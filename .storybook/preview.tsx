@@ -1,8 +1,11 @@
-import { addons } from "@storybook/addons"
-import { themes } from "@storybook/theming"
-import { urqlDecorator } from "@urql/storybook-addon"
-import * as NextImage from "next/image"
-import { withNextRouter } from "storybook-addon-next-router"
+import { addons } from "@storybook/addons";
+import { themes } from "@storybook/theming";
+import { urqlDecorator } from "@urql/storybook-addon";
+import * as NextImage from "next/image";
+import { withNextRouter } from "storybook-addon-next-router";
+import { ThemeProvider } from "../src/client/atoms";
+import { GlobalStyles } from "../src/client/styles";
+import "../src/client/styles/global.styles.css";
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
@@ -46,4 +49,13 @@ export const parameters = {
 	}
 };
 
-export const decorators = [withNextRouter, urqlDecorator];
+export const decorators = [
+	withNextRouter,
+	urqlDecorator,
+	(Story) => (
+		<ThemeProvider>
+			<GlobalStyles />
+			<Story />
+		</ThemeProvider>
+	)
+];
