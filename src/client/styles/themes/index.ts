@@ -1,7 +1,11 @@
-import { dark } from "./dark.theme";
-import { light } from "./light.theme";
+import { LightTheme } from "./light.theme";
 
 export * from "./dark.theme";
 export * from "./light.theme";
 
-export type Theme = typeof dark | typeof light;
+export type Theme = typeof LightTheme;
+
+declare module "styled-components" {
+	/* eslint-disable @typescript-eslint/no-empty-interface */
+	export interface DefaultTheme extends Theme {}
+}

@@ -1,7 +1,7 @@
 import { Colors } from "@/client/styles/colors";
 import { common } from "./common.theme";
 
-export const dark = {
+export const DarkTheme = {
 	...common,
 	colors: {
 		backgroundColor: Colors.darkerBlue,

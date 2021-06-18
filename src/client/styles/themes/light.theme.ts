@@ -1,7 +1,7 @@
 import { Colors } from "@/client/styles/colors";
 import { common } from "./common.theme";
 
-export const light = {
+export const LightTheme = {
 	...common,
 	colors: {
 		backgroundColor: Colors.white,

@@ -9,6 +9,7 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import { Provider as UrqlProvider } from "urql";
 
+import { ThemeProvider } from "@/client/atoms";
 import "@/client/styles/global.styles.css";
 
 const NextProgress = dynamic(() => import("nextjs-progressbar"));
@@ -40,13 +41,15 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 			{/* Import styles (inlined) */}
 			<GlobalStyles />
 			<UrqlProvider value={urqlClient}>
-				<NextProgress
-					startPosition={0.3}
-					stopDelayMs={ms("0.2s")}
-					options={{ showSpinner: false }}
-				/>
-				<Component {...pageProps} />
-				<Toaster position="bottom-center" />
+				<ThemeProvider>
+					<NextProgress
+						startPosition={0.3}
+						stopDelayMs={ms("0.2s")}
+						options={{ showSpinner: false }}
+					/>
+					<Component {...pageProps} />
+					<Toaster position="bottom-center" />
+				</ThemeProvider>
 			</UrqlProvider>
 		</>
 	);
