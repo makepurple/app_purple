@@ -11,7 +11,7 @@ export const Button = styled.button`
 	padding: 14px 16px;
 	border-radius: 0.375rem;
 	border: none;
-	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 	font-size: 1.125rem;
 	line-height: 1.125em;
 	font-weight: ${({ theme }) => theme.fontWeights.medium};

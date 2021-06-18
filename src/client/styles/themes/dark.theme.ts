@@ -5,6 +5,7 @@ export const DarkTheme = {
 	...common,
 	colors: {
 		backgroundColor: Colors.darkerBlue,
+		surfaceColor: Colors.mutedBlue,
 		contrastingBackgroundColor: Colors.brightPurple,
 		secondaryBackgroundColor: Colors.darkBlue,
 		tertiaryBackgroundColor: Colors.darkBlue,

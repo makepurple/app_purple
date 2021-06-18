@@ -4,7 +4,8 @@ import { common } from "./common.theme";
 export const LightTheme = {
 	...common,
 	colors: {
-		backgroundColor: Colors.white,
+		backgroundColor: Colors.mutedWhite,
+		surfaceColor: Colors.white,
 		contrastingBackgroundColor: Colors.black,
 		secondaryBackgroundColor: Colors.lightPurple,
 		tertiaryBackgroundColor: Colors.lightBlue,

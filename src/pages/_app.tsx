@@ -39,9 +39,9 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				/>
 			</NextHead>
 			{/* Import styles (inlined) */}
-			<GlobalStyles />
 			<UrqlProvider value={urqlClient}>
 				<ThemeProvider>
+					<GlobalStyles />
 					<NextProgress
 						startPosition={0.3}
 						stopDelayMs={ms("0.2s")}

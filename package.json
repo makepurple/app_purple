@@ -19,6 +19,7 @@
   "dependencies": {
     "@hookform/resolvers": "^2.5.2",
     "@prisma/client": "2.23.0",
+    "@types/common-tags": "^1.8.0",
     "@types/cookie-session": "^2.0.42",
     "@types/ioredis": "^4.26.4",
     "@types/ms": "^0.7.31",
@@ -74,6 +75,7 @@
     "@storybook/addon-links": "^6.2.9",
     "@storybook/react": "^6.2.9",
     "@svgr/webpack": "^5.5.0",
+    "@types/faker": "^5.5.6",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/eslint-plugin-tslint": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
@@ -99,6 +101,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "faker": "^5.5.3",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^8.0.0",
     "prettier": "^2.3.1",

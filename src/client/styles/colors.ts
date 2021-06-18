@@ -1,5 +1,6 @@
 export const Colors = {
 	white: "#ffffff",
+	mutedWhite: "#f7fafc",
 	black: "#1F1F41",
 	mutedBlack: "#101015",
 	trueBlack: "#000000",

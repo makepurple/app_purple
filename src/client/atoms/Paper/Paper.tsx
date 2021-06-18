@@ -1,0 +1,7 @@
+import styled from "styled-components";
+
+export const Paper = styled.div`
+	border-radius: 0.5rem;
+	box-shadow: ${({ theme }) => theme.shadows.lg};
+	background-color: ${({ theme }) => theme.palette.white};
+`;

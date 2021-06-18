@@ -43,7 +43,7 @@ html {
 }
 
 body,html,iframe {
-	width: 100%
+	width: 100%;
 }
 
 body {
@@ -55,7 +55,8 @@ body {
 	height: 100%;
 	position: relative;
 	min-height: 100vh;
-	scroll-behavior: smooth
+	scroll-behavior: smooth;
+	background-color: ${({ theme }) => theme.colors.backgroundColor} !important;
 }
 
 code {
