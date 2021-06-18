@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "profileUrl" DROP DEFAULT,
+ALTER COLUMN "username" DROP DEFAULT;

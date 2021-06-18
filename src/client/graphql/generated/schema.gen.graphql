@@ -1,0 +1,9 @@
+# Root mutation type
+type Mutation {
+  ok: Boolean!
+}
+
+# Root query type
+type Query {
+  ok: Boolean!
+}

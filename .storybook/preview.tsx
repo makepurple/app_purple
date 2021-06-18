@@ -1,0 +1,49 @@
+import { addons } from "@storybook/addons"
+import { themes } from "@storybook/theming"
+import { urqlDecorator } from "@urql/storybook-addon"
+import * as NextImage from "next/image"
+import { withNextRouter } from "storybook-addon-next-router"
+
+const alphabeticSort = (a, b) => {
+	const isSameKind: boolean = a[1].kind === b[1].kind;
+
+	if (isSameKind) {
+		return false;
+	}
+
+	const compared: boolean = a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
+
+	return compared;
+};
+
+addons.setConfig({
+	showRoots: true,
+	theme: themes.dark
+});
+
+/**
+ * !HACK
+ * @description next/image doesn't work within Storybook, so we're overwriting it here
+ * @author David Lee
+ * @date June 11, 2021
+ */
+const OriginalNextImage = NextImage.default;
+Object.defineProperty(NextImage, "default", {
+	configurable: true,
+	value: (props) => <OriginalNextImage {...props} unoptimized />
+});
+
+export const parameters = {
+	actions: { argTypesRegex: "^on[A-Z].*" },
+	controls: {
+		matchers: {
+			color: /(background|color)$/i,
+			date: /Date$/,
+		},
+	},
+	options: {
+		storySort: alphabeticSort
+	}
+};
+
+export const decorators = [withNextRouter, urqlDecorator];
