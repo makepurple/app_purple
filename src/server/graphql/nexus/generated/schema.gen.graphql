@@ -6,8 +6,24 @@ enum AuthProvider {
   GitHub
 }
 
+input CreatePresignedS3UrlInput {
+  fileName: String!
+  fileType: String!
+}
+
+type CreatePresignedS3UrlPayload {
+  fields: JSONObject!
+  url: String!
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
 """Root mutation type"""
 type Mutation {
+  createPresignedS3Url(data: CreatePresignedS3UrlInput!): CreatePresignedS3UrlPayload!
   ok: Boolean!
   viewer: User
 }

@@ -14,18 +14,22 @@ const config = {
 	pageExtensions: ["ts", "tsx", "md", "mdx"],
 	target: "experimental-serverless-trace",
 	env: {
-		PROJECT_DIRNAME:      __dirname,
+		PROJECT_DIRNAME:           __dirname,
 
-		API_BASE_URL:         process.env.API_BASE_URL,
-		COOKIE_SECRET:        process.env.COOKIE_SECRET,
+		API_BASE_URL:              process.env.API_BASE_URL,
+		COOKIE_SECRET:             process.env.COOKIE_SECRET,
 
-		REDIS_HOST:           process.env.REDIS_HOST,
-		REDIS_PORT:           process.env.REDIS_PORT,
-		REDIS_PASSWORD:       process.env.REDIS_PASSWORD,
+		REDIS_HOST:                process.env.REDIS_HOST,
+		REDIS_PORT:                process.env.REDIS_PORT,
+		REDIS_PASSWORD:            process.env.REDIS_PASSWORD,
 
-		GITHUB_CLIENT_ID:     process.env.GITHUB_CLIENT_ID,
-		GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-		GITHUB_AUTH_CALLBACK: process.env.GITHUB_AUTH_CALLBACK
+		GITHUB_CLIENT_ID:          process.env.GITHUB_CLIENT_ID,
+		GITHUB_CLIENT_SECRET:      process.env.GITHUB_CLIENT_SECRET,
+		GITHUB_AUTH_CALLBACK:      process.env.GITHUB_AUTH_CALLBACK,
+
+		APP_AWS_ACCESS_KEY_ID:     process.env.APP_AWS_ACCESS_KEY_ID,
+		APP_AWS_SECRET_ACCESS_KEY: process.env.APP_AWS_SECRET_ACCESS_KEY,
+		APP_AWS_IMAGE_BUCKET:      process.env.APP_AWS_IMAGE_BUCKET
 	},
 	webpack5: true,
 	webpack: (config, { dev, isServer, webpack }) => {

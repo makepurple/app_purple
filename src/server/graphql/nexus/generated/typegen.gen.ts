@@ -19,6 +19,10 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CreatePresignedS3UrlInput: { // input type
+    fileName: string; // String!
+    fileType: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -31,9 +35,14 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  JSONObject: any
 }
 
 export interface NexusGenObjects {
+  CreatePresignedS3UrlPayload: { // root type
+    fields: NexusGenScalars['JSONObject']; // JSONObject!
+    url: string; // String!
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -57,7 +66,12 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  CreatePresignedS3UrlPayload: { // field return type
+    fields: NexusGenScalars['JSONObject']; // JSONObject!
+    url: string; // String!
+  }
   Mutation: { // field return type
+    createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     ok: boolean; // Boolean!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -76,7 +90,12 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  CreatePresignedS3UrlPayload: { // field return type name
+    fields: 'JSONObject'
+    url: 'String'
+  }
   Mutation: { // field return type name
+    createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     ok: 'Boolean'
     viewer: 'User'
   }
@@ -95,6 +114,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createPresignedS3Url: { // args
+      data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -105,7 +129,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = keyof NexusGenEnums;
 

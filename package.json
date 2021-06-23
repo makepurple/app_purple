@@ -17,6 +17,8 @@
     "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.18.0",
+    "@aws-sdk/s3-presigned-post": "^3.18.0",
     "@hookform/resolvers": "^2.5.2",
     "@prisma/client": "2.23.0",
     "@types/common-tags": "^1.8.0",
@@ -39,6 +41,7 @@
     "graphql-middleware": "^6.0.10",
     "graphql-query-complexity": "^0.8.1",
     "graphql-rate-limit": "^3.1.0",
+    "graphql-scalars": "^1.10.0",
     "http-status-codes": "^2.1.4",
     "ioredis": "^4.27.6",
     "ms": "^2.1.3",

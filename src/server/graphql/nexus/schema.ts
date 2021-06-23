@@ -6,6 +6,7 @@ import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import { nexusPrisma } from "nexus-plugin-prisma";
 import path from "path";
 import { getClientIp } from "request-ip";
+import * as mutations from "./mutations";
 import { rateLimitPlugin, yupValidationPlugin } from "./plugins";
 import * as types from "./types";
 
@@ -20,7 +21,7 @@ const isGenerateScript: boolean = process.argv.includes("--nexus-exit");
 export const schema = makeSchema({
 	shouldGenerateArtifacts: isGenerateScript,
 	shouldExitAfterGenerateArtifacts: isGenerateScript,
-	types: { ...types },
+	types: { ...mutations, ...types },
 	outputs: {
 		schema: getPath("generated/schema.gen.graphql"),
 		typegen: getPath("generated/typegen.gen.ts")
