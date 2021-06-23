@@ -1,10 +1,12 @@
 import { prisma } from "@/server/db";
 import { Request } from "@/server/middlewares";
 import { redis } from "@/server/redis";
+import { aws } from "@/server/services";
 import { PrismaClient, User } from "@prisma/client";
 import { NextApiResponse } from "next";
 
 export interface ServerContext {
+	aws: typeof aws;
 	prisma: PrismaClient;
 	redis: typeof redis;
 	req: Request;
@@ -21,6 +23,7 @@ export const createContext = async (params: CreateContextParams): Promise<Server
 	const { req, res } = params;
 
 	return Promise.resolve({
+		aws,
 		prisma,
 		redis,
 		req,
