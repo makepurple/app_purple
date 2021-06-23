@@ -5,8 +5,23 @@ import { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
 import { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
 import { FieldRateLimitResolver } from "@/server/graphql/nexus/plugins/rate-limit.plugin"
 import { IFieldYupValidationResolver } from "@/server/graphql/nexus/plugins/yup-validation.plugin"
-
-
+import { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * The `Upload` scalar type represents a file upload.
+     */
+    upload<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Upload";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * The `Upload` scalar type represents a file upload.
+     */
+    upload<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Upload";
+  }
+}
 declare global {
   interface NexusGenCustomOutputProperties<TypeName extends string> {
     crud: NexusPrisma<TypeName, 'crud'>
@@ -36,6 +51,7 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   JSONObject: any
+  Upload: any
 }
 
 export interface NexusGenObjects {
