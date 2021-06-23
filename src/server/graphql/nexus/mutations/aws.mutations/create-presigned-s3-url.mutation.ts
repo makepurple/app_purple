@@ -34,7 +34,7 @@ export const createPresignedS3Url = mutationField("createPresignedS3Url", {
 		return true;
 	},
 	resolve: async (parent, { data }, { aws }) => {
-		const { url, fields } = await createPresignedPost(aws.s3, {
+		const { url, fields } = await createPresignedPost(aws.s3.instance, {
 			Bucket: S3_BUCKET,
 			Key: data.fileName,
 			Conditions: [
