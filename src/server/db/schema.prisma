@@ -15,10 +15,43 @@ enum AuthProvider {
 }
 
 model User {
-  id              String @id @default(cuid())
-  email           String @unique
+  id              String       @id @default(cuid())
+  email           String       @unique
   username        String
   profileUrl      String
   profileImageUrl String?
   provider        AuthProvider @default(GitHub)
+  posts           Post[]
+  comments        Comment[]
+  skills          Skill[]
+}
+
+model Post {
+  id                Int       @id @default(autoincrement())
+  author            User      @relation(fields: [authorId], references: [id])
+  authorId          String
+  title             String
+  // Content stored as Markdown
+  content           String
+  thumbnailImageUrl String?
+  comments          Comment[]
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
 }
