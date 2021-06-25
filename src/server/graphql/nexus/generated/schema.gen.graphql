@@ -6,6 +6,19 @@ enum AuthProvider {
   GitHub
 }
 
+type Comment {
+  author: User!
+  content: String!
+  createdAt: DateTime!
+  id: Int!
+  post: Post!
+  updatedAt: DateTime!
+}
+
+input CommentWhereUniqueInput {
+  id: Int
+}
+
 input CreatePresignedS3UrlInput {
   fileName: String!
   fileType: String!
@@ -15,6 +28,8 @@ type CreatePresignedS3UrlPayload {
   fields: JSONObject!
   url: String!
 }
+
+scalar DateTime
 
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
@@ -28,20 +43,54 @@ type Mutation {
   viewer: User
 }
 
+type Post {
+  author: User!
+  comments(cursor: CommentWhereUniqueInput, skip: Int, take: Int): [Comment!]!
+  content: String!
+  createdAt: DateTime!
+  id: Int!
+  thumbnailImageUrl: String
+  title: String!
+  updatedAt: DateTime!
+}
+
+input PostWhereUniqueInput {
+  id: Int
+}
+
 """Root query type"""
 type Query {
   ok: Boolean!
   viewer: User
 }
 
+type Skill {
+  id: Int!
+  name: String!
+  users(cursor: UserWhereUniqueInput, skip: Int, take: Int): [User!]!
+}
+
+input SkillWhereUniqueInput {
+  id: Int
+  name: String
+}
+
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
 
 type User {
+  comments(cursor: CommentWhereUniqueInput, skip: Int, take: Int): [Comment!]!
   email: String!
   id: String!
+  posts(cursor: PostWhereUniqueInput, skip: Int, take: Int): [Post!]!
+  profileGitHubUrl: String
   profileImageUrl: String
-  profileUrl: String!
   provider: AuthProvider!
+  skills(cursor: SkillWhereUniqueInput, skip: Int, take: Int): [Skill!]!
   username: String!
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: String
 }

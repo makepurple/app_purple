@@ -10,8 +10,11 @@ export const User = objectType({
 			}
 		});
 		t.model.profileImageUrl();
-		t.model.profileUrl();
+		t.model.profileGitHubUrl();
 		t.model.provider();
 		t.model.username();
+		t.model.skills();
+		t.model.posts();
+		t.model.comments();
 	}
 });

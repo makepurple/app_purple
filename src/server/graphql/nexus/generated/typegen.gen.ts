@@ -34,9 +34,23 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CommentWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
   CreatePresignedS3UrlInput: { // input type
     fileName: string; // String!
     fileType: string; // String!
+  }
+  PostWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  SkillWhereUniqueInput: { // input type
+    id?: number | null; // Int
+    name?: string | null; // String
+  }
+  UserWhereUniqueInput: { // input type
+    email?: string | null; // String
+    id?: string | null; // String
   }
 }
 
@@ -50,22 +64,41 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
   JSONObject: any
   Upload: any
 }
 
 export interface NexusGenObjects {
+  Comment: { // root type
+    content: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   CreatePresignedS3UrlPayload: { // root type
     fields: NexusGenScalars['JSONObject']; // JSONObject!
     url: string; // String!
   }
   Mutation: {};
+  Post: { // root type
+    content: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    thumbnailImageUrl?: string | null; // String
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: {};
+  Skill: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
   User: { // root type
     email: string; // String!
     id: string; // String!
+    profileGitHubUrl?: string | null; // String
     profileImageUrl?: string | null; // String
-    profileUrl: string; // String!
     provider: NexusGenEnums['AuthProvider']; // AuthProvider!
     username: string; // String!
   }
@@ -82,6 +115,14 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Comment: { // field return type
+    author: NexusGenRootTypes['User']; // User!
+    content: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    post: NexusGenRootTypes['Post']; // Post!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   CreatePresignedS3UrlPayload: { // field return type
     fields: NexusGenScalars['JSONObject']; // JSONObject!
     url: string; // String!
@@ -91,21 +132,47 @@ export interface NexusGenFieldTypes {
     ok: boolean; // Boolean!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
+  Post: { // field return type
+    author: NexusGenRootTypes['User']; // User!
+    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    content: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    thumbnailImageUrl: string | null; // String
+    title: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: { // field return type
     ok: boolean; // Boolean!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
+  Skill: { // field return type
+    id: number; // Int!
+    name: string; // String!
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
   User: { // field return type
+    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     email: string; // String!
     id: string; // String!
+    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    profileGitHubUrl: string | null; // String
     profileImageUrl: string | null; // String
-    profileUrl: string; // String!
     provider: NexusGenEnums['AuthProvider']; // AuthProvider!
+    skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     username: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Comment: { // field return type name
+    author: 'User'
+    content: 'String'
+    createdAt: 'DateTime'
+    id: 'Int'
+    post: 'Post'
+    updatedAt: 'DateTime'
+  }
   CreatePresignedS3UrlPayload: { // field return type name
     fields: 'JSONObject'
     url: 'String'
@@ -115,16 +182,34 @@ export interface NexusGenFieldTypeNames {
     ok: 'Boolean'
     viewer: 'User'
   }
+  Post: { // field return type name
+    author: 'User'
+    comments: 'Comment'
+    content: 'String'
+    createdAt: 'DateTime'
+    id: 'Int'
+    thumbnailImageUrl: 'String'
+    title: 'String'
+    updatedAt: 'DateTime'
+  }
   Query: { // field return type name
     ok: 'Boolean'
     viewer: 'User'
   }
+  Skill: { // field return type name
+    id: 'Int'
+    name: 'String'
+    users: 'User'
+  }
   User: { // field return type name
+    comments: 'Comment'
     email: 'String'
     id: 'String'
+    posts: 'Post'
+    profileGitHubUrl: 'String'
     profileImageUrl: 'String'
-    profileUrl: 'String'
     provider: 'AuthProvider'
+    skills: 'Skill'
     username: 'String'
   }
 }
@@ -133,6 +218,37 @@ export interface NexusGenArgTypes {
   Mutation: {
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
+    }
+  }
+  Post: {
+    comments: { // args
+      cursor?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
+  Skill: {
+    users: { // args
+      cursor?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
+  User: {
+    comments: { // args
+      cursor?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    posts: { // args
+      cursor?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    skills: { // args
+      cursor?: NexusGenInputs['SkillWhereUniqueInput'] | null; // SkillWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
     }
   }
 }

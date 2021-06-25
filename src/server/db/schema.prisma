@@ -15,15 +15,15 @@ enum AuthProvider {
 }
 
 model User {
-  id              String       @id @default(cuid())
-  email           String       @unique
-  username        String
-  profileUrl      String
-  profileImageUrl String?
-  provider        AuthProvider @default(GitHub)
-  posts           Post[]
-  comments        Comment[]
-  skills          Skill[]
+  id               String       @id @default(cuid())
+  email            String       @unique
+  username         String
+  profileGitHubUrl String?
+  profileImageUrl  String?
+  provider         AuthProvider @default(GitHub)
+  posts            Post[]
+  comments         Comment[]
+  skills           Skill[]
 }
 
 model Post {

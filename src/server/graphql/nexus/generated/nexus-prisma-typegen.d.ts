@@ -23,8 +23,8 @@ interface PrismaModels {
 interface NexusPrismaInputs {
   Query: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'email' | 'username' | 'profileUrl' | 'profileImageUrl' | 'provider' | 'posts' | 'comments' | 'skills'
-      ordering: 'id' | 'email' | 'username' | 'profileUrl' | 'profileImageUrl' | 'provider'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'email' | 'username' | 'profileGitHubUrl' | 'profileImageUrl' | 'provider' | 'posts' | 'comments' | 'skills'
+      ordering: 'id' | 'email' | 'username' | 'profileGitHubUrl' | 'profileImageUrl' | 'provider'
     }
     posts: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'author' | 'authorId' | 'title' | 'content' | 'thumbnailImageUrl' | 'comments' | 'createdAt' | 'updatedAt'
@@ -64,8 +64,8 @@ interface NexusPrismaInputs {
   }
   Skill: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'email' | 'username' | 'profileUrl' | 'profileImageUrl' | 'provider' | 'posts' | 'comments' | 'skills'
-      ordering: 'id' | 'email' | 'username' | 'profileUrl' | 'profileImageUrl' | 'provider'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'email' | 'username' | 'profileGitHubUrl' | 'profileImageUrl' | 'provider' | 'posts' | 'comments' | 'skills'
+      ordering: 'id' | 'email' | 'username' | 'profileGitHubUrl' | 'profileImageUrl' | 'provider'
     }
   }
 }
@@ -112,7 +112,7 @@ interface NexusPrismaOutputs {
     id: 'String'
     email: 'String'
     username: 'String'
-    profileUrl: 'String'
+    profileGitHubUrl: 'String'
     profileImageUrl: 'String'
     provider: 'AuthProvider'
     posts: 'Post'

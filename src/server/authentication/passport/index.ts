@@ -18,7 +18,7 @@ passport.use(githubStrategy);
 passport.serializeUser(async (profile: any, done) => {
 	const email: Maybe<string> = profile.emails[0]?.value?.toLowerCase();
 	const username: string = profile.username;
-	const profileUrl: string = profile.profileUrl;
+	const profileGitHubUrl: string = profile.profileUrl;
 	const profileImageUrl: string | null = profile.photos[0]?.value ?? null;
 
 	if (!email) {
@@ -29,7 +29,7 @@ passport.serializeUser(async (profile: any, done) => {
 		create: {
 			email,
 			username,
-			profileUrl,
+			profileGitHubUrl,
 			profileImageUrl,
 			provider: AuthProvider.GitHub
 		},
