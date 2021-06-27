@@ -1,13 +1,25 @@
 
 
-import { ServerContext as ctx } from "@/server/graphql/context"
-import { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
-import { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
-import { FieldRateLimitResolver } from "@/server/graphql/nexus/plugins/rate-limit.plugin"
-import { IFieldYupValidationResolver } from "@/server/graphql/nexus/plugins/yup-validation.plugin"
-import { core } from "nexus"
+import type { ServerContext as ctx } from "@/server/graphql/context"
+import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
+import type { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
+import type { FieldRateLimitResolver } from "@/server/graphql/nexus/plugins/rate-limit.plugin"
+import type { FieldYupValidationResolver } from "@/server/graphql/nexus/plugins/yup-validation.plugin"
+import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * The `Byte` scalar type represents byte value as a Buffer
+     */
+    bytes<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Bytes";
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+    /**
+     * The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Json";
     /**
      * The `Upload` scalar type represents a file upload.
      */
@@ -17,40 +29,33 @@ declare global {
 declare global {
   interface NexusGenCustomOutputMethods<TypeName extends string> {
     /**
+     * The `Byte` scalar type represents byte value as a Buffer
+     */
+    bytes<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Bytes";
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+    /**
+     * The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Json";
+    /**
      * The `Upload` scalar type represents a file upload.
      */
     upload<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Upload";
   }
 }
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    crud: NexusPrisma<TypeName, 'crud'>
-    model: NexusPrisma<TypeName, 'model'>
-  }
-}
+
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
-  CommentWhereUniqueInput: { // input type
-    id?: number | null; // Int
-  }
   CreatePresignedS3UrlInput: { // input type
     fileName: string; // String!
     fileType: string; // String!
-  }
-  PostWhereUniqueInput: { // input type
-    id?: number | null; // Int
-  }
-  SkillWhereUniqueInput: { // input type
-    id?: number | null; // Int
-    name?: string | null; // String
-  }
-  UserWhereUniqueInput: { // input type
-    email?: string | null; // String
-    id?: string | null; // String
   }
 }
 
@@ -64,8 +69,9 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  Bytes: any
   DateTime: any
-  JSONObject: any
+  Json: any
   Upload: any
 }
 
@@ -73,30 +79,30 @@ export interface NexusGenObjects {
   Comment: { // root type
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: number; // Int!
+    id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CreatePresignedS3UrlPayload: { // root type
-    fields: NexusGenScalars['JSONObject']; // JSONObject!
+    fields: NexusGenScalars['Json']; // Json!
     url: string; // String!
   }
   Mutation: {};
   Post: { // root type
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: number; // Int!
+    id: string; // ID!
     thumbnailImageUrl?: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Query: {};
   Skill: { // root type
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
   }
   User: { // root type
     email: string; // String!
-    id: string; // String!
+    id: string; // ID!
     profileGitHubUrl?: string | null; // String
     profileImageUrl?: string | null; // String
     provider: NexusGenEnums['AuthProvider']; // AuthProvider!
@@ -119,12 +125,12 @@ export interface NexusGenFieldTypes {
     author: NexusGenRootTypes['User']; // User!
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: number; // Int!
+    id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CreatePresignedS3UrlPayload: { // field return type
-    fields: NexusGenScalars['JSONObject']; // JSONObject!
+    fields: NexusGenScalars['Json']; // Json!
     url: string; // String!
   }
   Mutation: { // field return type
@@ -137,7 +143,7 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: number; // Int!
+    id: string; // ID!
     thumbnailImageUrl: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -147,14 +153,14 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Skill: { // field return type
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     email: string; // String!
-    id: string; // String!
+    id: string; // ID!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     profileGitHubUrl: string | null; // String
     profileImageUrl: string | null; // String
@@ -169,12 +175,12 @@ export interface NexusGenFieldTypeNames {
     author: 'User'
     content: 'String'
     createdAt: 'DateTime'
-    id: 'Int'
+    id: 'ID'
     post: 'Post'
     updatedAt: 'DateTime'
   }
   CreatePresignedS3UrlPayload: { // field return type name
-    fields: 'JSONObject'
+    fields: 'Json'
     url: 'String'
   }
   Mutation: { // field return type name
@@ -187,7 +193,7 @@ export interface NexusGenFieldTypeNames {
     comments: 'Comment'
     content: 'String'
     createdAt: 'DateTime'
-    id: 'Int'
+    id: 'ID'
     thumbnailImageUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'
@@ -197,14 +203,14 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Skill: { // field return type name
-    id: 'Int'
+    id: 'ID'
     name: 'String'
     users: 'User'
   }
   User: { // field return type name
     comments: 'Comment'
     email: 'String'
-    id: 'String'
+    id: 'ID'
     posts: 'Post'
     profileGitHubUrl: 'String'
     profileImageUrl: 'String'
@@ -218,37 +224,6 @@ export interface NexusGenArgTypes {
   Mutation: {
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
-    }
-  }
-  Post: {
-    comments: { // args
-      cursor?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-  }
-  Skill: {
-    users: { // args
-      cursor?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-  }
-  User: {
-    comments: { // args
-      cursor?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    posts: { // args
-      cursor?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    skills: { // args
-      cursor?: NexusGenInputs['SkillWhereUniqueInput'] | null; // SkillWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
     }
   }
 }
@@ -313,6 +288,8 @@ export interface NexusGenTypes {
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
   }
+  interface NexusGenPluginInputTypeConfig<TypeName extends string> {
+  }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
     /**
      * Authorization for an individual field. Returning "true"
@@ -336,7 +313,7 @@ declare global {
     /**
      * `yup` validation plugin for an individual field. Requires that an object schema definition be defined for the input args.
      */
-    yupValidation?: IFieldYupValidationResolver<TypeName, FieldName>
+    yupValidation?: FieldYupValidationResolver<TypeName, FieldName>
   }
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
   }

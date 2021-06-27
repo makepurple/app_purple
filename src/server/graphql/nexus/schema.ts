@@ -3,7 +3,6 @@ import { redis } from "@/server/redis";
 import { AuthorizationError } from "@/server/utils";
 import { RedisStore } from "graphql-rate-limit";
 import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
-import { nexusPrisma } from "nexus-plugin-prisma";
 import path from "path";
 import { getClientIp } from "request-ip";
 import * as mutations from "./mutations";
@@ -40,12 +39,6 @@ export const schema = makeSchema({
 	plugins: [
 		fieldAuthorizePlugin({
 			formatError: () => new AuthorizationError("Not authorized")
-		}),
-		nexusPrisma({
-			experimentalCRUD: true,
-			outputs: { typegen: getPath("generated/nexus-prisma-typegen.d.ts") },
-			paginationStrategy: "prisma",
-			prismaClient: (ctx) => ctx.prisma
 		}),
 		queryComplexityPlugin(),
 		rateLimitPlugin({

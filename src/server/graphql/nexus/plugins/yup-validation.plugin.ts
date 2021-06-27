@@ -19,7 +19,7 @@ import { ObjectShape } from "yup/lib/object";
 
 const fieldYupValidationResolverImport = printedGenTypingImport({
 	module: "@/server/graphql/nexus/plugins/yup-validation.plugin",
-	bindings: ["IFieldYupValidationResolver"]
+	bindings: ["FieldYupValidationResolver"]
 });
 
 const fieldDefTypes = printedGenTyping({
@@ -29,11 +29,11 @@ const fieldDefTypes = printedGenTyping({
 		\`yup\` validation plugin for an individual field. Requires that an object schema
 		definition be defined for the input args.
 	`,
-	type: "IFieldYupValidationResolver<TypeName, FieldName>",
+	type: "FieldYupValidationResolver<TypeName, FieldName>",
 	imports: [fieldYupValidationResolverImport]
 });
 
-export type IFieldYupValidationResolver<TypeName extends string, FieldName extends string> = (
+export type FieldYupValidationResolver<TypeName extends string, FieldName extends string> = (
 	root: SourceValue<TypeName>,
 	args: ArgsValue<TypeName, FieldName>,
 	context: GetGen<"context">,

@@ -22,3 +22,11 @@ declare type DeepPartial<T> = {
 };
 
 declare type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
+
+declare type Json =
+	| string
+	| number
+	| boolean
+	| null
+	| Json[]
+	| { [key: string]: Json };

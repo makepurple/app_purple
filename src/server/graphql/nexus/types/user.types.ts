@@ -1,20 +1,25 @@
 import { objectType } from "nexus";
+import { User } from "nexus-prisma";
 
-export const User = objectType({
-	name: "User",
-	definition: (t) => {
-		t.model.id();
-		t.model.email({
-			authorize: (root, args, { user }) => {
-				return user?.id === root.id;
-			}
-		});
-		t.model.profileImageUrl();
-		t.model.profileGitHubUrl();
-		t.model.provider();
-		t.model.username();
-		t.model.skills();
-		t.model.posts();
-		t.model.comments();
-	}
-});
+export const userTypes = [
+	objectType({
+		name: User.$name,
+		description: User.$description,
+		definition: (t) => {
+			t.field(User.id);
+			t.field({
+				...User.email,
+				authorize: (root, args, { user }) => {
+					return user?.id === root.id;
+				}
+			});
+			t.field(User.profileImageUrl);
+			t.field(User.profileGitHubUrl);
+			t.field(User.provider);
+			t.field(User.username);
+			t.field(User.skills);
+			t.field(User.posts);
+			t.field(User.comments);
+		}
+	})
+];

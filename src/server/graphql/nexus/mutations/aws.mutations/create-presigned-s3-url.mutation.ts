@@ -17,7 +17,7 @@ export const CreatePresignedS3UrlPayload = objectType({
 	name: "CreatePresignedS3UrlPayload",
 	definition: (t) => {
 		t.nonNull.string("url");
-		t.nonNull.field("fields", { type: "JSONObject" });
+		t.nonNull.field("fields", { type: "Json" });
 	}
 });
 

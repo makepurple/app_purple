@@ -9,6 +9,10 @@ generates:
       preResolveTypes: true
       pureMagicComment: true
       useTypeImports: true
+      scalars:
+        DateTime: Date
+        Json: Json
+        ID: string | number
     plugins:
       - typescript
       - typescript-operations

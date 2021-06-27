@@ -1,13 +1,17 @@
 import { objectType } from "nexus";
+import { Comment } from "nexus-prisma";
 
-export const Comment = objectType({
-	name: "Comment",
-	definition: (t) => {
-		t.model.id();
-		t.model.author();
-		t.model.content();
-		t.model.post();
-		t.model.createdAt();
-		t.model.updatedAt();
-	}
-});
+export const commentTypes = [
+	objectType({
+		name: Comment.$name,
+		description: Comment.$description,
+		definition: (t) => {
+			t.field(Comment.id);
+			t.field(Comment.author);
+			t.field(Comment.content);
+			t.field(Comment.post);
+			t.field(Comment.createdAt);
+			t.field(Comment.updatedAt);
+		}
+	})
+];
