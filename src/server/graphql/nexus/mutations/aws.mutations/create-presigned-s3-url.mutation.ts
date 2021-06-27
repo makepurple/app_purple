@@ -50,6 +50,7 @@ export const createPresignedS3Url = mutationField("createPresignedS3Url", {
 			Expires: 60 * 2 // in seconds
 		});
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		return { url, fields: fields as any };
 	}
 });

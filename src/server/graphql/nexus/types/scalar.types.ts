@@ -20,6 +20,7 @@ export const scalarTypes = [
 				return value;
 			}
 
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const file: FileUpload = await GraphQLUpload?.parseValue(value);
 			const filePath = path.join(__dirname, file.filename);
 

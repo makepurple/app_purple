@@ -32,7 +32,7 @@ const config = {
 		APP_AWS_IMAGE_BUCKET:      process.env.APP_AWS_IMAGE_BUCKET
 	},
 	webpack5: true,
-	webpack: (config, { dev, isServer, webpack }) => {
+	webpack: (config, { dev, isServer }) => {
 		config.module.rules.push({
 			test: /\.svg$/,
 			use: [
