@@ -29,7 +29,10 @@ const config = {
 
 		APP_AWS_ACCESS_KEY_ID:     process.env.APP_AWS_ACCESS_KEY_ID,
 		APP_AWS_SECRET_ACCESS_KEY: process.env.APP_AWS_SECRET_ACCESS_KEY,
-		APP_AWS_IMAGE_BUCKET:      process.env.APP_AWS_IMAGE_BUCKET
+		APP_AWS_IMAGE_BUCKET:      process.env.APP_AWS_IMAGE_BUCKET,
+
+		POSTMARK_API_TOKEN:        process.env.POSTMARK_API_TOKEN,
+		POSTMARK_FROM_EMAIL:       process.env.POSTMARK_FROM_EMAIL,
 	},
 	webpack5: true,
 	webpack: (config, { dev, isServer }) => {
@@ -53,6 +56,10 @@ const config = {
 				"url-loader"
 			]
 		});
+
+		if (!isServer) {
+			config.resolve.fallback.fs = false;
+		}
 
 		if (!dev && !isServer) {
 			const minimizer = config.optimization.minimizer || [];

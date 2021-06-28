@@ -23,6 +23,9 @@ declare type DeepPartial<T> = {
 
 declare type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
 
+declare type OptionalProps<T extends Record<string, any>, K extends keyof T> =
+	Omit<T, K> & Partial<Pick<T, K>>;
+
 declare type Json =
 	| string
 	| number
