@@ -31,16 +31,7 @@
 		"baseUrl": "./",
 		"paths":  {
 			"@/*": ["./src/*"],
-		},
-		"plugins": [
-			{
-				"name": "typescript-styled-plugin",
-				"tags": [
-					"styled",
-					"css"
-				]
-			}
-		]
+		}
 	},
 	"exclude": ["node_modules"],
 	"include": [
