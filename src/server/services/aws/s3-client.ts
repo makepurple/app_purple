@@ -15,13 +15,13 @@ export class AwsS3 {
 	});
 
 	public upload = async (key: string, file: FileUpload) => {
-		const { createReadStream, filename } = file;
+		const { filename } = file;
 
 		const result = await this.instance
 			.send(
 				new PutObjectCommand({
 					Bucket: appAwsImageBucket,
-					Body: createReadStream(),
+					Body: file.createReadStream(),
 					Key: `${key}/${filename}`
 				})
 			)
