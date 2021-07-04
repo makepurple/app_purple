@@ -7,7 +7,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
 }
 
 generator nexusPrisma {
@@ -19,20 +20,20 @@ enum AuthProvider {
 }
 
 model User {
-  id               String       @id @default(cuid())
-  email            String       @unique
+  id               String          @id @default(cuid())
+  email            String          @unique
   username         String
   profileGitHubUrl String?
   profileImageUrl  String?
-  provider         AuthProvider @default(GitHub)
+  provider         AuthProvider    @default(GitHub)
   posts            Post[]
   comments         Comment[]
-  skills           Skill[]
+  skills           SkillsOnUsers[]
 }
 
 model Post {
   id                Int       @id @default(autoincrement())
-  author            User      @relation(fields: [authorId], references: [id])
+  author            User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId          String
   title             String
   // Content stored as Markdown
@@ -45,9 +46,9 @@ model Post {
 
 model Comment {
   id        Int      @id @default(autoincrement())
-  author    User     @relation(fields: [authorId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
   content   String
   createdAt DateTime @default(now())
@@ -55,7 +56,16 @@ model Comment {
 }
 
 model Skill {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  users User[]
+  id    Int             @id @default(autoincrement())
+  name  String          @unique
+  users SkillsOnUsers[]
+}
+
+model SkillsOnUsers {
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId Int
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+
+  @@id([skillId, userId])
 }
