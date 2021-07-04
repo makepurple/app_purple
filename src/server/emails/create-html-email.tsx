@@ -14,7 +14,7 @@ const getStyledComponentsStaticCss = (sheet): string => {
 export const createHtmlEmail = <P extends Record<string, unknown>>(
 	template: ComponentType<P>,
 	props: P,
-	options: Mjml2HtmlOptions
+	options: Mjml2HtmlOptions = { minify: true }
 ) => {
 	const sheet = new ServerStyleSheet();
 	const element = createElement(template, props);
