@@ -23,3 +23,7 @@ export const Button = styled.button`
 		opacity: 0.85;
 	}
 `;
+
+Button.defaultProps = {
+	type: "button"
+};

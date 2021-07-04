@@ -11,6 +11,7 @@ import { Provider as UrqlProvider } from "urql";
 
 import { ThemeProvider } from "@/client/atoms";
 import "@/client/styles/global.styles.css";
+import "tippy.js/dist/tippy.css";
 
 const NextProgress = dynamic(() => import("nextjs-progressbar"));
 

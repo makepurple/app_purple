@@ -5,6 +5,8 @@ import * as NextImage from "next/image";
 import { withNextRouter } from "storybook-addon-next-router";
 import { ThemeProvider } from "../src/client/atoms";
 import { GlobalStyles } from "../src/client/styles";
+
+import "tippy.js/dist/tippy.css";
 import "../src/client/styles/global.styles.css";
 
 const alphabeticSort = (a, b) => {
