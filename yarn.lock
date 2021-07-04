@@ -14099,7 +14099,7 @@ postcss@^7.0.14, postcss@^7.0.26, postcss@^7.0.32, postcss@^7.0.36, postcss@^7.0
 
 postmark@^2.7.6:
   version "2.7.6"
-  resolved "https://registry.npmjs.org/postmark/-/postmark-2.7.6.tgz"
+  resolved "https://registry.yarnpkg.com/postmark/-/postmark-2.7.6.tgz#b3134a71becd8905536de11bea02d1a16b1af08b"
   integrity sha512-Jsnvz5H5Jau/k8mXymtmfEdYtV9u2y+9REYTF8V7N2mqIgCHWbMqeq5N5oy4YLF6uwMtE5+3sGMJLEMbbEzccA==
   dependencies:
     axios "^0.21.1"

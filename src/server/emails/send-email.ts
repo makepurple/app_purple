@@ -12,13 +12,9 @@ export const sendEmail = async (
 ): Promise<Maybe<MessageSendingResponse>> => {
 	if (process.env.NODE_ENV === "development") {
 		Logger.info("Not sending email in development");
-
-		// eslint-disable-next-line no-console
-		console.log(stripIndents`
-
+		Logger.info(stripIndents`
 			To: ${email.To}
 			Subject: ${email.Subject}
-
 		`);
 
 		return null;
