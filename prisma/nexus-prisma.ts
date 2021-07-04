@@ -11,5 +11,5 @@ import { settings } from "nexus-prisma/generator";
  * @date June 27, 2021
  */
 settings({
-	projectIdIntToGraphQL: "ID"
+	projectIdIntToGraphQL: "Int"
 });

@@ -32,7 +32,7 @@ export type Comment = {
   readonly author: User;
   readonly content: Scalars['String'];
   readonly createdAt: Scalars['DateTime'];
-  readonly id: Scalars['ID'];
+  readonly id: Scalars['Int'];
   readonly post: Post;
   readonly updatedAt: Scalars['DateTime'];
 };
@@ -70,7 +70,7 @@ export type Post = {
   readonly comments: ReadonlyArray<Comment>;
   readonly content: Scalars['String'];
   readonly createdAt: Scalars['DateTime'];
-  readonly id: Scalars['ID'];
+  readonly id: Scalars['Int'];
   readonly thumbnailImageUrl?: Maybe<Scalars['String']>;
   readonly title: Scalars['String'];
   readonly updatedAt: Scalars['DateTime'];
@@ -85,7 +85,7 @@ export type Query = {
 
 export type Skill = {
   readonly __typename?: 'Skill';
-  readonly id: Scalars['ID'];
+  readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
   readonly users: ReadonlyArray<User>;
 };
@@ -104,12 +104,31 @@ export type User = {
   readonly username: Scalars['String'];
 };
 
+export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename?: 'User', readonly id: string | number, readonly username: string, readonly profileImageUrl?: Maybe<string>, readonly profileGitHubUrl?: Maybe<string> }> };
+
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type OkQuery = { readonly __typename?: 'Query', readonly ok: boolean };
 
 
+export const GetMyUserDocument = /*#__PURE__*/ gql`
+    query GetMyUser {
+  viewer {
+    id
+    username
+    profileImageUrl
+    profileGitHubUrl
+  }
+}
+    `;
+
+export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
+};
 export const OkDocument = /*#__PURE__*/ gql`
     query Ok {
   ok

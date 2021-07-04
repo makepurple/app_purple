@@ -1,0 +1,8 @@
+query GetMyUser {
+	viewer {
+		id
+		username
+		profileImageUrl
+		profileGitHubUrl
+	}
+}

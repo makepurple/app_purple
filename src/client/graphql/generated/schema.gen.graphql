@@ -9,7 +9,7 @@ type Comment {
   author: User!
   content: String!
   createdAt: DateTime!
-  id: ID!
+  id: Int!
   post: Post!
   updatedAt: DateTime!
 }
@@ -42,7 +42,7 @@ type Post {
   comments: [Comment!]!
   content: String!
   createdAt: DateTime!
-  id: ID!
+  id: Int!
   thumbnailImageUrl: String
   title: String!
   updatedAt: DateTime!
@@ -55,7 +55,7 @@ type Query {
 }
 
 type Skill {
-  id: ID!
+  id: Int!
   name: String!
   users: [User!]!
 }
