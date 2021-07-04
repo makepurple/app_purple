@@ -4,4 +4,4 @@ export type InferComponentProps<T extends ElementType> = T extends ComponentType
 	? U
 	: T extends keyof JSX.IntrinsicElements
 	? JSX.IntrinsicElements[T]
-	: {};
+	: Record<string, never>;

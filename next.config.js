@@ -16,7 +16,7 @@ const config = {
 	env: {
 		PROJECT_DIRNAME:           __dirname,
 
-		API_BASE_URL:              process.env.API_BASE_URL,
+		BASE_URL:                  process.env.BASE_URL,
 		COOKIE_SECRET:             process.env.COOKIE_SECRET,
 
 		REDIS_HOST:                process.env.REDIS_HOST,

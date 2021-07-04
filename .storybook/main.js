@@ -1,4 +1,6 @@
 const { addWebpackAlias } = require("customize-cra");
+const NodemonPlugin = require("nodemon-webpack-plugin");
+const ms = require("ms");
 const path = require("path");
 
 module.exports = {
@@ -38,6 +40,17 @@ module.exports = {
 			]
 		});
 
+		config.plugins.push(
+			new NodemonPlugin({
+				watch: path.resolve(__dirname, "../src/server/emails/"),
+				ext: "ts,tsx",
+				ignore: ["**/generated/**"],
+				exec: ["yarn", "run", "generate:emails", "\n"],
+				delay: `${ms("1s")}`,
+				verbose: true
+			})
+		)
+
 		/**
 		 * TODO
 		 * @description
@@ -49,6 +62,7 @@ module.exports = {
 		config.node = {
 			fs: "empty"
 		};
+		
 
 		return addWebpackAlias({ "@": path.resolve(__dirname, "../src") })(config);
 	}
