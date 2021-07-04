@@ -1,4 +1,4 @@
-import { createHtmlEmail } from "@/server/emails/mjml-styled";
+import { createHtmlEmail } from "@/server/emails";
 import * as _templates from "@/server/emails/templates";
 import { stripIndent } from "common-tags";
 import fs from "fs-extra";
