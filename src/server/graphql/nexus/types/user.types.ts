@@ -1,4 +1,4 @@
-import { objectType } from "nexus";
+import { list, nonNull, objectType } from "nexus";
 import { User } from "nexus-prisma";
 
 export const userTypes = [
@@ -17,7 +17,17 @@ export const userTypes = [
 			t.field(User.profileGitHubUrl);
 			t.field(User.provider);
 			t.field(User.username);
-			t.field(User.skills);
+			t.field("skills", {
+				type: nonNull(list(nonNull("Skill"))),
+				resolve: (root, args, { prisma }) => {
+					return prisma.skillsOnUsers
+						.findMany({
+							where: { userId: root.id },
+							select: { skill: true }
+						})
+						.then((skills) => skills.map((s) => s.skill));
+				}
+			});
 			t.field(User.posts);
 			t.field(User.comments);
 		}

@@ -1,4 +1,4 @@
-import { objectType } from "nexus";
+import { list, nonNull, objectType } from "nexus";
 import { Skill } from "nexus-prisma";
 
 export const skillTypes = [
@@ -8,7 +8,17 @@ export const skillTypes = [
 		definition: (t) => {
 			t.field(Skill.id);
 			t.field(Skill.name);
-			t.field(Skill.users);
+			t.field("users", {
+				type: nonNull(list(nonNull("User"))),
+				resolve: (root, args, { prisma }) => {
+					return prisma.skillsOnUsers
+						.findMany({
+							where: { skillId: root.id },
+							select: { user: true }
+						})
+						.then((users) => users.map(({ user }) => user));
+				}
+			});
 		}
 	})
 ];

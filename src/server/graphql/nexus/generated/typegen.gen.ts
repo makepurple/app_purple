@@ -79,7 +79,7 @@ export interface NexusGenObjects {
   Comment: { // root type
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // ID!
+    id: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CreatePresignedS3UrlPayload: { // root type
@@ -90,14 +90,14 @@ export interface NexusGenObjects {
   Post: { // root type
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // ID!
+    id: number; // Int!
     thumbnailImageUrl?: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Query: {};
   Skill: { // root type
-    id: string; // ID!
+    id: number; // Int!
     name: string; // String!
   }
   User: { // root type
@@ -125,7 +125,7 @@ export interface NexusGenFieldTypes {
     author: NexusGenRootTypes['User']; // User!
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // ID!
+    id: number; // Int!
     post: NexusGenRootTypes['Post']; // Post!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -143,7 +143,7 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // ID!
+    id: number; // Int!
     thumbnailImageUrl: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -153,7 +153,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Skill: { // field return type
-    id: string; // ID!
+    id: number; // Int!
     name: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -175,7 +175,7 @@ export interface NexusGenFieldTypeNames {
     author: 'User'
     content: 'String'
     createdAt: 'DateTime'
-    id: 'ID'
+    id: 'Int'
     post: 'Post'
     updatedAt: 'DateTime'
   }
@@ -193,7 +193,7 @@ export interface NexusGenFieldTypeNames {
     comments: 'Comment'
     content: 'String'
     createdAt: 'DateTime'
-    id: 'ID'
+    id: 'Int'
     thumbnailImageUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'
@@ -203,7 +203,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Skill: { // field return type name
-    id: 'ID'
+    id: 'Int'
     name: 'String'
     users: 'User'
   }
