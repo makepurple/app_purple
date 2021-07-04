@@ -36,27 +36,6 @@ const config = {
 	},
 	webpack5: true,
 	webpack: (config, { dev, isServer }) => {
-		config.module.rules.push({
-			test: /\.svg$/,
-			use: [
-				{
-					loader: "@svgr/webpack",
-					options: {
-						memo: true,
-						ref: true,
-						svgo: true,
-						titleProp: true,
-						svgoConfig: {
-							plugins: {
-								removeViewBox: false,
-							}
-						}
-					}
-				},
-				"url-loader"
-			]
-		});
-
 		if (!isServer) {
 			config.resolve.fallback.fs = false;
 		}

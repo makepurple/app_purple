@@ -37,11 +37,7 @@ const toStory = (key: string, text: string) => {
 };
 
 const generateTemplates = (options: GenerateFromMjmlOptions) => {
-	const { shouldGenerateArtifacts = true, output, templates } = options;
-
-	if (!shouldGenerateArtifacts) {
-		return;
-	}
+	const { output, templates } = options;
 
 	const emailHtmlDict = Object.keys(templates).reduce<Record<string, string>>((acc, key) => {
 		const template = templates[key];
@@ -66,15 +62,12 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 };
 
 const dirname: string = process.env.PROJECT_DIRNAME
-	? path.join(process.env.PROJECT_DIRNAME, "src/server/scripts")
+	? path.join(process.env.PROJECT_DIRNAME)
 	: __dirname;
 
-const isProd: boolean = process.env.NODE_ENV === "production";
-
-const templatePath: string = path.resolve(dirname, "../emails/generated");
+const templatePath: string = path.resolve(dirname, "../src/server/emails/generated");
 
 generateTemplates({
-	shouldGenerateArtifacts: !isProd,
 	output: templatePath,
 	templates: _templates
 });

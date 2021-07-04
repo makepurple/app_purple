@@ -21,25 +21,6 @@ module.exports = {
 		}
 	},
 	webpackFinal: (config) => {
-		config.module.rules.unshift({
-			test: /\.svg$/,
-			use: [
-				{
-					loader: "@svgr/webpack",
-					options: {
-						memo: true,
-						ref: true,
-						svgoConfig: {
-							plugins: {
-								removeViewBox: false
-							}
-						}
-					}
-				},
-				"url-loader"
-			]
-		});
-
 		config.plugins.push(
 			new NodemonPlugin({
 				watch: path.resolve(__dirname, "../src/server/emails/"),

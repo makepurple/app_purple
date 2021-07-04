@@ -27,6 +27,7 @@ logs/**
 src/graphql/schema.json
 src/serviceWorker.ts
 **/generated/**
+src/client/svgs/**
 
 # types
 **/*.d.ts
