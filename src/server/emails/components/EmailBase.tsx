@@ -1,9 +1,9 @@
 import { ThemeProvider } from "@/client/atoms";
-import { withCssClass } from "@/server/emails/mjml-styled";
 import { Mjml, MjmlBody, MjmlFont, MjmlHead, MjmlPreview, MjmlTitle } from "mjml-react";
 import React, { FC, ReactNode } from "react";
 import styled from "styled-components";
 import { InjectStyles } from "./InjectStyles";
+import { withCssClass } from "./withCssClass";
 
 const Body = styled(withCssClass(MjmlBody))`
 	font-family: Gilroy, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,

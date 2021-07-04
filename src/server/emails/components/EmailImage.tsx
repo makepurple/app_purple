@@ -1,7 +1,7 @@
 import type { InferComponentProps } from "@/client/types";
-import { withCssClass } from "@/server/emails/mjml-styled";
 import { MjmlImage } from "mjml-react";
 import styled from "styled-components";
+import { withCssClass } from "./withCssClass";
 
 export type EmailImageProps = InferComponentProps<typeof EmailImage>;
 
