@@ -8,7 +8,7 @@ export const Button = styled.button`
 	align-items: center;
 	justify-content: center;
 	box-sizing: border-box;
-	padding: 14px 16px;
+	padding: 12px 16px;
 	border-radius: 0.375rem;
 	border: none;
 	transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);

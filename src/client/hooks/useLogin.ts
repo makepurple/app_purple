@@ -7,7 +7,7 @@ export interface UseLoginHookParams {
 	onSuccess?: () => void;
 }
 
-export const useLogin = (params: UseLoginHookParams) => {
+export const useLogin = (params: UseLoginHookParams = {}) => {
 	const { onSuccess } = params;
 
 	const [{ data }, getUser] = useGetMyUserQuery({
