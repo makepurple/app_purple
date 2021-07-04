@@ -66,10 +66,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
     }
   
         </style>
-        <style type="text/css">.krGvLV{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
-.kcVWWw,.kcVWWw *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
-.hPqXYV{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
-.inyOyg{background-color:#706EFF;}/*!sc*/
+        <style type="text/css">.gzNMGs{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
+.keLBDy,.keLBDy *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
+.iqbgIb{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
+.zXxCO{background-color:#706EFF;}/*!sc*/
 </style>
         
       </head>
@@ -81,14 +81,14 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
   
         
       <div
-         class="sc-eCApnc krGvLV" style=""
+         class="sc-iCoGMd gzNMGs" style=""
       >
         
       
-      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-kEqXSa-outlook hPqXYV-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-dIsUp-outlook iqbgIb-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
       
-      <div  class="sc-kEqXSa hPqXYV" style="margin:0px auto;max-width:600px;">
+      <div  class="sc-dIsUp iqbgIb" style="margin:0px auto;max-width:600px;">
         
         <table
            align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
@@ -98,10 +98,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
               <td
                  style="direction:ltr;font-size:0px;padding:0px;text-align:center;"
               >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-gKAaRy-outlook sc-iqAclL-outlook -outlook inyOyg-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-gKAaRy-outlook sc-iqAclL-outlook -outlook inyOyg-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-pNWdM-outlook sc-bqGGPW-outlook -outlook zXxCO-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-pNWdM-outlook sc-bqGGPW-outlook -outlook zXxCO-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
       
-      <div  class="sc-gKAaRy sc-iqAclL  inyOyg" style="margin:0px auto;max-width:600px;">
+      <div  class="sc-pNWdM sc-bqGGPW  zXxCO" style="margin:0px auto;max-width:600px;">
         
         <table
            align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
@@ -111,10 +111,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
               <td
                  style="direction:ltr;font-size:0px;padding:0px;text-align:center;"
               >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-jSFjdj-outlook" style="vertical-align:top;width:600px;" ><![endif]-->
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-fujyAs-outlook" style="vertical-align:top;width:600px;" ><![endif]-->
             
       <div
-         class="mj-column-per-100 mj-outlook-group-fix sc-jSFjdj" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+         class="mj-column-per-100 mj-outlook-group-fix sc-fujyAs" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
@@ -131,7 +131,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
           
               <tr>
                 <td
-                   align="center" class="sc-jrsJWt" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="center" class="sc-crzoAE" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <table
@@ -172,10 +172,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class="sc-gKAaRy-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-gKAaRy-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class="sc-pNWdM-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-pNWdM-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
       
-      <div  class="sc-gKAaRy" style="margin:0px auto;max-width:600px;">
+      <div  class="sc-pNWdM" style="margin:0px auto;max-width:600px;">
         
         <table
            align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
@@ -185,10 +185,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
               <td
                  style="direction:ltr;font-size:0px;padding:0px;text-align:center;"
               >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-jSFjdj-outlook" style="vertical-align:top;width:600px;" ><![endif]-->
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-fujyAs-outlook" style="vertical-align:top;width:600px;" ><![endif]-->
             
       <div
-         class="mj-column-per-100 mj-outlook-group-fix sc-jSFjdj" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+         class="mj-column-per-100 mj-outlook-group-fix sc-fujyAs" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
@@ -205,7 +205,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
           
               <tr>
                 <td
-                   align="center" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="center" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <div
@@ -234,10 +234,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class="sc-gKAaRy-outlook sc-iCoGMd-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-gKAaRy-outlook sc-iCoGMd-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class="sc-pNWdM-outlook sc-jrsJWt-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-pNWdM-outlook sc-jrsJWt-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
       
-      <div  class="sc-gKAaRy sc-iCoGMd" style="margin:0px auto;max-width:600px;">
+      <div  class="sc-pNWdM sc-jrsJWt" style="margin:0px auto;max-width:600px;">
         
         <table
            align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
@@ -247,10 +247,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
               <td
                  style="direction:ltr;font-size:0px;padding:0px;padding-bottom:20px;padding-left:64px;padding-right:64px;padding-top:20px;text-align:center;"
               >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-jSFjdj-outlook" style="vertical-align:top;width:472px;" ><![endif]-->
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-fujyAs-outlook" style="vertical-align:top;width:472px;" ><![endif]-->
             
       <div
-         class="mj-column-per-100 mj-outlook-group-fix sc-jSFjdj" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+         class="mj-column-per-100 mj-outlook-group-fix sc-fujyAs" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
@@ -267,7 +267,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
           
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <div
@@ -279,7 +279,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -291,7 +291,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -303,7 +303,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -315,7 +315,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -327,7 +327,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;padding-top:8px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;padding-top:8px;word-break:break-word;"
                 >
                   
       <div
@@ -339,7 +339,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -368,10 +368,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class="sc-gKAaRy-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-gKAaRy-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class="sc-pNWdM-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="sc-pNWdM-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
     
       
-      <div  class="sc-gKAaRy" style="margin:0px auto;max-width:600px;">
+      <div  class="sc-pNWdM" style="margin:0px auto;max-width:600px;">
         
         <table
            align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
@@ -381,10 +381,10 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
               <td
                  style="direction:ltr;font-size:0px;padding:0px;padding-bottom:48px;padding-left:64px;padding-right:64px;text-align:center;"
               >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-jSFjdj-outlook" style="vertical-align:top;width:472px;" ><![endif]-->
+                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="sc-fujyAs-outlook" style="vertical-align:top;width:472px;" ><![endif]-->
             
       <div
-         class="mj-column-per-100 mj-outlook-group-fix sc-jSFjdj" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
+         class="mj-column-per-100 mj-outlook-group-fix sc-fujyAs" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
@@ -401,7 +401,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
           
               <tr>
                 <td
-                   align="center" class="sc-fujyAs" style="font-size:0px;padding:24px 0;word-break:break-word;"
+                   align="center" class="sc-kEqXSa" style="font-size:0px;padding:24px 0;word-break:break-word;"
                 >
                   
       <p
@@ -418,7 +418,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-pNWdM kcVWWw" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="left" class="sc-iqAclL keLBDy" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <div

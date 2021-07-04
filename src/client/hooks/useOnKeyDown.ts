@@ -1,4 +1,4 @@
-import Keycode from "keycode-js";
+import * as Keycode from "keycode-js";
 import { KeyboardEvent, KeyboardEventHandler, useCallback, useEffect } from "react";
 
 interface IUseOnKeyDownOptions {
