@@ -80,6 +80,7 @@
     "@graphql-codegen/typescript-operations": "^1.18.3",
     "@graphql-codegen/typescript-urql": "^2.0.10",
     "@next/bundle-analyzer": "^11.0.1",
+    "@storybook/addon-a11y": "^6.3.2",
     "@storybook/addon-essentials": "^6.3.2",
     "@storybook/addon-storyshots": "^6.3.2",
     "@storybook/react": "^6.3.2",
