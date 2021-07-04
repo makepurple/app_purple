@@ -66,12 +66,12 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 };
 
 const dirname: string = process.env.PROJECT_DIRNAME
-	? path.join(process.env.PROJECT_DIRNAME, "src/server/emails")
+	? path.join(process.env.PROJECT_DIRNAME, "src/server/scripts")
 	: __dirname;
 
 const isProd: boolean = process.env.NODE_ENV === "production";
 
-const templatePath: string = path.resolve(dirname, "../generated");
+const templatePath: string = path.resolve(dirname, "../emails/generated");
 
 generateTemplates({
 	shouldGenerateArtifacts: !isProd,
