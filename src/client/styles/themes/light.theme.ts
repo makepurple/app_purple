@@ -24,6 +24,7 @@ export const LightTheme = {
 		tertiaryBoxShadow: "rgba(31, 31, 65, 0.05)",
 		buttonBoxShadow: "rgba(255, 255, 255, 0.25)",
 		iconColor: Colors.mediumBlue,
+		outlineColor: "rgb(232, 236, 253)",
 		secondaryIconColor: Colors.darkBlue
 	}
 } as const;

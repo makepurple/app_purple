@@ -24,6 +24,7 @@ export const DarkTheme = {
 		tertiaryBoxShadow: "rgba(31, 31, 65, 1)",
 		buttonBoxShadow: "rgba(0, 0, 0, 0.02)",
 		iconColor: Colors.purple,
+		outlineColor: "rgb(31, 31, 65)",
 		secondaryIconColor: Colors.purple
 	}
 } as const;
