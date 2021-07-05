@@ -10,19 +10,36 @@ export class CloudinaryClient {
 		});
 	}
 
-	public uploadFile(file: FileUpload): Promise<string> {
+	public uploadImageFile(file: FileUpload): Promise<string> {
+		const { filename } = file;
+
 		return new Promise<string>((resolve, reject) => {
 			file.createReadStream().pipe(
-				cloudinary.v2.uploader.upload_stream((error, result) => {
-					if (error) return reject(error);
-					if (!result?.secure_url) return reject(new Error("No secure url"));
-					resolve(result.secure_url);
-				})
+				cloudinary.v2.uploader.upload_stream(
+					{
+						type: "image",
+						public_id: `${process.env.CLOUDINARY_CLOUD_NAME}/images/${filename}`,
+						overwrite: true,
+						secure: true
+					},
+					(error, result) => {
+						if (error) return reject(error);
+						if (!result?.secure_url) return reject(new Error("No secure url"));
+						resolve(result.secure_url);
+					}
+				)
 			);
 		});
 	}
 
-	public uploadDataUrl(dataUrl: string): Promise<string> {
-		return cloudinary.v2.uploader.upload(dataUrl).then((result) => result.secure_url);
+	public uploadImageDataUrl(filename: string, dataUrl: string): Promise<string> {
+		return cloudinary.v2.uploader
+			.upload(dataUrl, {
+				type: "image",
+				public_id: `${process.env.CLOUDINARY_CLOUD_NAME}/images/${filename}`,
+				overwrite: true,
+				secure: true
+			})
+			.then((result) => result.secure_url);
 	}
 }
