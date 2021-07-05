@@ -1,3 +1,4 @@
+import { LazyMotion, ThemeProvider } from "@/client/atoms";
 import { urqlClient } from "@/client/graphql";
 import { GlobalStyles } from "@/client/styles";
 import ms from "ms";
@@ -9,7 +10,6 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import { Provider as UrqlProvider } from "urql";
 
-import { ThemeProvider } from "@/client/atoms";
 import "@/client/styles/global.styles.css";
 import "tippy.js/dist/tippy.css";
 
@@ -48,7 +48,9 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 						stopDelayMs={ms("0.2s")}
 						options={{ showSpinner: false }}
 					/>
-					<Component {...pageProps} />
+					<LazyMotion>
+						<Component {...pageProps} />
+					</LazyMotion>
 					<Toaster position="bottom-center" />
 				</ThemeProvider>
 			</UrqlProvider>

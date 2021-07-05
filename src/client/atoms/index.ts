@@ -2,6 +2,7 @@ export * from "./AppBar";
 export * from "./Brand";
 export * from "./Button";
 export * from "./Footer";
+export * from "./LazyMotion";
 export * from "./MainContainer";
 export * from "./PageContainer";
 export * from "./Paper";

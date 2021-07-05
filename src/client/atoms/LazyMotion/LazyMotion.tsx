@@ -1,0 +1,12 @@
+import { LazyMotion as LazyMotionProvider } from "framer-motion";
+import React, { FC, ReactNode } from "react";
+
+const loadFeatures = () => import("./features").then((res) => res.default);
+
+export interface LazyMotionProps {
+	children?: ReactNode;
+}
+
+export const LazyMotion: FC<LazyMotionProps> = ({ children }) => {
+	return <LazyMotionProvider features={loadFeatures}>{children}</LazyMotionProvider>;
+};

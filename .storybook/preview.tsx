@@ -1,7 +1,9 @@
 import { addons } from "@storybook/addons";
 import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
+import { domMax, LazyMotion } from "framer-motion";
 import * as NextImage from "next/image";
+import { Toaster } from "react-hot-toast";
 import { withNextRouter } from "storybook-addon-next-router";
 import { ThemeProvider } from "../src/client/atoms";
 import { GlobalStyles } from "../src/client/styles";
@@ -57,7 +59,10 @@ export const decorators = [
 	(Story) => (
 		<ThemeProvider>
 			<GlobalStyles />
-			<Story />
+			<LazyMotion features={domMax}>
+				<Story />
+			</LazyMotion>
+			<Toaster position="bottom-center" />
 		</ThemeProvider>
 	)
 ];

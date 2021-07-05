@@ -44,6 +44,7 @@
     "cloudinary": "^1.26.2",
     "common-tags": "^1.8.0",
     "cookie-session": "^1.4.0",
+    "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
     "graphql-depth-limit": "^1.1.0",
     "graphql-middleware": "^6.0.10",
