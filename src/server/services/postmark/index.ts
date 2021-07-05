@@ -1,3 +1,1 @@
-import { postmarkClient } from "./postmark-client";
-
-export const client = postmarkClient;
+export { postmarkClient as client } from "./postmark-client";
