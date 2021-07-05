@@ -9,7 +9,7 @@ const Root = styled.a`
 	font-weight: 600;
 	color: ${({ theme }) => theme.colors.primaryText};
 	background: ${({ theme }) => css`
-		linear-gradient(23deg, #D16BA5 18%, ${theme.palette.brightPurple} 50%, #5FFBF1 92%);
+		linear-gradient(-70deg, ${theme.palette.red}, ${theme.palette.blue})
 	`};
 	-webkit-background-clip: text;
 	background-clip: text;

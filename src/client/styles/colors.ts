@@ -17,14 +17,14 @@ export const Colors = {
 	mediumPurple: "#dfdff1",
 	darkPurple: "#383e59",
 	darkerPurple: "#464678",
-	red: "#FF656D",
 	mutedRed: "#FFF0F0",
-	blue: "#0F1C46",
 	mediumBlue: "#0A1A5D",
 	darkBlue: "#1F1F41",
 	darkerBlue: "#121226",
 	lightBlue: "#F2F2FF",
-	mutedBlue: "#F9F9FF"
+	mutedBlue: "#F9F9FF",
+	red: "#db469f",
+	blue: "#2188ff"
 } as const;
 
 export const RandomColors = [
