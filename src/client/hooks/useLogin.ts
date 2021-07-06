@@ -1,5 +1,5 @@
 import { useGetMyUserQuery } from "@/client/graphql";
-import { UrlUtils } from "@/utils";
+import { UrlUtils, WindowUtils } from "@/utils";
 import ms from "ms";
 import { useCallback, useEffect } from "react";
 
@@ -20,22 +20,14 @@ export const useLogin = (params: UseLoginHookParams = {}) => {
 			client_id: process.env.GITHUB_CLIENT_ID ?? ""
 		});
 
-		const height = 600;
-		const width = 400;
-		const top = window.screenY + (window.innerHeight - height) / 2;
-		const left = window.screenX + (window.innerWidth - width) / 2;
-
 		return new Promise<void>((resolve, reject) => {
 			let authWindow: Window | null;
 
 			try {
-				authWindow = window.open(
+				authWindow = WindowUtils.openWindow(
 					`/api/auth/github?${queryParams}`,
 					"github-oauth-authorize",
-					UrlUtils.toQuery(
-						{ height, width, top, left, scrollbars: "yes", status: 1 },
-						","
-					)
+					{ scrollbars: "yes", status: 1 }
 				);
 			} catch (error) {
 				reject(error);
