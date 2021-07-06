@@ -1,6 +1,20 @@
+import { WindowUtils } from "@/utils";
+import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
 import { cacheExchange } from "@urql/exchange-graphcache";
+import deepMerge from "deepmerge";
+import deepEqual from "fast-deep-equal";
+import produce from "immer";
 import toast from "react-hot-toast";
-import { createClient, dedupExchange, errorExchange, fetchExchange } from "urql";
+import {
+	Client,
+	createClient,
+	dedupExchange,
+	errorExchange,
+	fetchExchange,
+	ssrExchange
+} from "urql";
+
+export const URQL_STATE_PROP_NAME = "urqlState";
 
 /**
  * Consistently determine the API URL for the current client even when in a
@@ -32,20 +46,81 @@ const getApiUrl = (): string => {
 	return "https://example.org";
 };
 
-export const urqlClient = createClient({
-	exchanges: [
-		errorExchange({
-			onError: (error) => {
-				toast.error(error.message.replace("[GraphQL]", "Server error:"));
-			}
-		}),
-		dedupExchange,
-		cacheExchange(),
-		fetchExchange
-	],
-	fetchOptions: {
-		credentials: "include"
-	},
-	requestPolicy: "cache-first",
-	url: getApiUrl()
-});
+let ssr: SSRExchange;
+let urqlClient: Client | null = null;
+
+export interface CreateUrqlClientParams {
+	ssr?: SSRExchange;
+}
+
+export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
+	const { ssr: _ssr = ssrExchange() } = params;
+
+	if (WindowUtils.isSsr() || !urqlClient) {
+		urqlClient = createClient({
+			exchanges: [
+				errorExchange({
+					onError: (error) => {
+						toast.error(error.message.replace("[GraphQL]", "Server error:"));
+					}
+				}),
+				dedupExchange,
+				cacheExchange(),
+				_ssr,
+				fetchExchange
+			],
+			fetchOptions: {
+				credentials: "include"
+			},
+			requestPolicy: "cache-and-network",
+			url: getApiUrl()
+		});
+
+		// Serialize the urqlClient to null on the client-side.
+		// This ensures we don't share client and server instances of the urqlClient.
+		(urqlClient as any).toJSON = () => null;
+	}
+
+	return urqlClient;
+};
+
+export interface InitializeUrqlOptions {
+	initialState?: SSRData;
+}
+
+export const initializeUrql = (options: InitializeUrqlOptions = {}): Client => {
+	const { initialState = {} } = options;
+
+	if (!ssr || WindowUtils.isSsr()) {
+		ssr = ssrExchange({ initialState, isClient: true });
+	} else if (ssr && WindowUtils.isBrowser()) {
+		const existingCache = ssr.extractData();
+
+		// Merge the existing cache into the data passed from getStaticProps/getServerSideProps
+		const data = deepMerge(initialState, existingCache, {
+			// combine arrays using deep object equality (like in sets)
+			/* eslint-disable */
+			arrayMerge: (destinationArray, sourceArray) => [
+				...sourceArray,
+				...destinationArray.filter((d) => sourceArray.every((s) => !deepEqual(d, s)))
+			]
+			/* eslint-enable */
+		});
+
+		ssr.restoreData(data);
+	}
+
+	return createUrqlClient({ ssr });
+};
+
+export const addUrqlState = <T extends { props: Record<string, any> }>(
+	ssrCache: SSRExchange,
+	pageProps: T
+) => {
+	return produce(pageProps, (newPageProps) => {
+		newPageProps.props = {
+			...newPageProps.props,
+			[URQL_STATE_PROP_NAME]: ssrCache.extractData()
+		};
+	});
+};

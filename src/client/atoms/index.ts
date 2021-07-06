@@ -9,3 +9,4 @@ export * from "./Paper";
 export * from "./Popover";
 export * from "./ThemeProvider";
 export * from "./Typography";
+export * from "./UrqlProvider";

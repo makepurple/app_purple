@@ -1,5 +1,4 @@
-import { LazyMotion, ThemeProvider } from "@/client/atoms";
-import { urqlClient } from "@/client/graphql";
+import { LazyMotion, ThemeProvider, UrqlProvider } from "@/client/atoms";
 import { GlobalStyles } from "@/client/styles";
 import ms from "ms";
 import { NextComponentType } from "next";
@@ -8,7 +7,6 @@ import dynamic from "next/dynamic";
 import NextHead from "next/head";
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import { Provider as UrqlProvider } from "urql";
 
 import "@/client/styles/global.styles.css";
 import "tippy.js/dist/tippy.css";
@@ -40,7 +38,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				/>
 			</NextHead>
 			{/* Import styles (inlined) */}
-			<UrqlProvider value={urqlClient}>
+			<UrqlProvider pageProps={pageProps}>
 				<ThemeProvider>
 					<GlobalStyles />
 					<NextProgress

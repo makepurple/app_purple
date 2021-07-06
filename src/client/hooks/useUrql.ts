@@ -1,0 +1,13 @@
+import { initializeUrql, URQL_STATE_PROP_NAME } from "@/client/graphql";
+import type { SSRData } from "@urql/core/dist/types/exchanges/ssr";
+import { GetServerSidePropsResult } from "next";
+import { useMemo } from "react";
+import { Client } from "urql";
+
+export const useUrql = <P extends unknown>(pageProps: GetServerSidePropsResult<P>): Client => {
+	const initialState = pageProps[URQL_STATE_PROP_NAME] as SSRData;
+
+	const store = useMemo(() => initializeUrql({ initialState }), [initialState]);
+
+	return store;
+};

@@ -30,6 +30,7 @@ export const apiBaseMiddleware = () => {
 		nc<Request, NextApiResponse>({
 			onError: (err, _, res) => {
 				error(err);
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 				res.status(500).end(err.toString());
 			}
 		})

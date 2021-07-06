@@ -5,6 +5,10 @@ export class WindowUtils {
 		return typeof window !== "undefined";
 	}
 
+	public static isSsr(): boolean {
+		return typeof window === "undefined";
+	}
+
 	public static openWindow(
 		url: string,
 		name: string,
