@@ -8,5 +8,9 @@ export interface LazyMotionProps {
 }
 
 export const LazyMotion: FC<LazyMotionProps> = ({ children }) => {
-	return <LazyMotionProvider features={loadFeatures}>{children}</LazyMotionProvider>;
+	return (
+		<LazyMotionProvider features={loadFeatures} strict>
+			{children}
+		</LazyMotionProvider>
+	);
 };

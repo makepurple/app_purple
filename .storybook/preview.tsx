@@ -59,7 +59,7 @@ export const decorators = [
 	(Story) => (
 		<ThemeProvider>
 			<GlobalStyles />
-			<LazyMotion features={domMax}>
+			<LazyMotion features={domMax} strict>
 				<Story />
 			</LazyMotion>
 			<Toaster position="bottom-center" />
