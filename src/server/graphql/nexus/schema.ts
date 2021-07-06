@@ -6,7 +6,7 @@ import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import path from "path";
 import { getClientIp } from "request-ip";
 import * as mutations from "./mutations";
-import { rateLimitPlugin, yupValidationPlugin } from "./plugins";
+import { rateLimitPlugin } from "./plugins";
 import * as types from "./types";
 
 const dirname: string = process.env.PROJECT_DIRNAME
@@ -52,8 +52,7 @@ export const schema = makeSchema({
 				return identityKey;
 			},
 			store: new RedisStore(redis.instance)
-		}),
-		yupValidationPlugin()
+		})
 	],
 	sourceTypes: {
 		headers: [],

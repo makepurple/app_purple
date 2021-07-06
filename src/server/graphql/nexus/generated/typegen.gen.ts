@@ -4,7 +4,6 @@ import type { ServerContext as ctx } from "@/server/graphql/context"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
 import type { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
 import type { FieldRateLimitResolver } from "@/server/graphql/nexus/plugins/rate-limit.plugin"
-import type { FieldYupValidationResolver } from "@/server/graphql/nexus/plugins/yup-validation.plugin"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -310,10 +309,6 @@ declare global {
      * Rate limit plugin for an individual field. Uses the same directive args as `graphql-rate-limit`.
      */
     rateLimit?: FieldRateLimitResolver<TypeName, FieldName>
-    /**
-     * `yup` validation plugin for an individual field. Requires that an object schema definition be defined for the input args.
-     */
-    yupValidation?: FieldYupValidationResolver<TypeName, FieldName>
   }
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
   }
