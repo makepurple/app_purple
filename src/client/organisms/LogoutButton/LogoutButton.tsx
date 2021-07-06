@@ -1,5 +1,5 @@
-import { Button, Typography } from "@/client/atoms";
-import NextLink from "next/link";
+import { Button } from "@/client/atoms";
+import { useLogout } from "@/client/hooks";
 import React, { CSSProperties, FC } from "react";
 
 export interface LogoutButtonProps {
@@ -9,11 +9,11 @@ export interface LogoutButtonProps {
 }
 
 export const LogoutButton: FC<LogoutButtonProps> = ({ className, label = "Logout", style }) => {
+	const logout = useLogout();
+
 	return (
-		<NextLink href="/api/auth/logout" passHref>
-			<Button as="a" className={className} style={style} type="button">
-				<Typography>{label}</Typography>
-			</Button>
-		</NextLink>
+		<Button className={className} onClick={logout} style={style} type="button">
+			<span>{label}</span>
+		</Button>
 	);
 };

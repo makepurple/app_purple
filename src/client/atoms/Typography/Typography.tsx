@@ -6,7 +6,7 @@ export const Typography = styled.span`
 	font-size: 1rem;
 	font-weight: 300;
 	line-height: 1.5;
-	color: #000;
+	color: inherit;
 	margin: 0;
 	padding: 0;
 	border: 0;

@@ -1,5 +1,7 @@
 import { AppBar, Brand, MainContainer, PageContainer } from "@/client/atoms";
+import { useGetMyUserQuery } from "@/client/graphql";
 import { LoginButton } from "@/client/organisms/LoginButton";
+import { LogoutButton } from "@/client/organisms/LogoutButton";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
@@ -32,9 +34,7 @@ const Actions = styled.div`
 	}
 `;
 
-const SignUpButton = styled(LoginButton)``;
-
-const StyledLoginButton = styled(SignUpButton)`
+const StyledLoginButton = styled(LoginButton)`
 	background-color: transparent;
 	color: ${({ theme }) => theme.colors.primaryText};
 
@@ -49,6 +49,9 @@ export interface SiteWideAppBarProps {
 }
 
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
+	const [{ data }] = useGetMyUserQuery({ requestPolicy: "cache-first" });
+	const isAuthenticated = !!data?.viewer;
+
 	const { scrollY } = useViewportScroll();
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
@@ -93,8 +96,14 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					<Brand />
 				</BrandContainer>
 				<Actions>
-					<StyledLoginButton icon={null} label="Login" />
-					<SignUpButton label="Sign Up" />
+					{!isAuthenticated ? (
+						<>
+							<StyledLoginButton icon={null} label="Login" />
+							<LoginButton label="Sign Up" />
+						</>
+					) : (
+						<LogoutButton />
+					)}
 				</Actions>
 			</Content>
 		</Root>

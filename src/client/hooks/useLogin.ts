@@ -45,7 +45,7 @@ export const useLogin = (params: UseLoginHookParams = {}) => {
 		});
 	}, [getUser]);
 
-	const isLoggedIn = Boolean(data?.viewer);
+	const isLoggedIn: boolean = !!data?.viewer;
 
 	useEffect(
 		() => {

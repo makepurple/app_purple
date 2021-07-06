@@ -1,10 +1,10 @@
-import { Button, Typography } from "@/client/atoms";
+import { Button } from "@/client/atoms";
 import { useLogin } from "@/client/hooks";
 import { GitHubIcon } from "@/client/svgs";
 import React, { ComponentType, CSSProperties, FC, SVGAttributes } from "react";
 import styled from "styled-components";
 
-const Label = styled(Typography)`
+const Label = styled.span`
 	&:not(:first-child) {
 		margin-left: 8px;
 	}
