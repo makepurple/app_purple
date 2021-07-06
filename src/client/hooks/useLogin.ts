@@ -22,8 +22,8 @@ export const useLogin = (params: UseLoginHookParams = {}) => {
 
 		const height = 600;
 		const width = 400;
-		const top = window.screenY / 2 - (window.innerHeight - height) / 2;
-		const left = window.screenX / 2 - (window.innerWidth - width) / 2;
+		const top = window.screenY + (window.innerHeight - height) / 2;
+		const left = window.screenX + (window.innerWidth - width) / 2;
 
 		return new Promise<void>((resolve, reject) => {
 			let authWindow: Window | null;
@@ -32,7 +32,10 @@ export const useLogin = (params: UseLoginHookParams = {}) => {
 				authWindow = window.open(
 					`/api/auth/github?${queryParams}`,
 					"github-oauth-authorize",
-					UrlUtils.toQuery({ height, width, top, left }, ",")
+					UrlUtils.toQuery(
+						{ height, width, top, left, scrollbars: "yes", status: 1 },
+						","
+					)
 				);
 			} catch (error) {
 				reject(error);
