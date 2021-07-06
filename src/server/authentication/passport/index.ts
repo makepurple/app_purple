@@ -34,6 +34,8 @@ passport.serializeUser(async (profile: any, done) => {
 
 	if (existingUser) {
 		done(null, existingUser.id);
+
+		return;
 	}
 
 	const user = await prisma.user.create({
