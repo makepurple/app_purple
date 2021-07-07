@@ -7,6 +7,7 @@ export * from "./Footer";
 export * from "./GitHubAvatarImage";
 export * from "./LazyMotion";
 export * from "./MainContainer";
+export * from "./Menu";
 export * from "./PageContainer";
 export * from "./Paper";
 export * from "./Popover";

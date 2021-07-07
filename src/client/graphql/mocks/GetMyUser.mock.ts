@@ -5,7 +5,7 @@ export const GetMyUserMock: GetMyUserQuery = {
 		__typename: "User" as const,
 		id: "0",
 		username: "DenverCoder9",
-		profileImageUrl: "https://avatars.githubusercontent.com/u/810438?v=4",
+		profileImageUrl: "https://avatars.githubusercontent.com/u/810438",
 		profileGitHubUrl: "https://github.com/gaearon"
 	}
 };

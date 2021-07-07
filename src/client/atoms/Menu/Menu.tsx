@@ -1,0 +1,22 @@
+import { InferComponentProps } from "@/client/types";
+import { ObjectUtils } from "@/utils";
+import styled from "styled-components";
+import { MenuItem } from "./MenuItem";
+
+export type MenuProps = InferComponentProps<typeof Menu>;
+
+export const Menu = ObjectUtils.setStatic(
+	styled.div`
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		box-sizing: border-box;
+		padding: 0.75rem 0.5rem;
+		border-radius: 0.5rem;
+		background-color: ${({ theme }) => theme.colors.surfaceColor};
+		box-shadow: ${({ theme }) => theme.shadows.md};
+	`,
+	{ Item: MenuItem }
+);
+
+Menu.displayName = "Menu";
