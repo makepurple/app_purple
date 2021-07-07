@@ -1,3 +1,4 @@
+export * from "./Anchor";
 export * from "./AppBar";
 export * from "./Brand";
 export * from "./Button";

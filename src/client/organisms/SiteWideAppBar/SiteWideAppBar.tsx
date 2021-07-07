@@ -4,6 +4,7 @@ import { LoginButton } from "@/client/organisms/LoginButton";
 import { LogoutButton } from "@/client/organisms/LogoutButton";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
+import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -93,7 +94,9 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		>
 			<Content>
 				<BrandContainer>
-					<Brand />
+					<NextLink href="/" passHref>
+						<Brand />
+					</NextLink>
 				</BrandContainer>
 				<Actions>
 					{!isAuthenticated ? (

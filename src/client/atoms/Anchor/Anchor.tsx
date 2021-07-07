@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Typography = styled.span`
+export const Anchor = styled.a`
 	font-family: Gilroy, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
 		Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 1rem;
-	font-weight: 500;
+	font-size: 1.125rem;
+	font-weight: 600;
 	line-height: 1.5;
 	color: inherit;
 	margin: 0;
@@ -13,4 +13,12 @@ export const Typography = styled.span`
 	border-radius: 0;
 	box-shadow: none;
 	background: transparent;
+	color: ${({ theme }) => theme.palette.blue};
+	text-decoration: none;
+	cursor: pointer;
+
+	&:hover {
+		color: ${({ theme }) => theme.palette.purple};
+		text-decoration: underline;
+	}
 `;
