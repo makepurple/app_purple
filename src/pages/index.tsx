@@ -1,15 +1,17 @@
+import { MainContainer } from "@/client/atoms";
 import { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
 import { gql, useQuery } from "urql";
 
-const Root = styled.div`
-	background-color: #efefef;
+const Root = styled(MainContainer)`
+	background-color: red;
+	height: 200vh;
 `;
 
 export const Page: NextPage = () => {
-	const [session, loading] = useSession();
+	const [, loading] = useSession();
 
 	const [, doOk] = useQuery({
 		query: gql`

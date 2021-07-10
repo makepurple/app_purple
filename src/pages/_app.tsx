@@ -1,4 +1,5 @@
 import { LazyMotion, ThemeProvider, UrqlProvider } from "@/client/atoms";
+import { SiteWideLayout } from "@/client/organisms";
 import { GlobalStyles } from "@/client/styles";
 import ms from "ms";
 import { NextComponentType } from "next";
@@ -49,7 +50,9 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 							options={{ showSpinner: false }}
 						/>
 						<LazyMotion>
-							<Component {...pageProps} />
+							<SiteWideLayout>
+								<Component {...pageProps} />
+							</SiteWideLayout>
 						</LazyMotion>
 						<Toaster position="bottom-center" />
 					</ThemeProvider>

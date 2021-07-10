@@ -59,6 +59,12 @@ body {
 	background-color: ${({ theme }) => theme.colors.backgroundColor} !important;
 }
 
+#__next {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
 code {
 	font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace
 }

@@ -13,6 +13,7 @@ const Root = styled.div`
 
 const Content = styled(PageContainer)`
 	flex-grow: 1;
+	padding-top: 64px;
 `;
 
 export type SiteWideLayoutProps = InferComponentProps<typeof PageContainer>;
