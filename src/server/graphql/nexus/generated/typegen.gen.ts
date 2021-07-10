@@ -100,12 +100,10 @@ export interface NexusGenObjects {
     name: string; // String!
   }
   User: { // root type
-    email: string; // String!
-    id: string; // ID!
-    profileGitHubUrl?: string | null; // String
-    profileImageUrl?: string | null; // String
-    provider: NexusGenEnums['AuthProvider']; // AuthProvider!
-    username: string; // String!
+    email?: string | null; // String
+    id: number; // Int!
+    image?: string | null; // String
+    name?: string | null; // String
   }
 }
 
@@ -158,14 +156,12 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
-    email: string; // String!
-    id: string; // ID!
+    email: string | null; // String
+    id: number; // Int!
+    image: string | null; // String
+    name: string | null; // String
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
-    profileGitHubUrl: string | null; // String
-    profileImageUrl: string | null; // String
-    provider: NexusGenEnums['AuthProvider']; // AuthProvider!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
-    username: string; // String!
   }
 }
 
@@ -209,13 +205,11 @@ export interface NexusGenFieldTypeNames {
   User: { // field return type name
     comments: 'Comment'
     email: 'String'
-    id: 'ID'
+    id: 'Int'
+    image: 'String'
+    name: 'String'
     posts: 'Post'
-    profileGitHubUrl: 'String'
-    profileImageUrl: 'String'
-    provider: 'AuthProvider'
     skills: 'Skill'
-    username: 'String'
   }
 }
 

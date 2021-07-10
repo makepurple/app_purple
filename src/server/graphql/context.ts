@@ -2,8 +2,10 @@ import { prisma } from "@/server/db";
 import { Request } from "@/server/middlewares";
 import { redis } from "@/server/redis";
 import { aws } from "@/server/services";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
+import { Session } from "next-auth";
+import { getSession } from "next-auth/client";
 
 export interface ServerContext {
 	aws: typeof aws;
@@ -11,7 +13,7 @@ export interface ServerContext {
 	redis: typeof redis;
 	req: Request;
 	res: NextApiResponse;
-	user: User | null;
+	user: Session["user"] | null;
 }
 
 interface CreateContextParams {
@@ -22,12 +24,14 @@ interface CreateContextParams {
 export const createContext = async (params: CreateContextParams): Promise<ServerContext> => {
 	const { req, res } = params;
 
+	const session = await getSession({ req });
+
 	return Promise.resolve({
 		aws,
 		prisma,
 		redis,
 		req,
 		res,
-		user: req.user ?? null
+		user: session?.user ?? null
 	});
 };

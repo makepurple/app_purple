@@ -2,6 +2,7 @@ import { LazyMotion, ThemeProvider, UrqlProvider } from "@/client/atoms";
 import { GlobalStyles } from "@/client/styles";
 import ms from "ms";
 import { NextComponentType } from "next";
+import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import NextHead from "next/head";
@@ -37,21 +38,23 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 					crossOrigin="true"
 				/>
 			</NextHead>
-			{/* Import styles (inlined) */}
-			<UrqlProvider pageProps={pageProps}>
-				<ThemeProvider>
-					<GlobalStyles />
-					<NextProgress
-						startPosition={0.3}
-						stopDelayMs={ms("0.2s")}
-						options={{ showSpinner: false }}
-					/>
-					<LazyMotion>
-						<Component {...pageProps} />
-					</LazyMotion>
-					<Toaster position="bottom-center" />
-				</ThemeProvider>
-			</UrqlProvider>
+			<NextAuthProvider session={pageProps.session}>
+				<UrqlProvider pageProps={pageProps}>
+					<ThemeProvider>
+						{/* Import styles (inlined) */}
+						<GlobalStyles />
+						<NextProgress
+							startPosition={0.3}
+							stopDelayMs={ms("0.2s")}
+							options={{ showSpinner: false }}
+						/>
+						<LazyMotion>
+							<Component {...pageProps} />
+						</LazyMotion>
+						<Toaster position="bottom-center" />
+					</ThemeProvider>
+				</UrqlProvider>
+			</NextAuthProvider>
 		</>
 	);
 };

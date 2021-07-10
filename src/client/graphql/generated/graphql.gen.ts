@@ -7,7 +7,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string | number;
+  ID: string;
   String: string;
   Boolean: boolean;
   Int: number;
@@ -94,20 +94,18 @@ export type Skill = {
 export type User = {
   readonly __typename?: 'User';
   readonly comments: ReadonlyArray<Comment>;
-  readonly email: Scalars['String'];
-  readonly id: Scalars['ID'];
+  readonly email?: Maybe<Scalars['String']>;
+  readonly id: Scalars['Int'];
+  readonly image?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
   readonly posts: ReadonlyArray<Post>;
-  readonly profileGitHubUrl?: Maybe<Scalars['String']>;
-  readonly profileImageUrl?: Maybe<Scalars['String']>;
-  readonly provider: AuthProvider;
   readonly skills: ReadonlyArray<Skill>;
-  readonly username: Scalars['String'];
 };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename?: 'User', readonly id: string | number, readonly username: string, readonly profileImageUrl?: Maybe<string>, readonly profileGitHubUrl?: Maybe<string> }> };
+export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename?: 'User', readonly id: number, readonly name?: Maybe<string>, readonly image?: Maybe<string> }> };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -119,9 +117,8 @@ export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {
   viewer {
     id
-    username
-    profileImageUrl
-    profileGitHubUrl
+    name
+    image
   }
 }
     `;

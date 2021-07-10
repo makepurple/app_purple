@@ -17,6 +17,7 @@ const config = {
 		PROJECT_DIRNAME:           __dirname,
 
 		BASE_URL:                  process.env.BASE_URL,
+		NEXTAUTH_URL:              process.env.NEXTAUTH_URL,
 		COOKIE_SECRET:             process.env.COOKIE_SECRET,
 
 		REDIS_HOST:                process.env.REDIS_HOST,

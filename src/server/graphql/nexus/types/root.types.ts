@@ -1,3 +1,4 @@
+import { LangUtils } from "@/utils";
 import { mutationType, queryType } from "nexus";
 
 export const Query = queryType({
@@ -6,7 +7,11 @@ export const Query = queryType({
 		t.nonNull.boolean("ok", { resolve: () => true });
 		t.field("viewer", {
 			type: "User",
-			resolve: (root, args, { user }) => user
+			resolve: (root, args, { prisma, user }) => {
+				return LangUtils.isNil(user?.id)
+					? null
+					: prisma.user.findUnique({ where: { id: user?.id } });
+			}
 		});
 	}
 });
@@ -17,7 +22,11 @@ export const Mutation = mutationType({
 		t.nonNull.boolean("ok", { resolve: () => true });
 		t.field("viewer", {
 			type: "User",
-			resolve: (root, args, { user }) => user
+			resolve: (root, args, { prisma, user }) => {
+				return LangUtils.isNil(user?.id)
+					? null
+					: prisma.user.findUnique({ where: { id: user?.id } });
+			}
 		});
 	}
 });

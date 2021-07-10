@@ -7,16 +7,14 @@ export const userTypes = [
 		description: User.$description,
 		definition: (t) => {
 			t.field(User.id);
+			t.field(User.name);
 			t.field({
 				...User.email,
 				authorize: (root, args, { user }) => {
 					return user?.id === root.id;
 				}
 			});
-			t.field(User.profileImageUrl);
-			t.field(User.profileGitHubUrl);
-			t.field(User.provider);
-			t.field(User.username);
+			t.field(User.image);
 			t.field("skills", {
 				type: nonNull(list(nonNull("Skill"))),
 				resolve: (root, args, { prisma }) => {

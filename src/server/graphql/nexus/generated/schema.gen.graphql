@@ -73,12 +73,10 @@ scalar Upload
 
 type User {
   comments: [Comment!]!
-  email: String!
-  id: ID!
+  email: String
+  id: Int!
+  image: String
+  name: String
   posts: [Post!]!
-  profileGitHubUrl: String
-  profileImageUrl: String
-  provider: AuthProvider!
   skills: [Skill!]!
-  username: String!
 }
