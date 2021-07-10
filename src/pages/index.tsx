@@ -1,37 +1,56 @@
-import { UrlUtils } from "@/utils";
-import ms from "ms";
 import { NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
+import { gql, useQuery } from "urql";
 
 const Root = styled.div`
 	background-color: #efefef;
 `;
 
 export const Page: NextPage = () => {
+	const [session, loading] = useSession();
+
+	const [, doOk] = useQuery({
+		query: gql`
+			query {
+				ok
+			}
+		`,
+		pause: true
+	});
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<Root>
+			<div>{session?.user.email}</div>
+			<div>{session?.user.email}</div>
 			<button
-				onClick={() => {
-					const queryParams = UrlUtils.toQuery({
-						client_id: process.env.GITHUB_CLIENT_ID ?? ""
-					});
-
-					const win = window.open(
-						`/api/auth/github?${queryParams}`,
-						"github-oauth-authorize",
-						UrlUtils.toQuery({ height: 600, width: 400 }, ",")
-					);
-
-					const intId = setInterval(() => {
-						if (win?.location.pathname === "/auth/success") {
-							clearInterval(intId);
-						}
-					}, ms("0.5s"));
+				onClick={async () => {
+					await signIn("github");
 				}}
 				type="button"
 			>
-				Click
+				Sign in
+			</button>
+			<button
+				onClick={async () => {
+					await signOut();
+				}}
+				type="button"
+			>
+				Sign out
+			</button>
+			<button
+				onClick={() => {
+					doOk();
+				}}
+				type="button"
+			>
+				Do ok
 			</button>
 		</Root>
 	);
