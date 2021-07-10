@@ -1,6 +1,6 @@
 import { Button } from "@/client/atoms";
-import { useLogin } from "@/client/hooks";
 import { GitHubIcon } from "@/client/svgs";
+import { signIn } from "next-auth/client";
 import React, { ComponentType, CSSProperties, FC, SVGAttributes } from "react";
 import styled from "styled-components";
 
@@ -23,10 +23,8 @@ export const LoginButton: FC<LoginButtonProps> = ({
 	label = "Login",
 	style
 }) => {
-	const login = useLogin();
-
 	return (
-		<Button className={className} onClick={login} style={style} type="button">
+		<Button className={className} onClick={() => signIn("github")} style={style} type="button">
 			{Icon && <Icon height={20} width={20} />}
 			<Label>{label}</Label>
 		</Button>

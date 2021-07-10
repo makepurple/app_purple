@@ -1,5 +1,5 @@
 import { Button } from "@/client/atoms";
-import { useLogout } from "@/client/hooks";
+import { signOut } from "next-auth/client";
 import React, { CSSProperties, FC } from "react";
 
 export interface LogoutButtonProps {
@@ -9,10 +9,8 @@ export interface LogoutButtonProps {
 }
 
 export const LogoutButton: FC<LogoutButtonProps> = ({ className, label = "Logout", style }) => {
-	const logout = useLogout();
-
 	return (
-		<Button className={className} onClick={logout} style={style} type="button">
+		<Button className={className} onClick={() => signOut()} style={style} type="button">
 			<span>{label}</span>
 		</Button>
 	);
