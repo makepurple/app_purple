@@ -1,9 +1,9 @@
 import { AppBar, Brand, MainContainer, PageContainer } from "@/client/atoms";
-import { useGetMyUserQuery } from "@/client/graphql";
 import { LoginButton } from "@/client/organisms/LoginButton";
 import { LogoutButton } from "@/client/organisms/LogoutButton";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
+import { useSession } from "next-auth/client";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import styled from "styled-components";
@@ -50,8 +50,8 @@ export interface SiteWideAppBarProps {
 }
 
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
-	const [{ data }] = useGetMyUserQuery({ requestPolicy: "cache-first" });
-	const isAuthenticated = !!data?.viewer;
+	const [session] = useSession();
+	const isAuthenticated = !!session?.user;
 
 	const { scrollY } = useViewportScroll();
 

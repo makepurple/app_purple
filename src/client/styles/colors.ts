@@ -16,7 +16,7 @@ export const Colors = {
 	purple: "#706eff",
 	mediumPurple: "#dfdff1",
 	darkPurple: "#383e59",
-	darkerPurple: "#464678",
+	darkerPurple: "#2a0134",
 	mutedRed: "#FFF0F0",
 	mediumBlue: "#0A1A5D",
 	darkBlue: "#1F1F41",
