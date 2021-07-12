@@ -8,7 +8,7 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
-const SCROLL_THRESHOLD = 100;
+const SCROLL_THRESHOLD = 32;
 
 const MotionAppBar = m(AppBar);
 
