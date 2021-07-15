@@ -97,7 +97,7 @@ export type User = {
   readonly email?: Maybe<Scalars['String']>;
   readonly id: Scalars['Int'];
   readonly image?: Maybe<Scalars['String']>;
-  readonly name?: Maybe<Scalars['String']>;
+  readonly name: Scalars['String'];
   readonly posts: ReadonlyArray<Post>;
   readonly skills: ReadonlyArray<Skill>;
 };
@@ -105,7 +105,7 @@ export type User = {
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename?: 'User', readonly id: number, readonly name?: Maybe<string>, readonly image?: Maybe<string> }> };
+export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename?: 'User', readonly id: number, readonly name: string, readonly image?: Maybe<string> }> };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 

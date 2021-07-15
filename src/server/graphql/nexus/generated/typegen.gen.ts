@@ -103,7 +103,7 @@ export interface NexusGenObjects {
     email?: string | null; // String
     id: number; // Int!
     image?: string | null; // String
-    name?: string | null; // String
+    name: string; // String!
   }
 }
 
@@ -159,7 +159,7 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     id: number; // Int!
     image: string | null; // String
-    name: string | null; // String
+    name: string; // String!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
   }

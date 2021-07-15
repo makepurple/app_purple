@@ -68,7 +68,7 @@ type User {
   email: String
   id: Int!
   image: String
-  name: String
+  name: String!
   posts: [Post!]!
   skills: [Skill!]!
 }
