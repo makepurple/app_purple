@@ -14,5 +14,6 @@ export * from "./PageContainer";
 export * from "./Paper";
 export * from "./Popover";
 export * from "./ThemeProvider";
+export * from "./Toolbar";
 export * from "./Typography";
 export * from "./UrqlProvider";
