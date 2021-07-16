@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 export type MenuItemProps = InferComponentProps<typeof MenuItem>;
 
-export const MenuItem = styled.button<{ $selected?: boolean }>`
+export const MenuItem = styled.button<{ selected?: boolean }>`
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -24,8 +24,8 @@ export const MenuItem = styled.button<{ $selected?: boolean }>`
 		opacity: 0.8;
 	}
 
-	${({ $selected }) =>
-		$selected &&
+	${({ selected }) =>
+		selected &&
 		css`
 			color: ${({ theme }) => theme.colors.contrastingPrimaryText};
 
@@ -35,3 +35,7 @@ export const MenuItem = styled.button<{ $selected?: boolean }>`
 			}
 		`};
 `;
+
+MenuItem.defaultProps = {
+	type: "button"
+};

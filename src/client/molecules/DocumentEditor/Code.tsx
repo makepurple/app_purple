@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Code = styled.pre`
+export const Code = styled.code`
 	box-sizing: border-box;
 	padding: 4px;
 	border: 1px solid ${({ theme }) => theme.palette.lightGrey};

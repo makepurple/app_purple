@@ -38,6 +38,7 @@ export const PopoverBox = styled.div`
 	background-color: ${({ theme }) => theme.colors.surfaceColor};
 	border-radius: 4px;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+	pointer-events: auto;
 
 	&[data-placement^="top"] > ${PopoverArrow} {
 		bottom: 0;
@@ -127,7 +128,6 @@ export const Popover: FC<PopoverProps> = (props) => {
 
 	return (
 		<Tippy
-			interactive
 			placement="auto"
 			render={(attrs) =>
 				open && (

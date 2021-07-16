@@ -1,3 +1,6 @@
+import { Menu, Popover } from "@/client/atoms";
+import { useToggle } from "@/client/hooks";
+import { CodeIcon } from "@/client/svgs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, useState } from "react";
@@ -11,6 +14,7 @@ import {
 	useSlateStatic
 } from "slate-react";
 import styled, { css } from "styled-components";
+import { ToolbarButton } from "./ToolbarButton";
 
 const Root = styled.div<{ $selected: boolean }>`
 	border: 4px solid ${({ theme }) => theme.palette.lightGrey};
@@ -56,6 +60,57 @@ export const withCodeBlock = (editor: Editor): Editor => {
 	};
 
 	return editor;
+};
+
+type CodeBlockLanguage = [name: string, slateType: CodeBlockSlateType];
+
+const supportedLanguages: readonly CodeBlockLanguage[] = [
+	["JavaScript", "language-jsx"],
+	["TypeScript", "language-tsx"],
+	["HTML", "language-handlebars"],
+	["CSS / SCSS", "language-scss"],
+	["GraphQL", "language-graphql"],
+	["Python", "language-python"],
+	["Go", "language-go"],
+	["SQL", "language-sql"],
+	["YAML", "language-yaml"]
+];
+
+export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
+	const editor = useSlateStatic();
+
+	const [open, toggle] = useToggle();
+
+	return (
+		<Popover
+			content={
+				<Menu>
+					{supportedLanguages.map(([name, slateType]) => (
+						<Menu.Item
+							key={slateType}
+							onClick={() => {
+								Transforms.insertNodes(editor, {
+									type: slateType,
+									children: [{ text: "" }]
+								});
+
+								toggle.off();
+							}}
+						>
+							{name}
+						</Menu.Item>
+					))}
+				</Menu>
+			}
+			onClose={toggle.off}
+			open={open}
+			placement="bottom"
+		>
+			<ToolbarButton onClick={toggle.on} title="Code">
+				<CodeIcon height={16} width={16} />
+			</ToolbarButton>
+		</Popover>
+	);
 };
 
 export type CodeBlockProps = RenderElementProps;

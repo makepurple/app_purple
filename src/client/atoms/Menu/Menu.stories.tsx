@@ -11,7 +11,7 @@ const Template = (args) => {
 		<Menu {...args}>
 			<Menu.Item>Red</Menu.Item>
 			<Menu.Item>Blue</Menu.Item>
-			<Menu.Item $selected>Purple</Menu.Item>
+			<Menu.Item selected>Purple</Menu.Item>
 		</Menu>
 	);
 };
