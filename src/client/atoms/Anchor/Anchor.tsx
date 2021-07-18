@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Anchor = styled.a`
 	font-family: Gilroy, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
 		Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	font-size: 1.125rem;
+	font-size: inherit;
 	font-weight: 600;
 	line-height: 1.5;
 	color: inherit;

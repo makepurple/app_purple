@@ -3,6 +3,7 @@ export * from "./colors";
 export * from "./font-weights";
 export * from "./global.styles";
 export * from "./gradients";
+export * from "./language-colors";
 export * from "./media-queries";
 export * from "./shadows";
 export * from "./themes";

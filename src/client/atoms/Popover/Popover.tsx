@@ -87,7 +87,7 @@ export type PopoverProps = Omit<TippyProps, "content" | "render" | "visible"> & 
 	content?: ReactNode;
 	onClose?: (event?: SyntheticEvent) => void;
 	open?: boolean;
-	render?: FC<{ contentRef?: RefObject<HTMLDivElement> }>;
+	render?: FC<{ className?: string; contentRef?: RefObject<HTMLDivElement> }>;
 };
 
 export const Popover: FC<PopoverProps> = (props) => {
@@ -96,6 +96,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 		canEscapeKeyClose = true,
 		canOutsideClickClose = true,
 		children,
+		className,
 		content,
 		onClose,
 		open: _open,
@@ -131,7 +132,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 			placement="auto"
 			render={(attrs) =>
 				open && (
-					<Content {...attrs} contentRef={contentRef}>
+					<Content {...attrs} className={className} contentRef={contentRef}>
 						{content}
 					</Content>
 				)

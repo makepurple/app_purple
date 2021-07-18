@@ -1,3 +1,4 @@
+export * from "./useHover";
 export * from "./useNoSsr";
 export * from "./useOnClickOutside";
 export * from "./useOnKeyDown";
