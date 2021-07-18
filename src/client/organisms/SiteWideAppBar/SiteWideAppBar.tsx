@@ -9,6 +9,7 @@ import React, { CSSProperties, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const SCROLL_THRESHOLD = 32;
+const SCROLL_PROGRESS_THRESHOLD = 0.95;
 
 const MotionAppBar = m(AppBar);
 
@@ -53,25 +54,28 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const [session] = useSession();
 	const isAuthenticated = !!session?.user;
 
-	const { scrollY } = useViewportScroll();
+	const { scrollY, scrollYProgress } = useViewportScroll();
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
 
 	useEffect(() => {
 		const unsubscribeScrollY = scrollY.onChange((y) => {
-			setIsThreshold(y > SCROLL_THRESHOLD);
+			setIsThreshold(
+				y > SCROLL_THRESHOLD || scrollYProgress.get() > SCROLL_PROGRESS_THRESHOLD
+			);
 		});
 
 		return () => {
 			unsubscribeScrollY();
 		};
-	}, [scrollY]);
+	}, [scrollY, scrollYProgress]);
 
 	return (
 		<Root
 			as={MotionAppBar}
 			className={className}
 			style={style}
+			initial={false}
 			animate={isThreshold ? "scrolled" : "default"}
 			variants={{
 				default: {
