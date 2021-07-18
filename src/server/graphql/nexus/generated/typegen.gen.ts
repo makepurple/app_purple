@@ -101,9 +101,17 @@ export interface NexusGenObjects {
   }
   User: { // root type
     email?: string | null; // String
+    githubLogin: string; // String!
     id: number; // Int!
     image?: string | null; // String
     name: string; // String!
+  }
+  UserGitHub: { // root type
+    bio?: string | null; // String
+    company?: string | null; // String
+    twitterUsername?: string | null; // String
+    user: NexusGenRootTypes['User']; // User!
+    websiteUrl?: string | null; // String
   }
 }
 
@@ -157,11 +165,20 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     email: string | null; // String
+    github: NexusGenRootTypes['UserGitHub']; // UserGitHub!
+    githubLogin: string; // String!
     id: number; // Int!
     image: string | null; // String
     name: string; // String!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
+  }
+  UserGitHub: { // field return type
+    bio: string | null; // String
+    company: string | null; // String
+    twitterUsername: string | null; // String
+    user: NexusGenRootTypes['User']; // User!
+    websiteUrl: string | null; // String
   }
 }
 
@@ -205,11 +222,20 @@ export interface NexusGenFieldTypeNames {
   User: { // field return type name
     comments: 'Comment'
     email: 'String'
+    github: 'UserGitHub'
+    githubLogin: 'String'
     id: 'Int'
     image: 'String'
     name: 'String'
     posts: 'Post'
     skills: 'Skill'
+  }
+  UserGitHub: { // field return type name
+    bio: 'String'
+    company: 'String'
+    twitterUsername: 'String'
+    user: 'User'
+    websiteUrl: 'String'
   }
 }
 

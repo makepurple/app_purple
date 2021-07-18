@@ -74,9 +74,20 @@ scalar Upload
 type User {
   comments: [Comment!]!
   email: String
+  github: UserGitHub!
+  githubLogin: String!
   id: Int!
   image: String
   name: String!
   posts: [Post!]!
   skills: [Skill!]!
+}
+
+""""""
+type UserGitHub {
+  bio: String
+  company: String
+  twitterUsername: String
+  user: User!
+  websiteUrl: String
 }

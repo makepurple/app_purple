@@ -42,17 +42,17 @@ export class OctokitClient {
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	public graphql(accessToken: string = process.env.GITHUB_ACCESS_TOKEN!) {
-		return <TVariables extends Record<string, unknown>>(
+		return <TResult = any, TVariables extends Record<string, unknown> = any>(
 			strings: TemplateStringsArray,
 			...exprs: any[]
 		) => {
 			const query = oneLine(strings, ...exprs);
 			const auth = createTokenAuth(accessToken)();
 
-			return async (variables?: TVariables) => {
+			return async (variables?: TVariables): Promise<TResult> => {
 				const { token } = await auth;
 
-				const response = await this.instance.graphql({
+				const response = await this.instance.graphql<TResult>({
 					query,
 					...variables,
 					headers: {

@@ -1,23 +1,23 @@
 import { prisma } from "@/server/db";
-import { Request } from "@/server/middlewares";
 import { redis } from "@/server/redis";
-import { aws } from "@/server/services";
+import { aws, octokit } from "@/server/services";
 import { PrismaClient } from "@prisma/client";
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/client";
 
 export interface ServerContext {
 	aws: typeof aws;
+	octokit: ReturnType<typeof octokit["client"]["graphql"]>;
 	prisma: PrismaClient;
 	redis: typeof redis;
-	req: Request;
+	req: NextApiRequest;
 	res: NextApiResponse;
 	user: Session["user"] | null;
 }
 
 interface CreateContextParams {
-	req: Request;
+	req: NextApiRequest;
 	res: NextApiResponse;
 }
 
@@ -28,6 +28,7 @@ export const createContext = async (params: CreateContextParams): Promise<Server
 
 	return Promise.resolve({
 		aws,
+		octokit: octokit.client.graphql(session?.user.accessToken ?? undefined),
 		prisma,
 		redis,
 		req,

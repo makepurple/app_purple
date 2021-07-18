@@ -11,6 +11,9 @@ declare module "next-auth" {
 			name?: string;
 			email?: string | null | undefined;
 			image?: string | null | undefined;
+			accessToken?: string | null | undefined;
 		}
+		accessToken: string;
+		expires: string;
 	}
 }

@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import React from "react";
 import styled from "styled-components";
+import { gql, useQuery } from "urql";
 
 const Root = styled(MainContainer)`
 	height: 200vh;
@@ -11,11 +12,27 @@ const Root = styled(MainContainer)`
 export const Page: NextPage = () => {
 	const [session] = useSession();
 
+	const [, doQuery] = useQuery({
+		query: gql`
+			query {
+				viewer {
+					githubLogin
+					github {
+						bio
+						company
+						twitterUsername
+						websiteUrl
+					}
+				}
+			}
+		`,
+		pause: true
+	});
+
 	return (
 		<>
 			<GradientHeader />
 			<Root>
-				<div>{session?.user.email}</div>
 				<div>{session?.user.email}</div>
 				<button
 					onClick={async () => {
@@ -32,6 +49,14 @@ export const Page: NextPage = () => {
 					type="button"
 				>
 					Sign out
+				</button>
+				<button
+					onClick={() => {
+						doQuery();
+					}}
+					type="button"
+				>
+					Do query
 				</button>
 			</Root>
 		</>

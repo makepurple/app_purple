@@ -28,6 +28,27 @@ export const userTypes = [
 			});
 			t.field(User.posts);
 			t.field(User.comments);
+			t.field(User.githubLogin);
+			t.field("github", {
+				type: nonNull("UserGitHub"),
+				resolve: async (parent, args, { octokit: graphql }) => {
+					const userGithub = await graphql`
+						query GetUserGitHub($login: String!) {
+							user(login: $login) {
+								bio
+								company
+								twitterUsername
+								websiteUrl
+							}
+						}
+					`({ login: parent.githubLogin });
+
+					return {
+						user: parent,
+						...userGithub.user
+					};
+				}
+			});
 		}
 	})
 ];
