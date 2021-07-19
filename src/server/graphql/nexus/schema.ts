@@ -7,6 +7,7 @@ import path from "path";
 import { getClientIp } from "request-ip";
 import * as mutations from "./mutations";
 import { rateLimitPlugin } from "./plugins";
+import * as queries from "./queries";
 import * as types from "./types";
 
 const dirname: string = process.env.PROJECT_DIRNAME
@@ -20,7 +21,7 @@ const isGenerateScript: boolean = process.argv.includes("--nexus-exit");
 export const schema = makeSchema({
 	shouldGenerateArtifacts: isGenerateScript,
 	shouldExitAfterGenerateArtifacts: isGenerateScript,
-	types: { ...mutations, ...types },
+	types: { ...mutations, ...queries, ...types },
 	outputs: {
 		schema: getPath("generated/schema.gen.graphql"),
 		typegen: getPath("generated/typegen.gen.ts")
@@ -44,12 +45,12 @@ export const schema = makeSchema({
 		rateLimitPlugin({
 			defaultRateLimit: { max: 60, window: "1s" },
 			identifyContext: ({ user, req }: ServerContext): string => {
-				const userId: Maybe<string> = user?.id;
+				const userId: Maybe<number> = user?.id;
 				const ip: Maybe<string> = getClientIp(req);
 
-				const identityKey: string = userId ?? ip ?? "";
+				const identityKey: number | string = userId ?? ip ?? "";
 
-				return identityKey;
+				return identityKey.toString();
 			},
 			store: new RedisStore(redis.instance)
 		})

@@ -60,15 +60,36 @@ type Skill {
   users: [User!]!
 }
 
+#
+type TopLanguage {
+  # The name of the language.
+  name: String!
+
+  # The sum of number of bytes written across all owned repositories in this language.
+  size: Int!
+}
+
 # The `Upload` scalar type represents a file upload.
 scalar Upload
 
 type User {
   comments: [Comment!]!
   email: String
+  github: UserGitHub!
+  githubLogin: String!
   id: Int!
   image: String
   name: String!
   posts: [Post!]!
   skills: [Skill!]!
+}
+
+#
+type UserGitHub {
+  bio: String
+  company: String
+  topLanguages: [TopLanguage!]!
+  twitterUsername: String
+  user: User!
+  websiteUrl: String
 }

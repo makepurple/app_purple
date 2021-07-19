@@ -90,16 +90,36 @@ export type Skill = {
   readonly users: ReadonlyArray<User>;
 };
 
+export type TopLanguage = {
+  readonly __typename?: 'TopLanguage';
+  /** The name of the language. */
+  readonly name: Scalars['String'];
+  /** The sum of number of bytes written across all owned repositories in this language. */
+  readonly size: Scalars['Int'];
+};
+
 
 export type User = {
   readonly __typename?: 'User';
   readonly comments: ReadonlyArray<Comment>;
   readonly email?: Maybe<Scalars['String']>;
+  readonly github: UserGitHub;
+  readonly githubLogin: Scalars['String'];
   readonly id: Scalars['Int'];
   readonly image?: Maybe<Scalars['String']>;
   readonly name: Scalars['String'];
   readonly posts: ReadonlyArray<Post>;
   readonly skills: ReadonlyArray<Skill>;
+};
+
+export type UserGitHub = {
+  readonly __typename?: 'UserGitHub';
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly company?: Maybe<Scalars['String']>;
+  readonly topLanguages: ReadonlyArray<TopLanguage>;
+  readonly twitterUsername?: Maybe<Scalars['String']>;
+  readonly user: User;
+  readonly websiteUrl?: Maybe<Scalars['String']>;
 };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;

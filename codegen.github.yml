@@ -1,0 +1,15 @@
+schema:
+  - https://api.github.com/graphql:
+      headers:
+        Authorization: bearer ${GITHUB_ACCESS_TOKEN}
+documents: "./src/server/graphql/**/*.ts"
+generates:
+  src/server/services/octokit/generated/graphql.gen.ts:
+    config:
+      immutableTypes: true
+      preResolveTypes: true
+      pureMagicComment: true
+      useTypeImports: true
+    plugins:
+      - typescript
+      - typescript-operations

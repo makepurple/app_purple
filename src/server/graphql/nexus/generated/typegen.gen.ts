@@ -56,6 +56,11 @@ export interface NexusGenInputs {
     fileName: string; // String!
     fileType: string; // String!
   }
+  UserWhereUniqueInput: { // input type
+    email?: string | null; // String
+    id?: number | null; // Int
+    name?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -98,6 +103,14 @@ export interface NexusGenObjects {
   Skill: { // root type
     id: number; // Int!
     name: string; // String!
+  }
+  TopLanguage: { // root type
+    color: string; // String!
+    name: string; // String!
+    size: number; // Int!
+  }
+  TopLanguages: { // root type
+    nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
   }
   User: { // root type
     email?: string | null; // String
@@ -155,12 +168,22 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     ok: boolean; // Boolean!
+    user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Skill: { // field return type
     id: number; // Int!
     name: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  TopLanguage: { // field return type
+    color: string; // String!
+    name: string; // String!
+    size: number; // Int!
+  }
+  TopLanguages: { // field return type
+    nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
+    totalSize: number; // Int!
   }
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
@@ -176,6 +199,7 @@ export interface NexusGenFieldTypes {
   UserGitHub: { // field return type
     bio: string | null; // String
     company: string | null; // String
+    topLanguages: NexusGenRootTypes['TopLanguages'] | null; // TopLanguages
     twitterUsername: string | null; // String
     user: NexusGenRootTypes['User']; // User!
     websiteUrl: string | null; // String
@@ -212,12 +236,22 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     ok: 'Boolean'
+    user: 'User'
     viewer: 'User'
   }
   Skill: { // field return type name
     id: 'Int'
     name: 'String'
     users: 'User'
+  }
+  TopLanguage: { // field return type name
+    color: 'String'
+    name: 'String'
+    size: 'Int'
+  }
+  TopLanguages: { // field return type name
+    nodes: 'TopLanguage'
+    totalSize: 'Int'
   }
   User: { // field return type name
     comments: 'Comment'
@@ -233,6 +267,7 @@ export interface NexusGenFieldTypeNames {
   UserGitHub: { // field return type name
     bio: 'String'
     company: 'String'
+    topLanguages: 'TopLanguages'
     twitterUsername: 'String'
     user: 'User'
     websiteUrl: 'String'
@@ -243,6 +278,11 @@ export interface NexusGenArgTypes {
   Mutation: {
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
+    }
+  }
+  Query: {
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
   }
 }

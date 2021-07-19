@@ -1,3 +1,4 @@
+import { octokit } from "@/server/services";
 import { list, nonNull, objectType } from "nexus";
 import { User } from "nexus-prisma";
 
@@ -32,7 +33,10 @@ export const userTypes = [
 			t.field("github", {
 				type: nonNull("UserGitHub"),
 				resolve: async (parent, args, { octokit: graphql }) => {
-					const userGithub = await graphql`
+					const userGithub = await graphql<
+						octokit.GetUserGitHubQuery,
+						octokit.GetUserGitHubQueryVariables
+					>`
 						query GetUserGitHub($login: String!) {
 							user(login: $login) {
 								bio
