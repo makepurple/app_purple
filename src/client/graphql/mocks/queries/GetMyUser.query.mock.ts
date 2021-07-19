@@ -1,6 +1,6 @@
 import { GetMyUserQuery } from "@/client/graphql/generated";
 
-export const GetMyUserMock: GetMyUserQuery = {
+export const GetMyUser_mock: GetMyUserQuery = {
 	viewer: {
 		__typename: "User" as const,
 		id: 0,

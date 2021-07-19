@@ -1,4 +1,4 @@
-import { GetMyUserMock } from "@/client/graphql/mocks";
+import { GetMyUser_mock } from "@/client/graphql/mocks";
 import { SiteWideAppBar } from "@/client/organisms";
 import React from "react";
 import { getOperationName } from "urql";
@@ -29,7 +29,7 @@ LoggedIn.parameters = {
 	layout: "fullscreen",
 	urql: (op) => {
 		if (getOperationName(op.query) === "GetMyUser") {
-			return { data: GetMyUserMock };
+			return { data: GetMyUser_mock };
 		}
 
 		return {};

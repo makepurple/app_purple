@@ -109,9 +109,11 @@ type UserGitHub {
   company: String
   topLanguages: TopLanguages
   twitterUsername: String
+
+  # The URL of the user's GitHub profile.
   url: URL!
   user: User!
-  websiteUrl: URL
+  websiteUrl: String
 }
 
 input UserWhereUniqueInput {

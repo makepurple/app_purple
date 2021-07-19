@@ -134,7 +134,7 @@ export interface NexusGenObjects {
     twitterUsername?: string | null; // String
     url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
-    websiteUrl?: NexusGenScalars['URL'] | null; // URL
+    websiteUrl?: string | null; // String
   }
 }
 
@@ -215,7 +215,7 @@ export interface NexusGenFieldTypes {
     twitterUsername: string | null; // String
     url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
-    websiteUrl: NexusGenScalars['URL'] | null; // URL
+    websiteUrl: string | null; // String
   }
 }
 
@@ -286,7 +286,7 @@ export interface NexusGenFieldTypeNames {
     twitterUsername: 'String'
     url: 'URL'
     user: 'User'
-    websiteUrl: 'URL'
+    websiteUrl: 'String'
   }
 }
 

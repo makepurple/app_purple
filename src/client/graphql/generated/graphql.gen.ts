@@ -142,9 +142,10 @@ export type UserGitHub = {
   readonly company?: Maybe<Scalars['String']>;
   readonly topLanguages?: Maybe<TopLanguages>;
   readonly twitterUsername?: Maybe<Scalars['String']>;
+  /** The URL of the user's GitHub profile. */
   readonly url: Scalars['URL'];
   readonly user: User;
-  readonly websiteUrl?: Maybe<Scalars['URL']>;
+  readonly websiteUrl?: Maybe<Scalars['String']>;
 };
 
 export type UserWhereUniqueInput = {
@@ -156,7 +157,14 @@ export type UserWhereUniqueInput = {
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename?: 'User', readonly id: number, readonly name: string, readonly image?: Maybe<string> }> };
+export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename: 'User', readonly id: number, readonly name: string, readonly image?: Maybe<string> }> };
+
+export type GetUserSummarySidebarQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type GetUserSummarySidebarQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename: 'User', readonly id: number, readonly name: string, readonly image?: Maybe<string>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly url: any, readonly websiteUrl?: Maybe<string>, readonly topLanguages?: Maybe<{ readonly __typename: 'TopLanguages', readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> }> } }> };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -167,6 +175,7 @@ export type OkQuery = { readonly __typename?: 'Query', readonly ok: boolean };
 export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {
   viewer {
+    __typename
     id
     name
     image
@@ -176,6 +185,38 @@ export const GetMyUserDocument = /*#__PURE__*/ gql`
 
 export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
+};
+export const GetUserSummarySidebarDocument = /*#__PURE__*/ gql`
+    query GetUserSummarySidebar($name: String!) {
+  user(where: {name: $name}) {
+    __typename
+    id
+    name
+    image
+    github {
+      __typename
+      bio
+      company
+      twitterUsername
+      url
+      websiteUrl
+      topLanguages {
+        __typename
+        totalSize
+        nodes {
+          __typename
+          name
+          color
+          size
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useGetUserSummarySidebarQuery(options: Omit<Urql.UseQueryArgs<GetUserSummarySidebarQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserSummarySidebarQuery>({ query: GetUserSummarySidebarDocument, ...options });
 };
 export const OkDocument = /*#__PURE__*/ gql`
     query Ok {

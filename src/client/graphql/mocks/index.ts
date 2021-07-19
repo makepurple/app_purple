@@ -1,1 +1,1 @@
-export * from "./GetMyUser.mock";
+export * from "./queries";

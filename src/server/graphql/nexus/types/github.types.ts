@@ -58,8 +58,12 @@ export const githubTypes = [
 			t.string("bio");
 			t.string("company");
 			t.string("twitterUsername");
-			t.nonNull.url("url");
-			t.url("websiteUrl");
+			t.nonNull.url("url", {
+				description: oneLine`
+					The URL of the user's GitHub profile.
+				`
+			});
+			t.string("websiteUrl");
 			t.field("topLanguages", {
 				type: "TopLanguages",
 				resolve: async (parent, args, { octokit: graphql }) => {
