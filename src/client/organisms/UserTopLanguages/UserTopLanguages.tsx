@@ -48,6 +48,8 @@ export const UserTopLanguages: FC<UserTopLanguagesProps> = ({
 		[_topLanguages, totalSize]
 	);
 
+	if (topLanguages.length === 0) return null;
+
 	return (
 		<Root className={className} style={style}>
 			<Header>Most Used Languages</Header>
