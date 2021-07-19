@@ -1,5 +1,4 @@
 import svgr from "@svgr/core";
-import { stripIndents } from "common-tags";
 import fs from "fs-extra";
 import glob from "glob";
 import path from "path";

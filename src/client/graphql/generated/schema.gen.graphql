@@ -51,6 +51,7 @@ type Post {
 # Root query type
 type Query {
   ok: Boolean!
+  user(where: UserWhereUniqueInput!): User
   viewer: User
 }
 
@@ -62,11 +63,25 @@ type Skill {
 
 #
 type TopLanguage {
+  # The color of the language, defined by GitHub
+  color: String!
+
   # The name of the language.
   name: String!
 
   # The sum of number of bytes written across all owned repositories in this language.
   size: Int!
+}
+
+# The most used languages by a user, determined by number of bytes written to repositories owned by the user on GitHub.
+type TopLanguages {
+  nodes: [TopLanguage!]!
+
+  # The total number of languages across all owned repositories.
+  totalCount: Int!
+
+  # The total number of bytes written across all owned repositories across all languages.
+  totalSize: Int!
 }
 
 # The `Upload` scalar type represents a file upload.
@@ -84,12 +99,18 @@ type User {
   skills: [Skill!]!
 }
 
-#
+# Data for a user from that user's connected GitHub account.
 type UserGitHub {
   bio: String
   company: String
-  topLanguages: [TopLanguage!]!
+  topLanguages: TopLanguages
   twitterUsername: String
   user: User!
   websiteUrl: String
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
+  name: String
 }

@@ -80,7 +80,14 @@ export type Post = {
 export type Query = {
   readonly __typename?: 'Query';
   readonly ok: Scalars['Boolean'];
+  readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root query type */
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 export type Skill = {
@@ -92,10 +99,22 @@ export type Skill = {
 
 export type TopLanguage = {
   readonly __typename?: 'TopLanguage';
+  /** The color of the language, defined by GitHub */
+  readonly color: Scalars['String'];
   /** The name of the language. */
   readonly name: Scalars['String'];
   /** The sum of number of bytes written across all owned repositories in this language. */
   readonly size: Scalars['Int'];
+};
+
+/** The most used languages by a user, determined by number of bytes written to repositories owned by the user on GitHub. */
+export type TopLanguages = {
+  readonly __typename?: 'TopLanguages';
+  readonly nodes: ReadonlyArray<TopLanguage>;
+  /** The total number of languages across all owned repositories. */
+  readonly totalCount: Scalars['Int'];
+  /** The total number of bytes written across all owned repositories across all languages. */
+  readonly totalSize: Scalars['Int'];
 };
 
 
@@ -112,14 +131,21 @@ export type User = {
   readonly skills: ReadonlyArray<Skill>;
 };
 
+/** Data for a user from that user's connected GitHub account. */
 export type UserGitHub = {
   readonly __typename?: 'UserGitHub';
   readonly bio?: Maybe<Scalars['String']>;
   readonly company?: Maybe<Scalars['String']>;
-  readonly topLanguages: ReadonlyArray<TopLanguage>;
+  readonly topLanguages?: Maybe<TopLanguages>;
   readonly twitterUsername?: Maybe<Scalars['String']>;
   readonly user: User;
   readonly websiteUrl?: Maybe<Scalars['String']>;
+};
+
+export type UserWhereUniqueInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly id?: Maybe<Scalars['Int']>;
+  readonly name?: Maybe<Scalars['String']>;
 };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;

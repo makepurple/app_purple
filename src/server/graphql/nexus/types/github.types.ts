@@ -27,7 +27,10 @@ export const githubTypes = [
 	}),
 	objectType({
 		name: "TopLanguages",
-		description: "",
+		description: oneLine`
+			The most used languages by a user, determined by number of bytes written to repositories
+			owned by the user on GitHub.
+		`,
 		definition: (t) => {
 			t.nonNull.list.nonNull.field("nodes", { type: "TopLanguage" });
 			t.nonNull.int("totalSize", {
@@ -47,7 +50,9 @@ export const githubTypes = [
 	}),
 	objectType({
 		name: "UserGitHub",
-		description: "",
+		description: oneLine`
+			Data for a user from that user's connected GitHub account.
+		`,
 		definition: (t) => {
 			t.nonNull.field("user", { type: "User" });
 			t.string("bio");
@@ -121,7 +126,9 @@ export const githubTypes = [
 						);
 
 					const topLangs = Object.keys(topLangsDict)
+						// Sort by size (descending)
 						.sort((a, b) => topLangsDict[b].size - topLangsDict[a].size)
+						// Return an array of TopLanguage types
 						.map((langName) => topLangsDict[langName]);
 
 					return {

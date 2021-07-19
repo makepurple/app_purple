@@ -183,6 +183,7 @@ export interface NexusGenFieldTypes {
   }
   TopLanguages: { // field return type
     nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
+    totalCount: number; // Int!
     totalSize: number; // Int!
   }
   User: { // field return type
@@ -251,6 +252,7 @@ export interface NexusGenFieldTypeNames {
   }
   TopLanguages: { // field return type name
     nodes: 'TopLanguage'
+    totalCount: 'Int'
     totalSize: 'Int'
   }
   User: { // field return type name
