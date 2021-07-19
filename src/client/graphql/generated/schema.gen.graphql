@@ -84,6 +84,9 @@ type TopLanguages {
   totalSize: Int!
 }
 
+# A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+scalar URL
+
 # The `Upload` scalar type represents a file upload.
 scalar Upload
 
@@ -92,6 +95,7 @@ type User {
   email: String
   github: UserGitHub!
   githubLogin: String!
+  githubUrl: URL!
   id: Int!
   image: String
   name: String!
@@ -105,8 +109,9 @@ type UserGitHub {
   company: String
   topLanguages: TopLanguages
   twitterUsername: String
+  url: URL!
   user: User!
-  websiteUrl: String
+  websiteUrl: URL
 }
 
 input UserWhereUniqueInput {

@@ -30,6 +30,9 @@ export const userTypes = [
 			t.field(User.posts);
 			t.field(User.comments);
 			t.field(User.githubLogin);
+			t.nonNull.url("githubUrl", {
+				resolve: ({ githubLogin }) => `https://github.com/${githubLogin}`
+			});
 			t.field("github", {
 				type: nonNull("UserGitHub"),
 				resolve: async (parent, args, { octokit: graphql }) => {
@@ -42,10 +45,15 @@ export const userTypes = [
 								bio
 								company
 								twitterUsername
+								url
 								websiteUrl
 							}
 						}
-					`({ login: parent.githubLogin });
+					`({ login: parent.githubLogin }).catch(() => null);
+
+					if (!userGithub?.user) {
+						throw new Error("Could not get user's GitHub data");
+					}
 
 					return {
 						user: parent,

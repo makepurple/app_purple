@@ -23,6 +23,10 @@ declare global {
      * The `Upload` scalar type represents a file upload.
      */
     upload<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Upload";
+    /**
+     * A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+     */
+    url<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "URL";
   }
 }
 declare global {
@@ -43,6 +47,10 @@ declare global {
      * The `Upload` scalar type represents a file upload.
      */
     upload<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Upload";
+    /**
+     * A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+     */
+    url<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "URL";
   }
 }
 
@@ -74,8 +82,9 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   Bytes: any
-  DateTime: any
+  DateTime: Date
   Json: any
+  URL: string
   Upload: any
 }
 
@@ -123,8 +132,9 @@ export interface NexusGenObjects {
     bio?: string | null; // String
     company?: string | null; // String
     twitterUsername?: string | null; // String
+    url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
-    websiteUrl?: string | null; // String
+    websiteUrl?: NexusGenScalars['URL'] | null; // URL
   }
 }
 
@@ -191,6 +201,7 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     github: NexusGenRootTypes['UserGitHub']; // UserGitHub!
     githubLogin: string; // String!
+    githubUrl: NexusGenScalars['URL']; // URL!
     id: number; // Int!
     image: string | null; // String
     name: string; // String!
@@ -202,8 +213,9 @@ export interface NexusGenFieldTypes {
     company: string | null; // String
     topLanguages: NexusGenRootTypes['TopLanguages'] | null; // TopLanguages
     twitterUsername: string | null; // String
+    url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
-    websiteUrl: string | null; // String
+    websiteUrl: NexusGenScalars['URL'] | null; // URL
   }
 }
 
@@ -260,6 +272,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     github: 'UserGitHub'
     githubLogin: 'String'
+    githubUrl: 'URL'
     id: 'Int'
     image: 'String'
     name: 'String'
@@ -271,8 +284,9 @@ export interface NexusGenFieldTypeNames {
     company: 'String'
     topLanguages: 'TopLanguages'
     twitterUsername: 'String'
+    url: 'URL'
     user: 'User'
-    websiteUrl: 'String'
+    websiteUrl: 'URL'
   }
 }
 

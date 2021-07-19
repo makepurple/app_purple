@@ -10,6 +10,8 @@ generates:
       preResolveTypes: true
       pureMagicComment: true
       useTypeImports: true
+      scalars:
+        URI: string
     plugins:
       - typescript
       - typescript-operations

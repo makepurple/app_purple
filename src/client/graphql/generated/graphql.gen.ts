@@ -18,6 +18,8 @@ export type Scalars = {
   DateTime: Date;
   /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   Json: Json;
+  /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
+  URL: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
@@ -118,12 +120,14 @@ export type TopLanguages = {
 };
 
 
+
 export type User = {
   readonly __typename?: 'User';
   readonly comments: ReadonlyArray<Comment>;
   readonly email?: Maybe<Scalars['String']>;
   readonly github: UserGitHub;
   readonly githubLogin: Scalars['String'];
+  readonly githubUrl: Scalars['URL'];
   readonly id: Scalars['Int'];
   readonly image?: Maybe<Scalars['String']>;
   readonly name: Scalars['String'];
@@ -138,8 +142,9 @@ export type UserGitHub = {
   readonly company?: Maybe<Scalars['String']>;
   readonly topLanguages?: Maybe<TopLanguages>;
   readonly twitterUsername?: Maybe<Scalars['String']>;
+  readonly url: Scalars['URL'];
   readonly user: User;
-  readonly websiteUrl?: Maybe<Scalars['String']>;
+  readonly websiteUrl?: Maybe<Scalars['URL']>;
 };
 
 export type UserWhereUniqueInput = {

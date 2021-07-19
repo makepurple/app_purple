@@ -55,6 +55,7 @@
     "graphql-middleware": "^6.0.10",
     "graphql-query-complexity": "^0.8.1",
     "graphql-rate-limit": "^3.1.0",
+    "graphql-scalars": "^1.10.0",
     "http-status-codes": "^2.1.4",
     "immer": "^9.0.5",
     "ioredis": "^4.27.6",

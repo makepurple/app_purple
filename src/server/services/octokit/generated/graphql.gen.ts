@@ -24,7 +24,7 @@ export type Scalars = {
   /** An ISO-8601 encoded UTC date string with millisecond precision. */
   PreciseDateTime: any;
   /** An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string. */
-  URI: any;
+  URI: string;
   /** A valid x509 certificate string */
   X509Certificate: any;
 };
@@ -21288,4 +21288,4 @@ export type GetUserGitHubQueryVariables = Exact<{
 }>;
 
 
-export type GetUserGitHubQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename?: 'User', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly websiteUrl?: Maybe<any> }> };
+export type GetUserGitHubQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename?: 'User', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly url: string, readonly websiteUrl?: Maybe<string> }> };

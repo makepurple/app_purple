@@ -57,7 +57,11 @@ export const schema = makeSchema({
 	],
 	sourceTypes: {
 		headers: [],
-		modules: []
+		modules: [],
+		mapping: {
+			DateTime: "Date",
+			URL: "string"
+		}
 	},
 	contextType: {
 		module: "@/server/graphql/context",

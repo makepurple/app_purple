@@ -1,6 +1,7 @@
 import { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import { GraphQLUpload } from "apollo-server-micro";
 import { createWriteStream } from "fs";
+import { URLResolver } from "graphql-scalars";
 import { scalarType } from "nexus";
 import NexusPrismaScalars from "nexus-prisma/scalars";
 import path from "path";
@@ -32,5 +33,13 @@ export const scalarTypes = [
 			return filePath;
 		},
 		parseLiteral: GraphQLUpload?.parseLiteral
+	}),
+	scalarType({
+		name: URLResolver.name,
+		asNexusMethod: "url",
+		description: URLResolver.description,
+		serialize: URLResolver.serialize,
+		parseValue: URLResolver.parseValue,
+		parseLiteral: URLResolver.parseLiteral
 	})
 ];
