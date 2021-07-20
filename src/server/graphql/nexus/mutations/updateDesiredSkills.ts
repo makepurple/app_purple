@@ -1,3 +1,4 @@
+import { StringUtils } from "@/utils";
 import { arg, inputObjectType, mutationField, nonNull } from "nexus";
 
 export const UpdateDesiredSkillsInput = inputObjectType({
@@ -20,6 +21,8 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 
 		const { skills } = input;
 		const userId: number = user.id;
+
+		const sql = StringUtils.rename((...args) => prisma.$executeRaw(...args));
 
 		const [updatedUser] = await prisma.$transaction([
 			prisma.user.update({
@@ -46,14 +49,14 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 					}
 				}
 			}),
-			prisma.$executeRaw`
+			sql`
 				DELETE FROM Skill s
 				WHERE s.name NOT IN (
 					SELECT DISTINCT skillName
 					FROM   SkillsOnUsers
 					WHERE  skillName = s.name
 				)
-				OR WHERE s.name NOT IN (
+				OR s.name NOT IN (
 					SELECT DISTINCT skillName
 					FROM   DesiredSkillsOnUsers
 					WHERE  skillName = s.name
