@@ -60,7 +60,7 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 					SELECT DISTINCT skillName
 					FROM   DesiredSkillsOnUsers
 					WHERE  skillName = s.name
-				)
+				);
 			`
 		]);
 
