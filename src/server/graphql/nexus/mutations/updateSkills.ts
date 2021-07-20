@@ -21,29 +21,46 @@ export const updateSkills = mutationField("updateSkills", {
 		const { skills } = input;
 		const userId: number = user.id;
 
-		return await prisma.user.update({
-			where: {
-				id: user.id
-			},
-			data: {
-				skills: {
-					connectOrCreate: skills.map((skillName) => ({
-						where: {
-							skillName_userId: { skillName, userId }
-						},
-						create: {
-							skill: {
-								name: skillName
+		const [updatedUser] = await prisma.$transaction([
+			prisma.user.update({
+				where: {
+					id: user.id
+				},
+				data: {
+					skills: {
+						connectOrCreate: skills.map((skillName) => ({
+							where: {
+								skillName_userId: { skillName, userId }
+							},
+							create: {
+								skill: {
+									name: skillName
+								}
 							}
-						}
-					})),
-					deleteMany: {
-						skillName: {
-							notIn: [...skills]
+						})),
+						deleteMany: {
+							skillName: {
+								notIn: [...skills]
+							}
 						}
 					}
 				}
-			}
-		});
+			}),
+			prisma.$executeRaw`
+				DELETE FROM Skill s
+				WHERE s.name NOT IN (
+					SELECT DISTINCT skillName
+					FROM   SkillsOnUsers
+					WHERE  skillName = s.name
+				)
+				OR WHERE s.name NOT IN (
+					SELECT DISTINCT skillName
+					FROM   DesiredSkillsOnUsers
+					WHERE  skillName = s.name
+				)
+			`
+		]);
+
+		return updatedUser;
 	}
 });
