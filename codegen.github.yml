@@ -1,6 +1,7 @@
 schema:
   - https://api.github.com/graphql:
       headers:
+        Accept: "application/vnd.github.hawkgirl-preview+json"
         Authorization: bearer ${GITHUB_ACCESS_TOKEN}
 documents: "./src/server/graphql/**/*.ts"
 generates:

@@ -3511,6 +3511,96 @@ export type DemilestonedEvent = Node & {
   readonly subject: MilestoneItem;
 };
 
+/** A dependency manifest entry */
+export type DependencyGraphDependency = {
+  readonly __typename?: 'DependencyGraphDependency';
+  /** Does the dependency itself have dependencies? */
+  readonly hasDependencies: Scalars['Boolean'];
+  /** The original name of the package, as it appears in the manifest. */
+  readonly packageLabel: Scalars['String'];
+  /** The dependency package manager */
+  readonly packageManager?: Maybe<Scalars['String']>;
+  /** The name of the package in the canonical form used by the package manager. This may differ from the original textual form (see packageLabel), for example in a package manager that uses case-insensitive comparisons. */
+  readonly packageName: Scalars['String'];
+  /** The repository containing the package */
+  readonly repository?: Maybe<Repository>;
+  /** The dependency version requirements */
+  readonly requirements: Scalars['String'];
+};
+
+/** The connection type for DependencyGraphDependency. */
+export type DependencyGraphDependencyConnection = {
+  readonly __typename?: 'DependencyGraphDependencyConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<DependencyGraphDependencyEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<DependencyGraphDependency>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type DependencyGraphDependencyEdge = {
+  readonly __typename?: 'DependencyGraphDependencyEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<DependencyGraphDependency>;
+};
+
+/** Dependency manifest for a repository */
+export type DependencyGraphManifest = Node & {
+  readonly __typename?: 'DependencyGraphManifest';
+  /** Path to view the manifest file blob */
+  readonly blobPath: Scalars['String'];
+  /** A list of manifest dependencies */
+  readonly dependencies?: Maybe<DependencyGraphDependencyConnection>;
+  /** The number of dependencies listed in the manifest */
+  readonly dependenciesCount?: Maybe<Scalars['Int']>;
+  /** Is the manifest too big to parse? */
+  readonly exceedsMaxSize: Scalars['Boolean'];
+  /** Fully qualified manifest filename */
+  readonly filename: Scalars['String'];
+  readonly id: Scalars['ID'];
+  /** Were we able to parse the manifest? */
+  readonly parseable: Scalars['Boolean'];
+  /** The repository containing the manifest */
+  readonly repository: Repository;
+};
+
+
+/** Dependency manifest for a repository */
+export type DependencyGraphManifestDependenciesArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+/** The connection type for DependencyGraphManifest. */
+export type DependencyGraphManifestConnection = {
+  readonly __typename?: 'DependencyGraphManifestConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<DependencyGraphManifestEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<DependencyGraphManifest>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type DependencyGraphManifestEdge = {
+  readonly __typename?: 'DependencyGraphManifestEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<DependencyGraphManifest>;
+};
+
 /** A repository deploy key. */
 export type DeployKey = Node & {
   readonly __typename?: 'DeployKey';
@@ -15569,6 +15659,8 @@ export type Repository = Node & ProjectOwner & PackageOwner & Subscribable & Sta
   readonly defaultBranchRef?: Maybe<Ref>;
   /** Whether or not branches are automatically deleted when merged in this repository. */
   readonly deleteBranchOnMerge: Scalars['Boolean'];
+  /** A list of dependency manifests contained in the repository */
+  readonly dependencyGraphManifests?: Maybe<DependencyGraphManifestConnection>;
   /** A list of deploy keys that are on this repository. */
   readonly deployKeys: DeployKeyConnection;
   /** Deployments associated with the repository */
@@ -15797,6 +15889,18 @@ export type RepositoryCommitCommentsArgs = {
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+/** A repository contains the content for a project. */
+export type RepositoryDependencyGraphManifestsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  withDependencies?: Maybe<Scalars['Boolean']>;
+  dependenciesFirst?: Maybe<Scalars['Int']>;
+  dependenciesAfter?: Maybe<Scalars['String']>;
 };
 
 
