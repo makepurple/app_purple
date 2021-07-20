@@ -63,16 +63,17 @@ model VerificationRequest {
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  name          String          @unique
-  email         String?         @unique
-  emailVerified DateTime?       @map(name: "email_verified")
+  id            Int                    @id @default(autoincrement())
+  name          String                 @unique
+  email         String?                @unique
+  emailVerified DateTime?              @map(name: "email_verified")
   image         String?
-  createdAt     DateTime        @default(now()) @map(name: "created_at")
-  updatedAt     DateTime        @default(now()) @map(name: "updated_at")
+  createdAt     DateTime               @default(now()) @map(name: "created_at")
+  updatedAt     DateTime               @default(now()) @map(name: "updated_at")
   posts         Post[]
   comments      Comment[]
   skills        SkillsOnUsers[]
+  desiredSkills DesiredSkillsOnUsers[]
 
   @@map(name: "users")
 }
@@ -102,12 +103,22 @@ model Comment {
 }
 
 model Skill {
-  id    Int             @id @default(autoincrement())
-  name  String          @unique
-  users SkillsOnUsers[]
+  id            Int                    @id @default(autoincrement())
+  name          String                 @unique
+  users         SkillsOnUsers[]
+  desiringUsers DesiredSkillsOnUsers[]
 }
 
 model SkillsOnUsers {
+  skill     Skill  @relation(fields: [skillName], references: [name], onDelete: Cascade)
+  skillName String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+
+  @@id([skillName, userId])
+}
+
+model DesiredSkillsOnUsers {
   skill     Skill  @relation(fields: [skillName], references: [name], onDelete: Cascade)
   skillName String
   user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)

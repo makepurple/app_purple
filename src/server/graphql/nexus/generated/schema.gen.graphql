@@ -104,6 +104,11 @@ A field whose value conforms to the standard URL format as specified in RFC3986:
 """
 scalar URL
 
+input UpdateDesiredSkillsInput {
+  """List of skills (by name) to add to the user."""
+  skills: [String!]!
+}
+
 input UpdateSkillsInput {
   """List of skills (by name) to add to the user."""
   skills: [String!]!
@@ -114,6 +119,7 @@ scalar Upload
 
 type User {
   comments: [Comment!]!
+  desiredSkills: [Skill!]!
   email: String
   github: UserGitHub!
   githubUrl: URL!

@@ -27,6 +27,17 @@ export const userTypes = [
 						.then((skills) => skills.map((s) => s.skill));
 				}
 			});
+			t.field("desiredSkills", {
+				type: nonNull(list(nonNull("Skill"))),
+				resolve: (root, args, { prisma }) => {
+					return prisma.desiredSkillsOnUsers
+						.findMany({
+							where: { userId: root.id },
+							select: { skill: true }
+						})
+						.then((skills) => skills.map((s) => s.skill));
+				}
+			});
 			t.field(User.posts);
 			t.field(User.comments);
 			t.nonNull.url("githubUrl", {

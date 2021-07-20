@@ -57,6 +57,7 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
   readonly ok: Scalars['Boolean'];
+  readonly updateSkills: User;
   readonly viewer?: Maybe<User>;
 };
 
@@ -64,6 +65,12 @@ export type Mutation = {
 /** Root mutation type */
 export type MutationCreatePresignedS3UrlArgs = {
   data: CreatePresignedS3UrlInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateSkillsArgs = {
+  input: UpdateSkillsInput;
 };
 
 export type Post = {
@@ -120,10 +127,21 @@ export type TopLanguages = {
 };
 
 
+export type UpdateDesiredSkillsInput = {
+  /** List of skills (by name) to add to the user. */
+  readonly skills: ReadonlyArray<Scalars['String']>;
+};
+
+export type UpdateSkillsInput = {
+  /** List of skills (by name) to add to the user. */
+  readonly skills: ReadonlyArray<Scalars['String']>;
+};
+
 
 export type User = {
   readonly __typename?: 'User';
   readonly comments: ReadonlyArray<Comment>;
+  readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email?: Maybe<Scalars['String']>;
   readonly github: UserGitHub;
   readonly githubUrl: Scalars['URL'];

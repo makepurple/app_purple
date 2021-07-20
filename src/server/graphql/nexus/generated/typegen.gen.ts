@@ -64,6 +64,9 @@ export interface NexusGenInputs {
     fileName: string; // String!
     fileType: string; // String!
   }
+  UpdateDesiredSkillsInput: { // input type
+    skills: string[]; // [String!]!
+  }
   UpdateSkillsInput: { // input type
     skills: string[]; // [String!]!
   }
@@ -201,6 +204,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string | null; // String
     github: NexusGenRootTypes['UserGitHub']; // UserGitHub!
     githubUrl: NexusGenScalars['URL']; // URL!
@@ -272,6 +276,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     comments: 'Comment'
+    desiredSkills: 'Skill'
     email: 'String'
     github: 'UserGitHub'
     githubUrl: 'URL'
