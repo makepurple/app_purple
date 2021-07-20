@@ -64,6 +64,9 @@ export interface NexusGenInputs {
     fileName: string; // String!
     fileType: string; // String!
   }
+  UpdateSkillsInput: { // input type
+    skills: string[]; // [String!]!
+  }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: number | null; // Int
@@ -163,6 +166,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     ok: boolean; // Boolean!
+    updateSkills: NexusGenRootTypes['User']; // User!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Post: { // field return type
@@ -233,6 +237,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     ok: 'Boolean'
+    updateSkills: 'User'
     viewer: 'User'
   }
   Post: { // field return type name
@@ -291,6 +296,9 @@ export interface NexusGenArgTypes {
   Mutation: {
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
+    }
+    updateSkills: { // args
+      input: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!
     }
   }
   Query: {

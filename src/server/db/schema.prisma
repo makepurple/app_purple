@@ -108,10 +108,10 @@ model Skill {
 }
 
 model SkillsOnUsers {
-  skill   Skill @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  skillId Int
-  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  Int
+  skill     Skill  @relation(fields: [skillName], references: [name], onDelete: Cascade)
+  skillName String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
 
-  @@id([skillId, userId])
+  @@id([skillName, userId])
 }
