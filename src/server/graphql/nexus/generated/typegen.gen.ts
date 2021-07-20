@@ -169,6 +169,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     ok: boolean; // Boolean!
+    updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updateSkills: NexusGenRootTypes['User']; // User!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -241,6 +242,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     ok: 'Boolean'
+    updateDesiredSkills: 'User'
     updateSkills: 'User'
     viewer: 'User'
   }
@@ -301,6 +303,9 @@ export interface NexusGenArgTypes {
   Mutation: {
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
+    }
+    updateDesiredSkills: { // args
+      input: NexusGenInputs['UpdateDesiredSkillsInput']; // UpdateDesiredSkillsInput!
     }
     updateSkills: { // args
       input: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!

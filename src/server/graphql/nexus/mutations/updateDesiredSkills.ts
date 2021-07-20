@@ -9,7 +9,7 @@ export const UpdateDesiredSkillsInput = inputObjectType({
 	}
 });
 
-export const updateDesiredSkills = mutationField("updateSkills", {
+export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 	type: nonNull("User"),
 	authorize: (parent, args, { user }) => !!user,
 	args: {
