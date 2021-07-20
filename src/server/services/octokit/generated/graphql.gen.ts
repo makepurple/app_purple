@@ -4648,6 +4648,7 @@ export type EnterpriseIdentityProvider = Node & {
 
 /** An identity provider configured to provision identities for an enterprise. */
 export type EnterpriseIdentityProviderExternalIdentitiesArgs = {
+  membersOnly?: Maybe<Scalars['Boolean']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -11059,6 +11060,7 @@ export type OrganizationIdentityProvider = Node & {
 
 /** An Identity Provider configured to provision SAML and SCIM identities for Organizations */
 export type OrganizationIdentityProviderExternalIdentitiesArgs = {
+  membersOnly?: Maybe<Scalars['Boolean']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
