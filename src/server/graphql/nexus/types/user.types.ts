@@ -29,9 +29,8 @@ export const userTypes = [
 			});
 			t.field(User.posts);
 			t.field(User.comments);
-			t.field(User.githubLogin);
 			t.nonNull.url("githubUrl", {
-				resolve: ({ githubLogin }) => `https://github.com/${githubLogin}`
+				resolve: ({ name }) => `https://github.com/${name}`
 			});
 			t.field("github", {
 				type: nonNull("UserGitHub"),
@@ -49,7 +48,7 @@ export const userTypes = [
 								websiteUrl
 							}
 						}
-					`({ login: parent.githubLogin }).catch(() => null);
+					`({ login: parent.name }).catch(() => null);
 
 					if (!userGithub?.user) {
 						throw new Error("Could not get user's GitHub data");

@@ -92,7 +92,7 @@ export const githubTypes = [
 								}
 							}
 						}
-					`({ login: parent.user.githubLogin });
+					`({ login: parent.user.name });
 
 					const repoNodes = userTopLanguages.user?.repositories.nodes ?? [];
 

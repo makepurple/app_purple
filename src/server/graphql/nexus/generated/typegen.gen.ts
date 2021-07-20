@@ -123,7 +123,6 @@ export interface NexusGenObjects {
   }
   User: { // root type
     email?: string | null; // String
-    githubLogin: string; // String!
     id: number; // Int!
     image?: string | null; // String
     name: string; // String!
@@ -200,7 +199,6 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     email: string | null; // String
     github: NexusGenRootTypes['UserGitHub']; // UserGitHub!
-    githubLogin: string; // String!
     githubUrl: NexusGenScalars['URL']; // URL!
     id: number; // Int!
     image: string | null; // String
@@ -271,7 +269,6 @@ export interface NexusGenFieldTypeNames {
     comments: 'Comment'
     email: 'String'
     github: 'UserGitHub'
-    githubLogin: 'String'
     githubUrl: 'URL'
     id: 'Int'
     image: 'String'

@@ -16,7 +16,6 @@ export const Page: NextPage = () => {
 		query: gql`
 			query {
 				viewer {
-					githubLogin
 					github {
 						bio
 						company

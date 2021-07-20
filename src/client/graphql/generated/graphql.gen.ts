@@ -126,7 +126,6 @@ export type User = {
   readonly comments: ReadonlyArray<Comment>;
   readonly email?: Maybe<Scalars['String']>;
   readonly github: UserGitHub;
-  readonly githubLogin: Scalars['String'];
   readonly githubUrl: Scalars['URL'];
   readonly id: Scalars['Int'];
   readonly image?: Maybe<Scalars['String']>;

@@ -110,7 +110,6 @@ type User {
   comments: [Comment!]!
   email: String
   github: UserGitHub!
-  githubLogin: String!
   githubUrl: URL!
   id: Int!
   image: String
