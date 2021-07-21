@@ -1,5 +1,6 @@
 import { StringUtils } from "@/utils";
 import { arg, inputObjectType, mutationField, nonNull } from "nexus";
+import { Prisma } from "prisma";
 
 export const UpdateDesiredSkillsInput = inputObjectType({
 	name: "UpdateDesiredSkillsInput",
@@ -51,12 +52,13 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 			}),
 			sql`
 				DELETE FROM Skill s
-				WHERE s.name NOT IN (
+				WHERE s.name NOT IN (${Prisma.join(skills)})
+				AND s.name NOT IN (
 					SELECT DISTINCT skillName
 					FROM   SkillsOnUsers
 					WHERE  skillName = s.name
 				)
-				OR s.name NOT IN (
+				AND s.name NOT IN (
 					SELECT DISTINCT skillName
 					FROM   DesiredSkillsOnUsers
 					WHERE  skillName = s.name
