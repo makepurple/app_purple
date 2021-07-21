@@ -18103,7 +18103,7 @@ export type StatusCheckRollupContextEdge = {
 };
 
 /** Represents an individual commit status context */
-export type StatusContext = Node & RequirableByPullRequest & {
+export type StatusContext = RequirableByPullRequest & Node & {
   readonly __typename?: 'StatusContext';
   /** The avatar of the OAuth application or the user that created the status */
   readonly avatarUrl?: Maybe<Scalars['URI']>;

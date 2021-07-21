@@ -13,7 +13,7 @@ export const skillTypes = [
 				resolve: (root, args, { prisma }) => {
 					return prisma.skillsOnUsers
 						.findMany({
-							where: { skillId: root.id },
+							where: { skillName: root.name },
 							select: { user: true }
 						})
 						.then((users) => users.map(({ user }) => user));

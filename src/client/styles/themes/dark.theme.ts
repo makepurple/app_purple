@@ -9,6 +9,7 @@ export const DarkTheme = {
 		contrastingBackgroundColor: Colors.brightPurple,
 		secondaryBackgroundColor: Colors.darkBlue,
 		tertiaryBackgroundColor: Colors.darkBlue,
+		inputBackgroundColor: Colors.darkBlue,
 		foregroundColor: Colors.blue,
 		widgetPrimaryColor: Colors.darkBlue,
 		widgetSecondaryColor: Colors.darkerBlue,

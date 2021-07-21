@@ -7,6 +7,7 @@ export * from "./Footer";
 export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
 export * from "./GradientHeader";
+export * from "./Input";
 export * from "./LazyMotion";
 export * from "./MainContainer";
 export * from "./Menu";
