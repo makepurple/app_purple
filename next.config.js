@@ -26,7 +26,6 @@ const config = {
 
 		GITHUB_CLIENT_ID:          process.env.GITHUB_CLIENT_ID,
 		GITHUB_CLIENT_SECRET:      process.env.GITHUB_CLIENT_SECRET,
-		GITHUB_AUTH_CALLBACK:      process.env.GITHUB_AUTH_CALLBACK,
 		GITHUB_ACCESS_TOKEN:       process.env.GITHUB_ACCESS_TOKEN,
 
 		APP_AWS_ACCESS_KEY_ID:     process.env.APP_AWS_ACCESS_KEY_ID,

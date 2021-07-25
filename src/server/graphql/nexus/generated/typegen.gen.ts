@@ -78,7 +78,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  AuthProvider: "GitHub"
+  AuthProvider: "github" | "linkedin"
 }
 
 export interface NexusGenScalars {
@@ -128,8 +128,8 @@ export interface NexusGenObjects {
     nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
   }
   User: { // root type
-    email?: string | null; // String
-    id: number; // Int!
+    email: string; // String!
+    id: string; // ID!
     image?: string | null; // String
     name: string; // String!
   }
@@ -206,10 +206,10 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
-    email: string | null; // String
+    email: string; // String!
     github: NexusGenRootTypes['UserGitHub']; // UserGitHub!
     githubUrl: NexusGenScalars['URL']; // URL!
-    id: number; // Int!
+    id: string; // ID!
     image: string | null; // String
     name: string; // String!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
@@ -282,7 +282,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     github: 'UserGitHub'
     githubUrl: 'URL'
-    id: 'Int'
+    id: 'ID'
     image: 'String'
     name: 'String'
     posts: 'Post'

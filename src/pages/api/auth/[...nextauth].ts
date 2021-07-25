@@ -1,4 +1,5 @@
 import { prisma } from "@/server/db";
+import { AuthProvider } from "@prisma/client";
 import produce from "immer";
 import type { NextApiHandler } from "next";
 import NextAuth from "next-auth";
@@ -8,34 +9,33 @@ import Providers from "next-auth/providers";
 const authHandler: NextApiHandler = (req, res) =>
 	NextAuth(req, res, {
 		providers: [
-			{
-				...Providers.GitHub({
-					clientId: process.env.GITHUB_CLIENT_ID,
-					clientSecret: process.env.GITHUB_CLIENT_SECRET,
-					scope: "public_repo read:user user:email"
-				}),
-				profile(profile) {
-					return {
-						id: profile.id as string,
-						name: profile.login as string,
-						email: profile.email as string,
-						image: profile.avatar_url as string
-					};
-				}
-			}
+			Providers.GitHub({
+				clientId: process.env.GITHUB_CLIENT_ID,
+				clientSecret: process.env.GITHUB_CLIENT_SECRET,
+				scope: "public_repo read:user user:email",
+				profile: (profile) => ({
+					id: profile.id as string,
+					name: profile.login as string,
+					email: profile.email as string,
+					image: profile.avatar_url as string
+				})
+			})
 		],
 		adapter: Adapters.Prisma.Adapter({ prisma }),
 		secret: process.env.COOKIE_SECRET,
 		callbacks: {
 			session: async (session, user) => {
-				const userAccount = await prisma.account.findUnique({
+				const userAccount = await prisma.account.findFirst({
 					where: {
-						id: user.id as number
+						providerType: AuthProvider.github,
+						user: {
+							email: user.email as string
+						}
 					}
 				});
 
 				return produce(session, (newSession) => {
-					session.user.id = user.id as number;
+					session.user.id = user.id as string;
 					session.user.accessToken = userAccount?.accessToken;
 
 					return newSession;

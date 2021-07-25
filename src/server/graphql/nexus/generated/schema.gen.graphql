@@ -3,7 +3,8 @@
 
 
 enum AuthProvider {
-  GitHub
+  github
+  linkedin
 }
 
 """The `Byte` scalar type represents byte value as a Buffer"""
@@ -121,10 +122,10 @@ scalar Upload
 type User {
   comments: [Comment!]!
   desiredSkills: [Skill!]!
-  email: String
+  email: String!
   github: UserGitHub!
   githubUrl: URL!
-  id: Int!
+  id: ID!
   image: String
   name: String!
   posts: [Post!]!
