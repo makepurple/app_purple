@@ -28,6 +28,7 @@
     "@aws-sdk/client-s3": "^3.22.0",
     "@aws-sdk/s3-presigned-post": "^3.22.0",
     "@hookform/resolvers": "^2.6.1",
+    "@next-auth/prisma-adapter": "^0.5.3",
     "@octokit/core": "^3.5.1",
     "@octokit/plugin-throttling": "^3.5.1",
     "@prisma/client": "2.26.0",

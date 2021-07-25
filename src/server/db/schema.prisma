@@ -15,14 +15,10 @@ generator nexusPrisma {
   provider = "nexus-prisma"
 }
 
-enum AuthProvider {
-  github
-}
-
 model Account {
   id                 String    @id @default(cuid())
   userId             String
-  providerType       AuthProvider
+  providerType       String
   providerId         String
   providerAccountId  String
   refreshToken       String?
@@ -60,8 +56,6 @@ model User {
   comments      Comment[]
   skills        SkillsOnUsers[]
   desiredSkills DesiredSkillsOnUsers[]
-
-  @@map(name: "users")
 }
 
 model VerificationRequest {

@@ -7,7 +7,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
+  ID: string | number;
   String: string;
   Boolean: boolean;
   Int: number;
@@ -25,7 +25,7 @@ export type Scalars = {
 };
 
 export enum AuthProvider {
-  GitHub = 'GitHub'
+  Github = 'github'
 }
 
 
@@ -149,10 +149,10 @@ export type User = {
   readonly __typename?: 'User';
   readonly comments: ReadonlyArray<Comment>;
   readonly desiredSkills: ReadonlyArray<Skill>;
-  readonly email?: Maybe<Scalars['String']>;
+  readonly email: Scalars['String'];
   readonly github: UserGitHub;
   readonly githubUrl: Scalars['URL'];
-  readonly id: Scalars['Int'];
+  readonly id: Scalars['ID'];
   readonly image?: Maybe<Scalars['String']>;
   readonly name: Scalars['String'];
   readonly posts: ReadonlyArray<Post>;
@@ -181,14 +181,14 @@ export type UserWhereUniqueInput = {
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename: 'User', readonly id: number, readonly name: string, readonly image?: Maybe<string> }> };
+export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: Maybe<string> }> };
 
 export type GetUserSummarySidebarQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type GetUserSummarySidebarQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename: 'User', readonly id: number, readonly name: string, readonly image?: Maybe<string>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly url: any, readonly websiteUrl?: Maybe<string>, readonly topLanguages?: Maybe<{ readonly __typename: 'TopLanguages', readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> }> } }> };
+export type GetUserSummarySidebarQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: Maybe<string>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly url: any, readonly websiteUrl?: Maybe<string>, readonly topLanguages?: Maybe<{ readonly __typename: 'TopLanguages', readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> }> } }> };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
