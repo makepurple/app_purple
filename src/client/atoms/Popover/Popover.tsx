@@ -1,4 +1,5 @@
 import { useOnClickOutside, useOnKeyDown, useUncontrolledProp } from "@/client/hooks";
+import composeRefs from "@seznam/compose-react-refs";
 import Tippy, { TippyProps } from "@tippyjs/react";
 import React, {
 	cloneElement,
@@ -112,6 +113,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 	const [open, setOpen] = useUncontrolledProp(_open, false);
 
 	const contentRef = useRef<HTMLDivElement>(null);
+	const childRef = useRef<HTMLElement>(null);
 
 	useOnKeyDown({ global: true, key: "CODE_ESCAPE" }, (event) => {
 		if (!canEscapeKeyClose || !open) return;
@@ -122,6 +124,11 @@ export const Popover: FC<PopoverProps> = (props) => {
 
 	useOnClickOutside(contentRef, (event) => {
 		if (!canOutsideClickClose || !open) return;
+
+		const childElem = childRef.current;
+		const didClickIn = !childElem || childElem.contains(event.target as Node | null);
+
+		if (didClickIn) return;
 
 		setOpen(false);
 		onClose?.(event as any);
@@ -141,6 +148,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 		>
 			{children &&
 				cloneElement(children, {
+					ref: composeRefs(childRef, children.props.ref),
 					onClick: (event: MouseEvent<any>) => {
 						const lastOpen = open;
 
