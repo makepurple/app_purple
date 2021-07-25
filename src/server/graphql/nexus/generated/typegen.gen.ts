@@ -78,7 +78,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  AuthProvider: "github" | "linkedin"
+  AuthProvider: "github"
 }
 
 export interface NexusGenScalars {
