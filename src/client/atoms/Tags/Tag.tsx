@@ -1,15 +1,22 @@
+import { XIcon } from "@/client/svgs";
+import { InferComponentProps } from "@/client/types";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TagsContext } from "./context";
+
+export type TagProps = Omit<InferComponentProps<typeof Root>, "children"> & {
+	children: string;
+};
 
 export type TagType = "positive" | "neutral" | "negative";
 
-export const Tag = styled.span<{ type?: TagType }>`
+export const Root = styled.span<{ type?: TagType }>`
 	display: inline-flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: center;
 	box-sizing: border-box;
 	height: 1.5em;
 	margin: 0.25em;
-	padding: 0 0.75em;
 	border-radius: 0.25em;
 	background-color: ${({ theme, type }) => {
 		switch (type) {
@@ -27,3 +34,40 @@ export const Tag = styled.span<{ type?: TagType }>`
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.contrastingPrimaryText};
 `;
+
+const Text = styled.span`
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0 0.5rem;
+`;
+
+const CloseButton = styled.span`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 1.5rem;
+	width: 1.5rem;
+	cursor: pointer;
+`;
+
+export const Tag = styled(({ children, ...restTagProps }: TagProps) => {
+	const { editable, onRemove } = useContext(TagsContext);
+
+	return (
+		<Root {...restTagProps}>
+			<Text>{children}</Text>
+			{editable && (
+				<CloseButton
+					onClick={(event) => {
+						onRemove?.(children, event);
+					}}
+				>
+					<XIcon height={16} width={16} />
+				</CloseButton>
+			)}
+		</Root>
+	);
+})<TagProps>``;
+
+Tag.displayName = "Tag";
