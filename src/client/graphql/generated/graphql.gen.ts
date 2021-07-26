@@ -24,10 +24,6 @@ export type Scalars = {
   Upload: any;
 };
 
-export enum AuthProvider {
-  Github = 'github'
-}
-
 
 export type Comment = {
   readonly __typename?: 'Comment';

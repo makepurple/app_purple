@@ -1,7 +1,3 @@
-enum AuthProvider {
-  github
-}
-
 # The `Byte` scalar type represents byte value as a Buffer
 scalar Bytes
 
