@@ -19,7 +19,7 @@
     "generate:nexus": "yarn run script src/server/graphql/nexus/schema --nexus-exit",
     "generate:prisma": "prisma generate",
     "generate:svgs": "yarn run script scripts/generate-svg-components",
-    "prisma:migrate": "prisma migrate dev --preview-feature",
+    "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "test": "jest",
     "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T"
