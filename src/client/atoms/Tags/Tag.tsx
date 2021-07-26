@@ -40,6 +40,10 @@ const Text = styled.span`
 	align-items: center;
 	box-sizing: border-box;
 	padding: 0 0.5rem;
+
+	&:not(:last-child) {
+		padding-right: 0.125rem;
+	}
 `;
 
 const CloseButton = styled.span`
