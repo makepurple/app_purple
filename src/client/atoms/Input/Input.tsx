@@ -1,4 +1,7 @@
+import { InferComponentProps } from "@/client/types";
 import styled from "styled-components";
+
+export type InputProps = InferComponentProps<typeof Input>;
 
 export const Input = styled.input`
 	display: inline-block;
