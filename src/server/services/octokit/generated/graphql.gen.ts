@@ -4232,7 +4232,7 @@ export type DiscussionCategoryEdge = {
 };
 
 /** A comment on a discussion. */
-export type DiscussionComment = Node & Comment & Deletable & Minimizable & Updatable & UpdatableComment & Reactable & Votable & {
+export type DiscussionComment = Comment & Deletable & Minimizable & Updatable & UpdatableComment & Reactable & Votable & Node & {
   readonly __typename?: 'DiscussionComment';
   /** The actor who authored the comment. */
   readonly author?: Maybe<Actor>;
@@ -10796,6 +10796,8 @@ export type Organization = Node & Actor & PackageOwner & ProjectOwner & Reposito
   readonly resourcePath: Scalars['URI'];
   /** The Organization's SAML identity providers */
   readonly samlIdentityProvider?: Maybe<OrganizationIdentityProvider>;
+  /** List of sponsors for this user or organization. */
+  readonly sponsors: SponsorConnection;
   /** Events involving this sponsorable, such as new sponsorships. */
   readonly sponsorsActivities: SponsorsActivityConnection;
   /** The GitHub Sponsors listing for this user or organization. */
@@ -11012,6 +11014,17 @@ export type OrganizationRepositoryDiscussionsArgs = {
   orderBy?: Maybe<DiscussionOrder>;
   repositoryId?: Maybe<Scalars['ID']>;
   answered?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** An account on GitHub, with one or more owners, that has repositories, members and teams. */
+export type OrganizationSponsorsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  tierId?: Maybe<Scalars['ID']>;
+  orderBy?: Maybe<SponsorOrder>;
 };
 
 
@@ -14194,6 +14207,8 @@ export type Release = Node & UniformResourceLocatable & Reactable & {
   readonly isLatest: Scalars['Boolean'];
   /** Whether or not the release is a prerelease */
   readonly isPrerelease: Scalars['Boolean'];
+  /** A list of users mentioned in the release description */
+  readonly mentions?: Maybe<UserConnection>;
   /** The title of the release. */
   readonly name?: Maybe<Scalars['String']>;
   /** Identifies the date and time when the release was created. */
@@ -14222,6 +14237,15 @@ export type Release = Node & UniformResourceLocatable & Reactable & {
   readonly url: Scalars['URI'];
   /** Can user react to this subject */
   readonly viewerCanReact: Scalars['Boolean'];
+};
+
+
+/** A release contains the content for a release. */
+export type ReleaseMentionsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -16763,7 +16787,7 @@ export type RepositoryVisibilityChangeEnableAuditEntry = Node & AuditEntry & Ent
   readonly userUrl?: Maybe<Scalars['URI']>;
 };
 
-/** A alert for a repository with an affected vulnerability. */
+/** A Dependabot alert for a repository with a dependency affected by a security vulnerability. */
 export type RepositoryVulnerabilityAlert = Node & RepositoryNode & {
   readonly __typename?: 'RepositoryVulnerabilityAlert';
   /** When was the alert created? */
@@ -17540,6 +17564,44 @@ export type SmimeSignature = GitSignature & {
 /** Entities that can sponsor others via GitHub Sponsors */
 export type Sponsor = Organization | User;
 
+/** The connection type for Sponsor. */
+export type SponsorConnection = {
+  readonly __typename?: 'SponsorConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<SponsorEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<Sponsor>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** Represents a user or organization who is sponsoring someone in GitHub Sponsors. */
+export type SponsorEdge = {
+  readonly __typename?: 'SponsorEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<Sponsor>;
+};
+
+/** Ordering options for connections to get sponsor entities for GitHub Sponsors. */
+export type SponsorOrder = {
+  /** The field to order sponsor entities by. */
+  readonly field: SponsorOrderField;
+  /** The ordering direction. */
+  readonly direction: OrderDirection;
+};
+
+/** Properties by which sponsor connections can be ordered. */
+export enum SponsorOrderField {
+  /** Order sponsorable entities by login (username). */
+  Login = 'LOGIN',
+  /** Order sponsors by their relevance to the viewer. */
+  Relevance = 'RELEVANCE'
+}
+
 /** Entities that can be sponsored through GitHub Sponsors */
 export type Sponsorable = {
   /** True if this user/organization has a GitHub Sponsors listing. */
@@ -17548,6 +17610,8 @@ export type Sponsorable = {
   readonly isSponsoredBy: Scalars['Boolean'];
   /** True if the viewer is sponsored by this user/organization. */
   readonly isSponsoringViewer: Scalars['Boolean'];
+  /** List of sponsors for this user or organization. */
+  readonly sponsors: SponsorConnection;
   /** Events involving this sponsorable, such as new sponsorships. */
   readonly sponsorsActivities: SponsorsActivityConnection;
   /** The GitHub Sponsors listing for this user or organization. */
@@ -17568,6 +17632,17 @@ export type Sponsorable = {
 /** Entities that can be sponsored through GitHub Sponsors */
 export type SponsorableIsSponsoredByArgs = {
   accountLogin: Scalars['String'];
+};
+
+
+/** Entities that can be sponsored through GitHub Sponsors */
+export type SponsorableSponsorsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  tierId?: Maybe<Scalars['ID']>;
+  orderBy?: Maybe<SponsorOrder>;
 };
 
 
@@ -17758,12 +17833,18 @@ export type SponsorsListing = Node & {
   /** The full description of the listing rendered to HTML. */
   readonly fullDescriptionHTML: Scalars['HTML'];
   readonly id: Scalars['ID'];
+  /** Whether this listing is publicly visible. */
+  readonly isPublic: Scalars['Boolean'];
   /** The listing's full name. */
   readonly name: Scalars['String'];
+  /** A future date on which this listing is eligible to receive a payout. */
+  readonly nextPayoutDate?: Maybe<Scalars['Date']>;
   /** The short description of the listing. */
   readonly shortDescription: Scalars['String'];
   /** The short name of the listing. */
   readonly slug: Scalars['String'];
+  /** The entity this listing represents who can be sponsored on GitHub Sponsors. */
+  readonly sponsorable: Sponsorable;
   /** The published tiers for this GitHub Sponsors listing. */
   readonly tiers?: Maybe<SponsorsTierConnection>;
 };
@@ -20662,6 +20743,8 @@ export type User = Node & Actor & PackageOwner & ProjectOwner & RepositoryDiscus
   readonly resourcePath: Scalars['URI'];
   /** Replies this user has saved */
   readonly savedReplies?: Maybe<SavedReplyConnection>;
+  /** List of sponsors for this user or organization. */
+  readonly sponsors: SponsorConnection;
   /** Events involving this sponsorable, such as new sponsorships. */
   readonly sponsorsActivities: SponsorsActivityConnection;
   /** The GitHub Sponsors listing for this user or organization. */
@@ -20977,6 +21060,17 @@ export type UserSavedRepliesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<SavedReplyOrder>;
+};
+
+
+/** A user is an individual's account on GitHub that owns repositories and can make new content. */
+export type UserSponsorsArgs = {
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  tierId?: Maybe<Scalars['ID']>;
+  orderBy?: Maybe<SponsorOrder>;
 };
 
 
