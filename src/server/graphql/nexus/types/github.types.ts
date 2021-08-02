@@ -54,16 +54,8 @@ export const githubTypes = [
 			Data for a user from that user's connected GitHub account.
 		`,
 		definition: (t) => {
-			t.nonNull.field("user", { type: "User" });
 			t.string("bio");
 			t.string("company");
-			t.string("twitterUsername");
-			t.nonNull.url("url", {
-				description: oneLine`
-					The URL of the user's GitHub profile.
-				`
-			});
-			t.string("websiteUrl");
 			t.field("topLanguages", {
 				type: "TopLanguages",
 				resolve: async (parent, args, { octokit: graphql }) => {
@@ -141,6 +133,14 @@ export const githubTypes = [
 					};
 				}
 			});
+			t.string("twitterUsername");
+			t.nonNull.url("url", {
+				description: oneLine`
+					The URL of the user's GitHub profile.
+				`
+			});
+			t.nonNull.field("user", { type: "User" });
+			t.string("websiteUrl");
 		}
 	})
 ];

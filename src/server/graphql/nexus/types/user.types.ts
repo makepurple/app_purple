@@ -7,26 +7,7 @@ export const userTypes = [
 		name: User.$name,
 		description: User.$description,
 		definition: (t) => {
-			t.field(User.id);
-			t.field(User.name);
-			t.field({
-				...User.email,
-				authorize: (root, args, { user }) => {
-					return user?.id === root.id;
-				}
-			});
-			t.field(User.image);
-			t.field("skills", {
-				type: nonNull(list(nonNull("Skill"))),
-				resolve: (root, args, { prisma }) => {
-					return prisma.skillsOnUsers
-						.findMany({
-							where: { userId: root.id },
-							select: { skill: true }
-						})
-						.then((skills) => skills.map((s) => s.skill));
-				}
-			});
+			t.field(User.comments);
 			t.field("desiredSkills", {
 				type: nonNull(list(nonNull("Skill"))),
 				resolve: (root, args, { prisma }) => {
@@ -38,10 +19,11 @@ export const userTypes = [
 						.then((skills) => skills.map((s) => s.skill));
 				}
 			});
-			t.field(User.posts);
-			t.field(User.comments);
-			t.nonNull.url("githubUrl", {
-				resolve: ({ name }) => `https://github.com/${name}`
+			t.field({
+				...User.email,
+				authorize: (root, args, { user }) => {
+					return user?.id === root.id;
+				}
 			});
 			t.field("github", {
 				type: nonNull("UserGitHub"),
@@ -69,6 +51,24 @@ export const userTypes = [
 						user: parent,
 						...userGithub.user
 					};
+				}
+			});
+			t.nonNull.url("githubUrl", {
+				resolve: ({ name }) => `https://github.com/${name}`
+			});
+			t.field(User.id);
+			t.field(User.image);
+			t.field(User.name);
+			t.field(User.posts);
+			t.field("skills", {
+				type: nonNull(list(nonNull("Skill"))),
+				resolve: (root, args, { prisma }) => {
+					return prisma.skillsOnUsers
+						.findMany({
+							where: { userId: root.id },
+							select: { skill: true }
+						})
+						.then((skills) => skills.map((s) => s.skill));
 				}
 			});
 		}
