@@ -1,4 +1,8 @@
+import { InferComponentProps } from "@/client/types";
 import * as React from "react";
+
+export type SvgIconComponent = typeof GitHubIcon;
+export type SvgIconProps = InferComponentProps<SvgIconComponent>;
 
 export const BookIcon = React.memo(
 	React.forwardRef(
