@@ -1,7 +1,6 @@
 import { UrlUtils } from "@/utils";
-import { FC } from "hoist-non-react-statics/node_modules/@types/react";
 import NextImage, { ImageProps } from "next/image";
-import React from "react";
+import React, { FC } from "react";
 
 export type GitHubAvatarImageProps = ImageProps;
 

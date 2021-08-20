@@ -1,6 +1,6 @@
-import { Modifier } from "react-popper";
+import type { Modifier } from "@popperjs/core";
 
-export const SameWidth: Modifier<any> = {
+export const SameWidth: Modifier<any, any> = {
 	name: "sameWidth",
 	enabled: true,
 	phase: "beforeWrite",
