@@ -38,6 +38,27 @@ scalar DateTime
 """An arbitrary-precision Decimal type"""
 scalar Decimal
 
+type Experience {
+  actions: [String!]!
+  endDate: DateTime
+  id: Int!
+  location: String
+  organizationName: String
+  positionName: String
+  startDate: DateTime
+  type: ExperienceType
+  user: User!
+}
+
+enum ExperienceType {
+  Contract
+  FullTime
+  Intern
+  Misc
+  OpenSource
+  PartTime
+}
+
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -55,7 +76,7 @@ type Mutation {
 type Post {
   author: User!
   comments: [Comment!]!
-  content: String!
+  content: Json!
   createdAt: DateTime!
   id: Int!
   thumbnailImageUrl: String

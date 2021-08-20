@@ -1,10 +1,10 @@
-import { Tabs } from "@/client/atoms";
+import { Tabs } from "@/client/molecules";
 import { GitHubIcon } from "@/client/svgs";
 import NextLink from "next/link";
 import React from "react";
 
 export default {
-	title: "atoms/Tabs",
+	title: "molecules/Tabs",
 	component: Tabs
 };
 

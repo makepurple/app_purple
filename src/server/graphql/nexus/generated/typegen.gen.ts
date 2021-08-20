@@ -96,6 +96,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  ExperienceType: "Contract" | "FullTime" | "Intern" | "Misc" | "OpenSource" | "PartTime"
 }
 
 export interface NexusGenScalars {
@@ -124,9 +125,19 @@ export interface NexusGenObjects {
     fields: NexusGenScalars['Json']; // Json!
     url: string; // String!
   }
+  Experience: { // root type
+    actions: string[]; // [String!]!
+    endDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: number; // Int!
+    location?: string | null; // String
+    organizationName?: string | null; // String
+    positionName?: string | null; // String
+    startDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+  }
   Mutation: {};
   Post: { // root type
-    content: string; // String!
+    content: NexusGenScalars['Json']; // Json!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     thumbnailImageUrl?: string | null; // String
@@ -170,7 +181,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Comment: { // field return type
@@ -185,6 +196,17 @@ export interface NexusGenFieldTypes {
     fields: NexusGenScalars['Json']; // Json!
     url: string; // String!
   }
+  Experience: { // field return type
+    actions: string[]; // [String!]!
+    endDate: NexusGenScalars['DateTime'] | null; // DateTime
+    id: number; // Int!
+    location: string | null; // String
+    organizationName: string | null; // String
+    positionName: string | null; // String
+    startDate: NexusGenScalars['DateTime'] | null; // DateTime
+    type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+    user: NexusGenRootTypes['User']; // User!
+  }
   Mutation: { // field return type
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     ok: boolean; // Boolean!
@@ -195,7 +217,7 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
-    content: string; // String!
+    content: NexusGenScalars['Json']; // Json!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     thumbnailImageUrl: string | null; // String
@@ -258,6 +280,17 @@ export interface NexusGenFieldTypeNames {
     fields: 'Json'
     url: 'String'
   }
+  Experience: { // field return type name
+    actions: 'String'
+    endDate: 'DateTime'
+    id: 'Int'
+    location: 'String'
+    organizationName: 'String'
+    positionName: 'String'
+    startDate: 'DateTime'
+    type: 'ExperienceType'
+    user: 'User'
+  }
   Mutation: { // field return type name
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     ok: 'Boolean'
@@ -268,7 +301,7 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     author: 'User'
     comments: 'Comment'
-    content: 'String'
+    content: 'Json'
     createdAt: 'DateTime'
     id: 'Int'
     thumbnailImageUrl: 'String'
@@ -347,7 +380,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

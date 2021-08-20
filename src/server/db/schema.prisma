@@ -43,19 +43,25 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String    @unique
-  email         String    @unique
+  id            String                 @id @default(cuid())
+  // The GitHub name of the user
+  name          String                 @unique
+  email         String                 @unique
   emailVerified DateTime?
+  // Avatar image, pulled from GitHub
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  // Self written summary or description
+  summary       String?
+  // When this account was registered
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
   comments      Comment[]
   skills        SkillsOnUsers[]
   desiredSkills DesiredSkillsOnUsers[]
+  experiences   Experience[]
 }
 
 model VerificationRequest {
@@ -74,8 +80,7 @@ model Post {
   author            User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId          String
   title             String
-  // Content stored as Markdown
-  content           String
+  content           Json
   thumbnailImageUrl String?
   comments          Comment[]
   createdAt         DateTime  @default(now())
@@ -116,4 +121,33 @@ model DesiredSkillsOnUsers {
   userId    String
 
   @@id([skillName, userId])
+}
+
+enum ExperienceType {
+  FullTime
+  PartTime
+  Contract
+  Intern
+  OpenSource
+  Misc
+}
+
+model Experience {
+  id               Int             @id @default(autoincrement())
+  // The name of the position
+  positionName     String?
+  // The type of experience
+  type             ExperienceType?
+  // The name of the organization (can also be the name of a collaboration i.e. project)
+  organizationName String?
+  // When this experience was started
+  startDate        DateTime?
+  // When this experience was ended. Null is assumed as present.
+  endDate          DateTime?
+  // Where this experience took place
+  location         String?
+  // Things that the user has done in this experience
+  actions          String[]
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
 }

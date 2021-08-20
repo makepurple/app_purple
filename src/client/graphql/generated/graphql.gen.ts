@@ -56,6 +56,28 @@ export type CreatePresignedS3UrlPayload = {
 
 
 
+export type Experience = {
+  readonly __typename?: 'Experience';
+  readonly actions: ReadonlyArray<Scalars['String']>;
+  readonly endDate?: Maybe<Scalars['DateTime']>;
+  readonly id: Scalars['Int'];
+  readonly location?: Maybe<Scalars['String']>;
+  readonly organizationName?: Maybe<Scalars['String']>;
+  readonly positionName?: Maybe<Scalars['String']>;
+  readonly startDate?: Maybe<Scalars['DateTime']>;
+  readonly type?: Maybe<ExperienceType>;
+  readonly user: User;
+};
+
+export enum ExperienceType {
+  Contract = 'Contract',
+  FullTime = 'FullTime',
+  Intern = 'Intern',
+  Misc = 'Misc',
+  OpenSource = 'OpenSource',
+  PartTime = 'PartTime'
+}
+
 
 /** Root mutation type */
 export type Mutation = {
@@ -89,7 +111,7 @@ export type Post = {
   readonly __typename?: 'Post';
   readonly author: User;
   readonly comments: ReadonlyArray<Comment>;
-  readonly content: Scalars['String'];
+  readonly content: Scalars['Json'];
   readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['Int'];
   readonly thumbnailImageUrl?: Maybe<Scalars['String']>;

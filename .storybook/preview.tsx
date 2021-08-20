@@ -2,9 +2,9 @@ import { addons } from "@storybook/addons";
 import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
 import { domMax, LazyMotion } from "framer-motion";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";
 import { Toaster } from "react-hot-toast";
-import { withNextRouter } from "storybook-addon-next-router";
 import { ThemeProvider } from "../src/client/atoms";
 import { GlobalStyles } from "../src/client/styles";
 
@@ -48,13 +48,15 @@ export const parameters = {
 			date: /Date$/,
 		},
 	},
+	nextRouter: {
+		Provider: RouterContext.Provider,	
+	},
 	options: {
 		storySort: alphabeticSort
 	}
 };
 
 export const decorators = [
-	withNextRouter,
 	urqlDecorator,
 	(Story) => (
 		<ThemeProvider>

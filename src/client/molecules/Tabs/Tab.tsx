@@ -1,4 +1,4 @@
-import { Typography } from "@/client/atoms";
+import { Typography } from "@/client/atoms/Typography";
 import type { SvgIconComponent } from "@/client/svgs";
 import React, { forwardRef } from "react";
 import styled, { useTheme } from "styled-components";
