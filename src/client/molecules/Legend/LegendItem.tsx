@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const Root = styled.div`
 	display: inline-flex;
+	align-items: center;
 	margin: 4px;
 	color: ${({ theme }) => theme.palette.mediumPurple};
 	font-size: 0.875rem;
@@ -14,6 +15,10 @@ const LegendColor = styled.span`
 	border-radius: 50%;
 	height: 0.75rem;
 	width: 0.75rem;
+`;
+
+const Content = styled.span`
+	line-height: 1em;
 `;
 
 const Proportion = styled.span`
@@ -40,8 +45,10 @@ export const LegendItem: FC<LegendItemProps> = ({
 	return (
 		<Root className={className} style={style}>
 			<LegendColor style={{ backgroundColor: color }} />
-			{children}
-			{max && <Proportion>{((value / max) * 100).toFixed(2)}%</Proportion>}
+			<Content>
+				{children}
+				{max && <Proportion>{((value / max) * 100).toFixed(2)}%</Proportion>}
+			</Content>
 		</Root>
 	);
 };
