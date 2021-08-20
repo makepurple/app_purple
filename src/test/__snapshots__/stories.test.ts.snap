@@ -1,7 +1,259 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots atoms/Anchor Standard 1`] = `
+Array [
+  .c0 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.5;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #2188ff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c0:hover {
+  color: #706eff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<a
+    className="c0"
+    href="https://google.com"
+  >
+    google
+  </a>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/AppBar Standard 1`] = `
+Array [
+  .c0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #ffffff;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+<div
+    className="c0"
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Avatar Standard 1`] = `
+Array [
+  .c0 {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      style={
+        Object {
+          "boxSizing": "border-box",
+          "display": "inline-block",
+          "margin": 0,
+          "maxWidth": "100%",
+          "overflow": "hidden",
+          "position": "relative",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "display": "block",
+            "maxWidth": "100%",
+          }
+        }
+      >
+        <img
+          alt=""
+          aria-hidden={true}
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+          style={
+            Object {
+              "border": "none",
+              "display": "block",
+              "margin": 0,
+              "maxWidth": "100%",
+              "padding": 0,
+            }
+          }
+        />
+      </div>
+      <noscript>
+        <img
+          data-nimg={true}
+          decoding="async"
+          src="https://avatars.githubusercontent.com/u/810438?v=4"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": undefined,
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+      </noscript>
+      <img
+        data-nimg={true}
+        decoding="async"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        style={
+          Object {
+            "border": "none",
+            "bottom": 0,
+            "boxSizing": "border-box",
+            "display": "block",
+            "height": 0,
+            "left": 0,
+            "margin": "auto",
+            "maxHeight": "100%",
+            "maxWidth": "100%",
+            "minHeight": "100%",
+            "minWidth": "100%",
+            "objectFit": undefined,
+            "objectPosition": undefined,
+            "padding": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "width": 0,
+          }
+        }
+      />
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Brand Standard 1`] = `
+Array [
+  .c0 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c0:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
+    className="c0"
+  >
+    MakePurple
+  </a>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
 exports[`Storyshots atoms/Button Standard 1`] = `
-.c0 {
+Array [
+  .c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -15,7 +267,7 @@ exports[`Storyshots atoms/Button Standard 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   box-sizing: border-box;
-  padding: 14px 16px;
+  padding: 12px 16px;
   border-radius: 0.375rem;
   border: none;
   -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
@@ -23,7 +275,7 @@ exports[`Storyshots atoms/Button Standard 1`] = `
   font-size: 1.125rem;
   line-height: 1.125em;
   font-weight: 500;
-  background-color: #8E8CFF;
+  background-color: #706eff;
   color: #ffffff;
   cursor: pointer;
 }
@@ -33,23 +285,360 @@ exports[`Storyshots atoms/Button Standard 1`] = `
 }
 
 <button
-  className="c0"
->
-  Click me!
-</button>
+    className="c0"
+    type="button"
+  >
+    Click me!
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
 `;
 
-exports[`Storyshots atoms/Paper Standard 1`] = `
-.c0 {
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+exports[`Storyshots atoms/Footer Standard 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "height": "100vh",
+      }
+    }
+  />,
+  .c0 {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid rgb(232,236,253);
   background-color: #ffffff;
 }
 
+<footer
+    className="c0"
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/FrostedGlass Standard 1`] = `
+Array [
+  .c0 {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255,255,255,0.15);
+}
+
 <div
-  className="c0"
->
-  Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+    style={
+      Object {
+        "position": "relative",
+      }
+    }
+  >
+    <div
+      className="c0"
+      style={
+        Object {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      Hello World
+    </div>
+    <div>
+      The quick brown fox jumps over the lazy dog.
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/GitHubAvatarImage Standard 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "boxSizing": "border-box",
+        "display": "inline-block",
+        "margin": 0,
+        "maxWidth": "100%",
+        "overflow": "hidden",
+        "position": "relative",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "boxSizing": "border-box",
+          "display": "block",
+          "maxWidth": "100%",
+        }
+      }
+    >
+      <img
+        alt=""
+        aria-hidden={true}
+        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+        style={
+          Object {
+            "border": "none",
+            "display": "block",
+            "margin": 0,
+            "maxWidth": "100%",
+            "padding": 0,
+          }
+        }
+      />
+    </div>
+    <noscript>
+      <img
+        data-nimg={true}
+        decoding="async"
+        src="https://avatars.githubusercontent.com/u/810438"
+        style={
+          Object {
+            "border": "none",
+            "bottom": 0,
+            "boxSizing": "border-box",
+            "display": "block",
+            "height": 0,
+            "left": 0,
+            "margin": "auto",
+            "maxHeight": "100%",
+            "maxWidth": "100%",
+            "minHeight": "100%",
+            "minWidth": "100%",
+            "objectFit": undefined,
+            "objectPosition": undefined,
+            "padding": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "width": 0,
+          }
+        }
+      />
+    </noscript>
+    <img
+      data-nimg={true}
+      decoding="async"
+      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+      style={
+        Object {
+          "border": "none",
+          "bottom": 0,
+          "boxSizing": "border-box",
+          "display": "block",
+          "height": 0,
+          "left": 0,
+          "margin": "auto",
+          "maxHeight": "100%",
+          "maxWidth": "100%",
+          "minHeight": "100%",
+          "minWidth": "100%",
+          "objectFit": undefined,
+          "objectPosition": undefined,
+          "padding": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 0,
+        }
+      }
+    />
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/GradientHeader Standard 1`] = `
+Array [
+  .c0 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100px;
+  height: 60vh;
+  z-index: -1;
+  background-image: linear-gradient( rgba(142,140,255,0.3),rgba(142,140,255,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(142,140,255,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
+}
+
+<div
+    style={
+      Object {
+        "height": "100vh",
+        "position": "relative",
+      }
+    }
+  >
+    <div
+      className="c0"
+    />
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Input Standard 1`] = `
+Array [
+  .c0 {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 2.625rem;
+  padding: 0 0.625rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e8ecfd;
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  line-height: 1.3em;
+  font-weight: 600;
+  color: #1F1F41;
+  background-color: #e8ecfd;
+  -webkit-transition: border-color 0.15s ease-in-out 0s;
+  transition: border-color 0.15s ease-in-out 0s;
+}
+
+.c0::-webkit-input-placeholder {
+  color: #7578b5;
+}
+
+.c0::-moz-placeholder {
+  color: #7578b5;
+}
+
+.c0:-ms-input-placeholder {
+  color: #7578b5;
+}
+
+.c0::placeholder {
+  color: #7578b5;
+}
+
+.c0:focus {
+  outline: none;
+  background-color: #ffffff;
+  border: 1px solid #706eff;
+}
+
+<input
+    className="c0"
+    placeholder="Type stuff here..."
+    type="text"
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/MainContainer Standard 1`] = `
+Array [
+  .c0 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+<div
+    style={
+      Object {
+        "display": "flex",
+        "padding": "0 48px",
+      }
+    }
+  >
+    <div
+      className="c0"
+    >
+      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
  
 Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
  
@@ -68,5 +657,4114 @@ Sit vel et nostrum ut. Aut laborum iure molestiae et facere placeat molestiae. M
 Magni quasi exercitationem. Ea similique ad sed architecto magnam voluptatem maxime neque adipisci. Culpa quis ut ab nulla quod labore ullam quos sed. Voluptatibus eum saepe nesciunt omnis sit et. Eaque corrupti vel.
  
 Similique blanditiis voluptatem provident doloribus aut culpa ratione vel. Omnis numquam maxime sint libero laudantium voluptatem. Et voluptas quis non. Architecto non explicabo facere neque et ex quaerat. Aut qui adipisci.
-</div>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Menu Standard 1`] = `
+Array [
+  .c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7578b5;
+  background-color: transparent;
+  -webkit-transition-property: background-color,opacity;
+  transition-property: background-color,opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.c1:hover {
+  background-color: rgb(250,250,250);
+  opacity: 0.8;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7578b5;
+  background-color: transparent;
+  -webkit-transition-property: background-color,opacity;
+  transition-property: background-color,opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.c2:hover {
+  background-color: rgb(250,250,250);
+  opacity: 0.8;
+}
+
+.c2,
+.c2:hover {
+  background-color: #706eff;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  box-sizing: border-box;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+}
+
+<div
+    className="c0"
+  >
+    <button
+      className="c1"
+      type="button"
+    >
+      Red
+    </button>
+    <button
+      className="c1"
+      type="button"
+    >
+      Blue
+    </button>
+    <button
+      className="c2"
+      selected={true}
+      type="button"
+    >
+      Purple
+    </button>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/PageContainer Standard 1`] = `
+Array [
+  .c1 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1"
+    >
+      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+ 
+Qui nobis repellendus fugiat velit. Aperiam placeat fuga. Distinctio placeat ullam minima ducimus temporibus modi aut architecto ducimus. Voluptates explicabo exercitationem ut quis sed.
+ 
+Sit vitae soluta sint non voluptates ut. Quos qui illo error sunt. Ratione a officia quaerat cumque incidunt aut.
+ 
+Hic eligendi quos esse ut ab. Sed quae nam eos sint autem rerum doloremque officia. Ut ut eos ducimus eos saepe consequatur vel in ut. Et molestiae ea ut. Placeat quidem est consequuntur aut est fuga.
+ 
+Ex ut voluptas enim ex eveniet facere molestiae aut. Aut nam et dolorum architecto fugit repellendus hic veritatis qui. Culpa earum voluptate vel labore. Ut est sunt corporis alias est et sequi voluptas. Non aut rerum impedit ex rem voluptates.
+ 
+Totam perferendis ut non fugiat eligendi omnis. Quasi ipsum rem eos quod recusandae consectetur optio laudantium et. Possimus molestias facere quia. Ab quo occaecati quia ipsum sit qui accusantium odit doloremque. Dolore aut eos quis ut incidunt omnis. Voluptas minima quia ut minima sunt qui similique ut quam.
+ 
+Sit vel et nostrum ut. Aut laborum iure molestiae et facere placeat molestiae. Molestiae dolores commodi inventore sequi quia itaque. Sint odit dolor. Et quo aperiam natus.
+ 
+Magni quasi exercitationem. Ea similique ad sed architecto magnam voluptatem maxime neque adipisci. Culpa quis ut ab nulla quod labore ullam quos sed. Voluptatibus eum saepe nesciunt omnis sit et. Eaque corrupti vel.
+ 
+Similique blanditiis voluptatem provident doloribus aut culpa ratione vel. Omnis numquam maxime sint libero laudantium voluptatem. Et voluptas quis non. Architecto non explicabo facere neque et ex quaerat. Aut qui adipisci.
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Paper Standard 1`] = `
+Array [
+  .c0 {
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+}
+
+<div
+    className="c0"
+  >
+    Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+ 
+Qui nobis repellendus fugiat velit. Aperiam placeat fuga. Distinctio placeat ullam minima ducimus temporibus modi aut architecto ducimus. Voluptates explicabo exercitationem ut quis sed.
+ 
+Sit vitae soluta sint non voluptates ut. Quos qui illo error sunt. Ratione a officia quaerat cumque incidunt aut.
+ 
+Hic eligendi quos esse ut ab. Sed quae nam eos sint autem rerum doloremque officia. Ut ut eos ducimus eos saepe consequatur vel in ut. Et molestiae ea ut. Placeat quidem est consequuntur aut est fuga.
+ 
+Ex ut voluptas enim ex eveniet facere molestiae aut. Aut nam et dolorum architecto fugit repellendus hic veritatis qui. Culpa earum voluptate vel labore. Ut est sunt corporis alias est et sequi voluptas. Non aut rerum impedit ex rem voluptates.
+ 
+Totam perferendis ut non fugiat eligendi omnis. Quasi ipsum rem eos quod recusandae consectetur optio laudantium et. Possimus molestias facere quia. Ab quo occaecati quia ipsum sit qui accusantium odit doloremque. Dolore aut eos quis ut incidunt omnis. Voluptas minima quia ut minima sunt qui similique ut quam.
+ 
+Sit vel et nostrum ut. Aut laborum iure molestiae et facere placeat molestiae. Molestiae dolores commodi inventore sequi quia itaque. Sint odit dolor. Et quo aperiam natus.
+ 
+Magni quasi exercitationem. Ea similique ad sed architecto magnam voluptatem maxime neque adipisci. Culpa quis ut ab nulla quod labore ullam quos sed. Voluptatibus eum saepe nesciunt omnis sit et. Eaque corrupti vel.
+ 
+Similique blanditiis voluptatem provident doloribus aut culpa ratione vel. Omnis numquam maxime sint libero laudantium voluptatem. Et voluptas quis non. Architecto non explicabo facere neque et ex quaerat. Aut qui adipisci.
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Popover Standard 1`] = `
+Array [
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c0:hover {
+  opacity: 0.85;
+}
+
+<button
+    className="c0"
+    onClick={[Function]}
+    type="button"
+  >
+    Click me!
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/ProgressBar Standard 1`] = `
+Array [
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  height: 0.75rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #e2e9ef;
+}
+
+<div
+    className="c0"
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Tags Standard 1`] = `
+Array [
+  .c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 1.5em;
+  margin: 0.25em;
+  border-radius: 0.25em;
+  background-color: initial;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 0.5rem;
+}
+
+.c2:not(:last-child) {
+  padding-right: 0.125rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -0.25rem;
+}
+
+<div
+    className="c0"
+    style={
+      Object {
+        "width": 280,
+      }
+    }
+    type="neutral"
+  >
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Next.js
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Prisma
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Nexus
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Urql
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        TypeScript
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Storybook
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Figma
+      </span>
+    </span>
+    <span
+      className="c1 Tag-sc-sem7s1-3"
+    >
+      <span
+        className="c2"
+      >
+        Framer-Motion
+      </span>
+    </span>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Toolbar Standard 1`] = `
+Array [
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  height: 48px;
+  border: 1px solid #e8ecfd;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  font-size: 0.875rem;
+}
+
+<div
+    className="c0"
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots atoms/Typography Standard 1`] = `
+Array [
+  .c0 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2em;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+<span
+    className="c0"
+  >
+    The quick brown fox jumps over the lazy log.
+  </span>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots emails/WelcomeEmail Standard 1`] = `
+Array [
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "
+    <!doctype html>
+    <html xmlns=\\"http://www.w3.org/1999/xhtml\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\">
+      <head>
+        <title>
+          Welcome to MakePurple!
+        </title>
+        <!--[if !mso]><!-->
+        <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+        <!--<![endif]-->
+        <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=UTF-8\\">
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <style type=\\"text/css\\">
+          #outlook a { padding:0; }
+          body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%; }
+          table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt; }
+          img { border:0;height:auto;line-height:100%; outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; }
+          p { display:block;margin:13px 0; }
+        </style>
+        <!--[if mso]>
+        <noscript>
+        <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG/>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+        </xml>
+        </noscript>
+        <![endif]-->
+        <!--[if lte mso 11]>
+        <style type=\\"text/css\\">
+          .mj-outlook-group-fix { width:100% !important; }
+        </style>
+        <![endif]-->
+        
+      <!--[if !mso]><!-->
+        <link href=\\"https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700\\" rel=\\"stylesheet\\" type=\\"text/css\\">
+        <style type=\\"text/css\\">
+          @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);
+        </style>
+      <!--<![endif]-->
+
+    
+        
+    <style type=\\"text/css\\">
+      @media only screen and (min-width:480px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+      }
+    </style>
+    <style media=\\"screen and (min-width:480px)\\">
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
+    </style>
+    
+  
+        <style type=\\"text/css\\">
+        
+        
+
+    @media only screen and (max-width:480px) {
+      table.mj-full-width-mobile { width: 100% !important; }
+      td.mj-full-width-mobile { width: auto !important; }
+    }
+  
+        </style>
+        <style type=\\"text/css\\">.cnMGfy{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
+.fvvpNV,.fvvpNV *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
+.ZoQmN{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
+.blUvkI{background-color:#706EFF;}/*!sc*/
+</style>
+        
+      </head>
+      <body style=\\"word-spacing:normal;\\">
+        
+    <div style=\\"display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;\\">
+      Welcome to MakePurple!
+    </div>
+  
+        
+      <div
+         class=\\"sc-dlMDgC cnMGfy\\" style=\\"\\"
+      >
+        
+      
+      <!--[if mso | IE]><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-iJCRrE-outlook ZoQmN-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+    
+      
+      <div  class=\\"sc-iJCRrE ZoQmN\\" style=\\"margin:0px auto;max-width:600px;\\">
+        
+        <table
+           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
+              >
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-fKgJPI-outlook sc-giAqHp-outlook -outlook blUvkI-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook sc-giAqHp-outlook -outlook blUvkI-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+    
+      
+      <div  class=\\"sc-fKgJPI sc-giAqHp  blUvkI\\" style=\\"margin:0px auto;max-width:600px;\\">
+        
+        <table
+           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
+              >
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
+            
+      <div
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+      >
+        
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+      >
+        <tbody>
+          <tr>
+            <td  style=\\"vertical-align:top;padding:0px;\\">
+              
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align=\\"center\\" class=\\"sc-lmgQwP\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                >
+                  
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+      >
+        <tbody>
+          <tr>
+            <td  style=\\"width:600px;\\">
+              
+      <img
+         height=\\"auto\\" src=\\"/pngs/email-top-clip.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;\\" width=\\"600\\"
+      />
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKgJPI-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+    
+      
+      <div  class=\\"sc-fKgJPI\\" style=\\"margin:0px auto;max-width:600px;\\">
+        
+        <table
+           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
+              >
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
+            
+      <div
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+      >
+        
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+      >
+        <tbody>
+          <tr>
+            <td  style=\\"vertical-align:top;padding:0px;\\">
+              
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align=\\"center\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:24px;line-height:1;text-align:center;color:#000000;\\"
+      >Welcome to MakePurple!</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKgJPI-outlook sc-bCwfaz-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook sc-bCwfaz-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+    
+      
+      <div  class=\\"sc-fKgJPI sc-bCwfaz\\" style=\\"margin:0px auto;max-width:600px;\\">
+        
+        <table
+           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=\\"direction:ltr;font-size:0px;padding:0px;padding-bottom:20px;padding-left:64px;padding-right:64px;padding-top:20px;text-align:center;\\"
+              >
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
+            
+      <div
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+      >
+        
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+      >
+        <tbody>
+          <tr>
+            <td  style=\\"vertical-align:top;padding:0px;\\">
+              
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >Hey DenverCoder9!</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >Thanks for signing up for an account!</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >I&#x27;m David, the creator of MakePurple, and I want to welcome you to the platform.</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >I hope we can help you create great professional partnerships, where you can learn from and build great things with eachother!</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >Cheers,</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:8px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >David</div>
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;line-height:1;text-align:left;color:#000000;\\"
+      >P.S. If you have any feedback or questions, please ping me so that we can we can work to improve your experience.</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKgJPI-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+    
+      
+      <div  class=\\"sc-fKgJPI\\" style=\\"margin:0px auto;max-width:600px;\\">
+        
+        <table
+           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+        >
+          <tbody>
+            <tr>
+              <td
+                 style=\\"direction:ltr;font-size:0px;padding:0px;padding-bottom:48px;padding-left:64px;padding-right:64px;text-align:center;\\"
+              >
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
+            
+      <div
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+      >
+        
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+      >
+        <tbody>
+          <tr>
+            <td  style=\\"vertical-align:top;padding:0px;\\">
+              
+      <table
+         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+      >
+        <tbody>
+          
+              <tr>
+                <td
+                   align=\\"center\\" class=\\"sc-iwajpm\\" style=\\"font-size:0px;padding:24px 0;word-break:break-word;\\"
+                >
+                  
+      <p
+         style=\\"border-top:solid 1px #dddddd;font-size:1px;margin:0px auto;width:100%;\\"
+      >
+      </p>
+      
+      <!--[if mso | IE]><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" style=\\"border-top:solid 1px #dddddd;font-size:1px;margin:0px auto;width:472px;\\" role=\\"presentation\\" width=\\"472px\\" ><tr><td style=\\"height:0;line-height:0;\\"> &nbsp;
+</td></tr></table><![endif]-->
+    
+    
+                </td>
+              </tr>
+            
+              <tr>
+                <td
+                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                >
+                  
+      <div
+         style=\\"font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:12px;line-height:1;text-align:left;color:#8898aa;\\"
+      >You&#x27;re receiving this email because you&#x27;re a member of MakePurple.</div>
+    
+                </td>
+              </tr>
+            
+        </tbody>
+      </table>
+    
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]></td></tr></table><![endif]-->
+    
+    
+      </div>
+    
+      </body>
+    </html>
+  ",
+      }
+    }
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots molecules/AutoSuggest Standard 1`] = `
+Array [
+  .c0 {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 2.625rem;
+  padding: 0 0.625rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e8ecfd;
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  line-height: 1.3em;
+  font-weight: 600;
+  color: #1F1F41;
+  background-color: #e8ecfd;
+  -webkit-transition: border-color 0.15s ease-in-out 0s;
+  transition: border-color 0.15s ease-in-out 0s;
+}
+
+.c0::-webkit-input-placeholder {
+  color: #7578b5;
+}
+
+.c0::-moz-placeholder {
+  color: #7578b5;
+}
+
+.c0:-ms-input-placeholder {
+  color: #7578b5;
+}
+
+.c0::placeholder {
+  color: #7578b5;
+}
+
+.c0:focus {
+  outline: none;
+  background-color: #ffffff;
+  border: 1px solid #706eff;
+}
+
+<input
+    className="c0"
+    onChange={[Function]}
+    onClick={[Function]}
+    placeholder="What is your favorite library?"
+    style={
+      Object {
+        "width": 300,
+      }
+    }
+    type="text"
+    value=""
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots molecules/CodeBlock Standard 1`] = `
+Array [
+  .c0 {
+  border: 1px solid #e8ecfd;
+  border-radius: 0.375rem;
+  padding: 0.5em;
+  overflow: auto;
+  font-size: 0.875rem;
+  font-family: "Source Code Pro","Consolas","Monaco","Menlo","Mono","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Courier New",Courier,monospace;
+  tab-size: 4;
+}
+
+.c2 {
+  display: table-cell;
+  text-align: right;
+  padding-right: 1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  opacity: 0.5;
+}
+
+.c1 {
+  display: table-row;
+}
+
+.c3 {
+  display: table-cell;
+}
+
+<pre
+    className="c0 import React, { FC } from \\"react\\";
+
+export interface ButtonProps {
+	className?: string;
+	style?: React.CSSProperties;
+}
+
+export const Button: FC<ButtonProps> = (props) => <button {...props} />; prism-code language-tsx"
+    style={
+      Object {
+        "backgroundColor": "#2D2A55",
+        "color": "#9EFEFF",
+      }
+    }
+  >
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        1
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token keyword"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          import
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token maybe-class-name"
+        >
+          React
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          ,
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          {
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token constant"
+          style={
+            Object {
+              "color": "rgb(250, 208, 0)",
+            }
+          }
+        >
+          FC
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          }
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token keyword"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          from
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token string"
+          style={
+            Object {
+              "color": "rgb(165, 255, 144)",
+            }
+          }
+        >
+          "react"
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          ;
+        </span>
+        <span
+          className="token plain"
+        >
+          
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        2
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          
+
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        3
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+        >
+          
+        </span>
+        <span
+          className="token keyword"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          export
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token keyword"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          interface
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token class-name maybe-class-name"
+          style={
+            Object {
+              "color": "rgb(250, 208, 0)",
+            }
+          }
+        >
+          ButtonProps
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          {
+        </span>
+        <span
+          className="token plain"
+        >
+          
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        4
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+        >
+          	className
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          ?
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          :
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token builtin"
+          style={
+            Object {
+              "color": "rgb(250, 208, 0)",
+            }
+          }
+        >
+          string
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          ;
+        </span>
+        <span
+          className="token plain"
+        >
+          
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        5
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+        >
+          	style
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          ?
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          :
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token maybe-class-name"
+        >
+          React
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          .
+        </span>
+        <span
+          className="token maybe-class-name"
+        >
+          CSSProperties
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          ;
+        </span>
+        <span
+          className="token plain"
+        >
+          
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        6
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+        >
+          
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          }
+        </span>
+        <span
+          className="token plain"
+        >
+          
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        7
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          
+
+        </span>
+      </span>
+    </div>
+    <div
+      className="c1 token-line"
+      style={
+        Object {
+          "backgroundColor": null,
+          "color": "#9EFEFF",
+        }
+      }
+    >
+      <span
+        className="c2"
+      >
+        8
+      </span>
+      <span
+        className="c3"
+      >
+        <span
+          className="token plain"
+        >
+          
+        </span>
+        <span
+          className="token keyword"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          export
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token keyword"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          const
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token maybe-class-name"
+        >
+          Button
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          :
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token constant"
+          style={
+            Object {
+              "color": "rgb(250, 208, 0)",
+            }
+          }
+        >
+          FC
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          &lt;
+        </span>
+        <span
+          className="token maybe-class-name"
+        >
+          ButtonProps
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          &gt;
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          =
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          (
+        </span>
+        <span
+          className="token parameter"
+        >
+          props
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          )
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token operator"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          =&gt;
+        </span>
+        <span
+          className="token plain"
+        >
+           
+        </span>
+        <span
+          className="token tag punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          &lt;
+        </span>
+        <span
+          className="token tag"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          button
+        </span>
+        <span
+          className="token tag"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+           
+        </span>
+        <span
+          className="token tag spread punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          {
+        </span>
+        <span
+          className="token tag spread punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          ...
+        </span>
+        <span
+          className="token tag spread attr-value"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+          props
+        </span>
+        <span
+          className="token tag spread punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          }
+        </span>
+        <span
+          className="token tag"
+          style={
+            Object {
+              "color": "rgb(255, 157, 0)",
+            }
+          }
+        >
+           
+        </span>
+        <span
+          className="token tag punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          /&gt;
+        </span>
+        <span
+          className="token punctuation"
+          style={
+            Object {
+              "color": "rgb(255, 255, 255)",
+            }
+          }
+        >
+          ;
+        </span>
+      </span>
+    </div>
+  </pre>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots molecules/Legend Standard 1`] = `
+Array [
+  .c1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: 4px;
+  color: #7578b5;
+  font-size: 0.875rem;
+}
+
+.c2 {
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.c3 {
+  margin-left: 0.5rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -4px;
+}
+
+<div
+    className="c0"
+    style={
+      Object {
+        "width": 280,
+      }
+    }
+  >
+    <div
+      className="c1"
+    >
+      <span
+        className="c2"
+        style={
+          Object {
+            "backgroundColor": "#2b7489",
+          }
+        }
+      />
+      TypeScript
+      <span
+        className="c3"
+      >
+        66.67
+        %
+      </span>
+    </div>
+    <div
+      className="c1"
+    >
+      <span
+        className="c2"
+        style={
+          Object {
+            "backgroundColor": "#563d7c",
+          }
+        }
+      />
+      CSS
+      <span
+        className="c3"
+      >
+        22.22
+        %
+      </span>
+    </div>
+    <div
+      className="c1"
+    >
+      <span
+        className="c2"
+        style={
+          Object {
+            "backgroundColor": "#e34c26",
+          }
+        }
+      />
+      HTML
+      <span
+        className="c3"
+      >
+        11.11
+        %
+      </span>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots molecules/ProportionBar Standard 1`] = `
+Array [
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  height: 0.75rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #e2e9ef;
+}
+
+.c1 {
+  height: 100%;
+  background-color: #2b7489;
+}
+
+.c2 {
+  height: 100%;
+  background-color: #563d7c;
+}
+
+.c3 {
+  height: 100%;
+  background-color: #e34c26;
+}
+
+<div
+    className="c0"
+  >
+    <span
+      className="c1"
+      color="#2b7489"
+      onClick={[Function]}
+      style={
+        Object {
+          "width": "66.66666666666666%",
+        }
+      }
+    />
+    <span
+      className="c2"
+      color="#563d7c"
+      onClick={[Function]}
+      style={
+        Object {
+          "width": "22.22222222222222%",
+        }
+      }
+    />
+    <span
+      className="c3"
+      color="#e34c26"
+      onClick={[Function]}
+      style={
+        Object {
+          "width": "11.11111111111111%",
+        }
+      }
+    />
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots molecules/Tabs Standard 1`] = `
+Array [
+  .c1 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2em;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.c2 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-bottom: 0.25rem;
+  border-bottom: 4px solid #706eff;
+  line-height: 1em;
+  font-weight: 700;
+  color: #1F1F41;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c4 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-bottom: 0.25rem;
+  border-bottom: 4px solid transparent;
+  line-height: 1em;
+  font-weight: 500;
+  color: #1F1F41;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c3 {
+  margin-right: 4px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+<div
+    className="c0"
+  >
+    <a
+      className="c1 c2"
+      href="https://reactjs.org/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      <svg
+        className="c3"
+        color="#706eff"
+        height={16}
+        viewBox="0 0 24 24"
+        width={16}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        react
+      </span>
+    </a>
+    <a
+      className="c1 c4"
+      href="https://vuejs.org/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      vue
+    </a>
+    <a
+      className="c1 c4"
+      href="https://angular.io/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      angular
+    </a>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/LoginButton Standard 1`] = `
+Array [
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c0:hover {
+  opacity: 0.85;
+}
+
+.c1:not(:first-child) {
+  margin-left: 8px;
+}
+
+<button
+    className="c0"
+    onClick={[Function]}
+    type="button"
+  >
+    <svg
+      height={20}
+      viewBox="0 0 24 24"
+      width={20}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="c1"
+    >
+      Login
+    </span>
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/LogoutButton Standard 1`] = `
+Array [
+  .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c0:hover {
+  opacity: 0.85;
+}
+
+<button
+    className="c0"
+    onClick={[Function]}
+    type="button"
+  >
+    <span>
+      Logout
+    </span>
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/SiteWideAppBar Logged In 1`] = `
+Array [
+  .c0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #ffffff;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.c6 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c6:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c8:hover {
+  opacity: 0.85;
+}
+
+.c3 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+.c10:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c7 > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.c9 {
+  background-color: transparent;
+  color: #1F1F41;
+}
+
+.c9:hover {
+  box-shadow: 0 0 4px rgba(33,35,74,0.17);
+}
+
+<div
+    className="c0 c1 c2"
+    style={
+      Object {
+        "backdropFilter": "blur(0px)",
+        "backgroundColor": "rgba(255, 255, 255, 0)",
+        "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+      }
+    }
+  >
+    <div
+      className="c3 c4"
+    >
+      <div
+        className="c5"
+      >
+        <a
+          className="c6"
+          href="/"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          MakePurple
+        </a>
+      </div>
+      <div
+        className="c7"
+      >
+        <button
+          className="c8 c9"
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            className="c10"
+          >
+            Login
+          </span>
+        </button>
+        <button
+          className="c8"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            height={20}
+            viewBox="0 0 24 24"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            className="c10"
+          >
+            Sign Up
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+  <div
+    style={
+      Object {
+        "height": "200vh",
+      }
+    }
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/SiteWideAppBar Standard 1`] = `
+Array [
+  .c0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #ffffff;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.c6 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c6:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c8:hover {
+  opacity: 0.85;
+}
+
+.c3 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+.c10:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c7 > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.c9 {
+  background-color: transparent;
+  color: #1F1F41;
+}
+
+.c9:hover {
+  box-shadow: 0 0 4px rgba(33,35,74,0.17);
+}
+
+<div
+    className="c0 c1 c2"
+    style={
+      Object {
+        "backdropFilter": "blur(0px)",
+        "backgroundColor": "rgba(255, 255, 255, 0)",
+        "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+      }
+    }
+  >
+    <div
+      className="c3 c4"
+    >
+      <div
+        className="c5"
+      >
+        <a
+          className="c6"
+          href="/"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          MakePurple
+        </a>
+      </div>
+      <div
+        className="c7"
+      >
+        <button
+          className="c8 c9"
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            className="c10"
+          >
+            Login
+          </span>
+        </button>
+        <button
+          className="c8"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            height={20}
+            viewBox="0 0 24 24"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            className="c10"
+          >
+            Sign Up
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>,
+  <div
+    style={
+      Object {
+        "height": "200vh",
+      }
+    }
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/SiteWideFooter Standard 1`] = `
+Array [
+  .c7 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.5;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #2188ff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c7:hover {
+  color: #706eff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c5 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c5:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0 {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid rgb(232,236,253);
+  background-color: #ffffff;
+}
+
+.c2 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c6 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c8 {
+  color: #7578b5;
+  padding: 0 1.25rem;
+  opacity: 0.6;
+}
+
+.c8:hover {
+  color: #706eff;
+  opacity: 1;
+}
+
+<div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "minHeight": "100vh",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "flexGrow": 1,
+        }
+      }
+    />
+    <footer
+      className="c0 SiteWideFooter__Root-sc-1u0ojz8-0 c1"
+    >
+      <div
+        className="c2 c3"
+      >
+        <div
+          className="c4"
+        >
+          <a
+            className="c5"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="c6"
+        >
+          <a
+            className="c7 c8"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Blog
+          </a>
+          <a
+            className="c7 c8"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            About
+          </a>
+          <a
+            className="c7 c8"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Terms
+          </a>
+          <a
+            className="c7 c8"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/SiteWideLayout Standard 1`] = `
+Array [
+  .c17 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.5;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #2188ff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c17:hover {
+  color: #706eff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #ffffff;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.c7 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c7:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c9:hover {
+  opacity: 0.85;
+}
+
+.c13 {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid rgb(232,236,253);
+  background-color: #ffffff;
+}
+
+.c4 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+.c11:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c8 > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.c10 {
+  background-color: transparent;
+  color: #1F1F41;
+}
+
+.c10:hover {
+  box-shadow: 0 0 4px rgba(33,35,74,0.17);
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c15 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c16 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c18 {
+  color: #7578b5;
+  padding: 0 1.25rem;
+  opacity: 0.6;
+}
+
+.c18:hover {
+  color: #706eff;
+  opacity: 1;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.c12 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding-top: 64px;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1 c2 c3"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="c4 c5"
+      >
+        <div
+          className="c6"
+        >
+          <a
+            className="c7"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="c8"
+        >
+          <button
+            className="c9 c10"
+            onClick={[Function]}
+            type="button"
+          >
+            <span
+              className="c11"
+            >
+              Login
+            </span>
+          </button>
+          <button
+            className="c9"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              height={20}
+              viewBox="0 0 24 24"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                fill="currentColor"
+              />
+            </svg>
+            <span
+              className="c11"
+            >
+              Sign Up
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="c2 c12"
+    />
+    <footer
+      className="c13 SiteWideFooter__Root-sc-1u0ojz8-0 c2"
+    >
+      <div
+        className="c4 c14"
+      >
+        <div
+          className="c15"
+        >
+          <a
+            className="c7"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="c16"
+        >
+          <a
+            className="c17 c18"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Blog
+          </a>
+          <a
+            className="c17 c18"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            About
+          </a>
+          <a
+            className="c17 c18"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Terms
+          </a>
+          <a
+            className="c17 c18"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/UserTopLanguages Standard 1`] = `
+Array [
+  .c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  height: 0.75rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #e2e9ef;
+}
+
+.c1 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2em;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.c10 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin: 4px;
+  color: #7578b5;
+  font-size: 0.875rem;
+}
+
+.c11 {
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.c12 {
+  margin-left: 0.5rem;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -4px;
+}
+
+.c5 {
+  height: 100%;
+  background-color: #2b7489;
+}
+
+.c6 {
+  height: 100%;
+  background-color: #f1e05a;
+}
+
+.c7 {
+  height: 100%;
+  background-color: #563d7c;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.c2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.c4 {
+  margin-top: 1rem;
+}
+
+.c9 {
+  margin-top: 0.75rem;
+}
+
+<div
+    className="c0"
+    style={
+      Object {
+        "width": 296,
+      }
+    }
+  >
+    <span
+      className="c1 c2"
+    >
+      Most Used Languages
+    </span>
+    <div
+      className="c3 c4"
+    >
+      <span
+        className="c5"
+        color="#2b7489"
+        onClick={[Function]}
+        style={
+          Object {
+            "width": "93.3884155331274%",
+          }
+        }
+      />
+      <span
+        className="c6"
+        color="#f1e05a"
+        onClick={[Function]}
+        style={
+          Object {
+            "width": "4.840404553744187%",
+          }
+        }
+      />
+      <span
+        className="c7"
+        color="#563d7c"
+        onClick={[Function]}
+        style={
+          Object {
+            "width": "1.7711799131284094%",
+          }
+        }
+      />
+    </div>
+    <div
+      className="c8 c9"
+    >
+      <div
+        className="c10"
+      >
+        <span
+          className="c11"
+          style={
+            Object {
+              "backgroundColor": "#2b7489",
+            }
+          }
+        />
+        TypeScript
+        <span
+          className="c12"
+        >
+          93.39
+          %
+        </span>
+      </div>
+      <div
+        className="c10"
+      >
+        <span
+          className="c11"
+          style={
+            Object {
+              "backgroundColor": "#f1e05a",
+            }
+          }
+        />
+        JavaScript
+        <span
+          className="c12"
+        >
+          4.84
+          %
+        </span>
+      </div>
+      <div
+        className="c10"
+      >
+        <span
+          className="c11"
+          style={
+            Object {
+              "backgroundColor": "#563d7c",
+            }
+          }
+        />
+        CSS
+        <span
+          className="c12"
+        >
+          1.77
+          %
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots pages/index Standard 1`] = `
+Array [
+  .c19 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.5;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #2188ff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c19:hover {
+  color: #706eff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #ffffff;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.c7 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c7:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c9:hover {
+  opacity: 0.85;
+}
+
+.c15 {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid rgb(232,236,253);
+  background-color: #ffffff;
+}
+
+.c13 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100px;
+  height: 60vh;
+  z-index: -1;
+  background-image: linear-gradient( rgba(142,140,255,0.3),rgba(142,140,255,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(142,140,255,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
+}
+
+.c4 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+.c11:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c8 > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.c10 {
+  background-color: transparent;
+  color: #1F1F41;
+}
+
+.c10:hover {
+  box-shadow: 0 0 4px rgba(33,35,74,0.17);
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c17 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c18 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c20 {
+  color: #7578b5;
+  padding: 0 1.25rem;
+  opacity: 0.6;
+}
+
+.c20:hover {
+  color: #706eff;
+  opacity: 1;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.c12 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding-top: 64px;
+}
+
+.c14 {
+  height: 200vh;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1 c2 c3"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="c4 c5"
+      >
+        <div
+          className="c6"
+        >
+          <a
+            className="c7"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="c8"
+        >
+          <button
+            className="c9 c10"
+            onClick={[Function]}
+            type="button"
+          >
+            <span
+              className="c11"
+            >
+              Login
+            </span>
+          </button>
+          <button
+            className="c9"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              height={20}
+              viewBox="0 0 24 24"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                fill="currentColor"
+              />
+            </svg>
+            <span
+              className="c11"
+            >
+              Sign Up
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="c2 c12"
+    >
+      <div
+        className="c13"
+      />
+      <div
+        className="c4 c14"
+      >
+        <div />
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Sign in
+        </button>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Sign out
+        </button>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Do query
+        </button>
+      </div>
+    </div>
+    <footer
+      className="c15 SiteWideFooter__Root-sc-1u0ojz8-0 c2"
+    >
+      <div
+        className="c4 c16"
+      >
+        <div
+          className="c17"
+        >
+          <a
+            className="c7"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="c18"
+        >
+          <a
+            className="c19 c20"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Blog
+          </a>
+          <a
+            className="c19 c20"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            About
+          </a>
+          <a
+            className="c19 c20"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Terms
+          </a>
+          <a
+            className="c19 c20"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
 `;

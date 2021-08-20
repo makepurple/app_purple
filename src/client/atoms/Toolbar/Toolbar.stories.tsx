@@ -6,7 +6,7 @@ export default {
 	component: Toolbar
 };
 
-const Template = (args) => <Template {...args} />;
+const Template = (args) => <Toolbar {...args} />;
 Template.args = {};
 
 export const Standard = Template.bind({});
