@@ -1,7 +1,16 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import { RefObject, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useOnClickOutside, useOnKeyDown } from ".";
 
-export const useContextMenu = <TElement extends HTMLElement>(ref: RefObject<TElement>) => {
+export interface UseContextMenuOptions {
+	onClose?: (event: SyntheticEvent) => void;
+}
+
+export const useContextMenu = <TElement extends HTMLElement>(
+	ref: RefObject<TElement>,
+	options: UseContextMenuOptions = {}
+) => {
+	const { onClose } = options;
+
 	const [position, setPosition] = useState<Maybe<{ x: number; y: number }>>();
 
 	const onContextMenu = useCallback((event: MouseEvent) => {
@@ -13,17 +22,19 @@ export const useContextMenu = <TElement extends HTMLElement>(ref: RefObject<TEle
 		});
 	}, []);
 
-	useOnClickOutside(ref, () => {
+	useOnClickOutside(ref, (event) => {
 		setPosition(null);
+		onClose?.(event);
 	});
 
 	useOnKeyDown(
 		{
 			global: true,
-			key: "KEY_ESCAPE"
+			key: "CODE_ESCAPE"
 		},
-		() => {
+		(event) => {
 			setPosition(null);
+			onClose?.(event);
 		}
 	);
 

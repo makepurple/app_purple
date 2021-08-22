@@ -1,9 +1,11 @@
 import { Menu, Popover } from "@/client/atoms";
-import { useToggle } from "@/client/hooks";
+import { useContextMenu, useToggle } from "@/client/hooks";
+import { ContextMenu } from "@/client/molecules/ContextMenu";
 import { CodeIcon } from "@/client/svgs";
+import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
 import { Editor, Element, Node, Transforms } from "slate";
 import {
@@ -122,51 +124,80 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 	const selected = useSelected();
 	const editor = useSlateStatic();
 
+	const rootRef = useRef<HTMLDivElement>(null);
+	const { contextMenuProps } = useContextMenu(rootRef);
+
+	const composedRef = composeRefs(rootRef, attributes.ref);
+
 	const [code, setCode] = useState<string>(Node.string(element));
 
 	return (
-		<Root
-			{...attributes}
-			contentEditable={false}
-			style={shadesOfPurple.plain as any}
-			$selected={selected}
-		>
-			<StyledCodeEditor
-				highlight={(value) => (
-					<Highlight {...defaultProps} code={value} language="tsx" theme={shadesOfPurple}>
-						{({ tokens, getLineProps, getTokenProps }) =>
-							tokens.map((line, i) => (
-								<Line key={i} {...getLineProps({ line, key: i })}>
-									<LineContent>
-										{line.map((token, key) => (
-											<span key={key} {...getTokenProps({ token, key })} />
-										))}
-									</LineContent>
-								</Line>
-							))
-						}
-					</Highlight>
-				)}
-				name="code-block"
-				onBlur={() => {
-					const path = ReactEditor.findPath(editor, element);
+		<>
+			<Root
+				{...attributes}
+				ref={composedRef}
+				contentEditable={false}
+				style={shadesOfPurple.plain as any}
+				$selected={selected}
+			>
+				<StyledCodeEditor
+					highlight={(value) => (
+						<Highlight
+							{...defaultProps}
+							code={value}
+							language="tsx"
+							theme={shadesOfPurple}
+						>
+							{({ tokens, getLineProps, getTokenProps }) =>
+								tokens.map((line, i) => (
+									<Line key={i} {...getLineProps({ line, key: i })}>
+										<LineContent>
+											{line.map((token, key) => (
+												<span
+													key={key}
+													{...getTokenProps({ token, key })}
+												/>
+											))}
+										</LineContent>
+									</Line>
+								))
+							}
+						</Highlight>
+					)}
+					name="code-block"
+					onBlur={() => {
+						if (code === Node.string(element)) return;
 
-					Transforms.removeNodes(editor, { at: path });
-					Transforms.insertNodes(
-						editor,
-						{ ...element, children: [{ text: code }] },
-						{ at: path }
-					);
-				}}
-				onValueChange={(newValue) => {
-					setCode(newValue);
-				}}
-				padding={"0.5rem"}
-				readOnly={readOnly}
-				value={code}
-			/>
-			{children}
-		</Root>
+						const path = ReactEditor.findPath(editor, element);
+
+						Transforms.removeNodes(editor, { at: path });
+						Transforms.insertNodes(
+							editor,
+							{ ...element, children: [{ text: code }] },
+							{ at: path }
+						);
+					}}
+					onValueChange={(newValue) => {
+						setCode(newValue);
+					}}
+					padding={"0.5rem"}
+					readOnly={readOnly}
+					value={code}
+				/>
+				{children}
+				<ContextMenu contentEditable={false} {...contextMenuProps}>
+					<ContextMenu.Item
+						onClick={() => {
+							const path = ReactEditor.findPath(editor, element);
+
+							Transforms.removeNodes(editor, { at: path });
+						}}
+					>
+						Delete
+					</ContextMenu.Item>
+				</ContextMenu>
+			</Root>
+		</>
 	);
 };
 
