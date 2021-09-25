@@ -1,7 +1,7 @@
 import { Popover } from "@/client/atoms";
 import { useHover } from "@/client/hooks";
 import { ColorUtils } from "@/utils";
-import React, { CSSProperties, FC, useState } from "react";
+import React, { CSSProperties, FC } from "react";
 import styled from "styled-components";
 
 const StyledPopover = styled(Popover)`
@@ -47,8 +47,7 @@ export const ProportionBarItem: FC<ProportionBarItemProps> = ({
 	style,
 	value
 }) => {
-	const [rootElem, rootRef] = useState<HTMLSpanElement | null>(null);
-	const [isHovered] = useHover(rootElem);
+	const [isHovered, { handlers }] = useHover();
 
 	return (
 		<StyledPopover
@@ -62,7 +61,7 @@ export const ProportionBarItem: FC<ProportionBarItemProps> = ({
 			open={isHovered}
 			placement="bottom"
 		>
-			<Bar ref={rootRef} className={className} color={color} style={style} />
+			<Bar {...handlers} className={className} color={color} style={style} />
 		</StyledPopover>
 	);
 };

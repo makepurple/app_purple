@@ -133,37 +133,8 @@ Array [
           }
         />
       </div>
-      <noscript>
-        <img
-          data-nimg={true}
-          decoding="async"
-          src="https://avatars.githubusercontent.com/u/810438?v=4"
-          style={
-            Object {
-              "border": "none",
-              "bottom": 0,
-              "boxSizing": "border-box",
-              "display": "block",
-              "height": 0,
-              "left": 0,
-              "margin": "auto",
-              "maxHeight": "100%",
-              "maxWidth": "100%",
-              "minHeight": "100%",
-              "minWidth": "100%",
-              "objectFit": undefined,
-              "objectPosition": undefined,
-              "padding": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-              "width": 0,
-            }
-          }
-        />
-      </noscript>
       <img
-        data-nimg={true}
+        data-nimg="intrinsic"
         decoding="async"
         src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
         style={
@@ -189,6 +160,36 @@ Array [
           }
         }
       />
+      <noscript>
+        <img
+          data-nimg="intrinsic"
+          decoding="async"
+          loading="lazy"
+          src="https://avatars.githubusercontent.com/u/810438?v=4"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": undefined,
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+      </noscript>
     </div>
   </div>,
   <div
@@ -434,37 +435,8 @@ Array [
         }
       />
     </div>
-    <noscript>
-      <img
-        data-nimg={true}
-        decoding="async"
-        src="https://avatars.githubusercontent.com/u/810438"
-        style={
-          Object {
-            "border": "none",
-            "bottom": 0,
-            "boxSizing": "border-box",
-            "display": "block",
-            "height": 0,
-            "left": 0,
-            "margin": "auto",
-            "maxHeight": "100%",
-            "maxWidth": "100%",
-            "minHeight": "100%",
-            "minWidth": "100%",
-            "objectFit": undefined,
-            "objectPosition": undefined,
-            "padding": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 0,
-          }
-        }
-      />
-    </noscript>
     <img
-      data-nimg={true}
+      data-nimg="intrinsic"
       decoding="async"
       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
       style={
@@ -490,6 +462,36 @@ Array [
         }
       }
     />
+    <noscript>
+      <img
+        data-nimg="intrinsic"
+        decoding="async"
+        loading="lazy"
+        src="https://avatars.githubusercontent.com/u/810438"
+        style={
+          Object {
+            "border": "none",
+            "bottom": 0,
+            "boxSizing": "border-box",
+            "display": "block",
+            "height": 0,
+            "left": 0,
+            "margin": "auto",
+            "maxHeight": "100%",
+            "maxWidth": "100%",
+            "minHeight": "100%",
+            "minWidth": "100%",
+            "objectFit": undefined,
+            "objectPosition": undefined,
+            "padding": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "width": 0,
+          }
+        }
+      />
+    </noscript>
   </div>,
   <div
     onMouseEnter={[Function]}
@@ -1319,10 +1321,10 @@ Array [
     }
   
         </style>
-        <style type=\\"text/css\\">.cnMGfy{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
-.fvvpNV,.fvvpNV *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
-.ZoQmN{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
-.blUvkI{background-color:#706EFF;}/*!sc*/
+        <style type=\\"text/css\\">.crePPn{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
+.fSDuNT,.fSDuNT *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
+.djBPDc{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
+.fiylTl{background-color:#706EFF;}/*!sc*/
 </style>
         
       </head>
@@ -1334,14 +1336,14 @@ Array [
   
         
       <div
-         class=\\"sc-dlMDgC cnMGfy\\" style=\\"\\"
+         class=\\"sc-dmlqKv crePPn\\" style=\\"\\"
       >
         
       
-      <!--[if mso | IE]><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-iJCRrE-outlook ZoQmN-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-iJuVqt-outlook djBPDc-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-iJCRrE ZoQmN\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-iJuVqt djBPDc\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1351,10 +1353,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-fKgJPI-outlook sc-giAqHp-outlook -outlook blUvkI-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook sc-giAqHp-outlook -outlook blUvkI-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-fKFxtB-outlook sc-giImIA-outlook -outlook fiylTl-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook sc-giImIA-outlook -outlook fiylTl-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKgJPI sc-giAqHp  blUvkI\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-fKFxtB sc-giImIA  fiylTl\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1364,10 +1366,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1384,7 +1386,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"center\\" class=\\"sc-lmgQwP\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"center\\" class=\\"sc-lmoMya\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <table
@@ -1425,10 +1427,10 @@ Array [
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKgJPI-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKFxtB-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKgJPI\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-fKFxtB\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1438,10 +1440,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1458,7 +1460,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"center\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"center\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1487,10 +1489,10 @@ Array [
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKgJPI-outlook sc-bCwfaz-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook sc-bCwfaz-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKFxtB-outlook sc-bBXrwG-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook sc-bBXrwG-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKgJPI sc-bCwfaz\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-fKFxtB sc-bBXrwG\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1500,10 +1502,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;padding-bottom:20px;padding-left:64px;padding-right:64px;padding-top:20px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1520,7 +1522,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1532,7 +1534,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1544,7 +1546,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1556,7 +1558,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1568,7 +1570,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1580,7 +1582,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:8px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:8px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1592,7 +1594,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1621,10 +1623,10 @@ Array [
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKgJPI-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKgJPI-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKFxtB-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKgJPI\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-fKFxtB\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1634,10 +1636,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;padding-bottom:48px;padding-left:64px;padding-right:64px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfYoZR-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfYoZR\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1654,7 +1656,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"center\\" class=\\"sc-iwajpm\\" style=\\"font-size:0px;padding:24px 0;word-break:break-word;\\"
+                   align=\\"center\\" class=\\"sc-iwyWTf\\" style=\\"font-size:0px;padding:24px 0;word-break:break-word;\\"
                 >
                   
       <p
@@ -1671,7 +1673,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxNHIi fvvpNV\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <div
@@ -2630,6 +2632,31 @@ export const Button: FC<ButtonProps> = (props) => <button {...props} />; prism-c
 ]
 `;
 
+exports[`Storyshots molecules/ContextMenu Standard 1`] = `
+Array [
+  <button
+    type="button"
+  >
+    Right Click Me!
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
 exports[`Storyshots molecules/Legend Standard 1`] = `
 Array [
   .c1 {
@@ -2637,6 +2664,10 @@ Array [
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin: 4px;
   color: #7578b5;
   font-size: 0.875rem;
@@ -2650,6 +2681,10 @@ Array [
 }
 
 .c3 {
+  line-height: 1em;
+}
+
+.c4 {
   margin-left: 0.5rem;
 }
 
@@ -2686,12 +2721,16 @@ Array [
           }
         }
       />
-      TypeScript
       <span
         className="c3"
       >
-        66.67
-        %
+        TypeScript
+        <span
+          className="c4"
+        >
+          66.67
+          %
+        </span>
       </span>
     </div>
     <div
@@ -2705,12 +2744,16 @@ Array [
           }
         }
       />
-      CSS
       <span
         className="c3"
       >
-        22.22
-        %
+        CSS
+        <span
+          className="c4"
+        >
+          22.22
+          %
+        </span>
       </span>
     </div>
     <div
@@ -2724,12 +2767,16 @@ Array [
           }
         }
       />
-      HTML
       <span
         className="c3"
       >
-        11.11
-        %
+        HTML
+        <span
+          className="c4"
+        >
+          11.11
+          %
+        </span>
       </span>
     </div>
   </div>,
@@ -2790,6 +2837,8 @@ Array [
       className="c1"
       color="#2b7489"
       onClick={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
       style={
         Object {
           "width": "66.66666666666666%",
@@ -2800,6 +2849,8 @@ Array [
       className="c2"
       color="#563d7c"
       onClick={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
       style={
         Object {
           "width": "22.22222222222222%",
@@ -2810,6 +2861,8 @@ Array [
       className="c3"
       color="#e34c26"
       onClick={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
       style={
         Object {
           "width": "11.11111111111111%",
@@ -3194,10 +3247,6 @@ Array [
   padding: 0 24px;
 }
 
-.c10:not(:first-child) {
-  margin-left: 8px;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3241,15 +3290,6 @@ Array [
   margin-right: 1rem;
 }
 
-.c9 {
-  background-color: transparent;
-  color: #1F1F41;
-}
-
-.c9:hover {
-  box-shadow: 0 0 4px rgba(33,35,74,0.17);
-}
-
 <div
     className="c0 c1 c2"
     style={
@@ -3279,36 +3319,12 @@ Array [
         className="c7"
       >
         <button
-          className="c8 c9"
-          onClick={[Function]}
-          type="button"
-        >
-          <span
-            className="c10"
-          >
-            Login
-          </span>
-        </button>
-        <button
           className="c8"
           onClick={[Function]}
           type="button"
         >
-          <svg
-            height={20}
-            viewBox="0 0 24 24"
-            width={20}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-              fill="currentColor"
-            />
-          </svg>
-          <span
-            className="c10"
-          >
-            Sign Up
+          <span>
+            Logout
           </span>
         </button>
       </div>
@@ -3417,10 +3433,6 @@ Array [
   padding: 0 24px;
 }
 
-.c10:not(:first-child) {
-  margin-left: 8px;
-}
-
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3464,15 +3476,6 @@ Array [
   margin-right: 1rem;
 }
 
-.c9 {
-  background-color: transparent;
-  color: #1F1F41;
-}
-
-.c9:hover {
-  box-shadow: 0 0 4px rgba(33,35,74,0.17);
-}
-
 <div
     className="c0 c1 c2"
     style={
@@ -3502,36 +3505,12 @@ Array [
         className="c7"
       >
         <button
-          className="c8 c9"
-          onClick={[Function]}
-          type="button"
-        >
-          <span
-            className="c10"
-          >
-            Login
-          </span>
-        </button>
-        <button
           className="c8"
           onClick={[Function]}
           type="button"
         >
-          <svg
-            height={20}
-            viewBox="0 0 24 24"
-            width={20}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-              fill="currentColor"
-            />
-          </svg>
-          <span
-            className="c10"
-          >
-            Sign Up
+          <span>
+            Logout
           </span>
         </button>
       </div>
@@ -3760,6 +3739,597 @@ Array [
 
 exports[`Storyshots organisms/SiteWideLayout Standard 1`] = `
 Array [
+  .c15 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.5;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: #2188ff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c15:hover {
+  color: #706eff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: #ffffff;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.c7 {
+  line-height: 1em;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1F1F41;
+  background: linear-gradient(-70deg,#db469f,#2188ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.c7:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: 0.375rem;
+  border: none;
+  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.125rem;
+  line-height: 1.125em;
+  font-weight: 500;
+  background-color: #706eff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.c9:hover {
+  opacity: 0.85;
+}
+
+.c11 {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid rgb(232,236,253);
+  background-color: #ffffff;
+}
+
+.c4 {
+  -webkit-flex: 1000 1 0;
+  -ms-flex: 1000 1 0;
+  flex: 1000 1 0;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 24px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c8 > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c13 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c14 {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.c16 {
+  color: #7578b5;
+  padding: 0 1.25rem;
+  opacity: 0.6;
+}
+
+.c16:hover {
+  color: #706eff;
+  opacity: 1;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.c10 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding-top: 64px;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1 c2 c3"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="c4 c5"
+      >
+        <div
+          className="c6"
+        >
+          <a
+            className="c7"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="c8"
+        >
+          <button
+            className="c9"
+            onClick={[Function]}
+            type="button"
+          >
+            <span>
+              Logout
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="c2 c10"
+    />
+    <footer
+      className="c11 SiteWideFooter__Root-sc-1u0ojz8-0 c2"
+    >
+      <div
+        className="c4 c12"
+      >
+        <div
+          className="c13"
+        >
+          <a
+            className="c7"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="c14"
+        >
+          <a
+            className="c15 c16"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Blog
+          </a>
+          <a
+            className="c15 c16"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            About
+          </a>
+          <a
+            className="c15 c16"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Terms
+          </a>
+          <a
+            className="c15 c16"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots organisms/UserTopLanguages Standard 1`] = `
+Array [
+  .c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  height: 0.75rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #e2e9ef;
+}
+
+.c1 {
+  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2em;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.c10 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 4px;
+  color: #7578b5;
+  font-size: 0.875rem;
+}
+
+.c11 {
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.c12 {
+  line-height: 1em;
+}
+
+.c13 {
+  margin-left: 0.5rem;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -4px;
+}
+
+.c5 {
+  height: 100%;
+  background-color: #2b7489;
+}
+
+.c6 {
+  height: 100%;
+  background-color: #f1e05a;
+}
+
+.c7 {
+  height: 100%;
+  background-color: #563d7c;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.c2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.c4 {
+  margin-top: 1rem;
+}
+
+.c9 {
+  margin-top: 0.75rem;
+}
+
+<div
+    className="c0"
+    style={
+      Object {
+        "width": 296,
+      }
+    }
+  >
+    <span
+      className="c1 c2"
+    >
+      Most Used Languages
+    </span>
+    <div
+      className="c3 c4"
+    >
+      <span
+        className="c5"
+        color="#2b7489"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        style={
+          Object {
+            "width": "93.3884155331274%",
+          }
+        }
+      />
+      <span
+        className="c6"
+        color="#f1e05a"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        style={
+          Object {
+            "width": "4.840404553744187%",
+          }
+        }
+      />
+      <span
+        className="c7"
+        color="#563d7c"
+        onClick={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        style={
+          Object {
+            "width": "1.7711799131284094%",
+          }
+        }
+      />
+    </div>
+    <div
+      className="c8 c9"
+    >
+      <div
+        className="c10"
+      >
+        <span
+          className="c11"
+          style={
+            Object {
+              "backgroundColor": "#2b7489",
+            }
+          }
+        />
+        <span
+          className="c12"
+        >
+          TypeScript
+          <span
+            className="c13"
+          >
+            93.39
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        className="c10"
+      >
+        <span
+          className="c11"
+          style={
+            Object {
+              "backgroundColor": "#f1e05a",
+            }
+          }
+        />
+        <span
+          className="c12"
+        >
+          JavaScript
+          <span
+            className="c13"
+          >
+            4.84
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        className="c10"
+      >
+        <span
+          className="c11"
+          style={
+            Object {
+              "backgroundColor": "#563d7c",
+            }
+          }
+        />
+        <span
+          className="c12"
+        >
+          CSS
+          <span
+            className="c13"
+          >
+            1.77
+            %
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots pages/index Standard 1`] = `
+Array [
   .c17 {
   font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   font-size: inherit;
@@ -3850,6 +4420,17 @@ Array [
   background-color: #ffffff;
 }
 
+.c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100px;
+  height: 60vh;
+  z-index: -1;
+  background-image: linear-gradient( rgba(142,140,255,0.3),rgba(142,140,255,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(142,140,255,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
+}
+
 .c4 {
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
@@ -3865,10 +4446,6 @@ Array [
   display: -ms-flexbox;
   display: flex;
   padding: 0 24px;
-}
-
-.c11:not(:first-child) {
-  margin-left: 8px;
 }
 
 .c3 {
@@ -3912,15 +4489,6 @@ Array [
 
 .c8 > *:not(:last-child) {
   margin-right: 1rem;
-}
-
-.c10 {
-  background-color: transparent;
-  color: #1F1F41;
-}
-
-.c10:hover {
-  box-shadow: 0 0 4px rgba(33,35,74,0.17);
 }
 
 .c14 {
@@ -3972,12 +4540,16 @@ Array [
   min-height: 100vh;
 }
 
-.c12 {
+.c10 {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
   padding-top: 64px;
+}
+
+.c12 {
+  height: 200vh;
 }
 
 <div
@@ -4012,44 +4584,49 @@ Array [
           className="c8"
         >
           <button
-            className="c9 c10"
-            onClick={[Function]}
-            type="button"
-          >
-            <span
-              className="c11"
-            >
-              Login
-            </span>
-          </button>
-          <button
             className="c9"
             onClick={[Function]}
             type="button"
           >
-            <svg
-              height={20}
-              viewBox="0 0 24 24"
-              width={20}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                fill="currentColor"
-              />
-            </svg>
-            <span
-              className="c11"
-            >
-              Sign Up
+            <span>
+              Logout
             </span>
           </button>
         </div>
       </div>
     </div>
     <div
-      className="c2 c12"
-    />
+      className="c2 c10"
+    >
+      <div
+        className="c11"
+      />
+      <div
+        className="c4 c12"
+      >
+        <div>
+          storybook@test-makepurple.com
+        </div>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Sign in
+        </button>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Sign out
+        </button>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Do query
+        </button>
+      </div>
+    </div>
     <footer
       className="c13 SiteWideFooter__Root-sc-1u0ojz8-0 c2"
     >
@@ -4097,650 +4674,6 @@ Array [
           </a>
           <a
             className="c17 c18"
-            href="/legal/privacy"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-          >
-            Privacy
-          </a>
-        </nav>
-      </div>
-    </footer>
-  </div>,
-  <div
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    style={
-      Object {
-        "bottom": 16,
-        "left": 16,
-        "pointerEvents": "none",
-        "position": "fixed",
-        "right": 16,
-        "top": 16,
-        "zIndex": 9999,
-      }
-    }
-  />,
-]
-`;
-
-exports[`Storyshots organisms/UserTopLanguages Standard 1`] = `
-Array [
-  .c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  height: 0.75rem;
-  border-radius: 9999px;
-  overflow: hidden;
-  background-color: #e2e9ef;
-}
-
-.c1 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.2em;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-}
-
-.c10 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  margin: 4px;
-  color: #7578b5;
-  font-size: 0.875rem;
-}
-
-.c11 {
-  margin-right: 0.5rem;
-  border-radius: 50%;
-  height: 0.75rem;
-  width: 0.75rem;
-}
-
-.c12 {
-  margin-left: 0.5rem;
-}
-
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  margin: -4px;
-}
-
-.c5 {
-  height: 100%;
-  background-color: #2b7489;
-}
-
-.c6 {
-  height: 100%;
-  background-color: #f1e05a;
-}
-
-.c7 {
-  height: 100%;
-  background-color: #563d7c;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-}
-
-.c2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.c4 {
-  margin-top: 1rem;
-}
-
-.c9 {
-  margin-top: 0.75rem;
-}
-
-<div
-    className="c0"
-    style={
-      Object {
-        "width": 296,
-      }
-    }
-  >
-    <span
-      className="c1 c2"
-    >
-      Most Used Languages
-    </span>
-    <div
-      className="c3 c4"
-    >
-      <span
-        className="c5"
-        color="#2b7489"
-        onClick={[Function]}
-        style={
-          Object {
-            "width": "93.3884155331274%",
-          }
-        }
-      />
-      <span
-        className="c6"
-        color="#f1e05a"
-        onClick={[Function]}
-        style={
-          Object {
-            "width": "4.840404553744187%",
-          }
-        }
-      />
-      <span
-        className="c7"
-        color="#563d7c"
-        onClick={[Function]}
-        style={
-          Object {
-            "width": "1.7711799131284094%",
-          }
-        }
-      />
-    </div>
-    <div
-      className="c8 c9"
-    >
-      <div
-        className="c10"
-      >
-        <span
-          className="c11"
-          style={
-            Object {
-              "backgroundColor": "#2b7489",
-            }
-          }
-        />
-        TypeScript
-        <span
-          className="c12"
-        >
-          93.39
-          %
-        </span>
-      </div>
-      <div
-        className="c10"
-      >
-        <span
-          className="c11"
-          style={
-            Object {
-              "backgroundColor": "#f1e05a",
-            }
-          }
-        />
-        JavaScript
-        <span
-          className="c12"
-        >
-          4.84
-          %
-        </span>
-      </div>
-      <div
-        className="c10"
-      >
-        <span
-          className="c11"
-          style={
-            Object {
-              "backgroundColor": "#563d7c",
-            }
-          }
-        />
-        CSS
-        <span
-          className="c12"
-        >
-          1.77
-          %
-        </span>
-      </div>
-    </div>
-  </div>,
-  <div
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    style={
-      Object {
-        "bottom": 16,
-        "left": 16,
-        "pointerEvents": "none",
-        "position": "fixed",
-        "right": 16,
-        "top": 16,
-        "zIndex": 9999,
-      }
-    }
-  />,
-]
-`;
-
-exports[`Storyshots pages/index Standard 1`] = `
-Array [
-  .c19 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: inherit;
-  font-weight: 600;
-  line-height: 1.5;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  color: #2188ff;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.c19:hover {
-  color: #706eff;
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-}
-
-.c1 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #ffffff;
-  z-index: 1;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
-}
-
-.c7 {
-  line-height: 1em;
-  font-size: 24px;
-  font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  cursor: pointer;
-}
-
-.c7:hover {
-  -webkit-text-decoration: none;
-  text-decoration: none;
-}
-
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
-  border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  font-size: 1.125rem;
-  line-height: 1.125em;
-  font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.c9:hover {
-  opacity: 0.85;
-}
-
-.c15 {
-  width: 100%;
-  height: 100px;
-  border-top: 1px solid rgb(232,236,253);
-  background-color: #ffffff;
-}
-
-.c13 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100px;
-  height: 60vh;
-  z-index: -1;
-  background-image: linear-gradient( rgba(142,140,255,0.3),rgba(142,140,255,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(142,140,255,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
-}
-
-.c4 {
-  -webkit-flex: 1000 1 0;
-  -ms-flex: 1000 1 0;
-  flex: 1000 1 0;
-  box-sizing: border-box;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0 24px;
-}
-
-.c11:not(:first-child) {
-  margin-left: 8px;
-}
-
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c6 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.c8 > *:not(:last-child) {
-  margin-right: 1rem;
-}
-
-.c10 {
-  background-color: transparent;
-  color: #1F1F41;
-}
-
-.c10:hover {
-  box-shadow: 0 0 4px rgba(33,35,74,0.17);
-}
-
-.c16 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c17 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.c18 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.c20 {
-  color: #7578b5;
-  padding: 0 1.25rem;
-  opacity: 0.6;
-}
-
-.c20:hover {
-  color: #706eff;
-  opacity: 1;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.c12 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  padding-top: 64px;
-}
-
-.c14 {
-  height: 200vh;
-}
-
-<div
-    className="c0"
-  >
-    <div
-      className="c1 c2 c3"
-      style={
-        Object {
-          "backdropFilter": "blur(0px)",
-          "backgroundColor": "rgba(255, 255, 255, 0)",
-          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
-        }
-      }
-    >
-      <div
-        className="c4 c5"
-      >
-        <div
-          className="c6"
-        >
-          <a
-            className="c7"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-          >
-            MakePurple
-          </a>
-        </div>
-        <div
-          className="c8"
-        >
-          <button
-            className="c9 c10"
-            onClick={[Function]}
-            type="button"
-          >
-            <span
-              className="c11"
-            >
-              Login
-            </span>
-          </button>
-          <button
-            className="c9"
-            onClick={[Function]}
-            type="button"
-          >
-            <svg
-              height={20}
-              viewBox="0 0 24 24"
-              width={20}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                fill="currentColor"
-              />
-            </svg>
-            <span
-              className="c11"
-            >
-              Sign Up
-            </span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      className="c2 c12"
-    >
-      <div
-        className="c13"
-      />
-      <div
-        className="c4 c14"
-      >
-        <div />
-        <button
-          onClick={[Function]}
-          type="button"
-        >
-          Sign in
-        </button>
-        <button
-          onClick={[Function]}
-          type="button"
-        >
-          Sign out
-        </button>
-        <button
-          onClick={[Function]}
-          type="button"
-        >
-          Do query
-        </button>
-      </div>
-    </div>
-    <footer
-      className="c15 SiteWideFooter__Root-sc-1u0ojz8-0 c2"
-    >
-      <div
-        className="c4 c16"
-      >
-        <div
-          className="c17"
-        >
-          <a
-            className="c7"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-          >
-            MakePurple
-          </a>
-        </div>
-        <nav
-          className="c18"
-        >
-          <a
-            className="c19 c20"
-            href="/blog"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-          >
-            Blog
-          </a>
-          <a
-            className="c19 c20"
-            href="/about"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-          >
-            About
-          </a>
-          <a
-            className="c19 c20"
-            href="/legal/terms"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-          >
-            Terms
-          </a>
-          <a
-            className="c19 c20"
             href="/legal/privacy"
             onClick={[Function]}
             onMouseEnter={[Function]}

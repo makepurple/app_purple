@@ -52,6 +52,7 @@ declare module "slate" {
 export interface DocumentEditorProps {
 	readOnly?: boolean;
 	className?: string;
+	placeholder?: string;
 	style?: CSSProperties;
 }
 
@@ -80,12 +81,17 @@ const Leaf: FC<RenderLeafProps> = (props) => {
 	return <span {...attributes}>{children}</span>;
 };
 
-export const DocumentEditor: FC<DocumentEditorProps> = ({ readOnly, className, style }) => {
+export const DocumentEditor: FC<DocumentEditorProps> = ({
+	readOnly,
+	className,
+	placeholder = "",
+	style
+}) => {
 	const editor = useMemo(() => withCodeBlock(withReact(createEditor())), []);
 	const [value, setValue] = useState<Descendant[]>([
 		{
 			type: "paragraph",
-			children: [{ text: "Hello world" }]
+			children: [{ text: placeholder }]
 		}
 	]);
 
@@ -93,8 +99,8 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({ readOnly, className, s
 	const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
 
 	return (
-		<Root>
-			<Slate editor={editor} value={value} onChange={setValue}>
+		<Root className={className} style={style}>
+			<Slate editor={editor} value={value} onChange={(newValue) => setValue(newValue)}>
 				<EditorToolbar>
 					<CodeBlockToolbarButton />
 					<HeadingToolbarButton />
@@ -103,10 +109,8 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({ readOnly, className, s
 					<Editable
 						readOnly={readOnly}
 						autoFocus
-						className={className}
 						renderElement={renderElement}
 						renderLeaf={renderLeaf}
-						style={style}
 					/>
 				</EditableContainer>
 			</Slate>

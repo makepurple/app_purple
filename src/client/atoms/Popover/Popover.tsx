@@ -1,5 +1,4 @@
 import { useOnClickOutside, useOnKeyDown, useUncontrolledProp } from "@/client/hooks";
-import composeRefs from "@seznam/compose-react-refs";
 import Tippy, { TippyProps } from "@tippyjs/react";
 import React, {
 	cloneElement,
@@ -148,7 +147,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 		>
 			{children &&
 				cloneElement(children, {
-					ref: composeRefs(childRef, children.props.ref),
+					ref: childRef,
 					onClick: (event: MouseEvent<any>) => {
 						children.props.onClick?.(event);
 						setOpen(!open);
