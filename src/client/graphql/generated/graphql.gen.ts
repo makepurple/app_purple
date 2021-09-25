@@ -31,8 +31,6 @@ export type Scalars = {
   Upload: any;
 };
 
-
-
 export type Comment = {
   readonly __typename?: 'Comment';
   readonly author: User;
@@ -53,8 +51,6 @@ export type CreatePresignedS3UrlPayload = {
   readonly fields: Scalars['Json'];
   readonly url: Scalars['String'];
 };
-
-
 
 export type Experience = {
   readonly __typename?: 'Experience';
@@ -77,7 +73,6 @@ export enum ExperienceType {
   OpenSource = 'OpenSource',
   PartTime = 'PartTime'
 }
-
 
 /** Root mutation type */
 export type Mutation = {
@@ -160,7 +155,6 @@ export type TopLanguages = {
   readonly totalSize: Scalars['Int'];
 };
 
-
 export type UpdateDesiredSkillsInput = {
   /** List of skills (by name) to add to the user. */
   readonly skills: ReadonlyArray<Scalars['String']>;
@@ -170,7 +164,6 @@ export type UpdateSkillsInput = {
   /** List of skills (by name) to add to the user. */
   readonly skills: ReadonlyArray<Scalars['String']>;
 };
-
 
 export type User = {
   readonly __typename?: 'User';
