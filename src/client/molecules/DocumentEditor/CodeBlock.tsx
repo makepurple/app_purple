@@ -5,7 +5,7 @@ import { CodeIcon } from "@/client/svgs";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
 import { Editor, Element, Node, Transforms } from "slate";
 import {
@@ -64,9 +64,9 @@ export const withCodeBlock = (editor: Editor): Editor => {
 	return editor;
 };
 
-type CodeBlockLanguage = [name: string, slateType: CodeBlockSlateType];
+type CodeBlockLanguageOption = [name: string, slateType: CodeBlockSlateType];
 
-const supportedLanguages: readonly CodeBlockLanguage[] = [
+const supportedLanguages: readonly CodeBlockLanguageOption[] = [
 	["JavaScript", "language-jsx"],
 	["TypeScript", "language-tsx"],
 	["HTML", "language-handlebars"],
@@ -81,7 +81,7 @@ const supportedLanguages: readonly CodeBlockLanguage[] = [
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	const editor = useSlateStatic();
 
-	const [open, toggle] = useToggle();
+	const [open, toggle] = useToggle(false);
 
 	return (
 		<Popover
@@ -131,73 +131,75 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 
 	const [code, setCode] = useState<string>(Node.string(element));
 
+	const language = useMemo(
+		() => element.type.split("-").slice(-1)[0] as Language,
+		[element.type]
+	);
+
 	return (
-		<>
-			<Root
-				{...attributes}
-				ref={composedRef}
-				contentEditable={false}
-				style={shadesOfPurple.plain as any}
-				$selected={selected}
-			>
-				<StyledCodeEditor
-					highlight={(value) => (
-						<Highlight
-							{...defaultProps}
-							code={value}
-							language="tsx"
-							theme={shadesOfPurple}
-						>
-							{({ tokens, getLineProps, getTokenProps }) =>
-								tokens.map((line, i) => (
-									<Line key={i} {...getLineProps({ line, key: i })}>
-										<LineContent>
-											{line.map((token, key) => (
-												<span
-													key={key}
-													{...getTokenProps({ token, key })}
-												/>
-											))}
-										</LineContent>
-									</Line>
-								))
-							}
-						</Highlight>
-					)}
-					name="code-block"
-					onBlur={() => {
-						if (code === Node.string(element)) return;
+		<Root
+			{...attributes}
+			ref={composedRef}
+			contentEditable={false}
+			style={shadesOfPurple.plain as any}
+			$selected={selected}
+		>
+			<StyledCodeEditor
+				highlight={(value) => (
+					<Highlight
+						{...defaultProps}
+						code={value}
+						language={language}
+						theme={shadesOfPurple}
+					>
+						{({ tokens, getLineProps, getTokenProps }) =>
+							tokens.map((line, i) => (
+								<Line key={i} {...getLineProps({ line, key: i })}>
+									<LineContent>
+										{line.map((token, key) => (
+											<span key={key} {...getTokenProps({ token, key })} />
+										))}
+									</LineContent>
+								</Line>
+							))
+						}
+					</Highlight>
+				)}
+				name="code-block"
+				onBlur={() => {
+					if (code === Node.string(element)) return;
+
+					const path = ReactEditor.findPath(editor, element);
+
+					Transforms.removeNodes(editor, { at: path });
+					Transforms.insertNodes(
+						editor,
+						{ ...element, children: [{ text: code }] },
+						{ at: path }
+					);
+				}}
+				onValueChange={(newValue) => {
+					setCode(newValue);
+				}}
+				padding={"0.5rem"}
+				readOnly={readOnly}
+				value={code}
+			/>
+			{children}
+			<ContextMenu contentEditable={false} {...contextMenuProps}>
+				<ContextMenu.Item
+					onMouseDown={(event) => {
+						event.preventDefault();
 
 						const path = ReactEditor.findPath(editor, element);
 
 						Transforms.removeNodes(editor, { at: path });
-						Transforms.insertNodes(
-							editor,
-							{ ...element, children: [{ text: code }] },
-							{ at: path }
-						);
 					}}
-					onValueChange={(newValue) => {
-						setCode(newValue);
-					}}
-					padding={"0.5rem"}
-					readOnly={readOnly}
-					value={code}
-				/>
-				{children}
-				<ContextMenu contentEditable={false} {...contextMenuProps}>
-					<ContextMenu.Item
-						onClick={() => {
-							const path = ReactEditor.findPath(editor, element);
-
-							Transforms.removeNodes(editor, { at: path });
-						}}
-					>
-						Delete
-					</ContextMenu.Item>
-				</ContextMenu>
-			</Root>
-		</>
+				>
+					Delete
+				</ContextMenu.Item>
+			</ContextMenu>
+		</Root>
 	);
 };
 

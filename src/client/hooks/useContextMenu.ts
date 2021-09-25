@@ -46,5 +46,8 @@ export const useContextMenu = <TElement extends HTMLElement>(
 		elem.addEventListener("contextmenu", onContextMenu);
 	}, [onContextMenu, ref]);
 
-	return { contextMenuProps: { position } };
+	return {
+		contextMenuProps: { position },
+		isOpen: !!position
+	};
 };

@@ -150,13 +150,8 @@ export const Popover: FC<PopoverProps> = (props) => {
 				cloneElement(children, {
 					ref: composeRefs(childRef, children.props.ref),
 					onClick: (event: MouseEvent<any>) => {
-						const lastOpen = open;
-
-						/* eslint-disable-next-line @typescript-eslint/no-unsafe-call */
 						children.props.onClick?.(event);
 						setOpen(!open);
-
-						if (lastOpen) onClose?.(event);
 					}
 				})}
 		</Tippy>
