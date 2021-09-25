@@ -45,7 +45,7 @@ export const schema = makeSchema({
 		rateLimitPlugin({
 			defaultRateLimit: { max: 60, window: "1s" },
 			identifyContext: ({ user, req }: ServerContext): string => {
-				const userId: Maybe<number> = user?.id;
+				const userId: Maybe<string> = user?.id;
 				const ip: Maybe<string> = getClientIp(req);
 
 				const identityKey: number | string = userId ?? ip ?? "";

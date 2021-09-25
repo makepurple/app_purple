@@ -1,4 +1,5 @@
 import svgr from "@svgr/core";
+import { stripIndents } from "common-tags";
 import fs from "fs-extra";
 import glob from "glob";
 import path from "path";
@@ -35,7 +36,11 @@ const generateComponents = () => {
 
 	fs.appendFileSync(
 		`${componentPath}/index.tsx`,
-		'import * as React from "react";\n\n'
+		`${stripIndents`
+			import * as React from "react";
+
+			export type SvgIconComponent = typeof GitHubIcon;
+		`}\n\n`
 	);
 
 	filenames.forEach((filename) => {

@@ -4,7 +4,7 @@ export const userQueries = [
 	inputObjectType({
 		name: "UserWhereUniqueInput",
 		definition: (t) => {
-			t.int("id");
+			t.string("id");
 			t.string("name");
 			t.string("email");
 		}

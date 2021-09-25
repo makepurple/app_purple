@@ -172,6 +172,6 @@ type UserGitHub {
 
 input UserWhereUniqueInput {
   email: String
-  id: Int
+  id: String
   name: String
 }

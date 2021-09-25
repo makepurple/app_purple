@@ -21,7 +21,7 @@ export const updateSkills = mutationField("updateSkills", {
 		if (!user?.id) throw new Error("Should not reach here");
 
 		const { skills } = input;
-		const userId: number = user.id;
+		const userId = user.id;
 
 		const sql = StringUtils.rename((...args) => prisma.$executeRaw(...args));
 

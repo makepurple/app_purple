@@ -194,7 +194,7 @@ export type UserGitHub = {
 
 export type UserWhereUniqueInput = {
   readonly email?: Maybe<Scalars['String']>;
-  readonly id?: Maybe<Scalars['Int']>;
+  readonly id?: Maybe<Scalars['String']>;
   readonly name?: Maybe<Scalars['String']>;
 };
 
