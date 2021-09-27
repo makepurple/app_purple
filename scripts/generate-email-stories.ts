@@ -39,6 +39,8 @@ const toStory = (key: string, text: string) => {
 const generateTemplates = (options: GenerateFromMjmlOptions) => {
 	const { output, templates } = options;
 
+	console.log("Generating email stories");
+	
 	const emailHtmlDict = Object.keys(templates).reduce<Record<string, string>>((acc, key) => {
 		const template = templates[key];
 		const html = createHtmlEmail(template, {}, { minify: false });
@@ -46,10 +48,18 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 		return { ...acc, [key]: html };
 	}, {});
 
+	console.log("Emails created, ensuring empty output directory");
+	
 	fs.ensureDirSync(output);
 	fs.emptyDirSync(output);
 
-	Object.keys(emailHtmlDict).forEach((key) => {
+	console.log("Writing to output...");
+
+	const emailKeys: readonly string[] = Object.keys(emailHtmlDict);
+
+	emailKeys.forEach((key, i) => {
+		console.log(`Writing email ${i + 1} / ${emailKeys.length}: ${key}`);
+
 		const outputPath: string = path.join(output, `${key}.stories.tsx`);
 		const emailHtml: string = emailHtmlDict[key];
 
@@ -59,6 +69,8 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 			flag: "w"
 		});
 	});
+
+	process.exit(0);
 };
 
 const dirname: string = process.env.PROJECT_DIRNAME

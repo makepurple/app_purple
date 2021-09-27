@@ -6,7 +6,8 @@ import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "../src/client/atoms";
-import { GlobalStyles } from "../src/client/styles";
+import { GlobalStyles } from "../src/client/styles/global.styles";
+import "twin.macro"
 
 import "tippy.js/dist/tippy.css";
 import "../src/client/styles/global.styles.css";

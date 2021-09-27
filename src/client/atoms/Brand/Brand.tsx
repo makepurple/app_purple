@@ -1,7 +1,7 @@
 import { InferComponentProps } from "@/client/types";
 import { config } from "@/config";
 import React, { forwardRef } from "react";
-import styled, { css } from "styled-components";
+import { css, styled } from "twin.macro";
 
 const Root = styled.a`
 	line-height: 1em;

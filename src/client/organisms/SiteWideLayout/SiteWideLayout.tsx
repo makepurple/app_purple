@@ -3,7 +3,7 @@ import { SiteWideAppBar } from "@/client/organisms/SiteWideAppBar";
 import { SiteWideFooter } from "@/client/organisms/SiteWideFooter";
 import { InferComponentProps } from "@/client/types";
 import React, { FC } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled.div`
 	display: flex;

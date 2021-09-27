@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@/client/types";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 export type ButtonProps = InferComponentProps<typeof Button>;
 

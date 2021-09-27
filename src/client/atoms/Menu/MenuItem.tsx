@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@/client/types";
-import styled, { css } from "styled-components";
+import { css, styled } from "twin.macro";
 
 export type MenuItemProps = InferComponentProps<typeof MenuItem>;
 

@@ -2,7 +2,7 @@ import { GradientHeader, MainContainer } from "@/client/atoms";
 import { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/client";
 import React from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { gql, useQuery } from "urql";
 
 const Root = styled(MainContainer)`

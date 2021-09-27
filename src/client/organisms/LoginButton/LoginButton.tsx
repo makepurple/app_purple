@@ -2,7 +2,7 @@ import { Button } from "@/client/atoms";
 import { GitHubIcon } from "@/client/svgs";
 import { signIn } from "next-auth/client";
 import React, { ComponentType, CSSProperties, FC, SVGAttributes } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Label = styled.span`
 	&:not(:first-child) {

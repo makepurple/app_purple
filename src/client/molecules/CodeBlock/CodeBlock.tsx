@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled.pre`
 	border: 1px solid ${({ theme }) => theme.palette.lightGrey};

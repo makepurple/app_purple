@@ -1,4 +1,4 @@
-import { LightTheme } from "@/client/styles";
+import { LightTheme } from "@/client/styles/themes/light.theme";
 import React, { FC, ReactNode } from "react";
 import { ThemeProvider as Provider } from "styled-components";
 

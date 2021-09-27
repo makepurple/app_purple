@@ -9,7 +9,7 @@ import React, {
 	useCallback,
 	useMemo
 } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { TagsContext } from "./context";
 import { Tag, TagProps, TagType } from "./Tag";
 

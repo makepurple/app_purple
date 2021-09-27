@@ -15,7 +15,7 @@ import {
 	useSelected,
 	useSlateStatic
 } from "slate-react";
-import styled, { css } from "styled-components";
+import { css, styled } from "twin.macro";
 import { ToolbarButton } from "./ToolbarButton";
 
 const Root = styled.div<{ $selected: boolean }>`

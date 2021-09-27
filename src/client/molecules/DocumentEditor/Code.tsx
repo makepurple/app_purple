@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 export const Code = styled.code`
 	box-sizing: border-box;

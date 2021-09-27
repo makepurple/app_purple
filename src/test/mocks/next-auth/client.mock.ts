@@ -8,3 +8,5 @@ const mockSession = {
 };
 
 (client.useSession as jest.Mock) = jest.fn().mockReturnValue([mockSession, false]);
+(client.signIn as jest.Mock) = jest.fn();
+(client.signOut as jest.Mock) = jest.fn();

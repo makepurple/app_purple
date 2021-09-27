@@ -2,7 +2,7 @@ import { Popover } from "@/client/atoms";
 import { useHover } from "@/client/hooks";
 import { ColorUtils } from "@/utils";
 import React, { CSSProperties, FC } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const StyledPopover = styled(Popover)`
 	display: inline-flex;

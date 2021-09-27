@@ -3,7 +3,7 @@ import { useIsBlockActive, useToggle, useToggleBlock } from "@/client/hooks";
 import { HeadingIcon } from "@/client/svgs";
 import React, { FC } from "react";
 import { RenderElementProps } from "slate-react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { ToolbarButton } from "./ToolbarButton";
 
 const HeadingOne = styled(Typography)`

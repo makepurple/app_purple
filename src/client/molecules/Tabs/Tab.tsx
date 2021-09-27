@@ -1,7 +1,8 @@
 import { Typography } from "@/client/atoms/Typography";
 import type { SvgIconComponent } from "@/client/svgs";
 import React, { forwardRef } from "react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled(Typography)<{ $selected: boolean }>`
 	display: inline-flex;
@@ -35,7 +36,7 @@ export const Tab = forwardRef<HTMLAnchorElement, TabProps>((props, ref) => {
 	const theme = useTheme();
 
 	return (
-		<Root as="a" {...restAnchorProps} ref={ref} $selected={selected}>
+		<Root as="a" {...(restAnchorProps as any)} ref={ref} $selected={selected}>
 			{icon && <StyledIcon as={icon} height={16} width={16} color={theme.palette.purple} />}
 			{children}
 		</Root>

@@ -1,9 +1,7 @@
-import styled from "styled-components";
+import tw, { styled } from "twin.macro";
 
 export const Avatar = styled.div`
-	height: 48px;
-	width: 48px;
-	border-radius: 50%;
 	overflow: hidden;
 	cursor: pointer;
+	${tw`h-12 w-12 rounded-full`}
 `;

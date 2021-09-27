@@ -1,6 +1,6 @@
 import { ColorUtils } from "@/utils";
 import React, { CSSProperties, FC } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled.div`
 	display: inline-flex;

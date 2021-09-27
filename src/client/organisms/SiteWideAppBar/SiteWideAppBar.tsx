@@ -6,7 +6,7 @@ import { m, useViewportScroll } from "framer-motion";
 import { useSession } from "next-auth/client";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;

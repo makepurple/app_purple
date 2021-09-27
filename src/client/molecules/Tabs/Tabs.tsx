@@ -1,5 +1,5 @@
 import { ObjectUtils } from "@/utils";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { Tab } from "./Tab";
 
 const _Tabs = styled.div`

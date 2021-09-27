@@ -9,7 +9,7 @@ import React, {
 	SyntheticEvent,
 	useRef
 } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 export const PopoverArrow = styled.div`
 	position: absolute;

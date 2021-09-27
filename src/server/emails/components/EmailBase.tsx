@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/client/atoms";
+import { ThemeProvider } from "@/client/atoms/ThemeProvider";
 import { Mjml, MjmlBody, MjmlFont, MjmlHead, MjmlPreview, MjmlTitle } from "mjml-react";
 import React, { FC, ReactNode } from "react";
 import styled from "styled-components";

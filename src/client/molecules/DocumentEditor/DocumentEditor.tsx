@@ -9,7 +9,7 @@ import {
 	Slate,
 	withReact
 } from "slate-react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { Code } from "./Code";
 import { CodeBlock, CodeBlockSlateType, CodeBlockToolbarButton, withCodeBlock } from "./CodeBlock";
 import { Heading, HeadingSlateType, HeadingToolbarButton } from "./Heading";

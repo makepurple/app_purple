@@ -3,7 +3,7 @@ import { useToggle, useUncontrolledProp } from "@/client/hooks";
 import { StringUtils } from "@/utils";
 import Fuse from "fuse.js";
 import React, { forwardRef, SyntheticEvent, useMemo } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const MatchToken = styled.span<{ $match: boolean }>`
 	box-sizing: border-box;

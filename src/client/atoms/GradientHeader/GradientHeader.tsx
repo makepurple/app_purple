@@ -1,7 +1,7 @@
 import { InferComponentProps } from "@/client/types";
 import { oneLine } from "common-tags";
 import { rgba } from "polished";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 export type GradientHeaderProps = InferComponentProps<typeof GradientHeader>;
 

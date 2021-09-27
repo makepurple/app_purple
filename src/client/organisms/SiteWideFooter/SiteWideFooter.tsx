@@ -1,7 +1,7 @@
 import { Anchor, Brand, Footer, MainContainer, PageContainer } from "@/client/atoms";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled(PageContainer)``;
 

@@ -1,7 +1,7 @@
 import { XIcon } from "@/client/svgs";
 import { InferComponentProps } from "@/client/types";
 import React, { useContext } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { TagsContext } from "./context";
 
 export type TagProps = Omit<InferComponentProps<typeof Root>, "children"> & {

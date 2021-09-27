@@ -2,7 +2,7 @@ import { MainContainer } from "@/client/atoms";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled(MainContainer)``;
 

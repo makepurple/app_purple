@@ -1,6 +1,6 @@
 import { InferComponentProps } from "@/client/types";
 import { ObjectUtils } from "@/utils";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { MenuItem } from "./MenuItem";
 
 export type MenuProps = InferComponentProps<typeof Menu>;

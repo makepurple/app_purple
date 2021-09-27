@@ -13,15 +13,15 @@ module.exports = {
 		"@storybook/addon-essentials",
 		"storybook-addon-next-router",
 	],
-	typescript: {
-		check: false,
-		checkOptions: {},
-		reactDocgen: 'react-docgen-typescript',
-		reactDocgenTypescriptOptions: {
-			shouldExtractLiteralValuesFromEnum: true,
-			propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-		}
-	},
+	babel: () => ({
+		presets: ["next/babel"],
+		plugins: [
+			"macros",
+			["styled-components", {
+				"ssr": true
+			}]
+		]
+	}),
 	webpackFinal: (config) => {
 		config.plugins.push(
 			new NodemonPlugin({
@@ -32,7 +32,7 @@ module.exports = {
 				delay: `${ms("1s")}`,
 				verbose: true
 			})
-		)
+		);
 
 		/**
 		 * TODO
@@ -43,10 +43,9 @@ module.exports = {
 		 * @date June 28
 		 */
 		config.node = {
-			fs: "empty"
+			fs: "empty",
 		};
 		
-
 		return addWebpackAlias({ "@": path.resolve(__dirname, "../src") })(config);
 	}
 }

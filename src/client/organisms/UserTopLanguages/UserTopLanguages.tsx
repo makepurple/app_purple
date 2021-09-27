@@ -2,7 +2,7 @@ import { Typography } from "@/client/atoms";
 import { TopLanguage } from "@/client/graphql";
 import { Legend, ProportionBar } from "@/client/molecules";
 import React, { CSSProperties, FC, useMemo } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const MIN_SIZE_THRESHOLD = 0.01;
 const MAX_TOP_LANGUAGES = 10;

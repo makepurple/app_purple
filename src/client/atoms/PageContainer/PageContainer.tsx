@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 export const PageContainer = styled.div`
 	display: flex;

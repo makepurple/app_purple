@@ -1,6 +1,6 @@
 import { ObjectUtils } from "@/utils";
 import React, { CSSProperties, FC, ReactElement, useMemo } from "react";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 import { LegendItem, LegendItemProps } from "./LegendItem";
 
 const Root = styled.div`

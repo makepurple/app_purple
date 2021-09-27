@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 export const ToolbarButton = styled.button`
 	display: inline-flex;

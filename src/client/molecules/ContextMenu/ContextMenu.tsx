@@ -3,7 +3,7 @@ import { ObjectUtils, WindowUtils } from "@/utils";
 import { AnimatePresence, m } from "framer-motion";
 import React, { FC } from "react";
 import { createPortal } from "react-dom";
-import styled from "styled-components";
+import { styled } from "twin.macro";
 
 const Root = styled(m(Menu))`
 	position: fixed;
