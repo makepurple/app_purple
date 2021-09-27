@@ -9,16 +9,16 @@ import {
 	Slate,
 	withReact
 } from "slate-react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { Code } from "./Code";
 import { CodeBlock, CodeBlockSlateType, CodeBlockToolbarButton, withCodeBlock } from "./CodeBlock";
 import { Heading, HeadingSlateType, HeadingToolbarButton } from "./Heading";
 
 const Root = styled.div`
-	box-shadow: ${({ theme }) => theme.shadows.md};
 	border: 1px solid ${({ theme }) => theme.palette.lightGrey};
 	border-radius: 0.375rem;
 	overflow: hidden;
+	${tw`shadow-md`}
 `;
 
 const EditorToolbar = styled(Toolbar)`

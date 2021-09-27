@@ -1,4 +1,4 @@
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export const ToolbarButton = styled.button`
 	display: inline-flex;
@@ -8,12 +8,12 @@ export const ToolbarButton = styled.button`
 	min-width: 48px;
 	padding: 0 0.875rem;
 	border: none;
-	box-shadow: ${({ theme }) => theme.shadows.xs};
 	font-size: inherit;
 	color: ${({ theme }) => theme.colors.primaryText};
 	background-color: transparent;
 	cursor: pointer;
 	transition: box-shadow 0.2s ease-in-out;
+	${tw`shadow-md`}
 
 	&:hover {
 		box-shadow: ${({ theme }) => theme.shadows.md};

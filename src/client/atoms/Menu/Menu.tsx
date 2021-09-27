@@ -1,6 +1,6 @@
 import { InferComponentProps } from "@/client/types";
 import { ObjectUtils } from "@/utils";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { MenuItem } from "./MenuItem";
 
 export type MenuProps = InferComponentProps<typeof Menu>;
@@ -14,7 +14,7 @@ export const Menu = ObjectUtils.setStatic(
 		padding: 0.75rem 0.5rem;
 		border-radius: 0.5rem;
 		background-color: ${({ theme }) => theme.colors.surfaceColor};
-		box-shadow: ${({ theme }) => theme.shadows.md};
+		${tw`shadow-md`};
 	`,
 	{ Item: MenuItem }
 );

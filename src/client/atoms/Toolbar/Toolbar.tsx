@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@/client/types";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export type ToolbarProps = InferComponentProps<typeof Toolbar>;
 
@@ -9,6 +9,6 @@ export const Toolbar = styled.div`
 	width: 100%;
 	height: 48px;
 	border: 1px solid ${({ theme }) => theme.palette.lightGrey};
-	box-shadow: ${({ theme }) => theme.shadows.md};
 	font-size: 0.875rem;
+	${tw`shadow-md`}
 `;
