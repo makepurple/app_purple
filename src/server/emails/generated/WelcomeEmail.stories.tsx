@@ -66,7 +66,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
     }
   
         </style>
-        <style type="text/css">.kQFpkX{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
+        <style type="text/css">.fHbFgd{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
 .MCUeK,.MCUeK *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
 .gtxacw{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
 .fxeEHP{background-color:#706EFF;}/*!sc*/
@@ -81,7 +81,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
   
         
       <div
-         class="sc-bdfBQB kQFpkX" style=""
+         class="sc-bdfBQB fHbFgd" style=""
       >
         
       
