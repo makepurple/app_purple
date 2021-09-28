@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@/client/types";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export type InputProps = InferComponentProps<typeof Input>;
 
@@ -10,8 +10,7 @@ export const Input = styled.input`
 	padding: 0 0.625rem;
 	border-radius: 0.5rem;
 	border: 1px solid ${({ theme }) => theme.colors.inputBackgroundColor};
-	font-family: Gilroy, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-		Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	${tw`font-sans`}
 	font-size: 1rem;
 	line-height: 1.3em;
 	font-weight: 600;

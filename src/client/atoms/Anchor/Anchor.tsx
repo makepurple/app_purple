@@ -1,8 +1,7 @@
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export const Anchor = styled.a`
-	font-family: Gilroy, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-		Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	${tw`font-sans`}
 	font-size: inherit;
 	font-weight: 600;
 	line-height: 1.5;

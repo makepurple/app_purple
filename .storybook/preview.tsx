@@ -10,7 +10,6 @@ import { GlobalStyles } from "../src/client/styles/global.styles";
 import "twin.macro"
 
 import "tippy.js/dist/tippy.css";
-import "../src/client/styles/global.styles.css";
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
