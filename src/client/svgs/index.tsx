@@ -2,6 +2,26 @@ import * as React from "react";
 
 export type SvgIconComponent = typeof GitHubIcon;
 
+export const BoldIcon = React.memo(
+	React.forwardRef(
+		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				width={24}
+				height={24}
+				ref={svgRef}
+				{...props}
+			>
+				<path
+					fillRule="evenodd"
+					d="M6 4.75c0-.69.56-1.25 1.25-1.25h5a4.75 4.75 0 013.888 7.479A5 5 0 0114 20.5H7.25c-.69 0-1.25-.56-1.25-1.25V4.75zM8.5 13v5H14a2.5 2.5 0 000-5H8.5zm0-2.5h3.751A2.25 2.25 0 0012.25 6H8.5v4.5z"
+				/>
+			</svg>
+		)
+	)
+);
+
 export const BookIcon = React.memo(
 	React.forwardRef(
 		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
@@ -145,6 +165,26 @@ export const HexagonIcon = React.memo(
 				<path
 					fill="currentColor"
 					d="M19.429 12.61l-3.183 5.456a1.213 1.213 0 01-1.047.6H8.801a1.212 1.212 0 01-1.047-.6L4.57 12.61a1.214 1.214 0 010-1.222l3.183-5.454A1.212 1.212 0 018.8 5.333h6.398a1.212 1.212 0 011.047.602l3.183 5.454a1.213 1.213 0 010 1.222z"
+				/>
+			</svg>
+		)
+	)
+);
+
+export const ItalicIcon = React.memo(
+	React.forwardRef(
+		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				width={24}
+				height={24}
+				ref={svgRef}
+				{...props}
+			>
+				<path
+					fillRule="evenodd"
+					d="M10 4.75a.75.75 0 01.75-.75h8.5a.75.75 0 010 1.5h-3.514l-5.828 13h3.342a.75.75 0 010 1.5h-8.5a.75.75 0 010-1.5h3.514l5.828-13H10.75a.75.75 0 01-.75-.75z"
 				/>
 			</svg>
 		)

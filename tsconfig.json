@@ -28,7 +28,7 @@
 		"noUnusedParameters": false,
 		"noImplicitReturns": true,
 		"downlevelIteration": true,
-		"baseUrl": "./",
+		"baseUrl": ".",
 		"paths":  {
 			"@/*": ["./src/*"],
 		},

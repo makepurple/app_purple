@@ -10,9 +10,11 @@ import {
 	withReact
 } from "slate-react";
 import tw, { styled } from "twin.macro";
+import { BoldToolbarButton } from "./Bold";
 import { Code } from "./Code";
 import { CodeBlock, CodeBlockSlateType, CodeBlockToolbarButton, withCodeBlock } from "./CodeBlock";
 import { Heading, HeadingSlateType, HeadingToolbarButton } from "./Heading";
+import { Leaf } from "./Leaf";
 
 const Root = styled.div`
 	border: 1px solid ${({ theme }) => theme.palette.lightGrey};
@@ -38,7 +40,10 @@ type CustomElementType =
 	| CodeBlockSlateType
 	| "numbered-list"
 	| "paragraph";
-type CustomText = { text: string };
+type CustomText = {
+	bold?: boolean;
+	text: string;
+};
 type CustomElement = { type: CustomElementType; children: (CustomText | CustomElement)[] };
 
 declare module "slate" {
@@ -75,12 +80,6 @@ const Element: FC<RenderElementProps> = (props) => {
 	}
 };
 
-const Leaf: FC<RenderLeafProps> = (props) => {
-	const { attributes, children } = props;
-
-	return <span {...attributes}>{children}</span>;
-};
-
 export const DocumentEditor: FC<DocumentEditorProps> = ({
 	readOnly,
 	className,
@@ -104,6 +103,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 				<EditorToolbar>
 					<CodeBlockToolbarButton />
 					<HeadingToolbarButton />
+					<BoldToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable
