@@ -10,11 +10,15 @@ import {
 	withReact
 } from "slate-react";
 import tw, { styled } from "twin.macro";
-import { BoldToolbarButton } from "./Bold";
-import { Code } from "./Code";
 import { CodeBlock, CodeBlockSlateType, CodeBlockToolbarButton, withCodeBlock } from "./CodeBlock";
 import { Heading, HeadingSlateType, HeadingToolbarButton } from "./Heading";
-import { Leaf } from "./Leaf";
+import {
+	BoldToolbarButton,
+	CodeToolbarButton,
+	CustomText,
+	ItalicToolbarButton,
+	Leaf
+} from "./Leaf";
 
 const Root = styled.div`
 	border: 1px solid ${({ theme }) => theme.palette.lightGrey};
@@ -35,15 +39,11 @@ const EditableContainer = styled.div`
 
 type CustomElementType =
 	| "bulleted-list"
-	| "code"
 	| HeadingSlateType
 	| CodeBlockSlateType
 	| "numbered-list"
 	| "paragraph";
-type CustomText = {
-	bold?: boolean;
-	text: string;
-};
+
 type CustomElement = { type: CustomElementType; children: (CustomText | CustomElement)[] };
 
 declare module "slate" {
@@ -73,8 +73,6 @@ const Element: FC<RenderElementProps> = (props) => {
 	}
 
 	switch (element.type) {
-		case "code":
-			return <Code {...attributes}>{children}</Code>;
 		default:
 			return <div {...attributes}>{children}</div>;
 	}
@@ -104,6 +102,8 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<CodeBlockToolbarButton />
 					<HeadingToolbarButton />
 					<BoldToolbarButton />
+					<ItalicToolbarButton />
+					<CodeToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable

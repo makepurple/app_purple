@@ -86,7 +86,7 @@ export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 				}}
 				title="Heading"
 			>
-				<HeadingIcon height={24} width={24} />
+				<HeadingIcon height={16} width={16} />
 			</ToolbarButton>
 		</Popover>
 	);

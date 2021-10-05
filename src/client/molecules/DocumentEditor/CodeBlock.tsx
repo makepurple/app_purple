@@ -1,7 +1,7 @@
 import { Menu, Popover } from "@/client/atoms";
 import { useContextMenu, useToggle } from "@/client/hooks";
 import { ContextMenu } from "@/client/molecules/ContextMenu";
-import { CodeIcon } from "@/client/svgs";
+import { CodeSquareIcon } from "@/client/svgs";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
@@ -109,7 +109,7 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 			placement="bottom"
 		>
 			<ToolbarButton onClick={toggle.on} title="Code">
-				<CodeIcon height={16} width={16} />
+				<CodeSquareIcon height={16} width={16} />
 			</ToolbarButton>
 		</Popover>
 	);

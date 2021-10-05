@@ -1,9 +1,9 @@
 import { useToggleMark } from "@/client/hooks";
+import { ToolbarButton } from "@/client/molecules/DocumentEditor/ToolbarButton";
 import { BoldIcon } from "@/client/svgs";
 import React, { FC } from "react";
-import tw, { styled } from "twin.macro";
-import type { WrapLeafWithType } from "./Leaf";
-import { ToolbarButton } from "./ToolbarButton";
+import tw from "twin.macro";
+import type { WrapLeafWithType } from ".";
 
 export const BoldToolbarButton: FC<Record<string, never>> = () => {
 	const toggleMark = useToggleMark();
@@ -21,8 +21,8 @@ export const BoldToolbarButton: FC<Record<string, never>> = () => {
 	);
 };
 
-export const Bold = styled.strong`
-	${tw`font-semibold`}
+export const Bold = tw.strong`
+	font-semibold
 `;
 
 export const wrapLeafBold: WrapLeafWithType = (props) => {
