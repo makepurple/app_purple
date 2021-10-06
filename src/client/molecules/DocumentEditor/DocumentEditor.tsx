@@ -55,6 +55,7 @@ declare module "slate" {
 export interface DocumentEditorProps {
 	readOnly?: boolean;
 	className?: string;
+	name?: string;
 	placeholder?: string;
 	style?: CSSProperties;
 }
@@ -62,6 +63,7 @@ export interface DocumentEditorProps {
 export const DocumentEditor: FC<DocumentEditorProps> = ({
 	readOnly,
 	className,
+	name,
 	placeholder = "",
 	style
 }) => {
@@ -92,8 +94,10 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<Editable
 						readOnly={readOnly}
 						autoFocus
+						name={name}
 						renderElement={renderElement}
 						renderLeaf={renderLeaf}
+						aria-label={name}
 					/>
 				</EditableContainer>
 			</Slate>

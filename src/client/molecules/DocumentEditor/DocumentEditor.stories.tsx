@@ -10,6 +10,7 @@ const Template = (args) => {
 	return <DocumentEditor {...args} />;
 };
 Template.args = {
+	name: "Storybook textarea",
 	placeholder: "Hello world..."
 };
 

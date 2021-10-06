@@ -16,6 +16,7 @@ export const BoldToolbarButton: FC<Record<string, never>> = () => {
 				toggleMark("bold");
 			}}
 			title="bold"
+			aria-label="bold"
 		>
 			<BoldIcon height={20} width={20} />
 		</ToolbarButton>
