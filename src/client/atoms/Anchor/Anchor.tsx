@@ -4,8 +4,6 @@ export const Anchor = styled.a`
 	${tw`font-sans`}
 	font-size: inherit;
 	font-weight: 600;
-	line-height: 1.5;
-	color: inherit;
 	margin: 0;
 	padding: 0;
 	border: 0;
