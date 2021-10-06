@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import { RenderElementProps } from "slate-react";
 import type { CustomElementType } from ".";
 import type { BulletedListSlateType } from "./BulletedList";
+import { NumberedListSlateType } from "./NumberedList";
 
-export type ListSlateType = BulletedListSlateType | "numbered-list";
+export type ListSlateType = BulletedListSlateType | NumberedListSlateType;
 
 export type ListItemSlateType = "list-item";
 

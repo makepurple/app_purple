@@ -16,6 +16,7 @@ import {
 	CustomElement,
 	Element,
 	HeadingToolbarButton,
+	NumberedListToolbarButton,
 	withCodeBlock
 } from "./Element";
 import {
@@ -85,6 +86,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<ItalicToolbarButton />
 					<CodeToolbarButton />
 					<BulletedListToolbarButton />
+					<NumberedListToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable
