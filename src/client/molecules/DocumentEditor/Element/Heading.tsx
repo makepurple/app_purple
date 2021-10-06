@@ -84,7 +84,7 @@ export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 
 					toggle.on();
 				}}
-				title="Heading"
+				title="heading"
 			>
 				<HeadingIcon height={20} width={20} />
 			</ToolbarButton>
