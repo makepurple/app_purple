@@ -8,7 +8,7 @@ export const useIsMarkActive = () => {
 	const editor = useSlateStatic();
 
 	const isMarkActive = useCallback(
-		(mark: MarkType) => {
+		(mark: MarkType): boolean => {
 			const [match] = Editor.nodes(editor, {
 				match: (node) => {
 					return !Editor.isEditor(node) && SlateText.isText(node) && !!node[mark];

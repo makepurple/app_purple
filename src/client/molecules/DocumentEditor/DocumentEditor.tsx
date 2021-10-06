@@ -11,6 +11,7 @@ import {
 } from "slate-react";
 import tw, { styled } from "twin.macro";
 import {
+	BulletedListToolbarButton,
 	CodeBlockToolbarButton,
 	CustomElement,
 	Element,
@@ -83,6 +84,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<BoldToolbarButton />
 					<ItalicToolbarButton />
 					<CodeToolbarButton />
+					<BulletedListToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable

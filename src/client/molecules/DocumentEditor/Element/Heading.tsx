@@ -92,9 +92,7 @@ export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 	);
 };
 
-export type HeadingProps = RenderElementProps;
-
-export const Heading: FC<HeadingProps> = (props) => {
+export const Heading: FC<RenderElementProps> = (props) => {
 	const { attributes, children, element } = props;
 
 	switch (element.type) {
@@ -135,11 +133,7 @@ export const Heading: FC<HeadingProps> = (props) => {
 				</HeadingSix>
 			);
 		default:
-			return (
-				<Typography as="div" {...attributes}>
-					{children}
-				</Typography>
-			);
+			return null;
 	}
 };
 

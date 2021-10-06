@@ -115,9 +115,7 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	);
 };
 
-export type CodeBlockProps = RenderElementProps;
-
-export const CodeBlock: FC<CodeBlockProps> = (props) => {
+export const CodeBlock: FC<RenderElementProps> = (props) => {
 	const { attributes, children, element } = props;
 
 	const readOnly = useReadOnly();
