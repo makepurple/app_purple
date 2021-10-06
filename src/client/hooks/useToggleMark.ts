@@ -1,20 +1,25 @@
 import { useCallback } from "react";
+import { Editor } from "slate";
 import { useSlateStatic } from "slate-react";
-import { MarkType, useIsMarkActive } from ".";
+import { isMarkActive, MarkType } from ".";
+
+export const toggleMark = (editor: Editor, mark: MarkType, force?: boolean) => {
+	const isActive: boolean = isMarkActive(editor, mark);
+
+	if (typeof force === "boolean") {
+		!force ? editor.removeMark(mark) : editor.addMark(mark, true);
+
+		return;
+	}
+
+	isActive ? editor.removeMark(mark) : editor.addMark(mark, true);
+};
 
 export const useToggleMark = () => {
 	const editor = useSlateStatic();
 
-	const isMarkActive = useIsMarkActive();
-
-	const toggleMark = useCallback(
-		(mark: MarkType) => {
-			const isActive: boolean = isMarkActive(mark);
-
-			isActive ? editor.removeMark(mark) : editor.addMark(mark, true);
-		},
-		[editor, isMarkActive]
+	return useCallback(
+		(mark: MarkType, force?: boolean): void => toggleMark(editor, mark, force),
+		[editor]
 	);
-
-	return toggleMark;
 };
