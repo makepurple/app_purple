@@ -19,6 +19,7 @@ import {
 	NumberedListToolbarButton,
 	withCodeBlock
 } from "./Element";
+import { BlockQuoteToolbarButton } from "./Element/BlockQuote";
 import {
 	BoldToolbarButton,
 	CodeToolbarButton,
@@ -89,6 +90,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<CodeToolbarButton />
 					<BulletedListToolbarButton />
 					<NumberedListToolbarButton />
+					<BlockQuoteToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable
