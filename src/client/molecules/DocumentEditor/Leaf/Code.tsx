@@ -1,5 +1,5 @@
 import { useToggleMark } from "@/client/hooks";
-import { ToolbarButton } from "@/client/molecules/DocumentEditor/ToolbarButton";
+import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeIcon } from "@/client/svgs";
 import React, { FC } from "react";
 import tw from "twin.macro";

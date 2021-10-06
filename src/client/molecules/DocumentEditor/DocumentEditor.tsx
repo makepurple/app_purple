@@ -10,8 +10,13 @@ import {
 	withReact
 } from "slate-react";
 import tw, { styled } from "twin.macro";
-import { CodeBlock, CodeBlockSlateType, CodeBlockToolbarButton, withCodeBlock } from "./CodeBlock";
-import { Heading, HeadingSlateType, HeadingToolbarButton } from "./Heading";
+import {
+	CodeBlockToolbarButton,
+	CustomElement,
+	Element,
+	HeadingToolbarButton,
+	withCodeBlock
+} from "./Element";
 import {
 	BoldToolbarButton,
 	CodeToolbarButton,
@@ -37,15 +42,6 @@ const EditableContainer = styled.div`
 	padding: 1.375rem;
 `;
 
-type CustomElementType =
-	| "bulleted-list"
-	| HeadingSlateType
-	| CodeBlockSlateType
-	| "numbered-list"
-	| "paragraph";
-
-type CustomElement = { type: CustomElementType; children: (CustomText | CustomElement)[] };
-
 declare module "slate" {
 	interface CustomTypes {
 		Editor: BaseEditor & ReactEditor;
@@ -60,23 +56,6 @@ export interface DocumentEditorProps {
 	placeholder?: string;
 	style?: CSSProperties;
 }
-
-const Element: FC<RenderElementProps> = (props) => {
-	const { attributes, children, element } = props;
-
-	if (element.type.startsWith("language-")) {
-		return <CodeBlock {...props} />;
-	}
-
-	if (element.type.startsWith("heading-")) {
-		return <Heading {...props} />;
-	}
-
-	switch (element.type) {
-		default:
-			return <div {...attributes}>{children}</div>;
-	}
-};
 
 export const DocumentEditor: FC<DocumentEditorProps> = ({
 	readOnly,

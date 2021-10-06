@@ -1,10 +1,10 @@
 import { Menu, Popover, Typography } from "@/client/atoms";
 import { useIsBlockActive, useToggle, useToggleBlock } from "@/client/hooks";
+import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { HeadingIcon } from "@/client/svgs";
 import React, { FC } from "react";
 import { RenderElementProps } from "slate-react";
 import { styled } from "twin.macro";
-import { ToolbarButton } from "./ToolbarButton";
 
 const HeadingOne = styled(Typography)`
 	font-size: 32px;

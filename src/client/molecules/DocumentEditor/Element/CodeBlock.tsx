@@ -1,6 +1,7 @@
 import { Menu, Popover } from "@/client/atoms";
 import { useContextMenu, useToggle } from "@/client/hooks";
 import { ContextMenu } from "@/client/molecules/ContextMenu";
+import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeSquareIcon } from "@/client/svgs";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
@@ -16,7 +17,6 @@ import {
 	useSlateStatic
 } from "slate-react";
 import { css, styled } from "twin.macro";
-import { ToolbarButton } from "./ToolbarButton";
 
 const Root = styled.div<{ $selected: boolean }>`
 	border: 4px solid ${({ theme }) => theme.palette.lightGrey};
