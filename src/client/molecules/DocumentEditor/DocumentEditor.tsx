@@ -16,8 +16,10 @@ import {
 	CustomElement,
 	Element,
 	HeadingToolbarButton,
+	LinkToolbarButton,
 	NumberedListToolbarButton,
-	withCodeBlock
+	withCodeBlock,
+	withLinks
 } from "./Element";
 import { BlockQuoteToolbarButton } from "./Element/BlockQuote";
 import {
@@ -68,7 +70,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 	placeholder = "",
 	style
 }) => {
-	const editor = useMemo(() => withCodeBlock(withReact(createEditor())), []);
+	const editor = useMemo(() => withLinks(withCodeBlock(withReact(createEditor()))), []);
 	const [value, setValue] = useState<Descendant[]>([
 		{
 			type: "paragraph",
@@ -91,6 +93,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<BulletedListToolbarButton />
 					<NumberedListToolbarButton />
 					<BlockQuoteToolbarButton />
+					<LinkToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable

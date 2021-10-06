@@ -21,3 +21,7 @@ export const Anchor = styled.a`
 		text-decoration: underline;
 	}
 `;
+
+Anchor.defaultProps = {
+	spellCheck: false
+};
