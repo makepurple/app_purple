@@ -16,7 +16,7 @@ export const BoldToolbarButton: FC<Record<string, never>> = () => {
 				toggleMark("bold");
 			}}
 		>
-			<BoldIcon height={16} width={16} />
+			<BoldIcon height={20} width={20} />
 		</ToolbarButton>
 	);
 };

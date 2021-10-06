@@ -23,7 +23,7 @@ export const NumberedListToolbarButton: FC<Record<string, never>> = () => {
 				toggleBlock("numbered-list");
 			}}
 		>
-			<ListOrderedIcon height={16} width={16} />
+			<ListOrderedIcon height={20} width={20} />
 		</ToolbarButton>
 	);
 };

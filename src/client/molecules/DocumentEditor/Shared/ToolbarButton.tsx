@@ -6,7 +6,6 @@ export const ToolbarButton = styled.button`
 	justify-content: center;
 	box-sizing: border-box;
 	min-width: 48px;
-	padding: 0 0.875rem;
 	border: none;
 	font-size: inherit;
 	color: ${({ theme }) => theme.colors.primaryText};

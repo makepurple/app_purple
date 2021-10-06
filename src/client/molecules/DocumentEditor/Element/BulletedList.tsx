@@ -23,7 +23,7 @@ export const BulletedListToolbarButton: FC<Record<string, never>> = () => {
 				toggleBlock("bulleted-list");
 			}}
 		>
-			<ListUnorderedIcon height={16} width={16} />
+			<ListUnorderedIcon height={20} width={20} />
 		</ToolbarButton>
 	);
 };

@@ -109,7 +109,7 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 			placement="bottom"
 		>
 			<ToolbarButton onClick={toggle.on} title="Code">
-				<CodeSquareIcon height={16} width={16} />
+				<CodeSquareIcon height={20} width={20} />
 			</ToolbarButton>
 		</Popover>
 	);

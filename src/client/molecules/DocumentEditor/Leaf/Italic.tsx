@@ -16,7 +16,7 @@ export const ItalicToolbarButton: FC<Record<string, never>> = () => {
 				toggleMark("bold");
 			}}
 		>
-			<ItalicIcon height={16} width={16} />
+			<ItalicIcon height={20} width={20} />
 		</ToolbarButton>
 	);
 };
