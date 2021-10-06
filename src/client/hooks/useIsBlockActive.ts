@@ -1,5 +1,5 @@
 import type { CustomElementType } from "@/client/molecules/DocumentEditor/Element";
-import { useCallback } from "hoist-non-react-statics/node_modules/@types/react";
+import { useCallback } from "react";
 import { Editor, Element as SlateElement } from "slate";
 import { useSlateStatic } from "slate-react";
 
