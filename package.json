@@ -21,6 +21,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "test": "jest",
+    "test:update": "yarn test -u",
     "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T"
   },
   "dependencies": {
