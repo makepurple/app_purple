@@ -2,6 +2,7 @@ import { useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { ListUnorderedIcon } from "@/client/svgs";
 import React, { FC } from "react";
+import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
 
@@ -11,6 +12,11 @@ const Root = tw.ul`
 `;
 
 export type BulletedListSlateType = "bulleted-list";
+
+export type BulletedListElement = {
+	type: BulletedListSlateType;
+	children: Descendant[];
+};
 
 export const BulletedListToolbarButton: FC<Record<string, never>> = () => {
 	const toggleBlock = useToggleBlock();

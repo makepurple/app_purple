@@ -3,6 +3,7 @@ import { useIsBlockActive, useToggle, useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { HeadingIcon } from "@/client/svgs";
 import React, { FC } from "react";
+import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import { styled } from "twin.macro";
 
@@ -37,6 +38,11 @@ export type HeadingSlateType =
 	| "heading-four"
 	| "heading-five"
 	| "heading-six";
+
+export type HeadingElement = {
+	type: HeadingSlateType;
+	children: Descendant[];
+};
 
 type HeadingOption = [name: string, slateType: HeadingSlateType];
 

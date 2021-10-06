@@ -2,6 +2,7 @@ import { useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { ListOrderedIcon } from "@/client/svgs";
 import React, { FC } from "react";
+import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
 
@@ -11,6 +12,11 @@ const Root = tw.ol`
 `;
 
 export type NumberedListSlateType = "numbered-list";
+
+export type NumberedListElement = {
+	type: NumberedListSlateType;
+	children: Descendant[];
+};
 
 export const NumberedListToolbarButton: FC<Record<string, never>> = () => {
 	const toggleBlock = useToggleBlock();

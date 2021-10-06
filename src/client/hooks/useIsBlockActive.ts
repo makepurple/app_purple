@@ -7,7 +7,7 @@ export const useIsBlockActive = () => {
 	const editor = useSlateStatic();
 
 	const isBlockActive = useCallback(
-		(blockType: string): blockType is CustomElementType => {
+		(blockType: CustomElementType): boolean => {
 			const [match] = Editor.nodes(editor, {
 				match: (node) => {
 					return (

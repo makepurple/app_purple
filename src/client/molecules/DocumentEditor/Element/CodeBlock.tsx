@@ -54,6 +54,11 @@ const LineContent = styled.span`
 
 export type CodeBlockSlateType = `language-${Language}`;
 
+export type CodeBlockElement = {
+	type: CodeBlockSlateType;
+	children: [{ text: string }];
+};
+
 export const withCodeBlock = (editor: Editor): Editor => {
 	const { isVoid } = editor;
 

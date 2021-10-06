@@ -25,7 +25,7 @@ export const useToggleBlock = () => {
 
 			if (typeof force === "boolean") {
 				Transforms.setNodes(editor, {
-					type: !force ? "paragraph" : isList ? "list-item" : blockType
+					type: (!force ? "paragraph" : isList ? "list-item" : blockType) as any
 				});
 
 				if (force && isList) {
@@ -39,7 +39,7 @@ export const useToggleBlock = () => {
 			}
 
 			Transforms.setNodes(editor, {
-				type: isActive ? "paragraph" : isList ? "list-item" : blockType
+				type: (isActive ? "paragraph" : isList ? "list-item" : blockType) as any
 			});
 
 			if (!isActive && isList) {
