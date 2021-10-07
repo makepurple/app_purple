@@ -2,7 +2,7 @@ import { LazyMotion, ThemeProvider, UrqlProvider } from "@/client/atoms";
 import { SiteWideLayout } from "@/client/organisms";
 import { GlobalStyles } from "@/client/styles";
 import ms from "ms";
-import { NextComponentType } from "next";
+import type { NextComponentType } from "next";
 import { Provider as NextAuthProvider } from "next-auth/client";
 import { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";

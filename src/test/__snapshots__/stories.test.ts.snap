@@ -3,25 +3,18 @@
 exports[`Storyshots atoms/Anchor Standard 1`] = `
 Array [
   .c0 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: inherit;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-weight: 600;
-  line-height: 1.5;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  color: #2188ff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
+  cursor: pointer;
   -webkit-text-decoration: none;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .c0:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
@@ -29,6 +22,7 @@ Array [
 <a
     className="c0"
     href="https://google.com"
+    spellCheck={false}
   >
     google
   </a>,
@@ -54,13 +48,15 @@ exports[`Storyshots atoms/AppBar Standard 1`] = `
 Array [
   .c0 {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #ffffff;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 4rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   z-index: 1;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
 }
 
 <div
@@ -87,10 +83,10 @@ Array [
 exports[`Storyshots atoms/Avatar Standard 1`] = `
 Array [
   .c0 {
-  height: 48px;
-  width: 48px;
-  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
   overflow: hidden;
+  border-radius: 9999px;
   cursor: pointer;
 }
 
@@ -213,15 +209,16 @@ Array [
 exports[`Storyshots atoms/Brand Standard 1`] = `
 Array [
   .c0 {
-  line-height: 1em;
-  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
+  background: linear-gradient(-80deg,#db2777,#7c3aed,#3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .c0:hover {
@@ -267,22 +264,29 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c0:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 <button
@@ -320,9 +324,15 @@ Array [
   />,
   .c0 {
   width: 100%;
-  height: 100px;
-  border-top: 1px solid rgb(232,236,253);
-  background-color: #ffffff;
+  height: 6rem;
+  border-top-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(209,213,219,var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
 <footer
@@ -349,10 +359,13 @@ Array [
 exports[`Storyshots atoms/FrostedGlass Standard 1`] = `
 Array [
   .c0 {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  background-color: rgba(255,255,255,0.15);
+  --tw-backdrop-blur: blur(12px);
+  -webkit-backdrop-filter: var(--tw-backdrop-filter);
+  backdrop-filter: var(--tw-backdrop-filter);
+  --tw-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+  --tw-bg-opacity: 0.2;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
 }
 
 <div
@@ -515,13 +528,13 @@ exports[`Storyshots atoms/GradientHeader Standard 1`] = `
 Array [
   .c0 {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
   min-height: 100px;
   height: 60vh;
   z-index: -1;
-  background-image: linear-gradient( rgba(142,140,255,0.3),rgba(142,140,255,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(142,140,255,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
+  background-image: linear-gradient( rgba(167,139,250,0.3),rgba(167,139,250,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(167,139,250,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
 }
 
 <div
@@ -557,48 +570,64 @@ Array [
 exports[`Storyshots atoms/Input Standard 1`] = `
 Array [
   .c0 {
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,-webkit-transform,filter,backdrop-filter;
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
   display: inline-block;
-  box-sizing: border-box;
-  height: 2.625rem;
-  padding: 0 0.625rem;
+  height: 2.5rem;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
   border-radius: 0.5rem;
-  border: 1px solid #e8ecfd;
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(229,231,235,var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(245,243,255,var(--tw-bg-opacity));
   font-size: 1rem;
-  line-height: 1.3em;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background-color: #e8ecfd;
-  -webkit-transition: border-color 0.15s ease-in-out 0s;
-  transition: border-color 0.15s ease-in-out 0s;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
 }
 
 .c0::-webkit-input-placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0::-moz-placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0:-ms-input-placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0::placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0:focus {
-  outline: none;
-  background-color: #ffffff;
-  border: 1px solid #706eff;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-border-opacity: 1;
+  border-color: rgba(139,92,246,var(--tw-border-opacity));
 }
 
 <input
     className="c0"
     placeholder="Type stuff here..."
-    type="text"
   />,
   <div
     onMouseEnter={[Function]}
@@ -621,12 +650,14 @@ Array [
 exports[`Storyshots atoms/MainContainer Standard 1`] = `
 Array [
   .c0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 <div
@@ -682,6 +713,13 @@ Similique blanditiis voluptatem provident doloribus aut culpa ratione vel. Omnis
 exports[`Storyshots atoms/Menu Standard 1`] = `
 Array [
   .c1 {
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,-webkit-transform,filter,backdrop-filter;
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -690,29 +728,34 @@ Array [
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  box-sizing: border-box;
-  padding: 0.5rem 0.75rem;
-  border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-style: none;
   border-radius: 0.375rem;
   font-size: 1rem;
+  line-height: 1;
   font-weight: 600;
-  color: #7578b5;
-  background-color: transparent;
-  -webkit-transition-property: background-color,opacity;
-  transition-property: background-color,opacity;
-  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
-  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
-  -webkit-transition-duration: 0.15s;
-  transition-duration: 0.15s;
+  --tw-text-opacity: 1;
+  color: rgba(91,33,182,var(--tw-text-opacity));
+  background-color: rgba(0,0,0,0);
   cursor: pointer;
 }
 
 .c1:hover {
-  background-color: rgb(250,250,250);
-  opacity: 0.8;
+  --tw-bg-opacity: 0.8;
+  background-color: rgba(249,250,251,var(--tw-bg-opacity));
 }
 
 .c2 {
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,-webkit-transform,filter,backdrop-filter;
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -721,32 +764,33 @@ Array [
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  box-sizing: border-box;
-  padding: 0.5rem 0.75rem;
-  border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-style: none;
   border-radius: 0.375rem;
   font-size: 1rem;
+  line-height: 1;
   font-weight: 600;
-  color: #7578b5;
-  background-color: transparent;
-  -webkit-transition-property: background-color,opacity;
-  transition-property: background-color,opacity;
-  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
-  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
-  -webkit-transition-duration: 0.15s;
-  transition-duration: 0.15s;
+  --tw-text-opacity: 1;
+  color: rgba(91,33,182,var(--tw-text-opacity));
+  background-color: rgba(0,0,0,0);
   cursor: pointer;
-  color: #ffffff;
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(124,58,237,var(--tw-bg-opacity));
 }
 
 .c2:hover {
-  background-color: rgb(250,250,250);
-  opacity: 0.8;
+  --tw-bg-opacity: 0.8;
+  background-color: rgba(249,250,251,var(--tw-bg-opacity));
 }
 
-.c2,
 .c2:hover {
-  background-color: #706eff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(124,58,237,var(--tw-bg-opacity));
 }
 
 .c0 {
@@ -761,11 +805,15 @@ Array [
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  box-sizing: border-box;
-  padding: 0.75rem 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
 <div
@@ -812,12 +860,14 @@ Array [
 exports[`Storyshots atoms/PageContainer Standard 1`] = `
 Array [
   .c1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .c0 {
@@ -825,7 +875,10 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 <div
@@ -877,8 +930,10 @@ exports[`Storyshots atoms/Paper Standard 1`] = `
 Array [
   .c0 {
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
-  background-color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
 <div
@@ -937,22 +992,29 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c0:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 <button
@@ -994,7 +1056,8 @@ Array [
   height: 0.75rem;
   border-radius: 9999px;
   overflow: hidden;
-  background-color: #e2e9ef;
+  --tw-bg-opacity: 1;
+  background-color: rgba(229,231,235,var(--tw-bg-opacity));
 }
 
 <div
@@ -1033,14 +1096,15 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  height: 1.5em;
-  margin: 0.25em;
-  border-radius: 0.25em;
-  background-color: initial;
+  height: 1.5rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
   font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 500;
-  color: #ffffff;
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
+  background-color: initial;
 }
 
 .c2 {
@@ -1074,6 +1138,10 @@ Array [
   margin: -0.25rem;
 }
 
+.c0 .Tag-sem7s1-3 {
+  background-color: #1f2937;
+}
+
 <div
     className="c0"
     style={
@@ -1084,7 +1152,7 @@ Array [
     type="neutral"
   >
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1093,7 +1161,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1102,7 +1170,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1111,7 +1179,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1120,7 +1188,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1129,7 +1197,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1138,7 +1206,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1147,7 +1215,7 @@ Array [
       </span>
     </span>
     <span
-      className="c1 Tag-sc-sem7s1-3"
+      className="c1 Tag-sem7s1-3"
     >
       <span
         className="c2"
@@ -1186,10 +1254,15 @@ Array [
   -ms-flex-align: stretch;
   align-items: stretch;
   width: 100%;
-  height: 48px;
-  border: 1px solid #e8ecfd;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  height: 3rem;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(229,231,235,var(--tw-border-opacity));
+  --tw-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   font-size: 0.875rem;
+  line-height: 1;
 }
 
 <div
@@ -1216,17 +1289,8 @@ Array [
 exports[`Storyshots atoms/Typography Standard 1`] = `
 Array [
   .c0 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.2em;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  line-height: 1;
 }
 
 <span
@@ -1321,10 +1385,10 @@ Array [
     }
   
         </style>
-        <style type=\\"text/css\\">.crePPn{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
-.fSDuNT,.fSDuNT *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
-.djBPDc{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
-.fiylTl{background-color:#706EFF;}/*!sc*/
+        <style type=\\"text/css\\">.fHbFgd{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
+.MCUeK,.MCUeK *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
+.gtxacw{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
+.fxeEHP{background-color:#706EFF;}/*!sc*/
 </style>
         
       </head>
@@ -1336,14 +1400,14 @@ Array [
   
         
       <div
-         class=\\"sc-dmlqKv crePPn\\" style=\\"\\"
+         class=\\"sc-bdfBQB fHbFgd\\" style=\\"\\"
       >
         
       
-      <!--[if mso | IE]><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-iJuVqt-outlook djBPDc-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-iBPTik-outlook gtxacw-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-iJuVqt djBPDc\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-iBPTik gtxacw\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1353,10 +1417,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-fKFxtB-outlook sc-giImIA-outlook -outlook fiylTl-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook sc-giImIA-outlook -outlook fiylTl-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-dlfnuX-outlook sc-fubCzh-outlook -outlook fxeEHP-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-dlfnuX-outlook sc-fubCzh-outlook -outlook fxeEHP-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKFxtB sc-giImIA  fiylTl\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-dlfnuX sc-fubCzh  fxeEHP\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1366,10 +1430,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-gsTEea-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-gsTEea\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1386,7 +1450,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"center\\" class=\\"sc-lmoMya\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"center\\" class=\\"sc-gKseQn\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <table
@@ -1427,10 +1491,10 @@ Array [
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKFxtB-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-dlfnuX-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-dlfnuX-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKFxtB\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-dlfnuX\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1440,10 +1504,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-gsTEea-outlook\\" style=\\"vertical-align:top;width:600px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-gsTEea\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1460,7 +1524,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"center\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"center\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1489,10 +1553,10 @@ Array [
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKFxtB-outlook sc-bBXrwG-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook sc-bBXrwG-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-dlfnuX-outlook sc-hKgJUU-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-dlfnuX-outlook sc-hKgJUU-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKFxtB sc-bBXrwG\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-dlfnuX sc-hKgJUU\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1502,10 +1566,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;padding-bottom:20px;padding-left:64px;padding-right:64px;padding-top:20px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-gsTEea-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-gsTEea\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1522,7 +1586,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1534,7 +1598,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1546,7 +1610,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1558,7 +1622,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1570,7 +1634,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1582,7 +1646,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:8px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;padding-top:8px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1594,7 +1658,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;padding-top:24px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1623,10 +1687,10 @@ Array [
       </div>
     
       
-      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-fKFxtB-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-fKFxtB-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
+      <!--[if mso | IE]></td></tr></table></td></tr><tr><td class=\\"sc-dlfnuX-outlook\\" width=\\"600px\\" ><table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"sc-dlfnuX-outlook\\" role=\\"presentation\\" style=\\"width:600px;\\" width=\\"600\\" ><tr><td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\"><![endif]-->
     
       
-      <div  class=\\"sc-fKFxtB\\" style=\\"margin:0px auto;max-width:600px;\\">
+      <div  class=\\"sc-dlfnuX\\" style=\\"margin:0px auto;max-width:600px;\\">
         
         <table
            align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
@@ -1636,10 +1700,10 @@ Array [
               <td
                  style=\\"direction:ltr;font-size:0px;padding:0px;padding-bottom:48px;padding-left:64px;padding-right:64px;text-align:center;\\"
               >
-                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-kfzBvY-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
+                <!--[if mso | IE]><table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\"><tr><td class=\\"sc-gsTEea-outlook\\" style=\\"vertical-align:top;width:472px;\\" ><![endif]-->
             
       <div
-         class=\\"mj-column-per-100 mj-outlook-group-fix sc-kfzBvY\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class=\\"mj-column-per-100 mj-outlook-group-fix sc-gsTEea\\" style=\\"font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
       >
         
       <table
@@ -1656,7 +1720,7 @@ Array [
           
               <tr>
                 <td
-                   align=\\"center\\" class=\\"sc-iwyWTf\\" style=\\"font-size:0px;padding:24px 0;word-break:break-word;\\"
+                   align=\\"center\\" class=\\"sc-eCstlR\\" style=\\"font-size:0px;padding:24px 0;word-break:break-word;\\"
                 >
                   
       <p
@@ -1673,7 +1737,7 @@ Array [
             
               <tr>
                 <td
-                   align=\\"left\\" class=\\"sc-cxFLGX fSDuNT\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
+                   align=\\"left\\" class=\\"sc-jSgvzq MCUeK\\" style=\\"font-size:0px;padding:0px;word-break:break-word;\\"
                 >
                   
       <div
@@ -1743,42 +1807,59 @@ Array [
 exports[`Storyshots molecules/AutoSuggest Standard 1`] = `
 Array [
   .c0 {
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,-webkit-transform,filter,backdrop-filter;
+  -webkit-transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
   display: inline-block;
-  box-sizing: border-box;
-  height: 2.625rem;
-  padding: 0 0.625rem;
+  height: 2.5rem;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
   border-radius: 0.5rem;
-  border: 1px solid #e8ecfd;
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(229,231,235,var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(245,243,255,var(--tw-bg-opacity));
   font-size: 1rem;
-  line-height: 1.3em;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background-color: #e8ecfd;
-  -webkit-transition: border-color 0.15s ease-in-out 0s;
-  transition: border-color 0.15s ease-in-out 0s;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
 }
 
 .c0::-webkit-input-placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0::-moz-placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0:-ms-input-placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0::placeholder {
-  color: #7578b5;
+  --tw-text-opacity: 1;
+  color: rgba(156,163,175,var(--tw-text-opacity));
 }
 
 .c0:focus {
-  outline: none;
-  background-color: #ffffff;
-  border: 1px solid #706eff;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-border-opacity: 1;
+  border-color: rgba(139,92,246,var(--tw-border-opacity));
 }
 
 <input
@@ -1791,7 +1872,6 @@ Array [
         "width": 300,
       }
     }
-    type="text"
     value=""
   />,
   <div
@@ -1815,24 +1895,28 @@ Array [
 exports[`Storyshots molecules/CodeBlock Standard 1`] = `
 Array [
   .c0 {
-  border: 1px solid #e8ecfd;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(229,231,235,var(--tw-border-opacity));
   border-radius: 0.375rem;
-  padding: 0.5em;
+  padding: 0.5rem;
   overflow: auto;
   font-size: 0.875rem;
-  font-family: "Source Code Pro","Consolas","Monaco","Menlo","Mono","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Courier New",Courier,monospace;
+  line-height: 1.25rem;
+  font-family: Source Code Pro,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
   tab-size: 4;
 }
 
 .c2 {
   display: table-cell;
   text-align: right;
-  padding-right: 1em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   opacity: 0.5;
+  padding-right: 1em;
 }
 
 .c1 {
@@ -2668,20 +2752,22 @@ Array [
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 4px;
-  color: #7578b5;
+  margin: 0.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(31,41,55,var(--tw-text-opacity));
   font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .c2 {
   margin-right: 0.5rem;
-  border-radius: 50%;
+  border-radius: 9999px;
   height: 0.75rem;
   width: 0.75rem;
 }
 
 .c3 {
-  line-height: 1em;
+  line-height: 1;
 }
 
 .c4 {
@@ -2699,7 +2785,7 @@ Array [
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin: -4px;
+  margin: -0.25rem;
 }
 
 <div
@@ -2812,7 +2898,8 @@ Array [
   height: 0.75rem;
   border-radius: 9999px;
   overflow: hidden;
-  background-color: #e2e9ef;
+  --tw-bg-opacity: 1;
+  background-color: rgba(229,231,235,var(--tw-bg-opacity));
 }
 
 .c1 {
@@ -2891,17 +2978,8 @@ Array [
 exports[`Storyshots molecules/Tabs Standard 1`] = `
 Array [
   .c1 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.2em;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  line-height: 1;
 }
 
 .c2 {
@@ -2917,15 +2995,19 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
   padding-bottom: 0.25rem;
-  border-bottom: 4px solid #706eff;
-  line-height: 1em;
-  font-weight: 700;
-  color: #1F1F41;
+  border-width: 0px;
+  border-bottom-width: 4px;
+  border-style: solid;
+  line-height: 1;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
   -webkit-text-decoration: none;
   text-decoration: none;
+  --tw-border-opacity: 1;
+  border-color: rgba(139,92,246,var(--tw-border-opacity));
+  font-weight: 700;
 }
 
 .c4 {
@@ -2941,19 +3023,22 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
   padding-bottom: 0.25rem;
-  border-bottom: 4px solid transparent;
-  line-height: 1em;
-  font-weight: 500;
-  color: #1F1F41;
+  border-width: 0px;
+  border-bottom-width: 4px;
+  border-style: solid;
+  line-height: 1;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
   -webkit-text-decoration: none;
   text-decoration: none;
+  border-color: rgba(0,0,0,0);
+  font-weight: 500;
 }
 
 .c3 {
-  margin-right: 4px;
+  margin-right: 0.25rem;
 }
 
 .c0 {
@@ -3047,26 +3132,33 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c0:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .c1:not(:first-child) {
-  margin-left: 8px;
+  margin-left: 0.5rem;
 }
 
 <button
@@ -3124,22 +3216,29 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c0:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 <button
@@ -3173,25 +3272,28 @@ exports[`Storyshots organisms/SiteWideAppBar Logged In 1`] = `
 Array [
   .c0 {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #ffffff;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 4rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   z-index: 1;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
 }
 
 .c6 {
-  line-height: 1em;
-  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
+  background: linear-gradient(-80deg,#db2777,#7c3aed,#3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .c6:hover {
@@ -3212,31 +3314,40 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c8:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .c3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .c1 {
@@ -3244,7 +3355,10 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .c2 {
@@ -3359,25 +3473,28 @@ exports[`Storyshots organisms/SiteWideAppBar Standard 1`] = `
 Array [
   .c0 {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #ffffff;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 4rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   z-index: 1;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
 }
 
 .c6 {
-  line-height: 1em;
-  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
+  background: linear-gradient(-80deg,#db2777,#7c3aed,#3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .c6:hover {
@@ -3398,31 +3515,40 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c8:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .c3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .c1 {
@@ -3430,7 +3556,10 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .c2 {
@@ -3544,39 +3673,33 @@ Array [
 exports[`Storyshots organisms/SiteWideFooter Standard 1`] = `
 Array [
   .c7 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: inherit;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-weight: 600;
-  line-height: 1.5;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  color: #2188ff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
+  cursor: pointer;
   -webkit-text-decoration: none;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .c7:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
 .c5 {
-  line-height: 1em;
-  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
+  background: linear-gradient(-80deg,#db2777,#7c3aed,#3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .c5:hover {
@@ -3586,18 +3709,26 @@ Array [
 
 .c0 {
   width: 100%;
-  height: 100px;
-  border-top: 1px solid rgb(232,236,253);
-  background-color: #ffffff;
+  height: 6rem;
+  border-top-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(209,213,219,var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
 .c2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .c1 {
@@ -3605,7 +3736,10 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .c3 {
@@ -3636,13 +3770,16 @@ Array [
 }
 
 .c8 {
-  color: #7578b5;
-  padding: 0 1.25rem;
-  opacity: 0.6;
+  --tw-text-opacity: 1;
+  color: rgba(31,41,55,var(--tw-text-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  opacity: 0.7;
 }
 
 .c8:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(139,92,246,var(--tw-text-opacity));
   opacity: 1;
 }
 
@@ -3688,6 +3825,7 @@ Array [
             href="/blog"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Blog
           </a>
@@ -3696,6 +3834,7 @@ Array [
             href="/about"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             About
           </a>
@@ -3704,6 +3843,7 @@ Array [
             href="/legal/terms"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Terms
           </a>
@@ -3712,6 +3852,7 @@ Array [
             href="/legal/privacy"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Privacy
           </a>
@@ -3740,50 +3881,46 @@ Array [
 exports[`Storyshots organisms/SiteWideLayout Standard 1`] = `
 Array [
   .c15 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: inherit;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-weight: 600;
-  line-height: 1.5;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  color: #2188ff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
+  cursor: pointer;
   -webkit-text-decoration: none;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .c15:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
 .c1 {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #ffffff;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 4rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   z-index: 1;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
 }
 
 .c7 {
-  line-height: 1em;
-  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
+  background: linear-gradient(-80deg,#db2777,#7c3aed,#3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .c7:hover {
@@ -3804,38 +3941,53 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c9:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .c11 {
   width: 100%;
-  height: 100px;
-  border-top: 1px solid rgb(232,236,253);
-  background-color: #ffffff;
+  height: 6rem;
+  border-top-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(209,213,219,var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
 .c4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .c2 {
@@ -3843,7 +3995,10 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .c3 {
@@ -3917,13 +4072,16 @@ Array [
 }
 
 .c16 {
-  color: #7578b5;
-  padding: 0 1.25rem;
-  opacity: 0.6;
+  --tw-text-opacity: 1;
+  color: rgba(31,41,55,var(--tw-text-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  opacity: 0.7;
 }
 
 .c16:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(139,92,246,var(--tw-text-opacity));
   opacity: 1;
 }
 
@@ -3943,7 +4101,7 @@ Array [
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  padding-top: 64px;
+  padding-top: 4rem;
 }
 
 <div
@@ -4018,6 +4176,7 @@ Array [
             href="/blog"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Blog
           </a>
@@ -4026,6 +4185,7 @@ Array [
             href="/about"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             About
           </a>
@@ -4034,6 +4194,7 @@ Array [
             href="/legal/terms"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Terms
           </a>
@@ -4042,6 +4203,7 @@ Array [
             href="/legal/privacy"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Privacy
           </a>
@@ -4081,21 +4243,13 @@ Array [
   height: 0.75rem;
   border-radius: 9999px;
   overflow: hidden;
-  background-color: #e2e9ef;
+  --tw-bg-opacity: 1;
+  background-color: rgba(229,231,235,var(--tw-bg-opacity));
 }
 
 .c1 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.2em;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  line-height: 1;
 }
 
 .c10 {
@@ -4107,20 +4261,22 @@ Array [
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 4px;
-  color: #7578b5;
+  margin: 0.25rem;
+  --tw-text-opacity: 1;
+  color: rgba(31,41,55,var(--tw-text-opacity));
   font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .c11 {
   margin-right: 0.5rem;
-  border-radius: 50%;
+  border-radius: 9999px;
   height: 0.75rem;
   width: 0.75rem;
 }
 
 .c12 {
-  line-height: 1em;
+  line-height: 1;
 }
 
 .c13 {
@@ -4138,7 +4294,7 @@ Array [
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin: -4px;
+  margin: -0.25rem;
 }
 
 .c5 {
@@ -4172,6 +4328,7 @@ Array [
 
 .c2 {
   font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
 }
 
@@ -4331,50 +4488,46 @@ Array [
 exports[`Storyshots pages/index Standard 1`] = `
 Array [
   .c17 {
-  font-family: Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  font-size: inherit;
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-weight: 600;
-  line-height: 1.5;
-  color: inherit;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  color: #2188ff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
+  cursor: pointer;
   -webkit-text-decoration: none;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .c17:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(59,130,246,var(--tw-text-opacity));
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
 .c1 {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: #ffffff;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 4rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   z-index: 1;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
 }
 
 .c7 {
-  line-height: 1em;
-  font-size: 24px;
+  font-size: 1.5rem;
+  line-height: 1;
   font-weight: 600;
-  color: #1F1F41;
-  background: linear-gradient(-70deg,#db469f,#2188ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  --tw-text-opacity: 1;
+  color: rgba(0,0,0,var(--tw-text-opacity));
   cursor: pointer;
+  background: linear-gradient(-80deg,#db2777,#7c3aed,#3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .c7:hover {
@@ -4395,49 +4548,64 @@ Array [
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 12px 16px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.375rem;
-  border: none;
-  -webkit-transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
-  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1);
   font-size: 1.125rem;
-  line-height: 1.125em;
+  line-height: 1;
   font-weight: 500;
-  background-color: #706eff;
-  color: #ffffff;
+  --tw-bg-opacity: 1;
+  background-color: rgba(139,92,246,var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
   cursor: pointer;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
 }
 
 .c9:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .c13 {
   width: 100%;
-  height: 100px;
-  border-top: 1px solid rgb(232,236,253);
-  background-color: #ffffff;
+  height: 6rem;
+  border-top-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(209,213,219,var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
 }
 
 .c11 {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
   min-height: 100px;
   height: 60vh;
   z-index: -1;
-  background-image: linear-gradient( rgba(142,140,255,0.3),rgba(142,140,255,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(142,140,255,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
+  background-image: linear-gradient( rgba(167,139,250,0.3),rgba(167,139,250,0.15),rgba(255,255,255,0) 70% ),radial-gradient( rgba(167,139,250,0.15),rgba(255,255,255,0) 70%,rgba(255,255,255,0) 150% );
 }
 
 .c4 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-flex: 1000 1 0;
   -ms-flex: 1000 1 0;
   flex: 1000 1 0;
-  box-sizing: border-box;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .c2 {
@@ -4445,7 +4613,10 @@ Array [
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 24px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .c3 {
@@ -4519,13 +4690,16 @@ Array [
 }
 
 .c18 {
-  color: #7578b5;
-  padding: 0 1.25rem;
-  opacity: 0.6;
+  --tw-text-opacity: 1;
+  color: rgba(31,41,55,var(--tw-text-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  opacity: 0.7;
 }
 
 .c18:hover {
-  color: #706eff;
+  --tw-text-opacity: 1;
+  color: rgba(139,92,246,var(--tw-text-opacity));
   opacity: 1;
 }
 
@@ -4545,7 +4719,7 @@ Array [
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  padding-top: 64px;
+  padding-top: 4rem;
 }
 
 .c12 {
@@ -4653,6 +4827,7 @@ Array [
             href="/blog"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Blog
           </a>
@@ -4661,6 +4836,7 @@ Array [
             href="/about"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             About
           </a>
@@ -4669,6 +4845,7 @@ Array [
             href="/legal/terms"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Terms
           </a>
@@ -4677,6 +4854,7 @@ Array [
             href="/legal/privacy"
             onClick={[Function]}
             onMouseEnter={[Function]}
+            spellCheck={false}
           >
             Privacy
           </a>
