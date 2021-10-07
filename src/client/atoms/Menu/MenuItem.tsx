@@ -1,39 +1,36 @@
 import { InferComponentProps } from "@/client/types";
-import { css, styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export type MenuItemProps = InferComponentProps<typeof MenuItem>;
 
 export const MenuItem = styled.button<{ selected?: boolean }>`
-	display: flex;
-	align-items: center;
-	box-sizing: border-box;
-	padding: 0.5rem 0.75rem;
-	border: none;
-	border-radius: 0.375rem;
-	font-size: 1rem;
-	font-weight: 600;
-	color: ${({ theme }) => theme.colors.secondaryText};
-	background-color: transparent;
-	transition-property: background-color, opacity;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 0.15s;
-	cursor: pointer;
-
-	&:hover {
-		background-color: rgb(250, 250, 250);
-		opacity: 0.8;
-	}
+	${tw`
+		flex
+		items-center
+		py-2
+		px-3
+		border-none
+		rounded-md
+		text-base
+		leading-none
+		font-semibold
+		text-purple-800
+		bg-transparent
+		hover:bg-gray-50
+		hover:bg-opacity-80
+		transition
+		duration-150
+		ease-in-out
+		cursor-pointer
+	`}
 
 	${({ selected }) =>
 		selected &&
-		css`
-			color: ${({ theme }) => theme.colors.contrastingPrimaryText};
-
-			&,
-			&:hover {
-				background-color: ${({ theme }) => theme.palette.purple};
-			}
-		`};
+		tw`
+			text-white
+			bg-purple-600
+			hover:bg-purple-600
+		`}
 `;
 
 MenuItem.defaultProps = {

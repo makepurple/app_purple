@@ -6,43 +6,49 @@ import { m, useViewportScroll } from "framer-motion";
 import { useSession } from "next-auth/client";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
 
 const MotionAppBar = m(AppBar);
 
-const Root = styled(PageContainer)`
-	display: flex;
+const Root = tw(PageContainer)`
+	flex
+` as typeof MotionAppBar;
+
+const Content = tw(MainContainer)`
+	flex
+	flex-row
+	items-center
 `;
 
-const Content = styled(MainContainer)`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-`;
-
-const BrandContainer = styled.div`
-	flex-grow: 1;
+const BrandContainer = tw.div`
+	flex-grow
 `;
 
 const Actions = styled.div`
-	display: flex;
-	justify-content: flex-end;
+	${tw`
+		flex
+		justify-end
+	`}
 
 	& > *:not(:last-child) {
-		margin-right: 1rem;
+		${tw`
+			mr-4
+		`}
 	}
 `;
 
 const StyledLoginButton = styled(LoginButton)`
-	background-color: transparent;
-	color: ${({ theme }) => theme.colors.primaryText};
-
-	&:hover {
-		box-shadow: 0 0 4px ${({ theme }) => theme.colors.boxShadow};
-	}
+	${tw`
+		bg-transparent
+		text-black
+		hover:shadow-md
+		transition-shadow
+		duration-150
+		ease-in-out
+	`}
 `;
 
 export interface SiteWideAppBarProps {

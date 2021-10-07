@@ -3,17 +3,19 @@ import { SiteWideAppBar } from "@/client/organisms/SiteWideAppBar";
 import { SiteWideFooter } from "@/client/organisms/SiteWideFooter";
 import { InferComponentProps } from "@/client/types";
 import React, { FC } from "react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const Root = styled.div`
-	display: flex;
-	flex-direction: column;
+	${tw`
+		flex
+		flex-col
+	`}
 	min-height: 100vh;
 `;
 
-const Content = styled(PageContainer)`
-	flex-grow: 1;
-	padding-top: 64px;
+const Content = tw(PageContainer)`
+	flex-grow
+	pt-16
 `;
 
 export type SiteWideLayoutProps = InferComponentProps<typeof PageContainer>;

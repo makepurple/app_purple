@@ -2,28 +2,29 @@ import { Typography } from "@/client/atoms";
 import { TopLanguage } from "@/client/graphql";
 import { Legend, ProportionBar } from "@/client/molecules";
 import React, { CSSProperties, FC, useMemo } from "react";
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 
 const MIN_SIZE_THRESHOLD = 0.01;
 const MAX_TOP_LANGUAGES = 10;
 
-const Root = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
+const Root = tw.div`
+	flex
+	flex-col
+	items-stretch
 `;
 
-const Header = styled(Typography)`
-	font-size: 1.5rem;
-	font-weight: 600;
+const Header = tw(Typography)`
+	text-2xl
+	font-semibold
+	leading-none
 `;
 
-const StyledProportionBar = styled(ProportionBar)`
-	margin-top: 1rem;
+const StyledProportionBar = tw(ProportionBar)`
+	mt-4
 `;
 
-const StyledLegend = styled(Legend)`
-	margin-top: 0.75rem;
+const StyledLegend = tw(Legend)`
+	mt-3
 `;
 
 export interface UserTopLanguagesProps {

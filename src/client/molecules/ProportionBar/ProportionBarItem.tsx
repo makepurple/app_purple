@@ -2,31 +2,33 @@ import { Popover } from "@/client/atoms";
 import { useHover } from "@/client/hooks";
 import { ColorUtils } from "@/utils";
 import React, { CSSProperties, FC } from "react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
-const StyledPopover = styled(Popover)`
-	display: inline-flex;
-	align-items: center;
-	padding: 0.5rem;
-	font-size: 1rem;
-	line-height: 1em;
+const StyledPopover = tw(Popover)`
+	inline-flex
+	items-center
+	p-2
+	text-base
+	leading-none
 `;
 
-const LegendIcon = styled.span`
-	margin-right: 0.5rem;
-	border-radius: 50%;
-	height: 0.75rem;
-	width: 0.75rem;
+const LegendIcon = tw.span`
+	mr-2
+	rounded-full
+	h-3
+	w-3
 `;
 
-const Proportion = styled.span`
-	margin-left: 0.5rem;
-	color: ${({ theme }) => theme.palette.mediumPurple};
-	font-size: 0.875rem;
+const Proportion = tw.span`
+	ml-2
+	text-gray-800
+	text-sm
 `;
 
 const Bar = styled.span<{ color: string }>`
-	height: 100%;
+	${tw`
+		h-full
+	`}
 	background-color: ${({ color }) => color};
 `;
 

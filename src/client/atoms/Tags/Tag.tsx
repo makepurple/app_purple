@@ -1,7 +1,7 @@
 import { XIcon } from "@/client/svgs";
 import { InferComponentProps } from "@/client/types";
 import React, { useContext } from "react";
-import { styled } from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 
 export type TagProps = Omit<InferComponentProps<typeof Root>, "children"> & {
@@ -11,28 +11,29 @@ export type TagProps = Omit<InferComponentProps<typeof Root>, "children"> & {
 export type TagType = "positive" | "neutral" | "negative";
 
 export const Root = styled.span<{ type?: TagType }>`
-	display: inline-flex;
-	align-items: stretch;
-	justify-content: center;
-	box-sizing: border-box;
-	height: 1.5em;
-	margin: 0.25em;
-	border-radius: 0.25em;
-	background-color: ${({ theme, type }) => {
+	${tw`
+		inline-flex
+		items-stretch
+		justify-center
+		h-6
+		m-1
+		rounded
+		text-base
+		font-medium
+		text-white
+	`}
+	background-color: ${({ type }) => {
 		switch (type) {
 			case "positive":
-				return theme.palette.blue;
+				return theme`colors.blue.500`;
 			case "negative":
-				return theme.palette.red;
+				return theme`colors.pink.600`;
 			case "neutral":
-				return theme.palette.grey;
+				return theme`colors.gray.800`;
 			default:
 				return "initial";
 		}
 	}};
-	font-size: 1rem;
-	font-weight: 500;
-	color: ${({ theme }) => theme.colors.contrastingPrimaryText};
 `;
 
 const Text = styled.span`

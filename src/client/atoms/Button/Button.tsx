@@ -1,27 +1,27 @@
 import { InferComponentProps } from "@/client/types";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export type ButtonProps = InferComponentProps<typeof Button>;
 
 export const Button = styled.button`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	padding: 12px 16px;
-	border-radius: 0.375rem;
-	border: none;
-	transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-	font-size: 1.125rem;
-	line-height: 1.125em;
-	font-weight: ${({ theme }) => theme.fontWeights.medium};
-	background-color: ${({ theme }) => theme.palette.purple};
-	color: ${({ theme }) => theme.palette.white};
-	cursor: pointer;
-
-	&:hover {
-		opacity: 0.85;
-	}
+	${tw`
+		flex
+		items-center
+		justify-center
+		px-3
+		py-4
+		rounded-md
+		text-lg
+		leading-none
+		font-medium
+		bg-purple-500
+		text-white
+		cursor-pointer
+		hover:opacity-80
+		transition-opacity
+		duration-150
+		ease-in-out
+	`}
 `;
 
 Button.defaultProps = {

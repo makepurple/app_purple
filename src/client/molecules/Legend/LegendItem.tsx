@@ -1,28 +1,28 @@
 import { ColorUtils } from "@/utils";
 import React, { CSSProperties, FC } from "react";
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 
-const Root = styled.div`
-	display: inline-flex;
-	align-items: center;
-	margin: 4px;
-	color: ${({ theme }) => theme.palette.mediumPurple};
-	font-size: 0.875rem;
+const Root = tw.div`
+	inline-flex
+	items-center
+	m-1
+	text-gray-800
+	text-sm
 `;
 
-const LegendColor = styled.span`
-	margin-right: 0.5rem;
-	border-radius: 50%;
-	height: 0.75rem;
-	width: 0.75rem;
+const LegendColor = tw.span`
+	mr-2
+	rounded-full
+	h-3
+	w-3
 `;
 
-const Content = styled.span`
-	line-height: 1em;
+const Content = tw.span`
+	leading-none
 `;
 
-const Proportion = styled.span`
-	margin-left: 0.5rem;
+const Proportion = tw.span`
+	ml-2
 `;
 
 export interface LegendItemProps {

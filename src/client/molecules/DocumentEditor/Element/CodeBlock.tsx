@@ -16,40 +16,49 @@ import {
 	useSelected,
 	useSlateStatic
 } from "slate-react";
-import { css, styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const Root = styled.div<{ $selected: boolean }>`
-	border: 4px solid ${({ theme }) => theme.palette.lightGrey};
-	border-radius: 6px;
-	overflow: auto;
-	font-size: 0.875rem;
-	font-family: "Source Code Pro", "Consolas", "Monaco", "Menlo", "Mono", "DejaVu Sans Mono",
-		"Bitstream Vera Sans Mono", "Liberation Mono", "Courier New", Courier, monospace;
+	${tw`
+		border-4
+		border-solid
+		border-gray-200
+		rounded-md
+		overflow-auto
+		text-sm
+		font-mono
+	`}
 	tab-size: 4;
 
 	${({ $selected }) =>
 		$selected &&
-		css`
-			border: 4px solid ${({ theme }) => theme.palette.lightPurple};
+		tw`
+			border-4
+			border-solid
+			border-purple-500
 		`}
 `;
 
 const StyledCodeEditor = styled(CodeEditor)`
-	user-select: none;
-	pointer-events: none;
+	${tw`
+		select-none
+		pointer-events-none
+	`}
 
 	& textarea {
-		user-select: auto;
-		pointer-events: auto;
+		${tw`
+			select-auto
+			pointer-events-auto
+		`}
 	}
 `;
 
-const Line = styled.span`
-	display: table-row;
+const Line = tw.span`
+	table-row
 `;
 
-const LineContent = styled.span`
-	display: table-cell;
+const LineContent = tw.span`
+	table-cell
 `;
 
 export type CodeBlockSlateType = `language-${Language}`;

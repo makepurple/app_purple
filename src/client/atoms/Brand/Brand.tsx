@@ -1,24 +1,24 @@
 import { InferComponentProps } from "@/client/types";
 import { config } from "@/config";
+import { oneLine } from "common-tags";
 import React, { forwardRef } from "react";
-import { css, styled } from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 
 const Root = styled.a`
-	line-height: 1em;
-	font-size: 24px;
-	font-weight: 600;
-	color: ${({ theme }) => theme.colors.primaryText};
-	background: ${({ theme }) => css`
-		linear-gradient(-70deg, ${theme.palette.red}, ${theme.palette.blue})
+	${tw`
+		text-2xl
+		leading-none
+		font-semibold
+		text-black
+		cursor-pointer
+		hover:no-underline
+	`}
+	background: ${oneLine`
+		linear-gradient(-80deg, ${theme`colors.pink.600`}, ${theme`colors.purple.600`}, ${theme`colors.blue.500`})
 	`};
-	-webkit-background-clip: text;
 	background-clip: text;
+	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	cursor: pointer;
-
-	&:hover {
-		text-decoration: none;
-	}
 `;
 
 export type BrandProps = InferComponentProps<typeof Root>;

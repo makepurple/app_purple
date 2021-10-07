@@ -2,25 +2,36 @@ import { Typography } from "@/client/atoms/Typography";
 import type { SvgIconComponent } from "@/client/svgs";
 import React, { forwardRef } from "react";
 import { useTheme } from "styled-components";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const Root = styled(Typography)<{ $selected: boolean }>`
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	padding-bottom: 0.25rem;
-	border-bottom: 4px solid
-		${({ $selected, theme }) => ($selected ? theme.palette.purple : "transparent")};
-	line-height: 1em;
-	font-weight: ${({ $selected }) => ($selected ? 700 : 500)};
-	color: ${({ theme }) => theme.colors.primaryText};
-	cursor: pointer;
-	text-decoration: none;
+	${tw`
+		inline-flex
+		items-center
+		justify-center
+		pb-1
+		border-0
+		border-b-4
+		border-solid
+		leading-none
+		text-black
+		cursor-pointer
+		no-underline
+	`}
+	${({ $selected }) =>
+		$selected
+			? tw`
+				border-purple-500
+				font-bold
+			`
+			: tw`
+				border-transparent
+				font-medium
+			`}
 `;
 
-const StyledIcon = styled.svg`
-	margin-right: 4px;
+const StyledIcon = tw.svg`
+	mr-1
 `;
 
 type AnchorProps = JSX.IntrinsicElements["a"];

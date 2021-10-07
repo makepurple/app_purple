@@ -7,14 +7,16 @@ export type MenuProps = InferComponentProps<typeof Menu>;
 
 export const Menu = ObjectUtils.setStatic(
 	styled.div`
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		box-sizing: border-box;
-		padding: 0.75rem 0.5rem;
-		border-radius: 0.5rem;
-		background-color: ${({ theme }) => theme.colors.surfaceColor};
-		${tw`shadow-md`};
+		${tw`
+			flex
+			flex-col
+			items-stretch
+			py-3
+			px-2
+			rounded-lg
+			bg-white
+			shadow-md
+		`}
 	`,
 	{ Item: MenuItem }
 );

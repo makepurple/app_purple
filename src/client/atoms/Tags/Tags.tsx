@@ -9,7 +9,7 @@ import React, {
 	useCallback,
 	useMemo
 } from "react";
-import { styled } from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 import { Tag, TagProps, TagType } from "./Tag";
 
@@ -20,21 +20,24 @@ export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onC
 };
 
 const Root = styled.div<{ type: TagType }>`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	margin: -0.25rem;
+	${tw`
+		flex
+		flex-row
+		flex-wrap
+		-m-1
+	`}
 
 	& ${Tag} {
-		background-color: ${({ theme, type }) => {
+		background-color: ${({ type }) => {
 			switch (type) {
 				case "positive":
-					return theme.palette.blue;
+					return theme`colors.blue.500`;
 				case "negative":
-					return theme.palette.red;
+					return theme`colors.pink.600`;
 				case "neutral":
+					return theme`colors.gray.800`;
 				default:
-					return theme.palette.grey;
+					return "initial";
 			}
 		}};
 	}

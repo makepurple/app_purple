@@ -1,10 +1,10 @@
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 
-export const ProgressBar = styled.div`
-	display: flex;
-	align-items: stretch;
-	height: 0.75rem;
-	border-radius: 9999px;
-	overflow: hidden;
-	background-color: ${({ theme }) => theme.palette.mediumGrey};
+export const ProgressBar = tw.div`
+	flex
+	items-stretch
+	h-3
+	rounded-full
+	overflow-hidden
+	bg-gray-200
 `;

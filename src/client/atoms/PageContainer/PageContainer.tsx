@@ -1,6 +1,7 @@
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 
-export const PageContainer = styled.div`
-	display: flex;
-	padding: 0 24px;
+export const PageContainer = tw.div`
+	flex
+	py-0
+	px-6
 `;

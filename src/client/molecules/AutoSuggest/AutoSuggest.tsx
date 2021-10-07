@@ -3,15 +3,26 @@ import { useToggle, useUncontrolledProp } from "@/client/hooks";
 import { StringUtils } from "@/utils";
 import Fuse from "fuse.js";
 import React, { forwardRef, SyntheticEvent, useMemo } from "react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const MatchToken = styled.span<{ $match: boolean }>`
-	box-sizing: border-box;
-	border-radius: 4px;
-	padding: 0 ${({ $match }) => ($match ? 0.125 : 0)}rem;
-	color: ${({ theme, $match }) => ($match ? theme.palette.white : theme.colors.primaryText)};
-	background-color: ${({ theme, $match }) => ($match ? theme.palette.purple : "transparent")};
-	white-space: pre;
+	${tw`
+		rounded
+		py-0
+		whitespace-pre
+	`}
+	${({ $match }) =>
+		$match
+			? tw`
+				px-0.5
+				text-white
+				bg-purple-500
+			`
+			: tw`
+				px-0
+				text-black
+				bg-transparent
+			`};
 `;
 
 export interface AutoSuggestProps extends InputProps {

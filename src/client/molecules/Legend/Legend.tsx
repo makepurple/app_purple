@@ -1,13 +1,13 @@
 import { ObjectUtils } from "@/utils";
 import React, { CSSProperties, FC, ReactElement, useMemo } from "react";
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 import { LegendItem, LegendItemProps } from "./LegendItem";
 
-const Root = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	margin: -4px;
+const Root = tw.div`
+	flex
+	flex-row
+	flex-wrap
+	-m-1
 `;
 
 export interface LegendProps {

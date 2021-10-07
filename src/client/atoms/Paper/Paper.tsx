@@ -1,7 +1,7 @@
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
-export const Paper = styled.div`
-	border-radius: 0.5rem;
-	background-color: ${({ theme }) => theme.palette.white};
-	${tw`shadow-lg`}
+export const Paper = tw.div`
+	rounded-lg
+	bg-white
+	shadow-lg
 `;

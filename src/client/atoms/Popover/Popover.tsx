@@ -9,36 +9,46 @@ import React, {
 	SyntheticEvent,
 	useRef
 } from "react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 export const PopoverArrow = styled.div`
-	position: absolute;
-	width: 16px;
-	height: 16px;
-	border-color: transparent;
-	border-style: solid;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	${tw`
+		absolute
+		w-4
+		h-4
+		border-transparent
+		border-solid
+		top-1/2
+		left-1/2
+		transform
+		-translate-x-1/2
+		-translate-y-1/2
+	`}
 
 	&::before {
 		content: "";
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		color: ${({ theme }) => theme.colors.surfaceColor};
-		border-color: transparent;
-		border-style: solid;
-		border-width: 8px;
-		transform: translate(-50%, -50%);
+		${tw`
+			absolute
+			top-1/2
+			left-1/2
+			text-white
+			border-transparent
+			border-solid
+			border-8
+			transform
+			-translate-x-1/2
+			-translate-y-1/2
+		`}
 	}
 `;
 
 export const PopoverBox = styled.div`
-	background-color: ${({ theme }) => theme.colors.surfaceColor};
-	border-radius: 4px;
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-	pointer-events: auto;
+	${tw`
+		bg-white
+		rounded
+		shadow-md
+		pointer-events-auto
+	`}
 
 	&[data-placement^="top"] > ${PopoverArrow} {
 		bottom: 0;

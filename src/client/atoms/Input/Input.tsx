@@ -1,34 +1,27 @@
 import { InferComponentProps } from "@/client/types";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 export type InputProps = InferComponentProps<typeof Input>;
 
-export const Input = styled.input`
-	display: inline-block;
-	box-sizing: border-box;
-	height: 2.625rem;
-	padding: 0 0.625rem;
-	border-radius: 0.5rem;
-	border: 1px solid ${({ theme }) => theme.colors.inputBackgroundColor};
-	${tw`font-sans`}
-	font-size: 1rem;
-	line-height: 1.3em;
-	font-weight: 600;
-	color: ${({ theme }) => theme.colors.primaryText};
-	background-color: ${({ theme }) => theme.colors.inputBackgroundColor};
-	transition: border-color 0.15s ease-in-out 0s;
-
-	&::placeholder {
-		color: ${({ theme }) => theme.colors.secondaryText};
-	}
-
-	&:focus {
-		outline: none;
-		background-color: ${({ theme }) => theme.colors.surfaceColor};
-		border: 1px solid ${({ theme }) => theme.palette.purple};
-	}
+export const Input = tw.input`
+	inline-block
+	h-10
+	px-2.5
+	rounded-lg
+	border
+	border-solid
+	border-gray-200
+	bg-purple-50
+	text-base
+	leading-none
+	font-semibold
+	font-sans
+	text-black
+	transition
+	duration-300
+	ease-in-out
+	placeholder:text-gray-400
+	focus:outline-none
+	focus:bg-white
+	focus:border-purple-500
 `;
-
-Input.defaultProps = {
-	type: "text"
-};

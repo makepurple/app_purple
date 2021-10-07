@@ -1,33 +1,30 @@
 import { Anchor, Brand, Footer, MainContainer, PageContainer } from "@/client/atoms";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const Root = styled(PageContainer)``;
 
-const Content = styled(MainContainer)`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+const Content = tw(MainContainer)`
+	flex
+	flex-row
+	items-center
 `;
 
-const BrandContainer = styled.div`
-	flex-grow: 1;
+const BrandContainer = tw.div`
+	flex-grow
 `;
 
-const LinksContainer = styled.nav`
-	flex-shrink: 0;
+const LinksContainer = tw.nav`
+	flex-shrink-0
 `;
 
-const SiteLink = styled(Anchor)`
-	color: ${({ theme }) => theme.colors.secondaryText};
-	padding: 0 1.25rem;
-	opacity: 0.6;
-
-	&:hover {
-		color: ${({ theme }) => theme.palette.purple};
-		opacity: 1;
-	}
+const SiteLink = tw(Anchor)`
+	text-gray-800
+	px-5
+	opacity-70
+	hover:text-purple-500
+	hover:opacity-100
 `;
 
 export interface SiteWideFooterProps {

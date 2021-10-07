@@ -1,8 +1,11 @@
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 
-export const Footer = styled.footer`
-	width: 100%;
-	height: 100px;
-	border-top: 1px solid ${({ theme }) => theme.colors.outlineColor};
-	background-color: ${({ theme }) => theme.colors.surfaceColor};
+export const Footer = tw.footer`
+	w-full
+	h-24
+	border-t
+	border-solid
+	border-gray-300
+	bg-white
+	shadow-lg
 `;

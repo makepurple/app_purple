@@ -5,30 +5,30 @@ import { HeadingIcon } from "@/client/svgs";
 import React, { FC } from "react";
 import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
-import { styled } from "twin.macro";
+import tw, { styled } from "twin.macro";
 
-const HeadingOne = styled(Typography)`
-	font-size: 32px;
+const HeadingOne = tw(Typography)`
+	text-3xl
 `;
 
-const HeadingTwo = styled(Typography)`
-	font-size: 24px;
+const HeadingTwo = tw(Typography)`
+	text-2xl
 `;
 
-const HeadingThree = styled(Typography)`
-	font-size: 20px;
+const HeadingThree = tw(Typography)`
+	text-xl
 `;
 
-const HeadingFour = styled(Typography)`
-	font-size: 16px;
+const HeadingFour = tw(Typography)`
+	text-base
 `;
 
-const HeadingFive = styled(Typography)`
-	font-size: 14px;
+const HeadingFive = tw(Typography)`
+	text-sm
 `;
 
-const HeadingSix = styled(Typography)`
-	font-size: 12px;
+const HeadingSix = tw(Typography)`
+	text-xs
 `;
 
 export type HeadingSlateType =

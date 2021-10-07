@@ -9,7 +9,7 @@ import {
 	Slate,
 	withReact
 } from "slate-react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 import {
 	BulletedListToolbarButton,
 	CodeBlockToolbarButton,
@@ -30,21 +30,25 @@ import {
 	Leaf
 } from "./Leaf";
 
-const Root = styled.div`
-	border: 1px solid ${({ theme }) => theme.palette.lightGrey};
-	border-radius: 0.375rem;
-	overflow: hidden;
-	${tw`shadow-md`}
+const Root = tw.div`
+	shadow-md
+	border
+	border-solid
+	border-gray-200
+	rounded-md
+	overflow-hidden
 `;
 
-const EditorToolbar = styled(Toolbar)`
-	box-shadow: none;
-	border: none;
-	border-bottom: 1px solid ${({ theme }) => theme.palette.lightGrey};
+const EditorToolbar = tw(Toolbar)`
+	shadow-none
+	border-0
+	border-b
+	border-solid
+	border-gray-200
 `;
 
-const EditableContainer = styled.div`
-	padding: 1.375rem;
+const EditableContainer = tw.div`
+	p-5
 `;
 
 declare module "slate" {

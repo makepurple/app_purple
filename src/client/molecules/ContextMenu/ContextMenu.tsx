@@ -3,10 +3,10 @@ import { ObjectUtils, WindowUtils } from "@/utils";
 import { AnimatePresence, m } from "framer-motion";
 import React, { FC } from "react";
 import { createPortal } from "react-dom";
-import { styled } from "twin.macro";
+import tw from "twin.macro";
 
-const Root = styled(m(Menu))`
-	position: fixed;
+const Root = tw(m(Menu))`
+	fixed
 `;
 
 export interface ContextMenuProps extends MenuProps {
