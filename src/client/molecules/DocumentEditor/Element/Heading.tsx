@@ -5,7 +5,7 @@ import { HeadingIcon } from "@/client/svgs";
 import React, { FC } from "react";
 import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 const HeadingOne = tw(Typography)`
 	text-3xl
