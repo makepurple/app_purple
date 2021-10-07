@@ -5,7 +5,6 @@ import { domMax, LazyMotion } from "framer-motion";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";
 import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "../src/client/atoms";
 import { GlobalStyles } from "../src/client/styles/global.styles";
 import "twin.macro"
 
@@ -59,12 +58,12 @@ export const parameters = {
 export const decorators = [
 	urqlDecorator,
 	(Story) => (
-		<ThemeProvider>
+		<>
 			<GlobalStyles />
 			<LazyMotion features={domMax} strict>
 				<Story />
 			</LazyMotion>
 			<Toaster position="bottom-center" />
-		</ThemeProvider>
+		</>
 	)
 ];

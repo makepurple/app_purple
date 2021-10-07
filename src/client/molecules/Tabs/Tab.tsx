@@ -1,8 +1,7 @@
 import { Typography } from "@/client/atoms/Typography";
 import type { SvgIconComponent } from "@/client/svgs";
 import React, { forwardRef } from "react";
-import { useTheme } from "styled-components";
-import tw, { styled } from "twin.macro";
+import tw, { styled, theme } from "twin.macro";
 
 const Root = styled(Typography)<{ $selected: boolean }>`
 	${tw`
@@ -44,11 +43,11 @@ export interface TabProps extends AnchorProps {
 export const Tab = forwardRef<HTMLAnchorElement, TabProps>((props, ref) => {
 	const { children, icon, selected = false, ...restAnchorProps } = props;
 
-	const theme = useTheme();
-
 	return (
 		<Root as="a" {...(restAnchorProps as any)} ref={ref} $selected={selected}>
-			{icon && <StyledIcon as={icon} height={16} width={16} color={theme.palette.purple} />}
+			{icon && (
+				<StyledIcon as={icon} height={16} width={16} color={theme`colors.purple.500`} />
+			)}
 			{children}
 		</Root>
 	);
