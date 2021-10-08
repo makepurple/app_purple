@@ -27,7 +27,8 @@ import {
 	CodeToolbarButton,
 	CustomText,
 	ItalicToolbarButton,
-	Leaf
+	Leaf,
+	UnderlineToolbarButton
 } from "./Leaf";
 
 const Root = tw.div`
@@ -93,6 +94,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<HeadingToolbarButton />
 					<BoldToolbarButton />
 					<ItalicToolbarButton />
+					<UnderlineToolbarButton />
 					<CodeToolbarButton />
 					<BulletedListToolbarButton />
 					<NumberedListToolbarButton />

@@ -3,12 +3,14 @@ import React, { FC, ReactElement } from "react";
 import { RenderLeafProps } from "slate-react";
 import { wrapLeafCode, wrapLeafItalic } from ".";
 import { wrapLeafBold } from "./Bold";
+import { wrapLeafUnderline } from "./Underline";
 
 export type CustomText = {
 	bold?: boolean;
 	code?: boolean;
 	italic?: boolean;
 	text: string;
+	underline?: boolean;
 };
 
 export type WrapLeafWithTypeParams = {
@@ -24,7 +26,8 @@ export const Leaf: FC<RenderLeafProps> = (props) => {
 	const composed = FunctionUtils.compose<WrapLeafWithType>(
 		wrapLeafBold,
 		wrapLeafCode,
-		wrapLeafItalic
+		wrapLeafItalic,
+		wrapLeafUnderline
 	);
 
 	const { children } = composed(props);
