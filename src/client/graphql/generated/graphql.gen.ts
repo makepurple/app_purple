@@ -201,14 +201,14 @@ export type UserWhereUniqueInput = {
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: Maybe<{ readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: Maybe<string> }> };
+export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
 
 export type GetUserSummarySidebarQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type GetUserSummarySidebarQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: Maybe<string>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly url: any, readonly websiteUrl?: Maybe<string>, readonly topLanguages?: Maybe<{ readonly __typename: 'TopLanguages', readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> }> } }> };
+export type GetUserSummarySidebarQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: any, readonly websiteUrl?: string | null | undefined, readonly topLanguages?: { readonly __typename: 'TopLanguages', readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } | null | undefined } } | null | undefined };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -22076,11 +22076,11 @@ export type GetUserTopLanguagesQueryVariables = Exact<{
 }>;
 
 
-export type GetUserTopLanguagesQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename?: 'User', readonly repositories: { readonly __typename?: 'RepositoryConnection', readonly nodes?: Maybe<ReadonlyArray<Maybe<{ readonly __typename?: 'Repository', readonly name: string, readonly languages?: Maybe<{ readonly __typename?: 'LanguageConnection', readonly edges?: Maybe<ReadonlyArray<Maybe<{ readonly __typename?: 'LanguageEdge', readonly size: number, readonly node: { readonly __typename?: 'Language', readonly name: string, readonly color?: Maybe<string> } }>>> }> }>>> } }> };
+export type GetUserTopLanguagesQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly repositories: { readonly __typename?: 'RepositoryConnection', readonly nodes?: ReadonlyArray<{ readonly __typename?: 'Repository', readonly name: string, readonly languages?: { readonly __typename?: 'LanguageConnection', readonly edges?: ReadonlyArray<{ readonly __typename?: 'LanguageEdge', readonly size: number, readonly node: { readonly __typename?: 'Language', readonly name: string, readonly color?: string | null | undefined } } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined } } | null | undefined };
 
 export type GetUserGitHubQueryVariables = Exact<{
   login: Scalars['String'];
 }>;
 
 
-export type GetUserGitHubQuery = { readonly __typename?: 'Query', readonly user?: Maybe<{ readonly __typename?: 'User', readonly bio?: Maybe<string>, readonly company?: Maybe<string>, readonly twitterUsername?: Maybe<string>, readonly url: string, readonly websiteUrl?: Maybe<string> }> };
+export type GetUserGitHubQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined } | null | undefined };
