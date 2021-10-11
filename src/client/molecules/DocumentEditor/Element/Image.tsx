@@ -7,7 +7,9 @@ import { Editor, Transforms } from "slate";
 import { RenderElementProps, useFocused, useSelected, useSlateStatic } from "slate-react";
 import tw, { css, styled, theme } from "twin.macro";
 
-const Root = styled.div<{ $focused?: boolean }>`
+const Root = styled.div``;
+
+const ImageContainer = styled.div<{ $focused?: boolean }>`
 	${tw`
 		relative
 		flex
@@ -16,6 +18,7 @@ const Root = styled.div<{ $focused?: boolean }>`
 		h-64
 		cursor-pointer
 	`}
+
 	${({ $focused }) =>
 		$focused &&
 		css`
@@ -127,8 +130,10 @@ export const Image: FC<RenderElementProps> = (props) => {
 	if (element.type !== "image") return null;
 
 	return (
-		<Root {...attributes} contentEditable={false} $focused={selected && focused}>
-			<NextImage alt="" src={element.url} layout="fill" objectFit="contain" unoptimized />
+		<Root {...attributes}>
+			<ImageContainer contentEditable={false} $focused={selected && focused}>
+				<NextImage alt="" src={element.url} layout="fill" objectFit="contain" unoptimized />
+			</ImageContainer>
 			{children}
 		</Root>
 	);
