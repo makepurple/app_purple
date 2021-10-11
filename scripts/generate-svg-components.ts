@@ -34,16 +34,7 @@ const generateComponents = () => {
 	fs.ensureDirSync(componentPath);
 	fs.emptyDirSync(componentPath);
 
-	fs.appendFileSync(
-		`${componentPath}/index.tsx`,
-		`${stripIndents`
-			import * as React from "react";
-
-			export type SvgIconComponent = typeof GitHubIcon;
-		`}\n\n`
-	);
-
-	filenames.forEach((filename) => {
+	filenames.forEach((filename, i) => {
 		const svg = fs.readFileSync(filename, "utf8");
 		const componentName = path.parse(filename).name;
 		const componentCode = svgr.sync(
@@ -67,6 +58,18 @@ const generateComponents = () => {
 			},
 			{ componentName }
 		);
+
+		if (i === 0) {
+			fs.appendFileSync(
+				`${componentPath}/index.tsx`,
+				`${stripIndents`
+					import * as React from "react";
+					import { InferComponentProps } from "@/client/types"
+					export type SvgIconComponent = typeof ${componentName};
+					export type SvgIconComponentProps = InferComponentProps<SvgIconComponent>;
+				`}\n\n`
+			)
+		}
 
 		fs.appendFileSync(
 			`${componentPath}/index.tsx`,

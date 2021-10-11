@@ -4,6 +4,7 @@ import { BlockQuote, BlockQuoteElement } from "./BlockQuote";
 import { BulletedList, BulletedListElement } from "./BulletedList";
 import { CodeBlock, CodeBlockElement } from "./CodeBlock";
 import { Heading, HeadingElement } from "./Heading";
+import { Image, ImageElement } from "./Image";
 import { Link, LinkElement } from "./Link";
 import { ListItem, ListItemElement } from "./ListItem";
 import { NumberedList, NumberedListElement } from "./NumberedList";
@@ -14,6 +15,7 @@ export type CustomElement =
 	| BulletedListElement
 	| CodeBlockElement
 	| HeadingElement
+	| ImageElement
 	| LinkElement
 	| ListItemElement
 	| NumberedListElement
@@ -37,6 +39,9 @@ export const Element: FC<RenderElementProps> = (props) => {
 			return <BlockQuote {...props} />;
 		case "bulleted-list":
 			return <BulletedList {...props} />;
+		case "image":
+			// eslint-disable-next-line jsx-a11y/alt-text
+			return <Image {...props} />;
 		case "link":
 			return <Link {...props} />;
 		case "list-item":

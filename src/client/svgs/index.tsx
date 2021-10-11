@@ -1,6 +1,7 @@
 import * as React from "react";
-
-export type SvgIconComponent = typeof GitHubIcon;
+import { InferComponentProps } from "@/client/types"
+export type SvgIconComponent = typeof BoldIcon;
+export type SvgIconComponentProps = InferComponentProps<SvgIconComponent>;
 
 export const BoldIcon = React.memo(
 	React.forwardRef(
@@ -186,6 +187,26 @@ export const HexagonIcon = React.memo(
 				<path
 					fill="currentColor"
 					d="M19.429 12.61l-3.183 5.456a1.213 1.213 0 01-1.047.6H8.801a1.212 1.212 0 01-1.047-.6L4.57 12.61a1.214 1.214 0 010-1.222l3.183-5.454A1.212 1.212 0 018.8 5.333h6.398a1.212 1.212 0 011.047.602l3.183 5.454a1.213 1.213 0 010 1.222z"
+				/>
+			</svg>
+		)
+	)
+);
+
+export const ImageIcon = React.memo(
+	React.forwardRef(
+		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				width={24}
+				height={24}
+				ref={svgRef}
+				{...props}
+			>
+				<path
+					fillRule="evenodd"
+					d="M19.25 4.5H4.75a.25.25 0 00-.25.25v14.5c0 .138.112.25.25.25h.19l9.823-9.823a1.75 1.75 0 012.475 0l2.262 2.262V4.75a.25.25 0 00-.25-.25zm.25 9.56l-3.323-3.323a.25.25 0 00-.354 0L7.061 19.5H19.25a.25.25 0 00.25-.25v-5.19zM4.75 3A1.75 1.75 0 003 4.75v14.5c0 .966.784 1.75 1.75 1.75h14.5A1.75 1.75 0 0021 19.25V4.75A1.75 1.75 0 0019.25 3H4.75zM8.5 9.5a1 1 0 100-2 1 1 0 000 2zm0 1.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
 				/>
 			</svg>
 		)

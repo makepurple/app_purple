@@ -1,6 +1,8 @@
 import { Toolbar } from "@/client/atoms";
+import { FunctionUtils } from "@/utils";
 import React, { CSSProperties, FC, useCallback, useMemo, useState } from "react";
 import { BaseEditor, createEditor, Descendant } from "slate";
+import { withHistory } from "slate-history";
 import {
 	Editable,
 	ReactEditor,
@@ -16,9 +18,11 @@ import {
 	CustomElement,
 	Element,
 	HeadingToolbarButton,
+	ImageToolbarButton,
 	LinkToolbarButton,
 	NumberedListToolbarButton,
 	withCodeBlock,
+	withImages,
 	withLinks
 } from "./Element";
 import { BlockQuoteToolbarButton } from "./Element/BlockQuote";
@@ -75,7 +79,18 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 	placeholder = "",
 	style
 }) => {
-	const editor = useMemo(() => withLinks(withCodeBlock(withReact(createEditor()))), []);
+	const editor = useMemo(() => {
+		const composed = FunctionUtils.compose(
+			withReact,
+			withHistory,
+			withCodeBlock,
+			withImages,
+			withLinks
+		);
+
+		return composed(createEditor());
+	}, []);
+
 	const [value, setValue] = useState<Descendant[]>([
 		{
 			type: "paragraph",
@@ -100,6 +115,7 @@ export const DocumentEditor: FC<DocumentEditorProps> = ({
 					<NumberedListToolbarButton />
 					<BlockQuoteToolbarButton />
 					<LinkToolbarButton />
+					<ImageToolbarButton />
 				</EditorToolbar>
 				<EditableContainer>
 					<Editable
