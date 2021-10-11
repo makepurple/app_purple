@@ -9,34 +9,20 @@ import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
 import { Editor, Element, Node, Transforms } from "slate";
-import {
-	ReactEditor,
-	RenderElementProps,
-	useReadOnly,
-	useSelected,
-	useSlateStatic
-} from "slate-react";
+import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw, { styled } from "twin.macro";
 
-const Root = styled.div<{ $selected: boolean }>`
+const Root = styled.div`
 	${tw`
-		border-4
+		border-2
 		border-solid
-		border-gray-200
+		border-purple-500
 		rounded-md
 		overflow-auto
 		text-sm
 		font-mono
 	`}
 	tab-size: 4;
-
-	${({ $selected }) =>
-		$selected &&
-		tw`
-			border-4
-			border-solid
-			border-purple-500
-		`}
 `;
 
 const StyledCodeEditor = styled(CodeEditor)`
@@ -133,7 +119,6 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 	const { attributes, children, element } = props;
 
 	const readOnly = useReadOnly();
-	const selected = useSelected();
 	const editor = useSlateStatic();
 
 	const rootRef = useRef<HTMLDivElement>(null);
@@ -154,7 +139,6 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 			ref={composedRef}
 			contentEditable={false}
 			style={shadesOfPurple.plain as any}
-			$selected={selected}
 		>
 			<StyledCodeEditor
 				highlight={(value) => (
