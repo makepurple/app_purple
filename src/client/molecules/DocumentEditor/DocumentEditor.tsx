@@ -55,6 +55,7 @@ const _DocumentEditor: FC<DocumentEditorProps> = ({
 
 		return composed(createEditor());
 	}, []);
+
 	return (
 		<Root className={className} style={style}>
 			<Slate
