@@ -1,9 +1,10 @@
+import { insertBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { ImageIcon } from "@/client/svgs";
 import { UrlUtils } from "@/utils";
 import NextImage from "next/image";
 import React, { FC, useCallback } from "react";
-import { Editor, Transforms } from "slate";
+import { Editor } from "slate";
 import { RenderElementProps, useFocused, useSelected, useSlateStatic } from "slate-react";
 import tw, { css, styled, theme } from "twin.macro";
 
@@ -33,7 +34,7 @@ const insertImage = (editor: Editor, url: string): void => {
 		children: [{ text: "" }]
 	};
 
-	Transforms.insertNodes(editor, image);
+	insertBlock(editor, image);
 };
 
 const isImageUrl = (url: string): boolean => {

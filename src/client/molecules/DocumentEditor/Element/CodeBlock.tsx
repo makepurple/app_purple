@@ -1,5 +1,5 @@
 import { Menu, Popover } from "@/client/atoms";
-import { useContextMenu, useToggle } from "@/client/hooks";
+import { useContextMenu, useInsertBlock, useToggle } from "@/client/hooks";
 import { ContextMenu } from "@/client/molecules/ContextMenu";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeSquareIcon } from "@/client/svgs";
@@ -79,7 +79,7 @@ const supportedLanguages: readonly CodeBlockLanguageOption[] = [
 ];
 
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
-	const editor = useSlateStatic();
+	const insertBlock = useInsertBlock();
 
 	const [open, toggle] = useToggle(false);
 
@@ -91,7 +91,7 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 						<Menu.Item
 							key={slateType}
 							onClick={() => {
-								Transforms.insertNodes(editor, {
+								insertBlock({
 									type: slateType,
 									children: [{ text: "" }]
 								});

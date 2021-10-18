@@ -1,5 +1,6 @@
 export * from "./useContextMenu";
 export * from "./useHover";
+export * from "./useInsertBlock";
 export * from "./useIsBlockActive";
 export * from "./useIsMarkActive";
 export * from "./useNoSsr";
