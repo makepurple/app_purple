@@ -1,3 +1,4 @@
+export * from "./BlockQuote";
 export * from "./BulletedList";
 export * from "./CodeBlock";
 export * from "./Element";
