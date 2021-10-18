@@ -32,6 +32,13 @@ export class CloudinaryClient {
 		});
 	}
 
+	public async deleteImageFile(filename: string): Promise<boolean> {
+		return await cloudinary.v2.uploader
+			.destroy(`${process.env.CLOUDINARY_CLOUD_NAME}/images/${filename}`)
+			.then(() => true)
+			.catch(() => false);
+	}
+
 	public uploadImageDataUrl(filename: string, dataUrl: string): Promise<string> {
 		return cloudinary.v2.uploader
 			.upload(dataUrl, {
