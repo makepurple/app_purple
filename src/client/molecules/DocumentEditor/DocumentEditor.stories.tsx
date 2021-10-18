@@ -1,5 +1,6 @@
 import { DocumentEditor } from "@/client/molecules";
-import React from "react";
+import React, { useState } from "react";
+import { Descendant } from "slate";
 
 export default {
 	title: "molecules/DocumentEditor",
@@ -7,8 +8,15 @@ export default {
 };
 
 const Template = (args) => {
+	const [value, setValue] = useState<Descendant[]>([
+		{
+			type: "paragraph",
+			children: [{ text: "Hello world~!" }]
+		}
+	]);
+
 	return (
-		<DocumentEditor {...args}>
+		<DocumentEditor value={value} onChange={(newValue) => setValue(newValue)}>
 			<DocumentEditor.Toolbar>
 				<DocumentEditor.Toolbar.CodeBlock />
 				<DocumentEditor.Toolbar.Heading />
@@ -27,8 +35,7 @@ const Template = (args) => {
 	);
 };
 Template.args = {
-	name: "Storybook textarea",
-	placeholder: "Hello world..."
+	name: "Storybook textarea"
 };
 
 export const Standard = Template.bind({});
