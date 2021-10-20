@@ -49,8 +49,8 @@ const _DocumentEditor: FC<DocumentEditorProps> = ({
 			withReact,
 			withHistory,
 			withCodeBlock,
-			withImages,
-			withLinks
+			withLinks,
+			withImages
 		);
 
 		return composed(createEditor());

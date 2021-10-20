@@ -3,7 +3,14 @@ import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { ImageIcon } from "@/client/svgs";
 import { UrlUtils } from "@/utils";
 import NextImage from "next/image";
-import React, { FC, useCallback } from "react";
+import React, {
+	CSSProperties,
+	FC,
+	forwardRef,
+	MouseEvent,
+	useCallback,
+	useImperativeHandle
+} from "react";
 import { Editor } from "slate";
 import { RenderElementProps, useFocused, useSelected, useSlateStatic } from "slate-react";
 import tw, { css, styled, theme } from "twin.macro";
@@ -27,7 +34,20 @@ const ImageContainer = styled.div<{ $focused?: boolean }>`
 		`}
 `;
 
+const isImageUrl = (url: string): boolean => {
+	if (!url) return false;
+	if (!UrlUtils.isValid(url)) return false;
+
+	const extension = new URL(url).pathname.split(".").at(-1);
+
+	if (!extension) return false;
+
+	return ["gif", "jpeg", "jpg", "png", "webp"].includes(extension);
+};
+
 const insertImage = (editor: Editor, url: string): void => {
+	if (!isImageUrl(url)) return;
+
 	const image: ImageElement = {
 		type: "image",
 		url,
@@ -35,15 +55,6 @@ const insertImage = (editor: Editor, url: string): void => {
 	};
 
 	insertBlock(editor, image);
-};
-
-const isImageUrl = (url: string): boolean => {
-	if (!url) return false;
-	if (!UrlUtils.isValid(url)) return false;
-
-	const extension = new URL(url).pathname.split(".")[-1];
-
-	return ["gif", "jpeg", "jpg", "png", "webp"].includes(extension);
 };
 
 export const withImages = (editor: Editor): Editor => {
@@ -98,29 +109,51 @@ export type ImageElement = {
 	url: string;
 };
 
-export const ImageToolbarButton: FC<Record<string, never>> = () => {
-	const editor = useSlateStatic();
+export interface ImageToolbarButtonRef {
+	onImageUrl: (url: string) => void;
+}
 
-	const makeImage = useCallback(() => {
-		const url = window.prompt("Enter the URL for this image");
+export interface ImageToolbarButtonProps {
+	className?: string;
+	onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+	style?: CSSProperties;
+}
 
-		if (!url) return;
+export const ImageToolbarButton = forwardRef<ImageToolbarButtonRef, ImageToolbarButtonProps>(
+	(props, ref) => {
+		const { className, onClick, style } = props;
 
-		insertImage(editor, url);
-	}, [editor]);
+		const editor = useSlateStatic();
 
-	return (
-		<ToolbarButton
-			onClick={(event) => {
-				event.preventDefault();
+		const makeImage = useCallback(() => {
+			const url = window.prompt("Enter the URL for this image");
 
-				makeImage();
-			}}
-		>
-			<ImageIcon height={20} width={20} />
-		</ToolbarButton>
-	);
-};
+			if (!url) return;
+
+			insertImage(editor, url);
+		}, [editor]);
+
+		const onImageUrl = useCallback((url: string): void => insertImage(editor, url), [editor]);
+
+		useImperativeHandle(ref, () => ({ onImageUrl }));
+
+		return (
+			<ToolbarButton
+				className={className}
+				onClick={(event) => {
+					event.preventDefault();
+
+					onClick ? onClick(event) : makeImage();
+				}}
+				style={style}
+			>
+				<ImageIcon height={20} width={20} />
+			</ToolbarButton>
+		);
+	}
+);
+
+ImageToolbarButton.displayName = "ImageToolbarButton";
 
 export const Image: FC<RenderElementProps> = (props) => {
 	const { attributes, children, element } = props;
