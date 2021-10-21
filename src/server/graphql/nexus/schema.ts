@@ -1,6 +1,7 @@
 import { ServerContext } from "@/server/graphql/context";
 import { redis } from "@/server/redis";
 import { AuthorizationError } from "@/server/utils";
+import { oneLine } from "common-tags";
 import { RedisStore } from "graphql-rate-limit";
 import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import path from "path";
@@ -56,7 +57,11 @@ export const schema = makeSchema({
 		})
 	],
 	sourceTypes: {
-		headers: [],
+		headers: [
+			oneLine`
+				import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
+			`
+		],
 		modules: [],
 		mapping: {
 			DateTime: "Date",

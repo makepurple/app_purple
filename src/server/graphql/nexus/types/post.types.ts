@@ -1,5 +1,5 @@
 import { objectType } from "nexus";
-import { Post } from "nexus-prisma";
+import { Post, PostImage } from "nexus-prisma";
 
 export const postTypes = [
 	objectType({
@@ -10,10 +10,20 @@ export const postTypes = [
 			t.field(Post.author);
 			t.field(Post.comments);
 			t.field(Post.content);
-			t.field(Post.thumbnailImageUrl);
+			t.field(Post.thumbnailUrl);
 			t.field(Post.title);
+			t.field(Post.images);
 			t.field(Post.createdAt);
 			t.field(Post.updatedAt);
+		}
+	}),
+	objectType({
+		name: PostImage.$name,
+		description: PostImage.$description,
+		definition: (t) => {
+			t.field(PostImage.id);
+			t.field(PostImage.post);
+			t.field(PostImage.postId);
 		}
 	})
 ];

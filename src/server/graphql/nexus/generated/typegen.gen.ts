@@ -1,4 +1,4 @@
-
+import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 
 import type { ServerContext as ctx } from "@/server/graphql/context"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
@@ -78,6 +78,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CreatePostInput: { // input type
+    content: NexusGenScalars['Json']; // Json!
+    thumbnail?: NexusGenScalars['Upload'] | null; // Upload
+    title: string; // String!
+  }
   CreatePresignedS3UrlInput: { // input type
     fileName: string; // String!
     fileType: string; // String!
@@ -111,7 +116,7 @@ export interface NexusGenScalars {
   Decimal: any
   Json: any
   URL: string
-  Upload: any
+  Upload: FileUpload
 }
 
 export interface NexusGenObjects {
@@ -140,9 +145,13 @@ export interface NexusGenObjects {
     content: NexusGenScalars['Json']; // Json!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
-    thumbnailImageUrl?: string | null; // String
+    thumbnailUrl?: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  PostImage: { // root type
+    id: string; // ID!
+    postId: number; // Int!
   }
   Query: {};
   Skill: { // root type
@@ -208,6 +217,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
+    createPost: NexusGenRootTypes['Post']; // Post!
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     ok: boolean; // Boolean!
     updateDesiredSkills: NexusGenRootTypes['User']; // User!
@@ -220,9 +230,15 @@ export interface NexusGenFieldTypes {
     content: NexusGenScalars['Json']; // Json!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
-    thumbnailImageUrl: string | null; // String
+    images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
+    thumbnailUrl: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  PostImage: { // field return type
+    id: string; // ID!
+    post: NexusGenRootTypes['Post']; // Post!
+    postId: number; // Int!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
@@ -292,6 +308,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    createPost: 'Post'
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     ok: 'Boolean'
     updateDesiredSkills: 'User'
@@ -304,9 +321,15 @@ export interface NexusGenFieldTypeNames {
     content: 'Json'
     createdAt: 'DateTime'
     id: 'Int'
-    thumbnailImageUrl: 'String'
+    images: 'PostImage'
+    thumbnailUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'
+  }
+  PostImage: { // field return type name
+    id: 'ID'
+    post: 'Post'
+    postId: 'Int'
   }
   Query: { // field return type name
     ok: 'Boolean'
@@ -353,6 +376,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createPost: { // args
+      input: NexusGenInputs['CreatePostInput']; // CreatePostInput!
+    }
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
     }

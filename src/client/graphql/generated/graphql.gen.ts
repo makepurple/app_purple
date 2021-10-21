@@ -41,6 +41,12 @@ export type Comment = {
   readonly updatedAt: Scalars['DateTime'];
 };
 
+export type CreatePostInput = {
+  readonly content: Scalars['Json'];
+  readonly thumbnail?: Maybe<Scalars['Upload']>;
+  readonly title: Scalars['String'];
+};
+
 export type CreatePresignedS3UrlInput = {
   readonly fileName: Scalars['String'];
   readonly fileType: Scalars['String'];
@@ -77,11 +83,18 @@ export enum ExperienceType {
 /** Root mutation type */
 export type Mutation = {
   readonly __typename?: 'Mutation';
+  readonly createPost: Post;
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
   readonly ok: Scalars['Boolean'];
   readonly updateDesiredSkills: User;
   readonly updateSkills: User;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root mutation type */
+export type MutationCreatePostArgs = {
+  input: CreatePostInput;
 };
 
 
@@ -109,9 +122,19 @@ export type Post = {
   readonly content: Scalars['Json'];
   readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['Int'];
+  readonly images: ReadonlyArray<PostImage>;
+  readonly thumbnail?: Maybe<PostImage>;
+  readonly thumbnailId?: Maybe<Scalars['String']>;
   readonly thumbnailImageUrl?: Maybe<Scalars['String']>;
   readonly title: Scalars['String'];
   readonly updatedAt: Scalars['DateTime'];
+};
+
+export type PostImage = {
+  readonly __typename?: 'PostImage';
+  readonly id: Scalars['ID'];
+  readonly post: Post;
+  readonly postId: Scalars['Int'];
 };
 
 /** Root query type */

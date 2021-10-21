@@ -20,6 +20,12 @@ type Comment {
   updatedAt: DateTime!
 }
 
+input CreatePostInput {
+  content: Json!
+  thumbnail: Upload
+  title: String!
+}
+
 input CreatePresignedS3UrlInput {
   fileName: String!
   fileType: String!
@@ -66,6 +72,7 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 """Root mutation type"""
 type Mutation {
+  createPost(input: CreatePostInput!): Post!
   createPresignedS3Url(data: CreatePresignedS3UrlInput!): CreatePresignedS3UrlPayload!
   ok: Boolean!
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
@@ -79,9 +86,16 @@ type Post {
   content: Json!
   createdAt: DateTime!
   id: Int!
-  thumbnailImageUrl: String
+  images: [PostImage!]!
+  thumbnailUrl: String
   title: String!
   updatedAt: DateTime!
+}
+
+type PostImage {
+  id: ID!
+  post: Post!
+  postId: Int!
 }
 
 """Root query type"""
