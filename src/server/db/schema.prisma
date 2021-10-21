@@ -7,7 +7,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 generator nexusPrisma {
@@ -75,22 +76,23 @@ model VerificationRequest {
 }
 
 model Post {
-  id                Int         @id @default(autoincrement())
-  author            User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId          String
-  title             String
-  content           Json
-  thumbnailImageUrl String?
-  comments          Comment[]
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
-  images            PostImage[]
+  id           Int         @id @default(autoincrement())
+  author       User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId     String
+  title        String
+  content      Json
+  thumbnailUrl String?
+  comments     Comment[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  images       PostImage[]
 }
 
 model PostImage {
-  id     String @id @default(uuid())
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId Int
+  id        String   @id @default(uuid())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int
+  createdAt DateTime @default(now())
 }
 
 model Comment {

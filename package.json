@@ -65,6 +65,7 @@
     "mjml": "^4.10.4",
     "mjml-react": "^2.0.2",
     "ms": "^3.0.0-canary.1",
+    "nanoid": "^3.1.30",
     "next": "^11.1.2",
     "next-auth": "^3.29.0",
     "nextjs-progressbar": "^0.0.11",
