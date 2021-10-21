@@ -1,54 +1,29 @@
-import { arg, inputObjectType, mutationField, nonNull } from "nexus";
-
-export const CreatePostInput = inputObjectType({
-	name: "CreatePostInput",
-	definition: (t) => {
-		t.nonNull.string("title");
-		t.nonNull.json("content");
-		t.field("thumbnail", { type: "Upload" });
-	}
-});
+import { mutationField, nonNull } from "nexus";
 
 export const createPost = mutationField("createPost", {
 	type: nonNull("Post"),
 	authorize: (parent, args, { user }) => !!user,
-	args: {
-		input: nonNull(arg({ type: "CreatePostInput" }))
-	},
-	resolve: async (parent, { input }, { cloudinary, prisma, user }) => {
+	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw Error("Unexpected Error");
 
-		const thumbnailResult = input.thumbnail
-			? await cloudinary.client.uploadImageFile(input.thumbnail).catch(() => null)
-			: null;
+		const draft = await prisma.post.findFirst({
+			where: {
+				publishedAt: null
+			}
+		});
 
-		const post = await prisma.$transaction(async (transaction) => {
-			const newPost = await transaction.post.create({
-				data: {
-					title: input.title,
-					content: input.content,
-					author: {
-						connect: {
-							id: user.id
-						}
+		if (draft) {
+			throw new Error("You can only have 1 unfinished draft post at a time!");
+		}
+
+		const post = await prisma.post.create({
+			data: {
+				author: {
+					connect: {
+						id: user.id
 					}
 				}
-			});
-
-			if (thumbnailResult) {
-				const thumbnailImage = await transaction.postImage.create({
-					data: {
-						id: "",
-						post: {
-							connect: {
-								id: newPost.id
-							}
-						}
-					}
-				});
 			}
-
-			return newPost;
 		});
 
 		return post;

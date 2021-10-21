@@ -79,10 +79,11 @@ model Post {
   id           Int         @id @default(autoincrement())
   author       User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId     String
-  title        String
-  content      Json
+  title        String?
+  content      Json?
   thumbnailUrl String?
   comments     Comment[]
+  publishedAt  DateTime?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   images       PostImage[]

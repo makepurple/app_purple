@@ -83,12 +83,12 @@ type Mutation {
 type Post {
   author: User!
   comments: [Comment!]!
-  content: Json!
+  content: Json
   createdAt: DateTime!
   id: Int!
   images: [PostImage!]!
   thumbnailUrl: String
-  title: String!
+  title: String
   updatedAt: DateTime!
 }
 

@@ -142,11 +142,11 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Post: { // root type
-    content: NexusGenScalars['Json']; // Json!
+    content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     thumbnailUrl?: string | null; // String
-    title: string; // String!
+    title?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   PostImage: { // root type
@@ -227,12 +227,12 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
     thumbnailUrl: string | null; // String
-    title: string; // String!
+    title: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   PostImage: { // field return type
