@@ -78,20 +78,21 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  CreatePostInput: { // input type
-    content: NexusGenScalars['Json']; // Json!
-    thumbnail?: NexusGenScalars['Upload'] | null; // Upload
-    title: string; // String!
-  }
   CreatePresignedS3UrlInput: { // input type
     fileName: string; // String!
     fileType: string; // String!
+  }
+  PostWhereUniqueInput: { // input type
+    id?: number | null; // Int
   }
   UpdateDesiredSkillsInput: { // input type
     skills: string[]; // [String!]!
   }
   UpdateSkillsInput: { // input type
     skills: string[]; // [String!]!
+  }
+  UploadPostImageInput: { // input type
+    image: NexusGenScalars['Upload']; // Upload!
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
@@ -142,9 +143,11 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Post: { // root type
+    authorId: string; // String!
     content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
+    publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -222,15 +225,18 @@ export interface NexusGenFieldTypes {
     ok: boolean; // Boolean!
     updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updateSkills: NexusGenRootTypes['User']; // User!
+    uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
+    authorId: string; // String!
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
+    publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
     thumbnailUrl: string | null; // String
     title: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -242,6 +248,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     ok: boolean; // Boolean!
+    post: NexusGenRootTypes['Post'] | null; // Post
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -313,15 +320,18 @@ export interface NexusGenFieldTypeNames {
     ok: 'Boolean'
     updateDesiredSkills: 'User'
     updateSkills: 'User'
+    uploadPostImage: 'PostImage'
     viewer: 'User'
   }
   Post: { // field return type name
     author: 'User'
+    authorId: 'String'
     comments: 'Comment'
     content: 'Json'
     createdAt: 'DateTime'
     id: 'Int'
     images: 'PostImage'
+    publishedAt: 'DateTime'
     thumbnailUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'
@@ -333,6 +343,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     ok: 'Boolean'
+    post: 'Post'
     user: 'User'
     viewer: 'User'
   }
@@ -376,9 +387,6 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createPost: { // args
-      input: NexusGenInputs['CreatePostInput']; // CreatePostInput!
-    }
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
     }
@@ -388,8 +396,15 @@ export interface NexusGenArgTypes {
     updateSkills: { // args
       input: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!
     }
+    uploadPostImage: { // args
+      data: NexusGenInputs['UploadPostImageInput']; // UploadPostImageInput!
+      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
   }
   Query: {
+    post: { // args
+      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }

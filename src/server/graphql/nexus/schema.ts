@@ -6,6 +6,7 @@ import { RedisStore } from "graphql-rate-limit";
 import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import path from "path";
 import { getClientIp } from "request-ip";
+import * as inputTypes from "./input-types";
 import * as mutations from "./mutations";
 import { rateLimitPlugin } from "./plugins";
 import * as queries from "./queries";
@@ -22,7 +23,7 @@ const isGenerateScript: boolean = process.argv.includes("--nexus-exit");
 export const schema = makeSchema({
 	shouldGenerateArtifacts: isGenerateScript,
 	shouldExitAfterGenerateArtifacts: isGenerateScript,
-	types: { ...mutations, ...queries, ...types },
+	types: { ...inputTypes, ...mutations, ...queries, ...types },
 	outputs: {
 		schema: getPath("generated/schema.gen.graphql"),
 		typegen: getPath("generated/typegen.gen.ts")
