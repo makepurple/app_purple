@@ -41,12 +41,6 @@ export type Comment = {
   readonly updatedAt: Scalars['DateTime'];
 };
 
-export type CreatePostInput = {
-  readonly content: Scalars['Json'];
-  readonly thumbnail?: Maybe<Scalars['Upload']>;
-  readonly title: Scalars['String'];
-};
-
 export type CreatePresignedS3UrlInput = {
   readonly fileName: Scalars['String'];
   readonly fileType: Scalars['String'];
@@ -85,22 +79,25 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly createPost: Post;
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
+  /** User can delete their own post. */
+  readonly deletePost: Post;
   readonly ok: Scalars['Boolean'];
   readonly updateDesiredSkills: User;
   readonly updateSkills: User;
+  readonly uploadPostImage: PostImage;
   readonly viewer?: Maybe<User>;
-};
-
-
-/** Root mutation type */
-export type MutationCreatePostArgs = {
-  input: CreatePostInput;
 };
 
 
 /** Root mutation type */
 export type MutationCreatePresignedS3UrlArgs = {
   data: CreatePresignedS3UrlInput;
+};
+
+
+/** Root mutation type */
+export type MutationDeletePostArgs = {
+  where: PostWhereUniqueInput;
 };
 
 
@@ -115,19 +112,36 @@ export type MutationUpdateSkillsArgs = {
   input: UpdateSkillsInput;
 };
 
+
+/** Root mutation type */
+export type MutationUploadPostImageArgs = {
+  data: UploadPostImageInput;
+  where: PostWhereUniqueInput;
+};
+
 export type Post = {
   readonly __typename?: 'Post';
   readonly author: User;
+  readonly authorId: Scalars['String'];
   readonly comments: ReadonlyArray<Comment>;
-  readonly content: Scalars['Json'];
+  readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
+  readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['Int'];
   readonly images: ReadonlyArray<PostImage>;
-  readonly thumbnail?: Maybe<PostImage>;
-  readonly thumbnailId?: Maybe<Scalars['String']>;
-  readonly thumbnailImageUrl?: Maybe<Scalars['String']>;
-  readonly title: Scalars['String'];
+  readonly publishedAt?: Maybe<Scalars['DateTime']>;
+  readonly thumbnailUrl?: Maybe<Scalars['String']>;
+  readonly title?: Maybe<Scalars['String']>;
   readonly updatedAt: Scalars['DateTime'];
+  readonly upvoteCount: Scalars['Int'];
+  readonly upvotingUsers: ReadonlyArray<User>;
+  readonly viewerUpvoted: Scalars['Boolean'];
+};
+
+
+export type PostUpvotingUsersArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 export type PostImage = {
@@ -137,12 +151,40 @@ export type PostImage = {
   readonly postId: Scalars['Int'];
 };
 
+export type PostWhereInput = {
+  readonly authorId?: Maybe<Scalars['String']>;
+};
+
+export type PostWhereUniqueInput = {
+  /** The id of the post to retrieve */
+  readonly id?: Maybe<Scalars['Int']>;
+};
+
 /** Root query type */
 export type Query = {
   readonly __typename?: 'Query';
   readonly ok: Scalars['Boolean'];
+  /** A user-created post. */
+  readonly post?: Maybe<Post>;
+  /** A list of user-created posts */
+  readonly posts: ReadonlyArray<Post>;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root query type */
+export type QueryPostArgs = {
+  where: PostWhereUniqueInput;
+};
+
+
+/** Root query type */
+export type QueryPostsArgs = {
+  cursor?: Maybe<PostWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where: PostWhereInput;
 };
 
 
@@ -158,6 +200,7 @@ export type Skill = {
   readonly users: ReadonlyArray<User>;
 };
 
+/** One of the most used languages by a user */
 export type TopLanguage = {
   readonly __typename?: 'TopLanguage';
   /** The color of the language, defined by GitHub */
@@ -188,6 +231,11 @@ export type UpdateSkillsInput = {
   readonly skills: ReadonlyArray<Scalars['String']>;
 };
 
+export type UploadPostImageInput = {
+  /** The file of the image to be uploaded */
+  readonly image: Scalars['Upload'];
+};
+
 export type User = {
   readonly __typename?: 'User';
   readonly comments: ReadonlyArray<Comment>;
@@ -200,6 +248,7 @@ export type User = {
   readonly name: Scalars['String'];
   readonly posts: ReadonlyArray<Post>;
   readonly skills: ReadonlyArray<Skill>;
+  readonly upvotedPosts: ReadonlyArray<Post>;
 };
 
 /** Data for a user from that user's connected GitHub account. */
@@ -221,10 +270,21 @@ export type UserWhereUniqueInput = {
   readonly name?: Maybe<Scalars['String']>;
 };
 
+export type UserPostCardPostFragment = { readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } };
+
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
+
+export type GetPostsQueryVariables = Exact<{
+  cursor?: Maybe<PostWhereUniqueInput>;
+  take?: Maybe<Scalars['Int']>;
+  where: PostWhereInput;
+}>;
+
+
+export type GetPostsQuery = { readonly __typename?: 'Query', readonly posts: ReadonlyArray<{ readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } }> };
 
 export type GetUserSummarySidebarQueryVariables = Exact<{
   name: Scalars['String'];
@@ -238,7 +298,21 @@ export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OkQuery = { readonly __typename?: 'Query', readonly ok: boolean };
 
-
+export const UserPostCardPostFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserPostCardPost on Post {
+  id
+  author {
+    id
+    name
+  }
+  description
+  publishedAt
+  thumbnailUrl
+  title
+  upvoteCount
+  viewerUpvoted
+}
+    `;
 export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {
   viewer {
@@ -252,6 +326,18 @@ export const GetMyUserDocument = /*#__PURE__*/ gql`
 
 export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
+};
+export const GetPostsDocument = /*#__PURE__*/ gql`
+    query GetPosts($cursor: PostWhereUniqueInput, $take: Int, $where: PostWhereInput!) {
+  posts(cursor: $cursor, take: $take, where: $where) {
+    id
+    ...UserPostCardPost
+  }
+}
+    ${UserPostCardPostFragmentDoc}`;
+
+export function useGetPostsQuery(options: Omit<Urql.UseQueryArgs<GetPostsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetPostsQuery>({ query: GetPostsDocument, ...options });
 };
 export const GetUserSummarySidebarDocument = /*#__PURE__*/ gql`
     query GetUserSummarySidebar($name: String!) {

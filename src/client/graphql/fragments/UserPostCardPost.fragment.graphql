@@ -1,0 +1,13 @@
+fragment UserPostCardPost on Post {
+	id
+	author {
+		id
+		name
+	}
+	description
+	publishedAt
+	thumbnailUrl
+	title
+	upvoteCount
+	viewerUpvoted
+}

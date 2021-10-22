@@ -1,0 +1,10 @@
+query GetPosts(
+	$cursor: PostWhereUniqueInput
+	$take: Int
+	$where: PostWhereInput!
+) {
+	posts(cursor: $cursor, take: $take, where: $where) {
+		id
+		...UserPostCardPost
+	}
+}
