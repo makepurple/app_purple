@@ -82,6 +82,9 @@ export interface NexusGenInputs {
     fileName: string; // String!
     fileType: string; // String!
   }
+  PostWhereInput: { // input type
+    authorId?: string | null; // String
+  }
   PostWhereUniqueInput: { // input type
     id?: number | null; // Int
   }
@@ -255,6 +258,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
+    posts: NexusGenRootTypes['Post'][]; // [Post!]!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -356,6 +360,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     ok: 'Boolean'
     post: 'Post'
+    posts: 'Post'
     user: 'User'
     viewer: 'User'
   }
@@ -426,6 +431,12 @@ export interface NexusGenArgTypes {
   Query: {
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    posts: { // args
+      cursor?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+      skip?: number | null; // Int
+      take: number | null; // Int
+      where: NexusGenInputs['PostWhereInput']; // PostWhereInput!
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!

@@ -102,6 +102,10 @@ type PostImage {
   postId: Int!
 }
 
+input PostWhereInput {
+  authorId: String
+}
+
 input PostWhereUniqueInput {
   """The id of the post to retrieve"""
   id: Int
@@ -113,6 +117,9 @@ type Query {
 
   """A user-created post."""
   post(where: PostWhereUniqueInput!): Post
+
+  """A list of user-created posts"""
+  posts(cursor: PostWhereUniqueInput, skip: Int = 0, take: Int = 50, where: PostWhereInput!): [Post!]!
   user(where: UserWhereUniqueInput!): User
   viewer: User
 }
