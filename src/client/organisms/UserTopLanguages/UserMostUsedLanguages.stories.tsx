@@ -6,8 +6,7 @@ import { getOperationName } from "urql";
 
 export default {
 	title: "organisms/UserTopLanguages",
-	component: UserTopLanguages,
-	decorators: [(Story) => <Story />]
+	component: UserTopLanguages
 };
 
 const Template = (args) => {
