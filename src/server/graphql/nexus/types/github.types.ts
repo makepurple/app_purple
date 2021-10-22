@@ -5,7 +5,9 @@ import { objectType } from "nexus";
 export const githubTypes = [
 	objectType({
 		name: "TopLanguage",
-		description: "",
+		description: oneLine`
+			One of the most used languages by a user
+		`,
 		definition: (t) => {
 			t.nonNull.string("name", {
 				description: oneLine`
