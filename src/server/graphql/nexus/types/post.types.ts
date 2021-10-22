@@ -45,6 +45,22 @@ export const postTypes = [
 					return users;
 				}
 			});
+			t.nonNull.boolean("viewerUpvoted", {
+				resolve: async ({ id }, args, { prisma, user }) => {
+					if (!user?.id) return false;
+
+					const postUpvoter = await prisma.postUpvoter.findUnique({
+						where: {
+							userId_postId: {
+								userId: user.id,
+								postId: id
+							}
+						}
+					});
+
+					return !!postUpvoter;
+				}
+			});
 		}
 	}),
 	objectType({
