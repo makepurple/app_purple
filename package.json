@@ -159,5 +159,8 @@
   },
   "prisma": {
     "schema": "src/server/db/schema.prisma"
+  },
+  "resolutions": {
+    "@graphql-tools/utils": "^8.5.0"
   }
 }
