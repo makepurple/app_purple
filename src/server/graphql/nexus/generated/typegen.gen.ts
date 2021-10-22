@@ -146,6 +146,7 @@ export interface NexusGenObjects {
     authorId: string; // String!
     content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description?: string | null; // String
     id: number; // Int!
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     thumbnailUrl?: string | null; // String
@@ -235,6 +236,7 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string | null; // String
     id: number; // Int!
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
@@ -243,6 +245,7 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     upvoteCount: number; // Int!
     upvotingUsers: NexusGenRootTypes['User'][]; // [User!]!
+    viewerUpvoted: boolean; // Boolean!
   }
   PostImage: { // field return type
     id: string; // ID!
@@ -334,6 +337,7 @@ export interface NexusGenFieldTypeNames {
     comments: 'Comment'
     content: 'Json'
     createdAt: 'DateTime'
+    description: 'String'
     id: 'Int'
     images: 'PostImage'
     publishedAt: 'DateTime'
@@ -342,6 +346,7 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
     upvoteCount: 'Int'
     upvotingUsers: 'User'
+    viewerUpvoted: 'Boolean'
   }
   PostImage: { // field return type name
     id: 'ID'

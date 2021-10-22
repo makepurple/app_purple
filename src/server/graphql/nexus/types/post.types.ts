@@ -11,6 +11,7 @@ export const postTypes = [
 			t.field(Post.comments);
 			t.field(Post.content);
 			t.field(Post.createdAt);
+			t.field(Post.description);
 			t.field(Post.id);
 			t.field(Post.images);
 			t.field(Post.publishedAt);

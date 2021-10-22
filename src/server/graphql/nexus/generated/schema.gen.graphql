@@ -84,6 +84,7 @@ type Post {
   comments: [Comment!]!
   content: Json
   createdAt: DateTime!
+  description: String
   id: Int!
   images: [PostImage!]!
   publishedAt: DateTime
@@ -92,6 +93,7 @@ type Post {
   updatedAt: DateTime!
   upvoteCount: Int!
   upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
+  viewerUpvoted: Boolean!
 }
 
 type PostImage {

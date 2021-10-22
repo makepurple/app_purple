@@ -82,6 +82,7 @@ model Post {
   comments     Comment[]
   content      Json?
   createdAt    DateTime      @default(now())
+  description  String?
   id           Int           @id @default(autoincrement())
   images       PostImage[]
   publishedAt  DateTime?
