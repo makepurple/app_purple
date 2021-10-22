@@ -1,4 +1,4 @@
-import { objectType } from "nexus";
+import { intArg, list, nonNull, objectType } from "nexus";
 import { Post, PostImage } from "nexus-prisma";
 
 export const postTypes = [
@@ -17,6 +17,34 @@ export const postTypes = [
 			t.field(Post.thumbnailUrl);
 			t.field(Post.title);
 			t.field(Post.updatedAt);
+			t.nonNull.int("upvoteCount", {
+				resolve: async ({ id }, args, { prisma }) => {
+					return await prisma.postUpvoter.count({
+						where: { postId: id }
+					});
+				}
+			});
+			t.field("upvotingUsers", {
+				type: nonNull(list(nonNull("User"))),
+				args: {
+					skip: intArg({ default: 0 }),
+					take: intArg({ default: 50 })
+				},
+				resolve: async ({ id }, args, { prisma }) => {
+					const users = await prisma.post
+						.findUnique({
+							where: { id }
+						})
+						.upvotes({
+							skip: args.skip ?? 0,
+							take: Math.min(args.take ?? 50, 50),
+							select: { user: true }
+						})
+						.then((upvotes) => upvotes.map(({ user }) => user));
+
+					return users;
+				}
+			});
 		}
 	}),
 	objectType({

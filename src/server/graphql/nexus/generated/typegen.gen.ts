@@ -241,6 +241,8 @@ export interface NexusGenFieldTypes {
     thumbnailUrl: string | null; // String
     title: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    upvoteCount: number; // Int!
+    upvotingUsers: NexusGenRootTypes['User'][]; // [User!]!
   }
   PostImage: { // field return type
     id: string; // ID!
@@ -279,6 +281,7 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
+    upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
   UserGitHub: { // field return type
     bio: string | null; // String
@@ -337,6 +340,8 @@ export interface NexusGenFieldTypeNames {
     thumbnailUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'
+    upvoteCount: 'Int'
+    upvotingUsers: 'User'
   }
   PostImage: { // field return type name
     id: 'ID'
@@ -375,6 +380,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     posts: 'Post'
     skills: 'Skill'
+    upvotedPosts: 'Post'
   }
   UserGitHub: { // field return type name
     bio: 'String'
@@ -404,6 +410,12 @@ export interface NexusGenArgTypes {
     uploadPostImage: { // args
       data: NexusGenInputs['UploadPostImageInput']; // UploadPostImageInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+  }
+  Post: {
+    upvotingUsers: { // args
+      skip?: number | null; // Int
+      take: number | null; // Int
     }
   }
   Query: {

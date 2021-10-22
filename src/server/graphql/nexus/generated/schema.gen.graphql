@@ -90,6 +90,8 @@ type Post {
   thumbnailUrl: String
   title: String
   updatedAt: DateTime!
+  upvoteCount: Int!
+  upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
 }
 
 type PostImage {
@@ -182,6 +184,7 @@ type User {
   name: String!
   posts: [Post!]!
   skills: [Skill!]!
+  upvotedPosts: [Post!]!
 }
 
 """Data for a user from that user's connected GitHub account."""

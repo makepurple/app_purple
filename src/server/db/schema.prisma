@@ -57,11 +57,12 @@ model User {
   updatedAt     DateTime               @updatedAt
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]
+  posts         Post[]                 @relation("PostAuthor")
   comments      Comment[]
   skills        SkillsOnUsers[]
   desiredSkills DesiredSkillsOnUsers[]
   experiences   Experience[]
+  upvotedPosts  PostUpvoter[]
 }
 
 model VerificationRequest {
@@ -76,17 +77,27 @@ model VerificationRequest {
 }
 
 model Post {
-  id           Int         @id @default(autoincrement())
-  author       User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author       User          @relation(name: "PostAuthor", fields: [authorId], references: [id], onDelete: Cascade)
   authorId     String
-  title        String?
-  content      Json?
-  thumbnailUrl String?
   comments     Comment[]
-  publishedAt  DateTime?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  content      Json?
+  createdAt    DateTime      @default(now())
+  id           Int           @id @default(autoincrement())
   images       PostImage[]
+  publishedAt  DateTime?
+  title        String?
+  thumbnailUrl String?
+  updatedAt    DateTime      @updatedAt
+  upvotes      PostUpvoter[]
+}
+
+model PostUpvoter {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+
+  @@id([userId, postId])
 }
 
 model PostImage {

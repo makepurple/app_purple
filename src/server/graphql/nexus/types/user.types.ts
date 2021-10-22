@@ -62,13 +62,28 @@ export const userTypes = [
 			t.field(User.posts);
 			t.field("skills", {
 				type: nonNull(list(nonNull("Skill"))),
-				resolve: (root, args, { prisma }) => {
-					return prisma.skillsOnUsers
-						.findMany({
-							where: { userId: root.id },
+				resolve: async ({ id }, args, { prisma }) => {
+					return await prisma.user
+						.findUnique({
+							where: { id }
+						})
+						.skills({
 							select: { skill: true }
 						})
 						.then((skills) => skills.map((s) => s.skill));
+				}
+			});
+			t.field("upvotedPosts", {
+				type: nonNull(list(nonNull("Post"))),
+				resolve: async ({ id }, args, { prisma }) => {
+					return await prisma.user
+						.findUnique({
+							where: { id }
+						})
+						.upvotedPosts({
+							select: { post: true }
+						})
+						.then((posts) => posts.map((p) => p.post));
 				}
 			});
 		}
