@@ -12,7 +12,7 @@ export const GetPosts_mock: GetPostsQuery = {
 		}))
 };
 
-export const GetPosts_variables_mocks: GetPostsQueryVariables = {
+export const GetPosts_variables_mock: GetPostsQueryVariables = {
 	where: {
 		authorId: Post_fragment_mock.authorId
 	}
