@@ -39,6 +39,8 @@ Object.defineProperty(NextImage, "default", {
 	value: (props) => <OriginalNextImage {...props} unoptimized />
 });
 
+const DEFAULT_VIEWPORT_HEIGHT = "1200px";
+
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
 	controls: {
@@ -52,6 +54,59 @@ export const parameters = {
 	},
 	options: {
 		storySort: alphabeticSort
+	},
+	viewport: {
+		viewports: {
+			"2xs": {
+				name: "2xs",
+				styles: {
+					width: "360px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			},
+			xs: {
+				name: "xs",
+				styles: {
+					width: "475px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			},
+			sm: {
+				name: "sm",
+				styles: {
+					width: "640px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			},
+			md: {
+				name: "md",
+				styles: {
+					width: "768px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			},
+			lg: {
+				name: "lg",
+				styles: {
+					width: "1024px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			},
+			xl: {
+				name: "xl",
+				styles: {
+					width: "1280px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			},
+			"2xl": {
+				name: "2xl",
+				styles: {
+					width: "1536px",
+					height: DEFAULT_VIEWPORT_HEIGHT
+				}
+			}
+		}
 	}
 };
 
