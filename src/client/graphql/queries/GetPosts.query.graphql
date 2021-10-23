@@ -5,6 +5,6 @@ query GetPosts(
 ) {
 	posts(cursor: $cursor, take: $take, where: $where) {
 		id
-		...UserPostCardPost
+		...PostCardPost
 	}
 }

@@ -1,4 +1,4 @@
-fragment UserPostCardPost on Post {
+fragment PostCardPost on Post {
 	id
 	author {
 		id

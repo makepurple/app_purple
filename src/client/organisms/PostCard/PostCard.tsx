@@ -1,5 +1,5 @@
 import { Anchor, Paper, Popover } from "@/client/atoms";
-import { UserPostCardPostFragment, useUpvotePostMutation } from "@/client/graphql";
+import { PostCardPostFragment, useUpvotePostMutation } from "@/client/graphql";
 import { useHover } from "@/client/hooks";
 import { ThumbsUpIcon } from "@/client/svgs";
 import dayjs from "dayjs";
@@ -121,13 +121,13 @@ const Thumbnail = tw.a`
 	rounded-md
 `;
 
-export interface UserPostCardProps {
+export interface PostCardProps {
 	className?: string;
-	post: UserPostCardPostFragment;
+	post: PostCardPostFragment;
 	style?: CSSProperties;
 }
 
-export const UserPostCard = forwardRef<HTMLDivElement, UserPostCardProps>((props, ref) => {
+export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) => {
 	const { className, post, style } = props;
 
 	const router = useRouter();
@@ -211,4 +211,4 @@ export const UserPostCard = forwardRef<HTMLDivElement, UserPostCardProps>((props
 	);
 });
 
-UserPostCard.displayName = "UserPostCard";
+PostCard.displayName = "PostCard";

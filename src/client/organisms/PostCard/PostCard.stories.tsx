@@ -1,13 +1,13 @@
 import { useGetPostsQuery } from "@/client/graphql";
 import { GetPosts_mock, GetPosts_variables_mock } from "@/client/graphql/mocks";
-import { UserPostCard } from "@/client/organisms";
+import { PostCard } from "@/client/organisms";
 import type { Meta, Story } from "@storybook/react";
 import { getOperationName } from "@urql/core";
 import React from "react";
 
 export default {
-	title: "organisms/UserPostCard",
-	component: UserPostCard
+	title: "organisms/PostCard",
+	component: PostCard
 } as Meta;
 
 const Template: Story = (args) => {
@@ -19,7 +19,7 @@ const Template: Story = (args) => {
 
 	if (!post) return <></>;
 
-	return <UserPostCard {...args} post={post} />;
+	return <PostCard {...args} post={post} />;
 };
 Template.args = {};
 

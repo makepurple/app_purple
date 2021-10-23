@@ -285,7 +285,7 @@ export type UserWhereUniqueInput = {
   readonly name?: Maybe<Scalars['String']>;
 };
 
-export type UserPostCardPostFragment = { readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } };
+export type PostCardPostFragment = { readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -320,8 +320,8 @@ export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OkQuery = { readonly __typename?: 'Query', readonly ok: boolean };
 
-export const UserPostCardPostFragmentDoc = /*#__PURE__*/ gql`
-    fragment UserPostCardPost on Post {
+export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
+    fragment PostCardPost on Post {
   id
   author {
     id
@@ -369,10 +369,10 @@ export const GetPostsDocument = /*#__PURE__*/ gql`
     query GetPosts($cursor: PostWhereUniqueInput, $take: Int, $where: PostWhereInput!) {
   posts(cursor: $cursor, take: $take, where: $where) {
     id
-    ...UserPostCardPost
+    ...PostCardPost
   }
 }
-    ${UserPostCardPostFragmentDoc}`;
+    ${PostCardPostFragmentDoc}`;
 
 export function useGetPostsQuery(options: Omit<Urql.UseQueryArgs<GetPostsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetPostsQuery>({ query: GetPostsDocument, ...options });
