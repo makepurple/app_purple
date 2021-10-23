@@ -76,6 +76,7 @@ export const rateLimitPlugin = (options: RateLimitPluginConfig) => {
 
 			return async (parent, args, context, info, next) => {
 				const rateLimitArgs: GraphQLRateLimitDirectiveArgs =
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 					rateLimit?.(parent, args, context, info) ?? options.defaultRateLimit!;
 
 				const errorMessage: Maybe<string> = await rateLimiter(

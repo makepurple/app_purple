@@ -6,8 +6,8 @@ declare module "next-auth" {
 	 */
 	interface Session {
 		user: {
-			id?: string,
-			name?: string;
+			id: string,
+			name: string;
 			email?: string | null | undefined;
 			image?: string | null | undefined;
 			accessToken?: string | null | undefined;

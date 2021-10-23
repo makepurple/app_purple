@@ -4,3 +4,4 @@ export * from "./deletePost";
 export * from "./updateDesiredSkills";
 export * from "./updateSkills";
 export * from "./uploadPostImage";
+export * from "./upvotePost";

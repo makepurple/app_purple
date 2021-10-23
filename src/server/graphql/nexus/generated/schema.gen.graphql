@@ -75,6 +75,7 @@ type Mutation {
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
   updateSkills(input: UpdateSkillsInput!): User!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
+  upvotePost(where: PostWhereUniqueInput!): Post!
   viewer: User
 }
 

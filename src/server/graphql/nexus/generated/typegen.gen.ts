@@ -231,6 +231,7 @@ export interface NexusGenFieldTypes {
     updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updateSkills: NexusGenRootTypes['User']; // User!
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
+    upvotePost: NexusGenRootTypes['Post']; // Post!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Post: { // field return type
@@ -333,6 +334,7 @@ export interface NexusGenFieldTypeNames {
     updateDesiredSkills: 'User'
     updateSkills: 'User'
     uploadPostImage: 'PostImage'
+    upvotePost: 'Post'
     viewer: 'User'
   }
   Post: { // field return type name
@@ -419,6 +421,9 @@ export interface NexusGenArgTypes {
     }
     uploadPostImage: { // args
       data: NexusGenInputs['UploadPostImageInput']; // UploadPostImageInput!
+      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    upvotePost: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
   }
