@@ -23,17 +23,6 @@ module.exports = {
 		]
 	}),
 	webpackFinal: (config) => {
-		config.plugins.push(
-			new NodemonPlugin({
-				watch: path.resolve(__dirname, "../src/server/emails/"),
-				ext: "ts,tsx",
-				ignore: ["**/generated/**"],
-				exec: ["yarn", "run", "generate:emails", "\n"],
-				delay: `${ms("1s")}`,
-				verbose: true
-			})
-		);
-
 		/**
 		 * TODO
 		 * @description
