@@ -62,9 +62,11 @@ type Mutation {
   # User can delete their own post.
   deletePost(where: PostWhereUniqueInput!): Post!
   ok: Boolean!
+  publishPost(where: PostWhereUniqueInput!): Post!
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
   updateSkills(input: UpdateSkillsInput!): User!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
+  upvotePost(where: PostWhereUniqueInput!): Post!
   viewer: User
 }
 
@@ -83,6 +85,7 @@ type Post {
   updatedAt: DateTime!
   upvoteCount: Int!
   upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
+  urlSlug: String!
   viewerUpvoted: Boolean!
 }
 

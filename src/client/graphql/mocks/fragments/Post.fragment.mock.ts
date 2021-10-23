@@ -8,14 +8,15 @@ export const Post_fragment_mock: Post = {
 	author: {
 		__typename: "User",
 		id: "0",
-		name: faker.name.findName()
+		name: "denvercoder09"
 	},
 	authorId: "0",
-	description: faker.lorem.paragraphs(10),
+	description: faker.lorem.paragraphs(2),
 	id: 0,
 	publishedAt: faker.date.past(),
 	thumbnailUrl: "/pngs/test-thumbnail.png",
-	title: faker.lorem.words(8),
+	title: "Not a Real Blog Post Title",
 	upvoteCount: faker.datatype.number({ max: 2_000 }),
+	urlSlug: "not-a-real-blog-post-title",
 	viewerUpvoted: false
 } as any;

@@ -82,9 +82,11 @@ export type Mutation = {
   /** User can delete their own post. */
   readonly deletePost: Post;
   readonly ok: Scalars['Boolean'];
+  readonly publishPost: Post;
   readonly updateDesiredSkills: User;
   readonly updateSkills: User;
   readonly uploadPostImage: PostImage;
+  readonly upvotePost: Post;
   readonly viewer?: Maybe<User>;
 };
 
@@ -97,6 +99,12 @@ export type MutationCreatePresignedS3UrlArgs = {
 
 /** Root mutation type */
 export type MutationDeletePostArgs = {
+  where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationPublishPostArgs = {
   where: PostWhereUniqueInput;
 };
 
@@ -119,6 +127,12 @@ export type MutationUploadPostImageArgs = {
   where: PostWhereUniqueInput;
 };
 
+
+/** Root mutation type */
+export type MutationUpvotePostArgs = {
+  where: PostWhereUniqueInput;
+};
+
 export type Post = {
   readonly __typename?: 'Post';
   readonly author: User;
@@ -135,6 +149,7 @@ export type Post = {
   readonly updatedAt: Scalars['DateTime'];
   readonly upvoteCount: Scalars['Int'];
   readonly upvotingUsers: ReadonlyArray<User>;
+  readonly urlSlug: Scalars['String'];
   readonly viewerUpvoted: Scalars['Boolean'];
 };
 
@@ -270,7 +285,14 @@ export type UserWhereUniqueInput = {
   readonly name?: Maybe<Scalars['String']>;
 };
 
-export type UserPostCardPostFragment = { readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } };
+export type UserPostCardPostFragment = { readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } };
+
+export type UpvotePostMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+}>;
+
+
+export type UpvotePostMutation = { readonly __typename?: 'Mutation', readonly upvotePost: { readonly __typename?: 'Post', readonly id: number, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename?: 'User', readonly id: string | number }> } };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -284,7 +306,7 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { readonly __typename?: 'Query', readonly posts: ReadonlyArray<{ readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } }> };
+export type GetPostsQuery = { readonly __typename?: 'Query', readonly posts: ReadonlyArray<{ readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } }> };
 
 export type GetUserSummarySidebarQueryVariables = Exact<{
   name: Scalars['String'];
@@ -310,9 +332,25 @@ export const UserPostCardPostFragmentDoc = /*#__PURE__*/ gql`
   thumbnailUrl
   title
   upvoteCount
+  urlSlug
   viewerUpvoted
 }
     `;
+export const UpvotePostDocument = /*#__PURE__*/ gql`
+    mutation UpvotePost($where: PostWhereUniqueInput!) {
+  upvotePost(where: $where) {
+    id
+    upvoteCount
+    upvotingUsers {
+      id
+    }
+  }
+}
+    `;
+
+export function useUpvotePostMutation() {
+  return Urql.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(UpvotePostDocument);
+};
 export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {
   viewer {

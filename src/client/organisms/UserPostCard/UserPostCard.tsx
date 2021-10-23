@@ -1,24 +1,36 @@
-import { Paper, Popover } from "@/client/atoms";
-import { UserPostCardPostFragment } from "@/client/graphql";
+import { Anchor, Paper, Popover } from "@/client/atoms";
+import { UserPostCardPostFragment, useUpvotePostMutation } from "@/client/graphql";
 import { useHover } from "@/client/hooks";
 import { ThumbsUpIcon } from "@/client/svgs";
 import dayjs from "dayjs";
 import NextImage from "next/image";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
 
 const Root = tw(Paper)`
 	flex
-	flex-row
-	h-52
-	p-6
+	flex-col-reverse
+	h-80
+	p-3
+	sm:flex-row
+	sm:h-52
+	sm:p-6
+	cursor-pointer
 `;
 
 const Info = tw.div`
 	flex-grow
 	flex
 	flex-col
+`;
 
+const MainAnchor = tw.a`
+	flex-grow
+	flex
+	flex-col
 `;
 
 const Title = tw.h2`
@@ -36,10 +48,11 @@ const DescriptionContainer = tw.div`
 const Description = tw.p`
 	text-base
 	text-gray-500
-	line-clamp-3
+	line-clamp-1
+	sm:line-clamp-3
 `;
 
-const AuthorName = tw.span`
+const AuthorName = tw(Anchor)`
 	text-base
 	font-semibold
 	text-black
@@ -76,12 +89,17 @@ const KarmaContainer = tw.div`
 
 const UpvoteCount = tw.span`
 	text-sm
-	leading-5
+	leading-6
+	sm:leading-5
 	text-gray-500
 `;
 
 const UpvoteIcon = tw(ThumbsUpIcon)`
 	ml-2
+	h-8
+	w-8
+	sm:h-6
+	sm:w-6
 	text-green-500
 	cursor-pointer
 `;
@@ -90,12 +108,16 @@ const UpvoteTooltip = tw.div`
 	p-1.5
 `;
 
-const Thumbnail = tw.div`
+const Thumbnail = tw.a`
 	relative
 	flex-shrink-0
 	h-40
-	w-40
-	ml-6
+	w-full
+	mb-3
+	sm:w-40
+	sm:ml-6
+	sm:mb-0
+	overflow-hidden
 	rounded-md
 `;
 
@@ -108,19 +130,40 @@ export interface UserPostCardProps {
 export const UserPostCard = forwardRef<HTMLDivElement, UserPostCardProps>((props, ref) => {
 	const { className, post, style } = props;
 
+	const router = useRouter();
+
+	const [{ fetching }, upvotePost] = useUpvotePostMutation();
+
 	const [upvoteHovered, { handlers: upvoteHoverHandlers }] = useHover();
 
+	const postUrl: string = `/${post.author.name}/${post.urlSlug}`;
+
 	return (
-		<Root ref={ref} className={className} style={style}>
+		<Root
+			ref={ref}
+			className={className}
+			onClick={async () => {
+				await router.push(postUrl);
+			}}
+			style={style}
+		>
 			<Info>
-				<Title title={post.title ?? ""}>{post.title}</Title>
-				{post.description && (
-					<DescriptionContainer>
-						<Description>{post.description}</Description>
-					</DescriptionContainer>
-				)}
+				<NextLink href={postUrl} passHref>
+					<MainAnchor>
+						<Title title={post.title ?? ""}>{post.title}</Title>
+						{post.description && (
+							<DescriptionContainer title={post.description}>
+								<Description>{post.description}</Description>
+							</DescriptionContainer>
+						)}
+					</MainAnchor>
+				</NextLink>
 				<PostedDetails>
-					<AuthorName title={post.author.name}>{post.author.name}</AuthorName>
+					<NextLink href={`/${post.author.name}`} passHref>
+						<AuthorName onClick={(e) => e.stopPropagation()} title={post.author.name}>
+							{post.author.name}
+						</AuthorName>
+					</NextLink>
 					<Delimiter>·</Delimiter>
 					{post.publishedAt ? (
 						<PublishedAt>{dayjs(post.publishedAt).format("MMM D, YYYY")}</PublishedAt>
@@ -135,19 +178,34 @@ export const UserPostCard = forwardRef<HTMLDivElement, UserPostCardProps>((props
 						open={upvoteHovered}
 						placement="bottom"
 					>
-						<UpvoteIcon {...upvoteHoverHandlers} height={24} width={24} />
+						<UpvoteIcon
+							{...upvoteHoverHandlers}
+							height={32}
+							onClick={async (e) => {
+								e.stopPropagation();
+
+								if (fetching) return;
+
+								await upvotePost({ where: { id: post.id } });
+
+								toast.success("You liked this post!");
+							}}
+							width={32}
+						/>
 					</Popover>
 				</KarmaContainer>
 			</Info>
 			{post.thumbnailUrl && (
-				<Thumbnail>
-					<NextImage
-						alt="thumbnail"
-						src={post.thumbnailUrl}
-						layout="fill"
-						objectFit="cover"
-					/>
-				</Thumbnail>
+				<NextLink href={postUrl} passHref>
+					<Thumbnail onClick={(e) => e.stopPropagation()}>
+						<NextImage
+							alt="thumbnail"
+							src={post.thumbnailUrl}
+							layout="fill"
+							objectFit="cover"
+						/>
+					</Thumbnail>
+				</NextLink>
 			)}
 		</Root>
 	);

@@ -37,7 +37,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 							<Component {...pageProps} />
 						</SiteWideLayout>
 					</LazyMotion>
-					<Toaster position="bottom-center" />
+					<Toaster position="top-center" />
 				</UrqlProvider>
 			</NextAuthProvider>
 		</>

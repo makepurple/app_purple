@@ -9,5 +9,6 @@ fragment UserPostCardPost on Post {
 	thumbnailUrl
 	title
 	upvoteCount
+	urlSlug
 	viewerUpvoted
 }
