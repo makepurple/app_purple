@@ -46,6 +46,7 @@ export const postTypes = [
 					return users;
 				}
 			});
+			t.field(Post.urlSlug);
 			t.nonNull.boolean("viewerUpvoted", {
 				resolve: async ({ id }, args, { prisma, user }) => {
 					if (!user?.id) return false;

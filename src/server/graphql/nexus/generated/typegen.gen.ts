@@ -155,6 +155,7 @@ export interface NexusGenObjects {
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    urlSlug: string; // String!
   }
   PostImage: { // root type
     id: string; // ID!
@@ -250,6 +251,7 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     upvoteCount: number; // Int!
     upvotingUsers: NexusGenRootTypes['User'][]; // [User!]!
+    urlSlug: string; // String!
     viewerUpvoted: boolean; // Boolean!
   }
   PostImage: { // field return type
@@ -354,6 +356,7 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
     upvoteCount: 'Int'
     upvotingUsers: 'User'
+    urlSlug: 'String'
     viewerUpvoted: 'Boolean'
   }
   PostImage: { // field return type name

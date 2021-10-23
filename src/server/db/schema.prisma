@@ -87,7 +87,7 @@ model Post {
   images       PostImage[]
   publishedAt  DateTime?
   title        String?
-  urlSlug      String        @default("")
+  urlSlug      String        @default("draft")
   thumbnailUrl String?
   updatedAt    DateTime      @updatedAt
   upvotes      PostUpvoter[]

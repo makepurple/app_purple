@@ -95,6 +95,7 @@ type Post {
   updatedAt: DateTime!
   upvoteCount: Int!
   upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
+  urlSlug: String!
   viewerUpvoted: Boolean!
 }
 
