@@ -1,5 +1,4 @@
 const { addWebpackAlias } = require("customize-cra");
-const NodemonPlugin = require("nodemon-webpack-plugin");
 const ms = require("ms");
 const path = require("path");
 
