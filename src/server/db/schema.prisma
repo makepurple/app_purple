@@ -87,9 +87,12 @@ model Post {
   images       PostImage[]
   publishedAt  DateTime?
   title        String?
+  urlSlug      String        @default("")
   thumbnailUrl String?
   updatedAt    DateTime      @updatedAt
   upvotes      PostUpvoter[]
+
+  @@unique([authorId, urlSlug])
 }
 
 model PostUpvoter {

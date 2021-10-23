@@ -228,6 +228,7 @@ export interface NexusGenFieldTypes {
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     deletePost: NexusGenRootTypes['Post']; // Post!
     ok: boolean; // Boolean!
+    publishPost: NexusGenRootTypes['Post']; // Post!
     updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updateSkills: NexusGenRootTypes['User']; // User!
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
@@ -331,6 +332,7 @@ export interface NexusGenFieldTypeNames {
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     deletePost: 'Post'
     ok: 'Boolean'
+    publishPost: 'Post'
     updateDesiredSkills: 'User'
     updateSkills: 'User'
     uploadPostImage: 'PostImage'
@@ -411,6 +413,9 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
     }
     deletePost: { // args
+      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    publishPost: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     updateDesiredSkills: { // args
