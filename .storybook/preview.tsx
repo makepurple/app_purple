@@ -118,7 +118,7 @@ export const decorators = [
 			<LazyMotion features={domMax} strict>
 				<Story />
 			</LazyMotion>
-			<Toaster position="bottom-center" />
+			<Toaster position="top-center" />
 		</>
 	)
 ];
