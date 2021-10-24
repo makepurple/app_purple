@@ -3,6 +3,7 @@ export * from "./AppBar";
 export * from "./Avatar";
 export * from "./Brand";
 export * from "./Button";
+export * from "./Divider";
 export * from "./Footer";
 export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
