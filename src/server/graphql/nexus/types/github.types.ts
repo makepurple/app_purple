@@ -1,6 +1,6 @@
 import { octokit } from "@/server/services";
 import { oneLine } from "common-tags";
-import { objectType } from "nexus";
+import { nonNull, objectType } from "nexus";
 
 export const githubTypes = [
 	objectType({
@@ -60,7 +60,7 @@ export const githubTypes = [
 			t.string("company");
 			t.string("name");
 			t.field("topLanguages", {
-				type: "TopLanguages",
+				type: nonNull("TopLanguages"),
 				resolve: async (parent, args, { octokit: graphql }) => {
 					const userTopLanguages = await graphql<
 						octokit.GetUserTopLanguagesQuery,

@@ -299,7 +299,7 @@ export interface NexusGenFieldTypes {
     bio: string | null; // String
     company: string | null; // String
     name: string | null; // String
-    topLanguages: NexusGenRootTypes['TopLanguages'] | null; // TopLanguages
+    topLanguages: NexusGenRootTypes['TopLanguages']; // TopLanguages!
     twitterUsername: string | null; // String
     url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
