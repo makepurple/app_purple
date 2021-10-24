@@ -32,7 +32,7 @@ export type Scalars = {
 };
 
 export type Comment = {
-  readonly __typename?: 'Comment';
+  readonly __typename: 'Comment';
   readonly author: User;
   readonly content: Scalars['String'];
   readonly createdAt: Scalars['DateTime'];
@@ -47,13 +47,13 @@ export type CreatePresignedS3UrlInput = {
 };
 
 export type CreatePresignedS3UrlPayload = {
-  readonly __typename?: 'CreatePresignedS3UrlPayload';
+  readonly __typename: 'CreatePresignedS3UrlPayload';
   readonly fields: Scalars['Json'];
   readonly url: Scalars['String'];
 };
 
 export type Experience = {
-  readonly __typename?: 'Experience';
+  readonly __typename: 'Experience';
   readonly actions: ReadonlyArray<Scalars['String']>;
   readonly endDate?: Maybe<Scalars['DateTime']>;
   readonly id: Scalars['Int'];
@@ -76,7 +76,7 @@ export enum ExperienceType {
 
 /** Root mutation type */
 export type Mutation = {
-  readonly __typename?: 'Mutation';
+  readonly __typename: 'Mutation';
   readonly createPost: Post;
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
   /** User can delete their own post. */
@@ -134,7 +134,7 @@ export type MutationUpvotePostArgs = {
 };
 
 export type Post = {
-  readonly __typename?: 'Post';
+  readonly __typename: 'Post';
   readonly author: User;
   readonly authorId: Scalars['String'];
   readonly comments: ReadonlyArray<Comment>;
@@ -160,7 +160,7 @@ export type PostUpvotingUsersArgs = {
 };
 
 export type PostImage = {
-  readonly __typename?: 'PostImage';
+  readonly __typename: 'PostImage';
   readonly id: Scalars['ID'];
   readonly post: Post;
   readonly postId: Scalars['Int'];
@@ -177,7 +177,7 @@ export type PostWhereUniqueInput = {
 
 /** Root query type */
 export type Query = {
-  readonly __typename?: 'Query';
+  readonly __typename: 'Query';
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
   readonly post?: Maybe<Post>;
@@ -209,7 +209,7 @@ export type QueryUserArgs = {
 };
 
 export type Skill = {
-  readonly __typename?: 'Skill';
+  readonly __typename: 'Skill';
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
   readonly users: ReadonlyArray<User>;
@@ -217,7 +217,7 @@ export type Skill = {
 
 /** One of the most used languages by a user */
 export type TopLanguage = {
-  readonly __typename?: 'TopLanguage';
+  readonly __typename: 'TopLanguage';
   /** The color of the language, defined by GitHub */
   readonly color: Scalars['String'];
   /** The name of the language. */
@@ -228,7 +228,7 @@ export type TopLanguage = {
 
 /** The most used languages by a user, determined by number of bytes written to repositories owned by the user on GitHub. */
 export type TopLanguages = {
-  readonly __typename?: 'TopLanguages';
+  readonly __typename: 'TopLanguages';
   readonly nodes: ReadonlyArray<TopLanguage>;
   /** The total number of languages across all owned repositories. */
   readonly totalCount: Scalars['Int'];
@@ -252,7 +252,7 @@ export type UploadPostImageInput = {
 };
 
 export type User = {
-  readonly __typename?: 'User';
+  readonly __typename: 'User';
   readonly comments: ReadonlyArray<Comment>;
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
@@ -268,7 +268,7 @@ export type User = {
 
 /** Data for a user from that user's connected GitHub account. */
 export type UserGitHub = {
-  readonly __typename?: 'UserGitHub';
+  readonly __typename: 'UserGitHub';
   readonly bio?: Maybe<Scalars['String']>;
   readonly company?: Maybe<Scalars['String']>;
   readonly topLanguages?: Maybe<TopLanguages>;
@@ -285,19 +285,23 @@ export type UserWhereUniqueInput = {
   readonly name?: Maybe<Scalars['String']>;
 };
 
-export type PostCardPostFragment = { readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } };
+export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
+
+export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
+
+export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: any, readonly websiteUrl?: string | null | undefined, readonly topLanguages?: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } | null | undefined } };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type UpvotePostMutation = { readonly __typename?: 'Mutation', readonly upvotePost: { readonly __typename?: 'Post', readonly id: number, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename?: 'User', readonly id: string | number }> } };
+export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'Post', readonly id: number, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string | number }> } };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyUserQuery = { readonly __typename?: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
+export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
 
 export type GetPostsQueryVariables = Exact<{
   cursor?: Maybe<PostWhereUniqueInput>;
@@ -306,24 +310,26 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { readonly __typename?: 'Query', readonly posts: ReadonlyArray<{ readonly __typename?: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename?: 'User', readonly id: string | number, readonly name: string } }> };
+export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: ReadonlyArray<{ readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } }> };
 
-export type GetUserSummarySidebarQueryVariables = Exact<{
+export type GetUserInfoSideBarQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type GetUserSummarySidebarQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: any, readonly websiteUrl?: string | null | undefined, readonly topLanguages?: { readonly __typename: 'TopLanguages', readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } | null | undefined } } | null | undefined };
+export type GetUserInfoSideBarQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: any, readonly websiteUrl?: string | null | undefined, readonly topLanguages?: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } | null | undefined } } | null | undefined };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OkQuery = { readonly __typename?: 'Query', readonly ok: boolean };
+export type OkQuery = { readonly __typename: 'Query', readonly ok: boolean };
 
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
     fragment PostCardPost on Post {
+  __typename
   id
   author {
+    __typename
     id
     name
   }
@@ -336,6 +342,39 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
   viewerUpvoted
 }
     `;
+export const TopLanguagesFragmentDoc = /*#__PURE__*/ gql`
+    fragment TopLanguages on TopLanguages {
+  __typename
+  nodes {
+    __typename
+    name
+    color
+    size
+  }
+  totalCount
+  totalSize
+}
+    `;
+export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserInfoSideBarUser on User {
+  __typename
+  id
+  image
+  name
+  github {
+    __typename
+    bio
+    company
+    topLanguages {
+      __typename
+      ...TopLanguages
+    }
+    twitterUsername
+    url
+    websiteUrl
+  }
+}
+    ${TopLanguagesFragmentDoc}`;
 export const UpvotePostDocument = /*#__PURE__*/ gql`
     mutation UpvotePost($where: PostWhereUniqueInput!) {
   upvotePost(where: $where) {
@@ -368,6 +407,7 @@ export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQuery
 export const GetPostsDocument = /*#__PURE__*/ gql`
     query GetPosts($cursor: PostWhereUniqueInput, $take: Int, $where: PostWhereInput!) {
   posts(cursor: $cursor, take: $take, where: $where) {
+    __typename
     id
     ...PostCardPost
   }
@@ -377,37 +417,17 @@ export const GetPostsDocument = /*#__PURE__*/ gql`
 export function useGetPostsQuery(options: Omit<Urql.UseQueryArgs<GetPostsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetPostsQuery>({ query: GetPostsDocument, ...options });
 };
-export const GetUserSummarySidebarDocument = /*#__PURE__*/ gql`
-    query GetUserSummarySidebar($name: String!) {
+export const GetUserInfoSideBarDocument = /*#__PURE__*/ gql`
+    query GetUserInfoSideBar($name: String!) {
   user(where: {name: $name}) {
     __typename
-    id
-    name
-    image
-    github {
-      __typename
-      bio
-      company
-      twitterUsername
-      url
-      websiteUrl
-      topLanguages {
-        __typename
-        totalSize
-        nodes {
-          __typename
-          name
-          color
-          size
-        }
-      }
-    }
+    ...UserInfoSideBarUser
   }
 }
-    `;
+    ${UserInfoSideBarUserFragmentDoc}`;
 
-export function useGetUserSummarySidebarQuery(options: Omit<Urql.UseQueryArgs<GetUserSummarySidebarQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetUserSummarySidebarQuery>({ query: GetUserSummarySidebarDocument, ...options });
+export function useGetUserInfoSideBarQuery(options: Omit<Urql.UseQueryArgs<GetUserInfoSideBarQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserInfoSideBarQuery>({ query: GetUserInfoSideBarDocument, ...options });
 };
 export const OkDocument = /*#__PURE__*/ gql`
     query Ok {

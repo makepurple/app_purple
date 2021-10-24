@@ -6,6 +6,7 @@ generates:
   src/client/graphql/generated/graphql.gen.ts:
     config:
       immutableTypes: true
+      nonOptionalTypename: true
       preResolveTypes: true
       pureMagicComment: true
       useTypeImports: true

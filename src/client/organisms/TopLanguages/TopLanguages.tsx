@@ -27,7 +27,7 @@ const StyledLegend = tw(Legend)`
 	mt-3
 `;
 
-export interface UserTopLanguagesProps {
+export interface TopLanguagesProps {
 	className?: string;
 	style?: CSSProperties;
 	topLanguages: readonly TopLanguage[];
@@ -35,7 +35,7 @@ export interface UserTopLanguagesProps {
 	totalSize: number;
 }
 
-export const UserTopLanguages: FC<UserTopLanguagesProps> = ({
+export const TopLanguages: FC<TopLanguagesProps> = ({
 	className,
 	style,
 	topLanguages: _topLanguages = [],

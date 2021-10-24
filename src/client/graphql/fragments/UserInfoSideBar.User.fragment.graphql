@@ -1,0 +1,18 @@
+fragment UserInfoSideBarUser on User {
+	__typename
+	id
+	image
+	name
+	github {
+		__typename
+		bio
+		company
+		topLanguages {
+			__typename
+			...TopLanguages
+		}
+		twitterUsername
+		url
+		websiteUrl
+	}
+}

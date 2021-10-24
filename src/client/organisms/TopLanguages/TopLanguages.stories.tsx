@@ -1,16 +1,16 @@
-import { useGetUserSummarySidebarQuery } from "@/client/graphql";
-import { GetUserSummarySidebar_mock } from "@/client/graphql/mocks";
-import { UserTopLanguages } from "@/client/organisms";
+import { useGetUserInfoSideBarQuery } from "@/client/graphql";
+import { GetUserInfoSideBar_mock } from "@/client/graphql/mocks";
+import { TopLanguages } from "@/client/organisms";
 import React from "react";
 import { getOperationName } from "urql";
 
 export default {
-	title: "organisms/UserTopLanguages",
-	component: UserTopLanguages
+	title: "organisms/TopLanguages",
+	component: TopLanguages
 };
 
 const Template = (args) => {
-	const [{ data }] = useGetUserSummarySidebarQuery({
+	const [{ data }] = useGetUserInfoSideBarQuery({
 		variables: {
 			name: "leedavidcs"
 		}
@@ -19,7 +19,7 @@ const Template = (args) => {
 	const topLanguages = data?.user?.github.topLanguages;
 
 	return (
-		<UserTopLanguages
+		<TopLanguages
 			{...args}
 			style={{ width: 296 }}
 			topLanguages={topLanguages?.nodes ?? []}
@@ -33,8 +33,8 @@ export const Standard: any = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	urql: (op) => {
-		if (getOperationName(op.query) === "GetUserSummarySidebar") {
-			return { data: GetUserSummarySidebar_mock };
+		if (getOperationName(op.query) === "GetUserInfoSideBar") {
+			return { data: GetUserInfoSideBar_mock };
 		}
 
 		return {};
