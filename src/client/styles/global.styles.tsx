@@ -6,10 +6,6 @@ const CustomStyles = createGlobalStyle`
 body {
 	${tw`antialiased`}
 }
-
-code {
-	font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace
-}
 `;
 
 export const GlobalStyles = () => (
