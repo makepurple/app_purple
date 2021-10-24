@@ -1,6 +1,5 @@
 import { WindowUtils } from "@/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
-import { cacheExchange } from "@urql/exchange-graphcache";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
 import produce from "immer";
@@ -13,6 +12,7 @@ import {
 	fetchExchange,
 	ssrExchange
 } from "urql";
+import { createCache } from "./cache";
 
 export const URQL_STATE_PROP_NAME = "urqlState";
 
@@ -65,7 +65,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 					}
 				}),
 				dedupExchange,
-				cacheExchange(),
+				createCache(),
 				_ssr,
 				fetchExchange
 			],

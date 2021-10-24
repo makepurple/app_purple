@@ -167,6 +167,7 @@ export type PostImage = {
 };
 
 export type PostWhereInput = {
+  readonly author?: Maybe<UserWhereInput>;
   readonly authorId?: Maybe<Scalars['String']>;
 };
 
@@ -213,6 +214,15 @@ export type Skill = {
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
   readonly users: ReadonlyArray<User>;
+};
+
+export type StringNullableFilter = {
+  readonly contains?: Maybe<Scalars['String']>;
+  readonly endsWith?: Maybe<Scalars['String']>;
+  readonly equals?: Maybe<Scalars['String']>;
+  readonly in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly notIn?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly startsWith?: Maybe<Scalars['String']>;
 };
 
 /** One of the most used languages by a user */
@@ -278,6 +288,10 @@ export type UserGitHub = {
   readonly url: Scalars['URL'];
   readonly user: User;
   readonly websiteUrl?: Maybe<Scalars['String']>;
+};
+
+export type UserWhereInput = {
+  readonly name?: Maybe<StringNullableFilter>;
 };
 
 export type UserWhereUniqueInput = {
