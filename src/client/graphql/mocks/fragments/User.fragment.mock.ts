@@ -10,6 +10,7 @@ export const User_fragment_mock: User = {
 		__typename: "UserGitHub",
 		bio: "I learn things and work on MakePurple",
 		company: "Openbase",
+		name: "David Lee",
 		topLanguages: {
 			...TopLanguages_fragment_mock,
 			__typename: "TopLanguages"

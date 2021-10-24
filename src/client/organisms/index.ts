@@ -5,3 +5,4 @@ export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
 export * from "./TopLanguages";
+export * from "./UserInfoSideBar";

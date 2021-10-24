@@ -7,6 +7,7 @@ fragment UserInfoSideBarUser on User {
 		__typename
 		bio
 		company
+		name
 		topLanguages {
 			__typename
 			...TopLanguages

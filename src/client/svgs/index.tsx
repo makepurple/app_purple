@@ -330,6 +330,32 @@ export const LocationIcon = React.memo(
 	)
 );
 
+export const OpenbaseIcon = React.memo(
+	React.forwardRef(
+		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
+			<svg
+				width={24}
+				height={24}
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				ref={svgRef}
+				{...props}
+			>
+				<path
+					fill="currentColor"
+					opacity={0.01}
+					d="M1.004 15.602l.018-12.59L11.944 0l10.977 2.982-.018 12.59L11.943 24l-10.94-8.398z"
+				/>
+				<path
+					fill="currentColor"
+					d="M11.943 24L1.004 15.602 0 3.942 11.944 0 24 3.941l-1.097 11.63L11.943 24zm.007-22.7L1.32 4.83l10.623 19.166L22.687 4.833 11.95 1.3z"
+				/>
+			</svg>
+		)
+	)
+);
+
 export const PencilIcon = React.memo(
 	React.forwardRef(
 		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
