@@ -1,5 +1,6 @@
 import { redis } from "@/server/redis";
 import { Logger } from "@/server/utils";
+import { ObjectUtils } from "@/utils";
 import { createTokenAuth } from "@octokit/auth-token";
 import { Octokit } from "@octokit/core";
 import { throttling } from "@octokit/plugin-throttling";
@@ -49,7 +50,7 @@ export class OctokitClient {
 			const query = oneLine(strings, ...exprs);
 			const auth = createTokenAuth(accessToken)();
 
-			return async (variables?: TVariables): Promise<TResult> => {
+			const op = async (variables?: TVariables): Promise<TResult> => {
 				const { token } = await auth;
 
 				const response = await this.instance.graphql<TResult>({
@@ -62,6 +63,19 @@ export class OctokitClient {
 
 				return response;
 			};
+
+			return ObjectUtils.setStatic(op, {
+				/**
+				 * !HACK
+				 * @description Optionally type-cast the result after defining the query, so that
+				 * we get VSCode syntax highlighting for GraphQL
+				 * @author David Lee
+				 * @date October 23, 2021
+				 */
+				cast: <TCastResult = any, TCastVariables extends Record<string, unknown> = any>(
+					variables?: TCastVariables
+				): Promise<TCastResult> => op(variables as any) as any
+			});
 		};
 	}
 }

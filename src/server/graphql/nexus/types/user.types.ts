@@ -1,4 +1,4 @@
-import { octokit } from "@/server/services";
+import type { octokit } from "@/server/services";
 import { list, nonNull, objectType } from "nexus";
 import { User } from "nexus-prisma";
 
@@ -28,10 +28,7 @@ export const userTypes = [
 			t.field("github", {
 				type: nonNull("UserGitHub"),
 				resolve: async (parent, args, { octokit: graphql }) => {
-					const userGithub = await graphql<
-						octokit.GetUserGitHubQuery,
-						octokit.GetUserGitHubQueryVariables
-					>`
+					const userGithub = await graphql`
 						query GetUserGitHub($login: String!) {
 							user(login: $login) {
 								bio
@@ -41,7 +38,11 @@ export const userTypes = [
 								websiteUrl
 							}
 						}
-					`({ login: parent.name }).catch(() => null);
+					`
+						.cast<octokit.GetUserGitHubQuery, octokit.GetUserGitHubQueryVariables>({
+							login: parent.name
+						})
+						.catch(() => null);
 
 					if (!userGithub?.user) {
 						throw new Error("Could not get user's GitHub data");
