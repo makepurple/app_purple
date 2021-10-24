@@ -4,6 +4,7 @@ query GetPosts(
 	$where: PostWhereInput!
 ) {
 	posts(cursor: $cursor, take: $take, where: $where) {
+		__typename
 		id
 		...PostCardPost
 	}
