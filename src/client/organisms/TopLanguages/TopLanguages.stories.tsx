@@ -18,14 +18,7 @@ const Template = (args) => {
 
 	const topLanguages = data?.user?.github.topLanguages;
 
-	return (
-		<TopLanguages
-			{...args}
-			style={{ width: 296 }}
-			topLanguages={topLanguages?.nodes ?? []}
-			totalSize={topLanguages?.totalSize ?? 0}
-		/>
-	);
+	return <TopLanguages {...args} style={{ width: 296 }} topLanguages={topLanguages} />;
 };
 Template.args = {};
 

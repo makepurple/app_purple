@@ -18,5 +18,26 @@ export const User_fragment_mock: User = {
 		twitterUsername: "i3daly",
 		url: "https://github.com/leedavidcs",
 		websiteUrl: "https://leedavidcs.dev"
-	}
+	},
+	skills: [
+		"Next.js",
+		"Prisma",
+		"Nexus",
+		"Urql",
+		"TypeScript",
+		"Storybook",
+		"Figma",
+		"Framer-Motion"
+	].map((skill, i) => ({
+		__typename: "Skill",
+		id: i,
+		name: skill
+	})),
+	desiredSkills: ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map(
+		(skill, i) => ({
+			__typename: "Skill",
+			id: i,
+			name: skill
+		})
+	)
 } as any;

@@ -1,5 +1,4 @@
-import { Typography } from "@/client/atoms";
-import { TopLanguage } from "@/client/graphql";
+import type { TopLanguages as _TopLanguages } from "@/client/graphql";
 import { Legend, ProportionBar } from "@/client/molecules";
 import React, { CSSProperties, FC, useMemo } from "react";
 import tw from "twin.macro";
@@ -13,16 +12,6 @@ const Root = tw.div`
 	items-stretch
 `;
 
-const Header = tw(Typography)`
-	text-2xl
-	font-semibold
-	leading-none
-`;
-
-const StyledProportionBar = tw(ProportionBar)`
-	mt-4
-`;
-
 const StyledLegend = tw(Legend)`
 	mt-3
 `;
@@ -30,20 +19,19 @@ const StyledLegend = tw(Legend)`
 export interface TopLanguagesProps {
 	className?: string;
 	style?: CSSProperties;
-	topLanguages: readonly TopLanguage[];
-	totalCount: number;
-	totalSize: number;
+	topLanguages: _TopLanguages;
 }
 
 export const TopLanguages: FC<TopLanguagesProps> = ({
 	className,
 	style,
-	topLanguages: _topLanguages = [],
-	totalSize
+	topLanguages: _topLanguages
 }) => {
+	const { totalSize } = _topLanguages;
+
 	const topLanguages = useMemo(
 		() =>
-			_topLanguages
+			_topLanguages.nodes
 				.filter((topLanguage) => topLanguage.size > MIN_SIZE_THRESHOLD * totalSize)
 				.slice(0, MAX_TOP_LANGUAGES),
 		[_topLanguages, totalSize]
@@ -53,8 +41,7 @@ export const TopLanguages: FC<TopLanguagesProps> = ({
 
 	return (
 		<Root className={className} style={style}>
-			<Header>Most Used Languages</Header>
-			<StyledProportionBar>
+			<ProportionBar>
 				{topLanguages.map((topLanguage) => (
 					<ProportionBar.Item
 						key={topLanguage.name}
@@ -64,7 +51,7 @@ export const TopLanguages: FC<TopLanguagesProps> = ({
 						{topLanguage.name}
 					</ProportionBar.Item>
 				))}
-			</StyledProportionBar>
+			</ProportionBar>
 			<StyledLegend>
 				{topLanguages.map((topLanguage) => (
 					<Legend.Item

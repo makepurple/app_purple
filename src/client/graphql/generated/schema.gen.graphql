@@ -186,7 +186,7 @@ type UserGitHub {
   bio: String
   company: String
   name: String
-  topLanguages: TopLanguages
+  topLanguages: TopLanguages!
   twitterUsername: String
 
   # The URL of the user's GitHub profile.

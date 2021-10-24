@@ -272,7 +272,7 @@ export type UserGitHub = {
   readonly bio?: Maybe<Scalars['String']>;
   readonly company?: Maybe<Scalars['String']>;
   readonly name?: Maybe<Scalars['String']>;
-  readonly topLanguages?: Maybe<TopLanguages>;
+  readonly topLanguages: TopLanguages;
   readonly twitterUsername?: Maybe<Scalars['String']>;
   /** The URL of the user's GitHub profile. */
   readonly url: Scalars['URL'];
@@ -290,7 +290,7 @@ export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: n
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
-export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages?: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } | null | undefined } };
+export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -318,7 +318,7 @@ export type GetUserInfoSideBarQueryVariables = Exact<{
 }>;
 
 
-export type GetUserInfoSideBarQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages?: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } | null | undefined } } | null | undefined };
+export type GetUserInfoSideBarQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> } | null | undefined };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -359,9 +359,10 @@ export const TopLanguagesFragmentDoc = /*#__PURE__*/ gql`
 export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserInfoSideBarUser on User {
   __typename
-  id
-  image
-  name
+  desiredSkills {
+    id
+    name
+  }
   github {
     __typename
     bio
@@ -374,6 +375,13 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
     twitterUsername
     url
     websiteUrl
+  }
+  id
+  image
+  name
+  skills {
+    id
+    name
   }
 }
     ${TopLanguagesFragmentDoc}`;

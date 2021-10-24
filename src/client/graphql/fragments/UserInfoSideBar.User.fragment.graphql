@@ -1,8 +1,9 @@
 fragment UserInfoSideBarUser on User {
 	__typename
-	id
-	image
-	name
+	desiredSkills {
+		id
+		name
+	}
 	github {
 		__typename
 		bio
@@ -15,5 +16,12 @@ fragment UserInfoSideBarUser on User {
 		twitterUsername
 		url
 		websiteUrl
+	}
+	id
+	image
+	name
+	skills {
+		id
+		name
 	}
 }

@@ -1,23 +1,44 @@
-import { Avatar, GitHubAvatarImage, Paper } from "@/client/atoms";
+import { Avatar, Button, Divider, GitHubAvatarImage, Paper, Tags } from "@/client/atoms";
 import type { UserInfoSideBarUserFragment } from "@/client/graphql";
+import { TopLanguages } from "@/client/organisms/TopLanguages";
 import { GitHubIcon, OpenbaseIcon, PersonIcon, TwitterIcon } from "@/client/svgs";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled } from "twin.macro";
 
 const MainInfoContainer = tw.div`
-	p-8
+	p-6
+`;
+
+const TopLanguagesContainer = tw.div`
+	p-6
+`;
+
+const SkillsContainer = tw.div`
+	p-6
+`;
+
+const NewPostButtonContainer = tw.div`
+	p-6
+`;
+
+const SubTitle = styled.h2`
+	${tw`
+		text-xl
+		leading-none
+		font-semibold
+		text-black
+	`}
+	&:not(:first-child) {
+		${tw`
+			mt-6
+		`}
+	}
 `;
 
 const UserAvatar = tw(Avatar)`
 	h-32
 	w-32
-`;
-
-const Bio = tw.p`
-	mt-2
-	text-gray-500
-	line-clamp-4
 `;
 
 const UserName = tw.h1`
@@ -38,6 +59,12 @@ const SecondaryName = tw.div`
 	text-gray-500
 `;
 
+const Bio = tw.p`
+	mt-3
+	text-gray-500
+	line-clamp-4
+`;
+
 const SocialLinks = styled.div`
 	${tw`
 		mt-2
@@ -54,6 +81,19 @@ const SocialLink = tw.a`
 	inline-flex
 	h-4
 	w-4
+`;
+
+const MostUsedLanguages = tw(TopLanguages)`
+	mt-4
+`;
+
+const Skills = tw(Tags)`
+	mt-4
+`;
+
+const NewPostButton = tw(Button)`
+	w-full
+	mt-4
 `;
 
 export interface UserInfoSideBarProps {
@@ -83,10 +123,8 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					</UserAvatar>
 				</NextLink>
 				<UserName>
-					<DisplayName title={displayName}>{displayName}</DisplayName>
-					{!!user.github.name && (
-						<SecondaryName title={user.name}>{user.name}</SecondaryName>
-					)}
+					<DisplayName>{displayName}</DisplayName>
+					{!!user.github.name && <SecondaryName>{user.name}</SecondaryName>}
 				</UserName>
 				{user.github.bio && <Bio>{user.github.bio}</Bio>}
 				<SocialLinks>
@@ -121,6 +159,35 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					</SocialLink>
 				</SocialLinks>
 			</MainInfoContainer>
+			<Divider />
+			<TopLanguagesContainer>
+				<SubTitle>Most Used Languages</SubTitle>
+				<MostUsedLanguages topLanguages={user.github.topLanguages} />
+			</TopLanguagesContainer>
+			<Divider />
+			<SkillsContainer>
+				<SubTitle>Favorite Skills</SubTitle>
+				{!!user.skills.length && (
+					<Skills type="positive">
+						{user.skills.map((skill) => (
+							<Tags.Tag key={skill.id}>{skill.name}</Tags.Tag>
+						))}
+					</Skills>
+				)}
+				<SubTitle>Skills to Improve</SubTitle>
+				{!!user.desiredSkills.length && (
+					<Skills type="negative">
+						{user.desiredSkills.map((skill) => (
+							<Tags.Tag key={skill.id}>{skill.name}</Tags.Tag>
+						))}
+					</Skills>
+				)}
+			</SkillsContainer>
+			<NewPostButtonContainer>
+				<NextLink href={`/${user.name}/draft`} passHref>
+					<NewPostButton as="a">New Post</NewPostButton>
+				</NextLink>
+			</NewPostButtonContainer>
 		</Paper>
 	);
 };
