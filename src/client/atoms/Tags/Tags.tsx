@@ -19,7 +19,7 @@ export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onC
 	onChange?: (newTags: readonly string[], event?: SyntheticEvent) => void;
 };
 
-const Root = styled.div<{ type: TagType }>`
+const Root = styled.div<{ type?: TagType }>`
 	${tw`
 		flex
 		flex-row
@@ -45,7 +45,13 @@ const Root = styled.div<{ type: TagType }>`
 
 const _Tags = memo(
 	forwardRef<HTMLDivElement, TagsProps>((props, ref) => {
-		const { children, editable = false, onChange, ...restTagsProps } = props;
+		const {
+			children = [],
+			editable = false,
+			onChange,
+			type = "neutral",
+			...restTagsProps
+		} = props;
 
 		const tags: readonly string[] = useMemo(() => {
 			return children.map((child) => {
@@ -66,7 +72,7 @@ const _Tags = memo(
 		);
 
 		return (
-			<Root {...restTagsProps} ref={ref}>
+			<Root {...restTagsProps} ref={ref} type={type}>
 				<TagsContext.Provider value={{ editable, onRemove }}>
 					{children}
 				</TagsContext.Provider>
