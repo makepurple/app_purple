@@ -1,5 +1,5 @@
+import { LazyTippy, LazyTippyProps } from "@/client/atoms/LazyTippy";
 import { useOnClickOutside, useOnKeyDown, useUncontrolledProp } from "@/client/hooks";
-import Tippy, { TippyProps } from "@tippyjs/react";
 import React, {
 	cloneElement,
 	FC,
@@ -91,7 +91,7 @@ export const PopoverBox = styled.div`
 	}
 `;
 
-export type PopoverProps = Omit<TippyProps, "content" | "render" | "visible"> & {
+export type PopoverProps = Omit<LazyTippyProps, "content" | "render" | "visible"> & {
 	canEscapeKeyClose?: boolean;
 	canOutsideClickClose?: boolean;
 	content?: ReactNode;
@@ -144,7 +144,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 	});
 
 	return (
-		<Tippy
+		<LazyTippy
 			placement="auto"
 			render={(attrs) =>
 				open && (
@@ -163,6 +163,6 @@ export const Popover: FC<PopoverProps> = (props) => {
 						setOpen(!open);
 					}
 				})}
-		</Tippy>
+		</LazyTippy>
 	);
 };

@@ -10,6 +10,7 @@ export * from "./GitHubAvatarImage";
 export * from "./GradientHeader";
 export * from "./Input";
 export * from "./LazyMotion";
+export * from "./LazyTippy";
 export * from "./MainContainer";
 export * from "./Menu";
 export * from "./PageContainer";
