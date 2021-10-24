@@ -67,7 +67,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
   
         </style>
         <style type="text/css">.jhXNhQ{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;background-color:#f6f9fc;padding:20px 36px 64px;}/*!sc*/
-.elPTdI,.elPTdI *{font-family:Gilroy,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
+.jWgiBW,.jWgiBW *{font-family:Inter,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu, Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;}/*!sc*/
 .fHzcwX{border-radius:4px;border:1px solid #dddddd;background-color:#ffffff;overflow:hidden;}/*!sc*/
 .fiGKwa{background-color:#706EFF;}/*!sc*/
 </style>
@@ -205,7 +205,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
           
               <tr>
                 <td
-                   align="center" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="center" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <div
@@ -267,7 +267,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
           
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <div
@@ -279,7 +279,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -291,7 +291,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -303,7 +303,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -315,7 +315,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -327,7 +327,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;padding-top:8px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;padding-top:8px;word-break:break-word;"
                 >
                   
       <div
@@ -339,7 +339,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;padding-top:24px;word-break:break-word;"
                 >
                   
       <div
@@ -418,7 +418,7 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
             
               <tr>
                 <td
-                   align="left" class="sc-jRQBWg elPTdI" style="font-size:0px;padding:0px;word-break:break-word;"
+                   align="left" class="sc-jRQBWg jWgiBW" style="font-size:0px;padding:0px;word-break:break-word;"
                 >
                   
       <div

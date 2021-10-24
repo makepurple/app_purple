@@ -8,7 +8,7 @@ export type EmailTextProps = InferComponentProps<typeof EmailText>;
 export const EmailText = styled(withCssClass(MjmlText))`
 	&,
 	& * {
-		font-family: Gilroy, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+		font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
 			Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 	}
 `;
