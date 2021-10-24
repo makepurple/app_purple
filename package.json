@@ -5,6 +5,7 @@
     "dev": "dotenv -- next -p 3000",
     "prebuild": "yarn run generate:all",
     "build": "dotenv -- next build",
+    "build:test": "dotenv -- next build",
     "start": "next start",
     "storybook": "start-storybook -s ./public -p 6006",
     "storybook:build": "build-storybook -s ./public",

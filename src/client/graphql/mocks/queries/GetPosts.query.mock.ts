@@ -1,4 +1,4 @@
-import type { GetPostsQuery, GetPostsQueryVariables, Post } from "@/client/graphql/generated";
+import type { GetPostsQuery, GetPostsQueryVariables } from "@/client/graphql/generated";
 import { Post_fragment_mock } from "@/client/graphql/mocks/fragments";
 
 const DATA_SIZE = 10;

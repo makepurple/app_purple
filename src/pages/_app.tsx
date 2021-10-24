@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import NextHead from "next/head";
 import React from "react";
 import { Toaster } from "react-hot-toast";
+import { theme } from "twin.macro";
 
 import "tippy.js/dist/tippy.css";
 
@@ -28,6 +29,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 					{/* Import styles (inlined) */}
 					<GlobalStyles />
 					<NextProgress
+						color={theme`colors.indigo.500`}
 						startPosition={0.3}
 						stopDelayMs={ms("0.2s")}
 						options={{ showSpinner: false }}

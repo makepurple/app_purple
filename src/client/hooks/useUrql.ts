@@ -1,6 +1,6 @@
 import { initializeUrql, URQL_STATE_PROP_NAME } from "@/client/graphql";
 import type { SSRData } from "@urql/core/dist/types/exchanges/ssr";
-import { GetServerSidePropsResult } from "next";
+import type { GetServerSidePropsResult } from "next";
 import { useMemo } from "react";
 import { Client } from "urql";
 
