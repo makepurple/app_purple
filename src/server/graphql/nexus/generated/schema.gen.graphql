@@ -106,6 +106,7 @@ type PostImage {
 }
 
 input PostWhereInput {
+  author: UserWhereInput
   authorId: String
 }
 
@@ -131,6 +132,15 @@ type Skill {
   id: Int!
   name: String!
   users: [User!]!
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  startsWith: String
 }
 
 """One of the most used languages by a user"""
@@ -211,6 +221,10 @@ type UserGitHub {
   url: URL!
   user: User!
   websiteUrl: String
+}
+
+input UserWhereInput {
+  name: StringNullableFilter
 }
 
 input UserWhereUniqueInput {

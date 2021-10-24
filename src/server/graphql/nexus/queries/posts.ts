@@ -1,3 +1,4 @@
+import { PrismaUtils } from "@/server/utils";
 import { oneLine } from "common-tags";
 import { arg, intArg, list, nonNull, queryField } from "nexus";
 
@@ -20,6 +21,9 @@ export const posts = queryField("posts", {
 			skip: args.skip ?? 0,
 			take: Math.min(args.take ?? 50, 50),
 			where: {
+				author: {
+					name: PrismaUtils.nonNull(args.where.author?.name)
+				},
 				authorId: args.where.authorId ?? undefined
 			}
 		});

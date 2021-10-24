@@ -83,10 +83,19 @@ export interface NexusGenInputs {
     fileType: string; // String!
   }
   PostWhereInput: { // input type
+    author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorId?: string | null; // String
   }
   PostWhereUniqueInput: { // input type
     id?: number | null; // Int
+  }
+  StringNullableFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    in?: string[] | null; // [String!]
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
   }
   UpdateDesiredSkillsInput: { // input type
     skills: string[]; // [String!]!
@@ -96,6 +105,9 @@ export interface NexusGenInputs {
   }
   UploadPostImageInput: { // input type
     image: NexusGenScalars['Upload']; // Upload!
+  }
+  UserWhereInput: { // input type
+    name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
