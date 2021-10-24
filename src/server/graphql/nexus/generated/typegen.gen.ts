@@ -175,6 +175,15 @@ export interface NexusGenObjects {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     urlSlug: string; // String!
   }
+  PostConnection: { // root type
+    edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  PostEdge: { // root type
+    cursor: number; // Int!
+    node: NexusGenRootTypes['Post']; // Post!
+  }
   PostImage: { // root type
     id: string; // ID!
     postId: number; // Int!
@@ -278,6 +287,15 @@ export interface NexusGenFieldTypes {
     upvotingUsers: NexusGenRootTypes['User'][]; // [User!]!
     urlSlug: string; // String!
     viewerUpvoted: boolean; // Boolean!
+  }
+  PostConnection: { // field return type
+    edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  PostEdge: { // field return type
+    cursor: number; // Int!
+    node: NexusGenRootTypes['Post']; // Post!
   }
   PostImage: { // field return type
     id: string; // ID!
@@ -390,6 +408,15 @@ export interface NexusGenFieldTypeNames {
     upvotingUsers: 'User'
     urlSlug: 'String'
     viewerUpvoted: 'Boolean'
+  }
+  PostConnection: { // field return type name
+    edges: 'PostEdge'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  PostEdge: { // field return type name
+    cursor: 'Int'
+    node: 'Post'
   }
   PostImage: { // field return type name
     id: 'ID'

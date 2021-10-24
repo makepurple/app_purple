@@ -5,6 +5,8 @@ export * from "./Experience";
 export * from "./Mutation";
 export * from "./PageInfo";
 export * from "./Post";
+export * from "./PostConnection";
+export * from "./PostEdge";
 export * from "./PostImage";
 export * from "./Query";
 export * from "./Skill";

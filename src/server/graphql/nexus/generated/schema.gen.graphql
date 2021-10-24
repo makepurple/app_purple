@@ -107,6 +107,19 @@ type Post {
   viewerUpvoted: Boolean!
 }
 
+"""Relay-style connection for Post types."""
+type PostConnection {
+  edges: [PostEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+"""Relay-style edge for Post types."""
+type PostEdge {
+  cursor: Int!
+  node: Post!
+}
+
 type PostImage {
   id: ID!
   post: Post!
