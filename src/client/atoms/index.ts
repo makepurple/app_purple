@@ -4,6 +4,7 @@ export * from "./Avatar";
 export * from "./Brand";
 export * from "./Button";
 export * from "./Divider";
+export * from "./ErrorBoundary";
 export * from "./Footer";
 export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
