@@ -183,6 +183,7 @@ export interface NexusGenObjects {
   UserGitHub: { // root type
     bio?: string | null; // String
     company?: string | null; // String
+    name?: string | null; // String
     twitterUsername?: string | null; // String
     url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
@@ -297,6 +298,7 @@ export interface NexusGenFieldTypes {
   UserGitHub: { // field return type
     bio: string | null; // String
     company: string | null; // String
+    name: string | null; // String
     topLanguages: NexusGenRootTypes['TopLanguages'] | null; // TopLanguages
     twitterUsername: string | null; // String
     url: NexusGenScalars['URL']; // URL!
@@ -402,6 +404,7 @@ export interface NexusGenFieldTypeNames {
   UserGitHub: { // field return type name
     bio: 'String'
     company: 'String'
+    name: 'String'
     topLanguages: 'TopLanguages'
     twitterUsername: 'String'
     url: 'URL'

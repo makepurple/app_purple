@@ -33,6 +33,7 @@ export const userTypes = [
 							user(login: $login) {
 								bio
 								company
+								name
 								twitterUsername
 								url
 								websiteUrl

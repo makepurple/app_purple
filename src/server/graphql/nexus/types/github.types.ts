@@ -58,6 +58,7 @@ export const githubTypes = [
 		definition: (t) => {
 			t.string("bio");
 			t.string("company");
+			t.string("name");
 			t.field("topLanguages", {
 				type: "TopLanguages",
 				resolve: async (parent, args, { octokit: graphql }) => {
