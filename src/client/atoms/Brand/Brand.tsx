@@ -14,7 +14,11 @@ const Root = styled.a`
 		hover:no-underline
 	`}
 	background: ${oneLine`
-		linear-gradient(-80deg, ${theme`colors.pink.600`}, ${theme`colors.purple.600`}, ${theme`colors.blue.500`})
+		linear-gradient(
+			-80deg,
+			${theme`colors.pink.600`},
+			${theme`colors.violet.600`},
+			${theme`colors.blue.500`})
 	`};
 	background-clip: text;
 	-webkit-background-clip: text;

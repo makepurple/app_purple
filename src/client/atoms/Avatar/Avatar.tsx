@@ -1,9 +1,71 @@
-import tw from "twin.macro";
+import { oneLine } from "common-tags";
+import React, { AnchorHTMLAttributes, DetailedHTMLProps, forwardRef } from "react";
+import tw, { styled, theme } from "twin.macro";
 
-export const Avatar = tw.div`
-	h-12
-	w-12
-	overflow-hidden
-	rounded-full
-	cursor-pointer
+const Root = styled.a<{ $border?: number }>`
+	${tw`
+		relative
+		flex
+		flex-row
+		items-stretch
+		justify-items-stretch
+		h-12
+		w-12
+		rounded-full
+		border-solid
+		border-transparent
+		cursor-pointer
+	`}
+
+	background-clip: padding-box;
+	-webkit-background-clip: padding-box;
+	border-width: ${({ $border }) => $border}px;
+
+	&:before {
+		${tw`
+			content
+			absolute
+			inset-0
+		`}
+		margin: ${({ $border }) => -($border ?? 0)}px;
+		border-radius: inherit;
+		background: ${oneLine`
+			linear-gradient(
+				-80deg,
+				${theme`colors.pink.600`},
+				${theme`colors.violet.600`},
+				${theme`colors.blue.500`})
+		`};
+	}
 `;
+
+const Content = tw.div`
+	flex
+	items-stretch
+	justify-items-stretch
+	rounded-full
+	overflow-hidden
+`;
+
+export type AvatarProps = DetailedHTMLProps<
+	AnchorHTMLAttributes<HTMLAnchorElement>,
+	HTMLAnchorElement
+> & {
+	border?: number;
+};
+
+export const Avatar = forwardRef<HTMLAnchorElement, AvatarProps>((props, ref) => {
+	const { border, children, ...restAnchorProps } = props;
+
+	return (
+		<Root {...restAnchorProps} ref={ref} $border={border}>
+			<Content>{children}</Content>
+		</Root>
+	);
+});
+
+Avatar.displayName = "Avatar";
+
+Avatar.defaultProps = {
+	border: 0
+};
