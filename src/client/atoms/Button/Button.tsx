@@ -14,7 +14,7 @@ export const Button = styled.button`
 		text-lg
 		leading-none
 		font-medium
-		bg-violet-600
+		bg-indigo-500
 		text-white
 		cursor-pointer
 		hover:opacity-80
