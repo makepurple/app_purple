@@ -1,7 +1,7 @@
 import { Button } from "@/client/atoms";
-import { GitHubIcon } from "@/client/svgs";
+import { GitHubIcon, SvgIconComponent } from "@/client/svgs";
 import { signIn } from "next-auth/client";
-import React, { ComponentType, CSSProperties, FC, SVGAttributes } from "react";
+import React, { CSSProperties, FC } from "react";
 import tw, { styled } from "twin.macro";
 
 const Label = styled.span`
@@ -14,7 +14,7 @@ const Label = styled.span`
 
 export interface LoginButtonProps {
 	className?: string;
-	icon?: Maybe<ComponentType<SVGAttributes<SVGSVGElement>>>;
+	icon?: Maybe<SvgIconComponent>;
 	label?: string;
 	style?: CSSProperties;
 }
