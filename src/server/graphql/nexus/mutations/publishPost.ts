@@ -1,4 +1,6 @@
+import { postTitle } from "@/superstructs";
 import { arg, mutationField, nonNull } from "nexus";
+import { assert } from "superstruct";
 
 export const publishPost = mutationField("publishPost", {
 	type: nonNull("Post"),
@@ -28,6 +30,8 @@ export const publishPost = mutationField("publishPost", {
 		if (!post?.title) {
 			throw new Error("Posts must have a title to be published!");
 		}
+
+		assert(post.title, postTitle);
 
 		const urlSlug: string = post.title
 			.split(/\s+/g)

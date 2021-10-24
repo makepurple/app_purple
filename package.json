@@ -89,6 +89,7 @@
     "slate-history": "^0.66.0",
     "slate-react": "^0.67.0",
     "styled-components": "^5.3.3",
+    "superstruct": "^0.15.3",
     "tailwindcss": "^2.2.17",
     "twin.macro": "^2.8.0",
     "urql": "^2.0.5",
