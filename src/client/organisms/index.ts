@@ -4,4 +4,4 @@ export * from "./PostCard";
 export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
-export * from "./UserTopLanguages";
+export * from "./TopLanguages";
