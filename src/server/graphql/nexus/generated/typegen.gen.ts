@@ -157,6 +157,12 @@ export interface NexusGenObjects {
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
   }
   Mutation: {};
+  PageInfo: { // root type
+    endCursor?: string | null; // String
+    hasNextPage: boolean; // Boolean!
+    hasPreviousPage: boolean; // Boolean!
+    startCursor?: string | null; // String
+  }
   Post: { // root type
     authorId: string; // String!
     content?: NexusGenScalars['Json'] | null; // Json
@@ -248,6 +254,12 @@ export interface NexusGenFieldTypes {
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     upvotePost: NexusGenRootTypes['Post']; // Post!
     viewer: NexusGenRootTypes['User'] | null; // User
+  }
+  PageInfo: { // field return type
+    endCursor: string | null; // String
+    hasNextPage: boolean; // Boolean!
+    hasPreviousPage: boolean; // Boolean!
+    startCursor: string | null; // String
   }
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
@@ -354,6 +366,12 @@ export interface NexusGenFieldTypeNames {
     uploadPostImage: 'PostImage'
     upvotePost: 'Post'
     viewer: 'User'
+  }
+  PageInfo: { // field return type name
+    endCursor: 'String'
+    hasNextPage: 'Boolean'
+    hasPreviousPage: 'Boolean'
+    startCursor: 'String'
   }
   Post: { // field return type name
     author: 'User'

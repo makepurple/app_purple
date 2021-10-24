@@ -80,6 +80,14 @@ type Mutation {
   viewer: User
 }
 
+"""Page info for relay-style pagination connections."""
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
 type Post {
   author: User!
   authorId: String!
