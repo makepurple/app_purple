@@ -1,4 +1,5 @@
 import { postTitle } from "@/superstructs";
+import { Prisma } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { assert } from "superstruct";
 
@@ -36,14 +37,19 @@ export const publishPost = mutationField("publishPost", {
 		const urlSlug: string = post.title
 			.split(/\s+/g)
 			.map((word) => word.toLowerCase())
-			.join("-");
+			.join("-")
+			.trim();
 
 		return await prisma.post.update({
 			where: {
 				id: args.where.id ?? undefined
 			},
 			data: {
+				content: post.content as Prisma.JsonArray,
+				description: (post.description ?? "").trim(),
 				publishedAt: new Date(),
+				title: post.title.trim(),
+				thumbnailUrl: post.thumbnailUrl,
 				urlSlug: encodeURIComponent(urlSlug)
 			}
 		});
