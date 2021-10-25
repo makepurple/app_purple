@@ -306,8 +306,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
-    postConnection: NexusGenRootTypes['PostConnection']; // PostConnection!
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -429,8 +428,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     ok: 'Boolean'
     post: 'Post'
-    postConnection: 'PostConnection'
-    posts: 'Post'
+    posts: 'PostConnection'
     user: 'User'
     viewer: 'User'
   }
@@ -509,18 +507,12 @@ export interface NexusGenArgTypes {
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
-    postConnection: { // args
+    posts: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
-    }
-    posts: { // args
-      cursor?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      skip?: number | null; // Int
-      take: number | null; // Int
-      where: NexusGenInputs['PostWhereInput']; // PostWhereInput!
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
