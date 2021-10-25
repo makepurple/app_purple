@@ -20,7 +20,7 @@ const Template = (args) => {
 
 	if (!user) return null;
 
-	return <UserInfoSideBar {...args} user={user} />;
+	return <UserInfoSideBar {...args} username="leedavidcs" />;
 };
 Template.args = {};
 

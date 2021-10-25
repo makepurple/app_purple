@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider, GitHubAvatarImage, Paper, Tags } from "@/client/atoms";
-import type { UserInfoSideBarUserFragment } from "@/client/graphql";
+import { useGetUserInfoSideBarQuery } from "@/client/graphql";
 import { TopLanguages } from "@/client/organisms/TopLanguages";
 import { GitHubIcon, OpenbaseIcon, PersonIcon, TwitterIcon } from "@/client/svgs";
 import NextLink from "next/link";
@@ -99,10 +99,21 @@ const NewPostButton = tw(Button)`
 export interface UserInfoSideBarProps {
 	className?: string;
 	style?: CSSProperties;
-	user: UserInfoSideBarUserFragment;
+	username: string;
 }
 
-export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, user }) => {
+export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, username }) => {
+	const [{ data }] = useGetUserInfoSideBarQuery({
+		requestPolicy: "cache-first",
+		variables: {
+			name: username
+		}
+	});
+
+	const user = data?.user;
+
+	if (!user) return null;
+
 	const displayName: string = user.github.name ?? user.name;
 
 	return (
