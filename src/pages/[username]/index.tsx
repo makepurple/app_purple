@@ -14,15 +14,13 @@ export const Page: NextPage = () => {
 
 	const { username } = router.query;
 
-	const [{ data }] = useGetPostsQuery({
+	useGetPostsQuery({
 		requestPolicy: "cache-first",
 		variables: {
-			take: BATCH_SIZE,
+			first: BATCH_SIZE,
 			where: {}
 		}
 	});
-
-	const posts = data?.posts ?? [];
 
 	return <Root>{username}</Root>;
 };
