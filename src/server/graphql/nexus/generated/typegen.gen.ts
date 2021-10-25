@@ -181,7 +181,7 @@ export interface NexusGenObjects {
     totalCount: number; // Int!
   }
   PostEdge: { // root type
-    cursor: number; // Int!
+    cursor: string; // String!
     node: NexusGenRootTypes['Post']; // Post!
   }
   PostImage: { // root type
@@ -290,11 +290,12 @@ export interface NexusGenFieldTypes {
   }
   PostConnection: { // field return type
     edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
+    nodes: NexusGenRootTypes['Post'][]; // [Post!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
     totalCount: number; // Int!
   }
   PostEdge: { // field return type
-    cursor: number; // Int!
+    cursor: string; // String!
     node: NexusGenRootTypes['Post']; // Post!
   }
   PostImage: { // field return type
@@ -305,6 +306,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
+    postConnection: NexusGenRootTypes['PostConnection']; // PostConnection!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -411,11 +413,12 @@ export interface NexusGenFieldTypeNames {
   }
   PostConnection: { // field return type name
     edges: 'PostEdge'
+    nodes: 'Post'
     pageInfo: 'PageInfo'
     totalCount: 'Int'
   }
   PostEdge: { // field return type name
-    cursor: 'Int'
+    cursor: 'String'
     node: 'Post'
   }
   PostImage: { // field return type name
@@ -426,6 +429,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     ok: 'Boolean'
     post: 'Post'
+    postConnection: 'PostConnection'
     posts: 'Post'
     user: 'User'
     viewer: 'User'
@@ -504,6 +508,13 @@ export interface NexusGenArgTypes {
   Query: {
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    postConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
     posts: { // args
       cursor?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput

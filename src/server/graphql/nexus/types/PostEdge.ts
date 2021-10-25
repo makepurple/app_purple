@@ -7,7 +7,7 @@ export const PostEdge = objectType({
 		Relay-style edge for Post types.
 	`,
 	definition: (t) => {
-		t.nonNull.int("cursor");
+		t.nonNull.string("cursor");
 		t.nonNull.field("node", { type: "Post" });
 	}
 });

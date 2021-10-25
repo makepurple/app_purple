@@ -110,13 +110,14 @@ type Post {
 """Relay-style connection for Post types."""
 type PostConnection {
   edges: [PostEdge!]!
+  nodes: [Post!]!
   pageInfo: PageInfo!
   totalCount: Int!
 }
 
 """Relay-style edge for Post types."""
 type PostEdge {
-  cursor: Int!
+  cursor: String!
   node: Post!
 }
 
@@ -142,6 +143,9 @@ type Query {
 
   """A user-created post."""
   post(where: PostWhereUniqueInput!): Post
+
+  """Relay-style connection on Post types."""
+  postConnection(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
 
   """A list of user-created posts"""
   posts(cursor: PostWhereUniqueInput, skip: Int = 0, take: Int = 50, where: PostWhereInput!): [Post!]!

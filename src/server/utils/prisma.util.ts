@@ -1,3 +1,6 @@
+import { LangUtils } from "@/utils";
+import type { ConnectionArguments, Edge, Options } from "@devoxa/prisma-relay-cursor-connection";
+
 /* eslint-disable prettier/prettier */
 type DeepNonNullArgs<T> =
 	T extends null
@@ -40,5 +43,34 @@ export class PrismaUtils {
 		}
 
 		return input as DeepNonNullArgs<T>;
+	};
+
+	public static mapRelayEdgesToNodes = <T>(edges: Edge<T>[]): T[] => {
+		return edges.map(({ node }) => node);
+	};
+
+	public static handleRelayConnectionArgs = (
+		args: ConnectionArguments,
+		limit: number = 50
+	): ConnectionArguments => {
+		return {
+			first: LangUtils.isNil(args.first) ? undefined : Math.min(args.first, limit),
+			last: LangUtils.isNil(args.last) ? undefined : Math.min(args.last, limit),
+			after: args.after,
+			before: args.before
+		};
+	};
+
+	public static handleRelayCursor = <T extends string | number>(): Options<
+		any,
+		{ id: T },
+		any,
+		any
+	> => {
+		return {
+			getCursor: (record) => ({ id: record.id as T }),
+			encodeCursor: (cursor) => Buffer.from(JSON.stringify(cursor)).toString("base64"),
+			decodeCursor: (cursor) => JSON.parse(Buffer.from(cursor, "base64").toString("ascii"))
+		};
 	};
 }
