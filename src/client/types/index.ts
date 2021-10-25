@@ -5,3 +5,8 @@ export type InferComponentProps<T extends ElementType> = T extends ComponentType
 	: T extends keyof JSX.IntrinsicElements
 	? JSX.IntrinsicElements[T]
 	: Record<string, never>;
+
+export interface Coordinates {
+	x: number;
+	y: number;
+}

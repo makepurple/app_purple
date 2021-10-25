@@ -7,6 +7,8 @@ export * from "./useIsMarkActive";
 export * from "./useNoSsr";
 export * from "./useOnClickOutside";
 export * from "./useOnKeyDown";
+export * from "./useRelativeScrollPosition";
+export * from "./useRelayCursor";
 export * from "./useToggle";
 export * from "./useToggleBlock";
 export * from "./useToggleMark";
