@@ -133,6 +133,15 @@ export type MutationUpvotePostArgs = {
   where: PostWhereUniqueInput;
 };
 
+/** Page info for relay-style pagination connections. */
+export type PageInfo = {
+  readonly __typename: 'PageInfo';
+  readonly endCursor?: Maybe<Scalars['String']>;
+  readonly hasNextPage: Scalars['Boolean'];
+  readonly hasPreviousPage: Scalars['Boolean'];
+  readonly startCursor?: Maybe<Scalars['String']>;
+};
+
 export type Post = {
   readonly __typename: 'Post';
   readonly author: User;
@@ -159,6 +168,22 @@ export type PostUpvotingUsersArgs = {
   take?: Maybe<Scalars['Int']>;
 };
 
+/** Relay-style connection for Post types. */
+export type PostConnection = {
+  readonly __typename: 'PostConnection';
+  readonly edges: ReadonlyArray<PostEdge>;
+  readonly nodes: ReadonlyArray<Post>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+/** Relay-style edge for Post types. */
+export type PostEdge = {
+  readonly __typename: 'PostEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Post;
+};
+
 export type PostImage = {
   readonly __typename: 'PostImage';
   readonly id: Scalars['ID'];
@@ -182,8 +207,8 @@ export type Query = {
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
   readonly post?: Maybe<Post>;
-  /** A list of user-created posts */
-  readonly posts: ReadonlyArray<Post>;
+  /** Relay-style connection on Post types. */
+  readonly posts: PostConnection;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
@@ -197,10 +222,11 @@ export type QueryPostArgs = {
 
 /** Root query type */
 export type QueryPostsArgs = {
-  cursor?: Maybe<PostWhereUniqueInput>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-  where: PostWhereInput;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  where?: Maybe<PostWhereInput>;
 };
 
 
@@ -319,13 +345,13 @@ export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
 
 export type GetPostsQueryVariables = Exact<{
-  cursor?: Maybe<PostWhereUniqueInput>;
-  take?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
   where: PostWhereInput;
 }>;
 
 
-export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: ReadonlyArray<{ readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } }> };
+export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetUserInfoSideBarQueryVariables = Exact<{
   name: Scalars['String'];
@@ -429,11 +455,29 @@ export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQuery
   return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
 };
 export const GetPostsDocument = /*#__PURE__*/ gql`
-    query GetPosts($cursor: PostWhereUniqueInput, $take: Int, $where: PostWhereInput!) {
-  posts(cursor: $cursor, take: $take, where: $where) {
+    query GetPosts($after: String, $first: Int, $where: PostWhereInput!) {
+  posts(after: $after, first: $first, where: $where) {
     __typename
-    id
-    ...PostCardPost
+    edges {
+      __typename
+      cursor
+      node {
+        __typename
+        id
+      }
+    }
+    nodes {
+      __typename
+      id
+      ...PostCardPost
+    }
+    pageInfo {
+      __typename
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
   }
 }
     ${PostCardPostFragmentDoc}`;

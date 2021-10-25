@@ -15,7 +15,7 @@ const Template: Story = (args) => {
 		variables: GetPosts_variables_mock
 	});
 
-	const post = data?.posts[0];
+	const post = data?.posts.nodes[0];
 
 	if (!post) return <></>;
 

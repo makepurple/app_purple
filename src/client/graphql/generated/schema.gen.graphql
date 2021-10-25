@@ -70,6 +70,14 @@ type Mutation {
   viewer: User
 }
 
+# Page info for relay-style pagination connections.
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
 type Post {
   author: User!
   authorId: String!
@@ -87,6 +95,20 @@ type Post {
   upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
   urlSlug: String!
   viewerUpvoted: Boolean!
+}
+
+# Relay-style connection for Post types.
+type PostConnection {
+  edges: [PostEdge!]!
+  nodes: [Post!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+# Relay-style edge for Post types.
+type PostEdge {
+  cursor: String!
+  node: Post!
 }
 
 type PostImage {
@@ -112,8 +134,8 @@ type Query {
   # A user-created post.
   post(where: PostWhereUniqueInput!): Post
 
-  # A list of user-created posts
-  posts(cursor: PostWhereUniqueInput, skip: Int = 0, take: Int = 50, where: PostWhereInput!): [Post!]!
+  # Relay-style connection on Post types.
+  posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   user(where: UserWhereUniqueInput!): User
   viewer: User
 }
