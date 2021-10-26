@@ -11,6 +11,8 @@ export const Button = styled.button`
 		px-3
 		py-3.5
 		rounded-md
+		hover:shadow-lg
+		active:shadow-inner
 		text-lg
 		leading-none
 		font-medium
@@ -18,7 +20,6 @@ export const Button = styled.button`
 		text-white
 		cursor-pointer
 		hover:opacity-80
-		transition-opacity
 		duration-150
 		ease-in-out
 	`}
