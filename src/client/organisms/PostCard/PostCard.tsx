@@ -153,7 +153,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 					<MainAnchor>
 						<Title title={post.title ?? ""}>{post.title}</Title>
 						{post.description && (
-							<DescriptionContainer title={post.description}>
+							<DescriptionContainer>
 								<Description>{post.description}</Description>
 							</DescriptionContainer>
 						)}
