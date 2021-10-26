@@ -1,3 +1,4 @@
+export * from "./LoadingPostCard";
 export * from "./LoginButton";
 export * from "./LogoutButton";
 export * from "./PostCard";

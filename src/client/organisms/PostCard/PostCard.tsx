@@ -34,11 +34,12 @@ const MainAnchor = tw.a`
 `;
 
 const Title = tw.h2`
+	mb-2
 	text-xl
 	font-bold
 	leading-none
 	text-black
-	mb-2
+	line-clamp-2
 `;
 
 const DescriptionContainer = tw.div`

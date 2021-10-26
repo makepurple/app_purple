@@ -8,6 +8,6 @@ export const MainContainer = styled.div`
 		my-0
 		mx-auto
 	`}
-	flex: 1000 1 0;
-	max-width: 1000px;
+	flex: 1200 1 0;
+	max-width: 1200px;
 `;
