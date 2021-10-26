@@ -9,7 +9,7 @@ export const Button = styled.button`
 		items-center
 		justify-center
 		px-3
-		py-4
+		py-3.5
 		rounded-md
 		text-lg
 		leading-none
