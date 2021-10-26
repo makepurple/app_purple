@@ -17,7 +17,8 @@ const Root = styled(Typography)<{ $selected: boolean }>`
 		text-black
 		cursor-pointer
 		no-underline
-		hover:border-indigo-500
+		hover:border-cyan-600
+		hover:text-cyan-600
 	`}
 	${({ $selected }) =>
 		$selected
