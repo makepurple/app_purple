@@ -179,7 +179,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 			</TopLanguagesContainer>
 			<Divider />
 			<SkillsContainer>
-				<SubTitle>Favorite Skills</SubTitle>
+				<SubTitle>Highlighted Skills</SubTitle>
 				{!!user.skills.length && (
 					<Skills type="positive">
 						{user.skills.map((skill) => (
@@ -187,7 +187,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						))}
 					</Skills>
 				)}
-				<SubTitle>Skills to Improve</SubTitle>
+				<SubTitle>Currently Learning</SubTitle>
 				{!!user.desiredSkills.length && (
 					<Skills type="negative">
 						{user.desiredSkills.map((skill) => (
