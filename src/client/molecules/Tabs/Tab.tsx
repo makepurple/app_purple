@@ -12,15 +12,17 @@ const Root = styled(Typography)<{ $selected: boolean }>`
 		border-0
 		border-b-4
 		border-solid
+		text-lg
 		leading-none
 		text-black
 		cursor-pointer
 		no-underline
+		hover:border-indigo-500
 	`}
 	${({ $selected }) =>
 		$selected
 			? tw`
-				border-purple-500
+				border-indigo-500
 				font-bold
 			`
 			: tw`
@@ -30,7 +32,7 @@ const Root = styled(Typography)<{ $selected: boolean }>`
 `;
 
 const StyledIcon = tw.svg`
-	mr-1
+	mr-1.5
 `;
 
 type AnchorProps = JSX.IntrinsicElements["a"];
@@ -46,7 +48,7 @@ export const Tab = forwardRef<HTMLAnchorElement, TabProps>((props, ref) => {
 	return (
 		<Root as="a" {...(restAnchorProps as any)} ref={ref} $selected={selected}>
 			{icon && (
-				<StyledIcon as={icon} height={16} width={16} color={theme`colors.purple.500`} />
+				<StyledIcon as={icon} height={20} width={20} color={theme`colors.indigo.500`} />
 			)}
 			{children}
 		</Root>
