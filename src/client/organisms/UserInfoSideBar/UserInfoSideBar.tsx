@@ -8,18 +8,17 @@ import tw, { styled } from "twin.macro";
 
 const MainInfoContainer = tw.div`
 	p-6
+	sm:p-8
 `;
 
 const TopLanguagesContainer = tw.div`
 	p-6
+	sm:p-8
 `;
 
 const SkillsContainer = tw.div`
 	p-6
-`;
-
-const NewPostButtonContainer = tw.div`
-	p-6
+	sm:p-8
 `;
 
 const SubTitle = styled.h2`
@@ -83,16 +82,16 @@ const SocialLink = tw.a`
 	w-4
 `;
 
+const NewPostButton = tw(Button)`
+	w-full
+	mt-4
+`;
+
 const MostUsedLanguages = tw(TopLanguages)`
 	mt-4
 `;
 
 const Skills = tw(Tags)`
-	mt-4
-`;
-
-const NewPostButton = tw(Button)`
-	w-full
 	mt-4
 `;
 
@@ -169,6 +168,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						<OpenbaseIcon height={16} width={16} />
 					</SocialLink>
 				</SocialLinks>
+				<NextLink href={`/${user.name}/draft`} passHref>
+					<NewPostButton as="a">New Post</NewPostButton>
+				</NextLink>
 			</MainInfoContainer>
 			<Divider />
 			<TopLanguagesContainer>
@@ -194,11 +196,6 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					</Skills>
 				)}
 			</SkillsContainer>
-			<NewPostButtonContainer>
-				<NextLink href={`/${user.name}/draft`} passHref>
-					<NewPostButton as="a">New Post</NewPostButton>
-				</NextLink>
-			</NewPostButtonContainer>
 		</Paper>
 	);
 };
