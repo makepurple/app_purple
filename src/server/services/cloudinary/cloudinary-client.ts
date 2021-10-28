@@ -22,7 +22,7 @@ export class CloudinaryClient {
 			file.createReadStream().pipe(
 				cloudinary.v2.uploader.upload_stream(
 					{
-						type: "image",
+						allowed_formats: ["gif", "jpeg", "jpg", "png", "webp"],
 						public_id: CloudinaryClient.getImageFileName(filename),
 						overwrite: true,
 						secure: true
@@ -50,7 +50,6 @@ export class CloudinaryClient {
 
 	public uploadImageDataUrl(filename: string, dataUrl: string): Promise<UploadApiResponse> {
 		return cloudinary.v2.uploader.upload(dataUrl, {
-			type: "image",
 			public_id: CloudinaryClient.getImageFileName(filename),
 			overwrite: true,
 			secure: true

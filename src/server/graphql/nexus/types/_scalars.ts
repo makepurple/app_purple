@@ -6,7 +6,7 @@ import NexusPrismaScalars from "nexus-prisma/scalars";
 export const scalarTypes = [
 	NexusPrismaScalars,
 	scalarType({
-		sourceType: "FileUpload",
+		sourceType: "Promise<FileUpload>",
 		name: "Upload",
 		asNexusMethod: "upload",
 		description: GraphQLUpload?.description,
