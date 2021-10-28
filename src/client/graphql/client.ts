@@ -1,17 +1,11 @@
 import { WindowUtils } from "@/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
+import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
 import produce from "immer";
 import toast from "react-hot-toast";
-import {
-	Client,
-	createClient,
-	dedupExchange,
-	errorExchange,
-	fetchExchange,
-	ssrExchange
-} from "urql";
+import { Client, createClient, dedupExchange, errorExchange, ssrExchange } from "urql";
 import { createCache } from "./cache";
 
 export const URQL_STATE_PROP_NAME = "urqlState";
@@ -67,7 +61,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 				dedupExchange,
 				createCache(),
 				_ssr,
-				fetchExchange
+				multipartFetchExchange
 			],
 			fetchOptions: {
 				credentials: "include"

@@ -47,6 +47,7 @@
     "@types/request-ip": "^0.0.37",
     "@types/styled-components": "^5.1.15",
     "@urql/exchange-graphcache": "^4.3.5",
+    "@urql/exchange-multipart-fetch": "^0.1.13",
     "apollo-server-micro": "^2.25.2",
     "bottleneck": "^2.19.5",
     "cloudinary": "^1.27.1",
