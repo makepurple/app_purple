@@ -1,5 +1,5 @@
 import type { CustomElement } from "@/client/molecules/DocumentEditor/Element";
-import { isListType } from "@/client/molecules/DocumentEditor/Element";
+import { isListType } from "@/client/molecules/DocumentEditor/Element/ListItem";
 import { useCallback } from "react";
 import { Editor, Element as SlateElement, Transforms } from "slate";
 import { useSlateStatic } from "slate-react";
