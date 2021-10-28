@@ -7,6 +7,9 @@ const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE 
 const withTranspileModules = transpileModules([]);
 
 const config = {
+	experimental: {
+		esmExternals: false
+	},
 	i18n: {
 		locales: ["en-US"],
 		defaultLocale: "en-US"
