@@ -189,6 +189,7 @@ export type PostImage = {
   readonly id: Scalars['ID'];
   readonly post: Post;
   readonly postId: Scalars['Int'];
+  readonly url: Scalars['String'];
 };
 
 export type PostWhereInput = {

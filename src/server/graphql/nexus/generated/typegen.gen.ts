@@ -132,7 +132,7 @@ export interface NexusGenScalars {
   Decimal: any
   Json: any
   URL: string
-  Upload: FileUpload
+  Upload: Promise<FileUpload>
 }
 
 export interface NexusGenObjects {
@@ -187,6 +187,7 @@ export interface NexusGenObjects {
   PostImage: { // root type
     id: string; // ID!
     postId: number; // Int!
+    url: string; // String!
   }
   Query: {};
   Skill: { // root type
@@ -302,6 +303,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
     postId: number; // Int!
+    url: string; // String!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
@@ -424,6 +426,7 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     post: 'Post'
     postId: 'Int'
+    url: 'String'
   }
   Query: { // field return type name
     ok: 'Boolean'

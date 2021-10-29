@@ -115,6 +115,7 @@ type PostImage {
   id: ID!
   post: Post!
   postId: Int!
+  url: String!
 }
 
 input PostWhereInput {
