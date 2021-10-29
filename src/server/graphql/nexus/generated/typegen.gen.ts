@@ -235,7 +235,6 @@ export interface NexusGenFieldTypes {
     content: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
-    post: NexusGenRootTypes['Post']; // Post!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CreatePresignedS3UrlPayload: { // field return type
@@ -274,7 +273,6 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
     authorId: string; // String!
-    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -358,7 +356,6 @@ export interface NexusGenFieldTypeNames {
     content: 'String'
     createdAt: 'DateTime'
     id: 'Int'
-    post: 'Post'
     updatedAt: 'DateTime'
   }
   CreatePresignedS3UrlPayload: { // field return type name
@@ -397,7 +394,6 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     author: 'User'
     authorId: 'String'
-    comments: 'Comment'
     content: 'Json'
     createdAt: 'DateTime'
     description: 'String'

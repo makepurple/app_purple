@@ -7,7 +7,6 @@ export const Post = objectType({
 	definition: (t) => {
 		t.field(_Post.author);
 		t.field(_Post.authorId);
-		t.field(_Post.comments);
 		t.field(_Post.content);
 		t.field(_Post.createdAt);
 		t.field(_Post.description);

@@ -79,7 +79,6 @@ model VerificationRequest {
 model Post {
   author       User          @relation(name: "PostAuthor", fields: [authorId], references: [id], onDelete: Cascade)
   authorId     String
-  comments     Comment[]
   content      Json?
   createdAt    DateTime      @default(now())
   description  String?
@@ -116,8 +115,6 @@ model Comment {
   id        Int      @id @default(autoincrement())
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

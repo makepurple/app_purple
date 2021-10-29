@@ -9,7 +9,6 @@ export const Comment = objectType({
 		t.field(_Comment.content);
 		t.field(_Comment.createdAt);
 		t.field(_Comment.id);
-		t.field(_Comment.post);
 		t.field(_Comment.updatedAt);
 	}
 });
