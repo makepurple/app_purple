@@ -8,6 +8,19 @@ body {
 		antialiased
 		bg-blueGray-50
 	`}
+
+	& * {
+		${tw`
+			focus:outline-none
+			focus:ring
+			focus:ring-blue-300
+			focus:ring-opacity-80
+			focus-visible:outline-none
+			focus-visible:ring-2
+			focus-visible:ring-indigo-500
+			focus-visible:ring-opacity-80
+		`}
+	}
 }
 `;
 
