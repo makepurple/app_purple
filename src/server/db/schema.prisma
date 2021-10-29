@@ -105,9 +105,10 @@ model PostUpvoter {
 }
 
 model PostImage {
-  id        String   @id @default(uuid())
+  id        String   @id
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
+  url       String
   createdAt DateTime @default(now())
 }
 

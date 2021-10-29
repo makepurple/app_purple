@@ -8,5 +8,6 @@ export const PostImage = objectType({
 		t.field(_PostImage.id);
 		t.field(_PostImage.post);
 		t.field(_PostImage.postId);
+		t.field(_PostImage.url);
 	}
 });
