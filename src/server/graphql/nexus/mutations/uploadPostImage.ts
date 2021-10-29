@@ -28,8 +28,14 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 
 		return true;
 	},
-	resolve: async (parent, args, { cloudinary, prisma }) => {
-		const uploadResponse = await cloudinary.client.uploadImageFile(args.data.image);
+	resolve: async (parent, args, { cloudinary, prisma, user }) => {
+		// eslint-disable-next-line @typescript-eslint/await-thenable
+		const image = await args.data.image;
+
+		const uploadResponse = await cloudinary.client.uploadImageFile(image, {
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			folder: user!.id
+		});
 
 		return await prisma.postImage.create({
 			data: {
@@ -38,7 +44,8 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 					connect: {
 						id: args.where.id ?? undefined
 					}
-				}
+				},
+				url: uploadResponse.secure_url
 			}
 		});
 	}

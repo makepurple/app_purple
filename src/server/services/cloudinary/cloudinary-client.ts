@@ -2,6 +2,10 @@ import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import cloudinary, { UploadApiResponse } from "cloudinary";
 import { nanoid } from "nanoid";
 
+export interface CloudinaryUploadImageFileOptions {
+	folder?: string;
+}
+
 export class CloudinaryClient {
 	constructor() {
 		cloudinary.v2.config({
@@ -11,11 +15,10 @@ export class CloudinaryClient {
 		});
 	}
 
-	public static getImageFileName(filename: string): string {
-		return `${process.env.CLOUDINARY_CLOUD_NAME}/images/${filename}`;
-	}
-
-	public uploadImageFile(file: FileUpload): Promise<UploadApiResponse> {
+	public uploadImageFile(
+		file: FileUpload,
+		options?: CloudinaryUploadImageFileOptions
+	): Promise<UploadApiResponse> {
 		const filename: string = nanoid();
 
 		return new Promise<UploadApiResponse>((resolve, reject) => {
@@ -23,7 +26,7 @@ export class CloudinaryClient {
 				cloudinary.v2.uploader.upload_stream(
 					{
 						allowed_formats: ["gif", "jpeg", "jpg", "png", "webp"],
-						public_id: CloudinaryClient.getImageFileName(filename),
+						public_id: `${options?.folder}/${filename}`,
 						overwrite: true,
 						secure: true
 					},
@@ -41,18 +44,10 @@ export class CloudinaryClient {
 		return await cloudinary.v2.api.resource(publicId);
 	}
 
-	public async deleteImageFile(filename: string): Promise<boolean> {
+	public async deleteImageFile(publicId: string): Promise<boolean> {
 		return await cloudinary.v2.uploader
-			.destroy(CloudinaryClient.getImageFileName(filename))
+			.destroy(publicId)
 			.then(() => true)
 			.catch(() => false);
-	}
-
-	public uploadImageDataUrl(filename: string, dataUrl: string): Promise<UploadApiResponse> {
-		return cloudinary.v2.uploader.upload(dataUrl, {
-			public_id: CloudinaryClient.getImageFileName(filename),
-			overwrite: true,
-			secure: true
-		});
 	}
 }
