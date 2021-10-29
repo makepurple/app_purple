@@ -23,6 +23,7 @@
     "prisma:studio": "prisma studio",
     "test": "jest",
     "test:update": "yarn test -u",
+    "postinstall": "yarn generate:prisma",
     "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T"
   },
   "dependencies": {
