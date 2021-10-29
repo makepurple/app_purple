@@ -14,6 +14,9 @@ const config = {
 		locales: ["en-US"],
 		defaultLocale: "en-US"
 	},
+	images: {
+		domains: ["res.cloudinary.com"]
+	},
 	pageExtensions: ["ts", "tsx", "md", "mdx"],
 	target: "experimental-serverless-trace",
 	env: {
