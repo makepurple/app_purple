@@ -24,6 +24,7 @@ declare global {
 	namespace JSX {
 		interface IntrinsicAttributes<T> extends DOMAttributes<T> {
 			as?: string | ComponentType | Element
+			forwardedAs?: string | ComponentType | Element
 		}
 	}
 }
