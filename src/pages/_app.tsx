@@ -11,8 +11,6 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import { theme } from "twin.macro";
 
-import "tippy.js/dist/tippy.css";
-
 const NextProgress = dynamic(() => import("nextjs-progressbar"), { ssr: false });
 
 export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
