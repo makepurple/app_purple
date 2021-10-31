@@ -1,6 +1,7 @@
+import { Separator } from "reakit";
 import tw from "twin.macro";
 
-export const Divider = tw.hr`
+export const Divider = tw(Separator)`
 	m-0
 	border-t
 	border-solid
