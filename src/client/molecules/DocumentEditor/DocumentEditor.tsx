@@ -5,10 +5,18 @@ import React, { CSSProperties, FC, ReactNode, useMemo } from "react";
 import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
+import tw from "twin.macro";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
 import { DocumentEditorToolbar } from "./Toolbar";
+
+const Root = tw(Paper)`
+	outline-none
+	ring-blue-300
+	ring-opacity-80
+	focus-within:ring
+`;
 
 declare module "slate" {
 	interface CustomTypes {
@@ -48,7 +56,7 @@ const _DocumentEditor: FC<DocumentEditorProps> = ({
 	}, []);
 
 	return (
-		<Paper className={className} style={style}>
+		<Root className={className} style={style}>
 			<Slate
 				editor={editor}
 				value={value}
@@ -59,7 +67,7 @@ const _DocumentEditor: FC<DocumentEditorProps> = ({
 			>
 				{children}
 			</Slate>
-		</Paper>
+		</Root>
 	);
 };
 
