@@ -1,8 +1,8 @@
 import { Menu, MenuItem } from "@/client/atoms";
-import { useIsBlockActive, useToggle, useToggleBlock } from "@/client/hooks";
+import { useIsBlockActive, useOnClickOutside, useToggle, useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { HeadingIcon } from "@/client/svgs";
-import React, { FC } from "react";
+import React, { FC, useRef } from "react";
 import { MenuButton, useMenuState } from "reakit";
 import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
@@ -69,24 +69,34 @@ export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 		placement: "bottom-start"
 	});
 
+	const buttonRef = useRef<HTMLButtonElement>(null);
+	const menuRef = useRef<HTMLDivElement>(null);
+
 	const [open, toggle] = useToggle(false);
+
+	useOnClickOutside(buttonRef, (e) => {
+		if (!menuRef.current || menuRef.current.contains(e.target as Node | null)) return;
+
+		toggle.off();
+	});
 
 	return (
 		<>
 			<MenuButton
 				as={ToolbarButton}
+				ref={buttonRef}
 				{...menu}
 				onMouseDown={(event) => {
 					event.preventDefault();
 
-					toggle();
+					toggle.on();
 				}}
 				title="heading"
 				aria-label="heading"
 			>
 				<HeadingIcon height={20} width={20} />
 			</MenuButton>
-			<Menu {...menu} visible={open}>
+			<Menu ref={menuRef} {...menu} visible={open}>
 				{supportedHeadings.map(([name, slateType]) => (
 					<MenuItem
 						key={slateType}
