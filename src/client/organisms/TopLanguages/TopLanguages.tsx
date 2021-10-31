@@ -1,5 +1,5 @@
 import type { TopLanguages as _TopLanguages } from "@/client/graphql";
-import { Legend, ProportionBar } from "@/client/molecules";
+import { Legend, ProportionBar, ProportionBarItem } from "@/client/molecules";
 import React, { CSSProperties, FC, useMemo } from "react";
 import tw from "twin.macro";
 
@@ -43,13 +43,13 @@ export const TopLanguages: FC<TopLanguagesProps> = ({
 		<Root className={className} style={style}>
 			<ProportionBar>
 				{topLanguages.map((topLanguage) => (
-					<ProportionBar.Item
+					<ProportionBarItem
 						key={topLanguage.name}
 						color={topLanguage.color}
 						value={topLanguage.size}
 					>
 						{topLanguage.name}
-					</ProportionBar.Item>
+					</ProportionBarItem>
 				))}
 			</ProportionBar>
 			<StyledLegend>

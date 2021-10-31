@@ -1,5 +1,4 @@
 import { ProgressBar } from "@/client/atoms";
-import { ObjectUtils } from "@/utils";
 import React, { CSSProperties, forwardRef, memo, ReactElement, useMemo } from "react";
 import { ProportionBarItem, ProportionBarItemProps } from "./ProportionBarItem";
 
@@ -9,7 +8,7 @@ export interface ProportionBarProps {
 	style?: CSSProperties;
 }
 
-const _ProportionBar = memo<ProportionBarProps>(
+export const ProportionBar = memo<ProportionBarProps>(
 	forwardRef<HTMLDivElement, ProportionBarProps>(({ className, children = [], style }, ref) => {
 		const itemsProps = useMemo(() => {
 			return children.map((child) => child.props).sort((a, b) => b.value - a.value);
@@ -35,6 +34,4 @@ const _ProportionBar = memo<ProportionBarProps>(
 	})
 );
 
-_ProportionBar.displayName = "ProportionBar";
-
-export const ProportionBar = ObjectUtils.setStatic(_ProportionBar, { Item: ProportionBarItem });
+ProportionBar.displayName = "ProportionBar";
