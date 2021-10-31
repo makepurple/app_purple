@@ -21,7 +21,5 @@ export const Input = tw.input`
 	duration-300
 	ease-in-out
 	placeholder:text-gray-400
-	focus:outline-none
 	focus:bg-white
-	focus:border-purple-500
 `;

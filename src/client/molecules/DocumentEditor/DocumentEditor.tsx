@@ -13,9 +13,9 @@ import { DocumentEditorToolbar } from "./Toolbar";
 
 const Root = tw(Paper)`
 	outline-none
-	ring-blue-300
+	ring-indigo-500
 	ring-opacity-80
-	focus-within:ring
+	focus-within:ring-2
 `;
 
 declare module "slate" {
