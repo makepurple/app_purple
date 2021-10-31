@@ -6,17 +6,19 @@ export const ToolbarButton = styled.button`
 		items-center
 		justify-center
 		w-12
-		shadow-sm
-		border
-		border-solid
-		border-gray-200
+		mr-0.5
+		rounded-sm
 		text-black
 		bg-transparent
 		cursor-pointer
 		transition
 		duration-200
 		ease-in-out
-		hover:shadow-inner
+		ring-cyan-600
+		ring-opacity-80
+		ring-offset-2
+		hover:ring
+		not-first:ml-0.5
 	`}
 `;
 

@@ -20,6 +20,7 @@ import {
 export const DocumentEditorToolbar = ObjectUtils.setStatic(
 	styled(Toolbar)`
 		${tw`
+			p-1
 			shadow-none
 			border-0
 			border-b
