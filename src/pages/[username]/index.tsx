@@ -1,7 +1,7 @@
-import { MainContainer, Paper } from "@/client/atoms";
+import { MainContainer, Paper, Tab, TabList } from "@/client/atoms";
 import { useGetPostsQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
-import { NonIdealState, Tabs } from "@/client/molecules";
+import { NonIdealState } from "@/client/molecules";
 import { LoadingPostCard, PostCard, UserInfoSideBar } from "@/client/organisms";
 import { HexagonIcon, NoteIcon, RepoIcon } from "@/client/svgs";
 import { NextPage } from "next";
@@ -30,7 +30,7 @@ const LinksContainer = tw(Paper)`
 	h-14
 `;
 
-const Links = tw(Tabs)`
+const Links = tw(TabList)`
 	absolute
 	left-6
 	bottom-0
@@ -93,15 +93,22 @@ export const Page: NextPage = () => {
 				<LinksContainer>
 					<Links>
 						<NextLink href={`/${username}`} passHref>
-							<Tabs.Tab icon={NoteIcon} selected>
+							<Tab as="a">
+								<NoteIcon height={20} tw="mr-2" width={20} />
 								Posts
-							</Tabs.Tab>
+							</Tab>
 						</NextLink>
 						<NextLink href={`/${username}/repositories`} passHref>
-							<Tabs.Tab icon={RepoIcon}>Repositories</Tabs.Tab>
+							<Tab as="a">
+								<RepoIcon height={20} tw="mr-2" width={20} />
+								Repositories
+							</Tab>
 						</NextLink>
 						<NextLink href={`/${username}/experience`} passHref>
-							<Tabs.Tab icon={HexagonIcon}>Experience</Tabs.Tab>
+							<Tab as="a">
+								<HexagonIcon height={20} tw="mr-2" width={20} />
+								Experience
+							</Tab>
 						</NextLink>
 					</Links>
 				</LinksContainer>

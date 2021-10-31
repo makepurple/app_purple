@@ -1,28 +1,38 @@
-import { Tabs } from "@/client/molecules";
+import { Tab, TabList } from "@/client/atoms";
 import { GitHubIcon } from "@/client/svgs";
 import NextLink from "next/link";
 import React from "react";
+import { useTabState } from "reakit";
 
 export default {
-	title: "molecules/Tabs",
-	component: Tabs
+	title: "atoms/TabList",
+	component: TabList
 };
 
 const Template = (args) => {
+	const tabs = useTabState({
+		selectedId: "react"
+	});
+
 	return (
-		<Tabs {...args}>
+		<TabList {...tabs} {...args}>
 			<NextLink href="https://reactjs.org/" passHref>
-				<Tabs.Tab icon={GitHubIcon} selected>
+				<Tab {...tabs} id="react">
+					<GitHubIcon height={20} width={20} />
 					<span>react</span>
-				</Tabs.Tab>
+				</Tab>
 			</NextLink>
 			<NextLink href="https://vuejs.org/" passHref>
-				<Tabs.Tab>vue</Tabs.Tab>
+				<Tab {...tabs} as="a">
+					vue
+				</Tab>
 			</NextLink>
 			<NextLink href="https://angular.io/" passHref>
-				<Tabs.Tab>angular</Tabs.Tab>
+				<Tab {...tabs} as="a">
+					angular
+				</Tab>
 			</NextLink>
-		</Tabs>
+		</TabList>
 	);
 };
 Template.args = {};

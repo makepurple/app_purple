@@ -18,6 +18,7 @@ export * from "./PageContainer";
 export * from "./Paper";
 export * from "./Popover";
 export * from "./ProgressBar";
+export * from "./TabList";
 export * from "./Tags";
 export * from "./ThemeProvider";
 export * from "./Toolbar";
