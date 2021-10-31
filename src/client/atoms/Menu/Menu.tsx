@@ -11,7 +11,7 @@ export const Menu = styled(ReakitMenu)`
 		px-2
 		rounded-lg
 		bg-white
-		shadow-md
+		shadow-2xl
 	`}
 	z-index: ${getZIndex("menu")}
 `;
