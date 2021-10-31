@@ -1,2 +1,2 @@
-export * as PopoverModifiers from "./modifiers";
 export * from "./Popover";
+export * from "./PopoverArrow";

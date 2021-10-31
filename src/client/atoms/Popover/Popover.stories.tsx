@@ -1,26 +1,31 @@
-import { Button, Popover } from "@/client/atoms";
-import faker from "faker";
+import { Button, Popover, PopoverArrow } from "@/client/atoms";
+import type { Meta, Story } from "@storybook/react";
 import React from "react";
-
-faker.seed(1);
-
-const paragraphs = faker.lorem.paragraphs(10);
+import { PopoverDisclosure, usePopoverState } from "reakit";
 
 export default {
 	title: "atoms/Popover",
 	component: Popover
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story = (args) => {
+	const popover = usePopoverState({
+		placement: "bottom-start"
+	});
+
 	return (
-		<Popover {...args} content={paragraphs}>
-			<Button type="button">Click me!</Button>
-		</Popover>
+		<>
+			<PopoverDisclosure {...popover} as={Button}>
+				Open Popover
+			</PopoverDisclosure>
+			<Popover {...popover} {...args}>
+				<PopoverArrow {...popover} />
+				This is some popover content
+			</Popover>
+		</>
 	);
 };
-Template.args = {
-	arrow: true
-};
+Template.args = {};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };

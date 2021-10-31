@@ -1,20 +1,28 @@
-import { Menu, MenuProps } from "@/client/atoms";
-import { ObjectUtils, WindowUtils } from "@/utils";
+import { WindowUtils } from "@/utils";
 import { AnimatePresence, m } from "framer-motion";
-import React, { FC } from "react";
+import React, { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import { createPortal } from "react-dom";
 import tw from "twin.macro";
 
-const Root = tw(m(Menu))`
+const Root = tw(m.div)`
 	fixed
+	flex
+	flex-col
+	items-stretch
+	py-3
+	px-2
+	rounded-lg
+	bg-white
+	shadow-md
 `;
 
-export interface ContextMenuProps extends MenuProps {
+export interface ContextMenuProps
+	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	position?: Maybe<{ x: number; y: number }>;
 }
 
-const _ContextMenu: FC<ContextMenuProps> = ({ position, style, ...restMenuProps }) => {
-	if (!WindowUtils.isBrowser()) return null;
+export const ContextMenu: FC<ContextMenuProps> = ({ position, style, ...restMenuProps }) => {
+	if (WindowUtils.isSsr()) return null;
 
 	return createPortal(
 		<AnimatePresence initial={false}>
@@ -36,7 +44,3 @@ const _ContextMenu: FC<ContextMenuProps> = ({ position, style, ...restMenuProps 
 		document.body
 	);
 };
-
-export const ContextMenu = ObjectUtils.setStatic(_ContextMenu, {
-	Item: Menu.Item
-});

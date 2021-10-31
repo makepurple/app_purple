@@ -1,9 +1,10 @@
 import { InferComponentProps } from "@/client/types";
+import { Button as ReakitButton } from "reakit";
 import tw, { styled } from "twin.macro";
 
 export type ButtonProps = InferComponentProps<typeof Button>;
 
-export const Button = styled.button`
+export const Button = styled(ReakitButton)`
 	${tw`
 		flex
 		items-center
@@ -11,20 +12,17 @@ export const Button = styled.button`
 		px-3
 		py-3.5
 		rounded-md
-		hover:shadow-lg
-		active:shadow-inner
 		text-lg
 		leading-none
 		font-medium
 		bg-indigo-500
 		text-white
 		cursor-pointer
-		hover:opacity-80
 		duration-150
 		ease-in-out
+		active:shadow-inner
+		disabled:cursor-not-allowed
+		hover:shadow-lg
+		hover:opacity-80
 	`}
 `;
-
-Button.defaultProps = {
-	type: "button"
-};

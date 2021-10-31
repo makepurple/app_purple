@@ -1,10 +1,7 @@
-import { InferComponentProps } from "@/client/types";
-import { MenuItem as ReakitMenuItem } from "reakit";
+import { Button as ReakitButton } from "reakit";
 import tw, { styled } from "twin.macro";
 
-export type MenuItemProps = InferComponentProps<typeof MenuItem>;
-
-export const MenuItem = styled(ReakitMenuItem)<{ selected?: boolean }>`
+export const ContextMenuItem = styled(ReakitButton)<{ selected?: boolean }>`
 	${tw`
 		flex
 		items-center
@@ -28,8 +25,8 @@ export const MenuItem = styled(ReakitMenuItem)<{ selected?: boolean }>`
 	${({ selected }) =>
 		selected &&
 		tw`
-			text-white
-			bg-purple-600
-			hover:bg-purple-600
-		`}
+		text-white
+		bg-purple-600
+		hover:bg-purple-600
+	`}
 `;

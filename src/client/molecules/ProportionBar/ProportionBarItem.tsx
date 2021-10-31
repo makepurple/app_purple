@@ -1,10 +1,10 @@
-import { Popover } from "@/client/atoms";
-import { useHover } from "@/client/hooks";
+import { Tooltip, TooltipArrow } from "@/client/atoms";
 import { ColorUtils } from "@/utils";
 import React, { CSSProperties, FC } from "react";
+import { TooltipReference, useTooltipState } from "reakit";
 import tw, { styled } from "twin.macro";
 
-const StyledPopover = tw(Popover)`
+const StyledTooltip = tw(Tooltip)`
 	inline-flex
 	items-center
 	p-2
@@ -25,11 +25,11 @@ const Proportion = tw.span`
 	text-sm
 `;
 
-const Bar = styled.span<{ color: string }>`
+const Bar = styled.span<{ $color: string }>`
 	${tw`
 		h-full
 	`}
-	background-color: ${({ color }) => color};
+	background-color: ${({ $color }) => $color};
 `;
 
 export interface ProportionBarItemProps {
@@ -49,21 +49,25 @@ export const ProportionBarItem: FC<ProportionBarItemProps> = ({
 	style,
 	value
 }) => {
-	const [isHovered, { handlers }] = useHover();
+	const tooltip = useTooltipState({
+		placement: "bottom"
+	});
 
 	return (
-		<StyledPopover
-			content={
-				<>
-					<LegendIcon style={{ backgroundColor: color }} />
-					{children}
-					{max && <Proportion>{((value / max) * 100).toFixed(2)}%</Proportion>}
-				</>
-			}
-			open={isHovered}
-			placement="bottom"
-		>
-			<Bar {...handlers} className={className} color={color} style={style} />
-		</StyledPopover>
+		<>
+			<TooltipReference
+				{...tooltip}
+				as={Bar}
+				className={className}
+				style={style}
+				$color={color}
+			/>
+			<StyledTooltip {...tooltip}>
+				<TooltipArrow {...tooltip} />
+				<LegendIcon style={{ backgroundColor: color }} />
+				{children}
+				{max && <Proportion>{((value / max) * 100).toFixed(2)}%</Proportion>}
+			</StyledTooltip>
+		</>
 	);
 };

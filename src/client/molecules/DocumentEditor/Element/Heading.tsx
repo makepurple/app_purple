@@ -1,34 +1,41 @@
-import { Menu, Popover, Typography } from "@/client/atoms";
+import { Menu, MenuItem } from "@/client/atoms";
 import { useIsBlockActive, useToggle, useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { HeadingIcon } from "@/client/svgs";
 import React, { FC } from "react";
+import { MenuButton, useMenuState } from "reakit";
 import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
 
-const HeadingOne = tw(Typography)`
+const HeadingOne = tw.span`
 	text-3xl
+	font-bold
 `;
 
-const HeadingTwo = tw(Typography)`
+const HeadingTwo = tw.span`
 	text-2xl
+	font-semibold
 `;
 
-const HeadingThree = tw(Typography)`
+const HeadingThree = tw.span`
 	text-xl
+	font-semibold
 `;
 
-const HeadingFour = tw(Typography)`
+const HeadingFour = tw.span`
 	text-base
+	font-semibold
 `;
 
-const HeadingFive = tw(Typography)`
+const HeadingFive = tw.span`
 	text-sm
+	font-semibold
 `;
 
-const HeadingSix = tw(Typography)`
+const HeadingSix = tw.span`
 	text-xs
+	font-semibold
 `;
 
 export type HeadingSlateType =
@@ -58,44 +65,44 @@ const supportedHeadings: readonly HeadingOption[] = [
 export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 	const isBlockActive = useIsBlockActive();
 	const toggleBlock = useToggleBlock();
+	const menu = useMenuState({
+		placement: "bottom-start"
+	});
 
 	const [open, toggle] = useToggle(false);
 
 	return (
-		<Popover
-			content={
-				<Menu>
-					{supportedHeadings.map(([name, slateType]) => (
-						<Menu.Item
-							key={slateType}
-							onClick={() => {
-								toggleBlock(slateType);
-
-								toggle.off();
-							}}
-							selected={isBlockActive(slateType)}
-						>
-							{name}
-						</Menu.Item>
-					))}
-				</Menu>
-			}
-			onClose={toggle.off}
-			open={open}
-			placement="bottom"
-		>
-			<ToolbarButton
+		<>
+			<MenuButton
+				as={ToolbarButton}
+				{...menu}
 				onMouseDown={(event) => {
 					event.preventDefault();
 
-					toggle.on();
+					toggle();
 				}}
 				title="heading"
 				aria-label="heading"
 			>
 				<HeadingIcon height={20} width={20} />
-			</ToolbarButton>
-		</Popover>
+			</MenuButton>
+			<Menu {...menu} visible={open}>
+				{supportedHeadings.map(([name, slateType]) => (
+					<MenuItem
+						key={slateType}
+						{...menu}
+						onClick={() => {
+							toggleBlock(slateType);
+
+							toggle.off();
+						}}
+						selected={isBlockActive(slateType)}
+					>
+						{name}
+					</MenuItem>
+				))}
+			</Menu>
+		</>
 	);
 };
 

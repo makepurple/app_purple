@@ -1,6 +1,5 @@
-import { Menu, Popover } from "@/client/atoms";
+import { ContextMenu, ContextMenuItem, Menu, MenuItem } from "@/client/atoms";
 import { useContextMenu, useInsertBlock, useToggle } from "@/client/hooks";
-import { ContextMenu } from "@/client/molecules/ContextMenu";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeSquareIcon } from "@/client/svgs";
 import composeRefs from "@seznam/compose-react-refs";
@@ -8,6 +7,7 @@ import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
+import { MenuButton, useMenuState } from "reakit";
 import { Editor, Element, Node, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw, { styled } from "twin.macro";
@@ -80,38 +80,46 @@ const supportedLanguages: readonly CodeBlockLanguageOption[] = [
 
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	const insertBlock = useInsertBlock();
+	const menu = useMenuState({
+		placement: "bottom-start"
+	});
 
 	const [open, toggle] = useToggle(false);
 
 	return (
-		<Popover
-			content={
-				<Menu>
-					{supportedLanguages.map(([name, slateType]) => (
-						<Menu.Item
-							key={slateType}
-							onClick={() => {
-								insertBlock({
-									type: slateType,
-									children: [{ text: "" }]
-								});
+		<>
+			<MenuButton
+				as={ToolbarButton}
+				{...menu}
+				onMouseDown={(event) => {
+					event.preventDefault();
 
-								toggle.off();
-							}}
-						>
-							{name}
-						</Menu.Item>
-					))}
-				</Menu>
-			}
-			onClose={toggle.off}
-			open={open}
-			placement="bottom"
-		>
-			<ToolbarButton onClick={toggle.on} title="code block" aria-label="code block">
+					toggle();
+				}}
+				title="code block"
+				aria-label="code block"
+			>
 				<CodeSquareIcon height={20} width={20} />
-			</ToolbarButton>
-		</Popover>
+			</MenuButton>
+			<Menu {...menu} visible={open}>
+				{supportedLanguages.map(([name, slateType]) => (
+					<MenuItem
+						key={slateType}
+						{...menu}
+						onClick={() => {
+							insertBlock({
+								type: slateType,
+								children: [{ text: "" }]
+							});
+
+							toggle.off();
+						}}
+					>
+						{name}
+					</MenuItem>
+				))}
+			</Menu>
+		</>
 	);
 };
 
@@ -183,7 +191,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 			/>
 			{children}
 			<ContextMenu contentEditable={false} {...contextMenuProps}>
-				<ContextMenu.Item
+				<ContextMenuItem
 					onMouseDown={(event) => {
 						event.preventDefault();
 
@@ -193,7 +201,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 					}}
 				>
 					Delete
-				</ContextMenu.Item>
+				</ContextMenuItem>
 			</ContextMenu>
 		</Root>
 	);

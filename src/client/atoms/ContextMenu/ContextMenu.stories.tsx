@@ -1,10 +1,10 @@
+import { ContextMenu, ContextMenuItem } from "@/client/atoms";
 import { useContextMenu } from "@/client/hooks";
-import { ContextMenu } from "@/client/molecules";
 import { action } from "@storybook/addon-actions";
 import React, { useRef } from "react";
 
 export default {
-	title: "molecules/ContextMenu",
+	title: "atoms/ContextMenu",
 	component: ContextMenu
 };
 
@@ -18,9 +18,9 @@ const Template = (args) => {
 				Right Click Me!
 			</button>
 			<ContextMenu {...args} {...contextMenuProps}>
-				<ContextMenu.Item onClick={action("onClick")}>react</ContextMenu.Item>
-				<ContextMenu.Item onClick={action("onClick")}>vue</ContextMenu.Item>
-				<ContextMenu.Item onClick={action("onClick")}>angular</ContextMenu.Item>
+				<ContextMenuItem onClick={action("onClick")}>react</ContextMenuItem>
+				<ContextMenuItem onClick={action("onClick")}>vue</ContextMenuItem>
+				<ContextMenuItem onClick={action("onClick")}>angular</ContextMenuItem>
 			</ContextMenu>
 		</>
 	);

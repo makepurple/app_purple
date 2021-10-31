@@ -1,5 +1,6 @@
-import { Menu } from "@/client/atoms";
+import { Button, Menu, MenuItem } from "@/client/atoms";
 import React from "react";
+import { MenuButton, useMenuState } from "reakit";
 
 export default {
 	title: "atoms/Menu",
@@ -7,12 +8,21 @@ export default {
 };
 
 const Template = (args) => {
+	const menu = useMenuState();
+
 	return (
-		<Menu {...args}>
-			<Menu.Item>Red</Menu.Item>
-			<Menu.Item>Blue</Menu.Item>
-			<Menu.Item selected>Purple</Menu.Item>
-		</Menu>
+		<>
+			<MenuButton {...menu} as={Button}>
+				Open Menu
+			</MenuButton>
+			<Menu {...menu} {...args}>
+				<MenuItem {...menu}>Red</MenuItem>
+				<MenuItem {...menu}>Blue</MenuItem>
+				<MenuItem {...menu} selected>
+					Purple
+				</MenuItem>
+			</Menu>
+		</>
 	);
 };
 Template.args = {};

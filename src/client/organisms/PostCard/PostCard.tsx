@@ -1,6 +1,5 @@
-import { Anchor, Paper, Popover } from "@/client/atoms";
+import { Anchor, Paper } from "@/client/atoms";
 import { PostCardPostFragment, useUpvotePostMutation } from "@/client/graphql";
-import { useHover } from "@/client/hooks";
 import { ThumbsUpIcon } from "@/client/svgs";
 import dayjs from "dayjs";
 import NextImage from "next/image";
@@ -105,10 +104,6 @@ const UpvoteIcon = tw(ThumbsUpIcon)`
 	cursor-pointer
 `;
 
-const UpvoteTooltip = tw.div`
-	p-1.5
-`;
-
 const Thumbnail = tw.a`
 	relative
 	flex-shrink-0
@@ -134,8 +129,6 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 	const router = useRouter();
 
 	const [{ fetching }, upvotePost] = useUpvotePostMutation();
-
-	const [upvoteHovered, { handlers: upvoteHoverHandlers }] = useHover();
 
 	const postUrl: string = `/${post.author.name}/${post.urlSlug}`;
 
@@ -174,26 +167,19 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 				</PostedDetails>
 				<KarmaContainer>
 					<UpvoteCount>{post.upvoteCount.toLocaleString()}</UpvoteCount>
-					<Popover
-						content={<UpvoteTooltip>Like</UpvoteTooltip>}
-						open={upvoteHovered}
-						placement="bottom"
-					>
-						<UpvoteIcon
-							{...upvoteHoverHandlers}
-							height={32}
-							onClick={async (e) => {
-								e.stopPropagation();
+					<UpvoteIcon
+						height={32}
+						onClick={async (e) => {
+							e.stopPropagation();
 
-								if (fetching) return;
+							if (fetching) return;
 
-								await upvotePost({ where: { id: post.id } });
+							await upvotePost({ where: { id: post.id } });
 
-								toast.success("You liked this post!");
-							}}
-							width={32}
-						/>
-					</Popover>
+							toast.success("You liked this post!");
+						}}
+						width={32}
+					/>
 				</KarmaContainer>
 			</Info>
 			{post.thumbnailUrl && (
