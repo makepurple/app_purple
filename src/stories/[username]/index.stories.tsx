@@ -65,3 +65,35 @@ Loading.parameters = {
 		}
 	}
 };
+
+export const NoResults = Template.bind({});
+NoResults.args = { ...Template.args };
+NoResults.parameters = {
+	...Template.parameters,
+	urql: (op) => {
+		switch (getOperationName(op.query)) {
+			case "GetPosts":
+				return {
+					data: {
+						__typename: "Query",
+						posts: {
+							__typename: "PostConnection",
+							edges: [],
+							nodes: [],
+							pageInfo: {
+								__typename: "PageInfo",
+								endCursor: null,
+								hasNextPage: false,
+								hasPreviousPage: false,
+								startCursor: null
+							}
+						}
+					}
+				};
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			default:
+				return {};
+		}
+	}
+};
