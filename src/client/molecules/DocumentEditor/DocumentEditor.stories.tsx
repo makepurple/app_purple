@@ -1,6 +1,6 @@
 import { DocumentEditor } from "@/client/molecules";
 import React, { useState } from "react";
-import { Descendant } from "slate";
+import type { Descendant } from "slate";
 
 export default {
 	title: "molecules/DocumentEditor",
@@ -31,7 +31,7 @@ const Template = (args) => {
 					<DocumentEditor.Toolbar.Link />
 					<DocumentEditor.Toolbar.Image />
 				</DocumentEditor.Toolbar>
-				<DocumentEditor.Editable name={args.name} />
+				<DocumentEditor.Editable name={args.name} aria-label="Storybook-textarea" />
 			</DocumentEditor>
 			<pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(value, null, 2)}</pre>
 		</>

@@ -1,4 +1,4 @@
-import { ProportionBar } from "@/client/molecules";
+import { ProportionBar, ProportionBarItem } from "@/client/molecules";
 import { LanguageColors } from "@/client/styles";
 import React from "react";
 
@@ -10,15 +10,15 @@ export default {
 const Template = (args) => {
 	return (
 		<ProportionBar {...args}>
-			<ProportionBar.Item color={LanguageColors.TypeScript} value={120}>
+			<ProportionBarItem color={LanguageColors.TypeScript} value={120}>
 				TypeScript
-			</ProportionBar.Item>
-			<ProportionBar.Item color={LanguageColors.CSS} value={40}>
+			</ProportionBarItem>
+			<ProportionBarItem color={LanguageColors.CSS} value={40}>
 				CSS
-			</ProportionBar.Item>
-			<ProportionBar.Item color={LanguageColors.HTML} value={20}>
+			</ProportionBarItem>
+			<ProportionBarItem color={LanguageColors.HTML} value={20}>
 				HTML
-			</ProportionBar.Item>
+			</ProportionBarItem>
 		</ProportionBar>
 	);
 };

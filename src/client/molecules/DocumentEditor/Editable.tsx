@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
-import { Editable, RenderElementProps, RenderLeafProps } from "slate-react";
+import { Editable, RenderElementProps, RenderLeafProps, useReadOnly } from "slate-react";
 import tw, { styled } from "twin.macro";
 import { Element } from "./Element";
 import { Leaf } from "./Leaf";
+import { Placeholder } from "./Placeholder";
 
 /**
  * !HACK
@@ -10,13 +11,26 @@ import { Leaf } from "./Leaf";
  * @author David Lee
  * @date October 31, 2021
  */
-const EditableContainer = styled.div`
+const EditableContainer = styled.div<{ $readOnly: boolean }>`
 	${tw`
 		p-5
+		bg-indigo-50
+		transition
+		duration-300
+		ease-in-out
+		placeholder:text-gray-400
+		focus-within:bg-white
 	`}
+
 	&, & > * {
 		box-shadow: none !important;
 	}
+
+	${({ $readOnly }) =>
+		$readOnly &&
+		tw`
+			bg-white
+		`}
 `;
 
 export const DocumentEditorEditable: typeof Editable = ({
@@ -27,11 +41,14 @@ export const DocumentEditorEditable: typeof Editable = ({
 	const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
 	const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
 
+	const readOnly = useReadOnly();
+
 	return (
-		<EditableContainer className={className} style={style}>
+		<EditableContainer className={className} style={style} $readOnly={readOnly}>
 			<Editable
 				renderElement={renderElement}
 				renderLeaf={renderLeaf}
+				renderPlaceholder={Placeholder}
 				{...restEditableProps}
 			/>
 		</EditableContainer>
