@@ -1,5 +1,5 @@
 import { ContextMenu, ContextMenuItem, Menu, MenuItem } from "@/client/atoms";
-import { useContextMenu, useInsertBlock, useToggle } from "@/client/hooks";
+import { useContextMenu, useInsertBlock, useOnClickOutside, useToggle } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeSquareIcon } from "@/client/svgs";
 import composeRefs from "@seznam/compose-react-refs";
@@ -8,7 +8,7 @@ import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
 import { MenuButton, useMenuState } from "reakit";
-import { Editor, Element, Node, Transforms } from "slate";
+import { Editor, Element, Node as SlateNode, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw, { styled } from "twin.macro";
 
@@ -16,7 +16,7 @@ const Root = styled.div`
 	${tw`
 		border-2
 		border-solid
-		border-purple-500
+		border-indigo-500
 		rounded-md
 		overflow-auto
 		text-sm
@@ -84,24 +84,34 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 		placement: "bottom-start"
 	});
 
+	const buttonRef = useRef<HTMLButtonElement>(null);
+	const menuRef = useRef<HTMLDivElement>(null);
+
 	const [open, toggle] = useToggle(false);
+
+	useOnClickOutside(buttonRef, (e) => {
+		if (!menuRef.current || menuRef.current.contains(e.target as Node | null)) return;
+
+		toggle.off();
+	});
 
 	return (
 		<>
 			<MenuButton
 				as={ToolbarButton}
+				ref={buttonRef}
 				{...menu}
 				onMouseDown={(event) => {
 					event.preventDefault();
 
-					toggle();
+					toggle.on();
 				}}
 				title="code block"
 				aria-label="code block"
 			>
 				<CodeSquareIcon height={20} width={20} />
 			</MenuButton>
-			<Menu {...menu} visible={open}>
+			<Menu ref={menuRef} {...menu} visible={open}>
 				{supportedLanguages.map(([name, slateType]) => (
 					<MenuItem
 						key={slateType}
@@ -134,7 +144,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 
 	const composedRef = composeRefs(rootRef, attributes.ref);
 
-	const [code, setCode] = useState<string>(Node.string(element));
+	const [code, setCode] = useState<string>(SlateNode.string(element));
 
 	const language = useMemo(
 		() => element.type.split("-").slice(-1)[0] as Language,
@@ -171,7 +181,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 				)}
 				name="code-block"
 				onBlur={() => {
-					if (code === Node.string(element)) return;
+					if (code === SlateNode.string(element)) return;
 
 					const path = ReactEditor.findPath(editor, element);
 
