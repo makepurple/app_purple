@@ -1,6 +1,9 @@
 import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
-import cloudinary, { UploadApiResponse } from "cloudinary";
+import cloudinary from "cloudinary";
+import type { UploadApiResponse } from "cloudinary";
 import { nanoid } from "nanoid";
+
+const MAX_UPLOAD_SIZE = 1_048_576;
 
 export interface CloudinaryUploadImageFileOptions {
 	folder?: string;
@@ -21,22 +24,32 @@ export class CloudinaryClient {
 	): Promise<UploadApiResponse> {
 		const filename: string = nanoid();
 
+		let byteLength = 0;
+
 		return new Promise<UploadApiResponse>((resolve, reject) => {
-			file.createReadStream().pipe(
-				cloudinary.v2.uploader.upload_stream(
-					{
-						allowed_formats: ["gif", "jpeg", "jpg", "png", "webp"],
-						public_id: `${options?.folder}/${filename}`,
-						overwrite: true,
-						secure: true
-					},
-					(error, result) => {
-						if (error) return reject(error);
-						if (!result?.secure_url) return reject(new Error("No secure url"));
-						resolve(result);
-					}
-				)
+			const uploadStream = cloudinary.v2.uploader.upload_stream(
+				{
+					allowed_formats: ["gif", "jpeg", "jpg", "png", "webp"],
+					public_id: `${options?.folder}/${filename}`,
+					overwrite: true,
+					secure: true
+				},
+				(error, result) => {
+					if (error) return reject(error);
+					if (!result?.secure_url) return reject(new Error("No secure url"));
+					resolve(result);
+				}
 			);
+
+			file.createReadStream()
+				.on("data", (data: Buffer) => {
+					byteLength += data.byteLength;
+
+					if (byteLength > MAX_UPLOAD_SIZE) {
+						uploadStream.destroy(new Error("Max file size exceeded: 1MB"));
+					}
+				})
+				.pipe(uploadStream);
 		});
 	}
 
