@@ -13,7 +13,7 @@ const Root = tw(m.div)`
 	px-2
 	rounded-lg
 	bg-white
-	shadow-md
+	shadow-2xl
 `;
 
 export interface ContextMenuProps

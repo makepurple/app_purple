@@ -8,6 +8,6 @@ export const Tooltip = tw(ReakitTooltip)`
 	border
 	border-solid
 	border-gray-800
-	shadow-lg
+	shadow-md
 	text-white
 `;
