@@ -1,23 +1,14 @@
+import { Paper } from "@/client/atoms";
 import { useUncontrolledProp } from "@/client/hooks";
 import { FunctionUtils, ObjectUtils } from "@/utils";
 import React, { CSSProperties, FC, ReactNode, useMemo } from "react";
 import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
-import tw from "twin.macro";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
 import { DocumentEditorToolbar } from "./Toolbar";
-
-const Root = tw.div`
-	shadow-md
-	border
-	border-solid
-	border-gray-200
-	rounded-md
-	overflow-hidden
-`;
 
 declare module "slate" {
 	interface CustomTypes {
@@ -57,7 +48,7 @@ const _DocumentEditor: FC<DocumentEditorProps> = ({
 	}, []);
 
 	return (
-		<Root className={className} style={style}>
+		<Paper className={className} style={style}>
 			<Slate
 				editor={editor}
 				value={value}
@@ -68,7 +59,7 @@ const _DocumentEditor: FC<DocumentEditorProps> = ({
 			>
 				{children}
 			</Slate>
-		</Root>
+		</Paper>
 	);
 };
 
