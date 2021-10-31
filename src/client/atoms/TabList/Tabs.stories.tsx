@@ -17,18 +17,18 @@ const Template = (args) => {
 	return (
 		<TabList {...tabs} {...args}>
 			<NextLink href="https://reactjs.org/" passHref>
-				<Tab {...tabs} id="react">
-					<GitHubIcon height={20} width={20} />
+				<Tab {...tabs} forwardedAs="a" id="react">
+					<GitHubIcon height={20} tw="mr-2" width={20} />
 					<span>react</span>
 				</Tab>
 			</NextLink>
 			<NextLink href="https://vuejs.org/" passHref>
-				<Tab {...tabs} as="a">
+				<Tab {...tabs} forwardedAs="a">
 					vue
 				</Tab>
 			</NextLink>
 			<NextLink href="https://angular.io/" passHref>
-				<Tab {...tabs} as="a">
+				<Tab {...tabs} forwardedAs="a">
 					angular
 				</Tab>
 			</NextLink>

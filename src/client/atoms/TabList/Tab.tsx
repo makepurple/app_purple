@@ -6,25 +6,25 @@ export const Tab = styled(ReakitTab)`
 		inline-flex
 		items-center
 		justify-center
-		pb-1
-		border-0
-		border-b-4
-		border-solid
-		border-transparent
+		p-4
+		rounded-lg
 		text-lg
 		font-medium
 		leading-none
 		text-black
 		cursor-pointer
 		no-underline
-		hover:border-cyan-600
-		hover:text-cyan-600
+		hover:bg-cyan-600
+		hover:bg-opacity-10
 	`}
 
 	&[aria-selected="true"] {
 		${tw`
-			border-indigo-500
+			shadow
+			bg-indigo-500
+			text-white
 			font-bold
+
 		`}
 	}
 `;

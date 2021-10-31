@@ -26,20 +26,6 @@ const Content = tw.div`
 	flex-col
 `;
 
-const LinksContainer = tw(Paper)`
-	relative
-	h-14
-`;
-
-const Links = tw(TabList)`
-	absolute
-	left-6
-	bottom-0
-	right-6
-	xl:w-1/2
-	xl:right-auto
-`;
-
 const Posts = styled.div`
 	${tw`
 		flex-grow
@@ -95,28 +81,26 @@ export const Page: NextPage = () => {
 	return (
 		<Root>
 			<Content>
-				<LinksContainer>
-					<Links {...tabs}>
-						<NextLink href={`/${username}`} passHref>
-							<Tab {...tabs} forwardedAs="a" id="posts-tab">
-								<NoteIcon height={20} tw="mr-2" width={20} />
-								Posts
-							</Tab>
-						</NextLink>
-						<NextLink href={`/${username}/repositories`} passHref>
-							<Tab {...tabs} forwardedAs="a" id="repositories-tab">
-								<RepoIcon height={20} tw="mr-2" width={20} />
-								Repositories
-							</Tab>
-						</NextLink>
-						<NextLink href={`/${username}/experience`} passHref>
-							<Tab {...tabs} forwardedAs="a" id="experience-tab">
-								<HexagonIcon height={20} tw="mr-2" width={20} />
-								Experience
-							</Tab>
-						</NextLink>
-					</Links>
-				</LinksContainer>
+				<TabList {...tabs} forwardedAs={Paper}>
+					<NextLink href={`/${username}`} passHref>
+						<Tab {...tabs} forwardedAs="a" id="posts-tab">
+							<NoteIcon height={20} tw="mr-2" width={20} />
+							Posts
+						</Tab>
+					</NextLink>
+					<NextLink href={`/${username}/repositories`} passHref>
+						<Tab {...tabs} forwardedAs="a" id="repositories-tab">
+							<RepoIcon height={20} tw="mr-2" width={20} />
+							Repositories
+						</Tab>
+					</NextLink>
+					<NextLink href={`/${username}/experience`} passHref>
+						<Tab {...tabs} forwardedAs="a" id="experience-tab">
+							<HexagonIcon height={20} tw="mr-2" width={20} />
+							Experience
+						</Tab>
+					</NextLink>
+				</TabList>
 				<Posts>
 					{fetching ? (
 						Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)
