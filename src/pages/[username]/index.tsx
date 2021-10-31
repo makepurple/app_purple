@@ -8,6 +8,7 @@ import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { useTabState } from "reakit";
 import tw, { styled } from "twin.macro";
 
 const BATCH_SIZE = 20;
@@ -68,6 +69,10 @@ const SideBar = tw(UserInfoSideBar)`
 export const Page: NextPage = () => {
 	const router = useRouter();
 
+	const tabs = useTabState({
+		selectedId: "posts-tab"
+	});
+
 	const { username } = router?.query ?? {};
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetPostsQuery, {
@@ -91,21 +96,21 @@ export const Page: NextPage = () => {
 		<Root>
 			<Content>
 				<LinksContainer>
-					<Links>
+					<Links {...tabs}>
 						<NextLink href={`/${username}`} passHref>
-							<Tab as="a">
+							<Tab {...tabs} forwardedAs="a" id="posts-tab">
 								<NoteIcon height={20} tw="mr-2" width={20} />
 								Posts
 							</Tab>
 						</NextLink>
 						<NextLink href={`/${username}/repositories`} passHref>
-							<Tab as="a">
+							<Tab {...tabs} forwardedAs="a" id="repositories-tab">
 								<RepoIcon height={20} tw="mr-2" width={20} />
 								Repositories
 							</Tab>
 						</NextLink>
 						<NextLink href={`/${username}/experience`} passHref>
-							<Tab as="a">
+							<Tab {...tabs} forwardedAs="a" id="experience-tab">
 								<HexagonIcon height={20} tw="mr-2" width={20} />
 								Experience
 							</Tab>
