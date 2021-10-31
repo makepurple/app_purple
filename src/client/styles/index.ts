@@ -7,3 +7,4 @@ export * from "./language-colors";
 export * from "./media-queries";
 export * from "./shadows";
 export * from "./themes";
+export * from "./z-indicies";
