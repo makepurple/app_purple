@@ -1,11 +1,22 @@
 import React, { useCallback } from "react";
 import { Editable, RenderElementProps, RenderLeafProps } from "slate-react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { Element } from "./Element";
 import { Leaf } from "./Leaf";
 
-const EditableContainer = tw.div`
-	p-5
+/**
+ * !HACK
+ * @description Nothing in here should have visual focus, since the whole thing is a giant input
+ * @author David Lee
+ * @date October 31, 2021
+ */
+const EditableContainer = styled.div`
+	${tw`
+		p-5
+	`}
+	&, & > * {
+		box-shadow: none !important;
+	}
 `;
 
 export const DocumentEditorEditable: typeof Editable = ({
