@@ -22,6 +22,7 @@ const Root = tw(MainContainer)`
 `;
 
 const Content = tw.div`
+	flex-grow
 	flex
 	flex-col
 `;
