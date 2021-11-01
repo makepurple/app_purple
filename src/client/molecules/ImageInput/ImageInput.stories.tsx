@@ -19,7 +19,9 @@ const Template = (args) => {
 			})}
 		>
 			<ImageInput {...args} control={control} name="image_file" />
-			<Button type="submit">Submit</Button>
+			<Button tw="mt-2" type="submit">
+				Submit
+			</Button>
 		</form>
 	);
 };

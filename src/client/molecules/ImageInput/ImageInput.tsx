@@ -12,7 +12,18 @@ const Root = tw.div`
 	border
 	border-solid
 	border-gray-200
+	rounded-lg
+	bg-indigo-50
 	cursor-pointer
+	transition
+	duration-300
+	ease-in-out
+	focus:bg-white
+`;
+
+const Placeholder = tw.span`
+	text-gray-400
+	mb-3
 `;
 
 const DropInfo = styled.div<{ $hidden?: boolean }>`
@@ -21,7 +32,7 @@ const DropInfo = styled.div<{ $hidden?: boolean }>`
 		flex-col
 		items-center
 		justify-center
-		h-32
+		p-4
 		whitespace-pre
 	`}
 
@@ -33,6 +44,7 @@ const ChooseAFile = tw.span`
 `;
 
 const StyledImageIcon = tw(ImageIcon)`
+	flex-shrink-0
 	mb-3
 `;
 
@@ -54,11 +66,12 @@ export interface ImageInputProps {
 	className?: string;
 	control?: Control<any, any>;
 	name: string;
+	placeholder?: string;
 	style?: CSSProperties;
 }
 
 export const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>((props, ref) => {
-	const { className, control, name, style } = props;
+	const { className, control, name, placeholder, style } = props;
 
 	const [file, setFile] = useState<(File & { preview: string }) | null>(null);
 
@@ -100,12 +113,18 @@ export const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>((props, 
 								<Root {...getRootProps({ className, style })}>
 									<input
 										{...inputProps}
+										placeholder={placeholder}
 										ref={composeRefs(
 											ref,
 											inputProps[inputProps.refKey ?? "ref"]
 										)}
 									/>
 									<DropInfo $hidden={!!file}>
+										{placeholder && (
+											<Placeholder role="presentation" aria-hidden>
+												{placeholder}
+											</Placeholder>
+										)}
 										<StyledImageIcon height={64} width={64} />
 										<span>
 											<ChooseAFile>Choose a file</ChooseAFile> or drag it here
