@@ -3,6 +3,7 @@ import { useGetPostsQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
 import { NonIdealState } from "@/client/molecules";
 import { LoadingPostCard, PostCard, UserInfoSideBar } from "@/client/organisms";
+import { PageProps, pageProps } from "@/client/page-props/[username]";
 import { HexagonIcon, NoteIcon, RepoIcon } from "@/client/svgs";
 import { NextPage } from "next";
 import NextLink from "next/link";
@@ -53,7 +54,9 @@ const SideBar = tw(UserInfoSideBar)`
 	xl:ml-8
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const tabs = useTabState({
