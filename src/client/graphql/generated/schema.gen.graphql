@@ -10,7 +10,6 @@ type Comment {
   content: String!
   createdAt: DateTime!
   id: Int!
-  post: Post!
   updatedAt: DateTime!
 }
 
@@ -81,7 +80,6 @@ type PageInfo {
 type Post {
   author: User!
   authorId: String!
-  comments: [Comment!]!
   content: Json
   createdAt: DateTime!
   description: String

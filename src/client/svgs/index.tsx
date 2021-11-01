@@ -473,6 +473,24 @@ export const RepoIcon = React.memo(
 	)
 );
 
+export const SpinnerIcon = React.memo(
+	React.forwardRef(
+		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (
+			<svg viewBox="0 0 24 24" width={24} height={24} ref={svgRef} {...props}>
+				<circle
+					cx={12}
+					cy={12}
+					r={10}
+					fill="none"
+					stroke="currentColor"
+					strokeLinecap="round"
+					strokeWidth={3}
+				/>
+			</svg>
+		)
+	)
+);
+
 export const ThumbsUpIcon = React.memo(
 	React.forwardRef(
 		(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => (

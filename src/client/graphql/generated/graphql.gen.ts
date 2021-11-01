@@ -28,7 +28,7 @@ export type Scalars = {
   /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
   URL: string;
   /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
+  Upload: File;
 };
 
 export type Comment = {
@@ -37,7 +37,6 @@ export type Comment = {
   readonly content: Scalars['String'];
   readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['Int'];
-  readonly post: Post;
   readonly updatedAt: Scalars['DateTime'];
 };
 
@@ -146,7 +145,6 @@ export type Post = {
   readonly __typename: 'Post';
   readonly author: User;
   readonly authorId: Scalars['String'];
-  readonly comments: ReadonlyArray<Comment>;
   readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
@@ -333,6 +331,14 @@ export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readon
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
+export type UploadPostImageMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+  data: UploadPostImageInput;
+}>;
+
+
+export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly postImage: { readonly __typename: 'PostImage', readonly id: string | number, readonly url: string } };
+
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
@@ -426,6 +432,18 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     ${TopLanguagesFragmentDoc}`;
+export const UploadPostImageDocument = /*#__PURE__*/ gql`
+    mutation UploadPostImage($where: PostWhereUniqueInput!, $data: UploadPostImageInput!) {
+  postImage: uploadPostImage(where: $where, data: $data) {
+    id
+    url
+  }
+}
+    `;
+
+export function useUploadPostImageMutation() {
+  return Urql.useMutation<UploadPostImageMutation, UploadPostImageMutationVariables>(UploadPostImageDocument);
+};
 export const UpvotePostDocument = /*#__PURE__*/ gql`
     mutation UpvotePost($where: PostWhereUniqueInput!) {
   upvotePost(where: $where) {
