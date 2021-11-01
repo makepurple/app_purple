@@ -77,8 +77,8 @@ model VerificationRequest {
 }
 
 model Post {
-  author       User          @relation(name: "PostAuthor", fields: [authorId], references: [id], onDelete: Cascade)
-  authorId     String
+  author       User          @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
+  authorName   String
   content      Json?
   createdAt    DateTime      @default(now())
   description  String?
@@ -91,7 +91,7 @@ model Post {
   updatedAt    DateTime      @updatedAt
   upvotes      PostUpvoter[]
 
-  @@unique([authorId, urlSlug])
+  @@unique([authorName, urlSlug])
 }
 
 model PostUpvoter {

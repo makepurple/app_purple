@@ -144,7 +144,7 @@ export type PageInfo = {
 export type Post = {
   readonly __typename: 'Post';
   readonly author: User;
-  readonly authorId: Scalars['String'];
+  readonly authorName: Scalars['String'];
   readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
@@ -164,6 +164,11 @@ export type Post = {
 export type PostUpvotingUsersArgs = {
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
+};
+
+export type PostAuthorNameUrlSlugCompoundUniqueInput = {
+  readonly authorName: Scalars['String'];
+  readonly urlSlug: Scalars['String'];
 };
 
 /** Relay-style connection for Post types. */
@@ -196,6 +201,7 @@ export type PostWhereInput = {
 };
 
 export type PostWhereUniqueInput = {
+  readonly authorName_urlSlug?: Maybe<PostAuthorNameUrlSlugCompoundUniqueInput>;
   /** The id of the post to retrieve */
   readonly id?: Maybe<Scalars['Int']>;
 };
@@ -353,6 +359,13 @@ export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
 
+export type GetPostQueryVariables = Exact<{
+  where: PostWhereUniqueInput;
+}>;
+
+
+export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+
 export type GetPostsQueryVariables = Exact<{
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -474,6 +487,24 @@ export const GetMyUserDocument = /*#__PURE__*/ gql`
 
 export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
+};
+export const GetPostDocument = /*#__PURE__*/ gql`
+    query GetPost($where: PostWhereUniqueInput!) {
+  post(where: $where) {
+    id
+    authorName
+    content
+    description
+    publishedAt
+    title
+    urlSlug
+    thumbnailUrl
+  }
+}
+    `;
+
+export function useGetPostQuery(options: Omit<Urql.UseQueryArgs<GetPostQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetPostQuery>({ query: GetPostDocument, ...options });
 };
 export const GetPostsDocument = /*#__PURE__*/ gql`
     query GetPosts($after: String, $first: Int, $where: PostWhereInput!) {

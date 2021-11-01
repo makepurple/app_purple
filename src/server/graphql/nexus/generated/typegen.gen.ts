@@ -82,11 +82,15 @@ export interface NexusGenInputs {
     fileName: string; // String!
     fileType: string; // String!
   }
+  PostAuthorNameUrlSlugCompoundUniqueInput: { // input type
+    authorName: string; // String!
+    urlSlug: string; // String!
+  }
   PostWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    authorId?: string | null; // String
   }
   PostWhereUniqueInput: { // input type
+    authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
     id?: number | null; // Int
   }
   StringNullableFilter: { // input type
@@ -165,7 +169,7 @@ export interface NexusGenObjects {
     startCursor?: string | null; // String
   }
   Post: { // root type
-    authorId: string; // String!
+    authorName: string; // String!
     content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
@@ -273,7 +277,7 @@ export interface NexusGenFieldTypes {
   }
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
-    authorId: string; // String!
+    authorName: string; // String!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -394,7 +398,7 @@ export interface NexusGenFieldTypeNames {
   }
   Post: { // field return type name
     author: 'User'
-    authorId: 'String'
+    authorName: 'String'
     content: 'Json'
     createdAt: 'DateTime'
     description: 'String'

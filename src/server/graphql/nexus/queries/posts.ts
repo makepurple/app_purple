@@ -24,8 +24,7 @@ export const posts = queryField("posts", {
 					where: {
 						author: {
 							name: PrismaUtils.nonNull(args.where?.author?.name)
-						},
-						authorId: args.where?.authorId ?? undefined
+						}
 					}
 				}),
 			() => prisma.post.count(),

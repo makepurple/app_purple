@@ -12,7 +12,8 @@ export const post = queryField("post", {
 	resolve: async (parent, args, { prisma }) => {
 		return await prisma.post.findUnique({
 			where: {
-				id: args.where.id ?? undefined
+				id: args.where.id ?? undefined,
+				authorName_urlSlug: args.where.authorName_urlSlug ?? undefined
 			}
 		});
 	}

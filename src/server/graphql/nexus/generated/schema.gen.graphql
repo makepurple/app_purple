@@ -89,7 +89,7 @@ type PageInfo {
 
 type Post {
   author: User!
-  authorId: String!
+  authorName: String!
   content: Json
   createdAt: DateTime!
   description: String
@@ -103,6 +103,11 @@ type Post {
   upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
   urlSlug: String!
   viewerUpvoted: Boolean!
+}
+
+input PostAuthorNameUrlSlugCompoundUniqueInput {
+  authorName: String!
+  urlSlug: String!
 }
 
 """Relay-style connection for Post types."""
@@ -128,10 +133,11 @@ type PostImage {
 
 input PostWhereInput {
   author: UserWhereInput
-  authorId: String
 }
 
 input PostWhereUniqueInput {
+  authorName_urlSlug: PostAuthorNameUrlSlugCompoundUniqueInput
+
   """The id of the post to retrieve"""
   id: Int
 }

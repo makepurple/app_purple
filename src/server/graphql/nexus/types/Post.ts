@@ -6,7 +6,7 @@ export const Post = objectType({
 	description: _Post.$description,
 	definition: (t) => {
 		t.field(_Post.author);
-		t.field(_Post.authorId);
+		t.field(_Post.authorName);
 		t.field(_Post.content);
 		t.field(_Post.createdAt);
 		t.field(_Post.description);

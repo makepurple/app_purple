@@ -1,6 +1,7 @@
 export * from "./color.util";
 export * from "./function.util";
 export * from "./lang.util";
+export * from "./next.util";
 export * from "./object.util";
 export * from "./promise.util";
 export * from "./string.util";

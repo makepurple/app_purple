@@ -1,5 +1,6 @@
 import { GetPosts_mock, GetUserInfoSideBar_mock } from "@/client/graphql/mocks";
 import { SiteWideLayout } from "@/client/organisms";
+import { PageProps } from "@/client/page-props/[username]";
 import Page from "@/pages/[username]";
 import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";
@@ -19,7 +20,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};

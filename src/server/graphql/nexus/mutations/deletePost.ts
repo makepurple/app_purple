@@ -16,10 +16,17 @@ export const deletePost = mutationField("deletePost", {
 		const postToDelete = await prisma.post.findUnique({
 			where: {
 				id: args.where.id ?? undefined
+			},
+			select: {
+				author: {
+					select: {
+						id: true
+					}
+				}
 			}
 		});
 
-		if (postToDelete?.authorId !== user.id) return false;
+		if (postToDelete?.author.id !== user.id) return false;
 
 		return true;
 	},

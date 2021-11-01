@@ -4,6 +4,7 @@ import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
 import produce from "immer";
+import type { GetServerSidePropsContext } from "next";
 import toast from "react-hot-toast";
 import { Client, createClient, dedupExchange, errorExchange, ssrExchange } from "urql";
 import { createCache } from "./cache";
@@ -16,7 +17,7 @@ export const URQL_STATE_PROP_NAME = "urqlState";
  */
 const getApiUrl = (): string => {
 	// In the browser we just use a relative URL and everything works perfectly
-	if (process.browser) return `/api/graphql`;
+	if (process.browser) return "/api/graphql";
 
 	// Infer the deploy URL if we're in production
 	// VERCEL_URL = Vercel, DEPLOY_URL = Netlify
@@ -44,27 +45,31 @@ let ssr: SSRExchange;
 let urqlClient: Client | null = null;
 
 export interface CreateUrqlClientParams {
+	req?: GetServerSidePropsContext["req"];
 	ssr?: SSRExchange;
 }
 
 export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
-	const { ssr: _ssr = ssrExchange() } = params;
+	const { ssr: _ssr = ssrExchange({ isClient: WindowUtils.isSsr() }), req } = params;
 
 	if (WindowUtils.isSsr() || !urqlClient) {
 		urqlClient = createClient({
 			exchanges: [
+				dedupExchange,
+				createCache(),
 				errorExchange({
 					onError: (error) => {
 						toast.error(error.message.replace("[GraphQL]", "Server error:"));
 					}
 				}),
-				dedupExchange,
-				createCache(),
 				_ssr,
 				multipartFetchExchange
 			],
 			fetchOptions: {
-				credentials: "include"
+				credentials: "include",
+				headers: {
+					cookie: req?.headers.cookie ?? (WindowUtils.isBrowser() ? document.cookie : "")
+				}
 			},
 			requestPolicy: "cache-and-network",
 			url: getApiUrl()
@@ -116,5 +121,5 @@ export const addUrqlState = <T extends { props: Record<string, any> }>(
 			...newPageProps.props,
 			[URQL_STATE_PROP_NAME]: ssrCache.extractData()
 		};
-	});
+	}) as T & { props: T["props"] & { [URQL_STATE_PROP_NAME]: SSRData } };
 };

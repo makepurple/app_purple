@@ -9,5 +9,8 @@ export const PostWhereUniqueInput = inputObjectType({
 				The id of the post to retrieve
 			`
 		});
+		t.field("authorName_urlSlug", {
+			type: "PostAuthorNameUrlSlugCompoundUniqueInput"
+		});
 	}
 });

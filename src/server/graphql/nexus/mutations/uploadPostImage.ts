@@ -28,10 +28,17 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 		const post = await prisma.post.findUnique({
 			where: {
 				id: args.where.id ?? undefined
+			},
+			select: {
+				author: {
+					select: {
+						id: true
+					}
+				}
 			}
 		});
 
-		if (post?.authorId !== user.id) return false;
+		if (post?.author.id !== user.id) return false;
 
 		return true;
 	},
