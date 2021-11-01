@@ -282,6 +282,8 @@ export type UpdateSkillsInput = {
 };
 
 export type UploadPostImageInput = {
+  /** Set a custom filename when uploading to cloudinary. This will overwrite any file that exists under this filename. */
+  readonly fileName?: Maybe<Scalars['String']>;
   /** The file of the image to be uploaded */
   readonly image: Scalars['Upload'];
 };

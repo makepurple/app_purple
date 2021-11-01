@@ -194,6 +194,9 @@ input UpdateSkillsInput {
 scalar Upload
 
 input UploadPostImageInput {
+  # Set a custom filename when uploading to cloudinary. This will overwrite any file that exists under this filename.
+  fileName: String
+
   # The file of the image to be uploaded
   image: Upload!
 }

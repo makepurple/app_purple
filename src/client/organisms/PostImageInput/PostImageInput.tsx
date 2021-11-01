@@ -9,13 +9,15 @@ const ACCEPTED_IMAGE_TYPES = ["image/gif", "image/jpeg", "image/jpg", "image/png
 export interface PostImageInputProps {
 	children?: ReactNode;
 	className?: string;
+	// The name under which the file should be uploaded
+	fileName?: string;
 	onUpload?: (imageUrl: string) => void;
 	postId: number;
 	style?: CSSProperties;
 }
 
 export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>((props, ref) => {
-	const { children = "Upload an image", className, onUpload, postId, style } = props;
+	const { children = "Upload an image", className, fileName, onUpload, postId, style } = props;
 
 	const [{ fetching }, uploadPostImage] = useUploadPostImageMutation();
 
@@ -47,7 +49,10 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 					 */
 					const postImage = await uploadPostImage({
 						where: { id: postId },
-						data: { image: file }
+						data: {
+							fileName,
+							image: file
+						}
 					}).then((result) => result.data?.postImage ?? null);
 
 					if (!postImage) {

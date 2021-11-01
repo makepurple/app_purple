@@ -1,3 +1,4 @@
+import { oneLine } from "common-tags";
 import { arg, inputObjectType, mutationField, nonNull } from "nexus";
 
 export const UploadPostImageInput = inputObjectType({
@@ -5,6 +6,12 @@ export const UploadPostImageInput = inputObjectType({
 	definition: (t) => {
 		t.nonNull.upload("image", {
 			description: "The file of the image to be uploaded"
+		});
+		t.string("fileName", {
+			description: oneLine`
+				Set a custom filename when uploading to cloudinary. This will overwrite any file
+				that exists under this filename.
+			`
 		});
 	}
 });
@@ -33,6 +40,7 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 		const image = await args.data.image;
 
 		const uploadResponse = await cloudinary.client.uploadImageFile(image, {
+			fileName: args.data.fileName ?? undefined,
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			folder: user!.id
 		});
