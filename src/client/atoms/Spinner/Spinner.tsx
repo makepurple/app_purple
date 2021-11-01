@@ -24,7 +24,8 @@ const dash = (width: number) => {
 export const Spinner = styled(SpinnerIcon)`
 	${tw`
 		animate-spin
-		text-indigo-500
+		text-sky-200
+		opacity-80
 	`}
 
 	& > circle {
