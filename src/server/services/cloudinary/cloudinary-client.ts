@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 const MAX_UPLOAD_SIZE = 1_048_576;
 
 export interface CloudinaryUploadImageFileOptions {
+	fileName?: string;
 	folder?: string;
 }
 
@@ -22,7 +23,7 @@ export class CloudinaryClient {
 		file: FileUpload,
 		options?: CloudinaryUploadImageFileOptions
 	): Promise<UploadApiResponse> {
-		const filename: string = nanoid();
+		const filename: string = options?.fileName ?? nanoid();
 
 		let byteLength = 0;
 
