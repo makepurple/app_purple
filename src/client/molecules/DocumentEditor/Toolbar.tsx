@@ -16,6 +16,7 @@ import {
 	ItalicToolbarButton,
 	UnderlineToolbarButton
 } from "./Leaf";
+import { ToolbarButton } from "./Shared";
 
 export const DocumentEditorToolbar = ObjectUtils.setStatic(
 	styled(Toolbar)`
@@ -32,6 +33,7 @@ export const DocumentEditorToolbar = ObjectUtils.setStatic(
 		BlockQuote: BlockQuoteToolbarButton,
 		Bold: BoldToolbarButton,
 		BulletedList: BulletedListToolbarButton,
+		Button: ToolbarButton,
 		Code: CodeToolbarButton,
 		CodeBlock: CodeBlockToolbarButton,
 		Heading: HeadingToolbarButton,
