@@ -1,4 +1,4 @@
-import { insertBlock } from "@/client/hooks";
+import { insertImage } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { ImageIcon } from "@/client/svgs";
 import { UrlUtils } from "@/utils";
@@ -33,18 +33,6 @@ const ImageContainer = styled.div<{ $focused?: boolean }>`
 			box-shadow: 0 0 0 3px ${theme`colors.purple.300`};
 		`}
 `;
-
-const insertImage = (editor: Editor, url: string): void => {
-	if (!UrlUtils.isImage(url)) return;
-
-	const image: ImageElement = {
-		type: "image",
-		url,
-		children: [{ text: "" }]
-	};
-
-	insertBlock(editor, image);
-};
 
 export const withImages = (editor: Editor): Editor => {
 	const { insertData, isVoid } = editor;

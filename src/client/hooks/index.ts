@@ -2,6 +2,7 @@ export * from "./useContextMenu";
 export * from "./useErrorBoundary";
 export * from "./useHover";
 export * from "./useInsertBlock";
+export * from "./useInsertImage";
 export * from "./useIsBlockActive";
 export * from "./useIsMarkActive";
 export * from "./useNoSsr";
