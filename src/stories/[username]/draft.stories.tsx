@@ -1,8 +1,10 @@
+import { GetPost_mock } from "@/client/graphql/mocks";
 import { SiteWideLayout } from "@/client/organisms";
 import { PageProps } from "@/client/page-props/[username]/draft";
 import Page from "@/pages/[username]/draft";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
+import { getOperationName } from "urql";
 
 export default {
 	title: "pages/[username]/draft",
@@ -31,4 +33,14 @@ Template.parameters = {
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
-Standard.parameters = { ...Template.parameters };
+Standard.parameters = {
+	...Template.parameters,
+	urql: (op) => {
+		switch (getOperationName(op.query)) {
+			case "GetPost":
+				return { data: GetPost_mock };
+			default:
+				return {};
+		}
+	}
+};

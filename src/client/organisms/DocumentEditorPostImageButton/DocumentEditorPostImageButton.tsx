@@ -4,13 +4,13 @@ import { PostImageInput } from "@/client/organisms/PostImageInput";
 import { ImageIcon } from "@/client/svgs";
 import React, { CSSProperties, FC } from "react";
 
-export interface DocumentEditorPostImageButtomProps {
+export interface DocumentEditorPostImageButtonProps {
 	className?: string;
 	postId: number;
 	style?: CSSProperties;
 }
 
-export const DocumentEditorPostImageButtom: FC<DocumentEditorPostImageButtomProps> = ({
+export const DocumentEditorPostImageButton: FC<DocumentEditorPostImageButtonProps> = ({
 	className,
 	postId,
 	style
@@ -26,6 +26,7 @@ export const DocumentEditorPostImageButtom: FC<DocumentEditorPostImageButtomProp
 			}}
 			postId={postId}
 			style={style}
+			aria-label="image"
 		>
 			<ImageIcon height={20} width={20} />
 		</DocumentEditor.Toolbar.Button>

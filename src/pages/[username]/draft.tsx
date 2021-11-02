@@ -1,7 +1,7 @@
 import { Input, MainContainer, Paper } from "@/client/atoms";
 import { useGetPostQuery } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
-import { PostGuidelines, PostImageInput } from "@/client/organisms";
+import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[username]/draft";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -102,7 +102,7 @@ export const Page: NextPage<PageProps> = () => {
 						<DocumentEditor.Toolbar.BlockQuote />
 						<DocumentEditor.Toolbar.Code />
 						<DocumentEditor.Toolbar.Link />
-						<DocumentEditor.Toolbar.Image />
+						<DocumentEditorPostImageButton postId={post.id} />
 					</DocumentEditor.Toolbar>
 					<DocumentEditor.Editable
 						name="content"
