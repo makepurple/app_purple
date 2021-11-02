@@ -8,6 +8,7 @@ export const ToolbarButton = styled.button`
 		w-12
 		mr-0.5
 		rounded-sm
+		shadow-none
 		text-black
 		bg-transparent
 		cursor-pointer
