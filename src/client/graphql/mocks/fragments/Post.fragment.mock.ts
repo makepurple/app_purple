@@ -8,7 +8,7 @@ export const Post_fragment_mock: Post = {
 	author: {
 		__typename: "User",
 		id: "0",
-		name: "denvercoder09"
+		name: "leedavidcs"
 	},
 	authorId: "0",
 	description: faker.lorem.paragraphs(2),
