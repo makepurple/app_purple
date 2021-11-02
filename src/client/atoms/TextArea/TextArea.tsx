@@ -12,6 +12,7 @@ const Root = styled.textarea`
 		border-solid
 		border-gray-200
 		rounded-lg
+		shadow-inner
 		text-base
 		leading-snug
 		bg-indigo-50

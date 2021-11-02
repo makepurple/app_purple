@@ -8,10 +8,11 @@ export const Input = tw.input`
 	h-10
 	w-full
 	px-2.5
-	rounded-lg
 	border
 	border-solid
 	border-gray-200
+	rounded-lg
+	shadow-inner
 	bg-indigo-50
 	text-base
 	leading-none
