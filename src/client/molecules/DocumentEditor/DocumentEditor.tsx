@@ -12,6 +12,7 @@ import { CustomText } from "./Leaf";
 import { DocumentEditorToolbar } from "./Toolbar";
 
 const Root = tw(Paper)`
+	overflow-hidden
 	outline-none
 	ring-indigo-500
 	ring-opacity-80
