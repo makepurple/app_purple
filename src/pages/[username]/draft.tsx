@@ -1,4 +1,4 @@
-import { Input, MainContainer, Paper } from "@/client/atoms";
+import { Input, MainContainer, Paper, TextArea } from "@/client/atoms";
 import { useGetPostQuery } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
 import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
@@ -27,6 +27,10 @@ const Content = tw(Paper)`
 const AddACoverImageButton = tw(PostImageInput)`
 	w-52
 	mb-10
+`;
+
+const DescriptionInput = tw(TextArea)`
+	mt-4
 `;
 
 const StyledDocumentEditor = tw(DocumentEditor)`
@@ -90,6 +94,11 @@ export const Page: NextPage<PageProps> = () => {
 					Add a cover image
 				</AddACoverImageButton>
 				<Input name="title" placeholder="Title" type="text" aria-label="title" />
+				<DescriptionInput
+					name="description"
+					placeholder="Description"
+					aria-label="description"
+				/>
 				<StyledDocumentEditor value={value} onChange={(newValue) => setValue(newValue)}>
 					<DocumentEditor.Toolbar>
 						<DocumentEditor.Toolbar.CodeBlock />
