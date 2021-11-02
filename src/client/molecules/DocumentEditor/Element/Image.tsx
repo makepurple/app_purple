@@ -34,19 +34,8 @@ const ImageContainer = styled.div<{ $focused?: boolean }>`
 		`}
 `;
 
-const isImageUrl = (url: string): boolean => {
-	if (!url) return false;
-	if (!UrlUtils.isValid(url)) return false;
-
-	const extension = new URL(url).pathname.split(".").at(-1);
-
-	if (!extension) return false;
-
-	return ["gif", "jpeg", "jpg", "png", "webp"].includes(extension);
-};
-
 const insertImage = (editor: Editor, url: string): void => {
-	if (!isImageUrl(url)) return;
+	if (!UrlUtils.isImage(url)) return;
 
 	const image: ImageElement = {
 		type: "image",
@@ -89,7 +78,7 @@ export const withImages = (editor: Editor): Editor => {
 			return;
 		}
 
-		if (isImageUrl(text)) {
+		if (UrlUtils.isImage(text)) {
 			insertImage(editor, text);
 
 			return;

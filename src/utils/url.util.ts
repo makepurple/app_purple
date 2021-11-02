@@ -21,4 +21,14 @@ export class UrlUtils {
 			return false;
 		}
 	}
+
+	public static isImage(url: string): boolean {
+		if (!this.isValid(url)) return false;
+
+		const extension = new URL(url).pathname.split(".").at(-1);
+
+		if (!extension) return false;
+
+		return ["gif", "jpeg", "jpg", "png", "webp"].includes(extension);
+	}
 }
