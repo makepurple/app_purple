@@ -26,6 +26,7 @@ export const DocumentEditorPostImageButton: FC<DocumentEditorPostImageButtonProp
 			}}
 			postId={postId}
 			style={style}
+			title="image"
 			aria-label="image"
 		>
 			<ImageIcon height={20} width={20} />

@@ -14,15 +14,30 @@ export interface PostImageInputProps {
 	onUpload?: (imageUrl: string) => void;
 	postId: number;
 	style?: CSSProperties;
+	title?: string;
 }
 
 export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>((props, ref) => {
-	const { children = "Upload an image", className, fileName, onUpload, postId, style } = props;
+	const {
+		children = "Upload an image",
+		className,
+		fileName,
+		onUpload,
+		postId,
+		style,
+		title
+	} = props;
 
 	const [{ fetching }, uploadPostImage] = useUploadPostImageMutation();
 
 	return (
-		<Button as={"label" as any} className={className} disabled={fetching} style={style}>
+		<Button
+			as={"label" as any}
+			className={className}
+			disabled={fetching}
+			style={style}
+			title={title}
+		>
 			{fetching ? (
 				<>
 					<Spinner tw="mr-2" />

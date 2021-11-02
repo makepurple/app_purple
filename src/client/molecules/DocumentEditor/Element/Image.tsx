@@ -123,6 +123,7 @@ export const ImageToolbarButton = forwardRef<ImageToolbarButtonRef, ImageToolbar
 					onClick ? onClick(event) : makeImage();
 				}}
 				style={style}
+				title="image"
 				aria-label="image"
 			>
 				<ImageIcon height={20} width={20} />
