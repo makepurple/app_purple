@@ -1,4 +1,5 @@
 import { SiteWideLayout } from "@/client/organisms";
+import { PageProps } from "@/client/page-props/[username]/draft";
 import Page from "@/pages/[username]/draft";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -15,7 +16,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};
