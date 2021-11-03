@@ -10,6 +10,7 @@ const Template = (args) => {
 	return <Input {...args} />;
 };
 Template.args = {
+	error: false,
 	placeholder: "Type stuff here..."
 };
 

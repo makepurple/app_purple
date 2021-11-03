@@ -7,6 +7,8 @@ export * from "./ContextMenu";
 export * from "./Divider";
 export * from "./ErrorBoundary";
 export * from "./Footer";
+export * from "./FormGroup";
+export * from "./FormHelperText";
 export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
 export * from "./GradientHeader";
