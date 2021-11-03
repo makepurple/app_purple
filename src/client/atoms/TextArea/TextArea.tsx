@@ -7,6 +7,7 @@ import tw, { styled } from "twin.macro";
 
 const Root = styled.textarea<{ error?: boolean }>`
 	${tw`
+		w-full
 		px-2.5
 		py-2
 		border

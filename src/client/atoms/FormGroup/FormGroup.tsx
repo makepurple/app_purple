@@ -4,6 +4,11 @@ import tw, { styled } from "twin.macro";
 import { FormGroupContext } from "./context";
 
 const Root = styled.div`
+	${tw`
+		flex
+		flex-col
+	`}
+
 	& ${FormHelperText} {
 		${tw`
 			mt-1
