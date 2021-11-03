@@ -29,13 +29,12 @@ const Root = styled.input<{ error?: boolean }>`
 
 export type InputProps = InferComponentProps<typeof Root>;
 
-export const Input = styled(
-	// eslint-disable-next-line react/display-name
-	forwardRef<HTMLInputElement, InputProps>((props) => {
-		const context = useContext(FormGroupContext);
+export const Input = forwardRef<HTMLInputElement, InputProps>((props) => {
+	const context = useContext(FormGroupContext);
 
-		const error = props.error ?? context.error;
+	const error = props.error ?? context.error;
 
-		return <Root {...props} error={error} />;
-	})
-)``;
+	return <Root {...props} error={error} />;
+});
+
+Input.displayName = "Input";

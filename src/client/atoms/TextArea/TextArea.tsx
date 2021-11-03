@@ -1,16 +1,16 @@
+import { FormGroupContext } from "@/client/atoms/FormGroup/context";
 import { useUncontrolledProp } from "@/client/hooks";
 import { InferComponentProps } from "@/client/types";
 import composeRefs from "@seznam/compose-react-refs";
-import { forwardRef, useCallback, useEffect, useRef } from "react";
+import { forwardRef, useCallback, useContext, useEffect, useRef } from "react";
 import tw, { styled } from "twin.macro";
 
-const Root = styled.textarea`
+const Root = styled.textarea<{ error?: boolean }>`
 	${tw`
 		px-2.5
 		py-2
 		border
 		border-solid
-		border-gray-200
 		rounded-lg
 		shadow-inner
 		text-base
@@ -23,6 +23,7 @@ const Root = styled.textarea`
 		placeholder:text-gray-400
 		focus:bg-white
 	`}
+	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-200`)}
 	&::-webkit-scrollbar {
 		${tw`
 			w-0
@@ -31,12 +32,14 @@ const Root = styled.textarea`
 	}
 `;
 
-export type TextAreaProps = Omit<InferComponentProps<"textarea">, "ref">;
+export type TextAreaProps = Omit<InferComponentProps<typeof Root>, "ref">;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
 	const { value: _value } = props;
 
 	const [value, setValue] = useUncontrolledProp(_value, "");
+
+	const context = useContext(FormGroupContext);
 
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -54,6 +57,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 		textArea.style.height = `${Math.min(oldHeight, textHeight) + 2}px`;
 	}, []);
 
+	const error = props.error ?? context.error;
+
 	useEffect(() => {
 		setTextAreaHeight();
 	}, [setTextAreaHeight, value]);
@@ -62,6 +67,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 		<Root
 			{...props}
 			ref={composeRefs(ref, textAreaRef)}
+			error={error}
 			onChange={(e) => {
 				props.onChange?.(e);
 
