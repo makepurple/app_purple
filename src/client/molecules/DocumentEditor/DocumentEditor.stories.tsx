@@ -17,7 +17,11 @@ const Template = (args) => {
 
 	return (
 		<>
-			<DocumentEditor value={value} onChange={(newValue) => setValue(newValue)}>
+			<DocumentEditor
+				error={args.error}
+				value={value}
+				onChange={(newValue) => setValue(newValue)}
+			>
 				<DocumentEditor.Toolbar>
 					<DocumentEditor.Toolbar.CodeBlock />
 					<DocumentEditor.Toolbar.Heading />
@@ -38,6 +42,7 @@ const Template = (args) => {
 	);
 };
 Template.args = {
+	error: false,
 	name: "Storybook textarea"
 };
 
