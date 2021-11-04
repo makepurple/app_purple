@@ -12,12 +12,15 @@ export const Button = styled(ReakitButton)`
 		justify-center
 		px-3
 		py-3.5
+		border
+		border-solid
+		border-transparent
 		rounded-md
 		text-lg
 		leading-none
-		font-medium
 		bg-indigo-500
 		text-white
+		font-semibold
 		cursor-pointer
 		transition
 		duration-300

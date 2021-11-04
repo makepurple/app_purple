@@ -1,4 +1,4 @@
-import { Form, FormGroup, Input, MainContainer, Paper, TextArea } from "@/client/atoms";
+import { Form, FormButton, FormGroup, Input, MainContainer, Paper, TextArea } from "@/client/atoms";
 import { useGetPostQuery } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
 import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
@@ -7,7 +7,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import type { Descendant } from "slate";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const Root = tw(MainContainer)`
 	flex
@@ -35,6 +35,32 @@ const AddACoverImageButton = tw(PostImageInput)`
 
 const StyledDocumentEditor = tw(DocumentEditor)`
 	shadow-none
+`;
+
+const FormActions = styled.div`
+	${tw`
+		flex
+		flex-col
+		sm:flex-row
+		mt-10
+	`}
+
+	& > ${FormButton} {
+		${tw`
+			sm:w-36
+			sm:not-first:ml-4
+		`}
+	}
+`;
+
+const PublishButton = tw(FormButton)`
+	bg-blue-500
+`;
+
+const SaveButton = tw(FormButton)`
+	bg-gray-50
+	text-black
+	border-gray-400
 `;
 
 const SideBar = tw(PostGuidelines)`
@@ -128,6 +154,10 @@ export const Page: NextPage<PageProps> = () => {
 							/>
 						</StyledDocumentEditor>
 					</StyledFormGroup>
+					<FormActions>
+						<PublishButton type="submit">Publish</PublishButton>
+						<SaveButton type="button">Save</SaveButton>
+					</FormActions>
 				</Form>
 			</Content>
 			<SideBar />
