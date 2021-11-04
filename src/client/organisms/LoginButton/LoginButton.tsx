@@ -12,6 +12,10 @@ const Label = styled.span`
 	}
 `;
 
+const Icon = tw.svg`
+	flex-shrink-0
+`;
+
 export interface LoginButtonProps {
 	className?: string;
 	icon?: Maybe<SvgIconComponent>;
@@ -21,13 +25,13 @@ export interface LoginButtonProps {
 
 export const LoginButton: FC<LoginButtonProps> = ({
 	className,
-	icon: Icon = GitHubIcon,
+	icon = GitHubIcon,
 	label = "Login",
 	style
 }) => {
 	return (
 		<Button className={className} onClick={() => signIn("github")} style={style} type="button">
-			{Icon && <Icon height={20} width={20} />}
+			{icon && <Icon as={icon} height={20} width={20} />}
 			<Label>{label}</Label>
 		</Button>
 	);

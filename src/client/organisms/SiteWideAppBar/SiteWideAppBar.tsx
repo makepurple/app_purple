@@ -40,15 +40,23 @@ const Actions = styled.div`
 	}
 `;
 
-const StyledLoginButton = styled(LoginButton)`
-	${tw`
-		bg-transparent
-		text-black
-		hover:shadow-md
-		transition-shadow
-		duration-150
-		ease-in-out
-	`}
+const StyledLoginButton = tw(LoginButton)`
+	w-32
+	bg-transparent
+	text-black
+	border-gray-300
+	hover:shadow-md
+	transition-shadow
+	duration-150
+	ease-in-out
+`;
+
+const SignUpButton = tw(LoginButton)`
+	w-32
+`;
+
+const StyledLogoutButton = tw(LogoutButton)`
+	w-32
 `;
 
 export interface SiteWideAppBarProps {
@@ -114,10 +122,10 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					{!isAuthenticated ? (
 						<>
 							<StyledLoginButton icon={null} label="Login" />
-							<LoginButton label="Sign Up" />
+							<SignUpButton label="Sign Up" />
 						</>
 					) : (
-						<LogoutButton />
+						<StyledLogoutButton label="Logout" />
 					)}
 				</Actions>
 			</Content>
