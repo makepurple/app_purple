@@ -8695,6 +8695,11 @@ compute-scroll-into-view@^1.0.17:
   resolved "https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-1.0.17.tgz"
   integrity sha512-j4dx+Fb0URmzbwwMUrhqWM2BEWHdFGx+qZ9qqASHRPqvTYdqvWnHg0H1hIbcyLnvgnoNAVMlwkepyqM3DaIFUg==
 
+computed-types@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/computed-types/-/computed-types-1.11.1.tgz#2abd97d48f34914732070427f1ff6af192756a02"
+  integrity sha512-L0tn5D+PILEbG1TrvjYbq0hvxyjM7cj4TCE0YWk2Ks8aeT8HOACMhFRbOQnr1Th0CYhcsJ+aJOFmNkKADUoDIQ==
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
@@ -18351,11 +18356,6 @@ subscriptions-transport-ws@^0.9.19:
     iterall "^1.2.1"
     symbol-observable "^1.0.4"
     ws "^5.2.0 || ^6.0.0 || ^7.0.0"
-
-superstruct@^0.15.3:
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-0.15.3.tgz#07edfc715259ebfe3b4b2e4cb53e8e45b51674a4"
-  integrity sha512-wilec1Rg3FtKuRjRyCt70g5W29YUEuaLnybdVQUI+VQ7m0bw8k7TzrRv5iYmo6IpjLVrwxP5t3RgjAVqhYh4Fg==
 
 supports-color@^2.0.0:
   version "2.0.0"
