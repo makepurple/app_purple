@@ -59,28 +59,28 @@ export const parameters = {
 				name: "2xs",
 				styles: {
 					width: "360px",
-					height: DEFAULT_VIEWPORT_HEIGHT
+					height: "640px"
 				}
 			},
 			xs: {
 				name: "xs",
 				styles: {
 					width: "475px",
-					height: DEFAULT_VIEWPORT_HEIGHT
+					height: "800px"
 				}
 			},
 			sm: {
 				name: "sm",
 				styles: {
 					width: "640px",
-					height: DEFAULT_VIEWPORT_HEIGHT
+					height: "960px"
 				}
 			},
 			md: {
 				name: "md",
 				styles: {
 					width: "768px",
-					height: DEFAULT_VIEWPORT_HEIGHT
+					height: "1024px"
 				}
 			},
 			lg: {
