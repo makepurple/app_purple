@@ -1,4 +1,4 @@
-import { Form, Input } from "@/client/atoms";
+import { Form, FormButton, Input } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
@@ -12,6 +12,9 @@ const Template: Story = (args) => {
 		<Form disabled={args.disabled}>
 			<Input placeholder="name" />
 			<Input placeholder="email" tw="mt-4" />
+			<FormButton tw="mt-4" type="submit">
+				Submit
+			</FormButton>
 		</Form>
 	);
 };
