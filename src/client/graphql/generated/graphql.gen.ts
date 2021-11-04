@@ -197,7 +197,6 @@ export type PostImage = {
 
 export type PostWhereInput = {
   readonly author?: Maybe<UserWhereInput>;
-  readonly authorId?: Maybe<Scalars['String']>;
 };
 
 export type PostWhereUniqueInput = {
