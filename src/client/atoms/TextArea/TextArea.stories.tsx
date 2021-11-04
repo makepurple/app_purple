@@ -11,6 +11,8 @@ const Template: Story<TextAreaProps> = (args) => {
 	return <TextArea {...args} />;
 };
 Template.args = {
+	disabled: false,
+	error: false,
 	placeholder: "Type some text here..."
 };
 

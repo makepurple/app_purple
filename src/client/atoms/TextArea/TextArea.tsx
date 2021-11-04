@@ -1,3 +1,4 @@
+import { FormContext } from "@/client/atoms/Form/context";
 import { FormGroupContext } from "@/client/atoms/FormGroup/context";
 import { useUncontrolledProp } from "@/client/hooks";
 import { InferComponentProps } from "@/client/types";
@@ -23,8 +24,11 @@ const Root = styled.textarea<{ error?: boolean }>`
 		resize-none
 		placeholder:text-gray-400
 		focus:bg-white
+		disabled:cursor-not-allowed
+		disabled:bg-gray-200
+		disabled:opacity-60
 	`}
-	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-200`)}
+	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-400`)}
 	&::-webkit-scrollbar {
 		${tw`
 			w-0
@@ -40,7 +44,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 
 	const [value, setValue] = useUncontrolledProp(_value, "");
 
-	const context = useContext(FormGroupContext);
+	const form = useContext(FormContext);
+	const group = useContext(FormGroupContext);
 
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -58,7 +63,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 		textArea.style.height = `${Math.min(oldHeight, textHeight) + 2}px`;
 	}, []);
 
-	const error = props.error ?? context.error;
+	const disabled = props.disabled || form.disabled;
+	const error = props.error || group.error;
 
 	useEffect(() => {
 		setTextAreaHeight();
@@ -68,6 +74,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 		<Root
 			{...props}
 			ref={composeRefs(ref, textAreaRef)}
+			disabled={disabled}
 			error={error}
 			onChange={(e) => {
 				props.onChange?.(e);

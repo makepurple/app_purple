@@ -7,6 +7,7 @@ export * from "./ContextMenu";
 export * from "./Divider";
 export * from "./ErrorBoundary";
 export * from "./Footer";
+export * from "./Form";
 export * from "./FormGroup";
 export * from "./FormHelperText";
 export * from "./FrostedGlass";

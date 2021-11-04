@@ -1,3 +1,4 @@
+import { FormContext } from "@/client/atoms/Form/context";
 import { FormGroupContext } from "@/client/atoms/FormGroup/context";
 import { InferComponentProps } from "@/client/types";
 import { forwardRef, useContext } from "react";
@@ -23,18 +24,23 @@ const Root = styled.input<{ error?: boolean }>`
 		ease-in-out
 		placeholder:text-gray-400
 		focus:bg-white
+		disabled:cursor-not-allowed
+		disabled:bg-gray-200
+		disabled:opacity-60
 	`}
-	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-200`)}
+	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-400`)}
 `;
 
 export type InputProps = InferComponentProps<typeof Root>;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props) => {
-	const context = useContext(FormGroupContext);
+	const group = useContext(FormGroupContext);
+	const form = useContext(FormContext);
 
-	const error = props.error ?? context.error;
+	const disabled = props.disabled || form.disabled;
+	const error = props.error || group.error;
 
-	return <Root {...props} error={error} />;
+	return <Root {...props} disabled={disabled} error={error} aria-disabled={disabled} />;
 });
 
 Input.displayName = "Input";

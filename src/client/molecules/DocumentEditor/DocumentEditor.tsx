@@ -1,4 +1,5 @@
 import { Paper } from "@/client/atoms";
+import { FormContext } from "@/client/atoms/Form/context";
 import { FormGroupContext } from "@/client/atoms/FormGroup/context";
 import { useUncontrolledProp } from "@/client/hooks";
 import { FunctionUtils, ObjectUtils } from "@/utils";
@@ -6,13 +7,13 @@ import React, { CSSProperties, FC, ReactNode, useContext, useMemo } from "react"
 import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
-import tw, { styled } from "twin.macro";
+import tw, { css, styled } from "twin.macro";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
 import { DocumentEditorToolbar } from "./Toolbar";
 
-const Root = styled(Paper)<{ error?: boolean }>`
+const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
 	${tw`
 		overflow-hidden
 		outline-none
@@ -23,7 +24,19 @@ const Root = styled(Paper)<{ error?: boolean }>`
 		duration-300
 		ease-in-out
 	`}
-	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-200`)}
+	${({ disabled }) =>
+		disabled &&
+		css`
+			${tw`
+				cursor-not-allowed
+				opacity-60
+			`}
+
+			& ${DocumentEditorEditable} {
+				${tw`bg-gray-200`}
+			}
+		`}
+	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-400`)}
 `;
 
 declare module "slate" {
@@ -37,6 +50,7 @@ declare module "slate" {
 export interface DocumentEditorProps {
 	children?: ReactNode;
 	className?: string;
+	disabled?: boolean;
 	error?: boolean;
 	onChange?: (value: Descendant[]) => void;
 	style?: CSSProperties;
@@ -48,7 +62,8 @@ const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 
 	const [value, setValue] = useUncontrolledProp<Descendant[]>(_value, []);
 
-	const context = useContext(FormGroupContext);
+	const form = useContext(FormContext);
+	const group = useContext(FormGroupContext);
 
 	const editor = useMemo(() => {
 		const composed = FunctionUtils.compose(
@@ -62,10 +77,17 @@ const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 		return composed(createEditor());
 	}, []);
 
-	const error = props.error ?? context.error;
+	const disabled = props.disabled ?? form.disabled;
+	const error = props.error ?? group.error;
 
 	return (
-		<Root className={className} style={style} error={error}>
+		<Root
+			className={className}
+			style={style}
+			disabled={disabled}
+			error={error}
+			aria-disabled={disabled}
+		>
 			<Slate
 				editor={editor}
 				value={value}

@@ -1,13 +1,14 @@
 import { DocumentEditor } from "@/client/molecules";
+import type { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
 import type { Descendant } from "slate";
 
 export default {
 	title: "molecules/DocumentEditor",
 	component: DocumentEditor
-};
+} as Meta;
 
-const Template = (args) => {
+const Template: Story = (args) => {
 	const [value, setValue] = useState<Descendant[]>([
 		{
 			type: "paragraph",
@@ -18,6 +19,7 @@ const Template = (args) => {
 	return (
 		<>
 			<DocumentEditor
+				disabled={args.disabled}
 				error={args.error}
 				value={value}
 				onChange={(newValue) => setValue(newValue)}
@@ -42,6 +44,7 @@ const Template = (args) => {
 	);
 };
 Template.args = {
+	disabled: false,
 	error: false,
 	name: "Storybook textarea"
 };
