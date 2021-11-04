@@ -1,4 +1,4 @@
-import { FormGroup, Input, MainContainer, Paper, TextArea } from "@/client/atoms";
+import { Form, FormGroup, Input, MainContainer, Paper, TextArea } from "@/client/atoms";
 import { useGetPostQuery } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
 import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
@@ -92,38 +92,43 @@ export const Page: NextPage<PageProps> = () => {
 				>
 					Add a cover image
 				</AddACoverImageButton>
-				<FormGroup>
-					<Input name="title" placeholder="Title" type="text" aria-label="title" />
-				</FormGroup>
-				<StyledFormGroup>
-					<TextArea
-						name="description"
-						placeholder="Description"
-						aria-label="description"
-					/>
-				</StyledFormGroup>
-				<StyledFormGroup>
-					<StyledDocumentEditor value={value} onChange={(newValue) => setValue(newValue)}>
-						<DocumentEditor.Toolbar>
-							<DocumentEditor.Toolbar.CodeBlock />
-							<DocumentEditor.Toolbar.Heading />
-							<DocumentEditor.Toolbar.Bold />
-							<DocumentEditor.Toolbar.Italic />
-							<DocumentEditor.Toolbar.Underline />
-							<DocumentEditor.Toolbar.BulletedList />
-							<DocumentEditor.Toolbar.NumbedList />
-							<DocumentEditor.Toolbar.BlockQuote />
-							<DocumentEditor.Toolbar.Code />
-							<DocumentEditor.Toolbar.Link />
-							<DocumentEditorPostImageButton postId={post.id} />
-						</DocumentEditor.Toolbar>
-						<DocumentEditor.Editable
-							name="content"
-							placeholder="Tell us something interesting..."
-							aria-label="content"
+				<Form>
+					<FormGroup>
+						<Input name="title" placeholder="Title" type="text" aria-label="title" />
+					</FormGroup>
+					<StyledFormGroup>
+						<TextArea
+							name="description"
+							placeholder="Description"
+							aria-label="description"
 						/>
-					</StyledDocumentEditor>
-				</StyledFormGroup>
+					</StyledFormGroup>
+					<StyledFormGroup>
+						<StyledDocumentEditor
+							value={value}
+							onChange={(newValue) => setValue(newValue)}
+						>
+							<DocumentEditor.Toolbar>
+								<DocumentEditor.Toolbar.CodeBlock />
+								<DocumentEditor.Toolbar.Heading />
+								<DocumentEditor.Toolbar.Bold />
+								<DocumentEditor.Toolbar.Italic />
+								<DocumentEditor.Toolbar.Underline />
+								<DocumentEditor.Toolbar.BulletedList />
+								<DocumentEditor.Toolbar.NumbedList />
+								<DocumentEditor.Toolbar.BlockQuote />
+								<DocumentEditor.Toolbar.Code />
+								<DocumentEditor.Toolbar.Link />
+								<DocumentEditorPostImageButton postId={post.id} />
+							</DocumentEditor.Toolbar>
+							<DocumentEditor.Editable
+								name="content"
+								placeholder="Tell us something interesting..."
+								aria-label="content"
+							/>
+						</StyledDocumentEditor>
+					</StyledFormGroup>
+				</Form>
 			</Content>
 			<SideBar />
 		</Root>
