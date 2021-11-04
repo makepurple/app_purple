@@ -11,14 +11,17 @@ import tw, { styled } from "twin.macro";
 
 const Root = tw(MainContainer)`
 	flex
-	flex-col-reverse
+	flex-col
+	items-stretch
+	justify-start
 	lg:flex-row
-	items-start
+	lg:items-start
 	my-12
 `;
 
 const Content = tw(Paper)`
-	flex-grow
+	flex-grow-0
+	lg:flex-grow
 	flex
 	flex-col
 	p-6
@@ -64,8 +67,10 @@ const SaveButton = tw(FormButton)`
 `;
 
 const SideBar = tw(PostGuidelines)`
+	hidden
 	flex-shrink-0
 	w-full
+	lg:block
 	lg:w-96
 	lg:ml-6
 	xl:ml-8
