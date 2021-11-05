@@ -1,4 +1,9 @@
-import { GetPosts_mock, GetUserInfoSideBar_mock } from "@/client/graphql/mocks";
+import {
+	CreatePost_mock,
+	GetPostDraft_mock,
+	GetPosts_mock,
+	GetUserInfoSideBar_mock
+} from "@/client/graphql/mocks";
 import { SiteWideLayout } from "@/client/organisms";
 import { PageProps } from "@/client/page-props/[username]";
 import Page from "@/pages/[username]";
@@ -37,8 +42,14 @@ export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
-	urql: (op) => {
+	urql: async (op) => {
 		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetPosts":
 				return { data: GetPosts_mock };
 			case "GetUserInfoSideBar":
@@ -55,6 +66,12 @@ Loading.parameters = {
 	...Template.parameters,
 	urql: async (op) => {
 		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetPosts":
 				await PromiseUtils.wait(ms("5s"));
 
@@ -71,8 +88,19 @@ export const NoResults = Template.bind({});
 NoResults.args = { ...Template.args };
 NoResults.parameters = {
 	...Template.parameters,
-	urql: (op) => {
+	urql: async (op) => {
 		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetPostDraft":
+				return {
+					data: {
+						__typename: "Query",
+						postDraft: null
+					}
+				};
 			case "GetPosts":
 				return {
 					data: {

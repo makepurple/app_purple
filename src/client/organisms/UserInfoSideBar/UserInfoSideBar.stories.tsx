@@ -1,37 +1,40 @@
-import { useGetUserInfoSideBarQuery } from "@/client/graphql";
-import { GetUserInfoSideBar_mock } from "@/client/graphql/mocks";
-import { UserInfoSideBar } from "@/client/organisms";
+import {
+	CreatePost_mock,
+	GetPostDraft_mock,
+	GetUserInfoSideBar_mock
+} from "@/client/graphql/mocks";
+import { UserInfoSideBar, UserInfoSideBarProps } from "@/client/organisms";
+import { PromiseUtils } from "@/utils";
+import type { Meta, Story } from "@storybook/react";
+import { getOperationName } from "@urql/core";
+import ms from "ms";
 import React from "react";
-import { getOperationName } from "urql";
 
 export default {
 	title: "organisms/UserInfoSideBar",
 	component: UserInfoSideBar
-};
+} as Meta;
 
-const Template = (args) => {
-	const [{ data }] = useGetUserInfoSideBarQuery({
-		variables: {
-			name: "leedavidcs"
-		}
-	});
-
-	const user = data?.user;
-
-	if (!user) return null;
-
+const Template: Story<UserInfoSideBarProps> = (args) => {
 	return <UserInfoSideBar {...args} username="leedavidcs" />;
 };
 Template.args = {};
+Template.parameters = {};
 
 export const Standard: any = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
+	...Template.parameters,
 	urql: (op) => {
-		if (getOperationName(op.query) === "GetUserInfoSideBar") {
-			return { data: GetUserInfoSideBar_mock };
+		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				return PromiseUtils.wait(ms("1s")).then(() => ({ data: CreatePost_mock }));
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			default:
+				return {};
 		}
-
-		return {};
 	}
 };

@@ -1,5 +1,6 @@
-import { Avatar, Button, Divider, GitHubAvatarImage, Paper, Tags } from "@/client/atoms";
+import { Avatar, Divider, GitHubAvatarImage, Paper, Tags } from "@/client/atoms";
 import { useGetUserInfoSideBarQuery } from "@/client/graphql";
+import { NewPostButton } from "@/client/organisms/NewPostButton";
 import { TopLanguages } from "@/client/organisms/TopLanguages";
 import { GitHubIcon, OpenbaseIcon, PersonIcon, TwitterIcon } from "@/client/svgs";
 import NextLink from "next/link";
@@ -82,7 +83,7 @@ const SocialLink = tw.a`
 	w-4
 `;
 
-const NewPostButton = tw(Button)`
+const StyledNewPostButton = tw(NewPostButton)`
 	w-full
 	mt-4
 `;
@@ -168,9 +169,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						<OpenbaseIcon height={16} width={16} />
 					</SocialLink>
 				</SocialLinks>
-				<NextLink href={`/${user.name}/draft`} passHref>
-					<NewPostButton as="a">New Post</NewPostButton>
-				</NextLink>
+				<StyledNewPostButton userName={username}>New Post</StyledNewPostButton>
 			</MainInfoContainer>
 			<Divider />
 			<TopLanguagesContainer>
