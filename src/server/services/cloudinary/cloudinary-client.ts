@@ -1,12 +1,12 @@
 import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import cloudinary from "cloudinary";
 import type { UploadApiResponse } from "cloudinary";
+import { createHash } from "crypto";
 import { nanoid } from "nanoid";
 
 const MAX_UPLOAD_SIZE = 1_048_576;
 
 export interface CloudinaryUploadImageFileOptions {
-	fileName?: string;
 	folder?: string;
 }
 
@@ -23,7 +23,10 @@ export class CloudinaryClient {
 		file: FileUpload,
 		options?: CloudinaryUploadImageFileOptions
 	): Promise<UploadApiResponse> {
-		const filename: string = options?.fileName ?? nanoid();
+		const now = Date.now().toString();
+		const hash = createHash("md5").update(now);
+		const fileName = hash.digest("hex").toString();
+		const publicId = options?.folder ? [options.folder, fileName].join("/") : fileName;
 
 		let byteLength = 0;
 
@@ -31,7 +34,7 @@ export class CloudinaryClient {
 			const uploadStream = cloudinary.v2.uploader.upload_stream(
 				{
 					allowed_formats: ["gif", "jpeg", "jpg", "png", "webp"],
-					public_id: `${options?.folder}/${filename}`,
+					public_id: publicId,
 					overwrite: true,
 					secure: true
 				},

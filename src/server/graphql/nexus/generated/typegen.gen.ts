@@ -108,7 +108,6 @@ export interface NexusGenInputs {
     skills: string[]; // [String!]!
   }
   UploadPostImageInput: { // input type
-    fileName?: string | null; // String
     image: NexusGenScalars['Upload']; // Upload!
   }
   UserWhereInput: { // input type
