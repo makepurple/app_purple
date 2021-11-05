@@ -4,6 +4,9 @@ import {
 	GetMyUserDocument,
 	GetMyUserQuery,
 	GetMyUserQueryVariables,
+	GetPostDraftDocument,
+	GetPostDraftQuery,
+	GetPostDraftQueryVariables,
 	GetPostsDocument,
 	GetPostsQuery,
 	GetPostsQueryVariables,
@@ -37,6 +40,9 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				},
 				after: null
 			})
+			.toPromise(),
+		urqlClient
+			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
 			.toPromise(),
 		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(

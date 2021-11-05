@@ -138,6 +138,7 @@ type Query {
 
   # A user-created post.
   post(where: PostWhereUniqueInput!): Post
+  postDraft: Post
 
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!

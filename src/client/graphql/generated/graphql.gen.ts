@@ -211,6 +211,7 @@ export type Query = {
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
   readonly post?: Maybe<Post>;
+  readonly postDraft?: Maybe<Post>;
   /** Relay-style connection on Post types. */
   readonly posts: PostConnection;
   readonly user?: Maybe<User>;
@@ -363,6 +364,11 @@ export type GetPostQueryVariables = Exact<{
 
 export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
 
+export type GetPostDraftQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPostDraftQuery = { readonly __typename: 'Query', readonly postDraft?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly title?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+
 export type GetPostsQueryVariables = Exact<{
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -502,6 +508,21 @@ export const GetPostDocument = /*#__PURE__*/ gql`
 
 export function useGetPostQuery(options: Omit<Urql.UseQueryArgs<GetPostQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetPostQuery>({ query: GetPostDocument, ...options });
+};
+export const GetPostDraftDocument = /*#__PURE__*/ gql`
+    query GetPostDraft {
+  postDraft {
+    id
+    content
+    description
+    title
+    thumbnailUrl
+  }
+}
+    `;
+
+export function useGetPostDraftQuery(options: Omit<Urql.UseQueryArgs<GetPostDraftQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetPostDraftQuery>({ query: GetPostDraftDocument, ...options });
 };
 export const GetPostsDocument = /*#__PURE__*/ gql`
     query GetPosts($after: String, $first: Int, $where: PostWhereInput!) {
