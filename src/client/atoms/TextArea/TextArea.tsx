@@ -4,6 +4,7 @@ import { useUncontrolledProp } from "@/client/hooks";
 import { InferComponentProps } from "@/client/types";
 import composeRefs from "@seznam/compose-react-refs";
 import { forwardRef, useCallback, useContext, useEffect, useRef } from "react";
+import { useWindowSize } from "react-use";
 import tw, { styled } from "twin.macro";
 
 const Root = styled.textarea<{ error?: boolean }>`
@@ -43,6 +44,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 	const { value: _value } = props;
 
 	const [value, setValue] = useUncontrolledProp(_value, "");
+	const { width } = useWindowSize();
 
 	const form = useContext(FormContext);
 	const group = useContext(FormGroupContext);
@@ -68,7 +70,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 
 	useEffect(() => {
 		setTextAreaHeight();
-	}, [setTextAreaHeight, value]);
+	}, [setTextAreaHeight, value, width]);
 
 	return (
 		<Root
