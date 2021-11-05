@@ -25,10 +25,12 @@ export const Standard: any = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
-	urql: (op) => {
+	urql: async (op) => {
 		switch (getOperationName(op.query)) {
 			case "CreatePost":
-				return PromiseUtils.wait(ms("1s")).then(() => ({ data: CreatePost_mock }));
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
