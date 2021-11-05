@@ -37,10 +37,10 @@ const Posts = styled.div`
 		mt-4
 		xl:mt-6
 	`}
-	& > *:not(:first-child) {
+	& > * {
 		${tw`
-			mt-4
-			xl:mt-6
+			not-first:mt-4
+			xl:not-first:mt-6
 		`}
 	}
 `;
