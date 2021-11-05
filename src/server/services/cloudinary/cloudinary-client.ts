@@ -2,7 +2,6 @@ import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import cloudinary from "cloudinary";
 import type { UploadApiResponse } from "cloudinary";
 import { createHash } from "crypto";
-import { nanoid } from "nanoid";
 
 const MAX_UPLOAD_SIZE = 1_048_576;
 

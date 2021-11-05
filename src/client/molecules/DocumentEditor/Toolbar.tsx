@@ -1,6 +1,6 @@
 import { Toolbar } from "@/client/atoms";
 import { ObjectUtils } from "@/utils";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 import {
 	BlockQuoteToolbarButton,
 	BulletedListToolbarButton,

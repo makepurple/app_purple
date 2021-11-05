@@ -7,7 +7,7 @@ export default {
 	component: FormButton
 } as Meta;
 
-const Template = (args) => {
+const Template: Story = (args) => {
 	return <FormButton {...args} />;
 };
 Template.args = {
