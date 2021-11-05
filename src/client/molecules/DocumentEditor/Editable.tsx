@@ -34,6 +34,10 @@ const EditableContainer = styled.div<{ $readOnly: boolean }>`
 		`}
 `;
 
+const StyledEditable = styled(Editable)`
+	min-height: 4rem !important;
+`;
+
 export type DocumentEditorEditableProps = InferComponentProps<typeof Editable>;
 
 export const DocumentEditorEditable = styled((({
@@ -48,7 +52,7 @@ export const DocumentEditorEditable = styled((({
 
 	return (
 		<EditableContainer className={className} style={style} $readOnly={readOnly}>
-			<Editable
+			<StyledEditable
 				renderElement={renderElement}
 				renderLeaf={renderLeaf}
 				renderPlaceholder={Placeholder}
