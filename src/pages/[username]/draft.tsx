@@ -7,7 +7,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import type { Descendant } from "slate";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 const Root = tw(MainContainer)`
 	flex
@@ -24,7 +24,8 @@ const Content = tw(Paper)`
 	lg:flex-grow
 	flex
 	flex-col
-	p-6
+	p-4
+	sm:p-6
 `;
 
 const StyledFormGroup = tw(FormGroup)`
@@ -40,20 +41,11 @@ const StyledDocumentEditor = tw(DocumentEditor)`
 	shadow-none
 `;
 
-const FormActions = styled.div`
-	${tw`
-		flex
-		flex-col
-		sm:flex-row
-		mt-10
-	`}
-
-	& > ${FormButton} {
-		${tw`
-			sm:w-36
-			sm:not-first:ml-4
-		`}
-	}
+const FormActions = tw.div`
+	mt-10
+	grid
+	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	gap-4
 `;
 
 const PublishButton = tw(FormButton)`
