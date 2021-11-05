@@ -33,3 +33,7 @@ export const MenuItem = styled(ReakitMenuItem)<{ selected?: boolean }>`
 			hover:bg-purple-600
 		`}
 `;
+
+MenuItem.defaultProps = {
+	type: "button"
+};
