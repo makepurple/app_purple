@@ -146,7 +146,7 @@ export const Page: NextPage<PageProps> = () => {
 							</DocumentEditor.Toolbar>
 							<DocumentEditor.Editable
 								name="content"
-								placeholder="Tell us something interesting..."
+								placeholder="Tell the class things you've learned..."
 								aria-label="content"
 							/>
 						</StyledDocumentEditor>
