@@ -1,14 +1,21 @@
 import { Anchor, Brand, Footer, MainContainer, PageContainer } from "@/client/atoms";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
-const Root = styled(PageContainer)``;
+const Root = tw(PageContainer)`
+	h-auto
+`;
 
 const Content = tw(MainContainer)`
 	flex
-	flex-row
-	items-center
+	flex-col
+	items-start
+	gap-4
+	py-8
+	sm:flex-row
+	sm:flex-wrap
+	sm:items-center
 `;
 
 const BrandContainer = tw.div`
@@ -17,11 +24,13 @@ const BrandContainer = tw.div`
 
 const LinksContainer = tw.nav`
 	flex-shrink-0
+	flex
+	gap-6
+	sm:gap-12
 `;
 
 const SiteLink = tw(Anchor)`
 	text-gray-800
-	px-5
 	opacity-70
 	hover:text-purple-500
 	hover:opacity-100
