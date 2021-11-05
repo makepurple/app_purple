@@ -5,8 +5,6 @@ export const ToolbarButton = styled.button`
 		inline-flex
 		items-center
 		justify-center
-		w-12
-		mr-0.5
 		rounded-sm
 		shadow-none
 		text-black
@@ -17,9 +15,8 @@ export const ToolbarButton = styled.button`
 		ease-in-out
 		ring-cyan-600
 		ring-opacity-80
-		ring-offset-2
+		ring-offset-1
 		hover:ring
-		not-first:ml-0.5
 	`}
 `;
 

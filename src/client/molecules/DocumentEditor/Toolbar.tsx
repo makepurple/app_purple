@@ -21,6 +21,9 @@ import { ToolbarButton } from "./Shared";
 export const DocumentEditorToolbar = ObjectUtils.setStatic(
 	styled(Toolbar)`
 		${tw`
+			grid
+			gap-1
+			h-auto
 			p-1
 			shadow-none
 			border-0
@@ -28,6 +31,8 @@ export const DocumentEditorToolbar = ObjectUtils.setStatic(
 			border-solid
 			border-gray-200
 		`}
+		grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+		grid-auto-rows: minmax(3rem, 1fr);
 	`,
 	{
 		BlockQuote: BlockQuoteToolbarButton,
