@@ -47,5 +47,3 @@ export const DocumentEditorToolbar = ObjectUtils.setStatic(
 		Underline: UnderlineToolbarButton
 	}
 );
-
-DocumentEditorToolbar.displayName = "DocumentEditorToolbar";
