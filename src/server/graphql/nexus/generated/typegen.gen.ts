@@ -310,6 +310,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
+    postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -431,6 +432,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     ok: 'Boolean'
     post: 'Post'
+    postDraft: 'Post'
     posts: 'PostConnection'
     user: 'User'
     viewer: 'User'

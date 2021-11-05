@@ -8,7 +8,7 @@ export const createPost = mutationField("createPost", {
 
 		const draft = await prisma.post.findFirst({
 			where: {
-				publishedAt: null
+				OR: [{ publishedAt: null }, { urlSlug: "draft" }]
 			}
 		});
 
