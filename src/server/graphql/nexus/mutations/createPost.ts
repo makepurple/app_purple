@@ -1,7 +1,11 @@
+import { oneLine } from "common-tags";
 import { mutationField, nonNull } from "nexus";
 
 export const createPost = mutationField("createPost", {
 	type: nonNull("Post"),
+	description: oneLine`
+		Creates a new draft if the user doesn't have a draft pending to be published already
+	`,
 	authorize: (parent, args, { user }) => !!user,
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw Error("Unexpected Error");
