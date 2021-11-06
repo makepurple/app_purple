@@ -1,4 +1,5 @@
 import { PrismaUtils } from "@/server/utils";
+import { PostUpdateInput } from "@/validators";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const updatePost = mutationField("updatePost", {
@@ -11,8 +12,12 @@ export const updatePost = mutationField("updatePost", {
 		return !!user;
 	},
 	resolve: async (parent, args, { prisma }) => {
+		const nonNullData = PrismaUtils.nonNull(args.data);
+
+		const dataInput = PostUpdateInput.validator(nonNullData);
+
 		const updatedPost = await prisma.post.update({
-			data: args.data,
+			data: dataInput,
 			where: PrismaUtils.nonNull(args.where)
 		});
 
