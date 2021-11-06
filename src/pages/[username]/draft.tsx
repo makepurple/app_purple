@@ -102,7 +102,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const {
 		control,
-		formState: { errors, isValid },
+		formState: { errors },
 		handleSubmit,
 		register,
 		reset,
@@ -122,11 +122,20 @@ export const Page: NextPage<PageProps> = () => {
 		resolver: computedTypesResolver(PostUpdateInput)
 	});
 
-	const hasPost: boolean = !!post;
-
 	useEffect(() => {
-		hasPost && reset();
-	}, [hasPost, reset]);
+		!!post &&
+			reset({
+				thumbnailUrl: post.thumbnailUrl ?? "",
+				title: post.title ?? "",
+				description: post.description ?? "",
+				content: (post.content as any) ?? [
+					{
+						type: "paragraph",
+						children: [{ text: "" }]
+					}
+				]
+			});
+	}, [post, reset]);
 
 	/**
 	 * TODO
@@ -148,7 +157,7 @@ export const Page: NextPage<PageProps> = () => {
 					Add a cover image
 				</AddACoverImageButton>
 				<Form
-					disabled={fetching || !isValid}
+					disabled={fetching}
 					onSubmit={handleSubmit((values) => {
 						const { thumbnailUrl, title, description, content } = values;
 
