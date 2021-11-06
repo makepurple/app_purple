@@ -76,6 +76,7 @@ export enum ExperienceType {
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
+  /** Creates a new draft if the user doesn't have a draft pending to be published already */
   readonly createPost: Post;
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
   /** User can delete their own post. */
@@ -83,6 +84,7 @@ export type Mutation = {
   readonly ok: Scalars['Boolean'];
   readonly publishPost: Post;
   readonly updateDesiredSkills: User;
+  readonly updatePost?: Maybe<Post>;
   readonly updateSkills: User;
   readonly uploadPostImage: PostImage;
   readonly upvotePost: Post;
@@ -111,6 +113,13 @@ export type MutationPublishPostArgs = {
 /** Root mutation type */
 export type MutationUpdateDesiredSkillsArgs = {
   input: UpdateDesiredSkillsInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdatePostArgs = {
+  data: PostUpdateInput;
+  where: PostWhereUniqueInput;
 };
 
 
@@ -193,6 +202,13 @@ export type PostImage = {
   readonly post: Post;
   readonly postId: Scalars['Int'];
   readonly url: Scalars['String'];
+};
+
+export type PostUpdateInput = {
+  readonly content?: Maybe<Scalars['Json']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly thumbnailUrl?: Maybe<Scalars['String']>;
+  readonly title?: Maybe<Scalars['String']>;
 };
 
 export type PostWhereInput = {
@@ -342,6 +358,14 @@ export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type CreatePostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly urlSlug: string } };
 
+export type UpdatePostMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+  data: PostUpdateInput;
+}>;
+
+
+export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } | null | undefined };
+
 export type UploadPostImageMutationVariables = Exact<{
   where: PostWhereUniqueInput;
   data: UploadPostImageInput;
@@ -466,6 +490,21 @@ export const CreatePostDocument = /*#__PURE__*/ gql`
 
 export function useCreatePostMutation() {
   return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
+};
+export const UpdatePostDocument = /*#__PURE__*/ gql`
+    mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
+  post: updatePost(where: $where, data: $data) {
+    id
+    content
+    description
+    thumbnailUrl
+    title
+  }
+}
+    `;
+
+export function useUpdatePostMutation() {
+  return Urql.useMutation<UpdatePostMutation, UpdatePostMutationVariables>(UpdatePostDocument);
 };
 export const UploadPostImageDocument = /*#__PURE__*/ gql`
     mutation UploadPostImage($where: PostWhereUniqueInput!, $data: UploadPostImageInput!) {

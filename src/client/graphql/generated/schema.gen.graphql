@@ -55,6 +55,7 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 # Root mutation type
 type Mutation {
+  # Creates a new draft if the user doesn't have a draft pending to be published already
   createPost: Post!
   createPresignedS3Url(data: CreatePresignedS3UrlInput!): CreatePresignedS3UrlPayload!
 
@@ -63,6 +64,7 @@ type Mutation {
   ok: Boolean!
   publishPost(where: PostWhereUniqueInput!): Post!
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateSkills(input: UpdateSkillsInput!): User!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
   upvotePost(where: PostWhereUniqueInput!): Post!
@@ -119,6 +121,13 @@ type PostImage {
   post: Post!
   postId: Int!
   url: String!
+}
+
+input PostUpdateInput {
+  content: Json
+  description: String
+  thumbnailUrl: String
+  title: String
 }
 
 input PostWhereInput {
