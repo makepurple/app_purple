@@ -9,7 +9,7 @@ import {
 	Paper,
 	TextArea
 } from "@/client/atoms";
-import { useGetPostQuery } from "@/client/graphql";
+import { useGetPostQuery, useUpdatePostMutation } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
 import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[username]/draft";
@@ -96,11 +96,13 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
+	const [{ fetching }, updatePost] = useUpdatePostMutation();
+
 	const post = data?.post;
 
 	const {
 		control,
-		formState: { errors },
+		formState: { errors, isValid },
 		handleSubmit,
 		register,
 		reset,
@@ -146,6 +148,7 @@ export const Page: NextPage<PageProps> = () => {
 					Add a cover image
 				</AddACoverImageButton>
 				<Form
+					disabled={fetching || !isValid}
 					onSubmit={handleSubmit((values) => {
 						const { thumbnailUrl, title, description, content } = values;
 
