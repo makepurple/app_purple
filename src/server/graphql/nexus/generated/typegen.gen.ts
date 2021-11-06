@@ -268,6 +268,7 @@ export interface NexusGenFieldTypes {
     deletePost: NexusGenRootTypes['Post']; // Post!
     ok: boolean; // Boolean!
     publishPost: NexusGenRootTypes['Post']; // Post!
+    removePostThumbnail: NexusGenRootTypes['Post'] | null; // Post
     updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updateSkills: NexusGenRootTypes['User']; // User!
@@ -391,6 +392,7 @@ export interface NexusGenFieldTypeNames {
     deletePost: 'Post'
     ok: 'Boolean'
     publishPost: 'Post'
+    removePostThumbnail: 'Post'
     updateDesiredSkills: 'User'
     updatePost: 'Post'
     updateSkills: 'User'
@@ -494,6 +496,9 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     publishPost: { // args
+      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    removePostThumbnail: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     updateDesiredSkills: { // args

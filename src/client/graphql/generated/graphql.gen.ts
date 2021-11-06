@@ -83,6 +83,7 @@ export type Mutation = {
   readonly deletePost: Post;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: Post;
+  readonly removePostThumbnail?: Maybe<Post>;
   readonly updateDesiredSkills: User;
   readonly updatePost?: Maybe<Post>;
   readonly updateSkills: User;
@@ -106,6 +107,12 @@ export type MutationDeletePostArgs = {
 
 /** Root mutation type */
 export type MutationPublishPostArgs = {
+  where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationRemovePostThumbnailArgs = {
   where: PostWhereUniqueInput;
 };
 
@@ -358,6 +365,13 @@ export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type CreatePostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly urlSlug: string } };
 
+export type RemovePostThumbnailMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+}>;
+
+
+export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+
 export type UpdatePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
   data: PostUpdateInput;
@@ -490,6 +504,18 @@ export const CreatePostDocument = /*#__PURE__*/ gql`
 
 export function useCreatePostMutation() {
   return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
+};
+export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
+    mutation RemovePostThumbnail($where: PostWhereUniqueInput!) {
+  post: removePostThumbnail(where: $where) {
+    id
+    thumbnailUrl
+  }
+}
+    `;
+
+export function useRemovePostThumbnailMutation() {
+  return Urql.useMutation<RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables>(RemovePostThumbnailDocument);
 };
 export const UpdatePostDocument = /*#__PURE__*/ gql`
     mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {

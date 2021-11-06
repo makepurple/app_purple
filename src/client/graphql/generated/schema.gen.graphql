@@ -63,6 +63,7 @@ type Mutation {
   deletePost(where: PostWhereUniqueInput!): Post!
   ok: Boolean!
   publishPost(where: PostWhereUniqueInput!): Post!
+  removePostThumbnail(where: PostWhereUniqueInput!): Post
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateSkills(input: UpdateSkillsInput!): User!
