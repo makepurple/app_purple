@@ -12,9 +12,12 @@ export const updatePost = mutationField("updatePost", {
 		return !!user;
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const nonNullData = PrismaUtils.nonNull(args.data);
-
-		const dataInput = PostUpdateInput.validator(nonNullData);
+		const dataInput = PostUpdateInput.validator({
+			content: args.data.content ?? undefined,
+			description: args.data.description ?? undefined,
+			thumbnailUrl: args.data.thumbnailUrl,
+			title: args.data.title ?? undefined
+		});
 
 		const updatedPost = await prisma.post.update({
 			data: dataInput,

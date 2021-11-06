@@ -5,6 +5,6 @@ import { PostContent } from "./PostContent";
 export const PostUpdateInput = Schema({
 	content: PostContent.error("Content malformed").strictOptional(),
 	description: string.strictOptional(),
-	thumbnailUrl: CloudinaryUrl.strictOptional(),
+	thumbnailUrl: CloudinaryUrl.optional(),
 	title: PostTitle.strictOptional()
 });
