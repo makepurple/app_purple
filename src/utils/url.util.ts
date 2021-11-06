@@ -22,10 +22,18 @@ export class UrlUtils {
 		}
 	}
 
-	public static isImage(url: string): boolean {
-		if (!this.isValid(url)) return false;
+	public static isRelative(url: string): boolean {
+		return /^(\.\.\/|\.\/|\/)/.test(url) && this.isValid(`https://google.com${url}`);
+	}
 
-		const extension = new URL(url).pathname.split(".").at(-1);
+	public static isImage(url: string): boolean {
+		const isValid = this.isValid(url);
+		const isRelative = this.isRelative(url);
+
+		if (!isValid && !isRelative) return false;
+
+		const urlString = isValid ? url : `https://google.com${url}`;
+		const extension = new URL(urlString).pathname.split(".").at(-1);
 
 		if (!extension) return false;
 
