@@ -24,8 +24,12 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				<></>
 			</NextHead>
 			<GlobalStyles />
-			<ErrorBoundary>
-				{({ error }) => (
+			<ErrorBoundary
+				fallback={({ error }) => (
+					<NextError statusCode={500} title={error?.message ?? undefined} />
+				)}
+			>
+				{({ error, fallback }) => (
 					<NextAuthProvider session={pageProps.session}>
 						<UrqlProvider pageProps={pageProps}>
 							<NextProgress
@@ -36,11 +40,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 							/>
 							<LazyMotion>
 								<SiteWideLayout>
-									{error ? (
-										<NextError statusCode={500} title="Something went wrong" />
-									) : (
-										<Component {...pageProps} />
-									)}
+									{error ? fallback : <Component {...pageProps} />}
 								</SiteWideLayout>
 							</LazyMotion>
 							<Toaster position="top-center" />
