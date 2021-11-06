@@ -33,14 +33,14 @@ const Root = styled.input<{ error?: boolean }>`
 
 export type InputProps = InferComponentProps<typeof Root>;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 	const group = useContext(FormGroupContext);
 	const form = useContext(FormContext);
 
 	const disabled = props.disabled || form.disabled;
 	const error = props.error || group.error;
 
-	return <Root {...props} disabled={disabled} error={error} aria-disabled={disabled} />;
+	return <Root {...props} ref={ref} disabled={disabled} error={error} aria-disabled={disabled} />;
 });
 
 Input.displayName = "Input";

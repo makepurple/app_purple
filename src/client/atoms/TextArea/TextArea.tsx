@@ -1,6 +1,5 @@
 import { FormContext } from "@/client/atoms/Form/context";
 import { FormGroupContext } from "@/client/atoms/FormGroup/context";
-import { useUncontrolledProp } from "@/client/hooks";
 import { InferComponentProps } from "@/client/types";
 import composeRefs from "@seznam/compose-react-refs";
 import { forwardRef, useCallback, useContext, useEffect, useRef } from "react";
@@ -41,9 +40,6 @@ const Root = styled.textarea<{ error?: boolean }>`
 export type TextAreaProps = Omit<InferComponentProps<typeof Root>, "ref">;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
-	const { value: _value } = props;
-
-	const [value, setValue] = useUncontrolledProp(_value, "");
 	const { width } = useWindowSize();
 
 	const form = useContext(FormContext);
@@ -70,7 +66,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 
 	useEffect(() => {
 		setTextAreaHeight();
-	}, [setTextAreaHeight, value, width]);
+	}, [setTextAreaHeight, width]);
 
 	return (
 		<Root
@@ -81,9 +77,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 			onChange={(e) => {
 				props.onChange?.(e);
 
-				setValue(e.target.value);
+				setTextAreaHeight();
 			}}
-			value={value}
 			role="textbox"
 			aria-multiline
 		/>
