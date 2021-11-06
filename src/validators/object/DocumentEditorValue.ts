@@ -1,25 +1,25 @@
 import Schema, { array, boolean, string } from "computed-types";
 
-const SUPPORTED_LANGUAGES = [
-	"language-jsx",
-	"language-tsx",
-	"language-handlebars",
-	"language-scss",
-	"language-graphql",
-	"language-python",
-	"language-go",
-	"language-sql",
-	"language-yaml"
-] as const;
+export enum CodeBlockType {
+	JavaScript = "language-jsx",
+	TypeScript = "language-tsx",
+	HTML = "language-handlebars",
+	SCSS = "language-scss",
+	GraphQL = "language-graphql",
+	Python = "language-python",
+	Go = "language-go",
+	SQL = "language-sql",
+	YAML = "language-yaml"
+}
 
-const SUPPORTED_HEADINGS = [
-	"heading-one",
-	"heading-two",
-	"heading-three",
-	"heading-four",
-	"heading-five",
-	"heading-six"
-] as const;
+export enum HeadingType {
+	One = "heading-one",
+	Two = "heading-two",
+	Three = "heading-three",
+	Four = "heading-four",
+	Five = "heading-five",
+	Six = "heading-six"
+}
 
 const CustomText = Schema({
 	bold: boolean.strictOptional(),
@@ -45,16 +45,12 @@ const BulletedListElement = Schema({
 });
 
 const CodeBlockElement = Schema({
-	type: string.test((value) => {
-		return SUPPORTED_LANGUAGES.includes(value as any);
-	}),
+	type: Schema.enum(CodeBlockType),
 	children: array.of(CustomText)
 });
 
 const HeadingElement = Schema({
-	type: string.test((value) => {
-		return SUPPORTED_HEADINGS.includes(value as any);
-	}),
+	type: Schema.enum(HeadingType),
 	children: array.of(CustomText)
 });
 
@@ -91,4 +87,4 @@ const CustomElement = Schema.either(
 	ParagraphElement
 );
 
-export const PostContent = array.of(CustomElement);
+export const DocumentEditorValue = array.of(CustomElement);

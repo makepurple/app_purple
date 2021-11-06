@@ -1,2 +1,2 @@
-export * from "./PostContent";
+export * from "./DocumentEditorValue";
 export * from "./PostUpdateInput";

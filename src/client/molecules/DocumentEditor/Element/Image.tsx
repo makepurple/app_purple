@@ -11,7 +11,7 @@ import React, {
 	useCallback,
 	useImperativeHandle
 } from "react";
-import { Editor } from "slate";
+import { Descendant, Editor } from "slate";
 import { RenderElementProps, useFocused, useSelected, useSlateStatic } from "slate-react";
 import tw, { css, styled, theme } from "twin.macro";
 
@@ -82,7 +82,7 @@ export type ImageSlateType = "image";
 
 export type ImageElement = {
 	type: ImageSlateType;
-	children: [{ text: string }];
+	children: Descendant[];
 	url: string;
 };
 

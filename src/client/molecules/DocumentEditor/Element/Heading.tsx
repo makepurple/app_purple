@@ -2,6 +2,7 @@ import { Menu, MenuItem } from "@/client/atoms";
 import { useIsBlockActive, useOnClickOutside, useToggle, useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { HeadingIcon } from "@/client/svgs";
+import { HeadingType } from "@/validators";
 import React, { FC, useRef } from "react";
 import { MenuButton, useMenuState } from "reakit";
 import { Descendant } from "slate";
@@ -38,13 +39,7 @@ const HeadingSix = tw.span`
 	font-semibold
 `;
 
-export type HeadingSlateType =
-	| "heading-one"
-	| "heading-two"
-	| "heading-three"
-	| "heading-four"
-	| "heading-five"
-	| "heading-six";
+export type HeadingSlateType = HeadingType;
 
 export type HeadingElement = {
 	type: HeadingSlateType;
@@ -54,12 +49,12 @@ export type HeadingElement = {
 type HeadingOption = [name: string, slateType: HeadingSlateType];
 
 const supportedHeadings: readonly HeadingOption[] = [
-	["Heading One", "heading-one"],
-	["Heading Two", "heading-two"],
-	["Heading Three", "heading-three"],
-	["Heading Four", "heading-four"],
-	["Heading Five", "heading-five"],
-	["Heading Six", "heading-six"]
+	["Heading One", HeadingType.One],
+	["Heading Two", HeadingType.Two],
+	["Heading Three", HeadingType.Three],
+	["Heading Four", HeadingType.Four],
+	["Heading Five", HeadingType.Five],
+	["Heading Six", HeadingType.Six]
 ];
 
 export const HeadingToolbarButton: FC<Record<string, never>> = () => {

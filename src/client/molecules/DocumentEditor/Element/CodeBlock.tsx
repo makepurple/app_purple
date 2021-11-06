@@ -2,13 +2,14 @@ import { ContextMenu, ContextMenuItem, Menu, MenuItem } from "@/client/atoms";
 import { useContextMenu, useInsertBlock, useOnClickOutside, useToggle } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeSquareIcon } from "@/client/svgs";
+import { CodeBlockType } from "@/validators";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
 import { MenuButton, useMenuState } from "reakit";
-import { Editor, Element, Node as SlateNode, Transforms } from "slate";
+import { Descendant, Editor, Element, Node as SlateNode, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw, { styled } from "twin.macro";
 
@@ -47,11 +48,11 @@ const LineContent = tw.span`
 	table-cell
 `;
 
-export type CodeBlockSlateType = `language-${Language}`;
+export type CodeBlockSlateType = CodeBlockType;
 
 export type CodeBlockElement = {
 	type: CodeBlockSlateType;
-	children: [{ text: string }];
+	children: Descendant[];
 };
 
 export const withCodeBlock = (editor: Editor): Editor => {
@@ -67,15 +68,15 @@ export const withCodeBlock = (editor: Editor): Editor => {
 type CodeBlockLanguageOption = [name: string, slateType: CodeBlockSlateType];
 
 const supportedLanguages: readonly CodeBlockLanguageOption[] = [
-	["JavaScript", "language-jsx"],
-	["TypeScript", "language-tsx"],
-	["HTML", "language-handlebars"],
-	["CSS / SCSS", "language-scss"],
-	["GraphQL", "language-graphql"],
-	["Python", "language-python"],
-	["Go", "language-go"],
-	["SQL", "language-sql"],
-	["YAML", "language-yaml"]
+	["JavaScript", CodeBlockType.JavaScript],
+	["TypeScript", CodeBlockType.TypeScript],
+	["HTML", CodeBlockType.HTML],
+	["CSS / SCSS", CodeBlockType.SCSS],
+	["GraphQL", CodeBlockType.GraphQL],
+	["Python", CodeBlockType.Python],
+	["Go", CodeBlockType.Go],
+	["SQL", CodeBlockType.SQL],
+	["YAML", CodeBlockType.YAML]
 ];
 
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
