@@ -14,6 +14,7 @@ export * from "./FormHelperText";
 export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
 export * from "./GradientHeader";
+export * from "./HiddenInput";
 export * from "./Input";
 export * from "./LazyMotion";
 export * from "./MainContainer";
