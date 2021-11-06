@@ -1,12 +1,25 @@
-import { Form, FormButton, FormGroup, Input, MainContainer, Paper, TextArea } from "@/client/atoms";
+import {
+	Form,
+	FormButton,
+	FormGroup,
+	FormHelperText,
+	HiddenInput,
+	Input,
+	MainContainer,
+	Paper,
+	TextArea
+} from "@/client/atoms";
 import { useGetPostQuery } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
 import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[username]/draft";
+import { PostUpdateInput } from "@/validators";
+import { computedTypesResolver } from "@hookform/resolvers/computed-types";
+import type { Type } from "computed-types";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
-import type { Descendant } from "slate";
+import React, { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import tw from "twin.macro";
 
 const Root = tw(MainContainer)`
@@ -26,10 +39,6 @@ const Content = tw(Paper)`
 	flex-col
 	p-4
 	sm:p-6
-`;
-
-const StyledFormGroup = tw(FormGroup)`
-	mt-4
 `;
 
 const AddACoverImageButton = tw(PostImageInput)`
@@ -89,12 +98,33 @@ export const Page: NextPage<PageProps> = () => {
 
 	const post = data?.post;
 
-	const [value, setValue] = useState<Descendant[]>([
-		{
-			type: "paragraph",
-			children: [{ text: "" }]
-		}
-	]);
+	const {
+		control,
+		formState: { errors },
+		handleSubmit,
+		register,
+		reset,
+		setValue
+	} = useForm<Type<typeof PostUpdateInput>>({
+		defaultValues: {
+			thumbnailUrl: post?.thumbnailUrl ?? "",
+			title: post?.title ?? "",
+			description: post?.description ?? "",
+			content: [
+				{
+					type: "paragraph",
+					children: [{ text: "" }]
+				}
+			]
+		},
+		resolver: computedTypesResolver(PostUpdateInput)
+	});
+
+	const hasPost: boolean = !!post;
+
+	useEffect(() => {
+		hasPost && reset();
+	}, [hasPost, reset]);
 
 	/**
 	 * TODO
@@ -109,48 +139,72 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				<AddACoverImageButton
 					onUpload={(thumbnailUrl) => {
-						console.log(thumbnailUrl);
+						setValue("thumbnailUrl", thumbnailUrl);
 					}}
 					postId={post.id}
 				>
 					Add a cover image
 				</AddACoverImageButton>
-				<Form>
+				<Form
+					onSubmit={handleSubmit((values) => {
+						const { thumbnailUrl, title, description, content } = values;
+
+						console.log(thumbnailUrl);
+						console.log(title);
+						console.log(description);
+						console.log(content);
+					})}
+				>
+					<HiddenInput {...register("thumbnailUrl")} />
 					<FormGroup>
-						<Input name="title" placeholder="Title" type="text" aria-label="title" />
+						<Input
+							{...register("title")}
+							placeholder="Title"
+							type="text"
+							aria-label="title"
+						/>
+						<FormHelperText error={errors.title?.message} />
 					</FormGroup>
-					<StyledFormGroup>
+					<FormGroup tw="mt-4">
 						<TextArea
-							name="description"
+							{...register("description")}
 							placeholder="Description"
 							aria-label="description"
 						/>
-					</StyledFormGroup>
-					<StyledFormGroup>
-						<StyledDocumentEditor
-							value={value}
-							onChange={(newValue) => setValue(newValue)}
-						>
-							<DocumentEditor.Toolbar>
-								<DocumentEditor.Toolbar.CodeBlock />
-								<DocumentEditor.Toolbar.Heading />
-								<DocumentEditor.Toolbar.Bold />
-								<DocumentEditor.Toolbar.Italic />
-								<DocumentEditor.Toolbar.Underline />
-								<DocumentEditor.Toolbar.BulletedList />
-								<DocumentEditor.Toolbar.NumbedList />
-								<DocumentEditor.Toolbar.BlockQuote />
-								<DocumentEditor.Toolbar.Code />
-								<DocumentEditor.Toolbar.Link />
-								<DocumentEditorPostImageButton postId={post.id} />
-							</DocumentEditor.Toolbar>
-							<DocumentEditor.Editable
-								name="content"
-								placeholder="Tell the class things you've learned..."
-								aria-label="content"
-							/>
-						</StyledDocumentEditor>
-					</StyledFormGroup>
+						<FormHelperText error={errors.description?.message} />
+					</FormGroup>
+					<FormGroup tw="mt-4">
+						<Controller
+							control={control}
+							name="content"
+							render={({ field: { name, onChange, value } }) => (
+								<StyledDocumentEditor
+									value={value}
+									onChange={(newContent) => onChange(newContent)}
+								>
+									<DocumentEditor.Toolbar>
+										<DocumentEditor.Toolbar.CodeBlock />
+										<DocumentEditor.Toolbar.Heading />
+										<DocumentEditor.Toolbar.Bold />
+										<DocumentEditor.Toolbar.Italic />
+										<DocumentEditor.Toolbar.Underline />
+										<DocumentEditor.Toolbar.BulletedList />
+										<DocumentEditor.Toolbar.NumbedList />
+										<DocumentEditor.Toolbar.BlockQuote />
+										<DocumentEditor.Toolbar.Code />
+										<DocumentEditor.Toolbar.Link />
+										<DocumentEditorPostImageButton postId={post.id} />
+									</DocumentEditor.Toolbar>
+									<DocumentEditor.Editable
+										name={name}
+										placeholder="Tell the class things you've learned..."
+										aria-label="content"
+									/>
+								</StyledDocumentEditor>
+							)}
+						/>
+						<FormHelperText error={(errors.content as any)?.message} />
+					</FormGroup>
 					<FormActions>
 						<PublishButton type="submit">Publish</PublishButton>
 						<SaveButton type="button">Save</SaveButton>
