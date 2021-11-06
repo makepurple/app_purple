@@ -23,12 +23,11 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 			<NextHead>
 				<></>
 			</NextHead>
+			<GlobalStyles />
 			<ErrorBoundary>
 				{({ error }) => (
 					<NextAuthProvider session={pageProps.session}>
 						<UrqlProvider pageProps={pageProps}>
-							{/* Import styles (inlined) */}
-							<GlobalStyles />
 							<NextProgress
 								color={theme`colors.indigo.500`}
 								startPosition={0.3}
