@@ -1,6 +1,6 @@
 import { FormGroupContext } from "@/client/atoms/FormGroup/context";
 import { InferComponentProps } from "@/client/types";
-import React, { FC, forwardRef, ReactNode, useContext } from "react";
+import React, { forwardRef, ReactNode, useContext } from "react";
 import tw, { styled } from "twin.macro";
 
 const Root = styled.div<{ error?: boolean }>`
