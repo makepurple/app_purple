@@ -6,7 +6,7 @@ const Bar = tw.div`
 	absolute
 	left-0
 	block
-	height[9px]
+	h-1
 	w-full
 	bg-black
 	rounded-full
@@ -17,15 +17,15 @@ const Bar = tw.div`
 	duration-150
 	ease-in-out
 	first:top-0
-	not-first:not-last:top[18px]
-	last:top[36px]
+	not-first:not-last:top-2.5
+	last:top-5
 `;
 
 const Root = styled(ReakitMenuButton)`
 	${tw`
 		relative
-		width[60px]
-		height[45px]
+		w-6
+		h-6
 		transition
 		duration-300
 		ease-in-out
@@ -36,8 +36,8 @@ const Root = styled(ReakitMenuButton)`
 		&:first-child,
 		&:last-child {
 			${tw`
-				top[18px]
-				width[0%]
+				top-2.5
+				w-0
 				left-1/2
 			`}
 		}
