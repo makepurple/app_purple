@@ -11,15 +11,22 @@ import {
 } from "@/client/atoms";
 import { useGetPostQuery, useUpdatePostMutation } from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
-import { DocumentEditorPostImageButton, PostGuidelines, PostImageInput } from "@/client/organisms";
+import {
+	DocumentEditorPostImageButton,
+	PostGuidelines,
+	PostImageInput,
+	RemovePostThumbnailButton
+} from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[username]/draft";
 import { PostUpdateInput } from "@/validators";
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import type { Type } from "computed-types";
 import { NextPage } from "next";
+import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
 
 const Root = tw(MainContainer)`
@@ -41,9 +48,26 @@ const Content = tw(Paper)`
 	sm:p-6
 `;
 
-const AddACoverImageButton = tw(PostImageInput)`
+const AddCoverImageButton = tw(PostImageInput)`
 	w-52
 	mb-10
+`;
+
+const ThumbnailPreviewContainer = tw.div`
+	flex
+	flex-wrap
+	items-center
+	gap-4
+	mb-10
+`;
+
+const ThumbnailPreview = tw(Paper)`
+	relative
+	rounded-xl
+	h-36
+	w-full
+	sm:width[20rem]
+	overflow-hidden
 `;
 
 const StyledDocumentEditor = tw(DocumentEditor)`
@@ -106,7 +130,8 @@ export const Page: NextPage<PageProps> = () => {
 		handleSubmit,
 		register,
 		reset,
-		setValue
+		setValue,
+		watch
 	} = useForm<Type<typeof PostUpdateInput>>({
 		defaultValues: {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
@@ -121,6 +146,8 @@ export const Page: NextPage<PageProps> = () => {
 		},
 		resolver: computedTypesResolver(PostUpdateInput)
 	});
+
+	const thumbnailUrl = watch("thumbnailUrl");
 
 	useEffect(() => {
 		!!post &&
@@ -148,23 +175,37 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root>
 			<Content>
-				<AddACoverImageButton
-					onUpload={(thumbnailUrl) => {
-						setValue("thumbnailUrl", thumbnailUrl);
-					}}
-					postId={post.id}
-				>
-					Add a cover image
-				</AddACoverImageButton>
+				{!thumbnailUrl ? (
+					<AddCoverImageButton
+						disabled={fetching}
+						onUpload={(newThumbnailUrl) => {
+							setValue("thumbnailUrl", newThumbnailUrl);
+						}}
+						postId={post.id}
+					>
+						Add a cover image
+					</AddCoverImageButton>
+				) : (
+					<ThumbnailPreviewContainer>
+						<ThumbnailPreview>
+							<NextImage
+								alt="thumbnail preview"
+								src={thumbnailUrl}
+								layout="fill"
+								objectFit="cover"
+							/>
+						</ThumbnailPreview>
+						<RemovePostThumbnailButton disabled={fetching} postId={post.id}>
+							Remove image
+						</RemovePostThumbnailButton>
+					</ThumbnailPreviewContainer>
+				)}
 				<Form
 					disabled={fetching}
 					onSubmit={handleSubmit((values) => {
-						const { thumbnailUrl, title, description, content } = values;
+						console.log(values);
 
-						console.log(thumbnailUrl);
-						console.log(title);
-						console.log(description);
-						console.log(content);
+						toast.success("Your post was published! 🎉");
 					})}
 				>
 					<HiddenInput {...register("thumbnailUrl")} />

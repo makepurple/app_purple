@@ -9,6 +9,7 @@ const ACCEPTED_IMAGE_TYPES = ["image/gif", "image/jpeg", "image/jpg", "image/png
 export interface PostImageInputProps {
 	children?: ReactNode;
 	className?: string;
+	disabled?: boolean;
 	onUpload?: (imageUrl: string) => void;
 	postId: number;
 	style?: CSSProperties;
@@ -16,7 +17,15 @@ export interface PostImageInputProps {
 }
 
 export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>((props, ref) => {
-	const { children = "Upload an image", className, onUpload, postId, style, title } = props;
+	const {
+		children = "Upload an image",
+		className,
+		disabled,
+		onUpload,
+		postId,
+		style,
+		title
+	} = props;
 
 	const [{ fetching }, uploadPostImage] = useUploadPostImageMutation();
 
@@ -24,7 +33,7 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 		<Button
 			as={"label" as any}
 			className={className}
-			disabled={fetching}
+			disabled={disabled || fetching}
 			style={style}
 			title={title}
 		>

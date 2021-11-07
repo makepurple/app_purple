@@ -1,22 +1,21 @@
-import { UploadPostImage_mock } from "@/client/graphql/mocks";
-import { PostImageInput } from "@/client/organisms";
+import { Post_fragment_mock, RemovePostThumbnail_mock } from "@/client/graphql/mocks";
+import { RemovePostThumbnailButton, RemovePostThumbnailButtonProps } from "@/client/organisms";
 import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
 import React from "react";
 import { getOperationName } from "urql";
-import { PostImageInputProps } from ".";
 
 export default {
-	title: "organisms/PostImageInput",
-	component: PostImageInput
+	title: "organisms/RemovePostThumbnailButton",
+	component: RemovePostThumbnailButton
 } as Meta;
 
-const Template: Story<PostImageInputProps> = (args) => {
-	return <PostImageInput {...args} />;
+const Template: Story<RemovePostThumbnailButtonProps> = (args) => {
+	return <RemovePostThumbnailButton {...args} />;
 };
 Template.args = {
-	postId: 0
+	postId: Post_fragment_mock.id
 };
 Template.parameters = {};
 
@@ -26,10 +25,10 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op) => {
 		switch (getOperationName(op.query)) {
-			case "UploadPostImage":
+			case "RemovePostThumbnail":
 				await PromiseUtils.wait(ms("1s"));
 
-				return { data: UploadPostImage_mock };
+				return { data: RemovePostThumbnail_mock };
 			default:
 				return {};
 		}
