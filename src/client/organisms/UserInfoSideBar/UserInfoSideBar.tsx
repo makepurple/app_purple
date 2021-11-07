@@ -99,14 +99,14 @@ const Skills = tw(Tags)`
 export interface UserInfoSideBarProps {
 	className?: string;
 	style?: CSSProperties;
-	username: string;
+	userName: string;
 }
 
-export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, username }) => {
+export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, userName }) => {
 	const [{ data }] = useGetUserInfoSideBarQuery({
 		requestPolicy: "cache-first",
 		variables: {
-			name: username
+			name: userName
 		}
 	});
 
@@ -169,7 +169,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						<OpenbaseIcon height={16} width={16} />
 					</SocialLink>
 				</SocialLinks>
-				<StyledNewPostButton userName={username}>New Post</StyledNewPostButton>
+				<StyledNewPostButton userName={userName}>New Post</StyledNewPostButton>
 			</MainInfoContainer>
 			<Divider />
 			<TopLanguagesContainer>

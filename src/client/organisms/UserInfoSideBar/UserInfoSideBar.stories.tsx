@@ -16,7 +16,7 @@ export default {
 } as Meta;
 
 const Template: Story<UserInfoSideBarProps> = (args) => {
-	return <UserInfoSideBar {...args} username="leedavidcs" />;
+	return <UserInfoSideBar {...args} userName="leedavidcs" />;
 };
 Template.args = {};
 Template.parameters = {};

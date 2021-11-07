@@ -63,7 +63,7 @@ export const Page: NextPage<PageProps> = () => {
 		selectedId: "posts-tab"
 	});
 
-	const { username } = router?.query ?? {};
+	const userName = router?.query.userName as string;
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetPostsQuery, {
 		field: "posts",
@@ -73,7 +73,7 @@ export const Page: NextPage<PageProps> = () => {
 			where: {
 				author: {
 					name: {
-						equals: username as string
+						equals: userName
 					}
 				}
 			}
@@ -86,19 +86,19 @@ export const Page: NextPage<PageProps> = () => {
 		<Root>
 			<Content>
 				<TabList {...tabs} forwardedAs={Paper}>
-					<NextLink href={`/${username}`} passHref>
+					<NextLink href={`/${userName}`} passHref>
 						<Tab {...tabs} forwardedAs="a" id="posts-tab">
 							<NoteIcon height={20} tw="mr-2" width={20} />
 							Posts
 						</Tab>
 					</NextLink>
-					<NextLink href={`/${username}/repositories`} passHref>
+					<NextLink href={`/${userName}/repositories`} passHref>
 						<Tab {...tabs} forwardedAs="a" id="repositories-tab">
 							<RepoIcon height={20} tw="mr-2" width={20} />
 							Repositories
 						</Tab>
 					</NextLink>
-					<NextLink href={`/${username}/experience`} passHref>
+					<NextLink href={`/${userName}/experience`} passHref>
 						<Tab {...tabs} forwardedAs="a" id="experience-tab">
 							<HexagonIcon height={20} tw="mr-2" width={20} />
 							Experience
@@ -122,7 +122,7 @@ export const Page: NextPage<PageProps> = () => {
 					)}
 				</Posts>
 			</Content>
-			<SideBar username={username as string} />
+			<SideBar userName={userName} />
 		</Root>
 	);
 };

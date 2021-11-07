@@ -4,6 +4,5 @@ mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
 		content
 		description
 		thumbnailUrl
-		title
 	}
 }

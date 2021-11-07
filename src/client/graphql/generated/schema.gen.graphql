@@ -62,7 +62,7 @@ type Mutation {
   # User can delete their own post.
   deletePost(where: PostWhereUniqueInput!): Post!
   ok: Boolean!
-  publishPost(where: PostWhereUniqueInput!): Post!
+  publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): Post!
   removePostThumbnail(where: PostWhereUniqueInput!): Post
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
@@ -130,6 +130,13 @@ type PostImage {
   post: Post!
   postId: Int!
   url: String!
+}
+
+input PostPublishInput {
+  content: Json
+  description: String
+  thumbnailUrl: String
+  title: String
 }
 
 input PostUpdateInput {

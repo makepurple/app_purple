@@ -6,7 +6,7 @@ import {
 } from "@/client/graphql/mocks";
 import { SiteWideLayout } from "@/client/organisms";
 import { PageProps } from "@/client/page-props/[username]";
-import Page from "@/pages/[username]";
+import Page from "@/pages/[userName]";
 import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
@@ -33,7 +33,7 @@ Template.parameters = {
 	layout: "fullscreen",
 	nextRouter: {
 		query: {
-			username: "leedavidcs"
+			userName: "leedavidcs"
 		}
 	}
 };

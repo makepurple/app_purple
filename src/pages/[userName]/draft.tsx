@@ -9,7 +9,11 @@ import {
 	Paper,
 	TextArea
 } from "@/client/atoms";
-import { useGetPostQuery, useUpdatePostMutation } from "@/client/graphql";
+import {
+	useGetPostQuery,
+	usePublishPostMutation,
+	useUpdatePostDraftMutation
+} from "@/client/graphql";
 import { DocumentEditor } from "@/client/molecules";
 import {
 	DocumentEditorPostImageButton,
@@ -18,7 +22,7 @@ import {
 	RemovePostThumbnailButton
 } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[username]/draft";
-import { PostUpdateInput } from "@/validators";
+import { PostDraftUpdateInput } from "@/validators";
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import type { Type } from "computed-types";
 import { NextPage } from "next";
@@ -106,21 +110,22 @@ export const getServerSideProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
-	const authorName = router?.query.username;
+	const authorName = router?.query.userName as string;
 
 	const [{ data }] = useGetPostQuery({
 		requestPolicy: "cache-first",
 		variables: {
 			where: {
 				authorName_urlSlug: {
-					authorName: authorName as string,
+					authorName,
 					urlSlug: "draft"
 				}
 			}
 		}
 	});
 
-	const [{ fetching }, updatePost] = useUpdatePostMutation();
+	const [{ fetching: saving }, updatePostDraft] = useUpdatePostDraftMutation();
+	const [{ fetching: publishing }, publishPost] = usePublishPostMutation();
 
 	const post = data?.post;
 
@@ -132,7 +137,7 @@ export const Page: NextPage<PageProps> = () => {
 		reset,
 		setValue,
 		watch
-	} = useForm<Type<typeof PostUpdateInput>>({
+	} = useForm<Type<typeof PostDraftUpdateInput>>({
 		defaultValues: {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
 			title: post?.title ?? "",
@@ -144,7 +149,7 @@ export const Page: NextPage<PageProps> = () => {
 				}
 			]
 		},
-		resolver: computedTypesResolver(PostUpdateInput)
+		resolver: computedTypesResolver(PostDraftUpdateInput)
 	});
 
 	const thumbnailUrl = watch("thumbnailUrl");
@@ -164,6 +169,11 @@ export const Page: NextPage<PageProps> = () => {
 			});
 	}, [post, reset]);
 
+	useEffect(() => {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		router.prefetch("/[username]/[postTitle]");
+	}, [router]);
+
 	/**
 	 * TODO
 	 * @description Handle case where no post is found.
@@ -177,7 +187,7 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				{!thumbnailUrl ? (
 					<AddCoverImageButton
-						disabled={fetching}
+						disabled={publishing || saving}
 						onUpload={(newThumbnailUrl) => {
 							setValue("thumbnailUrl", newThumbnailUrl);
 						}}
@@ -195,15 +205,31 @@ export const Page: NextPage<PageProps> = () => {
 								objectFit="cover"
 							/>
 						</ThumbnailPreview>
-						<RemovePostThumbnailButton disabled={fetching} postId={post.id}>
+						<RemovePostThumbnailButton disabled={publishing || saving} postId={post.id}>
 							Remove image
 						</RemovePostThumbnailButton>
 					</ThumbnailPreviewContainer>
 				)}
 				<Form
-					disabled={fetching}
-					onSubmit={handleSubmit((values) => {
-						console.log(values);
+					disabled={publishing || saving}
+					onSubmit={handleSubmit(async (values) => {
+						const publishedPost = await publishPost({
+							where: { id: post.id },
+							data: values
+						})
+							.then((result) => result.data?.post ?? null)
+							.catch(() => null);
+
+						if (!publishedPost) {
+							toast.error("Post could not be published");
+
+							return;
+						}
+
+						await router.push(
+							"/[username]/[postTitle]",
+							`/${publishedPost.authorName}/${publishedPost.urlSlug}`
+						);
 
 						toast.success("Your post was published! 🎉");
 					})}
@@ -260,7 +286,23 @@ export const Page: NextPage<PageProps> = () => {
 					</FormGroup>
 					<FormActions>
 						<PublishButton type="submit">Publish</PublishButton>
-						<SaveButton type="button">Save</SaveButton>
+						<SaveButton
+							onClick={handleSubmit(async (values) => {
+								const didSucceed = await updatePostDraft({
+									where: { id: post.id },
+									data: values
+								})
+									.then((result) => !!result.data?.post)
+									.catch(() => false);
+
+								didSucceed
+									? toast.success("Your draft was saved! 🎉")
+									: toast.error("Draft could not be saved");
+							})}
+							type="button"
+						>
+							Save
+						</SaveButton>
 					</FormActions>
 				</Form>
 			</Content>

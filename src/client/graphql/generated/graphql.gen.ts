@@ -108,6 +108,7 @@ export type MutationDeletePostArgs = {
 
 /** Root mutation type */
 export type MutationPublishPostArgs = {
+  data?: Maybe<PostPublishInput>;
   where: PostWhereUniqueInput;
 };
 
@@ -224,6 +225,13 @@ export type PostImage = {
   readonly post: Post;
   readonly postId: Scalars['Int'];
   readonly url: Scalars['String'];
+};
+
+export type PostPublishInput = {
+  readonly content?: Maybe<Scalars['Json']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly thumbnailUrl?: Maybe<Scalars['String']>;
+  readonly title?: Maybe<Scalars['String']>;
 };
 
 export type PostUpdateInput = {
@@ -379,6 +387,14 @@ export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type CreatePostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly urlSlug: string } };
 
+export type PublishPostMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+  data: PostPublishInput;
+}>;
+
+
+export type PublishPostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string } };
+
 export type RemovePostThumbnailMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
@@ -392,7 +408,15 @@ export type UpdatePostMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } | null | undefined };
+export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+
+export type UpdatePostDraftMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+  data: PostDraftUpdateInput;
+}>;
+
+
+export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } | null | undefined };
 
 export type UploadPostImageMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -519,6 +543,24 @@ export const CreatePostDocument = /*#__PURE__*/ gql`
 export function useCreatePostMutation() {
   return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
 };
+export const PublishPostDocument = /*#__PURE__*/ gql`
+    mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {
+  post: publishPost(where: $where, data: $data) {
+    id
+    authorName
+    content
+    description
+    publishedAt
+    thumbnailUrl
+    title
+    urlSlug
+  }
+}
+    `;
+
+export function usePublishPostMutation() {
+  return Urql.useMutation<PublishPostMutation, PublishPostMutationVariables>(PublishPostDocument);
+};
 export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
     mutation RemovePostThumbnail($where: PostWhereUniqueInput!) {
   post: removePostThumbnail(where: $where) {
@@ -538,13 +580,27 @@ export const UpdatePostDocument = /*#__PURE__*/ gql`
     content
     description
     thumbnailUrl
-    title
   }
 }
     `;
 
 export function useUpdatePostMutation() {
   return Urql.useMutation<UpdatePostMutation, UpdatePostMutationVariables>(UpdatePostDocument);
+};
+export const UpdatePostDraftDocument = /*#__PURE__*/ gql`
+    mutation UpdatePostDraft($where: PostWhereUniqueInput!, $data: PostDraftUpdateInput!) {
+  post: updatePostDraft(where: $where, data: $data) {
+    id
+    content
+    description
+    thumbnailUrl
+    title
+  }
+}
+    `;
+
+export function useUpdatePostDraftMutation() {
+  return Urql.useMutation<UpdatePostDraftMutation, UpdatePostDraftMutationVariables>(UpdatePostDraftDocument);
 };
 export const UploadPostImageDocument = /*#__PURE__*/ gql`
     mutation UploadPostImage($where: PostWhereUniqueInput!, $data: UploadPostImageInput!) {
