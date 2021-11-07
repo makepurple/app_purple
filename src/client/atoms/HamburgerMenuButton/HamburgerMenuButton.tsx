@@ -16,9 +16,9 @@ const Bar = tw.div`
 	transition-all
 	duration-150
 	ease-in-out
-	first:top-0
+	first:top-0.5
 	not-first:not-last:top-2.5
-	last:top-5
+	last:top[1.125rem]
 `;
 
 const Root = styled(ReakitMenuButton)`
