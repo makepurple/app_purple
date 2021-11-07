@@ -46,6 +46,7 @@ export const publishPost = mutationField("publishPost", {
 
 		return await prisma.post.update({
 			data: {
+				...dataInput,
 				publishedAt: new Date(),
 				urlSlug
 			},
