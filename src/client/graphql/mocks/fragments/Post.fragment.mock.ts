@@ -14,7 +14,7 @@ export const Post_fragment_mock: Post = {
 	description: faker.lorem.paragraphs(2),
 	id: 0,
 	publishedAt: faker.date.past(),
-	thumbnailUrl: "/pngs/test-thumbnail.png",
+	thumbnailUrl: "/static/pngs/test-thumbnail.png",
 	title: "Not a Real Blog Post Title",
 	upvoteCount: faker.datatype.number({ max: 2_000 }),
 	urlSlug: "not-a-real-blog-post-title",

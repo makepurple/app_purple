@@ -8,8 +8,8 @@ const dirname: string = process.env.PROJECT_DIRNAME
 	? path.join(process.env.PROJECT_DIRNAME)
 	: __dirname;
 
-const sourcePath: string = path.resolve(dirname, "../public/svgs");
-const componentPath: string = path.resolve(dirname, "../src/client/svgs");
+const sourcePath: string = path.resolve(dirname, "../public/static/svgs");
+const componentPath: string = path.resolve(dirname, "../src/client/static/svgs");
 
 // Template to generate named exports instaed of default ones
 const componentTemplate = (

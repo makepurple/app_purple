@@ -5,6 +5,6 @@ export const UploadPostImage_mock: UploadPostImageMutation = {
 	postImage: {
 		__typename: "PostImage",
 		id: "0",
-		url: "/pngs/test-thumbnail.png"
+		url: "/static/pngs/test-thumbnail.png"
 	}
 };

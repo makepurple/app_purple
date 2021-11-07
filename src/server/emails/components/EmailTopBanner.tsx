@@ -15,7 +15,7 @@ export const EmailTopBanner: FC<EmailTopBannerProps> = ({ ...props }) => {
 	return (
 		<Root {...props}>
 			<EmailColumn>
-				<EmailImage src="/pngs/email-top-clip.png" width={600} />
+				<EmailImage src="/static/pngs/email-top-clip.png" width={600} />
 			</EmailColumn>
 		</Root>
 	);
