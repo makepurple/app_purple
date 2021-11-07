@@ -86,6 +86,7 @@ export type Mutation = {
   readonly removePostThumbnail?: Maybe<Post>;
   readonly updateDesiredSkills: User;
   readonly updatePost?: Maybe<Post>;
+  readonly updatePostDraft?: Maybe<Post>;
   readonly updateSkills: User;
   readonly uploadPostImage: PostImage;
   readonly upvotePost: Post;
@@ -126,6 +127,13 @@ export type MutationUpdateDesiredSkillsArgs = {
 /** Root mutation type */
 export type MutationUpdatePostArgs = {
   data: PostUpdateInput;
+  where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdatePostDraftArgs = {
+  data: PostDraftUpdateInput;
   where: PostWhereUniqueInput;
 };
 
@@ -196,6 +204,13 @@ export type PostConnection = {
   readonly totalCount: Scalars['Int'];
 };
 
+export type PostDraftUpdateInput = {
+  readonly content?: Maybe<Scalars['Json']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly thumbnailUrl?: Maybe<Scalars['String']>;
+  readonly title?: Maybe<Scalars['String']>;
+};
+
 /** Relay-style edge for Post types. */
 export type PostEdge = {
   readonly __typename: 'PostEdge';
@@ -215,7 +230,6 @@ export type PostUpdateInput = {
   readonly content?: Maybe<Scalars['Json']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly thumbnailUrl?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
 };
 
 export type PostWhereInput = {

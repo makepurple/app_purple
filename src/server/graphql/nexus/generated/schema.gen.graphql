@@ -74,10 +74,11 @@ type Mutation {
   """User can delete their own post."""
   deletePost(where: PostWhereUniqueInput!): Post!
   ok: Boolean!
-  publishPost(where: PostWhereUniqueInput!): Post!
+  publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): Post!
   removePostThumbnail(where: PostWhereUniqueInput!): Post
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
+  updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): Post
   updateSkills(input: UpdateSkillsInput!): User!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
   upvotePost(where: PostWhereUniqueInput!): Post!
@@ -123,6 +124,13 @@ type PostConnection {
   totalCount: Int!
 }
 
+input PostDraftUpdateInput {
+  content: Json
+  description: String
+  thumbnailUrl: String
+  title: String
+}
+
 """Relay-style edge for Post types."""
 type PostEdge {
   cursor: String!
@@ -136,11 +144,17 @@ type PostImage {
   url: String!
 }
 
-input PostUpdateInput {
+input PostPublishInput {
   content: Json
   description: String
   thumbnailUrl: String
   title: String
+}
+
+input PostUpdateInput {
+  content: Json
+  description: String
+  thumbnailUrl: String
 }
 
 input PostWhereInput {

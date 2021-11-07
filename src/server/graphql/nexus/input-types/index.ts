@@ -1,4 +1,6 @@
 export * from "./PostAuthorNameUrlSlugCompoundUniqueInput";
+export * from "./PostDraftUpdateInput";
+export * from "./PostPublishInput";
 export * from "./PostUpdateInput";
 export * from "./PostWhereInput";
 export * from "./PostWhereUniqueInput";

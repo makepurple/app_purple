@@ -1,10 +1,11 @@
 import { inputObjectType } from "nexus";
 
-export const PostUpdateInput = inputObjectType({
-	name: "PostUpdateInput",
+export const PostPublishInput = inputObjectType({
+	name: "PostPublishInput",
 	definition: (t) => {
 		t.json("content");
 		t.string("description");
+		t.string("title");
 		t.string("thumbnailUrl");
 	}
 });

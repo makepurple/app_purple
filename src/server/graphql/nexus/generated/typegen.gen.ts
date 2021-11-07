@@ -86,11 +86,22 @@ export interface NexusGenInputs {
     authorName: string; // String!
     urlSlug: string; // String!
   }
-  PostUpdateInput: { // input type
+  PostDraftUpdateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     description?: string | null; // String
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
+  }
+  PostPublishInput: { // input type
+    content?: NexusGenScalars['Json'] | null; // Json
+    description?: string | null; // String
+    thumbnailUrl?: string | null; // String
+    title?: string | null; // String
+  }
+  PostUpdateInput: { // input type
+    content?: NexusGenScalars['Json'] | null; // Json
+    description?: string | null; // String
+    thumbnailUrl?: string | null; // String
   }
   PostWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
@@ -271,6 +282,7 @@ export interface NexusGenFieldTypes {
     removePostThumbnail: NexusGenRootTypes['Post'] | null; // Post
     updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updatePost: NexusGenRootTypes['Post'] | null; // Post
+    updatePostDraft: NexusGenRootTypes['Post'] | null; // Post
     updateSkills: NexusGenRootTypes['User']; // User!
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     upvotePost: NexusGenRootTypes['Post']; // Post!
@@ -395,6 +407,7 @@ export interface NexusGenFieldTypeNames {
     removePostThumbnail: 'Post'
     updateDesiredSkills: 'User'
     updatePost: 'Post'
+    updatePostDraft: 'Post'
     updateSkills: 'User'
     uploadPostImage: 'PostImage'
     upvotePost: 'Post'
@@ -496,6 +509,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     publishPost: { // args
+      data?: NexusGenInputs['PostPublishInput'] | null; // PostPublishInput
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     removePostThumbnail: { // args
@@ -506,6 +520,10 @@ export interface NexusGenArgTypes {
     }
     updatePost: { // args
       data: NexusGenInputs['PostUpdateInput']; // PostUpdateInput!
+      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    updatePostDraft: { // args
+      data: NexusGenInputs['PostDraftUpdateInput']; // PostDraftUpdateInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     updateSkills: { // args

@@ -66,6 +66,7 @@ type Mutation {
   removePostThumbnail(where: PostWhereUniqueInput!): Post
   updateDesiredSkills(input: UpdateDesiredSkillsInput!): User!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
+  updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): Post
   updateSkills(input: UpdateSkillsInput!): User!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
   upvotePost(where: PostWhereUniqueInput!): Post!
@@ -111,6 +112,13 @@ type PostConnection {
   totalCount: Int!
 }
 
+input PostDraftUpdateInput {
+  content: Json
+  description: String
+  thumbnailUrl: String
+  title: String
+}
+
 # Relay-style edge for Post types.
 type PostEdge {
   cursor: String!
@@ -128,7 +136,6 @@ input PostUpdateInput {
   content: Json
   description: String
   thumbnailUrl: String
-  title: String
 }
 
 input PostWhereInput {
