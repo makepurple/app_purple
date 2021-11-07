@@ -1,5 +1,5 @@
+import { PrismaUtils } from "@/server/utils";
 import { PostTitle } from "@/validators";
-import { Prisma } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const publishPost = mutationField("publishPost", {
@@ -28,19 +28,18 @@ export const publishPost = mutationField("publishPost", {
 		return true;
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const post = await prisma.post.findUnique({
-			where: {
-				id: args.where.id ?? undefined
-			}
-		});
+		const where = PrismaUtils.nonNull(args.where);
+
+		const post = await prisma.post.findUnique({ where });
 
 		if (!post?.title) {
 			throw new Error("Posts must have a title to be published!");
 		}
 
-		PostTitle.validator(post.title);
+		const postTitle = PostTitle.validator(post.title);
 
-		const urlSlug: string = post.title
+		const urlSlug: string = postTitle
+			.replace(/[^a-z0-9]/gim, "")
 			.split(/\s+/g)
 			.map((word) => word.toLowerCase())
 			.join("-")
@@ -51,12 +50,8 @@ export const publishPost = mutationField("publishPost", {
 				id: args.where.id ?? undefined
 			},
 			data: {
-				content: post.content as Prisma.JsonArray,
-				description: (post.description ?? "").trim(),
 				publishedAt: new Date(),
-				title: post.title.trim(),
-				thumbnailUrl: post.thumbnailUrl,
-				urlSlug: encodeURIComponent(urlSlug)
+				urlSlug
 			}
 		});
 	}
