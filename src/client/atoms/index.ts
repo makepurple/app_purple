@@ -21,6 +21,7 @@ export * from "./Input";
 export * from "./LazyMotion";
 export * from "./MainContainer";
 export * from "./Menu";
+export * from "./MobileAppBarDrawer";
 export * from "./OrderedList";
 export * from "./PageContainer";
 export * from "./Paper";
