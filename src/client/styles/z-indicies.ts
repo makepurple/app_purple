@@ -1,4 +1,4 @@
-export const ZIndicies = ["default", "page-drawer", "app-bar", "menu"] as const;
+export const ZIndicies = ["default", "app-bar", "backdrop", "page-drawer", "menu"] as const;
 
 export type ZIndexType = typeof ZIndicies[number];
 

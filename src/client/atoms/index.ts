@@ -1,6 +1,7 @@
 export * from "./Anchor";
 export * from "./AppBar";
 export * from "./Avatar";
+export * from "./Backdrop";
 export * from "./Brand";
 export * from "./Button";
 export * from "./ContextMenu";

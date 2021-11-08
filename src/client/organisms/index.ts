@@ -2,6 +2,7 @@ export * from "./DocumentEditorPostImageButton";
 export * from "./LoadingPostCard";
 export * from "./LoginButton";
 export * from "./LogoutButton";
+export * from "./MobileAppDrawer";
 export * from "./NewPostButton";
 export * from "./PostCard";
 export * from "./PostGuidelines";
