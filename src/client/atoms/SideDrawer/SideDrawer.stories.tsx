@@ -1,17 +1,22 @@
-import { HamburgerMenuButton } from "@/client/atoms/HamburgerMenuButton";
+import { HamburgerMenuButton, SideDrawer } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { useDialogState } from "reakit";
 
 export default {
-	title: "atoms/HamburgerMenuButton",
-	component: HamburgerMenuButton
+	title: "atoms/SideDrawer",
+	component: SideDrawer
 } as Meta;
 
 const Template: Story = (args) => {
-	const dialog = useDialogState();
+	const dialog = useDialogState({ animated: true });
 
-	return <HamburgerMenuButton {...dialog} {...args} />;
+	return (
+		<>
+			<HamburgerMenuButton {...dialog} />
+			<SideDrawer {...dialog} {...args} />
+		</>
+	);
 };
 Template.args = {};
 

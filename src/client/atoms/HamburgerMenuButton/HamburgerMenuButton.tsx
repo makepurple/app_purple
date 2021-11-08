@@ -1,5 +1,8 @@
 import React, { FC } from "react";
-import { MenuButton as ReakitMenuButton, MenuButtonProps as ReakitMenuButtonProps } from "reakit";
+import {
+	DialogDisclosure as ReakitDialogDisclosure,
+	DialogDisclosureProps as ReakitDialogDisclosureProps
+} from "reakit";
 import tw, { styled } from "twin.macro";
 
 const Bar = styled.span`
@@ -22,7 +25,7 @@ const Bar = styled.span`
 	`}
 `;
 
-const Root = styled(ReakitMenuButton)`
+const Root = styled(ReakitDialogDisclosure)`
 	${tw`
 		flex
 		items-center
@@ -71,7 +74,7 @@ const Bars = tw.div`
 	cursor-pointer
 `;
 
-export type HamburgerMenuButtonProps = ReakitMenuButtonProps;
+export type HamburgerMenuButtonProps = ReakitDialogDisclosureProps;
 
 export const HamburgerMenuButton: FC<HamburgerMenuButtonProps> = (props) => {
 	return (
