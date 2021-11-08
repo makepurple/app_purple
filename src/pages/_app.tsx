@@ -10,6 +10,7 @@ import NextError from "next/error";
 import NextHead from "next/head";
 import React from "react";
 import { Toaster } from "react-hot-toast";
+import { Provider as ReakitProvider } from "reakit";
 import { theme } from "twin.macro";
 
 const NextProgress = dynamic(() => import("nextjs-progressbar"), { ssr: false });
@@ -39,9 +40,11 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 								options={{ showSpinner: false }}
 							/>
 							<LazyMotion>
-								<SiteWideLayout>
-									{error ? fallback : <Component {...pageProps} />}
-								</SiteWideLayout>
+								<ReakitProvider>
+									<SiteWideLayout>
+										{error ? fallback : <Component {...pageProps} />}
+									</SiteWideLayout>
+								</ReakitProvider>
 							</LazyMotion>
 							<Toaster position="top-center" />
 						</UrqlProvider>
