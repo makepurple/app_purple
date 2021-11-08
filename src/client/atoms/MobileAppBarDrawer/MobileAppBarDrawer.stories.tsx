@@ -1,12 +1,7 @@
-import { AppBar, HamburgerMenuButton, MobileAppBarDrawer } from "@/client/atoms";
+import { AppBar, HamburgerMenuButton, MenuItem, MobileAppBarDrawer } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
-import faker from "faker";
 import React from "react";
 import { useMenuState } from "reakit";
-
-faker.seed(1);
-
-const paragraphs = faker.lorem.paragraphs(10);
 
 export default {
 	title: "atoms/MobileAppBarDrawer",
@@ -22,7 +17,11 @@ const Template: Story = (args) => {
 				<HamburgerMenuButton {...menu} />
 			</AppBar>
 			<MobileAppBarDrawer {...menu} {...args}>
-				{paragraphs}
+				<MenuItem {...menu}>Red</MenuItem>
+				<MenuItem {...menu}>Blue</MenuItem>
+				<MenuItem {...menu} selected>
+					Purple
+				</MenuItem>
 			</MobileAppBarDrawer>
 		</>
 	);

@@ -2,37 +2,40 @@ import React, { FC } from "react";
 import { MenuButton as ReakitMenuButton, MenuButtonProps as ReakitMenuButtonProps } from "reakit";
 import tw, { styled } from "twin.macro";
 
-const Bar = tw.div`
-	absolute
-	left-0
-	block
-	h-1
-	w-full
-	bg-black
-	rounded-full
-	opacity-100
-	transform
-	rotate-0
-	transition-all
-	duration-150
-	ease-in-out
-	first:top-0.5
-	not-first:not-last:top-2.5
-	last:top[1.125rem]
+const Bar = styled.span`
+	${tw`
+		absolute
+		left-0
+		h-1
+		w-full
+		bg-black
+		rounded-full
+		opacity-100
+		transform
+		rotate-0
+		transition-all
+		duration-150
+		ease-in-out
+		first:top-0.5
+		not-first:not-last:top-2.5
+		last:top[1.125rem]
+	`}
 `;
 
 const Root = styled(ReakitMenuButton)`
 	${tw`
-		relative
-		w-6
-		h-6
-		transition
-		duration-300
-		ease-in-out
-		cursor-pointer
+		flex
+		items-center
+		justify-center
+		h-9
+		w-9
+		border
+		border-solid
+		border-gray-200
+		rounded-md
 	`}
 
-	&[aria-expanded="true"] > div {
+	&[aria-expanded="true"] ${Bar} {
 		&:first-child,
 		&:last-child {
 			${tw`
@@ -58,15 +61,27 @@ const Root = styled(ReakitMenuButton)`
 	}
 `;
 
+const Bars = tw.div`
+	relative
+	w-6
+	h-6
+	transition
+	duration-300
+	ease-in-out
+	cursor-pointer
+`;
+
 export type HamburgerMenuButtonProps = ReakitMenuButtonProps;
 
 export const HamburgerMenuButton: FC<HamburgerMenuButtonProps> = (props) => {
 	return (
 		<Root {...props}>
-			<Bar />
-			<Bar />
-			<Bar />
-			<Bar />
+			<Bars>
+				<Bar />
+				<Bar />
+				<Bar />
+				<Bar />
+			</Bars>
 		</Root>
 	);
 };

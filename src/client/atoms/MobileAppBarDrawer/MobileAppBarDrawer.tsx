@@ -6,7 +6,8 @@ export type MobileAppBarDrawerProps = ReakitMenuProps;
 
 export const MobileAppBarDrawer = styled(ReakitMenu)`
 	${tw`
-		pt-16
+		pt-20
+		px-4
 		flex
 		flex-col
 		items-stretch
