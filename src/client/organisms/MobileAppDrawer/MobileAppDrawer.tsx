@@ -1,5 +1,6 @@
 import { Backdrop, Brand, HamburgerMenuButton, Paper, SideDrawer } from "@/client/atoms";
 import { LoginButton } from "@/client/organisms/LoginButton";
+import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import type { DialogStateReturn } from "reakit";
 import tw from "twin.macro";
@@ -72,13 +73,17 @@ export const MobileAppDrawer: FC<MobileAppDrawerProps> = (props) => {
 			<MobileDrawer {...dialogProps} className={className} style={style}>
 				<TopContent>
 					<CloseButton baseId={dialogProps.baseId} toggle={dialogProps.toggle} visible />
-					<Brand />
+					<NextLink href="/" passHref>
+						<Brand />
+					</NextLink>
 				</TopContent>
 				<Content>
 					<AuthContainer>
 						<AuthInfo>
-							<AuthBrand /> is a community where developers collaborate, share and
-							mutually grow.
+							<NextLink href="/" passHref>
+								<AuthBrand />
+							</NextLink>{" "}
+							is a community where developers collaborate, share and mutually grow.
 						</AuthInfo>
 						<LoginButton label="Sign Up" tw="mt-4" />
 						<StyledLoginButton icon={null} label="Login" tw="mt-2" />
