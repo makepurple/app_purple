@@ -3322,10 +3322,10 @@
     lodash "~4.17.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/schema-ast@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/schema-ast/-/schema-ast-2.3.0.tgz#cabf92cdfb9c686c3c9776118dbd5263d4c940ed"
-  integrity sha512-MMZPmim0ZliST3t1/ABrW69DDjYV6QZY9mKLybuEPkBmbbLiwyBy6Ak4AHS+SYI1PpaNU7Okd32dDwvboicKFw==
+"@graphql-codegen/schema-ast@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/schema-ast/-/schema-ast-2.4.0.tgz#a41fdf2bacf88ec8318c78fdf03f19e620e5534a"
+  integrity sha512-xsLd4mF0H3mPp7Z2PHZ2Sv1KKIb/FOORqhDc9XHCnHJJ/h9nmaleKSTxTGzSUfIAQ1aCNzVilcaUwlenK+MMBQ==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^2.3.0"
     "@graphql-tools/utils" "^8.1.1"
@@ -3342,10 +3342,10 @@
     auto-bind "~4.0.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-urql@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-urql/-/typescript-urql-3.3.0.tgz#2582d5608f30101520d43dedb3e60117ecf573ce"
-  integrity sha512-oLQgyOhBNax4skpEj9I9ldKWaSxr9r4ld2nZIzPrGSIrdfNPByUPOol5B/CmlE+Nf4545WiB48Ndu+JnaSQ+VQ==
+"@graphql-codegen/typescript-urql@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-urql/-/typescript-urql-3.4.0.tgz#8e2b4997fb36c51109351a4c8051fb56da095af7"
+  integrity sha512-TPyEHleOJyPOTPI1VJXu7eDn/hyMcU2MuAZiNJQ4GTAQb4qIaCE6sGPfcQfxqqxYnkm8Pb1h8Q4s/6rQjT5Tyg==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^2.3.0"
     "@graphql-codegen/visitor-plugin-common" "2.5.0"
@@ -3359,6 +3359,17 @@
   integrity sha512-bsq+y0cyrltVfpK5/JVz90lMBFby/Q+4oxiFGpjVdAjv/dbS9Bu476tQlN0Es76fc88Ce25wD40JXKfgWQDqKw==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^2.3.0"
+    "@graphql-codegen/visitor-plugin-common" "2.5.0"
+    auto-bind "~4.0.0"
+    tslib "~2.3.0"
+
+"@graphql-codegen/typescript@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.3.1.tgz#ad557cc28f20aa8a9ad9f153c3c8ac8b6e09075a"
+  integrity sha512-5wfuJhXnDVdufznLZG2/YlPMy5qGVYAEodBACVT8Dfgnt7T8eQOdaTfEPh04hqf/WR6DDoiLrJDcdyqWUO305w==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^2.3.0"
+    "@graphql-codegen/schema-ast" "^2.4.0"
     "@graphql-codegen/visitor-plugin-common" "2.5.0"
     auto-bind "~4.0.0"
     tslib "~2.3.0"
@@ -3432,14 +3443,14 @@
     tslib "~2.3.0"
     value-or-promise "1.0.10"
 
-"@graphql-tools/delegate@^8.4.1":
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/@graphql-tools/delegate/-/delegate-8.4.1.tgz#f113e6a4d39c90ad955fac09b4f0ad07fbd96551"
-  integrity sha512-Oz1DYXmAKPKgHNsFnflg+CXKRVoPJI3AGRkcaRR0kA/4VWlMiKonL2O0BZdoRd0IbtZimBeQCrDEb5TikjIv0g==
+"@graphql-tools/delegate@^8.4.2":
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/delegate/-/delegate-8.4.2.tgz#a61d45719855720304e3656800342cfa17d82558"
+  integrity sha512-CjggOhiL4WtyG2I3kux+1/p8lQxSFHBj0gwa0NxnQ6Vsnpw7Ig5VP1ovPnitFuBv2k4QdC37Nj2xv2n7DRn8fw==
   dependencies:
     "@graphql-tools/batch-execute" "^8.3.1"
     "@graphql-tools/schema" "^8.3.1"
-    "@graphql-tools/utils" "^8.5.1"
+    "@graphql-tools/utils" "^8.5.3"
     dataloader "2.0.0"
     tslib "~2.3.0"
     value-or-promise "1.0.11"
@@ -3685,6 +3696,13 @@
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.5.2.tgz#fa775d92c19237f648105f7d4aeeeb63ba3d257f"
   integrity sha512-wxA51td/759nQziPYh+HxE0WbURRufrp1lwfOYMgfK4e8Aa6gCa1P1p6ERogUIm423NrIfOVau19Q/BBpHdolw==
+  dependencies:
+    tslib "~2.3.0"
+
+"@graphql-tools/utils@^8.5.3":
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.5.3.tgz#404062e62cae9453501197039687749c4885356e"
+  integrity sha512-HDNGWFVa8QQkoQB0H1lftvaO1X5xUaUDk1zr1qDe0xN1NL0E/CrQdJ5UKLqOvH4hkqVUPxQsyOoAZFkaH6rLHg==
   dependencies:
     tslib "~2.3.0"
 
@@ -5961,10 +5979,10 @@
   resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.4.tgz"
   integrity sha512-1z8k4wzFnNjVK/tlxvrWuK5WMt6mydWWP7+zvH5eFep4oj+UkrfiJTRtjCeBXNpwaA/FYqqtb4/QS4ianFpIRA==
 
-"@types/mjml-react@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@types/mjml-react/-/mjml-react-2.0.0.tgz#e433974bcab80487ad8525c72c56f5251d231298"
-  integrity sha512-doa1NrhFOWr/pwMwvLVBly6+DF/UFUJqJ2DxIwQ5wd3mf1bKek4y+1oAGoTEmSkflqwWMXyCT+TfZ4J68cB6NQ==
+"@types/mjml-react@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@types/mjml-react/-/mjml-react-2.0.1.tgz#2a88c17981bb8dbb58379a7962be9b0d997ff646"
+  integrity sha512-sKiDAH8kCPIIAOkDIU7TFAWSTKe3/3MRzIsh6B/RZiyHj9R+7lLxtclnE4iuKe3C8ttg10JYzv0PyaCmDEbb1A==
   dependencies:
     "@types/react" "*"
 
@@ -5996,10 +6014,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-14.17.3.tgz"
   integrity sha512-e6ZowgGJmTuXa3GyaPbTGxX17tnThl2aSSizrFthQ7m9uLGZBXiGhgE55cjRZTF5kjZvYn9EOPOMljdjwbflxw==
 
-"@types/node@^16.11.6":
-  version "16.11.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.6.tgz#6bef7a2a0ad684cf6e90fcfe31cecabd9ce0a3ae"
-  integrity sha512-ua7PgUoeQFjmWPcoo9khiPum3Pd60k4/2ZGXt18sm2Slk0W0xZTqt5Y0Ny1NyBiN1EVQ/+FaF9NcY4Qe6rwk5w==
+"@types/node@^16.11.7":
+  version "16.11.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.7.tgz#36820945061326978c42a01e56b61cd223dfdc42"
+  integrity sha512-QB5D2sqfSjCmTuWcBWyJ+/44bcjO7VbjSbOE0ucoVbAsSNQc4Lt6QkgkVXkTDwkL4z/beecZNDvVX15D4P8Jbw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -11384,18 +11402,18 @@ graphql-extensions@^0.15.0:
     apollo-server-env "^3.1.0"
     apollo-server-types "^0.9.0"
 
-graphql-middleware@^6.1.11:
-  version "6.1.11"
-  resolved "https://registry.yarnpkg.com/graphql-middleware/-/graphql-middleware-6.1.11.tgz#197baa3bc45c384898a9d04441052934fb9cefa7"
-  integrity sha512-5thAGtAQmuKHsUkGtUFsqqtF78mWcWn//a/8bLaRnCmsQ6gjt+HBcGXmtZgbjmOfQ/UrrgGfwPV2+6w4TahGZA==
+graphql-middleware@^6.1.12:
+  version "6.1.12"
+  resolved "https://registry.yarnpkg.com/graphql-middleware/-/graphql-middleware-6.1.12.tgz#8c8c99d8c31e8bb4376f89c7af389ddc0a8ac9c1"
+  integrity sha512-9Z4grqhabrbw2oCEDlRMzggETKIAe3cluEW0HxR63r/+L9l48PCirve6rowJlhdsGeopM/Gd3ZrnL0mhECOQCw==
   dependencies:
-    "@graphql-tools/delegate" "^8.4.1"
+    "@graphql-tools/delegate" "^8.4.2"
     "@graphql-tools/schema" "^8.3.1"
 
-graphql-query-complexity@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/graphql-query-complexity/-/graphql-query-complexity-0.10.0.tgz#489042275bc2405da9b051b4397530e5c34d6a0f"
-  integrity sha512-dygwzTt7fT/AyaoKV18oyX1TLuZaht8p+EQuHQCDt7dCP2lRJL52nnO3aNgcpzjHGUwsin11OeRl/XrBz6YP3w==
+graphql-query-complexity@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/graphql-query-complexity/-/graphql-query-complexity-0.11.0.tgz#6078e72a39a410bb5285673077565ec8ee127c6b"
+  integrity sha512-1Ns64a41XYLehYFxZwoEn7i7myUQPd/fLRZPZ73ULjln4VBWMwptzB8LiPWNaRHsTjLMkecZPeqmuKYNXrFIGA==
   dependencies:
     lodash.get "^4.4.2"
 
@@ -14632,10 +14650,10 @@ mjml-raw@4.10.4:
     lodash "^4.17.21"
     mjml-core "4.10.4"
 
-mjml-react@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/mjml-react/-/mjml-react-2.0.2.tgz#530b21851506991242d8094b0e1c0c70b719d2b8"
-  integrity sha512-17IO2vcRHGm2Qpazks1oOAqYgyIIJntH1oFotQo3AL6LFQz3ghvimKCmnooRRS6c+SvpmrARZkoyyVBAM5qaOQ==
+mjml-react@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/mjml-react/-/mjml-react-2.0.3.tgz#24b82d490bf933533525c4998fd78e451961c41c"
+  integrity sha512-YHSwhM6ifnz5GNSFWcrshyj5mthtb2BQXJ/nwJCWtDeZBL1t1WKKzJ9IJAS2GC5FKJNsaKxan0rRZJWTZP6oLQ==
   dependencies:
     "@babel/runtime" "^7.14.6"
     babel-runtime "~6.25.0"
@@ -16557,10 +16575,10 @@ react-helmet-async@^1.0.7:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-hook-form@^7.18.1:
-  version "7.18.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.18.1.tgz#dcd412a22fc1843bdb54d0acb21035a4a75f7435"
-  integrity sha512-T9Lv5nBnLzncEd2p87Bc0+LtNYS+ochURtyvw7Ln474xSGxoUjvVygXa3WPWTc/2lH1sw3VdGtSfNKC35vJd5A==
+react-hook-form@^7.19.1:
+  version "7.19.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.19.1.tgz#df19c065a96cbd4275c4ca8992a9f5908b114a4f"
+  integrity sha512-e0Oii07qNAa72JeGUT5czVCMwdAFPxmxYvd1Y9oPy2KVD6ZGblN6DG1G7AwL9Bz2lOPFZu15SRNnn0Vpx/eGdg==
 
 react-hot-toast@^2.1.1:
   version "2.1.1"
@@ -17690,10 +17708,10 @@ slate-history@^0.66.0:
   dependencies:
     is-plain-object "^5.0.0"
 
-slate-react@^0.69.0:
-  version "0.69.0"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.69.0.tgz#6a444b8f0f854b6ffbfc07ab554a8d497b735baa"
-  integrity sha512-qz3w4dTRuiv9HHBUmQ1mcaaZ1il/7vm8fOCF4ccTqGGsOfwriY9pKX9lTFG06QCqkKaRrSvPHELL+V0oZJIF0g==
+slate-react@^0.70.0:
+  version "0.70.0"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.70.0.tgz#0d6bb83191e9c90ffeb6df934f75c09dc27bb342"
+  integrity sha512-7txteUdJZL46R7jaPzXiv9vN9/8ATPQtwf7irRb6/BclPwJ5kmg9Q35Rn2ETlWJCRX84eVtLTPX8u7p5kKwHkA==
   dependencies:
     "@types/is-hotkey" "^0.1.1"
     "@types/lodash" "^4.14.149"
@@ -17704,10 +17722,10 @@ slate-react@^0.69.0:
     scroll-into-view-if-needed "^2.2.20"
     tiny-invariant "1.0.6"
 
-slate@^0.66.5:
-  version "0.66.5"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.66.5.tgz#bdd93a4422891341dd18a31ff7810f5cae60e40a"
-  integrity sha512-bG03uEKIm/gS6jQarKSNbHn2anemOON2vnSI3VGRd7MJJU5Yiwmutze0yHNO9uZwDLTB+LeDQYZeGu1ACWT0VA==
+slate@^0.70.0:
+  version "0.70.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.70.0.tgz#26807dba3b41f59fc56449fdb3230a824169bc27"
+  integrity sha512-mLBr20GW8VX0vWZBXv/DGz6Mj2wMHvlFld6NK+9wfMqjO9L/E5TuY6ytC30GGQSAHJAoVVmYYSpqwkwjbexMRQ==
   dependencies:
     immer "^9.0.6"
     is-plain-object "^5.0.0"
@@ -18633,13 +18651,12 @@ terser-webpack-plugin@^4.2.3:
     terser "^5.3.4"
     webpack-sources "^1.4.3"
 
-terser-webpack-plugin@^5.2.4:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.2.4.tgz#ad1be7639b1cbe3ea49fab995cbe7224b31747a1"
-  integrity sha512-E2CkNMN+1cho04YpdANyRrn8CyN4yMy+WdFKZIySFZrGXZxJwJP6PMNGGc/Mcr6qygQHUUqRxnAPmi0M9f00XA==
+terser-webpack-plugin@^5.2.5:
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.2.5.tgz#ce65b9880a0c36872555c4874f45bbdb02ee32c9"
+  integrity sha512-3luOVHku5l0QBeYS8r4CdHYWEGMmIj3H1U64jgkdZzECcSOJAyJ9TjuqcQZvw1Y+4AOBN9SeYJPJmFn2cM4/2g==
   dependencies:
     jest-worker "^27.0.6"
-    p-limit "^3.1.0"
     schema-utils "^3.1.1"
     serialize-javascript "^6.0.0"
     source-map "^0.6.1"
