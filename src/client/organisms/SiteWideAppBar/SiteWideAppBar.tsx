@@ -1,12 +1,14 @@
-import { AppBar, Brand, MainContainer, PageContainer } from "@/client/atoms";
+import { AppBar, Brand, HamburgerMenuButton, MainContainer, PageContainer } from "@/client/atoms";
 import { LoginButton } from "@/client/organisms/LoginButton";
 import { LogoutButton } from "@/client/organisms/LogoutButton";
+import { MobileAppDrawer } from "@/client/organisms/MobileAppDrawer";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
 import { useSession } from "next-auth/client";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
-import tw, { styled } from "twin.macro";
+import { useDialogState } from "reakit";
+import tw from "twin.macro";
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
@@ -25,19 +27,20 @@ const Content = tw(MainContainer)`
 
 const BrandContainer = tw.div`
 	flex-grow
+	flex
+	items-center
 `;
 
-const Actions = styled.div`
-	${tw`
-		flex
-		justify-end
-	`}
+const MobileMenuButton = tw(HamburgerMenuButton)`
+	mr-2
+	sm:hidden
+`;
 
-	& > *:not(:last-child) {
-		${tw`
-			mr-4
-		`}
-	}
+const Actions = tw.div`
+	hidden
+	justify-end
+	sm:flex
+	[& > *]:not-last:mr-4
 `;
 
 const StyledLoginButton = tw(LoginButton)`
@@ -64,6 +67,8 @@ export interface SiteWideAppBarProps {
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
 	const [session] = useSession();
 	const isAuthenticated = !!session?.user;
+
+	const dialog = useDialogState({ animated: true });
 
 	const { scrollY, scrollYProgress } = useViewportScroll();
 
@@ -111,6 +116,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		>
 			<Content>
 				<BrandContainer>
+					<MobileMenuButton {...dialog} tw="mr-2" />
 					<NextLink href="/" passHref>
 						<Brand />
 					</NextLink>
@@ -126,6 +132,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					)}
 				</Actions>
 			</Content>
+			<MobileAppDrawer {...dialog} />
 		</Root>
 	);
 };
