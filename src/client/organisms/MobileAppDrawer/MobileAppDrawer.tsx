@@ -11,7 +11,6 @@ const MobileDrawer = tw(SideDrawer)`
 	flex
 	flex-col
 	pt-16
-	pointer-events-none
 	sm:hidden
 `;
 
@@ -19,7 +18,6 @@ const Content = tw.div`
 	flex-grow
 	flex
 	flex-col
-	pointer-events-auto
 `;
 
 export type MobileAppDrawerProps = DialogStateReturn & {

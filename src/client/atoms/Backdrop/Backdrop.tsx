@@ -12,11 +12,11 @@ export const Backdrop = styled(ReakitDialogBackdrop)`
 		fixed
 		inset-0
 		bg-black
-		opacity-0
+		bg-opacity-0
 		backdrop-filter
 		backdrop-blur-lg
-		[&[data-enter]]:opacity-40
-		transition-opacity
+		[&[data-enter]]:bg-opacity-40
+		transition
 		duration-150
 		ease-in-out
 	`}
