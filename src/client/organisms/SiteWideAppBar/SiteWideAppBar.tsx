@@ -116,7 +116,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		>
 			<Content>
 				<BrandContainer>
-					<MobileMenuButton {...dialog} tw="mr-2" />
+					{!isAuthenticated && <MobileMenuButton {...dialog} tw="mr-2" />}
 					<NextLink href="/" passHref>
 						<Brand />
 					</NextLink>
