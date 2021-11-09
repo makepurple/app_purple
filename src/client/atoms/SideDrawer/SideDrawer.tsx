@@ -10,14 +10,13 @@ export const SideDrawer = styled(ReakitDialog)`
 		inset-y-0
 		left-0
 		w-72
-		p-4
 		transform
 		-translate-x-full
 		[&[data-enter]]:translate-x-0
-		bg-white
+		bg-blueGray-50
 		shadow-2xl
 		transition-transform
-		duration-300
+		duration-150
 		ease-in-out
 	`}
 	z-index: ${getZIndex("page-drawer")};

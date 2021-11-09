@@ -46,9 +46,6 @@ const StyledLoginButton = tw(LoginButton)`
 	text-black
 	border-gray-300
 	hover:shadow-md
-	transition-shadow
-	duration-150
-	ease-in-out
 `;
 
 const SignUpButton = tw(LoginButton)`

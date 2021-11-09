@@ -30,7 +30,7 @@ export const Button = styled(ReakitButton)`
 		disabled:opacity-60
 		disabled:cursor-not-allowed
 		not-disabled:active:shadow-none
-		not-disabled:hover:shadow-lg
+		not-disabled:hover:shadow-md
 		not-disabled:hover:opacity-90
 		disabled:after:absolute
 		disabled:after:inset-0
