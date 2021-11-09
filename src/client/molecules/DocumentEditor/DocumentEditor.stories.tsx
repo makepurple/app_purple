@@ -24,20 +24,26 @@ const Template: Story = (args) => {
 				value={value}
 				onChange={(newValue) => setValue(newValue)}
 			>
-				<DocumentEditor.Toolbar>
-					<DocumentEditor.Toolbar.CodeBlock />
-					<DocumentEditor.Toolbar.Heading />
-					<DocumentEditor.Toolbar.Bold />
-					<DocumentEditor.Toolbar.Italic />
-					<DocumentEditor.Toolbar.Underline />
-					<DocumentEditor.Toolbar.BulletedList />
-					<DocumentEditor.Toolbar.NumbedList />
-					<DocumentEditor.Toolbar.BlockQuote />
-					<DocumentEditor.Toolbar.Code />
-					<DocumentEditor.Toolbar.Link />
-					<DocumentEditor.Toolbar.Image />
-				</DocumentEditor.Toolbar>
-				<DocumentEditor.Editable name={args.name} aria-label="Storybook-textarea" />
+				{!args.readOnly && (
+					<DocumentEditor.Toolbar>
+						<DocumentEditor.Toolbar.CodeBlock />
+						<DocumentEditor.Toolbar.Heading />
+						<DocumentEditor.Toolbar.Bold />
+						<DocumentEditor.Toolbar.Italic />
+						<DocumentEditor.Toolbar.Underline />
+						<DocumentEditor.Toolbar.BulletedList />
+						<DocumentEditor.Toolbar.NumbedList />
+						<DocumentEditor.Toolbar.BlockQuote />
+						<DocumentEditor.Toolbar.Code />
+						<DocumentEditor.Toolbar.Link />
+						<DocumentEditor.Toolbar.Image />
+					</DocumentEditor.Toolbar>
+				)}
+				<DocumentEditor.Editable
+					name={args.name}
+					readOnly={args.readOnly}
+					aria-label="Storybook-textarea"
+				/>
 			</DocumentEditor>
 			<pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(value, null, 2)}</pre>
 		</>
@@ -46,7 +52,8 @@ const Template: Story = (args) => {
 Template.args = {
 	disabled: false,
 	error: false,
-	name: "Storybook textarea"
+	name: "Storybook textarea",
+	readOnly: false
 };
 
 export const Standard = Template.bind({});
