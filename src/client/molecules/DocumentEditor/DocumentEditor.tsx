@@ -8,6 +8,7 @@ import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
 import tw, { css, styled } from "twin.macro";
+import { DocumentEditorContext } from "./context";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
@@ -53,12 +54,13 @@ export interface DocumentEditorProps {
 	disabled?: boolean;
 	error?: boolean;
 	onChange?: (value: Descendant[]) => void;
+	readOnly?: boolean;
 	style?: CSSProperties;
 	value?: Descendant[];
 }
 
 const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
-	const { children, className, onChange, style, value: _value } = props;
+	const { children, className, onChange, readOnly, style, value: _value } = props;
 
 	const [value, setValue] = useUncontrolledProp<Descendant[]>(_value, []);
 
@@ -96,7 +98,9 @@ const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 					onChange?.(newValue);
 				}}
 			>
-				{children}
+				<DocumentEditorContext.Provider value={{ readOnly }}>
+					{children}
+				</DocumentEditorContext.Provider>
 			</Slate>
 		</Root>
 	);

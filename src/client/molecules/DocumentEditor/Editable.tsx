@@ -1,7 +1,8 @@
 import { InferComponentProps } from "@/client/types";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { Editable, RenderElementProps, RenderLeafProps } from "slate-react";
 import tw, { styled } from "twin.macro";
+import { DocumentEditorContext } from "./context";
 import { Element } from "./Element";
 import { Leaf } from "./Leaf";
 import { Placeholder } from "./Placeholder";
@@ -12,7 +13,7 @@ import { Placeholder } from "./Placeholder";
  * @author David Lee
  * @date October 31, 2021
  */
-const EditableContainer = styled.div<{ $readOnly: boolean }>`
+const EditableContainer = styled.div<{ $readOnly?: boolean }>`
 	${tw`
 		p-5
 		bg-indigo-50
@@ -43,11 +44,15 @@ export type DocumentEditorEditableProps = InferComponentProps<typeof Editable>;
 export const DocumentEditorEditable = styled((({
 	className,
 	style,
-	readOnly = false,
+	readOnly: _readOnly,
 	...restEditableProps
 }: DocumentEditorEditableProps) => {
+	const context = useContext(DocumentEditorContext);
+
 	const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
 	const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
+
+	const readOnly = _readOnly ?? context.readOnly;
 
 	return (
 		<EditableContainer className={className} style={style} $readOnly={readOnly}>
