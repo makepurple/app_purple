@@ -214,6 +214,7 @@ export interface NexusGenObjects {
   Skill: { // root type
     id: number; // Int!
     name: string; // String!
+    owner?: string | null; // String
   }
   TopLanguage: { // root type
     color: string; // String!
@@ -336,8 +337,10 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Skill: { // field return type
+    desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
     id: number; // Int!
     name: string; // String!
+    owner: string | null; // String
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   TopLanguage: { // field return type
@@ -461,8 +464,10 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Skill: { // field return type name
+    desiringUsers: 'User'
     id: 'Int'
     name: 'String'
+    owner: 'String'
     users: 'User'
   }
   TopLanguage: { // field return type name

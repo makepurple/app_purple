@@ -183,8 +183,10 @@ type Query {
 }
 
 type Skill {
+  desiringUsers: [User!]!
   id: Int!
   name: String!
+  owner: String
   users: [User!]!
 }
 

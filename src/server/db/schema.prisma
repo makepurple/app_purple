@@ -123,6 +123,7 @@ model Comment {
 model Skill {
   id            Int                    @id @default(autoincrement())
   name          String                 @unique
+  owner         String?
   users         SkillsOnUsers[]
   desiringUsers DesiredSkillsOnUsers[]
 }
