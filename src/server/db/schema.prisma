@@ -122,28 +122,30 @@ model Comment {
 
 model Skill {
   id            Int                    @id @default(autoincrement())
-  name          String                 @unique
-  owner         String?
+  name          String
+  owner         String
   users         SkillsOnUsers[]
   desiringUsers DesiredSkillsOnUsers[]
+
+  @@unique([name, owner])
 }
 
 model SkillsOnUsers {
-  skill     Skill  @relation(fields: [skillName], references: [name], onDelete: Cascade)
-  skillName String
+  skill     Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId   Int
   user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 
-  @@id([skillName, userId])
+  @@id([skillId, userId])
 }
 
 model DesiredSkillsOnUsers {
-  skill     Skill  @relation(fields: [skillName], references: [name], onDelete: Cascade)
-  skillName String
+  skill     Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId   Int
   user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 
-  @@id([skillName, userId])
+  @@id([skillId, userId])
 }
 
 enum ExperienceType {

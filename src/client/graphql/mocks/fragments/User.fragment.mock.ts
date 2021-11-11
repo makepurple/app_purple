@@ -7,7 +7,7 @@ export const User_fragment_mock: User = {
 	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
 	name: "leedavidcs",
 	github: {
-		__typename: "UserGitHub",
+		__typename: "GitHubUser",
 		bio: "I learn things and work on MakePurple",
 		company: "Openbase",
 		name: "David Lee",

@@ -73,6 +73,30 @@ export enum ExperienceType {
   PartTime = 'PartTime'
 }
 
+export type GitHubRepository = {
+  readonly __typename: 'GitHubRepository';
+  readonly description?: Maybe<Scalars['String']>;
+  readonly id: Scalars['String'];
+  readonly name: Scalars['String'];
+  readonly owner: GitHubUser;
+};
+
+/** Data for a user from that user's connected GitHub account. */
+export type GitHubUser = {
+  readonly __typename: 'GitHubUser';
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly company?: Maybe<Scalars['String']>;
+  readonly id: Scalars['String'];
+  readonly login: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly topLanguages: TopLanguages;
+  readonly twitterUsername?: Maybe<Scalars['String']>;
+  /** The URL of the user's GitHub profile. */
+  readonly url: Scalars['URL'];
+  readonly user?: Maybe<User>;
+  readonly websiteUrl?: Maybe<Scalars['String']>;
+};
+
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
@@ -84,10 +108,8 @@ export type Mutation = {
   readonly ok: Scalars['Boolean'];
   readonly publishPost: Post;
   readonly removePostThumbnail?: Maybe<Post>;
-  readonly updateDesiredSkills: User;
   readonly updatePost?: Maybe<Post>;
   readonly updatePostDraft?: Maybe<Post>;
-  readonly updateSkills: User;
   readonly uploadPostImage: PostImage;
   readonly upvotePost: Post;
   readonly viewer?: Maybe<User>;
@@ -120,12 +142,6 @@ export type MutationRemovePostThumbnailArgs = {
 
 
 /** Root mutation type */
-export type MutationUpdateDesiredSkillsArgs = {
-  input: UpdateDesiredSkillsInput;
-};
-
-
-/** Root mutation type */
 export type MutationUpdatePostArgs = {
   data: PostUpdateInput;
   where: PostWhereUniqueInput;
@@ -136,12 +152,6 @@ export type MutationUpdatePostArgs = {
 export type MutationUpdatePostDraftArgs = {
   data: PostDraftUpdateInput;
   where: PostWhereUniqueInput;
-};
-
-
-/** Root mutation type */
-export type MutationUpdateSkillsArgs = {
-  input: UpdateSkillsInput;
 };
 
 
@@ -287,8 +297,10 @@ export type QueryUserArgs = {
 
 export type Skill = {
   readonly __typename: 'Skill';
+  readonly desiringUsers: ReadonlyArray<User>;
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
   readonly users: ReadonlyArray<User>;
 };
 
@@ -299,6 +311,17 @@ export type StringNullableFilter = {
   readonly in?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly notIn?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly startsWith?: Maybe<Scalars['String']>;
+};
+
+export type SuggestSkillWhereInput = {
+  readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
+};
+
+export type SuggestSkills = {
+  readonly __typename: 'SuggestSkills';
+  readonly nodes: ReadonlyArray<GitHubRepository>;
+  readonly totalCount: Scalars['Int'];
 };
 
 /** One of the most used languages by a user */
@@ -322,16 +345,6 @@ export type TopLanguages = {
   readonly totalSize: Scalars['Int'];
 };
 
-export type UpdateDesiredSkillsInput = {
-  /** List of skills (by name) to add to the user. */
-  readonly skills: ReadonlyArray<Scalars['String']>;
-};
-
-export type UpdateSkillsInput = {
-  /** List of skills (by name) to add to the user. */
-  readonly skills: ReadonlyArray<Scalars['String']>;
-};
-
 export type UploadPostImageInput = {
   /** The file of the image to be uploaded */
   readonly image: Scalars['Upload'];
@@ -342,7 +355,7 @@ export type User = {
   readonly comments: ReadonlyArray<Comment>;
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
-  readonly github: UserGitHub;
+  readonly github: GitHubUser;
   readonly githubUrl: Scalars['URL'];
   readonly id: Scalars['ID'];
   readonly image?: Maybe<Scalars['String']>;
@@ -350,20 +363,6 @@ export type User = {
   readonly posts: ReadonlyArray<Post>;
   readonly skills: ReadonlyArray<Skill>;
   readonly upvotedPosts: ReadonlyArray<Post>;
-};
-
-/** Data for a user from that user's connected GitHub account. */
-export type UserGitHub = {
-  readonly __typename: 'UserGitHub';
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly company?: Maybe<Scalars['String']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly topLanguages: TopLanguages;
-  readonly twitterUsername?: Maybe<Scalars['String']>;
-  /** The URL of the user's GitHub profile. */
-  readonly url: Scalars['URL'];
-  readonly user: User;
-  readonly websiteUrl?: Maybe<Scalars['String']>;
 };
 
 export type UserWhereInput = {
@@ -380,7 +379,7 @@ export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: n
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
-export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
+export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'GitHubUser', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -464,7 +463,7 @@ export type GetUserInfoSideBarQueryVariables = Exact<{
 }>;
 
 
-export type GetUserInfoSideBarQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'UserGitHub', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> } | null | undefined };
+export type GetUserInfoSideBarQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string | number, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'GitHubUser', readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> } | null | undefined };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 

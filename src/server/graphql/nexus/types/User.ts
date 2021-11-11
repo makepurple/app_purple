@@ -1,4 +1,5 @@
 import type { octokit } from "@/server/services";
+import { GitHubUser } from "@/server/services/octokit";
 import { list, nonNull, objectType } from "nexus";
 import { User as _User } from "nexus-prisma";
 
@@ -25,32 +26,28 @@ export const User = objectType({
 			}
 		});
 		t.field("github", {
-			type: nonNull("UserGitHub"),
+			type: nonNull("GitHubUser"),
 			resolve: async (parent, args, { octokit: graphql }) => {
-				const userGithub = await graphql`
-					query GetUserGitHub($login: String!) {
+				const githubUser = await graphql`
+					query GetGitHubUser($login: String!) {
 						user(login: $login) {
-							bio
-							company
-							name
-							twitterUsername
-							url
-							websiteUrl
+							...GitHubUser
 						}
 					}
+					${GitHubUser}
 				`
-					.cast<octokit.GetUserGitHubQuery, octokit.GetUserGitHubQueryVariables>({
+					.cast<octokit.GetGitHubUserQuery, octokit.GetGitHubUserQueryVariables>({
 						login: parent.name
 					})
 					.catch(() => null);
 
-				if (!userGithub?.user) {
+				if (!githubUser?.user) {
 					throw new Error("Could not get user's GitHub data");
 				}
 
 				return {
 					user: parent,
-					...userGithub.user
+					...githubUser.user
 				};
 			}
 		});

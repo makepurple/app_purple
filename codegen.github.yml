@@ -3,7 +3,9 @@ schema:
       headers:
         Accept: "application/vnd.github.hawkgirl-preview+json"
         Authorization: bearer ${GITHUB_ACCESS_TOKEN}
-documents: "./src/server/graphql/**/*.ts"
+documents:
+  - "./src/server/graphql/**/*.ts"
+  - "./src/server/services/octokit/fragments/*.ts"
 generates:
   src/server/services/octokit/generated/graphql.gen.ts:
     config:

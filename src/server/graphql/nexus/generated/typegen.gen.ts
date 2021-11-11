@@ -118,11 +118,9 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
-  UpdateDesiredSkillsInput: { // input type
-    skills: string[]; // [String!]!
-  }
-  UpdateSkillsInput: { // input type
-    skills: string[]; // [String!]!
+  SuggestSkillWhereInput: { // input type
+    name: string; // String!
+    owner: string; // String!
   }
   UploadPostImageInput: { // input type
     image: NexusGenScalars['Upload']; // Upload!
@@ -177,6 +175,23 @@ export interface NexusGenObjects {
     startDate?: NexusGenScalars['DateTime'] | null; // DateTime
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
   }
+  GitHubRepository: { // root type
+    description?: string | null; // String
+    id: string; // String!
+    name: string; // String!
+    owner: NexusGenRootTypes['GitHubUser']; // GitHubUser!
+  }
+  GitHubUser: { // root type
+    bio?: string | null; // String
+    company?: string | null; // String
+    id: string; // String!
+    login: string; // String!
+    name?: string | null; // String
+    twitterUsername?: string | null; // String
+    url: NexusGenScalars['URL']; // URL!
+    user?: NexusGenRootTypes['User'] | null; // User
+    websiteUrl?: string | null; // String
+  }
   Mutation: {};
   PageInfo: { // root type
     endCursor?: string | null; // String
@@ -214,7 +229,11 @@ export interface NexusGenObjects {
   Skill: { // root type
     id: number; // Int!
     name: string; // String!
-    owner?: string | null; // String
+    owner: string; // String!
+  }
+  SuggestSkills: { // root type
+    nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
+    totalCount: number; // Int!
   }
   TopLanguage: { // root type
     color: string; // String!
@@ -229,15 +248,6 @@ export interface NexusGenObjects {
     id: string; // ID!
     image?: string | null; // String
     name: string; // String!
-  }
-  UserGitHub: { // root type
-    bio?: string | null; // String
-    company?: string | null; // String
-    name?: string | null; // String
-    twitterUsername?: string | null; // String
-    url: NexusGenScalars['URL']; // URL!
-    user: NexusGenRootTypes['User']; // User!
-    websiteUrl?: string | null; // String
   }
 }
 
@@ -274,6 +284,24 @@ export interface NexusGenFieldTypes {
     type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     user: NexusGenRootTypes['User']; // User!
   }
+  GitHubRepository: { // field return type
+    description: string | null; // String
+    id: string; // String!
+    name: string; // String!
+    owner: NexusGenRootTypes['GitHubUser']; // GitHubUser!
+  }
+  GitHubUser: { // field return type
+    bio: string | null; // String
+    company: string | null; // String
+    id: string; // String!
+    login: string; // String!
+    name: string | null; // String
+    topLanguages: NexusGenRootTypes['TopLanguages']; // TopLanguages!
+    twitterUsername: string | null; // String
+    url: NexusGenScalars['URL']; // URL!
+    user: NexusGenRootTypes['User'] | null; // User
+    websiteUrl: string | null; // String
+  }
   Mutation: { // field return type
     createPost: NexusGenRootTypes['Post']; // Post!
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
@@ -281,10 +309,8 @@ export interface NexusGenFieldTypes {
     ok: boolean; // Boolean!
     publishPost: NexusGenRootTypes['Post']; // Post!
     removePostThumbnail: NexusGenRootTypes['Post'] | null; // Post
-    updateDesiredSkills: NexusGenRootTypes['User']; // User!
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updatePostDraft: NexusGenRootTypes['Post'] | null; // Post
-    updateSkills: NexusGenRootTypes['User']; // User!
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     upvotePost: NexusGenRootTypes['Post']; // Post!
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -340,8 +366,12 @@ export interface NexusGenFieldTypes {
     desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
     id: number; // Int!
     name: string; // String!
-    owner: string | null; // String
+    owner: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  SuggestSkills: { // field return type
+    nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
+    totalCount: number; // Int!
   }
   TopLanguage: { // field return type
     color: string; // String!
@@ -357,7 +387,7 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
-    github: NexusGenRootTypes['UserGitHub']; // UserGitHub!
+    github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
     githubUrl: NexusGenScalars['URL']; // URL!
     id: string; // ID!
     image: string | null; // String
@@ -365,16 +395,6 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
-  }
-  UserGitHub: { // field return type
-    bio: string | null; // String
-    company: string | null; // String
-    name: string | null; // String
-    topLanguages: NexusGenRootTypes['TopLanguages']; // TopLanguages!
-    twitterUsername: string | null; // String
-    url: NexusGenScalars['URL']; // URL!
-    user: NexusGenRootTypes['User']; // User!
-    websiteUrl: string | null; // String
   }
 }
 
@@ -401,6 +421,24 @@ export interface NexusGenFieldTypeNames {
     type: 'ExperienceType'
     user: 'User'
   }
+  GitHubRepository: { // field return type name
+    description: 'String'
+    id: 'String'
+    name: 'String'
+    owner: 'GitHubUser'
+  }
+  GitHubUser: { // field return type name
+    bio: 'String'
+    company: 'String'
+    id: 'String'
+    login: 'String'
+    name: 'String'
+    topLanguages: 'TopLanguages'
+    twitterUsername: 'String'
+    url: 'URL'
+    user: 'User'
+    websiteUrl: 'String'
+  }
   Mutation: { // field return type name
     createPost: 'Post'
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
@@ -408,10 +446,8 @@ export interface NexusGenFieldTypeNames {
     ok: 'Boolean'
     publishPost: 'Post'
     removePostThumbnail: 'Post'
-    updateDesiredSkills: 'User'
     updatePost: 'Post'
     updatePostDraft: 'Post'
-    updateSkills: 'User'
     uploadPostImage: 'PostImage'
     upvotePost: 'Post'
     viewer: 'User'
@@ -470,6 +506,10 @@ export interface NexusGenFieldTypeNames {
     owner: 'String'
     users: 'User'
   }
+  SuggestSkills: { // field return type name
+    nodes: 'GitHubRepository'
+    totalCount: 'Int'
+  }
   TopLanguage: { // field return type name
     color: 'String'
     name: 'String'
@@ -484,7 +524,7 @@ export interface NexusGenFieldTypeNames {
     comments: 'Comment'
     desiredSkills: 'Skill'
     email: 'String'
-    github: 'UserGitHub'
+    github: 'GitHubUser'
     githubUrl: 'URL'
     id: 'ID'
     image: 'String'
@@ -492,16 +532,6 @@ export interface NexusGenFieldTypeNames {
     posts: 'Post'
     skills: 'Skill'
     upvotedPosts: 'Post'
-  }
-  UserGitHub: { // field return type name
-    bio: 'String'
-    company: 'String'
-    name: 'String'
-    topLanguages: 'TopLanguages'
-    twitterUsername: 'String'
-    url: 'URL'
-    user: 'User'
-    websiteUrl: 'String'
   }
 }
 
@@ -520,9 +550,6 @@ export interface NexusGenArgTypes {
     removePostThumbnail: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
-    updateDesiredSkills: { // args
-      input: NexusGenInputs['UpdateDesiredSkillsInput']; // UpdateDesiredSkillsInput!
-    }
     updatePost: { // args
       data: NexusGenInputs['PostUpdateInput']; // PostUpdateInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
@@ -530,9 +557,6 @@ export interface NexusGenArgTypes {
     updatePostDraft: { // args
       data: NexusGenInputs['PostDraftUpdateInput']; // PostDraftUpdateInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    updateSkills: { // args
-      input: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!
     }
     uploadPostImage: { // args
       data: NexusGenInputs['UploadPostImageInput']; // UploadPostImageInput!

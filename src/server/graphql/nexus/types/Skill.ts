@@ -12,7 +12,14 @@ export const Skill = objectType({
 			type: "User",
 			resolve: async (root, args, { prisma }) => {
 				const users = await prisma.skill
-					.findUnique({ where: { name: root.name } })
+					.findUnique({
+						where: {
+							name_owner: {
+								name: root.name,
+								owner: root.owner
+							}
+						}
+					})
 					.users({ include: { user: true } });
 
 				return users.map(({ user }) => user);
@@ -22,7 +29,14 @@ export const Skill = objectType({
 			type: "User",
 			resolve: async (root, args, { prisma }) => {
 				const users = await prisma.skill
-					.findUnique({ where: { name: root.name } })
+					.findUnique({
+						where: {
+							name_owner: {
+								name: root.name,
+								owner: root.owner
+							}
+						}
+					})
 					.desiringUsers({ include: { user: true } });
 
 				return users.map(({ user }) => user);

@@ -2,22 +2,23 @@ import { octokit } from "@/server/services";
 import { oneLine } from "common-tags";
 import { nonNull, objectType } from "nexus";
 
-export const UserGitHub = objectType({
-	name: "UserGitHub",
+export const GitHubUser = objectType({
+	name: "GitHubUser",
 	description: oneLine`
-			Data for a user from that user's connected GitHub account.
-		`,
+		Data for a user from that user's connected GitHub account.
+	`,
 	definition: (t) => {
 		t.string("bio");
 		t.string("company");
+		t.nonNull.string("id");
+		t.nonNull.string("login");
 		t.string("name");
 		t.field("topLanguages", {
 			type: nonNull("TopLanguages"),
 			resolve: async (parent, args, { octokit: graphql }) => {
-				const userTopLanguages = await graphql<
-					octokit.GetUserTopLanguagesQuery,
-					octokit.GetUserTopLanguagesQueryVariables
-				>`
+				if (!parent.user?.name) return { nodes: [] };
+
+				const userTopLanguages = await graphql`
 					query GetUserTopLanguages($login: String!) {
 						user(login: $login) {
 							repositories(ownerAffiliations: [OWNER], isFork: false, first: 50) {
@@ -39,14 +40,21 @@ export const UserGitHub = objectType({
 							}
 						}
 					}
-				`({ login: parent.user.name });
+				`
+					.cast<
+						octokit.GetUserTopLanguagesQuery,
+						octokit.GetUserTopLanguagesQueryVariables
+					>({ login: parent.user.name })
+					.catch(() => null);
 
-				const repoNodes = userTopLanguages.user?.repositories.nodes ?? [];
+				if (!userTopLanguages?.user) return { nodes: [] };
+
+				const repoNodes = userTopLanguages?.user.repositories.nodes ?? [];
 
 				const _languageEdge = repoNodes?.[0]?.languages?.edges?.[0];
 				type LanguageEdge = typeof _languageEdge;
 
-				const topLangsDict = (userTopLanguages.user?.repositories.nodes ?? [])
+				const topLangsDict = repoNodes
 					// Repo must have at least 1 language
 					.filter((repo) => (repo?.languages?.edges?.length ?? 0) > 0)
 					// Flatten language edges
@@ -91,10 +99,10 @@ export const UserGitHub = objectType({
 		t.string("twitterUsername");
 		t.nonNull.url("url", {
 			description: oneLine`
-					The URL of the user's GitHub profile.
-				`
+				The URL of the user's GitHub profile.
+			`
 		});
-		t.nonNull.field("user", { type: "User" });
+		t.field("user", { type: "User" });
 		t.string("websiteUrl");
 	}
 });
