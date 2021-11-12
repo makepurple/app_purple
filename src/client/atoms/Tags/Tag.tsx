@@ -16,7 +16,6 @@ export const Root = styled.span<{ type?: TagType }>`
 		items-stretch
 		justify-center
 		h-6
-		m-1
 		rounded
 		text-base
 		font-medium

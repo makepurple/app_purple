@@ -24,7 +24,7 @@ const Root = styled.div<{ type?: TagType }>`
 		flex
 		flex-row
 		flex-wrap
-		-m-1
+		gap-1.5
 	`}
 
 	& ${Tag} {
