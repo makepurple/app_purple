@@ -1,16 +1,15 @@
+import { InferComponentProps } from "@/client/types";
 import { oneLine } from "common-tags";
-import React, { AnchorHTMLAttributes, DetailedHTMLProps, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import tw, { styled, theme } from "twin.macro";
 
 const Root = styled.a<{ $border?: number }>`
 	${tw`
 		relative
-		flex
+		inline-flex
 		flex-row
 		items-stretch
 		justify-items-stretch
-		h-12
-		w-12
 		rounded-full
 		border-solid
 		border-transparent
@@ -47,10 +46,7 @@ const Content = tw.div`
 	overflow-hidden
 `;
 
-export type AvatarProps = DetailedHTMLProps<
-	AnchorHTMLAttributes<HTMLAnchorElement>,
-	HTMLAnchorElement
-> & {
+export type AvatarProps = InferComponentProps<"a"> & {
 	border?: number;
 };
 

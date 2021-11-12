@@ -1,11 +1,12 @@
-import { Avatar, Divider, GitHubAvatarImage, Paper, Tags } from "@/client/atoms";
+import { Divider, Paper, Tags } from "@/client/atoms";
 import { useGetUserInfoSideBarQuery } from "@/client/graphql";
 import { NewPostButton } from "@/client/organisms/NewPostButton";
 import { TopLanguages } from "@/client/organisms/TopLanguages";
-import { GitHubIcon, OpenbaseIcon, PersonIcon, TwitterIcon } from "@/client/svgs";
-import NextLink from "next/link";
+import { UserAvatar } from "@/client/organisms/UserAvatar";
+import { GitHubIcon, OpenbaseIcon, TwitterIcon } from "@/client/svgs";
+import { useSession } from "next-auth/client";
 import React, { CSSProperties, FC } from "react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 const MainInfoContainer = tw.div`
 	p-6
@@ -22,23 +23,12 @@ const SkillsContainer = tw.div`
 	sm:p-8
 `;
 
-const SubTitle = styled.h2`
-	${tw`
-		text-xl
-		leading-none
-		font-semibold
-		text-black
-	`}
-	&:not(:first-child) {
-		${tw`
-			mt-6
-		`}
-	}
-`;
-
-const UserAvatar = tw(Avatar)`
-	h-32
-	w-32
+const SubTitle = tw.h2`
+	text-xl
+	leading-none
+	font-semibold
+	text-black
+	not-first:mt-6
 `;
 
 const UserName = tw.h1`
@@ -65,22 +55,14 @@ const Bio = tw.p`
 	line-clamp-4
 `;
 
-const SocialLinks = styled.div`
-	${tw`
-		mt-2
-		text-indigo-800
-	`}
-	& > *:not(:first-child) {
-		${tw`
-			ml-2
-		`}
-	}
+const SocialLinks = tw.div`
+	mt-4
+	text-indigo-800
+	[& > *]:not-first:ml-4
 `;
 
 const SocialLink = tw.a`
 	inline-flex
-	h-4
-	w-4
 `;
 
 const StyledNewPostButton = tw(NewPostButton)`
@@ -110,7 +92,10 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 		}
 	});
 
+	const [session] = useSession();
+
 	const user = data?.user;
+	const isMyUser = user?.id === session?.user.id;
 
 	if (!user) return null;
 
@@ -119,20 +104,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	return (
 		<Paper className={className} style={style}>
 			<MainInfoContainer>
-				<NextLink href={`/${user.name}`} passHref>
-					<UserAvatar border={4} title={user.name}>
-						{user.image ? (
-							<GitHubAvatarImage
-								alt="user avatar"
-								src={user.image}
-								height={128}
-								width={128}
-							/>
-						) : (
-							<PersonIcon height={128} width={128} />
-						)}
-					</UserAvatar>
-				</NextLink>
+				<UserAvatar border={4} height={128} user={user} width={128} />
 				<UserName>
 					<DisplayName>{displayName}</DisplayName>
 					{!!user.github.name && <SecondaryName>{user.name}</SecondaryName>}
@@ -146,7 +118,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						aria-label="github"
 						title="GitHub"
 					>
-						<GitHubIcon height={16} width={16} />
+						<GitHubIcon height={24} width={24} />
 					</SocialLink>
 					{!!user.github.twitterUsername && (
 						<SocialLink
@@ -156,7 +128,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							aria-label="twitter"
 							title="Twitter"
 						>
-							<TwitterIcon height={16} width={16} />
+							<TwitterIcon height={24} width={24} />
 						</SocialLink>
 					)}
 					<SocialLink
@@ -166,10 +138,12 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						aria-label="openbase"
 						title="Openbase"
 					>
-						<OpenbaseIcon height={16} width={16} />
+						<OpenbaseIcon height={24} width={24} />
 					</SocialLink>
 				</SocialLinks>
-				<StyledNewPostButton userName={userName}>New Post</StyledNewPostButton>
+				{isMyUser && (
+					<StyledNewPostButton userName={userName}>New Post</StyledNewPostButton>
+				)}
 			</MainInfoContainer>
 			<Divider />
 			<TopLanguagesContainer>

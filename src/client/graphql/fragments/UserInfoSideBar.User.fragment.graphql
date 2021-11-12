@@ -18,10 +18,10 @@ fragment UserInfoSideBarUser on User {
 		websiteUrl
 	}
 	id
-	image
 	name
 	skills {
 		id
 		name
 	}
+	...UserAvatarUser
 }
