@@ -13,6 +13,8 @@ import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 import { Tag, TagProps, TagType } from "./Tag";
 
+export type { TagProps, TagType } from "./Tag";
+
 export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onChange"> & {
 	children: ReactElement<TagProps, typeof Tag>[];
 	editable?: boolean;
