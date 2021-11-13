@@ -4,8 +4,8 @@ import React, { useContext } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 
-export type TagProps = Omit<InferComponentProps<typeof Root>, "children"> & {
-	children: string;
+export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
+	id: string;
 };
 
 export type TagType = "positive" | "neutral" | "negative";
@@ -52,7 +52,9 @@ const CloseButton = tw.span`
 	cursor-pointer
 `;
 
-export const Tag = styled(({ children, ...restTagProps }: TagProps) => {
+export const Tag = styled((props: TagProps) => {
+	const { children, ...restTagProps } = props;
+
 	const { editable, onRemove } = useContext(TagsContext);
 
 	return (
@@ -61,7 +63,7 @@ export const Tag = styled(({ children, ...restTagProps }: TagProps) => {
 			{editable && (
 				<CloseButton
 					onClick={(event) => {
-						onRemove?.(children, event);
+						onRemove?.(props, event);
 					}}
 				>
 					<XIcon height={16} width={16} />

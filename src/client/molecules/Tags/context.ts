@@ -1,8 +1,9 @@
 import { createContext, SyntheticEvent } from "react";
+import type { TagProps } from ".";
 
 export interface TagsContextProps {
 	editable: boolean;
-	onRemove?: (tag: string, event?: SyntheticEvent) => void;
+	onRemove?: (tag: TagProps, event?: SyntheticEvent) => void;
 }
 
 export const TagsContext = createContext<TagsContextProps>({

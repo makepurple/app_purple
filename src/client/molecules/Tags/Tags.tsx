@@ -1,23 +1,20 @@
 import { InferComponentProps } from "@/client/types";
 import { ObjectUtils } from "@/utils";
-import React, {
-	forwardRef,
-	isValidElement,
-	memo,
-	SyntheticEvent,
-	useCallback,
-	useMemo
-} from "react";
+import React, { forwardRef, memo, ReactElement, SyntheticEvent, useCallback, useMemo } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
-import { Tag, TagType } from "./Tag";
+import { Tag, TagProps, TagType } from "./Tag";
+import { TagEditable, TagEditableProps } from "./TagEditable";
 
 export type { TagProps, TagType } from "./Tag";
 
 export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onChange"> & {
-	children: ReactNode;
+	children: (
+		| ReactElement<TagProps, typeof Tag>
+		| ReactElement<TagEditableProps, typeof TagEditable>
+	)[];
 	editable?: boolean;
-	onChange?: (newTags: readonly string[], event?: SyntheticEvent) => void;
+	onChange?: (newTags: readonly TagProps[], event?: SyntheticEvent) => void;
 };
 
 const Root = styled.div<{ editable?: boolean; type?: TagType }>`
@@ -73,18 +70,15 @@ const _Tags = memo(
 			...restTagsProps
 		} = props;
 
-		const tags: readonly string[] = useMemo(() => {
-			return children.map((child) => {
-				if (!isValidElement(child)) throw new Error("Child is not a valid element!");
-				if (child.type !== Tag) throw new Error("Child is not a Tag!");
-
-				return child.props.children;
-			});
+		const tags: readonly TagProps[] = useMemo(() => {
+			return children
+				.filter((child) => child.type === Tag)
+				.map((child) => child.props as TagProps);
 		}, [children]);
 
 		const onRemove = useCallback(
-			(tagName: string, event?: SyntheticEvent) => {
-				const newTags: readonly string[] = tags.filter((tag) => tag !== tagName);
+			(toRemove: TagProps, event?: SyntheticEvent) => {
+				const newTags: readonly TagProps[] = tags.filter((tag) => tag.id !== toRemove.id);
 
 				onChange?.(newTags, event);
 			},
@@ -103,4 +97,7 @@ const _Tags = memo(
 
 _Tags.displayName = "Tags";
 
-export const Tags = ObjectUtils.setStatic(_Tags, { Tag });
+export const Tags = ObjectUtils.setStatic(_Tags, {
+	Editable: TagEditable,
+	Tag
+});

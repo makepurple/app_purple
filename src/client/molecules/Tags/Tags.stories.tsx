@@ -9,14 +9,15 @@ export default {
 const Template = (args) => {
 	return (
 		<Tags {...args} style={{ width: 280 }}>
-			<Tags.Tag>Next.js</Tags.Tag>
-			<Tags.Tag>Prisma</Tags.Tag>
-			<Tags.Tag>Nexus</Tags.Tag>
-			<Tags.Tag>Urql</Tags.Tag>
-			<Tags.Tag>TypeScript</Tags.Tag>
-			<Tags.Tag>Storybook</Tags.Tag>
-			<Tags.Tag>Figma</Tags.Tag>
-			<Tags.Tag>Framer-Motion</Tags.Tag>
+			<Tags.Tag id="vercel/next">Next.js</Tags.Tag>
+			<Tags.Tag id="prisma/prisma">Prisma</Tags.Tag>
+			<Tags.Tag id="graphql-nexus/nexus">Nexus</Tags.Tag>
+			<Tags.Tag id="formidablelabs/urql">Urql</Tags.Tag>
+			<Tags.Tag id="microsoft/typescript">TypeScript</Tags.Tag>
+			<Tags.Tag id="storybook/storybook">Storybook</Tags.Tag>
+			<Tags.Tag id="figma/figma">Figma</Tags.Tag>
+			<Tags.Tag id="framer/motion">Framer-Motion</Tags.Tag>
+			<Tags.Editable />
 		</Tags>
 	);
 };

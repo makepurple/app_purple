@@ -1,7 +1,10 @@
+import { InferComponentProps } from "@/client/types";
 import tw from "twin.macro";
 
+export type EditableTextProps = InferComponentProps<typeof EditableText>;
+
 export const EditableText = tw.input`
-	inline-block
+	inline-flex
 	p-1
 	border
 	border-solid
