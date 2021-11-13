@@ -6,6 +6,7 @@ export * from "./Brand";
 export * from "./Button";
 export * from "./ContextMenu";
 export * from "./Divider";
+export * from "./EditableText";
 export * from "./ErrorBoundary";
 export * from "./Footer";
 export * from "./Form";
