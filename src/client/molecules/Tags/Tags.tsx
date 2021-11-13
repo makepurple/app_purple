@@ -4,19 +4,18 @@ import React, {
 	forwardRef,
 	isValidElement,
 	memo,
-	ReactElement,
 	SyntheticEvent,
 	useCallback,
 	useMemo
 } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
-import { Tag, TagProps, TagType } from "./Tag";
+import { Tag, TagType } from "./Tag";
 
 export type { TagProps, TagType } from "./Tag";
 
 export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onChange"> & {
-	children: ReactElement<TagProps, typeof Tag>[];
+	children: ReactNode;
 	editable?: boolean;
 	onChange?: (newTags: readonly string[], event?: SyntheticEvent) => void;
 };
