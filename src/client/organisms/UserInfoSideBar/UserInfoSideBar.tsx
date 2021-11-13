@@ -1,5 +1,6 @@
-import { Divider, Paper, Tags } from "@/client/atoms";
+import { Divider, Paper } from "@/client/atoms";
 import { useGetUserInfoSideBarQuery } from "@/client/graphql";
+import { Tags } from "@/client/molecules";
 import { NewPostButton } from "@/client/organisms/NewPostButton";
 import { TopLanguages } from "@/client/organisms/TopLanguages";
 import { UserAvatar } from "@/client/organisms/UserAvatar";

@@ -1,8 +1,8 @@
-import { Tags } from "@/client/atoms";
+import { Tags } from "@/client/molecules";
 import React from "react";
 
 export default {
-	title: "atoms/Tags",
+	title: "molecules/Tags",
 	component: Tags
 };
 

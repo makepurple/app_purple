@@ -21,13 +21,32 @@ export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onC
 	onChange?: (newTags: readonly string[], event?: SyntheticEvent) => void;
 };
 
-const Root = styled.div<{ type?: TagType }>`
+const Root = styled.div<{ editable?: boolean; type?: TagType }>`
 	${tw`
 		flex
 		flex-row
 		flex-wrap
 		gap-1.5
 	`}
+
+	${({ editable }) =>
+		editable &&
+		tw`
+			p-2
+			border
+			border-solid
+			border-gray-400
+			rounded-lg
+			shadow-inner
+			bg-indigo-50
+			ring-indigo-500
+			ring-opacity-80
+			transition
+			duration-300
+			ease-in-out
+			focus-within:ring-2
+			focus-within:bg-white
+		`}
 
 	& ${Tag} {
 		background-color: ${({ type }) => {
@@ -74,7 +93,7 @@ const _Tags = memo(
 		);
 
 		return (
-			<Root {...restTagsProps} ref={ref} type={type}>
+			<Root {...restTagsProps} ref={ref} editable={editable} type={type}>
 				<TagsContext.Provider value={{ editable, onRemove }}>
 					{children}
 				</TagsContext.Provider>

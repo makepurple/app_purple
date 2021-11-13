@@ -31,7 +31,6 @@ export * from "./ProgressBar";
 export * from "./SideDrawer";
 export * from "./Spinner";
 export * from "./TabList";
-export * from "./Tags";
 export * from "./TextArea";
 export * from "./ThemeProvider";
 export * from "./Toolbar";
