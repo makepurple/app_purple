@@ -21,6 +21,7 @@ const Template = (args) => {
 	);
 };
 Template.args = {
+	editable: false,
 	type: "neutral"
 };
 

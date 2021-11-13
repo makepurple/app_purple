@@ -35,24 +35,21 @@ export const Root = styled.span<{ type?: TagType }>`
 	}};
 `;
 
-const Text = styled.span`
-	display: flex;
-	align-items: center;
-	box-sizing: border-box;
-	padding: 0 0.5rem;
-
-	&:not(:last-child) {
-		padding-right: 0.125rem;
-	}
+const Text = tw.span`
+	flex
+	items-center
+	px-3.5
+	not-last:pr-0
+	not-last:pl-1
 `;
 
-const CloseButton = styled.span`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 1.5rem;
-	width: 1.5rem;
-	cursor: pointer;
+const CloseButton = tw.span`
+	flex
+	items-center
+	justify-center
+	h-6
+	w-6
+	cursor-pointer
 `;
 
 export const Tag = styled(({ children, ...restTagProps }: TagProps) => {
