@@ -20,6 +20,7 @@ body {
 		focus-visible:ring-2
 		focus-visible:ring-indigo-500
 		focus-visible:ring-opacity-80
+		placeholder:text-gray-400
 	`}
 }
 `;

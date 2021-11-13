@@ -22,7 +22,6 @@ const Root = styled.textarea<{ error?: boolean }>`
 		duration-300
 		ease-in-out
 		resize-none
-		placeholder:text-gray-400
 		focus:bg-white
 		disabled:cursor-not-allowed
 		disabled:bg-gray-200

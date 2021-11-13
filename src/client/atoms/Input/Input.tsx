@@ -22,7 +22,6 @@ const Root = styled.input<{ error?: boolean }>`
 		transition
 		duration-300
 		ease-in-out
-		placeholder:text-gray-400
 		focus:bg-white
 		disabled:cursor-not-allowed
 		disabled:bg-gray-200
