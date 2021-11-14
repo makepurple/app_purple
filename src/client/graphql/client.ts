@@ -59,6 +59,11 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 				createCache(),
 				errorExchange({
 					onError: (error) => {
+						if (process.env.NODE_ENV === "development") {
+							// eslint-disable-next-line no-console
+							console.error(error.message);
+						}
+
 						toast.error(error.message.replace("[GraphQL]", "Server error:"));
 					}
 				}),
@@ -121,5 +126,7 @@ export const addUrqlState = <T extends { props: Record<string, any> }>(
 			...newPageProps.props,
 			[URQL_STATE_PROP_NAME]: ssrCache.extractData()
 		};
+
+		return newPageProps;
 	}) as T & { props: T["props"] & { [URQL_STATE_PROP_NAME]: SSRData } };
 };

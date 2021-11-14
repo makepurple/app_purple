@@ -47,7 +47,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
 				GetUserInfoSideBarDocument,
-				{ name: query.username as string }
+				{ name: query.userName as string }
 			)
 			.toPromise(),
 		urqlClient.query<GetMyUserQuery, GetMyUserQueryVariables>(GetMyUserDocument).toPromise()

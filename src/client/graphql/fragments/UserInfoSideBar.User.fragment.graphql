@@ -6,6 +6,7 @@ fragment UserInfoSideBarUser on User {
 	}
 	github {
 		__typename
+		id
 		bio
 		company
 		name

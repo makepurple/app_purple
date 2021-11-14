@@ -8,6 +8,7 @@ export const User_fragment_mock: User = {
 	name: "leedavidcs",
 	github: {
 		__typename: "GitHubUser",
+		id: "0",
 		bio: "I learn things and work on MakePurple",
 		company: "Openbase",
 		name: "David Lee",
