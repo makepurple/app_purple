@@ -269,6 +269,7 @@ export type Query = {
   readonly postDraft?: Maybe<Post>;
   /** Relay-style connection on Post types. */
   readonly posts: PostConnection;
+  readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
@@ -287,6 +288,12 @@ export type QueryPostsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   where?: Maybe<PostWhereInput>;
+};
+
+
+/** Root query type */
+export type QuerySuggestSkillsArgs = {
+  where: SuggestSkillWhereInput;
 };
 
 

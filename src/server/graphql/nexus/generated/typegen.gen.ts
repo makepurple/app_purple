@@ -359,6 +359,7 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
+    suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -496,6 +497,7 @@ export interface NexusGenFieldTypeNames {
     post: 'Post'
     postDraft: 'Post'
     posts: 'PostConnection'
+    suggestSkills: 'SuggestSkills'
     user: 'User'
     viewer: 'User'
   }
@@ -582,6 +584,9 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
+    }
+    suggestSkills: { // args
+      where: NexusGenInputs['SuggestSkillWhereInput']; // SuggestSkillWhereInput!
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
