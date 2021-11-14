@@ -1,11 +1,12 @@
 import { XIcon } from "@/client/svgs";
 import { InferComponentProps } from "@/client/types";
-import React, { useContext } from "react";
+import React, { SyntheticEvent, useContext } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 
 export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
 	id: string;
+	onRemove?: (tag: TagProps, event?: SyntheticEvent) => void;
 };
 
 export type TagType = "positive" | "neutral" | "negative";
@@ -53,16 +54,17 @@ const CloseButton = tw.span`
 `;
 
 export const Tag = styled((props: TagProps) => {
-	const { children, ...restTagProps } = props;
+	const { children, onRemove, ...restTagProps } = props;
 
-	const { editable, onRemove } = useContext(TagsContext);
+	const context = useContext(TagsContext);
 
 	return (
 		<Root {...restTagProps}>
 			<Text>{children}</Text>
-			{editable && (
+			{context.editable && (
 				<CloseButton
 					onClick={(event) => {
+						context.onRemove?.(props, event);
 						onRemove?.(props, event);
 					}}
 				>

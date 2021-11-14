@@ -1,18 +1,15 @@
 import { InferComponentProps } from "@/client/types";
 import { ObjectUtils } from "@/utils";
-import React, { forwardRef, memo, ReactElement, SyntheticEvent, useCallback, useMemo } from "react";
+import React, { forwardRef, memo, ReactNode, SyntheticEvent, useCallback, useMemo } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 import { Tag, TagProps, TagType } from "./Tag";
-import { TagEditable, TagEditableProps } from "./TagEditable";
+import { TagEditable } from "./TagEditable";
 
 export type { TagProps, TagType } from "./Tag";
 
 export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onChange"> & {
-	children: (
-		| ReactElement<TagProps, typeof Tag>
-		| ReactElement<TagEditableProps, typeof TagEditable>
-	)[];
+	children: ReactNode[];
 	editable?: boolean;
 	onChange?: (newTags: readonly TagProps[], event?: SyntheticEvent) => void;
 };
@@ -72,8 +69,8 @@ const _Tags = memo(
 
 		const tags: readonly TagProps[] = useMemo(() => {
 			return children
-				.filter((child) => child.type === Tag)
-				.map((child) => child.props as TagProps);
+				.filter((child) => (child as any).type === Tag)
+				.map((child) => (child as any).props as TagProps);
 		}, [children]);
 
 		const onRemove = useCallback(

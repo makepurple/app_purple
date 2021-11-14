@@ -14,3 +14,4 @@ export * from "./SiteWideLayout";
 export * from "./TopLanguages";
 export * from "./UserAvatar";
 export * from "./UserInfoSideBar";
+export * from "./UserInfoSideBarForm";
