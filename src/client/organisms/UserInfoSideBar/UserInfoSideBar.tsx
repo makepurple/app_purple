@@ -157,7 +157,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				{!!user.skills.length && (
 					<Skills type="positive">
 						{user.skills.map((skill) => (
-							<Tags.Tag key={skill.id}>{skill.name}</Tags.Tag>
+							<Tags.Tag key={skill.id} id={skill.id.toString()}>
+								{skill.name}
+							</Tags.Tag>
 						))}
 					</Skills>
 				)}
@@ -165,7 +167,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				{!!user.desiredSkills.length && (
 					<Skills type="negative">
 						{user.desiredSkills.map((skill) => (
-							<Tags.Tag key={skill.id}>{skill.name}</Tags.Tag>
+							<Tags.Tag key={skill.id} id={skill.id.toString()}>
+								{skill.name}
+							</Tags.Tag>
 						))}
 					</Skills>
 				)}
