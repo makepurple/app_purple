@@ -37,6 +37,7 @@ export const ComboBoxOption = styled((props: ComboBoxOptionProps) => {
 	const { as = "li", combobox, index, item, ...liProps } = props;
 
 	if (!combobox.isOpen) return null;
+	if (combobox.loading) return null;
 
 	return <Root as={as} {...liProps} {...combobox.getItemProps({ ...liProps, index, item })} />;
 })<ComboBoxOptionProps>``;
