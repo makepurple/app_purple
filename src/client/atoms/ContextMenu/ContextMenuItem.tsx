@@ -26,7 +26,7 @@ export const ContextMenuItem = styled(ReakitButton)<{ selected?: boolean }>`
 		selected &&
 		tw`
 		text-white
-		bg-purple-600
-		hover:bg-purple-600
+		bg-indigo-500
+		hover:bg-indigo-500
 	`}
 `;

@@ -4,6 +4,7 @@ export * from "./Avatar";
 export * from "./Backdrop";
 export * from "./Brand";
 export * from "./Button";
+export * from "./ComboBox";
 export * from "./ContextMenu";
 export * from "./Divider";
 export * from "./EditableText";
