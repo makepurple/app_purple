@@ -34,7 +34,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				where: {
 					author: {
 						name: {
-							equals: query.username as string
+							equals: query.userName as string
 						}
 					}
 				},

@@ -76,7 +76,8 @@ export const Page: NextPage<PageProps> = () => {
 						equals: userName
 					}
 				}
-			}
+			},
+			after: null
 		}
 	});
 
