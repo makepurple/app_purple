@@ -1,4 +1,4 @@
-import { Paper } from "@/client/atoms";
+import { Paper } from "@/client/atoms/Paper";
 import { UseComboBoxState } from "@/client/hooks";
 import { InferComponentProps } from "@/client/types";
 import React, { ComponentType, FC } from "react";
