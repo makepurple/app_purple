@@ -4,15 +4,20 @@ import {
 	UseComboboxReturnValue,
 	UseComboboxStateChange
 } from "downshift";
-import ms from "ms";
 import { useState } from "react";
 import { useDebounce, useMountedState } from "react-use";
+
+export type UseComboBoxProps<T> = UseComboboxProps<T> & {
+	debounce?: number;
+};
 
 export type UseComboBoxState<T> = {
 	combobox: UseComboboxReturnValue<T> & { loading: boolean };
 };
 
-export const useComboBoxState = <T>(props: UseComboboxProps<T>): UseComboBoxState<T> => {
+export const useComboBoxState = <T>(props: UseComboBoxProps<T>): UseComboBoxState<T> => {
+	const { debounce = 0, ...downshiftProps } = props;
+
 	const isMounted = useMountedState();
 
 	const [changes, setChanges] = useState<UseComboboxStateChange<T> | null>(null);
@@ -28,12 +33,12 @@ export const useComboBoxState = <T>(props: UseComboboxProps<T>): UseComboBoxStat
 
 			isMounted() && setLoading(false);
 		},
-		ms("0.2s"),
+		debounce,
 		[changes]
 	);
 
 	const combobox = useCombobox({
-		...props,
+		...downshiftProps,
 		onInputValueChange: (newChanges) => {
 			setChanges(newChanges);
 		}

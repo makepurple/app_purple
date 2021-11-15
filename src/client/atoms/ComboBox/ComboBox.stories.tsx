@@ -1,11 +1,4 @@
-import {
-	ComboBox,
-	ComboBoxInput,
-	ComboBoxLoadingState,
-	ComboBoxOption,
-	ComboBoxProps,
-	ComboBoxSelect
-} from "@/client/atoms";
+import { ComboBox, ComboBoxProps } from "@/client/atoms";
 import { useComboBoxState } from "@/client/hooks";
 import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";
@@ -40,16 +33,16 @@ const Template: Story<ComboBoxProps> = (args) => {
 	return (
 		<>
 			<ComboBox {...combobox} {...args}>
-				<ComboBoxInput {...combobox} />
+				<ComboBox.Input {...combobox} />
 			</ComboBox>
-			<ComboBoxLoadingState {...combobox} />
-			<ComboBoxSelect {...combobox}>
+			<ComboBox.LoadingState {...combobox} />
+			<ComboBox.Select {...combobox}>
 				{items.map((item, i) => (
-					<ComboBoxOption key={item.id} {...combobox} item={item} index={i}>
+					<ComboBox.Option key={item.id} {...combobox} item={item} index={i}>
 						{item.name}
-					</ComboBoxOption>
+					</ComboBox.Option>
 				))}
-			</ComboBoxSelect>
+			</ComboBox.Select>
 		</>
 	);
 };

@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@/client/types";
-import React, { FC, useContext } from "react";
+import React, { forwardRef, useContext } from "react";
 import tw from "twin.macro";
 import { TagsContext } from "./context";
 
@@ -16,12 +16,14 @@ const Root = tw.input`
 
 export type TagEditableProps = InferComponentProps<typeof Root>;
 
-export const TagEditable: FC<TagEditableProps> = (props) => {
+export const TagEditable = forwardRef<HTMLInputElement, TagEditableProps>((props, ref) => {
 	const { ...editableTextProps } = props;
 
 	const { editable } = useContext(TagsContext);
 
 	if (!editable) return null;
 
-	return <Root spellCheck={false} {...editableTextProps} />;
-};
+	return <Root spellCheck={false} {...editableTextProps} ref={ref} />;
+});
+
+TagEditable.displayName = "TagEditable";

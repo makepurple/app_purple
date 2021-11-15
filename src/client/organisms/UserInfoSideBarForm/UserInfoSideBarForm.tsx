@@ -1,9 +1,17 @@
-import { Form, HiddenInput } from "@/client/atoms";
-import { useGetUserInfoSideBarQuery } from "@/client/graphql";
+import { ComboBox, Form, HiddenInput } from "@/client/atoms";
+import {
+	SuggestSkillsDocument,
+	SuggestSkillsQuery,
+	SuggestSkillsQueryVariables,
+	useGetUserInfoSideBarQuery
+} from "@/client/graphql";
+import { useComboBoxState } from "@/client/hooks";
 import { Tags } from "@/client/molecules";
-import React, { CSSProperties, FC, useEffect } from "react";
+import ms from "ms";
+import React, { CSSProperties, FC, useCallback, useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
+import { useClient } from "urql";
 
 const Root = tw(Form)``;
 
@@ -18,8 +26,29 @@ const SubTitle = tw.div`
 `;
 
 const Skills = tw(Tags)`
+	relative
 	mt-4
 `;
+
+const SkillsSuggestLoading = tw(ComboBox.LoadingState)`
+	bottom-0
+	inset-x-0
+	transform
+	translate-y-full
+`;
+
+const SkillsSuggest = tw(ComboBox.Select)`
+	bottom-0
+	inset-x-0
+	transform
+	translate-y-full
+`;
+
+type SuggestedSkill = {
+	id: string;
+	name: string;
+	owner: string;
+};
 
 export interface UserInfoSideBarFormProps {
 	className?: string;
@@ -36,6 +65,67 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		requestPolicy: "cache-first",
 		variables: {
 			name: userName
+		}
+	});
+
+	const urqlClient = useClient();
+
+	const getSuggestedSkills = useCallback(
+		async (input: Maybe<string>) => {
+			if (!input) return null;
+
+			const [name, owner] = input.split("/");
+
+			if (!name || !owner) return null;
+
+			const result = await urqlClient
+				.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
+					where: { name, owner }
+				})
+				.toPromise();
+
+			return (
+				result.data?.suggestSkills.nodes.map((repo) => ({
+					id: repo.id,
+					name: repo.name,
+					owner: repo.owner.login
+				})) ?? []
+			);
+		},
+		[urqlClient]
+	);
+
+	const [blueItems, setBlueItems] = useState<SuggestedSkill[]>([]);
+	const [redItems, setRedItems] = useState<SuggestedSkill[]>([]);
+
+	const blueComboBox = useComboBoxState<SuggestedSkill>({
+		debounce: ms("0.2s"),
+		id: "skills-combobox",
+		items: [],
+		itemToString: (item) => item?.name ?? "",
+		onInputValueChange: async ({ inputValue }) => {
+			const suggestions = await getSuggestedSkills(inputValue);
+
+			if (!suggestions) return;
+
+			setBlueItems(suggestions);
+		}
+	});
+
+	const redComboBox = useComboBoxState<SuggestedSkill>({
+		debounce: ms("0.2s"),
+		id: "desired-skills-combobox",
+		items: redItems,
+		itemToString: (item) => item?.name ?? "",
+		onInputValueChange: async ({ inputValue }) => {
+			const suggestions = await getSuggestedSkills(inputValue);
+
+			if (!suggestions) return;
+
+			setRedItems(suggestions);
+		},
+		onSelectedItemChange: (changes) => {
+			console.log(changes);
 		}
 	});
 
@@ -63,8 +153,6 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		});
 	}, [reset, user]);
 
-	if (!user) return null;
-
 	return (
 		<Root className={className} style={style}>
 			<SkillsContainer>
@@ -82,7 +170,17 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 							<span>{field.name}</span>
 						</Tags.Tag>
 					))}
-					<Tags.Editable />
+					<ComboBox {...blueComboBox} tw="flex-grow">
+						<ComboBox.Input {...blueComboBox} as={Tags.Editable} />
+					</ComboBox>
+					<SkillsSuggestLoading {...blueComboBox} />
+					<SkillsSuggest {...blueComboBox}>
+						{blueItems.map((item, i) => (
+							<ComboBox.Option key={item.id} {...blueComboBox} item={item} index={i}>
+								{item.name}
+							</ComboBox.Option>
+						))}
+					</SkillsSuggest>
 				</Skills>
 				<SubTitle>Currently Learning</SubTitle>
 				<Skills editable type="negative">
@@ -98,7 +196,17 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 							<span>{field.name}</span>
 						</Tags.Tag>
 					))}
-					<Tags.Editable />
+					<ComboBox {...redComboBox} tw="flex-grow">
+						<ComboBox.Input {...redComboBox} as={Tags.Editable} />
+					</ComboBox>
+					<SkillsSuggestLoading {...redComboBox} />
+					<SkillsSuggest {...redComboBox}>
+						{redItems.map((item, i) => (
+							<ComboBox.Option key={item.id} {...redComboBox} item={item} index={i}>
+								{item.name}
+							</ComboBox.Option>
+						))}
+					</SkillsSuggest>
 				</Skills>
 			</SkillsContainer>
 		</Root>

@@ -2,6 +2,11 @@ import { Input } from "@/client/atoms/Input";
 import { UseComboBoxState } from "@/client/hooks";
 import { InferComponentProps } from "@/client/types";
 import React, { ComponentType, forwardRef } from "react";
+import tw from "twin.macro";
+
+const Root = tw.div`
+	flex-grow
+`;
 
 export type ComboBoxInputProps = InferComponentProps<"input"> &
 	UseComboBoxState<any> & {
@@ -9,9 +14,9 @@ export type ComboBoxInputProps = InferComponentProps<"input"> &
 	};
 
 export const ComboBoxInput = forwardRef<HTMLInputElement, ComboBoxInputProps>((props, ref) => {
-	const { as: Type = Input, combobox, ...inputProps } = props;
+	const { as = Input, combobox, ...inputProps } = props;
 
-	return <Type {...inputProps} {...combobox.getInputProps({ ...inputProps, ref })} />;
+	return <Root as={as} {...inputProps} {...combobox.getInputProps({ ...inputProps, ref })} />;
 });
 
 ComboBoxInput.displayName = "ComboBoxInput";

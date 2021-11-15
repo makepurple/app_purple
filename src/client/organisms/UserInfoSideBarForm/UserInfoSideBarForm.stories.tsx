@@ -1,7 +1,9 @@
-import { GetUserInfoSideBar_mock } from "@/client/graphql/mocks";
+import { GetUserInfoSideBar_mock, SuggestSkills_mock } from "@/client/graphql/mocks";
 import { UserInfoSideBarForm, UserInfoSideBarFormProps } from "@/client/organisms";
+import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";
 import { getOperationName } from "@urql/core";
+import ms from "ms";
 import React from "react";
 
 export default {
@@ -19,8 +21,12 @@ export const Standard: any = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
-	urql: (op) => {
+	urql: async (op) => {
 		switch (getOperationName(op.query)) {
+			case "SuggestSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestSkills_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:

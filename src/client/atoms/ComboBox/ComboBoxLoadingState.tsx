@@ -6,12 +6,14 @@ import tw from "twin.macro";
 
 const Root = tw(Paper)`
 	absolute
+	flex
+	flex-col
+	items-stretch
 `;
 
 const Item = tw.li`
 	animate-pulse
 	h-6
-	w-64
 	m-1
 	rounded-md
 	bg-indigo-400
@@ -20,12 +22,12 @@ const Item = tw.li`
 export type ComboBoxLoadingStateProps = InferComponentProps<"ul"> & UseComboBoxState<any>;
 
 export const ComboBoxLoadingState: FC<ComboBoxLoadingStateProps> = (props) => {
-	const { combobox } = props;
+	const { combobox, ...ulProps } = props;
 
 	if (!combobox.loading) return null;
 
 	return (
-		<Root as="ul">
+		<Root as="ul" {...(ulProps as any)}>
 			<Item />
 			<Item />
 			<Item />
