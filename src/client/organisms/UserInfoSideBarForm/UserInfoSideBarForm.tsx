@@ -208,7 +208,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 							{...blueComboBox}
 							as={Tags.Editable}
 							onKeyDown={onEnterBlue}
-							placeholder="repo_owner/repo_name"
+							placeholder="[repo_owner]/[repo_name]"
 							aria-label="new skill"
 						/>
 					</ComboBox>
@@ -244,7 +244,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 							{...redComboBox}
 							as={Tags.Editable}
 							onKeyDown={onEnterRed}
-							placeholder="repo_owner/repo_name"
+							placeholder="[repo_owner]/[repo_name]"
 							aria-label="new desired skill"
 						/>
 					</ComboBox>
