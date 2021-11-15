@@ -294,7 +294,7 @@ export type QueryPostsArgs = {
 /** Root query type */
 export type QuerySuggestSkillsArgs = {
   first?: Maybe<Scalars['Int']>;
-  where: SuggestSkillWhereInput;
+  where: SuggestSkillsWhereInput;
 };
 
 
@@ -321,15 +321,15 @@ export type StringNullableFilter = {
   readonly startsWith?: Maybe<Scalars['String']>;
 };
 
-export type SuggestSkillWhereInput = {
-  readonly name: Scalars['String'];
-  readonly owner: Scalars['String'];
-};
-
 export type SuggestSkills = {
   readonly __typename: 'SuggestSkills';
   readonly nodes: ReadonlyArray<GitHubRepository>;
   readonly totalCount: Scalars['Int'];
+};
+
+export type SuggestSkillsWhereInput = {
+  readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
 };
 
 /** One of the most used languages by a user */
@@ -480,6 +480,13 @@ export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OkQuery = { readonly __typename: 'Query', readonly ok: boolean };
 
+export type SuggestSkillsQueryVariables = Exact<{
+  where: SuggestSkillsWhereInput;
+}>;
+
+
+export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
+
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
     fragment PostCardPost on Post {
   __typename
@@ -513,6 +520,7 @@ export const TopLanguagesFragmentDoc = /*#__PURE__*/ gql`
     `;
 export const UserAvatarUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserAvatarUser on User {
+  __typename
   id
   name
   image
@@ -522,6 +530,7 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserInfoSideBarUser on User {
   __typename
   desiredSkills {
+    __typename
     id
     name
   }
@@ -542,6 +551,7 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
   id
   name
   skills {
+    __typename
     id
     name
   }
@@ -664,6 +674,7 @@ export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQuery
 export const GetPostDocument = /*#__PURE__*/ gql`
     query GetPost($where: PostWhereUniqueInput!) {
   post(where: $where) {
+    __typename
     id
     authorName
     content
@@ -682,6 +693,7 @@ export function useGetPostQuery(options: Omit<Urql.UseQueryArgs<GetPostQueryVari
 export const GetPostDraftDocument = /*#__PURE__*/ gql`
     query GetPostDraft {
   postDraft {
+    __typename
     id
     content
     description
@@ -745,4 +757,27 @@ export const OkDocument = /*#__PURE__*/ gql`
 
 export function useOkQuery(options: Omit<Urql.UseQueryArgs<OkQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<OkQuery>({ query: OkDocument, ...options });
+};
+export const SuggestSkillsDocument = /*#__PURE__*/ gql`
+    query SuggestSkills($where: SuggestSkillsWhereInput!) {
+  suggestSkills(where: $where) {
+    __typename
+    nodes {
+      __typename
+      id
+      description
+      name
+      owner {
+        __typename
+        id
+        login
+      }
+    }
+    totalCount
+  }
+}
+    `;
+
+export function useSuggestSkillsQuery(options: Omit<Urql.UseQueryArgs<SuggestSkillsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SuggestSkillsQuery>({ query: SuggestSkillsDocument, ...options });
 };

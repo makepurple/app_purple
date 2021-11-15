@@ -118,7 +118,7 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
-  SuggestSkillWhereInput: { // input type
+  SuggestSkillsWhereInput: { // input type
     name: string; // String!
     owner: string; // String!
   }
@@ -587,7 +587,7 @@ export interface NexusGenArgTypes {
     }
     suggestSkills: { // args
       first?: number | null; // Int
-      where: NexusGenInputs['SuggestSkillWhereInput']; // SuggestSkillWhereInput!
+      where: NexusGenInputs['SuggestSkillsWhereInput']; // SuggestSkillsWhereInput!
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!

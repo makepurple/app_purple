@@ -6,7 +6,7 @@ export const suggestSkills = queryField("suggestSkills", {
 	type: nonNull("SuggestSkills"),
 	args: {
 		first: intArg(),
-		where: nonNull(arg({ type: "SuggestSkillWhereInput" }))
+		where: nonNull(arg({ type: "SuggestSkillsWhereInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;
