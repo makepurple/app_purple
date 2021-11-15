@@ -8,6 +8,7 @@ const Root = tw.input`
 	w-20
 	h-6
 	bg-transparent
+	truncate
 	hover:shadow-none
 	hover:border-transparent
 	focus:ring-0

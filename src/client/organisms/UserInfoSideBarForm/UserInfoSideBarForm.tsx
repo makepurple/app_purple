@@ -174,6 +174,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						<ComboBox.Input
 							{...blueComboBox}
 							as={Tags.Editable}
+							placeholder="repo_owner/repo_name"
 							aria-label="new skill"
 						/>
 					</ComboBox>
@@ -204,6 +205,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						<ComboBox.Input
 							{...redComboBox}
 							as={Tags.Editable}
+							placeholder="repo_owner/repo_name"
 							aria-label="new desired skill"
 						/>
 					</ComboBox>
