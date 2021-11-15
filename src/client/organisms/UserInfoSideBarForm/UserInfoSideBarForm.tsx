@@ -5,7 +5,7 @@ import {
 	SuggestSkillsQueryVariables,
 	useGetUserInfoSideBarQuery
 } from "@/client/graphql";
-import { useComboBoxState } from "@/client/hooks";
+import { useComboBoxState, useOnKeyDown } from "@/client/hooks";
 import { Tags } from "@/client/molecules";
 import ms from "ms";
 import React, { CSSProperties, FC, useCallback, useEffect, useState } from "react";
@@ -45,7 +45,6 @@ const SkillsSuggest = tw(ComboBox.Select)`
 `;
 
 type SuggestedSkill = {
-	id: string;
 	name: string;
 	owner: string;
 };
@@ -72,11 +71,11 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 	const getSuggestedSkills = useCallback(
 		async (input: Maybe<string>) => {
-			if (!input) return null;
+			if (!input) return [];
 
-			const [name, owner] = input.split("/");
+			const [owner, name] = input.split("/");
 
-			if (!name || !owner) return null;
+			if (!owner || !name) return [];
 
 			const result = await urqlClient
 				.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
@@ -95,20 +94,39 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		[urqlClient]
 	);
 
+	const user = data?.user;
+
+	const { control, reset } = useForm<{
+		skills: readonly { name: string; owner: string }[];
+		desiredSkills: readonly { name: string; owner: string }[];
+	}>({
+		defaultValues: {
+			skills: user?.skills ?? [],
+			desiredSkills: user?.desiredSkills ?? []
+		}
+	});
+
+	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
+	const desiredSkills = useFieldArray({ control, keyName: "_id", name: "desiredSkills" });
+
 	const [blueItems, setBlueItems] = useState<SuggestedSkill[]>([]);
 	const [redItems, setRedItems] = useState<SuggestedSkill[]>([]);
 
 	const blueComboBox = useComboBoxState<SuggestedSkill>({
 		debounce: ms("0.2s"),
 		id: "skills-combobox",
-		items: [],
+		items: blueItems,
 		itemToString: (item) => item?.name ?? "",
 		onInputValueChange: async ({ inputValue }) => {
 			const suggestions = await getSuggestedSkills(inputValue);
 
-			if (!suggestions) return;
-
 			setBlueItems(suggestions);
+		},
+		onSelectedItemChange: ({ selectedItem }) => {
+			if (!selectedItem) return;
+
+			skills.append(selectedItem);
+			blueComboBox.combobox.setInputValue("");
 		}
 	});
 
@@ -120,29 +138,49 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		onInputValueChange: async ({ inputValue }) => {
 			const suggestions = await getSuggestedSkills(inputValue);
 
-			if (!suggestions) return;
-
 			setRedItems(suggestions);
 		},
-		onSelectedItemChange: (changes) => {
-			console.log(changes);
+		onSelectedItemChange: ({ selectedItem }) => {
+			if (!selectedItem) return;
+
+			desiredSkills.append(selectedItem);
+			redComboBox.combobox.setInputValue("");
 		}
 	});
 
-	const user = data?.user;
+	const onEnterBlue = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
+		const inputValue = e.currentTarget.value;
 
-	const { control, reset } = useForm<{
-		skills: readonly { id: number; name: string; owner: string }[];
-		desiredSkills: readonly { id: number; name: string; owner: string }[];
-	}>({
-		defaultValues: {
-			skills: user?.skills ?? [],
-			desiredSkills: user?.desiredSkills ?? []
-		}
+		if (!inputValue) return;
+
+		const [owner, name] = inputValue.split("/");
+
+		if (!owner || !name) return;
+
+		const newSelectedItem = blueItems.find(
+			(item) => item.name === name && item.owner === owner
+		);
+
+		if (!newSelectedItem) return;
+
+		blueComboBox.combobox.selectItem(newSelectedItem);
 	});
 
-	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
-	const desiredSkills = useFieldArray({ control, keyName: "_id", name: "desiredSkills" });
+	const onEnterRed = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
+		const inputValue = e.currentTarget.value;
+
+		if (!inputValue) return;
+
+		const [owner, name] = inputValue.split("/");
+
+		if (!owner || !name) return;
+
+		const newSelectedItem = redItems.find((item) => item.name === name && item.owner === owner);
+
+		if (!newSelectedItem) return;
+
+		redComboBox.combobox.selectItem(newSelectedItem);
+	});
 
 	useEffect(() => {
 		if (!user) return;
@@ -159,12 +197,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 				<SubTitle>Highlighted Skills</SubTitle>
 				<Skills editable type="positive">
 					{skills.fields.map((field, i) => (
-						<Tags.Tag
-							key={field._id}
-							id={field.id.toString()}
-							onRemove={() => skills.remove(i)}
-						>
-							<HiddenInput name={`skills.${i}.id`} value={field.id} />
+						<Tags.Tag key={field._id} id={field._id} onRemove={() => skills.remove(i)}>
 							<HiddenInput name={`skills.${i}.name`} value={field.name} />
 							<HiddenInput name={`skills.${i}.owner`} value={field.owner} />
 							<span>{field.name}</span>
@@ -174,6 +207,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						<ComboBox.Input
 							{...blueComboBox}
 							as={Tags.Editable}
+							onKeyDown={onEnterBlue}
 							placeholder="repo_owner/repo_name"
 							aria-label="new skill"
 						/>
@@ -181,7 +215,12 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					<SkillsSuggestLoading {...blueComboBox} />
 					<SkillsSuggest {...blueComboBox}>
 						{blueItems.map((item, i) => (
-							<ComboBox.Option key={item.id} {...blueComboBox} item={item} index={i}>
+							<ComboBox.Option
+								key={`${item.owner}:${item.name}`}
+								{...blueComboBox}
+								item={item}
+								index={i}
+							>
 								{item.name}
 							</ComboBox.Option>
 						))}
@@ -192,10 +231,9 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					{desiredSkills.fields.map((field, i) => (
 						<Tags.Tag
 							key={field._id}
-							id={field.id.toString()}
+							id={field._id}
 							onRemove={() => desiredSkills.remove(i)}
 						>
-							<HiddenInput name={`desiredSkills.${i}.id`} value={field.id} />
 							<HiddenInput name={`desiredSkills.${i}.name`} value={field.name} />
 							<HiddenInput name={`desiredSkills.${i}.owner`} value={field.owner} />
 							<span>{field.name}</span>
@@ -205,6 +243,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						<ComboBox.Input
 							{...redComboBox}
 							as={Tags.Editable}
+							onKeyDown={onEnterRed}
 							placeholder="repo_owner/repo_name"
 							aria-label="new desired skill"
 						/>
@@ -212,7 +251,12 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					<SkillsSuggestLoading {...redComboBox} />
 					<SkillsSuggest {...redComboBox}>
 						{redItems.map((item, i) => (
-							<ComboBox.Option key={item.id} {...redComboBox} item={item} index={i}>
+							<ComboBox.Option
+								key={`${item.owner}:${item.name}`}
+								{...redComboBox}
+								item={item}
+								index={i}
+							>
 								{item.name}
 							</ComboBox.Option>
 						))}
