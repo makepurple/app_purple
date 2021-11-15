@@ -586,6 +586,7 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
     suggestSkills: { // args
+      first?: number | null; // Int
       where: NexusGenInputs['SuggestSkillWhereInput']; // SuggestSkillWhereInput!
     }
     user: { // args

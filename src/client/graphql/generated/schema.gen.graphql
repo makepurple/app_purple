@@ -187,7 +187,7 @@ type Query {
 
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
-  suggestSkills(where: SuggestSkillWhereInput!): SuggestSkills!
+  suggestSkills(first: Int, where: SuggestSkillWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
   viewer: User
 }

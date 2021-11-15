@@ -1,10 +1,11 @@
 import type { octokit } from "@/server/services";
 import { GitHubRepository } from "@/server/services/octokit";
-import { arg, nonNull, queryField } from "nexus";
+import { arg, intArg, nonNull, queryField } from "nexus";
 
 export const suggestSkills = queryField("suggestSkills", {
 	type: nonNull("SuggestSkills"),
 	args: {
+		first: intArg(),
 		where: nonNull(arg({ type: "SuggestSkillWhereInput" }))
 	},
 	authorize: (parent, args, { user }) => {
@@ -12,8 +13,8 @@ export const suggestSkills = queryField("suggestSkills", {
 	},
 	resolve: async (parent, args, { octokit: graphql }) => {
 		const searchData = await graphql`
-			query SuggestRepositories($searchQuery: String!) {
-				search(first: 10, query: $searchQuery, type: REPOSITORY) {
+			query SuggestRepositories($first: Int, $searchQuery: String!) {
+				search(first: $first, query: $searchQuery, type: REPOSITORY) {
 					nodes {
 						... on Repository {
 							...GitHubRepository
@@ -25,6 +26,7 @@ export const suggestSkills = queryField("suggestSkills", {
 			${GitHubRepository}
 		`
 			.cast<octokit.SuggestRepositoriesQuery, octokit.SuggestRepositoriesQueryVariables>({
+				first: Math.min(args.first ?? 10, 10),
 				searchQuery: `user:${args.where.owner} ${args.where.name} in:name`
 			})
 			.catch(() => null);

@@ -293,6 +293,7 @@ export type QueryPostsArgs = {
 
 /** Root query type */
 export type QuerySuggestSkillsArgs = {
+  first?: Maybe<Scalars['Int']>;
   where: SuggestSkillWhereInput;
 };
 
