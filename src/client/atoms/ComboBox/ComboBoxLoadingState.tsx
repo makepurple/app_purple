@@ -1,14 +1,18 @@
 import { Paper } from "@/client/atoms/Paper";
 import { UseComboBoxState } from "@/client/hooks";
+import { getZIndex } from "@/client/styles";
 import { InferComponentProps } from "@/client/types";
 import React, { FC } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 
-const Root = tw(Paper)`
-	absolute
-	flex
-	flex-col
-	items-stretch
+const Root = styled(Paper)`
+	${tw`
+		absolute
+		flex
+		flex-col
+		items-stretch	
+	`}
+	z-index: ${getZIndex("menu")};
 `;
 
 const Item = tw.li`
