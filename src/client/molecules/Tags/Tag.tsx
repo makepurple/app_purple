@@ -54,7 +54,7 @@ const CloseButton = tw.span`
 `;
 
 export const Tag = styled((props: TagProps) => {
-	const { children, onRemove, ...restTagProps } = props;
+	const { children, id, onRemove, ...restTagProps } = props;
 
 	const context = useContext(TagsContext);
 

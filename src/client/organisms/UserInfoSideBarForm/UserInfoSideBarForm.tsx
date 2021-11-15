@@ -171,7 +171,11 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						</Tags.Tag>
 					))}
 					<ComboBox {...blueComboBox} tw="flex-grow">
-						<ComboBox.Input {...blueComboBox} as={Tags.Editable} />
+						<ComboBox.Input
+							{...blueComboBox}
+							as={Tags.Editable}
+							aria-label="new skill"
+						/>
 					</ComboBox>
 					<SkillsSuggestLoading {...blueComboBox} />
 					<SkillsSuggest {...blueComboBox}>
@@ -197,7 +201,11 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						</Tags.Tag>
 					))}
 					<ComboBox {...redComboBox} tw="flex-grow">
-						<ComboBox.Input {...redComboBox} as={Tags.Editable} />
+						<ComboBox.Input
+							{...redComboBox}
+							as={Tags.Editable}
+							aria-label="new desired skill"
+						/>
 					</ComboBox>
 					<SkillsSuggestLoading {...redComboBox} />
 					<SkillsSuggest {...redComboBox}>
