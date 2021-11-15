@@ -1,6 +1,7 @@
 fragment UserInfoSideBarUser on User {
 	__typename
 	desiredSkills {
+		__typename
 		id
 		name
 	}
@@ -21,6 +22,7 @@ fragment UserInfoSideBarUser on User {
 	id
 	name
 	skills {
+		__typename
 		id
 		name
 	}
