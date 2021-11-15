@@ -24,7 +24,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
 				where: {
 					authorName_urlSlug: {
-						authorName: query.username as string,
+						authorName: query.userName as string,
 						urlSlug: "draft"
 					}
 				}
