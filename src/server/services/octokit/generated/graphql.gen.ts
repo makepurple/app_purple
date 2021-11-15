@@ -22533,7 +22533,7 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
 };
 
 export type SuggestRepositoriesQueryVariables = Exact<{
-  query: Scalars['String'];
+  searchQuery: Scalars['String'];
 }>;
 
 

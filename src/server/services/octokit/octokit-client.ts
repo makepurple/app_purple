@@ -53,8 +53,7 @@ export class OctokitClient {
 			const op = async (variables?: TVariables): Promise<TResult> => {
 				const { token } = await auth;
 
-				const response = await this.instance.graphql<TResult>({
-					query,
+				const response = await this.instance.graphql<TResult>(query, {
 					...variables,
 					headers: {
 						Authorization: `token ${token}`
