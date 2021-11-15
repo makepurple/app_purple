@@ -1,6 +1,14 @@
 import { InferComponentProps } from "@/client/types";
 import { ObjectUtils } from "@/utils";
-import React, { forwardRef, memo, ReactNode, SyntheticEvent, useCallback, useMemo } from "react";
+import React, {
+	forwardRef,
+	memo,
+	ReactNode,
+	SyntheticEvent,
+	useCallback,
+	useMemo,
+	useState
+} from "react";
 import tw, { styled, theme } from "twin.macro";
 import { TagsContext } from "./context";
 import { Tag, TagProps, TagType } from "./Tag";
@@ -67,6 +75,8 @@ const _Tags = memo(
 			...restTagsProps
 		} = props;
 
+		const [editableElem, editableRef] = useState<HTMLInputElement | null>(null);
+
 		const tags: readonly TagProps[] = useMemo(() => {
 			return children
 				.filter((child) => (child as any).type === Tag)
@@ -83,8 +93,18 @@ const _Tags = memo(
 		);
 
 		return (
-			<Root {...restTagsProps} ref={ref} editable={editable} type={type}>
-				<TagsContext.Provider value={{ editable, onRemove }}>
+			<Root
+				{...restTagsProps}
+				ref={ref}
+				editable={editable}
+				onClick={() => {
+					if (!editableElem) return;
+
+					editableElem.focus();
+				}}
+				type={type}
+			>
+				<TagsContext.Provider value={{ editable, editableRef, onRemove }}>
 					{children}
 				</TagsContext.Provider>
 			</Root>
