@@ -4,7 +4,7 @@ import {
 	UploadPostImage_mock
 } from "@/client/graphql/mocks";
 import { SiteWideLayout } from "@/client/organisms";
-import { PageProps } from "@/client/page-props/[username]/draft";
+import { PageProps } from "@/client/page-props/[userName]/draft";
 import Page from "@/pages/[userName]/draft";
 import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";

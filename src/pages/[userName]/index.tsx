@@ -3,7 +3,7 @@ import { useGetPostsQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
 import { NonIdealState } from "@/client/molecules";
 import { LoadingPostCard, PostCard, UserInfoSideBar } from "@/client/organisms";
-import { PageProps, pageProps } from "@/client/page-props/[username]";
+import { PageProps, pageProps } from "@/client/page-props/[userName]";
 import { HexagonIcon, NoteIcon, RepoIcon } from "@/client/svgs";
 import { NextPage } from "next";
 import NextLink from "next/link";

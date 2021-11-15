@@ -21,7 +21,7 @@ import {
 	PostImageInput,
 	RemovePostThumbnailButton
 } from "@/client/organisms";
-import { PageProps, pageProps } from "@/client/page-props/[username]/draft";
+import { PageProps, pageProps } from "@/client/page-props/[userName]/draft";
 import { PostDraftUpdateInput } from "@/validators";
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import type { Type } from "computed-types";
