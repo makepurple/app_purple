@@ -113,7 +113,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 	const [redItems, setRedItems] = useState<SuggestedSkill[]>([]);
 
 	const blueComboBox = useComboBoxState<SuggestedSkill>({
-		debounce: ms("0.2s"),
+		debounce: ms("0.3s"),
 		id: "skills-combobox",
 		items: blueItems,
 		itemToString: (item) => item?.name ?? "",
@@ -131,7 +131,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 	});
 
 	const redComboBox = useComboBoxState<SuggestedSkill>({
-		debounce: ms("0.2s"),
+		debounce: ms("0.3s"),
 		id: "desired-skills-combobox",
 		items: redItems,
 		itemToString: (item) => item?.name ?? "",
