@@ -1,9 +1,19 @@
 import * as Keycode from "keycode-js";
 import { KeyboardEvent, KeyboardEventHandler, useCallback, useEffect } from "react";
 
-interface IUseOnKeyDownOptions {
+type KeycodeCode<T extends keyof typeof Keycode> = T extends `CODE_${infer U}`
+	? U
+	: T extends `KEY_${infer U}`
+	? U
+	: T extends `VALUE_${infer U}`
+	? U
+	: never;
+
+export type KeyCode = KeycodeCode<keyof typeof Keycode>;
+
+export interface UseOnKeyDownOptions {
 	global?: boolean;
-	key: keyof typeof Keycode;
+	key: KeyCode;
 }
 
 /**
@@ -15,36 +25,34 @@ interface IUseOnKeyDownOptions {
  * @date July 4, 2021
  */
 export const useOnKeyDown = <T extends HTMLElement>(
-	options: IUseOnKeyDownOptions,
+	options: UseOnKeyDownOptions,
 	callback: KeyboardEventHandler<T>
 ) => {
 	const { global = false, key } = options;
 
-	const suffix = key.split("_").slice(1).join("_");
-
 	const onKeyDown = useCallback(
 		(event: KeyboardEvent<T>): KeyboardEvent<T> => {
-			const isKey = event.key === Keycode[`VALUE_${suffix}`];
-			const isKeyCode = event.keyCode === Keycode[`KEY_${suffix}`];
-			const isCode = event.code === Keycode[`CODE_${suffix}`];
+			const valueCode = Keycode[`VALUE_${key}`] ?? null;
+			const keyCode = Keycode[`KEY_${key}`] ?? null;
+			const codeCode = Keycode[`CODE_${key}`] ?? null;
+
+			const isKey = !!valueCode && event.key === valueCode;
+			const isKeyCode = !!keyCode && event.keyCode === keyCode;
+			const isCode = !!codeCode && event.code === codeCode;
 
 			if (isKey || isKeyCode || isCode) callback(event);
 
 			return event;
 		},
-		[callback, suffix]
+		[callback, key]
 	);
 
 	useEffect(() => {
-		if (!global) {
-			return;
-		}
+		if (!global) return;
 
-		document.body.addEventListener("keydown", onKeyDown as any);
 		document.body.addEventListener("keydown", onKeyDown as any);
 
 		return () => {
-			document.body.removeEventListener("keydown", onKeyDown as any);
 			document.body.removeEventListener("keydown", onKeyDown as any);
 		};
 	}, [global, onKeyDown]);

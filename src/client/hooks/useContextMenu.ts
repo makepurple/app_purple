@@ -27,16 +27,10 @@ export const useContextMenu = <TElement extends HTMLElement>(
 		onClose?.(event);
 	});
 
-	useOnKeyDown(
-		{
-			global: true,
-			key: "CODE_ESCAPE"
-		},
-		(event) => {
-			setPosition(null);
-			onClose?.(event);
-		}
-	);
+	useOnKeyDown({ global: true, key: "ESCAPE" }, (event) => {
+		setPosition(null);
+		onClose?.(event);
+	});
 
 	useEffect(() => {
 		const elem = ref.current;
