@@ -3,14 +3,24 @@ import { TopLanguages_fragment_mock } from ".";
 
 export const User_fragment_mock: User = {
 	__typename: "User" as const,
-	id: "0",
-	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
-	name: "leedavidcs",
+	comments: [],
+	desiredSkills: ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map(
+		(skill, i) => ({
+			__typename: "Skill",
+			id: i,
+			name: skill,
+			owner: "github",
+			users: [],
+			desiringUsers: []
+		})
+	),
+	email: "lee.david.cs@test.com",
 	github: {
 		__typename: "GitHubUser",
 		id: "0",
 		bio: "I learn things and work on MakePurple",
 		company: "Openbase",
+		login: "leedavidcs",
 		name: "David Lee",
 		topLanguages: {
 			...TopLanguages_fragment_mock,
@@ -20,6 +30,11 @@ export const User_fragment_mock: User = {
 		url: "https://github.com/leedavidcs",
 		websiteUrl: "https://leedavidcs.dev"
 	},
+	githubUrl: "https://github.com/leedavidcs",
+	id: "0",
+	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
+	name: "leedavidcs",
+	posts: [],
 	skills: [
 		"Next.js",
 		"Prisma",
@@ -32,13 +47,10 @@ export const User_fragment_mock: User = {
 	].map((skill, i) => ({
 		__typename: "Skill",
 		id: i,
-		name: skill
+		name: skill,
+		owner: "github",
+		users: [],
+		desiringUsers: []
 	})),
-	desiredSkills: ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map(
-		(skill, i) => ({
-			__typename: "Skill",
-			id: i,
-			name: skill
-		})
-	)
-} as any;
+	upvotedPosts: []
+};
