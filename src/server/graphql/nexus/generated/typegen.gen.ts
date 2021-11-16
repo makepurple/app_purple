@@ -130,6 +130,9 @@ export interface NexusGenInputs {
     name: string; // String!
     owner: string; // String!
   }
+  UpdateDesiredSkillsInput: { // input type
+    skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
+  }
   UpdateSkillsInput: { // input type
     skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
   }
@@ -320,6 +323,7 @@ export interface NexusGenFieldTypes {
     ok: boolean; // Boolean!
     publishPost: NexusGenRootTypes['Post']; // Post!
     removePostThumbnail: NexusGenRootTypes['Post'] | null; // Post
+    updateDesiredSkills: NexusGenRootTypes['User'] | null; // User
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updatePostDraft: NexusGenRootTypes['Post'] | null; // Post
     updateSkills: NexusGenRootTypes['User'] | null; // User
@@ -459,6 +463,7 @@ export interface NexusGenFieldTypeNames {
     ok: 'Boolean'
     publishPost: 'Post'
     removePostThumbnail: 'Post'
+    updateDesiredSkills: 'User'
     updatePost: 'Post'
     updatePostDraft: 'Post'
     updateSkills: 'User'
@@ -564,6 +569,9 @@ export interface NexusGenArgTypes {
     }
     removePostThumbnail: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    updateDesiredSkills: { // args
+      data: NexusGenInputs['UpdateDesiredSkillsInput']; // UpdateDesiredSkillsInput!
     }
     updatePost: { // args
       data: NexusGenInputs['PostUpdateInput']; // PostUpdateInput!

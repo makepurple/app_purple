@@ -108,6 +108,7 @@ export type Mutation = {
   readonly ok: Scalars['Boolean'];
   readonly publishPost: Post;
   readonly removePostThumbnail?: Maybe<Post>;
+  readonly updateDesiredSkills?: Maybe<User>;
   readonly updatePost?: Maybe<Post>;
   readonly updatePostDraft?: Maybe<Post>;
   readonly updateSkills?: Maybe<User>;
@@ -139,6 +140,12 @@ export type MutationPublishPostArgs = {
 /** Root mutation type */
 export type MutationRemovePostThumbnailArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateDesiredSkillsArgs = {
+  data: UpdateDesiredSkillsInput;
 };
 
 
@@ -368,6 +375,10 @@ export type TopLanguages = {
   readonly totalCount: Scalars['Int'];
   /** The total number of bytes written across all owned repositories across all languages. */
   readonly totalSize: Scalars['Int'];
+};
+
+export type UpdateDesiredSkillsInput = {
+  readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
 };
 
 export type UpdateSkillsInput = {

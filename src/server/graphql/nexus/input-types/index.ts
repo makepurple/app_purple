@@ -8,6 +8,7 @@ export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillWhereUniqueInput";
 export * from "./StringNullableFilter";
 export * from "./SuggestSkillsWhereInput";
+export * from "./UpdateDesiredSkillsInput";
 export * from "./UpdateSkillsInput";
 export * from "./UserWhereInput";
 export * from "./UserWhereUniqueInput";

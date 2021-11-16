@@ -99,6 +99,7 @@ type Mutation {
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): Post!
   removePostThumbnail(where: PostWhereUniqueInput!): Post
+  updateDesiredSkills(data: UpdateDesiredSkillsInput!): User
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): Post
   updateSkills(data: UpdateSkillsInput!): User
@@ -275,6 +276,10 @@ type TopLanguages {
 A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 """
 scalar URL
+
+input UpdateDesiredSkillsInput {
+  skills: [SkillWhereUniqueInput!]!
+}
 
 input UpdateSkillsInput {
   skills: [SkillWhereUniqueInput!]!
