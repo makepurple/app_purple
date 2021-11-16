@@ -212,10 +212,10 @@ export const Page: NextPage<PageProps> = () => {
 				)}
 				<Form
 					disabled={publishing || saving}
-					onSubmit={handleSubmit(async (values) => {
+					onSubmit={handleSubmit(async (formData) => {
 						const publishedPost = await publishPost({
 							where: { id: post.id },
-							data: values
+							data: formData
 						})
 							.then((result) => result.data?.post ?? null)
 							.catch(() => null);
@@ -287,10 +287,10 @@ export const Page: NextPage<PageProps> = () => {
 					<FormActions>
 						<PublishButton type="submit">Publish</PublishButton>
 						<SaveButton
-							onClick={handleSubmit(async (values) => {
+							onClick={handleSubmit(async (formData) => {
 								const didSucceed = await updatePostDraft({
 									where: { id: post.id },
-									data: values
+									data: formData
 								})
 									.then((result) => !!result.data?.post)
 									.catch(() => false);

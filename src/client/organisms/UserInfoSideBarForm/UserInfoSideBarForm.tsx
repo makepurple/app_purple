@@ -3,13 +3,15 @@ import {
 	SuggestSkillsDocument,
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables,
-	useGetUserInfoSideBarQuery
+	useGetUserInfoSideBarQuery,
+	useUpdateUserSkillsMutation
 } from "@/client/graphql";
 import { useComboBoxState, useOnKeyDown } from "@/client/hooks";
 import { Tags } from "@/client/molecules";
 import ms from "ms";
 import React, { CSSProperties, FC, useCallback, useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useClient } from "urql";
 
@@ -67,6 +69,8 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		}
 	});
 
+	const [{ fetching: updatingSkills }, updateSkills] = useUpdateUserSkillsMutation();
+
 	const urqlClient = useClient();
 
 	const getSuggestedSkills = useCallback(
@@ -96,7 +100,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 	const user = data?.user;
 
-	const { control, reset } = useForm<{
+	const { control, handleSubmit, reset } = useForm<{
 		skills: readonly { name: string; owner: string }[];
 		desiredSkills: readonly { name: string; owner: string }[];
 	}>({
@@ -192,7 +196,35 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 	}, [reset, user]);
 
 	return (
-		<Root className={className} style={style}>
+		<Root
+			className={className}
+			disabled={updatingSkills}
+			onSubmit={handleSubmit(async (formData) => {
+				const didSucceed = await updateSkills({
+					skills: formData.skills.map((skill) => ({
+						name_owner: {
+							name: skill.name,
+							owner: skill.owner
+						}
+					})),
+					desiredSkills: formData.desiredSkills.map((skill) => ({
+						name_owner: {
+							name: skill.name,
+							owner: skill.owner
+						}
+					}))
+				})
+					.then((result) => {
+						return !!result.data?.updateDesiredSkills && !!result.data.updateSkills;
+					})
+					.catch(() => false);
+
+				didSucceed
+					? toast.success("Your skills were updated 🎉")
+					: toast.error("Your skills could not be saved");
+			})}
+			style={style}
+		>
 			<SkillsContainer>
 				<SubTitle>Highlighted Skills</SubTitle>
 				<Skills editable type="positive">
