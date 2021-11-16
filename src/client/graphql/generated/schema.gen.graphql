@@ -275,6 +275,7 @@ input UploadPostImageInput {
 
 type User {
   comments: [Comment!]!
+  description: String
   desiredSkills: [Skill!]!
   email: String!
   github: GitHubUser!

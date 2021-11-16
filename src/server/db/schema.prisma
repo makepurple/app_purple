@@ -51,7 +51,7 @@ model User {
   // Avatar image, pulled from GitHub
   image         String?
   // Self written summary or description
-  summary       String?
+  description       String?
   // When this account was registered
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt

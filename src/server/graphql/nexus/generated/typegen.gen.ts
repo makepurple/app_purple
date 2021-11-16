@@ -258,6 +258,7 @@ export interface NexusGenObjects {
     nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
   }
   User: { // root type
+    description?: string | null; // String
     email: string; // String!
     id: string; // ID!
     image?: string | null; // String
@@ -402,6 +403,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    description: string | null; // String
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
     github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
@@ -542,6 +544,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     comments: 'Comment'
+    description: 'String'
     desiredSkills: 'Skill'
     email: 'String'
     github: 'GitHubUser'

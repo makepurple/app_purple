@@ -8,6 +8,7 @@ export const User = objectType({
 	description: _User.$description,
 	definition: (t) => {
 		t.field(_User.comments);
+		t.field(_User.description);
 		t.field("desiredSkills", {
 			type: nonNull(list(nonNull("Skill"))),
 			resolve: (root, args, { prisma }) => {

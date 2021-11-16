@@ -393,6 +393,7 @@ export type UploadPostImageInput = {
 export type User = {
   readonly __typename: 'User';
   readonly comments: ReadonlyArray<Comment>;
+  readonly description?: Maybe<Scalars['String']>;
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
   readonly github: GitHubUser;
