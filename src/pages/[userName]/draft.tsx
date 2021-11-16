@@ -79,14 +79,14 @@ const StyledDocumentEditor = tw(DocumentEditor)`
 `;
 
 const FormActions = tw.div`
-	mt-10
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
 	gap-4
+	mt-10
 `;
 
 const PublishButton = tw(FormButton)`
-	bg-blue-500
+	bg-indigo-500
 `;
 
 const SaveButton = tw(FormButton)`

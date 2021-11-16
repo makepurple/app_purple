@@ -71,10 +71,6 @@ const StyledNewPostButton = tw(NewPostButton)`
 	mt-4
 `;
 
-const MostUsedLanguages = tw(TopLanguages)`
-	mt-4
-`;
-
 const Skills = tw(Tags)`
 	mt-4
 `;
@@ -149,7 +145,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 			<Divider />
 			<TopLanguagesContainer>
 				<SubTitle>Most Used Languages</SubTitle>
-				<MostUsedLanguages topLanguages={user.github.topLanguages} />
+				<TopLanguages topLanguages={user.github.topLanguages} tw="mt-4" />
 			</TopLanguagesContainer>
 			<Divider />
 			<SkillsContainer>

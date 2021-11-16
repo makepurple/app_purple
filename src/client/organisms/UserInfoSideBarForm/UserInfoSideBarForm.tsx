@@ -1,4 +1,4 @@
-import { ComboBox, Form, HiddenInput } from "@/client/atoms";
+import { ComboBox, Form, FormButton, HiddenInput } from "@/client/atoms";
 import {
 	SuggestSkillsDocument,
 	SuggestSkillsQuery,
@@ -19,6 +19,13 @@ const Root = tw(Form)``;
 
 const SkillsContainer = tw.div``;
 
+const FormActions = tw.div`
+	grid
+	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	gap-4
+	mt-10
+`;
+
 const SubTitle = tw.div`
 	text-xl
 	leading-none
@@ -30,6 +37,16 @@ const SubTitle = tw.div`
 const Skills = tw(Tags)`
 	relative
 	mt-4
+`;
+
+const SaveButton = tw(FormButton)`
+	bg-indigo-500
+`;
+
+const CancelButton = tw(FormButton)`
+	bg-gray-50
+	text-black
+	border-gray-400
 `;
 
 const SkillsSuggestLoading = tw(ComboBox.LoadingState)`
@@ -295,6 +312,10 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					</SkillsSuggest>
 				</Skills>
 			</SkillsContainer>
+			<FormActions>
+				<SaveButton type="submit">Save</SaveButton>
+				<CancelButton type="button">Cancel</CancelButton>
+			</FormActions>
 		</Root>
 	);
 };
