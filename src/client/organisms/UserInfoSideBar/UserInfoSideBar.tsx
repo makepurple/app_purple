@@ -1,4 +1,4 @@
-import { Divider, Paper } from "@/client/atoms";
+import { Divider, NoDataText, Paper } from "@/client/atoms";
 import { useGetUserInfoSideBarQuery } from "@/client/graphql";
 import { Tags } from "@/client/molecules";
 import { NewPostButton } from "@/client/organisms/NewPostButton";
@@ -150,7 +150,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 			<Divider />
 			<SkillsContainer>
 				<SubTitle>Highlighted Skills</SubTitle>
-				{!!user.skills.length && (
+				{user.skills.length ? (
 					<Skills type="positive">
 						{user.skills.map((skill) => (
 							<Tags.Tag key={skill.id} id={skill.id.toString()}>
@@ -158,9 +158,11 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</Tags.Tag>
 						))}
 					</Skills>
+				) : (
+					<NoDataText tw="mt-4">This user has not added any skills</NoDataText>
 				)}
 				<SubTitle>Currently Learning</SubTitle>
-				{!!user.desiredSkills.length && (
+				{user.desiredSkills.length ? (
 					<Skills type="negative">
 						{user.desiredSkills.map((skill) => (
 							<Tags.Tag key={skill.id} id={skill.id.toString()}>
@@ -168,6 +170,8 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</Tags.Tag>
 						))}
 					</Skills>
+				) : (
+					<NoDataText tw="mt-4">This user has not added any desired skills</NoDataText>
 				)}
 			</SkillsContainer>
 		</Paper>
