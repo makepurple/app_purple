@@ -1,4 +1,8 @@
-import { GetUserInfoSideBar_mock, SuggestSkills_mock } from "@/client/graphql/mocks";
+import {
+	GetUserInfoSideBar_mock,
+	SuggestSkills_mock,
+	UpdateUserSkills_mock
+} from "@/client/graphql/mocks";
 import { UserInfoSideBarForm, UserInfoSideBarFormProps } from "@/client/organisms";
 import { PromiseUtils } from "@/utils";
 import type { Meta, Story } from "@storybook/react";
@@ -29,6 +33,10 @@ Standard.parameters = {
 				return { data: SuggestSkills_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "UpdateUserSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: UpdateUserSkills_mock };
 			default:
 				return {};
 		}
