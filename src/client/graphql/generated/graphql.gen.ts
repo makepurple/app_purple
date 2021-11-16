@@ -419,6 +419,8 @@ export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: n
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
+export type UpdateUserSkillsSkillFragment = { readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string };
+
 export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined };
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
@@ -458,6 +460,14 @@ export type UpdatePostDraftMutationVariables = Exact<{
 
 
 export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } | null | undefined };
+
+export type UpdateUserSkillsMutationVariables = Exact<{
+  skills: ReadonlyArray<SkillWhereUniqueInput> | SkillWhereUniqueInput;
+  desiredSkills: ReadonlyArray<SkillWhereUniqueInput> | SkillWhereUniqueInput;
+}>;
+
+
+export type UpdateUserSkillsMutation = { readonly __typename: 'Mutation', readonly updateSkills?: { readonly __typename: 'User', readonly id: string | number, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string }> } | null | undefined, readonly updateDesiredSkills?: { readonly __typename: 'User', readonly id: string | number, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string }> } | null | undefined };
 
 export type UploadPostImageMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -535,6 +545,14 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
   upvoteCount
   urlSlug
   viewerUpvoted
+}
+    `;
+export const UpdateUserSkillsSkillFragmentDoc = /*#__PURE__*/ gql`
+    fragment UpdateUserSkillsSkill on Skill {
+  __typename
+  id
+  name
+  owner
 }
     `;
 export const TopLanguagesFragmentDoc = /*#__PURE__*/ gql`
@@ -661,6 +679,30 @@ export const UpdatePostDraftDocument = /*#__PURE__*/ gql`
 
 export function useUpdatePostDraftMutation() {
   return Urql.useMutation<UpdatePostDraftMutation, UpdatePostDraftMutationVariables>(UpdatePostDraftDocument);
+};
+export const UpdateUserSkillsDocument = /*#__PURE__*/ gql`
+    mutation UpdateUserSkills($skills: [SkillWhereUniqueInput!]!, $desiredSkills: [SkillWhereUniqueInput!]!) {
+  updateSkills(data: {skills: $skills}) {
+    __typename
+    id
+    skills {
+      __typename
+      ...UpdateUserSkillsSkill
+    }
+  }
+  updateDesiredSkills(data: {skills: $desiredSkills}) {
+    __typename
+    id
+    skills {
+      __typename
+      ...UpdateUserSkillsSkill
+    }
+  }
+}
+    ${UpdateUserSkillsSkillFragmentDoc}`;
+
+export function useUpdateUserSkillsMutation() {
+  return Urql.useMutation<UpdateUserSkillsMutation, UpdateUserSkillsMutationVariables>(UpdateUserSkillsDocument);
 };
 export const UploadPostImageDocument = /*#__PURE__*/ gql`
     mutation UploadPostImage($where: PostWhereUniqueInput!, $data: UploadPostImageInput!) {
