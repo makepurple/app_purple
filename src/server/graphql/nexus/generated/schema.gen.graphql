@@ -101,6 +101,7 @@ type Mutation {
   removePostThumbnail(where: PostWhereUniqueInput!): Post
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): Post
+  updateSkills(data: UpdateSkillsInput!): User
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
   upvotePost(where: PostWhereUniqueInput!): Post!
   viewer: User
@@ -212,6 +213,16 @@ type Skill {
   users: [User!]!
 }
 
+input SkillNameOwnerCompoundUniqueInput {
+  name: String!
+  owner: String!
+}
+
+input SkillWhereUniqueInput {
+  id: Int
+  name_owner: SkillNameOwnerCompoundUniqueInput
+}
+
 input StringNullableFilter {
   contains: String
   endsWith: String
@@ -264,6 +275,10 @@ type TopLanguages {
 A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 """
 scalar URL
+
+input UpdateSkillsInput {
+  skills: [SkillWhereUniqueInput!]!
+}
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload

@@ -110,6 +110,14 @@ export interface NexusGenInputs {
     authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
     id?: number | null; // Int
   }
+  SkillNameOwnerCompoundUniqueInput: { // input type
+    name: string; // String!
+    owner: string; // String!
+  }
+  SkillWhereUniqueInput: { // input type
+    id?: number | null; // Int
+    name_owner?: NexusGenInputs['SkillNameOwnerCompoundUniqueInput'] | null; // SkillNameOwnerCompoundUniqueInput
+  }
   StringNullableFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -121,6 +129,9 @@ export interface NexusGenInputs {
   SuggestSkillsWhereInput: { // input type
     name: string; // String!
     owner: string; // String!
+  }
+  UpdateSkillsInput: { // input type
+    skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
   }
   UploadPostImageInput: { // input type
     image: NexusGenScalars['Upload']; // Upload!
@@ -311,6 +322,7 @@ export interface NexusGenFieldTypes {
     removePostThumbnail: NexusGenRootTypes['Post'] | null; // Post
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updatePostDraft: NexusGenRootTypes['Post'] | null; // Post
+    updateSkills: NexusGenRootTypes['User'] | null; // User
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     upvotePost: NexusGenRootTypes['Post']; // Post!
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -449,6 +461,7 @@ export interface NexusGenFieldTypeNames {
     removePostThumbnail: 'Post'
     updatePost: 'Post'
     updatePostDraft: 'Post'
+    updateSkills: 'User'
     uploadPostImage: 'PostImage'
     upvotePost: 'Post'
     viewer: 'User'
@@ -559,6 +572,9 @@ export interface NexusGenArgTypes {
     updatePostDraft: { // args
       data: NexusGenInputs['PostDraftUpdateInput']; // PostDraftUpdateInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    updateSkills: { // args
+      data: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!
     }
     uploadPostImage: { // args
       data: NexusGenInputs['UploadPostImageInput']; // UploadPostImageInput!

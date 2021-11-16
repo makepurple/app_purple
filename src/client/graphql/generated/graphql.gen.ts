@@ -110,6 +110,7 @@ export type Mutation = {
   readonly removePostThumbnail?: Maybe<Post>;
   readonly updatePost?: Maybe<Post>;
   readonly updatePostDraft?: Maybe<Post>;
+  readonly updateSkills?: Maybe<User>;
   readonly uploadPostImage: PostImage;
   readonly upvotePost: Post;
   readonly viewer?: Maybe<User>;
@@ -152,6 +153,12 @@ export type MutationUpdatePostArgs = {
 export type MutationUpdatePostDraftArgs = {
   data: PostDraftUpdateInput;
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateSkillsArgs = {
+  data: UpdateSkillsInput;
 };
 
 
@@ -312,6 +319,16 @@ export type Skill = {
   readonly users: ReadonlyArray<User>;
 };
 
+export type SkillNameOwnerCompoundUniqueInput = {
+  readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
+};
+
+export type SkillWhereUniqueInput = {
+  readonly id?: Maybe<Scalars['Int']>;
+  readonly name_owner?: Maybe<SkillNameOwnerCompoundUniqueInput>;
+};
+
 export type StringNullableFilter = {
   readonly contains?: Maybe<Scalars['String']>;
   readonly endsWith?: Maybe<Scalars['String']>;
@@ -351,6 +368,10 @@ export type TopLanguages = {
   readonly totalCount: Scalars['Int'];
   /** The total number of bytes written across all owned repositories across all languages. */
   readonly totalSize: Scalars['Int'];
+};
+
+export type UpdateSkillsInput = {
+  readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
 };
 
 export type UploadPostImageInput = {
