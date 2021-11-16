@@ -1,4 +1,4 @@
-mutation UpdateUserSkills(
+mutation UpdateUserInfo(
 	$skills: [SkillWhereUniqueInput!]!
 	$desiredSkills: [SkillWhereUniqueInput!]!
 ) {
@@ -7,7 +7,7 @@ mutation UpdateUserSkills(
 		id
 		skills {
 			__typename
-			...UpdateUserSkillsSkill
+			...UpdateUserInfoSkill
 		}
 	}
 	updateDesiredSkills(data: { skills: $desiredSkills }) {
@@ -15,7 +15,7 @@ mutation UpdateUserSkills(
 		id
 		skills {
 			__typename
-			...UpdateUserSkillsSkill
+			...UpdateUserInfoSkill
 		}
 	}
 }

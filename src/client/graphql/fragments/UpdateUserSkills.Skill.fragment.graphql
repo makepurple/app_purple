@@ -1,6 +1,0 @@
-fragment UpdateUserSkillsSkill on Skill {
-	__typename
-	id
-	name
-	owner
-}

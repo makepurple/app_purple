@@ -4,7 +4,7 @@ import {
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables,
 	useGetUserInfoSideBarQuery,
-	useUpdateUserSkillsMutation
+	useUpdateUserInfoMutation
 } from "@/client/graphql";
 import { useComboBoxState, useOnKeyDown } from "@/client/hooks";
 import { Tags } from "@/client/molecules";
@@ -86,7 +86,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		}
 	});
 
-	const [{ fetching: updatingSkills }, updateSkills] = useUpdateUserSkillsMutation();
+	const [{ fetching: updatingSkills }, updateSkills] = useUpdateUserInfoMutation();
 
 	const urqlClient = useClient();
 
