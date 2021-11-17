@@ -39,3 +39,26 @@ Template.args = {};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
+
+export const AsButtons = (args) => {
+	const tabs = useTabState({
+		selectedId: "react"
+	});
+
+	console.log(tabs.selectedId);
+
+	return (
+		<TabList {...tabs} {...args}>
+			<Tab {...tabs} id="react">
+				<GitHubIcon height={20} tw="mr-2" width={20} />
+				<span>react</span>
+			</Tab>
+			<Tab {...tabs} id="vue">
+				vue
+			</Tab>
+			<Tab {...tabs} id="angular">
+				angular
+			</Tab>
+		</TabList>
+	);
+};
