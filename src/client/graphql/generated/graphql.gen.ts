@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -132,7 +133,7 @@ export type MutationDeletePostArgs = {
 
 /** Root mutation type */
 export type MutationPublishPostArgs = {
-  data?: Maybe<PostPublishInput>;
+  data?: InputMaybe<PostPublishInput>;
   where: PostWhereUniqueInput;
 };
 
@@ -211,8 +212,8 @@ export type Post = {
 
 
 export type PostUpvotingUsersArgs = {
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
 };
 
 export type PostAuthorNameUrlSlugCompoundUniqueInput = {
@@ -230,10 +231,10 @@ export type PostConnection = {
 };
 
 export type PostDraftUpdateInput = {
-  readonly content?: Maybe<Scalars['Json']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly thumbnailUrl?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['Json']>;
+  readonly description?: InputMaybe<Scalars['String']>;
+  readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
+  readonly title?: InputMaybe<Scalars['String']>;
 };
 
 /** Relay-style edge for Post types. */
@@ -252,26 +253,26 @@ export type PostImage = {
 };
 
 export type PostPublishInput = {
-  readonly content?: Maybe<Scalars['Json']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly thumbnailUrl?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['Json']>;
+  readonly description?: InputMaybe<Scalars['String']>;
+  readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
+  readonly title?: InputMaybe<Scalars['String']>;
 };
 
 export type PostUpdateInput = {
-  readonly content?: Maybe<Scalars['Json']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly thumbnailUrl?: Maybe<Scalars['String']>;
+  readonly content?: InputMaybe<Scalars['Json']>;
+  readonly description?: InputMaybe<Scalars['String']>;
+  readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
 };
 
 export type PostWhereInput = {
-  readonly author?: Maybe<UserWhereInput>;
+  readonly author?: InputMaybe<UserWhereInput>;
 };
 
 export type PostWhereUniqueInput = {
-  readonly authorName_urlSlug?: Maybe<PostAuthorNameUrlSlugCompoundUniqueInput>;
+  readonly authorName_urlSlug?: InputMaybe<PostAuthorNameUrlSlugCompoundUniqueInput>;
   /** The id of the post to retrieve */
-  readonly id?: Maybe<Scalars['Int']>;
+  readonly id?: InputMaybe<Scalars['Int']>;
 };
 
 /** Root query type */
@@ -297,17 +298,17 @@ export type QueryPostArgs = {
 
 /** Root query type */
 export type QueryPostsArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  where?: Maybe<PostWhereInput>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PostWhereInput>;
 };
 
 
 /** Root query type */
 export type QuerySuggestSkillsArgs = {
-  first?: Maybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
   where: SuggestSkillsWhereInput;
 };
 
@@ -332,17 +333,17 @@ export type SkillNameOwnerCompoundUniqueInput = {
 };
 
 export type SkillWhereUniqueInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly name_owner?: Maybe<SkillNameOwnerCompoundUniqueInput>;
+  readonly id?: InputMaybe<Scalars['Int']>;
+  readonly name_owner?: InputMaybe<SkillNameOwnerCompoundUniqueInput>;
 };
 
 export type StringNullableFilter = {
-  readonly contains?: Maybe<Scalars['String']>;
-  readonly endsWith?: Maybe<Scalars['String']>;
-  readonly equals?: Maybe<Scalars['String']>;
-  readonly in?: Maybe<ReadonlyArray<Scalars['String']>>;
-  readonly notIn?: Maybe<ReadonlyArray<Scalars['String']>>;
-  readonly startsWith?: Maybe<Scalars['String']>;
+  readonly contains?: InputMaybe<Scalars['String']>;
+  readonly endsWith?: InputMaybe<Scalars['String']>;
+  readonly equals?: InputMaybe<Scalars['String']>;
+  readonly in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly notIn?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly startsWith?: InputMaybe<Scalars['String']>;
 };
 
 export type SuggestSkills = {
@@ -407,13 +408,13 @@ export type User = {
 };
 
 export type UserWhereInput = {
-  readonly name?: Maybe<StringNullableFilter>;
+  readonly name?: InputMaybe<StringNullableFilter>;
 };
 
 export type UserWhereUniqueInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly id?: Maybe<Scalars['String']>;
-  readonly name?: Maybe<Scalars['String']>;
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly id?: InputMaybe<Scalars['String']>;
+  readonly name?: InputMaybe<Scalars['String']>;
 };
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
