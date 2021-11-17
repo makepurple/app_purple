@@ -5,8 +5,8 @@ import tw, { styled } from "twin.macro";
 
 export type TabListProps = InferComponentProps<typeof ReakitTabList>;
 
-export const TabList = styled(ReakitTabList).attrs<TabListProps>(({ children }) => ({
-	children: <LayoutGroup>{children}</LayoutGroup>
+export const TabList = styled(ReakitTabList).attrs<TabListProps>(({ children, id }) => ({
+	children: <LayoutGroup id={id}>{children}</LayoutGroup>
 }))<TabListProps>`
 	${tw`
 		grid
