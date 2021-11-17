@@ -27,7 +27,13 @@ const Root = styled.input<{ error?: boolean }>`
 		disabled:bg-gray-200
 		disabled:opacity-60
 	`}
-	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-400`)}
+	${({ error }) =>
+		error
+			? tw`
+				border-red-600
+				text-red-600
+			`
+			: tw`border-gray-400`}
 `;
 
 export type InputProps = InferComponentProps<typeof Root>;

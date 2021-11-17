@@ -27,7 +27,13 @@ const Root = styled.textarea<{ error?: boolean }>`
 		disabled:bg-gray-200
 		disabled:opacity-60
 	`}
-	${({ error }) => (error ? tw`border-red-600` : tw`border-gray-400`)}
+	${({ error }) =>
+		error
+			? tw`
+				border-red-600
+				text-red-600
+			`
+			: tw`border-gray-400`}
 	&::-webkit-scrollbar {
 		${tw`
 			w-0
