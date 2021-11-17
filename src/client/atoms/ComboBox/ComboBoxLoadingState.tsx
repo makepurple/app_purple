@@ -1,4 +1,5 @@
 import { Paper } from "@/client/atoms/Paper";
+import { Skeleton } from "@/client/atoms/Skeleton";
 import { UseComboBoxState } from "@/client/hooks";
 import { getZIndex } from "@/client/styles";
 import { InferComponentProps } from "@/client/types";
@@ -15,12 +16,9 @@ const Root = styled(Paper)`
 	z-index: ${getZIndex("menu")};
 `;
 
-const Item = tw.li`
-	animate-pulse
+const Item = tw(Skeleton)`
 	h-6
 	m-1
-	rounded-md
-	bg-indigo-400
 `;
 
 export type ComboBoxLoadingStateProps = InferComponentProps<"ul"> & UseComboBoxState<any>;
@@ -32,9 +30,9 @@ export const ComboBoxLoadingState: FC<ComboBoxLoadingStateProps> = (props) => {
 
 	return (
 		<Root as="ul" {...(ulProps as any)}>
-			<Item />
-			<Item />
-			<Item />
+			<Item as="li" />
+			<Item as="li" />
+			<Item as="li" />
 		</Root>
 	);
 };

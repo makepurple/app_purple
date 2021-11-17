@@ -31,6 +31,7 @@ export * from "./Paper";
 export * from "./Popover";
 export * from "./ProgressBar";
 export * from "./SideDrawer";
+export * from "./Skeleton";
 export * from "./Spinner";
 export * from "./TabList";
 export * from "./TextArea";
