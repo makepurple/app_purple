@@ -39,16 +39,6 @@ const Skills = tw(Tags)`
 	mt-4
 `;
 
-const SaveButton = tw(FormButton)`
-	bg-indigo-500
-`;
-
-const CancelButton = tw(FormButton)`
-	bg-gray-50
-	text-black
-	border-gray-400
-`;
-
 const SkillsSuggestLoading = tw(ComboBox.LoadingState)`
 	bottom-0
 	inset-x-0
@@ -313,8 +303,10 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 				</Skills>
 			</SkillsContainer>
 			<FormActions>
-				<SaveButton type="submit">Save</SaveButton>
-				<CancelButton type="button">Cancel</CancelButton>
+				<FormButton type="submit">Save</FormButton>
+				<FormButton type="button" variant="secondary">
+					Cancel
+				</FormButton>
 			</FormActions>
 		</Root>
 	);

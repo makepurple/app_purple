@@ -2,9 +2,13 @@ import { InferComponentProps } from "@/client/types";
 import { Button as ReakitButton } from "reakit";
 import tw, { styled } from "twin.macro";
 
-export type ButtonProps = InferComponentProps<typeof Button>;
+export type ButtonVariant = "success" | "error" | "alert" | "primary" | "secondary";
 
-export const Button = styled(ReakitButton)`
+export type ButtonProps = InferComponentProps<"button"> & {
+	variant?: ButtonVariant;
+};
+
+export const Button = styled(ReakitButton)<ButtonProps>`
 	${tw`
 		relative
 		flex
@@ -23,18 +27,41 @@ export const Button = styled(ReakitButton)`
 		font-semibold
 		cursor-pointer
 		transition
-		duration-300
+		duration-150
 		ease-in-out
 		shadow-sm
+		transform
 		disabled:shadow-none
 		disabled:opacity-60
 		disabled:cursor-not-allowed
 		not-disabled:active:shadow-none
 		not-disabled:hover:shadow-md
 		not-disabled:hover:opacity-90
+		not-disabled:hover:-translate-y-0.5
 		disabled:after:absolute
 		disabled:after:inset-0
 		disabled:after:pointer-events-auto
 		disabled:after:cursor-not-allowed
 	`}
+
+	${({ variant = "primary" }) => {
+		switch (variant) {
+			case "alert":
+				return tw`bg-pink-600`;
+			case "error":
+				return tw`bg-red-600`;
+			case "primary":
+				return tw`bg-indigo-500`;
+			case "secondary":
+				return tw`
+					bg-white
+					text-black
+					border-gray-400
+				`;
+			case "success":
+				return tw`bg-blue-500`;
+			default:
+				return null;
+		}
+	}}
 `;

@@ -85,16 +85,6 @@ const FormActions = tw.div`
 	mt-10
 `;
 
-const PublishButton = tw(FormButton)`
-	bg-indigo-500
-`;
-
-const SaveButton = tw(FormButton)`
-	bg-gray-50
-	text-black
-	border-gray-400
-`;
-
 const SideBar = tw(PostGuidelines)`
 	hidden
 	flex-shrink-0
@@ -285,8 +275,8 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={(errors.content as any)?.message} />
 					</FormGroup>
 					<FormActions>
-						<PublishButton type="submit">Publish</PublishButton>
-						<SaveButton
+						<FormButton type="submit">Publish</FormButton>
+						<FormButton
 							onClick={handleSubmit(async (formData) => {
 								const didSucceed = await updatePostDraft({
 									where: { id: post.id },
@@ -300,9 +290,10 @@ export const Page: NextPage<PageProps> = () => {
 									: toast.error("Draft could not be saved");
 							})}
 							type="button"
+							variant="secondary"
 						>
 							Save
-						</SaveButton>
+						</FormButton>
 					</FormActions>
 				</Form>
 			</Content>
