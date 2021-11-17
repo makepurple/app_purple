@@ -9,21 +9,17 @@ import {
 import { useComboBoxState, useOnKeyDown } from "@/client/hooks";
 import { Tags } from "@/client/molecules";
 import ms from "ms";
-import React, { CSSProperties, FC, useCallback, useEffect, useState } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useClient } from "urql";
 
-const Root = tw(Form)``;
-
-const SkillsContainer = tw.div``;
-
 const FormActions = tw.div`
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
 	gap-4
-	mt-10
+	mt-8
 `;
 
 const SubTitle = tw.div`
@@ -60,12 +56,14 @@ type SuggestedSkill = {
 
 export interface UserInfoSideBarFormProps {
 	className?: string;
+	onClose?: (event?: SyntheticEvent) => void;
 	style?: CSSProperties;
 	userName: string;
 }
 
 export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 	className,
+	onClose,
 	style,
 	userName
 }) => {
@@ -203,7 +201,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 	}, [reset, user]);
 
 	return (
-		<Root
+		<Form
 			className={className}
 			disabled={updatingSkills}
 			onSubmit={handleSubmit(async (formData) => {
@@ -226,88 +224,92 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					})
 					.catch(() => false);
 
-				didSucceed
-					? toast.success("Your skills were updated 🎉")
-					: toast.error("Your skills could not be saved");
+				if (!didSucceed) {
+					toast.error("Your skills could not be saved");
+
+					return;
+				}
+
+				toast.success("Your skills were updated 🎉");
+
+				onClose?.();
 			})}
 			style={style}
 		>
-			<SkillsContainer>
-				<SubTitle>Highlighted Skills</SubTitle>
-				<Skills editable type="positive">
-					{skills.fields.map((field, i) => (
-						<Tags.Tag key={field._id} id={field._id} onRemove={() => skills.remove(i)}>
-							<HiddenInput name={`skills.${i}.name`} value={field.name} />
-							<HiddenInput name={`skills.${i}.owner`} value={field.owner} />
-							<span>{field.name}</span>
-						</Tags.Tag>
-					))}
-					<ComboBox {...blueComboBox} tw="flex-grow">
-						<ComboBox.Input
+			<SubTitle>Highlighted Skills</SubTitle>
+			<Skills editable type="positive">
+				{skills.fields.map((field, i) => (
+					<Tags.Tag key={field._id} id={field._id} onRemove={() => skills.remove(i)}>
+						<HiddenInput name={`skills.${i}.name`} value={field.name} />
+						<HiddenInput name={`skills.${i}.owner`} value={field.owner} />
+						<span>{field.name}</span>
+					</Tags.Tag>
+				))}
+				<ComboBox {...blueComboBox} tw="flex-grow">
+					<ComboBox.Input
+						{...blueComboBox}
+						as={Tags.Editable}
+						onKeyDown={onEnterBlue}
+						placeholder="[repo_owner]/[repo_name]"
+						aria-label="new skill"
+					/>
+				</ComboBox>
+				<SkillsSuggestLoading {...blueComboBox} />
+				<SkillsSuggest {...blueComboBox}>
+					{blueItems.map((item, i) => (
+						<ComboBox.Option
+							key={`${item.owner}:${item.name}`}
 							{...blueComboBox}
-							as={Tags.Editable}
-							onKeyDown={onEnterBlue}
-							placeholder="[repo_owner]/[repo_name]"
-							aria-label="new skill"
-						/>
-					</ComboBox>
-					<SkillsSuggestLoading {...blueComboBox} />
-					<SkillsSuggest {...blueComboBox}>
-						{blueItems.map((item, i) => (
-							<ComboBox.Option
-								key={`${item.owner}:${item.name}`}
-								{...blueComboBox}
-								item={item}
-								index={i}
-							>
-								{item.name}
-							</ComboBox.Option>
-						))}
-					</SkillsSuggest>
-				</Skills>
-				<SubTitle>Currently Learning</SubTitle>
-				<Skills editable type="negative">
-					{desiredSkills.fields.map((field, i) => (
-						<Tags.Tag
-							key={field._id}
-							id={field._id}
-							onRemove={() => desiredSkills.remove(i)}
+							item={item}
+							index={i}
 						>
-							<HiddenInput name={`desiredSkills.${i}.name`} value={field.name} />
-							<HiddenInput name={`desiredSkills.${i}.owner`} value={field.owner} />
-							<span>{field.name}</span>
-						</Tags.Tag>
+							{item.name}
+						</ComboBox.Option>
 					))}
-					<ComboBox {...redComboBox} tw="flex-grow">
-						<ComboBox.Input
+				</SkillsSuggest>
+			</Skills>
+			<SubTitle>Currently Learning</SubTitle>
+			<Skills editable type="negative">
+				{desiredSkills.fields.map((field, i) => (
+					<Tags.Tag
+						key={field._id}
+						id={field._id}
+						onRemove={() => desiredSkills.remove(i)}
+					>
+						<HiddenInput name={`desiredSkills.${i}.name`} value={field.name} />
+						<HiddenInput name={`desiredSkills.${i}.owner`} value={field.owner} />
+						<span>{field.name}</span>
+					</Tags.Tag>
+				))}
+				<ComboBox {...redComboBox} tw="flex-grow">
+					<ComboBox.Input
+						{...redComboBox}
+						as={Tags.Editable}
+						onKeyDown={onEnterRed}
+						placeholder="[repo_owner]/[repo_name]"
+						aria-label="new desired skill"
+					/>
+				</ComboBox>
+				<SkillsSuggestLoading {...redComboBox} />
+				<SkillsSuggest {...redComboBox}>
+					{redItems.map((item, i) => (
+						<ComboBox.Option
+							key={`${item.owner}:${item.name}`}
 							{...redComboBox}
-							as={Tags.Editable}
-							onKeyDown={onEnterRed}
-							placeholder="[repo_owner]/[repo_name]"
-							aria-label="new desired skill"
-						/>
-					</ComboBox>
-					<SkillsSuggestLoading {...redComboBox} />
-					<SkillsSuggest {...redComboBox}>
-						{redItems.map((item, i) => (
-							<ComboBox.Option
-								key={`${item.owner}:${item.name}`}
-								{...redComboBox}
-								item={item}
-								index={i}
-							>
-								{item.name}
-							</ComboBox.Option>
-						))}
-					</SkillsSuggest>
-				</Skills>
-			</SkillsContainer>
+							item={item}
+							index={i}
+						>
+							{item.name}
+						</ComboBox.Option>
+					))}
+				</SkillsSuggest>
+			</Skills>
 			<FormActions>
 				<FormButton type="submit">Save</FormButton>
-				<FormButton type="button" variant="secondary">
+				<FormButton onClick={onClose} type="button" variant="secondary">
 					Cancel
 				</FormButton>
 			</FormActions>
-		</Root>
+		</Form>
 	);
 };

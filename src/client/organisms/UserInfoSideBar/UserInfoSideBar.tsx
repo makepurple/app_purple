@@ -1,4 +1,4 @@
-import { Divider, NoDataText, Paper } from "@/client/atoms";
+import { Button, Divider, NoDataText, Paper } from "@/client/atoms";
 import { useGetUserInfoSideBarQuery } from "@/client/graphql";
 import { Tags } from "@/client/molecules";
 import { NewPostButton } from "@/client/organisms/NewPostButton";
@@ -6,8 +6,13 @@ import { TopLanguages } from "@/client/organisms/TopLanguages";
 import { UserAvatar } from "@/client/organisms/UserAvatar";
 import { GitHubIcon, OpenbaseIcon, TwitterIcon } from "@/client/svgs";
 import { useSession } from "next-auth/client";
-import React, { CSSProperties, FC } from "react";
+import dynamic from "next/dynamic";
+import React, { CSSProperties, FC, useState } from "react";
 import tw from "twin.macro";
+
+const UserInfoSideBarForm = dynamic(() => import("@/client/organisms/UserInfoSideBarForm"), {
+	ssr: false
+});
 
 const MainInfoContainer = tw.div`
 	p-6
@@ -20,6 +25,11 @@ const TopLanguagesContainer = tw.div`
 `;
 
 const SkillsContainer = tw.div`
+	p-6
+	sm:p-8
+`;
+
+const FormContainer = tw.div`
 	p-6
 	sm:p-8
 `;
@@ -66,15 +76,16 @@ const SocialLink = tw.a`
 	inline-flex
 `;
 
-const StyledNewPostButton = tw(NewPostButton)`
-	w-full
+const Actions = tw.div`
+	grid
+	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	gap-4
 	mt-4
 `;
 
 const Skills = tw(Tags)`
 	mt-4
 `;
-
 export interface UserInfoSideBarProps {
 	className?: string;
 	style?: CSSProperties;
@@ -90,6 +101,8 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	});
 
 	const [session] = useSession();
+
+	const [formOpen, setFormOpen] = useState<boolean>(false);
 
 	const user = data?.user;
 	const isMyUser = user?.id === session?.user.id;
@@ -138,42 +151,68 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						<OpenbaseIcon height={24} width={24} />
 					</SocialLink>
 				</SocialLinks>
-				{isMyUser && (
-					<StyledNewPostButton userName={userName}>New Post</StyledNewPostButton>
+				{isMyUser && !formOpen && (
+					<Actions>
+						<NewPostButton userName={userName}>New Post</NewPostButton>
+						<Button
+							onClick={() => {
+								setFormOpen(true);
+							}}
+							type="button"
+							variant="secondary"
+						>
+							Edit Profile
+						</Button>
+					</Actions>
 				)}
 			</MainInfoContainer>
 			<Divider />
-			<TopLanguagesContainer>
-				<SubTitle>Most Used Languages</SubTitle>
-				<TopLanguages topLanguages={user.github.topLanguages} tw="mt-4" />
-			</TopLanguagesContainer>
-			<Divider />
-			<SkillsContainer>
-				<SubTitle>Highlighted Skills</SubTitle>
-				{user.skills.length ? (
-					<Skills type="positive">
-						{user.skills.map((skill) => (
-							<Tags.Tag key={skill.id} id={skill.id.toString()}>
-								{skill.name}
-							</Tags.Tag>
-						))}
-					</Skills>
-				) : (
-					<NoDataText tw="mt-4">This user has not added any skills</NoDataText>
-				)}
-				<SubTitle>Currently Learning</SubTitle>
-				{user.desiredSkills.length ? (
-					<Skills type="negative">
-						{user.desiredSkills.map((skill) => (
-							<Tags.Tag key={skill.id} id={skill.id.toString()}>
-								{skill.name}
-							</Tags.Tag>
-						))}
-					</Skills>
-				) : (
-					<NoDataText tw="mt-4">This user has not added any desired skills</NoDataText>
-				)}
-			</SkillsContainer>
+			{!formOpen ? (
+				<>
+					<TopLanguagesContainer>
+						<SubTitle>Most Used Languages</SubTitle>
+						<TopLanguages topLanguages={user.github.topLanguages} tw="mt-4" />
+					</TopLanguagesContainer>
+					<Divider />
+					<SkillsContainer>
+						<SubTitle>Highlighted Skills</SubTitle>
+						{user.skills.length ? (
+							<Skills type="positive">
+								{user.skills.map((skill) => (
+									<Tags.Tag key={skill.id} id={skill.id.toString()}>
+										{skill.name}
+									</Tags.Tag>
+								))}
+							</Skills>
+						) : (
+							<NoDataText tw="mt-4">This user has not added any skills</NoDataText>
+						)}
+						<SubTitle>Currently Learning</SubTitle>
+						{user.desiredSkills.length ? (
+							<Skills type="negative">
+								{user.desiredSkills.map((skill) => (
+									<Tags.Tag key={skill.id} id={skill.id.toString()}>
+										{skill.name}
+									</Tags.Tag>
+								))}
+							</Skills>
+						) : (
+							<NoDataText tw="mt-4">
+								This user has not added any desired skills
+							</NoDataText>
+						)}
+					</SkillsContainer>
+				</>
+			) : (
+				<FormContainer>
+					<UserInfoSideBarForm
+						onClose={() => {
+							setFormOpen(false);
+						}}
+						userName={userName}
+					/>
+				</FormContainer>
+			)}
 		</Paper>
 	);
 };
