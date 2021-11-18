@@ -159,20 +159,14 @@ enum ExperienceType {
 
 model Experience {
   id               Int             @id @default(autoincrement())
-  // The name of the position
-  positionName     String?
-  // The type of experience
-  type             ExperienceType?
-  // The name of the organization (can also be the name of a collaboration i.e. project)
-  organizationName String?
-  // When this experience was started
-  startDate        DateTime?
   // When this experience was ended. Null is assumed as present.
   endDate          DateTime?
-  // Where this experience took place
+  highlights       String[]
   location         String?
-  // Things that the user has done in this experience
-  actions          String[]
+  organizationName String
+  positionName     String?
+  startDate        DateTime?
+  type             ExperienceType?
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
 }
