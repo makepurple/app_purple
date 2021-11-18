@@ -54,11 +54,11 @@ export type CreatePresignedS3UrlPayload = {
 
 export type Experience = {
   readonly __typename: 'Experience';
-  readonly actions: ReadonlyArray<Scalars['String']>;
   readonly endDate?: Maybe<Scalars['DateTime']>;
+  readonly highlights: ReadonlyArray<Scalars['String']>;
   readonly id: Scalars['Int'];
   readonly location?: Maybe<Scalars['String']>;
-  readonly organizationName?: Maybe<Scalars['String']>;
+  readonly organizationName: Scalars['String'];
   readonly positionName?: Maybe<Scalars['String']>;
   readonly startDate?: Maybe<Scalars['DateTime']>;
   readonly type?: Maybe<ExperienceType>;

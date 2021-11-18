@@ -5,8 +5,8 @@ export const Experience = objectType({
 	name: _Experience.$name,
 	description: _Experience.$description,
 	definition: (t) => {
-		t.field(_Experience.actions);
 		t.field(_Experience.endDate);
+		t.field(_Experience.highlights);
 		t.field(_Experience.id);
 		t.field(_Experience.location);
 		t.field(_Experience.organizationName);

@@ -30,11 +30,11 @@ scalar DateTime
 scalar Decimal
 
 type Experience {
-  actions: [String!]!
   endDate: DateTime
+  highlights: [String!]!
   id: Int!
   location: String
-  organizationName: String
+  organizationName: String!
   positionName: String
   startDate: DateTime
   type: ExperienceType

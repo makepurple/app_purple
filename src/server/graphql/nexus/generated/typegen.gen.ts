@@ -180,11 +180,11 @@ export interface NexusGenObjects {
     url: string; // String!
   }
   Experience: { // root type
-    actions: string[]; // [String!]!
     endDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    highlights: string[]; // [String!]!
     id: number; // Int!
     location?: string | null; // String
-    organizationName?: string | null; // String
+    organizationName: string; // String!
     positionName?: string | null; // String
     startDate?: NexusGenScalars['DateTime'] | null; // DateTime
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
@@ -289,11 +289,11 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   Experience: { // field return type
-    actions: string[]; // [String!]!
     endDate: NexusGenScalars['DateTime'] | null; // DateTime
+    highlights: string[]; // [String!]!
     id: number; // Int!
     location: string | null; // String
-    organizationName: string | null; // String
+    organizationName: string; // String!
     positionName: string | null; // String
     startDate: NexusGenScalars['DateTime'] | null; // DateTime
     type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
@@ -430,8 +430,8 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   Experience: { // field return type name
-    actions: 'String'
     endDate: 'DateTime'
+    highlights: 'String'
     id: 'Int'
     location: 'String'
     organizationName: 'String'
