@@ -63,6 +63,16 @@ type ExperienceConnection {
   totalCount: Int!
 }
 
+input ExperienceCreateInput {
+  endDate: DateTime
+  highlights: [String!]
+  location: String
+  organizationName: String!
+  positionName: String
+  startDate: DateTime
+  type: ExperienceType
+}
+
 """Relay-style edge for Experience types."""
 type ExperienceEdge {
   cursor: String!
@@ -120,6 +130,8 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 """Root mutation type"""
 type Mutation {
+  createExperience(data: ExperienceCreateInput!): Experience!
+
   """
   Creates a new draft if the user doesn't have a draft pending to be published already
   """

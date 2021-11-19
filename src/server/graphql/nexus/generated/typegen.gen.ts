@@ -87,6 +87,15 @@ export interface NexusGenInputs {
     in?: NexusGenEnums['ExperienceType'][] | null; // [ExperienceType!]
     notIn?: NexusGenEnums['ExperienceType'][] | null; // [ExperienceType!]
   }
+  ExperienceCreateInput: { // input type
+    endDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    highlights?: string[] | null; // [String!]
+    location?: string | null; // String
+    organizationName: string; // String!
+    positionName?: string | null; // String
+    startDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+  }
   ExperienceOrderByInput: { // input type
     endDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
     startDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -353,6 +362,7 @@ export interface NexusGenFieldTypes {
     websiteUrl: string | null; // String
   }
   Mutation: { // field return type
+    createExperience: NexusGenRootTypes['Experience']; // Experience!
     createPost: NexusGenRootTypes['Post']; // Post!
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     deletePost: NexusGenRootTypes['Post']; // Post!
@@ -505,6 +515,7 @@ export interface NexusGenFieldTypeNames {
     websiteUrl: 'String'
   }
   Mutation: { // field return type name
+    createExperience: 'Experience'
     createPost: 'Post'
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     deletePost: 'Post'
@@ -607,6 +618,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createExperience: { // args
+      data: NexusGenInputs['ExperienceCreateInput']; // ExperienceCreateInput!
+    }
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
     }

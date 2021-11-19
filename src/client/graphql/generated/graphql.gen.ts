@@ -80,6 +80,16 @@ export type ExperienceConnection = {
   readonly totalCount: Scalars['Int'];
 };
 
+export type ExperienceCreateInput = {
+  readonly endDate?: InputMaybe<Scalars['DateTime']>;
+  readonly highlights?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: InputMaybe<Scalars['String']>;
+  readonly organizationName: Scalars['String'];
+  readonly positionName?: InputMaybe<Scalars['String']>;
+  readonly startDate?: InputMaybe<Scalars['DateTime']>;
+  readonly type?: InputMaybe<ExperienceType>;
+};
+
 /** Relay-style edge for Experience types. */
 export type ExperienceEdge = {
   readonly __typename: 'ExperienceEdge';
@@ -135,6 +145,7 @@ export type GitHubUser = {
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
+  readonly createExperience: Experience;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
   readonly createPost: Post;
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
@@ -150,6 +161,12 @@ export type Mutation = {
   readonly uploadPostImage: PostImage;
   readonly upvotePost: Post;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root mutation type */
+export type MutationCreateExperienceArgs = {
+  data: ExperienceCreateInput;
 };
 
 
