@@ -100,11 +100,23 @@ export interface NexusGenInputs {
     endDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
     startDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
+  ExperienceUpdateInput: { // input type
+    endDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    highlights?: string[] | null; // [String!]
+    location?: string | null; // String
+    organizationName?: string | null; // String
+    positionName?: string | null; // String
+    startDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+  }
   ExperienceWhereInput: { // input type
     organizationName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     positionName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     type?: NexusGenInputs['EnumExperienceTypeNullableFilter'] | null; // EnumExperienceTypeNullableFilter
     userId?: string | null; // String
+  }
+  ExperienceWhereUniqueInput: { // input type
+    id: number; // Int!
   }
   PostAuthorNameUrlSlugCompoundUniqueInput: { // input type
     authorName: string; // String!
@@ -370,6 +382,7 @@ export interface NexusGenFieldTypes {
     publishPost: NexusGenRootTypes['Post']; // Post!
     removePostThumbnail: NexusGenRootTypes['Post'] | null; // Post
     updateDesiredSkills: NexusGenRootTypes['User'] | null; // User
+    updateExperience: NexusGenRootTypes['Experience'] | null; // Experience
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updatePostDraft: NexusGenRootTypes['Post'] | null; // Post
     updateSkills: NexusGenRootTypes['User'] | null; // User
@@ -523,6 +536,7 @@ export interface NexusGenFieldTypeNames {
     publishPost: 'Post'
     removePostThumbnail: 'Post'
     updateDesiredSkills: 'User'
+    updateExperience: 'Experience'
     updatePost: 'Post'
     updatePostDraft: 'Post'
     updateSkills: 'User'
@@ -636,6 +650,10 @@ export interface NexusGenArgTypes {
     }
     updateDesiredSkills: { // args
       data: NexusGenInputs['UpdateDesiredSkillsInput']; // UpdateDesiredSkillsInput!
+    }
+    updateExperience: { // args
+      data: NexusGenInputs['ExperienceUpdateInput']; // ExperienceUpdateInput!
+      where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
     }
     updatePost: { // args
       data: NexusGenInputs['PostUpdateInput']; // PostUpdateInput!

@@ -5,6 +5,7 @@ export * from "./deletePost";
 export * from "./publishPost";
 export * from "./removePostThumbnail";
 export * from "./updateDesiredSkills";
+export * from "./updateExperience";
 export * from "./updatePost";
 export * from "./updatePostDraft";
 export * from "./updateSkills";

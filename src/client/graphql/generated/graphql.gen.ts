@@ -111,11 +111,25 @@ export enum ExperienceType {
   PartTime = 'PartTime'
 }
 
+export type ExperienceUpdateInput = {
+  readonly endDate?: InputMaybe<Scalars['DateTime']>;
+  readonly highlights?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: InputMaybe<Scalars['String']>;
+  readonly organizationName?: InputMaybe<Scalars['String']>;
+  readonly positionName?: InputMaybe<Scalars['String']>;
+  readonly startDate?: InputMaybe<Scalars['DateTime']>;
+  readonly type?: InputMaybe<ExperienceType>;
+};
+
 export type ExperienceWhereInput = {
   readonly organizationName?: InputMaybe<StringNullableFilter>;
   readonly positionName?: InputMaybe<StringNullableFilter>;
   readonly type?: InputMaybe<EnumExperienceTypeNullableFilter>;
   readonly userId?: InputMaybe<Scalars['String']>;
+};
+
+export type ExperienceWhereUniqueInput = {
+  readonly id: Scalars['Int'];
 };
 
 export type GitHubRepository = {
@@ -155,6 +169,7 @@ export type Mutation = {
   readonly publishPost: Post;
   readonly removePostThumbnail?: Maybe<Post>;
   readonly updateDesiredSkills?: Maybe<User>;
+  readonly updateExperience?: Maybe<Experience>;
   readonly updatePost?: Maybe<Post>;
   readonly updatePostDraft?: Maybe<Post>;
   readonly updateSkills?: Maybe<User>;
@@ -198,6 +213,13 @@ export type MutationRemovePostThumbnailArgs = {
 /** Root mutation type */
 export type MutationUpdateDesiredSkillsArgs = {
   data: UpdateDesiredSkillsInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateExperienceArgs = {
+  data: ExperienceUpdateInput;
+  where: ExperienceWhereUniqueInput;
 };
 
 

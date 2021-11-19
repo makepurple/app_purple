@@ -85,11 +85,25 @@ enum ExperienceType {
   PartTime
 }
 
+input ExperienceUpdateInput {
+  endDate: DateTime
+  highlights: [String!]
+  location: String
+  organizationName: String
+  positionName: String
+  startDate: DateTime
+  type: ExperienceType
+}
+
 input ExperienceWhereInput {
   organizationName: StringNullableFilter
   positionName: StringNullableFilter
   type: EnumExperienceTypeNullableFilter
   userId: String
+}
+
+input ExperienceWhereUniqueInput {
+  id: Int!
 }
 
 type GitHubRepository {
@@ -132,6 +146,7 @@ type Mutation {
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): Post!
   removePostThumbnail(where: PostWhereUniqueInput!): Post
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): User
+  updateExperience(data: ExperienceUpdateInput!, where: ExperienceWhereUniqueInput!): Experience
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): Post
   updateSkills(data: UpdateSkillsInput!): User
