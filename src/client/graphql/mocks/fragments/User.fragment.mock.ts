@@ -1,5 +1,5 @@
 import type { User } from "@/client/graphql/generated";
-import { TopLanguages_fragment_mock } from ".";
+import { GitHubUser_fragment_mock } from "./GitHubUser.fragment.mock";
 
 export const User_fragment_mock: User = {
 	__typename: "User" as const,
@@ -15,21 +15,7 @@ export const User_fragment_mock: User = {
 		})
 	),
 	email: "lee.david.cs@test.com",
-	github: {
-		__typename: "GitHubUser",
-		id: "0",
-		bio: "I learn things and work on MakePurple",
-		company: "Openbase",
-		login: "leedavidcs",
-		name: "David Lee",
-		topLanguages: {
-			...TopLanguages_fragment_mock,
-			__typename: "TopLanguages"
-		},
-		twitterUsername: "i3daly",
-		url: "https://github.com/leedavidcs",
-		websiteUrl: "https://leedavidcs.dev"
-	},
+	github: GitHubUser_fragment_mock,
 	githubUrl: "https://github.com/leedavidcs",
 	id: "0",
 	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
