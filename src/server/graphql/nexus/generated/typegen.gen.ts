@@ -162,6 +162,9 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
+  SuggestExperiencesWhereInput: { // input type
+    name: string; // String!
+  }
   SuggestSkillsWhereInput: { // input type
     name: string; // String!
     owner: string; // String!
@@ -235,13 +238,23 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Experience']; // Experience!
   }
+  GitHubOrganization: { // root type
+    avatarUrl: NexusGenScalars['URL']; // URL!
+    description?: string | null; // String
+    id: string; // String!
+    login: string; // String!
+    name?: string | null; // String
+    url: NexusGenScalars['URL']; // URL!
+  }
   GitHubRepository: { // root type
     description?: string | null; // String
     id: string; // String!
     name: string; // String!
-    owner: NexusGenRootTypes['GitHubUser']; // GitHubUser!
+    owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
+    url: NexusGenScalars['URL']; // URL!
   }
   GitHubUser: { // root type
+    avatarUrl: NexusGenScalars['URL']; // URL!
     bio?: string | null; // String
     company?: string | null; // String
     id: string; // String!
@@ -291,6 +304,10 @@ export interface NexusGenObjects {
     name: string; // String!
     owner: string; // String!
   }
+  SuggestExperiences: { // root type
+    nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
+    totalCount: number; // Int!
+  }
   SuggestSkills: { // root type
     nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
     totalCount: number; // Int!
@@ -313,12 +330,13 @@ export interface NexusGenObjects {
 }
 
 export interface NexusGenInterfaces {
+  GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
 }
 
 export interface NexusGenUnions {
 }
 
-export type NexusGenRootTypes = NexusGenObjects
+export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects
 
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
@@ -355,13 +373,23 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Experience']; // Experience!
   }
+  GitHubOrganization: { // field return type
+    avatarUrl: NexusGenScalars['URL']; // URL!
+    description: string | null; // String
+    id: string; // String!
+    login: string; // String!
+    name: string | null; // String
+    url: NexusGenScalars['URL']; // URL!
+  }
   GitHubRepository: { // field return type
     description: string | null; // String
     id: string; // String!
     name: string; // String!
-    owner: NexusGenRootTypes['GitHubUser']; // GitHubUser!
+    owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
+    url: NexusGenScalars['URL']; // URL!
   }
   GitHubUser: { // field return type
+    avatarUrl: NexusGenScalars['URL']; // URL!
     bio: string | null; // String
     company: string | null; // String
     id: string; // String!
@@ -435,6 +463,7 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
+    suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -445,6 +474,10 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     owner: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
+  }
+  SuggestExperiences: { // field return type
+    nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
+    totalCount: number; // Int!
   }
   SuggestSkills: { // field return type
     nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
@@ -473,6 +506,12 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
+  }
+  GitHubRepositoryOwner: { // field return type
+    avatarUrl: NexusGenScalars['URL']; // URL!
+    id: string; // String!
+    login: string; // String!
+    url: NexusGenScalars['URL']; // URL!
   }
 }
 
@@ -509,13 +548,23 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'Experience'
   }
+  GitHubOrganization: { // field return type name
+    avatarUrl: 'URL'
+    description: 'String'
+    id: 'String'
+    login: 'String'
+    name: 'String'
+    url: 'URL'
+  }
   GitHubRepository: { // field return type name
     description: 'String'
     id: 'String'
     name: 'String'
-    owner: 'GitHubUser'
+    owner: 'GitHubRepositoryOwner'
+    url: 'URL'
   }
   GitHubUser: { // field return type name
+    avatarUrl: 'URL'
     bio: 'String'
     company: 'String'
     id: 'String'
@@ -589,6 +638,7 @@ export interface NexusGenFieldTypeNames {
     post: 'Post'
     postDraft: 'Post'
     posts: 'PostConnection'
+    suggestExperiences: 'SuggestExperiences'
     suggestSkills: 'SuggestSkills'
     user: 'User'
     viewer: 'User'
@@ -599,6 +649,10 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     owner: 'String'
     users: 'User'
+  }
+  SuggestExperiences: { // field return type name
+    nodes: 'GitHubOrganization'
+    totalCount: 'Int'
   }
   SuggestSkills: { // field return type name
     nodes: 'GitHubRepository'
@@ -627,6 +681,12 @@ export interface NexusGenFieldTypeNames {
     posts: 'Post'
     skills: 'Skill'
     upvotedPosts: 'Post'
+  }
+  GitHubRepositoryOwner: { // field return type name
+    avatarUrl: 'URL'
+    id: 'String'
+    login: 'String'
+    url: 'URL'
   }
 }
 
@@ -698,6 +758,10 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
+    suggestExperiences: { // args
+      first?: number | null; // Int
+      where: NexusGenInputs['SuggestExperiencesWhereInput']; // SuggestExperiencesWhereInput!
+    }
     suggestSkills: { // args
       first?: number | null; // Int
       where: NexusGenInputs['SuggestSkillsWhereInput']; // SuggestSkillsWhereInput!
@@ -709,9 +773,12 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
+  GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
 }
 
 export interface NexusGenTypeInterfaces {
+  GitHubOrganization: "GitHubRepositoryOwner"
+  GitHubUser: "GitHubRepositoryOwner"
 }
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
@@ -720,7 +787,7 @@ export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = keyof NexusGenEnums;
 
-export type NexusGenInterfaceNames = never;
+export type NexusGenInterfaceNames = keyof NexusGenInterfaces;
 
 export type NexusGenScalarNames = keyof NexusGenScalars;
 

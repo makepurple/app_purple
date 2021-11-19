@@ -8,10 +8,9 @@ export const GitHubUser = objectType({
 		Data for a user from that user's connected GitHub account.
 	`,
 	definition: (t) => {
+		t.implements("GitHubRepositoryOwner");
 		t.string("bio");
 		t.string("company");
-		t.nonNull.string("id");
-		t.nonNull.string("login");
 		t.string("name");
 		t.field("topLanguages", {
 			type: nonNull("TopLanguages"),
@@ -97,11 +96,6 @@ export const GitHubUser = objectType({
 			}
 		});
 		t.string("twitterUsername");
-		t.nonNull.url("url", {
-			description: oneLine`
-				The URL of the user's GitHub profile.
-			`
-		});
 		t.field("user", { type: "User" });
 		t.string("websiteUrl");
 	}

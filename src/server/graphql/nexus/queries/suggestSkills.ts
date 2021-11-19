@@ -36,10 +36,10 @@ export const suggestSkills = queryField("suggestSkills", {
 		const { totalCount } = searchData.search;
 		const nodes = searchData.search.nodes ?? [];
 
-		const repositories = nodes.filter((node) => node?.__typename === "Repository");
+		const repositories: any = nodes.filter((node) => node?.__typename === "Repository");
 
 		return {
-			nodes: repositories as any,
+			nodes: repositories,
 			totalCount
 		};
 	}

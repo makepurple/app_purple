@@ -1,5 +1,5 @@
 import { gql } from "@/server/services/octokit/gql";
-import { GitHubUser } from "./GitHubUser";
+import { GitHubRepositoryOwner } from "./GitHubRepositoryOwner";
 
 export const GitHubRepository = gql`
 	fragment GitHubRepository on Repository {
@@ -10,9 +10,9 @@ export const GitHubRepository = gql`
 		owner {
 			__typename
 			id
-			login
-			...GitHubUser
+			...GitHubRepositoryOwner
 		}
+		url
 	}
-	${GitHubUser}
+	${GitHubRepositoryOwner}
 `;

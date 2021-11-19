@@ -4,6 +4,7 @@ export const GitHubUser = gql`
 	fragment GitHubUser on User {
 		__typename
 		id
+		avatarUrl
 		bio
 		company
 		login

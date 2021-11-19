@@ -6,6 +6,7 @@ export const GitHubRepository = objectType({
 		t.nonNull.string("id");
 		t.string("description");
 		t.nonNull.string("name");
-		t.nonNull.field("owner", { type: "GitHubUser" });
+		t.nonNull.field("owner", { type: "GitHubRepositoryOwner" });
+		t.nonNull.url("url");
 	}
 });

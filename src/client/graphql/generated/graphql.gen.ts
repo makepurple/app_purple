@@ -132,17 +132,36 @@ export type ExperienceWhereUniqueInput = {
   readonly id: Scalars['Int'];
 };
 
+export type GitHubOrganization = GitHubRepositoryOwner & {
+  readonly __typename: 'GitHubOrganization';
+  readonly avatarUrl: Scalars['URL'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly id: Scalars['String'];
+  readonly login: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly url: Scalars['URL'];
+};
+
 export type GitHubRepository = {
   readonly __typename: 'GitHubRepository';
   readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
   readonly name: Scalars['String'];
-  readonly owner: GitHubUser;
+  readonly owner: GitHubRepositoryOwner;
+  readonly url: Scalars['URL'];
+};
+
+export type GitHubRepositoryOwner = {
+  readonly avatarUrl: Scalars['URL'];
+  readonly id: Scalars['String'];
+  readonly login: Scalars['String'];
+  readonly url: Scalars['URL'];
 };
 
 /** Data for a user from that user's connected GitHub account. */
-export type GitHubUser = {
+export type GitHubUser = GitHubRepositoryOwner & {
   readonly __typename: 'GitHubUser';
+  readonly avatarUrl: Scalars['URL'];
   readonly bio?: Maybe<Scalars['String']>;
   readonly company?: Maybe<Scalars['String']>;
   readonly id: Scalars['String'];
@@ -150,7 +169,6 @@ export type GitHubUser = {
   readonly name?: Maybe<Scalars['String']>;
   readonly topLanguages: TopLanguages;
   readonly twitterUsername?: Maybe<Scalars['String']>;
-  /** The URL of the user's GitHub profile. */
   readonly url: Scalars['URL'];
   readonly user?: Maybe<User>;
   readonly websiteUrl?: Maybe<Scalars['String']>;
@@ -358,6 +376,7 @@ export type Query = {
   readonly postDraft?: Maybe<Post>;
   /** Relay-style connection on Post types. */
   readonly posts: PostConnection;
+  readonly suggestExperiences: SuggestExperiences;
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -387,6 +406,13 @@ export type QueryPostsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PostWhereInput>;
+};
+
+
+/** Root query type */
+export type QuerySuggestExperiencesArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestExperiencesWhereInput;
 };
 
 
@@ -433,6 +459,16 @@ export type StringNullableFilter = {
   readonly in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
   readonly notIn?: InputMaybe<ReadonlyArray<Scalars['String']>>;
   readonly startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type SuggestExperiences = {
+  readonly __typename: 'SuggestExperiences';
+  readonly nodes: ReadonlyArray<GitHubOrganization>;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type SuggestExperiencesWhereInput = {
+  readonly name: Scalars['String'];
 };
 
 export type SuggestSkills = {
@@ -618,7 +654,7 @@ export type SuggestSkillsQueryVariables = Exact<{
 }>;
 
 
-export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
+export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
 
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
     fragment PostCardPost on Post {

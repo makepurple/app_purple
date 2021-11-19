@@ -13,6 +13,7 @@ export * from "./PostWhereUniqueInput";
 export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillWhereUniqueInput";
 export * from "./StringNullableFilter";
+export * from "./SuggestExperiencesWhereInput";
 export * from "./SuggestSkillsWhereInput";
 export * from "./UpdateDesiredSkillsInput";
 export * from "./UpdateSkillsInput";

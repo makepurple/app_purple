@@ -106,15 +106,33 @@ input ExperienceWhereUniqueInput {
   id: Int!
 }
 
+type GitHubOrganization implements GitHubRepositoryOwner {
+  avatarUrl: URL!
+  description: String
+  id: String!
+  login: String!
+  name: String
+  url: URL!
+}
+
 type GitHubRepository {
   description: String
   id: String!
   name: String!
-  owner: GitHubUser!
+  owner: GitHubRepositoryOwner!
+  url: URL!
+}
+
+interface GitHubRepositoryOwner {
+  avatarUrl: URL!
+  id: String!
+  login: String!
+  url: URL!
 }
 
 # Data for a user from that user's connected GitHub account.
-type GitHubUser {
+type GitHubUser implements GitHubRepositoryOwner {
+  avatarUrl: URL!
   bio: String
   company: String
   id: String!
@@ -122,8 +140,6 @@ type GitHubUser {
   name: String
   topLanguages: TopLanguages!
   twitterUsername: String
-
-  # The URL of the user's GitHub profile.
   url: URL!
   user: User
   websiteUrl: String
@@ -249,6 +265,7 @@ type Query {
 
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
+  suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
   viewer: User
@@ -284,6 +301,15 @@ input StringNullableFilter {
   in: [String!]
   notIn: [String!]
   startsWith: String
+}
+
+type SuggestExperiences {
+  nodes: [GitHubOrganization!]!
+  totalCount: Int!
+}
+
+input SuggestExperiencesWhereInput {
+  name: String!
 }
 
 type SuggestSkills {
