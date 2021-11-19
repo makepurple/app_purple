@@ -82,6 +82,21 @@ export interface NexusGenInputs {
     fileName: string; // String!
     fileType: string; // String!
   }
+  EnumExperienceTypeNullableFilter: { // input type
+    equals?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+    in?: NexusGenEnums['ExperienceType'][] | null; // [ExperienceType!]
+    notIn?: NexusGenEnums['ExperienceType'][] | null; // [ExperienceType!]
+  }
+  ExperienceOrderByInput: { // input type
+    endDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    startDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  ExperienceWhereInput: { // input type
+    organizationName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    positionName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    type?: NexusGenInputs['EnumExperienceTypeNullableFilter'] | null; // EnumExperienceTypeNullableFilter
+    userId?: string | null; // String
+  }
   PostAuthorNameUrlSlugCompoundUniqueInput: { // input type
     authorName: string; // String!
     urlSlug: string; // String!
@@ -151,6 +166,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "Misc" | "OpenSource" | "PartTime"
+  SortOrder: "asc" | "desc"
 }
 
 export interface NexusGenScalars {
@@ -188,6 +204,15 @@ export interface NexusGenObjects {
     positionName?: string | null; // String
     startDate?: NexusGenScalars['DateTime'] | null; // DateTime
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+  }
+  ExperienceConnection: { // root type
+    edges: NexusGenRootTypes['ExperienceEdge'][]; // [ExperienceEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  ExperienceEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Experience']; // Experience!
   }
   GitHubRepository: { // root type
     description?: string | null; // String
@@ -299,6 +324,16 @@ export interface NexusGenFieldTypes {
     type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     user: NexusGenRootTypes['User']; // User!
   }
+  ExperienceConnection: { // field return type
+    edges: NexusGenRootTypes['ExperienceEdge'][]; // [ExperienceEdge!]!
+    nodes: NexusGenRootTypes['Experience'][]; // [Experience!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  ExperienceEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Experience']; // Experience!
+  }
   GitHubRepository: { // field return type
     description: string | null; // String
     id: string; // String!
@@ -372,6 +407,7 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   Query: { // field return type
+    experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
@@ -439,6 +475,16 @@ export interface NexusGenFieldTypeNames {
     startDate: 'DateTime'
     type: 'ExperienceType'
     user: 'User'
+  }
+  ExperienceConnection: { // field return type name
+    edges: 'ExperienceEdge'
+    nodes: 'Experience'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  ExperienceEdge: { // field return type name
+    cursor: 'String'
+    node: 'Experience'
   }
   GitHubRepository: { // field return type name
     description: 'String'
@@ -513,6 +559,7 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   Query: { // field return type name
+    experiences: 'ExperienceConnection'
     ok: 'Boolean'
     post: 'Post'
     postDraft: 'Post'
@@ -602,6 +649,13 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    experiences: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      orderBy?: NexusGenInputs['ExperienceOrderByInput'] | null; // ExperienceOrderByInput
+      where: NexusGenInputs['ExperienceWhereInput']; // ExperienceWhereInput!
+    }
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }

@@ -52,6 +52,12 @@ export type CreatePresignedS3UrlPayload = {
   readonly url: Scalars['String'];
 };
 
+export type EnumExperienceTypeNullableFilter = {
+  readonly equals?: InputMaybe<ExperienceType>;
+  readonly in?: InputMaybe<ReadonlyArray<ExperienceType>>;
+  readonly notIn?: InputMaybe<ReadonlyArray<ExperienceType>>;
+};
+
 export type Experience = {
   readonly __typename: 'Experience';
   readonly endDate?: Maybe<Scalars['DateTime']>;
@@ -65,6 +71,27 @@ export type Experience = {
   readonly user: User;
 };
 
+/** Relay-style connection for Experience types. */
+export type ExperienceConnection = {
+  readonly __typename: 'ExperienceConnection';
+  readonly edges: ReadonlyArray<ExperienceEdge>;
+  readonly nodes: ReadonlyArray<Experience>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+/** Relay-style edge for Experience types. */
+export type ExperienceEdge = {
+  readonly __typename: 'ExperienceEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Experience;
+};
+
+export type ExperienceOrderByInput = {
+  readonly endDate?: InputMaybe<SortOrder>;
+  readonly startDate?: InputMaybe<SortOrder>;
+};
+
 export enum ExperienceType {
   Contract = 'Contract',
   FullTime = 'FullTime',
@@ -73,6 +100,13 @@ export enum ExperienceType {
   OpenSource = 'OpenSource',
   PartTime = 'PartTime'
 }
+
+export type ExperienceWhereInput = {
+  readonly organizationName?: InputMaybe<StringNullableFilter>;
+  readonly positionName?: InputMaybe<StringNullableFilter>;
+  readonly type?: InputMaybe<EnumExperienceTypeNullableFilter>;
+  readonly userId?: InputMaybe<Scalars['String']>;
+};
 
 export type GitHubRepository = {
   readonly __typename: 'GitHubRepository';
@@ -278,6 +312,7 @@ export type PostWhereUniqueInput = {
 /** Root query type */
 export type Query = {
   readonly __typename: 'Query';
+  readonly experiences: ExperienceConnection;
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
   readonly post?: Maybe<Post>;
@@ -287,6 +322,16 @@ export type Query = {
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root query type */
+export type QueryExperiencesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ExperienceOrderByInput>;
+  where: ExperienceWhereInput;
 };
 
 
@@ -336,6 +381,11 @@ export type SkillWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['Int']>;
   readonly name_owner?: InputMaybe<SkillNameOwnerCompoundUniqueInput>;
 };
+
+export enum SortOrder {
+  Asc = 'Asc',
+  Desc = 'Desc'
+}
 
 export type StringNullableFilter = {
   readonly contains?: InputMaybe<Scalars['String']>;

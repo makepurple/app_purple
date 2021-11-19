@@ -2,6 +2,8 @@ export * from "./_enums";
 export * from "./_scalars";
 export * from "./Comment";
 export * from "./Experience";
+export * from "./ExperienceConnection";
+export * from "./ExperienceEdge";
 export * from "./GitHubRepository";
 export * from "./GitHubUser";
 export * from "./Mutation";

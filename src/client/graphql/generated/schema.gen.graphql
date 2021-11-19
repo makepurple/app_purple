@@ -29,6 +29,12 @@ scalar DateTime
 # An arbitrary-precision Decimal type
 scalar Decimal
 
+input EnumExperienceTypeNullableFilter {
+  equals: ExperienceType
+  in: [ExperienceType!]
+  notIn: [ExperienceType!]
+}
+
 type Experience {
   endDate: DateTime
   highlights: [String!]!
@@ -41,6 +47,25 @@ type Experience {
   user: User!
 }
 
+# Relay-style connection for Experience types.
+type ExperienceConnection {
+  edges: [ExperienceEdge!]!
+  nodes: [Experience!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+# Relay-style edge for Experience types.
+type ExperienceEdge {
+  cursor: String!
+  node: Experience!
+}
+
+input ExperienceOrderByInput {
+  endDate: SortOrder
+  startDate: SortOrder
+}
+
 enum ExperienceType {
   Contract
   FullTime
@@ -48,6 +73,13 @@ enum ExperienceType {
   Misc
   OpenSource
   PartTime
+}
+
+input ExperienceWhereInput {
+  organizationName: StringNullableFilter
+  positionName: StringNullableFilter
+  type: EnumExperienceTypeNullableFilter
+  userId: String
 }
 
 type GitHubRepository {
@@ -181,6 +213,7 @@ input PostWhereUniqueInput {
 
 # Root query type
 type Query {
+  experiences(after: String, before: String, first: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput!): ExperienceConnection!
   ok: Boolean!
 
   # A user-created post.
@@ -210,6 +243,11 @@ input SkillNameOwnerCompoundUniqueInput {
 input SkillWhereUniqueInput {
   id: Int
   name_owner: SkillNameOwnerCompoundUniqueInput
+}
+
+enum SortOrder {
+  Asc
+  Desc
 }
 
 input StringNullableFilter {
