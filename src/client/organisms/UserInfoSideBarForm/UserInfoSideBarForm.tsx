@@ -42,7 +42,7 @@ const SkillsSuggestLoading = tw(ComboBox.LoadingState)`
 	translate-y-full
 `;
 
-const SkillsSuggest = tw(ComboBox.Select)`
+const SkillsSuggest = tw(ComboBox.Options)`
 	bottom-0
 	inset-x-0
 	transform
