@@ -19,12 +19,12 @@ const Root = styled(Paper)<{ $hidden: boolean }>`
 		`}
 `;
 
-export type ComboBoxSelectProps = InferComponentProps<"ul"> &
+export type ComboBoxOptionsProps = InferComponentProps<"ul"> &
 	UseComboBoxState<any> & {
 		as?: string | ComponentType<any>;
 	};
 
-export const ComboBoxSelect: FC<ComboBoxSelectProps> = (props) => {
+export const ComboBoxOptions: FC<ComboBoxOptionsProps> = (props) => {
 	const { as = "ul", combobox, ...ulProps } = props;
 
 	return (

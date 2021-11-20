@@ -6,7 +6,7 @@ import tw from "twin.macro";
 import { ComboBoxInput } from "./ComboBoxInput";
 import { ComboBoxLoadingState } from "./ComboBoxLoadingState";
 import { ComboBoxOption } from "./ComboBoxOption";
-import { ComboBoxSelect } from "./ComboBoxSelect";
+import { ComboBoxOptions } from "./ComboBoxOptions";
 
 const Root = tw.div`
 	flex
@@ -29,5 +29,5 @@ export const ComboBox = ObjectUtils.setStatic(_ComboBox, {
 	Input: ComboBoxInput,
 	LoadingState: ComboBoxLoadingState,
 	Option: ComboBoxOption,
-	Select: ComboBoxSelect
+	Options: ComboBoxOptions
 });
