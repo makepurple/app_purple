@@ -30,6 +30,7 @@ export * from "./PageContainer";
 export * from "./Paper";
 export * from "./Popover";
 export * from "./ProgressBar";
+export * from "./Select";
 export * from "./SideDrawer";
 export * from "./Skeleton";
 export * from "./Spinner";
