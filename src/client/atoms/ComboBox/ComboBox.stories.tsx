@@ -36,13 +36,13 @@ const Template: Story<ComboBoxProps> = (args) => {
 				<ComboBox.Input {...combobox} />
 			</ComboBox>
 			<ComboBox.LoadingState {...combobox} style={{ width: 256 }} />
-			<ComboBox.Select {...combobox}>
+			<ComboBox.Options {...combobox}>
 				{items.map((item, i) => (
 					<ComboBox.Option key={item.id} {...combobox} item={item} index={i}>
 						{item.name}
 					</ComboBox.Option>
 				))}
-			</ComboBox.Select>
+			</ComboBox.Options>
 		</>
 	);
 };
