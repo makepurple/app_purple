@@ -4,7 +4,7 @@ import { GlobalStyles } from "@/client/styles";
 import { oneLine } from "common-tags";
 import ms from "ms";
 import type { NextComponentType } from "next";
-import { Provider as NextAuthProvider } from "next-auth/client";
+import { SessionProvider } from "next-auth/react";
 import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import NextError from "next/error";
@@ -32,7 +32,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				)}
 			>
 				{({ error, fallback }) => (
-					<NextAuthProvider session={pageProps.session}>
+					<SessionProvider session={pageProps.session}>
 						<UrqlProvider pageProps={pageProps}>
 							<NextProgress
 								color={oneLine`
@@ -56,7 +56,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 							</LazyMotion>
 							<Toaster position="top-center" />
 						</UrqlProvider>
-					</NextAuthProvider>
+					</SessionProvider>
 				)}
 			</ErrorBoundary>
 		</>

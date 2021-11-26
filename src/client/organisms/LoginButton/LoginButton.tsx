@@ -1,6 +1,6 @@
 import { Button } from "@/client/atoms";
 import { GitHubIcon, SvgIconComponent } from "@/client/svgs";
-import { signIn } from "next-auth/client";
+import { signIn } from "next-auth/react";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled } from "twin.macro";
 

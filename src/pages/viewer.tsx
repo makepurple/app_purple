@@ -8,7 +8,7 @@ import {
 } from "@/client/graphql";
 import { NextUtils } from "@/utils";
 import type { NextPage } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import React from "react";
 import { ssrExchange } from "urql";
 

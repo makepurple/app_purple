@@ -10,7 +10,7 @@ import {
 } from "@/client/graphql";
 import { NextUtils } from "@/utils";
 import { InferGetServerSidePropsType } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { ssrExchange } from "urql";
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {

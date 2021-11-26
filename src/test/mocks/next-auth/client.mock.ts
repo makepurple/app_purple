@@ -1,6 +1,6 @@
-import client from "next-auth/client";
+import client from "next-auth/react";
 
-jest.mock("next-auth/client");
+jest.mock("next-auth/react");
 
 const mockSession = {
 	expires: "1",

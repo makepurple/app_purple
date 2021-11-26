@@ -4,7 +4,7 @@ import { aws, cloudinary, octokit } from "@/server/services";
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-auth";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 
 export interface ServerContext {
 	aws: typeof aws;

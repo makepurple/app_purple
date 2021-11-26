@@ -4,7 +4,7 @@ import { LogoutButton } from "@/client/organisms/LogoutButton";
 import { MobileAppDrawer } from "@/client/organisms/MobileAppDrawer";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import { useDialogState } from "reakit";
@@ -65,7 +65,7 @@ export interface SiteWideAppBarProps {
 }
 
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
-	const [session] = useSession();
+	const { data: session } = useSession();
 	const isAuthenticated = !!session?.user;
 
 	const dialog = useDialogState({ animated: true });

@@ -1,5 +1,5 @@
 import { Button } from "@/client/atoms";
-import { signOut } from "next-auth/client";
+import { signOut } from "next-auth/react";
 import React, { CSSProperties, FC } from "react";
 
 export interface LogoutButtonProps {

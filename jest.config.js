@@ -7,7 +7,7 @@ module.exports = {
 	setupFiles: [
 		"dotenv/config",
 		"<rootDir>/src/test/mocks/fetch.mock.ts",
-		"<rootDir>/src/test/mocks/next-auth/client.mock.ts",
+		"<rootDir>/src/test/mocks/next-auth/react.mock.ts",
 		"<rootDir>/src/test//mocks/portal.mock.ts"
 	],
 	setupFilesAfterEnv: [

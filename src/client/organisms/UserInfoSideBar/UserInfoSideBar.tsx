@@ -5,7 +5,7 @@ import { NewPostButton } from "@/client/organisms/NewPostButton";
 import { TopLanguages } from "@/client/organisms/TopLanguages";
 import { UserAvatar } from "@/client/organisms/UserAvatar";
 import { GitHubIcon, OpenbaseIcon, TwitterIcon } from "@/client/svgs";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import React, { CSSProperties, FC, useState } from "react";
 import tw from "twin.macro";
@@ -100,7 +100,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 		}
 	});
 
-	const [session] = useSession();
+	const { data: session } = useSession();
 
 	const [formOpen, setFormOpen] = useState<boolean>(false);
 
