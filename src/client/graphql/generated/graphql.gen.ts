@@ -629,8 +629,8 @@ export type GetPostDraftQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetPostDraftQuery = { readonly __typename: 'Query', readonly postDraft?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly title?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
 
 export type GetPostsQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
   where: PostWhereInput;
 }>;
 
