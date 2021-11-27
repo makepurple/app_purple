@@ -16,12 +16,12 @@ export const GradientHeader = styled.div`
 	z-index: -1;
 	background-image: ${oneLine`
 		linear-gradient(
-			${rgba(theme`colors.purple.400`, 0.3)},
-			${rgba(theme`colors.purple.400`, 0.15)},
+			${rgba(theme`colors.indigo.400`, 0.3)},
+			${rgba(theme`colors.indigo.400`, 0.15)},
 			rgba(255, 255, 255, 0) 70%
 		),
 		radial-gradient(
-			${rgba(theme`colors.purple.400`, 0.15)},
+			${rgba(theme`colors.indigo.400`, 0.15)},
 			rgba(255, 255, 255, 0) 70%,
 			rgba(255, 255, 255, 0) 150%
 		);
