@@ -16,6 +16,8 @@ import { theme } from "twin.macro";
 
 const NextProgress = dynamic(() => import("nextjs-progressbar"), { ssr: false });
 
+const REFETCH_INTERVAL = ms("5m") / 1_000;
+
 export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps> = ({
 	Component,
 	pageProps
@@ -32,7 +34,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				)}
 			>
 				{({ error, fallback }) => (
-					<SessionProvider session={pageProps.session}>
+					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>
 						<UrqlProvider pageProps={pageProps}>
 							<NextProgress
 								color={oneLine`

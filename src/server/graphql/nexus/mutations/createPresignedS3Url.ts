@@ -27,11 +27,7 @@ export const createPresignedS3Url = mutationField("createPresignedS3Url", {
 		data: nonNull(arg({ type: "CreatePresignedS3UrlInput" }))
 	},
 	authorize: (parent, args, { user }) => {
-		if (!user) {
-			return false;
-		}
-
-		return true;
+		return !!user;
 	},
 	resolve: async (parent, { data }, { aws }) => {
 		const { url, fields } = await createPresignedPost(aws.s3.instance, {

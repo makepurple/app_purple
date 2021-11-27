@@ -26,7 +26,7 @@ export const deletePost = mutationField("deletePost", {
 			}
 		});
 
-		if (postToDelete?.author.id !== user.id) return false;
+		if (user.id !== postToDelete?.author.id) return false;
 
 		return true;
 	},

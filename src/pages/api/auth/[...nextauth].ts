@@ -4,9 +4,24 @@ import produce from "immer";
 import type { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
+import { theme } from "twin.macro";
 
 const authHandler: NextApiHandler = (req, res) =>
 	NextAuth(req, res, {
+		adapter: PrismaAdapter(prisma),
+		callbacks: {
+			jwt: ({ account, token }) => {
+				const accessToken = account?.access_token;
+
+				if (!accessToken) return token;
+
+				return produce(token, (newToken) => {
+					token.accessToken = accessToken;
+
+					return newToken;
+				});
+			}
+		},
 		providers: [
 			GitHubProvider({
 				clientId: process.env.GITHUB_CLIENT_ID,
@@ -24,29 +39,13 @@ const authHandler: NextApiHandler = (req, res) =>
 				}
 			})
 		],
-		adapter: PrismaAdapter(prisma),
-		secret: process.env.COOKIE_SECRET,
+		secret: process.env.NEXTAUTH_SECRET,
 		session: {
 			strategy: "jwt"
 		},
-		callbacks: {
-			session: async ({ session, user }) => {
-				const userAccount = await prisma.account.findFirst({
-					where: {
-						providerId: "github",
-						user: {
-							email: user.email as string
-						}
-					}
-				});
-
-				return produce(session, (newSession) => {
-					session.user.id = user.id;
-					session.user.accessToken = userAccount?.accessToken;
-
-					return newSession;
-				});
-			}
+		theme: {
+			colorScheme: "auto",
+			brandColor: theme`colors.indigo.500`
 		}
 	});
 

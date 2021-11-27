@@ -29,7 +29,7 @@
     "@aws-sdk/s3-presigned-post": "^3.39.0",
     "@devoxa/prisma-relay-cursor-connection": "^2.0.3",
     "@hookform/resolvers": "^2.8.3",
-    "@next-auth/prisma-adapter": "^0.5.4",
+    "@next-auth/prisma-adapter": "^0.5.2-next.19",
     "@octokit/core": "^3.5.1",
     "@octokit/plugin-throttling": "^3.5.2",
     "@prisma/client": "^3.5.0",

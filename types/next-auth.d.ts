@@ -16,3 +16,16 @@ declare module "next-auth" {
 		expires: string;
 	}
 }
+
+declare module "next-auth/jwt" {
+	/**
+	 * Returned by `getToken`
+	 */
+	interface JWT {
+		name: string;
+		email: string;
+		picture?: Maybe<string>;
+		sub: string;
+		accessToken: string;
+	}
+}

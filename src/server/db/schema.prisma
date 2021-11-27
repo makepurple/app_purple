@@ -16,30 +16,32 @@ generator nexusPrisma {
 }
 
 model Account {
-  id                 String    @id @default(cuid())
+  id                 String  @id @default(cuid())
   userId             String
-  providerType       String
-  providerId         String
+  type               String
+  provider           String
   providerAccountId  String
-  refreshToken       String?
-  accessToken        String
-  accessTokenExpires DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  user               User      @relation(fields: [userId], references: [id])
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  oauth_token_secret String?
+  oauth_token        String?
 
-  @@unique([providerId, providerAccountId])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
   id           String   @id @default(cuid())
+  sessionToken String   @unique
   userId       String
   expires      DateTime
-  sessionToken String   @unique
-  accessToken  String   @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -51,7 +53,7 @@ model User {
   // Avatar image, pulled from GitHub
   image         String?
   // Self written summary or description
-  description       String?
+  description   String?
   // When this account was registered
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt
@@ -65,13 +67,10 @@ model User {
   upvotedPosts  PostUpvoter[]
 }
 
-model VerificationRequest {
-  id         String   @id @default(cuid())
+model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
 }
@@ -131,19 +130,19 @@ model Skill {
 }
 
 model SkillsOnUsers {
-  skill     Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  skillId   Int
-  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId Int
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
 
   @@id([skillId, userId])
 }
 
 model DesiredSkillsOnUsers {
-  skill     Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  skillId   Int
-  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId Int
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
 
   @@id([skillId, userId])
 }

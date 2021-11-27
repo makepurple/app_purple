@@ -3,18 +3,24 @@ import { redis } from "@/server/redis";
 import { aws, cloudinary, octokit } from "@/server/services";
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Session } from "next-auth";
-import { getSession } from "next-auth/react";
+import { getToken, JWT } from "next-auth/jwt";
+
+export interface ServerContextUser {
+	id: string;
+	email: string;
+	name: string;
+}
 
 export interface ServerContext {
 	aws: typeof aws;
 	cloudinary: typeof cloudinary;
+	jwt: Maybe<JWT>;
 	octokit: ReturnType<typeof octokit["client"]["graphql"]>;
 	prisma: PrismaClient;
 	redis: typeof redis;
 	req: NextApiRequest;
 	res: NextApiResponse;
-	user: Session["user"] | null;
+	user: Maybe<ServerContextUser>;
 }
 
 interface CreateContextParams {
@@ -25,16 +31,22 @@ interface CreateContextParams {
 export const createContext = async (params: CreateContextParams): Promise<ServerContext> => {
 	const { req, res } = params;
 
-	const session = await getSession({ req });
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! });
 
-	return Promise.resolve({
+	return {
 		aws,
 		cloudinary,
-		octokit: octokit.client.graphql(session?.user.accessToken ?? undefined),
+		jwt,
+		octokit: octokit.client.graphql(jwt?.accessToken),
 		prisma,
 		redis,
 		req,
 		res,
-		user: session?.user ?? null
-	});
+		user: jwt && {
+			id: jwt.sub,
+			name: jwt.name,
+			email: jwt.email
+		}
+	};
 };
