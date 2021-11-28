@@ -5,6 +5,7 @@ import tw, { styled } from "twin.macro";
 export type ButtonVariant = "success" | "error" | "alert" | "primary" | "secondary";
 
 export type ButtonProps = InferComponentProps<"button"> & {
+	size?: "small" | "medium" | "large";
 	variant?: ButtonVariant;
 };
 
@@ -43,7 +44,6 @@ export const Button = styled(ReakitButton)<ButtonProps>`
 		disabled:after:pointer-events-auto
 		disabled:after:cursor-not-allowed
 	`}
-
 	${({ variant = "primary" }) => {
 		switch (variant) {
 			case "alert":
@@ -60,6 +60,27 @@ export const Button = styled(ReakitButton)<ButtonProps>`
 				`;
 			case "success":
 				return tw`bg-blue-500`;
+			default:
+				return null;
+		}
+	}}
+	${({ size = "medium" }) => {
+		switch (size) {
+			case "large":
+				return tw`
+					px-4
+					py-5
+				`;
+			case "medium":
+				return tw`
+					px-3
+					py-3.5
+				`;
+			case "small":
+				return tw`
+					px-1
+					py-1.5
+				`;
 			default:
 				return null;
 		}
