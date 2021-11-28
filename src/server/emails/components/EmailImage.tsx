@@ -1,12 +1,15 @@
-import type { InferComponentProps } from "@/client/types";
+import { InferComponentProps } from "@/client/types";
+import { styled } from "goober";
 import { MjmlImage } from "mjml-react";
-import styled from "styled-components";
+import React from "react";
 import { withCssClass } from "./withCssClass";
 
-export type EmailImageProps = InferComponentProps<typeof EmailImage>;
-
-export const EmailImage = styled(withCssClass(MjmlImage))``;
-
-EmailImage.defaultProps = {
-	padding: 0
+export type EmailImageProps = InferComponentProps<typeof MjmlImage> & {
+	className?: string;
 };
+
+export const EmailImage = styled<EmailImageProps>(
+	withCssClass((props) => <MjmlImage padding={0} {...props} />)
+)``;
+
+EmailImage.displayName = "EmailImage";

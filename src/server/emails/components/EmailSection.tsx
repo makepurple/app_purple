@@ -1,12 +1,15 @@
-import type { InferComponentProps } from "@/client/types";
+import { InferComponentProps } from "@/client/types";
+import { styled } from "goober";
 import { MjmlSection } from "mjml-react";
-import styled from "styled-components";
+import React from "react";
 import { withCssClass } from "./withCssClass";
 
-export type EmailSectionProps = InferComponentProps<typeof EmailSection>;
-
-export const EmailSection = styled(withCssClass(MjmlSection))``;
-
-EmailSection.defaultProps = {
-	padding: 0
+export type EmailSectionProps = InferComponentProps<typeof MjmlSection> & {
+	className?: string;
 };
+
+export const EmailSection = styled<EmailSectionProps>(
+	withCssClass((props) => <MjmlSection padding={0} {...props} />)
+)``;
+
+EmailSection.displayName = "EmailSection";

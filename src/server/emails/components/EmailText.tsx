@@ -1,11 +1,16 @@
-import type { InferComponentProps } from "@/client/types";
+import { InferComponentProps } from "@/client/types";
+import { styled } from "goober";
 import { MjmlText } from "mjml-react";
-import styled from "styled-components";
+import React from "react";
 import { withCssClass } from "./withCssClass";
 
-export type EmailTextProps = InferComponentProps<typeof EmailText>;
+export type EmailTextProps = InferComponentProps<typeof MjmlText> & {
+	className?: string;
+};
 
-export const EmailText = styled(withCssClass(MjmlText))`
+export const EmailText = styled<EmailTextProps>(
+	withCssClass((props) => <MjmlText fontSize={15} padding={0} {...props} />)
+)`
 	&,
 	& * {
 		font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
@@ -13,7 +18,4 @@ export const EmailText = styled(withCssClass(MjmlText))`
 	}
 `;
 
-EmailText.defaultProps = {
-	padding: 0,
-	fontSize: 15
-};
+EmailText.displayName = "EmailText";

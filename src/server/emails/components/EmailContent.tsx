@@ -1,11 +1,19 @@
-import styled from "styled-components";
-import { EmailSection } from "./EmailSection";
+import { styled } from "goober";
+import React from "react";
+import { EmailSection, EmailSectionProps } from "./EmailSection";
 
-export const EmailContent = styled(EmailSection)``;
-
-EmailContent.defaultProps = {
-	paddingTop: 20,
-	paddingRight: 64,
-	paddingBottom: 20,
-	paddingLeft: 64
+export type EmailContentProps = EmailSectionProps & {
+	className?: string;
 };
+
+export const EmailContent = styled<EmailContentProps>((props) => (
+	<EmailSection
+		paddingTop={20}
+		paddingBottom={20}
+		paddingLeft={24}
+		paddingRight={24}
+		{...props}
+	/>
+))``;
+
+EmailContent.displayName = "EmailContent";

@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@/client/atoms/ThemeProvider";
+import { styled } from "goober";
 import { Mjml, MjmlBody, MjmlFont, MjmlHead, MjmlPreview, MjmlTitle } from "mjml-react";
 import React, { FC, ReactNode } from "react";
-import styled from "styled-components";
 import { InjectStyles } from "./InjectStyles";
 import { withCssClass } from "./withCssClass";
 

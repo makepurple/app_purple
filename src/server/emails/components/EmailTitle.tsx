@@ -1,10 +1,9 @@
-import type { InferComponentProps } from "@/client/types";
 import React, { FC } from "react";
 import { EmailColumn } from "./EmailColumn";
-import { EmailSection } from "./EmailSection";
+import { EmailSection, EmailSectionProps } from "./EmailSection";
 import { EmailText } from "./EmailText";
 
-export type EmailTitleProps = InferComponentProps<typeof EmailSection>;
+export type EmailTitleProps = EmailSectionProps;
 
 export const EmailTitle: FC<EmailTitleProps> = ({ children, ...props }) => {
 	return (
@@ -17,3 +16,5 @@ export const EmailTitle: FC<EmailTitleProps> = ({ children, ...props }) => {
 		</EmailSection>
 	);
 };
+
+EmailTitle.displayName = "EmailTitle";

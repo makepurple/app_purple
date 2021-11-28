@@ -1,14 +1,23 @@
-import type { InferComponentProps } from "@/client/types";
+import { InferComponentProps } from "@/client/types";
+import { styled } from "goober";
 import { MjmlDivider } from "mjml-react";
-import styled from "styled-components";
+import React from "react";
 import { withCssClass } from "./withCssClass";
 
-export type EmailDividerProps = InferComponentProps<typeof EmailDivider>;
-
-export const EmailDivider = styled(withCssClass(MjmlDivider))``;
-
-EmailDivider.defaultProps = {
-	borderColor: "#dddddd",
-	borderStyle: "solid",
-	borderWidth: 1
+export type EmailDividerProps = InferComponentProps<typeof MjmlDivider> & {
+	className?: string;
 };
+
+export const EmailDivider = styled<EmailDividerProps>(
+	withCssClass((props) => (
+		<MjmlDivider
+			borderColor="#dddddd"
+			borderStyle="solid"
+			borderWidth={1}
+			padding="24px 0"
+			{...props}
+		/>
+	))
+)``;
+
+EmailDivider.displayName = "EmailDivider";

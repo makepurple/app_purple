@@ -1,15 +1,14 @@
-import type { InferComponentProps } from "@/client/types";
+import { styled } from "goober";
 import React, { FC } from "react";
-import styled from "styled-components";
 import { EmailColumn } from "./EmailColumn";
 import { EmailImage } from "./EmailImage";
-import { EmailSection } from "./EmailSection";
+import { EmailSection, EmailSectionProps } from "./EmailSection";
 
 const Root = styled(EmailSection)`
-	background-color: ${({ theme }) => theme.palette.brightPurple};
+	background-color: #6366f1;
 `;
 
-export type EmailTopBannerProps = InferComponentProps<typeof Root>;
+export type EmailTopBannerProps = EmailSectionProps;
 
 export const EmailTopBanner: FC<EmailTopBannerProps> = ({ ...props }) => {
 	return (
@@ -20,3 +19,5 @@ export const EmailTopBanner: FC<EmailTopBannerProps> = ({ ...props }) => {
 		</Root>
 	);
 };
+
+EmailTopBanner.displayName = "EmailTopBanner";

@@ -1,12 +1,14 @@
-import type { InferComponentProps } from "@/client/types";
-import { MjmlColumn } from "mjml-react";
-import styled from "styled-components";
+import { styled } from "goober";
+import { MjmlColumn, MjmlColumnProps } from "mjml-react";
+import React from "react";
 import { withCssClass } from "./withCssClass";
 
-export type EmailColumnProps = InferComponentProps<typeof EmailColumn>;
-
-export const EmailColumn = styled(withCssClass(MjmlColumn))``;
-
-EmailColumn.defaultProps = {
-	padding: 0
+export type EmailColumnProps = MjmlColumnProps & {
+	className?: string;
 };
+
+export const EmailColumn = styled<EmailColumnProps>(
+	withCssClass((props: MjmlColumnProps) => <MjmlColumn padding={0} {...props} />)
+)``;
+
+EmailColumn.displayName = "EmailColumn";

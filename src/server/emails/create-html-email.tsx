@@ -1,32 +1,27 @@
+import { extractCss, setup } from "goober";
+import juice from "juice";
 import { Mjml2HtmlOptions, render } from "mjml-react";
 import { ComponentType, createElement } from "react";
-import { ServerStyleSheet } from "styled-components";
-
-const getStyledComponentsStaticCss = (sheet): string => {
-	/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-	/* eslint-disable @typescript-eslint/no-unsafe-call */
-	/* eslint-disable @typescript-eslint/no-unsafe-return */
-	const tag = sheet.getTag();
-
-	return [...Array(tag.length).keys()].map((group) => tag.getGroup(group)).join("");
-};
 
 export const createHtmlEmail = <P extends Record<string, unknown>>(
 	template: ComponentType<P>,
 	props: P,
 	options: Mjml2HtmlOptions = {}
 ) => {
-	const sheet = new ServerStyleSheet();
-	const element = createElement(template, props);
-	const elementWithCollectedStyles = sheet.collectStyles(element);
+	setup(createElement);
 
-	const { html, errors } = render(elementWithCollectedStyles, options);
+	const element = createElement(template, props);
+
+	const { html, errors } = render(element, options);
 
 	if (errors?.length) {
 		throw new Error(errors[0].formattedMessage);
 	}
 
-	const css = getStyledComponentsStaticCss(sheet.instance);
+	const css = extractCss();
 
-	return html.replace(/\/\* inject css here \*\//g, css);
+	const withStyleHead = html.replace(/\/\* inject css here \*\//g, css);
+	const withInlinedStyles = juice(withStyleHead);
+
+	return withInlinedStyles;
 };
