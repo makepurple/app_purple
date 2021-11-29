@@ -1,8 +1,8 @@
 import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
-	import { WelcomeEmail } from "@/server/emails/templates";
-	import React from "react";
+import { WelcomeEmail } from "@/server/emails/templates";
+import React from "react";
 
-	const html: string = ` 
+const html: string = `
     <!doctype html>
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
@@ -363,13 +363,13 @@ import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
     </html>
   `;
 
-	export default {
-		title: "emails/WelcomeEmail",
-		component: WelcomeEmail
-	};
+export default {
+	title: "emails/WelcomeEmail",
+	component: WelcomeEmail,
+};
 
-	export const Standard = () => <MjmlMounter>{html}</MjmlMounter>;
+export const Standard = () => <MjmlMounter>{html}</MjmlMounter>;
 
-	Standard.parameters = {
-		layout: "fullscreen"
-	};
+Standard.parameters = {
+	layout: "fullscreen",
+};

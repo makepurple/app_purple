@@ -3,6 +3,7 @@ import * as _templates from "@/server/emails/templates";
 import { stripIndent } from "common-tags";
 import fs from "fs-extra";
 import path from "path";
+import prettier from "prettier";
 import { ComponentType } from "react";
 
 interface EmailTemplates {
@@ -62,9 +63,16 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 
 		const outputPath: string = path.join(output, `${key}.stories.tsx`);
 		const emailHtml: string = emailHtmlDict[key];
+		const storyCode: string = toStory(key, emailHtml);
+		const prettied: string = prettier.format(storyCode, {
+			parser: "babel-ts",
+			semi: true,
+			tabWidth: 4,
+			useTabs: true
+		});
 
 		fs.ensureFileSync(outputPath);
-		fs.writeFileSync(outputPath, toStory(key, emailHtml), {
+		fs.writeFileSync(outputPath, prettied, {
 			encoding: "utf8",
 			flag: "w"
 		});
