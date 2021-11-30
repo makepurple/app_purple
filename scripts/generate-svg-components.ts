@@ -1,4 +1,4 @@
-import svgr from "@svgr/core";
+import { transform } from "@svgr/core";
 import { stripIndents } from "common-tags";
 import fs from "fs-extra";
 import glob from "glob";
@@ -11,21 +11,6 @@ const dirname: string = process.env.PROJECT_DIRNAME
 const sourcePath: string = path.resolve(dirname, "../public/static/svgs");
 const componentPath: string = path.resolve(dirname, "../src/client/svgs");
 
-// Template to generate named exports instaed of default ones
-const componentTemplate = (
-	{ template },
-	opts,
-	{ imports, componentName, jsx }
-) => {
-	return template.smart({ plugins: ['typescript'] }).ast`
-		export const ${componentName} = React.memo(
-			React.forwardRef(
-				(props: React.SVGProps<SVGSVGElement>, svgRef: React.ForwardedRef<SVGSVGElement>) => ${jsx}
-			)
-		);
-	`;
-}
-
 const generateComponents = () => {
 	const filenames = glob.sync(`${sourcePath}/**.svg`);
 
@@ -37,24 +22,32 @@ const generateComponents = () => {
 	filenames.forEach((filename, i) => {
 		const svg = fs.readFileSync(filename, "utf8");
 		const componentName = path.parse(filename).name;
-		const componentCode = svgr.sync(
+		const componentCode = transform.sync(
 			svg,
 			{
-				template: componentTemplate,
+				template: (variables, { tpl }) => {
+					return tpl`
+						export const ${variables.componentName} = React.memo(
+							React.forwardRef(
+								(${variables.props}) => ${variables.jsx}
+							)
+						);
+					`;
+				},
 				// 1. Clean SVG files using SVGO
 				// 2. Generate JSX
 				// 3. Format the result using Prettier
 				plugins: [
-					'@svgr/plugin-svgo',
-					'@svgr/plugin-jsx',
-					'@svgr/plugin-prettier'
+					"@svgr/plugin-jsx",
+					"@svgr/plugin-prettier"
 				],
 				svgoConfig: {
 					plugins: [{ removeViewBox: false }]
 				},
 				memo: true,
 				ref: true,
-				svgo: true
+				svgo: true,
+				typescript: true
 			},
 			{ componentName }
 		);
@@ -64,7 +57,9 @@ const generateComponents = () => {
 				`${componentPath}/index.tsx`,
 				`${stripIndents`
 					import * as React from "react";
-					import { InferComponentProps } from "@/client/types"
+					import type { Ref, SVGProps } from "react";
+					import type { InferComponentProps } from "@/client/types"
+
 					export type SvgIconComponent = typeof ${componentName};
 					export type SvgIconComponentProps = InferComponentProps<SvgIconComponent>;
 				`}\n\n`
