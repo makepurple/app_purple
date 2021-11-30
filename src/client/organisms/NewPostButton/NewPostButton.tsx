@@ -29,7 +29,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		router.prefetch(`/${userName}/draft`);
+		router?.prefetch(`/${userName}/draft`);
 	}, [router, userName]);
 
 	return (

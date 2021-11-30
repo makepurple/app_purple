@@ -161,7 +161,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		router.prefetch("/[username]/[postTitle]");
+		router?.prefetch("/[username]/[postTitle]");
 	}, [router]);
 
 	/**
