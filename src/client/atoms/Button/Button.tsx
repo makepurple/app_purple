@@ -1,15 +1,14 @@
 import { InferComponentProps } from "@/client/types";
-import { Button as ReakitButton } from "reakit";
 import tw, { styled } from "twin.macro";
 
 export type ButtonVariant = "success" | "error" | "alert" | "primary" | "secondary";
 
-export type ButtonProps = InferComponentProps<"button"> & {
+export type ButtonProps = InferComponentProps<typeof Button>;
+
+export const Button = styled.button<{
 	size?: "small" | "medium" | "large";
 	variant?: ButtonVariant;
-};
-
-export const Button = styled(ReakitButton)<ButtonProps>`
+}>`
 	${tw`
 		relative
 		flex
@@ -86,3 +85,8 @@ export const Button = styled(ReakitButton)<ButtonProps>`
 		}
 	}}
 `;
+
+Button.defaultProps = {
+	role: "button",
+	type: "button"
+};

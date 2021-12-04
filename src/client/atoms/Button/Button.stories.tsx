@@ -14,6 +14,7 @@ const Template: Story<ButtonProps> = (args) => {
 Template.args = {
 	children: "Click me!",
 	disabled: false,
+	size: "medium",
 	variant: "primary"
 };
 
