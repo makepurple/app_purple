@@ -1,7 +1,6 @@
-import { Button as ReakitButton } from "reakit";
 import tw, { styled } from "twin.macro";
 
-export const ContextMenuItem = styled(ReakitButton)<{ selected?: boolean }>`
+export const ContextMenuItem = styled.button<{ selected?: boolean }>`
 	${tw`
 		flex
 		items-center
@@ -30,3 +29,7 @@ export const ContextMenuItem = styled(ReakitButton)<{ selected?: boolean }>`
 		hover:bg-indigo-500
 	`}
 `;
+
+ContextMenuItem.defaultProps = {
+	type: "button"
+};
