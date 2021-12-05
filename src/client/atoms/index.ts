@@ -44,3 +44,4 @@ export * from "./Toolbar";
 export * from "./Tooltip";
 export * from "./Typography";
 export * from "./UrqlProvider";
+export * from "./VisuallyHidden";

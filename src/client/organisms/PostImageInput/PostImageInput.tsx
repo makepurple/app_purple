@@ -1,8 +1,7 @@
-import { Button, Spinner } from "@/client/atoms";
+import { Button, Spinner, VisuallyHidden } from "@/client/atoms";
 import { useUploadPostImageMutation } from "@/client/graphql";
 import React, { ChangeEvent, CSSProperties, forwardRef, ReactNode } from "react";
 import { toast } from "react-hot-toast";
-import { VisuallyHidden } from "reakit";
 
 const ACCEPTED_IMAGE_TYPES = ["image/gif", "image/jpeg", "image/jpg", "image/png", "image/webp"];
 
