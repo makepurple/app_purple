@@ -7,7 +7,6 @@ import { m, useViewportScroll } from "framer-motion";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
-import { useDialogState } from "reakit";
 import tw from "twin.macro";
 
 const SCROLL_THRESHOLD = 32;
@@ -68,11 +67,10 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const { data: session } = useSession();
 	const isAuthenticated = !!session?.user;
 
-	const dialog = useDialogState({ animated: true });
-
 	const { scrollY, scrollYProgress } = useViewportScroll();
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
+	const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		const unsubscribeScrollY = scrollY.onChange((y) => {
@@ -116,7 +114,15 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		>
 			<Content>
 				<BrandContainer>
-					{!isAuthenticated && <MobileMenuButton {...dialog} tw="mr-2" />}
+					{!isAuthenticated && (
+						<MobileMenuButton
+							onClick={() => {
+								setMenuOpen(true);
+							}}
+							open={menuOpen}
+							tw="mr-2"
+						/>
+					)}
 					<NextLink href="/" passHref>
 						<Brand />
 					</NextLink>
@@ -132,7 +138,13 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					)}
 				</Actions>
 			</Content>
-			<MobileAppDrawer {...dialog} />
+			<MobileAppDrawer
+				onClose={() => {
+					setMenuOpen(false);
+				}}
+				open={menuOpen}
+				tw="sm:hidden"
+			/>
 		</Root>
 	);
 };

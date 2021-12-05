@@ -1,18 +1,13 @@
 import { Backdrop, Brand, HamburgerMenuButton, Paper, SideDrawer } from "@/client/atoms";
 import { LoginButton } from "@/client/organisms/LoginButton";
+import { Dialog } from "@headlessui/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
-import type { DialogStateReturn } from "reakit";
 import tw from "twin.macro";
 
-const Root = tw(Backdrop)`
-	sm:hidden
-`;
-
-const MobileDrawer = tw(SideDrawer)`
+const Root = tw(SideDrawer)`
 	flex
 	flex-col
-	sm:hidden
 `;
 
 const TopContent = tw(Paper)`
@@ -60,36 +55,42 @@ const StyledLoginButton = tw(LoginButton)`
 
 `;
 
-export type MobileAppDrawerProps = DialogStateReturn & {
+export type MobileAppDrawerProps = {
 	className?: string;
+	onClose: () => void;
+	open: boolean;
 	style?: CSSProperties;
 };
 
 export const MobileAppDrawer: FC<MobileAppDrawerProps> = (props) => {
-	const { className, style, ...dialogProps } = props;
+	const { className, onClose, open, style } = props;
 
 	return (
-		<Root {...dialogProps}>
-			<MobileDrawer {...dialogProps} className={className} style={style}>
-				<TopContent>
-					<CloseButton baseId={dialogProps.baseId} toggle={dialogProps.toggle} visible />
-					<NextLink href="/" passHref>
-						<Brand />
-					</NextLink>
-				</TopContent>
-				<Content>
-					<AuthContainer>
-						<AuthInfo>
-							<NextLink href="/" passHref>
-								<AuthBrand />
-							</NextLink>{" "}
-							is a community where developers collaborate, share and mutually grow.
-						</AuthInfo>
-						<LoginButton label="Sign Up" tw="mt-4" />
-						<StyledLoginButton icon={null} label="Login" tw="mt-2" />
-					</AuthContainer>
-				</Content>
-			</MobileDrawer>
+		<Root className={className} onClose={onClose} open={open} style={style}>
+			<Dialog.Overlay as={Backdrop} />
+			<TopContent>
+				<CloseButton
+					onClick={() => {
+						onClose();
+					}}
+					open={open}
+				/>
+				<NextLink href="/" passHref>
+					<Brand />
+				</NextLink>
+			</TopContent>
+			<Content>
+				<AuthContainer>
+					<AuthInfo>
+						<NextLink href="/" passHref>
+							<AuthBrand />
+						</NextLink>{" "}
+						is a community where developers collaborate, share and mutually grow.
+					</AuthInfo>
+					<LoginButton label="Sign Up" tw="mt-4" />
+					<StyledLoginButton icon={null} label="Login" tw="mt-2" />
+				</AuthContainer>
+			</Content>
 		</Root>
 	);
 };
