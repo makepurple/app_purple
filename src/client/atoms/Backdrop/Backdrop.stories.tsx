@@ -1,26 +1,18 @@
-import { Backdrop, HamburgerMenuButton, SideDrawer } from "@/client/atoms";
+import { Backdrop, BackdropProps } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
-import { useDialogState } from "reakit";
 
 export default {
 	title: "atoms/Backdrop",
 	component: Backdrop
 } as Meta;
 
-const Template: Story = (args) => {
-	const dialog = useDialogState({ animated: true });
-
-	return (
-		<>
-			<HamburgerMenuButton {...dialog} />
-			<Backdrop {...dialog} {...args}>
-				<SideDrawer {...dialog} />
-			</Backdrop>
-		</>
-	);
+const Template: Story<BackdropProps> = (args) => {
+	return <Backdrop {...args} />;
 };
-Template.args = {};
+Template.args = {
+	open: false
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
