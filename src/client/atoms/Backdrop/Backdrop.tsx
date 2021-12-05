@@ -1,19 +1,15 @@
 import { getZIndex } from "@/client/styles";
-import {
-	DialogBackdrop as ReakitDialogBackdrop,
-	DialogBackdropProps as ReakitDialogBackdropProps
-} from "reakit";
+import { InferComponentProps } from "@/client/types";
 import tw, { styled } from "twin.macro";
 
-export type BackdropProps = ReakitDialogBackdropProps;
+export type BackdropProps = InferComponentProps<"div">;
 
-export const Backdrop = styled(ReakitDialogBackdrop)`
+export const Backdrop = styled.div`
 	${tw`
 		fixed
 		inset-0
 		bg-black
 		bg-opacity-0
-		backdrop-filter
 		backdrop-blur-lg
 		[&[data-enter]]:bg-opacity-40
 		transition
