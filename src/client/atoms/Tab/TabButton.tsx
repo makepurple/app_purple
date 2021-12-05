@@ -1,7 +1,8 @@
 import { InferComponentProps } from "@/client/types";
 import { m } from "framer-motion";
-import { Tab as ReakitTab } from "reakit";
 import tw, { styled } from "twin.macro";
+
+export type TabButtonProps = InferComponentProps<typeof TabButton>;
 
 const Selection = styled(m.div)`
 	${tw`
@@ -9,26 +10,32 @@ const Selection = styled(m.div)`
 		absolute
 		inset-0
 		bg-indigo-500
-		z-index[-1]
 		rounded-md
 	`}
 `;
 
-export type TabProps = InferComponentProps<typeof ReakitTab>;
+const Content = tw.span`
+	inline-flex
+	items-center
+	truncate
+	z-index[1]
+`;
 
-export const Tab = styled(ReakitTab).attrs<TabProps>(({ children, id, selectedId }) => ({
+export const TabButton = styled.button.attrs<{ selected?: boolean }>(({ children, selected }) => ({
+	"aria-selected": selected,
 	children: (
 		<>
-			{id === selectedId && <Selection initial={false} layoutId="tab" />}
-			{children}
+			{selected && <Selection initial={false} layoutId="tabButton" />}
+			<Content>{children}</Content>
 		</>
 	)
-}))<TabProps>`
+}))`
 	${tw`
 		relative
 		inline-flex
 		items-center
 		justify-center
+		m-0.5
 		p-4
 		rounded-lg
 		text-lg
@@ -41,8 +48,9 @@ export const Tab = styled(ReakitTab).attrs<TabProps>(({ children, id, selectedId
 		delay-75
 		duration-75
 		ease-linear
-		hover:bg-cyan-600
-		hover:bg-opacity-10
+		hover:text-white
+		hover:bg-indigo-500
+		hover:bg-opacity-80
 	`}
 
 	&[aria-selected="true"] {
@@ -51,9 +59,14 @@ export const Tab = styled(ReakitTab).attrs<TabProps>(({ children, id, selectedId
 		}
 
 		${tw`
-			text-white
 			shadow
+			text-white
 			font-bold
+			bg-opacity-100
 		`}
 	}
 `;
+
+TabButton.defaultProps = {
+	type: "button"
+};

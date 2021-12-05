@@ -1,4 +1,4 @@
-import { MainContainer, Paper, Tab, TabList } from "@/client/atoms";
+import { MainContainer, NextLinkAs, Paper, Tab } from "@/client/atoms";
 import { useGetPostsQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
 import { NonIdealState } from "@/client/molecules";
@@ -6,10 +6,8 @@ import { LoadingPostCard, PostCard, UserInfoSideBar } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[userName]";
 import { HexagonIcon, NoteIcon, RepoIcon } from "@/client/svgs";
 import { NextPage } from "next";
-import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
-import { useTabState } from "reakit";
+import React, { Fragment } from "react";
 import tw, { styled } from "twin.macro";
 
 const BATCH_SIZE = 20;
@@ -59,10 +57,6 @@ export const getServerSideProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
-	const tabs = useTabState({
-		selectedId: "posts-tab"
-	});
-
 	const userName = router?.query.userName as string;
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetPostsQuery, {
@@ -86,26 +80,49 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root>
 			<Content>
-				<TabList {...tabs} forwardedAs={Paper}>
-					<NextLink href={`/${userName}`} passHref>
-						<Tab {...tabs} forwardedAs="a" id="posts-tab">
-							<NoteIcon height={20} tw="mr-2" width={20} />
-							Posts
+				<Tab.Group>
+					<Tab.List forwardedAs={Paper}>
+						<Tab as={Fragment}>
+							{(tabProps) => (
+								<NextLinkAs
+									as={Tab.Button}
+									forwardedAs="a"
+									href={`/${userName}`}
+									{...tabProps}
+								>
+									<NoteIcon height={20} tw="mr-2" width={20} />
+									Posts
+								</NextLinkAs>
+							)}
 						</Tab>
-					</NextLink>
-					<NextLink href={`/${userName}/repositories`} passHref>
-						<Tab {...tabs} forwardedAs="a" id="repositories-tab">
-							<RepoIcon height={20} tw="mr-2" width={20} />
-							Repositories
+						<Tab as={Fragment}>
+							{(tabProps) => (
+								<NextLinkAs
+									as={Tab.Button}
+									forwardedAs="a"
+									href={`/${userName}/repositories`}
+									{...tabProps}
+								>
+									<RepoIcon height={20} tw="mr-2" width={20} />
+									Repositories
+								</NextLinkAs>
+							)}
 						</Tab>
-					</NextLink>
-					<NextLink href={`/${userName}/experience`} passHref>
-						<Tab {...tabs} forwardedAs="a" id="experience-tab">
-							<HexagonIcon height={20} tw="mr-2" width={20} />
-							Experience
+						<Tab as={Fragment}>
+							{(tabProps) => (
+								<NextLinkAs
+									as={Tab.Button}
+									forwardedAs="a"
+									href={`/${userName}/experience`}
+									{...tabProps}
+								>
+									<HexagonIcon height={20} tw="mr-2" width={20} />
+									Experience
+								</NextLinkAs>
+							)}
 						</Tab>
-					</NextLink>
-				</TabList>
+					</Tab.List>
+				</Tab.Group>
 				<Posts>
 					{fetching ? (
 						Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)

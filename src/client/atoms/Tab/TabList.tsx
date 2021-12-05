@@ -1,11 +1,11 @@
 import { InferComponentProps } from "@/client/types";
+import { Tab as HUITab } from "@headlessui/react";
 import { LayoutGroup } from "framer-motion";
-import { TabList as ReakitTabList } from "reakit";
 import tw, { styled } from "twin.macro";
 
-export type TabListProps = InferComponentProps<typeof ReakitTabList>;
+export type TabListProps = InferComponentProps<typeof HUITab["List"]>;
 
-export const TabList = styled(ReakitTabList).attrs<TabListProps>(({ children, id }) => ({
+export const TabList = styled(HUITab.List).attrs<TabListProps>(({ children, id }) => ({
 	children: <LayoutGroup id={id}>{children}</LayoutGroup>
 }))<TabListProps>`
 	${tw`
