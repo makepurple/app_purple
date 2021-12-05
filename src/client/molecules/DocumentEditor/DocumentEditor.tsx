@@ -16,7 +16,6 @@ import { DocumentEditorToolbar } from "./Toolbar";
 
 const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
 	${tw`
-		overflow-hidden
 		outline-none
 		ring-indigo-500
 		ring-opacity-80

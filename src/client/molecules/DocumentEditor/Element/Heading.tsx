@@ -1,10 +1,9 @@
-import { Menu, MenuItem } from "@/client/atoms";
-import { useIsBlockActive, useOnClickOutside, useToggle, useToggleBlock } from "@/client/hooks";
+import { ListItem, Menu } from "@/client/atoms";
+import { useIsBlockActive, useToggleBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { HeadingIcon } from "@/client/svgs";
 import { HeadingType } from "@/validators";
-import React, { FC, useRef } from "react";
-import { MenuButton, useMenuState } from "reakit";
+import React, { FC } from "react";
 import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
@@ -60,54 +59,30 @@ const supportedHeadings: readonly HeadingOption[] = [
 export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 	const isBlockActive = useIsBlockActive();
 	const toggleBlock = useToggleBlock();
-	const menu = useMenuState({
-		placement: "bottom-start"
-	});
-
-	const buttonRef = useRef<HTMLButtonElement>(null);
-	const menuRef = useRef<HTMLDivElement>(null);
-
-	const [open, toggle] = useToggle(false);
-
-	useOnClickOutside(buttonRef, (e) => {
-		if (!menuRef.current || menuRef.current.contains(e.target as Node | null)) return;
-
-		toggle.off();
-	});
 
 	return (
-		<>
-			<MenuButton
-				as={ToolbarButton}
-				ref={buttonRef}
-				{...menu}
-				onMouseDown={(event) => {
-					event.preventDefault();
-
-					toggle.on();
-				}}
-				title="heading"
-				aria-label="heading"
-			>
+		<Menu>
+			<Menu.Button as={ToolbarButton} title="heading" aria-label="heading">
 				<HeadingIcon height={20} width={20} />
-			</MenuButton>
-			<Menu ref={menuRef} {...menu} visible={open}>
+			</Menu.Button>
+			<Menu.Items>
 				{supportedHeadings.map(([name, slateType]) => (
-					<MenuItem
-						key={slateType}
-						{...menu}
-						onClick={() => {
-							toggleBlock(slateType);
-
-							toggle.off();
-						}}
-						selected={isBlockActive(slateType)}
-					>
-						{name}
-					</MenuItem>
+					<Menu.Item key={slateType}>
+						{(itemProps) => (
+							<ListItem
+								{...itemProps}
+								onClick={() => {
+									toggleBlock(slateType);
+								}}
+								selected={isBlockActive(slateType)}
+							>
+								{name}
+							</ListItem>
+						)}
+					</Menu.Item>
 				))}
-			</Menu>
-		</>
+			</Menu.Items>
+		</Menu>
 	);
 };
 

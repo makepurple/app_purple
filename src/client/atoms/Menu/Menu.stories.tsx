@@ -1,28 +1,22 @@
-import { Button, Menu, MenuItem } from "@/client/atoms";
+import { Button, ListItem, Menu } from "@/client/atoms";
+import type { Meta, Story } from "@storybook/react";
 import React from "react";
-import { MenuButton, useMenuState } from "reakit";
 
 export default {
 	title: "atoms/Menu",
 	component: Menu
-};
+} as Meta;
 
-const Template = (args) => {
-	const menu = useMenuState();
-
+const Template: Story = (args) => {
 	return (
-		<>
-			<MenuButton {...menu} as={Button}>
-				Open Menu
-			</MenuButton>
-			<Menu {...menu} {...args}>
-				<MenuItem {...menu}>Red</MenuItem>
-				<MenuItem {...menu}>Blue</MenuItem>
-				<MenuItem {...menu} selected>
-					Purple
-				</MenuItem>
-			</Menu>
-		</>
+		<Menu {...args}>
+			<Menu.Button as={Button}>More</Menu.Button>
+			<Menu.Items>
+				<Menu.Item>{(itemProps) => <ListItem {...itemProps}>react</ListItem>}</Menu.Item>
+				<Menu.Item>{(itemProps) => <ListItem {...itemProps}>vue</ListItem>}</Menu.Item>
+				<Menu.Item>{(itemProps) => <ListItem {...itemProps}>angular</ListItem>}</Menu.Item>
+			</Menu.Items>
+		</Menu>
 	);
 };
 Template.args = {};

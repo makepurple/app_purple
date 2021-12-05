@@ -1,5 +1,5 @@
-import { ContextMenu, ContextMenuItem, Menu, MenuItem } from "@/client/atoms";
-import { useContextMenu, useInsertBlock, useOnClickOutside, useToggle } from "@/client/hooks";
+import { ContextMenu, ContextMenuItem, ListItem, Menu } from "@/client/atoms";
+import { useContextMenu, useInsertBlock } from "@/client/hooks";
 import { ToolbarButton } from "@/client/molecules/DocumentEditor/Shared";
 import { CodeSquareIcon } from "@/client/svgs";
 import { CodeBlockType } from "@/validators";
@@ -8,7 +8,6 @@ import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
-import { MenuButton, useMenuState } from "reakit";
 import { Descendant, Editor, Element, Node as SlateNode, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw, { styled } from "twin.macro";
@@ -81,56 +80,32 @@ const supportedLanguages: readonly CodeBlockLanguageOption[] = [
 
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	const insertBlock = useInsertBlock();
-	const menu = useMenuState({
-		placement: "bottom-start"
-	});
-
-	const buttonRef = useRef<HTMLButtonElement>(null);
-	const menuRef = useRef<HTMLDivElement>(null);
-
-	const [open, toggle] = useToggle(false);
-
-	useOnClickOutside(buttonRef, (e) => {
-		if (!menuRef.current || menuRef.current.contains(e.target as Node | null)) return;
-
-		toggle.off();
-	});
 
 	return (
-		<>
-			<MenuButton
-				as={ToolbarButton}
-				ref={buttonRef}
-				{...menu}
-				onMouseDown={(event) => {
-					event.preventDefault();
-
-					toggle.on();
-				}}
-				title="code block"
-				aria-label="code block"
-			>
+		<Menu>
+			<Menu.Button as={ToolbarButton} title="code block" aria-label="code block">
 				<CodeSquareIcon height={20} width={20} />
-			</MenuButton>
-			<Menu ref={menuRef} {...menu} visible={open}>
+			</Menu.Button>
+			<Menu.Items>
 				{supportedLanguages.map(([name, slateType]) => (
-					<MenuItem
-						key={slateType}
-						{...menu}
-						onClick={() => {
-							insertBlock({
-								type: slateType,
-								children: [{ text: "" }]
-							});
-
-							toggle.off();
-						}}
-					>
-						{name}
-					</MenuItem>
+					<Menu.Item key={slateType}>
+						{(itemProps) => (
+							<ListItem
+								{...itemProps}
+								onClick={() => {
+									insertBlock({
+										type: slateType,
+										children: [{ text: "" }]
+									});
+								}}
+							>
+								{name}
+							</ListItem>
+						)}
+					</Menu.Item>
 				))}
-			</Menu>
-		</>
+			</Menu.Items>
+		</Menu>
 	);
 };
 

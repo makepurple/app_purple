@@ -8,6 +8,8 @@ export type InferComponentProps<T extends ElementType> = T extends ComponentType
 		: JSX.IntrinsicElements[T]
 	: Record<string, never>;
 
+export type WithAsProp<T extends ElementType> = { as?: T } & InferComponentProps<T>;
+
 export interface Coordinates {
 	x: number;
 	y: number;

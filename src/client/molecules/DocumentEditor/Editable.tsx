@@ -16,6 +16,7 @@ import { Placeholder } from "./Placeholder";
 const EditableContainer = styled.div<{ $readOnly?: boolean }>`
 	${tw`
 		p-5
+		rounded-b-lg
 		bg-indigo-50
 		transition
 		duration-300

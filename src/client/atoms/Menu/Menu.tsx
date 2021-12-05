@@ -1,17 +1,34 @@
-import { getZIndex } from "@/client/styles";
-import { Menu as ReakitMenu } from "reakit";
+import { InferComponentProps } from "@/client/types";
+import { ObjectUtils } from "@/utils";
+import { Menu as HUIMenu } from "@headlessui/react";
 import tw, { styled } from "twin.macro";
+import { MenuButton } from "./MenuButton";
+import { MenuItem } from "./MenuItem";
+import { MenuItems } from "./MenuItems";
 
-export const Menu = styled(ReakitMenu)`
+const Root = styled(HUIMenu)`
 	${tw`
-		flex
-		flex-col
+		relative
+		inline-flex
 		items-stretch
-		py-3
-		px-2
-		rounded-lg
-		bg-white
-		shadow-2xl
 	`}
-	z-index: ${getZIndex("menu")}
+
+	& > * {
+		${tw`
+			first:flex-grow
+		`}
+	}
 `;
+
+Root.displayName = "Menu";
+Root.defaultProps = {
+	forwardedAs: "div"
+};
+
+export type MenuProps = InferComponentProps<typeof Menu>;
+
+export const Menu = ObjectUtils.setStatic(Root, {
+	Button: MenuButton,
+	Item: MenuItem,
+	Items: MenuItems
+});
