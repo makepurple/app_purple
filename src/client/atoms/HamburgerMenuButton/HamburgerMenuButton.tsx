@@ -1,8 +1,5 @@
+import { InferComponentProps } from "@/client/types";
 import React, { FC } from "react";
-import {
-	DialogDisclosure as ReakitDialogDisclosure,
-	DialogDisclosureProps as ReakitDialogDisclosureProps
-} from "reakit";
 import tw, { styled } from "twin.macro";
 
 const Bar = styled.span`
@@ -25,7 +22,7 @@ const Bar = styled.span`
 	`}
 `;
 
-const Root = styled(ReakitDialogDisclosure)`
+const Root = styled.button`
 	${tw`
 		flex
 		items-center
@@ -74,11 +71,15 @@ const Bars = tw.div`
 	cursor-pointer
 `;
 
-export type HamburgerMenuButtonProps = ReakitDialogDisclosureProps;
+export type HamburgerMenuButtonProps = InferComponentProps<"button"> & {
+	open?: boolean;
+};
 
 export const HamburgerMenuButton: FC<HamburgerMenuButtonProps> = (props) => {
+	const { open, ...divProps } = props;
+
 	return (
-		<Root {...props}>
+		<Root type="button" aria-expanded={open} aria-label="Open menu" {...divProps}>
 			<Bars>
 				<Bar />
 				<Bar />

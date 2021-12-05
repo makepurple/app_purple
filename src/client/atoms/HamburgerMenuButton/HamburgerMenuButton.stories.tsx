@@ -1,19 +1,18 @@
-import { HamburgerMenuButton } from "@/client/atoms/HamburgerMenuButton";
+import { HamburgerMenuButton, HamburgerMenuButtonProps } from "@/client/atoms/HamburgerMenuButton";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
-import { useDialogState } from "reakit";
 
 export default {
 	title: "atoms/HamburgerMenuButton",
 	component: HamburgerMenuButton
 } as Meta;
 
-const Template: Story = (args) => {
-	const dialog = useDialogState();
-
-	return <HamburgerMenuButton {...dialog} {...args} />;
+const Template: Story<HamburgerMenuButtonProps> = (args) => {
+	return <HamburgerMenuButton {...args} />;
 };
-Template.args = {};
+Template.args = {
+	open: false
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
