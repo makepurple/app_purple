@@ -163,11 +163,10 @@ export const HeartIcon = React.memo(
 export const HexagonIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
-			role="img"
+			xmlns="http://www.w3.org/2000/svg"
 			width={24}
 			height={24}
 			viewBox="0 0 24 24"
-			xmlns="http://www.w3.org/2000/svg"
 			ref={ref}
 			{...props}
 		>
