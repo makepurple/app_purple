@@ -1,5 +1,4 @@
 const { addWebpackAlias } = require("customize-cra");
-const ms = require("ms");
 const path = require("path");
 
 module.exports = {
@@ -10,6 +9,7 @@ module.exports = {
 	addons: [
 		"@storybook/addon-a11y",
 		"@storybook/addon-essentials",
+		"addon-screen-reader",
 		"storybook-addon-next-router",
 	],
 	babel: () => ({

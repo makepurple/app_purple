@@ -128,6 +128,7 @@
     "@typescript-eslint/eslint-plugin-tslint": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@urql/storybook-addon": "^1.0.7",
+    "addon-screen-reader": "^1.8.6",
     "autoprefixer": "^10.4.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-twin": "^1.0.2",
