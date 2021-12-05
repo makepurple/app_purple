@@ -21,6 +21,7 @@ module.exports = {
 			}]
 		]
 	}),
+	staticDirs: ["../public"],
 	webpackFinal: (config) => {
 		/**
 		 * TODO
@@ -33,6 +34,8 @@ module.exports = {
 		config.node = {
 			fs: "empty",
 		};
+
+		config.resolve.alias["next-auth/react"] = require.resolve("./__mocks__/next-auth/react.js");
 
 		/**
 		 * !HACK
