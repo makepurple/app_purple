@@ -1,4 +1,4 @@
-import { Button, ListItem, Select, SelectProps } from "@/client/atoms";
+import { Button, ExpandIcon, ListItem, Select, SelectProps } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";
 
@@ -26,22 +26,27 @@ const Template: Story<SelectProps<{ name: string; value: number }>> = (args) => 
 			}}
 			value={value}
 		>
-			<TypedSelect.Button as={Button}>
-				<span tw="w-64">
-					{value.name}: {value.value}
-				</span>
-			</TypedSelect.Button>
-			<TypedSelect.Options>
-				{MOCK_DATA.map((item) => (
-					<TypedSelect.Option key={item.name} value={item}>
-						{(optionProps) => (
-							<ListItem {...optionProps} selected={item.name === value.name}>
-								{item.name}: {item.value}
-							</ListItem>
-						)}
-					</TypedSelect.Option>
-				))}
-			</TypedSelect.Options>
+			{({ open }) => (
+				<>
+					<TypedSelect.Button as={Button} size="small">
+						<span tw="w-48">
+							{value.name}: {value.value}
+						</span>
+						<ExpandIcon open={open} />
+					</TypedSelect.Button>
+					<TypedSelect.Options>
+						{MOCK_DATA.map((item) => (
+							<TypedSelect.Option key={item.name} value={item}>
+								{(optionProps) => (
+									<ListItem {...optionProps} selected={item.name === value.name}>
+										{item.name}: {item.value}
+									</ListItem>
+								)}
+							</TypedSelect.Option>
+						))}
+					</TypedSelect.Options>
+				</>
+			)}
 		</TypedSelect>
 	);
 };

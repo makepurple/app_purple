@@ -9,6 +9,7 @@ export * from "./ContextMenu";
 export * from "./Divider";
 export * from "./EditableText";
 export * from "./ErrorBoundary";
+export * from "./ExpandIcon";
 export * from "./Footer";
 export * from "./Form";
 export * from "./FormButton";
