@@ -1,6 +1,6 @@
 import { Button, ListItem, Select, SelectProps } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 const MOCK_DATA = [
 	{ name: "One", value: 1 },
@@ -33,7 +33,7 @@ const Template: Story<SelectProps<{ name: string; value: number }>> = (args) => 
 			</TypedSelect.Button>
 			<TypedSelect.Options>
 				{MOCK_DATA.map((item) => (
-					<TypedSelect.Option as={Fragment} key={item.name} value={item}>
+					<TypedSelect.Option key={item.name} value={item}>
 						{(optionProps) => (
 							<ListItem {...optionProps} selected={item.name === value.name}>
 								{item.name}: {item.value}
