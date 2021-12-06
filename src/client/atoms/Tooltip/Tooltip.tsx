@@ -1,13 +1,10 @@
-import { Tooltip as ReakitTooltip } from "reakit";
-import tw from "twin.macro";
+import Tippy, { TippyProps } from "@tippyjs/react";
+import React, { FC } from "react";
 
-export const Tooltip = tw(ReakitTooltip)`
-	rounded-lg
-	bg-black
-	bg-opacity-80
-	border
-	border-solid
-	border-gray-800
-	shadow-md
-	text-white
-`;
+export type TooltipProps = TippyProps;
+
+export const Tooltip: FC<TooltipProps> = (props) => {
+	const { children, ...tippyProps } = props;
+
+	return <Tippy {...tippyProps}>{children}</Tippy>;
+};

@@ -1,5 +1,5 @@
 import Tippy, { TippyProps } from "@tippyjs/react";
-import { FC } from "react";
+import React, { FC } from "react";
 import tw from "twin.macro";
 
 const Root = tw(Tippy)`

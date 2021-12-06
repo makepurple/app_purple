@@ -1,4 +1,4 @@
-import { Button, Popover } from "@/client/atoms";
+import { Button, Popover, PopoverProps } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
@@ -7,7 +7,7 @@ export default {
 	component: Popover
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PopoverProps> = (args) => {
 	return (
 		<Popover {...args}>
 			<Button type="button">Reference</Button>

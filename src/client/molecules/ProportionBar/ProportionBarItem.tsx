@@ -1,13 +1,11 @@
-import { Tooltip, TooltipArrow } from "@/client/atoms";
+import { Tooltip } from "@/client/atoms";
 import { ColorUtils } from "@/utils";
 import React, { CSSProperties, FC } from "react";
-import { TooltipReference, useTooltipState } from "reakit";
 import tw, { styled } from "twin.macro";
 
 const StyledTooltip = tw(Tooltip)`
 	inline-flex
 	items-center
-	p-2
 	text-base
 	leading-none
 `;
@@ -21,7 +19,7 @@ const LegendIcon = tw.span`
 
 const Proportion = tw.span`
 	ml-2
-	text-gray-800
+	text-indigo-300
 	text-sm
 `;
 
@@ -49,25 +47,17 @@ export const ProportionBarItem: FC<ProportionBarItemProps> = ({
 	style,
 	value
 }) => {
-	const tooltip = useTooltipState({
-		placement: "bottom"
-	});
-
 	return (
-		<>
-			<TooltipReference
-				{...tooltip}
-				as={Bar}
-				className={className}
-				style={style}
-				$color={color}
-			/>
-			<StyledTooltip {...tooltip}>
-				<TooltipArrow {...tooltip} />
-				<LegendIcon style={{ backgroundColor: color }} />
-				{children}
-				{max && <Proportion>{((value / max) * 100).toFixed(2)}%</Proportion>}
-			</StyledTooltip>
-		</>
+		<StyledTooltip
+			content={
+				<>
+					<LegendIcon style={{ backgroundColor: color }} />
+					{children}
+					{max && <Proportion>{((value / max) * 100).toFixed(2)}%</Proportion>}
+				</>
+			}
+		>
+			<Bar className={className} style={style} $color={color} />
+		</StyledTooltip>
 	);
 };
