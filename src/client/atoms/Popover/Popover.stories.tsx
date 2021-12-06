@@ -1,7 +1,6 @@
-import { Button, Popover, PopoverArrow } from "@/client/atoms";
+import { Button, Popover } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
-import { PopoverDisclosure, usePopoverState } from "reakit";
 
 export default {
 	title: "atoms/Popover",
@@ -9,23 +8,15 @@ export default {
 } as Meta;
 
 const Template: Story = (args) => {
-	const popover = usePopoverState({
-		placement: "bottom-start"
-	});
-
 	return (
-		<>
-			<PopoverDisclosure {...popover} as={Button}>
-				Open Popover
-			</PopoverDisclosure>
-			<Popover {...popover} {...args}>
-				<PopoverArrow {...popover} />
-				This is some popover content
-			</Popover>
-		</>
+		<Popover {...args}>
+			<Button type="button">Reference</Button>
+		</Popover>
 	);
 };
-Template.args = {};
+Template.args = {
+	content: <button>Tab to focus me</button>
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };

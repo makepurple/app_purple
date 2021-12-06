@@ -6,7 +6,8 @@ import { RouterContext } from "next/dist/shared/lib/router-context";
 import * as NextImage from "next/image";
 import { Toaster } from "react-hot-toast";
 import { GlobalStyles } from "../src/client/styles/global.styles";
-import "twin.macro"
+import "twin.macro";
+import "tippy.js/dist/tippy.css";
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
