@@ -16,6 +16,7 @@ export const MenuItems = styled(HUIMenu.Items)`
 		rounded-lg
 		bg-white
 		shadow-2xl
+		empty:hidden
 	`}
 	z-index: ${getZIndex("menu")}
 `;

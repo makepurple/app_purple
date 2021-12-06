@@ -1,6 +1,6 @@
-import { Select, SelectProps } from "@/client/atoms";
+import { Button, ListItem, Select, SelectProps } from "@/client/atoms";
 import type { Meta, Story } from "@storybook/react";
-import React from "react";
+import React, { Fragment, useState } from "react";
 
 const MOCK_DATA = [
 	{ name: "One", value: 1 },
@@ -16,17 +16,31 @@ export default {
 const TypedSelect = Select.ofType<{ name: string; value: number }>();
 
 const Template: Story<SelectProps<{ name: string; value: number }>> = (args) => {
+	const [value, setValue] = useState<{ name: string; value: number }>(MOCK_DATA[0]);
+
 	return (
-		<TypedSelect {...args} items={MOCK_DATA}>
-			<TypedSelect.Disclosure>Select Thing</TypedSelect.Disclosure>
+		<TypedSelect
+			{...args}
+			onChange={(newValue) => {
+				setValue(newValue);
+			}}
+			value={value}
+		>
+			<TypedSelect.Button as={Button}>
+				<span tw="w-64">
+					{value.name}: {value.value}
+				</span>
+			</TypedSelect.Button>
 			<TypedSelect.Options>
-				{({ items }) =>
-					items.map((item, i) => (
-						<TypedSelect.Option key={i} index={i}>
-							{item.name}
-						</TypedSelect.Option>
-					))
-				}
+				{MOCK_DATA.map((item) => (
+					<TypedSelect.Option as={Fragment} key={item.name} value={item}>
+						{(optionProps) => (
+							<ListItem {...optionProps} selected={item.name === value.name}>
+								{item.name}: {item.value}
+							</ListItem>
+						)}
+					</TypedSelect.Option>
+				))}
 			</TypedSelect.Options>
 		</TypedSelect>
 	);

@@ -15,6 +15,7 @@ export const ListItem = styled.li<{
 		px-3
 		border-none
 		rounded-md
+		whitespace-nowrap
 		text-base
 		leading-none
 		font-semibold

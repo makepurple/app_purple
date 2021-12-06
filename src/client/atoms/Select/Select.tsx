@@ -1,44 +1,43 @@
+import { InferComponentProps } from "@/client/types";
 import { ObjectUtils } from "@/utils";
-import { useSelect, UseSelectProps } from "downshift";
-import React, { CSSProperties, FC, ReactNode } from "react";
-import tw from "twin.macro";
-import { SelectContext } from "./context";
-import { SelectDisclosure } from "./SelectDisclosure";
+import { Listbox as HUIListbox } from "@headlessui/react";
+import { FC } from "react";
+import tw, { styled } from "twin.macro";
+import { SelectButton } from "./SelectButton";
 import { SelectOption } from "./SelectOption";
 import { SelectOptions } from "./SelectOptions";
 
-const Root = tw.div`
-	inline-flex
-	relative
+const Root = styled(HUIListbox)`
+	${tw`
+		relative
+		inline-flex
+		items-stretch
+	`}
+
+	& > * {
+		${tw`
+			first:flex-grow
+		`}
+	}
 `;
 
-export type SelectProps<T> = UseSelectProps<T> & {
-	children?: ReactNode;
-	className?: string;
-	style?: CSSProperties;
+export type SelectProps<T> = Omit<InferComponentProps<typeof HUIListbox>, "onChange" | "value"> & {
+	value: T;
+	onChange: (value: T) => void;
 };
 
 const ofType = <T extends any>() => {
-	const TypedSelect: FC<SelectProps<T>> = (props) => {
-		const { children, className, style, ...selectProps } = props;
-
-		const select = useSelect(selectProps);
-
-		return (
-			<SelectContext.Provider value={{ ...select, items: selectProps.items }}>
-				<Root className={className} style={style}>
-					{children}
-				</Root>
-			</SelectContext.Provider>
-		);
-	};
+	const TypedSelect: FC<SelectProps<T>> = Root;
 
 	TypedSelect.displayName = "TypedSelect";
+	TypedSelect.defaultProps = {
+		forwardedAs: "div"
+	};
 
 	const component = ObjectUtils.setStatic(TypedSelect, {
-		Disclosure: SelectDisclosure,
-		Option: SelectOption,
-		Options: SelectOptions.ofType<T>()
+		Button: SelectButton,
+		Option: SelectOption.ofType<T>(),
+		Options: SelectOptions
 	});
 
 	return component;
