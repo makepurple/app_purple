@@ -64,6 +64,7 @@ export type Experience = {
   readonly highlights: ReadonlyArray<Scalars['String']>;
   readonly id: Scalars['Int'];
   readonly location?: Maybe<Scalars['String']>;
+  readonly organization: Organization;
   readonly organizationName: Scalars['String'];
   readonly positionName?: Maybe<Scalars['String']>;
   readonly startDate?: Maybe<Scalars['DateTime']>;
@@ -139,6 +140,7 @@ export type GitHubOrganization = GitHubRepositoryOwner & {
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;
+  readonly organization: Organization;
   readonly url: Scalars['URL'];
 };
 
@@ -170,7 +172,7 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly topLanguages: TopLanguages;
   readonly twitterUsername?: Maybe<Scalars['String']>;
   readonly url: Scalars['URL'];
-  readonly user?: Maybe<User>;
+  readonly user: User;
   readonly websiteUrl?: Maybe<Scalars['String']>;
 };
 
@@ -181,7 +183,9 @@ export type Mutation = {
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
   readonly createPost: Post;
   readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
-  /** User can delete their own post. */
+  /** Users can delete their own experiences. */
+  readonly deleteExperience: Experience;
+  /** Users can delete their own posts. */
   readonly deletePost: Post;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: Post;
@@ -206,6 +210,12 @@ export type MutationCreateExperienceArgs = {
 /** Root mutation type */
 export type MutationCreatePresignedS3UrlArgs = {
   data: CreatePresignedS3UrlInput;
+};
+
+
+/** Root mutation type */
+export type MutationDeleteExperienceArgs = {
+  where: ExperienceWhereUniqueInput;
 };
 
 
@@ -271,6 +281,14 @@ export type MutationUploadPostImageArgs = {
 /** Root mutation type */
 export type MutationUpvotePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+export type Organization = {
+  readonly __typename: 'Organization';
+  readonly experiences: ReadonlyArray<Experience>;
+  readonly github: GitHubOrganization;
+  readonly id: Scalars['Int'];
+  readonly name: Scalars['String'];
 };
 
 /** Page info for relay-style pagination connections. */

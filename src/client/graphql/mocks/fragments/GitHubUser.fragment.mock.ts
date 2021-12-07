@@ -1,5 +1,6 @@
 import type { GitHubUser } from "@/client/graphql/generated";
 import { TopLanguages_fragment_mock } from "./TopLanguages.fragment.mock";
+import { User_fragment_mock } from "./User.fragment.mock";
 
 export const GitHubUser_fragment_mock: GitHubUser = {
 	__typename: "GitHubUser",
@@ -15,5 +16,6 @@ export const GitHubUser_fragment_mock: GitHubUser = {
 	},
 	twitterUsername: "i3daly",
 	url: "https://github.com/leedavidcs",
+	user: User_fragment_mock,
 	websiteUrl: "https://leedavidcs.dev"
 };
