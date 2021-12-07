@@ -170,7 +170,10 @@ type Mutation {
   createPost: Post!
   createPresignedS3Url(data: CreatePresignedS3UrlInput!): CreatePresignedS3UrlPayload!
 
-  """User can delete their own post."""
+  """Users can delete their own experiences."""
+  deleteExperience(where: ExperienceWhereUniqueInput!): Experience!
+
+  """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): Post!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): Post!

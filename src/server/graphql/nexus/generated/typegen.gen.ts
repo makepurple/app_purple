@@ -410,6 +410,7 @@ export interface NexusGenFieldTypes {
     createExperience: NexusGenRootTypes['Experience']; // Experience!
     createPost: NexusGenRootTypes['Post']; // Post!
     createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
+    deleteExperience: NexusGenRootTypes['Experience']; // Experience!
     deletePost: NexusGenRootTypes['Post']; // Post!
     ok: boolean; // Boolean!
     publishPost: NexusGenRootTypes['Post']; // Post!
@@ -593,6 +594,7 @@ export interface NexusGenFieldTypeNames {
     createExperience: 'Experience'
     createPost: 'Post'
     createPresignedS3Url: 'CreatePresignedS3UrlPayload'
+    deleteExperience: 'Experience'
     deletePost: 'Post'
     ok: 'Boolean'
     publishPost: 'Post'
@@ -716,6 +718,9 @@ export interface NexusGenArgTypes {
     }
     createPresignedS3Url: { // args
       data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
+    }
+    deleteExperience: { // args
+      where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
     }
     deletePost: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!

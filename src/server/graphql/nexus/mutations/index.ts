@@ -1,6 +1,7 @@
 export * from "./createExperience";
 export * from "./createPost";
 export * from "./createPresignedS3Url";
+export * from "./deleteExperience";
 export * from "./deletePost";
 export * from "./publishPost";
 export * from "./removePostThumbnail";

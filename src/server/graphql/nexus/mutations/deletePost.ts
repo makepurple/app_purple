@@ -1,11 +1,11 @@
-import { Logger } from "@/server/utils";
+import { Logger, PrismaUtils } from "@/server/utils";
 import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const deletePost = mutationField("deletePost", {
 	type: nonNull("Post"),
 	description: oneLine`
-		User can delete their own post.
+		Users can delete their own posts.
 	`,
 	args: {
 		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
@@ -13,44 +13,27 @@ export const deletePost = mutationField("deletePost", {
 	authorize: async (parent, args, { prisma, user }) => {
 		if (!user) return false;
 
-		const postToDelete = await prisma.post.findUnique({
-			where: {
-				id: args.where.id ?? undefined
-			},
-			select: {
-				author: {
-					select: {
-						id: true
-					}
-				}
-			}
-		});
+		const author = await prisma.post
+			.findUnique({
+				where: PrismaUtils.nonNull(args.where)
+			})
+			.author();
 
-		if (user.id !== postToDelete?.author.id) return false;
+		if (user.id !== author?.id) return false;
 
 		return true;
 	},
 	resolve: async (parent, args, { cloudinary, prisma }) => {
-		const postToDelete = await prisma.post.findUnique({
-			where: {
-				id: args.where.id ?? undefined
-			},
-			select: {
-				images: {
-					select: {
-						id: true
-					}
-				}
-			}
-		});
-
-		if (!postToDelete) {
-			throw new Error("Post was not found");
-		}
+		const images = await prisma.post
+			.findUnique({
+				where: PrismaUtils.nonNull(args.where)
+			})
+			.images();
 
 		await Promise.all(
-			postToDelete.images.map((image) => {
-				return cloudinary.client.deleteImageFile(image.id).catch(() => {
+			images.map(async (image) => {
+				return await cloudinary.client.deleteImageFile(image.id).catch(() => {
+					// Try our best to delete as much as possible, but proceed
 					Logger.error(`Could not delete cloudinary image: ${image.id}`);
 				});
 			})
