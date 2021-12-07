@@ -48,6 +48,7 @@ type Experience {
   highlights: [String!]!
   id: Int!
   location: String
+  organization: Organization!
   organizationName: String!
   positionName: String
   startDate: DateTime
@@ -120,6 +121,7 @@ type GitHubOrganization implements GitHubRepositoryOwner {
   id: String!
   login: String!
   name: String
+  organization: Organization!
   url: URL!
 }
 
@@ -149,7 +151,7 @@ type GitHubUser implements GitHubRepositoryOwner {
   topLanguages: TopLanguages!
   twitterUsername: String
   url: URL!
-  user: User
+  user: User!
   websiteUrl: String
 }
 
@@ -181,6 +183,13 @@ type Mutation {
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
   upvotePost(where: PostWhereUniqueInput!): Post!
   viewer: User
+}
+
+type Organization {
+  experiences: [Experience!]!
+  github: GitHubOrganization!
+  id: Int!
+  name: String!
 }
 
 """Page info for relay-style pagination connections."""

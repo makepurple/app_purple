@@ -46,10 +46,7 @@ export const User = objectType({
 					throw new Error("Could not get user's GitHub data");
 				}
 
-				return {
-					user: parent,
-					...githubUser.user
-				};
+				return githubUser.user;
 			}
 		});
 		t.nonNull.url("githubUrl", {

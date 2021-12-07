@@ -856,6 +856,9 @@ export type BotAvatarUrlArgs = {
   size?: InputMaybe<Scalars['Int']>;
 };
 
+/** Types which can be actors for `BranchActorAllowance` objects. */
+export type BranchActorAllowanceActor = Team | User;
+
 /** A branch protection rule. */
 export type BranchProtectionRule = Node & {
   readonly __typename?: 'BranchProtectionRule';
@@ -865,6 +868,8 @@ export type BranchProtectionRule = Node & {
   readonly allowsForcePushes: Scalars['Boolean'];
   /** A list of conflicts matching branches protection rule and other branch protection rules */
   readonly branchProtectionRuleConflicts: BranchProtectionRuleConflictConnection;
+  /** A list of actors able to bypass PRs for this branch protection rule. */
+  readonly bypassPullRequestAllowances: BypassPullRequestAllowanceConnection;
   /** The actor who created this branch protection rule. */
   readonly creator?: Maybe<Actor>;
   /** Identifies the primary key from the database. */
@@ -913,6 +918,15 @@ export type BranchProtectionRule = Node & {
 
 /** A branch protection rule. */
 export type BranchProtectionRuleBranchProtectionRuleConflictsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** A branch protection rule. */
+export type BranchProtectionRuleBypassPullRequestAllowancesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1000,6 +1014,38 @@ export type BranchProtectionRuleEdge = {
   readonly cursor: Scalars['String'];
   /** The item at the end of the edge. */
   readonly node?: Maybe<BranchProtectionRule>;
+};
+
+/** A team or user who has the ability to bypass a pull request requirement on a protected branch. */
+export type BypassPullRequestAllowance = Node & {
+  readonly __typename?: 'BypassPullRequestAllowance';
+  /** The actor that can dismiss. */
+  readonly actor?: Maybe<BranchActorAllowanceActor>;
+  /** Identifies the branch protection rule associated with the allowed user or team. */
+  readonly branchProtectionRule?: Maybe<BranchProtectionRule>;
+  readonly id: Scalars['ID'];
+};
+
+/** The connection type for BypassPullRequestAllowance. */
+export type BypassPullRequestAllowanceConnection = {
+  readonly __typename?: 'BypassPullRequestAllowanceConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<BypassPullRequestAllowanceEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<BypassPullRequestAllowance>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type BypassPullRequestAllowanceEdge = {
+  readonly __typename?: 'BypassPullRequestAllowanceEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<BypassPullRequestAllowance>;
 };
 
 /** The Common Vulnerability Scoring System */
@@ -2640,6 +2686,8 @@ export type CreateBranchProtectionRuleInput = {
   readonly allowsDeletions?: InputMaybe<Scalars['Boolean']>;
   /** Are force pushes allowed on this branch. */
   readonly allowsForcePushes?: InputMaybe<Scalars['Boolean']>;
+  /** A list of User or Team IDs allowed to bypass pull requests targeting matching branches. */
+  readonly bypassPullRequestActorIds?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
   /** A unique identifier for the client performing the mutation. */
   readonly clientMutationId?: InputMaybe<Scalars['String']>;
   /** Will new commits pushed to matching branches dismiss pull request review approvals. */
@@ -17729,7 +17777,7 @@ export type RequiredStatusCheckDescription = {
 
 /** Specifies the attributes for a new or updated required status check. */
 export type RequiredStatusCheckInput = {
-  /** The ID of the App that must set the status in order for it to be accepted. */
+  /** The ID of the App that must set the status in order for it to be accepted. Omit this value to use whichever app has recently been setting this status, or use "any" to allow any app to set the status. */
   readonly appId?: InputMaybe<Scalars['ID']>;
   /** Status check context that must pass for commits to be accepted to the matching branch. */
   readonly context: Scalars['String'];
@@ -20660,6 +20708,8 @@ export type UpdateBranchProtectionRuleInput = {
   readonly allowsForcePushes?: InputMaybe<Scalars['Boolean']>;
   /** The global relay id of the branch protection rule to be updated. */
   readonly branchProtectionRuleId: Scalars['ID'];
+  /** A list of User or Team IDs allowed to bypass pull requests targeting matching branches. */
+  readonly bypassPullRequestActorIds?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
   /** A unique identifier for the client performing the mutation. */
   readonly clientMutationId?: InputMaybe<Scalars['String']>;
   /** Will new commits pushed to matching branches dismiss pull request review approvals. */
@@ -22561,7 +22611,7 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
 };
 
 export type SuggestOrganizationsQueryVariables = Exact<{
-  first?: Maybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
   searchQuery: Scalars['String'];
 }>;
 
@@ -22569,7 +22619,7 @@ export type SuggestOrganizationsQueryVariables = Exact<{
 export type SuggestOrganizationsQuery = { readonly __typename?: 'Query', readonly search: { readonly __typename?: 'SearchResultItemConnection', readonly totalCount: number, readonly nodes?: ReadonlyArray<{ readonly __typename?: 'App' } | { readonly __typename?: 'Discussion' } | { readonly __typename?: 'Issue' } | { readonly __typename?: 'MarketplaceListing' } | { readonly __typename: 'Organization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } | { readonly __typename?: 'PullRequest' } | { readonly __typename?: 'Repository' } | { readonly __typename?: 'User' } | null | undefined> | null | undefined } };
 
 export type SuggestRepositoriesQueryVariables = Exact<{
-  first?: Maybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
   searchQuery: Scalars['String'];
 }>;
 
@@ -22582,6 +22632,13 @@ export type GetUserTopLanguagesQueryVariables = Exact<{
 
 
 export type GetUserTopLanguagesQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly repositories: { readonly __typename?: 'RepositoryConnection', readonly nodes?: ReadonlyArray<{ readonly __typename?: 'Repository', readonly name: string, readonly languages?: { readonly __typename?: 'LanguageConnection', readonly edges?: ReadonlyArray<{ readonly __typename?: 'LanguageEdge', readonly size: number, readonly node: { readonly __typename?: 'Language', readonly name: string, readonly color?: string | null | undefined } } | null | undefined> | null | undefined } | null | undefined } | null | undefined> | null | undefined } } | null | undefined };
+
+export type GetGitHubOrganizationQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type GetGitHubOrganizationQuery = { readonly __typename?: 'Query', readonly organization?: { readonly __typename: 'Organization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } | null | undefined };
 
 export type GetGitHubUserQueryVariables = Exact<{
   login: Scalars['String'];

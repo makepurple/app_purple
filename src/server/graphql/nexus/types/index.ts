@@ -9,6 +9,7 @@ export * from "./GitHubRepository";
 export * from "./GitHubRepositoryOwner";
 export * from "./GitHubUser";
 export * from "./Mutation";
+export * from "./Organization";
 export * from "./PageInfo";
 export * from "./Post";
 export * from "./PostConnection";

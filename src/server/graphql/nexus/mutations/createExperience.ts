@@ -13,8 +13,22 @@ export const createExperience = mutationField("createExperience", {
 
 		return await prisma.experience.create({
 			data: {
-				...args.data,
+				endDate: args.data.endDate,
 				highlights: args.data.highlights ?? [],
+				location: args.data.location,
+				organization: {
+					connectOrCreate: {
+						create: {
+							name: args.data.organizationName
+						},
+						where: {
+							name: args.data.organizationName
+						}
+					}
+				},
+				positionName: args.data.positionName,
+				startDate: args.data.startDate,
+				type: args.data.type,
 				user: {
 					connect: {
 						id: user.id

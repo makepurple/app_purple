@@ -23,9 +23,24 @@ export const updateExperience = mutationField("updateExperience", {
 	resolve: async (root, args, { prisma }) => {
 		return await prisma.experience.update({
 			data: {
-				...args.data,
+				endDate: args.data.endDate,
 				highlights: args.data.highlights ?? undefined,
-				organizationName: args.data.organizationName ?? undefined
+				location: args.data.location,
+				organization: args.data.organizationName
+					? {
+							connectOrCreate: {
+								create: {
+									name: args.data.organizationName
+								},
+								where: {
+									name: args.data.organizationName
+								}
+							}
+					  }
+					: undefined,
+				positionName: args.data.positionName,
+				startDate: args.data.startDate,
+				type: args.data.type
 			},
 			where: PrismaUtils.nonNull(args.where)
 		});

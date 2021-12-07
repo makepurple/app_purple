@@ -14,8 +14,14 @@ export const GitHubUser = objectType({
 		t.string("name");
 		t.field("topLanguages", {
 			type: nonNull("TopLanguages"),
-			resolve: async (parent, args, { octokit: graphql }) => {
-				if (!parent.user?.name) return { nodes: [] };
+			resolve: async (parent, args, { octokit: graphql, prisma }) => {
+				const user = await prisma.user.findUnique({
+					where: {
+						name: parent.login
+					}
+				});
+
+				if (!user?.name) return { nodes: [] };
 
 				const userTopLanguages = await graphql`
 					query GetUserTopLanguages($login: String!) {
@@ -43,7 +49,7 @@ export const GitHubUser = objectType({
 					.cast<
 						octokit.GetUserTopLanguagesQuery,
 						octokit.GetUserTopLanguagesQueryVariables
-					>({ login: parent.user.name })
+					>({ login: user.name })
 					.catch(() => null);
 
 				if (!userTopLanguages?.user) return { nodes: [] };
@@ -96,7 +102,22 @@ export const GitHubUser = objectType({
 			}
 		});
 		t.string("twitterUsername");
-		t.field("user", { type: "User" });
+		t.field("user", {
+			type: nonNull("User"),
+			resolve: async (parent, args, { prisma }) => {
+				const user = await prisma.user.findUnique({
+					where: {
+						name: parent.login
+					}
+				});
+
+				if (!user) {
+					throw new Error("User could not be found");
+				}
+
+				return user;
+			}
+		});
 		t.string("websiteUrl");
 	}
 });

@@ -262,10 +262,13 @@ export interface NexusGenObjects {
     name?: string | null; // String
     twitterUsername?: string | null; // String
     url: NexusGenScalars['URL']; // URL!
-    user?: NexusGenRootTypes['User'] | null; // User
     websiteUrl?: string | null; // String
   }
   Mutation: {};
+  Organization: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
   PageInfo: { // root type
     endCursor?: string | null; // String
     hasNextPage: boolean; // Boolean!
@@ -357,6 +360,7 @@ export interface NexusGenFieldTypes {
     highlights: string[]; // [String!]!
     id: number; // Int!
     location: string | null; // String
+    organization: NexusGenRootTypes['Organization']; // Organization!
     organizationName: string; // String!
     positionName: string | null; // String
     startDate: NexusGenScalars['DateTime'] | null; // DateTime
@@ -379,6 +383,7 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     login: string; // String!
     name: string | null; // String
+    organization: NexusGenRootTypes['Organization']; // Organization!
     url: NexusGenScalars['URL']; // URL!
   }
   GitHubRepository: { // field return type
@@ -398,7 +403,7 @@ export interface NexusGenFieldTypes {
     topLanguages: NexusGenRootTypes['TopLanguages']; // TopLanguages!
     twitterUsername: string | null; // String
     url: NexusGenScalars['URL']; // URL!
-    user: NexusGenRootTypes['User'] | null; // User
+    user: NexusGenRootTypes['User']; // User!
     websiteUrl: string | null; // String
   }
   Mutation: { // field return type
@@ -417,6 +422,12 @@ export interface NexusGenFieldTypes {
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     upvotePost: NexusGenRootTypes['Post']; // Post!
     viewer: NexusGenRootTypes['User'] | null; // User
+  }
+  Organization: { // field return type
+    experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
+    github: NexusGenRootTypes['GitHubOrganization']; // GitHubOrganization!
+    id: number; // Int!
+    name: string; // String!
   }
   PageInfo: { // field return type
     endCursor: string | null; // String
@@ -532,6 +543,7 @@ export interface NexusGenFieldTypeNames {
     highlights: 'String'
     id: 'Int'
     location: 'String'
+    organization: 'Organization'
     organizationName: 'String'
     positionName: 'String'
     startDate: 'DateTime'
@@ -554,6 +566,7 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     login: 'String'
     name: 'String'
+    organization: 'Organization'
     url: 'URL'
   }
   GitHubRepository: { // field return type name
@@ -592,6 +605,12 @@ export interface NexusGenFieldTypeNames {
     uploadPostImage: 'PostImage'
     upvotePost: 'Post'
     viewer: 'User'
+  }
+  Organization: { // field return type name
+    experiences: 'Experience'
+    github: 'GitHubOrganization'
+    id: 'Int'
+    name: 'String'
   }
   PageInfo: { // field return type name
     endCursor: 'String'
