@@ -42,7 +42,7 @@
     "@types/ioredis": "^4.28.2",
     "@types/mjml-react": "^2.0.2",
     "@types/ms": "^0.7.31",
-    "@types/node": "^16.11.11",
+    "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/request-ip": "^0.0.37",
