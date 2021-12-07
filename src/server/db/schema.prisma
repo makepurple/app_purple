@@ -16,61 +16,60 @@ generator nexusPrisma {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
   access_token       String?
   expires_at         Int?
-  token_type         String?
-  scope              String?
+  id                 String  @id @default(cuid())
   id_token           String?
-  session_state      String?
-  oauth_token_secret String?
+  provider           String
+  providerAccountId  String
   oauth_token        String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  oauth_token_secret String?
+  refresh_token      String?
+  scope              String?
+  session_state      String?
+  token_type         String?
+  type               String
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String
 
   @@unique([provider, providerAccountId])
 }
 
 model Session {
+  expires      DateTime
   id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       String
-  expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
 }
 
 model User {
-  id            String                 @id @default(cuid())
-  // The GitHub name of the user
-  name          String                 @unique
-  email         String                 @unique
-  emailVerified DateTime?
-  // Avatar image, pulled from GitHub
-  image         String?
-  // Self written summary or description
-  description   String?
+  accounts      Account[]
+  comments      Comment[]
   // When this account was registered
   createdAt     DateTime               @default(now())
-  updatedAt     DateTime               @updatedAt
-  accounts      Account[]
-  sessions      Session[]
-  posts         Post[]                 @relation("PostAuthor")
-  comments      Comment[]
-  skills        SkillsOnUsers[]
+  description   String?
   desiredSkills DesiredSkillsOnUsers[]
+  email         String                 @unique
+  emailVerified DateTime?
   experiences   Experience[]
+  id            String                 @id @default(cuid())
+  // Avatar image, pulled from GitHub
+  image         String?
+  // The GitHub name of the user
+  name          String                 @unique
+  posts         Post[]                 @relation("PostAuthor")
+  // Self written summary or description
+  sessions      Session[]
+  skills        SkillsOnUsers[]
+  updatedAt     DateTime               @updatedAt
   upvotedPosts  PostUpvoter[]
 }
 
 model VerificationToken {
+  expires    DateTime
   identifier String
   token      String   @unique
-  expires    DateTime
 
   @@unique([identifier, token])
 }
@@ -85,19 +84,19 @@ model Post {
   images       PostImage[]
   publishedAt  DateTime?
   title        String?
-  urlSlug      String        @default("draft")
   thumbnailUrl String?
   updatedAt    DateTime      @updatedAt
   upvotes      PostUpvoter[]
+  urlSlug      String        @default("draft")
 
   @@unique([authorName, urlSlug])
 }
 
 model PostUpvoter {
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
   @@id([userId, postId])
 }
@@ -147,6 +146,12 @@ model DesiredSkillsOnUsers {
   @@id([skillId, userId])
 }
 
+model Organization {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  experiences Experience[]
+}
+
 enum ExperienceType {
   FullTime
   PartTime
@@ -162,6 +167,7 @@ model Experience {
   endDate          DateTime?
   highlights       String[]
   location         String?
+  organization     Organization    @relation(fields: [organizationName], references: [name], onDelete: Cascade)
   organizationName String
   positionName     String?
   startDate        DateTime?

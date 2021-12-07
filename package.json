@@ -17,12 +17,14 @@
     "generate:nexus": "yarn run script src/server/graphql/nexus/schema --nexus-exit",
     "generate:prisma": "prisma generate",
     "generate:svgs": "yarn run script scripts/generate-svg-components",
+    "prisma:format": "prisma format",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "test": "jest",
     "test:update": "yarn test -u",
     "postinstall": "yarn generate:prisma",
-    "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T"
+    "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T",
+    "services": "docker-compose up -d"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.44.0",
