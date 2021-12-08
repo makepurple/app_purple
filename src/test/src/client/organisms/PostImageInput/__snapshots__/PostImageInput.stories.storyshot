@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/PostImageInput Standard 1`] = `
+Array [
+  <label
+    className="Button-sc-1re3a49-0 jzepDw"
+    disabled={false}
+    role="button"
+    type="button"
+  >
+    Upload an image
+    <input
+      accept="image/gif,image/jpeg,image/jpg,image/png,image/webp"
+      className="VisuallyHidden-kikdl2-0 bOwpZK"
+      disabled={false}
+      onChange={[Function]}
+      type="file"
+    />
+  </label>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/Spinner Standard 1`] = `
+Array [
+  <svg
+    className="Spinner-sc-12jptmk-0 iAvVxs"
+    height={24}
+    viewBox="0 0 24 24"
+    width={24}
+  >
+    <circle
+      cx={12}
+      cy={12}
+      fill="none"
+      r={10}
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeWidth={3}
+    />
+  </svg>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

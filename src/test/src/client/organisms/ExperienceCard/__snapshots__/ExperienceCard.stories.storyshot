@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/ExperienceCard Standard 1`] = `
+Array [
+  <div
+    className="ExperienceCard__Root-o0wuka-0 iiJPhp"
+  >
+    <a
+      className="Avatar__Root-sc-5oha42-0 jKkKcg ExperienceCard__StyledAvatar-o0wuka-1 jkLCtw"
+    >
+      <div
+        className="Avatar__Content-sc-5oha42-1 ePGzeG"
+      >
+        <span
+          style={
+            Object {
+              "background": "none",
+              "border": 0,
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "height": "initial",
+              "margin": 0,
+              "maxWidth": "100%",
+              "opacity": 1,
+              "overflow": "hidden",
+              "padding": 0,
+              "position": "relative",
+              "width": "initial",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "background": "none",
+                "border": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": "initial",
+                "margin": 0,
+                "maxWidth": "100%",
+                "opacity": 1,
+                "padding": 0,
+                "width": "initial",
+              }
+            }
+          >
+            <img
+              alt=""
+              aria-hidden={true}
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+              style={
+                Object {
+                  "background": "none",
+                  "border": 0,
+                  "display": "block",
+                  "height": "initial",
+                  "margin": 0,
+                  "maxWidth": "100%",
+                  "opacity": 1,
+                  "padding": 0,
+                  "width": "initial",
+                }
+              }
+            />
+          </span>
+          <img
+            alt="Meta"
+            data-nimg="intrinsic"
+            decoding="async"
+            src="https://avatars.githubusercontent.com/u/69631?s=200&v=4"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+            title="Meta"
+          />
+          <noscript>
+            <img
+              alt="Meta"
+              data-nimg="intrinsic"
+              decoding="async"
+              loading="lazy"
+              src="https://avatars.githubusercontent.com/u/69631?s=200&v=4"
+              style={
+                Object {
+                  "border": "none",
+                  "bottom": 0,
+                  "boxSizing": "border-box",
+                  "display": "block",
+                  "height": 0,
+                  "left": 0,
+                  "margin": "auto",
+                  "maxHeight": "100%",
+                  "maxWidth": "100%",
+                  "minHeight": "100%",
+                  "minWidth": "100%",
+                  "objectFit": undefined,
+                  "objectPosition": undefined,
+                  "padding": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "width": 0,
+                }
+              }
+              title="Meta"
+            />
+          </noscript>
+        </span>
+      </div>
+    </a>
+    <div
+      className="ExperienceCard__Info-o0wuka-2 A-dpeb"
+    >
+      <h3
+        className="ExperienceCard__PositionName-o0wuka-3 jXcVEZ"
+      >
+        Senior Frontend Engineer
+        <span
+          className="ExperienceCard__PositionType-o0wuka-4 ExperienceCard___StyledPositionType-o0wuka-5 gwRMmi cZBCJt"
+        >
+          (
+          full-time
+          )
+        </span>
+      </h3>
+      <h4
+        className="ExperienceCard__OrganizationName-o0wuka-6 ecqBLJ"
+      >
+        Meta
+      </h4>
+      <div
+        className="ExperienceCard__Timeframe-o0wuka-7 Brzvc"
+      >
+        Oct 2011 – Present • 10yrs
+      </div>
+      <div
+        className="ExperienceCard__Location-o0wuka-8 hvWuPy"
+      >
+        San Francisco, CA
+      </div>
+      <ul
+        className="ExperienceCard__Highlights-o0wuka-9 dEkQbW"
+      >
+        <li>
+          Did a thing, then did another thing that was really incredible
+        </li>
+      </ul>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/Typography Standard 1`] = `
+Array [
+  <span
+    className="Typography-sc-1tizrqr-0 elxePs"
+  >
+    The quick brown fox jumps over the lazy log.
+  </span>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

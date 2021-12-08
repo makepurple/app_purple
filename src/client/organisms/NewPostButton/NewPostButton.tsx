@@ -28,6 +28,8 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 	const draft = data?.postDraft;
 
 	useEffect(() => {
+		if (process.env.NODE_ENV === "test") return;
+
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		router?.prefetch(`/${userName}/draft`);
 	}, [router, userName]);

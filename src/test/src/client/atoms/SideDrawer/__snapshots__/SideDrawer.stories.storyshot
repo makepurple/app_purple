@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/SideDrawer Standard 1`] = `
+Array [
+  <div
+    aria-labelledby={null}
+    aria-modal={true}
+    className="SideDrawer__Root-sc-1m2b3xf-0 gCHvGr"
+    id="headlessui-dialog-5"
+    onClick={[Function]}
+    role="dialog"
+    style={
+      Object {
+        "transform": "translateX(0%) translateZ(0)",
+      }
+    }
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

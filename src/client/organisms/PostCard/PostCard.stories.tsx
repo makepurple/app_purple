@@ -1,8 +1,6 @@
-import { useGetPostsQuery } from "@/client/graphql";
-import { GetPosts_mock, GetPosts_variables_mock } from "@/client/graphql/mocks";
-import { PostCard } from "@/client/organisms";
+import { GetPosts_mock } from "@/client/graphql/mocks";
+import { PostCard, PostCardProps } from "@/client/organisms";
 import type { Meta, Story } from "@storybook/react";
-import { getOperationName } from "@urql/core";
 import React from "react";
 
 export default {
@@ -10,27 +8,12 @@ export default {
 	component: PostCard
 } as Meta;
 
-const Template: Story = (args) => {
-	const [{ data }] = useGetPostsQuery({
-		variables: GetPosts_variables_mock
-	});
-
-	const post = data?.posts.nodes[0];
-
-	if (!post) return <></>;
-
-	return <PostCard {...args} post={post} />;
+const Template: Story<PostCardProps> = (args) => {
+	return <PostCard {...args} />;
 };
-Template.args = {};
+Template.args = {
+	post: GetPosts_mock.posts.nodes[0]
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
-Standard.parameters = {
-	urql: (op) => {
-		if (getOperationName(op.query) === "GetPosts") {
-			return { data: GetPosts_mock };
-		}
-
-		return {};
-	}
-};

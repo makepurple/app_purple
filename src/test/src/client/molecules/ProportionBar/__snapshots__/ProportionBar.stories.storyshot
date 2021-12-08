@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots molecules/ProportionBar Standard 1`] = `
+Array [
+  <div
+    className="ProgressBar-sc-1xlitap-0 fMhuXa"
+  >
+    <span
+      className="ProportionBarItem__Bar-sc-1u20zrp-3 cFImxb"
+      style={
+        Object {
+          "width": "66.66666666666666%",
+        }
+      }
+    />
+    <span
+      className="ProportionBarItem__LegendIcon-sc-1u20zrp-1 hZcgbg"
+      style={
+        Object {
+          "backgroundColor": "#2b7489",
+        }
+      }
+    />
+    TypeScript
+    <span
+      className="ProportionBarItem__Proportion-sc-1u20zrp-2 jOlIuV"
+    >
+      66.67
+      %
+    </span>
+    <span
+      className="ProportionBarItem__Bar-sc-1u20zrp-3 loixvl"
+      style={
+        Object {
+          "width": "22.22222222222222%",
+        }
+      }
+    />
+    <span
+      className="ProportionBarItem__LegendIcon-sc-1u20zrp-1 hZcgbg"
+      style={
+        Object {
+          "backgroundColor": "#563d7c",
+        }
+      }
+    />
+    CSS
+    <span
+      className="ProportionBarItem__Proportion-sc-1u20zrp-2 jOlIuV"
+    >
+      22.22
+      %
+    </span>
+    <span
+      className="ProportionBarItem__Bar-sc-1u20zrp-3 RrLPw"
+      style={
+        Object {
+          "width": "11.11111111111111%",
+        }
+      }
+    />
+    <span
+      className="ProportionBarItem__LegendIcon-sc-1u20zrp-1 hZcgbg"
+      style={
+        Object {
+          "backgroundColor": "#e34c26",
+        }
+      }
+    />
+    HTML
+    <span
+      className="ProportionBarItem__Proportion-sc-1u20zrp-2 jOlIuV"
+    >
+      11.11
+      %
+    </span>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

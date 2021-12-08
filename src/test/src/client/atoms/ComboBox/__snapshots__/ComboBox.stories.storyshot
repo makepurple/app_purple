@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/ComboBox Standard 1`] = `
+Array [
+  <div
+    aria-expanded={false}
+    aria-haspopup="listbox"
+    aria-owns="downshift-0-menu"
+    className="ComboBox__Root-sc-10447bn-0 cZjuHW"
+    role="combobox"
+  >
+    <input
+      aria-autocomplete="list"
+      aria-controls="downshift-0-menu"
+      aria-labelledby="downshift-0-label"
+      autoComplete="off"
+      className="Input__Root-hdtm4u-0 hideiz ComboBoxInput__Root-a4s8jr-0 jswAga"
+      id="downshift-0-input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      value=""
+    />
+  </div>,
+  <ul
+    aria-labelledby="downshift-0-label"
+    className="Paper-sc-17miy3t-0 ComboBoxOptions__Root-uxkivz-0 cqdILt eQGbDI"
+    id="downshift-0-menu"
+    onMouseLeave={[Function]}
+    role="listbox"
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

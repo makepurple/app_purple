@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/GradientHeader Standard 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "height": "100vh",
+        "position": "relative",
+      }
+    }
+  >
+    <div
+      className="GradientHeader-sc-1ybh1d2-0 gjLROb"
+    />
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

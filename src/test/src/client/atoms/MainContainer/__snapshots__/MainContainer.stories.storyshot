@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/MainContainer Standard 1`] = `
+Array [
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "padding": "0 48px",
+      }
+    }
+  >
+    <div
+      className="MainContainer-sc-11m3cyl-0 YtDRh"
+    >
+      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+ 
+Qui nobis repellendus fugiat velit. Aperiam placeat fuga. Distinctio placeat ullam minima ducimus temporibus modi aut architecto ducimus. Voluptates explicabo exercitationem ut quis sed.
+ 
+Sit vitae soluta sint non voluptates ut. Quos qui illo error sunt. Ratione a officia quaerat cumque incidunt aut.
+ 
+Hic eligendi quos esse ut ab. Sed quae nam eos sint autem rerum doloremque officia. Ut ut eos ducimus eos saepe consequatur vel in ut. Et molestiae ea ut. Placeat quidem est consequuntur aut est fuga.
+ 
+Ex ut voluptas enim ex eveniet facere molestiae aut. Aut nam et dolorum architecto fugit repellendus hic veritatis qui. Culpa earum voluptate vel labore. Ut est sunt corporis alias est et sequi voluptas. Non aut rerum impedit ex rem voluptates.
+ 
+Totam perferendis ut non fugiat eligendi omnis. Quasi ipsum rem eos quod recusandae consectetur optio laudantium et. Possimus molestias facere quia. Ab quo occaecati quia ipsum sit qui accusantium odit doloremque. Dolore aut eos quis ut incidunt omnis. Voluptas minima quia ut minima sunt qui similique ut quam.
+ 
+Sit vel et nostrum ut. Aut laborum iure molestiae et facere placeat molestiae. Molestiae dolores commodi inventore sequi quia itaque. Sint odit dolor. Et quo aperiam natus.
+ 
+Magni quasi exercitationem. Ea similique ad sed architecto magnam voluptatem maxime neque adipisci. Culpa quis ut ab nulla quod labore ullam quos sed. Voluptatibus eum saepe nesciunt omnis sit et. Eaque corrupti vel.
+ 
+Similique blanditiis voluptatem provident doloribus aut culpa ratione vel. Omnis numquam maxime sint libero laudantium voluptatem. Et voluptas quis non. Architecto non explicabo facere neque et ex quaerat. Aut qui adipisci.
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

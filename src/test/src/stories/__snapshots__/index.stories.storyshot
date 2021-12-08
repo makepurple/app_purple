@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots pages/index Standard 1`] = `
+Array [
+  <div
+    className="SiteWideLayout__Root-sc-128mofe-0 jEoKOU"
+  >
+    <div
+      className="AppBar-sc-1dv2ht0-0 hyzKwG PageContainer-sc-1hni1j7-0 SiteWideAppBar__Root-sc-1bp19ab-0 gUkJUu fwnQiR"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="MainContainer-sc-11m3cyl-0 SiteWideAppBar__Content-sc-1bp19ab-1 YtDRh koVAg"
+      >
+        <div
+          className="SiteWideAppBar__BrandContainer-sc-1bp19ab-2 gxImTx"
+        >
+          <a
+            className="Brand__Root-v6sw5w-0 kdIDkF"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="SiteWideAppBar__Actions-sc-1bp19ab-5 kWNvjN"
+        >
+          <button
+            className="Button-sc-1re3a49-0 jzepDw SiteWideAppBar__StyledLogoutButton-sc-1bp19ab-8 bdqPCJ"
+            onClick={[Function]}
+            role="button"
+            type="button"
+          >
+            <span>
+              Logout
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="PageContainer-sc-1hni1j7-0 SiteWideLayout__Content-sc-128mofe-1 gUkJUu kjxecx"
+    >
+      <div
+        className="GradientHeader-sc-1ybh1d2-0 gjLROb"
+      />
+      <div
+        className="MainContainer-sc-11m3cyl-0 pages__Root-sc-1d8akw7-0 YtDRh gbrmvA"
+      >
+        <div>
+          storybook@test-makepurple.com
+        </div>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Sign in
+        </button>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Sign out
+        </button>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Do query
+        </button>
+      </div>
+    </div>
+    <footer
+      className="Footer-sc-1mjgj5s-0 iYcqSN PageContainer-sc-1hni1j7-0 SiteWideFooter__Root-sc-1u0ojz8-0 gUkJUu kewXAG"
+    >
+      <div
+        className="MainContainer-sc-11m3cyl-0 SiteWideFooter__Content-sc-1u0ojz8-1 YtDRh lcxogF"
+      >
+        <div
+          className="SiteWideFooter__BrandContainer-sc-1u0ojz8-2 dwByKg"
+        >
+          <a
+            className="Brand__Root-v6sw5w-0 kdIDkF"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="SiteWideFooter__LinksContainer-sc-1u0ojz8-3 gxTzWG"
+        >
+          <a
+            className="Anchor-sc-15duxdg-0 SiteWideFooter__SiteLink-sc-1u0ojz8-4 knhOBF uJrvJ"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Blog
+          </a>
+          <a
+            className="Anchor-sc-15duxdg-0 SiteWideFooter__SiteLink-sc-1u0ojz8-4 knhOBF uJrvJ"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            About
+          </a>
+          <a
+            className="Anchor-sc-15duxdg-0 SiteWideFooter__SiteLink-sc-1u0ojz8-4 knhOBF uJrvJ"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Terms
+          </a>
+          <a
+            className="Anchor-sc-15duxdg-0 SiteWideFooter__SiteLink-sc-1u0ojz8-4 knhOBF uJrvJ"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/TopLanguages Standard 1`] = `
+Array [
+  <div
+    className="TopLanguages__Root-lkk60a-0 fhhega"
+    style={
+      Object {
+        "width": 296,
+      }
+    }
+  >
+    <div
+      className="ProgressBar-sc-1xlitap-0 fMhuXa"
+    >
+      <span
+        className="ProportionBarItem__Bar-sc-1u20zrp-3 cFImxb"
+        style={
+          Object {
+            "width": "93.3884155331274%",
+          }
+        }
+      />
+      <span
+        className="ProportionBarItem__LegendIcon-sc-1u20zrp-1 hZcgbg"
+        style={
+          Object {
+            "backgroundColor": "#2b7489",
+          }
+        }
+      />
+      TypeScript
+      <span
+        className="ProportionBarItem__Proportion-sc-1u20zrp-2 jOlIuV"
+      >
+        93.39
+        %
+      </span>
+      <span
+        className="ProportionBarItem__Bar-sc-1u20zrp-3 cMPjVT"
+        style={
+          Object {
+            "width": "4.840404553744187%",
+          }
+        }
+      />
+      <span
+        className="ProportionBarItem__LegendIcon-sc-1u20zrp-1 hZcgbg"
+        style={
+          Object {
+            "backgroundColor": "#f1e05a",
+          }
+        }
+      />
+      JavaScript
+      <span
+        className="ProportionBarItem__Proportion-sc-1u20zrp-2 jOlIuV"
+      >
+        4.84
+        %
+      </span>
+      <span
+        className="ProportionBarItem__Bar-sc-1u20zrp-3 loixvl"
+        style={
+          Object {
+            "width": "1.7711799131284094%",
+          }
+        }
+      />
+      <span
+        className="ProportionBarItem__LegendIcon-sc-1u20zrp-1 hZcgbg"
+        style={
+          Object {
+            "backgroundColor": "#563d7c",
+          }
+        }
+      />
+      CSS
+      <span
+        className="ProportionBarItem__Proportion-sc-1u20zrp-2 jOlIuV"
+      >
+        1.77
+        %
+      </span>
+    </div>
+    <div
+      className="Legend__Root-sc-1ng7k88-0 dzAOOS TopLanguages__StyledLegend-lkk60a-1 dztBAL"
+    >
+      <div
+        className="LegendItem__Root-hwm6m3-0 kboCYb"
+      >
+        <span
+          className="LegendItem__LegendColor-hwm6m3-1 lovLBT"
+          style={
+            Object {
+              "backgroundColor": "#2b7489",
+            }
+          }
+        />
+        <span
+          className="LegendItem__Content-hwm6m3-2 kUZHwX"
+        >
+          TypeScript
+          <span
+            className="LegendItem__Proportion-hwm6m3-3 iHdYWz"
+          >
+            93.39
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        className="LegendItem__Root-hwm6m3-0 kboCYb"
+      >
+        <span
+          className="LegendItem__LegendColor-hwm6m3-1 lovLBT"
+          style={
+            Object {
+              "backgroundColor": "#f1e05a",
+            }
+          }
+        />
+        <span
+          className="LegendItem__Content-hwm6m3-2 kUZHwX"
+        >
+          JavaScript
+          <span
+            className="LegendItem__Proportion-hwm6m3-3 iHdYWz"
+          >
+            4.84
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        className="LegendItem__Root-hwm6m3-0 kboCYb"
+      >
+        <span
+          className="LegendItem__LegendColor-hwm6m3-1 lovLBT"
+          style={
+            Object {
+              "backgroundColor": "#563d7c",
+            }
+          }
+        />
+        <span
+          className="LegendItem__Content-hwm6m3-2 kUZHwX"
+        >
+          CSS
+          <span
+            className="LegendItem__Proportion-hwm6m3-3 iHdYWz"
+          >
+            1.77
+            %
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

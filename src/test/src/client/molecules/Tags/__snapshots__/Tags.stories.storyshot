@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots molecules/Tags Standard 1`] = `
+Array [
+  <div
+    className="Tags__Root-pe2ain-0 fKeXYd"
+    onClick={[Function]}
+    style={
+      Object {
+        "width": 280,
+      }
+    }
+    type="neutral"
+  >
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Next.js
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Prisma
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Nexus
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Urql
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        TypeScript
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Storybook
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Figma
+      </span>
+    </span>
+    <span
+      className="Tag__Root-sc-1lzqxo-0 cGgzxS Tag-sc-1lzqxo-3"
+    >
+      <span
+        className="Tag__Text-sc-1lzqxo-1 cNVHjY"
+      >
+        Framer-Motion
+      </span>
+    </span>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
