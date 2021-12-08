@@ -189,7 +189,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  ExperienceType: "Contract" | "FullTime" | "Intern" | "Misc" | "OpenSource" | "PartTime"
+  ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
   SortOrder: "asc" | "desc"
 }
 

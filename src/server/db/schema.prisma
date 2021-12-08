@@ -158,7 +158,6 @@ enum ExperienceType {
   Contract
   Intern
   OpenSource
-  Misc
 }
 
 model Experience {
