@@ -1,13 +1,13 @@
-import { MainContainer, NextLinkAs, Paper, Tab } from "@/client/atoms";
+import { MainContainer } from "@/client/atoms";
 import { useGetPostsQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
 import { NonIdealState } from "@/client/molecules";
-import { LoadingPostCard, PostCard, UserInfoSideBar } from "@/client/organisms";
+import { LoadingPostCard, PostCard, UserInfoSideBar, UserPageTabs } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[userName]";
-import { HexagonIcon, NoteIcon, RepoIcon } from "@/client/svgs";
+import { NoteIcon } from "@/client/svgs";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React from "react";
 import tw, { styled } from "twin.macro";
 
 const BATCH_SIZE = 20;
@@ -81,49 +81,7 @@ export const Page: NextPage<PageProps> = () => {
 		<Root>
 			<SideBar userName={userName} />
 			<Content>
-				<Tab.Group>
-					<Tab.List forwardedAs={Paper}>
-						<Tab as={Fragment}>
-							{(tabProps) => (
-								<NextLinkAs
-									as={Tab.Button}
-									forwardedAs="a"
-									href={`/${userName}`}
-									{...tabProps}
-								>
-									<NoteIcon height={20} tw="mr-2" width={20} />
-									Posts
-								</NextLinkAs>
-							)}
-						</Tab>
-						<Tab as={Fragment}>
-							{(tabProps) => (
-								<NextLinkAs
-									as={Tab.Button}
-									forwardedAs="a"
-									href={`/${userName}/repositories`}
-									{...tabProps}
-								>
-									<RepoIcon height={20} tw="mr-2" width={20} />
-									Repositories
-								</NextLinkAs>
-							)}
-						</Tab>
-						<Tab as={Fragment}>
-							{(tabProps) => (
-								<NextLinkAs
-									as={Tab.Button}
-									forwardedAs="a"
-									href={`/${userName}/experience`}
-									{...tabProps}
-								>
-									<HexagonIcon height={20} tw="mr-2" width={20} />
-									Experience
-								</NextLinkAs>
-							)}
-						</Tab>
-					</Tab.List>
-				</Tab.Group>
+				<UserPageTabs selectedTab="posts" userName={userName} />
 				<Posts>
 					{fetching ? (
 						Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)

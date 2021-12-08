@@ -16,3 +16,4 @@ export * from "./TopLanguages";
 export * from "./UserAvatar";
 export * from "./UserInfoSideBar";
 export * from "./UserInfoSideBarForm";
+export * from "./UserPageTabs";

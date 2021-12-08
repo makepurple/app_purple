@@ -29,7 +29,7 @@ const reservedWords = [
 	"edit",
 	"error",
 	"errors",
-	"experience",
+	"experiences",
 	"faq",
 	"favicon",
 	"features",
