@@ -107,7 +107,6 @@ export enum ExperienceType {
   Contract = 'Contract',
   FullTime = 'FullTime',
   Intern = 'Intern',
-  Misc = 'Misc',
   OpenSource = 'OpenSource',
   PartTime = 'PartTime'
 }
@@ -560,6 +559,8 @@ export type UserWhereUniqueInput = {
   readonly name?: InputMaybe<Scalars['String']>;
 };
 
+export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: number, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
+
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
@@ -674,6 +675,29 @@ export type SuggestSkillsQueryVariables = Exact<{
 
 export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
 
+export const ExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
+    fragment ExperienceCardExperience on Experience {
+  __typename
+  endDate
+  highlights
+  id
+  location
+  organization {
+    __typename
+    id
+    github {
+      __typename
+      avatarUrl
+      id
+      login
+      name
+    }
+  }
+  positionName
+  startDate
+  type
+}
+    `;
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
     fragment PostCardPost on Post {
   __typename

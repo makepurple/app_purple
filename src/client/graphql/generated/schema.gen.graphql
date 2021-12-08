@@ -81,7 +81,6 @@ enum ExperienceType {
   Contract
   FullTime
   Intern
-  Misc
   OpenSource
   PartTime
 }

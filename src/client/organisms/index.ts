@@ -1,4 +1,5 @@
 export * from "./DocumentEditorPostImageButton";
+export * from "./ExperienceCard";
 export * from "./LoadingPostCard";
 export * from "./LoginButton";
 export * from "./LogoutButton";

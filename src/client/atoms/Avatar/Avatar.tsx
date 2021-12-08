@@ -42,8 +42,8 @@ const Content = tw.div`
 	flex
 	items-stretch
 	justify-items-stretch
-	rounded-full
 	overflow-hidden
+	border-radius[inherit]
 `;
 
 export type AvatarProps = InferComponentProps<"a"> & {

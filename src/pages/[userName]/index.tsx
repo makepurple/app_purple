@@ -14,10 +14,19 @@ const BATCH_SIZE = 20;
 
 const Root = tw(MainContainer)`
 	flex
-	flex-col-reverse
-	lg:flex-row
+	flex-col
+	lg:flex-row-reverse
 	items-start
 	my-12
+`;
+
+const SideBar = tw(UserInfoSideBar)`
+	flex-shrink-0
+	w-full
+	mb-6
+	lg:w-96
+	lg:ml-6
+	xl:ml-8
 `;
 
 const Content = tw.div`
@@ -41,15 +50,6 @@ const Posts = styled.div`
 			xl:not-first:mt-6
 		`}
 	}
-`;
-
-const SideBar = tw(UserInfoSideBar)`
-	flex-shrink-0
-	w-full
-	mb-6
-	lg:w-96
-	lg:ml-6
-	xl:ml-8
 `;
 
 export const getServerSideProps = pageProps;
@@ -79,6 +79,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root>
+			<SideBar userName={userName} />
 			<Content>
 				<Tab.Group>
 					<Tab.List forwardedAs={Paper}>
@@ -140,7 +141,6 @@ export const Page: NextPage<PageProps> = () => {
 					)}
 				</Posts>
 			</Content>
-			<SideBar userName={userName} />
 		</Root>
 	);
 };
