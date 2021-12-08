@@ -1,8 +1,7 @@
-import { MainContainer } from "@/client/atoms";
 import { useGetPostsQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
 import { NonIdealState } from "@/client/molecules";
-import { LoadingPostCard, PostCard, UserInfoSideBar, UserPageTabs } from "@/client/organisms";
+import { LoadingPostCard, PostCard, UserPageLayout } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[userName]";
 import { NoteIcon } from "@/client/svgs";
 import { NextPage } from "next";
@@ -12,38 +11,13 @@ import tw, { styled } from "twin.macro";
 
 const BATCH_SIZE = 20;
 
-const Root = tw(MainContainer)`
-	flex
-	flex-col
-	lg:flex-row-reverse
-	items-start
-	my-12
-`;
-
-const SideBar = tw(UserInfoSideBar)`
-	flex-shrink-0
-	w-full
-	mb-6
-	lg:w-96
-	lg:ml-6
-	xl:ml-8
-`;
-
-const Content = tw.div`
-	flex-grow
-	flex
-	flex-col
-`;
-
-const Posts = styled.div`
+const Layout = styled(UserPageLayout)`
 	${tw`
-		flex-grow
 		flex
 		flex-col
 		items-stretch
-		mt-4
-		xl:mt-6
 	`}
+
 	& > * {
 		${tw`
 			not-first:mt-4
@@ -78,28 +52,19 @@ export const Page: NextPage<PageProps> = () => {
 	const posts = data?.posts.nodes ?? [];
 
 	return (
-		<Root>
-			<SideBar userName={userName} />
-			<Content>
-				<UserPageTabs selectedTab="posts" userName={userName} />
-				<Posts>
-					{fetching ? (
-						Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)
-					) : !posts.length ? (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="We couldn't find any posts"
-						>
-							<NoteIcon height={96} width={96} />
-						</NonIdealState>
-					) : (
-						posts.map((post, i) => (
-							<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
-						))
-					)}
-				</Posts>
-			</Content>
-		</Root>
+		<Layout selectedTab="posts" userName={userName}>
+			{fetching ? (
+				Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)
+			) : !posts.length ? (
+				<NonIdealState title="There's nothing here" subTitle="We couldn't find any posts">
+					<NoteIcon height={96} width={96} />
+				</NonIdealState>
+			) : (
+				posts.map((post, i) => (
+					<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
+				))
+			)}
+		</Layout>
 	);
 };
 

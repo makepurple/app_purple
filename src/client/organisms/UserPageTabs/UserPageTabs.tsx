@@ -66,7 +66,7 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 							{...tabProps}
 						>
 							<HexagonIcon height={20} tw="mr-2" width={20} />
-							Experience
+							Experiences
 						</NextLinkAs>
 					)}
 				</Tab>
