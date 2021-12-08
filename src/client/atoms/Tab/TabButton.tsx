@@ -15,8 +15,11 @@ const Selection = styled(m.div)`
 `;
 
 const Content = tw.span`
+	absolute
+	inset-0
 	inline-flex
 	items-center
+	justify-center
 	truncate
 	z-index[1]
 `;
@@ -32,11 +35,12 @@ export const TabButton = styled.button.attrs<{ selected?: boolean }>(({ children
 }))`
 	${tw`
 		relative
+		flex-shrink-0
 		inline-flex
 		items-center
 		justify-center
 		m-0.5
-		p-4
+		h-14
 		rounded-lg
 		text-lg
 		font-medium
