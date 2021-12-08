@@ -1,4 +1,5 @@
 export * from "./color.util";
+export * from "./dayjs";
 export * from "./function.util";
 export * from "./lang.util";
 export * from "./next.util";
