@@ -1,7 +1,7 @@
 import { MainContainer } from "@/client/atoms";
 import { UserInfoSideBar } from "@/client/organisms/UserInfoSideBar";
 import { UserPageTabs } from "@/client/organisms/UserPageTabs";
-import React, { CSSProperties, FC, ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import tw from "twin.macro";
 
 const Root = tw(MainContainer)`
@@ -28,35 +28,24 @@ const Content = tw.div`
 	flex-col
 `;
 
-const PageWrapper = tw.div`
-	flex-grow
-	mt-4
-	xl:mt-6
+const PageTabs = tw(UserPageTabs)`
+	mb-4
+	xl:mb-6
 `;
 
 export interface UserPageLayoutProps {
 	children?: ReactNode;
-	className?: string;
 	selectedTab?: "posts" | "repositories" | "experiences";
-	style?: CSSProperties;
 	userName: string;
 }
 
-export const UserPageLayout: FC<UserPageLayoutProps> = ({
-	children,
-	className,
-	selectedTab,
-	style,
-	userName
-}) => {
+export const UserPageLayout: FC<UserPageLayoutProps> = ({ children, selectedTab, userName }) => {
 	return (
 		<Root>
 			<SideBar userName={userName} />
 			<Content>
-				<UserPageTabs selectedTab={selectedTab} userName={userName} />
-				<PageWrapper className={className} style={style}>
-					{children}
-				</PageWrapper>
+				<PageTabs selectedTab={selectedTab} userName={userName} />
+				{children}
 			</Content>
 		</Root>
 	);

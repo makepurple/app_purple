@@ -11,7 +11,7 @@ import tw, { styled } from "twin.macro";
 
 const BATCH_SIZE = 20;
 
-const Layout = styled(UserPageLayout)`
+const Posts = styled.div`
 	${tw`
 		flex
 		flex-col
@@ -52,19 +52,24 @@ export const Page: NextPage<PageProps> = () => {
 	const posts = data?.posts.nodes ?? [];
 
 	return (
-		<Layout selectedTab="posts" userName={userName}>
-			{fetching ? (
-				Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)
-			) : !posts.length ? (
-				<NonIdealState title="There's nothing here" subTitle="We couldn't find any posts">
-					<NoteIcon height={96} width={96} />
-				</NonIdealState>
-			) : (
-				posts.map((post, i) => (
-					<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
-				))
-			)}
-		</Layout>
+		<UserPageLayout selectedTab="posts" userName={userName}>
+			<Posts>
+				{fetching ? (
+					Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)
+				) : !posts.length ? (
+					<NonIdealState
+						title="There's nothing here"
+						subTitle="We couldn't find any posts"
+					>
+						<NoteIcon height={96} width={96} />
+					</NonIdealState>
+				) : (
+					posts.map((post, i) => (
+						<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
+					))
+				)}
+			</Posts>
+		</UserPageLayout>
 	);
 };
 
