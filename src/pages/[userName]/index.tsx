@@ -7,23 +7,16 @@ import { NoteIcon } from "@/client/svgs";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
 const BATCH_SIZE = 20;
 
-const Posts = styled.div`
-	${tw`
-		flex
-		flex-col
-		items-stretch
-	`}
-
-	& > * {
-		${tw`
-			not-first:mt-4
-			xl:not-first:mt-6
-		`}
-	}
+const Posts = tw.div`
+	flex
+	flex-col
+	items-stretch
+	gap-4
+	xl:gap-6
 `;
 
 export const getServerSideProps = pageProps;

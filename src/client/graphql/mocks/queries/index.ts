@@ -1,3 +1,4 @@
+export * from "./GetExperiences.query.mock";
 export * from "./GetMyUser.query.mock";
 export * from "./GetPost.query.mock";
 export * from "./GetPostDraft.query.mock";

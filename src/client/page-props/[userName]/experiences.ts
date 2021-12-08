@@ -1,6 +1,9 @@
 import {
 	addUrqlState,
 	createUrqlClient,
+	GetExperiencesDocument,
+	GetExperiencesQuery,
+	GetExperiencesQueryVariables,
 	GetMyUserDocument,
 	GetMyUserQuery,
 	GetMyUserQueryVariables,
@@ -25,6 +28,19 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const urqlClient = createUrqlClient({ req, ssr });
 
 	await Promise.all([
+		urqlClient
+			.query<GetExperiencesQuery, GetExperiencesQueryVariables>(GetExperiencesDocument, {
+				after: null,
+				first: BATCH_SIZE,
+				where: {
+					user: {
+						name: {
+							equals: query.userName as string
+						}
+					}
+				}
+			})
+			.toPromise(),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
 			.toPromise(),

@@ -1,0 +1,29 @@
+query GetExperiences(
+	$after: String
+	$first: Int
+	$where: ExperienceWhereInput!
+) {
+	experiences(after: $after, first: $first, where: $where) {
+		__typename
+		edges {
+			__typename
+			cursor
+			node {
+				__typename
+				id
+			}
+		}
+		nodes {
+			__typename
+			id
+			...ExperienceCardExperience
+		}
+		pageInfo {
+			__typename
+			endCursor
+			hasNextPage
+			hasPreviousPage
+			startCursor
+		}
+	}
+}

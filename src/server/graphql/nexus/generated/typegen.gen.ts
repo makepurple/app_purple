@@ -113,6 +113,7 @@ export interface NexusGenInputs {
     organizationName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     positionName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     type?: NexusGenInputs['EnumExperienceTypeNullableFilter'] | null; // EnumExperienceTypeNullableFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     userId?: string | null; // String
   }
   ExperienceWhereUniqueInput: { // input type

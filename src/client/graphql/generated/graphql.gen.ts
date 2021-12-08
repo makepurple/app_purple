@@ -125,6 +125,7 @@ export type ExperienceWhereInput = {
   readonly organizationName?: InputMaybe<StringNullableFilter>;
   readonly positionName?: InputMaybe<StringNullableFilter>;
   readonly type?: InputMaybe<EnumExperienceTypeNullableFilter>;
+  readonly user?: InputMaybe<UserWhereInput>;
   readonly userId?: InputMaybe<Scalars['String']>;
 };
 
@@ -630,6 +631,15 @@ export type UpvotePostMutationVariables = Exact<{
 
 export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string | number }> } };
 
+export type GetExperiencesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where: ExperienceWhereInput;
+}>;
+
+
+export type GetExperiencesQuery = { readonly __typename: 'Query', readonly experiences: { readonly __typename: 'ExperienceConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -899,6 +909,37 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
 
 export function useUpvotePostMutation() {
   return Urql.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(UpvotePostDocument);
+};
+export const GetExperiencesDocument = /*#__PURE__*/ gql`
+    query GetExperiences($after: String, $first: Int, $where: ExperienceWhereInput!) {
+  experiences(after: $after, first: $first, where: $where) {
+    __typename
+    edges {
+      __typename
+      cursor
+      node {
+        __typename
+        id
+      }
+    }
+    nodes {
+      __typename
+      id
+      ...ExperienceCardExperience
+    }
+    pageInfo {
+      __typename
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    ${ExperienceCardExperienceFragmentDoc}`;
+
+export function useGetExperiencesQuery(options: Omit<Urql.UseQueryArgs<GetExperiencesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetExperiencesQuery>({ query: GetExperiencesDocument, ...options });
 };
 export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {

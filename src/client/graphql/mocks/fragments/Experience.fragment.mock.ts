@@ -9,7 +9,11 @@ faker.seed(1);
 export const Experience_fragment_mock: Experience = {
 	__typename: "Experience",
 	endDate: null,
-	highlights: ["Did a thing, then did another thing that was really incredible"],
+	highlights: [
+		"Did a thing, then did another thing that was really incredible",
+		"Did a thing, then did another thing that was really incredible",
+		"Did a thing, then did another thing that was really incredible"
+	],
 	id: 0,
 	location: "San Francisco, CA",
 	organization: Organization_fragment_mock,

@@ -1,5 +1,6 @@
 import {
 	CreatePost_mock,
+	GetExperiences_mock,
 	GetPostDraft_mock,
 	GetUserInfoSideBar_mock
 } from "@/client/graphql/mocks";
@@ -47,6 +48,8 @@ Standard.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
+			case "GetExperiences":
+				return { data: GetExperiences_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
@@ -67,6 +70,8 @@ Loading.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
+			case "GetExperiences":
+				return { data: GetExperiences_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
@@ -87,6 +92,24 @@ NoResults.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
+			case "GetExperiences":
+				return {
+					data: {
+						__typename: "Query",
+						experiences: {
+							__typename: "ExperienceConnection",
+							edges: [],
+							nodes: [],
+							pageInfo: {
+								__typename: "PageInfo",
+								endCursor: null,
+								hasNextPage: false,
+								hasPreviousPage: false,
+								startCursor: null
+							}
+						}
+					}
+				};
 			case "GetPostDraft":
 				return {
 					data: {

@@ -1,7 +1,7 @@
 import { Avatar, GitHubAvatarImage } from "@/client/atoms";
 import { ExperienceCardExperienceFragment, ExperienceType } from "@/client/graphql";
 import { dayjs } from "@/utils";
-import React, { CSSProperties, FC, useMemo } from "react";
+import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw from "twin.macro";
 
 const Root = tw.div`
@@ -72,7 +72,9 @@ export interface ExperienceCardProps {
 	style?: CSSProperties;
 }
 
-export const ExperienceCard: FC<ExperienceCardProps> = ({ className, experience, style }) => {
+export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((props, ref) => {
+	const { className, experience, style } = props;
+
 	const githubOrganization = experience.organization.github;
 
 	const experienceType = useMemo(() => {
@@ -117,7 +119,7 @@ export const ExperienceCard: FC<ExperienceCardProps> = ({ className, experience,
 	}, [startDate, endDate, duration]);
 
 	return (
-		<Root className={className} style={style}>
+		<Root ref={ref} className={className} style={style}>
 			<StyledAvatar border={4}>
 				<GitHubAvatarImage
 					alt={githubOrganization.name ?? ""}
@@ -151,4 +153,6 @@ export const ExperienceCard: FC<ExperienceCardProps> = ({ className, experience,
 			</Info>
 		</Root>
 	);
-};
+});
+
+ExperienceCard.displayName = "ExperienceCard";

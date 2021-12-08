@@ -18,17 +18,9 @@ export const GetPosts_mock: GetPostsQuery = {
 		edges: posts.map((post) => ({
 			__typename: "PostEdge",
 			cursor: post.id.toString(),
-			node: {
-				...Post_fragment_mock,
-				__typename: "Post",
-				id: post.id
-			}
+			node: post
 		})),
-		nodes: posts.map((post) => ({
-			...post,
-			__typename: "Post",
-			id: post.id
-		})),
+		nodes: posts.map((post) => post),
 		pageInfo: {
 			__typename: "PageInfo",
 			endCursor: null,
@@ -40,6 +32,8 @@ export const GetPosts_mock: GetPostsQuery = {
 };
 
 export const GetPosts_variables_mock: GetPostsQueryVariables = {
+	after: null,
+	first: 20,
 	where: {
 		author: {
 			name: {

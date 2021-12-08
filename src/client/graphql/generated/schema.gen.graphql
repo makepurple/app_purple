@@ -99,6 +99,7 @@ input ExperienceWhereInput {
   organizationName: StringNullableFilter
   positionName: StringNullableFilter
   type: EnumExperienceTypeNullableFilter
+  user: UserWhereInput
   userId: String
 }
 
