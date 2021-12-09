@@ -14,6 +14,11 @@ module.exports = {
 				sans: ["Inter", ...defaultTheme.fontFamily.sans],
 				mono: ["Source Code Pro", ...defaultTheme.fontFamily.mono],
 			},
+			spacing: {
+				...defaultTheme.spacing,
+				"4.5": "1.125rem",
+				"22": "5.5rem"
+			}
 		},
 	},
 	plugins: [

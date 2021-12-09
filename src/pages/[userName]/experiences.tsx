@@ -1,13 +1,13 @@
-import { Paper } from "@/client/atoms";
+import { Divider, Paper } from "@/client/atoms";
 import { useGetExperiencesQuery } from "@/client/graphql";
 import { useRelayCursor } from "@/client/hooks";
 import { NonIdealState } from "@/client/molecules";
-import { ExperienceCard, UserPageLayout } from "@/client/organisms";
+import { ExperienceCard, LoadingExperienceCard, UserPageLayout } from "@/client/organisms";
 import { PageProps, pageProps } from "@/client/page-props/[userName]/experiences";
 import { HexagonIcon } from "@/client/svgs";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { Fragment } from "react";
 import tw from "twin.macro";
 
 const BATCH_SIZE = 20;
@@ -61,7 +61,14 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				<Title>Experiences</Title>
 				<Experiences>
-					{!experiences.length ? (
+					{fetching ? (
+						Array.from({ length: 3 }, (_, i) => (
+							<Fragment key={i}>
+								{!!i && <Divider tw="ml-22" />}
+								<LoadingExperienceCard />
+							</Fragment>
+						))
+					) : !experiences.length ? (
 						<NonIdealState
 							title="There's nothing here"
 							subTitle="We couldn't find any experiences"
@@ -71,11 +78,10 @@ export const Page: NextPage<PageProps> = () => {
 						</NonIdealState>
 					) : (
 						experiences.map((experience, i) => (
-							<ExperienceCard
-								key={experience.id}
-								ref={getLoadMoreRef(i)}
-								experience={experience}
-							/>
+							<Fragment key={experience.id}>
+								{!!i && <Divider tw="ml-22" />}
+								<ExperienceCard ref={getLoadMoreRef(i)} experience={experience} />
+							</Fragment>
 						))
 					)}
 				</Experiences>

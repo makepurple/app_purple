@@ -71,6 +71,8 @@ Loading.parameters = {
 
 				return { data: CreatePost_mock };
 			case "GetExperiences":
+				await PromiseUtils.wait(ms("5s"));
+
 				return { data: GetExperiences_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };

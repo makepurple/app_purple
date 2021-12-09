@@ -1,12 +1,43 @@
-import { Avatar, GitHubAvatarImage } from "@/client/atoms";
+import { Avatar, Button, GitHubAvatarImage } from "@/client/atoms";
 import { ExperienceCardExperienceFragment, ExperienceType } from "@/client/graphql";
+import { PencilIcon } from "@/client/svgs";
 import { dayjs } from "@/utils";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 
-const Root = tw.div`
-	flex
-	items-start
+const EditButton = styled(Button)`
+	${tw`
+		flex-shrink-0
+		h-12
+		w-12
+		p-0
+		ml-2
+		opacity-100
+		transition
+		duration-150
+		ease-in
+		sm:opacity-0
+	`}
+`;
+
+const Root = styled.div`
+	${tw`
+		flex
+		items-start
+		py-4
+	`}
+
+	&:first-child ${EditButton} {
+		${tw`
+			opacity-100
+		`}
+	}
+
+	&:hover ${EditButton} {
+		${tw`
+			opacity-100
+		`}
+	}
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -151,6 +182,9 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 					</Highlights>
 				)}
 			</Info>
+			<EditButton type="button" variant="secondary">
+				<PencilIcon height={24} width={24} />
+			</EditButton>
 		</Root>
 	);
 });
