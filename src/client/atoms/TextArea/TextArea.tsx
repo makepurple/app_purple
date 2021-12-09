@@ -14,6 +14,7 @@ const Root = styled.textarea<{ error?: boolean }>`
 		border
 		border-solid
 		rounded-lg
+		overflow-y-auto
 		shadow-inner
 		text-base
 		leading-snug
@@ -21,7 +22,7 @@ const Root = styled.textarea<{ error?: boolean }>`
 		transition
 		duration-300
 		ease-in-out
-		resize-none
+		resize-y
 		focus:bg-white
 		disabled:cursor-not-allowed
 		disabled:bg-gray-200
@@ -36,7 +37,6 @@ const Root = styled.textarea<{ error?: boolean }>`
 			: tw`border-gray-400`}
 	&::-webkit-scrollbar {
 		${tw`
-			w-0
 			bg-transparent
 		`}
 	}
@@ -63,7 +63,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 
 		const textHeight: number = textArea.scrollHeight;
 
-		textArea.style.height = `${Math.min(oldHeight, textHeight) + 2}px`;
+		textArea.style.height = `${Math.min(oldHeight, textHeight) + 24}px`;
 	}, []);
 
 	const disabled = props.disabled || form.disabled;
@@ -71,7 +71,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, r
 
 	useEffect(() => {
 		setTextAreaHeight();
-	}, [setTextAreaHeight, width]);
+	}, [ref, setTextAreaHeight, width]);
 
 	return (
 		<Root

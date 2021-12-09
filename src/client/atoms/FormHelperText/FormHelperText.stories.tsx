@@ -12,7 +12,7 @@ const Template: Story = (args) => {
 };
 Template.args = {
 	children: "Some important helper text",
-	error: false
+	error: null
 };
 
 export const Standard = Template.bind({});

@@ -24,7 +24,7 @@ export const FormHelperText = styled(
 
 		const error = !!props.error ?? context.error;
 
-		if (!props.error || !props.children) return null;
+		if (!error && !props.children) return null;
 
 		return (
 			<Root {...props} ref={ref} error={error}>
