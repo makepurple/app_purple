@@ -15,8 +15,10 @@ export const SelectOptions = styled(HUIListbox.Options)`
 		inline-flex
 		flex-col
 		items-stretch
+		max-h-80
 		mt-1
 		p-0.5
+		overflow-y-auto
 		rounded-lg
 		bg-white
 		shadow-2xl
