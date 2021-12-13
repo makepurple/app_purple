@@ -1,0 +1,20 @@
+schema:
+  - https://api.github.com/graphql:
+      headers:
+        Accept: "application/vnd.github.hawkgirl-preview+json"
+        Authorization: bearer ${GITHUB_ACCESS_TOKEN}
+documents:
+  - "./src/graphql/**/*.ts"
+  - "./src/services/octokit/fragments/*.ts"
+generates:
+  src/services/octokit/generated/graphql.gen.ts:
+    config:
+      immutableTypes: true
+      preResolveTypes: true
+      pureMagicComment: true
+      useTypeImports: true
+      scalars:
+        URI: string
+    plugins:
+      - typescript
+      - typescript-operations
