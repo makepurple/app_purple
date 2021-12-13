@@ -277,6 +277,49 @@ importers:
       turbo: 1.0.6
       typescript: 4.5.3
 
+  packages/components:
+    specifiers:
+      '@headlessui/react': ^1.4.2
+      '@makepurple/config': workspace:*
+      '@makepurple/tsconfig': workspace:*
+      '@makepurple/typings': workspace:*
+      '@makepurple/utils': workspace:*
+      '@tippyjs/react': ^4.2.6
+      '@types/ms': ^0.7.31
+      '@types/react': ^17.0.37
+      '@types/react-dom': ^17.0.11
+      ms: ^2.1.3
+      nextjs-progressbar: ^0.0.13
+      polished: ^4.1.3
+      react: ^17.0.2
+      react-dom: ^17.0.2
+      react-simple-code-editor: ^0.11.0
+      slate: ^0.72.0
+      slate-react: ^0.72.1
+      twin.macro: ^2.8.2
+      typescript: ^4.5.3
+    dependencies:
+      '@headlessui/react': 1.4.2_react-dom@17.0.2+react@17.0.2
+      '@makepurple/config': link:../config
+      '@makepurple/typings': link:../typings
+      '@makepurple/utils': link:../utils
+      '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
+      '@types/ms': 0.7.31
+      '@types/react': 17.0.37
+      '@types/react-dom': 17.0.11
+      ms: 2.1.3
+      nextjs-progressbar: 0.0.13_next@12.0.7+react@17.0.2
+      polished: 4.1.3
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
+      slate: 0.72.0
+      slate-react: 0.72.1_b3d952409b7dd7fa21595adcfd3437cd
+      twin.macro: 2.8.2_ts-node@10.4.0
+    devDependencies:
+      '@makepurple/tsconfig': link:../tsconfig
+      typescript: 4.5.3
+
   packages/config:
     specifiers: {}
 
@@ -284,7 +327,7 @@ importers:
     specifiers:
       '@makepurple/config': workspace:*
       '@makepurple/tsconfig': workspace:*
-      '@makepurple/types': workspace:*
+      '@makepurple/typings': workspace:*
       '@types/mjml-react': ^2.0.2
       '@types/node': ^16.11.12
       '@types/react': ^17.0.37
@@ -300,7 +343,7 @@ importers:
       typescript: ^4.5.3
     dependencies:
       '@makepurple/config': link:../config
-      '@makepurple/types': link:../types
+      '@makepurple/typings': link:../typings
       '@types/mjml-react': 2.0.2
       '@types/node': 16.11.12
       '@types/react': 17.0.37
@@ -317,6 +360,17 @@ importers:
       ts-node: 10.4.0_74e588db5264178750052e53ffe97b8f
       typescript: 4.5.3
 
+  packages/hooks:
+    specifiers:
+      '@makepurple/tsconfig': workspace:*
+      '@makepurple/typings': workspace:*
+      '@makepurple/utils': workspace:*
+    dependencies:
+      '@makepurple/typings': link:../typings
+      '@makepurple/utils': link:../utils
+    devDependencies:
+      '@makepurple/tsconfig': link:../tsconfig
+
   packages/server:
     specifiers:
       '@apollographql/graphql-upload-8-fork': ^8.1.3
@@ -327,7 +381,7 @@ importers:
       '@graphql-codegen/typescript': ^2.4.1
       '@graphql-codegen/typescript-operations': ^2.2.1
       '@makepurple/tsconfig': workspace:*
-      '@makepurple/types': workspace:*
+      '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
       '@makepurple/validators': workspace:*
       '@octokit/auth-token': ^2.5.0
@@ -338,6 +392,7 @@ importers:
       '@types/graphql-depth-limit': ^1.1.3
       '@types/ioredis': ^4.28.3
       '@types/node': ^16.11.12
+      '@types/request-ip': ^0.0.37
       apollo-server-micro: 2.25.3
       bottleneck: ^2.19.5
       cloudinary: ^1.27.1
@@ -353,6 +408,7 @@ importers:
       nexus: ^1.1.0
       nexus-prisma: ^0.34.0
       prisma: ^3.6.0
+      request-ip: ^2.1.3
       ts-node: ^10.4.0
       typescript: ^4.5.3
       winston: ^3.3.3
@@ -361,7 +417,7 @@ importers:
       '@aws-sdk/client-s3': 3.44.0
       '@aws-sdk/s3-presigned-post': 3.44.0
       '@devoxa/prisma-relay-cursor-connection': 2.0.3_@prisma+client@3.6.0
-      '@makepurple/types': link:../types
+      '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
       '@makepurple/validators': link:../validators
       '@octokit/auth-token': 2.5.0
@@ -372,6 +428,7 @@ importers:
       '@types/graphql-depth-limit': 1.1.3
       '@types/ioredis': 4.28.3
       '@types/node': 16.11.12
+      '@types/request-ip': 0.0.37
       apollo-server-micro: 2.25.3_graphql@15.7.2
       bottleneck: 2.19.5
       cloudinary: 1.27.1
@@ -386,6 +443,7 @@ importers:
       nexus: 1.1.0_graphql@15.7.2
       nexus-prisma: 0.34.0_b9c34420b520ffe0c9fb7a4cffbfe980
       prisma: 3.6.0
+      request-ip: 2.1.3
       winston: 3.3.3
     devDependencies:
       '@graphql-codegen/cli': 2.3.0_b928ef9c76e968dd78b50536708127c1
@@ -399,7 +457,7 @@ importers:
   packages/tsconfig:
     specifiers: {}
 
-  packages/types:
+  packages/typings:
     specifiers:
       '@makepurple/tsconfig': workspace:*
       typescript: ^4.5.3
