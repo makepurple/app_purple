@@ -76,12 +76,6 @@
 		],
 		"no-console": "warn",
 		"no-multiple-empty-lines": "error",
-		"no-restricted-imports": [
-			"error",
-			{
-				"patterns": [".."]
-			}
-		],
 		"no-use-before-define": "off",
 		"object-shorthand": "error",
 		"prettier/prettier": "error",
