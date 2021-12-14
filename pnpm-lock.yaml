@@ -365,9 +365,19 @@ importers:
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
+      downshift: ^6.1.7
+      framer-motion: ^5.4.5
+      keycode-js: ^3.1.0
+      react-use: ^17.3.1
+      urql: ^2.0.6
     dependencies:
       '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
+      downshift: 6.1.7_react@17.0.2
+      framer-motion: 5.4.5_react-dom@17.0.2+react@17.0.2
+      keycode-js: 3.1.0
+      react-use: 17.3.1_react-dom@17.0.2+react@17.0.2
+      urql: 2.0.6_graphql@15.7.2+react@17.0.2
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
 

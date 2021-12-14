@@ -6,7 +6,12 @@
 	"types": "src/index.ts",
 	"dependencies": {
 		"@makepurple/typings": "workspace:*",
-		"@makepurple/utils": "workspace:*"
+		"@makepurple/utils": "workspace:*",
+		"downshift": "^6.1.7",
+		"framer-motion": "^5.4.5",
+		"keycode-js": "^3.1.0",
+		"react-use": "^17.3.1",
+		"urql": "^2.0.6"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*"
