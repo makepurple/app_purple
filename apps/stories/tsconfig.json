@@ -1,0 +1,13 @@
+{
+	"extends": "@makepurple/tsconfig/react-library.json",
+	"include": ["src", "types.d.ts"],
+	"exclude": ["node_modules"],
+	"compilerOptions": {
+		"downlevelIteration": true,
+		"lib": ["dom"],
+		"moduleResolution": "node",
+		"rootDir": "src",
+		"outDir": "dist",
+		"jsx": "react"
+	}
+}
