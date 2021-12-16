@@ -1,0 +1,6 @@
+fragment UserAvatarUser on User {
+	__typename
+	id
+	name
+	image
+}

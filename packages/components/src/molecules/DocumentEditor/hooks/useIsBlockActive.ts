@@ -4,13 +4,17 @@ import { useSlateStatic } from "slate-react";
 import type { CustomElementType } from "../Element";
 
 export const isBlockActive = (editor: Editor, blockType: CustomElementType): boolean => {
-	const [match] = Editor.nodes(editor, {
-		match: (node) => {
-			return (
-				!Editor.isEditor(node) && SlateElement.isElement(node) && node.type === blockType
-			);
-		}
-	});
+	const [match] = Array.from(
+		Editor.nodes(editor, {
+			match: (node) => {
+				return (
+					!Editor.isEditor(node) &&
+					SlateElement.isElement(node) &&
+					node.type === blockType
+				);
+			}
+		})
+	);
 
 	return !!match;
 };

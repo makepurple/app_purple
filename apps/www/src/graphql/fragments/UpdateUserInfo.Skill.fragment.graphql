@@ -1,0 +1,6 @@
+fragment UpdateUserInfoSkill on Skill {
+	__typename
+	id
+	name
+	owner
+}

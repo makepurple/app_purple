@@ -1,0 +1,6 @@
+mutation RemovePostThumbnail($where: PostWhereUniqueInput!) {
+	post: removePostThumbnail(where: $where) {
+		id
+		thumbnailUrl
+	}
+}

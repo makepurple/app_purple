@@ -20,7 +20,7 @@ export const schema = makeSchema({
 	types: { ...inputTypes, ...mutations, ...queries, ...types },
 	outputs: {
 		schema: path.resolve(__dirname, "./generated/schema.gen.graphql"),
-		typegen: path.resolve(__dirname, "./generated/typegen.gen.ts")
+		typegen: path.resolve(__dirname, "./generated/typegen.gen.d.ts")
 	},
 	features: {
 		abstractTypeStrategies: {

@@ -1,0 +1,10 @@
+query GetUserInfoSideBar($name: String!) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		__typename
+		...UserInfoSideBarUser
+	}
+}

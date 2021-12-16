@@ -1,0 +1,21 @@
+mutation UpdateUserInfo(
+	$skills: [SkillWhereUniqueInput!]!
+	$desiredSkills: [SkillWhereUniqueInput!]!
+) {
+	updateSkills(data: { skills: $skills }) {
+		__typename
+		id
+		skills {
+			__typename
+			...UpdateUserInfoSkill
+		}
+	}
+	updateDesiredSkills(data: { skills: $desiredSkills }) {
+		__typename
+		id
+		skills {
+			__typename
+			...UpdateUserInfoSkill
+		}
+	}
+}

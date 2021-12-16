@@ -1,5 +1,4 @@
 import { ComplexityError } from "@/server/utils";
-import type { ApolloServerPlugin } from "apollo-server-plugin-base";
 import { DocumentNode, GraphQLSchema, separateOperations } from "graphql";
 import {
 	ComplexityEstimator,
@@ -13,10 +12,7 @@ interface ComplexityPluginParams {
 	schema: GraphQLSchema;
 }
 
-export const complexityPlugin = ({
-	maxComplexity = Infinity,
-	schema
-}: ComplexityPluginParams): ApolloServerPlugin => ({
+export const complexityPlugin = ({ maxComplexity = Infinity, schema }: ComplexityPluginParams) => ({
 	requestDidStart: () => ({
 		didResolveOperation: ({ request: { operationName, variables = {} }, document }) => {
 			const query: DocumentNode = operationName

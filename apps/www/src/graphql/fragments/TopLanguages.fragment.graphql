@@ -1,0 +1,11 @@
+fragment TopLanguages on TopLanguages {
+	__typename
+	nodes {
+		__typename
+		name
+		color
+		size
+	}
+	totalCount
+	totalSize
+}

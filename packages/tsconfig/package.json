@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"main": "index.js",
+	"sideEffects": false,
 	"files": [
 		"base.json",
 		"nextjs.json",

@@ -1,0 +1,8 @@
+mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
+	post: updatePost(where: $where, data: $data) {
+		id
+		content
+		description
+		thumbnailUrl
+	}
+}

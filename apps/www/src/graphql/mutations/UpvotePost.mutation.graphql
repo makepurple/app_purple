@@ -1,0 +1,9 @@
+mutation UpvotePost($where: PostWhereUniqueInput!) {
+	post: upvotePost(where: $where) {
+		id
+		upvoteCount
+		upvotingUsers {
+			id
+		}
+	}
+}

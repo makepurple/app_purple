@@ -1,0 +1,30 @@
+fragment UserInfoSideBarUser on User {
+	__typename
+	desiredSkills {
+		__typename
+		id
+		name
+	}
+	github {
+		__typename
+		id
+		bio
+		company
+		name
+		topLanguages {
+			__typename
+			...TopLanguages
+		}
+		twitterUsername
+		url
+		websiteUrl
+	}
+	id
+	name
+	skills {
+		__typename
+		id
+		name
+	}
+	...UserAvatarUser
+}

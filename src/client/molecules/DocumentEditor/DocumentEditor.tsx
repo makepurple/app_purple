@@ -4,14 +4,13 @@ import { FormGroupContext } from "@/client/atoms/FormGroup/context";
 import { useUncontrolledProp } from "@/client/hooks";
 import { FunctionUtils, ObjectUtils } from "@/utils";
 import React, { CSSProperties, FC, ReactNode, useContext, useMemo } from "react";
-import { BaseEditor, createEditor, Descendant } from "slate";
+import { createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
-import { ReactEditor, Slate, withReact } from "slate-react";
+import { Slate, withReact } from "slate-react";
 import tw, { css, styled } from "twin.macro";
 import { DocumentEditorContext } from "./context";
 import { DocumentEditorEditable } from "./Editable";
-import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
-import { CustomText } from "./Leaf";
+import { withCodeBlock, withImages, withLinks } from "./Element";
 import { DocumentEditorToolbar } from "./Toolbar";
 
 const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
@@ -44,14 +43,6 @@ const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
 			`
 			: tw`border-gray-400`}
 `;
-
-declare module "slate" {
-	interface CustomTypes {
-		Editor: BaseEditor & ReactEditor;
-		Element: CustomElement;
-		Text: CustomText;
-	}
-}
 
 export interface DocumentEditorProps {
 	children?: ReactNode;

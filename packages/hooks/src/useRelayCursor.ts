@@ -31,7 +31,9 @@ export const useRelayCursor = <TQuery, TVariables, TFieldName extends keyof TQue
 
 	const { data, fetching } = result;
 
-	const field = data?.[fieldName] as { nodes: unknown[]; pageInfo: PageInfo } | undefined;
+	const field = (data as any)?.[fieldName] as
+		| { nodes: unknown[]; pageInfo: PageInfo }
+		| undefined;
 
 	const [loadMoreElem, loadMoreRef] = useState<HTMLElement | null>(null);
 

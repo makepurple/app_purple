@@ -1,4 +1,3 @@
-import { ApolloServerPlugin } from "apollo-server-plugin-base";
 import { GraphQLSchema } from "graphql";
 import { complexityPlugin } from "./complexity.plugin";
 
@@ -10,7 +9,7 @@ interface GetPluginsParams {
 export const getPlugins = (params: GetPluginsParams) => {
 	const { maxComplexity = Infinity, schema } = params;
 
-	const plugins: ApolloServerPlugin[] = [complexityPlugin({ maxComplexity, schema })];
+	const plugins = [complexityPlugin({ maxComplexity, schema })];
 
 	return plugins;
 };

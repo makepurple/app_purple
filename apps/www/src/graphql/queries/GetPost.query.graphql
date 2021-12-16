@@ -1,0 +1,13 @@
+query GetPost($where: PostWhereUniqueInput!) {
+	post(where: $where) {
+		__typename
+		id
+		authorName
+		content
+		description
+		publishedAt
+		title
+		urlSlug
+		thumbnailUrl
+	}
+}

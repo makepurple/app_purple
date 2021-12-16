@@ -23,7 +23,7 @@ export const GitHubUser = objectType({
 
 				if (!user?.name) return { nodes: [] };
 
-				const userTopLanguages = await graphql`
+				const userTopLanguages: octokit.GetUserTopLanguagesQuery | null = await graphql`
 					query GetUserTopLanguages($login: String!) {
 						user(login: $login) {
 							repositories(ownerAffiliations: [OWNER], isFork: false, first: 50) {

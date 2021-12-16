@@ -1,0 +1,9 @@
+mutation UpdatePostDraft($where: PostWhereUniqueInput!, $data: PostDraftUpdateInput!) {
+	post: updatePostDraft(where: $where, data: $data) {
+		id
+		content
+		description
+		thumbnailUrl
+		title
+	}
+}

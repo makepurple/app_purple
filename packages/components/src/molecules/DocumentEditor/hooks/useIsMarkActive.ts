@@ -5,11 +5,13 @@ import { useSlateStatic } from "slate-react";
 export type MarkType = keyof NonNullable<BaseEditor["marks"]>;
 
 export const isMarkActive = (editor: Editor, mark: MarkType): boolean => {
-	const [match] = Editor.nodes(editor, {
-		match: (node) => {
-			return !Editor.isEditor(node) && SlateText.isText(node) && !!node[mark];
-		}
-	});
+	const [match] = Array.from(
+		Editor.nodes(editor, {
+			match: (node) => {
+				return !Editor.isEditor(node) && SlateText.isText(node) && !!node[mark];
+			}
+		})
+	);
 
 	return !!match;
 };

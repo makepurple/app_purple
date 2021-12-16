@@ -3,9 +3,11 @@ import { CloudinaryUrl } from "../string/CloudinaryUrl";
 import { PostTitle } from "../string/PostTitle";
 import { DocumentEditorValue } from "./DocumentEditorValue";
 
-export const PostDraftUpdateInput = Schema({
+const schema = Schema({
 	content: DocumentEditorValue.error("Content malformed").strictOptional(),
 	description: string.trim().strictOptional(),
 	thumbnailUrl: CloudinaryUrl.optional(),
 	title: PostTitle.strictOptional()
 });
+
+export const PostDraftUpdateInput: typeof schema = schema;

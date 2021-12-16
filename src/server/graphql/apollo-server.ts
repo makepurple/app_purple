@@ -29,7 +29,7 @@ export const getApolloServer = (config: GetApolloServerConfig): ApolloServer => 
 		debug: !isProd,
 		introspection: !isProd,
 		playground: !isProd,
-		plugins: getPlugins({ schema, maxComplexity }),
+		plugins: getPlugins({ schema, maxComplexity }) as any,
 		schema,
 		validationRules: getValidationRules({ maxDepth })
 	});

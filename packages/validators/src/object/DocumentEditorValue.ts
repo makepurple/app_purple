@@ -87,4 +87,6 @@ const CustomElement = Schema.either(
 	ParagraphElement
 );
 
-export const DocumentEditorValue = array.of(CustomElement);
+const schema = array.of(CustomElement);
+
+export const DocumentEditorValue: typeof schema = schema;

@@ -1,0 +1,10 @@
+query GetPostDraft {
+	postDraft {
+		__typename
+		id
+		content
+		description
+		title
+		thumbnailUrl
+	}
+}
