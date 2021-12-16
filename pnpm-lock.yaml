@@ -288,16 +288,31 @@ importers:
       '@storybook/addon-actions': ^6.4.9
       '@storybook/addon-essentials': ^6.4.9
       '@storybook/addon-storyshots': ^6.4.9
+      '@storybook/addons': ^6.4.9
       '@storybook/react': ^6.4.9
+      '@storybook/theming': ^6.4.9
+      '@tippyjs/react': ^4.2.6
       '@types/common-tags': ^1.8.1
       '@types/faker': ^5.5.9
+      '@types/node': ^16.11.12
       '@types/react': ^17.0.37
       '@types/react-dom': ^17.0.11
+      '@types/styled-components': ^5.1.17
+      '@urql/storybook-addon': ^1.0.8
+      addon-screen-reader: ^1.8.6
+      babel-plugin-macros: ^3.1.0
+      babel-plugin-twin: ^1.0.2
       common-tags: ^1.8.2
+      customize-cra: ^1.0.0
       faker: ^5.5.3
+      framer-motion: ^5.4.5
       next: ^12.0.7
       react: ^17.0.2
       react-dom: ^17.0.2
+      react-hot-toast: ^2.1.1
+      storybook-addon-next-router: ^3.1.0
+      styled-components: ^5.3.3
+      twin.macro: ^2.8.2
       typescript: ^4.5.3
     dependencies:
       '@headlessui/react': 1.4.2_react-dom@17.0.2+react@17.0.2
@@ -306,20 +321,35 @@ importers:
       '@makepurple/utils': link:../../packages/utils
       '@storybook/addon-actions': 6.4.9_5539cae010396b202b015f3568914e95
       '@storybook/react': 6.4.9_9986f3fc3232299c8a1af0f04d36a9fa
+      '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
       '@types/common-tags': 1.8.1
       '@types/faker': 5.5.9
       '@types/react': 17.0.37
       '@types/react-dom': 17.0.11
+      '@types/styled-components': 5.1.17
       common-tags: 1.8.2
       faker: 5.5.3
+      framer-motion: 5.4.5_react-dom@17.0.2+react@17.0.2
       next: 12.0.7_aae888dfa296766acacf1a733aa50b3a
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-hot-toast: 2.1.1_react-dom@17.0.2+react@17.0.2
+      styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
+      twin.macro: 2.8.2_ts-node@10.4.0
     devDependencies:
       '@makepurple/tsconfig': link:../../packages/tsconfig
       '@storybook/addon-a11y': 6.4.9_5539cae010396b202b015f3568914e95
       '@storybook/addon-essentials': 6.4.9_005f6e5922072e01b585f170cb3cc97d
       '@storybook/addon-storyshots': 6.4.9_6ea6c5fd1c834ef162caedc13d611e6f
+      '@storybook/addons': 6.4.9_react-dom@17.0.2+react@17.0.2
+      '@storybook/theming': 6.4.9_react-dom@17.0.2+react@17.0.2
+      '@types/node': 16.11.12
+      '@urql/storybook-addon': 1.0.8_5968641e810e1e9dbee61b781da15c43
+      addon-screen-reader: 1.8.6_e675ffcc343a472307c706807f2d6cd4
+      babel-plugin-macros: 3.1.0
+      babel-plugin-twin: 1.0.2
+      customize-cra: 1.0.0
+      storybook-addon-next-router: 3.1.0_03999677eafa41fa7dd564f2a11a2cca
       typescript: 4.5.3
 
   apps/www:
@@ -17200,6 +17230,25 @@ packages:
 
   /store2/2.12.0:
     resolution: {integrity: sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==}
+
+  /storybook-addon-next-router/3.1.0_03999677eafa41fa7dd564f2a11a2cca:
+    resolution: {integrity: sha512-+IBMeosdudfCQ6IqZmpdCxdr2kacLPP/HIHTApKSOYBhfKIEZYiXtEW0UXvbokjEdnUaLNpZA2Rpyq6sdt6Mxw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@storybook/addon-actions': ^6.0.0
+      '@storybook/addons': ^6.0.0
+      '@storybook/client-api': ^6.0.0
+      next: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@storybook/addon-actions': 6.4.9_5539cae010396b202b015f3568914e95
+      '@storybook/addons': 6.4.9_react-dom@17.0.2+react@17.0.2
+      next: 12.0.7_aae888dfa296766acacf1a733aa50b3a
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      tslib: 2.3.1
+    dev: true
 
   /storybook-addon-next-router/3.1.0_d837ce8f3acb2f60f8b7454672a9bcea:
     resolution: {integrity: sha512-+IBMeosdudfCQ6IqZmpdCxdr2kacLPP/HIHTApKSOYBhfKIEZYiXtEW0UXvbokjEdnUaLNpZA2Rpyq6sdt6Mxw==}

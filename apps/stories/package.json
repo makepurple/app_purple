@@ -4,6 +4,10 @@
 	"private": true,
 	"main": "src/index.ts",
 	"types": "src/index.ts",
+	"scripts": {
+		"dev": "start-storybook -p 6006",
+		"build": "build-storybook"
+	},
 	"dependencies": {
 		"@headlessui/react": "^1.4.2",
 		"@makepurple/components": "workspace:*",
@@ -11,21 +15,41 @@
 		"@makepurple/utils": "workspace:*",
 		"@storybook/addon-actions": "^6.4.9",
 		"@storybook/react": "^6.4.9",
+		"@tippyjs/react": "^4.2.6",
 		"@types/common-tags": "^1.8.1",
 		"@types/faker": "^5.5.9",
 		"@types/react": "^17.0.37",
 		"@types/react-dom": "^17.0.11",
+		"@types/styled-components": "^5.1.17",
 		"common-tags": "^1.8.2",
 		"faker": "^5.5.3",
+		"framer-motion": "^5.4.5",
 		"next": "^12.0.7",
 		"react": "^17.0.2",
-		"react-dom": "^17.0.2"
+		"react-dom": "^17.0.2",
+		"react-hot-toast": "^2.1.1",
+		"styled-components": "^5.3.3",
+		"twin.macro": "^2.8.2"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
 		"@storybook/addon-a11y": "^6.4.9",
 		"@storybook/addon-essentials": "^6.4.9",
 		"@storybook/addon-storyshots": "^6.4.9",
+		"@storybook/addons": "^6.4.9",
+		"@storybook/theming": "^6.4.9",
+		"@types/node": "^16.11.12",
+		"@urql/storybook-addon": "^1.0.8",
+		"addon-screen-reader": "^1.8.6",
+		"babel-plugin-macros": "^3.1.0",
+		"babel-plugin-twin": "^1.0.2",
+		"customize-cra": "^1.0.0",
+		"storybook-addon-next-router": "^3.1.0",
 		"typescript": "^4.5.3"
+	},
+	"babelMacros": {
+		"twin": {
+			"preset": "styled-components"
+		}
 	}
 }
