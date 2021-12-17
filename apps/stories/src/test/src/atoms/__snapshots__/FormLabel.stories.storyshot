@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/FormLabel Standard 1`] = `
+Array [
+  <div
+    className="FormGroup__Root-sc-1bcwy44-0 gTgNTj"
+  >
+    <label
+      className="FormLabel-sc-1jubgj6-0 hBOEaj"
+    >
+      First name
+    </label>
+    <input
+      className="Input__Root-sc-ku6kfd-0 jsoxyH"
+    />
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

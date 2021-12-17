@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/LoadingPostCard Standard 1`] = `
+Array [
+  <div
+    className="Paper-sc-13sx1oc-0 LoadingPostCard__Root-sc-1lor1w2-0 dAVOlJ hZYaLq"
+  >
+    <div
+      className="LoadingPostCard__Info-sc-1lor1w2-1 bGttTi"
+    >
+      <div
+        className="Skeleton-sc-17iamk7-0 LoadingPostCard__Title-sc-1lor1w2-2 gptcUU MWpFl"
+      />
+      <div
+        className="LoadingPostCard__Description-sc-1lor1w2-3 hZmleT"
+      >
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+        />
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+        />
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+        />
+      </div>
+      <div
+        className="LoadingPostCard__PostedDetails-sc-1lor1w2-5 dHIHTf"
+      >
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+        />
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+        />
+      </div>
+      <div
+        className="LoadingPostCard__KarmaContainer-sc-1lor1w2-7 jzzpYp"
+      >
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteCount-sc-1lor1w2-8 gptcUU erqEhF"
+        />
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteIcon-sc-1lor1w2-9 gptcUU dBHcDD"
+        />
+      </div>
+    </div>
+    <div
+      className="Skeleton-sc-17iamk7-0 LoadingPostCard__Thumbnail-sc-1lor1w2-10 gptcUU eLSYvT"
+    />
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

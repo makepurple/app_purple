@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/ExperienceCard Standard 1`] = `
+Array [
+  <div
+    className="ExperienceCard__Root-sc-xue9rj-1 dVYofq"
+  >
+    <a
+      className="Avatar__Root-sc-u1lc8a-0 ddeOTL ExperienceCard__StyledAvatar-sc-xue9rj-2 jwszjU"
+    >
+      <div
+        className="Avatar__Content-sc-u1lc8a-1 ktvtUF"
+      >
+        <span
+          style={
+            Object {
+              "background": "none",
+              "border": 0,
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "height": "initial",
+              "margin": 0,
+              "maxWidth": "100%",
+              "opacity": 1,
+              "overflow": "hidden",
+              "padding": 0,
+              "position": "relative",
+              "width": "initial",
+            }
+          }
+        >
+          <span
+            style={
+              Object {
+                "background": "none",
+                "border": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": "initial",
+                "margin": 0,
+                "maxWidth": "100%",
+                "opacity": 1,
+                "padding": 0,
+                "width": "initial",
+              }
+            }
+          >
+            <img
+              alt=""
+              aria-hidden={true}
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+              style={
+                Object {
+                  "background": "none",
+                  "border": 0,
+                  "display": "block",
+                  "height": "initial",
+                  "margin": 0,
+                  "maxWidth": "100%",
+                  "opacity": 1,
+                  "padding": 0,
+                  "width": "initial",
+                }
+              }
+            />
+          </span>
+          <img
+            alt="Meta"
+            data-nimg="intrinsic"
+            decoding="async"
+            src="https://avatars.githubusercontent.com/u/69631?s=200&v=4"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+            title="Meta"
+          />
+          <noscript>
+            <img
+              alt="Meta"
+              data-nimg="intrinsic"
+              decoding="async"
+              loading="lazy"
+              src="https://avatars.githubusercontent.com/u/69631?s=200&v=4"
+              style={
+                Object {
+                  "border": "none",
+                  "bottom": 0,
+                  "boxSizing": "border-box",
+                  "display": "block",
+                  "height": 0,
+                  "left": 0,
+                  "margin": "auto",
+                  "maxHeight": "100%",
+                  "maxWidth": "100%",
+                  "minHeight": "100%",
+                  "minWidth": "100%",
+                  "objectFit": undefined,
+                  "objectPosition": undefined,
+                  "padding": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "width": 0,
+                }
+              }
+              title="Meta"
+            />
+          </noscript>
+        </span>
+      </div>
+    </a>
+    <div
+      className="ExperienceCard__Info-sc-xue9rj-3 jXbQAB"
+    >
+      <h3
+        className="ExperienceCard__PositionName-sc-xue9rj-4 ikONAN"
+      >
+        Senior Frontend Engineer
+        <span
+          className="ExperienceCard__PositionType-sc-xue9rj-5 ExperienceCard___StyledPositionType-sc-xue9rj-6 eQHDoY gffiFd"
+        >
+          (
+          full-time
+          )
+        </span>
+      </h3>
+      <h4
+        className="ExperienceCard__OrganizationName-sc-xue9rj-7 jdMCSL"
+      >
+        Meta
+      </h4>
+      <div
+        className="ExperienceCard__Timeframe-sc-xue9rj-8 jegacs"
+      >
+        Oct 2011 – Present • 10yrs
+      </div>
+      <div
+        className="ExperienceCard__Location-sc-xue9rj-9 Tqzeo"
+      >
+        San Francisco, CA
+      </div>
+      <ul
+        className="ExperienceCard__Highlights-sc-xue9rj-10 ejukMh"
+      >
+        <li>
+          Did a thing, then did another thing that was really incredible
+        </li>
+        <li>
+          Did a thing, then did another thing that was really incredible
+        </li>
+        <li>
+          Did a thing, then did another thing that was really incredible
+        </li>
+      </ul>
+    </div>
+    <button
+      className="Button-sc-35b00c-0 ExperienceCard__EditButton-sc-xue9rj-0 cAXctj dQwa-Dq"
+      role="button"
+      type="button"
+    >
+      <svg
+        height={24}
+        viewBox="0 0 24 24"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.263 2.177a1.75 1.75 0 012.474 0l2.586 2.586a1.75 1.75 0 010 2.474L19.53 10.03l-.012.013L8.69 20.378a1.75 1.75 0 01-.699.409l-5.523 1.68a.75.75 0 01-.935-.935l1.673-5.5a1.75 1.75 0 01.466-.756L14.476 4.963l2.787-2.786zm-2.275 4.371l-10.28 9.813a.25.25 0 00-.067.108l-1.264 4.154 4.177-1.271a.25.25 0 00.1-.059l10.273-9.806-2.94-2.939zM19 8.44l2.263-2.262a.25.25 0 000-.354l-2.586-2.586a.25.25 0 00-.354 0L16.061 5.5 19 8.44z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

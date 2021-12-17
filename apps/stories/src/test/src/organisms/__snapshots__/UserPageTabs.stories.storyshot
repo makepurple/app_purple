@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/UserPageTabs Standard 1`] = `
+Array [
+  <div
+    aria-orientation="horizontal"
+    className="Paper-sc-13sx1oc-0 dAVOlJ TabList-sc-16lqras-0 fLnWtv"
+    role="tablist"
+  >
+    <a
+      aria-selected={false}
+      className="TabButton-sc-1qu4nxi-2 BPHQU"
+      href="/leedavidcs"
+      id="headlessui-tabs-tab-29"
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onMouseEnter={[Function]}
+      role="tab"
+      selected={false}
+      tabIndex={-1}
+      type="button"
+    >
+      <span
+        className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+      >
+        <svg
+          className="UserPageTabs___StyledNoteIcon-sc-1olw86z-0 jSVflI"
+          height={20}
+          viewBox="0 0 24 24"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 4.75C0 3.784.784 3 1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0122.25 21H1.75A1.75 1.75 0 010 19.25V4.75zm1.75-.25a.25.25 0 00-.25.25v14.5c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V4.75a.25.25 0 00-.25-.25H1.75z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+          <path
+            d="M5 8.75A.75.75 0 015.75 8h11.5a.75.75 0 010 1.5H5.75A.75.75 0 015 8.75zm0 4a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+        </svg>
+        Posts
+      </span>
+    </a>
+    <a
+      aria-selected={false}
+      className="TabButton-sc-1qu4nxi-2 BPHQU"
+      href="/leedavidcs/repositories"
+      id="headlessui-tabs-tab-30"
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onMouseEnter={[Function]}
+      role="tab"
+      selected={false}
+      tabIndex={-1}
+      type="button"
+    >
+      <span
+        className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+      >
+        <svg
+          className="UserPageTabs___StyledRepoIcon-sc-1olw86z-1 iqnFHZ"
+          height={20}
+          viewBox="0 0 24 24"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 2.75A2.75 2.75 0 015.75 0h14.5a.75.75 0 01.75.75v20.5a.75.75 0 01-.75.75h-6a.75.75 0 010-1.5h5.25v-4H6A1.5 1.5 0 004.5 18v.75c0 .716.43 1.334 1.05 1.605a.75.75 0 01-.6 1.374A3.25 3.25 0 013 18.75v-16zM19.5 1.5V15H6c-.546 0-1.059.146-1.5.401V2.75c0-.69.56-1.25 1.25-1.25H19.5z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+          <path
+            d="M7 18.25a.25.25 0 01.25-.25h5a.25.25 0 01.25.25v5.01a.25.25 0 01-.397.201l-2.206-1.604a.25.25 0 00-.294 0L7.397 23.46a.25.25 0 01-.397-.2v-5.01z"
+            fill="currentColor"
+          />
+        </svg>
+        Repositories
+      </span>
+    </a>
+    <a
+      aria-selected={false}
+      className="TabButton-sc-1qu4nxi-2 BPHQU"
+      href="/leedavidcs/experiences"
+      id="headlessui-tabs-tab-31"
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onMouseEnter={[Function]}
+      role="tab"
+      selected={false}
+      tabIndex={-1}
+      type="button"
+    >
+      <span
+        className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+      >
+        <svg
+          className="UserPageTabs___StyledHexagonIcon-sc-1olw86z-2 yYTbk"
+          height={20}
+          viewBox="0 0 24 24"
+          width={20}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M23.0617 10.9917L18.3951 2.99167C18.2185 2.68995 17.9661 2.43968 17.6629 2.26571C17.3597 2.09174 17.0163 2.00014 16.6667 2H7.33339C6.98369 1.99999 6.64007 2.09153 6.33671 2.2655C6.03336 2.43948 5.78082 2.68983 5.60423 2.99167L0.937559 10.9917C0.759698 11.2979 0.666016 11.6458 0.666016 12C0.666016 12.3542 0.759698 12.7021 0.937559 13.0083L5.60423 21.0083C5.78082 21.3102 6.03336 21.5605 6.33671 21.7345C6.64007 21.9085 6.98369 22 7.33339 22H16.6667C17.0164 22 17.36 21.9085 17.6634 21.7345C17.9668 21.5605 18.2193 21.3102 18.3959 21.0083L23.0626 13.0083C23.2403 12.702 23.3338 12.3541 23.3337 11.9999C23.3335 11.6457 23.2397 11.2979 23.0617 10.9917V10.9917ZM19.4288 12.6108L16.2463 18.0654C16.1395 18.2484 15.9866 18.4002 15.8029 18.5056C15.6192 18.6111 15.4111 18.6667 15.1992 18.6667H8.80089C8.58905 18.6667 8.3809 18.6111 8.19719 18.5056C8.01347 18.4002 7.86061 18.2484 7.75381 18.0654L4.57131 12.6108C4.46326 12.4254 4.40634 12.2146 4.40634 12C4.40634 11.7854 4.46326 11.5746 4.57131 11.3892L7.75381 5.93458C7.86054 5.75157 8.0134 5.59974 8.19712 5.49424C8.38085 5.38874 8.58903 5.33326 8.80089 5.33333H15.1992C15.4111 5.33326 15.6193 5.38874 15.803 5.49424C15.9867 5.59974 16.1396 5.75157 16.2463 5.93458L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2146 19.5369 12.4254 19.4288 12.6108V12.6108Z"
+            fill="currentColor"
+            opacity={0.4}
+          />
+          <path
+            d="M19.4288 12.6109L16.2463 18.0655C16.1395 18.2484 15.9867 18.4002 15.803 18.5057C15.6193 18.6112 15.4111 18.6667 15.1993 18.6667H8.80093C8.58908 18.6667 8.38094 18.6112 8.19722 18.5057C8.01351 18.4002 7.86064 18.2484 7.75384 18.0655L4.57134 12.6109C4.4633 12.4254 4.40637 12.2147 4.40637 12C4.40637 11.7854 4.4633 11.5746 4.57134 11.3892L7.75384 5.93462C7.86058 5.75161 8.01343 5.59978 8.19716 5.49428C8.38089 5.38878 8.58907 5.3333 8.80093 5.33337H15.1993C15.4111 5.3333 15.6193 5.38878 15.803 5.49428C15.9868 5.59978 16.1396 5.75161 16.2463 5.93462L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2147 19.5369 12.4254 19.4288 12.6109V12.6109Z"
+            fill="currentColor"
+          />
+        </svg>
+        Experiences
+      </span>
+    </a>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

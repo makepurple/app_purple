@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots molecules/Legend Standard 1`] = `
+Array [
+  <div
+    className="Legend__Root-sc-a7l6or-0 hNsOjL"
+    style={
+      Object {
+        "width": 280,
+      }
+    }
+  >
+    <div
+      className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+    >
+      <span
+        className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+        style={
+          Object {
+            "backgroundColor": "#ff0000",
+          }
+        }
+      />
+      <span
+        className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+      >
+        TypeScript
+        <span
+          className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+        >
+          66.67
+          %
+        </span>
+      </span>
+    </div>
+    <div
+      className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+    >
+      <span
+        className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+        style={
+          Object {
+            "backgroundColor": "#00ff00",
+          }
+        }
+      />
+      <span
+        className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+      >
+        CSS
+        <span
+          className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+        >
+          22.22
+          %
+        </span>
+      </span>
+    </div>
+    <div
+      className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+    >
+      <span
+        className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+        style={
+          Object {
+            "backgroundColor": "#0000ff",
+          }
+        }
+      />
+      <span
+        className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+      >
+        HTML
+        <span
+          className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+        >
+          11.11
+          %
+        </span>
+      </span>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

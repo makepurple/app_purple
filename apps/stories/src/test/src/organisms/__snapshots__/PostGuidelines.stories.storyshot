@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/PostGuidelines Standard 1`] = `
+Array [
+  <div
+    className="Paper-sc-13sx1oc-0 dAVOlJ"
+  >
+    <div
+      className="PostGuidelines__Title-sc-115d4ui-0 hLfvyT"
+    >
+      Posting Guidelines
+    </div>
+    <hr
+      className="Divider-sc-1c7xn9p-0 jeaGSX"
+    />
+    <ol
+      className="OrderedList-sc-39tpl2-0 PostGuidelines__List-sc-115d4ui-1 fasPvJ bJcLRz"
+    >
+      <li
+        className="OrderedListItem-sc-1e91eca-0 erTglF"
+      >
+        Use kind and inclusive language
+      </li>
+      <li
+        className="OrderedListItem-sc-1e91eca-0 erTglF"
+      >
+        Be respectful of differing viewpoints
+      </li>
+      <li
+        className="OrderedListItem-sc-1e91eca-0 erTglF"
+      >
+        Give credit where it is due
+      </li>
+      <li
+        className="OrderedListItem-sc-1e91eca-0 erTglF"
+      >
+        Focus on learning and community
+      </li>
+      <li
+        className="OrderedListItem-sc-1e91eca-0 erTglF"
+      >
+        Showcase your skills and learning
+      </li>
+    </ol>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

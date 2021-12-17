@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots pages/index Standard 1`] = `
+Array [
+  <div
+    className="SiteWideLayout__Root-sc-1o04sav-0 eOdPGA"
+  >
+    <div
+      className="AppBar-sc-e14pte-0 itRDnq PageContainer-sc-15l5btz-0 SiteWideAppBar__Root-sc-1gywhck-0 JZJVd eItGjh"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideAppBar__Content-sc-1gywhck-1 ehxotG ffDGbA"
+      >
+        <div
+          className="SiteWideAppBar__BrandContainer-sc-1gywhck-2 PIpWB"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="SiteWideAppBar__Actions-sc-1gywhck-5 pyhiR"
+        >
+          <button
+            className="Button-sc-35b00c-0 iWLPnG SiteWideAppBar__StyledLogoutButton-sc-1gywhck-8 fUwveZ"
+            onClick={[Function]}
+            role="button"
+            type="button"
+          >
+            <span>
+              Logout
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="PageContainer-sc-15l5btz-0 SiteWideLayout__Content-sc-1o04sav-1 JZJVd lotNKB"
+    >
+      <div>
+        First page works~!
+      </div>
+    </div>
+    <footer
+      className="Footer-sc-al7lrf-0 hdjYwq PageContainer-sc-15l5btz-0 SiteWideFooter__Root-sc-gr3sj6-0 JZJVd bUUGOI"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideFooter__Content-sc-gr3sj6-1 ehxotG dmWdEL"
+      >
+        <div
+          className="SiteWideFooter__BrandContainer-sc-gr3sj6-2 dAjqGS"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="SiteWideFooter__LinksContainer-sc-gr3sj6-3 cUnHXM"
+        >
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Blog
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            About
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Terms
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

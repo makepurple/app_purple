@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/LoadingExperienceCard Standard 1`] = `
+Array [
+  <div
+    className="LoadingExperienceCard__Root-sc-g89icf-0 pdkyi"
+  >
+    <div
+      className="Skeleton-sc-17iamk7-0 LoadingExperienceCard__Avatar-sc-g89icf-1 gptcUU bvlEpX"
+    />
+    <div
+      className="LoadingExperienceCard__Info-sc-g89icf-2 oOWWh"
+    >
+      <div
+        className="LoadingExperienceCard___StyledDiv-sc-g89icf-3 sNtaf"
+      >
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingExperienceCard___StyledSkeleton-sc-g89icf-4 gptcUU lfkrgu"
+        />
+        <div
+          className="Skeleton-sc-17iamk7-0 LoadingExperienceCard___StyledSkeleton2-sc-g89icf-5 gptcUU eqRHiY"
+        />
+      </div>
+      <div
+        className="Skeleton-sc-17iamk7-0 LoadingExperienceCard___StyledSkeleton3-sc-g89icf-6 gptcUU bIdvgm"
+      />
+      <div
+        className="Skeleton-sc-17iamk7-0 LoadingExperienceCard___StyledSkeleton4-sc-g89icf-7 gptcUU fGgtEj"
+      />
+      <div
+        className="Skeleton-sc-17iamk7-0 LoadingExperienceCard___StyledSkeleton5-sc-g89icf-8 gptcUU jCfzcU"
+      />
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/Form Standard 1`] = `
+Array [
+  <form
+    className="Form__Root-sc-3d4802-0 dsmDlf"
+  >
+    <input
+      aria-disabled={false}
+      className="Input__Root-sc-ku6kfd-0 jsoxyH"
+      disabled={false}
+      placeholder="name"
+    />
+    <input
+      aria-disabled={false}
+      className="Input__Root-sc-ku6kfd-0 jsoxyH Formstories___StyledInput-sc-162s5vs-0 boXZmG"
+      disabled={false}
+      placeholder="email"
+    />
+    <button
+      className="Button-sc-35b00c-0 iWLPnG FormButton-sc-u44x8r-0 Formstories___StyledFormButton-sc-162s5vs-1  bmzycp"
+      disabled={false}
+      role="button"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

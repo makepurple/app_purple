@@ -1,0 +1,4308 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots pages/[username] Loading 1`] = `
+Array [
+  <div
+    className="SiteWideLayout__Root-sc-1o04sav-0 eOdPGA"
+  >
+    <div
+      className="AppBar-sc-e14pte-0 itRDnq PageContainer-sc-15l5btz-0 SiteWideAppBar__Root-sc-1gywhck-0 JZJVd eItGjh"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideAppBar__Content-sc-1gywhck-1 ehxotG ffDGbA"
+      >
+        <div
+          className="SiteWideAppBar__BrandContainer-sc-1gywhck-2 PIpWB"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="SiteWideAppBar__Actions-sc-1gywhck-5 pyhiR"
+        >
+          <button
+            className="Button-sc-35b00c-0 iWLPnG SiteWideAppBar__StyledLogoutButton-sc-1gywhck-8 fUwveZ"
+            onClick={[Function]}
+            role="button"
+            type="button"
+          >
+            <span>
+              Logout
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="PageContainer-sc-15l5btz-0 SiteWideLayout__Content-sc-1o04sav-1 JZJVd lotNKB"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 UserPageLayout__Root-sc-1mvyejp-0 ehxotG czjla"
+      >
+        <div
+          className="Paper-sc-13sx1oc-0 dAVOlJ UserPageLayout__SideBar-sc-1mvyejp-1 hNrjwu"
+        >
+          <div
+            className="UserInfoSideBar__MainInfoContainer-sc-lent2y-0 kLDumy"
+          >
+            <a
+              className="Avatar__Root-sc-u1lc8a-0 ddeOTL"
+              href="/leedavidcs"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+            >
+              <div
+                className="Avatar__Content-sc-u1lc8a-1 ktvtUF"
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "inline-block",
+                      "height": "initial",
+                      "margin": 0,
+                      "maxWidth": "100%",
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "relative",
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <span
+                    style={
+                      Object {
+                        "background": "none",
+                        "border": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": "initial",
+                        "margin": 0,
+                        "maxWidth": "100%",
+                        "opacity": 1,
+                        "padding": 0,
+                        "width": "initial",
+                      }
+                    }
+                  >
+                    <img
+                      alt=""
+                      aria-hidden={true}
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                      style={
+                        Object {
+                          "background": "none",
+                          "border": 0,
+                          "display": "block",
+                          "height": "initial",
+                          "margin": 0,
+                          "maxWidth": "100%",
+                          "opacity": 1,
+                          "padding": 0,
+                          "width": "initial",
+                        }
+                      }
+                    />
+                  </span>
+                  <img
+                    alt="leedavidcs"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="https://avatars.githubusercontent.com/u/15151154?v=4"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="leedavidcs"
+                      data-nimg="intrinsic"
+                      decoding="async"
+                      loading="lazy"
+                      src="https://avatars.githubusercontent.com/u/15151154?v=4"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": undefined,
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </div>
+            </a>
+            <h1
+              className="UserInfoSideBar__UserName-sc-lent2y-5 dXbLBa"
+            >
+              <div
+                className="UserInfoSideBar__DisplayName-sc-lent2y-6 bIFBiI"
+              >
+                David Lee
+              </div>
+              <div
+                className="UserInfoSideBar__SecondaryName-sc-lent2y-7 gjplrF"
+              >
+                leedavidcs
+              </div>
+            </h1>
+            <p
+              className="UserInfoSideBar__Bio-sc-lent2y-8 hbtdSS"
+            >
+              I learn things and work on MakePurple
+            </p>
+            <div
+              className="UserInfoSideBar__SocialLinks-sc-lent2y-9 kdjOvT"
+            >
+              <a
+                aria-label="github"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://github.com/leedavidcs"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="GitHub"
+              >
+                <svg
+                  height={24}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>
+                    GitHub
+                  </title>
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <a
+                aria-label="twitter"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://twitter.com/i3daly"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="Twitter"
+              >
+                <svg
+                  height={24}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>
+                    Twitter
+                  </title>
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <a
+                aria-label="openbase"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://openbase.com/user/leedavidcs"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="Openbase"
+              >
+                <svg
+                  fill="none"
+                  height={24}
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.00391 15.6021L1.0218 3.01235L11.9445 3.05176e-05L22.9207 2.98165L22.9029 15.5714L11.9433 24L1.00391 15.6021Z"
+                    fill="currentColor"
+                    opacity={0.01}
+                  />
+                  <path
+                    d="M11.9433 23.9999L1.004 15.6021L0 3.94113L11.9444 0L24 3.94113L22.9029 15.5715L11.9433 23.9999ZM11.9498 1.29997L1.32114 4.83083L11.9439 23.9956L22.6868 4.83338L11.9498 1.30003V1.29997Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div
+              className="UserInfoSideBar__Actions-sc-lent2y-11 dpOrep"
+            >
+              <button
+                className="Button-sc-35b00c-0 iWLPnG"
+                disabled={true}
+                onClick={[Function]}
+                role="button"
+                type="button"
+              >
+                New Post
+              </button>
+              <button
+                className="Button-sc-35b00c-0 cAXctj"
+                onClick={[Function]}
+                role="button"
+                type="button"
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
+          <hr
+            className="Divider-sc-1c7xn9p-0 jeaGSX"
+          />
+          <div
+            className="UserInfoSideBar__TopLanguagesContainer-sc-lent2y-1 fMZMpA"
+          >
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Most Used Languages
+            </h2>
+            <div
+              className="TopLanguages__Root-sc-90bu3d-0 gvodzd UserInfoSideBar___StyledTopLanguages-sc-lent2y-13 kkkaoU"
+            >
+              <div
+                className="ProgressBar-sc-uokfey-0 IcEjc"
+              >
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 jbNwFk"
+                  style={
+                    Object {
+                      "width": "93.3884155331274%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#2b7489",
+                    }
+                  }
+                />
+                TypeScript
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  93.39
+                  %
+                </span>
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 iIEWlw"
+                  style={
+                    Object {
+                      "width": "4.840404553744187%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#f1e05a",
+                    }
+                  }
+                />
+                JavaScript
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  4.84
+                  %
+                </span>
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 bZdfDW"
+                  style={
+                    Object {
+                      "width": "1.7711799131284094%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#563d7c",
+                    }
+                  }
+                />
+                CSS
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  1.77
+                  %
+                </span>
+              </div>
+              <div
+                className="Legend__Root-sc-a7l6or-0 hNsOjL TopLanguages__StyledLegend-sc-90bu3d-1 kJvSEQ"
+              >
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#2b7489",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    TypeScript
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      93.39
+                      %
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#f1e05a",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    JavaScript
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      4.84
+                      %
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#563d7c",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    CSS
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      1.77
+                      %
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr
+            className="Divider-sc-1c7xn9p-0 jeaGSX"
+          />
+          <div
+            className="UserInfoSideBar__SkillsContainer-sc-lent2y-2 cRlZLz"
+          >
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Highlighted Skills
+            </h2>
+            <div
+              className="Tags__Root-sc-dgh5b3-0 iXuLZr UserInfoSideBar__Skills-sc-lent2y-12 hcmOQB"
+              onClick={[Function]}
+              type="positive"
+            >
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Next.js
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Prisma
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Nexus
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Urql
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  TypeScript
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Storybook
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Figma
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Framer-Motion
+                </span>
+              </span>
+            </div>
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Currently Learning
+            </h2>
+            <div
+              className="Tags__Root-sc-dgh5b3-0 faGeiv UserInfoSideBar__Skills-sc-lent2y-12 hcmOQB"
+              onClick={[Function]}
+              type="negative"
+            >
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  PostgreSQL
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Kubernetes
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Terraform
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Blender
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Inkscape
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UserPageLayout__Content-sc-1mvyejp-2 iQkAWY"
+        >
+          <div
+            aria-orientation="horizontal"
+            className="Paper-sc-13sx1oc-0 dAVOlJ TabList-sc-16lqras-0 fLnWtv UserPageLayout__PageTabs-sc-1mvyejp-3 dLGigf"
+            role="tablist"
+          >
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined"
+              id="headlessui-tabs-tab-35"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledNoteIcon-sc-1olw86z-0 jSVflI"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 4.75C0 3.784.784 3 1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0122.25 21H1.75A1.75 1.75 0 010 19.25V4.75zm1.75-.25a.25.25 0 00-.25.25v14.5c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V4.75a.25.25 0 00-.25-.25H1.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M5 8.75A.75.75 0 015.75 8h11.5a.75.75 0 010 1.5H5.75A.75.75 0 015 8.75zm0 4a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                Posts
+              </span>
+            </a>
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined/repositories"
+              id="headlessui-tabs-tab-36"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledRepoIcon-sc-1olw86z-1 iqnFHZ"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 2.75A2.75 2.75 0 015.75 0h14.5a.75.75 0 01.75.75v20.5a.75.75 0 01-.75.75h-6a.75.75 0 010-1.5h5.25v-4H6A1.5 1.5 0 004.5 18v.75c0 .716.43 1.334 1.05 1.605a.75.75 0 01-.6 1.374A3.25 3.25 0 013 18.75v-16zM19.5 1.5V15H6c-.546 0-1.059.146-1.5.401V2.75c0-.69.56-1.25 1.25-1.25H19.5z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M7 18.25a.25.25 0 01.25-.25h5a.25.25 0 01.25.25v5.01a.25.25 0 01-.397.201l-2.206-1.604a.25.25 0 00-.294 0L7.397 23.46a.25.25 0 01-.397-.2v-5.01z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Repositories
+              </span>
+            </a>
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined/experiences"
+              id="headlessui-tabs-tab-37"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledHexagonIcon-sc-1olw86z-2 yYTbk"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.0617 10.9917L18.3951 2.99167C18.2185 2.68995 17.9661 2.43968 17.6629 2.26571C17.3597 2.09174 17.0163 2.00014 16.6667 2H7.33339C6.98369 1.99999 6.64007 2.09153 6.33671 2.2655C6.03336 2.43948 5.78082 2.68983 5.60423 2.99167L0.937559 10.9917C0.759698 11.2979 0.666016 11.6458 0.666016 12C0.666016 12.3542 0.759698 12.7021 0.937559 13.0083L5.60423 21.0083C5.78082 21.3102 6.03336 21.5605 6.33671 21.7345C6.64007 21.9085 6.98369 22 7.33339 22H16.6667C17.0164 22 17.36 21.9085 17.6634 21.7345C17.9668 21.5605 18.2193 21.3102 18.3959 21.0083L23.0626 13.0083C23.2403 12.702 23.3338 12.3541 23.3337 11.9999C23.3335 11.6457 23.2397 11.2979 23.0617 10.9917V10.9917ZM19.4288 12.6108L16.2463 18.0654C16.1395 18.2484 15.9866 18.4002 15.8029 18.5056C15.6192 18.6111 15.4111 18.6667 15.1992 18.6667H8.80089C8.58905 18.6667 8.3809 18.6111 8.19719 18.5056C8.01347 18.4002 7.86061 18.2484 7.75381 18.0654L4.57131 12.6108C4.46326 12.4254 4.40634 12.2146 4.40634 12C4.40634 11.7854 4.46326 11.5746 4.57131 11.3892L7.75381 5.93458C7.86054 5.75157 8.0134 5.59974 8.19712 5.49424C8.38085 5.38874 8.58903 5.33326 8.80089 5.33333H15.1992C15.4111 5.33326 15.6193 5.38874 15.803 5.49424C15.9867 5.59974 16.1396 5.75157 16.2463 5.93458L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2146 19.5369 12.4254 19.4288 12.6108V12.6108Z"
+                    fill="currentColor"
+                    opacity={0.4}
+                  />
+                  <path
+                    d="M19.4288 12.6109L16.2463 18.0655C16.1395 18.2484 15.9867 18.4002 15.803 18.5057C15.6193 18.6112 15.4111 18.6667 15.1993 18.6667H8.80093C8.58908 18.6667 8.38094 18.6112 8.19722 18.5057C8.01351 18.4002 7.86064 18.2484 7.75384 18.0655L4.57134 12.6109C4.4633 12.4254 4.40637 12.2147 4.40637 12C4.40637 11.7854 4.4633 11.5746 4.57134 11.3892L7.75384 5.93462C7.86058 5.75161 8.01343 5.59978 8.19716 5.49428C8.38089 5.38878 8.58907 5.3333 8.80093 5.33337H15.1993C15.4111 5.3333 15.6193 5.38878 15.803 5.49428C15.9868 5.59978 16.1396 5.75161 16.2463 5.93462L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2147 19.5369 12.4254 19.4288 12.6109V12.6109Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Experiences
+              </span>
+            </a>
+          </div>
+          <div
+            className="userName__Posts-sc-1l41056-0 bMCOHC"
+          >
+            <div
+              className="Paper-sc-13sx1oc-0 LoadingPostCard__Root-sc-1lor1w2-0 dAVOlJ hZYaLq"
+            >
+              <div
+                className="LoadingPostCard__Info-sc-1lor1w2-1 bGttTi"
+              >
+                <div
+                  className="Skeleton-sc-17iamk7-0 LoadingPostCard__Title-sc-1lor1w2-2 gptcUU MWpFl"
+                />
+                <div
+                  className="LoadingPostCard__Description-sc-1lor1w2-3 hZmleT"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                </div>
+                <div
+                  className="LoadingPostCard__PostedDetails-sc-1lor1w2-5 dHIHTf"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+                  />
+                </div>
+                <div
+                  className="LoadingPostCard__KarmaContainer-sc-1lor1w2-7 jzzpYp"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteCount-sc-1lor1w2-8 gptcUU erqEhF"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteIcon-sc-1lor1w2-9 gptcUU dBHcDD"
+                  />
+                </div>
+              </div>
+              <div
+                className="Skeleton-sc-17iamk7-0 LoadingPostCard__Thumbnail-sc-1lor1w2-10 gptcUU eLSYvT"
+              />
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 LoadingPostCard__Root-sc-1lor1w2-0 dAVOlJ hZYaLq"
+            >
+              <div
+                className="LoadingPostCard__Info-sc-1lor1w2-1 bGttTi"
+              >
+                <div
+                  className="Skeleton-sc-17iamk7-0 LoadingPostCard__Title-sc-1lor1w2-2 gptcUU MWpFl"
+                />
+                <div
+                  className="LoadingPostCard__Description-sc-1lor1w2-3 hZmleT"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                </div>
+                <div
+                  className="LoadingPostCard__PostedDetails-sc-1lor1w2-5 dHIHTf"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+                  />
+                </div>
+                <div
+                  className="LoadingPostCard__KarmaContainer-sc-1lor1w2-7 jzzpYp"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteCount-sc-1lor1w2-8 gptcUU erqEhF"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteIcon-sc-1lor1w2-9 gptcUU dBHcDD"
+                  />
+                </div>
+              </div>
+              <div
+                className="Skeleton-sc-17iamk7-0 LoadingPostCard__Thumbnail-sc-1lor1w2-10 gptcUU eLSYvT"
+              />
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 LoadingPostCard__Root-sc-1lor1w2-0 dAVOlJ hZYaLq"
+            >
+              <div
+                className="LoadingPostCard__Info-sc-1lor1w2-1 bGttTi"
+              >
+                <div
+                  className="Skeleton-sc-17iamk7-0 LoadingPostCard__Title-sc-1lor1w2-2 gptcUU MWpFl"
+                />
+                <div
+                  className="LoadingPostCard__Description-sc-1lor1w2-3 hZmleT"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__DescriptionRow-sc-1lor1w2-4 gptcUU bhUrKp"
+                  />
+                </div>
+                <div
+                  className="LoadingPostCard__PostedDetails-sc-1lor1w2-5 dHIHTf"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__PostedDetail-sc-1lor1w2-6 gptcUU entBuM"
+                  />
+                </div>
+                <div
+                  className="LoadingPostCard__KarmaContainer-sc-1lor1w2-7 jzzpYp"
+                >
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteCount-sc-1lor1w2-8 gptcUU erqEhF"
+                  />
+                  <div
+                    className="Skeleton-sc-17iamk7-0 LoadingPostCard__UpvoteIcon-sc-1lor1w2-9 gptcUU dBHcDD"
+                  />
+                </div>
+              </div>
+              <div
+                className="Skeleton-sc-17iamk7-0 LoadingPostCard__Thumbnail-sc-1lor1w2-10 gptcUU eLSYvT"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer
+      className="Footer-sc-al7lrf-0 hdjYwq PageContainer-sc-15l5btz-0 SiteWideFooter__Root-sc-gr3sj6-0 JZJVd bUUGOI"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideFooter__Content-sc-gr3sj6-1 ehxotG dmWdEL"
+      >
+        <div
+          className="SiteWideFooter__BrandContainer-sc-gr3sj6-2 dAjqGS"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="SiteWideFooter__LinksContainer-sc-gr3sj6-3 cUnHXM"
+        >
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Blog
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            About
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Terms
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots pages/[username] No Results 1`] = `
+Array [
+  <div
+    className="SiteWideLayout__Root-sc-1o04sav-0 eOdPGA"
+  >
+    <div
+      className="AppBar-sc-e14pte-0 itRDnq PageContainer-sc-15l5btz-0 SiteWideAppBar__Root-sc-1gywhck-0 JZJVd eItGjh"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideAppBar__Content-sc-1gywhck-1 ehxotG ffDGbA"
+      >
+        <div
+          className="SiteWideAppBar__BrandContainer-sc-1gywhck-2 PIpWB"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="SiteWideAppBar__Actions-sc-1gywhck-5 pyhiR"
+        >
+          <button
+            className="Button-sc-35b00c-0 iWLPnG SiteWideAppBar__StyledLogoutButton-sc-1gywhck-8 fUwveZ"
+            onClick={[Function]}
+            role="button"
+            type="button"
+          >
+            <span>
+              Logout
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="PageContainer-sc-15l5btz-0 SiteWideLayout__Content-sc-1o04sav-1 JZJVd lotNKB"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 UserPageLayout__Root-sc-1mvyejp-0 ehxotG czjla"
+      >
+        <div
+          className="Paper-sc-13sx1oc-0 dAVOlJ UserPageLayout__SideBar-sc-1mvyejp-1 hNrjwu"
+        >
+          <div
+            className="UserInfoSideBar__MainInfoContainer-sc-lent2y-0 kLDumy"
+          >
+            <a
+              className="Avatar__Root-sc-u1lc8a-0 ddeOTL"
+              href="/leedavidcs"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+            >
+              <div
+                className="Avatar__Content-sc-u1lc8a-1 ktvtUF"
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "inline-block",
+                      "height": "initial",
+                      "margin": 0,
+                      "maxWidth": "100%",
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "relative",
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <span
+                    style={
+                      Object {
+                        "background": "none",
+                        "border": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": "initial",
+                        "margin": 0,
+                        "maxWidth": "100%",
+                        "opacity": 1,
+                        "padding": 0,
+                        "width": "initial",
+                      }
+                    }
+                  >
+                    <img
+                      alt=""
+                      aria-hidden={true}
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                      style={
+                        Object {
+                          "background": "none",
+                          "border": 0,
+                          "display": "block",
+                          "height": "initial",
+                          "margin": 0,
+                          "maxWidth": "100%",
+                          "opacity": 1,
+                          "padding": 0,
+                          "width": "initial",
+                        }
+                      }
+                    />
+                  </span>
+                  <img
+                    alt="leedavidcs"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="https://avatars.githubusercontent.com/u/15151154?v=4"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="leedavidcs"
+                      data-nimg="intrinsic"
+                      decoding="async"
+                      loading="lazy"
+                      src="https://avatars.githubusercontent.com/u/15151154?v=4"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": undefined,
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </div>
+            </a>
+            <h1
+              className="UserInfoSideBar__UserName-sc-lent2y-5 dXbLBa"
+            >
+              <div
+                className="UserInfoSideBar__DisplayName-sc-lent2y-6 bIFBiI"
+              >
+                David Lee
+              </div>
+              <div
+                className="UserInfoSideBar__SecondaryName-sc-lent2y-7 gjplrF"
+              >
+                leedavidcs
+              </div>
+            </h1>
+            <p
+              className="UserInfoSideBar__Bio-sc-lent2y-8 hbtdSS"
+            >
+              I learn things and work on MakePurple
+            </p>
+            <div
+              className="UserInfoSideBar__SocialLinks-sc-lent2y-9 kdjOvT"
+            >
+              <a
+                aria-label="github"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://github.com/leedavidcs"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="GitHub"
+              >
+                <svg
+                  height={24}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>
+                    GitHub
+                  </title>
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <a
+                aria-label="twitter"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://twitter.com/i3daly"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="Twitter"
+              >
+                <svg
+                  height={24}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>
+                    Twitter
+                  </title>
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <a
+                aria-label="openbase"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://openbase.com/user/leedavidcs"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="Openbase"
+              >
+                <svg
+                  fill="none"
+                  height={24}
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.00391 15.6021L1.0218 3.01235L11.9445 3.05176e-05L22.9207 2.98165L22.9029 15.5714L11.9433 24L1.00391 15.6021Z"
+                    fill="currentColor"
+                    opacity={0.01}
+                  />
+                  <path
+                    d="M11.9433 23.9999L1.004 15.6021L0 3.94113L11.9444 0L24 3.94113L22.9029 15.5715L11.9433 23.9999ZM11.9498 1.29997L1.32114 4.83083L11.9439 23.9956L22.6868 4.83338L11.9498 1.30003V1.29997Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div
+              className="UserInfoSideBar__Actions-sc-lent2y-11 dpOrep"
+            >
+              <button
+                className="Button-sc-35b00c-0 iWLPnG"
+                disabled={false}
+                onClick={[Function]}
+                role="button"
+                type="button"
+              >
+                New Post
+              </button>
+              <button
+                className="Button-sc-35b00c-0 cAXctj"
+                onClick={[Function]}
+                role="button"
+                type="button"
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
+          <hr
+            className="Divider-sc-1c7xn9p-0 jeaGSX"
+          />
+          <div
+            className="UserInfoSideBar__TopLanguagesContainer-sc-lent2y-1 fMZMpA"
+          >
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Most Used Languages
+            </h2>
+            <div
+              className="TopLanguages__Root-sc-90bu3d-0 gvodzd UserInfoSideBar___StyledTopLanguages-sc-lent2y-13 kkkaoU"
+            >
+              <div
+                className="ProgressBar-sc-uokfey-0 IcEjc"
+              >
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 jbNwFk"
+                  style={
+                    Object {
+                      "width": "93.3884155331274%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#2b7489",
+                    }
+                  }
+                />
+                TypeScript
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  93.39
+                  %
+                </span>
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 iIEWlw"
+                  style={
+                    Object {
+                      "width": "4.840404553744187%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#f1e05a",
+                    }
+                  }
+                />
+                JavaScript
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  4.84
+                  %
+                </span>
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 bZdfDW"
+                  style={
+                    Object {
+                      "width": "1.7711799131284094%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#563d7c",
+                    }
+                  }
+                />
+                CSS
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  1.77
+                  %
+                </span>
+              </div>
+              <div
+                className="Legend__Root-sc-a7l6or-0 hNsOjL TopLanguages__StyledLegend-sc-90bu3d-1 kJvSEQ"
+              >
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#2b7489",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    TypeScript
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      93.39
+                      %
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#f1e05a",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    JavaScript
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      4.84
+                      %
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#563d7c",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    CSS
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      1.77
+                      %
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr
+            className="Divider-sc-1c7xn9p-0 jeaGSX"
+          />
+          <div
+            className="UserInfoSideBar__SkillsContainer-sc-lent2y-2 cRlZLz"
+          >
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Highlighted Skills
+            </h2>
+            <div
+              className="Tags__Root-sc-dgh5b3-0 iXuLZr UserInfoSideBar__Skills-sc-lent2y-12 hcmOQB"
+              onClick={[Function]}
+              type="positive"
+            >
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Next.js
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Prisma
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Nexus
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Urql
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  TypeScript
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Storybook
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Figma
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Framer-Motion
+                </span>
+              </span>
+            </div>
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Currently Learning
+            </h2>
+            <div
+              className="Tags__Root-sc-dgh5b3-0 faGeiv UserInfoSideBar__Skills-sc-lent2y-12 hcmOQB"
+              onClick={[Function]}
+              type="negative"
+            >
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  PostgreSQL
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Kubernetes
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Terraform
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Blender
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Inkscape
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UserPageLayout__Content-sc-1mvyejp-2 iQkAWY"
+        >
+          <div
+            aria-orientation="horizontal"
+            className="Paper-sc-13sx1oc-0 dAVOlJ TabList-sc-16lqras-0 fLnWtv UserPageLayout__PageTabs-sc-1mvyejp-3 dLGigf"
+            role="tablist"
+          >
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined"
+              id="headlessui-tabs-tab-38"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledNoteIcon-sc-1olw86z-0 jSVflI"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 4.75C0 3.784.784 3 1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0122.25 21H1.75A1.75 1.75 0 010 19.25V4.75zm1.75-.25a.25.25 0 00-.25.25v14.5c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V4.75a.25.25 0 00-.25-.25H1.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M5 8.75A.75.75 0 015.75 8h11.5a.75.75 0 010 1.5H5.75A.75.75 0 015 8.75zm0 4a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                Posts
+              </span>
+            </a>
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined/repositories"
+              id="headlessui-tabs-tab-39"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledRepoIcon-sc-1olw86z-1 iqnFHZ"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 2.75A2.75 2.75 0 015.75 0h14.5a.75.75 0 01.75.75v20.5a.75.75 0 01-.75.75h-6a.75.75 0 010-1.5h5.25v-4H6A1.5 1.5 0 004.5 18v.75c0 .716.43 1.334 1.05 1.605a.75.75 0 01-.6 1.374A3.25 3.25 0 013 18.75v-16zM19.5 1.5V15H6c-.546 0-1.059.146-1.5.401V2.75c0-.69.56-1.25 1.25-1.25H19.5z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M7 18.25a.25.25 0 01.25-.25h5a.25.25 0 01.25.25v5.01a.25.25 0 01-.397.201l-2.206-1.604a.25.25 0 00-.294 0L7.397 23.46a.25.25 0 01-.397-.2v-5.01z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Repositories
+              </span>
+            </a>
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined/experiences"
+              id="headlessui-tabs-tab-40"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledHexagonIcon-sc-1olw86z-2 yYTbk"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.0617 10.9917L18.3951 2.99167C18.2185 2.68995 17.9661 2.43968 17.6629 2.26571C17.3597 2.09174 17.0163 2.00014 16.6667 2H7.33339C6.98369 1.99999 6.64007 2.09153 6.33671 2.2655C6.03336 2.43948 5.78082 2.68983 5.60423 2.99167L0.937559 10.9917C0.759698 11.2979 0.666016 11.6458 0.666016 12C0.666016 12.3542 0.759698 12.7021 0.937559 13.0083L5.60423 21.0083C5.78082 21.3102 6.03336 21.5605 6.33671 21.7345C6.64007 21.9085 6.98369 22 7.33339 22H16.6667C17.0164 22 17.36 21.9085 17.6634 21.7345C17.9668 21.5605 18.2193 21.3102 18.3959 21.0083L23.0626 13.0083C23.2403 12.702 23.3338 12.3541 23.3337 11.9999C23.3335 11.6457 23.2397 11.2979 23.0617 10.9917V10.9917ZM19.4288 12.6108L16.2463 18.0654C16.1395 18.2484 15.9866 18.4002 15.8029 18.5056C15.6192 18.6111 15.4111 18.6667 15.1992 18.6667H8.80089C8.58905 18.6667 8.3809 18.6111 8.19719 18.5056C8.01347 18.4002 7.86061 18.2484 7.75381 18.0654L4.57131 12.6108C4.46326 12.4254 4.40634 12.2146 4.40634 12C4.40634 11.7854 4.46326 11.5746 4.57131 11.3892L7.75381 5.93458C7.86054 5.75157 8.0134 5.59974 8.19712 5.49424C8.38085 5.38874 8.58903 5.33326 8.80089 5.33333H15.1992C15.4111 5.33326 15.6193 5.38874 15.803 5.49424C15.9867 5.59974 16.1396 5.75157 16.2463 5.93458L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2146 19.5369 12.4254 19.4288 12.6108V12.6108Z"
+                    fill="currentColor"
+                    opacity={0.4}
+                  />
+                  <path
+                    d="M19.4288 12.6109L16.2463 18.0655C16.1395 18.2484 15.9867 18.4002 15.803 18.5057C15.6193 18.6112 15.4111 18.6667 15.1993 18.6667H8.80093C8.58908 18.6667 8.38094 18.6112 8.19722 18.5057C8.01351 18.4002 7.86064 18.2484 7.75384 18.0655L4.57134 12.6109C4.4633 12.4254 4.40637 12.2147 4.40637 12C4.40637 11.7854 4.4633 11.5746 4.57134 11.3892L7.75384 5.93462C7.86058 5.75161 8.01343 5.59978 8.19716 5.49428C8.38089 5.38878 8.58907 5.3333 8.80093 5.33337H15.1993C15.4111 5.3333 15.6193 5.38878 15.803 5.49428C15.9868 5.59978 16.1396 5.75161 16.2463 5.93462L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2147 19.5369 12.4254 19.4288 12.6109V12.6109Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Experiences
+              </span>
+            </a>
+          </div>
+          <div
+            className="userName__Posts-sc-1l41056-0 bMCOHC"
+          >
+            <div
+              className="Paper-sc-13sx1oc-0 NonIdealState__Root-sc-k6cwrx-0 dAVOlJ iecUhu"
+            >
+              <div
+                className="NonIdealState__Title-sc-k6cwrx-1 eZHSVn"
+              >
+                There's nothing here
+              </div>
+              <div
+                className="NonIdealState__SubTitle-sc-k6cwrx-2 ndGVP"
+              >
+                We couldn't find any posts
+              </div>
+              <div
+                className="NonIdealState__Content-sc-k6cwrx-3 heKdEH"
+              >
+                <svg
+                  height={96}
+                  viewBox="0 0 24 24"
+                  width={96}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 4.75C0 3.784.784 3 1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0122.25 21H1.75A1.75 1.75 0 010 19.25V4.75zm1.75-.25a.25.25 0 00-.25.25v14.5c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V4.75a.25.25 0 00-.25-.25H1.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M5 8.75A.75.75 0 015.75 8h11.5a.75.75 0 010 1.5H5.75A.75.75 0 015 8.75zm0 4a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer
+      className="Footer-sc-al7lrf-0 hdjYwq PageContainer-sc-15l5btz-0 SiteWideFooter__Root-sc-gr3sj6-0 JZJVd bUUGOI"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideFooter__Content-sc-gr3sj6-1 ehxotG dmWdEL"
+      >
+        <div
+          className="SiteWideFooter__BrandContainer-sc-gr3sj6-2 dAjqGS"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="SiteWideFooter__LinksContainer-sc-gr3sj6-3 cUnHXM"
+        >
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Blog
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            About
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Terms
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Storyshots pages/[username] Standard 1`] = `
+Array [
+  <div
+    className="SiteWideLayout__Root-sc-1o04sav-0 eOdPGA"
+  >
+    <div
+      className="AppBar-sc-e14pte-0 itRDnq PageContainer-sc-15l5btz-0 SiteWideAppBar__Root-sc-1gywhck-0 JZJVd eItGjh"
+      style={
+        Object {
+          "backdropFilter": "blur(0px)",
+          "backgroundColor": "rgba(255, 255, 255, 0)",
+          "boxShadow": "0 2px 2px 0 rgba(0, 0, 0, 0), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, 0)",
+        }
+      }
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideAppBar__Content-sc-1gywhck-1 ehxotG ffDGbA"
+      >
+        <div
+          className="SiteWideAppBar__BrandContainer-sc-1gywhck-2 PIpWB"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <div
+          className="SiteWideAppBar__Actions-sc-1gywhck-5 pyhiR"
+        >
+          <button
+            className="Button-sc-35b00c-0 iWLPnG SiteWideAppBar__StyledLogoutButton-sc-1gywhck-8 fUwveZ"
+            onClick={[Function]}
+            role="button"
+            type="button"
+          >
+            <span>
+              Logout
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="PageContainer-sc-15l5btz-0 SiteWideLayout__Content-sc-1o04sav-1 JZJVd lotNKB"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 UserPageLayout__Root-sc-1mvyejp-0 ehxotG czjla"
+      >
+        <div
+          className="Paper-sc-13sx1oc-0 dAVOlJ UserPageLayout__SideBar-sc-1mvyejp-1 hNrjwu"
+        >
+          <div
+            className="UserInfoSideBar__MainInfoContainer-sc-lent2y-0 kLDumy"
+          >
+            <a
+              className="Avatar__Root-sc-u1lc8a-0 ddeOTL"
+              href="/leedavidcs"
+              onClick={[Function]}
+              onMouseEnter={[Function]}
+            >
+              <div
+                className="Avatar__Content-sc-u1lc8a-1 ktvtUF"
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "boxSizing": "border-box",
+                      "display": "inline-block",
+                      "height": "initial",
+                      "margin": 0,
+                      "maxWidth": "100%",
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "relative",
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <span
+                    style={
+                      Object {
+                        "background": "none",
+                        "border": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": "initial",
+                        "margin": 0,
+                        "maxWidth": "100%",
+                        "opacity": 1,
+                        "padding": 0,
+                        "width": "initial",
+                      }
+                    }
+                  >
+                    <img
+                      alt=""
+                      aria-hidden={true}
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+                      style={
+                        Object {
+                          "background": "none",
+                          "border": 0,
+                          "display": "block",
+                          "height": "initial",
+                          "margin": 0,
+                          "maxWidth": "100%",
+                          "opacity": 1,
+                          "padding": 0,
+                          "width": "initial",
+                        }
+                      }
+                    />
+                  </span>
+                  <img
+                    alt="leedavidcs"
+                    data-nimg="intrinsic"
+                    decoding="async"
+                    src="https://avatars.githubusercontent.com/u/15151154?v=4"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": undefined,
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="leedavidcs"
+                      data-nimg="intrinsic"
+                      decoding="async"
+                      loading="lazy"
+                      src="https://avatars.githubusercontent.com/u/15151154?v=4"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": undefined,
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </div>
+            </a>
+            <h1
+              className="UserInfoSideBar__UserName-sc-lent2y-5 dXbLBa"
+            >
+              <div
+                className="UserInfoSideBar__DisplayName-sc-lent2y-6 bIFBiI"
+              >
+                David Lee
+              </div>
+              <div
+                className="UserInfoSideBar__SecondaryName-sc-lent2y-7 gjplrF"
+              >
+                leedavidcs
+              </div>
+            </h1>
+            <p
+              className="UserInfoSideBar__Bio-sc-lent2y-8 hbtdSS"
+            >
+              I learn things and work on MakePurple
+            </p>
+            <div
+              className="UserInfoSideBar__SocialLinks-sc-lent2y-9 kdjOvT"
+            >
+              <a
+                aria-label="github"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://github.com/leedavidcs"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="GitHub"
+              >
+                <svg
+                  height={24}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>
+                    GitHub
+                  </title>
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <a
+                aria-label="twitter"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://twitter.com/i3daly"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="Twitter"
+              >
+                <svg
+                  height={24}
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>
+                    Twitter
+                  </title>
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <a
+                aria-label="openbase"
+                className="UserInfoSideBar__SocialLink-sc-lent2y-10 iRYQA"
+                href="https://openbase.com/user/leedavidcs"
+                rel="nofollow noopener noreferer"
+                target="_blank"
+                title="Openbase"
+              >
+                <svg
+                  fill="none"
+                  height={24}
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.00391 15.6021L1.0218 3.01235L11.9445 3.05176e-05L22.9207 2.98165L22.9029 15.5714L11.9433 24L1.00391 15.6021Z"
+                    fill="currentColor"
+                    opacity={0.01}
+                  />
+                  <path
+                    d="M11.9433 23.9999L1.004 15.6021L0 3.94113L11.9444 0L24 3.94113L22.9029 15.5715L11.9433 23.9999ZM11.9498 1.29997L1.32114 4.83083L11.9439 23.9956L22.6868 4.83338L11.9498 1.30003V1.29997Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div
+              className="UserInfoSideBar__Actions-sc-lent2y-11 dpOrep"
+            >
+              <button
+                className="Button-sc-35b00c-0 iWLPnG"
+                disabled={true}
+                onClick={[Function]}
+                role="button"
+                type="button"
+              >
+                New Post
+              </button>
+              <button
+                className="Button-sc-35b00c-0 cAXctj"
+                onClick={[Function]}
+                role="button"
+                type="button"
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
+          <hr
+            className="Divider-sc-1c7xn9p-0 jeaGSX"
+          />
+          <div
+            className="UserInfoSideBar__TopLanguagesContainer-sc-lent2y-1 fMZMpA"
+          >
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Most Used Languages
+            </h2>
+            <div
+              className="TopLanguages__Root-sc-90bu3d-0 gvodzd UserInfoSideBar___StyledTopLanguages-sc-lent2y-13 kkkaoU"
+            >
+              <div
+                className="ProgressBar-sc-uokfey-0 IcEjc"
+              >
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 jbNwFk"
+                  style={
+                    Object {
+                      "width": "93.3884155331274%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#2b7489",
+                    }
+                  }
+                />
+                TypeScript
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  93.39
+                  %
+                </span>
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 iIEWlw"
+                  style={
+                    Object {
+                      "width": "4.840404553744187%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#f1e05a",
+                    }
+                  }
+                />
+                JavaScript
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  4.84
+                  %
+                </span>
+                <span
+                  className="ProportionBarItem__Bar-sc-16p90cx-3 bZdfDW"
+                  style={
+                    Object {
+                      "width": "1.7711799131284094%",
+                    }
+                  }
+                />
+                <span
+                  className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+                  style={
+                    Object {
+                      "backgroundColor": "#563d7c",
+                    }
+                  }
+                />
+                CSS
+                <span
+                  className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+                >
+                  1.77
+                  %
+                </span>
+              </div>
+              <div
+                className="Legend__Root-sc-a7l6or-0 hNsOjL TopLanguages__StyledLegend-sc-90bu3d-1 kJvSEQ"
+              >
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#2b7489",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    TypeScript
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      93.39
+                      %
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#f1e05a",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    JavaScript
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      4.84
+                      %
+                    </span>
+                  </span>
+                </div>
+                <div
+                  className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+                >
+                  <span
+                    className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+                    style={
+                      Object {
+                        "backgroundColor": "#563d7c",
+                      }
+                    }
+                  />
+                  <span
+                    className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+                  >
+                    CSS
+                    <span
+                      className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+                    >
+                      1.77
+                      %
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr
+            className="Divider-sc-1c7xn9p-0 jeaGSX"
+          />
+          <div
+            className="UserInfoSideBar__SkillsContainer-sc-lent2y-2 cRlZLz"
+          >
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Highlighted Skills
+            </h2>
+            <div
+              className="Tags__Root-sc-dgh5b3-0 iXuLZr UserInfoSideBar__Skills-sc-lent2y-12 hcmOQB"
+              onClick={[Function]}
+              type="positive"
+            >
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Next.js
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Prisma
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Nexus
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Urql
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  TypeScript
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Storybook
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Figma
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Framer-Motion
+                </span>
+              </span>
+            </div>
+            <h2
+              className="UserInfoSideBar__SubTitle-sc-lent2y-4 gIyStS"
+            >
+              Currently Learning
+            </h2>
+            <div
+              className="Tags__Root-sc-dgh5b3-0 faGeiv UserInfoSideBar__Skills-sc-lent2y-12 hcmOQB"
+              onClick={[Function]}
+              type="negative"
+            >
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  PostgreSQL
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Kubernetes
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Terraform
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Blender
+                </span>
+              </span>
+              <span
+                className="Tag__Root-sc-2syqrw-0 kNNAbX Tag-sc-2syqrw-3"
+              >
+                <span
+                  className="Tag__Text-sc-2syqrw-1 bCMyUd"
+                >
+                  Inkscape
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="UserPageLayout__Content-sc-1mvyejp-2 iQkAWY"
+        >
+          <div
+            aria-orientation="horizontal"
+            className="Paper-sc-13sx1oc-0 dAVOlJ TabList-sc-16lqras-0 fLnWtv UserPageLayout__PageTabs-sc-1mvyejp-3 dLGigf"
+            role="tablist"
+          >
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined"
+              id="headlessui-tabs-tab-32"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledNoteIcon-sc-1olw86z-0 jSVflI"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 4.75C0 3.784.784 3 1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14.5A1.75 1.75 0 0122.25 21H1.75A1.75 1.75 0 010 19.25V4.75zm1.75-.25a.25.25 0 00-.25.25v14.5c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V4.75a.25.25 0 00-.25-.25H1.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M5 8.75A.75.75 0 015.75 8h11.5a.75.75 0 010 1.5H5.75A.75.75 0 015 8.75zm0 4a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                Posts
+              </span>
+            </a>
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined/repositories"
+              id="headlessui-tabs-tab-33"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledRepoIcon-sc-1olw86z-1 iqnFHZ"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 2.75A2.75 2.75 0 015.75 0h14.5a.75.75 0 01.75.75v20.5a.75.75 0 01-.75.75h-6a.75.75 0 010-1.5h5.25v-4H6A1.5 1.5 0 004.5 18v.75c0 .716.43 1.334 1.05 1.605a.75.75 0 01-.6 1.374A3.25 3.25 0 013 18.75v-16zM19.5 1.5V15H6c-.546 0-1.059.146-1.5.401V2.75c0-.69.56-1.25 1.25-1.25H19.5z"
+                    fill="currentColor"
+                    fillRule="evenodd"
+                  />
+                  <path
+                    d="M7 18.25a.25.25 0 01.25-.25h5a.25.25 0 01.25.25v5.01a.25.25 0 01-.397.201l-2.206-1.604a.25.25 0 00-.294 0L7.397 23.46a.25.25 0 01-.397-.2v-5.01z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Repositories
+              </span>
+            </a>
+            <a
+              aria-selected={false}
+              className="TabButton-sc-1qu4nxi-2 BPHQU"
+              href="/undefined/experiences"
+              id="headlessui-tabs-tab-34"
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onMouseEnter={[Function]}
+              role="tab"
+              selected={false}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="TabButton__Content-sc-1qu4nxi-1 ilKCaY"
+              >
+                <svg
+                  className="UserPageTabs___StyledHexagonIcon-sc-1olw86z-2 yYTbk"
+                  height={20}
+                  viewBox="0 0 24 24"
+                  width={20}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.0617 10.9917L18.3951 2.99167C18.2185 2.68995 17.9661 2.43968 17.6629 2.26571C17.3597 2.09174 17.0163 2.00014 16.6667 2H7.33339C6.98369 1.99999 6.64007 2.09153 6.33671 2.2655C6.03336 2.43948 5.78082 2.68983 5.60423 2.99167L0.937559 10.9917C0.759698 11.2979 0.666016 11.6458 0.666016 12C0.666016 12.3542 0.759698 12.7021 0.937559 13.0083L5.60423 21.0083C5.78082 21.3102 6.03336 21.5605 6.33671 21.7345C6.64007 21.9085 6.98369 22 7.33339 22H16.6667C17.0164 22 17.36 21.9085 17.6634 21.7345C17.9668 21.5605 18.2193 21.3102 18.3959 21.0083L23.0626 13.0083C23.2403 12.702 23.3338 12.3541 23.3337 11.9999C23.3335 11.6457 23.2397 11.2979 23.0617 10.9917V10.9917ZM19.4288 12.6108L16.2463 18.0654C16.1395 18.2484 15.9866 18.4002 15.8029 18.5056C15.6192 18.6111 15.4111 18.6667 15.1992 18.6667H8.80089C8.58905 18.6667 8.3809 18.6111 8.19719 18.5056C8.01347 18.4002 7.86061 18.2484 7.75381 18.0654L4.57131 12.6108C4.46326 12.4254 4.40634 12.2146 4.40634 12C4.40634 11.7854 4.46326 11.5746 4.57131 11.3892L7.75381 5.93458C7.86054 5.75157 8.0134 5.59974 8.19712 5.49424C8.38085 5.38874 8.58903 5.33326 8.80089 5.33333H15.1992C15.4111 5.33326 15.6193 5.38874 15.803 5.49424C15.9867 5.59974 16.1396 5.75157 16.2463 5.93458L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2146 19.5369 12.4254 19.4288 12.6108V12.6108Z"
+                    fill="currentColor"
+                    opacity={0.4}
+                  />
+                  <path
+                    d="M19.4288 12.6109L16.2463 18.0655C16.1395 18.2484 15.9867 18.4002 15.803 18.5057C15.6193 18.6112 15.4111 18.6667 15.1993 18.6667H8.80093C8.58908 18.6667 8.38094 18.6112 8.19722 18.5057C8.01351 18.4002 7.86064 18.2484 7.75384 18.0655L4.57134 12.6109C4.4633 12.4254 4.40637 12.2147 4.40637 12C4.40637 11.7854 4.4633 11.5746 4.57134 11.3892L7.75384 5.93462C7.86058 5.75161 8.01343 5.59978 8.19716 5.49428C8.38089 5.38878 8.58907 5.3333 8.80093 5.33337H15.1993C15.4111 5.3333 15.6193 5.38878 15.803 5.49428C15.9868 5.59978 16.1396 5.75161 16.2463 5.93462L19.4288 11.3892C19.5369 11.5746 19.5938 11.7854 19.5938 12C19.5938 12.2147 19.5369 12.4254 19.4288 12.6109V12.6109Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Experiences
+              </span>
+            </a>
+          </div>
+          <div
+            className="userName__Posts-sc-1l41056-0 bMCOHC"
+          >
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+            <div
+              className="Paper-sc-13sx1oc-0 PostCard__Root-sc-qx1an1-0 dAVOlJ fJZegX"
+              onClick={[Function]}
+            >
+              <div
+                className="PostCard__Info-sc-qx1an1-1 fHpWFC"
+              >
+                <a
+                  className="PostCard__MainAnchor-sc-qx1an1-2 hUGAVR"
+                  href="/leedavidcs/not-a-real-blog-post-title"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <h2
+                    className="PostCard__Title-sc-qx1an1-3 iInMGA"
+                    title="Not a Real Blog Post Title"
+                  >
+                    Not a Real Blog Post Title
+                  </h2>
+                  <div
+                    className="PostCard__DescriptionContainer-sc-qx1an1-4 kaucgT"
+                  >
+                    <p
+                      className="PostCard__Description-sc-qx1an1-5 mpFhV"
+                    >
+                      Quisquam recusandae alias consequuntur corporis repellat ratione ut sunt qui. Iure ut libero qui. Ut nulla quam ipsam nobis cupiditate sed dignissimos debitis incidunt. Sed libero repudiandae.
+ 
+Natus et eos itaque velit omnis. Porro ut et ipsam explicabo eligendi occaecati debitis et. Eum dicta eum eaque enim ipsum inventore debitis libero aspernatur. Quam tempore a velit provident velit eligendi.
+                    </p>
+                  </div>
+                </a>
+                <div
+                  className="PostCard__PostedDetails-sc-qx1an1-7 lhOvqC"
+                >
+                  <a
+                    className="Anchor-sc-1ywzjus-0 PostCard__AuthorName-sc-qx1an1-6 brqaZa dWgSNv"
+                    href="/leedavidcs"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                    spellCheck={false}
+                    title="leedavidcs"
+                  >
+                    leedavidcs
+                  </a>
+                  <span
+                    className="PostCard__Delimiter-sc-qx1an1-8 liNbHy"
+                  >
+                    ·
+                  </span>
+                  <span
+                    className="PostCard__PublishedAt-sc-qx1an1-9 kzeQdX"
+                  >
+                    Sep 2, 2021
+                  </span>
+                </div>
+                <div
+                  className="PostCard__KarmaContainer-sc-qx1an1-11 bxdOCu"
+                >
+                  <span
+                    className="PostCard__UpvoteCount-sc-qx1an1-12 bSzeOR"
+                  >
+                    631
+                  </span>
+                  <svg
+                    className="PostCard__UpvoteIcon-sc-qx1an1-13 vfEbA"
+                    height={32}
+                    onClick={[Function]}
+                    viewBox="0 0 24 24"
+                    width={32}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.596 2.043c-1.301-.092-2.303.986-2.303 2.206v1.053c0 2.666-1.813 3.785-2.774 4.2a1.866 1.866 0 01-.523.131A1.75 1.75 0 005.25 8h-1.5A1.75 1.75 0 002 9.75v10.5c0 .967.784 1.75 1.75 1.75h1.5a1.75 1.75 0 001.742-1.58c.838.06 1.667.296 2.69.586l.602.17c1.464.406 3.213.824 5.544.824 2.188 0 3.693-.204 4.583-1.372.422-.554.65-1.255.816-2.05.148-.708.262-1.57.396-2.58l.051-.39c.319-2.386.328-4.18-.223-5.394-.293-.644-.743-1.125-1.355-1.431-.59-.296-1.284-.404-2.036-.404h-2.05l.056-.429c.025-.18.05-.372.076-.572.06-.483.117-1.006.117-1.438 0-1.245-.222-2.253-.92-2.941-.684-.675-1.668-.88-2.743-.956zM7 18.918c1.059.064 2.079.355 3.118.652l.568.16c1.406.39 3.006.77 5.142.77 2.277 0 3.004-.274 3.39-.781.216-.283.388-.718.54-1.448.136-.65.242-1.45.379-2.477l.05-.384c.32-2.4.253-3.795-.102-4.575-.16-.352-.375-.568-.66-.711-.305-.153-.74-.245-1.365-.245h-2.37c-.681 0-1.293-.57-1.211-1.328.026-.243.065-.537.105-.834l.07-.527c.06-.482.105-.921.105-1.25 0-1.125-.213-1.617-.473-1.873-.275-.27-.774-.455-1.795-.528-.351-.024-.698.274-.698.71v1.053c0 3.55-2.488 5.063-3.68 5.577-.372.16-.754.232-1.113.26v7.78zM3.75 20.5a.25.25 0 01-.25-.25V9.75a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v10.5a.25.25 0 01-.25.25h-1.5z"
+                      fill="currentColor"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <a
+                className="PostCard__Thumbnail-sc-qx1an1-14 loMLWj"
+                href="/leedavidcs/not-a-real-blog-post-title"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <span
+                  style={
+                    Object {
+                      "background": "none",
+                      "border": 0,
+                      "bottom": 0,
+                      "boxSizing": "border-box",
+                      "display": "block",
+                      "height": "initial",
+                      "left": 0,
+                      "margin": 0,
+                      "opacity": 1,
+                      "overflow": "hidden",
+                      "padding": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                      "width": "initial",
+                    }
+                  }
+                >
+                  <img
+                    alt="thumbnail"
+                    data-nimg="fill"
+                    decoding="async"
+                    src="/static/pngs/test-thumbnail.png"
+                    style={
+                      Object {
+                        "border": "none",
+                        "bottom": 0,
+                        "boxSizing": "border-box",
+                        "display": "block",
+                        "height": 0,
+                        "left": 0,
+                        "margin": "auto",
+                        "maxHeight": "100%",
+                        "maxWidth": "100%",
+                        "minHeight": "100%",
+                        "minWidth": "100%",
+                        "objectFit": "cover",
+                        "objectPosition": undefined,
+                        "padding": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                        "width": 0,
+                      }
+                    }
+                  />
+                  <noscript>
+                    <img
+                      alt="thumbnail"
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      src="/static/pngs/test-thumbnail.png"
+                      style={
+                        Object {
+                          "border": "none",
+                          "bottom": 0,
+                          "boxSizing": "border-box",
+                          "display": "block",
+                          "height": 0,
+                          "left": 0,
+                          "margin": "auto",
+                          "maxHeight": "100%",
+                          "maxWidth": "100%",
+                          "minHeight": "100%",
+                          "minWidth": "100%",
+                          "objectFit": "cover",
+                          "objectPosition": undefined,
+                          "padding": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                          "width": 0,
+                        }
+                      }
+                    />
+                  </noscript>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer
+      className="Footer-sc-al7lrf-0 hdjYwq PageContainer-sc-15l5btz-0 SiteWideFooter__Root-sc-gr3sj6-0 JZJVd bUUGOI"
+    >
+      <div
+        className="MainContainer-sc-fpf32v-0 SiteWideFooter__Content-sc-gr3sj6-1 ehxotG dmWdEL"
+      >
+        <div
+          className="SiteWideFooter__BrandContainer-sc-gr3sj6-2 dAjqGS"
+        >
+          <a
+            className="Brand__Root-sc-1phcoix-0 ddnwFm"
+            href="/"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            MakePurple
+          </a>
+        </div>
+        <nav
+          className="SiteWideFooter__LinksContainer-sc-gr3sj6-3 cUnHXM"
+        >
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/blog"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Blog
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/about"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            About
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/terms"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Terms
+          </a>
+          <a
+            className="Anchor-sc-1ywzjus-0 SiteWideFooter__SiteLink-sc-gr3sj6-4 brqaZa gGIBGD"
+            href="/legal/privacy"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            spellCheck={false}
+          >
+            Privacy
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

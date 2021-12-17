@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/Menu Standard 1`] = `
+Array [
+  <div
+    className="Menu__Root-sc-1ri58bo-0 etDQcu"
+  >
+    <button
+      aria-expanded={false}
+      aria-haspopup={true}
+      className="Button-sc-35b00c-0 iWLPnG"
+      id="headlessui-menu-button-1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      type="button"
+    >
+      More
+    </button>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

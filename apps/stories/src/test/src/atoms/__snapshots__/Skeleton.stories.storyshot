@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/Skeleton Standard 1`] = `
+Array [
+  <div
+    className="Skeleton-sc-17iamk7-0 gptcUU"
+    style={
+      Object {
+        "height": 300,
+        "width": 300,
+      }
+    }
+  />,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/HamburgerMenuButton Standard 1`] = `
+Array [
+  <button
+    aria-expanded={false}
+    aria-label="Open menu"
+    className="HamburgerMenuButton__Root-sc-1lkk6n0-1 kCyCNU"
+    type="button"
+  >
+    <div
+      className="HamburgerMenuButton__Bars-sc-1lkk6n0-2 mclrS"
+    >
+      <span
+        className="HamburgerMenuButton__Bar-sc-1lkk6n0-0 fHTNDc"
+      />
+      <span
+        className="HamburgerMenuButton__Bar-sc-1lkk6n0-0 fHTNDc"
+      />
+      <span
+        className="HamburgerMenuButton__Bar-sc-1lkk6n0-0 fHTNDc"
+      />
+      <span
+        className="HamburgerMenuButton__Bar-sc-1lkk6n0-0 fHTNDc"
+      />
+    </div>
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

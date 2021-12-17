@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/Select Standard 1`] = `
+Array [
+  <div
+    className="Select___Select-sc-11h2zo2-0 gaobhL"
+  >
+    <button
+      aria-expanded={false}
+      aria-haspopup={true}
+      className="Button-sc-35b00c-0 kMiVqK"
+      disabled={false}
+      id="headlessui-listbox-button-3"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      role="button"
+      size="small"
+      type="button"
+    >
+      <span
+        className="Selectstories___StyledSpan-sc-wop7vy-0 ctLnZc"
+      >
+        One
+        : 
+        1
+      </span>
+      <svg
+        className="ExpandIcon__Root-sc-nnqhsk-0 jGrdGP"
+        height={24}
+        viewBox="0 0 24 24"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

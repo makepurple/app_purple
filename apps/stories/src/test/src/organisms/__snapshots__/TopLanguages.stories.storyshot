@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/TopLanguages Standard 1`] = `
+Array [
+  <div
+    className="TopLanguages__Root-sc-90bu3d-0 gvodzd"
+    style={
+      Object {
+        "width": 296,
+      }
+    }
+  >
+    <div
+      className="ProgressBar-sc-uokfey-0 IcEjc"
+    >
+      <span
+        className="ProportionBarItem__Bar-sc-16p90cx-3 jbNwFk"
+        style={
+          Object {
+            "width": "93.3884155331274%",
+          }
+        }
+      />
+      <span
+        className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+        style={
+          Object {
+            "backgroundColor": "#2b7489",
+          }
+        }
+      />
+      TypeScript
+      <span
+        className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+      >
+        93.39
+        %
+      </span>
+      <span
+        className="ProportionBarItem__Bar-sc-16p90cx-3 iIEWlw"
+        style={
+          Object {
+            "width": "4.840404553744187%",
+          }
+        }
+      />
+      <span
+        className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+        style={
+          Object {
+            "backgroundColor": "#f1e05a",
+          }
+        }
+      />
+      JavaScript
+      <span
+        className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+      >
+        4.84
+        %
+      </span>
+      <span
+        className="ProportionBarItem__Bar-sc-16p90cx-3 bZdfDW"
+        style={
+          Object {
+            "width": "1.7711799131284094%",
+          }
+        }
+      />
+      <span
+        className="ProportionBarItem__LegendIcon-sc-16p90cx-1 iRowMP"
+        style={
+          Object {
+            "backgroundColor": "#563d7c",
+          }
+        }
+      />
+      CSS
+      <span
+        className="ProportionBarItem__Proportion-sc-16p90cx-2 Ngodi"
+      >
+        1.77
+        %
+      </span>
+    </div>
+    <div
+      className="Legend__Root-sc-a7l6or-0 hNsOjL TopLanguages__StyledLegend-sc-90bu3d-1 kJvSEQ"
+    >
+      <div
+        className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+      >
+        <span
+          className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+          style={
+            Object {
+              "backgroundColor": "#2b7489",
+            }
+          }
+        />
+        <span
+          className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+        >
+          TypeScript
+          <span
+            className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+          >
+            93.39
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+      >
+        <span
+          className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+          style={
+            Object {
+              "backgroundColor": "#f1e05a",
+            }
+          }
+        />
+        <span
+          className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+        >
+          JavaScript
+          <span
+            className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+          >
+            4.84
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        className="LegendItem__Root-sc-bfnvhf-0 VIxXy"
+      >
+        <span
+          className="LegendItem__LegendColor-sc-bfnvhf-1 jpwRzO"
+          style={
+            Object {
+              "backgroundColor": "#563d7c",
+            }
+          }
+        />
+        <span
+          className="LegendItem__Content-sc-bfnvhf-2 enniTO"
+        >
+          CSS
+          <span
+            className="LegendItem__Proportion-sc-bfnvhf-3 cDIPmS"
+          >
+            1.77
+            %
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

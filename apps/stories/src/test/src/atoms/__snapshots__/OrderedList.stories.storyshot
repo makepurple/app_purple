@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/OrderedList Standard 1`] = `
+Array [
+  <ol
+    className="OrderedList-sc-39tpl2-0 fasPvJ"
+  >
+    <li
+      className="OrderedListItem-sc-1e91eca-0 erTglF"
+    >
+      react
+    </li>
+    <li
+      className="OrderedListItem-sc-1e91eca-0 erTglF"
+    >
+      vue
+    </li>
+    <li
+      className="OrderedListItem-sc-1e91eca-0 erTglF"
+    >
+      angular
+    </li>
+  </ol>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

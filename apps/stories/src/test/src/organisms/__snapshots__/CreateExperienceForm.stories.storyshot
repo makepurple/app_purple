@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/CreateExperienceForm Standard 1`] = `
+Array [
+  <form
+    className="Form__Root-sc-3d4802-0 dsmDlf"
+    onSubmit={[Function]}
+  >
+    <div
+      className="FormGroup__Root-sc-1bcwy44-0 gTgNTj"
+    >
+      <label
+        className="FormLabel-sc-1jubgj6-0 hBOEaj"
+      >
+        Title
+      </label>
+      <input
+        aria-label="title"
+        className="Input__Root-sc-ku6kfd-0 jsoxyH"
+        name="positionName"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Title"
+      />
+    </div>
+    <div
+      className="FormGroup__Root-sc-1bcwy44-0 gTgNTj CreateExperienceForm___StyledFormGroup-sc-1yp4695-1 btErub"
+    >
+      <label
+        className="FormLabel-sc-1jubgj6-0 hBOEaj"
+      >
+        Experience type
+      </label>
+      <div
+        className="Select___Select-sc-11h2zo2-0 gaobhL"
+      >
+        <button
+          aria-expanded={false}
+          aria-haspopup={true}
+          className="Button-sc-35b00c-0 iAZTvX"
+          disabled={false}
+          id="headlessui-listbox-button-14"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          role="button"
+          size="small"
+          type="button"
+        >
+          <span
+            className="CreateExperienceForm___StyledSpan-sc-1yp4695-2 jshwAQ"
+          >
+            Experience type
+          </span>
+          <svg
+            className="ExpandIcon__Root-sc-nnqhsk-0 jGrdGP CreateExperienceForm___StyledExpandIcon-sc-1yp4695-3 bCupNJ"
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"
+              fill="currentColor"
+              fillRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      className="CreateExperienceForm___StyledDiv-sc-1yp4695-4 iZOOfs"
+    >
+      <label
+        className="FormLabel-sc-1jubgj6-0 hBOEaj"
+      >
+        Start date
+      </label>
+      <div
+        className="CreateExperienceForm__DateSelectorContainer-sc-1yp4695-0 iCkPKg"
+      >
+        <div
+          className="FormGroup__Root-sc-1bcwy44-0 gTgNTj"
+        >
+          <div
+            className="Select___Select-sc-11h2zo2-0 gaobhL"
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="Button-sc-35b00c-0 iAZTvX"
+              disabled={false}
+              id="headlessui-listbox-button-16"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              size="small"
+              type="button"
+            >
+              <span
+                className="CreateExperienceForm___StyledSpan2-sc-1yp4695-5 dFWkOh"
+              >
+                Month
+              </span>
+              <svg
+                className="ExpandIcon__Root-sc-nnqhsk-0 jGrdGP CreateExperienceForm___StyledExpandIcon2-sc-1yp4695-6 ftekne"
+                height={24}
+                viewBox="0 0 24 24"
+                width={24}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          className="FormGroup__Root-sc-1bcwy44-0 gTgNTj"
+        >
+          <div
+            className="Select___Select-sc-11h2zo2-0 gaobhL"
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="Button-sc-35b00c-0 iAZTvX"
+              disabled={false}
+              id="headlessui-listbox-button-18"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              size="small"
+              type="button"
+            >
+              <span
+                className="CreateExperienceForm___StyledSpan3-sc-1yp4695-7 hbMzly"
+              >
+                Year
+              </span>
+              <svg
+                className="ExpandIcon__Root-sc-nnqhsk-0 jGrdGP CreateExperienceForm___StyledExpandIcon3-sc-1yp4695-8 dgEMSx"
+                height={24}
+                viewBox="0 0 24 24"
+                width={24}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="CreateExperienceForm___StyledDiv2-sc-1yp4695-9 igSdbf"
+    >
+      <label
+        className="FormLabel-sc-1jubgj6-0 hBOEaj"
+      >
+        End date
+      </label>
+      <div
+        className="CreateExperienceForm__DateSelectorContainer-sc-1yp4695-0 iCkPKg"
+      >
+        <div
+          className="FormGroup__Root-sc-1bcwy44-0 gTgNTj"
+        >
+          <div
+            className="Select___Select-sc-11h2zo2-0 gaobhL"
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="Button-sc-35b00c-0 iAZTvX"
+              disabled={false}
+              id="headlessui-listbox-button-20"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              size="small"
+              type="button"
+            >
+              <span
+                className="CreateExperienceForm___StyledSpan4-sc-1yp4695-10 eubcwD"
+              >
+                Month
+              </span>
+              <svg
+                className="ExpandIcon__Root-sc-nnqhsk-0 jGrdGP CreateExperienceForm___StyledExpandIcon4-sc-1yp4695-11 iBIlEq"
+                height={24}
+                viewBox="0 0 24 24"
+                width={24}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div
+          className="FormGroup__Root-sc-1bcwy44-0 gTgNTj"
+        >
+          <div
+            className="Select___Select-sc-11h2zo2-0 gaobhL"
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="Button-sc-35b00c-0 iAZTvX"
+              disabled={false}
+              id="headlessui-listbox-button-22"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              role="button"
+              size="small"
+              type="button"
+            >
+              <span
+                className="CreateExperienceForm___StyledSpan5-sc-1yp4695-12 dnwbOM"
+              >
+                Year
+              </span>
+              <svg
+                className="ExpandIcon__Root-sc-nnqhsk-0 jGrdGP CreateExperienceForm___StyledExpandIcon5-sc-1yp4695-13 eRhDkJ"
+                height={24}
+                viewBox="0 0 24 24"
+                width={24}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

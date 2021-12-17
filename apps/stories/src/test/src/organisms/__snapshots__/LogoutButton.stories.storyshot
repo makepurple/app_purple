@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/LogoutButton Standard 1`] = `
+Array [
+  <button
+    className="Button-sc-35b00c-0 iWLPnG"
+    onClick={[Function]}
+    role="button"
+    type="button"
+  >
+    <span>
+      Logout
+    </span>
+  </button>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

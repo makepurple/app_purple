@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots atoms/ListItem Standard 1`] = `
+Array [
+  <ul
+    className="Paper-sc-13sx1oc-0 dAVOlJ"
+  >
+    <li
+      className="ListItem-sc-vpy91s-0 gvBEyi"
+    >
+      Item A
+    </li>
+    <li
+      className="ListItem-sc-vpy91s-0 gvBEyi"
+    >
+      Item B
+    </li>
+  </ul>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;

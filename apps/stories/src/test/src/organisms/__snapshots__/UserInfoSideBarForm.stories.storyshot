@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots organisms/UserInfoSideBarForm Standard 1`] = `
+Array [
+  <form
+    className="Form__Root-sc-3d4802-0 dsmDlf"
+    onSubmit={[Function]}
+  >
+    <div
+      className="UserInfoSideBarForm__SubTitle-sc-19lvum0-1 bIIguj"
+    >
+      Highlighted Skills
+    </div>
+    <div
+      className="Tags__Root-sc-dgh5b3-0 cdPZnH UserInfoSideBarForm__Skills-sc-19lvum0-2 bxKiVV"
+      onClick={[Function]}
+      type="positive"
+    >
+      <div
+        aria-expanded={false}
+        aria-haspopup="listbox"
+        aria-owns="skills-combobox-menu"
+        className="ComboBox__Root-sc-ktbsgl-0 iVZqIt UserInfoSideBarForm___StyledComboBox-sc-19lvum0-5 bIChWt"
+        role="combobox"
+      >
+        <input
+          aria-autocomplete="list"
+          aria-controls="skills-combobox-menu"
+          aria-label="new skill"
+          aria-labelledby="skills-combobox-label"
+          autoComplete="off"
+          className="TagEditable__Root-sc-1dg2826-0 kiuDHR ComboBoxInput__Root-sc-n4xg3w-0 jqMxFg"
+          id="skills-combobox-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="[repo_owner]/[repo_name]"
+          spellCheck={false}
+          value=""
+        />
+      </div>
+      <ul
+        aria-labelledby="skills-combobox-label"
+        className="Paper-sc-13sx1oc-0 ComboBoxOptions__Root-sc-1gox300-0 dAVOlJ beWRXw UserInfoSideBarForm__SkillsSuggest-sc-19lvum0-4 kgDlqn"
+        id="skills-combobox-menu"
+        onMouseLeave={[Function]}
+        role="listbox"
+      />
+    </div>
+    <div
+      className="UserInfoSideBarForm__SubTitle-sc-19lvum0-1 bIIguj"
+    >
+      Currently Learning
+    </div>
+    <div
+      className="Tags__Root-sc-dgh5b3-0 gPbBpb UserInfoSideBarForm__Skills-sc-19lvum0-2 bxKiVV"
+      onClick={[Function]}
+      type="negative"
+    >
+      <div
+        aria-expanded={false}
+        aria-haspopup="listbox"
+        aria-owns="desired-skills-combobox-menu"
+        className="ComboBox__Root-sc-ktbsgl-0 iVZqIt UserInfoSideBarForm___StyledComboBox2-sc-19lvum0-6 dhLHGc"
+        role="combobox"
+      >
+        <input
+          aria-autocomplete="list"
+          aria-controls="desired-skills-combobox-menu"
+          aria-label="new desired skill"
+          aria-labelledby="desired-skills-combobox-label"
+          autoComplete="off"
+          className="TagEditable__Root-sc-1dg2826-0 kiuDHR ComboBoxInput__Root-sc-n4xg3w-0 jqMxFg"
+          id="desired-skills-combobox-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="[repo_owner]/[repo_name]"
+          spellCheck={false}
+          value=""
+        />
+      </div>
+      <ul
+        aria-labelledby="desired-skills-combobox-label"
+        className="Paper-sc-13sx1oc-0 ComboBoxOptions__Root-sc-1gox300-0 dAVOlJ beWRXw UserInfoSideBarForm__SkillsSuggest-sc-19lvum0-4 kgDlqn"
+        id="desired-skills-combobox-menu"
+        onMouseLeave={[Function]}
+        role="listbox"
+      />
+    </div>
+    <div
+      className="UserInfoSideBarForm__FormActions-sc-19lvum0-0 ceQMNY"
+    >
+      <button
+        className="Button-sc-35b00c-0 iWLPnG FormButton-sc-u44x8r-0"
+        disabled={false}
+        role="button"
+        type="submit"
+      >
+        Save
+      </button>
+      <button
+        className="Button-sc-35b00c-0 cAXctj FormButton-sc-u44x8r-0"
+        disabled={false}
+        role="button"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>,
+  <div
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "bottom": 16,
+        "left": 16,
+        "pointerEvents": "none",
+        "position": "fixed",
+        "right": 16,
+        "top": 16,
+        "zIndex": 9999,
+      }
+    }
+  />,
+]
+`;
