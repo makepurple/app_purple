@@ -1,6 +1,0 @@
-mutation CreatePost {
-	post: createPost {
-		id
-		urlSlug
-	}
-}

@@ -7,7 +7,6 @@
 	"sideEffects": false,
 	"scripts": {
 		"dev": "start-storybook -p 6006",
-		"build": "build-storybook",
 		"test": "jest"
 	},
 	"dependencies": {
