@@ -1,10 +1,11 @@
-import { createHtmlEmail } from "@/server/emails";
-import * as _templates from "@/server/emails/templates";
+/* eslint-disable no-console */
 import { stripIndent } from "common-tags";
 import fs from "fs-extra";
 import path from "path";
 import prettier from "prettier";
 import { ComponentType } from "react";
+import { createHtmlEmail } from "../src";
+import * as _templates from "../src/templates";
 
 interface EmailTemplates {
 	[key: string]: ComponentType<any>;
@@ -18,8 +19,8 @@ interface GenerateFromMjmlOptions {
 
 const toStory = (key: string, text: string) => {
 	return stripIndent`
-	import { MjmlMounter } from "@/server/emails/components/MjmlMounter";
-	import { ${key} } from "@/server/emails/templates";
+	import { MjmlMounter } from "../components/MjmlMounter";
+	import { ${key} } from "../templates";
 	import React from "react";
 
 	const html: string = \`${text}\`;
@@ -41,7 +42,7 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 	const { output, templates } = options;
 
 	console.log("Generating email stories");
-	
+
 	const emailHtmlDict = Object.keys(templates).reduce<Record<string, string>>((acc, key) => {
 		const template = templates[key];
 		const html = createHtmlEmail(template, {}, { minify: false });
@@ -50,7 +51,7 @@ const generateTemplates = (options: GenerateFromMjmlOptions) => {
 	}, {});
 
 	console.log("Emails created, ensuring empty output directory");
-	
+
 	fs.ensureDirSync(output);
 	fs.emptyDirSync(output);
 
@@ -85,7 +86,7 @@ const dirname: string = process.env.PROJECT_DIRNAME
 	? path.join(process.env.PROJECT_DIRNAME)
 	: __dirname;
 
-const templatePath: string = path.resolve(dirname, "../src/server/emails/generated");
+const templatePath: string = path.resolve(dirname, "../src/generated");
 
 generateTemplates({
 	output: templatePath,

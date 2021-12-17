@@ -5,6 +5,7 @@
 	"main": "src/index.ts",
 	"types": "src/index.d.ts",
 	"scripts": {
+		"postinstall": "pnpm run generate:prisma",
 		"generate:codegen:github": "graphql-codegen --config ./codegen.github.yml --require dotenv/config",
 		"generate:prisma": "prisma generate",
 		"generate:nexus": "pnpm run script src/graphql/nexus/schema -- --nexus-exit",

@@ -22,7 +22,6 @@
     "prisma:studio": "prisma studio",
     "test": "jest",
     "test:update": "pnpm run test -u",
-    "postinstall": "pnpm run generate:prisma",
     "script": "dotenv -- ts-node -P tsconfig.script.json -r tsconfig-paths/register -T",
     "services": "docker-compose up -d",
     "turbo": "turbo"

@@ -5,13 +5,19 @@
 	"main": "src/index.ts",
 	"types": "src/index.ts",
 	"sideEffects": false,
+	"scripts": {
+		"generate:emails": "cross-env NODE_ENV=test pnpm run script scripts/generate-email-stories",
+		"script": "dotenv -- ts-node -P tsconfig.json -T"
+	},
 	"dependencies": {
 		"@makepurple/config": "workspace:*",
 		"@makepurple/typings": "workspace:*",
+		"@types/common-tags": "^1.8.1",
 		"@types/mjml-react": "^2.0.2",
 		"@types/node": "^16.11.12",
 		"@types/react": "^17.0.37",
 		"@types/react-dom": "^17.0.11",
+		"common-tags": "^1.8.2",
 		"goober": "^2.1.1",
 		"juice": "^8.0.0",
 		"mjml": "^4.11.0",
@@ -22,6 +28,10 @@
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
+		"@types/fs-extra": "^9.0.13",
+		"cross-env": "^7.0.3",
+		"fs-extra": "^10.0.0",
+		"prettier": "^2.5.1",
 		"ts-node": "^10.4.0",
 		"typescript": "^4.5.3"
 	}

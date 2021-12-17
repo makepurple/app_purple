@@ -574,15 +574,21 @@ importers:
       '@makepurple/config': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
+      '@types/common-tags': ^1.8.1
+      '@types/fs-extra': ^9.0.13
       '@types/mjml-react': ^2.0.2
       '@types/node': ^16.11.12
       '@types/react': ^17.0.37
       '@types/react-dom': ^17.0.11
+      common-tags: ^1.8.2
+      cross-env: ^7.0.3
+      fs-extra: ^10.0.0
       goober: ^2.1.1
       juice: ^8.0.0
       mjml: ^4.11.0
       mjml-react: ^2.0.3
       postmark: ^2.7.8
+      prettier: ^2.5.1
       react: ^17.0.2
       react-dom: ^17.0.2
       ts-node: ^10.4.0
@@ -590,10 +596,12 @@ importers:
     dependencies:
       '@makepurple/config': link:../config
       '@makepurple/typings': link:../typings
+      '@types/common-tags': 1.8.1
       '@types/mjml-react': 2.0.2
       '@types/node': 16.11.12
       '@types/react': 17.0.37
       '@types/react-dom': 17.0.11
+      common-tags: 1.8.2
       goober: 2.1.1
       juice: 8.0.0
       mjml: 4.11.0
@@ -603,6 +611,10 @@ importers:
       react-dom: 17.0.2_react@17.0.2
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
+      '@types/fs-extra': 9.0.13
+      cross-env: 7.0.3
+      fs-extra: 10.0.0
+      prettier: 2.5.1
       ts-node: 10.4.0_74e588db5264178750052e53ffe97b8f
       typescript: 4.5.3
 
