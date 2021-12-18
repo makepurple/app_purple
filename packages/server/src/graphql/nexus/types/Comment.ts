@@ -1,14 +1,14 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
-import { Comment as _Comment } from "nexus-prisma";
 
 export const Comment = objectType({
-	name: _Comment.$name,
-	description: _Comment.$description,
+	name: NexusPrisma.Comment.$name,
+	description: NexusPrisma.Comment.$description,
 	definition: (t) => {
-		t.field(_Comment.author);
-		t.field(_Comment.content);
-		t.field(_Comment.createdAt);
-		t.field(_Comment.id);
-		t.field(_Comment.updatedAt);
+		t.field(NexusPrisma.Comment.author);
+		t.field(NexusPrisma.Comment.content);
+		t.field(NexusPrisma.Comment.createdAt);
+		t.field(NexusPrisma.Comment.id);
+		t.field(NexusPrisma.Comment.updatedAt);
 	}
 });

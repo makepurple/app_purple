@@ -1,13 +1,13 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
-import { PostImage as _PostImage } from "nexus-prisma";
 
 export const PostImage = objectType({
-	name: _PostImage.$name,
-	description: _PostImage.$description,
+	name: NexusPrisma.PostImage.$name,
+	description: NexusPrisma.PostImage.$description,
 	definition: (t) => {
-		t.field(_PostImage.id);
-		t.field(_PostImage.post);
-		t.field(_PostImage.postId);
-		t.field(_PostImage.url);
+		t.field(NexusPrisma.PostImage.id);
+		t.field(NexusPrisma.PostImage.post);
+		t.field(NexusPrisma.PostImage.postId);
+		t.field(NexusPrisma.PostImage.url);
 	}
 });

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@makepurple/prisma";
 
 // Make global.cachedPrisma work with TypeScript
 declare global {

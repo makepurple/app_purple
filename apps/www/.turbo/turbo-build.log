@@ -7,41 +7,41 @@ info  - Checking validity of types...
 info  - Creating an optimized production build...
 info  - Disabled SWC as replacement for Babel because of custom Babel configuration ".babelrc" https://nextjs.org/docs/messages/swc-disabled
 info  - Using external babel configuration from /home/leedavidcs/projects/app_purple/apps/www/.babelrc
-warn - As of Tailwind CSS v2.2, `lightBlue` has been renamed to `sky`.
-warn - Please update your color palette to eliminate this warning.
-info  - Compiled successfully
-info  - Collecting page data...
-info  - Generating static pages (0/8)
-info  - Generating static pages (2/8)
-info  - Generating static pages (4/8)
-info  - Generating static pages (6/8)
-info  - Generating static pages (8/8)
-info  - Finalizing page optimization...
-
-Page                                       Size     First Load JS
-┌ ○ /                                      289 B           177 kB
-├   /_app                                  0 B             176 kB
-├ λ /[userName]                            2.58 kB         213 kB
-├ ○ /[userName]/[postTitle]                303 B           177 kB
-├ λ /[userName]/draft                      119 kB          299 kB
-├ λ /[userName]/experiences                2.57 kB         213 kB
-├ ○ /404                                   193 B           176 kB
-├ λ /api/auth/[...nextauth]                0 B             176 kB
-└ λ /api/graphql                           0 B             176 kB
-+ First Load JS shared by all              176 kB
-  ├ chunks/framework-247c6b35909e496a.js   42.2 kB
-  ├ chunks/main-0067e52a90e3a5b9.js        27.5 kB
-  ├ chunks/pages/_app-c07ee42a60c8ed2e.js  105 kB
-  └ chunks/webpack-82755b64646fa25f.js     1.78 kB
-
-λ  (Lambda)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
-○  (Static)  automatically rendered as static HTML (uses no initial props)
-
+ ELIFECYCLE  Command failed with exit code 1.
 warn  - The `target` config is deprecated and will be removed in a future version.
 See more info here https://nextjs.org/docs/messages/deprecated-target-config
 warn  - You have enabled experimental feature(s).
 warn  - Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use them at your own risk.
 
-warn(prisma) Conflict for env vars REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, GITHUB_ACCESS_TOKEN in ../../.env and ../../packages/server/.env
-Env vars from ../../packages/server/.env overwrite the ones from ../../.env
-      
+
+warn - As of Tailwind CSS v2.2, `lightBlue` has been renamed to `sky`.
+warn - Update your configuration file to silence this warning.
+
+warn - As of Tailwind CSS v3.0, `warmGray` has been renamed to `stone`.
+warn - Update your configuration file to silence this warning.
+
+warn - As of Tailwind CSS v3.0, `trueGray` has been renamed to `neutral`.
+warn - Update your configuration file to silence this warning.
+
+warn - As of Tailwind CSS v3.0, `coolGray` has been renamed to `gray`.
+warn - Update your configuration file to silence this warning.
+
+warn - As of Tailwind CSS v3.0, `blueGray` has been renamed to `slate`.
+warn - Update your configuration file to silence this warning.
+[BABEL] Note: The code generator has deoptimised the styling of /home/leedavidcs/projects/app_purple/packages/server/src/services/octokit/generated/graphql.gen.ts as it exceeds the max of 500KB.
+Failed to compile.
+
+../../node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/@prisma/client/runtime/index.js
+Module not found: Can't resolve '_http_common' in '/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/@prisma/client/runtime'
+
+Import trace for requested module:
+../../node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/.prisma/client/index.js
+../../node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/@prisma/client/index.js
+../../packages/server/src/db/prisma.ts
+../../packages/server/src/db/index.ts
+../../packages/server/src/index.ts
+./src/pages/api/graphql.ts
+../../node_modules/.pnpm/next@12.0.7_react-dom@17.0.2+react@17.0.2/node_modules/next/dist/build/webpack/loaders/next-serverless-loader/index.js?page=%2Fapi%2Fgraphql&absolutePagePath=private-next-pages%2Fapi%2Fgraphql.ts&absoluteAppPath=private-next-pages%2F_app.tsx&absoluteDocumentPath=private-next-pages%2F_document.tsx&absoluteErrorPath=next%2Fdist%2Fpages%2F_error&absolute404Path=&distDir=private-dot-next&buildId=w6tNGp7J-vTJGv2rpf7mI&assetPrefix=&generateEtags=true&poweredByHeader=true&canonicalBase=&basePath=&runtimeConfig=&previewProps=%7B%22previewModeId%22%3A%2273c5766378616b5906c13fe44284d6e9%22%2C%22previewModeSigningKey%22%3A%22e7e39d4a2ab65c2367c39f6645061903f0f86581388498ab64857efa3902ed37%22%2C%22previewModeEncryptionKey%22%3A%22243ebf0772653f8466e06810e07a273f956415c2dcb6bb0dc1e0db3bb70e58ee%22%7D&loadedEnvFiles=W3sicGF0aCI6Ii5lbnYiLCJjb250ZW50cyI6IkJBU0VfVVJMPVwiaHR0cDovL2xvY2FsaG9zdDozMDAxXCJcbk5FWFRBVVRIX1NFQ1JFVD1cImNMS0pJdDJ4dkpCS2duN0tNdWRvXCJcbk5FWFRBVVRIX1VSTD1cImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMS9hcGkvYXV0aFwiXG5cblJFRElTX0hPU1Q9XCJsb2NhbGhvc3RcIlxuUkVESVNfUE9SVD1cIjYzNzlcIlxuUkVESVNfUEFTU1dPUkQ9XCJcIlxuXG5HSVRIVUJfQ0xJRU5UX0lEPVwiOTE4ZmJmNDBkZjU4NWZmZjA3ODJcIlxuR0lUSFVCX0NMSUVOVF9TRUNSRVQ9XCI2NjBhNDM3NzkxMjQzNmI2M2U3M2MzOTVmMWJmMzkwODk3ODZlYTkxXCJcbkdJVEhVQl9BQ0NFU1NfVE9LRU49XCJnaG9faHpPZkNKRXVHNkFMWUNYT0lvOVJsU2ZycHFwSDV1M21WVHN6XCJcblxuQVBQX0FXU19BQ0NFU1NfS0VZX0lEPVwiQUtJQVdPVjY3RlBMM1k3WjZKN1hcIlxuQVBQX0FXU19TRUNSRVRfQUNDRVNTX0tFWT1cInF5cWFLRDlZbXZyR1kwajhQOWYxU0FLSWlxdno5WXgrWkdGaTRYNWVcIlxuQVBQX0FXU19JTUFHRV9CVUNLRVQ9XCJhcHAtcHVycGxlLWltYWdlc1wiXG5cblBPU1RNQVJLX0FQSV9UT0tFTj1cImJiNmVlMTMzLWU0MzQtNDY5ZC05OWJlLWZmZGFhNjVlYTdiMVwiXG5QT1NUTUFSS19GUk9NX0VNQUlMPVwiZGF2aWRAbWFrZXB1cnBsZS5pb1wiXG5cbkNMT1VESU5BUllfQ0xPVURfTkFNRT1cIm1ha2VwdXJwbGUtaW9cIlxuQ0xPVURJTkFSWV9BUElfS0VZPVwiOTk0NDcxNzczNDQ5NzU2XCJcbkNMT1VESU5BUllfQVBJX1NFQ1JFVD1cInlDdkROQW9fZ0dDN3EydkFBeG1Pd043TGZONFwiXG5DTE9VRElOQVJZX0FQSV9WQVJJQUJMRT1cImNsb3VkaW5hcnk6Ly85OTQ0NzE3NzM0NDk3NTY6eUN2RE5Bb19nR0M3cTJ2QUF4bU93TjdMZk40QG1ha2VwdXJwbGUtaW9cIlxuIn1d&i18n=%7B%22locales%22%3A%5B%22en-US%22%5D%2C%22defaultLocale%22%3A%22en-US%22%7D!
+
+
+> webpack config.resolve.alias was incorrectly overridden. https://nextjs.org/docs/messages/invalid-resolve-alias

@@ -1,4 +1,4 @@
-import { prisma } from "@makepurple/server";
+import { prisma } from "@makepurple/server/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import produce from "immer";
 import type { NextApiHandler } from "next";

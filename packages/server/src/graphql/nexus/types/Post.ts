@@ -1,21 +1,21 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { intArg, list, nonNull, objectType } from "nexus";
-import { Post as _Post } from "nexus-prisma";
 
 export const Post = objectType({
-	name: _Post.$name,
-	description: _Post.$description,
+	name: NexusPrisma.Post.$name,
+	description: NexusPrisma.Post.$description,
 	definition: (t) => {
-		t.field(_Post.author);
-		t.field(_Post.authorName);
-		t.field(_Post.content);
-		t.field(_Post.createdAt);
-		t.field(_Post.description);
-		t.field(_Post.id);
-		t.field(_Post.images);
-		t.field(_Post.publishedAt);
-		t.field(_Post.thumbnailUrl);
-		t.field(_Post.title);
-		t.field(_Post.updatedAt);
+		t.field(NexusPrisma.Post.author);
+		t.field(NexusPrisma.Post.authorName);
+		t.field(NexusPrisma.Post.content);
+		t.field(NexusPrisma.Post.createdAt);
+		t.field(NexusPrisma.Post.description);
+		t.field(NexusPrisma.Post.id);
+		t.field(NexusPrisma.Post.images);
+		t.field(NexusPrisma.Post.publishedAt);
+		t.field(NexusPrisma.Post.thumbnailUrl);
+		t.field(NexusPrisma.Post.title);
+		t.field(NexusPrisma.Post.updatedAt);
 		t.nonNull.int("upvoteCount", {
 			resolve: async ({ id }, args, { prisma }) => {
 				return await prisma.postUpvoter.count({
@@ -44,7 +44,7 @@ export const Post = objectType({
 				return users;
 			}
 		});
-		t.field(_Post.urlSlug);
+		t.field(NexusPrisma.Post.urlSlug);
 		t.nonNull.boolean("viewerUpvoted", {
 			resolve: async ({ id }, args, { prisma, user }) => {
 				if (!user?.id) return false;

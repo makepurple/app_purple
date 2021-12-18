@@ -1,9 +1,9 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@makepurple/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken, JWT } from "next-auth/jwt";
 import { prisma } from "../db";
 import { redis } from "../redis";
-import { aws, cloudinary, octokit } from "../services";
+import { cloudinary, octokit } from "../services";
 
 export interface ServerContextUser {
 	id: string;
@@ -12,7 +12,6 @@ export interface ServerContextUser {
 }
 
 export interface ServerContext {
-	aws: typeof aws;
 	cloudinary: typeof cloudinary;
 	jwt: Maybe<JWT>;
 	octokit: ReturnType<typeof octokit["client"]["graphql"]>;
@@ -35,7 +34,6 @@ export const createContext = async (params: CreateContextParams): Promise<Server
 	const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! });
 
 	return {
-		aws,
 		cloudinary,
 		jwt,
 		octokit: octokit.client.graphql(jwt?.accessToken),

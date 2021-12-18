@@ -1,6 +1,6 @@
 {
 	"extends": "@makepurple/tsconfig/base.json",
-	"include": ["src", "../../types"],
+	"include": ["src", "types.d.ts"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
 		"moduleResolution": "node",

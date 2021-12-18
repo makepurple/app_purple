@@ -1,13 +1,13 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { nonNull, objectType } from "nexus";
-import { Organization as _Organization } from "nexus-prisma";
 import type { octokit } from "../../../services";
 import { GitHubOrganization } from "../../../services/octokit";
 
 export const Organization = objectType({
-	name: _Organization.$name,
-	description: _Organization.$description,
+	name: NexusPrisma.Organization.$name,
+	description: NexusPrisma.Organization.$description,
 	definition: (t) => {
-		t.field(_Organization.experiences);
+		t.field(NexusPrisma.Organization.experiences);
 		t.field("github", {
 			type: nonNull("GitHubOrganization"),
 			resolve: async (parent, args, { octokit: graphql }) => {
@@ -34,7 +34,7 @@ export const Organization = objectType({
 				return githubOrganization.organization;
 			}
 		});
-		t.field(_Organization.id);
-		t.field(_Organization.name);
+		t.field(NexusPrisma.Organization.id);
+		t.field(NexusPrisma.Organization.name);
 	}
 });

@@ -1,19 +1,19 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
-import { Experience as _Experience } from "nexus-prisma";
 
 export const Experience = objectType({
-	name: _Experience.$name,
-	description: _Experience.$description,
+	name: NexusPrisma.Experience.$name,
+	description: NexusPrisma.Experience.$description,
 	definition: (t) => {
-		t.field(_Experience.endDate);
-		t.field(_Experience.highlights);
-		t.field(_Experience.id);
-		t.field(_Experience.location);
-		t.field(_Experience.organization);
-		t.field(_Experience.organizationName);
-		t.field(_Experience.positionName);
-		t.field(_Experience.startDate);
-		t.field(_Experience.type);
-		t.field(_Experience.user);
+		t.field(NexusPrisma.Experience.endDate);
+		t.field(NexusPrisma.Experience.highlights);
+		t.field(NexusPrisma.Experience.id);
+		t.field(NexusPrisma.Experience.location);
+		t.field(NexusPrisma.Experience.organization);
+		t.field(NexusPrisma.Experience.organizationName);
+		t.field(NexusPrisma.Experience.positionName);
+		t.field(NexusPrisma.Experience.startDate);
+		t.field(NexusPrisma.Experience.type);
+		t.field(NexusPrisma.Experience.user);
 	}
 });

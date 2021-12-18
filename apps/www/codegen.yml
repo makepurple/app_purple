@@ -4,6 +4,7 @@ documents: "./src/graphql/**/*.{fragment,mutation,query}.{ts,graphql}"
 generates:
   src/graphql/generated/graphql.gen.ts:
     config:
+      gqlImport: urql#gql
       immutableTypes: true
       nonOptionalTypename: true
       preResolveTypes: true

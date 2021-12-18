@@ -78,10 +78,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  CreatePresignedS3UrlInput: { // input type
-    fileName: string; // String!
-    fileType: string; // String!
-  }
   EnumExperienceTypeNullableFilter: { // input type
     equals?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     in?: NexusGenEnums['ExperienceType'][] | null; // [ExperienceType!]
@@ -216,10 +212,6 @@ export interface NexusGenObjects {
     id: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  CreatePresignedS3UrlPayload: { // root type
-    fields: NexusGenScalars['Json']; // Json!
-    url: string; // String!
-  }
   Experience: { // root type
     endDate?: NexusGenScalars['DateTime'] | null; // DateTime
     highlights: string[]; // [String!]!
@@ -352,10 +344,6 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
-  CreatePresignedS3UrlPayload: { // field return type
-    fields: NexusGenScalars['Json']; // Json!
-    url: string; // String!
-  }
   Experience: { // field return type
     endDate: NexusGenScalars['DateTime'] | null; // DateTime
     highlights: string[]; // [String!]!
@@ -410,7 +398,6 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createExperience: NexusGenRootTypes['Experience']; // Experience!
     createPost: NexusGenRootTypes['Post']; // Post!
-    createPresignedS3Url: NexusGenRootTypes['CreatePresignedS3UrlPayload']; // CreatePresignedS3UrlPayload!
     deleteExperience: NexusGenRootTypes['Experience']; // Experience!
     deletePost: NexusGenRootTypes['Post']; // Post!
     ok: boolean; // Boolean!
@@ -536,10 +523,6 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     updatedAt: 'DateTime'
   }
-  CreatePresignedS3UrlPayload: { // field return type name
-    fields: 'Json'
-    url: 'String'
-  }
   Experience: { // field return type name
     endDate: 'DateTime'
     highlights: 'String'
@@ -594,7 +577,6 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createExperience: 'Experience'
     createPost: 'Post'
-    createPresignedS3Url: 'CreatePresignedS3UrlPayload'
     deleteExperience: 'Experience'
     deletePost: 'Post'
     ok: 'Boolean'
@@ -716,9 +698,6 @@ export interface NexusGenArgTypes {
   Mutation: {
     createExperience: { // args
       data: NexusGenInputs['ExperienceCreateInput']; // ExperienceCreateInput!
-    }
-    createPresignedS3Url: { // args
-      data: NexusGenInputs['CreatePresignedS3UrlInput']; // CreatePresignedS3UrlInput!
     }
     deleteExperience: { // args
       where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!

@@ -1,13 +1,13 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
-import { Skill as _Skill } from "nexus-prisma";
 
 export const Skill = objectType({
-	name: _Skill.$name,
-	description: _Skill.$description,
+	name: NexusPrisma.Skill.$name,
+	description: NexusPrisma.Skill.$description,
 	definition: (t) => {
-		t.field(_Skill.id);
-		t.field(_Skill.name);
-		t.field(_Skill.owner);
+		t.field(NexusPrisma.Skill.id);
+		t.field(NexusPrisma.Skill.name);
+		t.field(NexusPrisma.Skill.owner);
 		t.nonNull.list.nonNull.field("users", {
 			type: "User",
 			resolve: async (root, args, { prisma }) => {

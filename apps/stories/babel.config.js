@@ -12,5 +12,10 @@ module.exports = {
 		["styled-components", {
 			"ssr": true
 		}]
-	]
+	],
+	"env": {
+		"test": {
+			"plugins": ["babel-plugin-dynamic-import-node"]
+		}
+	}
 }

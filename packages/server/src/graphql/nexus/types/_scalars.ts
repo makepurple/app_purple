@@ -1,7 +1,7 @@
+import { NexusPrismaScalars } from "@makepurple/prisma/nexus";
 import { GraphQLUpload } from "apollo-server-micro";
 import { URLResolver } from "graphql-scalars";
 import { scalarType } from "nexus";
-import NexusPrismaScalars from "nexus-prisma/scalars";
 
 export const scalarTypes = [
 	NexusPrismaScalars,

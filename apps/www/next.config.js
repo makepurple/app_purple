@@ -1,20 +1,19 @@
 const bundleAnalyzer = require("@next/bundle-analyzer");
 const withPlugins = require("next-compose-plugins");
 const transpileModules = require("next-transpile-modules");
-const TerserPlugin = require("terser-webpack-plugin");
 
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE === "true" });
 const withTranspileModules = transpileModules([
 	"@makepurple/components",
 	"@makepurple/hooks",
-	"@makepurple/server",
 	"@makepurple/utils",
 	"@makepurple/validators"
 ]);
 
 const config = {
 	experimental: {
-		esmExternals: false
+		esmExternals: false,
+		externalDir: true
 	},
 	i18n: {
 		locales: ["en-US"],
@@ -24,7 +23,6 @@ const config = {
 		domains: ["res.cloudinary.com"]
 	},
 	pageExtensions: ["ts", "tsx", "md", "mdx"],
-	target: "experimental-serverless-trace",
 	env: {
 		PROJECT_DIRNAME:           __dirname,
 
@@ -56,15 +54,11 @@ const config = {
 	webpack: (config, { dev, isServer }) => {
 		if (!isServer) {
 			config.resolve.fallback.fs = false;
+
 		}
 
-		if (!dev && !isServer) {
-			const minimizer = config.optimization.minimizer || [];
-			
-			minimizer.push(new TerserPlugin());
-
-			config.optimization.minimize = true;
-			config.optimization.minimizer = minimizer;
+		if (isServer) {
+			config.externals.push('_http_common')
 		}
 
 		return config;

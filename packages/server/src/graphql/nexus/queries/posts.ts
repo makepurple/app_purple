@@ -1,5 +1,5 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
-import { Post } from "@prisma/client";
+import { Post } from "@makepurple/prisma";
 import { oneLine } from "common-tags";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";

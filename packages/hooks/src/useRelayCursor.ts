@@ -1,5 +1,5 @@
 import { RefCallback, useCallback, useEffect, useState } from "react";
-import type { UseQueryArgs, UseQueryResponse } from "urql";
+import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
 import { useRelativeScrollPosition } from "./useRelativeScrollPosition";
 
 export type PageInfo = {
@@ -67,5 +67,5 @@ export const useRelayCursor = <TQuery, TVariables, TFieldName extends keyof TQue
 		[nodes.length, offset]
 	);
 
-	return [result, getRef] as [typeof result, typeof getRef];
+	return [result, getRef] as [UseQueryState<TQuery, any>, typeof getRef];
 };

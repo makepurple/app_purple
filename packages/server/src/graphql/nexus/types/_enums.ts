@@ -1,8 +1,8 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { enumType } from "nexus";
-import { ExperienceType } from "nexus-prisma";
 
 export const enumTypes = [
-	enumType(ExperienceType),
+	enumType(NexusPrisma.ExperienceType),
 	enumType({
 		name: "SortOrder",
 		members: {

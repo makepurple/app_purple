@@ -1,14 +1,14 @@
+import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { list, nonNull, objectType } from "nexus";
-import { User as _User } from "nexus-prisma";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
 
 export const User = objectType({
-	name: _User.$name,
-	description: _User.$description,
+	name: NexusPrisma.User.$name,
+	description: NexusPrisma.User.$description,
 	definition: (t) => {
-		t.field(_User.comments);
-		t.field(_User.description);
+		t.field(NexusPrisma.User.comments);
+		t.field(NexusPrisma.User.description);
 		t.field("desiredSkills", {
 			type: nonNull(list(nonNull("Skill"))),
 			resolve: (root, args, { prisma }) => {
@@ -21,7 +21,7 @@ export const User = objectType({
 			}
 		});
 		t.field({
-			..._User.email,
+			...NexusPrisma.User.email,
 			authorize: (root, args, { user }) => {
 				return user?.id === root.id;
 			}
@@ -52,10 +52,10 @@ export const User = objectType({
 		t.nonNull.url("githubUrl", {
 			resolve: ({ name }) => `https://github.com/${name}`
 		});
-		t.field(_User.id);
-		t.field(_User.image);
-		t.field(_User.name);
-		t.field(_User.posts);
+		t.field(NexusPrisma.User.id);
+		t.field(NexusPrisma.User.image);
+		t.field(NexusPrisma.User.name);
+		t.field(NexusPrisma.User.posts);
 		t.field("skills", {
 			type: nonNull(list(nonNull("Skill"))),
 			resolve: async ({ id }, args, { prisma }) => {
