@@ -17,26 +17,29 @@ export const complexityPlugin = ({
 	maxComplexity = Infinity,
 	schema
 }: ComplexityPluginParams): ApolloServerPlugin => ({
-	requestDidStart: () => ({
-		didResolveOperation: async ({ request: { operationName, variables = {} }, document }) => {
-			const query: DocumentNode = operationName
-				? separateOperations(document)[operationName]
-				: document;
+	requestDidStart: async () =>
+		Promise.resolve({
+			didResolveOperation: async ({ request: { operationName, variables }, document }) => {
+				if (!document) return;
 
-			const estimators: ComplexityEstimator[] = [
-				fieldExtensionsEstimator(),
-				simpleEstimator({ defaultComplexity: 1 })
-			];
+				const query: DocumentNode = operationName
+					? separateOperations(document)[operationName]
+					: document;
 
-			const complexity: number = getComplexity({ estimators, query, schema, variables });
+				const estimators: ComplexityEstimator[] = [
+					fieldExtensionsEstimator(),
+					simpleEstimator({ defaultComplexity: 1 })
+				];
 
-			if (complexity >= maxComplexity) {
-				throw new ComplexityError(
-					`Query (${complexity}) exceeds the max allowed complexity (${maxComplexity})`
-				);
+				const complexity: number = getComplexity({ estimators, query, schema, variables });
+
+				if (complexity >= maxComplexity) {
+					throw new ComplexityError(
+						`Query (${complexity}) exceeds the max allowed complexity (${maxComplexity})`
+					);
+				}
+
+				await Promise.resolve();
 			}
-
-			await Promise.resolve();
-		}
-	})
+		})
 });
