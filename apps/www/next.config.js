@@ -38,10 +38,6 @@ const config = {
 		GITHUB_CLIENT_SECRET:      process.env.GITHUB_CLIENT_SECRET,
 		GITHUB_ACCESS_TOKEN:       process.env.GITHUB_ACCESS_TOKEN,
 
-		APP_AWS_ACCESS_KEY_ID:     process.env.APP_AWS_ACCESS_KEY_ID,
-		APP_AWS_SECRET_ACCESS_KEY: process.env.APP_AWS_SECRET_ACCESS_KEY,
-		APP_AWS_IMAGE_BUCKET:      process.env.APP_AWS_IMAGE_BUCKET,
-
 		POSTMARK_API_TOKEN:        process.env.POSTMARK_API_TOKEN,
 		POSTMARK_FROM_EMAIL:       process.env.POSTMARK_FROM_EMAIL,
 
@@ -54,7 +50,6 @@ const config = {
 	webpack: (config, { dev, isServer }) => {
 		if (!isServer) {
 			config.resolve.fallback.fs = false;
-
 		}
 
 		if (isServer) {
