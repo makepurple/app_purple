@@ -17,6 +17,7 @@ importers:
       eslint-plugin-promise: ^5.1.0
       prettier: ^2.5.1
       styled-components: ^5.3.3
+      tailwindcss: 2.2.19
       tslint: ^6.1.3
       turbo: ^1.0.19
       twin.macro: ^2.8.2
@@ -35,6 +36,7 @@ importers:
       eslint-plugin-promise: 5.2.0_eslint@7.32.0
       prettier: 2.5.1
       styled-components: 5.3.3
+      tailwindcss: 2.2.19
       tslint: 6.1.3_typescript@4.5.4
       turbo: 1.0.19
       twin.macro: 2.8.2
@@ -320,6 +322,8 @@ importers:
       '@makepurple/utils': workspace:*
       '@makepurple/validators': workspace:*
       '@seznam/compose-react-refs': ^1.0.6
+      '@tailwindcss/forms': 0.3.4
+      '@tailwindcss/line-clamp': 0.2.2
       '@tippyjs/react': ^4.2.6
       '@types/common-tags': ^1.8.1
       '@types/ms': ^0.7.31
@@ -345,6 +349,7 @@ importers:
       slate-history: ^0.66.0
       slate-react: ^0.72.1
       styled-components: ^5.3.3
+      tailwindcss: 2.2.19
       twin.macro: ^2.8.2
       typescript: ^4.5.4
     dependencies:
@@ -379,9 +384,12 @@ importers:
       slate-history: 0.66.0_slate@0.72.0
       slate-react: 0.72.1_b3d952409b7dd7fa21595adcfd3437cd
       styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
+      tailwindcss: 2.2.19
       twin.macro: 2.8.2
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
+      '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
+      '@tailwindcss/line-clamp': 0.2.2_tailwindcss@2.2.19
       react-is: 17.0.2
       typescript: 4.5.4
 
@@ -2038,24 +2046,6 @@ packages:
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
-
-  /@babel/traverse/7.16.5_supports-color@5.5.0:
-    resolution: {integrity: sha512-FOCODAzqUMROikDYLYxl4nmwiLlu85rNqBML/A5hKRVXG2LV8d0iMqgPzdYTcIpjZEBB7D6UDU9vxRZiriASdQ==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/code-frame': 7.16.0
-      '@babel/generator': 7.16.5
-      '@babel/helper-environment-visitor': 7.16.5
-      '@babel/helper-function-name': 7.16.0
-      '@babel/helper-hoist-variables': 7.16.0
-      '@babel/helper-split-export-declaration': 7.16.0
-      '@babel/parser': 7.16.6
-      '@babel/types': 7.16.0
-      debug: 4.3.3_supports-color@5.5.0
-      globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /@babel/types/7.15.0:
     resolution: {integrity: sha512-OBvfqnllOIdX4ojTHpwZbpvz4j3EWyjkZEdmjH0/cgsd6QOdSgU8rLSk6ard/pcW7rlmjdVSX/AWOaORR1uNOQ==}
@@ -5501,7 +5491,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19_16a290f6d0e3717bf6d2667234aebd30
+      tailwindcss: 2.2.19
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -5509,7 +5499,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_16a290f6d0e3717bf6d2667234aebd30
+      tailwindcss: 2.2.19
     dev: true
 
   /@tippyjs/react/4.2.6_react-dom@17.0.2+react@17.0.2:
@@ -15111,7 +15101,6 @@ packages:
       postcss: ^8.2.14
     dependencies:
       postcss-selector-parser: 6.0.7
-    dev: false
 
   /postcss-nested/5.0.6_postcss@8.4.5:
     resolution: {integrity: sha512-rKqm2Fk0KbA8Vt3AdGN0FB9OBOMDVajMG6ZCf/GoHgdxUJ4sBFp0A/uMIRm+MJUdo33YXEtjqIz8u7DAp8B7DA==}
@@ -17197,7 +17186,7 @@ packages:
       react-is: '>= 16.8.0'
     dependencies:
       '@babel/helper-module-imports': 7.16.0
-      '@babel/traverse': 7.16.5_supports-color@5.5.0
+      '@babel/traverse': 7.16.3_supports-color@5.5.0
       '@emotion/is-prop-valid': 0.8.8
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
@@ -17461,7 +17450,6 @@ packages:
       tmp: 0.2.1
     transitivePeerDependencies:
       - ts-node
-    dev: false
 
   /tailwindcss/2.2.19_16a290f6d0e3717bf6d2667234aebd30:
     resolution: {integrity: sha512-6Ui7JSVtXadtTUo2NtkBBacobzWiQYVjYW0ZnKaP9S1ZCKQ0w7KVNz+YSDI/j7O7KCMHbOkz94ZMQhbT9pOqjw==}
