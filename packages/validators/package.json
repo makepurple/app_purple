@@ -13,6 +13,6 @@
 		"@makepurple/tsconfig": "workspace:*",
 		"@makepurple/utils": "workspace:*",
 		"prisma": "^3.6.0",
-		"typescript": "^4.5.3"
+		"typescript": "^4.5.4"
 	}
 }
