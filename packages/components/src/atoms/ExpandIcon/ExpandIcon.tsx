@@ -9,6 +9,7 @@ const Root = styled(ChevronDownIcon)<{ $open?: boolean }>`
 		transition
 		duration-150
 		ease-in
+		text-black
 	`}
 
 	${({ $open }) =>

@@ -1,7 +1,7 @@
 import { InferComponentProps } from "@makepurple/typings";
 import tw, { styled } from "twin.macro";
 
-export type ButtonVariant = "success" | "error" | "alert" | "primary" | "secondary";
+export type ButtonVariant = "success" | "error" | "alert" | "primary" | "secondary" | "input";
 
 export type ButtonProps = InferComponentProps<typeof Button>;
 
@@ -49,6 +49,15 @@ export const Button = styled.button<{
 				return tw`bg-pink-600`;
 			case "error":
 				return tw`bg-red-600`;
+			case "input":
+				return tw`
+					bg-indigo-50
+					border
+					border-solid
+					border-gray-400
+					shadow-inner
+					text-gray-400
+				`;
 			case "primary":
 				return tw`bg-indigo-500`;
 			case "secondary":

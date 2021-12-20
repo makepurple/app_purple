@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@makepurple/typings";
-import { forwardRef, useContext } from "react";
+import React, { forwardRef, useContext } from "react";
 import tw, { styled } from "twin.macro";
 import { FormContext } from "../Form/context";
 import { FormGroupContext } from "../FormGroup/context";

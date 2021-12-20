@@ -84,7 +84,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({ className,
 										as={Button}
 										size="small"
 										type="button"
-										variant="secondary"
+										variant="input"
 									>
 										<span tw="flex-grow">
 											{field.value ?? "Experience type"}
@@ -133,7 +133,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({ className,
 												as={Button}
 												size="small"
 												type="button"
-												variant="secondary"
+												variant="input"
 											>
 												<span tw="flex-grow">
 													{LangUtils.isNil(field.value)
@@ -171,7 +171,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({ className,
 												as={Button}
 												size="small"
 												type="button"
-												variant="secondary"
+												variant="input"
 											>
 												<span tw="flex-grow">{field.value ?? "Year"}</span>
 												<ExpandIcon open={open} tw="ml-1" />
@@ -215,7 +215,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({ className,
 												as={Button}
 												size="small"
 												type="button"
-												variant="secondary"
+												variant="input"
 											>
 												<span tw="flex-grow">
 													{LangUtils.isNil(field.value)
@@ -253,7 +253,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({ className,
 												as={Button}
 												size="small"
 												type="button"
-												variant="secondary"
+												variant="input"
 											>
 												<span tw="flex-grow">{field.value ?? "Year"}</span>
 												<ExpandIcon open={open} tw="ml-1" />
