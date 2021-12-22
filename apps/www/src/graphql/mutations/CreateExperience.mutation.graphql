@@ -1,28 +1,32 @@
+fragment CreateExperienceFragment on Experience {
+	id
+	endDate
+	highlights
+	location
+	organization {
+		id
+		github {
+			id
+			avatarUrl
+			login
+			url
+			description
+			name
+		}
+		name
+	}
+	organizationName
+	positionName
+	startDate
+	type
+	user {
+		id
+		name
+	}
+}
+
 mutation CreateExperience($data: ExperienceCreateInput!) {
 	createExperience(data: $data) {
-		id
-		endDate
-		highlights
-		location
-		organization {
-			id
-			github {
-				id
-				avatarUrl
-				login
-				url
-				description
-				name
-			}
-			name
-		}
-		organizationName
-		positionName
-		startDate
-		type
-		user {
-			id
-			name
-		}
+		...CreateExperienceFragment
 	}
 }

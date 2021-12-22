@@ -15,6 +15,7 @@ export const User_fragment_mock: User = {
 		})
 	),
 	email: "lee.david.cs@test.com",
+	experiences: [],
 	github: GitHubUser_fragment_mock,
 	githubUrl: "https://github.com/leedavidcs",
 	id: "0",

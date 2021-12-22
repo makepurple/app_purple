@@ -1,7 +1,7 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import { gql } from "urql";
-import { CreateExperienceMutation } from "../generated";
+import { CreateExperienceFragmentFragmentDoc, CreateExperienceMutation } from "../generated";
 
 export const createCache = () => {
 	return cacheExchange({
@@ -21,32 +21,10 @@ export const createCache = () => {
 						fragment _ on User {
 							id
 							experiences {
-								id
-								endDate
-								highlights
-								location
-								organization {
-									id
-									github {
-										id
-										avatarUrl
-										login
-										url
-										description
-										name
-									}
-									name
-								}
-								organizationName
-								positionName
-								startDate
-								type
-								user {
-									id
-									name
-								}
+								...CreateExperienceFragment
 							}
 						}
+						${CreateExperienceFragmentFragmentDoc}
 					`;
 
 					const newExperience = result.createExperience;

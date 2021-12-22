@@ -555,6 +555,8 @@ export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id:
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
+export type CreateExperienceFragmentFragment = { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
+
 export type CreateExperienceMutationVariables = Exact<{
   data: ExperienceCreateInput;
 }>;
@@ -786,36 +788,41 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
 }
     ${TopLanguagesFragmentDoc}
 ${UserAvatarUserFragmentDoc}`;
-export const CreateExperienceDocument = /*#__PURE__*/ gql`
-    mutation CreateExperience($data: ExperienceCreateInput!) {
-  createExperience(data: $data) {
+export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
+    fragment CreateExperienceFragment on Experience {
+  id
+  endDate
+  highlights
+  location
+  organization {
     id
-    endDate
-    highlights
-    location
-    organization {
+    github {
       id
-      github {
-        id
-        avatarUrl
-        login
-        url
-        description
-        name
-      }
+      avatarUrl
+      login
+      url
+      description
       name
     }
-    organizationName
-    positionName
-    startDate
-    type
-    user {
-      id
-      name
-    }
+    name
+  }
+  organizationName
+  positionName
+  startDate
+  type
+  user {
+    id
+    name
   }
 }
     `;
+export const CreateExperienceDocument = /*#__PURE__*/ gql`
+    mutation CreateExperience($data: ExperienceCreateInput!) {
+  createExperience(data: $data) {
+    ...CreateExperienceFragment
+  }
+}
+    ${CreateExperienceFragmentFragmentDoc}`;
 
 export function useCreateExperienceMutation() {
   return Urql.useMutation<CreateExperienceMutation, CreateExperienceMutationVariables>(CreateExperienceDocument);
