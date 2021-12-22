@@ -84,9 +84,14 @@ export const OrganizationInput: FC<OrganizationInputProps> = ({
 		getItemProps,
 		getMenuProps,
 		highlightedIndex,
-		isOpen
+		isOpen,
+		reset,
+		selectedItem
 	} = useCombobox({
-		items: organizations
+		items: organizations,
+		onSelectedItemChange: (changes) => {
+			!!changes.selectedItem && onChange(changes.selectedItem.login);
+		}
 	});
 
 	const currentOrg = useMemo(() => {
@@ -116,6 +121,8 @@ export const OrganizationInput: FC<OrganizationInputProps> = ({
 						name,
 						onChange: (e) => {
 							onChange(e.currentTarget.value.toLowerCase());
+
+							reset();
 						},
 						placeholder,
 						spellCheck: false,
@@ -125,32 +132,32 @@ export const OrganizationInput: FC<OrganizationInputProps> = ({
 			</div>
 			<Options {...getMenuProps()}>
 				{isOpen &&
-					fetching &&
-					Array.from({ length: 3 }, (_, i) => (
-						<ListItem key={i}>
-							<Skeleton tw="h-9 w-full" />
-						</ListItem>
-					))}
-				{isOpen &&
-					organizations.map((organization, index) => (
-						<ListItem
-							key={organization.id}
-							{...getItemProps({
-								index,
-								item: organization
-							})}
-							active={highlightedIndex === index}
-						>
-							<Avatar border={1} tw="mr-2 rounded-md">
-								<GitHubAvatarImage
-									src={organization.avatarUrl}
-									height={36}
-									width={36}
-								/>
-							</Avatar>
-							<div>{organization.login}</div>
-						</ListItem>
-					))}
+					(fetching
+						? Array.from({ length: 3 }, (_, i) => (
+								<ListItem key={i}>
+									<Skeleton tw="h-9 w-full" />
+								</ListItem>
+						  ))
+						: organizations.map((organization, index) => (
+								<ListItem
+									key={organization.id}
+									{...getItemProps({
+										index,
+										item: organization
+									})}
+									active={highlightedIndex === index}
+									selected={selectedItem?.id === organization.id}
+								>
+									<Avatar border={1} tw="mr-2 rounded-md">
+										<GitHubAvatarImage
+											src={organization.avatarUrl}
+											height={36}
+											width={36}
+										/>
+									</Avatar>
+									<div>{organization.login}</div>
+								</ListItem>
+						  )))}
 			</Options>
 		</Root>
 	);
