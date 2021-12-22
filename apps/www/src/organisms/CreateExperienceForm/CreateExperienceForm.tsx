@@ -20,6 +20,7 @@ import { ExperienceCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import React, { CSSProperties, FC, SyntheticEvent, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { ExperienceType, useCreateExperienceMutation } from "../../graphql";
 import { OrganizationInput } from "../OrganizationInput";
@@ -113,7 +114,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 							.year(formData.endDate.year)
 							.toDate();
 
-				await createExperience({
+				const didSucceed = await createExperience({
 					data: {
 						endDate,
 						highlights: formData.highlights.map(
@@ -126,7 +127,19 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 						startDate,
 						type: formData.type as Maybe<ExperienceType>
 					}
-				});
+				})
+					.then((result) => !!result.data?.createExperience)
+					.catch(() => false);
+
+				if (!didSucceed) {
+					toast.error("Your experiences could not be saved");
+
+					return;
+				}
+
+				toast.success("Your experiences were updated 🎉");
+
+				onClose?.();
 
 				// eslint-disable-next-line no-console
 				console.log(formData);
