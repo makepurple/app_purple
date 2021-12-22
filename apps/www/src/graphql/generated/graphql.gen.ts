@@ -41,17 +41,6 @@ export type Comment = {
   readonly updatedAt: Scalars['DateTime'];
 };
 
-export type CreatePresignedS3UrlInput = {
-  readonly fileName: Scalars['String'];
-  readonly fileType: Scalars['String'];
-};
-
-export type CreatePresignedS3UrlPayload = {
-  readonly __typename: 'CreatePresignedS3UrlPayload';
-  readonly fields: Scalars['Json'];
-  readonly url: Scalars['String'];
-};
-
 export type EnumExperienceTypeNullableFilter = {
   readonly equals?: InputMaybe<ExperienceType>;
   readonly in?: InputMaybe<ReadonlyArray<ExperienceType>>;
@@ -182,7 +171,6 @@ export type Mutation = {
   readonly createExperience: Experience;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
   readonly createPost: Post;
-  readonly createPresignedS3Url: CreatePresignedS3UrlPayload;
   /** Users can delete their own experiences. */
   readonly deleteExperience: Experience;
   /** Users can delete their own posts. */
@@ -204,12 +192,6 @@ export type Mutation = {
 /** Root mutation type */
 export type MutationCreateExperienceArgs = {
   data: ExperienceCreateInput;
-};
-
-
-/** Root mutation type */
-export type MutationCreatePresignedS3UrlArgs = {
-  data: CreatePresignedS3UrlInput;
 };
 
 
@@ -678,6 +660,14 @@ export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OkQuery = { readonly __typename: 'Query', readonly ok: boolean };
 
+export type SuggestExperiencesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestExperiencesWhereInput;
+}>;
+
+
+export type SuggestExperiencesQuery = { readonly __typename: 'Query', readonly suggestExperiences: { readonly __typename: 'SuggestExperiences', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined }> } };
+
 export type SuggestSkillsQueryVariables = Exact<{
   where: SuggestSkillsWhereInput;
 }>;
@@ -1041,6 +1031,24 @@ export const OkDocument = /*#__PURE__*/ gql`
 
 export function useOkQuery(options: Omit<Urql.UseQueryArgs<OkQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<OkQuery>({ query: OkDocument, ...options });
+};
+export const SuggestExperiencesDocument = /*#__PURE__*/ gql`
+    query SuggestExperiences($first: Int, $where: SuggestExperiencesWhereInput!) {
+  suggestExperiences(first: $first, where: $where) {
+    totalCount
+    nodes {
+      avatarUrl
+      description
+      id
+      login
+      name
+    }
+  }
+}
+    `;
+
+export function useSuggestExperiencesQuery(options: Omit<Urql.UseQueryArgs<SuggestExperiencesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SuggestExperiencesQuery>({ query: SuggestExperiencesDocument, ...options });
 };
 export const SuggestSkillsDocument = /*#__PURE__*/ gql`
     query SuggestSkills($where: SuggestSkillsWhereInput!) {

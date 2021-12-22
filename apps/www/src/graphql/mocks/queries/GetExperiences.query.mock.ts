@@ -1,5 +1,5 @@
-import { GetExperiencesQuery, GetExperiencesQueryVariables } from "../../../graphql/generated";
-import { Experience_fragment_mock } from "../../../graphql/mocks";
+import { GetExperiencesQuery, GetExperiencesQueryVariables } from "../../generated";
+import { Experience_fragment_mock } from "../../mocks";
 
 const DATA_SIZE = 10;
 

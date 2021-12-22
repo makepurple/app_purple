@@ -9,7 +9,7 @@ import { SelectOptions } from "./SelectOptions";
 const _Select = styled(Listbox)`
 	${tw`
 		relative
-		inline-flex
+		flex
 		items-stretch
 	`}
 
@@ -27,11 +27,7 @@ _Select.defaultProps = {
 
 export type SelectProps = InferComponentProps<typeof Listbox>;
 
-export const Select: typeof Listbox & {
-	Button: typeof Listbox.Button;
-	Option: typeof Listbox.Option;
-	Options: typeof Listbox.Options;
-} = ObjectUtils.setStatic(_Select as typeof Listbox, {
+export const Select = ObjectUtils.setStatic(_Select, {
 	Button: SelectButton,
 	Option: SelectOption,
 	Options: SelectOptions
