@@ -1,5 +1,5 @@
 import { ExperienceType } from "@prisma/client";
-import Schema, { array, DateType, number, string } from "computed-types";
+import Schema, { array, boolean, DateType, number, string } from "computed-types";
 
 export const ExperienceCreateInput = Schema({
 	endDate: Schema.either(
@@ -7,7 +7,8 @@ export const ExperienceCreateInput = Schema({
 		Schema({
 			month: number.gte(0, "Invalid month").lte(12, "Invalid year"),
 			year: number.gte(0, "Invalid year")
-		}).optional()
+		}).optional(),
+		boolean.equals(false).optional()
 	).optional(),
 	highlights: Schema.either(
 		array

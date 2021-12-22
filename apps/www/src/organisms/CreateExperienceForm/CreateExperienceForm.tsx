@@ -9,6 +9,7 @@ import {
 	FormGroup,
 	FormHelperText,
 	FormLabel,
+	HiddenInput,
 	Input,
 	ListItem,
 	Select,
@@ -17,7 +18,7 @@ import {
 import { dayjs, LangUtils } from "@makepurple/utils";
 import { ExperienceCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
-import React, { CSSProperties, FC, SyntheticEvent, useState } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { ExperienceType } from "../../graphql";
@@ -50,27 +51,29 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 	onClose,
 	style
 }) => {
+	const today = useMemo(() => dayjs(), []);
+
 	const {
 		control,
 		formState: { errors },
 		handleSubmit,
 		register,
-		reset
+		setValue
 	} = useForm<Type<typeof ExperienceCreateInput>>({
 		defaultValues: {
 			endDate: {
-				month: null as any,
-				year: null as any
+				month: today.month(),
+				year: today.year()
 			},
 			highlights: [],
 			location: "",
 			organizationName: "",
 			positionName: "",
 			startDate: {
-				month: null as any,
-				year: null as any
+				month: undefined,
+				year: undefined
 			},
-			type: null as any
+			type: undefined
 		},
 		resolver: computedTypesResolver(ExperienceCreateInput)
 	});
@@ -275,14 +278,21 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 							setCurrentlyWork(newChecked);
 
 							newChecked
-								? reset({ endDate: null as any })
-								: reset({ endDate: { month: null as any, year: null as any } });
+								? setValue("endDate", false)
+								: setValue("endDate", { month: today.month(), year: today.year() });
 						}}
 						tw="mr-2"
 					/>
 					<div>I currently work here</div>
 				</EndDateToggleContainer>
-				{!currentlyWork && (
+				{currentlyWork ? (
+					<Controller
+						control={control}
+						defaultValue={false}
+						name="endDate"
+						render={() => <HiddenInput checked={false} name="endDate" readOnly />}
+					/>
+				) : (
 					<DateSelectorContainer tw="mt-4">
 						<FormGroup>
 							<Controller
