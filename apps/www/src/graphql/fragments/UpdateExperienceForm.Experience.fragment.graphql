@@ -1,0 +1,10 @@
+fragment UpdateExperienceFormExperience on Experience {
+	endDate
+	highlights
+	id
+	location
+	organizationName
+	positionName
+	startDate
+	type
+}

@@ -56,7 +56,7 @@ export type Experience = {
   readonly organization: Organization;
   readonly organizationName: Scalars['String'];
   readonly positionName?: Maybe<Scalars['String']>;
-  readonly startDate?: Maybe<Scalars['DateTime']>;
+  readonly startDate: Scalars['DateTime'];
   readonly type?: Maybe<ExperienceType>;
   readonly user: User;
 };
@@ -543,11 +543,13 @@ export type UserWhereUniqueInput = {
   readonly name?: InputMaybe<Scalars['String']>;
 };
 
-export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: number, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
+export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: number, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
+
+export type UpdateExperienceFormExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: number, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined };
 
 export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string };
 
@@ -555,14 +557,14 @@ export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id:
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
-export type CreateExperienceFragmentFragment = { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
+export type CreateExperienceFragmentFragment = { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
 
 export type CreateExperienceMutationVariables = Exact<{
   data: ExperienceCreateInput;
 }>;
 
 
-export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } };
+export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } };
 
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -630,7 +632,7 @@ export type GetExperiencesQueryVariables = Exact<{
 }>;
 
 
-export type GetExperiencesQuery = { readonly __typename: 'Query', readonly experiences: { readonly __typename: 'ExperienceConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+export type GetExperiencesQuery = { readonly __typename: 'Query', readonly experiences: { readonly __typename: 'ExperienceConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -724,6 +726,18 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
   upvoteCount
   urlSlug
   viewerUpvoted
+}
+    `;
+export const UpdateExperienceFormExperienceFragmentDoc = /*#__PURE__*/ gql`
+    fragment UpdateExperienceFormExperience on Experience {
+  endDate
+  highlights
+  id
+  location
+  organizationName
+  positionName
+  startDate
+  type
 }
     `;
 export const UpdateUserInfoSkillFragmentDoc = /*#__PURE__*/ gql`

@@ -219,7 +219,7 @@ export interface NexusGenObjects {
     location?: string | null; // String
     organizationName: string; // String!
     positionName?: string | null; // String
-    startDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    startDate: NexusGenScalars['DateTime']; // DateTime!
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
   }
   ExperienceConnection: { // root type
@@ -352,7 +352,7 @@ export interface NexusGenFieldTypes {
     organization: NexusGenRootTypes['Organization']; // Organization!
     organizationName: string; // String!
     positionName: string | null; // String
-    startDate: NexusGenScalars['DateTime'] | null; // DateTime
+    startDate: NexusGenScalars['DateTime']; // DateTime!
     type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     user: NexusGenRootTypes['User']; // User!
   }

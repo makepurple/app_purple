@@ -41,7 +41,7 @@ type Experience {
   organization: Organization!
   organizationName: String!
   positionName: String
-  startDate: DateTime
+  startDate: DateTime!
   type: ExperienceType
   user: User!
 }

@@ -169,7 +169,7 @@ model Experience {
   organization     Organization    @relation(fields: [organizationName], references: [name], onDelete: Cascade)
   organizationName String
   positionName     String?
-  startDate        DateTime?
+  startDate        DateTime
   type             ExperienceType?
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
