@@ -1,11 +1,13 @@
 import { InferComponentProps } from "@makepurple/typings";
-import tw, { styled } from "twin.macro";
+import tw, { css, styled } from "twin.macro";
 
 export type ButtonVariant = "success" | "error" | "alert" | "primary" | "secondary" | "input";
 
 export type ButtonProps = InferComponentProps<typeof Button>;
 
 export const Button = styled.button<{
+	bounce?: boolean;
+	hasInput?: boolean;
 	size?: "small" | "medium" | "large";
 	variant?: ButtonVariant;
 }>`
@@ -37,26 +39,30 @@ export const Button = styled.button<{
 		not-disabled:active:shadow-none
 		not-disabled:hover:shadow-md
 		not-disabled:hover:opacity-90
-		not-disabled:hover:-translate-y-0.5
+		
 		disabled:after:absolute
 		disabled:after:inset-0
 		disabled:after:pointer-events-auto
 		disabled:after:cursor-not-allowed
 	`}
-	${({ variant = "primary" }) => {
+	${({ bounce }) => bounce && tw`not-disabled:hover:-translate-y-0.5`}
+	${({ hasInput, variant = "primary" }) => {
 		switch (variant) {
 			case "alert":
 				return tw`bg-pink-600`;
 			case "error":
 				return tw`bg-red-600`;
 			case "input":
-				return tw`
-					bg-indigo-50
-					border
-					border-solid
-					border-gray-400
-					shadow-inner
-					text-gray-400
+				return css`
+					${tw`
+						bg-indigo-50
+						border
+						border-solid
+						border-gray-400
+						shadow-inner
+						text-gray-400
+					`}
+					${hasInput && tw`text-black`}
 				`;
 			case "primary":
 				return tw`bg-indigo-500`;
@@ -96,6 +102,7 @@ export const Button = styled.button<{
 `;
 
 Button.defaultProps = {
+	bounce: true,
 	role: "button",
 	type: "button"
 };
