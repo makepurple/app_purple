@@ -7,6 +7,7 @@ export * from "./Button";
 export * from "./Checkbox";
 export * from "./ComboBox";
 export * from "./ContextMenu";
+export * from "./ControlGroup";
 export * from "./Divider";
 export * from "./EditableText";
 export * from "./ErrorBoundary";
