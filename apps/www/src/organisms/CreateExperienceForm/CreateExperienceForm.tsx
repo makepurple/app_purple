@@ -21,7 +21,7 @@ import { Type } from "computed-types";
 import React, { CSSProperties, FC, SyntheticEvent, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
-import { ExperienceType } from "../../graphql";
+import { ExperienceType, useCreateExperienceMutation } from "../../graphql";
 import { OrganizationInput } from "../OrganizationInput";
 
 const DateSelectorContainer = tw.div`
@@ -78,6 +78,8 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 		resolver: computedTypesResolver(ExperienceCreateInput)
 	});
 
+	const [{ fetching }, createExperience] = useCreateExperienceMutation();
+
 	const {
 		fields: highlights,
 		append,
@@ -92,13 +94,40 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 	return (
 		<Form
 			className={className}
-			onSubmit={handleSubmit((formData) => {
-				/**
-				 * TODO
-				 * @description Remove this when this is completed
-				 * @author David Lee
-				 * @date December 11, 2021
-				 */
+			disabled={fetching}
+			onSubmit={handleSubmit(async (formData) => {
+				const startDate =
+					formData.startDate instanceof Date
+						? formData.startDate
+						: dayjs("2000-01-01T00:00:00.000Z")
+								.month(formData.startDate.month)
+								.year(formData.startDate.year)
+								.toDate();
+
+				const endDate = !formData.endDate
+					? null
+					: formData.endDate instanceof Date
+					? formData.endDate
+					: dayjs("2000-01-01T00:00:00.000Z")
+							.month(formData.endDate.month)
+							.year(formData.endDate.year)
+							.toDate();
+
+				await createExperience({
+					data: {
+						endDate,
+						highlights: formData.highlights.map(
+							(highlight: string | { value: string }) =>
+								typeof highlight === "string" ? highlight : highlight.value
+						),
+						location: formData.location,
+						organizationName: formData.organizationName,
+						positionName: formData.positionName,
+						startDate,
+						type: formData.type as Maybe<ExperienceType>
+					}
+				});
+
 				// eslint-disable-next-line no-console
 				console.log(formData);
 			})}

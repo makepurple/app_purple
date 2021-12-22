@@ -498,6 +498,7 @@ export interface NexusGenFieldTypes {
     description: string | null; // String
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
+    experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
     github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
     githubUrl: NexusGenScalars['URL']; // URL!
     id: string; // ID!
@@ -677,6 +678,7 @@ export interface NexusGenFieldTypeNames {
     description: 'String'
     desiredSkills: 'Skill'
     email: 'String'
+    experiences: 'Experience'
     github: 'GitHubUser'
     githubUrl: 'URL'
     id: 'ID'

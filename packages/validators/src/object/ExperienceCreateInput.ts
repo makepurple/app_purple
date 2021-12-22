@@ -8,7 +8,7 @@ export const ExperienceCreateInput = Schema({
 			month: number.gte(0, "Invalid month").lte(12, "Invalid year"),
 			year: number.gte(0, "Invalid year")
 		}).optional(),
-		boolean.equals(false).optional()
+		boolean.equals(false)
 	).optional(),
 	highlights: Schema.either(
 		array

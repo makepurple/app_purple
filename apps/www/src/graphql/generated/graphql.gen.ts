@@ -522,6 +522,7 @@ export type User = {
   readonly description?: Maybe<Scalars['String']>;
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
+  readonly experiences: ReadonlyArray<Experience>;
   readonly github: GitHubUser;
   readonly githubUrl: Scalars['URL'];
   readonly id: Scalars['ID'];
@@ -553,6 +554,13 @@ export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readon
 export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined };
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined, readonly desiredSkills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }>, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
+
+export type CreateExperienceMutationVariables = Exact<{
+  data: ExperienceCreateInput;
+}>;
+
+
+export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate?: Date | null | undefined, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } };
 
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -778,6 +786,40 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
 }
     ${TopLanguagesFragmentDoc}
 ${UserAvatarUserFragmentDoc}`;
+export const CreateExperienceDocument = /*#__PURE__*/ gql`
+    mutation CreateExperience($data: ExperienceCreateInput!) {
+  createExperience(data: $data) {
+    id
+    endDate
+    highlights
+    location
+    organization {
+      id
+      github {
+        id
+        avatarUrl
+        login
+        url
+        description
+        name
+      }
+      name
+    }
+    organizationName
+    positionName
+    startDate
+    type
+    user {
+      id
+      name
+    }
+  }
+}
+    `;
+
+export function useCreateExperienceMutation() {
+  return Urql.useMutation<CreateExperienceMutation, CreateExperienceMutationVariables>(CreateExperienceDocument);
+};
 export const CreatePostDocument = /*#__PURE__*/ gql`
     mutation CreatePost {
   post: createPost {

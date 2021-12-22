@@ -26,6 +26,7 @@ export const User = objectType({
 				return user?.id === root.id;
 			}
 		});
+		t.field(NexusPrisma.User.experiences);
 		t.field("github", {
 			type: nonNull("GitHubUser"),
 			resolve: async (parent, args, { octokit: graphql }) => {

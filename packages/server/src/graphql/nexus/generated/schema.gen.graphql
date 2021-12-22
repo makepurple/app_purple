@@ -390,6 +390,7 @@ type User {
   description: String
   desiredSkills: [Skill!]!
   email: String!
+  experiences: [Experience!]!
   github: GitHubUser!
   githubUrl: URL!
   id: ID!
