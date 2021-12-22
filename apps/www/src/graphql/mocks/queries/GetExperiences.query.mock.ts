@@ -1,5 +1,5 @@
 import { GetExperiencesQuery, GetExperiencesQueryVariables } from "../../generated";
-import { Experience_fragment_mock } from "../../mocks";
+import { Experience_fragment_mock } from "../fragments";
 
 const DATA_SIZE = 10;
 

@@ -1,5 +1,5 @@
-import { CreatePostMutation } from "../../../graphql/generated";
-import { Post_fragment_mock } from "../../../graphql/mocks/fragments";
+import { CreatePostMutation } from "../../generated";
+import { Post_fragment_mock } from "../fragments";
 
 export const CreatePost_mock: CreatePostMutation = {
 	__typename: "Mutation",

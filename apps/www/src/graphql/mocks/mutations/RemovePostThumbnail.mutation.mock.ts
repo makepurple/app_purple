@@ -1,8 +1,5 @@
-import {
-	RemovePostThumbnailMutation,
-	RemovePostThumbnailMutationVariables
-} from "../../../graphql/generated";
-import { Post_fragment_mock } from "../../../graphql/mocks/fragments";
+import { RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables } from "../../generated";
+import { Post_fragment_mock } from "../fragments";
 
 export const RemovePostThumbnail_mock: RemovePostThumbnailMutation = {
 	__typename: "Mutation",

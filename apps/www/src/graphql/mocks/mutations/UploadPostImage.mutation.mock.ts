@@ -1,4 +1,4 @@
-import type { UploadPostImageMutation } from "../../../graphql/generated";
+import type { UploadPostImageMutation } from "../../generated";
 
 export const UploadPostImage_mock: UploadPostImageMutation = {
 	__typename: "Mutation",

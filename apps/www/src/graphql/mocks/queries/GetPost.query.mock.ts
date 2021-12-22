@@ -1,5 +1,5 @@
-import { GetPostQuery, GetPostQueryVariables } from "../../../graphql/generated";
-import { Post_fragment_mock } from "../../../graphql/mocks/fragments";
+import { GetPostQuery, GetPostQueryVariables } from "../../generated";
+import { Post_fragment_mock } from "../fragments";
 
 export const GetPost_mock: GetPostQuery = {
 	__typename: "Query",

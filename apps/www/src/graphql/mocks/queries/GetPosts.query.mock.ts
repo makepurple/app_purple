@@ -1,5 +1,5 @@
-import type { GetPostsQuery, GetPostsQueryVariables } from "../../../graphql/generated";
-import { Post_fragment_mock } from "../../../graphql/mocks/fragments";
+import type { GetPostsQuery, GetPostsQueryVariables } from "../../generated";
+import { Post_fragment_mock } from "../fragments";
 
 const DATA_SIZE = 10;
 

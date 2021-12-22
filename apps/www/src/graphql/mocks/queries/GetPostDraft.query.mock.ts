@@ -1,5 +1,5 @@
-import { GetPostDraftQuery } from "../../../graphql/generated";
-import { Post_fragment_mock } from "../../../graphql/mocks/fragments";
+import { GetPostDraftQuery } from "../../generated";
+import { Post_fragment_mock } from "../fragments";
 
 export const GetPostDraft_mock: GetPostDraftQuery = {
 	__typename: "Query",

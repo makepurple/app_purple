@@ -1,5 +1,5 @@
-import { UpdateUserInfoMutation } from "../../../graphql/generated";
-import { User_fragment_mock } from "../../../graphql/mocks/fragments";
+import { UpdateUserInfoMutation } from "../../generated";
+import { User_fragment_mock } from "../fragments";
 
 export const UpdateUserInfo_mock: UpdateUserInfoMutation = {
 	__typename: "Mutation",

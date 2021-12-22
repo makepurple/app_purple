@@ -1,4 +1,4 @@
-import { SuggestSkillsQuery, SuggestSkillsQueryVariables } from "../../../graphql/generated";
+import { SuggestSkillsQuery, SuggestSkillsQueryVariables } from "../../generated";
 
 export const SuggestSkills_mock: SuggestSkillsQuery = {
 	__typename: "Query",

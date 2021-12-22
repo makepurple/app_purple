@@ -1,6 +1,5 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
-	Button,
 	Checkbox,
 	ControlGroup,
 	ExpandIcon,
@@ -13,6 +12,7 @@ import {
 	Input,
 	ListItem,
 	Select,
+	Spinner,
 	XIcon
 } from "@makepurple/components";
 import { dayjs, LangUtils } from "@makepurple/utils";
@@ -140,9 +140,6 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 				toast.success("Your experiences were updated 🎉");
 
 				onClose?.();
-
-				// eslint-disable-next-line no-console
-				console.log(formData);
 			})}
 			style={style}
 		>
@@ -161,7 +158,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 							{({ open }) => (
 								<>
 									<Select.Button
-										as={Button}
+										as={FormButton}
 										bounce={false}
 										hasInput={!LangUtils.isNil(field.value)}
 										size="small"
@@ -232,7 +229,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 									{({ open }) => (
 										<>
 											<Select.Button
-												as={Button}
+												as={FormButton}
 												bounce={false}
 												hasInput={!LangUtils.isNil(field.value)}
 												size="small"
@@ -272,7 +269,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 									{({ open }) => (
 										<>
 											<Select.Button
-												as={Button}
+												as={FormButton}
 												bounce={false}
 												hasInput={!LangUtils.isNil(field.value)}
 												size="small"
@@ -345,7 +342,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 										{({ open }) => (
 											<>
 												<Select.Button
-													as={Button}
+													as={FormButton}
 													bounce={false}
 													hasInput={!LangUtils.isNil(field.value)}
 													size="small"
@@ -389,7 +386,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 										{({ open }) => (
 											<>
 												<Select.Button
-													as={Button}
+													as={FormButton}
 													bounce={false}
 													hasInput={!LangUtils.isNil(field.value)}
 													size="small"
@@ -465,7 +462,10 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 				</FormGroup>
 			</div>
 			<ActionsContainer tw="mt-8">
-				<FormButton type="submit">Save</FormButton>
+				<FormButton type="submit">
+					<span>Save</span>
+					{fetching && <Spinner tw="ml-2" />}
+				</FormButton>
 				<FormButton onClick={onClose} type="button" variant="secondary">
 					Cancel
 				</FormButton>

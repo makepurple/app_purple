@@ -1,8 +1,5 @@
-import type {
-	GetUserInfoSideBarQuery,
-	GetUserInfoSideBarQueryVariables
-} from "../../../graphql/generated";
-import { User_fragment_mock } from "../../../graphql/mocks/fragments";
+import type { GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables } from "../../generated";
+import { User_fragment_mock } from "../fragments";
 
 export const GetUserInfoSideBar_mock: GetUserInfoSideBarQuery = {
 	__typename: "Query",

@@ -1,4 +1,4 @@
-import { GetMyUserQuery } from "../../../graphql/generated";
+import { GetMyUserQuery } from "../../generated";
 
 export const GetMyUser_mock: GetMyUserQuery = {
 	__typename: "Query",
