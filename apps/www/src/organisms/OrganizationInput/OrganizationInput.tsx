@@ -51,6 +51,7 @@ const Options = styled.ul`
 
 export interface OrganizationInputProps {
 	className?: string;
+	name?: string;
 	onChange: (value: string) => void;
 	placeholder?: string;
 	style?: CSSProperties;
@@ -59,6 +60,7 @@ export interface OrganizationInputProps {
 
 export const OrganizationInput: FC<OrganizationInputProps> = ({
 	className,
+	name,
 	onChange,
 	placeholder = "Ex: makepurple",
 	style,
@@ -111,6 +113,7 @@ export const OrganizationInput: FC<OrganizationInputProps> = ({
 			<div {...getComboboxProps()}>
 				<Input
 					{...getInputProps({
+						name,
 						onChange: (e) => {
 							onChange(e.currentTarget.value.toLowerCase());
 						},

@@ -17,6 +17,7 @@ import React, { CSSProperties, FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { ExperienceType } from "../../graphql";
+import { OrganizationInput } from "../OrganizationInput";
 
 const DateSelectorContainer = tw.div`
 	grid
@@ -281,6 +282,21 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({ className,
 						/>
 					</FormGroup>
 				</DateSelectorContainer>
+				<FormGroup tw="mt-4">
+					<FormLabel>Company name</FormLabel>
+					<Controller
+						control={control}
+						name="organizationName"
+						render={({ field }) => (
+							<OrganizationInput
+								name={field.name}
+								onChange={field.onChange}
+								value={field.value}
+							/>
+						)}
+					/>
+					<FormHelperText error={errors.organizationName?.message} />
+				</FormGroup>
 			</div>
 		</Form>
 	);
