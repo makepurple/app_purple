@@ -1,5 +1,6 @@
 import { WindowUtils } from "@makepurple/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
+import { devtoolsExchange } from "@urql/devtools";
 import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
@@ -55,6 +56,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 	if (WindowUtils.isSsr() || !urqlClient) {
 		urqlClient = createClient({
 			exchanges: [
+				...(process.env.NODE_ENV === "development" ? [devtoolsExchange] : []),
 				dedupExchange,
 				createCache(),
 				errorExchange({
