@@ -1,10 +1,12 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
+	CreateExperience_mock,
 	CreatePost_mock,
 	GetExperiences_mock,
 	GetPostDraft_mock,
-	GetUserInfoSideBar_mock
+	GetUserInfoSideBar_mock,
+	SuggestExperiences_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/experiences";
 import Page from "@makepurple/www/src/pages/[userName]/experiences";
@@ -44,6 +46,10 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
+			case "CreateExperience":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreateExperience_mock };
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
 
@@ -54,6 +60,10 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "SuggestExperiences":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestExperiences_mock };
 			default:
 				return {};
 		}
@@ -66,6 +76,10 @@ Loading.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
+			case "CreateExperience":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreateExperience_mock };
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
 
@@ -78,6 +92,10 @@ Loading.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "SuggestExperiences":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestExperiences_mock };
 			default:
 				return {};
 		}
@@ -90,6 +108,10 @@ NoResults.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
+			case "CreateExperience":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreateExperience_mock };
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
 
@@ -121,6 +143,10 @@ NoResults.parameters = {
 				};
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "SuggestExperiences":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestExperiences_mock };
 			default:
 				return {};
 		}
