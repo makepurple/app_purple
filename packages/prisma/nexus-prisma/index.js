@@ -13,16 +13,16 @@ const gentimeSettings = {
     "GraphQLDocs": true,
     "JSDoc": true
   },
-  "prismaClientImportId": "/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/@prisma/client"
+  "prismaClientImportId": "/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.7.0_prisma@3.7.0/node_modules/@prisma/client"
 }
 
 const dmmf = getPrismaClientDmmf({
   // JSON stringify the values to ensure proper escaping
   // Details: https://github.com/prisma/nexus-prisma/issues/143
   // TODO test that fails without this code
-  require: () => require("/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/@prisma/client"),
+  require: () => require("/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.7.0_prisma@3.7.0/node_modules/@prisma/client"),
   importId: gentimeSettings.prismaClientImportId,
-  importIdResolved: require.resolve("/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.6.0_prisma@3.6.0/node_modules/@prisma/client")
+  importIdResolved: require.resolve("/home/leedavidcs/projects/app_purple/node_modules/.pnpm/@prisma+client@3.7.0_prisma@3.7.0/node_modules/@prisma/client")
 })
 
 const models = ModelsGenerator.JS.createNexusTypeDefConfigurations(dmmf, {
