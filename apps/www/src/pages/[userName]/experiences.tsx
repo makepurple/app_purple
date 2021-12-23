@@ -4,11 +4,12 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw, { styled } from "twin.macro";
-import { useGetExperiencesQuery } from "../../graphql";
+import { CreateExperienceFragmentFragment, useGetExperiencesQuery } from "../../graphql";
 import {
 	CreateExperienceForm,
 	ExperienceCard,
 	LoadingExperienceCard,
+	UpdateExperienceForm,
 	UserPageLayout
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/experiences";
@@ -42,14 +43,14 @@ const Experiences = tw.div`
 	items-stretch
 `;
 
-const AddRemoveIcon = styled(PlusIcon)<{ $isCreate: boolean }>`
+const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
 	${tw`
 		transition
 		duration-150
 		ease-in
 	`}
 
-	${({ $isCreate }) => $isCreate && tw`rotate-45`}
+	${({ $canClose }) => $canClose && tw`rotate-45`}
 `;
 
 export const getServerSideProps = pageProps;
@@ -76,6 +77,8 @@ export const Page: NextPage<PageProps> = () => {
 	});
 
 	const [isCreate, setIsCreate] = useState<boolean>(false);
+	const [editExperience, setEditExperience] =
+		useState<Maybe<CreateExperienceFragmentFragment>>(null);
 
 	const experiences = data?.experiences.nodes ?? [];
 
@@ -83,23 +86,47 @@ export const Page: NextPage<PageProps> = () => {
 		<UserPageLayout selectedTab="experiences" userName={userName}>
 			<Content>
 				<Title>
-					<span tw="flex-grow">{isCreate ? "Add Experience" : "Experiences"}</span>
+					<span tw="flex-grow">
+						{isCreate
+							? "Add Experience"
+							: editExperience
+							? "Edit Experience"
+							: "Experiences"}
+					</span>
 					<AddButton
 						onClick={() => {
-							setIsCreate((oldIsCreate) => !oldIsCreate);
+							if (isCreate || editExperience) {
+								setIsCreate(false);
+								setEditExperience(null);
+
+								return;
+							}
+
+							setIsCreate(true);
 						}}
 						size="small"
 						type="button"
 						variant="secondary"
 						tw="flex-shrink-0"
 					>
-						<AddRemoveIcon height={24} width={24} $isCreate={isCreate} />
+						<AddRemoveIcon
+							height={24}
+							width={24}
+							$canClose={isCreate || !!editExperience}
+						/>
 					</AddButton>
 				</Title>
 				{isCreate ? (
 					<CreateExperienceForm
 						onClose={() => {
 							setIsCreate(false);
+						}}
+					/>
+				) : editExperience ? (
+					<UpdateExperienceForm
+						experience={editExperience}
+						onClose={() => {
+							setEditExperience(null);
 						}}
 					/>
 				) : (
@@ -126,6 +153,7 @@ export const Page: NextPage<PageProps> = () => {
 									<ExperienceCard
 										ref={getLoadMoreRef(i)}
 										experience={experience}
+										onEdit={() => setEditExperience(experience)}
 									/>
 								</Fragment>
 							))

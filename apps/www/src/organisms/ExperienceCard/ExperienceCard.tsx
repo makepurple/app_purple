@@ -99,11 +99,12 @@ const Highlights = tw.ul`
 export interface ExperienceCardProps {
 	className?: string;
 	experience: ExperienceCardExperienceFragment;
+	onEdit?: (experience: ExperienceCardExperienceFragment) => void;
 	style?: CSSProperties;
 }
 
 export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((props, ref) => {
-	const { className, experience, style } = props;
+	const { className, experience, onEdit, style } = props;
 
 	const githubOrganization = experience.organization.github;
 
@@ -181,7 +182,13 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 					</Highlights>
 				)}
 			</Info>
-			<EditButton type="button" variant="secondary">
+			<EditButton
+				onClick={() => {
+					onEdit?.(experience);
+				}}
+				type="button"
+				variant="secondary"
+			>
 				<PencilIcon height={24} width={24} />
 			</EditButton>
 		</Root>

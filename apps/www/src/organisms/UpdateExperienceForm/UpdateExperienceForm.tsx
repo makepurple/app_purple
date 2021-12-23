@@ -18,7 +18,7 @@ import {
 import { dayjs, LangUtils } from "@makepurple/utils";
 import { ExperienceUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
-import React, { CSSProperties, FC, SyntheticEvent, useMemo, useState } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
@@ -58,8 +58,8 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 	onClose,
 	style
 }) => {
-	const startDate = useMemo(() => dayjs(experience.startDate), [experience.startDate]);
-	const endDate = useMemo(
+	const defaultStartDate = useMemo(() => dayjs(experience.startDate), [experience.startDate]);
+	const defaultEndDate = useMemo(
 		() => experience.endDate && dayjs(experience.endDate),
 		[experience.endDate]
 	);
@@ -71,23 +71,25 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 		formState: { errors },
 		handleSubmit,
 		register,
-		setValue
+		setValue,
+		watch
 	} = useForm<Type<typeof ExperienceUpdateInput>>({
 		defaultValues: {
-			endDate: !endDate
+			endDate: !defaultEndDate
 				? false
 				: {
-						month: endDate.month(),
-						year: endDate.year()
+						month: defaultEndDate.month(),
+						year: defaultEndDate.year()
 				  },
-			highlights: experience.highlights.slice(),
+			highlights: experience.highlights.map((value) => ({ value })),
 			location: experience.location ?? "",
 			organizationName: experience.organizationName,
 			positionName: experience.positionName ?? "",
 			startDate: {
-				month: startDate.month(),
-				year: startDate.year()
-			}
+				month: defaultStartDate.month(),
+				year: defaultStartDate.year()
+			},
+			type: experience.type ?? undefined
 		},
 		resolver: computedTypesResolver(ExperienceUpdateInput)
 	});
@@ -101,13 +103,13 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 		name: "highlights"
 	});
 
-	const [currentlyWork, setCurrentlyWork] = useState<boolean>(false);
+	const currentEndDate = watch("endDate");
 
 	return (
 		<Form
 			className={className}
 			onSubmit={handleSubmit(async (formData) => {
-				const formStartDate =
+				const startDate =
 					formData.startDate instanceof Date
 						? formData.startDate
 						: dayjs("2000-01-01T00:00:00.000Z")
@@ -115,7 +117,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 								.year(formData.startDate.year)
 								.toDate();
 
-				const formEndDate = !formData.endDate
+				const endDate = !formData.endDate
 					? null
 					: formData.endDate instanceof Date
 					? formData.endDate
@@ -126,7 +128,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 
 				const didSucceed = await updateExperience({
 					data: {
-						endDate: formEndDate,
+						endDate,
 						highlights: formData.highlights.map(
 							(highlight: string | { value: string }) =>
 								typeof highlight === "string" ? highlight : highlight.value
@@ -134,7 +136,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 						location: formData.location,
 						organizationName: formData.organizationName,
 						positionName: formData.positionName,
-						startDate: formStartDate,
+						startDate,
 						type: formData.type as Maybe<ExperienceType>
 					},
 					where: {
@@ -323,24 +325,22 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 				<FormLabel>End date</FormLabel>
 				<EndDateToggleContainer tw="mt-2">
 					<Checkbox
-						checked={currentlyWork}
+						checked={!currentEndDate}
 						onChange={(e) => {
 							const newChecked = e.target.checked;
 
-							setCurrentlyWork(newChecked);
-
-							newChecked || !endDate
+							newChecked || !defaultEndDate
 								? setValue("endDate", false)
 								: setValue("endDate", {
-										month: endDate.month(),
-										year: endDate.year()
+										month: defaultEndDate.month(),
+										year: defaultEndDate.year()
 								  });
 						}}
 						tw="mr-2"
 					/>
 					<div>I currently work here</div>
 				</EndDateToggleContainer>
-				{currentlyWork ? (
+				{!currentEndDate ? (
 					<Controller
 						control={control}
 						defaultValue={false}

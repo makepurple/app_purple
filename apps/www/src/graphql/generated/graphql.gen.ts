@@ -640,7 +640,7 @@ export type GetExperiencesQueryVariables = Exact<{
 }>;
 
 
-export type GetExperiencesQuery = { readonly __typename: 'Query', readonly experiences: { readonly __typename: 'ExperienceConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+export type GetExperiencesQuery = { readonly __typename: 'Query', readonly experiences: { readonly __typename: 'ExperienceConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organizationName: string, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string, readonly description?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -998,6 +998,7 @@ export const GetExperiencesDocument = /*#__PURE__*/ gql`
       __typename
       id
       ...ExperienceCardExperience
+      ...CreateExperienceFragment
     }
     pageInfo {
       __typename
@@ -1008,7 +1009,8 @@ export const GetExperiencesDocument = /*#__PURE__*/ gql`
     }
   }
 }
-    ${ExperienceCardExperienceFragmentDoc}`;
+    ${ExperienceCardExperienceFragmentDoc}
+${CreateExperienceFragmentFragmentDoc}`;
 
 export function useGetExperiencesQuery(options: Omit<Urql.UseQueryArgs<GetExperiencesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetExperiencesQuery>({ query: GetExperiencesDocument, ...options });

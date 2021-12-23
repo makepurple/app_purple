@@ -17,6 +17,7 @@ query GetExperiences(
 			__typename
 			id
 			...ExperienceCardExperience
+			...CreateExperienceFragment
 		}
 		pageInfo {
 			__typename

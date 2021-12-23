@@ -26,6 +26,7 @@ const Content = tw.div`
 	flex-grow
 	flex
 	flex-col
+	overflow-x-hidden
 `;
 
 const PageTabs = tw(UserPageTabs)`

@@ -18,7 +18,7 @@ import {
 import { dayjs, LangUtils } from "@makepurple/utils";
 import { ExperienceCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
-import React, { CSSProperties, FC, SyntheticEvent, useMemo, useState } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
@@ -61,7 +61,8 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 		formState: { errors },
 		handleSubmit,
 		register,
-		setValue
+		setValue,
+		watch
 	} = useForm<Type<typeof ExperienceCreateInput>>({
 		defaultValues: {
 			endDate: {
@@ -90,7 +91,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 		name: "highlights"
 	});
 
-	const [currentlyWork, setCurrentlyWork] = useState<boolean>(false);
+	const currentEndDate = watch("endDate");
 
 	return (
 		<Form
@@ -310,11 +311,9 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 				<FormLabel>End date</FormLabel>
 				<EndDateToggleContainer tw="mt-2">
 					<Checkbox
-						checked={currentlyWork}
+						checked={!currentEndDate}
 						onChange={(e) => {
 							const newChecked = e.target.checked;
-
-							setCurrentlyWork(newChecked);
 
 							newChecked
 								? setValue("endDate", false)
@@ -324,7 +323,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 					/>
 					<div>I currently work here</div>
 				</EndDateToggleContainer>
-				{currentlyWork ? (
+				{!currentEndDate ? (
 					<Controller
 						control={control}
 						defaultValue={false}
