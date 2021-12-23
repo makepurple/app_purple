@@ -1,0 +1,8 @@
+mutation UpdateExperience(
+	$data: ExperienceUpdateInput!
+	$where: ExperienceWhereUniqueInput!
+) {
+	updateExperience(data: $data, where: $where) {
+		...CreateExperienceFragment
+	}
+}

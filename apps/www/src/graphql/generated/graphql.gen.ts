@@ -586,6 +586,14 @@ export type RemovePostThumbnailMutationVariables = Exact<{
 
 export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
 
+export type UpdateExperienceMutationVariables = Exact<{
+  data: ExperienceUpdateInput;
+  where: ExperienceWhereUniqueInput;
+}>;
+
+
+export type UpdateExperienceMutation = { readonly __typename: 'Mutation', readonly updateExperience?: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName?: string | null | undefined, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } | null | undefined };
+
 export type UpdatePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
   data: PostUpdateInput;
@@ -882,6 +890,17 @@ export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
 
 export function useRemovePostThumbnailMutation() {
   return Urql.useMutation<RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables>(RemovePostThumbnailDocument);
+};
+export const UpdateExperienceDocument = /*#__PURE__*/ gql`
+    mutation UpdateExperience($data: ExperienceUpdateInput!, $where: ExperienceWhereUniqueInput!) {
+  updateExperience(data: $data, where: $where) {
+    ...CreateExperienceFragment
+  }
+}
+    ${CreateExperienceFragmentFragmentDoc}`;
+
+export function useUpdateExperienceMutation() {
+  return Urql.useMutation<UpdateExperienceMutation, UpdateExperienceMutationVariables>(UpdateExperienceDocument);
 };
 export const UpdatePostDocument = /*#__PURE__*/ gql`
     mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {

@@ -16,14 +16,18 @@ import {
 	XIcon
 } from "@makepurple/components";
 import { dayjs, LangUtils } from "@makepurple/utils";
-import { ExperienceCreateInput } from "@makepurple/validators";
+import { ExperienceUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import React, { CSSProperties, FC, SyntheticEvent, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
-import { ExperienceType, useCreateExperienceMutation } from "../../graphql";
-import { OrganizationInput } from "../OrganizationInput";
+import { OrganizationInput } from "..";
+import {
+	ExperienceType,
+	UpdateExperienceFormExperienceFragment,
+	useUpdateExperienceMutation
+} from "../../graphql";
 
 const DateSelectorContainer = tw.div`
 	grid
@@ -41,20 +45,26 @@ const ActionsContainer = tw.div`
 	gap-4
 `;
 
-export interface CreateExperienceFormProps {
+export interface UpdateExperienceFormProps {
 	className?: string;
+	experience: UpdateExperienceFormExperienceFragment;
 	onClose?: (e?: SyntheticEvent) => void;
 	style?: CSSProperties;
 }
 
-export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
+export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 	className,
+	experience,
 	onClose,
 	style
 }) => {
-	const today = useMemo(() => dayjs(), []);
+	const startDate = useMemo(() => dayjs(experience.startDate), [experience.startDate]);
+	const endDate = useMemo(
+		() => experience.endDate && dayjs(experience.endDate),
+		[experience.endDate]
+	);
 
-	const [{ fetching }, createExperience] = useCreateExperienceMutation();
+	const [{ fetching }, updateExperience] = useUpdateExperienceMutation();
 
 	const {
 		control,
@@ -62,23 +72,24 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 		handleSubmit,
 		register,
 		setValue
-	} = useForm<Type<typeof ExperienceCreateInput>>({
+	} = useForm<Type<typeof ExperienceUpdateInput>>({
 		defaultValues: {
-			endDate: {
-				month: today.month(),
-				year: today.year()
-			},
-			highlights: [],
-			location: "",
-			organizationName: "",
-			positionName: "",
+			endDate: !endDate
+				? false
+				: {
+						month: endDate.month(),
+						year: endDate.year()
+				  },
+			highlights: experience.highlights.slice(),
+			location: experience.location ?? "",
+			organizationName: experience.organizationName,
+			positionName: experience.positionName ?? "",
 			startDate: {
-				month: undefined,
-				year: undefined
-			},
-			type: undefined
+				month: startDate.month(),
+				year: startDate.year()
+			}
 		},
-		resolver: computedTypesResolver(ExperienceCreateInput)
+		resolver: computedTypesResolver(ExperienceUpdateInput)
 	});
 
 	const {
@@ -95,9 +106,8 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 	return (
 		<Form
 			className={className}
-			disabled={fetching}
 			onSubmit={handleSubmit(async (formData) => {
-				const startDate =
+				const formStartDate =
 					formData.startDate instanceof Date
 						? formData.startDate
 						: dayjs("2000-01-01T00:00:00.000Z")
@@ -105,7 +115,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 								.year(formData.startDate.year)
 								.toDate();
 
-				const endDate = !formData.endDate
+				const formEndDate = !formData.endDate
 					? null
 					: formData.endDate instanceof Date
 					? formData.endDate
@@ -114,9 +124,9 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 							.year(formData.endDate.year)
 							.toDate();
 
-				const didSucceed = await createExperience({
+				const didSucceed = await updateExperience({
 					data: {
-						endDate,
+						endDate: formEndDate,
 						highlights: formData.highlights.map(
 							(highlight: string | { value: string }) =>
 								typeof highlight === "string" ? highlight : highlight.value
@@ -124,11 +134,14 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 						location: formData.location,
 						organizationName: formData.organizationName,
 						positionName: formData.positionName,
-						startDate,
+						startDate: formStartDate,
 						type: formData.type as Maybe<ExperienceType>
+					},
+					where: {
+						id: experience.id
 					}
 				})
-					.then((result) => !!result.data?.createExperience)
+					.then((result) => !!result.data?.updateExperience)
 					.catch(() => false);
 
 				if (!didSucceed) {
@@ -316,9 +329,12 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 
 							setCurrentlyWork(newChecked);
 
-							newChecked
+							newChecked || !endDate
 								? setValue("endDate", false)
-								: setValue("endDate", { month: today.month(), year: today.year() });
+								: setValue("endDate", {
+										month: endDate.month(),
+										year: endDate.year()
+								  });
 						}}
 						tw="mr-2"
 					/>

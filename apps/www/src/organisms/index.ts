@@ -16,6 +16,7 @@ export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
 export * from "./TopLanguages";
+export * from "./UpdateExperienceForm";
 export * from "./UrqlProvider";
 export * from "./UserAvatar";
 export * from "./UserInfoSideBar";
