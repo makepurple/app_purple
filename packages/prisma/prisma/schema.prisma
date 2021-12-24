@@ -59,6 +59,7 @@ model User {
   // The GitHub name of the user
   name          String                 @unique
   posts         Post[]                 @relation("PostAuthor")
+  repositories  Repository[]
   // Self written summary or description
   sessions      Session[]
   skills        SkillsOnUsers[]
@@ -124,6 +125,7 @@ model Skill {
   owner         String
   users         SkillsOnUsers[]
   desiringUsers DesiredSkillsOnUsers[]
+  repositories  SkillsOnRepositories[]
 
   @@unique([name, owner])
 }
@@ -144,6 +146,23 @@ model DesiredSkillsOnUsers {
   userId  String
 
   @@id([skillId, userId])
+}
+
+model Repository {
+  id     Int                    @id @default(autoincrement())
+  name   String
+  skills SkillsOnRepositories[]
+  user   User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model SkillsOnRepositories {
+  skill        Skill      @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId      Int
+  repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+  repositoryId Int
+
+  @@id([skillId])
 }
 
 model Organization {
@@ -168,7 +187,7 @@ model Experience {
   location         String?
   organization     Organization    @relation(fields: [organizationName], references: [name], onDelete: Cascade)
   organizationName String
-  positionName     String?
+  positionName     String
   startDate        DateTime
   type             ExperienceType?
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)

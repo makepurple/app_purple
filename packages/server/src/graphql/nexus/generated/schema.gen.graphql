@@ -40,7 +40,7 @@ type Experience {
   location: String
   organization: Organization!
   organizationName: String!
-  positionName: String
+  positionName: String!
   startDate: DateTime!
   type: ExperienceType
   user: User!
@@ -59,8 +59,8 @@ input ExperienceCreateInput {
   highlights: [String!]
   location: String
   organizationName: String!
-  positionName: String
-  startDate: DateTime
+  positionName: String!
+  startDate: DateTime!
   type: ExperienceType
 }
 
@@ -284,6 +284,14 @@ type Query {
   viewer: User
 }
 
+type Repository {
+  id: Int!
+  name: String!
+  skills: [Skill!]!
+  user: User!
+  userId: String!
+}
+
 type Skill {
   desiringUsers: [User!]!
   id: Int!
@@ -397,6 +405,7 @@ type User {
   image: String
   name: String!
   posts: [Post!]!
+  repositories: [Repository!]!
   skills: [Skill!]!
   upvotedPosts: [Post!]!
 }

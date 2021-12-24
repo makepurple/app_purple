@@ -1,3 +1,4 @@
+import { ExperienceCreateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const createExperience = mutationField("createExperience", {
@@ -11,24 +12,34 @@ export const createExperience = mutationField("createExperience", {
 	resolve: async (root, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
+		const dataInput = ExperienceCreateInput.validator({
+			endDate: args.data.endDate,
+			highlights: args.data.highlights ?? [],
+			location: args.data.location,
+			organizationName: args.data.organizationName,
+			positionName: args.data.positionName,
+			startDate: args.data.startDate,
+			type: args.data.type
+		});
+
 		return await prisma.experience.create({
 			data: {
-				endDate: args.data.endDate,
-				highlights: args.data.highlights ?? [],
-				location: args.data.location,
+				endDate: dataInput.endDate as Maybe<Date>,
+				highlights: (dataInput.highlights ?? []) as string[],
+				location: dataInput.location,
 				organization: {
 					connectOrCreate: {
 						create: {
-							name: args.data.organizationName
+							name: dataInput.organizationName
 						},
 						where: {
-							name: args.data.organizationName
+							name: dataInput.organizationName
 						}
 					}
 				},
-				positionName: args.data.positionName,
-				startDate: args.data.startDate,
-				type: args.data.type,
+				positionName: dataInput.positionName,
+				startDate: dataInput.startDate as Date,
+				type: dataInput.type,
 				user: {
 					connect: {
 						id: user.id

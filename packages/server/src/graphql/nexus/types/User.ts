@@ -1,5 +1,5 @@
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { list, nonNull, objectType } from "nexus";
+import { objectType } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
 
@@ -9,8 +9,8 @@ export const User = objectType({
 	definition: (t) => {
 		t.field(NexusPrisma.User.comments);
 		t.field(NexusPrisma.User.description);
-		t.field("desiredSkills", {
-			type: nonNull(list(nonNull("Skill"))),
+		t.nonNull.list.nonNull.field("desiredSkills", {
+			type: "Skill",
 			resolve: (root, args, { prisma }) => {
 				return prisma.desiredSkillsOnUsers
 					.findMany({
@@ -27,8 +27,8 @@ export const User = objectType({
 			}
 		});
 		t.field(NexusPrisma.User.experiences);
-		t.field("github", {
-			type: nonNull("GitHubUser"),
+		t.nonNull.field("github", {
+			type: "GitHubUser",
 			resolve: async (parent, args, { octokit: graphql }) => {
 				const githubUser = await graphql`
 					query GetGitHubUser($login: String!) {
@@ -57,8 +57,9 @@ export const User = objectType({
 		t.field(NexusPrisma.User.image);
 		t.field(NexusPrisma.User.name);
 		t.field(NexusPrisma.User.posts);
-		t.field("skills", {
-			type: nonNull(list(nonNull("Skill"))),
+		t.field(NexusPrisma.User.repositories);
+		t.nonNull.list.nonNull.field("skills", {
+			type: "Skill",
 			resolve: async ({ id }, args, { prisma }) => {
 				return await prisma.user
 					.findUnique({
@@ -70,8 +71,8 @@ export const User = objectType({
 					.then((skills) => skills.map((s) => s.skill));
 			}
 		});
-		t.field("upvotedPosts", {
-			type: nonNull(list(nonNull("Post"))),
+		t.nonNull.list.nonNull.field("upvotedPosts", {
+			type: "Post",
 			resolve: async ({ id }, args, { prisma }) => {
 				return await prisma.user
 					.findUnique({

@@ -7,8 +7,8 @@ export const ExperienceCreateInput = inputObjectType({
 		t.list.nonNull.string("highlights");
 		t.string("location");
 		t.nonNull.string("organizationName");
-		t.string("positionName");
-		t.field("startDate", { type: "DateTime" });
+		t.nonNull.string("positionName");
+		t.nonNull.field("startDate", { type: "DateTime" });
 		t.field("type", { type: "ExperienceType" });
 	}
 });

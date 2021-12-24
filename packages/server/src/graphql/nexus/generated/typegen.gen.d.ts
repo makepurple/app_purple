@@ -88,8 +88,8 @@ export interface NexusGenInputs {
     highlights?: string[] | null; // [String!]
     location?: string | null; // String
     organizationName: string; // String!
-    positionName?: string | null; // String
-    startDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    positionName: string; // String!
+    startDate: NexusGenScalars['DateTime']; // DateTime!
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
   }
   ExperienceOrderByInput: { // input type
@@ -218,7 +218,7 @@ export interface NexusGenObjects {
     id: number; // Int!
     location?: string | null; // String
     organizationName: string; // String!
-    positionName?: string | null; // String
+    positionName: string; // String!
     startDate: NexusGenScalars['DateTime']; // DateTime!
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
   }
@@ -295,6 +295,11 @@ export interface NexusGenObjects {
     url: string; // String!
   }
   Query: {};
+  Repository: { // root type
+    id: number; // Int!
+    name: string; // String!
+    userId: string; // String!
+  }
   Skill: { // root type
     id: number; // Int!
     name: string; // String!
@@ -351,7 +356,7 @@ export interface NexusGenFieldTypes {
     location: string | null; // String
     organization: NexusGenRootTypes['Organization']; // Organization!
     organizationName: string; // String!
-    positionName: string | null; // String
+    positionName: string; // String!
     startDate: NexusGenScalars['DateTime']; // DateTime!
     type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     user: NexusGenRootTypes['User']; // User!
@@ -468,6 +473,13 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
+  Repository: { // field return type
+    id: number; // Int!
+    name: string; // String!
+    skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
     id: number; // Int!
@@ -505,6 +517,7 @@ export interface NexusGenFieldTypes {
     image: string | null; // String
     name: string; // String!
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
@@ -648,6 +661,13 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     viewer: 'User'
   }
+  Repository: { // field return type name
+    id: 'Int'
+    name: 'String'
+    skills: 'Skill'
+    user: 'User'
+    userId: 'String'
+  }
   Skill: { // field return type name
     desiringUsers: 'User'
     id: 'Int'
@@ -685,6 +705,7 @@ export interface NexusGenFieldTypeNames {
     image: 'String'
     name: 'String'
     posts: 'Post'
+    repositories: 'Repository'
     skills: 'Skill'
     upvotedPosts: 'Post'
   }

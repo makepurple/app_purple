@@ -109,13 +109,14 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 		<Form
 			className={className}
 			onSubmit={handleSubmit(async (formData) => {
-				const startDate =
-					formData.startDate instanceof Date
-						? formData.startDate
-						: dayjs("2000-01-01T00:00:00.000Z")
-								.month(formData.startDate.month)
-								.year(formData.startDate.year)
-								.toDate();
+				const startDate = !formData.startDate
+					? undefined
+					: formData.startDate instanceof Date
+					? formData.startDate
+					: dayjs("2000-01-01T00:00:00.000Z")
+							.month(formData.startDate.month)
+							.year(formData.startDate.year)
+							.toDate();
 
 				const endDate = !formData.endDate
 					? null
@@ -129,7 +130,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 				const didSucceed = await updateExperience({
 					data: {
 						endDate,
-						highlights: formData.highlights.map(
+						highlights: formData.highlights?.map(
 							(highlight: string | { value: string }) =>
 								typeof highlight === "string" ? highlight : highlight.value
 						),
@@ -221,7 +222,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 						<OrganizationInput
 							name={field.name}
 							onChange={field.onChange}
-							value={field.value}
+							value={field.value ?? ""}
 						/>
 					)}
 				/>

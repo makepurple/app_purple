@@ -1,3 +1,4 @@
+import { ExperienceUpdateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -21,26 +22,36 @@ export const updateExperience = mutationField("updateExperience", {
 		return true;
 	},
 	resolve: async (root, args, { prisma }) => {
+		const dataInput = ExperienceUpdateInput.validator({
+			endDate: args.data.endDate,
+			highlights: args.data.highlights,
+			location: args.data.location,
+			organizationName: args.data.organizationName ?? undefined,
+			positionName: args.data.positionName ?? undefined,
+			startDate: args.data.startDate ?? undefined,
+			type: args.data.type
+		});
+
 		return await prisma.experience.update({
 			data: {
-				endDate: args.data.endDate,
-				highlights: args.data.highlights ?? undefined,
-				location: args.data.location,
-				organization: args.data.organizationName
+				endDate: dataInput.endDate as Maybe<Date>,
+				highlights: ((dataInput.highlights ?? []) as string[]) ?? undefined,
+				location: dataInput.location,
+				organization: dataInput.organizationName
 					? {
 							connectOrCreate: {
 								create: {
-									name: args.data.organizationName
+									name: dataInput.organizationName
 								},
 								where: {
-									name: args.data.organizationName
+									name: dataInput.organizationName
 								}
 							}
 					  }
 					: undefined,
-				positionName: args.data.positionName,
-				startDate: args.data.startDate,
-				type: args.data.type
+				positionName: dataInput.positionName ?? undefined,
+				startDate: (dataInput.startDate as Maybe<Date>) ?? undefined,
+				type: dataInput.type
 			},
 			where: PrismaUtils.nonNull(args.where)
 		});

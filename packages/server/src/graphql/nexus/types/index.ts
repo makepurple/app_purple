@@ -16,6 +16,7 @@ export * from "./PostConnection";
 export * from "./PostEdge";
 export * from "./PostImage";
 export * from "./Query";
+export * from "./Repository";
 export * from "./Skill";
 export * from "./SuggestExperiences";
 export * from "./SuggestSkills";
