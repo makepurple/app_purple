@@ -9,7 +9,9 @@
 	],
 	"scripts": {
 		"generate:prisma": "prisma generate",
-		"prisma:format": "prisma format"
+		"prisma:format": "prisma format",
+		"prisma:migrate": "prisma migrate dev",
+		"prisma:studio": "prisma studio"
 	},
 	"dependencies": {
 		"@makepurple/typings": "workspace:*",
