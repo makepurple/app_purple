@@ -22792,6 +22792,22 @@ export type SuggestRepositoriesQueryVariables = Exact<{
 
 export type SuggestRepositoriesQuery = { readonly __typename?: 'Query', readonly search: { readonly __typename?: 'SearchResultItemConnection', readonly totalCount: number, readonly nodes?: ReadonlyArray<{ readonly __typename?: 'App' } | { readonly __typename?: 'Discussion' } | { readonly __typename?: 'Issue' } | { readonly __typename?: 'MarketplaceListing' } | { readonly __typename?: 'Organization' } | { readonly __typename?: 'PullRequest' } | { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly url: string, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } } | { readonly __typename?: 'User' } | null | undefined> | null | undefined } };
 
+export type GetRepositoryLanguageQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetRepositoryLanguageQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename?: 'Repository', readonly languages?: { readonly __typename?: 'LanguageConnection', readonly edges?: ReadonlyArray<{ readonly __typename?: 'LanguageEdge', readonly size: number, readonly node: { readonly __typename?: 'Language', readonly color?: string | null | undefined, readonly name: string } } | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+
+export type GetRepositoryIssueCountQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetRepositoryIssueCountQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename?: 'Repository', readonly issues: { readonly __typename?: 'IssueConnection', readonly totalCount: number } } | null | undefined };
+
 export type GetUserTopLanguagesQueryVariables = Exact<{
   login: Scalars['String'];
 }>;

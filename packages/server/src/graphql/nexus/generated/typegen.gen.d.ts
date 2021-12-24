@@ -245,6 +245,7 @@ export interface NexusGenObjects {
   GitHubRepository: { // root type
     description?: string | null; // String
     id: string; // String!
+    issueCount: number; // Int!
     name: string; // String!
     owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
     url: NexusGenScalars['URL']; // URL!
@@ -395,6 +396,8 @@ export interface NexusGenFieldTypes {
   GitHubRepository: { // field return type
     description: string | null; // String
     id: string; // String!
+    issueCount: number; // Int!
+    language: NexusGenRootTypes['TopLanguage'] | null; // TopLanguage
     name: string; // String!
     owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
     url: NexusGenScalars['URL']; // URL!
@@ -595,6 +598,8 @@ export interface NexusGenFieldTypeNames {
   GitHubRepository: { // field return type name
     description: 'String'
     id: 'String'
+    issueCount: 'Int'
+    language: 'TopLanguage'
     name: 'String'
     owner: 'GitHubRepositoryOwner'
     url: 'URL'

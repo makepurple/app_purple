@@ -118,6 +118,8 @@ type GitHubOrganization implements GitHubRepositoryOwner {
 type GitHubRepository {
   description: String
   id: String!
+  issueCount: Int!
+  language: TopLanguage
   name: String!
   owner: GitHubRepositoryOwner!
   url: URL!
