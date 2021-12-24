@@ -4,19 +4,17 @@ import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw, { styled } from "twin.macro";
 import { ExperienceCardExperienceFragment, ExperienceType } from "../../graphql";
 
-const EditButton = styled(Button)`
-	${tw`
-		flex-shrink-0
-		h-12
-		w-12
-		p-0
-		ml-2
-		opacity-100
-		transition
-		duration-150
-		ease-in
-		sm:opacity-0
-	`}
+const EditButton = tw(Button)`
+	flex-shrink-0
+	h-12
+	w-12
+	p-0
+	ml-2
+	opacity-100
+	transition
+	duration-150
+	ease-in
+	sm:opacity-0
 `;
 
 const Root = styled.div`
