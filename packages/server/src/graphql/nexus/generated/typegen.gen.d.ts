@@ -143,6 +143,9 @@ export interface NexusGenInputs {
     authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
     id?: number | null; // Int
   }
+  RepositoryWhereInput: { // input type
+    name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+  }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
     owner: string; // String!
@@ -299,6 +302,15 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
     userId: string; // String!
+  }
+  RepositoryConnection: { // root type
+    edges: NexusGenRootTypes['RepositoryEdge'][]; // [RepositoryEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  RepositoryEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Repository']; // Repository!
   }
   Skill: { // root type
     id: number; // Int!
@@ -468,6 +480,7 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
+    repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
@@ -480,6 +493,16 @@ export interface NexusGenFieldTypes {
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
+  }
+  RepositoryConnection: { // field return type
+    edges: NexusGenRootTypes['RepositoryEdge'][]; // [RepositoryEdge!]!
+    nodes: NexusGenRootTypes['Repository'][]; // [Repository!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  RepositoryEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Repository']; // Repository!
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
@@ -657,6 +680,7 @@ export interface NexusGenFieldTypeNames {
     post: 'Post'
     postDraft: 'Post'
     posts: 'PostConnection'
+    repositories: 'RepositoryConnection'
     suggestExperiences: 'SuggestExperiences'
     suggestSkills: 'SuggestSkills'
     user: 'User'
@@ -669,6 +693,16 @@ export interface NexusGenFieldTypeNames {
     skills: 'Skill'
     user: 'User'
     userId: 'String'
+  }
+  RepositoryConnection: { // field return type name
+    edges: 'RepositoryEdge'
+    nodes: 'Repository'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  RepositoryEdge: { // field return type name
+    cursor: 'String'
+    node: 'Repository'
   }
   Skill: { // field return type name
     desiringUsers: 'User'
@@ -774,8 +808,9 @@ export interface NexusGenArgTypes {
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
+      last?: number | null; // Int
       orderBy?: NexusGenInputs['ExperienceOrderByInput'] | null; // ExperienceOrderByInput
-      where: NexusGenInputs['ExperienceWhereInput']; // ExperienceWhereInput!
+      where?: NexusGenInputs['ExperienceWhereInput'] | null; // ExperienceWhereInput
     }
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
@@ -786,6 +821,13 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
+    }
+    repositories: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where: NexusGenInputs['RepositoryWhereInput']; // RepositoryWhereInput!
     }
     suggestExperiences: { // args
       first?: number | null; // Int

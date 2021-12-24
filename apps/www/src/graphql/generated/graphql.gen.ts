@@ -376,6 +376,7 @@ export type Query = {
   readonly postDraft?: Maybe<Post>;
   /** Relay-style connection on Post types. */
   readonly posts: PostConnection;
+  readonly repositories: RepositoryConnection;
   readonly suggestExperiences: SuggestExperiences;
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
@@ -388,8 +389,9 @@ export type QueryExperiencesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<ExperienceOrderByInput>;
-  where: ExperienceWhereInput;
+  where?: InputMaybe<ExperienceWhereInput>;
 };
 
 
@@ -406,6 +408,16 @@ export type QueryPostsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PostWhereInput>;
+};
+
+
+/** Root query type */
+export type QueryRepositoriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where: RepositoryWhereInput;
 };
 
 
@@ -436,6 +448,26 @@ export type Repository = {
   readonly skills: ReadonlyArray<Skill>;
   readonly user: User;
   readonly userId: Scalars['String'];
+};
+
+/** Relay-style connection for Repository types. */
+export type RepositoryConnection = {
+  readonly __typename: 'RepositoryConnection';
+  readonly edges: ReadonlyArray<RepositoryEdge>;
+  readonly nodes: ReadonlyArray<Repository>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+/** Relay-style edge for Repository type */
+export type RepositoryEdge = {
+  readonly __typename: 'RepositoryEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Repository;
+};
+
+export type RepositoryWhereInput = {
+  readonly name?: InputMaybe<StringNullableFilter>;
 };
 
 export type Skill = {

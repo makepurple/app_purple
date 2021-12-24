@@ -1,22 +1,21 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
-import { Experience } from "@prisma/client";
+import { Repository } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const experiences = queryField("experiences", {
-	type: nonNull("ExperienceConnection"),
+export const repositories = queryField("repositories", {
+	type: nonNull("RepositoryConnection"),
 	args: {
 		after: stringArg(),
 		before: stringArg(),
 		first: intArg(),
 		last: intArg(),
-		orderBy: arg({ type: "ExperienceOrderByInput" }),
-		where: arg({ type: "ExperienceWhereInput" })
+		where: nonNull(arg({ type: "RepositoryWhereInput" }))
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const connection = await findManyCursorConnection<Experience, { id: number }>(
+		const connection = await findManyCursorConnection<Repository, { id: number }>(
 			(paginationArgs) =>
-				prisma.experience.findMany({
+				prisma.repository.findMany({
 					...paginationArgs,
 					where: PrismaUtils.nonNull(args.where)
 				}),

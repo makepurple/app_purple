@@ -257,7 +257,7 @@ input PostWhereUniqueInput {
 
 # Root query type
 type Query {
-  experiences(after: String, before: String, first: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput!): ExperienceConnection!
+  experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
   ok: Boolean!
 
   # A user-created post.
@@ -266,6 +266,7 @@ type Query {
 
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
+  repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
@@ -279,6 +280,24 @@ type Repository {
   skills: [Skill!]!
   user: User!
   userId: String!
+}
+
+# Relay-style connection for Repository types.
+type RepositoryConnection {
+  edges: [RepositoryEdge!]!
+  nodes: [Repository!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+# Relay-style edge for Repository type
+type RepositoryEdge {
+  cursor: String!
+  node: Repository!
+}
+
+input RepositoryWhereInput {
+  name: StringNullableFilter
 }
 
 type Skill {

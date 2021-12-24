@@ -10,6 +10,7 @@ export * from "./PostPublishInput";
 export * from "./PostUpdateInput";
 export * from "./PostWhereInput";
 export * from "./PostWhereUniqueInput";
+export * from "./RepositoryWhereInput";
 export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillWhereUniqueInput";
 export * from "./StringNullableFilter";
