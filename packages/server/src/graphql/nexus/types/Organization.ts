@@ -1,5 +1,5 @@
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { nonNull, objectType } from "nexus";
+import { objectType } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubOrganization } from "../../../services/octokit";
 
@@ -8,8 +8,8 @@ export const Organization = objectType({
 	description: NexusPrisma.Organization.$description,
 	definition: (t) => {
 		t.field(NexusPrisma.Organization.experiences);
-		t.field("github", {
-			type: nonNull("GitHubOrganization"),
+		t.nonNull.field("github", {
+			type: "GitHubOrganization",
 			resolve: async (parent, args, { octokit: graphql }) => {
 				const githubOrganization = await graphql`
 					query GetGitHubOrganization($login: String!) {
@@ -23,7 +23,7 @@ export const Organization = objectType({
 						octokit.GetGitHubOrganizationQuery,
 						octokit.GetGitHubOrganizationQueryVariables
 					>({
-						login: ""
+						login: parent.name
 					})
 					.catch(() => null);
 

@@ -430,6 +430,7 @@ export type QueryUserArgs = {
 
 export type Repository = {
   readonly __typename: 'Repository';
+  readonly github: GitHubRepository;
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
   readonly skills: ReadonlyArray<Skill>;

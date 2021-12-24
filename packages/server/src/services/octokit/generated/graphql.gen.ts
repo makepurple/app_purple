@@ -868,6 +868,8 @@ export type BranchProtectionRule = Node & {
   readonly allowsForcePushes: Scalars['Boolean'];
   /** A list of conflicts matching branches protection rule and other branch protection rules */
   readonly branchProtectionRuleConflicts: BranchProtectionRuleConflictConnection;
+  /** A list of actors able to force push for this branch protection rule. */
+  readonly bypassForcePushAllowances: BypassForcePushAllowanceConnection;
   /** A list of actors able to bypass PRs for this branch protection rule. */
   readonly bypassPullRequestAllowances: BypassPullRequestAllowanceConnection;
   /** The actor who created this branch protection rule. */
@@ -918,6 +920,15 @@ export type BranchProtectionRule = Node & {
 
 /** A branch protection rule. */
 export type BranchProtectionRuleBranchProtectionRuleConflictsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** A branch protection rule. */
+export type BranchProtectionRuleBypassForcePushAllowancesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1014,6 +1025,38 @@ export type BranchProtectionRuleEdge = {
   readonly cursor: Scalars['String'];
   /** The item at the end of the edge. */
   readonly node?: Maybe<BranchProtectionRule>;
+};
+
+/** A team or user who has the ability to bypass a force push requirement on a protected branch. */
+export type BypassForcePushAllowance = Node & {
+  readonly __typename?: 'BypassForcePushAllowance';
+  /** The actor that can dismiss. */
+  readonly actor?: Maybe<BranchActorAllowanceActor>;
+  /** Identifies the branch protection rule associated with the allowed user or team. */
+  readonly branchProtectionRule?: Maybe<BranchProtectionRule>;
+  readonly id: Scalars['ID'];
+};
+
+/** The connection type for BypassForcePushAllowance. */
+export type BypassForcePushAllowanceConnection = {
+  readonly __typename?: 'BypassForcePushAllowanceConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<BypassForcePushAllowanceEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<BypassForcePushAllowance>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An edge in a connection. */
+export type BypassForcePushAllowanceEdge = {
+  readonly __typename?: 'BypassForcePushAllowanceEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<BypassForcePushAllowance>;
 };
 
 /** A team or user who has the ability to bypass a pull request requirement on a protected branch. */
@@ -2698,6 +2741,8 @@ export type CreateBranchProtectionRuleInput = {
   readonly allowsDeletions?: InputMaybe<Scalars['Boolean']>;
   /** Are force pushes allowed on this branch. */
   readonly allowsForcePushes?: InputMaybe<Scalars['Boolean']>;
+  /** A list of User or Team IDs allowed to bypass force push targeting matching branches. */
+  readonly bypassForcePushActorIds?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
   /** A list of User or Team IDs allowed to bypass pull requests targeting matching branches. */
   readonly bypassPullRequestActorIds?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
   /** A unique identifier for the client performing the mutation. */
@@ -4833,6 +4878,7 @@ export type EnterpriseOrganizationsArgs = {
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<OrganizationOrder>;
   query?: InputMaybe<Scalars['String']>;
+  viewerOrganizationRole?: InputMaybe<RoleInOrganization>;
 };
 
 
@@ -6909,7 +6955,7 @@ export enum IpAllowListForInstalledAppsEnabledSettingValue {
 export type IpAllowListOwner = App | Enterprise | Organization;
 
 /** An Issue is a place to discuss ideas, enhancements, tasks, and bugs for a project. */
-export type Issue = Assignable & Closable & Comment & Labelable & Lockable & Node & Reactable & RepositoryNode & Subscribable & UniformResourceLocatable & Updatable & UpdatableComment & {
+export type Issue = Assignable & Closable & Comment & Labelable & Lockable & Node & ProjectNextOwner & Reactable & RepositoryNode & Subscribable & UniformResourceLocatable & Updatable & UpdatableComment & {
   readonly __typename?: 'Issue';
   /** Reason that the conversation was locked. */
   readonly activeLockReason?: Maybe<LockReason>;
@@ -6966,6 +7012,10 @@ export type Issue = Assignable & Closable & Comment & Labelable & Lockable & Nod
   readonly participants: UserConnection;
   /** List of project cards associated with this issue. */
   readonly projectCards: ProjectCardConnection;
+  /** Find a project by project (beta) number. */
+  readonly projectNext?: Maybe<ProjectNext>;
+  /** A list of project (beta) items under the owner. */
+  readonly projectsNext: ProjectNextConnection;
   /** Identifies when the comment was published at. */
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** A list of reactions grouped by content left on the subject. */
@@ -7061,6 +7111,23 @@ export type IssueProjectCardsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** An Issue is a place to discuss ideas, enhancements, tasks, and bugs for a project. */
+export type IssueProjectNextArgs = {
+  number: Scalars['Int'];
+};
+
+
+/** An Issue is a place to discuss ideas, enhancements, tasks, and bugs for a project. */
+export type IssueProjectsNextArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<ProjectNextOrderField>;
 };
 
 
@@ -8860,6 +8927,8 @@ export type Mutation = {
   readonly updateIssueComment?: Maybe<UpdateIssueCommentPayload>;
   /** Update the setting to restrict notifications to only verified or approved domains available to an owner. */
   readonly updateNotificationRestrictionSetting?: Maybe<UpdateNotificationRestrictionSettingPayload>;
+  /** Sets whether private repository forks are enabled for an organization. */
+  readonly updateOrganizationAllowPrivateRepositoryForkingSetting?: Maybe<UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload>;
   /** Updates an existing project. */
   readonly updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates an existing project card. */
@@ -9756,6 +9825,12 @@ export type MutationUpdateIssueCommentArgs = {
 /** The root query for implementing GraphQL mutations. */
 export type MutationUpdateNotificationRestrictionSettingArgs = {
   input: UpdateNotificationRestrictionSettingInput;
+};
+
+
+/** The root query for implementing GraphQL mutations. */
+export type MutationUpdateOrganizationAllowPrivateRepositoryForkingSettingArgs = {
+  input: UpdateOrganizationAllowPrivateRepositoryForkingSettingInput;
 };
 
 
@@ -11350,6 +11425,8 @@ export type Organization = Actor & MemberStatusable & Node & PackageOwner & Prof
   readonly login: Scalars['String'];
   /** Get the status messages members of this entity have set that are either public or visible only to the organization. */
   readonly memberStatuses: UserStatusConnection;
+  /** Members can fork private repositories in this organization */
+  readonly membersCanForkPrivateRepositories: Scalars['Boolean'];
   /** A list of users who are members of this organization. */
   readonly membersWithRole: OrganizationMemberConnection;
   /** The estimated monthly GitHub Sponsors income for this user/organization in cents (USD). */
@@ -11376,11 +11453,11 @@ export type Organization = Actor & MemberStatusable & Node & PackageOwner & Prof
   readonly pinnedItemsRemaining: Scalars['Int'];
   /** Find project by number. */
   readonly project?: Maybe<Project>;
-  /** Find project by project next number. */
+  /** Find a project by project (beta) number. */
   readonly projectNext?: Maybe<ProjectNext>;
   /** A list of projects under the owner. */
   readonly projects: ProjectConnection;
-  /** A list of project next items under the owner. */
+  /** A list of project (beta) items under the owner. */
   readonly projectsNext: ProjectNextConnection;
   /** The HTTP path listing organization's projects */
   readonly projectsResourcePath: Scalars['URI'];
@@ -11595,6 +11672,8 @@ export type OrganizationProjectsNextArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<ProjectNextOrderField>;
 };
 
 
@@ -11764,7 +11843,7 @@ export type OrganizationAuditEntryEdge = {
   readonly node?: Maybe<OrganizationAuditEntry>;
 };
 
-/** The connection type for Organization. */
+/** A list of organizations managed by an enterprise. */
 export type OrganizationConnection = {
   readonly __typename?: 'OrganizationConnection';
   /** A list of edges. */
@@ -13084,28 +13163,42 @@ export type ProjectNextItemFieldValueEdge = {
   readonly node?: Maybe<ProjectNextItemFieldValue>;
 };
 
-/** Represents an owner of a Project. */
+/** Properties by which the return project can be ordered. */
+export enum ProjectNextOrderField {
+  /** The project's date and time of creation */
+  CreatedAt = 'CREATED_AT',
+  /** The project's number */
+  Number = 'NUMBER',
+  /** The project's title */
+  Title = 'TITLE',
+  /** The project's date and time of update */
+  UpdatedAt = 'UPDATED_AT'
+}
+
+/** Represents an owner of a project (beta). */
 export type ProjectNextOwner = {
   readonly id: Scalars['ID'];
-  /** Find project by project next number. */
+  /** Find a project by project (beta) number. */
   readonly projectNext?: Maybe<ProjectNext>;
-  /** A list of project next items under the owner. */
+  /** A list of project (beta) items under the owner. */
   readonly projectsNext: ProjectNextConnection;
 };
 
 
-/** Represents an owner of a Project. */
+/** Represents an owner of a project (beta). */
 export type ProjectNextOwnerProjectNextArgs = {
   number: Scalars['Int'];
 };
 
 
-/** Represents an owner of a Project. */
+/** Represents an owner of a project (beta). */
 export type ProjectNextOwnerProjectsNextArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<ProjectNextOrderField>;
 };
 
 /** Ways in which lists of projects can be ordered upon return. */
@@ -13239,7 +13332,7 @@ export type PublicKeyEdge = {
 };
 
 /** A repository pull request. */
-export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable & Node & Reactable & RepositoryNode & Subscribable & UniformResourceLocatable & Updatable & UpdatableComment & {
+export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable & Node & ProjectNextOwner & Reactable & RepositoryNode & Subscribable & UniformResourceLocatable & Updatable & UpdatableComment & {
   readonly __typename?: 'PullRequest';
   /** Reason that the conversation was locked. */
   readonly activeLockReason?: Maybe<LockReason>;
@@ -13350,6 +13443,10 @@ export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable
   readonly potentialMergeCommit?: Maybe<Commit>;
   /** List of project cards associated with this pull request. */
   readonly projectCards: ProjectCardConnection;
+  /** Find a project by project (beta) number. */
+  readonly projectNext?: Maybe<ProjectNext>;
+  /** A list of project (beta) items under the owner. */
+  readonly projectsNext: ProjectNextConnection;
   /** Identifies when the comment was published at. */
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** A list of reactions grouped by content left on the subject. */
@@ -13522,6 +13619,23 @@ export type PullRequestProjectCardsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** A repository pull request. */
+export type PullRequestProjectNextArgs = {
+  number: Scalars['Int'];
+};
+
+
+/** A repository pull request. */
+export type PullRequestProjectsNextArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<ProjectNextOrderField>;
 };
 
 
@@ -18001,6 +18115,16 @@ export type ReviewStatusHovercardContext = HovercardContext & {
   readonly reviewDecision?: Maybe<PullRequestReviewDecision>;
 };
 
+/** Possible roles a user may have in relation to an organization. */
+export enum RoleInOrganization {
+  /** A user who is a direct member of the organization. */
+  DirectMember = 'DIRECT_MEMBER',
+  /** A user with full administrative access to the organization. */
+  Owner = 'OWNER',
+  /** A user who is unaffiliated with the organization. */
+  Unaffiliated = 'UNAFFILIATED'
+}
+
 /** The possible digest algorithms used to sign SAML requests for an identity provider. */
 export enum SamlDigestAlgorithm {
   /** SHA1 */
@@ -20725,6 +20849,8 @@ export type UpdateBranchProtectionRuleInput = {
   readonly allowsForcePushes?: InputMaybe<Scalars['Boolean']>;
   /** The global relay id of the branch protection rule to be updated. */
   readonly branchProtectionRuleId: Scalars['ID'];
+  /** A list of User or Team IDs allowed to bypass force push targeting matching branches. */
+  readonly bypassForcePushActorIds?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
   /** A list of User or Team IDs allowed to bypass pull requests targeting matching branches. */
   readonly bypassPullRequestActorIds?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
   /** A unique identifier for the client performing the mutation. */
@@ -21373,6 +21499,27 @@ export type UpdateNotificationRestrictionSettingPayload = {
   readonly owner?: Maybe<VerifiableDomainOwner>;
 };
 
+/** Autogenerated input type of UpdateOrganizationAllowPrivateRepositoryForkingSetting */
+export type UpdateOrganizationAllowPrivateRepositoryForkingSettingInput = {
+  /** A unique identifier for the client performing the mutation. */
+  readonly clientMutationId?: InputMaybe<Scalars['String']>;
+  /** Enable forking of private repositories in the organization? */
+  readonly forkingEnabled: Scalars['Boolean'];
+  /** The ID of the organization on which to set the allow private repository forking setting. */
+  readonly organizationId: Scalars['ID'];
+};
+
+/** Autogenerated return type of UpdateOrganizationAllowPrivateRepositoryForkingSetting */
+export type UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload = {
+  readonly __typename?: 'UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload';
+  /** A unique identifier for the client performing the mutation. */
+  readonly clientMutationId?: Maybe<Scalars['String']>;
+  /** A message confirming the result of updating the allow private repository forking setting. */
+  readonly message?: Maybe<Scalars['String']>;
+  /** The organization with the updated allow private repository forking setting. */
+  readonly organization?: Maybe<Organization>;
+};
+
 /** Autogenerated input type of UpdateProjectCard */
 export type UpdateProjectCardInput = {
   /** A unique identifier for the client performing the mutation. */
@@ -21822,11 +21969,11 @@ export type User = Actor & Node & PackageOwner & ProfileOwner & ProjectNextOwner
   readonly pinnedItemsRemaining: Scalars['Int'];
   /** Find project by number. */
   readonly project?: Maybe<Project>;
-  /** Find project by project next number. */
+  /** Find a project by project (beta) number. */
   readonly projectNext?: Maybe<ProjectNext>;
   /** A list of projects under the owner. */
   readonly projects: ProjectConnection;
-  /** A list of project next items under the owner. */
+  /** A list of project (beta) items under the owner. */
   readonly projectsNext: ProjectNextConnection;
   /** The HTTP path listing user's projects */
   readonly projectsResourcePath: Scalars['URI'];
@@ -22100,6 +22247,8 @@ export type UserProjectsNextArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<ProjectNextOrderField>;
 };
 
 
@@ -22656,6 +22805,14 @@ export type GetGitHubOrganizationQueryVariables = Exact<{
 
 
 export type GetGitHubOrganizationQuery = { readonly __typename?: 'Query', readonly organization?: { readonly __typename: 'Organization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } | null | undefined };
+
+export type GetGitHubRepositoryQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetGitHubRepositoryQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly url: string, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } } | null | undefined };
 
 export type GetGitHubUserQueryVariables = Exact<{
   login: Scalars['String'];

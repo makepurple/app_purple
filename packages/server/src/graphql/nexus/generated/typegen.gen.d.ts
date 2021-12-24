@@ -474,6 +474,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Repository: { // field return type
+    github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
     id: number; // Int!
     name: string; // String!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
@@ -662,6 +663,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Repository: { // field return type name
+    github: 'GitHubRepository'
     id: 'Int'
     name: 'String'
     skills: 'Skill'

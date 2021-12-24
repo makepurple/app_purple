@@ -273,6 +273,7 @@ type Query {
 }
 
 type Repository {
+  github: GitHubRepository!
   id: Int!
   name: String!
   skills: [Skill!]!
