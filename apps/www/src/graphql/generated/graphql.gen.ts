@@ -590,6 +590,8 @@ export type ExperienceCardExperienceFragment = { readonly __typename: 'Experienc
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
 
+export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
+
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
 export type UpdateExperienceFormExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: number, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined };
@@ -777,6 +779,26 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
   upvoteCount
   urlSlug
   viewerUpvoted
+}
+    `;
+export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment RepositoryCardRepository on Repository {
+  id
+  github {
+    id
+    description
+    name
+    owner {
+      id
+      login
+    }
+    url
+  }
+  name
+  skills {
+    id
+    name
+  }
 }
     `;
 export const UpdateExperienceFormExperienceFragmentDoc = /*#__PURE__*/ gql`

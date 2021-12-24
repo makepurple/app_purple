@@ -1,0 +1,18 @@
+fragment RepositoryCardRepository on Repository {
+	id
+	github {
+		id
+		description
+		name
+		owner {
+			id
+			login
+		}
+		url
+	}
+	name
+	skills {
+		id
+		name
+	}
+}
