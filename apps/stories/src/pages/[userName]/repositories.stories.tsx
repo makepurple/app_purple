@@ -1,20 +1,18 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
-	CreatePost_mock,
 	GetPostDraft_mock,
-	GetPosts_mock,
+	GetRepositories_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
-import { PageProps } from "@makepurple/www/src/page-props/[userName]";
-import Page from "@makepurple/www/src/pages/[userName]";
+import { Page } from "@makepurple/www/src/pages/[userName]/repositories";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
 import React from "react";
 import { getOperationName } from "urql";
 
 export default {
-	title: "pages/[username]",
+	title: "pages/[userName]/repositories",
 	component: Page,
 	decorators: [
 		(Story) => (
@@ -25,7 +23,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story<PageProps> = (args) => {
+const Template: Story = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};
@@ -42,16 +40,12 @@ export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
-	urql: async (op: any) => {
+	urql: (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "CreatePost":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: CreatePost_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
-			case "GetPosts":
-				return { data: GetPosts_mock };
+			case "GetRepositories":
+				return { data: GetRepositories_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:
@@ -66,16 +60,12 @@ Loading.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "CreatePost":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: CreatePost_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
-			case "GetPosts":
+			case "GetRepositories":
 				await PromiseUtils.wait(ms("5s"));
 
-				return { data: GetPosts_mock };
+				return { data: GetRepositories_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:
@@ -88,25 +78,16 @@ export const NoResults = Template.bind({});
 NoResults.args = { ...Template.args };
 NoResults.parameters = {
 	...Template.parameters,
-	urql: async (op: any) => {
+	urql: (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "CreatePost":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: CreatePost_mock };
 			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetRepositories":
 				return {
 					data: {
 						__typename: "Query",
-						postDraft: null
-					}
-				};
-			case "GetPosts":
-				return {
-					data: {
-						__typename: "Query",
-						posts: {
-							__typename: "PostConnection",
+						repositories: {
+							__typename: "RepositoryConnection",
 							edges: [],
 							nodes: [],
 							pageInfo: {

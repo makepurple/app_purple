@@ -1,22 +1,20 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
-	CreateExperience_mock,
 	CreatePost_mock,
-	GetExperiences_mock,
 	GetPostDraft_mock,
-	GetUserInfoSideBar_mock,
-	SuggestExperiences_mock
+	GetPosts_mock,
+	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
-import { PageProps } from "@makepurple/www/src/page-props/[userName]/experiences";
-import Page from "@makepurple/www/src/pages/[userName]/experiences";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]";
+import Page from "@makepurple/www/src/pages/[userName]";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
 import React from "react";
 import { getOperationName } from "urql";
 
 export default {
-	title: "pages/[username]/experiences",
+	title: "pages/[userName]",
 	component: Page,
 	decorators: [
 		(Story) => (
@@ -46,24 +44,16 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "CreateExperience":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: CreateExperience_mock };
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetExperiences":
-				return { data: GetExperiences_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetPosts":
+				return { data: GetPosts_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
-			case "SuggestExperiences":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: SuggestExperiences_mock };
 			default:
 				return {};
 		}
@@ -76,26 +66,18 @@ Loading.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "CreateExperience":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: CreateExperience_mock };
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetExperiences":
-				await PromiseUtils.wait(ms("5s"));
-
-				return { data: GetExperiences_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetPosts":
+				await PromiseUtils.wait(ms("5s"));
+
+				return { data: GetPosts_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
-			case "SuggestExperiences":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: SuggestExperiences_mock };
 			default:
 				return {};
 		}
@@ -108,20 +90,23 @@ NoResults.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "CreateExperience":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: CreateExperience_mock };
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetExperiences":
+			case "GetPostDraft":
 				return {
 					data: {
 						__typename: "Query",
-						experiences: {
-							__typename: "ExperienceConnection",
+						postDraft: null
+					}
+				};
+			case "GetPosts":
+				return {
+					data: {
+						__typename: "Query",
+						posts: {
+							__typename: "PostConnection",
 							edges: [],
 							nodes: [],
 							pageInfo: {
@@ -134,19 +119,8 @@ NoResults.parameters = {
 						}
 					}
 				};
-			case "GetPostDraft":
-				return {
-					data: {
-						__typename: "Query",
-						postDraft: null
-					}
-				};
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
-			case "SuggestExperiences":
-				await PromiseUtils.wait(ms("1s"));
-
-				return { data: SuggestExperiences_mock };
 			default:
 				return {};
 		}

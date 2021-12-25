@@ -3,6 +3,7 @@ export * from "./DocumentEditorPostImageButton";
 export * from "./ExperienceCard";
 export * from "./LoadingExperienceCard";
 export * from "./LoadingPostCard";
+export * from "./LoadingRepositoryCard";
 export * from "./LoginButton";
 export * from "./LogoutButton";
 export * from "./MobileAppDrawer";

@@ -332,6 +332,8 @@ type RepositoryEdge {
 
 input RepositoryWhereInput {
   name: StringNullableFilter
+  user: UserWhereInput
+  userId: String
 }
 
 type Skill {

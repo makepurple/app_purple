@@ -13,7 +13,7 @@ import React from "react";
 import { getOperationName } from "urql";
 
 export default {
-	title: "pages/[username]/draft",
+	title: "pages/[userName]/draft",
 	component: Page,
 	decorators: [
 		(Story) => (

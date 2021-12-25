@@ -492,6 +492,8 @@ export type RepositoryEdge = {
 
 export type RepositoryWhereInput = {
   readonly name?: InputMaybe<StringNullableFilter>;
+  readonly user?: InputMaybe<UserWhereInput>;
+  readonly userId?: InputMaybe<Scalars['String']>;
 };
 
 export type Skill = {
@@ -736,6 +738,15 @@ export type GetPostsQueryVariables = Exact<{
 
 
 export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+
+export type GetRepositoriesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where: RepositoryWhereInput;
+}>;
+
+
+export type GetRepositoriesQuery = { readonly __typename: 'Query', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetUserInfoSideBarQueryVariables = Exact<{
   name: Scalars['String'];
@@ -1206,6 +1217,37 @@ export const GetPostsDocument = /*#__PURE__*/ gql`
 
 export function useGetPostsQuery(options: Omit<Urql.UseQueryArgs<GetPostsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetPostsQuery>({ query: GetPostsDocument, ...options });
+};
+export const GetRepositoriesDocument = /*#__PURE__*/ gql`
+    query GetRepositories($after: String, $first: Int, $where: RepositoryWhereInput!) {
+  repositories(after: $after, first: $first, where: $where) {
+    __typename
+    edges {
+      __typename
+      cursor
+      node {
+        __typename
+        id
+      }
+    }
+    nodes {
+      __typename
+      id
+      ...RepositoryCardRepository
+    }
+    pageInfo {
+      __typename
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}
+    ${RepositoryCardRepositoryFragmentDoc}`;
+
+export function useGetRepositoriesQuery(options: Omit<Urql.UseQueryArgs<GetRepositoriesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetRepositoriesQuery>({ query: GetRepositoriesDocument, ...options });
 };
 export const GetUserInfoSideBarDocument = /*#__PURE__*/ gql`
     query GetUserInfoSideBar($name: String!) {

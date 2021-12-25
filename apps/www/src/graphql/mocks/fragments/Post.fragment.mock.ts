@@ -1,6 +1,6 @@
 import { dayjs } from "@makepurple/utils";
 import faker from "faker";
-import type { Post } from "../../../graphql/generated";
+import type { Post } from "../../generated";
 import { User_fragment_mock } from "./User.fragment.mock";
 
 faker.seed(1);

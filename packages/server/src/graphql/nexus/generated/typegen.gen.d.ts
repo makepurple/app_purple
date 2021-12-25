@@ -145,6 +145,8 @@ export interface NexusGenInputs {
   }
   RepositoryWhereInput: { // input type
     name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: string | null; // String
   }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!

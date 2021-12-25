@@ -1,4 +1,4 @@
-import type { GitHubUser } from "../../../graphql/generated";
+import type { GitHubUser } from "../../generated";
 import { TopLanguages_fragment_mock } from "./TopLanguages.fragment.mock";
 
 export const GitHubUser_fragment_mock: GitHubUser = {

@@ -1,4 +1,4 @@
-import type { TopLanguages } from "../../../graphql/generated";
+import type { TopLanguages } from "../../generated";
 
 export const TopLanguages_fragment_mock: TopLanguages = {
 	__typename: "TopLanguages",

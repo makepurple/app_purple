@@ -12,7 +12,7 @@ const Root = tw.div`
 	cursor-pointer
 `;
 
-const Name = tw.h2`
+const Name = tw.h3`
 	text-lg
 	leading-none
 	font-semibold
@@ -95,7 +95,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 				tw="mt-3"
 			>
 				{repository.skills.map((skill) => (
-					<Tags.Tag key={skill.id} id={skill.id.toString()}>
+					<Tags.Tag key={skill.id} id={skill.id.toString()} tw="cursor-auto">
 						{skill.name}
 					</Tags.Tag>
 				))}

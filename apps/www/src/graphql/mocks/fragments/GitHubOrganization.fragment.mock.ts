@@ -1,5 +1,5 @@
 import { oneLine } from "common-tags";
-import { GitHubOrganization } from "../../../graphql/generated";
+import { GitHubOrganization } from "../../generated";
 
 export const GitHubOrganization_fragment_mock: GitHubOrganization = {
 	__typename: "GitHubOrganization",
