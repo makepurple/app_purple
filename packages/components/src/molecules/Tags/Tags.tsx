@@ -71,6 +71,7 @@ const _Tags = memo(
 			children = [],
 			editable = false,
 			onChange,
+			onClick,
 			type = "neutral",
 			...restTagsProps
 		} = props;
@@ -97,7 +98,9 @@ const _Tags = memo(
 				{...restTagsProps}
 				ref={ref}
 				editable={editable}
-				onClick={() => {
+				onClick={(e) => {
+					onClick?.(e);
+
 					if (!editableElem) return;
 
 					editableElem.focus();

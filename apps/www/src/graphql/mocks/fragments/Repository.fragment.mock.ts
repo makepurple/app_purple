@@ -14,7 +14,7 @@ export const Repository_fragment_mock: Repository = {
 		issueCount: 123,
 		licenseInfo: {
 			__typename: "GitHubLicense",
-			id: "MDc6TGljZW5zZTEz",
+			id: "0",
 			name: "MIT License",
 			nickname: null,
 			spdxId: "MIT",
@@ -22,6 +22,7 @@ export const Repository_fragment_mock: Repository = {
 		},
 		name: "react",
 		owner: {
+			...({ __typename: "GitHubUser" } as any),
 			avatarUrl: "https://avatars.githubusercontent.com/u/69631?v=4",
 			id: "MDEyOk9yZ2FuaXphdGlvbjY5NjMx",
 			login: "facebook",
@@ -39,7 +40,24 @@ export const Repository_fragment_mock: Repository = {
 		url: "https://github.com/facebook/react"
 	},
 	name: "react",
-	skills: [],
+	skills: [
+		{
+			__typename: "Skill",
+			name: "react",
+			id: 0,
+			desiringUsers: [],
+			users: [],
+			owner: "facebook"
+		},
+		{
+			__typename: "Skill",
+			name: "typescript",
+			id: 1,
+			desiringUsers: [],
+			users: [],
+			owner: "microsoft"
+		}
+	],
 	user: User_fragment_mock,
 	userId: User_fragment_mock.id.toString()
 };

@@ -28,6 +28,7 @@ export * from "./Input";
 export * from "./LazyMotion";
 export * from "./ListItem";
 export * from "./MainContainer";
+export * from "./MaybeAnchor";
 export * from "./Menu";
 export * from "./NextLinkAs";
 export * from "./NextProgressBar";

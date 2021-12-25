@@ -1,4 +1,7 @@
+import { InferComponentProps } from "@makepurple/typings";
 import tw, { styled } from "twin.macro";
+
+export type AnchorProps = InferComponentProps<typeof Anchor>;
 
 export const Anchor = styled.a`
 	${tw`

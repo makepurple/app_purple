@@ -54,7 +54,7 @@ const generateComponents = () => {
 			fs.appendFileSync(
 				`${componentPath}/index.tsx`,
 				`${stripIndents`
-					import type { InferComponentProps } from "@makepurple/typings"
+					import type { InferComponentProps } from "@makepurple/typings";
 					import * as React from "react";
 					import type { Ref, SVGProps } from "react";
 
