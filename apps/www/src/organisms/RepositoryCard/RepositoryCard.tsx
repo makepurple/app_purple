@@ -1,4 +1,5 @@
 import { Anchor, MaybeAnchor, Tags } from "@makepurple/components";
+import { dayjs } from "@makepurple/utils";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import { RepositoryCardRepositoryFragment } from "../../graphql";
@@ -155,6 +156,9 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 					<PullRequestIcon height={16} width={16} tw="mr-1" />
 					<span>{repository.github.pullRequestCount.toLocaleString()}</span>
 				</StyledMaybeAnchor>
+				{!!repository.github.pushedAt && (
+					<span>Updated {dayjs(repository.github.pushedAt).fromNow()}</span>
+				)}
 			</Info>
 		</Root>
 	);
