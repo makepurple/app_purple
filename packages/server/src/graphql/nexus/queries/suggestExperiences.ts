@@ -20,7 +20,7 @@ export const suggestExperiences = queryField("suggestExperiences", {
 							...GitHubOrganization
 						}
 					}
-					totalCount: repositoryCount
+					totalCount: userCount
 				}
 				${GitHubOrganization}
 			}

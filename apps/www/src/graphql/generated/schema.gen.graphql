@@ -168,6 +168,7 @@ type Mutation {
 
   # Creates a new draft if the user doesn't have a draft pending to be published already
   createPost: Post!
+  createRepository(data: RepositoryCreateInput!): Repository!
 
   # Users can delete their own experiences.
   deleteExperience(where: ExperienceWhereUniqueInput!): Experience!
@@ -181,6 +182,7 @@ type Mutation {
   updateExperience(data: ExperienceUpdateInput!, where: ExperienceWhereUniqueInput!): Experience
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): Post
+  updateRepository(data: RepositoryUpdateInput!, where: RepositoryWhereUniqueInput!): Repository
   updateSkills(data: UpdateSkillsInput!): User
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): PostImage!
   upvotePost(where: PostWhereUniqueInput!): Post!
@@ -290,6 +292,7 @@ type Query {
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
+  suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
   viewer: User
@@ -312,16 +315,33 @@ type RepositoryConnection {
   totalCount: Int!
 }
 
+input RepositoryCreateInput {
+  name: String!
+}
+
 # Relay-style edge for Repository type
 type RepositoryEdge {
   cursor: String!
   node: Repository!
 }
 
+input RepositoryNameUserIdCompoundUniqueInput {
+  name: String!
+  userId: String!
+}
+
+input RepositoryUpdateInput {
+  skills: [SkillWhereUniqueInput!]
+}
+
 input RepositoryWhereInput {
   name: StringNullableFilter
   user: UserWhereInput
   userId: String
+}
+
+input RepositoryWhereUniqueInput {
+  id: Int
 }
 
 type Skill {
@@ -362,6 +382,15 @@ type SuggestExperiences {
 }
 
 input SuggestExperiencesWhereInput {
+  name: String!
+}
+
+type SuggestRepositories {
+  nodes: [GitHubRepository!]!
+  totalCount: Int!
+}
+
+input SuggestRepositoriesWhereInput {
   name: String!
 }
 

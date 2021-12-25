@@ -22776,6 +22776,14 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+export type GetRepositoryToCreateQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetRepositoryToCreateQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename?: 'Repository', readonly id: string } | null | undefined };
+
 export type SuggestOrganizationsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   searchQuery: Scalars['String'];

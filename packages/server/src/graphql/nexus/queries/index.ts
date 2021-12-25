@@ -5,4 +5,5 @@ export * from "./posts";
 export * from "./repositories";
 export * from "./user";
 export * from "./suggestExperiences";
+export * from "./suggestRepositories";
 export * from "./suggestSkills";

@@ -23,6 +23,7 @@ export * from "./RepositoryConnection";
 export * from "./RepositoryEdge";
 export * from "./Skill";
 export * from "./SuggestExperiences";
+export * from "./SuggestRepositories";
 export * from "./SuggestSkills";
 export * from "./TopLanguage";
 export * from "./TopLanguages";

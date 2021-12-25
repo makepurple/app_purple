@@ -143,10 +143,23 @@ export interface NexusGenInputs {
     authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
     id?: number | null; // Int
   }
+  RepositoryCreateInput: { // input type
+    name: string; // String!
+  }
+  RepositoryNameUserIdCompoundUniqueInput: { // input type
+    name: string; // String!
+    userId: string; // String!
+  }
+  RepositoryUpdateInput: { // input type
+    skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
+  }
   RepositoryWhereInput: { // input type
     name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     userId?: string | null; // String
+  }
+  RepositoryWhereUniqueInput: { // input type
+    id?: number | null; // Int
   }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
@@ -165,6 +178,9 @@ export interface NexusGenInputs {
     startsWith?: string | null; // String
   }
   SuggestExperiencesWhereInput: { // input type
+    name: string; // String!
+  }
+  SuggestRepositoriesWhereInput: { // input type
     name: string; // String!
   }
   SuggestSkillsWhereInput: { // input type
@@ -341,6 +357,10 @@ export interface NexusGenObjects {
     nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
     totalCount: number; // Int!
   }
+  SuggestRepositories: { // root type
+    nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
+    totalCount: number; // Int!
+  }
   SuggestSkills: { // root type
     nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
     totalCount: number; // Int!
@@ -455,6 +475,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createExperience: NexusGenRootTypes['Experience']; // Experience!
     createPost: NexusGenRootTypes['Post']; // Post!
+    createRepository: NexusGenRootTypes['Repository']; // Repository!
     deleteExperience: NexusGenRootTypes['Experience']; // Experience!
     deletePost: NexusGenRootTypes['Post']; // Post!
     ok: boolean; // Boolean!
@@ -464,6 +485,7 @@ export interface NexusGenFieldTypes {
     updateExperience: NexusGenRootTypes['Experience'] | null; // Experience
     updatePost: NexusGenRootTypes['Post'] | null; // Post
     updatePostDraft: NexusGenRootTypes['Post'] | null; // Post
+    updateRepository: NexusGenRootTypes['Repository'] | null; // Repository
     updateSkills: NexusGenRootTypes['User'] | null; // User
     uploadPostImage: NexusGenRootTypes['PostImage']; // PostImage!
     upvotePost: NexusGenRootTypes['Post']; // Post!
@@ -522,6 +544,7 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
+    suggestRepositories: NexusGenRootTypes['SuggestRepositories']; // SuggestRepositories!
     suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -553,6 +576,10 @@ export interface NexusGenFieldTypes {
   }
   SuggestExperiences: { // field return type
     nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
+    totalCount: number; // Int!
+  }
+  SuggestRepositories: { // field return type
+    nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
     totalCount: number; // Int!
   }
   SuggestSkills: { // field return type
@@ -675,6 +702,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createExperience: 'Experience'
     createPost: 'Post'
+    createRepository: 'Repository'
     deleteExperience: 'Experience'
     deletePost: 'Post'
     ok: 'Boolean'
@@ -684,6 +712,7 @@ export interface NexusGenFieldTypeNames {
     updateExperience: 'Experience'
     updatePost: 'Post'
     updatePostDraft: 'Post'
+    updateRepository: 'Repository'
     updateSkills: 'User'
     uploadPostImage: 'PostImage'
     upvotePost: 'Post'
@@ -742,6 +771,7 @@ export interface NexusGenFieldTypeNames {
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
     suggestExperiences: 'SuggestExperiences'
+    suggestRepositories: 'SuggestRepositories'
     suggestSkills: 'SuggestSkills'
     user: 'User'
     viewer: 'User'
@@ -773,6 +803,10 @@ export interface NexusGenFieldTypeNames {
   }
   SuggestExperiences: { // field return type name
     nodes: 'GitHubOrganization'
+    totalCount: 'Int'
+  }
+  SuggestRepositories: { // field return type name
+    nodes: 'GitHubRepository'
     totalCount: 'Int'
   }
   SuggestSkills: { // field return type name
@@ -818,6 +852,9 @@ export interface NexusGenArgTypes {
     createExperience: { // args
       data: NexusGenInputs['ExperienceCreateInput']; // ExperienceCreateInput!
     }
+    createRepository: { // args
+      data: NexusGenInputs['RepositoryCreateInput']; // RepositoryCreateInput!
+    }
     deleteExperience: { // args
       where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
     }
@@ -845,6 +882,10 @@ export interface NexusGenArgTypes {
     updatePostDraft: { // args
       data: NexusGenInputs['PostDraftUpdateInput']; // PostDraftUpdateInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    updateRepository: { // args
+      data: NexusGenInputs['RepositoryUpdateInput']; // RepositoryUpdateInput!
+      where: NexusGenInputs['RepositoryWhereUniqueInput']; // RepositoryWhereUniqueInput!
     }
     updateSkills: { // args
       data: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!
@@ -892,6 +933,10 @@ export interface NexusGenArgTypes {
     suggestExperiences: { // args
       first?: number | null; // Int
       where: NexusGenInputs['SuggestExperiencesWhereInput']; // SuggestExperiencesWhereInput!
+    }
+    suggestRepositories: { // args
+      first?: number | null; // Int
+      where: NexusGenInputs['SuggestRepositoriesWhereInput']; // SuggestRepositoriesWhereInput!
     }
     suggestSkills: { // args
       first?: number | null; // Int

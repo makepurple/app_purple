@@ -195,6 +195,7 @@ export type Mutation = {
   readonly createExperience: Experience;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
   readonly createPost: Post;
+  readonly createRepository: Repository;
   /** Users can delete their own experiences. */
   readonly deleteExperience: Experience;
   /** Users can delete their own posts. */
@@ -206,6 +207,7 @@ export type Mutation = {
   readonly updateExperience?: Maybe<Experience>;
   readonly updatePost?: Maybe<Post>;
   readonly updatePostDraft?: Maybe<Post>;
+  readonly updateRepository?: Maybe<Repository>;
   readonly updateSkills?: Maybe<User>;
   readonly uploadPostImage: PostImage;
   readonly upvotePost: Post;
@@ -216,6 +218,12 @@ export type Mutation = {
 /** Root mutation type */
 export type MutationCreateExperienceArgs = {
   data: ExperienceCreateInput;
+};
+
+
+/** Root mutation type */
+export type MutationCreateRepositoryArgs = {
+  data: RepositoryCreateInput;
 };
 
 
@@ -268,6 +276,13 @@ export type MutationUpdatePostArgs = {
 export type MutationUpdatePostDraftArgs = {
   data: PostDraftUpdateInput;
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateRepositoryArgs = {
+  data: RepositoryUpdateInput;
+  where: RepositoryWhereUniqueInput;
 };
 
 
@@ -402,6 +417,7 @@ export type Query = {
   readonly posts: PostConnection;
   readonly repositories: RepositoryConnection;
   readonly suggestExperiences: SuggestExperiences;
+  readonly suggestRepositories: SuggestRepositories;
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -453,6 +469,13 @@ export type QuerySuggestExperiencesArgs = {
 
 
 /** Root query type */
+export type QuerySuggestRepositoriesArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestRepositoriesWhereInput;
+};
+
+
+/** Root query type */
 export type QuerySuggestSkillsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestSkillsWhereInput;
@@ -483,6 +506,10 @@ export type RepositoryConnection = {
   readonly totalCount: Scalars['Int'];
 };
 
+export type RepositoryCreateInput = {
+  readonly name: Scalars['String'];
+};
+
 /** Relay-style edge for Repository type */
 export type RepositoryEdge = {
   readonly __typename: 'RepositoryEdge';
@@ -490,10 +517,23 @@ export type RepositoryEdge = {
   readonly node: Repository;
 };
 
+export type RepositoryNameUserIdCompoundUniqueInput = {
+  readonly name: Scalars['String'];
+  readonly userId: Scalars['String'];
+};
+
+export type RepositoryUpdateInput = {
+  readonly skills?: InputMaybe<ReadonlyArray<SkillWhereUniqueInput>>;
+};
+
 export type RepositoryWhereInput = {
   readonly name?: InputMaybe<StringNullableFilter>;
   readonly user?: InputMaybe<UserWhereInput>;
   readonly userId?: InputMaybe<Scalars['String']>;
+};
+
+export type RepositoryWhereUniqueInput = {
+  readonly id?: InputMaybe<Scalars['Int']>;
 };
 
 export type Skill = {
@@ -536,6 +576,16 @@ export type SuggestExperiences = {
 };
 
 export type SuggestExperiencesWhereInput = {
+  readonly name: Scalars['String'];
+};
+
+export type SuggestRepositories = {
+  readonly __typename: 'SuggestRepositories';
+  readonly nodes: ReadonlyArray<GitHubRepository>;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type SuggestRepositoriesWhereInput = {
   readonly name: Scalars['String'];
 };
 

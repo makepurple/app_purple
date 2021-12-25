@@ -154,6 +154,8 @@ model Repository {
   skills SkillsOnRepositories[]
   user   User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+
+  @@unique([name, userId])
 }
 
 model SkillsOnRepositories {
@@ -162,7 +164,7 @@ model SkillsOnRepositories {
   repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
   repositoryId Int
 
-  @@id([skillId])
+  @@id([skillId, repositoryId])
 }
 
 model Organization {

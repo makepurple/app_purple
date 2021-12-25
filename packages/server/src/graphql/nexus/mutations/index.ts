@@ -1,5 +1,6 @@
 export * from "./createExperience";
 export * from "./createPost";
+export * from "./createRepository";
 export * from "./deleteExperience";
 export * from "./deletePost";
 export * from "./publishPost";
@@ -8,6 +9,7 @@ export * from "./updateDesiredSkills";
 export * from "./updateExperience";
 export * from "./updatePost";
 export * from "./updatePostDraft";
+export * from "./updateRepository";
 export * from "./updateSkills";
 export * from "./uploadPostImage";
 export * from "./upvotePost";
