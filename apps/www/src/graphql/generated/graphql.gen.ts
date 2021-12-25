@@ -614,7 +614,7 @@ export type ExperienceCardExperienceFragment = { readonly __typename: 'Experienc
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
 
-export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
+export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
@@ -807,19 +807,42 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
     `;
 export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
     fragment RepositoryCardRepository on Repository {
+  __typename
   id
   github {
+    __typename
     id
     description
+    forkCount
+    issueCount
+    licenseInfo {
+      __typename
+      id
+      name
+      nickname
+      spdxId
+      url
+    }
     name
     owner {
+      __typename
       id
       login
     }
+    primaryLanguage {
+      __typename
+      color
+      id
+      name
+    }
+    pullRequestCount
+    pushedAt
+    stargazerCount
     url
   }
   name
   skills {
+    __typename
     id
     name
   }

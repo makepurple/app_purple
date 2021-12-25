@@ -9,11 +9,11 @@ export const RepositoryConnection = objectType({
 	`,
 	definition: (t) => {
 		t.nonNull.list.nonNull.field("edges", { type: "RepositoryEdge" });
-		t.nonNull.field("pageInfo", { type: "PageInfo" });
 		t.nonNull.list.nonNull.field("nodes", {
 			type: "Repository",
 			resolve: (parent) => PrismaUtils.mapRelayEdgesToNodes(parent.edges)
 		});
+		t.nonNull.field("pageInfo", { type: "PageInfo" });
 		t.nonNull.int("totalCount");
 	}
 });

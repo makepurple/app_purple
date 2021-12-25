@@ -1,17 +1,40 @@
 fragment RepositoryCardRepository on Repository {
+	__typename
 	id
 	github {
+		__typename
 		id
 		description
+		forkCount
+		issueCount
+		licenseInfo {
+			__typename
+			id
+			name
+			nickname
+			spdxId
+			url
+		}
 		name
 		owner {
+			__typename
 			id
 			login
 		}
+		primaryLanguage {
+			__typename
+			color
+			id
+			name
+		}
+		pullRequestCount
+		pushedAt
+		stargazerCount
 		url
 	}
 	name
 	skills {
+		__typename
 		id
 		name
 	}

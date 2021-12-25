@@ -1,6 +1,6 @@
 import { dayjs } from "@makepurple/utils";
 import faker from "faker";
-import { Experience, ExperienceType } from "../../../graphql/generated";
+import { Experience, ExperienceType } from "../../generated";
 import { Organization_fragment_mock } from "./Organization.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
