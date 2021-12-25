@@ -4,6 +4,8 @@ export * from "./Comment";
 export * from "./Experience";
 export * from "./ExperienceConnection";
 export * from "./ExperienceEdge";
+export * from "./GitHubLanguage";
+export * from "./GitHubLicense";
 export * from "./GitHubOrganization";
 export * from "./GitHubRepository";
 export * from "./GitHubRepositoryOwner";

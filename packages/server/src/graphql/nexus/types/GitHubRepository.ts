@@ -6,50 +6,13 @@ export const GitHubRepository = objectType({
 	definition: (t) => {
 		t.nonNull.string("id");
 		t.string("description");
-		t.field("language", {
-			type: "TopLanguage",
-			resolve: async (parent, args, { octokit: graphql }) => {
-				const githubRepository = await graphql`
-					query GetRepositoryLanguage($name: String!, $owner: String!) {
-						repository(name: $name, owner: $owner) {
-							languages(first: 1, orderBy: { field: SIZE, direction: DESC }) {
-								edges {
-									node {
-										color
-										name
-									}
-									size
-								}
-							}
-						}
-					}
-				`
-					.cast<
-						octokit.GetRepositoryLanguageQuery,
-						octokit.GetRepositoryLanguageQueryVariables
-					>({
-						name: parent.name,
-						owner: parent.owner.login
-					})
-					.catch(() => null);
-
-				const language = githubRepository?.repository?.languages?.edges?.[0];
-
-				if (!language) return null;
-
-				return {
-					color: language.node.color ?? "#6366f1",
-					name: language.node.name,
-					size: language.size
-				};
-			}
-		});
+		t.nonNull.int("forkCount");
 		t.nonNull.int("issueCount", {
 			resolve: async (parent, args, { octokit: graphql }) => {
 				const githubRepository = await graphql`
 					query GetRepositoryIssueCount($name: String!, $owner: String!) {
 						repository(name: $name, owner: $owner) {
-							issues(first: 1) {
+							issues(first: 0) {
 								totalCount
 							}
 						}
@@ -69,8 +32,37 @@ export const GitHubRepository = objectType({
 				return issueCount;
 			}
 		});
+		t.field("licenseInfo", { type: "GitHubLicense" });
 		t.nonNull.string("name");
+		t.field("primaryLanguage", { type: "GitHubLanguage" });
+		t.nonNull.int("pullRequestCount", {
+			resolve: async (parent, args, { octokit: graphql }) => {
+				const githubRepository = await graphql`
+					query GetRepositoryPullRequestCount($name: String!, $owner: String!) {
+						repository(name: $name, owner: $owner) {
+							pullRequests(first: 0) {
+								totalCount
+							}
+						}
+					}
+				`
+					.cast<
+						octokit.GetRepositoryPullRequestCountQuery,
+						octokit.GetRepositoryIssueCountQueryVariables
+					>({
+						name: parent.name,
+						owner: parent.owner.login
+					})
+					.catch(() => null);
+
+				const pullRequestCount = githubRepository?.repository?.pullRequests.totalCount ?? 0;
+
+				return pullRequestCount;
+			}
+		});
+		t.dateTime("pushedAt");
 		t.nonNull.field("owner", { type: "GitHubRepositoryOwner" });
+		t.nonNull.int("stargazerCount");
 		t.nonNull.url("url");
 	}
 });

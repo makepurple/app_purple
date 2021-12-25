@@ -22,6 +22,7 @@ export const User_fragment_mock: User = {
 	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
 	name: "leedavidcs",
 	posts: [],
+	repositories: [],
 	skills: [
 		"Next.js",
 		"Prisma",

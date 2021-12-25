@@ -122,6 +122,23 @@ export type ExperienceWhereUniqueInput = {
   readonly id: Scalars['Int'];
 };
 
+export type GitHubLanguage = {
+  readonly __typename: 'GitHubLanguage';
+  readonly color?: Maybe<Scalars['String']>;
+  readonly id: Scalars['String'];
+  readonly name: Scalars['String'];
+};
+
+export type GitHubLicense = {
+  readonly __typename: 'GitHubLicense';
+  readonly description?: Maybe<Scalars['String']>;
+  readonly id: Scalars['String'];
+  readonly name: Scalars['String'];
+  readonly nickname?: Maybe<Scalars['String']>;
+  readonly spdxId?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['URL']>;
+};
+
 export type GitHubOrganization = GitHubRepositoryOwner & {
   readonly __typename: 'GitHubOrganization';
   readonly avatarUrl: Scalars['URL'];
@@ -136,9 +153,16 @@ export type GitHubOrganization = GitHubRepositoryOwner & {
 export type GitHubRepository = {
   readonly __typename: 'GitHubRepository';
   readonly description?: Maybe<Scalars['String']>;
+  readonly forkCount: Scalars['Int'];
   readonly id: Scalars['String'];
+  readonly issueCount: Scalars['Int'];
+  readonly licenseInfo?: Maybe<GitHubLicense>;
   readonly name: Scalars['String'];
   readonly owner: GitHubRepositoryOwner;
+  readonly primaryLanguage?: Maybe<GitHubLanguage>;
+  readonly pullRequestCount: Scalars['Int'];
+  readonly pushedAt?: Maybe<Scalars['DateTime']>;
+  readonly stargazerCount: Scalars['Int'];
   readonly url: Scalars['URL'];
 };
 

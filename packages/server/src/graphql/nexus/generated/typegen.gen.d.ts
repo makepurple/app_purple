@@ -234,6 +234,19 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Experience']; // Experience!
   }
+  GitHubLanguage: { // root type
+    color?: string | null; // String
+    id: string; // String!
+    name: string; // String!
+  }
+  GitHubLicense: { // root type
+    description?: string | null; // String
+    id: string; // String!
+    name: string; // String!
+    nickname?: string | null; // String
+    spdxId?: string | null; // String
+    url?: NexusGenScalars['URL'] | null; // URL
+  }
   GitHubOrganization: { // root type
     avatarUrl: NexusGenScalars['URL']; // URL!
     description?: string | null; // String
@@ -244,10 +257,14 @@ export interface NexusGenObjects {
   }
   GitHubRepository: { // root type
     description?: string | null; // String
+    forkCount: number; // Int!
     id: string; // String!
-    issueCount: number; // Int!
+    licenseInfo?: NexusGenRootTypes['GitHubLicense'] | null; // GitHubLicense
     name: string; // String!
     owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
+    primaryLanguage?: NexusGenRootTypes['GitHubLanguage'] | null; // GitHubLanguage
+    pushedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    stargazerCount: number; // Int!
     url: NexusGenScalars['URL']; // URL!
   }
   GitHubUser: { // root type
@@ -384,6 +401,19 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Experience']; // Experience!
   }
+  GitHubLanguage: { // field return type
+    color: string | null; // String
+    id: string; // String!
+    name: string; // String!
+  }
+  GitHubLicense: { // field return type
+    description: string | null; // String
+    id: string; // String!
+    name: string; // String!
+    nickname: string | null; // String
+    spdxId: string | null; // String
+    url: NexusGenScalars['URL'] | null; // URL
+  }
   GitHubOrganization: { // field return type
     avatarUrl: NexusGenScalars['URL']; // URL!
     description: string | null; // String
@@ -395,11 +425,16 @@ export interface NexusGenFieldTypes {
   }
   GitHubRepository: { // field return type
     description: string | null; // String
+    forkCount: number; // Int!
     id: string; // String!
     issueCount: number; // Int!
-    language: NexusGenRootTypes['TopLanguage'] | null; // TopLanguage
+    licenseInfo: NexusGenRootTypes['GitHubLicense'] | null; // GitHubLicense
     name: string; // String!
     owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
+    primaryLanguage: NexusGenRootTypes['GitHubLanguage'] | null; // GitHubLanguage
+    pullRequestCount: number; // Int!
+    pushedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    stargazerCount: number; // Int!
     url: NexusGenScalars['URL']; // URL!
   }
   GitHubUser: { // field return type
@@ -586,6 +621,19 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'Experience'
   }
+  GitHubLanguage: { // field return type name
+    color: 'String'
+    id: 'String'
+    name: 'String'
+  }
+  GitHubLicense: { // field return type name
+    description: 'String'
+    id: 'String'
+    name: 'String'
+    nickname: 'String'
+    spdxId: 'String'
+    url: 'URL'
+  }
   GitHubOrganization: { // field return type name
     avatarUrl: 'URL'
     description: 'String'
@@ -597,11 +645,16 @@ export interface NexusGenFieldTypeNames {
   }
   GitHubRepository: { // field return type name
     description: 'String'
+    forkCount: 'Int'
     id: 'String'
     issueCount: 'Int'
-    language: 'TopLanguage'
+    licenseInfo: 'GitHubLicense'
     name: 'String'
     owner: 'GitHubRepositoryOwner'
+    primaryLanguage: 'GitHubLanguage'
+    pullRequestCount: 'Int'
+    pushedAt: 'DateTime'
+    stargazerCount: 'Int'
     url: 'URL'
   }
   GitHubUser: { // field return type name

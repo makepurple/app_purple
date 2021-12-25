@@ -105,6 +105,21 @@ input ExperienceWhereUniqueInput {
   id: Int!
 }
 
+type GitHubLanguage {
+  color: String
+  id: String!
+  name: String!
+}
+
+type GitHubLicense {
+  description: String
+  id: String!
+  name: String!
+  nickname: String
+  spdxId: String
+  url: URL
+}
+
 type GitHubOrganization implements GitHubRepositoryOwner {
   avatarUrl: URL!
   description: String
@@ -117,11 +132,16 @@ type GitHubOrganization implements GitHubRepositoryOwner {
 
 type GitHubRepository {
   description: String
+  forkCount: Int!
   id: String!
   issueCount: Int!
-  language: TopLanguage
+  licenseInfo: GitHubLicense
   name: String!
   owner: GitHubRepositoryOwner!
+  primaryLanguage: GitHubLanguage
+  pullRequestCount: Int!
+  pushedAt: DateTime
+  stargazerCount: Int!
   url: URL!
 }
 
