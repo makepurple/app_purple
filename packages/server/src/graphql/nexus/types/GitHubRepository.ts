@@ -61,6 +61,19 @@ export const GitHubRepository = objectType({
 			}
 		});
 		t.dateTime("pushedAt");
+		t.field("repository", {
+			type: "Repository",
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.repository.findUnique({
+					where: {
+						name_owner: {
+							name: parent.name,
+							owner: parent.owner.login
+						}
+					}
+				});
+			}
+		});
 		t.nonNull.field("owner", { type: "GitHubRepositoryOwner" });
 		t.nonNull.int("stargazerCount");
 		t.nonNull.url("url");

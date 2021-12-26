@@ -141,6 +141,7 @@ type GitHubRepository {
   primaryLanguage: GitHubLanguage
   pullRequestCount: Int!
   pushedAt: DateTime
+  repository: Repository
   stargazerCount: Int!
   url: URL!
 }
@@ -314,9 +315,9 @@ type Repository {
   github: GitHubRepository!
   id: Int!
   name: String!
+  owner: String!
   skills: [Skill!]!
   user: User!
-  userId: String!
 }
 
 """Relay-style connection for Repository types."""
@@ -337,9 +338,9 @@ type RepositoryEdge {
   node: Repository!
 }
 
-input RepositoryNameUserIdCompoundUniqueInput {
+input RepositoryNameOwnerCompoundUniqueInput {
   name: String!
-  userId: String!
+  owner: String!
 }
 
 input RepositoryUpdateInput {
@@ -348,12 +349,13 @@ input RepositoryUpdateInput {
 
 input RepositoryWhereInput {
   name: StringNullableFilter
+  owner: StringNullableFilter
   user: UserWhereInput
-  userId: String
 }
 
 input RepositoryWhereUniqueInput {
   id: Int
+  name_owner: RepositoryNameOwnerCompoundUniqueInput
 }
 
 type Skill {

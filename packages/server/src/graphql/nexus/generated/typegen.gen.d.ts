@@ -146,20 +146,21 @@ export interface NexusGenInputs {
   RepositoryCreateInput: { // input type
     name: string; // String!
   }
-  RepositoryNameUserIdCompoundUniqueInput: { // input type
+  RepositoryNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
-    userId: string; // String!
+    owner: string; // String!
   }
   RepositoryUpdateInput: { // input type
     skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
   }
   RepositoryWhereInput: { // input type
     name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    owner?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    userId?: string | null; // String
   }
   RepositoryWhereUniqueInput: { // input type
     id?: number | null; // Int
+    name_owner?: NexusGenInputs['RepositoryNameOwnerCompoundUniqueInput'] | null; // RepositoryNameOwnerCompoundUniqueInput
   }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
@@ -337,7 +338,7 @@ export interface NexusGenObjects {
   Repository: { // root type
     id: number; // Int!
     name: string; // String!
-    userId: string; // String!
+    owner: string; // String!
   }
   RepositoryConnection: { // root type
     edges: NexusGenRootTypes['RepositoryEdge'][]; // [RepositoryEdge!]!
@@ -456,6 +457,7 @@ export interface NexusGenFieldTypes {
     primaryLanguage: NexusGenRootTypes['GitHubLanguage'] | null; // GitHubLanguage
     pullRequestCount: number; // Int!
     pushedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    repository: NexusGenRootTypes['Repository'] | null; // Repository
     stargazerCount: number; // Int!
     url: NexusGenScalars['URL']; // URL!
   }
@@ -553,9 +555,9 @@ export interface NexusGenFieldTypes {
     github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
     id: number; // Int!
     name: string; // String!
+    owner: string; // String!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     user: NexusGenRootTypes['User']; // User!
-    userId: string; // String!
   }
   RepositoryConnection: { // field return type
     edges: NexusGenRootTypes['RepositoryEdge'][]; // [RepositoryEdge!]!
@@ -683,6 +685,7 @@ export interface NexusGenFieldTypeNames {
     primaryLanguage: 'GitHubLanguage'
     pullRequestCount: 'Int'
     pushedAt: 'DateTime'
+    repository: 'Repository'
     stargazerCount: 'Int'
     url: 'URL'
   }
@@ -780,9 +783,9 @@ export interface NexusGenFieldTypeNames {
     github: 'GitHubRepository'
     id: 'Int'
     name: 'String'
+    owner: 'String'
     skills: 'Skill'
     user: 'User'
-    userId: 'String'
   }
   RepositoryConnection: { // field return type name
     edges: 'RepositoryEdge'

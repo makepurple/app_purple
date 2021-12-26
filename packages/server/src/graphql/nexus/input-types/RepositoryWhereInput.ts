@@ -5,6 +5,6 @@ export const RepositoryWhereInput = inputObjectType({
 	definition: (t) => {
 		t.field("name", { type: "StringNullableFilter" });
 		t.field("user", { type: "UserWhereInput" });
-		t.string("userId");
+		t.field("owner", { type: "StringNullableFilter" });
 	}
 });

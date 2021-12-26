@@ -1,0 +1,17 @@
+query SuggestRepositories($first: Int, $where: SuggestRepositoriesWhereInput!) {
+	suggestRepositories(first: $first, where: $where) {
+		__typename
+		totalCount
+		nodes {
+			__typename
+			description
+			id
+			name
+			pushedAt
+			repository {
+				__typename
+				id
+			}
+		}
+	}
+}

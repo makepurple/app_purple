@@ -4902,7 +4902,7 @@ export interface Repository {
     resolve: NexusCore.FieldResolver<'Repository', 'user'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Repository.userId`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Repository.owner`.
     *
     * ### ️⚠️ You have not writen documentation for model Repository
     *
@@ -4911,7 +4911,7 @@ export interface Repository {
     * ```prisma
     * model Repository {
     *   /// Lorem ipsum dolor sit amet.
-    *   userId  String
+    *   owner  String
     * }
     * ```
     *
@@ -4926,15 +4926,15 @@ export interface Repository {
     *   name: Repository.$name
     *   description: Repository.$description
     *   definition(t) {
-    *     t.field(Repository.userId)
+    *     t.field(Repository.owner)
     *   }
     * })
     */
-  userId: {
+  owner: {
     /**
      * The name of this field.
      */
-    name: 'userId'
+    name: 'owner'
   
     /**
      * The type of this field.
@@ -4951,7 +4951,7 @@ export interface Repository {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Repository', 'userId'>
+    resolve: NexusCore.FieldResolver<'Repository', 'owner'>
   }
 }
 

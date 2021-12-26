@@ -162,6 +162,7 @@ export type GitHubRepository = {
   readonly primaryLanguage?: Maybe<GitHubLanguage>;
   readonly pullRequestCount: Scalars['Int'];
   readonly pushedAt?: Maybe<Scalars['DateTime']>;
+  readonly repository?: Maybe<Repository>;
   readonly stargazerCount: Scalars['Int'];
   readonly url: Scalars['URL'];
 };
@@ -492,9 +493,9 @@ export type Repository = {
   readonly github: GitHubRepository;
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
   readonly skills: ReadonlyArray<Skill>;
   readonly user: User;
-  readonly userId: Scalars['String'];
 };
 
 /** Relay-style connection for Repository types. */
@@ -517,9 +518,9 @@ export type RepositoryEdge = {
   readonly node: Repository;
 };
 
-export type RepositoryNameUserIdCompoundUniqueInput = {
+export type RepositoryNameOwnerCompoundUniqueInput = {
   readonly name: Scalars['String'];
-  readonly userId: Scalars['String'];
+  readonly owner: Scalars['String'];
 };
 
 export type RepositoryUpdateInput = {
@@ -528,12 +529,13 @@ export type RepositoryUpdateInput = {
 
 export type RepositoryWhereInput = {
   readonly name?: InputMaybe<StringNullableFilter>;
+  readonly owner?: InputMaybe<StringNullableFilter>;
   readonly user?: InputMaybe<UserWhereInput>;
-  readonly userId?: InputMaybe<Scalars['String']>;
 };
 
 export type RepositoryWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['Int']>;
+  readonly name_owner?: InputMaybe<RepositoryNameOwnerCompoundUniqueInput>;
 };
 
 export type Skill = {
@@ -817,6 +819,14 @@ export type SuggestExperiencesQueryVariables = Exact<{
 
 
 export type SuggestExperiencesQuery = { readonly __typename: 'Query', readonly suggestExperiences: { readonly __typename: 'SuggestExperiences', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined }> } };
+
+export type SuggestRepositoriesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestRepositoriesWhereInput;
+}>;
+
+
+export type SuggestRepositoriesQuery = { readonly __typename: 'Query', readonly suggestRepositories: { readonly __typename: 'SuggestRepositories', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly description?: string | null | undefined, readonly id: string, readonly name: string, readonly pushedAt?: Date | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: number } | null | undefined }> } };
 
 export type SuggestSkillsQueryVariables = Exact<{
   where: SuggestSkillsWhereInput;
@@ -1337,6 +1347,29 @@ export const SuggestExperiencesDocument = /*#__PURE__*/ gql`
 
 export function useSuggestExperiencesQuery(options: Omit<Urql.UseQueryArgs<SuggestExperiencesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<SuggestExperiencesQuery>({ query: SuggestExperiencesDocument, ...options });
+};
+export const SuggestRepositoriesDocument = /*#__PURE__*/ gql`
+    query SuggestRepositories($first: Int, $where: SuggestRepositoriesWhereInput!) {
+  suggestRepositories(first: $first, where: $where) {
+    __typename
+    totalCount
+    nodes {
+      __typename
+      description
+      id
+      name
+      pushedAt
+      repository {
+        __typename
+        id
+      }
+    }
+  }
+}
+    `;
+
+export function useSuggestRepositoriesQuery(options: Omit<Urql.UseQueryArgs<SuggestRepositoriesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SuggestRepositoriesQuery>({ query: SuggestRepositoriesDocument, ...options });
 };
 export const SuggestSkillsDocument = /*#__PURE__*/ gql`
     query SuggestSkills($where: SuggestSkillsWhereInput!) {

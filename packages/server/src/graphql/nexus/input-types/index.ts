@@ -11,7 +11,7 @@ export * from "./PostUpdateInput";
 export * from "./PostWhereInput";
 export * from "./PostWhereUniqueInput";
 export * from "./RepositoryCreateInput";
-export * from "./RepositoryNameUserIdCompoundUniqueInput";
+export * from "./RepositoryNameOwnerCompoundUniqueInput";
 export * from "./RepositoryUpdateInput";
 export * from "./RepositoryWhereInput";
 export * from "./RepositoryWhereUniqueInput";

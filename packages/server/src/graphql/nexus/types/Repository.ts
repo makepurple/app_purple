@@ -61,6 +61,6 @@ export const Repository = objectType({
 			}
 		});
 		t.field(NexusPrisma.Repository.user);
-		t.field(NexusPrisma.Repository.userId);
+		t.field(NexusPrisma.Repository.owner);
 	}
 });

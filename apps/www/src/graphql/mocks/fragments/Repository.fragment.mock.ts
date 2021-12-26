@@ -59,5 +59,5 @@ export const Repository_fragment_mock: Repository = {
 		}
 	],
 	user: User_fragment_mock,
-	userId: User_fragment_mock.id.toString()
+	owner: User_fragment_mock.name.toString()
 };

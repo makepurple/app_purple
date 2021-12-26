@@ -152,10 +152,10 @@ model Repository {
   id     Int                    @id @default(autoincrement())
   name   String
   skills SkillsOnRepositories[]
-  user   User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  user   User                   @relation(fields: [owner], references: [name], onDelete: Cascade)
+  owner  String
 
-  @@unique([name, userId])
+  @@unique([name, owner])
 }
 
 model SkillsOnRepositories {
