@@ -3,7 +3,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const updateExperience = mutationField("updateExperience", {
-	type: "Experience",
+	type: nonNull("UpdateExperiencePayload"),
 	args: {
 		data: nonNull(arg({ type: "ExperienceUpdateInput" })),
 		where: nonNull(arg({ type: "ExperienceWhereUniqueInput" }))
@@ -32,7 +32,7 @@ export const updateExperience = mutationField("updateExperience", {
 			type: args.data.type
 		});
 
-		return await prisma.experience.update({
+		const record = await prisma.experience.update({
 			data: {
 				endDate: dataInput.endDate as Maybe<Date>,
 				highlights: ((dataInput.highlights ?? []) as string[]) ?? undefined,
@@ -55,5 +55,7 @@ export const updateExperience = mutationField("updateExperience", {
 			},
 			where: PrismaUtils.nonNull(args.where)
 		});
+
+		return { record };
 	}
 });

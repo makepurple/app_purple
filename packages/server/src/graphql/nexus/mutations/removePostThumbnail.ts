@@ -1,8 +1,9 @@
+import { Post } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const removePostThumbnail = mutationField("removePostThumbnail", {
-	type: "Post",
+	type: nonNull("RemovePostThumbnailPayload"),
 	args: {
 		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
 	},
@@ -20,13 +21,13 @@ export const removePostThumbnail = mutationField("removePostThumbnail", {
 		return true;
 	},
 	resolve: async (parent, args, { cloudinary, prisma }) => {
-		const post = await prisma.post.findUnique({
+		let record: Post | null = await prisma.post.findUnique({
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		const thumbnailUrl = post?.thumbnailUrl;
+		const thumbnailUrl = record?.thumbnailUrl;
 
-		if (!thumbnailUrl) return post;
+		if (!thumbnailUrl) return { record };
 
 		const thumbnailImage = await prisma.postImage.findUnique({
 			where: {
@@ -35,17 +36,19 @@ export const removePostThumbnail = mutationField("removePostThumbnail", {
 		});
 
 		if (!thumbnailImage) {
-			return await prisma.post.update({
+			record = await prisma.post.update({
 				where: PrismaUtils.nonNull(args.where),
 				data: {
 					thumbnailUrl: null
 				}
 			});
+
+			return { record };
 		}
 
 		await cloudinary.client.deleteImageFile(thumbnailImage.id);
 
-		return await prisma.$transaction(async (transaction) => {
+		record = await prisma.$transaction(async (transaction) => {
 			await transaction.postImage.delete({
 				where: {
 					url: thumbnailUrl
@@ -59,5 +62,7 @@ export const removePostThumbnail = mutationField("removePostThumbnail", {
 				}
 			});
 		});
+
+		return { record };
 	}
 });

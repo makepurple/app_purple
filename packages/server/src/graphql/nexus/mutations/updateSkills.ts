@@ -2,7 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const updateSkills = mutationField("updateSkills", {
-	type: "User",
+	type: nonNull("UpdateSkillsPayload"),
 	args: {
 		data: nonNull(arg({ type: "UpdateSkillsInput" }))
 	},
@@ -24,7 +24,7 @@ export const updateSkills = mutationField("updateSkills", {
 			where: { id: { in: skillIds } }
 		});
 
-		const updatedUser = await prisma.$transaction(async (transaction) => {
+		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.user.update({
 				where: { id: user.id },
 				data: { skills: { deleteMany: {} } }
@@ -65,6 +65,6 @@ export const updateSkills = mutationField("updateSkills", {
 			});
 		});
 
-		return updatedUser;
+		return { record };
 	}
 });

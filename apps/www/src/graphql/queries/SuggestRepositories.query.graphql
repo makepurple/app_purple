@@ -4,14 +4,8 @@ query SuggestRepositories($first: Int, $where: SuggestRepositoriesWhereInput!) {
 		totalCount
 		nodes {
 			__typename
-			description
 			id
-			name
-			pushedAt
-			repository {
-				__typename
-				id
-			}
+			...CreateRepositoryFormOptionGitHubRepository
 		}
 	}
 }

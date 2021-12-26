@@ -1,16 +1,7 @@
-import { arg, inputObjectType, mutationField, nonNull } from "nexus";
-
-export const UploadPostImageInput = inputObjectType({
-	name: "UploadPostImageInput",
-	definition: (t) => {
-		t.nonNull.upload("image", {
-			description: "The file of the image to be uploaded"
-		});
-	}
-});
+import { arg, mutationField, nonNull } from "nexus";
 
 export const uploadPostImage = mutationField("uploadPostImage", {
-	type: nonNull("PostImage"),
+	type: nonNull("UploadPostImagePayload"),
 	args: {
 		where: nonNull(arg({ type: "PostWhereUniqueInput" })),
 		data: nonNull(arg({ type: "UploadPostImageInput" }))
@@ -44,7 +35,7 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 			folder: user!.id
 		});
 
-		return await prisma.postImage.create({
+		const record = await prisma.postImage.create({
 			data: {
 				id: uploadResponse.public_id,
 				post: {
@@ -55,5 +46,7 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 				url: uploadResponse.secure_url
 			}
 		});
+
+		return { record };
 	}
 });

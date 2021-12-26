@@ -144,7 +144,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 						id: experience.id
 					}
 				})
-					.then((result) => !!result.data?.updateExperience)
+					.then((result) => !!result.data?.updateExperience.record)
 					.catch(() => false);
 
 				if (!didSucceed) {

@@ -16,11 +16,6 @@ fragment RepositoryCardRepository on Repository {
 			url
 		}
 		name
-		owner {
-			__typename
-			id
-			login
-		}
 		primaryLanguage {
 			__typename
 			color

@@ -6,4 +6,5 @@ export * from "./GetPosts.query.mock";
 export * from "./GetRepositories.query.mock";
 export * from "./GetUserInfoSideBar.query.mock";
 export * from "./SuggestExperiences.query.mock";
+export * from "./SuggestRepositories.query.mock";
 export * from "./SuggestSkills.query.mock";

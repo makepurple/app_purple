@@ -2,7 +2,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 
 export const createRepository = mutationField("createRepository", {
-	type: nonNull("Repository"),
+	type: nonNull("CreateRepositoryPayload"),
 	args: {
 		data: nonNull(arg({ type: "RepositoryCreateInput" }))
 	},
@@ -27,7 +27,7 @@ export const createRepository = mutationField("createRepository", {
 
 		if (!githubRepository?.repository) throw new Error("This repository does not exist");
 
-		return await prisma.repository.create({
+		const record = await prisma.repository.create({
 			data: {
 				name: args.data.name,
 				user: {
@@ -37,5 +37,7 @@ export const createRepository = mutationField("createRepository", {
 				}
 			}
 		});
+
+		return { record };
 	}
 });

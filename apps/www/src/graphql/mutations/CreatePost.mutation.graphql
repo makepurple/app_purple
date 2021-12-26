@@ -1,6 +1,8 @@
 mutation CreatePost {
-	post: createPost {
-		id
-		urlSlug
+	createPost {
+		record {
+			id
+			urlSlug
+		}
 	}
 }

@@ -3,7 +3,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const updateRepository = mutationField("updateRepository", {
-	type: "Repository",
+	type: nonNull("UpdateRepositoryPayload"),
 	args: {
 		data: nonNull(arg({ type: "RepositoryUpdateInput" })),
 		where: nonNull(arg({ type: "RepositoryWhereUniqueInput" }))
@@ -26,7 +26,7 @@ export const updateRepository = mutationField("updateRepository", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!repository) return null;
+		if (!repository) throw new Error("Repository could not be found");
 
 		const skills = args.data.skills ?? [];
 
@@ -40,7 +40,7 @@ export const updateRepository = mutationField("updateRepository", {
 			where: { id: { in: skillIds } }
 		});
 
-		const updatedRepository = await prisma.$transaction(async (transaction) => {
+		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.repository.update({
 				data: { skills: { deleteMany: {} } },
 				where: PrismaUtils.nonNull(args.where)
@@ -81,6 +81,6 @@ export const updateRepository = mutationField("updateRepository", {
 			});
 		});
 
-		return updatedRepository;
+		return { record };
 	}
 });

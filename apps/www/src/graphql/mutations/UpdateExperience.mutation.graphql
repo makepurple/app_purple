@@ -3,6 +3,8 @@ mutation UpdateExperience(
 	$where: ExperienceWhereUniqueInput!
 ) {
 	updateExperience(data: $data, where: $where) {
-		...CreateExperienceFragment
+		record {
+			...CreateExperienceFragment
+		}
 	}
 }

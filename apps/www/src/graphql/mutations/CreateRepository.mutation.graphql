@@ -1,0 +1,11 @@
+mutation CreateRepository($data: RepositoryCreateInput!) {
+	createRepository(data: $data) {
+		record {
+			...RepositoryCardRepository
+			user {
+				__typename
+				id
+			}
+		}
+	}
+}

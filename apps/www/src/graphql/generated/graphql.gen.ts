@@ -41,6 +41,36 @@ export type Comment = {
   readonly updatedAt: Scalars['DateTime'];
 };
 
+export type CreateExperiencePayload = MutationPayload & {
+  readonly __typename: 'CreateExperiencePayload';
+  readonly query: Query;
+  readonly record: Experience;
+};
+
+export type CreatePostPayload = MutationPayload & {
+  readonly __typename: 'CreatePostPayload';
+  readonly query: Query;
+  readonly record: Post;
+};
+
+export type CreateRepositoryPayload = MutationPayload & {
+  readonly __typename: 'CreateRepositoryPayload';
+  readonly query: Query;
+  readonly record: Repository;
+};
+
+export type DeleteExperiencePayload = MutationPayload & {
+  readonly __typename: 'DeleteExperiencePayload';
+  readonly query: Query;
+  readonly record: Experience;
+};
+
+export type DeletePostPayload = MutationPayload & {
+  readonly __typename: 'DeletePostPayload';
+  readonly query: Query;
+  readonly record: Post;
+};
+
 export type EnumExperienceTypeNullableFilter = {
   readonly equals?: InputMaybe<ExperienceType>;
   readonly in?: InputMaybe<ReadonlyArray<ExperienceType>>;
@@ -193,25 +223,25 @@ export type GitHubUser = GitHubRepositoryOwner & {
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
-  readonly createExperience: Experience;
+  readonly createExperience: CreateExperiencePayload;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
-  readonly createPost: Post;
-  readonly createRepository: Repository;
+  readonly createPost: CreatePostPayload;
+  readonly createRepository: CreateRepositoryPayload;
   /** Users can delete their own experiences. */
-  readonly deleteExperience: Experience;
+  readonly deleteExperience: DeleteExperiencePayload;
   /** Users can delete their own posts. */
-  readonly deletePost: Post;
+  readonly deletePost: DeletePostPayload;
   readonly ok: Scalars['Boolean'];
-  readonly publishPost: Post;
-  readonly removePostThumbnail?: Maybe<Post>;
-  readonly updateDesiredSkills?: Maybe<User>;
-  readonly updateExperience?: Maybe<Experience>;
-  readonly updatePost?: Maybe<Post>;
-  readonly updatePostDraft?: Maybe<Post>;
-  readonly updateRepository?: Maybe<Repository>;
-  readonly updateSkills?: Maybe<User>;
-  readonly uploadPostImage: PostImage;
-  readonly upvotePost: Post;
+  readonly publishPost: PublishPostPayload;
+  readonly removePostThumbnail: RemovePostThumbnailPayload;
+  readonly updateDesiredSkills: UpdateDesiredSkillsPayload;
+  readonly updateExperience: UpdateExperiencePayload;
+  readonly updatePost: UpdatePostPayload;
+  readonly updatePostDraft: UpdatePostDraftPayload;
+  readonly updateRepository: UpdateRepositoryPayload;
+  readonly updateSkills: UpdateSkillsPayload;
+  readonly uploadPostImage: UploadPostImagePayload;
+  readonly upvotePost: UpvotePostPayload;
   readonly viewer?: Maybe<User>;
 };
 
@@ -303,6 +333,10 @@ export type MutationUploadPostImageArgs = {
 /** Root mutation type */
 export type MutationUpvotePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+export type MutationPayload = {
+  readonly query: Query;
 };
 
 export type Organization = {
@@ -406,6 +440,12 @@ export type PostWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['Int']>;
 };
 
+export type PublishPostPayload = MutationPayload & {
+  readonly __typename: 'PublishPostPayload';
+  readonly query: Query;
+  readonly record: Post;
+};
+
 /** Root query type */
 export type Query = {
   readonly __typename: 'Query';
@@ -486,6 +526,12 @@ export type QuerySuggestSkillsArgs = {
 /** Root query type */
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+export type RemovePostThumbnailPayload = MutationPayload & {
+  readonly __typename: 'RemovePostThumbnailPayload';
+  readonly query: Query;
+  readonly record?: Maybe<Post>;
 };
 
 export type Repository = {
@@ -627,13 +673,61 @@ export type UpdateDesiredSkillsInput = {
   readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
 };
 
+export type UpdateDesiredSkillsPayload = MutationPayload & {
+  readonly __typename: 'UpdateDesiredSkillsPayload';
+  readonly query: Query;
+  readonly record: User;
+};
+
+export type UpdateExperiencePayload = MutationPayload & {
+  readonly __typename: 'UpdateExperiencePayload';
+  readonly query: Query;
+  readonly record: Experience;
+};
+
+export type UpdatePostDraftPayload = MutationPayload & {
+  readonly __typename: 'UpdatePostDraftPayload';
+  readonly query: Query;
+  readonly record: Post;
+};
+
+export type UpdatePostPayload = MutationPayload & {
+  readonly __typename: 'UpdatePostPayload';
+  readonly query: Query;
+  readonly record: Post;
+};
+
+export type UpdateRepositoryPayload = MutationPayload & {
+  readonly __typename: 'UpdateRepositoryPayload';
+  readonly query: Query;
+  readonly record: Repository;
+};
+
 export type UpdateSkillsInput = {
   readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
+};
+
+export type UpdateSkillsPayload = MutationPayload & {
+  readonly __typename: 'UpdateSkillsPayload';
+  readonly query: Query;
+  readonly record: User;
 };
 
 export type UploadPostImageInput = {
   /** The file of the image to be uploaded */
   readonly image: Scalars['Upload'];
+};
+
+export type UploadPostImagePayload = MutationPayload & {
+  readonly __typename: 'UploadPostImagePayload';
+  readonly query: Query;
+  readonly record: PostImage;
+};
+
+export type UpvotePostPayload = MutationPayload & {
+  readonly __typename: 'UpvotePostPayload';
+  readonly query: Query;
+  readonly record: Post;
 };
 
 export type User = {
@@ -664,11 +758,13 @@ export type UserWhereUniqueInput = {
   readonly name?: InputMaybe<Scalars['String']>;
 };
 
+export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: number } | null | undefined };
+
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: number, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: number, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string } };
 
-export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
+export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
@@ -687,12 +783,19 @@ export type CreateExperienceMutationVariables = Exact<{
 }>;
 
 
-export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } };
+export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'CreateExperiencePayload', readonly record: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } } };
 
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreatePostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly urlSlug: string } };
+export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly urlSlug: string } } };
+
+export type CreateRepositoryMutationVariables = Exact<{
+  data: RepositoryCreateInput;
+}>;
+
+
+export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly user: { readonly __typename: 'User', readonly id: string | number }, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> } } };
 
 export type PublishPostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -700,14 +803,14 @@ export type PublishPostMutationVariables = Exact<{
 }>;
 
 
-export type PublishPostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string } };
+export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string } } };
 
 export type RemovePostThumbnailMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: number, readonly thumbnailUrl?: string | null | undefined } | null | undefined } };
 
 export type UpdateExperienceMutationVariables = Exact<{
   data: ExperienceUpdateInput;
@@ -715,7 +818,7 @@ export type UpdateExperienceMutationVariables = Exact<{
 }>;
 
 
-export type UpdateExperienceMutation = { readonly __typename: 'Mutation', readonly updateExperience?: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } | null | undefined };
+export type UpdateExperienceMutation = { readonly __typename: 'Mutation', readonly updateExperience: { readonly __typename: 'UpdateExperiencePayload', readonly record: { readonly __typename: 'Experience', readonly id: number, readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly location?: string | null | undefined, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null | undefined, readonly name?: string | null | undefined } }, readonly user: { readonly __typename: 'User', readonly id: string | number, readonly name: string } } } };
 
 export type UpdatePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -723,7 +826,7 @@ export type UpdatePostMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly updatePost: { readonly __typename: 'UpdatePostPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined } } };
 
 export type UpdatePostDraftMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -731,7 +834,7 @@ export type UpdatePostDraftMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } | null | undefined };
+export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } } };
 
 export type UpdateUserInfoMutationVariables = Exact<{
   skills: ReadonlyArray<SkillWhereUniqueInput> | SkillWhereUniqueInput;
@@ -739,7 +842,7 @@ export type UpdateUserInfoMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserInfoMutation = { readonly __typename: 'Mutation', readonly updateSkills?: { readonly __typename: 'User', readonly id: string | number, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string }> } | null | undefined, readonly updateDesiredSkills?: { readonly __typename: 'User', readonly id: string | number, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string }> } | null | undefined };
+export type UpdateUserInfoMutation = { readonly __typename: 'Mutation', readonly updateSkills: { readonly __typename: 'UpdateSkillsPayload', readonly record: { readonly __typename: 'User', readonly id: string | number, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string }> } }, readonly updateDesiredSkills: { readonly __typename: 'UpdateDesiredSkillsPayload', readonly record: { readonly __typename: 'User', readonly id: string | number, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string, readonly owner: string }> } } };
 
 export type UploadPostImageMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -747,14 +850,14 @@ export type UploadPostImageMutationVariables = Exact<{
 }>;
 
 
-export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly postImage: { readonly __typename: 'PostImage', readonly id: string | number, readonly url: string } };
+export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly uploadPostImage: { readonly __typename: 'UploadPostImagePayload', readonly record: { readonly __typename: 'PostImage', readonly id: string | number, readonly url: string } } };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly post: { readonly __typename: 'Post', readonly id: number, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string | number }> } };
+export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string | number }> } } };
 
 export type GetExperiencesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -798,7 +901,7 @@ export type GetRepositoriesQueryVariables = Exact<{
 }>;
 
 
-export type GetRepositoriesQuery = { readonly __typename: 'Query', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+export type GetRepositoriesQuery = { readonly __typename: 'Query', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: number } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: number, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: number, readonly name: string }> }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetUserInfoSideBarQueryVariables = Exact<{
   name: Scalars['String'];
@@ -826,7 +929,7 @@ export type SuggestRepositoriesQueryVariables = Exact<{
 }>;
 
 
-export type SuggestRepositoriesQuery = { readonly __typename: 'Query', readonly suggestRepositories: { readonly __typename: 'SuggestRepositories', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly description?: string | null | undefined, readonly id: string, readonly name: string, readonly pushedAt?: Date | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: number } | null | undefined }> } };
+export type SuggestRepositoriesQuery = { readonly __typename: 'Query', readonly suggestRepositories: { readonly __typename: 'SuggestRepositories', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: number } | null | undefined }> } };
 
 export type SuggestSkillsQueryVariables = Exact<{
   where: SuggestSkillsWhereInput;
@@ -835,6 +938,37 @@ export type SuggestSkillsQueryVariables = Exact<{
 
 export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
 
+export const CreateRepositoryFormOptionGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment CreateRepositoryFormOptionGitHubRepository on GitHubRepository {
+  __typename
+  id
+  description
+  forkCount
+  issueCount
+  licenseInfo {
+    __typename
+    id
+    name
+    nickname
+    spdxId
+    url
+  }
+  name
+  primaryLanguage {
+    __typename
+    color
+    id
+    name
+  }
+  pullRequestCount
+  pushedAt
+  repository {
+    __typename
+    id
+  }
+  stargazerCount
+}
+    `;
 export const ExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
     fragment ExperienceCardExperience on Experience {
   __typename
@@ -895,11 +1029,6 @@ export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
       url
     }
     name
-    owner {
-      __typename
-      id
-      login
-    }
     primaryLanguage {
       __typename
       color
@@ -1024,7 +1153,9 @@ export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
 export const CreateExperienceDocument = /*#__PURE__*/ gql`
     mutation CreateExperience($data: ExperienceCreateInput!) {
   createExperience(data: $data) {
-    ...CreateExperienceFragment
+    record {
+      ...CreateExperienceFragment
+    }
   }
 }
     ${CreateExperienceFragmentFragmentDoc}`;
@@ -1034,9 +1165,11 @@ export function useCreateExperienceMutation() {
 };
 export const CreatePostDocument = /*#__PURE__*/ gql`
     mutation CreatePost {
-  post: createPost {
-    id
-    urlSlug
+  createPost {
+    record {
+      id
+      urlSlug
+    }
   }
 }
     `;
@@ -1044,17 +1177,36 @@ export const CreatePostDocument = /*#__PURE__*/ gql`
 export function useCreatePostMutation() {
   return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
 };
+export const CreateRepositoryDocument = /*#__PURE__*/ gql`
+    mutation CreateRepository($data: RepositoryCreateInput!) {
+  createRepository(data: $data) {
+    record {
+      ...RepositoryCardRepository
+      user {
+        __typename
+        id
+      }
+    }
+  }
+}
+    ${RepositoryCardRepositoryFragmentDoc}`;
+
+export function useCreateRepositoryMutation() {
+  return Urql.useMutation<CreateRepositoryMutation, CreateRepositoryMutationVariables>(CreateRepositoryDocument);
+};
 export const PublishPostDocument = /*#__PURE__*/ gql`
     mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {
-  post: publishPost(where: $where, data: $data) {
-    id
-    authorName
-    content
-    description
-    publishedAt
-    thumbnailUrl
-    title
-    urlSlug
+  publishPost(where: $where, data: $data) {
+    record {
+      id
+      authorName
+      content
+      description
+      publishedAt
+      thumbnailUrl
+      title
+      urlSlug
+    }
   }
 }
     `;
@@ -1064,9 +1216,11 @@ export function usePublishPostMutation() {
 };
 export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
     mutation RemovePostThumbnail($where: PostWhereUniqueInput!) {
-  post: removePostThumbnail(where: $where) {
-    id
-    thumbnailUrl
+  removePostThumbnail(where: $where) {
+    record {
+      id
+      thumbnailUrl
+    }
   }
 }
     `;
@@ -1077,7 +1231,9 @@ export function useRemovePostThumbnailMutation() {
 export const UpdateExperienceDocument = /*#__PURE__*/ gql`
     mutation UpdateExperience($data: ExperienceUpdateInput!, $where: ExperienceWhereUniqueInput!) {
   updateExperience(data: $data, where: $where) {
-    ...CreateExperienceFragment
+    record {
+      ...CreateExperienceFragment
+    }
   }
 }
     ${CreateExperienceFragmentFragmentDoc}`;
@@ -1087,11 +1243,13 @@ export function useUpdateExperienceMutation() {
 };
 export const UpdatePostDocument = /*#__PURE__*/ gql`
     mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
-  post: updatePost(where: $where, data: $data) {
-    id
-    content
-    description
-    thumbnailUrl
+  updatePost(where: $where, data: $data) {
+    record {
+      id
+      content
+      description
+      thumbnailUrl
+    }
   }
 }
     `;
@@ -1101,12 +1259,14 @@ export function useUpdatePostMutation() {
 };
 export const UpdatePostDraftDocument = /*#__PURE__*/ gql`
     mutation UpdatePostDraft($where: PostWhereUniqueInput!, $data: PostDraftUpdateInput!) {
-  post: updatePostDraft(where: $where, data: $data) {
-    id
-    content
-    description
-    thumbnailUrl
-    title
+  updatePostDraft(where: $where, data: $data) {
+    record {
+      id
+      content
+      description
+      thumbnailUrl
+      title
+    }
   }
 }
     `;
@@ -1117,19 +1277,23 @@ export function useUpdatePostDraftMutation() {
 export const UpdateUserInfoDocument = /*#__PURE__*/ gql`
     mutation UpdateUserInfo($skills: [SkillWhereUniqueInput!]!, $desiredSkills: [SkillWhereUniqueInput!]!) {
   updateSkills(data: {skills: $skills}) {
-    __typename
-    id
-    skills {
+    record {
       __typename
-      ...UpdateUserInfoSkill
+      id
+      skills {
+        __typename
+        ...UpdateUserInfoSkill
+      }
     }
   }
   updateDesiredSkills(data: {skills: $desiredSkills}) {
-    __typename
-    id
-    skills {
+    record {
       __typename
-      ...UpdateUserInfoSkill
+      id
+      skills {
+        __typename
+        ...UpdateUserInfoSkill
+      }
     }
   }
 }
@@ -1140,9 +1304,11 @@ export function useUpdateUserInfoMutation() {
 };
 export const UploadPostImageDocument = /*#__PURE__*/ gql`
     mutation UploadPostImage($where: PostWhereUniqueInput!, $data: UploadPostImageInput!) {
-  postImage: uploadPostImage(where: $where, data: $data) {
-    id
-    url
+  uploadPostImage(where: $where, data: $data) {
+    record {
+      id
+      url
+    }
   }
 }
     `;
@@ -1152,11 +1318,13 @@ export function useUploadPostImageMutation() {
 };
 export const UpvotePostDocument = /*#__PURE__*/ gql`
     mutation UpvotePost($where: PostWhereUniqueInput!) {
-  post: upvotePost(where: $where) {
-    id
-    upvoteCount
-    upvotingUsers {
+  upvotePost(where: $where) {
+    record {
       id
+      upvoteCount
+      upvotingUsers {
+        id
+      }
     }
   }
 }
@@ -1355,18 +1523,12 @@ export const SuggestRepositoriesDocument = /*#__PURE__*/ gql`
     totalCount
     nodes {
       __typename
-      description
       id
-      name
-      pushedAt
-      repository {
-        __typename
-        id
-      }
+      ...CreateRepositoryFormOptionGitHubRepository
     }
   }
 }
-    `;
+    ${CreateRepositoryFormOptionGitHubRepositoryFragmentDoc}`;
 
 export function useSuggestRepositoriesQuery(options: Omit<Urql.UseQueryArgs<SuggestRepositoriesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<SuggestRepositoriesQuery>({ query: SuggestRepositoriesDocument, ...options });

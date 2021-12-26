@@ -2,7 +2,7 @@ import { oneLine } from "common-tags";
 import { mutationField, nonNull } from "nexus";
 
 export const createPost = mutationField("createPost", {
-	type: nonNull("Post"),
+	type: nonNull("CreatePostPayload"),
 	description: oneLine`
 		Creates a new draft if the user doesn't have a draft pending to be published already
 	`,
@@ -20,7 +20,7 @@ export const createPost = mutationField("createPost", {
 			throw new Error("You can only have 1 unfinished draft post at a time!");
 		}
 
-		const post = await prisma.post.create({
+		const record = await prisma.post.create({
 			data: {
 				author: {
 					connect: {
@@ -30,6 +30,6 @@ export const createPost = mutationField("createPost", {
 			}
 		});
 
-		return post;
+		return { record };
 	}
 });

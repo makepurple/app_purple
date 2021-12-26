@@ -203,7 +203,7 @@ export const Page: NextPage<PageProps> = () => {
 							where: { id: post.id },
 							data: formData
 						})
-							.then((result) => result.data?.post ?? null)
+							.then((result) => result.data?.publishPost.record ?? null)
 							.catch(() => null);
 
 						if (!publishedPost) {
@@ -278,7 +278,7 @@ export const Page: NextPage<PageProps> = () => {
 									where: { id: post.id },
 									data: formData
 								})
-									.then((result) => !!result.data?.post)
+									.then((result) => !!result.data?.updatePostDraft.record)
 									.catch(() => false);
 
 								didSucceed

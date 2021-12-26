@@ -40,7 +40,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 			disabled={!!draft && !creatingPost}
 			onClick={async () => {
 				const didSucceed = await createPost()
-					.then((result) => !!result.data?.post)
+					.then((result) => !!result.data?.createPost.record)
 					.catch(() => {
 						/**
 						 * TODO

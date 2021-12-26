@@ -3,10 +3,13 @@ import { Post_fragment_mock } from "../fragments";
 
 export const RemovePostThumbnail_mock: RemovePostThumbnailMutation = {
 	__typename: "Mutation",
-	post: {
-		__typename: "Post",
-		id: Post_fragment_mock.id,
-		thumbnailUrl: null
+	removePostThumbnail: {
+		__typename: "RemovePostThumbnailPayload",
+		record: {
+			__typename: "Post",
+			id: Post_fragment_mock.id,
+			thumbnailUrl: null
+		}
 	}
 };
 

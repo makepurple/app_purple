@@ -173,9 +173,17 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 
 							if (fetching) return;
 
-							await upvotePost({ where: { id: post.id } });
+							const didSucceed = await upvotePost({ where: { id: post.id } })
+								.then((result) => !!result.data?.upvotePost.record)
+								.catch(() => false);
 
-							toast.success("You liked this post!");
+							if (!didSucceed) {
+								toast.error("Could not like this post");
+
+								return;
+							}
+
+							toast.success("You liked this post! 🎉");
 						}}
 						width={32}
 					/>

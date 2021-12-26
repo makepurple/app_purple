@@ -129,7 +129,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 						type: formData.type as Maybe<ExperienceType>
 					}
 				})
-					.then((result) => !!result.data?.createExperience)
+					.then((result) => !!result.data?.createExperience.record)
 					.catch(() => false);
 
 				if (!didSucceed) {

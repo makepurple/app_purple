@@ -1,6 +1,8 @@
 mutation UploadPostImage($where: PostWhereUniqueInput!, $data: UploadPostImageInput!) {
-	postImage: uploadPostImage(where: $where, data: $data) {
-		id
-		url
+	uploadPostImage(where: $where, data: $data) {
+		record {
+			id
+			url
+		}
 	}
 }

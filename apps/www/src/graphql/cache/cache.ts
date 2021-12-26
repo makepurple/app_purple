@@ -27,13 +27,13 @@ export const createCache = () => {
 						${CreateExperienceFragmentFragmentDoc}
 					`;
 
-					const newExperience = result.createExperience;
+					const newExperience = result.createExperience.record;
 					const userId = newExperience.user.id;
 
 					const oldUser = cache.readFragment(fragment, { id: userId });
 
 					cache.writeFragment(fragment, {
-						id: result.createExperience.user.id,
+						id: newExperience.user.id,
 						experiences: oldUser.experiences.push(newExperience)
 					});
 				}

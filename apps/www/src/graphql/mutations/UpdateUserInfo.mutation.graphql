@@ -3,19 +3,23 @@ mutation UpdateUserInfo(
 	$desiredSkills: [SkillWhereUniqueInput!]!
 ) {
 	updateSkills(data: { skills: $skills }) {
-		__typename
-		id
-		skills {
+		record {
 			__typename
-			...UpdateUserInfoSkill
+			id
+			skills {
+				__typename
+				...UpdateUserInfoSkill
+			}
 		}
 	}
 	updateDesiredSkills(data: { skills: $desiredSkills }) {
-		__typename
-		id
-		skills {
+		record {
 			__typename
-			...UpdateUserInfoSkill
+			id
+			skills {
+				__typename
+				...UpdateUserInfoSkill
+			}
 		}
 	}
 }

@@ -5,7 +5,7 @@ import React from "react";
 export default {
 	title: "organisms/LoadingRepositoryCard",
 	component: LoadingRepositoryCard
-};
+} as Meta;
 
 const Template: Story<LoadingRepositoryCardProps> = (args) => {
 	return <LoadingRepositoryCard {...args} />;

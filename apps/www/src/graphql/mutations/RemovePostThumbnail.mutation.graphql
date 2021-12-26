@@ -1,6 +1,8 @@
 mutation RemovePostThumbnail($where: PostWhereUniqueInput!) {
-	post: removePostThumbnail(where: $where) {
-		id
-		thumbnailUrl
+	removePostThumbnail(where: $where) {
+		record {
+			id
+			thumbnailUrl
+		}
 	}
 }

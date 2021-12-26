@@ -23,5 +23,6 @@ export * from "./SuggestRepositoriesWhereInput";
 export * from "./SuggestSkillsWhereInput";
 export * from "./UpdateDesiredSkillsInput";
 export * from "./UpdateSkillsInput";
+export * from "./UploadPostImageInput";
 export * from "./UserWhereInput";
 export * from "./UserWhereUniqueInput";

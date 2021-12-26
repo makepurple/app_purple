@@ -1,8 +1,10 @@
 mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
-	post: updatePost(where: $where, data: $data) {
-		id
-		content
-		description
-		thumbnailUrl
+	updatePost(where: $where, data: $data) {
+		record {
+			id
+			content
+			description
+			thumbnailUrl
+		}
 	}
 }

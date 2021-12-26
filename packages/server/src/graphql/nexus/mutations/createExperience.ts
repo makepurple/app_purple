@@ -2,7 +2,7 @@ import { ExperienceCreateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const createExperience = mutationField("createExperience", {
-	type: nonNull("Experience"),
+	type: nonNull("CreateExperiencePayload"),
 	args: {
 		data: nonNull(arg({ type: "ExperienceCreateInput" }))
 	},
@@ -22,7 +22,7 @@ export const createExperience = mutationField("createExperience", {
 			type: args.data.type
 		});
 
-		return await prisma.experience.create({
+		const record = await prisma.experience.create({
 			data: {
 				endDate: dataInput.endDate as Maybe<Date>,
 				highlights: (dataInput.highlights ?? []) as string[],
@@ -47,5 +47,7 @@ export const createExperience = mutationField("createExperience", {
 				}
 			}
 		});
+
+		return { record };
 	}
 });

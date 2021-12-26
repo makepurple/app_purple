@@ -3,7 +3,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const updatePost = mutationField("updatePost", {
-	type: "Post",
+	type: nonNull("UpdatePostPayload"),
 	args: {
 		data: nonNull(arg({ type: "PostUpdateInput" })),
 		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
@@ -18,11 +18,11 @@ export const updatePost = mutationField("updatePost", {
 			thumbnailUrl: args.data.thumbnailUrl
 		});
 
-		const updatedPost = await prisma.post.update({
+		const record = await prisma.post.update({
 			data: dataInput,
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		return updatedPost;
+		return { record };
 	}
 });

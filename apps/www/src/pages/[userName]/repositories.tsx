@@ -1,11 +1,12 @@
-import { Divider, NonIdealState, Paper, RepoIcon } from "@makepurple/components";
+import { Button, Divider, NonIdealState, Paper, RepoIcon } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
-import tw from "twin.macro";
+import { Fragment, useState } from "react";
+import tw, { styled } from "twin.macro";
 import { useGetRepositoriesQuery } from "../../graphql";
 import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
+import { PlusIcon } from "../../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -23,10 +24,26 @@ const Title = tw.h2`
 	font-bold
 `;
 
+const AddButton = tw(Button)`
+	h-12
+	w-12
+	p-0
+`;
+
 const Repositories = tw.div`
 	flex
 	flex-col
 	items-stretch
+`;
+
+const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
+	${tw`
+		transition
+		duration-150
+		ease-in
+	`}
+
+	${({ $canClose }) => $canClose && tw`rotate-45`}
 `;
 
 export const Page: NextPage = () => {
@@ -50,12 +67,27 @@ export const Page: NextPage = () => {
 		}
 	});
 
+	const [isCreate, setIsCreate] = useState<boolean>(false);
+
 	const repositories = data?.repositories.nodes ?? [];
 
 	return (
 		<UserPageLayout selectedTab="repositories" userName={userName}>
 			<Content>
-				<Title>Repositories</Title>
+				<Title>
+					<span tw="flex-grow">Repositories</span>
+					<AddButton
+						onClick={() => {
+							setIsCreate((oldIsCreate) => !oldIsCreate);
+						}}
+						size="small"
+						type="button"
+						variant="secondary"
+						tw="flex-shrink-0"
+					>
+						<AddRemoveIcon height={24} width={24} $canClose={isCreate} />
+					</AddButton>
+				</Title>
 				<Repositories>
 					{fetching ? (
 						Array.from({ length: 3 }, (_, i) => (

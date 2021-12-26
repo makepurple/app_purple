@@ -220,7 +220,10 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					}))
 				})
 					.then((result) => {
-						return !!result.data?.updateDesiredSkills && !!result.data.updateSkills;
+						return (
+							!!result.data?.updateDesiredSkills.record &&
+							!!result.data.updateSkills.record
+						);
 					})
 					.catch(() => false);
 

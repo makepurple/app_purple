@@ -3,7 +3,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { Logger, PrismaUtils } from "../../../utils";
 
 export const deletePost = mutationField("deletePost", {
-	type: nonNull("Post"),
+	type: nonNull("DeletePostPayload"),
 	description: oneLine`
 		Users can delete their own posts.
 	`,
@@ -39,10 +39,12 @@ export const deletePost = mutationField("deletePost", {
 			})
 		);
 
-		return await prisma.post.delete({
+		const record = await prisma.post.delete({
 			where: {
 				id: args.where.id ?? undefined
 			}
 		});
+
+		return { record };
 	}
 });

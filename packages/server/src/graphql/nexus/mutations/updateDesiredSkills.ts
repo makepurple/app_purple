@@ -2,7 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { arg, mutationField, nonNull } from "nexus";
 
 export const updateDesiredSkills = mutationField("updateDesiredSkills", {
-	type: "User",
+	type: nonNull("UpdateDesiredSkillsPayload"),
 	args: {
 		data: nonNull(arg({ type: "UpdateDesiredSkillsInput" }))
 	},
@@ -44,7 +44,7 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 
 			const skillsToConnect = [...skillsById, ...skillsByNameOwner];
 
-			return await transaction.user.update({
+			const record = await transaction.user.update({
 				where: { id: user.id },
 				data: {
 					desiredSkills: {
@@ -63,6 +63,8 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 					}
 				}
 			});
+
+			return { record };
 		});
 
 		return updatedUser;

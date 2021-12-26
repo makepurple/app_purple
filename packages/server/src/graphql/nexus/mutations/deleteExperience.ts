@@ -3,7 +3,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const deleteExperience = mutationField("deleteExperience", {
-	type: nonNull("Experience"),
+	type: nonNull("DeleteExperiencePayload"),
 	description: oneLine`
 		Users can delete their own experiences.
 	`,
@@ -24,10 +24,10 @@ export const deleteExperience = mutationField("deleteExperience", {
 		return true;
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const deletedPost = await prisma.experience.delete({
+		const record = await prisma.experience.delete({
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		return deletedPost;
+		return { record };
 	}
 });

@@ -1,5 +1,6 @@
 export * from "./Experience.fragment.mock";
 export * from "./GitHubOrganization.fragment.mock";
+export * from "./GitHubRepository.fragment.mock";
 export * from "./GitHubUser.fragment.mock";
 export * from "./Organization.fragment.mock";
 export * from "./Post.fragment.mock";

@@ -1,12 +1,14 @@
 mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {
-	post: publishPost(where: $where, data: $data) {
-		id
-		authorName
-		content
-		description
-		publishedAt
-		thumbnailUrl
-		title
-		urlSlug
+	publishPost(where: $where, data: $data) {
+		record {
+			id
+			authorName
+			content
+			description
+			publishedAt
+			thumbnailUrl
+			title
+			urlSlug
+		}
 	}
 }

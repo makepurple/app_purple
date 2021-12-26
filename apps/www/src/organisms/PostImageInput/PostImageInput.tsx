@@ -65,7 +65,7 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 						data: {
 							image: file
 						}
-					}).then((result) => result.data?.postImage ?? null);
+					}).then((result) => result.data?.uploadPostImage.record ?? null);
 
 					if (!postImage) {
 						toast.error("Image could not be uploaded");
@@ -75,7 +75,7 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 
 					onUpload?.(postImage.url);
 
-					toast.success("Image successfully uploaded!");
+					toast.success("Image successfully uploaded! 🎉");
 				}}
 				type="file"
 			/>

@@ -3,7 +3,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const publishPost = mutationField("publishPost", {
-	type: nonNull("Post"),
+	type: nonNull("PublishPostPayload"),
 	args: {
 		data: arg({ type: "PostPublishInput" }),
 		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
@@ -44,7 +44,7 @@ export const publishPost = mutationField("publishPost", {
 			.join("-")
 			.trim();
 
-		return await prisma.post.update({
+		const record = await prisma.post.update({
 			data: {
 				...dataInput,
 				publishedAt: new Date(),
@@ -52,5 +52,7 @@ export const publishPost = mutationField("publishPost", {
 			},
 			where
 		});
+
+		return { record };
 	}
 });

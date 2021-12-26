@@ -1,0 +1,29 @@
+fragment CreateRepositoryFormOptionGitHubRepository on GitHubRepository {
+	__typename
+	id
+	description
+	forkCount
+	issueCount
+	licenseInfo {
+		__typename
+		id
+		name
+		nickname
+		spdxId
+		url
+	}
+	name
+	primaryLanguage {
+		__typename
+		color
+		id
+		name
+	}
+	pullRequestCount
+	pushedAt
+	repository {
+		__typename
+		id
+	}
+	stargazerCount
+}
