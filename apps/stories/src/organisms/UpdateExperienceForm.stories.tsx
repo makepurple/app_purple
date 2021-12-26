@@ -1,6 +1,10 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { UpdateExperienceForm, UpdateExperienceFormProps } from "@makepurple/www";
-import { SuggestExperiences_mock, UpdateExperience_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	Experience_fragment_mock,
+	SuggestExperiences_mock,
+	UpdateExperience_mock
+} from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import { getOperationName } from "@urql/core";
 import ms from "ms";
@@ -14,7 +18,9 @@ export default {
 const Template: Story<UpdateExperienceFormProps> = (args) => {
 	return <UpdateExperienceForm {...args} />;
 };
-Template.args = {};
+Template.args = {
+	experience: Experience_fragment_mock
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
