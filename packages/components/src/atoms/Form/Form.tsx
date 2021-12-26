@@ -1,14 +1,8 @@
 import { InferComponentProps } from "@makepurple/typings";
 import React, { FC } from "react";
-import tw from "twin.macro";
 import { FormContext } from "./context";
 
-export const Root = tw.form`
-	flex
-	flex-col
-`;
-
-export type FormProps = InferComponentProps<typeof Root> & {
+export type FormProps = InferComponentProps<"form"> & {
 	disabled?: boolean;
 };
 
@@ -17,7 +11,7 @@ export const Form: FC<FormProps> = (props) => {
 
 	return (
 		<FormContext.Provider value={{ disabled }}>
-			<Root {...restFormProps} />
+			<form {...restFormProps} />
 		</FormContext.Provider>
 	);
 };
