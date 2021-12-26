@@ -1,7 +1,8 @@
-import { FormGroup, FormLabel, Input } from "@makepurple/components";
-import React, { CSSProperties, FC, useState } from "react";
+import { Divider, FormGroup, FormLabel, Input } from "@makepurple/components";
+import React, { CSSProperties, FC, Fragment, SyntheticEvent, useState } from "react";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
-import { useSuggestRepositoriesQuery } from "../../graphql";
+import { useCreateRepositoryMutation, useSuggestRepositoriesQuery } from "../../graphql";
 import { CreateRepositoryFormOption } from "../CreateRepositoryFormOption";
 import { LoadingCreateRepositoryFormOption } from "../LoadingCreateRepositoryFormOption";
 
@@ -15,18 +16,23 @@ const RepositoryOptions = tw.div`
 	flex
 	flex-col
 	items-stretch
-	gap-6
+	gap-4
 `;
 
 export interface CreateRepositoryFormProps {
 	className?: string;
+	onClose?: (event?: SyntheticEvent) => void;
 	style?: CSSProperties;
 }
 
-export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({ className, style }) => {
+export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
+	className,
+	onClose,
+	style
+}) => {
 	const [query, setQuery] = useState<string>("");
 
-	const [{ data }] = useSuggestRepositoriesQuery({
+	const [{ data, fetching }] = useSuggestRepositoriesQuery({
 		variables: {
 			first: 5,
 			where: {
@@ -35,8 +41,7 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({ className,
 		}
 	});
 
-	const fetching = false;
-	const disabled = false;
+	const [{ fetching: creating }, createRepository] = useCreateRepositoryMutation();
 
 	const repositories = data?.suggestRepositories.nodes ?? [];
 
@@ -56,17 +61,40 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({ className,
 			<RepositoryOptions tw="mt-6">
 				{fetching
 					? Array.from({ length: 3 }, (_, i) => (
-							<LoadingCreateRepositoryFormOption key={i} />
+							<Fragment key={i}>
+								{!!i && <Divider />}
+								<LoadingCreateRepositoryFormOption />
+							</Fragment>
 					  ))
-					: repositories.map((repository) => (
-							<CreateRepositoryFormOption
-								key={repository.id}
-								disabled={disabled || !!repository.repository}
-								onAdd={(toAddRepository) => {
-									console.log(toAddRepository);
-								}}
-								repository={repository}
-							/>
+					: repositories.map((repository, i) => (
+							<Fragment key={repository.id}>
+								{!!i && <Divider />}
+								<CreateRepositoryFormOption
+									disabled={creating || !!repository.repository}
+									onAdd={async (newRepository) => {
+										const didSucceed = await createRepository({
+											data: {
+												name: newRepository.name
+											}
+										})
+											.then(
+												(result) => !!result.data?.createRepository.record
+											)
+											.catch(() => false);
+
+										if (!didSucceed) {
+											toast.error("Could not add this repository");
+
+											return;
+										}
+
+										toast.success("Repository added! 🎉");
+
+										onClose?.();
+									}}
+									repository={repository}
+								/>
+							</Fragment>
 					  ))}
 			</RepositoryOptions>
 		</Root>

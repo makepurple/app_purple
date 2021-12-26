@@ -52,6 +52,7 @@ const LanguageColor = tw.div`
 `;
 
 const AddButton = tw(Button)`
+	flex-shrink-0
 	flex
 	items-center
 	justify-center
@@ -132,6 +133,7 @@ export const CreateRepositoryFormOption: FC<CreateRepositoryFormOptionProps> = (
 				size="small"
 				type="button"
 				variant="secondary"
+				tw="ml-2"
 			>
 				<PlusIcon height={24} width={24} />
 			</AddButton>
