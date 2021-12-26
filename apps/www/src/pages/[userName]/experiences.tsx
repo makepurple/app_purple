@@ -1,19 +1,21 @@
 import { Button, Divider, HexagonIcon, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { CreateExperienceFragmentFragment, useGetExperiencesQuery } from "../../graphql";
-import {
-	CreateExperienceForm,
-	ExperienceCard,
-	LoadingExperienceCard,
-	UpdateExperienceForm,
-	UserPageLayout
-} from "../../organisms";
+import { ExperienceCard, LoadingExperienceCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/experiences";
 import { PlusIcon } from "../../svgs";
+
+const CreateExperienceForm = dynamic(() => import("../../organisms/CreateExperienceForm"), {
+	ssr: false
+});
+const UpdateExperienceForm = dynamic(() => import("../../organisms/UpdateExperienceForm"), {
+	ssr: false
+});
 
 const BATCH_SIZE = 20;
 
