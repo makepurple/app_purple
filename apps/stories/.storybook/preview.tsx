@@ -4,10 +4,37 @@ import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
 import { domMax, LazyMotion } from "framer-motion";
 import { RouterContext } from "next/dist/shared/lib/router-context";
-import * as NextImage from "next/image";
 import { Toaster } from "react-hot-toast";
 import "twin.macro";
 import "tippy.js/dist/tippy.css";
+
+/**
+ * !HACK
+ * @description next/image doesn't work within Storybook, so we're overwriting it here
+ * @author David Lee
+ * @date June 11, 2021
+ */
+import * as WwwNextImage from "../../www/node_modules/next/image";
+import * as ComponentsNextImage from "../../../packages/components/node_modules/next/image";
+
+const overwriteNextImage = (nextImage: any) => {
+	const OriginalNextImage = nextImage.default;
+
+	Object.defineProperty(nextImage, "default", {
+		configurable: true,
+		value: (props) => (
+			<OriginalNextImage
+				{...props}
+				unoptimized
+				blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAADAAQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAbEAADAAMBAQAAAAAAAAAAAAABAgMABAURUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAECEf/aAAwDAQACEQMRAD8Anz9voy1dCI2mectSE5ioFCqia+KCwJ8HzGMZPqJb1oPEf//Z"
+				loader={({ src }) => src}
+			/>
+		)
+	});
+};
+
+overwriteNextImage(WwwNextImage);
+overwriteNextImage(ComponentsNextImage);
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
@@ -22,18 +49,6 @@ const alphabeticSort = (a, b) => {
 addons.setConfig({
 	showRoots: true,
 	theme: themes.dark
-});
-
-/**
- * !HACK
- * @description next/image doesn't work within Storybook, so we're overwriting it here
- * @author David Lee
- * @date June 11, 2021
- */
-const OriginalNextImage = NextImage.default;
-Object.defineProperty(NextImage, "default", {
-	configurable: true,
-	value: (props) => <OriginalNextImage {...props} unoptimized />
 });
 
 const DEFAULT_VIEWPORT_HEIGHT = "1200px";
