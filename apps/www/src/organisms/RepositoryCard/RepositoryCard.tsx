@@ -6,6 +6,7 @@ import {
 	HiddenInput,
 	MaybeAnchor,
 	Skeleton,
+	Spinner,
 	Tags
 } from "@makepurple/components";
 import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
@@ -83,6 +84,7 @@ const LanguageColor = tw.div`
 
 const SaveButton = tw(FormButton)`
 	flex-shrink-0
+	w-20
 `;
 
 const SkillsSuggest = tw(ComboBox.Options)`
@@ -110,7 +112,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 	const primaryLanguage = repository.github.primaryLanguage;
 	const license = repository.github.licenseInfo;
 
-	const [{ fetching }, updateRepository] = useUpdateRepositoryMutation();
+	const [{ fetching: updating }, updateRepository] = useUpdateRepositoryMutation();
 
 	const { control, handleSubmit, register } = useForm<{
 		skills: readonly SuggestedSkill[];
@@ -191,7 +193,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 		<Root
 			as={Form}
 			ref={ref as any}
-			disabled={fetching}
+			disabled={updating}
 			onSubmit={handleSubmit(async (formData) => {
 				const didSucceed = await updateRepository({
 					data: {
@@ -362,7 +364,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 			</Details>
 			{editing && (
 				<SaveButton type="submit" tw="ml-2">
-					Save
+					{updating ? <Spinner /> : "Save"}
 				</SaveButton>
 			)}
 		</>
