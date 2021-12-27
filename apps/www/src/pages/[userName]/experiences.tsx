@@ -66,6 +66,7 @@ export const Page: NextPage<PageProps> = () => {
 		field: "experiences",
 		requestPolicy: "cache-first",
 		variables: {
+			after: null,
 			first: BATCH_SIZE,
 			where: {
 				user: {
@@ -73,8 +74,7 @@ export const Page: NextPage<PageProps> = () => {
 						equals: userName
 					}
 				}
-			},
-			after: null
+			}
 		}
 	});
 

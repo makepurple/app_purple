@@ -7,6 +7,7 @@ import {
 	SuggestRepositories_mock,
 	SuggestSkills_mock
 } from "@makepurple/www/src/graphql/mocks";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]/repositories";
 import { Page } from "@makepurple/www/src/pages/[userName]/repositories";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
@@ -25,7 +26,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};

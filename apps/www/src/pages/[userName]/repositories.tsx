@@ -7,6 +7,7 @@ import { Fragment, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useGetRepositoriesQuery } from "../../graphql";
 import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
+import { PageProps, pageProps } from "../../page-props/[userName]/repositories";
 import { PencilIcon, PlusIcon, RepoIcon } from "../../svgs";
 
 const CreateRepositoryForm = dynamic(() => import("../../organisms/CreateRepositoryForm"), {
@@ -59,7 +60,9 @@ const Repositories = tw.div`
 	items-stretch
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
@@ -68,6 +71,7 @@ export const Page: NextPage = () => {
 		field: "repositories",
 		requestPolicy: "cache-first",
 		variables: {
+			after: null,
 			first: BATCH_SIZE,
 			where: {
 				user: {
@@ -75,8 +79,7 @@ export const Page: NextPage = () => {
 						equals: userName
 					}
 				}
-			},
-			after: null
+			}
 		}
 	});
 
