@@ -1,6 +1,7 @@
 const bundleAnalyzer = require("@next/bundle-analyzer");
 const withPlugins = require("next-compose-plugins");
 const transpileModules = require("next-transpile-modules");
+const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE === "true" });
 const withTranspileModules = transpileModules([
@@ -53,7 +54,21 @@ const config = {
 		}
 
 		if (isServer) {
-			config.externals.push('_http_common')
+			config.externals.push('_http_common');
+
+			/**
+			 * !HACK
+			 * @description We don't care about the bundle-size on the server, and this error is
+			 * way too verbose. So we're squelching this error on the server (this particular
+			 * error shouldn't affect functionality, which is why we're doing this).
+			 * @author David Lee
+			 * @date December 27, 2021
+			 */
+			config.plugins.push(
+				new FilterWarningsPlugin({
+					exclude: /Critical dependency: the request of a dependency is an expression/
+				})
+			);
 		}
 
 		return config;
