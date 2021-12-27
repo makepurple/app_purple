@@ -21,7 +21,7 @@ const Template: Story<UserInfoSideBarFormProps> = (args) => {
 Template.args = {};
 Template.parameters = {};
 
-export const Standard: any = Template.bind({});
+export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,

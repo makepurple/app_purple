@@ -29,11 +29,6 @@ const SubTitle = tw.div`
 	not-first:mt-6
 `;
 
-const Skills = tw(Tags)`
-	relative
-	mt-4
-`;
-
 const SkillsSuggest = tw(ComboBox.Options)`
 	bottom-0
 	inset-x-0
@@ -97,7 +92,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 	const user = data?.user;
 
-	const { control, handleSubmit, reset } = useForm<{
+	const { control, handleSubmit, register, reset } = useForm<{
 		skills: readonly { name: string; owner: string }[];
 		desiredSkills: readonly { name: string; owner: string }[];
 	}>({
@@ -233,11 +228,11 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 			style={style}
 		>
 			<SubTitle>Highlighted Skills</SubTitle>
-			<Skills editable type="positive">
+			<Tags editable type="positive" tw="relative mt-4">
 				{skills.fields.map((field, i) => (
 					<Tags.Tag key={field._id} id={field._id} onRemove={() => skills.remove(i)}>
-						<HiddenInput name={`skills.${i}.name`} value={field.name} />
-						<HiddenInput name={`skills.${i}.owner`} value={field.owner} />
+						<HiddenInput {...register(`skills.${i}.name`)} />
+						<HiddenInput {...register(`skills.${i}.owner`)} />
 						<span>{field.name}</span>
 					</Tags.Tag>
 				))}
@@ -248,6 +243,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						onKeyDown={onEnterBlue}
 						placeholder="[repo_owner]/[repo_name]"
 						aria-label="new skill"
+						tw="w-52"
 					/>
 				</ComboBox>
 				<SkillsSuggest {...blueComboBox.getMenuProps()} isOpen={blueComboBox.isOpen}>
@@ -265,17 +261,17 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 								</ComboBox.Option>
 						  ))}
 				</SkillsSuggest>
-			</Skills>
+			</Tags>
 			<SubTitle>Currently Learning</SubTitle>
-			<Skills editable type="negative">
+			<Tags editable type="negative" tw="relative mt-4">
 				{desiredSkills.fields.map((field, i) => (
 					<Tags.Tag
 						key={field._id}
 						id={field._id}
 						onRemove={() => desiredSkills.remove(i)}
 					>
-						<HiddenInput name={`desiredSkills.${i}.name`} value={field.name} />
-						<HiddenInput name={`desiredSkills.${i}.owner`} value={field.owner} />
+						<HiddenInput {...register(`desiredSkills.${i}.name`)} />
+						<HiddenInput {...register(`desiredSkills.${i}.owner`)} />
 						<span>{field.name}</span>
 					</Tags.Tag>
 				))}
@@ -286,6 +282,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						onKeyDown={onEnterRed}
 						placeholder="[repo_owner]/[repo_name]"
 						aria-label="new desired skill"
+						tw="w-52"
 					/>
 				</ComboBox>
 				<SkillsSuggest {...redComboBox.getMenuProps()} isOpen={redComboBox.isOpen}>
@@ -303,7 +300,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 								</ComboBox.Option>
 						  ))}
 				</SkillsSuggest>
-			</Skills>
+			</Tags>
 			<FormActions>
 				<FormButton type="submit">Save</FormButton>
 				<FormButton onClick={onClose} type="button" variant="secondary">

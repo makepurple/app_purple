@@ -1,0 +1,15 @@
+mutation UpdateRepository(
+	$data: RepositoryUpdateInput!
+	$where: RepositoryWhereUniqueInput!
+) {
+	updateRepository(data: $data, where: $where) {
+		record {
+			id
+			skills {
+				id
+				name
+				owner
+			}
+		}
+	}
+}

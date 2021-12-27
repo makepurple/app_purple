@@ -32,5 +32,6 @@ fragment RepositoryCardRepository on Repository {
 		__typename
 		id
 		name
+		owner
 	}
 }

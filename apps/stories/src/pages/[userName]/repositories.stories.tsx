@@ -3,7 +3,9 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetPostDraft_mock,
 	GetRepositories_mock,
-	GetUserInfoSideBar_mock
+	GetUserInfoSideBar_mock,
+	SuggestRepositories_mock,
+	SuggestSkills_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { Page } from "@makepurple/www/src/pages/[userName]/repositories";
 import type { Meta, Story } from "@storybook/react";
@@ -40,7 +42,7 @@ export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
-	urql: (op: any) => {
+	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
@@ -48,6 +50,12 @@ Standard.parameters = {
 				return { data: GetRepositories_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "SuggestRepositories":
+				return { data: SuggestRepositories_mock };
+			case "SuggestSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -68,6 +76,12 @@ Loading.parameters = {
 				return { data: GetRepositories_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "SuggestRepositories":
+				return { data: SuggestRepositories_mock };
+			case "SuggestSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -78,7 +92,7 @@ export const NoResults = Template.bind({});
 NoResults.args = { ...Template.args };
 NoResults.parameters = {
 	...Template.parameters,
-	urql: (op: any) => {
+	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
@@ -102,6 +116,12 @@ NoResults.parameters = {
 				};
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "SuggestRepositories":
+				return { data: SuggestRepositories_mock };
+			case "SuggestSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}

@@ -1,12 +1,17 @@
-import { Button, Divider, NonIdealState, Paper, RepoIcon } from "@makepurple/components";
+import { Button, Divider, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useGetRepositoriesQuery } from "../../graphql";
 import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
-import { PlusIcon } from "../../svgs";
+import { PencilIcon, PlusIcon, RepoIcon } from "../../svgs";
+
+const CreateRepositoryForm = dynamic(() => import("../../organisms/CreateRepositoryForm"), {
+	ssr: false
+});
 
 const BATCH_SIZE = 20;
 
@@ -24,16 +29,18 @@ const Title = tw.h2`
 	font-bold
 `;
 
-const AddButton = tw(Button)`
+const EditButton = tw(Button)`
+	flex-shrink-0
 	h-12
 	w-12
 	p-0
 `;
 
-const Repositories = tw.div`
-	flex
-	flex-col
-	items-stretch
+const AddButton = tw(Button)`
+	flex-shrink-0
+	h-12
+	w-12
+	p-0
 `;
 
 const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
@@ -44,6 +51,12 @@ const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
 	`}
 
 	${({ $canClose }) => $canClose && tw`rotate-45`}
+`;
+
+const Repositories = tw.div`
+	flex
+	flex-col
+	items-stretch
 `;
 
 export const Page: NextPage = () => {
@@ -67,7 +80,7 @@ export const Page: NextPage = () => {
 		}
 	});
 
-	const [isCreate, setIsCreate] = useState<boolean>(false);
+	const [mode, setMode] = useState<"create" | "read" | "update">("read");
 
 	const repositories = data?.repositories.nodes ?? [];
 
@@ -75,44 +88,73 @@ export const Page: NextPage = () => {
 		<UserPageLayout selectedTab="repositories" userName={userName}>
 			<Content>
 				<Title>
-					<span tw="flex-grow">Repositories</span>
-					<AddButton
+					<span tw="flex-grow">
+						{mode === "create"
+							? "Add Repository"
+							: mode === "update"
+							? "Edit Repositories"
+							: "Repositories"}
+					</span>
+					<EditButton
 						onClick={() => {
-							setIsCreate((oldIsCreate) => !oldIsCreate);
+							setMode((oldMode) => (oldMode !== "read" ? "read" : "update"));
 						}}
 						size="small"
 						type="button"
 						variant="secondary"
-						tw="flex-shrink-0"
+						style={mode !== "read" ? { display: "none" } : {}}
+						tw="mr-4"
 					>
-						<AddRemoveIcon height={24} width={24} $canClose={isCreate} />
+						<PencilIcon height={24} width={24} />
+					</EditButton>
+					<AddButton
+						onClick={() => {
+							setMode((oldMode) => (oldMode !== "read" ? "read" : "create"));
+						}}
+						size="small"
+						type="button"
+						variant="secondary"
+					>
+						<AddRemoveIcon height={24} width={24} $canClose={mode !== "read"} />
 					</AddButton>
 				</Title>
-				<Repositories>
-					{fetching ? (
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{!!i && <Divider />}
-								<LoadingRepositoryCard />
-							</Fragment>
-						))
-					) : !repositories.length ? (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="We couldn't find any repositories"
-							tw="shadow-none"
-						>
-							<RepoIcon height={96} width={96} />
-						</NonIdealState>
-					) : (
-						repositories.map((repository, i) => (
-							<Fragment key={repository.id}>
-								{!!i && <Divider />}
-								<RepositoryCard ref={getLoadMoreRef(i)} repository={repository} />
-							</Fragment>
-						))
-					)}
-				</Repositories>
+				{mode === "create" ? (
+					<CreateRepositoryForm
+						onClose={() => {
+							setMode("read");
+						}}
+					/>
+				) : (
+					<Repositories>
+						{fetching ? (
+							Array.from({ length: 3 }, (_, i) => (
+								<Fragment key={i}>
+									{!!i && <Divider />}
+									<LoadingRepositoryCard />
+								</Fragment>
+							))
+						) : !repositories.length ? (
+							<NonIdealState
+								title="There's nothing here"
+								subTitle="We couldn't find any repositories"
+								tw="shadow-none"
+							>
+								<RepoIcon height={96} width={96} />
+							</NonIdealState>
+						) : (
+							repositories.map((repository, i) => (
+								<Fragment key={repository.id}>
+									{!!i && <Divider />}
+									<RepositoryCard
+										ref={getLoadMoreRef(i)}
+										editing={mode === "update"}
+										repository={repository}
+									/>
+								</Fragment>
+							))
+						)}
+					</Repositories>
+				)}
 			</Content>
 		</UserPageLayout>
 	);

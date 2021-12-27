@@ -12,9 +12,7 @@ import "tippy.js/dist/tippy.css";
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
 
-	if (isSameKind) {
-		return false;
-	}
+	if (isSameKind) return false;
 
 	const compared: boolean = a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
 
