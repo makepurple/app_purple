@@ -221,7 +221,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					return;
 				}
 
-				toast.success("Your skills were updated 🎉");
+				toast.success("Your skills were updated! 🎉");
 
 				onClose?.();
 			})}

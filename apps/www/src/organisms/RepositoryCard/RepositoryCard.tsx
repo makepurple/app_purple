@@ -13,6 +13,7 @@ import { dayjs } from "@makepurple/utils";
 import ms from "ms";
 import React, { cloneElement, CSSProperties, forwardRef, useCallback, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
@@ -191,8 +192,30 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 			as={Form}
 			ref={ref as any}
 			disabled={fetching}
-			onSubmit={handleSubmit((formData) => {
-				console.log(formData);
+			onSubmit={handleSubmit(async (formData) => {
+				const didSucceed = await updateRepository({
+					data: {
+						skills: formData.skills.map((skill) => ({
+							name_owner: {
+								name: skill.name,
+								owner: skill.owner
+							}
+						}))
+					},
+					where: {
+						id: repository.id
+					}
+				})
+					.then((result) => !!result.data?.updateRepository.record)
+					.catch(() => false);
+
+				if (!didSucceed) {
+					toast.error("Could not update repository details");
+
+					return;
+				}
+
+				toast.success("Repository details were updated! 🎉");
 			})}
 		/>
 	) : (
