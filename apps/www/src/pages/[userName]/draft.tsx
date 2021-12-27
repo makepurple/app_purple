@@ -5,6 +5,7 @@ import {
 	FormButton,
 	FormGroup,
 	FormHelperText,
+	FormLabel,
 	HiddenInput,
 	Input,
 	MainContainer,
@@ -222,6 +223,7 @@ export const Page: NextPage<PageProps> = () => {
 				>
 					<HiddenInput {...register("thumbnailUrl")} />
 					<FormGroup>
+						<FormLabel>Title</FormLabel>
 						<Input
 							{...register("title")}
 							placeholder="Title"
@@ -231,6 +233,7 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={errors.title?.message} />
 					</FormGroup>
 					<FormGroup tw="mt-4">
+						<FormLabel>Description</FormLabel>
 						<TextArea
 							{...register("description")}
 							placeholder="Description"
@@ -239,6 +242,7 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={errors.description?.message} />
 					</FormGroup>
 					<FormGroup tw="mt-4">
+						<FormLabel>Content</FormLabel>
 						<Controller
 							control={control}
 							name="content"
