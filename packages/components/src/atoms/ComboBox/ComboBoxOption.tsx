@@ -1,9 +1,7 @@
-import { UseComboBoxState } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
-import React, { ComponentType } from "react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 
-const Root = tw.li`
+export const ComboBoxOption = tw.div`
 	flex
 	items-center
 	py-2
@@ -26,20 +24,4 @@ const Root = tw.li`
 	[&[aria-selected="true"]]:hover:bg-indigo-500
 `;
 
-export type ComboBoxOptionProps = InferComponentProps<"li"> &
-	UseComboBoxState<any> & {
-		as?: string | ComponentType<any>;
-		index: number;
-		item: any;
-	};
-
-export const ComboBoxOption = styled((props: ComboBoxOptionProps) => {
-	const { as = "li", combobox, index, item, ...liProps } = props;
-
-	if (!combobox.isOpen) return null;
-	if (combobox.loading) return null;
-
-	return <Root as={as} {...liProps} {...combobox.getItemProps({ ...liProps, index, item })} />;
-})<ComboBoxOptionProps>``;
-
-ComboBoxOption.displayName = "ComboBoxOption";
+export type ComboBoxOptionProps = InferComponentProps<typeof ComboBoxOption>;

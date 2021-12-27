@@ -1,4 +1,4 @@
-import { ComboBox, Form, FormButton, HiddenInput, Tags } from "@makepurple/components";
+import { ComboBox, Form, FormButton, HiddenInput, Skeleton, Tags } from "@makepurple/components";
 import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
@@ -32,13 +32,6 @@ const SubTitle = tw.div`
 const Skills = tw(Tags)`
 	relative
 	mt-4
-`;
-
-const SkillsSuggestLoading = tw(ComboBox.LoadingState)`
-	bottom-0
-	inset-x-0
-	transform
-	translate-y-full
 `;
 
 const SkillsSuggest = tw(ComboBox.Options)`
@@ -134,7 +127,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 			if (!selectedItem) return;
 
 			skills.append(selectedItem);
-			blueComboBox.combobox.setInputValue("");
+			blueComboBox.setInputValue("");
 		}
 	});
 
@@ -152,7 +145,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 			if (!selectedItem) return;
 
 			desiredSkills.append(selectedItem);
-			redComboBox.combobox.setInputValue("");
+			redComboBox.setInputValue("");
 		}
 	});
 
@@ -171,7 +164,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 		if (!newSelectedItem) return;
 
-		blueComboBox.combobox.selectItem(newSelectedItem);
+		blueComboBox.selectItem(newSelectedItem);
 	});
 
 	const onEnterRed = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
@@ -187,7 +180,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 		if (!newSelectedItem) return;
 
-		redComboBox.combobox.selectItem(newSelectedItem);
+		redComboBox.selectItem(newSelectedItem);
 	});
 
 	useEffect(() => {
@@ -248,27 +241,29 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						<span>{field.name}</span>
 					</Tags.Tag>
 				))}
-				<ComboBox {...blueComboBox} tw="flex-grow">
+				<ComboBox {...blueComboBox.getComboboxProps()} tw="flex-grow">
 					<ComboBox.Input
-						{...blueComboBox}
+						{...blueComboBox.getInputProps()}
 						as={Tags.Editable}
 						onKeyDown={onEnterBlue}
 						placeholder="[repo_owner]/[repo_name]"
 						aria-label="new skill"
 					/>
 				</ComboBox>
-				<SkillsSuggestLoading {...blueComboBox} />
-				<SkillsSuggest {...blueComboBox}>
-					{blueItems.map((item, i) => (
-						<ComboBox.Option
-							key={`${item.owner}:${item.name}`}
-							{...blueComboBox}
-							item={item}
-							index={i}
-						>
-							{item.name}
-						</ComboBox.Option>
-					))}
+				<SkillsSuggest {...blueComboBox.getMenuProps()} isOpen={blueComboBox.isOpen}>
+					{blueComboBox.loading
+						? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} tw="h-8" />)
+						: blueItems.map((item, i) => (
+								<ComboBox.Option
+									key={`${item.owner}:${item.name}`}
+									{...blueComboBox.getItemProps({
+										item,
+										index: i
+									})}
+								>
+									{item.name}
+								</ComboBox.Option>
+						  ))}
 				</SkillsSuggest>
 			</Skills>
 			<SubTitle>Currently Learning</SubTitle>
@@ -284,27 +279,29 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 						<span>{field.name}</span>
 					</Tags.Tag>
 				))}
-				<ComboBox {...redComboBox} tw="flex-grow">
+				<ComboBox {...redComboBox.getComboboxProps()} tw="flex-grow">
 					<ComboBox.Input
-						{...redComboBox}
+						{...redComboBox.getInputProps()}
 						as={Tags.Editable}
 						onKeyDown={onEnterRed}
 						placeholder="[repo_owner]/[repo_name]"
 						aria-label="new desired skill"
 					/>
 				</ComboBox>
-				<SkillsSuggestLoading {...redComboBox} />
-				<SkillsSuggest {...redComboBox}>
-					{redItems.map((item, i) => (
-						<ComboBox.Option
-							key={`${item.owner}:${item.name}`}
-							{...redComboBox}
-							item={item}
-							index={i}
-						>
-							{item.name}
-						</ComboBox.Option>
-					))}
+				<SkillsSuggest {...redComboBox.getMenuProps()} isOpen={redComboBox.isOpen}>
+					{redComboBox.loading
+						? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} tw="h-8" />)
+						: redItems.map((item, i) => (
+								<ComboBox.Option
+									key={`${item.owner}:${item.name}`}
+									{...redComboBox.getItemProps({
+										item,
+										index: i
+									})}
+								>
+									{item.name}
+								</ComboBox.Option>
+						  ))}
 				</SkillsSuggest>
 			</Skills>
 			<FormActions>

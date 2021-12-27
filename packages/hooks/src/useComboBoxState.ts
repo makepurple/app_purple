@@ -12,9 +12,7 @@ export type UseComboBoxProps<T> = UseComboboxProps<T> & {
 	debounce?: number;
 };
 
-export type UseComboBoxState<T> = {
-	combobox: UseComboboxReturnValue<T> & { loading: boolean };
-};
+export type UseComboBoxState<T> = UseComboboxReturnValue<T> & { loading: boolean };
 
 export const useComboBoxState = ObjectUtils.setStatic(
 	<T>(props: UseComboBoxProps<T>): UseComboBoxState<T> => {
@@ -48,7 +46,14 @@ export const useComboBoxState = ObjectUtils.setStatic(
 
 		const isPending = !!changes && isReady() === false;
 
-		return { combobox: { ...combobox, loading: loading || isPending } };
+		const isOpen = combobox.isOpen;
+		const hasItems = !!props.items.length;
+
+		return {
+			...combobox,
+			isOpen: isOpen || loading || hasItems,
+			loading: loading || isPending
+		};
 	},
 	{
 		stateChangeTypes: useCombobox.stateChangeTypes

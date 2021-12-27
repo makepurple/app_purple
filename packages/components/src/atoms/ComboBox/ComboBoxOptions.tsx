@@ -1,13 +1,17 @@
-import { UseComboBoxState } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
 import { StyleUtils } from "@makepurple/utils";
-import React, { ComponentType, FC } from "react";
+import React, { forwardRef } from "react";
 import tw, { styled } from "twin.macro";
 import { Paper } from "../Paper";
 
 const Root = styled(Paper)<{ $hidden: boolean }>`
 	${tw`
 		absolute
+		flex
+		flex-col
+		items-stretch
+		gap-1
+		p-1
 		empty:hidden
 	`}
 	z-index: ${StyleUtils.getZIndex("menu")};
@@ -19,20 +23,14 @@ const Root = styled(Paper)<{ $hidden: boolean }>`
 		`}
 `;
 
-export type ComboBoxOptionsProps = InferComponentProps<"ul"> &
-	UseComboBoxState<any> & {
-		as?: string | ComponentType<any>;
-	};
-
-export const ComboBoxOptions: FC<ComboBoxOptionsProps> = (props) => {
-	const { as = "ul", combobox, ...ulProps } = props;
-
-	return (
-		<Root
-			as={as}
-			{...ulProps}
-			{...combobox.getMenuProps({ ...ulProps })}
-			$hidden={!combobox.isOpen || combobox.loading}
-		/>
-	);
+export type ComboBoxOptionsProps = InferComponentProps<"div"> & {
+	isOpen?: boolean;
 };
+
+export const ComboBoxOptions = forwardRef<HTMLDivElement, ComboBoxOptionsProps>((props, ref) => {
+	const { isOpen, ...ulProps } = props;
+
+	return <Root {...ulProps} ref={ref} $hidden={!isOpen} />;
+});
+
+ComboBoxOptions.displayName = "ComboBoxOptions";
