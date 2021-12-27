@@ -31,6 +31,7 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 	return (
 		<Button
 			as={"label" as any}
+			bounce={false}
 			className={className}
 			disabled={disabled || fetching}
 			style={style}
@@ -39,7 +40,7 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 			{fetching ? (
 				<>
 					<Spinner tw="mr-2" />
-					Uploading
+					<span>Uploading</span>
 				</>
 			) : (
 				children
