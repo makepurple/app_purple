@@ -101,6 +101,7 @@ importers:
       storybook-addon-next-router: ^3.1.1
       styled-components: ^5.3.3
       tailwindcss: 2.2.19
+      tippy.js: ^6.3.7
       twin.macro: ^2.8.2
       typescript: ^4.5.4
       urql: ^2.0.6
@@ -133,6 +134,7 @@ importers:
       react-hot-toast: 2.1.1_cf9e547307deef37c34d2702bfa94a69
       styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19
+      tippy.js: 6.3.7
       twin.macro: 2.8.2
       urql: 2.0.6_graphql@15.7.2+react@17.0.2
     devDependencies:
@@ -238,6 +240,7 @@ importers:
       react-hook-form: ^7.22.5
       react-hot-toast: ^2.1.1
       react-is: ^17.0.2
+      react-use: ^17.3.1
       styled-components: ^5.3.3
       tailwindcss: 2.2.19
       ts-node: ^10.4.0
@@ -282,6 +285,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       react-hook-form: 7.22.5_react@17.0.2
       react-hot-toast: 2.1.1_react-dom@17.0.2+react@17.0.2
+      react-use: 17.3.1_react-dom@17.0.2+react@17.0.2
       styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19_67faf65efc23bbcb8667813493b8c465
       twin.macro: 2.8.2_ts-node@10.4.0

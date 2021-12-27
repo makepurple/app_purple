@@ -37,6 +37,7 @@
 		"react-hot-toast": "^2.1.1",
 		"styled-components": "^5.3.3",
 		"tailwindcss": "2.2.19",
+		"tippy.js": "^6.3.7",
 		"twin.macro": "^2.8.2",
 		"urql": "^2.0.6"
 	},
