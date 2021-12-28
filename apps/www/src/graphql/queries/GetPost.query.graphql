@@ -2,6 +2,11 @@ query GetPost($where: PostWhereUniqueInput!) {
 	post(where: $where) {
 		__typename
 		id
+		author {
+			id
+			name
+			image
+		}
 		authorName
 		content
 		description

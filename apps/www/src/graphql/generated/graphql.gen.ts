@@ -886,7 +886,7 @@ export type GetPostQueryVariables = Exact<{
 }>;
 
 
-export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string, readonly thumbnailUrl?: string | null | undefined } | null | undefined };
+export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: number, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string, readonly thumbnailUrl?: string | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string | number, readonly name: string, readonly image?: string | null | undefined } } | null | undefined };
 
 export type GetPostDraftQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1423,6 +1423,11 @@ export const GetPostDocument = /*#__PURE__*/ gql`
   post(where: $where) {
     __typename
     id
+    author {
+      id
+      name
+      image
+    }
     authorName
     content
     description

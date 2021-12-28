@@ -1,4 +1,18 @@
-export const ZIndicies = ["default", "app-bar", "backdrop", "page-drawer", "menu"] as const;
+export const ZIndicies = [
+	"default",
+	/**
+	 * !HACK
+	 * @description z-index: 1 is occasionally used manually, which may place higher than the
+	 * app-bar unintentionally. So placing "extra" here to bump everything by +1.
+	 * @author David Lee
+	 * @date December 28, 2021
+	 */
+	"extra",
+	"app-bar",
+	"backdrop",
+	"page-drawer",
+	"menu"
+] as const;
 
 export type ZIndexType = typeof ZIndicies[number];
 

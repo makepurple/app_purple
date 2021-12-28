@@ -38,6 +38,7 @@ Template.parameters = {
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
+	...Template.parameters,
 	urql: (op: any) => {
 		switch (getOperationName(op.query)) {
 			case "GetPost":
