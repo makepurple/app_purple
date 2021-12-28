@@ -4,9 +4,6 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	GetMyUserDocument,
-	GetMyUserQuery,
-	GetMyUserQueryVariables,
 	GetPostDraftDocument,
 	GetPostDraftQuery,
 	GetPostDraftQueryVariables,
@@ -49,8 +46,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				GetUserInfoSideBarDocument,
 				{ name: query.userName as string }
 			)
-			.toPromise(),
-		urqlClient.query<GetMyUserQuery, GetMyUserQueryVariables>(GetMyUserDocument).toPromise()
+			.toPromise()
 	]);
 
 	return addUrqlState(ssr, {

@@ -1,7 +1,7 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
-	GetPostDraft_mock,
+	GetPost_mock,
 	RemovePostThumbnail_mock,
 	UploadPostImage_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -43,8 +43,8 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "GetPostDraft":
-				return { data: GetPostDraft_mock };
+			case "GetPost":
+				return { data: GetPost_mock };
 			case "RemovePostThumbnail":
 				await PromiseUtils.wait(ms("1s"));
 

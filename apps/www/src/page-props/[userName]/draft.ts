@@ -4,26 +4,29 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	GetMyUserDocument,
-	GetMyUserQuery,
-	GetMyUserQueryVariables,
 	GetPostDocument,
-	GetPostDraftQuery,
-	GetPostDraftQueryVariables
+	GetPostQuery,
+	GetPostQueryVariables
 } from "../../graphql";
 import { NextUtils } from "../../utils";
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { req } = ctx;
+	const { query, req } = ctx;
 
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
 	await Promise.all([
 		urqlClient
-			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDocument)
-			.toPromise(),
-		urqlClient.query<GetMyUserQuery, GetMyUserQueryVariables>(GetMyUserDocument).toPromise()
+			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
+				where: {
+					authorName_urlSlug: {
+						authorName: query.userName as string,
+						urlSlug: "draft"
+					}
+				}
+			})
+			.toPromise()
 	]);
 
 	return addUrqlState(ssr, {

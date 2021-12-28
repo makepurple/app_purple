@@ -21,11 +21,7 @@ import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
-import {
-	useGetPostDraftQuery,
-	usePublishPostMutation,
-	useUpdatePostDraftMutation
-} from "../../graphql";
+import { useGetPostQuery, usePublishPostMutation, useUpdatePostDraftMutation } from "../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
@@ -101,14 +97,24 @@ export const getServerSideProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
-	const [{ data }] = useGetPostDraftQuery({
-		requestPolicy: "cache-first"
+	const authorName = router?.query.userName as string;
+
+	const [{ data }] = useGetPostQuery({
+		requestPolicy: "cache-first",
+		variables: {
+			where: {
+				authorName_urlSlug: {
+					authorName,
+					urlSlug: "draft"
+				}
+			}
+		}
 	});
 
 	const [{ fetching: saving }, updatePostDraft] = useUpdatePostDraftMutation();
 	const [{ fetching: publishing }, publishPost] = usePublishPostMutation();
 
-	const post = data?.postDraft;
+	const post = data?.post;
 
 	const {
 		control,
