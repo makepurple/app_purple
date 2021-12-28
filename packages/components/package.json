@@ -13,6 +13,7 @@
 		"@makepurple/utils": "workspace:*",
 		"@makepurple/validators": "workspace:*",
 		"@seznam/compose-react-refs": "^1.0.6",
+		"@tailwindcss/aspect-ratio": "0.3.0",
 		"@tippyjs/react": "^4.2.6",
 		"@types/common-tags": "^1.8.1",
 		"@types/ms": "^0.7.31",

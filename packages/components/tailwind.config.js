@@ -1,7 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
-
 module.exports = {
 	theme: {
 		extend: {
@@ -20,6 +19,7 @@ module.exports = {
 		},
 	},
 	plugins: [
+		require("@tailwindcss/aspect-ratio"),
 		require("@tailwindcss/forms")({
 			strategy: "class"
 		}),

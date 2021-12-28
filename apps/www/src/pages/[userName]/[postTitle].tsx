@@ -2,6 +2,7 @@ import { Avatar, DocumentEditor, GitHubAvatarImage, Paper } from "@makepurple/co
 import { dayjs } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
 import { NextPage } from "next";
+import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw from "twin.macro";
@@ -36,6 +37,11 @@ const ByLine = tw.div`
 
 const PublishedAt = tw.div`
 	text-gray-500
+`;
+
+const ThumbnailImage = tw.div`
+	aspect-w-16
+	aspect-h-9
 `;
 
 const Editor = tw(DocumentEditor)`
@@ -108,6 +114,11 @@ export const Page: NextPage<PageProps> = () => {
 						<PublishedAt>{dayjs(post.publishedAt).format("MMM DD, YYYY")}</PublishedAt>
 					</div>
 				</ByLine>
+				{post.thumbnailUrl && (
+					<ThumbnailImage tw="mb-8">
+						<NextImage src={post.thumbnailUrl} layout="fill" objectFit="cover" />
+					</ThumbnailImage>
+				)}
 				<Editor readOnly value={content}>
 					<Editable />
 				</Editor>
