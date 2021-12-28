@@ -18,8 +18,8 @@ const SideBar = tw(UserInfoSideBar)`
 	w-full
 	mb-6
 	lg:w-96
-	lg:ml-6
-	xl:ml-8
+	lg:ml-4
+	xl:ml-6
 `;
 
 const Content = tw.div`
