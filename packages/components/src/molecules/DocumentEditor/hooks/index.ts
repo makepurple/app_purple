@@ -4,3 +4,4 @@ export * from "./useIsBlockActive";
 export * from "./useIsMarkActive";
 export * from "./useToggleBlock";
 export * from "./useToggleMark";
+export * from "./useWordCount";

@@ -5,6 +5,7 @@ import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
 import tw, { css, styled } from "twin.macro";
+import { DocumentEditorInfo } from ".";
 import { Paper } from "../../atoms";
 import { FormContext } from "../../atoms/Form/context";
 import { FormGroupContext } from "../../atoms/FormGroup/context";
@@ -115,5 +116,6 @@ _DocumentEditor.displayName = "DocumentEditor";
 
 export const DocumentEditor = ObjectUtils.setStatic(_DocumentEditor, {
 	Editable: DocumentEditorEditable,
+	Info: DocumentEditorInfo,
 	Toolbar: DocumentEditorToolbar
 });

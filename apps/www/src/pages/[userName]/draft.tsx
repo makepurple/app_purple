@@ -1,6 +1,7 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	DocumentEditor,
+	DocumentEditorInfoRef,
 	Form,
 	FormButton,
 	FormGroup,
@@ -17,7 +18,7 @@ import type { Type } from "computed-types";
 import { NextPage } from "next";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
@@ -29,6 +30,8 @@ import {
 	RemovePostThumbnailButton
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/draft";
+
+const WPM_READ_SPEED = 275;
 
 const Root = tw(MainContainer)`
 	flex
@@ -113,6 +116,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [{ fetching: saving }, updatePostDraft] = useUpdatePostDraftMutation();
 	const [{ fetching: publishing }, publishPost] = usePublishPostMutation();
+
+	const infoRef = useRef<DocumentEditorInfoRef>(null);
 
 	const post = data?.post;
 
@@ -200,9 +205,17 @@ export const Page: NextPage<PageProps> = () => {
 				<Form
 					disabled={publishing || saving}
 					onSubmit={handleSubmit(async (formData) => {
+						const readTime = (infoRef.current?.wordCount ?? 0) / WPM_READ_SPEED;
+
 						const publishedPost = await publishPost({
 							where: { id: post.id },
-							data: formData
+							data: {
+								content: formData.content,
+								description: formData.description,
+								readTime: readTime || undefined,
+								thumbnailUrl: formData.thumbnailUrl,
+								title: formData.title
+							}
 						})
 							.then((result) => result.data?.publishPost.record ?? null)
 							.catch(() => null);
@@ -248,9 +261,10 @@ export const Page: NextPage<PageProps> = () => {
 							name="content"
 							render={({ field: { name, onChange, value } }) => (
 								<StyledDocumentEditor
-									value={value as any}
+									value={value}
 									onChange={(newContent) => onChange(newContent)}
 								>
+									<DocumentEditor.Info ref={infoRef} />
 									<DocumentEditor.Toolbar>
 										<DocumentEditor.Toolbar.CodeBlock />
 										<DocumentEditor.Toolbar.Heading />

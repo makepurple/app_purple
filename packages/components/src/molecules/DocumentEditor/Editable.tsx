@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@makepurple/typings";
-import React, { useCallback, useContext } from "react";
+import React, { forwardRef, useCallback, useContext } from "react";
 import { Editable, RenderElementProps, RenderLeafProps } from "slate-react";
 import tw, { styled } from "twin.macro";
 import { DocumentEditorContext } from "./context";
@@ -42,31 +42,35 @@ const StyledEditable = styled(Editable)`
 
 export type DocumentEditorEditableProps = InferComponentProps<typeof Editable>;
 
-export const DocumentEditorEditable = styled((({
-	className,
-	style,
-	readOnly: _readOnly,
-	...restEditableProps
-}: DocumentEditorEditableProps) => {
-	const context = useContext(DocumentEditorContext);
+const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditableProps>(
+	(props, ref) => {
+		const { className, style, readOnly: _readOnly, ...restEditableProps } = props;
 
-	const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
-	const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
+		const context = useContext(DocumentEditorContext);
 
-	const readOnly = _readOnly ?? context.readOnly;
+		const renderElement = useCallback(
+			(elementProps: RenderElementProps) => <Element {...elementProps} />,
+			[]
+		);
+		const renderLeaf = useCallback((leafProps: RenderLeafProps) => <Leaf {...leafProps} />, []);
 
-	return (
-		<EditableContainer className={className} style={style} $readOnly={readOnly}>
-			<StyledEditable
-				renderElement={renderElement}
-				renderLeaf={renderLeaf}
-				renderPlaceholder={Placeholder}
-				readOnly={readOnly}
-				aria-readonly={readOnly}
-				{...restEditableProps}
-			/>
-		</EditableContainer>
-	);
-}) as typeof Editable)``;
+		const readOnly = _readOnly ?? context.readOnly;
 
-DocumentEditorEditable.displayName = "DocumentEditorEditable";
+		return (
+			<EditableContainer ref={ref} className={className} style={style} $readOnly={readOnly}>
+				<StyledEditable
+					renderElement={renderElement}
+					renderLeaf={renderLeaf}
+					renderPlaceholder={Placeholder}
+					readOnly={readOnly}
+					aria-readonly={readOnly}
+					{...restEditableProps}
+				/>
+			</EditableContainer>
+		);
+	}
+);
+
+_DocumentEditorEditable.displayName = "DocumentEditorEditable";
+
+export const DocumentEditorEditable = styled(_DocumentEditorEditable)``;
