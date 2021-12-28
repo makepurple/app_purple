@@ -24,7 +24,6 @@ const ImageContainer = styled.div<{ $focused?: boolean }>`
 		justify-center
 		items-center
 		h-64
-		cursor-pointer
 	`}
 
 	${({ $focused }) =>

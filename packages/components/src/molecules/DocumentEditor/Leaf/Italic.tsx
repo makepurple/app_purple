@@ -13,7 +13,7 @@ export const ItalicToolbarButton: FC<Record<string, never>> = () => {
 			onMouseDown={(event) => {
 				event.preventDefault();
 
-				toggleMark("bold");
+				toggleMark("italic");
 			}}
 			title="italic"
 			aria-label="italic"

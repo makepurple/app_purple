@@ -13,7 +13,7 @@ export const CodeToolbarButton: FC<Record<string, never>> = () => {
 			onMouseDown={(event) => {
 				event.preventDefault();
 
-				toggleMark("bold");
+				toggleMark("code");
 			}}
 			title="code"
 			aria-label="code"

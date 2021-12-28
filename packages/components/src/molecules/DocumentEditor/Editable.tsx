@@ -21,6 +21,7 @@ const EditableContainer = styled.div<{ $readOnly?: boolean }>`
 		transition
 		duration-300
 		ease-in-out
+		first:rounded-t-lg
 		focus-within:bg-white
 	`}
 

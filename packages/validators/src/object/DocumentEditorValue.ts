@@ -73,7 +73,18 @@ const NumberedListElement = Schema({
 
 const ParagraphElement = Schema({
 	type: string.equals("paragraph"),
-	children: array.of(CustomText)
+	children: array.of(
+		Schema.either(
+			CustomText,
+			BlockQuoteElement,
+			BulletedListElement,
+			CodeBlockElement,
+			HeadingElement,
+			ImageElement,
+			LinkElement,
+			NumberedListElement
+		)
+	)
 });
 
 const CustomElement = Schema.either(
