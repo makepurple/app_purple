@@ -8,27 +8,20 @@ import {
 	GetMyUserQuery,
 	GetMyUserQueryVariables,
 	GetPostDocument,
-	GetPostQuery,
-	GetPostQueryVariables
+	GetPostDraftQuery,
+	GetPostDraftQueryVariables
 } from "../../graphql";
 import { NextUtils } from "../../utils";
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { query, req } = ctx;
+	const { req } = ctx;
 
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
 	await Promise.all([
 		urqlClient
-			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
-				where: {
-					authorName_urlSlug: {
-						authorName: query.userName as string,
-						urlSlug: "draft"
-					}
-				}
-			})
+			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDocument)
 			.toPromise(),
 		urqlClient.query<GetMyUserQuery, GetMyUserQueryVariables>(GetMyUserDocument).toPromise()
 	]);
