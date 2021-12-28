@@ -283,7 +283,7 @@ export const Post_fragment_mock: Post = {
 			]
 		}
 	],
-	description: faker.lorem.paragraphs(1),
+	description: faker.lorem.sentences(1),
 	id: 0,
 	images: [],
 	publishedAt: faker.date.past(),

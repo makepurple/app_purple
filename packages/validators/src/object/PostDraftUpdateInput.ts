@@ -5,7 +5,7 @@ import { DocumentEditorValue } from "./DocumentEditorValue";
 
 const schema = Schema({
 	content: DocumentEditorValue.error("Content malformed").strictOptional(),
-	description: string.trim().strictOptional(),
+	description: string.trim().max(140).strictOptional(),
 	thumbnailUrl: CloudinaryUrl.optional(),
 	title: PostTitle.strictOptional()
 });

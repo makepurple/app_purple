@@ -4,6 +4,6 @@ import { DocumentEditorValue } from "./DocumentEditorValue";
 
 export const PostUpdateInput = Schema({
 	content: DocumentEditorValue.error("Content malformed").strictOptional(),
-	description: string.trim().strictOptional(),
+	description: string.trim().max(140).strictOptional(),
 	thumbnailUrl: CloudinaryUrl.optional()
 });
