@@ -42,6 +42,7 @@ const PublishedAt = tw.div`
 const ThumbnailImage = tw.div`
 	aspect-w-16
 	aspect-h-9
+	rounded-md
 `;
 
 const Editor = tw(DocumentEditor)`
