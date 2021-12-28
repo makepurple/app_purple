@@ -255,6 +255,7 @@ type Post {
   id: Int!
   images: [PostImage!]!
   publishedAt: DateTime
+  readTime: Int
   thumbnailUrl: String
   title: String
   updatedAt: DateTime!
@@ -300,6 +301,7 @@ type PostImage {
 input PostPublishInput {
   content: Json
   description: String
+  readTime: Int
   thumbnailUrl: String
   title: String
 }
@@ -307,6 +309,7 @@ input PostPublishInput {
 input PostUpdateInput {
   content: Json
   description: String
+  readTime: Int
   thumbnailUrl: String
 }
 

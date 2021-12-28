@@ -128,12 +128,14 @@ export interface NexusGenInputs {
   PostPublishInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     description?: string | null; // String
+    readTime?: number | null; // Int
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
   }
   PostUpdateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     description?: string | null; // String
+    readTime?: number | null; // Int
     thumbnailUrl?: string | null; // String
   }
   PostWhereInput: { // input type
@@ -330,6 +332,7 @@ export interface NexusGenObjects {
     description?: string | null; // String
     id: number; // Int!
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    readTime?: number | null; // Int
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -580,6 +583,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    readTime: number | null; // Int
     thumbnailUrl: string | null; // String
     title: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -871,6 +875,7 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     images: 'PostImage'
     publishedAt: 'DateTime'
+    readTime: 'Int'
     thumbnailUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'

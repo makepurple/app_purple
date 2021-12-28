@@ -366,6 +366,7 @@ export type Post = {
   readonly id: Scalars['Int'];
   readonly images: ReadonlyArray<PostImage>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
+  readonly readTime?: Maybe<Scalars['Int']>;
   readonly thumbnailUrl?: Maybe<Scalars['String']>;
   readonly title?: Maybe<Scalars['String']>;
   readonly updatedAt: Scalars['DateTime'];
@@ -420,6 +421,7 @@ export type PostImage = {
 export type PostPublishInput = {
   readonly content?: InputMaybe<Scalars['Json']>;
   readonly description?: InputMaybe<Scalars['String']>;
+  readonly readTime?: InputMaybe<Scalars['Int']>;
   readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
   readonly title?: InputMaybe<Scalars['String']>;
 };
@@ -427,6 +429,7 @@ export type PostPublishInput = {
 export type PostUpdateInput = {
   readonly content?: InputMaybe<Scalars['Json']>;
   readonly description?: InputMaybe<Scalars['String']>;
+  readonly readTime?: InputMaybe<Scalars['Int']>;
   readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
 };
 

@@ -13,6 +13,7 @@ export const Post = objectType({
 		t.field(NexusPrisma.Post.id);
 		t.field(NexusPrisma.Post.images);
 		t.field(NexusPrisma.Post.publishedAt);
+		t.field(NexusPrisma.Post.readTime);
 		t.field(NexusPrisma.Post.thumbnailUrl);
 		t.field(NexusPrisma.Post.title);
 		t.field(NexusPrisma.Post.updatedAt);

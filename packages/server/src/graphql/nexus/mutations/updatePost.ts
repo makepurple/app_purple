@@ -19,7 +19,10 @@ export const updatePost = mutationField("updatePost", {
 		});
 
 		const record = await prisma.post.update({
-			data: dataInput,
+			data: {
+				...dataInput,
+				readTime: args.data.readTime ?? undefined
+			},
 			where: PrismaUtils.nonNull(args.where)
 		});
 

@@ -84,6 +84,8 @@ model Post {
   id           Int           @id @default(autoincrement())
   images       PostImage[]
   publishedAt  DateTime?
+  // Estimated time in minutes to read this post
+  readTime     Int?
   title        String?
   thumbnailUrl String?
   updatedAt    DateTime      @updatedAt

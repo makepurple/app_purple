@@ -2681,6 +2681,58 @@ export interface Post {
     resolve: NexusCore.FieldResolver<'Post', 'publishedAt'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.readTime`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Post
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Post
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Post {
+    *   /// Lorem ipsum dolor sit amet.
+    *   readTime  Int?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Post } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Post.$name
+    *   description: Post.$description
+    *   definition(t) {
+    *     t.field(Post.readTime)
+    *   }
+    * })
+    */
+  readTime: {
+    /**
+     * The name of this field.
+     */
+    name: 'readTime'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Post', 'readTime'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.title`.
     *
     * ### ️⚠️ You have not writen documentation for model Post

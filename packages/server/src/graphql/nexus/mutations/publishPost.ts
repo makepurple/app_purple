@@ -48,6 +48,7 @@ export const publishPost = mutationField("publishPost", {
 			data: {
 				...dataInput,
 				publishedAt: new Date(),
+				readTime: args.data?.readTime ?? undefined,
 				urlSlug
 			},
 			where
