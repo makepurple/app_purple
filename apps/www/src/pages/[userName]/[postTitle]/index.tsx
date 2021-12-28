@@ -6,9 +6,9 @@ import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw from "twin.macro";
-import { useGetPostQuery } from "../../graphql";
-import { UserPageLayout } from "../../organisms";
-import { pageProps, PageProps } from "../../page-props/[userName]/[postTitle]";
+import { useGetPostQuery } from "../../../graphql";
+import { UserPageLayout } from "../../../organisms";
+import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
 
 const Content = tw(Paper)`
 	flex
