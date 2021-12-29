@@ -21,7 +21,7 @@ type Comment {
   parentId: Int
   post: Post
   postId: Int
-  replies(after: String, before: String, first: Int, last: Int, where: CommentWhereInput): CommentConnection!
+  replies(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   updatedAt: DateTime!
 }
 
@@ -37,6 +37,11 @@ type CommentConnection {
 type CommentEdge {
   cursor: String!
   node: Comment!
+}
+
+input CommentOrderByInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
 }
 
 input CommentWhereInput {
@@ -366,6 +371,7 @@ type PublishPostPayload implements MutationPayload {
 
 """Root query type"""
 type Query {
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
   ok: Boolean!
 
@@ -586,7 +592,7 @@ type UpvotePostPayload implements MutationPayload {
 }
 
 type User {
-  comments(after: String, before: String, first: Int, last: Int, where: CommentWhereInput): CommentConnection!
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   description: String
   desiredSkills: [Skill!]!
   email: String!

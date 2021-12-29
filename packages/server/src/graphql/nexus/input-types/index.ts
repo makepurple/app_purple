@@ -1,3 +1,4 @@
+export * from "./CommentOrderByInput";
 export * from "./CommentWhereInput";
 export * from "./DateTimeNullableFilter";
 export * from "./EnumExperienceTypeNullableFilter";

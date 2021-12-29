@@ -17,14 +17,18 @@ export const User = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
-				where: arg({ type: "CommentWhereInput" })
+				where: arg({ type: "CommentWhereInput" }),
+				orderBy: arg({ type: "CommentOrderByInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
+				const user = prisma.user.findUnique({ where: { id: parent.id } });
+
 				const connection = await findManyCursorConnection<_Comment, { id: number }>(
 					(paginationArgs) =>
-						prisma.comment.findMany({
+						user.comments({
 							...paginationArgs,
-							where: PrismaUtils.nonNull(args.where)
+							where: PrismaUtils.nonNull(args.where),
+							orderBy: PrismaUtils.nonNull(args.orderBy)
 						}),
 					() => prisma.comment.count(),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },

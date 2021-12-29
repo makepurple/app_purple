@@ -78,6 +78,10 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CommentOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   CommentWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
@@ -654,6 +658,7 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Post']; // Post!
   }
   Query: { // field return type
+    comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
@@ -963,6 +968,7 @@ export interface NexusGenFieldTypeNames {
     record: 'Post'
   }
   Query: { // field return type name
+    comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
     ok: 'Boolean'
     post: 'Post'
@@ -1092,6 +1098,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
       where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
     }
   }
@@ -1152,6 +1159,14 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    comments: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
+      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
     experiences: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -1199,6 +1214,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
       where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
     }
   }
