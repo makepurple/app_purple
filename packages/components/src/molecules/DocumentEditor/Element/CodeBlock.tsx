@@ -3,42 +3,70 @@ import { CodeBlockType } from "@makepurple/validators";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
-import React, { FC, useMemo, useRef, useState } from "react";
+import React, { FC, useCallback, useMemo, useRef, useState } from "react";
 import CodeEditor from "react-simple-code-editor";
 import { Descendant, Editor, Element, Node as SlateNode, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
-import tw, { styled } from "twin.macro";
+import tw from "twin.macro";
 import { ContextMenu, ContextMenuItem, ListItem, Menu } from "../../../atoms";
-import { CodeSquareIcon } from "../../../svgs";
+import { CodeSquareIcon, XIcon } from "../../../svgs";
 import { useInsertBlock } from "../hooks/useInsertBlock";
 import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { ToolbarButton } from "../Shared";
 
-const Root = styled.div`
-	${tw`
-		border-2
-		border-solid
-		border-indigo-500
-		rounded-md
-		overflow-auto
-		text-sm
-		font-mono
-	`}
-	tab-size: 4;
+const Root = tw.div`
+	flex
+	flex-col
+	items-stretch
 `;
 
-const StyledCodeEditor = styled(CodeEditor)`
-	${tw`
-		select-none
-		pointer-events-none
-	`}
+const Info = tw.div`
+	flex
+	flex-row
+	items-center
+	h-8
+	pl-2
+	rounded-t-md
+	border
+	border-solid
+	border-gray-500
+	bg-indigo-500
+	text-white
+	font-semibold
+`;
 
-	& textarea {
-		${tw`
-			select-auto
-			pointer-events-auto
-		`}
-	}
+const LanguageName = tw.div`
+	flex-grow
+`;
+
+const CloseIcon = tw.button`
+	flex-shrink-0
+	flex
+	items-center
+	justify-center
+	h-8
+	w-8
+	rounded-tl-md
+	cursor-pointer
+	disabled:cursor-not-allowed
+`;
+
+const EditorWrapper = tw.div`
+	border-2
+	border-solid
+	border-indigo-500
+	rounded-b-md
+	overflow-auto
+	text-sm
+	font-mono
+	tab-size[4]
+`;
+
+const StyledCodeEditor = tw(CodeEditor)`
+	select-none
+	pointer-events-none
+	[& textarea]:select-auto
+	[& textarea]:pointer-events-auto
 `;
 
 const Line = tw.span`
@@ -148,68 +176,93 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 		[element.type]
 	);
 
+	const [languageName] = useMemo(
+		() => supportedLanguages.find(([, type]) => type === element.type) ?? supportedLanguages[0],
+		[element.type]
+	);
+
+	const deleteSelf = useCallback(() => {
+		const path = ReactEditor.findPath(editor, element);
+
+		Transforms.removeNodes(editor, { at: path });
+	}, [editor, element]);
+
 	return (
-		<Root
-			{...attributes}
-			ref={composedRef}
-			contentEditable={false}
-			style={shadesOfPurple.plain as any}
-		>
-			<StyledCodeEditor
-				highlight={(value) => (
-					<Highlight
-						{...defaultProps}
-						code={value}
-						language={language}
-						theme={shadesOfPurple}
+		<Root {...attributes} contentEditable={false}>
+			<Info>
+				<LanguageName>{languageName}</LanguageName>
+				{!readOnly && (
+					<CloseIcon
+						disabled={readOnly}
+						onClick={(e) => {
+							e.preventDefault();
+
+							deleteSelf();
+						}}
+						type="button"
 					>
-						{({ tokens, getLineProps, getTokenProps }) =>
-							tokens.map((line, i) => (
-								<Line key={i} {...getLineProps({ line, key: i })}>
-									<LineContent>
-										{line.map((token, key) => (
-											<span key={key} {...getTokenProps({ token, key })} />
-										))}
-									</LineContent>
-								</Line>
-							))
-						}
-					</Highlight>
+						<XIcon height={24} width={24} />
+					</CloseIcon>
 				)}
-				name="code-block"
-				onBlur={() => {
-					if (code === SlateNode.string(element)) return;
-
-					const path = ReactEditor.findPath(editor, element);
-
-					Transforms.removeNodes(editor, { at: path });
-					Transforms.insertNodes(
-						editor,
-						{ ...element, children: [{ text: code }] },
-						{ at: path }
-					);
-				}}
-				onValueChange={(newValue) => {
-					setCode(newValue);
-				}}
-				padding={"0.5rem"}
-				readOnly={readOnly}
-				value={code}
-			/>
-			{children}
-			<ContextMenu contentEditable={false} {...contextMenuProps}>
-				<ContextMenuItem
-					onMouseDown={(event) => {
-						event.preventDefault();
+			</Info>
+			<EditorWrapper ref={composedRef} style={shadesOfPurple.plain as any}>
+				<StyledCodeEditor
+					highlight={(value) => (
+						<Highlight
+							{...defaultProps}
+							code={value}
+							language={language}
+							theme={shadesOfPurple}
+						>
+							{({ tokens, getLineProps, getTokenProps }) =>
+								tokens.map((line, i) => (
+									<Line key={i} {...getLineProps({ line, key: i })}>
+										<LineContent>
+											{line.map((token, key) => (
+												<span
+													key={key}
+													{...getTokenProps({ token, key })}
+												/>
+											))}
+										</LineContent>
+									</Line>
+								))
+							}
+						</Highlight>
+					)}
+					name="code-block"
+					onBlur={() => {
+						if (code === SlateNode.string(element)) return;
 
 						const path = ReactEditor.findPath(editor, element);
 
 						Transforms.removeNodes(editor, { at: path });
+						Transforms.insertNodes(
+							editor,
+							{ ...element, children: [{ text: code }] },
+							{ at: path }
+						);
 					}}
-				>
-					Delete
-				</ContextMenuItem>
-			</ContextMenu>
+					onValueChange={(newValue) => {
+						setCode(newValue);
+					}}
+					padding={"0.5rem"}
+					readOnly={readOnly}
+					value={code}
+				/>
+				<ContextMenu contentEditable={false} {...contextMenuProps}>
+					<ContextMenuItem
+						onMouseDown={(e) => {
+							e.preventDefault();
+
+							deleteSelf();
+						}}
+					>
+						Delete
+					</ContextMenuItem>
+				</ContextMenu>
+			</EditorWrapper>
+			{children}
 		</Root>
 	);
 };
