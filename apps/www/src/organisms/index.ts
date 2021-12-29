@@ -1,3 +1,4 @@
+export * from "./CommentInput";
 export * from "./CreateExperienceForm";
 export * from "./CreateRepositoryForm";
 export * from "./CreateRepositoryFormOption";

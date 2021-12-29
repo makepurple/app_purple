@@ -24,6 +24,8 @@ const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
 		transition
 		duration-300
 		ease-in-out
+		[& > *]:first:rounded-t-lg
+		[& > *]:last:rounded-b-lg
 	`}
 	${({ disabled }) =>
 		disabled &&
@@ -54,21 +56,23 @@ declare module "slate" {
 	}
 }
 
+export type DocumentEditorValue = Descendant[];
+
 export interface DocumentEditorProps {
 	children?: ReactNode;
 	className?: string;
 	disabled?: boolean;
 	error?: boolean;
-	onChange?: (value: Descendant[]) => void;
+	onChange?: (value: DocumentEditorValue) => void;
 	readOnly?: boolean;
 	style?: CSSProperties;
-	value?: Descendant[];
+	value?: DocumentEditorValue;
 }
 
 const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 	const { children, className, onChange, readOnly, style, value: _value } = props;
 
-	const [value, setValue] = useUncontrolledProp<Descendant[]>(_value, []);
+	const [value, setValue] = useUncontrolledProp<DocumentEditorValue>(_value, []);
 
 	const form = useContext(FormContext);
 	const group = useContext(FormGroupContext);
