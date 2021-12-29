@@ -33,8 +33,8 @@ export const Code = tw.code`
 	border-solid
 	border-gray-200
 	font-mono
-	text-black
-	bg-purple-400
+	text-gray-800
+	bg-indigo-100
 `;
 
 export const wrapLeafCode: WrapLeafWithType = (props) => {
