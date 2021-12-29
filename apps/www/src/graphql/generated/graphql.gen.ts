@@ -35,10 +35,74 @@ export type Scalars = {
 export type Comment = {
   readonly __typename: 'Comment';
   readonly author: User;
-  readonly content: Scalars['String'];
+  readonly authorId: Scalars['String'];
+  readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['Int'];
+  readonly parent?: Maybe<Comment>;
+  readonly parentId?: Maybe<Scalars['Int']>;
+  readonly post?: Maybe<Post>;
+  readonly postId?: Maybe<Scalars['Int']>;
+  readonly replies: CommentConnection;
   readonly updatedAt: Scalars['DateTime'];
+};
+
+
+export type CommentRepliesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CommentOrderByInput>;
+  where?: InputMaybe<CommentWhereInput>;
+};
+
+/** Relay-style connection for Comment types. */
+export type CommentConnection = {
+  readonly __typename: 'CommentConnection';
+  readonly edges: ReadonlyArray<CommentEdge>;
+  readonly nodes: ReadonlyArray<Comment>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type CommentCreateInput = {
+  readonly content?: InputMaybe<Scalars['Json']>;
+  readonly parent?: InputMaybe<CommentWhereUniqueInput>;
+  readonly post?: InputMaybe<PostWhereUniqueInput>;
+};
+
+/** Relay-style edge for Comment types. */
+export type CommentEdge = {
+  readonly __typename: 'CommentEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Comment;
+};
+
+export type CommentOrderByInput = {
+  readonly createdAt?: InputMaybe<SortOrder>;
+  readonly updatedAt?: InputMaybe<SortOrder>;
+};
+
+export type CommentUpdateInput = {
+  readonly content?: InputMaybe<Scalars['Json']>;
+};
+
+export type CommentWhereInput = {
+  readonly author?: InputMaybe<UserWhereInput>;
+  readonly authorId?: InputMaybe<StringNullableFilter>;
+  readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
+  readonly updatedAt?: InputMaybe<DateTimeNullableFilter>;
+};
+
+export type CommentWhereUniqueInput = {
+  readonly id?: InputMaybe<Scalars['Int']>;
+};
+
+export type CreateCommentPayload = MutationPayload & {
+  readonly __typename: 'CreateCommentPayload';
+  readonly query: Query;
+  readonly record: Comment;
 };
 
 export type CreateExperiencePayload = MutationPayload & {
@@ -57,6 +121,19 @@ export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
   readonly query: Query;
   readonly record: Repository;
+};
+
+export type DateTimeNullableFilter = {
+  readonly gt?: InputMaybe<Scalars['DateTime']>;
+  readonly gte?: InputMaybe<Scalars['DateTime']>;
+  readonly lt?: InputMaybe<Scalars['DateTime']>;
+  readonly lte?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type DeleteCommentPayload = MutationPayload & {
+  readonly __typename: 'DeleteCommentPayload';
+  readonly query: Query;
+  readonly record: Comment;
 };
 
 export type DeleteExperiencePayload = MutationPayload & {
@@ -223,10 +300,12 @@ export type GitHubUser = GitHubRepositoryOwner & {
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
+  readonly createComment: CreateCommentPayload;
   readonly createExperience: CreateExperiencePayload;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
   readonly createPost: CreatePostPayload;
   readonly createRepository: CreateRepositoryPayload;
+  readonly deleteComment: DeleteCommentPayload;
   /** Users can delete their own experiences. */
   readonly deleteExperience: DeleteExperiencePayload;
   /** Users can delete their own posts. */
@@ -234,6 +313,7 @@ export type Mutation = {
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
+  readonly updateComment: UpdateCommentPayload;
   readonly updateDesiredSkills: UpdateDesiredSkillsPayload;
   readonly updateExperience: UpdateExperiencePayload;
   readonly updatePost: UpdatePostPayload;
@@ -247,6 +327,12 @@ export type Mutation = {
 
 
 /** Root mutation type */
+export type MutationCreateCommentArgs = {
+  data: CommentCreateInput;
+};
+
+
+/** Root mutation type */
 export type MutationCreateExperienceArgs = {
   data: ExperienceCreateInput;
 };
@@ -255,6 +341,12 @@ export type MutationCreateExperienceArgs = {
 /** Root mutation type */
 export type MutationCreateRepositoryArgs = {
   data: RepositoryCreateInput;
+};
+
+
+/** Root mutation type */
+export type MutationDeleteCommentArgs = {
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -280,6 +372,13 @@ export type MutationPublishPostArgs = {
 /** Root mutation type */
 export type MutationRemovePostThumbnailArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateCommentArgs = {
+  data: CommentUpdateInput;
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -360,6 +459,7 @@ export type Post = {
   readonly __typename: 'Post';
   readonly author: User;
   readonly authorName: Scalars['String'];
+  readonly comments: ReadonlyArray<Comment>;
   readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
@@ -452,6 +552,8 @@ export type PublishPostPayload = MutationPayload & {
 /** Root query type */
 export type Query = {
   readonly __typename: 'Query';
+  readonly comment?: Maybe<Comment>;
+  readonly comments: CommentConnection;
   readonly experiences: ExperienceConnection;
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
@@ -465,6 +567,23 @@ export type Query = {
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root query type */
+export type QueryCommentArgs = {
+  where: CommentWhereUniqueInput;
+};
+
+
+/** Root query type */
+export type QueryCommentsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CommentOrderByInput>;
+  where?: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -672,6 +791,12 @@ export type TopLanguages = {
   readonly totalSize: Scalars['Int'];
 };
 
+export type UpdateCommentPayload = MutationPayload & {
+  readonly __typename: 'UpdateCommentPayload';
+  readonly query: Query;
+  readonly record: Comment;
+};
+
 export type UpdateDesiredSkillsInput = {
   readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
 };
@@ -735,7 +860,7 @@ export type UpvotePostPayload = MutationPayload & {
 
 export type User = {
   readonly __typename: 'User';
-  readonly comments: ReadonlyArray<Comment>;
+  readonly comments: CommentConnection;
   readonly description?: Maybe<Scalars['String']>;
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
@@ -749,6 +874,16 @@ export type User = {
   readonly repositories: ReadonlyArray<Repository>;
   readonly skills: ReadonlyArray<Skill>;
   readonly upvotedPosts: ReadonlyArray<Post>;
+};
+
+
+export type UserCommentsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CommentOrderByInput>;
+  where?: InputMaybe<CommentWhereInput>;
 };
 
 export type UserWhereInput = {
