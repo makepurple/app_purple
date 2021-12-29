@@ -88,6 +88,9 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
+  CommentWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
   DateTimeNullableFilter: { // input type
     gt?: NexusGenScalars['DateTime'] | null; // DateTime
     gte?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -658,6 +661,7 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Post']; // Post!
   }
   Query: { // field return type
+    comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
     ok: boolean; // Boolean!
@@ -968,6 +972,7 @@ export interface NexusGenFieldTypeNames {
     record: 'Post'
   }
   Query: { // field return type name
+    comment: 'Comment'
     comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
     ok: 'Boolean'
@@ -1159,6 +1164,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    comment: { // args
+      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+    }
     comments: { // args
       after?: string | null; // String
       before?: string | null; // String

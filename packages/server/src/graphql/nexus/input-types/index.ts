@@ -1,5 +1,6 @@
 export * from "./CommentOrderByInput";
 export * from "./CommentWhereInput";
+export * from "./CommentWhereUniqueInput";
 export * from "./DateTimeNullableFilter";
 export * from "./EnumExperienceTypeNullableFilter";
 export * from "./ExperienceCreateInput";

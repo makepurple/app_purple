@@ -1,3 +1,4 @@
+export * from "./comment";
 export * from "./comments";
 export * from "./experiences";
 export * from "./post";
