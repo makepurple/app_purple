@@ -1,4 +1,6 @@
+export * from "./CommentCreateInput";
 export * from "./CommentOrderByInput";
+export * from "./CommentUpdateInput";
 export * from "./CommentWhereInput";
 export * from "./CommentWhereUniqueInput";
 export * from "./DateTimeNullableFilter";

@@ -33,6 +33,12 @@ type CommentConnection {
   totalCount: Int!
 }
 
+input CommentCreateInput {
+  content: Json
+  parent: CommentWhereUniqueInput
+  post: PostWhereUniqueInput
+}
+
 """Relay-style edge for Comment types."""
 type CommentEdge {
   cursor: String!
@@ -44,6 +50,10 @@ input CommentOrderByInput {
   updatedAt: SortOrder
 }
 
+input CommentUpdateInput {
+  content: Json
+}
+
 input CommentWhereInput {
   author: UserWhereInput
   authorId: StringNullableFilter
@@ -53,6 +63,11 @@ input CommentWhereInput {
 
 input CommentWhereUniqueInput {
   id: Int
+}
+
+type CreateCommentPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
 }
 
 type CreateExperiencePayload implements MutationPayload {
@@ -84,6 +99,11 @@ input DateTimeNullableFilter {
 
 """An arbitrary-precision Decimal type"""
 scalar Decimal
+
+type DeleteCommentPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+}
 
 type DeleteExperiencePayload implements MutationPayload {
   query: Query!
@@ -243,6 +263,7 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 """Root mutation type"""
 type Mutation {
+  createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
   """
@@ -250,6 +271,7 @@ type Mutation {
   """
   createPost: CreatePostPayload!
   createRepository(data: RepositoryCreateInput!): CreateRepositoryPayload!
+  deleteComment(where: CommentWhereUniqueInput!): DeleteCommentPayload!
 
   """Users can delete their own experiences."""
   deleteExperience(where: ExperienceWhereUniqueInput!): DeleteExperiencePayload!
@@ -259,6 +281,7 @@ type Mutation {
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
   updateExperience(data: ExperienceUpdateInput!, where: ExperienceWhereUniqueInput!): UpdateExperiencePayload!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): UpdatePostPayload!
@@ -539,6 +562,11 @@ type TopLanguages {
 A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 """
 scalar URL
+
+type UpdateCommentPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+}
 
 input UpdateDesiredSkillsInput {
   skills: [SkillWhereUniqueInput!]!

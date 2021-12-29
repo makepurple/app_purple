@@ -78,9 +78,17 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CommentCreateInput: { // input type
+    content?: NexusGenScalars['Json'] | null; // Json
+    parent?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
+    post?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+  }
   CommentOrderByInput: { // input type
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  CommentUpdateInput: { // input type
+    content?: NexusGenScalars['Json'] | null; // Json
   }
   CommentWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
@@ -267,6 +275,9 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Comment']; // Comment!
   }
+  CreateCommentPayload: { // root type
+    record: NexusGenRootTypes['Comment']; // Comment!
+  }
   CreateExperiencePayload: { // root type
     record: NexusGenRootTypes['Experience']; // Experience!
   }
@@ -275,6 +286,9 @@ export interface NexusGenObjects {
   }
   CreateRepositoryPayload: { // root type
     record: NexusGenRootTypes['Repository']; // Repository!
+  }
+  DeleteCommentPayload: { // root type
+    record: NexusGenRootTypes['Comment']; // Comment!
   }
   DeleteExperiencePayload: { // root type
     record: NexusGenRootTypes['Experience']; // Experience!
@@ -429,6 +443,9 @@ export interface NexusGenObjects {
   TopLanguages: { // root type
     nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
   }
+  UpdateCommentPayload: { // root type
+    record: NexusGenRootTypes['Comment']; // Comment!
+  }
   UpdateDesiredSkillsPayload: { // root type
     record: NexusGenRootTypes['User']; // User!
   }
@@ -464,7 +481,7 @@ export interface NexusGenObjects {
 
 export interface NexusGenInterfaces {
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
-  MutationPayload: core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
+  MutationPayload: core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
 }
 
 export interface NexusGenUnions {
@@ -498,6 +515,10 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Comment']; // Comment!
   }
+  CreateCommentPayload: { // field return type
+    query: NexusGenRootTypes['Query']; // Query!
+    record: NexusGenRootTypes['Comment']; // Comment!
+  }
   CreateExperiencePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience']; // Experience!
@@ -509,6 +530,10 @@ export interface NexusGenFieldTypes {
   CreateRepositoryPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository']; // Repository!
+  }
+  DeleteCommentPayload: { // field return type
+    query: NexusGenRootTypes['Query']; // Query!
+    record: NexusGenRootTypes['Comment']; // Comment!
   }
   DeleteExperiencePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
@@ -591,14 +616,17 @@ export interface NexusGenFieldTypes {
     websiteUrl: string | null; // String
   }
   Mutation: { // field return type
+    createComment: NexusGenRootTypes['CreateCommentPayload']; // CreateCommentPayload!
     createExperience: NexusGenRootTypes['CreateExperiencePayload']; // CreateExperiencePayload!
     createPost: NexusGenRootTypes['CreatePostPayload']; // CreatePostPayload!
     createRepository: NexusGenRootTypes['CreateRepositoryPayload']; // CreateRepositoryPayload!
+    deleteComment: NexusGenRootTypes['DeleteCommentPayload']; // DeleteCommentPayload!
     deleteExperience: NexusGenRootTypes['DeleteExperiencePayload']; // DeleteExperiencePayload!
     deletePost: NexusGenRootTypes['DeletePostPayload']; // DeletePostPayload!
     ok: boolean; // Boolean!
     publishPost: NexusGenRootTypes['PublishPostPayload']; // PublishPostPayload!
     removePostThumbnail: NexusGenRootTypes['RemovePostThumbnailPayload']; // RemovePostThumbnailPayload!
+    updateComment: NexusGenRootTypes['UpdateCommentPayload']; // UpdateCommentPayload!
     updateDesiredSkills: NexusGenRootTypes['UpdateDesiredSkillsPayload']; // UpdateDesiredSkillsPayload!
     updateExperience: NexusGenRootTypes['UpdateExperiencePayload']; // UpdateExperiencePayload!
     updatePost: NexusGenRootTypes['UpdatePostPayload']; // UpdatePostPayload!
@@ -726,6 +754,10 @@ export interface NexusGenFieldTypes {
     totalCount: number; // Int!
     totalSize: number; // Int!
   }
+  UpdateCommentPayload: { // field return type
+    query: NexusGenRootTypes['Query']; // Query!
+    record: NexusGenRootTypes['Comment']; // Comment!
+  }
   UpdateDesiredSkillsPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
@@ -809,6 +841,10 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'Comment'
   }
+  CreateCommentPayload: { // field return type name
+    query: 'Query'
+    record: 'Comment'
+  }
   CreateExperiencePayload: { // field return type name
     query: 'Query'
     record: 'Experience'
@@ -820,6 +856,10 @@ export interface NexusGenFieldTypeNames {
   CreateRepositoryPayload: { // field return type name
     query: 'Query'
     record: 'Repository'
+  }
+  DeleteCommentPayload: { // field return type name
+    query: 'Query'
+    record: 'Comment'
   }
   DeleteExperiencePayload: { // field return type name
     query: 'Query'
@@ -902,14 +942,17 @@ export interface NexusGenFieldTypeNames {
     websiteUrl: 'String'
   }
   Mutation: { // field return type name
+    createComment: 'CreateCommentPayload'
     createExperience: 'CreateExperiencePayload'
     createPost: 'CreatePostPayload'
     createRepository: 'CreateRepositoryPayload'
+    deleteComment: 'DeleteCommentPayload'
     deleteExperience: 'DeleteExperiencePayload'
     deletePost: 'DeletePostPayload'
     ok: 'Boolean'
     publishPost: 'PublishPostPayload'
     removePostThumbnail: 'RemovePostThumbnailPayload'
+    updateComment: 'UpdateCommentPayload'
     updateDesiredSkills: 'UpdateDesiredSkillsPayload'
     updateExperience: 'UpdateExperiencePayload'
     updatePost: 'UpdatePostPayload'
@@ -1037,6 +1080,10 @@ export interface NexusGenFieldTypeNames {
     totalCount: 'Int'
     totalSize: 'Int'
   }
+  UpdateCommentPayload: { // field return type name
+    query: 'Query'
+    record: 'Comment'
+  }
   UpdateDesiredSkillsPayload: { // field return type name
     query: 'Query'
     record: 'User'
@@ -1108,11 +1155,17 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    createComment: { // args
+      data: NexusGenInputs['CommentCreateInput']; // CommentCreateInput!
+    }
     createExperience: { // args
       data: NexusGenInputs['ExperienceCreateInput']; // ExperienceCreateInput!
     }
     createRepository: { // args
       data: NexusGenInputs['RepositoryCreateInput']; // RepositoryCreateInput!
+    }
+    deleteComment: { // args
+      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }
     deleteExperience: { // args
       where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
@@ -1126,6 +1179,10 @@ export interface NexusGenArgTypes {
     }
     removePostThumbnail: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    updateComment: { // args
+      data: NexusGenInputs['CommentUpdateInput']; // CommentUpdateInput!
+      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }
     updateDesiredSkills: { // args
       data: NexusGenInputs['UpdateDesiredSkillsInput']; // UpdateDesiredSkillsInput!
@@ -1230,19 +1287,22 @@ export interface NexusGenArgTypes {
 
 export interface NexusGenAbstractTypeMembers {
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
-  MutationPayload: "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteExperiencePayload" | "DeletePostPayload" | "PublishPostPayload" | "RemovePostThumbnailPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UploadPostImagePayload" | "UpvotePostPayload"
+  MutationPayload: "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeletePostPayload" | "PublishPostPayload" | "RemovePostThumbnailPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UploadPostImagePayload" | "UpvotePostPayload"
 }
 
 export interface NexusGenTypeInterfaces {
+  CreateCommentPayload: "MutationPayload"
   CreateExperiencePayload: "MutationPayload"
   CreatePostPayload: "MutationPayload"
   CreateRepositoryPayload: "MutationPayload"
+  DeleteCommentPayload: "MutationPayload"
   DeleteExperiencePayload: "MutationPayload"
   DeletePostPayload: "MutationPayload"
   GitHubOrganization: "GitHubRepositoryOwner"
   GitHubUser: "GitHubRepositoryOwner"
   PublishPostPayload: "MutationPayload"
   RemovePostThumbnailPayload: "MutationPayload"
+  UpdateCommentPayload: "MutationPayload"
   UpdateDesiredSkillsPayload: "MutationPayload"
   UpdateExperiencePayload: "MutationPayload"
   UpdatePostDraftPayload: "MutationPayload"
