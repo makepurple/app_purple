@@ -5,14 +5,8 @@ import {
 	addUrqlState,
 	createUrqlClient,
 	GetPostDocument,
-	GetPostDraftDocument,
-	GetPostDraftQuery,
-	GetPostDraftQueryVariables,
 	GetPostQuery,
-	GetPostQueryVariables,
-	GetUserInfoSideBarDocument,
-	GetUserInfoSideBarQuery,
-	GetUserInfoSideBarQueryVariables
+	GetPostQueryVariables
 } from "../../../graphql";
 import { NextUtils } from "../../../utils";
 
@@ -35,15 +29,6 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 					}
 				}
 			})
-			.toPromise(),
-		urqlClient
-			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-			.toPromise(),
-		urqlClient
-			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
-				GetUserInfoSideBarDocument,
-				{ name: query.userName as string }
-			)
 			.toPromise()
 	]);
 
