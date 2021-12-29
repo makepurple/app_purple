@@ -2,14 +2,18 @@ import React, { FC } from "react";
 import tw from "twin.macro";
 import type { WrapLeafWithType } from ".";
 import { CodeIcon } from "../../../svgs";
+import { useIsMarkActive } from "../hooks/useIsMarkActive";
 import { useToggleMark } from "../hooks/useToggleMark";
 import { ToolbarButton } from "../Shared";
 
 export const CodeToolbarButton: FC<Record<string, never>> = () => {
 	const toggleMark = useToggleMark();
 
+	const isActive = useIsMarkActive();
+
 	return (
 		<ToolbarButton
+			active={isActive("code")}
 			onMouseDown={(event) => {
 				event.preventDefault();
 

@@ -1,6 +1,6 @@
 import tw, { styled } from "twin.macro";
 
-export const ToolbarButton = styled.button`
+export const ToolbarButton = styled.button<{ active?: boolean }>`
 	${tw`
 		inline-flex
 		items-center
@@ -18,6 +18,13 @@ export const ToolbarButton = styled.button`
 		ring-offset-1
 		hover:ring
 	`}
+
+	${({ active }) =>
+		active &&
+		tw`
+			text-white
+			bg-indigo-500
+		`}
 `;
 
 ToolbarButton.defaultProps = {

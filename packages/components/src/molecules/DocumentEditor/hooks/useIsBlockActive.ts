@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { Editor, Element as SlateElement } from "slate";
-import { useSlateStatic } from "slate-react";
+import { useSlate } from "slate-react";
 import type { CustomElementType } from "../Element";
 
 export const isBlockActive = (editor: Editor, blockType: CustomElementType): boolean => {
@@ -20,7 +20,7 @@ export const isBlockActive = (editor: Editor, blockType: CustomElementType): boo
 };
 
 export const useIsBlockActive = () => {
-	const editor = useSlateStatic();
+	const editor = useSlate();
 
 	return useCallback(
 		(blockType: CustomElementType): boolean => isBlockActive(editor, blockType),
