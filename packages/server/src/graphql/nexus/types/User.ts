@@ -1,13 +1,39 @@
+import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { objectType } from "nexus";
+import { Comment as _Comment } from "@prisma/client";
+import { arg, intArg, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
+import { PrismaUtils } from "../../../utils";
 
 export const User = objectType({
 	name: NexusPrisma.User.$name,
 	description: NexusPrisma.User.$description,
 	definition: (t) => {
-		t.field(NexusPrisma.User.comments);
+		t.nonNull.field("comments", {
+			type: "CommentConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "CommentWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<_Comment, { id: number }>(
+					(paginationArgs) =>
+						prisma.comment.findMany({
+							...paginationArgs,
+							where: PrismaUtils.nonNull(args.where)
+						}),
+					() => prisma.comment.count(),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
 		t.field(NexusPrisma.User.description);
 		t.nonNull.list.nonNull.field("desiredSkills", {
 			type: "Skill",

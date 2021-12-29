@@ -13,10 +13,37 @@ scalar Bytes
 
 type Comment {
   author: User!
-  content: String!
+  authorId: String!
+  content: Json
   createdAt: DateTime!
   id: Int!
+  parent: Comment
+  parentId: Int
+  post: Post
+  postId: Int
+  replies(after: String, before: String, first: Int, last: Int, where: CommentWhereInput): CommentConnection!
   updatedAt: DateTime!
+}
+
+"""Relay-style connection for Comment types."""
+type CommentConnection {
+  edges: [CommentEdge!]!
+  nodes: [Comment!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+"""Relay-style edge for Comment types."""
+type CommentEdge {
+  cursor: String!
+  node: Comment!
+}
+
+input CommentWhereInput {
+  author: UserWhereInput
+  authorId: StringNullableFilter
+  createdAt: DateTimeNullableFilter
+  updatedAt: DateTimeNullableFilter
 }
 
 type CreateExperiencePayload implements MutationPayload {
@@ -38,6 +65,13 @@ type CreateRepositoryPayload implements MutationPayload {
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
+
+input DateTimeNullableFilter {
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+}
 
 """An arbitrary-precision Decimal type"""
 scalar Decimal
@@ -249,6 +283,7 @@ type PageInfo {
 type Post {
   author: User!
   authorName: String!
+  comments: [Comment!]!
   content: Json
   createdAt: DateTime!
   description: String
@@ -551,7 +586,7 @@ type UpvotePostPayload implements MutationPayload {
 }
 
 type User {
-  comments: [Comment!]!
+  comments(after: String, before: String, first: Int, last: Int, where: CommentWhereInput): CommentConnection!
   description: String
   desiredSkills: [Skill!]!
   email: String!

@@ -7,6 +7,7 @@ export const Post = objectType({
 	definition: (t) => {
 		t.field(NexusPrisma.Post.author);
 		t.field(NexusPrisma.Post.authorName);
+		t.field(NexusPrisma.Post.comments);
 		t.field(NexusPrisma.Post.content);
 		t.field(NexusPrisma.Post.createdAt);
 		t.field(NexusPrisma.Post.description);

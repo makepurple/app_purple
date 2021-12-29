@@ -3,6 +3,8 @@ import { LangUtils } from "@makepurple/utils";
 
 type DeepNonNullArgs<T> = T extends null
 	? undefined
+	: T extends Date
+	? Date
 	: T extends { [key: string]: any }
 	? { [P in keyof T]: DeepNonNullArgs<T[P]> }
 	: T extends (infer U)[]
@@ -27,6 +29,10 @@ export class PrismaUtils {
 			return (input as readonly any[]).map((value) =>
 				PrismaUtils.nonNull(value)
 			) as DeepNonNullArgs<T>;
+		}
+
+		if (input instanceof Date) {
+			return input as DeepNonNullArgs<T>;
 		}
 
 		if (typeof input === "object") {

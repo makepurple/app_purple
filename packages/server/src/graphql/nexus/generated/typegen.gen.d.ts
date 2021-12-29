@@ -78,6 +78,18 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CommentWhereInput: { // input type
+    author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    authorId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+  }
+  DateTimeNullableFilter: { // input type
+    gt?: NexusGenScalars['DateTime'] | null; // DateTime
+    gte?: NexusGenScalars['DateTime'] | null; // DateTime
+    lt?: NexusGenScalars['DateTime'] | null; // DateTime
+    lte?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
   EnumExperienceTypeNullableFilter: { // input type
     equals?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     in?: NexusGenEnums['ExperienceType'][] | null; // [ExperienceType!]
@@ -231,10 +243,22 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Comment: { // root type
-    content: string; // String!
+    authorId: string; // String!
+    content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
+    parentId?: number | null; // Int
+    postId?: number | null; // Int
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  CommentConnection: { // root type
+    edges: NexusGenRootTypes['CommentEdge'][]; // [CommentEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  CommentEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Comment']; // Comment!
   }
   CreateExperiencePayload: { // root type
     record: NexusGenRootTypes['Experience']; // Experience!
@@ -446,10 +470,26 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 export interface NexusGenFieldTypes {
   Comment: { // field return type
     author: NexusGenRootTypes['User']; // User!
-    content: string; // String!
+    authorId: string; // String!
+    content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
+    parent: NexusGenRootTypes['Comment'] | null; // Comment
+    parentId: number | null; // Int
+    post: NexusGenRootTypes['Post'] | null; // Post
+    postId: number | null; // Int
+    replies: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  CommentConnection: { // field return type
+    edges: NexusGenRootTypes['CommentEdge'][]; // [CommentEdge!]!
+    nodes: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  CommentEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Comment']; // Comment!
   }
   CreateExperiencePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
@@ -577,6 +617,7 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
     authorName: string; // String!
+    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -709,7 +750,7 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Post']; // Post!
   }
   User: { // field return type
-    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     description: string | null; // String
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
@@ -738,10 +779,26 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Comment: { // field return type name
     author: 'User'
-    content: 'String'
+    authorId: 'String'
+    content: 'Json'
     createdAt: 'DateTime'
     id: 'Int'
+    parent: 'Comment'
+    parentId: 'Int'
+    post: 'Post'
+    postId: 'Int'
+    replies: 'CommentConnection'
     updatedAt: 'DateTime'
+  }
+  CommentConnection: { // field return type name
+    edges: 'CommentEdge'
+    nodes: 'Comment'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  CommentEdge: { // field return type name
+    cursor: 'String'
+    node: 'Comment'
   }
   CreateExperiencePayload: { // field return type name
     query: 'Query'
@@ -869,6 +926,7 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     author: 'User'
     authorName: 'String'
+    comments: 'Comment'
     content: 'Json'
     createdAt: 'DateTime'
     description: 'String'
@@ -1001,7 +1059,7 @@ export interface NexusGenFieldTypeNames {
     record: 'Post'
   }
   User: { // field return type name
-    comments: 'Comment'
+    comments: 'CommentConnection'
     description: 'String'
     desiredSkills: 'Skill'
     email: 'String'
@@ -1028,6 +1086,15 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Comment: {
+    replies: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
+  }
   Mutation: {
     createExperience: { // args
       data: NexusGenInputs['ExperienceCreateInput']; // ExperienceCreateInput!
@@ -1124,6 +1191,15 @@ export interface NexusGenArgTypes {
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+  }
+  User: {
+    comments: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
     }
   }
 }
