@@ -1,3 +1,4 @@
+import { CommentUpdateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../..";
 
@@ -21,10 +22,14 @@ export const updateComment = mutationField("updateComment", {
 		return true;
 	},
 	resolve: async (parent, args, { prisma }) => {
+		const dataInput = CommentUpdateInput.validator({
+			content: args.data.content ?? undefined
+		});
+
 		const record = await prisma.comment.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
-				content: args.data.content ?? undefined
+				content: dataInput.content ?? undefined
 			}
 		});
 

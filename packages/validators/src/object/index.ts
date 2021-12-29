@@ -1,3 +1,6 @@
+export * from "./CommentContent";
+export * from "./CommentCreateInput";
+export * from "./CommentUpdateInput";
 export * from "./DocumentEditorValue";
 export * from "./ExperienceCreateInput";
 export * from "./ExperienceUpdateInput";
