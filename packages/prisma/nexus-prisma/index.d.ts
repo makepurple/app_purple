@@ -4043,7 +4043,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   postId  Int
+    *   postId  Int?
     * }
     * ```
     *
@@ -4072,7 +4072,7 @@ export interface Comment {
      * The type of this field.
      */
     type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
+    ? NexusCore.NexusNullDef<'Int'>
     : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
   
     /**

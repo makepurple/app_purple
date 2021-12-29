@@ -122,7 +122,7 @@ model Comment {
   parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
   parentId  Int?
   post      Post?     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
+  postId    Int?
   replies   Comment[] @relation("CommentReplies")
   updatedAt DateTime  @updatedAt
 }
