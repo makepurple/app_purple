@@ -30,6 +30,7 @@ Template.parameters = {
 	layout: "fullscreen",
 	nextRouter: {
 		query: {
+			postTitle: "not-a-real-blog-post-title",
 			userName: "leedavidcs"
 		}
 	}
