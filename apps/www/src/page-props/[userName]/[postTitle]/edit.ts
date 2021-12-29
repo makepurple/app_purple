@@ -13,8 +13,8 @@ import {
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
 	GetUserInfoSideBarQueryVariables
-} from "../../graphql";
-import { NextUtils } from "../../utils";
+} from "../../../graphql";
+import { NextUtils } from "../../../utils";
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const { query, req } = ctx;

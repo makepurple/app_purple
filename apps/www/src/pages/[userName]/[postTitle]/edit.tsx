@@ -1,5 +1,6 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
+	Button,
 	DocumentEditor,
 	DocumentEditorInfoRef,
 	Form,
@@ -13,23 +14,24 @@ import {
 	Paper,
 	TextArea
 } from "@makepurple/components";
-import { PostDraftUpdateInput } from "@makepurple/validators";
-import type { Type } from "computed-types";
+import { PostUpdateInput } from "@makepurple/validators";
+import { Type } from "computed-types";
 import { NextPage } from "next";
 import NextImage from "next/image";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
-import { useGetPostQuery, usePublishPostMutation, useUpdatePostDraftMutation } from "../../graphql";
+import { useGetPostQuery, useUpdatePostMutation } from "../../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
 	PostImageInput,
 	RemovePostThumbnailButton
-} from "../../organisms";
-import { PageProps, pageProps } from "../../page-props/[userName]/draft";
+} from "../../../organisms";
+import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]/edit";
 
 const WPM_READ_SPEED = 275;
 
@@ -102,22 +104,24 @@ export const Page: NextPage<PageProps> = () => {
 
 	const infoRef = useRef<DocumentEditorInfoRef>(null);
 
-	const authorName = router?.query.userName as string;
+	const userName = router?.query.userName as string;
+	const postTitle = router?.query.postTitle as string;
 
 	const [{ data }] = useGetPostQuery({
 		requestPolicy: "cache-first",
 		variables: {
 			where: {
 				authorName_urlSlug: {
-					authorName,
-					urlSlug: "draft"
+					authorName: userName,
+					urlSlug: postTitle
 				}
 			}
 		}
 	});
 
-	const [{ fetching: saving }, updatePostDraft] = useUpdatePostDraftMutation();
-	const [{ fetching: publishing }, publishPost] = usePublishPostMutation();
+	const [{ fetching: saving }, updatePost] = useUpdatePostMutation();
+
+	const updating: boolean = false;
 
 	const post = data?.post;
 
@@ -129,10 +133,9 @@ export const Page: NextPage<PageProps> = () => {
 		reset,
 		setValue,
 		watch
-	} = useForm<Type<typeof PostDraftUpdateInput>>({
+	} = useForm<Type<typeof PostUpdateInput>>({
 		defaultValues: {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
-			title: post?.title ?? "",
 			description: post?.description ?? "",
 			content: [
 				{
@@ -141,7 +144,7 @@ export const Page: NextPage<PageProps> = () => {
 				}
 			]
 		},
-		resolver: computedTypesResolver(PostDraftUpdateInput)
+		resolver: computedTypesResolver(PostUpdateInput)
 	});
 
 	const thumbnailUrl = watch("thumbnailUrl");
@@ -150,7 +153,6 @@ export const Page: NextPage<PageProps> = () => {
 		!!post &&
 			reset({
 				thumbnailUrl: post.thumbnailUrl ?? "",
-				title: post.title ?? "",
 				description: post.description ?? "",
 				content: (post.content as any) ?? [
 					{
@@ -161,16 +163,11 @@ export const Page: NextPage<PageProps> = () => {
 			});
 	}, [post, reset]);
 
-	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		router?.prefetch("/[username]/[postTitle]");
-	}, [router]);
-
 	/**
 	 * TODO
 	 * @description Handle case where no post is found.
 	 * @author David Lee
-	 * @date October 31, 2021
+	 * @date December 28, 2021
 	 */
 	if (!post) return null;
 
@@ -179,7 +176,7 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				{!thumbnailUrl ? (
 					<AddCoverImageButton
-						disabled={publishing || saving}
+						disabled={updating}
 						onUpload={(newThumbnailUrl) => {
 							setValue("thumbnailUrl", newThumbnailUrl);
 						}}
@@ -197,53 +194,43 @@ export const Page: NextPage<PageProps> = () => {
 								objectFit="cover"
 							/>
 						</ThumbnailPreview>
-						<RemovePostThumbnailButton disabled={publishing || saving} postId={post.id}>
+						<RemovePostThumbnailButton disabled={updating} postId={post.id}>
 							Remove image
 						</RemovePostThumbnailButton>
 					</ThumbnailPreviewContainer>
 				)}
 				<Form
-					disabled={publishing || saving}
+					disabled={saving}
 					onSubmit={handleSubmit(async (formData) => {
 						const readTime = (infoRef.current?.wordCount ?? 0) / WPM_READ_SPEED;
 
-						const publishedPost = await publishPost({
+						const didSucceed = await updatePost({
 							where: { id: post.id },
 							data: {
 								content: formData.content,
 								description: formData.description,
 								readTime: readTime || undefined,
-								thumbnailUrl: formData.thumbnailUrl,
-								title: formData.title
+								thumbnailUrl: formData.thumbnailUrl
 							}
 						})
-							.then((result) => result.data?.publishPost.record ?? null)
-							.catch(() => null);
+							.then((result) => !!result.data?.updatePost.record)
+							.catch(() => false);
 
-						if (!publishedPost) {
-							toast.error("Post could not be published");
-
-							return;
-						}
-
-						await router.push(
-							"/[username]/[postTitle]",
-							`/${publishedPost.authorName}/${publishedPost.urlSlug}`
-						);
-
-						toast.success("Your post was published! 🎉");
+						didSucceed
+							? toast.success("Your post was updated! 🎉")
+							: toast.error("Post could not be updated");
 					})}
 				>
 					<HiddenInput {...register("thumbnailUrl")} />
 					<FormGroup>
 						<FormLabel>Title</FormLabel>
 						<Input
-							{...register("title")}
+							disabled
 							placeholder="Title"
 							type="text"
+							value={post.title ?? ""}
 							aria-label="title"
 						/>
-						<FormHelperText error={errors.title?.message} />
 					</FormGroup>
 					<FormGroup tw="mt-4">
 						<FormLabel>Description</FormLabel>
@@ -289,25 +276,16 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={(errors.content as any)?.message} />
 					</FormGroup>
 					<FormActions>
-						<FormButton type="submit">Publish</FormButton>
-						<FormButton
-							onClick={handleSubmit(async (formData) => {
-								const didSucceed = await updatePostDraft({
-									where: { id: post.id },
-									data: formData
-								})
-									.then((result) => !!result.data?.updatePostDraft.record)
-									.catch(() => false);
-
-								didSucceed
-									? toast.success("Your draft was saved! 🎉")
-									: toast.error("Draft could not be saved");
-							})}
-							type="button"
-							variant="secondary"
+						<FormButton type="submit">Save</FormButton>
+						<NextLink
+							href="/[userName]/[postTitle]"
+							as={`/${userName}/${postTitle}`}
+							passHref
 						>
-							Save
-						</FormButton>
+							<Button as="a" variant="secondary">
+								Go to post
+							</Button>
+						</NextLink>
 					</FormActions>
 				</Form>
 			</Content>

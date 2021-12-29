@@ -4,6 +4,7 @@ mutation UpdatePostDraft($where: PostWhereUniqueInput!, $data: PostDraftUpdateIn
 			id
 			content
 			description
+			readTime
 			thumbnailUrl
 			title
 		}

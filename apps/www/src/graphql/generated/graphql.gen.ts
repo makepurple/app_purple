@@ -829,7 +829,7 @@ export type UpdatePostMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly updatePost: { readonly __typename: 'UpdatePostPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined } } };
+export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly updatePost: { readonly __typename: 'UpdatePostPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined } } };
 
 export type UpdatePostDraftMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -837,7 +837,7 @@ export type UpdatePostDraftMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } } };
+export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record: { readonly __typename: 'Post', readonly id: number, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined } } };
 
 export type UpdateRepositoryMutationVariables = Exact<{
   data: RepositoryUpdateInput;
@@ -1271,6 +1271,7 @@ export const UpdatePostDocument = /*#__PURE__*/ gql`
       id
       content
       description
+      readTime
       thumbnailUrl
     }
   }
@@ -1287,6 +1288,7 @@ export const UpdatePostDraftDocument = /*#__PURE__*/ gql`
       id
       content
       description
+      readTime
       thumbnailUrl
       title
     }

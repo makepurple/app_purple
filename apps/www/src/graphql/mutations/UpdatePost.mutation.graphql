@@ -4,6 +4,7 @@ mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
 			id
 			content
 			description
+			readTime
 			thumbnailUrl
 		}
 	}

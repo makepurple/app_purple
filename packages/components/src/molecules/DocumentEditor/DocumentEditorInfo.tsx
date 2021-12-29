@@ -1,7 +1,8 @@
 import React, { forwardRef, useImperativeHandle } from "react";
 import { useWordCount } from "./hooks";
 
-export type DocumentEditorInfoProps = Record<string, never>;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type DocumentEditorInfoProps = {};
 
 export interface DocumentEditorInfoRef {
 	wordCount: number;
