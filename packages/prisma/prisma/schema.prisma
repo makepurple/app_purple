@@ -78,6 +78,7 @@ model VerificationToken {
 model Post {
   author       User          @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName   String
+  comments     Comment[]
   content      Json?
   createdAt    DateTime      @default(now())
   description  String?
@@ -113,12 +114,17 @@ model PostImage {
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  id        Int       @id @default(autoincrement())
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  content   Json?
+  createdAt DateTime  @default(now())
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  parentId  Int?
+  post      Post?     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int
+  replies   Comment[] @relation("CommentReplies")
+  updatedAt DateTime  @updatedAt
 }
 
 model Skill {

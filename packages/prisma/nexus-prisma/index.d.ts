@@ -2369,6 +2369,58 @@ export interface Post {
     resolve: NexusCore.FieldResolver<'Post', 'authorName'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.comments`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Post
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Post
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Post {
+    *   /// Lorem ipsum dolor sit amet.
+    *   comments  Comment
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Post } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Post.$name
+    *   description: Post.$description
+    *   definition(t) {
+    *     t.field(Post.comments)
+    *   }
+    * })
+    */
+  comments: {
+    /**
+     * The name of this field.
+     */
+    name: 'comments'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Comment' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Comment'> | NexusCore.NexusNonNullDef<'Comment'>)
+    : 'Warning/Error: The type \'Comment\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Comment\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Post', 'comments'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.content`.
     *
     * ### ️⚠️ You have not writen documentation for model Post
@@ -3731,7 +3783,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   content  String
+    *   content  Json?
     * }
     * ```
     *
@@ -3759,9 +3811,9 @@ export interface Comment {
     /**
      * The type of this field.
      */
-    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
-    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+    type: 'Json' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'Json'>
+    : 'Warning/Error: The type \'Json\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Json\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -3824,6 +3876,266 @@ export interface Comment {
      * The resolver of this field
      */
     resolve: NexusCore.FieldResolver<'Comment', 'createdAt'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.parent`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Comment
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Comment
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Comment {
+    *   /// Lorem ipsum dolor sit amet.
+    *   parent  Comment?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Comment } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Comment.$name
+    *   description: Comment.$description
+    *   definition(t) {
+    *     t.field(Comment.parent)
+    *   }
+    * })
+    */
+  parent: {
+    /**
+     * The name of this field.
+     */
+    name: 'parent'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Comment' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'Comment'>
+    : 'Warning/Error: The type \'Comment\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Comment\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Comment', 'parent'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.parentId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Comment
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Comment
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Comment {
+    *   /// Lorem ipsum dolor sit amet.
+    *   parentId  Int?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Comment } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Comment.$name
+    *   description: Comment.$description
+    *   definition(t) {
+    *     t.field(Comment.parentId)
+    *   }
+    * })
+    */
+  parentId: {
+    /**
+     * The name of this field.
+     */
+    name: 'parentId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Comment', 'parentId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.post`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Comment
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Comment
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Comment {
+    *   /// Lorem ipsum dolor sit amet.
+    *   post  Post?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Comment } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Comment.$name
+    *   description: Comment.$description
+    *   definition(t) {
+    *     t.field(Comment.post)
+    *   }
+    * })
+    */
+  post: {
+    /**
+     * The name of this field.
+     */
+    name: 'post'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Post' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'Post'>
+    : 'Warning/Error: The type \'Post\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Post\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Comment', 'post'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.postId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Comment
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Comment
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Comment {
+    *   /// Lorem ipsum dolor sit amet.
+    *   postId  Int
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Comment } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Comment.$name
+    *   description: Comment.$description
+    *   definition(t) {
+    *     t.field(Comment.postId)
+    *   }
+    * })
+    */
+  postId: {
+    /**
+     * The name of this field.
+     */
+    name: 'postId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Comment', 'postId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.replies`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Comment
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Comment
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Comment {
+    *   /// Lorem ipsum dolor sit amet.
+    *   replies  Comment
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Comment } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Comment.$name
+    *   description: Comment.$description
+    *   definition(t) {
+    *     t.field(Comment.replies)
+    *   }
+    * })
+    */
+  replies: {
+    /**
+     * The name of this field.
+     */
+    name: 'replies'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Comment' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Comment'> | NexusCore.NexusNonNullDef<'Comment'>)
+    : 'Warning/Error: The type \'Comment\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Comment\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Comment', 'replies'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.updatedAt`.
