@@ -3,6 +3,7 @@ import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
 import { ListOrderedIcon } from "../../../svgs";
+import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { useToggleBlock } from "../hooks/useToggleBlock";
 import { ToolbarButton } from "../Shared";
 
@@ -21,8 +22,11 @@ export type NumberedListElement = {
 export const NumberedListToolbarButton: FC<Record<string, never>> = () => {
 	const toggleBlock = useToggleBlock();
 
+	const isActive = useIsBlockActive();
+
 	return (
 		<ToolbarButton
+			active={isActive("numbered-list")}
 			onMouseDown={(event) => {
 				event.preventDefault();
 

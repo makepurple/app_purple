@@ -3,6 +3,7 @@ import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
 import { QuoteIcon } from "../../../svgs";
+import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { useToggleBlock } from "../hooks/useToggleBlock";
 import { ToolbarButton } from "../Shared";
 
@@ -25,8 +26,11 @@ export type BlockQuoteElement = {
 export const BlockQuoteToolbarButton: FC<Record<string, never>> = () => {
 	const toggleBlock = useToggleBlock();
 
+	const isActive = useIsBlockActive();
+
 	return (
 		<ToolbarButton
+			active={isActive("block-quote")}
 			onMouseDown={(event) => {
 				event.preventDefault();
 

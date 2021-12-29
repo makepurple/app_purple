@@ -13,6 +13,7 @@ import { RenderElementProps, useFocused, useSelected, useSlateStatic } from "sla
 import tw, { css, styled, theme } from "twin.macro";
 import { ImageIcon } from "../../../svgs";
 import { insertImage } from "../hooks/useInsertImage";
+import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { ToolbarButton } from "../Shared";
 
 const Root = styled.div``;
@@ -101,6 +102,8 @@ export const ImageToolbarButton = forwardRef<ImageToolbarButtonRef, ImageToolbar
 
 		const editor = useSlateStatic();
 
+		const isActive = useIsBlockActive();
+
 		const makeImage = useCallback(() => {
 			const url = window.prompt("Enter the URL for this image");
 
@@ -115,6 +118,7 @@ export const ImageToolbarButton = forwardRef<ImageToolbarButtonRef, ImageToolbar
 
 		return (
 			<ToolbarButton
+				active={isActive("image")}
 				className={className}
 				onClick={(event) => {
 					event.preventDefault();

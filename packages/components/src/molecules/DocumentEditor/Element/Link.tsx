@@ -4,7 +4,7 @@ import { Descendant, Editor, Range, Transforms } from "slate";
 import { RenderElementProps, useSlateStatic } from "slate-react";
 import { Anchor } from "../../../atoms";
 import { LinkIcon } from "../../../svgs";
-import { isBlockActive } from "../hooks/useIsBlockActive";
+import { isBlockActive, useIsBlockActive } from "../hooks/useIsBlockActive";
 import { toggleBlock } from "../hooks/useToggleBlock";
 import { ToolbarButton } from "../Shared";
 
@@ -70,6 +70,8 @@ export const withLinks = (editor: Editor): Editor => {
 export const LinkToolbarButton: FC<Record<string, never>> = () => {
 	const editor = useSlateStatic();
 
+	const isActive = useIsBlockActive();
+
 	const makeLink = useCallback(() => {
 		if (!editor.selection) return;
 
@@ -82,6 +84,7 @@ export const LinkToolbarButton: FC<Record<string, never>> = () => {
 
 	return (
 		<ToolbarButton
+			active={isActive("link")}
 			onMouseDown={(event) => {
 				event.preventDefault();
 

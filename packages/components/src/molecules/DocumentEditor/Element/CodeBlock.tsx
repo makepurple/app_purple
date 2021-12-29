@@ -11,6 +11,7 @@ import tw, { styled } from "twin.macro";
 import { ContextMenu, ContextMenuItem, ListItem, Menu } from "../../../atoms";
 import { CodeSquareIcon } from "../../../svgs";
 import { useInsertBlock } from "../hooks/useInsertBlock";
+import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { ToolbarButton } from "../Shared";
 
 const Root = styled.div`
@@ -82,9 +83,27 @@ const supportedLanguages: readonly CodeBlockLanguageOption[] = [
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	const insertBlock = useInsertBlock();
 
+	const isActive = useIsBlockActive();
+
+	const isCodeBlockActive =
+		isActive(CodeBlockType.Go) ||
+		isActive(CodeBlockType.GraphQL) ||
+		isActive(CodeBlockType.HTML) ||
+		isActive(CodeBlockType.JavaScript) ||
+		isActive(CodeBlockType.Python) ||
+		isActive(CodeBlockType.SCSS) ||
+		isActive(CodeBlockType.SQL) ||
+		isActive(CodeBlockType.TypeScript) ||
+		isActive(CodeBlockType.YAML);
+
 	return (
 		<Menu>
-			<Menu.Button as={ToolbarButton} title="code block" aria-label="code block">
+			<Menu.Button
+				as={ToolbarButton}
+				active={isCodeBlockActive}
+				title="code block"
+				aria-label="code block"
+			>
 				<CodeSquareIcon height={20} width={20} />
 			</Menu.Button>
 			<Menu.Items>
@@ -99,6 +118,7 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 										children: [{ text: "" }]
 									});
 								}}
+								selected={isActive(slateType)}
 							>
 								{name}
 							</ListItem>

@@ -3,6 +3,7 @@ import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
 import { ListUnorderedIcon } from "../../../svgs";
+import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { useToggleBlock } from "../hooks/useToggleBlock";
 import { ToolbarButton } from "../Shared";
 
@@ -21,8 +22,11 @@ export type BulletedListElement = {
 export const BulletedListToolbarButton: FC<Record<string, never>> = () => {
 	const toggleBlock = useToggleBlock();
 
+	const isActive = useIsBlockActive();
+
 	return (
 		<ToolbarButton
+			active={isActive("bulleted-list")}
 			onMouseDown={(event) => {
 				event.preventDefault();
 

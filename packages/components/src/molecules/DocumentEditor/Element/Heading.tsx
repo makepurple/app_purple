@@ -58,12 +58,25 @@ const supportedHeadings: readonly HeadingOption[] = [
 ];
 
 export const HeadingToolbarButton: FC<Record<string, never>> = () => {
-	const isBlockActive = useIsBlockActive();
+	const isActive = useIsBlockActive();
 	const toggleBlock = useToggleBlock();
+
+	const isHeadingActive =
+		isActive(HeadingType.One) ||
+		isActive(HeadingType.Two) ||
+		isActive(HeadingType.Three) ||
+		isActive(HeadingType.Four) ||
+		isActive(HeadingType.Five) ||
+		isActive(HeadingType.Six);
 
 	return (
 		<Menu>
-			<Menu.Button as={ToolbarButton} title="heading" aria-label="heading">
+			<Menu.Button
+				as={ToolbarButton}
+				active={isHeadingActive}
+				title="heading"
+				aria-label="heading"
+			>
 				<HeadingIcon height={20} width={20} />
 			</Menu.Button>
 			<Menu.Items>
@@ -75,7 +88,7 @@ export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 								onClick={() => {
 									toggleBlock(slateType);
 								}}
-								selected={isBlockActive(slateType)}
+								selected={isActive(slateType)}
 							>
 								{name}
 							</ListItem>
