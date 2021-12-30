@@ -118,7 +118,7 @@ const Actions = tw.div`
 	gap-2
 `;
 
-const UpvoteButton = styled(Button)<{ $upvoted }>`
+const UpvoteButton = styled(Button)<{ $upvoted: boolean }>`
 	${tw`
 		text-base
 		leading-none
