@@ -12,6 +12,43 @@ export const Comment = objectType({
 		t.field(NexusPrisma.Comment.authorId);
 		t.field(NexusPrisma.Comment.content);
 		t.field(NexusPrisma.Comment.createdAt);
+		t.nonNull.field("downvoters", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const comment = prisma.comment.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						comment
+							.upvoters({
+								...paginationArgs,
+								where: {
+									upvote: false,
+									user: PrismaUtils.nonNull(args.where)
+								},
+								include: { user: true }
+							})
+							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
+					() =>
+						prisma.commentUpvoter.count({
+							where: { user: PrismaUtils.nonNull(args.where) }
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
 		t.field(NexusPrisma.Comment.id);
 		t.field(NexusPrisma.Comment.parent);
 		t.field(NexusPrisma.Comment.parentId);
@@ -65,7 +102,10 @@ export const Comment = objectType({
 						comment
 							.upvoters({
 								...paginationArgs,
-								where: { user: PrismaUtils.nonNull(args.where) },
+								where: {
+									upvote: true,
+									user: PrismaUtils.nonNull(args.where)
+								},
 								include: { user: true }
 							})
 							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
@@ -82,11 +122,21 @@ export const Comment = objectType({
 		});
 		t.nonNull.int("upvotes", {
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.commentUpvoter.count({
+				const upvotes = await prisma.commentUpvoter.count({
 					where: {
-						commentId: parent.id
+						commentId: parent.id,
+						upvote: true
 					}
 				});
+
+				const downvotes = await prisma.commentUpvoter.count({
+					where: {
+						commentId: parent.id,
+						upvote: false
+					}
+				});
+
+				return upvotes - downvotes;
 			}
 		});
 	}

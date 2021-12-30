@@ -17,6 +17,19 @@ export const Comment_fragment_mock: Comment = {
 		}
 	],
 	createdAt: dayjs(1318781876406).toDate(),
+	downvoters: {
+		__typename: "UserConnection",
+		edges: [],
+		nodes: [],
+		totalCount: 0,
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		}
+	},
 	id: "0",
 	parent: null,
 	parentId: null,

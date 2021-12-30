@@ -98,12 +98,15 @@ model Post {
 }
 
 model PostUpvoter {
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  id     String  @id @default(cuid())
+  post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Whether this is an upvote. If false, this is a downvote instead
+  upvote Boolean @default(true)
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  @@id([userId, postId])
+  @@unique([userId, postId])
 }
 
 model PostImage {
@@ -133,6 +136,8 @@ model CommentUpvoter {
   id        String  @id @default(cuid())
   comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String
+  // Whether this is an upvote. If false, this is a downvote instead
+  upvote    Boolean @default(true)
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 

@@ -1,7 +1,7 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { Comment } from "@prisma/client";
-import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
+import { Comment, User } from "@prisma/client";
+import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const Post = objectType({
@@ -41,6 +41,43 @@ export const Post = objectType({
 		t.field(NexusPrisma.Post.content);
 		t.field(NexusPrisma.Post.createdAt);
 		t.field(NexusPrisma.Post.description);
+		t.nonNull.field("downvoters", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const post = prisma.post.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						post
+							.upvoters({
+								...paginationArgs,
+								where: {
+									upvote: false,
+									user: PrismaUtils.nonNull(args.where)
+								},
+								include: { user: true }
+							})
+							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
+					() =>
+						prisma.postUpvoter.count({
+							where: { user: PrismaUtils.nonNull(args.where) }
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
 		t.field(NexusPrisma.Post.id);
 		t.field(NexusPrisma.Post.images);
 		t.field(NexusPrisma.Post.publishedAt);
@@ -49,31 +86,59 @@ export const Post = objectType({
 		t.field(NexusPrisma.Post.title);
 		t.field(NexusPrisma.Post.updatedAt);
 		t.nonNull.int("upvotes", {
-			resolve: async ({ id }, args, { prisma }) => {
-				return await prisma.postUpvoter.count({
-					where: { postId: id }
+			resolve: async (parent, args, { prisma }) => {
+				const upvotes = await prisma.postUpvoter.count({
+					where: {
+						postId: parent.id,
+						upvote: true
+					}
 				});
+
+				const downvotes = await prisma.postUpvoter.count({
+					where: {
+						postId: parent.id,
+						upvote: false
+					}
+				});
+
+				return upvotes - downvotes;
 			}
 		});
-		t.field("upvotingUsers", {
-			type: nonNull(list(nonNull("User"))),
+		t.nonNull.field("upvoters", {
+			type: "UserConnection",
 			args: {
-				skip: intArg({ default: 0 }),
-				take: intArg({ default: 50 })
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
 			},
-			resolve: async ({ id }, args, { prisma }) => {
-				const users = await prisma.post
-					.findUnique({
-						where: { id }
-					})
-					.upvoters({
-						skip: args.skip ?? 0,
-						take: Math.min(args.take ?? 50, 50),
-						select: { user: true }
-					})
-					.then((upvotes) => upvotes.map(({ user }) => user));
+			resolve: async (parent, args, { prisma }) => {
+				const post = prisma.post.findUnique({
+					where: { id: parent.id }
+				});
 
-				return users;
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						post
+							.upvoters({
+								...paginationArgs,
+								where: {
+									upvote: true,
+									user: PrismaUtils.nonNull(args.where)
+								},
+								include: { user: true }
+							})
+							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
+					() =>
+						prisma.postUpvoter.count({
+							where: { user: PrismaUtils.nonNull(args.where) }
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
 			}
 		});
 		t.field(NexusPrisma.Post.urlSlug);

@@ -297,6 +297,19 @@ export const Post_fragment_mock: Post = {
 		}
 	],
 	description: faker.lorem.sentences(1),
+	downvoters: {
+		__typename: "UserConnection",
+		edges: [],
+		nodes: [],
+		totalCount: 0,
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		}
+	},
 	id: "0",
 	images: [],
 	publishedAt: faker.date.past(),
@@ -305,7 +318,19 @@ export const Post_fragment_mock: Post = {
 	createdAt: dayjs(1318781876406).toDate(),
 	updatedAt: dayjs(1318781876406).toDate(),
 	upvotes: faker.datatype.number({ max: 2_000 }),
-	upvotingUsers: [],
+	upvoters: {
+		__typename: "UserConnection",
+		edges: [],
+		nodes: [],
+		totalCount: 0,
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		}
+	},
 	urlSlug: "not-a-real-blog-post-title",
 	viewerUpvoted: false
 };

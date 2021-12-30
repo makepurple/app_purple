@@ -4,6 +4,7 @@ import { PrismaUtils } from "../../../utils";
 export const upvoteComment = mutationField("upvoteComment", {
 	type: nonNull("UpvoteCommentPayload"),
 	args: {
+		data: nonNull(arg({ type: "UpvoteCommentInput" })),
 		where: nonNull(arg({ type: "CommentWhereUniqueInput" }))
 	},
 	authorize: (parent, args, { user }) => {
@@ -30,6 +31,7 @@ export const upvoteComment = mutationField("upvoteComment", {
 							}
 						},
 						create: {
+							upvote: args.data.upvote ?? undefined,
 							userId: user.id
 						}
 					}

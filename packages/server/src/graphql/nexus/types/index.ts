@@ -41,6 +41,7 @@ export * from "./SuggestRepositories";
 export * from "./SuggestSkills";
 export * from "./TopLanguage";
 export * from "./TopLanguages";
+export * from "./UnvoteCommentPayload";
 export * from "./UpdateCommentPayload";
 export * from "./UpdateDesiredSkillsPayload";
 export * from "./UpdateExperiencePayload";

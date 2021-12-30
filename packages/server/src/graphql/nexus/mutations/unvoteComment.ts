@@ -1,8 +1,8 @@
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const downvoteComment = mutationField("downvoteComment", {
-	type: nonNull("DownvoteCommentPayload"),
+export const unvoteComment = mutationField("unvoteComment", {
+	type: nonNull("UnvoteCommentPayload"),
 	args: {
 		where: nonNull(arg({ type: "CommentWhereUniqueInput" }))
 	},
@@ -25,7 +25,7 @@ export const downvoteComment = mutationField("downvoteComment", {
 					userId: user.id
 				}
 			},
-			include: {
+			select: {
 				comment: true
 			}
 		});

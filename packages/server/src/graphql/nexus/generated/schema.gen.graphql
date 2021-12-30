@@ -16,6 +16,7 @@ type Comment {
   authorId: String!
   content: Json
   createdAt: DateTime!
+  downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: ID!
   parent: Comment
   parentId: String
@@ -290,10 +291,10 @@ type Mutation {
 
   """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
-  downvoteComment(where: CommentWhereUniqueInput!): DownvoteCommentPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
   updateExperience(data: ExperienceUpdateInput!, where: ExperienceWhereUniqueInput!): UpdateExperiencePayload!
@@ -302,7 +303,7 @@ type Mutation {
   updateRepository(data: RepositoryUpdateInput!, where: RepositoryWhereUniqueInput!): UpdateRepositoryPayload!
   updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
-  upvoteComment(where: CommentWhereUniqueInput!): UpvoteCommentPayload!
+  upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
   viewer: User
 }
@@ -333,6 +334,7 @@ type Post {
   content: Json
   createdAt: DateTime!
   description: String
+  downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: ID!
   images: [PostImage!]!
   publishedAt: DateTime
@@ -340,8 +342,8 @@ type Post {
   thumbnailUrl: String
   title: String
   updatedAt: DateTime!
+  upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!
-  upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
   urlSlug: String!
   viewerUpvoted: Boolean!
 }
@@ -575,6 +577,11 @@ A field whose value conforms to the standard URL format as specified in RFC3986:
 """
 scalar URL
 
+type UnvoteCommentPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+}
+
 type UpdateCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
@@ -629,6 +636,10 @@ input UploadPostImageInput {
 type UploadPostImagePayload implements MutationPayload {
   query: Query!
   record: PostImage!
+}
+
+input UpvoteCommentInput {
+  upvote: Boolean
 }
 
 type UpvoteCommentPayload implements MutationPayload {

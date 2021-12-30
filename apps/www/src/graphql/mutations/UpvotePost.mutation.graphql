@@ -3,8 +3,16 @@ mutation UpvotePost($where: PostWhereUniqueInput!) {
 		record {
 			id
 			upvotes
-			upvotingUsers {
-				id
+			upvoters {
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+				}
 			}
 		}
 	}

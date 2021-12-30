@@ -38,6 +38,7 @@ export type Comment = {
   readonly authorId: Scalars['String'];
   readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
+  readonly downvoters: UserConnection;
   readonly id: Scalars['ID'];
   readonly parent?: Maybe<Comment>;
   readonly parentId?: Maybe<Scalars['String']>;
@@ -47,6 +48,15 @@ export type Comment = {
   readonly updatedAt: Scalars['DateTime'];
   readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];
+};
+
+
+export type CommentDownvotersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 
@@ -332,10 +342,10 @@ export type Mutation = {
   readonly deleteExperience: DeleteExperiencePayload;
   /** Users can delete their own posts. */
   readonly deletePost: DeletePostPayload;
-  readonly downvoteComment: DownvoteCommentPayload;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
+  readonly unvoteComment: UnvoteCommentPayload;
   readonly updateComment: UpdateCommentPayload;
   readonly updateDesiredSkills: UpdateDesiredSkillsPayload;
   readonly updateExperience: UpdateExperiencePayload;
@@ -387,12 +397,6 @@ export type MutationDeletePostArgs = {
 
 
 /** Root mutation type */
-export type MutationDownvoteCommentArgs = {
-  where: CommentWhereUniqueInput;
-};
-
-
-/** Root mutation type */
 export type MutationPublishPostArgs = {
   data?: InputMaybe<PostPublishInput>;
   where: PostWhereUniqueInput;
@@ -402,6 +406,12 @@ export type MutationPublishPostArgs = {
 /** Root mutation type */
 export type MutationRemovePostThumbnailArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUnvoteCommentArgs = {
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -461,6 +471,7 @@ export type MutationUploadPostImageArgs = {
 
 /** Root mutation type */
 export type MutationUpvoteCommentArgs = {
+  data: UpvoteCommentInput;
   where: CommentWhereUniqueInput;
 };
 
@@ -499,6 +510,7 @@ export type Post = {
   readonly content?: Maybe<Scalars['Json']>;
   readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
+  readonly downvoters: UserConnection;
   readonly id: Scalars['ID'];
   readonly images: ReadonlyArray<PostImage>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
@@ -506,8 +518,8 @@ export type Post = {
   readonly thumbnailUrl?: Maybe<Scalars['String']>;
   readonly title?: Maybe<Scalars['String']>;
   readonly updatedAt: Scalars['DateTime'];
+  readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];
-  readonly upvotingUsers: ReadonlyArray<User>;
   readonly urlSlug: Scalars['String'];
   readonly viewerUpvoted: Scalars['Boolean'];
 };
@@ -523,9 +535,21 @@ export type PostCommentsArgs = {
 };
 
 
-export type PostUpvotingUsersArgs = {
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+export type PostDownvotersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type PostUpvotersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 export type PostAuthorNameUrlSlugCompoundUniqueInput = {
@@ -836,6 +860,12 @@ export type TopLanguages = {
   readonly totalSize: Scalars['Int'];
 };
 
+export type UnvoteCommentPayload = MutationPayload & {
+  readonly __typename: 'UnvoteCommentPayload';
+  readonly query: Query;
+  readonly record: Comment;
+};
+
 export type UpdateCommentPayload = MutationPayload & {
   readonly __typename: 'UpdateCommentPayload';
   readonly query: Query;
@@ -895,6 +925,10 @@ export type UploadPostImagePayload = MutationPayload & {
   readonly __typename: 'UploadPostImagePayload';
   readonly query: Query;
   readonly record: PostImage;
+};
+
+export type UpvoteCommentInput = {
+  readonly upvote?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type UpvoteCommentPayload = MutationPayload & {
@@ -1072,7 +1106,7 @@ export type UpvotePostMutationVariables = Exact<{
 }>;
 
 
-export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } };
+export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
 
 export type GetExperiencesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -1585,8 +1619,16 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
     record {
       id
       upvotes
-      upvotingUsers {
-        id
+      upvoters {
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          id
+        }
       }
     }
   }
