@@ -3,11 +3,23 @@ import { GitHubUser_fragment_mock } from "./GitHubUser.fragment.mock";
 
 export const User_fragment_mock: User = {
 	__typename: "User" as const,
-	comments: [],
+	comments: {
+		__typename: "CommentConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	desiredSkills: ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map(
 		(skill, i) => ({
 			__typename: "Skill",
-			id: i,
+			id: i.toString(),
 			name: skill,
 			owner: "github",
 			users: [],
@@ -34,7 +46,7 @@ export const User_fragment_mock: User = {
 		"Framer-Motion"
 	].map((skill, i) => ({
 		__typename: "Skill",
-		id: i,
+		id: i.toString(),
 		name: skill,
 		owner: "github",
 		users: [],

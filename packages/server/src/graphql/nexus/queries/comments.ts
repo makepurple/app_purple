@@ -14,7 +14,7 @@ export const comments = queryField("comments", {
 		orderBy: arg({ type: "CommentOrderByInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const connection = await findManyCursorConnection<_Comment, { id: number }>(
+		const connection = await findManyCursorConnection<_Comment, { id: string }>(
 			(paginationArgs) =>
 				prisma.comment.findMany({
 					...paginationArgs,

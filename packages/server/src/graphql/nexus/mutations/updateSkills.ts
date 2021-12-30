@@ -14,7 +14,7 @@ export const updateSkills = mutationField("updateSkills", {
 
 		const skillIds = args.data.skills
 			.filter((skill) => !!skill.id)
-			.map((skill) => skill.id) as number[];
+			.map((skill) => skill.id) as string[];
 
 		const skillNameOwners = args.data.skills
 			.filter((skill) => !!skill.name_owner)

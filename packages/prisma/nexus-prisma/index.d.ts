@@ -1987,6 +1987,58 @@ export interface User {
     resolve: NexusCore.FieldResolver<'User', 'updatedAt'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.upvotedComments`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   upvotedComments  CommentUpvoter
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.upvotedComments)
+    *   }
+    * })
+    */
+  upvotedComments: {
+    /**
+     * The name of this field.
+     */
+    name: 'upvotedComments'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'CommentUpvoter' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'CommentUpvoter'> | NexusCore.NexusNonNullDef<'CommentUpvoter'>)
+    : 'Warning/Error: The type \'CommentUpvoter\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'CommentUpvoter\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'upvotedComments'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.upvotedPosts`.
     *
     * ### ️⚠️ You have not writen documentation for model User
@@ -2586,7 +2638,7 @@ export interface Post {
     * ```prisma
     * model Post {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  Int
+    *   id  String
     * }
     * ```
     *
@@ -2614,9 +2666,9 @@ export interface Post {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -3141,7 +3193,7 @@ export interface PostUpvoter {
     * ```prisma
     * model PostUpvoter {
     *   /// Lorem ipsum dolor sit amet.
-    *   postId  Int
+    *   postId  String
     * }
     * ```
     *
@@ -3169,9 +3221,9 @@ export interface PostUpvoter {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -3436,7 +3488,7 @@ export interface PostImage {
     * ```prisma
     * model PostImage {
     *   /// Lorem ipsum dolor sit amet.
-    *   postId  Int
+    *   postId  String
     * }
     * ```
     *
@@ -3464,9 +3516,9 @@ export interface PostImage {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -3627,7 +3679,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  Int
+    *   id  String
     * }
     * ```
     *
@@ -3655,9 +3707,9 @@ export interface Comment {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -3939,7 +3991,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   parentId  Int?
+    *   parentId  String?
     * }
     * ```
     *
@@ -3967,9 +4019,9 @@ export interface Comment {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -4043,7 +4095,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   postId  Int?
+    *   postId  String?
     * }
     * ```
     *
@@ -4071,9 +4123,9 @@ export interface Comment {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -4189,6 +4241,353 @@ export interface Comment {
      */
     resolve: NexusCore.FieldResolver<'Comment', 'updatedAt'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.upvoters`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Comment
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Comment
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Comment {
+    *   /// Lorem ipsum dolor sit amet.
+    *   upvoters  CommentUpvoter
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Comment } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Comment.$name
+    *   description: Comment.$description
+    *   definition(t) {
+    *     t.field(Comment.upvoters)
+    *   }
+    * })
+    */
+  upvoters: {
+    /**
+     * The name of this field.
+     */
+    name: 'upvoters'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'CommentUpvoter' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'CommentUpvoter'> | NexusCore.NexusNonNullDef<'CommentUpvoter'>)
+    : 'Warning/Error: The type \'CommentUpvoter\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'CommentUpvoter\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Comment', 'upvoters'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `CommentUpvoter`.
+  *
+  * ### ️⚠️ You have not writen documentation for model CommentUpvoter
+  *
+  * Replace this default advisory JSDoc with your own documentation about model CommentUpvoter
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model CommentUpvoter {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { CommentUpvoter } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: CommentUpvoter.$name
+  *   description: CommentUpvoter.$description
+  *   definition(t) {
+  *     t.field(CommentUpvoter.id)
+  *   }
+  * })
+  */
+export interface CommentUpvoter {
+  $name: 'CommentUpvoter'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CommentUpvoter.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model CommentUpvoter
+    *
+    * Replace this default advisory JSDoc with your own documentation about model CommentUpvoter
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model CommentUpvoter {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { CommentUpvoter } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: CommentUpvoter.$name
+    *   description: CommentUpvoter.$description
+    *   definition(t) {
+    *     t.field(CommentUpvoter.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'CommentUpvoter', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CommentUpvoter.comment`.
+    *
+    * ### ️⚠️ You have not writen documentation for model CommentUpvoter
+    *
+    * Replace this default advisory JSDoc with your own documentation about model CommentUpvoter
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model CommentUpvoter {
+    *   /// Lorem ipsum dolor sit amet.
+    *   comment  Comment
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { CommentUpvoter } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: CommentUpvoter.$name
+    *   description: CommentUpvoter.$description
+    *   definition(t) {
+    *     t.field(CommentUpvoter.comment)
+    *   }
+    * })
+    */
+  comment: {
+    /**
+     * The name of this field.
+     */
+    name: 'comment'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Comment' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Comment'>
+    : 'Warning/Error: The type \'Comment\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Comment\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'CommentUpvoter', 'comment'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CommentUpvoter.commentId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model CommentUpvoter
+    *
+    * Replace this default advisory JSDoc with your own documentation about model CommentUpvoter
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model CommentUpvoter {
+    *   /// Lorem ipsum dolor sit amet.
+    *   commentId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { CommentUpvoter } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: CommentUpvoter.$name
+    *   description: CommentUpvoter.$description
+    *   definition(t) {
+    *     t.field(CommentUpvoter.commentId)
+    *   }
+    * })
+    */
+  commentId: {
+    /**
+     * The name of this field.
+     */
+    name: 'commentId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'CommentUpvoter', 'commentId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CommentUpvoter.user`.
+    *
+    * ### ️⚠️ You have not writen documentation for model CommentUpvoter
+    *
+    * Replace this default advisory JSDoc with your own documentation about model CommentUpvoter
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model CommentUpvoter {
+    *   /// Lorem ipsum dolor sit amet.
+    *   user  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { CommentUpvoter } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: CommentUpvoter.$name
+    *   description: CommentUpvoter.$description
+    *   definition(t) {
+    *     t.field(CommentUpvoter.user)
+    *   }
+    * })
+    */
+  user: {
+    /**
+     * The name of this field.
+     */
+    name: 'user'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'CommentUpvoter', 'user'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CommentUpvoter.userId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model CommentUpvoter
+    *
+    * Replace this default advisory JSDoc with your own documentation about model CommentUpvoter
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model CommentUpvoter {
+    *   /// Lorem ipsum dolor sit amet.
+    *   userId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { CommentUpvoter } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: CommentUpvoter.$name
+    *   description: CommentUpvoter.$description
+    *   definition(t) {
+    *     t.field(CommentUpvoter.userId)
+    *   }
+    * })
+    */
+  userId: {
+    /**
+     * The name of this field.
+     */
+    name: 'userId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'CommentUpvoter', 'userId'>
+  }
 }
 
 /**
@@ -4234,7 +4633,7 @@ export interface Skill {
     * ```prisma
     * model Skill {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  Int
+    *   id  String
     * }
     * ```
     *
@@ -4262,9 +4661,9 @@ export interface Skill {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -4633,7 +5032,7 @@ export interface SkillsOnUsers {
     * ```prisma
     * model SkillsOnUsers {
     *   /// Lorem ipsum dolor sit amet.
-    *   skillId  Int
+    *   skillId  String
     * }
     * ```
     *
@@ -4661,9 +5060,9 @@ export interface SkillsOnUsers {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -4876,7 +5275,7 @@ export interface DesiredSkillsOnUsers {
     * ```prisma
     * model DesiredSkillsOnUsers {
     *   /// Lorem ipsum dolor sit amet.
-    *   skillId  Int
+    *   skillId  String
     * }
     * ```
     *
@@ -4904,9 +5303,9 @@ export interface DesiredSkillsOnUsers {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -5067,7 +5466,7 @@ export interface Repository {
     * ```prisma
     * model Repository {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  Int
+    *   id  String
     * }
     * ```
     *
@@ -5095,9 +5494,9 @@ export interface Repository {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -5414,7 +5813,7 @@ export interface SkillsOnRepositories {
     * ```prisma
     * model SkillsOnRepositories {
     *   /// Lorem ipsum dolor sit amet.
-    *   skillId  Int
+    *   skillId  String
     * }
     * ```
     *
@@ -5442,9 +5841,9 @@ export interface SkillsOnRepositories {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -5518,7 +5917,7 @@ export interface SkillsOnRepositories {
     * ```prisma
     * model SkillsOnRepositories {
     *   /// Lorem ipsum dolor sit amet.
-    *   repositoryId  Int
+    *   repositoryId  String
     * }
     * ```
     *
@@ -5546,9 +5945,9 @@ export interface SkillsOnRepositories {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -5605,7 +6004,7 @@ export interface Organization {
     * ```prisma
     * model Organization {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  Int
+    *   id  String
     * }
     * ```
     *
@@ -5633,9 +6032,9 @@ export interface Organization {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -5796,7 +6195,7 @@ export interface Experience {
     * ```prisma
     * model Experience {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  Int
+    *   id  String
     * }
     * ```
     *
@@ -5824,9 +6223,9 @@ export interface Experience {
     /**
      * The type of this field.
      */
-    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Int'>
-    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -6432,6 +6831,8 @@ export const PostUpvoter: PostUpvoter
 export const PostImage: PostImage
 
 export const Comment: Comment
+
+export const CommentUpvoter: CommentUpvoter
 
 export const Skill: Skill
 

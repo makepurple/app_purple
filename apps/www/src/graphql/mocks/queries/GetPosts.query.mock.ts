@@ -8,7 +8,7 @@ const posts = Array(DATA_SIZE)
 	.map((__, i) => ({
 		...Post_fragment_mock,
 		__typename: "Post" as const,
-		id: i
+		id: i.toString()
 	}));
 
 export const GetPosts_mock: GetPostsQuery = {

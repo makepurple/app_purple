@@ -14,7 +14,7 @@ export const experiences = queryField("experiences", {
 		where: arg({ type: "ExperienceWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const connection = await findManyCursorConnection<Experience, { id: number }>(
+		const connection = await findManyCursorConnection<Experience, { id: string }>(
 			(paginationArgs) =>
 				prisma.experience.findMany({
 					...paginationArgs,

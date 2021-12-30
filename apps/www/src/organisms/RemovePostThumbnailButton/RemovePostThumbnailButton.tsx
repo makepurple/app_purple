@@ -9,7 +9,7 @@ const Root = tw(FormButton)`
 `;
 
 export type RemovePostThumbnailButtonProps = FormButtonProps & {
-	postId: number;
+	postId: string;
 };
 
 export const RemovePostThumbnailButton: FC<RemovePostThumbnailButtonProps> = (props) => {

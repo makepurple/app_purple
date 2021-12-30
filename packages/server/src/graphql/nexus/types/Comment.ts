@@ -1,6 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { Comment as _Comment } from "@prisma/client";
+import { Comment as _Comment, User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -30,7 +30,7 @@ export const Comment = objectType({
 			resolve: async (parent, args, { prisma }) => {
 				const comment = prisma.comment.findUnique({ where: { id: parent.id } });
 
-				const connection = await findManyCursorConnection<_Comment, { id: number }>(
+				const connection = await findManyCursorConnection<_Comment, { id: string }>(
 					(paginationArgs) =>
 						comment.replies({
 							...paginationArgs,
@@ -46,5 +46,48 @@ export const Comment = objectType({
 			}
 		});
 		t.field(NexusPrisma.Comment.updatedAt);
+		t.nonNull.field("upvoters", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const comment = prisma.comment.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						comment
+							.upvoters({
+								...paginationArgs,
+								where: { user: PrismaUtils.nonNull(args.where) },
+								include: { user: true }
+							})
+							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
+					() =>
+						prisma.commentUpvoter.count({
+							where: { user: PrismaUtils.nonNull(args.where) }
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
+		t.nonNull.int("upvotes", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.commentUpvoter.count({
+					where: {
+						commentId: parent.id
+					}
+				});
+			}
+		});
 	}
 });

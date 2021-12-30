@@ -9,6 +9,19 @@ export const Post_fragment_mock: Post = {
 	__typename: "Post",
 	author: User_fragment_mock,
 	authorName: User_fragment_mock.name,
+	comments: {
+		__typename: "CommentConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	content: [
 		{
 			type: "language-tsx",
@@ -284,7 +297,7 @@ export const Post_fragment_mock: Post = {
 		}
 	],
 	description: faker.lorem.sentences(1),
-	id: 0,
+	id: "0",
 	images: [],
 	publishedAt: faker.date.past(),
 	thumbnailUrl: "/static/pngs/test-thumbnail.png",

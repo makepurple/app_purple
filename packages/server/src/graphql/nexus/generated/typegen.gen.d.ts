@@ -97,7 +97,7 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
   CommentWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   DateTimeNullableFilter: { // input type
     gt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -140,7 +140,7 @@ export interface NexusGenInputs {
     userId?: string | null; // String
   }
   ExperienceWhereUniqueInput: { // input type
-    id: number; // Int!
+    id: string; // String!
   }
   PostAuthorNameUrlSlugCompoundUniqueInput: { // input type
     authorName: string; // String!
@@ -170,7 +170,7 @@ export interface NexusGenInputs {
   }
   PostWhereUniqueInput: { // input type
     authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
-    id?: number | null; // Int
+    id?: string | null; // String
   }
   RepositoryCreateInput: { // input type
     name: string; // String!
@@ -188,7 +188,7 @@ export interface NexusGenInputs {
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   RepositoryWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
     name_owner?: NexusGenInputs['RepositoryNameOwnerCompoundUniqueInput'] | null; // RepositoryNameOwnerCompoundUniqueInput
   }
   SkillNameOwnerCompoundUniqueInput: { // input type
@@ -196,7 +196,7 @@ export interface NexusGenInputs {
     owner: string; // String!
   }
   SkillWhereUniqueInput: { // input type
-    id?: number | null; // Int
+    id?: string | null; // String
     name_owner?: NexusGenInputs['SkillNameOwnerCompoundUniqueInput'] | null; // SkillNameOwnerCompoundUniqueInput
   }
   StringNullableFilter: { // input type
@@ -261,9 +261,9 @@ export interface NexusGenObjects {
     authorId: string; // String!
     content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: number; // Int!
-    parentId?: number | null; // Int
-    postId?: number | null; // Int
+    id: string; // ID!
+    parentId?: string | null; // String
+    postId?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CommentConnection: { // root type
@@ -299,7 +299,7 @@ export interface NexusGenObjects {
   Experience: { // root type
     endDate?: NexusGenScalars['DateTime'] | null; // DateTime
     highlights: string[]; // [String!]!
-    id: number; // Int!
+    id: string; // ID!
     location?: string | null; // String
     organizationName: string; // String!
     positionName: string; // String!
@@ -361,7 +361,7 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Organization: { // root type
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
   }
   PageInfo: { // root type
@@ -375,7 +375,7 @@ export interface NexusGenObjects {
     content?: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
-    id: number; // Int!
+    id: string; // ID!
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     readTime?: number | null; // Int
     thumbnailUrl?: string | null; // String
@@ -394,7 +394,7 @@ export interface NexusGenObjects {
   }
   PostImage: { // root type
     id: string; // ID!
-    postId: number; // Int!
+    postId: string; // String!
     url: string; // String!
   }
   PublishPostPayload: { // root type
@@ -405,7 +405,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   Repository: { // root type
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
     owner: string; // String!
   }
@@ -419,7 +419,7 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['Repository']; // Repository!
   }
   Skill: { // root type
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
     owner: string; // String!
   }
@@ -477,9 +477,19 @@ export interface NexusGenObjects {
     image?: string | null; // String
     name: string; // String!
   }
+  UserConnection: { // root type
+    edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  UserEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['User']; // User!
+  }
 }
 
 export interface NexusGenInterfaces {
+  Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationPayload: core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
 }
@@ -497,13 +507,15 @@ export interface NexusGenFieldTypes {
     authorId: string; // String!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: number; // Int!
+    id: string; // ID!
     parent: NexusGenRootTypes['Comment'] | null; // Comment
-    parentId: number | null; // Int
+    parentId: string | null; // String
     post: NexusGenRootTypes['Post'] | null; // Post
-    postId: number | null; // Int
+    postId: string | null; // String
     replies: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    upvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
+    upvotes: number; // Int!
   }
   CommentConnection: { // field return type
     edges: NexusGenRootTypes['CommentEdge'][]; // [CommentEdge!]!
@@ -546,7 +558,7 @@ export interface NexusGenFieldTypes {
   Experience: { // field return type
     endDate: NexusGenScalars['DateTime'] | null; // DateTime
     highlights: string[]; // [String!]!
-    id: number; // Int!
+    id: string; // ID!
     location: string | null; // String
     organization: NexusGenRootTypes['Organization']; // Organization!
     organizationName: string; // String!
@@ -640,7 +652,7 @@ export interface NexusGenFieldTypes {
   Organization: { // field return type
     experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
     github: NexusGenRootTypes['GitHubOrganization']; // GitHubOrganization!
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
   }
   PageInfo: { // field return type
@@ -652,11 +664,11 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User']; // User!
     authorName: string; // String!
-    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     content: NexusGenScalars['Json'] | null; // Json
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
-    id: number; // Int!
+    id: string; // ID!
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
     readTime: number | null; // Int
@@ -681,7 +693,7 @@ export interface NexusGenFieldTypes {
   PostImage: { // field return type
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
-    postId: number; // Int!
+    postId: string; // String!
     url: string; // String!
   }
   PublishPostPayload: { // field return type
@@ -709,7 +721,7 @@ export interface NexusGenFieldTypes {
   }
   Repository: { // field return type
     github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
     owner: string; // String!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
@@ -727,7 +739,7 @@ export interface NexusGenFieldTypes {
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
-    id: number; // Int!
+    id: string; // ID!
     name: string; // String!
     owner: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
@@ -806,6 +818,20 @@ export interface NexusGenFieldTypes {
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
   }
+  UserConnection: { // field return type
+    edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
+    nodes: NexusGenRootTypes['User'][]; // [User!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  UserEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['User']; // User!
+  }
+  Connection: { // field return type
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
   GitHubRepositoryOwner: { // field return type
     avatarUrl: NexusGenScalars['URL']; // URL!
     id: string; // String!
@@ -823,13 +849,15 @@ export interface NexusGenFieldTypeNames {
     authorId: 'String'
     content: 'Json'
     createdAt: 'DateTime'
-    id: 'Int'
+    id: 'ID'
     parent: 'Comment'
-    parentId: 'Int'
+    parentId: 'String'
     post: 'Post'
-    postId: 'Int'
+    postId: 'String'
     replies: 'CommentConnection'
     updatedAt: 'DateTime'
+    upvoters: 'UserConnection'
+    upvotes: 'Int'
   }
   CommentConnection: { // field return type name
     edges: 'CommentEdge'
@@ -872,7 +900,7 @@ export interface NexusGenFieldTypeNames {
   Experience: { // field return type name
     endDate: 'DateTime'
     highlights: 'String'
-    id: 'Int'
+    id: 'ID'
     location: 'String'
     organization: 'Organization'
     organizationName: 'String'
@@ -966,7 +994,7 @@ export interface NexusGenFieldTypeNames {
   Organization: { // field return type name
     experiences: 'Experience'
     github: 'GitHubOrganization'
-    id: 'Int'
+    id: 'ID'
     name: 'String'
   }
   PageInfo: { // field return type name
@@ -978,11 +1006,11 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     author: 'User'
     authorName: 'String'
-    comments: 'Comment'
+    comments: 'CommentConnection'
     content: 'Json'
     createdAt: 'DateTime'
     description: 'String'
-    id: 'Int'
+    id: 'ID'
     images: 'PostImage'
     publishedAt: 'DateTime'
     readTime: 'Int'
@@ -1007,7 +1035,7 @@ export interface NexusGenFieldTypeNames {
   PostImage: { // field return type name
     id: 'ID'
     post: 'Post'
-    postId: 'Int'
+    postId: 'String'
     url: 'String'
   }
   PublishPostPayload: { // field return type name
@@ -1035,7 +1063,7 @@ export interface NexusGenFieldTypeNames {
   }
   Repository: { // field return type name
     github: 'GitHubRepository'
-    id: 'Int'
+    id: 'ID'
     name: 'String'
     owner: 'String'
     skills: 'Skill'
@@ -1053,7 +1081,7 @@ export interface NexusGenFieldTypeNames {
   }
   Skill: { // field return type name
     desiringUsers: 'User'
-    id: 'Int'
+    id: 'ID'
     name: 'String'
     owner: 'String'
     users: 'User'
@@ -1132,6 +1160,20 @@ export interface NexusGenFieldTypeNames {
     skills: 'Skill'
     upvotedPosts: 'Post'
   }
+  UserConnection: { // field return type name
+    edges: 'UserEdge'
+    nodes: 'User'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  UserEdge: { // field return type name
+    cursor: 'String'
+    node: 'User'
+  }
+  Connection: { // field return type name
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
   GitHubRepositoryOwner: { // field return type name
     avatarUrl: 'URL'
     id: 'String'
@@ -1152,6 +1194,13 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
       where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
+    upvoters: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
   Mutation: {
@@ -1215,6 +1264,14 @@ export interface NexusGenArgTypes {
     }
   }
   Post: {
+    comments: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
+      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
     upvotingUsers: { // args
       skip?: number | null; // Int
       take: number | null; // Int
@@ -1286,11 +1343,13 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
+  Connection: "CommentConnection" | "ExperienceConnection" | "PostConnection" | "RepositoryConnection" | "UserConnection"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationPayload: "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeletePostPayload" | "PublishPostPayload" | "RemovePostThumbnailPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UploadPostImagePayload" | "UpvotePostPayload"
 }
 
 export interface NexusGenTypeInterfaces {
+  CommentConnection: "Connection"
   CreateCommentPayload: "MutationPayload"
   CreateExperiencePayload: "MutationPayload"
   CreatePostPayload: "MutationPayload"
@@ -1298,10 +1357,13 @@ export interface NexusGenTypeInterfaces {
   DeleteCommentPayload: "MutationPayload"
   DeleteExperiencePayload: "MutationPayload"
   DeletePostPayload: "MutationPayload"
+  ExperienceConnection: "Connection"
   GitHubOrganization: "GitHubRepositoryOwner"
   GitHubUser: "GitHubRepositoryOwner"
+  PostConnection: "Connection"
   PublishPostPayload: "MutationPayload"
   RemovePostThumbnailPayload: "MutationPayload"
+  RepositoryConnection: "Connection"
   UpdateCommentPayload: "MutationPayload"
   UpdateDesiredSkillsPayload: "MutationPayload"
   UpdateExperiencePayload: "MutationPayload"
@@ -1311,6 +1373,7 @@ export interface NexusGenTypeInterfaces {
   UpdateSkillsPayload: "MutationPayload"
   UploadPostImagePayload: "MutationPayload"
   UpvotePostPayload: "MutationPayload"
+  UserConnection: "Connection"
 }
 
 export type NexusGenObjectNames = keyof NexusGenObjects;

@@ -17,7 +17,7 @@ export const posts = queryField("posts", {
 		where: arg({ type: "PostWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const connection = await findManyCursorConnection<Post, { id: number }>(
+		const connection = await findManyCursorConnection<Post, { id: string }>(
 			(paginationArgs) =>
 				prisma.post.findMany({
 					...paginationArgs,

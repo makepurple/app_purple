@@ -13,7 +13,7 @@ export const RemovePostThumbnail_mock: RemovePostThumbnailMutation = {
 	}
 };
 
-export const RemovePostThumbnail_variales_mock: RemovePostThumbnailMutationVariables = {
+export const RemovePostThumbnail_variables_mock: RemovePostThumbnailMutationVariables = {
 	where: {
 		id: Post_fragment_mock.id
 	}

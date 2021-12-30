@@ -10,7 +10,7 @@ export interface PostImageInputProps {
 	className?: string;
 	disabled?: boolean;
 	onUpload?: (imageUrl: string) => void;
-	postId: number;
+	postId: string;
 	style?: CSSProperties;
 	title?: string;
 }

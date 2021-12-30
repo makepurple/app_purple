@@ -8,12 +8,11 @@ export const CommentConnection = objectType({
 		Relay-style connection for Comment types.
 	`,
 	definition: (t) => {
+		t.implements("Connection");
 		t.nonNull.list.nonNull.field("edges", { type: "CommentEdge" });
 		t.nonNull.list.nonNull.field("nodes", {
 			type: "Comment",
 			resolve: (parent) => PrismaUtils.mapRelayEdgesToNodes(parent.edges)
 		});
-		t.nonNull.field("pageInfo", { type: "PageInfo" });
-		t.nonNull.int("totalCount");
 	}
 });

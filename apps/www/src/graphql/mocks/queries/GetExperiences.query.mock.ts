@@ -8,7 +8,7 @@ const experiences = Array(DATA_SIZE)
 	.map((__, i) => ({
 		...Experience_fragment_mock,
 		__typename: "Experience" as const,
-		id: i
+		id: i.toString()
 	}));
 
 export const GetExperiences_mock: GetExperiencesQuery = {

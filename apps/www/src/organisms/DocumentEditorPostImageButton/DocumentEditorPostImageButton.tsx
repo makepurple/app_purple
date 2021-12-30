@@ -4,7 +4,7 @@ import { PostImageInput } from "../PostImageInput";
 
 export interface DocumentEditorPostImageButtonProps {
 	className?: string;
-	postId: number;
+	postId: string;
 	style?: CSSProperties;
 }
 

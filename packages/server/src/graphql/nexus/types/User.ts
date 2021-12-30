@@ -23,7 +23,7 @@ export const User = objectType({
 			resolve: async (parent, args, { prisma }) => {
 				const user = prisma.user.findUnique({ where: { id: parent.id } });
 
-				const connection = await findManyCursorConnection<_Comment, { id: number }>(
+				const connection = await findManyCursorConnection<_Comment, { id: string }>(
 					(paginationArgs) =>
 						user.comments({
 							...paginationArgs,

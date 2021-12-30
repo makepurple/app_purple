@@ -1,5 +1,8 @@
+import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { intArg, list, nonNull, objectType } from "nexus";
+import { Comment } from "@prisma/client";
+import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
+import { PrismaUtils } from "../../../utils";
 
 export const Post = objectType({
 	name: NexusPrisma.Post.$name,
@@ -7,7 +10,34 @@ export const Post = objectType({
 	definition: (t) => {
 		t.field(NexusPrisma.Post.author);
 		t.field(NexusPrisma.Post.authorName);
-		t.field(NexusPrisma.Post.comments);
+		t.nonNull.field("comments", {
+			type: "CommentConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "CommentWhereInput" }),
+				orderBy: arg({ type: "CommentOrderByInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const post = prisma.post.findUnique({ where: { id: parent.id } });
+
+				const connection = await findManyCursorConnection<Comment, { id: string }>(
+					(paginationArgs) =>
+						post.comments({
+							...paginationArgs,
+							where: PrismaUtils.nonNull(args.where),
+							orderBy: PrismaUtils.nonNull(args.orderBy)
+						}),
+					() => prisma.comment.count(),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
 		t.field(NexusPrisma.Post.content);
 		t.field(NexusPrisma.Post.createdAt);
 		t.field(NexusPrisma.Post.description);

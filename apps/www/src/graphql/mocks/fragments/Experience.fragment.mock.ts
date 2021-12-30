@@ -14,7 +14,7 @@ export const Experience_fragment_mock: Experience = {
 		"Did a thing, then did another thing that was really incredible",
 		"Did a thing, then did another thing that was really incredible"
 	],
-	id: 0,
+	id: "0",
 	location: "San Francisco, CA",
 	organization: Organization_fragment_mock,
 	organizationName: Organization_fragment_mock.name,

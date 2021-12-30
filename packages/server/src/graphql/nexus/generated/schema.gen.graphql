@@ -16,17 +16,19 @@ type Comment {
   authorId: String!
   content: Json
   createdAt: DateTime!
-  id: Int!
+  id: ID!
   parent: Comment
-  parentId: Int
+  parentId: String
   post: Post
-  postId: Int
+  postId: String
   replies(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   updatedAt: DateTime!
+  upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  upvotes: Int!
 }
 
 """Relay-style connection for Comment types."""
-type CommentConnection {
+type CommentConnection implements Connection {
   edges: [CommentEdge!]!
   nodes: [Comment!]!
   pageInfo: PageInfo!
@@ -62,7 +64,12 @@ input CommentWhereInput {
 }
 
 input CommentWhereUniqueInput {
-  id: Int
+  id: String
+}
+
+interface Connection {
+  pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 type CreateCommentPayload implements MutationPayload {
@@ -124,7 +131,7 @@ input EnumExperienceTypeNullableFilter {
 type Experience {
   endDate: DateTime
   highlights: [String!]!
-  id: Int!
+  id: ID!
   location: String
   organization: Organization!
   organizationName: String!
@@ -135,7 +142,7 @@ type Experience {
 }
 
 """Relay-style connection for Experience types."""
-type ExperienceConnection {
+type ExperienceConnection implements Connection {
   edges: [ExperienceEdge!]!
   nodes: [Experience!]!
   pageInfo: PageInfo!
@@ -190,7 +197,7 @@ input ExperienceWhereInput {
 }
 
 input ExperienceWhereUniqueInput {
-  id: Int!
+  id: String!
 }
 
 type GitHubLanguage {
@@ -300,7 +307,7 @@ interface MutationPayload {
 type Organization {
   experiences: [Experience!]!
   github: GitHubOrganization!
-  id: Int!
+  id: ID!
   name: String!
 }
 
@@ -315,11 +322,11 @@ type PageInfo {
 type Post {
   author: User!
   authorName: String!
-  comments: [Comment!]!
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   content: Json
   createdAt: DateTime!
   description: String
-  id: Int!
+  id: ID!
   images: [PostImage!]!
   publishedAt: DateTime
   readTime: Int
@@ -338,7 +345,7 @@ input PostAuthorNameUrlSlugCompoundUniqueInput {
 }
 
 """Relay-style connection for Post types."""
-type PostConnection {
+type PostConnection implements Connection {
   edges: [PostEdge!]!
   nodes: [Post!]!
   pageInfo: PageInfo!
@@ -361,7 +368,7 @@ type PostEdge {
 type PostImage {
   id: ID!
   post: Post!
-  postId: Int!
+  postId: String!
   url: String!
 }
 
@@ -386,9 +393,7 @@ input PostWhereInput {
 
 input PostWhereUniqueInput {
   authorName_urlSlug: PostAuthorNameUrlSlugCompoundUniqueInput
-
-  """The id of the post to retrieve"""
-  id: Int
+  id: String
 }
 
 type PublishPostPayload implements MutationPayload {
@@ -424,7 +429,7 @@ type RemovePostThumbnailPayload implements MutationPayload {
 
 type Repository {
   github: GitHubRepository!
-  id: Int!
+  id: ID!
   name: String!
   owner: String!
   skills: [Skill!]!
@@ -432,7 +437,7 @@ type Repository {
 }
 
 """Relay-style connection for Repository types."""
-type RepositoryConnection {
+type RepositoryConnection implements Connection {
   edges: [RepositoryEdge!]!
   nodes: [Repository!]!
   pageInfo: PageInfo!
@@ -465,13 +470,13 @@ input RepositoryWhereInput {
 }
 
 input RepositoryWhereUniqueInput {
-  id: Int
+  id: String
   name_owner: RepositoryNameOwnerCompoundUniqueInput
 }
 
 type Skill {
   desiringUsers: [User!]!
-  id: Int!
+  id: ID!
   name: String!
   owner: String!
   users: [User!]!
@@ -483,7 +488,7 @@ input SkillNameOwnerCompoundUniqueInput {
 }
 
 input SkillWhereUniqueInput {
-  id: Int
+  id: String
   name_owner: SkillNameOwnerCompoundUniqueInput
 }
 
@@ -639,6 +644,20 @@ type User {
   repositories: [Repository!]!
   skills: [Skill!]!
   upvotedPosts: [Post!]!
+}
+
+"""Relay-style connection for User types."""
+type UserConnection implements Connection {
+  edges: [UserEdge!]!
+  nodes: [User!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+"""Relay-style edge for User types."""
+type UserEdge {
+  cursor: String!
+  node: User!
 }
 
 input UserWhereInput {

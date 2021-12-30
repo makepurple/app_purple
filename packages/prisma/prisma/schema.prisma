@@ -44,27 +44,28 @@ model Session {
 }
 
 model User {
-  accounts      Account[]
-  comments      Comment[]
+  accounts        Account[]
+  comments        Comment[]
   // When this account was registered
-  createdAt     DateTime               @default(now())
-  description   String?
-  desiredSkills DesiredSkillsOnUsers[]
-  email         String                 @unique
-  emailVerified DateTime?
-  experiences   Experience[]
-  id            String                 @id @default(cuid())
+  createdAt       DateTime               @default(now())
+  description     String?
+  desiredSkills   DesiredSkillsOnUsers[]
+  email           String                 @unique
+  emailVerified   DateTime?
+  experiences     Experience[]
+  id              String                 @id @default(cuid())
   // Avatar image, pulled from GitHub
-  image         String?
+  image           String?
   // The GitHub name of the user
-  name          String                 @unique
-  posts         Post[]                 @relation("PostAuthor")
-  repositories  Repository[]
+  name            String                 @unique
+  posts           Post[]                 @relation("PostAuthor")
+  repositories    Repository[]
   // Self written summary or description
-  sessions      Session[]
-  skills        SkillsOnUsers[]
-  updatedAt     DateTime               @updatedAt
-  upvotedPosts  PostUpvoter[]
+  sessions        Session[]
+  skills          SkillsOnUsers[]
+  updatedAt       DateTime               @updatedAt
+  upvotedComments CommentUpvoter[]
+  upvotedPosts    PostUpvoter[]
 }
 
 model VerificationToken {
@@ -82,7 +83,7 @@ model Post {
   content      Json?
   createdAt    DateTime      @default(now())
   description  String?
-  id           Int           @id @default(autoincrement())
+  id           String        @id @default(cuid())
   images       PostImage[]
   publishedAt  DateTime?
   // Estimated time in minutes to read this post
@@ -98,7 +99,7 @@ model Post {
 
 model PostUpvoter {
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId Int
+  postId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
@@ -108,27 +109,38 @@ model PostUpvoter {
 model PostImage {
   id        String   @id
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
+  postId    String
   url       String   @unique
   createdAt DateTime @default(now())
 }
 
 model Comment {
-  id        Int       @id @default(autoincrement())
-  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  id        String           @id @default(cuid())
+  author    User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId  String
   content   Json?
-  createdAt DateTime  @default(now())
-  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
-  parentId  Int?
-  post      Post?     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int?
-  replies   Comment[] @relation("CommentReplies")
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime         @default(now())
+  parent    Comment?         @relation("CommentReplies", fields: [parentId], references: [id])
+  parentId  String?
+  post      Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String?
+  replies   Comment[]        @relation("CommentReplies")
+  updatedAt DateTime         @updatedAt
+  upvoters  CommentUpvoter[]
+}
+
+model CommentUpvoter {
+  id        String  @id @default(cuid())
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@unique([commentId, userId])
 }
 
 model Skill {
-  id            Int                    @id @default(autoincrement())
+  id            String                 @id @default(cuid())
   name          String
   owner         String
   users         SkillsOnUsers[]
@@ -140,7 +152,7 @@ model Skill {
 
 model SkillsOnUsers {
   skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  skillId Int
+  skillId String
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
 
@@ -149,7 +161,7 @@ model SkillsOnUsers {
 
 model DesiredSkillsOnUsers {
   skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  skillId Int
+  skillId String
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
 
@@ -157,7 +169,7 @@ model DesiredSkillsOnUsers {
 }
 
 model Repository {
-  id     Int                    @id @default(autoincrement())
+  id     String                 @id @default(cuid())
   name   String
   skills SkillsOnRepositories[]
   user   User                   @relation(fields: [owner], references: [name], onDelete: Cascade)
@@ -168,15 +180,15 @@ model Repository {
 
 model SkillsOnRepositories {
   skill        Skill      @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  skillId      Int
+  skillId      String
   repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
-  repositoryId Int
+  repositoryId String
 
   @@id([skillId, repositoryId])
 }
 
 model Organization {
-  id          Int          @id @default(autoincrement())
+  id          String       @id @default(cuid())
   name        String       @unique
   experiences Experience[]
 }
@@ -190,7 +202,7 @@ enum ExperienceType {
 }
 
 model Experience {
-  id               Int             @id @default(autoincrement())
+  id               String          @id @default(cuid())
   // When this experience was ended. Null is assumed as present.
   endDate          DateTime?
   highlights       String[]

@@ -13,7 +13,7 @@ generates:
       scalars:
         DateTime: Date
         Json: Json
-        ID: string | number
+        ID: string
         Upload: File
         URL: string
     plugins:

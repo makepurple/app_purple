@@ -8,12 +8,11 @@ export const PostConnection = objectType({
 		Relay-style connection for Post types.
 	`,
 	definition: (t) => {
+		t.implements("Connection");
 		t.nonNull.list.nonNull.field("edges", { type: "PostEdge" });
 		t.nonNull.list.nonNull.field("nodes", {
 			type: "Post",
 			resolve: (parent) => PrismaUtils.mapRelayEdgesToNodes(parent.edges)
 		});
-		t.nonNull.field("pageInfo", { type: "PageInfo" });
-		t.nonNull.int("totalCount");
 	}
 });

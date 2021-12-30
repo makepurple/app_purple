@@ -2,16 +2,16 @@ import { oneLine } from "common-tags";
 import { objectType } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const ExperienceConnection = objectType({
-	name: "ExperienceConnection",
+export const UserConnection = objectType({
+	name: "UserConnection",
 	description: oneLine`
-		Relay-style connection for Experience types.
+		Relay-style connection for User types.
 	`,
 	definition: (t) => {
 		t.implements("Connection");
-		t.nonNull.list.nonNull.field("edges", { type: "ExperienceEdge" });
+		t.nonNull.list.nonNull.field("edges", { type: "UserEdge" });
 		t.nonNull.list.nonNull.field("nodes", {
-			type: "Experience",
+			type: "User",
 			resolve: (parent) => PrismaUtils.mapRelayEdgesToNodes(parent.edges)
 		});
 	}

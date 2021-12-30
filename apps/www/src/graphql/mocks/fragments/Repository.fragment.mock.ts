@@ -4,14 +4,14 @@ import { User_fragment_mock } from "./User.fragment.mock";
 
 export const Repository_fragment_mock: Repository = {
 	__typename: "Repository",
-	id: 0,
+	id: "0",
 	github: GitHubRepository_fragment_mock,
 	name: "react",
 	skills: [
 		{
 			__typename: "Skill",
 			name: "react",
-			id: 0,
+			id: "0",
 			desiringUsers: [],
 			users: [],
 			owner: "facebook"
@@ -19,7 +19,7 @@ export const Repository_fragment_mock: Repository = {
 		{
 			__typename: "Skill",
 			name: "typescript",
-			id: 1,
+			id: "1",
 			desiringUsers: [],
 			users: [],
 			owner: "microsoft"
