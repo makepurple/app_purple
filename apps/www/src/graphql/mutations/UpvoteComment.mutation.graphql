@@ -1,0 +1,12 @@
+mutation UpvoteComment(
+	$data: UpvoteCommentInput!
+	$where: CommentWhereUniqueInput!
+) {
+	upvoteComment(data: $data, where: $where) {
+		record {
+			__typename
+			id
+			...CommentCardComment
+		}
+	}
+}

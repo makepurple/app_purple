@@ -8,6 +8,9 @@ export const createCache = () => {
 			TopLanguage: () => null
 		},
 		resolvers: {
+			Comment: {
+				replies: relayPagination()
+			},
 			Query: {
 				posts: relayPagination()
 			}

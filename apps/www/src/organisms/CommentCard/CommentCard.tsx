@@ -4,20 +4,30 @@ import {
 	DocumentEditor,
 	DocumentEditorValue,
 	GitHubAvatarImage,
+	Spinner,
 	ThumbsUpIcon
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import React, { CSSProperties, forwardRef, useState } from "react";
+import { flushSync } from "react-dom";
+import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { CommentCardCommentFragment } from "../../graphql";
-import { CommentIcon, ThumbsDownIcon, UnfoldIcon } from "../../svgs";
+import {
+	CommentCardCommentFragment,
+	GetCommentRepliesCommentConnectionFragment,
+	useGetCommentRepliesQuery,
+	useUnvoteCommentMutation,
+	useUpvoteCommentMutation
+} from "../../graphql";
+import { CommentIcon, UnfoldIcon } from "../../svgs";
+import { LoadingCommentCard } from "../LoadingCommentCard";
 
 const Root = tw.div`
 	flex
 	flex-col
 `;
 
-const PosterInfo = styled.div<{ $collapsed: boolean }>`
+const CommenterInfo = styled.div<{ $collapsed: boolean }>`
 	${tw`
 		relative
 		flex
@@ -37,7 +47,7 @@ const ExpandButton = tw(Button)`
 	w-8
 `;
 
-const PosterInfoContent = tw.div`
+const CommenterInfoContent = tw.div`
 	flex
 	items-center
 `;
@@ -108,39 +118,71 @@ const Actions = tw.div`
 	gap-2
 `;
 
+const UpvoteButton = styled(Button)<{ $upvoted }>`
+	${tw`
+		text-base
+		leading-none
+		font-normal
+	`}
+
+	${({ $upvoted }) => $upvoted && tw`text-green-700`}
+`;
+
 const ActionButton = tw(Button)`
-	h-8
 	text-base
 	leading-none
 	font-normal
 `;
 
-const UpvoteButton = tw(Button)`
-	h-8
-	w-8
-	p-0
+const Replies = tw.div`
+	flex
+	flex-col
+	items-stretch
+	gap-1
 `;
 
-const Upvotes = tw.div`
-	flex
-	items-center
-	gap-2
+const LoadMoreButton = tw(Button)`
+	text-base
+	leading-none
+	font-normal
 `;
 
 export interface CommentCardProps {
 	className?: string;
 	comment: CommentCardCommentFragment;
+	replies?: GetCommentRepliesCommentConnectionFragment;
 	style?: CSSProperties;
 }
 
 export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, ref) => {
-	const { className, comment, style } = props;
+	const { className, comment, replies, style } = props;
 
 	const [collapsed, setCollapsed] = useState<boolean>(false);
 
+	const [cursor, setCursor] = useState<string | null>(null);
+
+	const [{ data, fetching }, getReplies] = useGetCommentRepliesQuery({
+		pause: !!replies,
+		variables: {
+			after: cursor,
+			first: 8,
+			where: {
+				id: comment.id
+			}
+		}
+	});
+
+	const commentReplies: readonly (CommentCardCommentFragment & {
+		replies?: GetCommentRepliesCommentConnectionFragment;
+	})[] = replies?.nodes ?? data?.comment?.replies.nodes ?? [];
+	const pageInfo = replies?.pageInfo ?? data?.comment?.replies.pageInfo;
+
+	const [{ fetching: unvoting }, unvoteComment] = useUnvoteCommentMutation();
+	const [{ fetching: upvoting }, upvoteComment] = useUpvoteCommentMutation();
+
 	return (
 		<Root ref={ref} className={className} style={style}>
-			<PosterInfo $collapsed={collapsed}>
+			<CommenterInfo $collapsed={collapsed}>
 				{collapsed && (
 					<ExpandButton
 						onClick={() => {
@@ -156,22 +198,27 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 				)}
 				{comment.author.image && (
 					<Avatar border={2} tw="mr-2">
-						<GitHubAvatarImage src={comment.author.image} height={36} width={36} />
+						<GitHubAvatarImage
+							alt={comment.author.name}
+							src={comment.author.image}
+							height={36}
+							width={36}
+						/>
 					</Avatar>
 				)}
-				<PosterInfoContent>
+				<CommenterInfoContent>
 					<UserName>{comment.author.name}</UserName>
 					<Delimiter />
 					<CreatedAt>{dayjs(comment.createdAt).fromNow()}</CreatedAt>
-				</PosterInfoContent>
-			</PosterInfo>
+				</CommenterInfoContent>
+			</CommenterInfo>
 			{!collapsed && (
 				<Body>
 					<CollapseBar
 						onClick={() => {
 							setCollapsed(true);
 						}}
-						tw="my-1 ml-2 mr-4"
+						tw="mt-1 ml-2 mr-4"
 					>
 						<Threadline />
 					</CollapseBar>
@@ -184,20 +231,75 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 							<DeletedComment>[removed]</DeletedComment>
 						)}
 						<Actions tw="mt-2">
-							<Upvotes>
-								<UpvoteButton size="small" variant="secondary">
-									<ThumbsUpIcon height={16} width={16} />
-								</UpvoteButton>
+							<UpvoteButton
+								onClick={async (e) => {
+									e.preventDefault();
+
+									if (comment.viewerUpvote) {
+										await unvoteComment({
+											where: { id: comment.id }
+										}).catch(() => null);
+
+										return;
+									}
+
+									const record = await upvoteComment({
+										data: { upvote: true },
+										where: { id: comment.id }
+									})
+										.then((result) => result.data?.upvoteComment.record)
+										.catch(() => null);
+
+									if (!record?.viewerUpvote) return;
+
+									toast.success("You liked this post! 🎉");
+								}}
+								size="small"
+								type="button"
+								variant="secondary"
+								$upvoted={!!comment.viewerUpvote}
+							>
+								{unvoting || upvoting ? (
+									<Spinner height={16} width={16} tw="mr-1" />
+								) : (
+									<ThumbsUpIcon height={16} width={16} tw="mr-1" />
+								)}
 								<span>{comment.upvotes.toLocaleString()}</span>
-								<UpvoteButton size="small" variant="secondary">
-									<ThumbsDownIcon height={16} width={16} />
-								</UpvoteButton>
-							</Upvotes>
+							</UpvoteButton>
 							<ActionButton size="small" variant="secondary">
-								<CommentIcon height={16} width={16} tw="mr-2" />
+								<CommentIcon height={16} width={16} tw="mr-1" />
 								<span>Reply</span>
 							</ActionButton>
 						</Actions>
+						<Replies tw="mt-2">
+							{commentReplies.map((reply) => (
+								<CommentCard
+									key={reply.id}
+									comment={reply}
+									replies={reply.replies}
+								/>
+							))}
+							{fetching &&
+								Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
+						</Replies>
+						{pageInfo?.hasNextPage && (
+							<LoadMoreButton
+								disabled={fetching}
+								onClick={() => {
+									flushSync(() => {
+										pageInfo.endCursor && setCursor(pageInfo.endCursor);
+									});
+
+									getReplies();
+								}}
+								size="small"
+								type="button"
+								variant="secondary"
+								tw="mt-1"
+							>
+								Load more
+							</LoadMoreButton>
+						)}
 					</Content>
 				</Body>
 			)}

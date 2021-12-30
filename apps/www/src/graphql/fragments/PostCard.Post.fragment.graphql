@@ -12,5 +12,5 @@ fragment PostCardPost on Post {
 	title
 	upvotes
 	urlSlug
-	viewerUpvoted
+	viewerUpvote
 }

@@ -3,7 +3,7 @@ import { Comment } from "../../generated";
 import { User_fragment_mock } from "./User.fragment.mock";
 
 export const Comment_fragment_mock: Comment = {
-	__typename: "Comment",
+	__typename: "Comment" as const,
 	author: User_fragment_mock,
 	authorId: User_fragment_mock.id,
 	content: [
@@ -18,12 +18,12 @@ export const Comment_fragment_mock: Comment = {
 	],
 	createdAt: dayjs(1318781876406).toDate(),
 	downvoters: {
-		__typename: "UserConnection",
+		__typename: "UserConnection" as const,
 		edges: [],
 		nodes: [],
 		totalCount: 0,
 		pageInfo: {
-			__typename: "PageInfo",
+			__typename: "PageInfo" as const,
 			endCursor: null,
 			hasNextPage: false,
 			hasPreviousPage: false,
@@ -36,9 +36,9 @@ export const Comment_fragment_mock: Comment = {
 	post: null,
 	postId: null,
 	replies: {
-		__typename: "CommentConnection",
+		__typename: "CommentConnection" as const,
 		pageInfo: {
-			__typename: "PageInfo",
+			__typename: "PageInfo" as const,
 			endCursor: null,
 			hasNextPage: false,
 			hasPreviousPage: false,
@@ -50,9 +50,9 @@ export const Comment_fragment_mock: Comment = {
 	},
 	updatedAt: dayjs(1318781876406).toDate(),
 	upvoters: {
-		__typename: "UserConnection",
+		__typename: "UserConnection" as const,
 		pageInfo: {
-			__typename: "PageInfo",
+			__typename: "PageInfo" as const,
 			endCursor: null,
 			hasNextPage: false,
 			hasPreviousPage: false,

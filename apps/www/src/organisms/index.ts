@@ -5,6 +5,7 @@ export * from "./CreateRepositoryForm";
 export * from "./CreateRepositoryFormOption";
 export * from "./DocumentEditorPostImageButton";
 export * from "./ExperienceCard";
+export * from "./LoadingCommentCard";
 export * from "./LoadingCreateRepositoryFormOption";
 export * from "./LoadingExperienceCard";
 export * from "./LoadingPostCard";

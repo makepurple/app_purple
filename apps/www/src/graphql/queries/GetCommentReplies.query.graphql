@@ -1,0 +1,47 @@
+fragment GetCommentRepliesCommentConnection on CommentConnection {
+	__typename
+	edges {
+		__typename
+		cursor
+		node {
+			__typename
+			id
+		}
+	}
+	nodes {
+		__typename
+		id
+		...CommentCardComment
+	}
+	totalCount
+	pageInfo {
+		__typename
+		endCursor
+		hasNextPage
+		hasPreviousPage
+		startCursor
+	}
+}
+
+query GetCommentReplies(
+	$after: String
+	$first: Int
+	$where: CommentWhereUniqueInput!
+) {
+	comment(where: $where) {
+		id
+		replies(after: $after, first: $first) {
+			__typename
+			...GetCommentRepliesCommentConnection
+			nodes {
+				__typename
+				id
+				...CommentCardComment
+				replies(first: $first) {
+					__typename
+					...GetCommentRepliesCommentConnection
+				}
+			}
+		}
+	}
+}

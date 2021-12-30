@@ -8,4 +8,8 @@ fragment CommentCardComment on Comment {
 		name
 	}
 	content
+	createdAt
+	updatedAt
+	upvotes
+	viewerUpvote
 }

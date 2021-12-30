@@ -1012,7 +1012,7 @@ export type UserWhereUniqueInput = {
   readonly name?: InputMaybe<Scalars['String']>;
 };
 
-export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null | undefined };
 
@@ -1068,6 +1068,13 @@ export type RemovePostThumbnailMutationVariables = Exact<{
 
 export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null | undefined } | null | undefined } };
 
+export type UnvoteCommentMutationVariables = Exact<{
+  where: CommentWhereUniqueInput;
+}>;
+
+
+export type UnvoteCommentMutation = { readonly __typename: 'Mutation', readonly unvoteComment: { readonly __typename: 'UnvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } };
+
 export type UpdateExperienceMutationVariables = Exact<{
   data: ExperienceUpdateInput;
   where: ExperienceWhereUniqueInput;
@@ -1122,7 +1129,7 @@ export type UpvoteCommentMutationVariables = Exact<{
 }>;
 
 
-export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly upvotes: number } } };
+export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -1130,6 +1137,17 @@ export type UpvotePostMutationVariables = Exact<{
 
 
 export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+
+export type GetCommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } };
+
+export type GetCommentRepliesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where: CommentWhereUniqueInput;
+}>;
+
+
+export type GetCommentRepliesQuery = { readonly __typename: 'Query', readonly comment?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } } | null | undefined };
 
 export type GetExperiencesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -1210,22 +1228,6 @@ export type SuggestSkillsQueryVariables = Exact<{
 
 export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
 
-export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
-    fragment CommentCardComment on Comment {
-  __typename
-  id
-  author {
-    __typename
-    id
-    image
-    name
-  }
-  content
-  createdAt
-  updatedAt
-  upvotes
-}
-    `;
 export const CreateRepositoryFormOptionGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
     fragment CreateRepositoryFormOptionGitHubRepository on GitHubRepository {
   __typename
@@ -1439,6 +1441,49 @@ export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     `;
+export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
+    fragment CommentCardComment on Comment {
+  __typename
+  id
+  author {
+    __typename
+    id
+    image
+    name
+  }
+  content
+  createdAt
+  updatedAt
+  upvotes
+  viewerUpvote
+}
+    `;
+export const GetCommentRepliesCommentConnectionFragmentDoc = /*#__PURE__*/ gql`
+    fragment GetCommentRepliesCommentConnection on CommentConnection {
+  __typename
+  edges {
+    __typename
+    cursor
+    node {
+      __typename
+      id
+    }
+  }
+  nodes {
+    __typename
+    id
+    ...CommentCardComment
+  }
+  totalCount
+  pageInfo {
+    __typename
+    endCursor
+    hasNextPage
+    hasPreviousPage
+    startCursor
+  }
+}
+    ${CommentCardCommentFragmentDoc}`;
 export const CreateExperienceDocument = /*#__PURE__*/ gql`
     mutation CreateExperience($data: ExperienceCreateInput!) {
   createExperience(data: $data) {
@@ -1527,6 +1572,21 @@ export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
 
 export function useRemovePostThumbnailMutation() {
   return Urql.useMutation<RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables>(RemovePostThumbnailDocument);
+};
+export const UnvoteCommentDocument = /*#__PURE__*/ gql`
+    mutation UnvoteComment($where: CommentWhereUniqueInput!) {
+  unvoteComment(where: $where) {
+    record {
+      __typename
+      id
+      ...CommentCardComment
+    }
+  }
+}
+    ${CommentCardCommentFragmentDoc}`;
+
+export function useUnvoteCommentMutation() {
+  return Urql.useMutation<UnvoteCommentMutation, UnvoteCommentMutationVariables>(UnvoteCommentDocument);
 };
 export const UpdateExperienceDocument = /*#__PURE__*/ gql`
     mutation UpdateExperience($data: ExperienceUpdateInput!, $where: ExperienceWhereUniqueInput!) {
@@ -1642,11 +1702,11 @@ export const UpvoteCommentDocument = /*#__PURE__*/ gql`
     record {
       __typename
       id
-      upvotes
+      ...CommentCardComment
     }
   }
 }
-    `;
+    ${CommentCardCommentFragmentDoc}`;
 
 export function useUpvoteCommentMutation() {
   return Urql.useMutation<UpvoteCommentMutation, UpvoteCommentMutationVariables>(UpvoteCommentDocument);
@@ -1675,6 +1735,31 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
 
 export function useUpvotePostMutation() {
   return Urql.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(UpvotePostDocument);
+};
+export const GetCommentRepliesDocument = /*#__PURE__*/ gql`
+    query GetCommentReplies($after: String, $first: Int, $where: CommentWhereUniqueInput!) {
+  comment(where: $where) {
+    id
+    replies(after: $after, first: $first) {
+      __typename
+      ...GetCommentRepliesCommentConnection
+      nodes {
+        __typename
+        id
+        ...CommentCardComment
+        replies(first: $first) {
+          __typename
+          ...GetCommentRepliesCommentConnection
+        }
+      }
+    }
+  }
+}
+    ${GetCommentRepliesCommentConnectionFragmentDoc}
+${CommentCardCommentFragmentDoc}`;
+
+export function useGetCommentRepliesQuery(options: Omit<Urql.UseQueryArgs<GetCommentRepliesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCommentRepliesQuery>({ query: GetCommentRepliesDocument, ...options });
 };
 export const GetExperiencesDocument = /*#__PURE__*/ gql`
     query GetExperiences($after: String, $first: Int, $where: ExperienceWhereInput!) {

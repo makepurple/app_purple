@@ -93,7 +93,7 @@ const UpvoteButton = styled(Button)<{ $upvoted: boolean }>`
 		font-normal
 	`}
 
-	${({ $upvoted }) => $upvoted && tw`text-green-500`}
+	${({ $upvoted }) => $upvoted && tw`text-green-700`}
 `;
 
 const UpvoteCount = tw.span`
