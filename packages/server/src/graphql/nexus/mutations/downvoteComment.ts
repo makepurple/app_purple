@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../..";
+import { PrismaUtils } from "../../../utils";
 
 export const downvoteComment = mutationField("downvoteComment", {
 	type: nonNull("DownvoteCommentPayload"),
