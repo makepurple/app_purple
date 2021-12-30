@@ -1,6 +1,7 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment, User } from "@prisma/client";
+import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -142,20 +143,27 @@ export const Post = objectType({
 			}
 		});
 		t.field(NexusPrisma.Post.urlSlug);
-		t.nonNull.boolean("viewerUpvoted", {
-			resolve: async ({ id }, args, { prisma, user }) => {
-				if (!user?.id) return false;
+		t.boolean("viewerUpvote", {
+			description: stripIndents`
+				How the viewer has voted on this post.
+
+				true: upvoted
+				false: downvoted
+				null: didn't vote
+			`,
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return null;
 
 				const postUpvoter = await prisma.postUpvoter.findUnique({
 					where: {
 						userId_postId: {
-							userId: user.id,
-							postId: id
+							postId: parent.id,
+							userId: user.id
 						}
 					}
 				});
 
-				return !!postUpvoter;
+				return postUpvoter?.upvote ?? null;
 			}
 		});
 	}

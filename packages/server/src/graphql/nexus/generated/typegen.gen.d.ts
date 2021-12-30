@@ -529,6 +529,7 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     upvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     upvotes: number; // Int!
+    viewerUpvote: boolean | null; // Boolean
   }
   CommentConnection: { // field return type
     edges: NexusGenRootTypes['CommentEdge'][]; // [CommentEdge!]!
@@ -698,7 +699,7 @@ export interface NexusGenFieldTypes {
     upvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     upvotes: number; // Int!
     urlSlug: string; // String!
-    viewerUpvoted: boolean; // Boolean!
+    viewerUpvote: boolean | null; // Boolean
   }
   PostConnection: { // field return type
     edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
@@ -887,6 +888,7 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
     upvoters: 'UserConnection'
     upvotes: 'Int'
+    viewerUpvote: 'Boolean'
   }
   CommentConnection: { // field return type name
     edges: 'CommentEdge'
@@ -1056,7 +1058,7 @@ export interface NexusGenFieldTypeNames {
     upvoters: 'UserConnection'
     upvotes: 'Int'
     urlSlug: 'String'
-    viewerUpvoted: 'Boolean'
+    viewerUpvote: 'Boolean'
   }
   PostConnection: { // field return type name
     edges: 'PostEdge'

@@ -1,11 +1,11 @@
-import { Anchor, Paper, ThumbsUpIcon } from "@makepurple/components";
+import { Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import toast from "react-hot-toast";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { PostCardPostFragment, useUpvotePostMutation } from "../../graphql";
 
 const Root = tw(Paper)`
@@ -86,21 +86,20 @@ const KarmaContainer = tw.div`
 	mt-1
 `;
 
+const UpvoteButton = styled(Button)<{ $upvoted: boolean }>`
+	${tw`
+		flex
+		items-center
+		font-normal
+	`}
+
+	${({ $upvoted }) => $upvoted && tw`text-green-500`}
+`;
+
 const UpvoteCount = tw.span`
 	text-sm
 	leading-6
 	sm:leading-5
-	text-gray-500
-`;
-
-const UpvoteIcon = tw(ThumbsUpIcon)`
-	ml-2
-	h-8
-	w-8
-	sm:h-6
-	sm:w-6
-	text-green-500
-	cursor-pointer
 `;
 
 const Thumbnail = tw.a`
@@ -164,10 +163,9 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						<NotPublished>Draft</NotPublished>
 					)}
 				</PostedDetails>
-				<KarmaContainer>
-					<UpvoteCount>{post.upvotes.toLocaleString()}</UpvoteCount>
-					<UpvoteIcon
-						height={32}
+				<KarmaContainer tw="mt-2">
+					<UpvoteButton
+						disabled={!!post.viewerUpvote}
 						onClick={async (e) => {
 							e.stopPropagation();
 
@@ -185,8 +183,14 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 
 							toast.success("You liked this post! 🎉");
 						}}
-						width={32}
-					/>
+						size="small"
+						type="button"
+						variant="secondary"
+						$upvoted={!!post.viewerUpvote}
+					>
+						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
+						<UpvoteCount>{post.upvotes.toLocaleString()}</UpvoteCount>
+					</UpvoteButton>
 				</KarmaContainer>
 			</Info>
 			{post.thumbnailUrl && (

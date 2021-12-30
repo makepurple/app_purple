@@ -26,6 +26,15 @@ type Comment {
   updatedAt: DateTime!
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!
+
+  """
+  How the viewer has voted on this comment.
+  
+  true: upvoted
+  false: downvoted
+  null: didn't vote
+  """
+  viewerUpvote: Boolean
 }
 
 """Relay-style connection for Comment types."""
@@ -345,7 +354,15 @@ type Post {
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!
   urlSlug: String!
-  viewerUpvoted: Boolean!
+
+  """
+  How the viewer has voted on this post.
+  
+  true: upvoted
+  false: downvoted
+  null: didn't vote
+  """
+  viewerUpvote: Boolean
 }
 
 input PostAuthorNameUrlSlugCompoundUniqueInput {

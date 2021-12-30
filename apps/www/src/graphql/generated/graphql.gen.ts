@@ -48,6 +48,14 @@ export type Comment = {
   readonly updatedAt: Scalars['DateTime'];
   readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];
+  /**
+   * How the viewer has voted on this comment.
+   *
+   * true: upvoted
+   * false: downvoted
+   * null: didn't vote
+   */
+  readonly viewerUpvote?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -521,7 +529,14 @@ export type Post = {
   readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];
   readonly urlSlug: Scalars['String'];
-  readonly viewerUpvoted: Scalars['Boolean'];
+  /**
+   * How the viewer has voted on this post.
+   *
+   * true: upvoted
+   * false: downvoted
+   * null: didn't vote
+   */
+  readonly viewerUpvote?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1003,7 +1018,7 @@ export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __ty
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
 
-export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
+export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
 export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
@@ -1101,6 +1116,14 @@ export type UploadPostImageMutationVariables = Exact<{
 
 export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly uploadPostImage: { readonly __typename: 'UploadPostImagePayload', readonly record: { readonly __typename: 'PostImage', readonly id: string, readonly url: string } } };
 
+export type UpvoteCommentMutationVariables = Exact<{
+  data: UpvoteCommentInput;
+  where: CommentWhereUniqueInput;
+}>;
+
+
+export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly upvotes: number } } };
+
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
@@ -1141,7 +1164,7 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetRepositoriesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -1272,7 +1295,7 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
   title
   upvotes
   urlSlug
-  viewerUpvoted
+  viewerUpvote
 }
     `;
 export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
@@ -1612,6 +1635,21 @@ export const UploadPostImageDocument = /*#__PURE__*/ gql`
 
 export function useUploadPostImageMutation() {
   return Urql.useMutation<UploadPostImageMutation, UploadPostImageMutationVariables>(UploadPostImageDocument);
+};
+export const UpvoteCommentDocument = /*#__PURE__*/ gql`
+    mutation UpvoteComment($data: UpvoteCommentInput!, $where: CommentWhereUniqueInput!) {
+  upvoteComment(data: $data, where: $where) {
+    record {
+      __typename
+      id
+      upvotes
+    }
+  }
+}
+    `;
+
+export function useUpvoteCommentMutation() {
+  return Urql.useMutation<UpvoteCommentMutation, UpvoteCommentMutationVariables>(UpvoteCommentDocument);
 };
 export const UpvotePostDocument = /*#__PURE__*/ gql`
     mutation UpvotePost($where: PostWhereUniqueInput!) {

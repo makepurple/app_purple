@@ -1,6 +1,7 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment as _Comment, User } from "@prisma/client";
+import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -137,6 +138,29 @@ export const Comment = objectType({
 				});
 
 				return upvotes - downvotes;
+			}
+		});
+		t.boolean("viewerUpvote", {
+			description: stripIndents`
+				How the viewer has voted on this comment.
+
+				true: upvoted
+				false: downvoted
+				null: didn't vote
+			`,
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return null;
+
+				const commentUpvoter = await prisma.commentUpvoter.findUnique({
+					where: {
+						commentId_userId: {
+							commentId: parent.id,
+							userId: user.id
+						}
+					}
+				});
+
+				return commentUpvoter?.upvote ?? null;
 			}
 		});
 	}
