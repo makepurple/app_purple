@@ -480,6 +480,7 @@ importers:
       keycode-js: ^3.1.0
       react: ^17.0.2
       react-dom: ^17.0.2
+      react-hook-form: ^7.22.5
       react-use: ^17.3.1
       urql: ^2.0.6
     dependencies:
@@ -492,6 +493,7 @@ importers:
       keycode-js: 3.1.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-hook-form: 7.22.5_react@17.0.2
       react-use: 17.3.1_react-dom@17.0.2+react@17.0.2
       urql: 2.0.6_graphql@15.7.2+react@17.0.2
     devDependencies:
@@ -627,10 +629,14 @@ importers:
   packages/utils:
     specifiers:
       '@makepurple/tsconfig': workspace:*
+      '@makepurple/typings': workspace:*
       dayjs: ^1.10.7
+      react-hook-form: ^7.22.5
       typescript: ^4.5.4
     dependencies:
+      '@makepurple/typings': link:../typings
       dayjs: 1.10.7
+      react-hook-form: 7.22.5
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
       typescript: 4.5.4
@@ -15726,6 +15732,13 @@ packages:
       react-dom: 17.0.2_react@17.0.2
       react-fast-compare: 3.2.0
       shallowequal: 1.1.0
+
+  /react-hook-form/7.22.5:
+    resolution: {integrity: sha512-Q2zaeQFXdVQ8l3hcywhltH+Nzj4vo50wMVujHDVN/1Xy9IOaSZJwYBXA2CYTpK6rq41fnXviw3jTLb04c7Gu9Q==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17
+    dev: false
 
   /react-hook-form/7.22.5_react@17.0.2:
     resolution: {integrity: sha512-Q2zaeQFXdVQ8l3hcywhltH+Nzj4vo50wMVujHDVN/1Xy9IOaSZJwYBXA2CYTpK6rq41fnXviw3jTLb04c7Gu9Q==}
