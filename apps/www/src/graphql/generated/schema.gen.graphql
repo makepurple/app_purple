@@ -114,6 +114,11 @@ type DeletePostPayload implements MutationPayload {
   record: Post!
 }
 
+type DownvoteCommentPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+}
+
 input EnumExperienceTypeNullableFilter {
   equals: ExperienceType
   in: [ExperienceType!]
@@ -273,6 +278,7 @@ type Mutation {
 
   # Users can delete their own posts.
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
+  downvoteComment(where: CommentWhereUniqueInput!): DownvoteCommentPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
@@ -284,6 +290,7 @@ type Mutation {
   updateRepository(data: RepositoryUpdateInput!, where: RepositoryWhereUniqueInput!): UpdateRepositoryPayload!
   updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
+  upvoteComment(where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
   viewer: User
 }
@@ -321,7 +328,7 @@ type Post {
   thumbnailUrl: String
   title: String
   updatedAt: DateTime!
-  upvoteCount: Int!
+  upvotes: Int!
   upvotingUsers(skip: Int = 0, take: Int = 50): [User!]!
   urlSlug: String!
   viewerUpvoted: Boolean!
@@ -602,6 +609,11 @@ input UploadPostImageInput {
 type UploadPostImagePayload implements MutationPayload {
   query: Query!
   record: PostImage!
+}
+
+type UpvoteCommentPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
 }
 
 type UpvotePostPayload implements MutationPayload {

@@ -1,10 +1,10 @@
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const upvotePost = mutationField("upvotePost", {
-	type: nonNull("UpvotePostPayload"),
+export const upvoteComment = mutationField("upvoteComment", {
+	type: nonNull("UpvoteCommentPayload"),
 	args: {
-		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
+		where: nonNull(arg({ type: "CommentWhereUniqueInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;
@@ -12,15 +12,20 @@ export const upvotePost = mutationField("upvotePost", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const record = await prisma.post.update({
+		const comment = await prisma.comment.findUnique({
+			where: PrismaUtils.nonNull(args.where)
+		});
+
+		if (!comment) throw new Error();
+
+		const record = await prisma.comment.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
 				upvoters: {
 					connectOrCreate: {
 						where: {
-							userId_postId: {
-								// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-								postId: args.where.id!,
+							commentId_userId: {
+								commentId: comment.id,
 								userId: user.id
 							}
 						},

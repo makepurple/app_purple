@@ -91,7 +91,7 @@ model Post {
   title        String?
   thumbnailUrl String?
   updatedAt    DateTime      @updatedAt
-  upvotes      PostUpvoter[]
+  upvoters     PostUpvoter[]
   urlSlug      String        @default("draft")
 
   @@unique([authorName, urlSlug])

@@ -2,7 +2,7 @@ mutation UpvotePost($where: PostWhereUniqueInput!) {
 	upvotePost(where: $where) {
 		record {
 			id
-			upvoteCount
+			upvotes
 			upvotingUsers {
 				id
 			}

@@ -165,7 +165,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 					)}
 				</PostedDetails>
 				<KarmaContainer>
-					<UpvoteCount>{post.upvoteCount.toLocaleString()}</UpvoteCount>
+					<UpvoteCount>{post.upvotes.toLocaleString()}</UpvoteCount>
 					<UpvoteIcon
 						height={32}
 						onClick={async (e) => {

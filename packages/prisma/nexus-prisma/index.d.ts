@@ -2993,7 +2993,7 @@ export interface Post {
     resolve: NexusCore.FieldResolver<'Post', 'updatedAt'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.upvotes`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.upvoters`.
     *
     * ### ️⚠️ You have not writen documentation for model Post
     *
@@ -3002,7 +3002,7 @@ export interface Post {
     * ```prisma
     * model Post {
     *   /// Lorem ipsum dolor sit amet.
-    *   upvotes  PostUpvoter
+    *   upvoters  PostUpvoter
     * }
     * ```
     *
@@ -3017,15 +3017,15 @@ export interface Post {
     *   name: Post.$name
     *   description: Post.$description
     *   definition(t) {
-    *     t.field(Post.upvotes)
+    *     t.field(Post.upvoters)
     *   }
     * })
     */
-  upvotes: {
+  upvoters: {
     /**
      * The name of this field.
      */
-    name: 'upvotes'
+    name: 'upvoters'
   
     /**
      * The type of this field.
@@ -3042,7 +3042,7 @@ export interface Post {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Post', 'upvotes'>
+    resolve: NexusCore.FieldResolver<'Post', 'upvoters'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.urlSlug`.

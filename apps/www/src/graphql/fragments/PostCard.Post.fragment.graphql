@@ -10,7 +10,7 @@ fragment PostCardPost on Post {
 	publishedAt
 	thumbnailUrl
 	title
-	upvoteCount
+	upvotes
 	urlSlug
 	viewerUpvoted
 }

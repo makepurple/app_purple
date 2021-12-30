@@ -48,7 +48,7 @@ export const Post = objectType({
 		t.field(NexusPrisma.Post.thumbnailUrl);
 		t.field(NexusPrisma.Post.title);
 		t.field(NexusPrisma.Post.updatedAt);
-		t.nonNull.int("upvoteCount", {
+		t.nonNull.int("upvotes", {
 			resolve: async ({ id }, args, { prisma }) => {
 				return await prisma.postUpvoter.count({
 					where: { postId: id }
@@ -66,7 +66,7 @@ export const Post = objectType({
 					.findUnique({
 						where: { id }
 					})
-					.upvotes({
+					.upvoters({
 						skip: args.skip ?? 0,
 						take: Math.min(args.take ?? 50, 50),
 						select: { user: true }

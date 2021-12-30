@@ -164,6 +164,12 @@ export type DeletePostPayload = MutationPayload & {
   readonly record: Post;
 };
 
+export type DownvoteCommentPayload = MutationPayload & {
+  readonly __typename: 'DownvoteCommentPayload';
+  readonly query: Query;
+  readonly record: Comment;
+};
+
 export type EnumExperienceTypeNullableFilter = {
   readonly equals?: InputMaybe<ExperienceType>;
   readonly in?: InputMaybe<ReadonlyArray<ExperienceType>>;
@@ -326,6 +332,7 @@ export type Mutation = {
   readonly deleteExperience: DeleteExperiencePayload;
   /** Users can delete their own posts. */
   readonly deletePost: DeletePostPayload;
+  readonly downvoteComment: DownvoteCommentPayload;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
@@ -337,6 +344,7 @@ export type Mutation = {
   readonly updateRepository: UpdateRepositoryPayload;
   readonly updateSkills: UpdateSkillsPayload;
   readonly uploadPostImage: UploadPostImagePayload;
+  readonly upvoteComment: UpvoteCommentPayload;
   readonly upvotePost: UpvotePostPayload;
   readonly viewer?: Maybe<User>;
 };
@@ -375,6 +383,12 @@ export type MutationDeleteExperienceArgs = {
 /** Root mutation type */
 export type MutationDeletePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationDownvoteCommentArgs = {
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -446,6 +460,12 @@ export type MutationUploadPostImageArgs = {
 
 
 /** Root mutation type */
+export type MutationUpvoteCommentArgs = {
+  where: CommentWhereUniqueInput;
+};
+
+
+/** Root mutation type */
 export type MutationUpvotePostArgs = {
   where: PostWhereUniqueInput;
 };
@@ -486,7 +506,7 @@ export type Post = {
   readonly thumbnailUrl?: Maybe<Scalars['String']>;
   readonly title?: Maybe<Scalars['String']>;
   readonly updatedAt: Scalars['DateTime'];
-  readonly upvoteCount: Scalars['Int'];
+  readonly upvotes: Scalars['Int'];
   readonly upvotingUsers: ReadonlyArray<User>;
   readonly urlSlug: Scalars['String'];
   readonly viewerUpvoted: Scalars['Boolean'];
@@ -877,6 +897,12 @@ export type UploadPostImagePayload = MutationPayload & {
   readonly record: PostImage;
 };
 
+export type UpvoteCommentPayload = MutationPayload & {
+  readonly __typename: 'UpvoteCommentPayload';
+  readonly query: Query;
+  readonly record: Comment;
+};
+
 export type UpvotePostPayload = MutationPayload & {
   readonly __typename: 'UpvotePostPayload';
   readonly query: Query;
@@ -937,13 +963,13 @@ export type UserWhereUniqueInput = {
   readonly name?: InputMaybe<Scalars['String']>;
 };
 
-export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null | undefined };
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
 
-export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
+export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
 export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
@@ -1046,7 +1072,7 @@ export type UpvotePostMutationVariables = Exact<{
 }>;
 
 
-export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvoteCount: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } };
+export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvotingUsers: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } };
 
 export type GetExperiencesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -1081,7 +1107,7 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvoteCount: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvoted: boolean, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetRepositoriesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -1138,6 +1164,9 @@ export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
     name
   }
   content
+  createdAt
+  updatedAt
+  upvotes
 }
     `;
 export const CreateRepositoryFormOptionGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
@@ -1207,7 +1236,7 @@ export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
   publishedAt
   thumbnailUrl
   title
-  upvoteCount
+  upvotes
   urlSlug
   viewerUpvoted
 }
@@ -1555,7 +1584,7 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
   upvotePost(where: $where) {
     record {
       id
-      upvoteCount
+      upvotes
       upvotingUsers {
         id
       }

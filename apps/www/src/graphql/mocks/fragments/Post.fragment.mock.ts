@@ -304,7 +304,7 @@ export const Post_fragment_mock: Post = {
 	title: "Not a Real Blog Post Title",
 	createdAt: dayjs(1318781876406).toDate(),
 	updatedAt: dayjs(1318781876406).toDate(),
-	upvoteCount: faker.datatype.number({ max: 2_000 }),
+	upvotes: faker.datatype.number({ max: 2_000 }),
 	upvotingUsers: [],
 	urlSlug: "not-a-real-blog-post-title",
 	viewerUpvoted: false
