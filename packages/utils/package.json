@@ -6,7 +6,9 @@
 	"types": "src/index.ts",
 	"sideEffects": false,
 	"dependencies": {
-		"dayjs": "^1.10.7"
+		"@makepurple/typings": "workspace:*",
+		"dayjs": "^1.10.7",
+		"react-hook-form": "^7.22.5"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",

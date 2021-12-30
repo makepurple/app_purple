@@ -1,4 +1,6 @@
+import { ObjectUtils } from "@makepurple/utils";
 import { RefCallback, useCallback, useEffect, useState } from "react";
+import type { FieldPath } from "react-hook-form";
 import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
 import { useRelativeScrollPosition } from "./useRelativeScrollPosition";
 
@@ -12,14 +14,18 @@ export type UseQueryHook<TQuery, TVariables> = (
 	// eslint-disable-next-line @typescript-eslint/ban-types
 ) => UseQueryResponse<TQuery, object>;
 
-export const useRelayCursor = <TQuery, TVariables, TFieldName extends keyof TQuery>(
+export const useRelayCursor = <
+	TQuery,
+	TVariables,
+	TFieldName extends FieldPath<TQuery> = FieldPath<TQuery>
+>(
 	useQueryHook: UseQueryHook<TQuery, TVariables>,
 	options: Omit<UseQueryArgs<TVariables>, "query"> & {
 		direction?: "x" | "y";
 		field: TFieldName;
 		offset?: number;
 	}
-) => {
+): [state: UseQueryState<TQuery, any>, getRef: (i: number) => Maybe<RefCallback<HTMLElement>>] => {
 	const { direction = "y", field: fieldName, offset = 0, ...queryOptions } = options;
 
 	const [cursor, setCursor] = useState<Maybe<string>>(null);
@@ -31,7 +37,7 @@ export const useRelayCursor = <TQuery, TVariables, TFieldName extends keyof TQue
 
 	const { data, fetching } = result;
 
-	const field = (data as any)?.[fieldName] as
+	const field = ObjectUtils.get(data as TQuery, fieldName) as
 		| { nodes: unknown[]; pageInfo: PageInfo }
 		| undefined;
 
