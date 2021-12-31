@@ -15,6 +15,17 @@ generator nexusPrisma {
   provider = "nexus-prisma"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  theme = "default"
+  output = "../ERD.svg"
+}
+
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output = "../docs"
+}
+
 model Account {
   access_token       String?
   expires_at         Int?
@@ -53,6 +64,10 @@ model User {
   email           String                 @unique
   emailVerified   DateTime?
   experiences     Experience[]
+  followedBy      Follow[]               @relation("follower")
+  following       Follow[]               @relation("following")
+  friendedBy      Friendship[]           @relation("friender")
+  friending       Friendship[]           @relation("friending")
   id              String                 @id @default(cuid())
   // Avatar image, pulled from GitHub
   image           String?
@@ -66,6 +81,29 @@ model User {
   updatedAt       DateTime               @updatedAt
   upvotedComments CommentUpvoter[]
   upvotedPosts    PostUpvoter[]
+}
+
+// These are uni-directional match requests. If matched 2-way, then it is a confirmed match.
+model Friendship {
+  id          String   @id @default(cuid())
+  friender    User     @relation("friender", fields: [frienderId], references: [id], onDelete: Cascade)
+  frienderId  String
+  friending   User     @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
+  friendingId String
+  createdAt   DateTime @default(now())
+
+  @@unique([frienderId, friendingId])
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId  String
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
 }
 
 model VerificationToken {

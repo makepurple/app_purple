@@ -9,6 +9,7 @@
 	],
 	"scripts": {
 		"generate:prisma": "prisma generate",
+		"prisma:docs": "prisma-docs-generator serve --port 4002",
 		"prisma:format": "prisma format",
 		"prisma:migrate": "prisma migrate dev",
 		"prisma:studio": "prisma studio"
@@ -22,6 +23,8 @@
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
 		"graphql": "15.7.2",
-		"prisma": "^3.7.0"
+		"prisma": "^3.7.0",
+		"prisma-docs-generator": "^0.5.0",
+		"prisma-erd-generator": "^0.8.0"
 	}
 }
