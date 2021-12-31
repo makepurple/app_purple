@@ -679,6 +679,8 @@ type User {
   desiredSkills: [Skill!]!
   email: String!
   experiences: [Experience!]!
+  friendRequests(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubUser!
   githubUrl: URL!
   id: ID!

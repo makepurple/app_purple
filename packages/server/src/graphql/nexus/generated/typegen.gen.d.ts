@@ -841,6 +841,8 @@ export interface NexusGenFieldTypes {
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
     experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
+    friendRequests: NexusGenRootTypes['UserConnection']; // UserConnection!
+    friends: NexusGenRootTypes['UserConnection']; // UserConnection!
     github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
     githubUrl: NexusGenScalars['URL']; // URL!
     id: string; // ID!
@@ -1200,6 +1202,8 @@ export interface NexusGenFieldTypeNames {
     desiredSkills: 'Skill'
     email: 'String'
     experiences: 'Experience'
+    friendRequests: 'UserConnection'
+    friends: 'UserConnection'
     github: 'GitHubUser'
     githubUrl: 'URL'
     id: 'ID'
@@ -1412,6 +1416,20 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
       where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
+    friendRequests: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    friends: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
 }

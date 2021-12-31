@@ -1,6 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { Comment as _Comment } from "@prisma/client";
+import { Comment, User as _User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
@@ -23,7 +23,7 @@ export const User = objectType({
 			resolve: async (parent, args, { prisma }) => {
 				const user = prisma.user.findUnique({ where: { id: parent.id } });
 
-				const connection = await findManyCursorConnection<_Comment, { id: string }>(
+				const connection = await findManyCursorConnection<Comment, { id: string }>(
 					(paginationArgs) =>
 						user.comments({
 							...paginationArgs,
@@ -52,11 +52,98 @@ export const User = objectType({
 		});
 		t.field({
 			...NexusPrisma.User.email,
-			authorize: (root, args, { user }) => {
-				return user?.id === root.id;
+			authorize: (parent, args, { user }) => {
+				return user?.id === parent.id;
 			}
 		});
 		t.field(NexusPrisma.User.experiences);
+		t.nonNull.field("friendRequests", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			authorize: (parent, args, { user }) => {
+				return user?.id === parent.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const user = prisma.user.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<_User, { id: string }>(
+					(paginationArgs) =>
+						user
+							.friending({
+								...paginationArgs,
+								where: {
+									frienderId: parent.id,
+									friending: PrismaUtils.nonNull(args.where)
+								},
+								include: { friending: true }
+							})
+							.then((friendRequests) =>
+								friendRequests.map((friendRequest) => friendRequest.friending)
+							),
+					() =>
+						prisma.friendship.count({
+							where: {
+								frienderId: parent.id,
+								friending: PrismaUtils.nonNull(args.where)
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
+		t.nonNull.field("friends", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const user = prisma.user.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<_User, { id: string }>(
+					(paginationArgs) =>
+						user
+							.friending({
+								...paginationArgs,
+								where: {
+									friender: PrismaUtils.nonNull(args.where),
+									friendingId: parent.id
+								},
+								include: { friender: true }
+							})
+							.then((friendRequests) =>
+								friendRequests.map((friendRequest) => friendRequest.friender)
+							),
+					() =>
+						prisma.friendship.count({
+							where: {
+								friender: PrismaUtils.nonNull(args.where),
+								friendingId: parent.id
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("github", {
 			type: "GitHubUser",
 			resolve: async (parent, args, { octokit: graphql }) => {
