@@ -332,5 +332,5 @@ export const Post_fragment_mock: Post = {
 		}
 	},
 	urlSlug: "not-a-real-blog-post-title",
-	viewerUpvoted: false
+	viewerUpvote: false
 };
