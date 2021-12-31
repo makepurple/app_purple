@@ -94,6 +94,8 @@ export interface NexusGenInputs {
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    post?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
+    postId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
   CommentWhereUniqueInput: { // input type
@@ -167,6 +169,8 @@ export interface NexusGenInputs {
   }
   PostWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    authorName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    urlSlug?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   PostWhereUniqueInput: { // input type
     authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
