@@ -446,9 +446,11 @@ type Query {
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
+  suggestFriends(after: String, first: Int): UserConnection!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
+  users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
 }
 
@@ -675,6 +677,7 @@ type UpvotePostPayload implements MutationPayload {
 
 type User {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
+  createdAt: DateTime!
   description: String
   desiredSkills: [Skill!]!
   email: String!
@@ -704,6 +707,11 @@ type UserConnection implements Connection {
 type UserEdge {
   cursor: String!
   node: User!
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
 }
 
 input UserWhereInput {

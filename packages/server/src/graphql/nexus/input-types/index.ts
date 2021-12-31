@@ -31,5 +31,6 @@ export * from "./UpdateDesiredSkillsInput";
 export * from "./UpdateSkillsInput";
 export * from "./UploadPostImageInput";
 export * from "./UpvoteCommentInput";
+export * from "./UserOrderByInput";
 export * from "./UserWhereInput";
 export * from "./UserWhereUniqueInput";

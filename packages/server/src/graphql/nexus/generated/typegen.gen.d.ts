@@ -233,6 +233,10 @@ export interface NexusGenInputs {
   UpvoteCommentInput: { // input type
     upvote?: boolean | null; // Boolean
   }
+  UserOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   UserWhereInput: { // input type
     name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
@@ -487,6 +491,7 @@ export interface NexusGenObjects {
     record: NexusGenRootTypes['Post']; // Post!
   }
   User: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
     email: string; // String!
     id: string; // ID!
@@ -735,9 +740,11 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
+    suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
     suggestRepositories: NexusGenRootTypes['SuggestRepositories']; // SuggestRepositories!
     suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
+    users: NexusGenRootTypes['UserConnection']; // UserConnection!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemovePostThumbnailPayload: { // field return type
@@ -837,6 +844,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
@@ -1096,9 +1104,11 @@ export interface NexusGenFieldTypeNames {
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
     suggestExperiences: 'SuggestExperiences'
+    suggestFriends: 'UserConnection'
     suggestRepositories: 'SuggestRepositories'
     suggestSkills: 'SuggestSkills'
     user: 'User'
+    users: 'UserConnection'
     viewer: 'User'
   }
   RemovePostThumbnailPayload: { // field return type name
@@ -1198,6 +1208,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     comments: 'CommentConnection'
+    createdAt: 'DateTime'
     description: 'String'
     desiredSkills: 'Skill'
     email: 'String'
@@ -1396,6 +1407,10 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       where: NexusGenInputs['SuggestExperiencesWhereInput']; // SuggestExperiencesWhereInput!
     }
+    suggestFriends: { // args
+      after?: string | null; // String
+      first?: number | null; // Int
+    }
     suggestRepositories: { // args
       first?: number | null; // Int
       where: NexusGenInputs['SuggestRepositoriesWhereInput']; // SuggestRepositoriesWhereInput!
@@ -1406,6 +1421,14 @@ export interface NexusGenArgTypes {
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    users: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
   User: {

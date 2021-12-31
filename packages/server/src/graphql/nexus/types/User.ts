@@ -38,6 +38,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.field(NexusPrisma.User.createdAt);
 		t.field(NexusPrisma.User.description);
 		t.nonNull.list.nonNull.field("desiredSkills", {
 			type: "Skill",
