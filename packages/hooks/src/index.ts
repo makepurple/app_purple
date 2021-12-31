@@ -8,3 +8,4 @@ export * from "./useRelativeScrollPosition";
 export * from "./useRelayCursor";
 export * from "./useToggle";
 export * from "./useUncontrolledProp";
+export * from "./useWhyDidYouUpdate";
