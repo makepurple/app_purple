@@ -546,6 +546,7 @@ importers:
       '@types/request-ip': ^0.0.37
       apollo-server-micro: 3.5.0
       bottleneck: ^2.19.5
+      chalk: ^4.1.2
       cloudinary: ^1.27.1
       common-tags: ^1.8.2
       dotenv-cli: ^4.1.1
@@ -584,6 +585,7 @@ importers:
       '@types/request-ip': 0.0.37
       apollo-server-micro: 3.5.0_graphql@15.7.2+micro@9.3.4
       bottleneck: 2.19.5
+      chalk: 4.1.2
       cloudinary: 1.27.1
       common-tags: 1.8.2
       graphql-depth-limit: 1.1.0_graphql@15.7.2

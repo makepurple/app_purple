@@ -1987,6 +1987,110 @@ export interface User {
     resolve: NexusCore.FieldResolver<'User', 'posts'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.rejectedBy`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   rejectedBy  FriendshipRejection
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.rejectedBy)
+    *   }
+    * })
+    */
+  rejectedBy: {
+    /**
+     * The name of this field.
+     */
+    name: 'rejectedBy'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'FriendshipRejection' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'FriendshipRejection'> | NexusCore.NexusNonNullDef<'FriendshipRejection'>)
+    : 'Warning/Error: The type \'FriendshipRejection\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'FriendshipRejection\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'rejectedBy'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.rejecting`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   rejecting  FriendshipRejection
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.rejecting)
+    *   }
+    * })
+    */
+  rejecting: {
+    /**
+     * The name of this field.
+     */
+    name: 'rejecting'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'FriendshipRejection' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'FriendshipRejection'> | NexusCore.NexusNonNullDef<'FriendshipRejection'>)
+    : 'Warning/Error: The type \'FriendshipRejection\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'FriendshipRejection\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'rejecting'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.repositories`.
     *
     * ### ️⚠️ You have not writen documentation for model User
@@ -2644,6 +2748,353 @@ export interface Friendship {
      * The resolver of this field
      */
     resolve: NexusCore.FieldResolver<'Friendship', 'createdAt'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `FriendshipRejection`.
+  *
+  * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+  *
+  * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model FriendshipRejection {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { FriendshipRejection } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: FriendshipRejection.$name
+  *   description: FriendshipRejection.$description
+  *   definition(t) {
+  *     t.field(FriendshipRejection.id)
+  *   }
+  * })
+  */
+export interface FriendshipRejection {
+  $name: 'FriendshipRejection'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+    *
+    * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model FriendshipRejection {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { FriendshipRejection } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: FriendshipRejection.$name
+    *   description: FriendshipRejection.$description
+    *   definition(t) {
+    *     t.field(FriendshipRejection.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.rejecter`.
+    *
+    * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+    *
+    * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model FriendshipRejection {
+    *   /// Lorem ipsum dolor sit amet.
+    *   rejecter  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { FriendshipRejection } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: FriendshipRejection.$name
+    *   description: FriendshipRejection.$description
+    *   definition(t) {
+    *     t.field(FriendshipRejection.rejecter)
+    *   }
+    * })
+    */
+  rejecter: {
+    /**
+     * The name of this field.
+     */
+    name: 'rejecter'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'rejecter'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.rejecterId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+    *
+    * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model FriendshipRejection {
+    *   /// Lorem ipsum dolor sit amet.
+    *   rejecterId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { FriendshipRejection } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: FriendshipRejection.$name
+    *   description: FriendshipRejection.$description
+    *   definition(t) {
+    *     t.field(FriendshipRejection.rejecterId)
+    *   }
+    * })
+    */
+  rejecterId: {
+    /**
+     * The name of this field.
+     */
+    name: 'rejecterId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'rejecterId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.rejecting`.
+    *
+    * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+    *
+    * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model FriendshipRejection {
+    *   /// Lorem ipsum dolor sit amet.
+    *   rejecting  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { FriendshipRejection } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: FriendshipRejection.$name
+    *   description: FriendshipRejection.$description
+    *   definition(t) {
+    *     t.field(FriendshipRejection.rejecting)
+    *   }
+    * })
+    */
+  rejecting: {
+    /**
+     * The name of this field.
+     */
+    name: 'rejecting'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'rejecting'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.rejectingId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+    *
+    * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model FriendshipRejection {
+    *   /// Lorem ipsum dolor sit amet.
+    *   rejectingId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { FriendshipRejection } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: FriendshipRejection.$name
+    *   description: FriendshipRejection.$description
+    *   definition(t) {
+    *     t.field(FriendshipRejection.rejectingId)
+    *   }
+    * })
+    */
+  rejectingId: {
+    /**
+     * The name of this field.
+     */
+    name: 'rejectingId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'rejectingId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.createdAt`.
+    *
+    * ### ️⚠️ You have not writen documentation for model FriendshipRejection
+    *
+    * Replace this default advisory JSDoc with your own documentation about model FriendshipRejection
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model FriendshipRejection {
+    *   /// Lorem ipsum dolor sit amet.
+    *   createdAt  DateTime
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { FriendshipRejection } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: FriendshipRejection.$name
+    *   description: FriendshipRejection.$description
+    *   definition(t) {
+    *     t.field(FriendshipRejection.createdAt)
+    *   }
+    * })
+    */
+  createdAt: {
+    /**
+     * The name of this field.
+     */
+    name: 'createdAt'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'DateTime' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'DateTime'>
+    : 'Warning/Error: The type \'DateTime\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'DateTime\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'createdAt'>
   }
 }
 
@@ -7881,6 +8332,8 @@ export const Session: Session
 export const User: User
 
 export const Friendship: Friendship
+
+export const FriendshipRejection: FriendshipRejection
 
 export const Follow: Follow
 

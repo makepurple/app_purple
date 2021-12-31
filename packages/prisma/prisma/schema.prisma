@@ -17,13 +17,13 @@ generator nexusPrisma {
 
 generator erd {
   provider = "prisma-erd-generator"
-  theme = "default"
-  output = "../ERD.svg"
+  theme    = "default"
+  output   = "../ERD.svg"
 }
 
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
-  output = "../docs"
+  output   = "../docs"
 }
 
 model Account {
@@ -74,6 +74,8 @@ model User {
   // The GitHub name of the user
   name            String                 @unique
   posts           Post[]                 @relation("PostAuthor")
+  rejectedBy      FriendshipRejection[]  @relation("rejecter")
+  rejecting       FriendshipRejection[]  @relation("rejecting")
   repositories    Repository[]
   // Self written summary or description
   sessions        Session[]
@@ -93,6 +95,17 @@ model Friendship {
   createdAt   DateTime @default(now())
 
   @@unique([frienderId, friendingId])
+}
+
+model FriendshipRejection {
+  id          String   @id @default(cuid())
+  rejecter    User     @relation("rejecter", fields: [rejecterId], references: [id], onDelete: Cascade)
+  rejecterId  String
+  rejecting   User     @relation("rejecting", fields: [rejectingId], references: [id], onDelete: Cascade)
+  rejectingId String
+  createdAt   DateTime @default(now())
+
+  @@unique([rejecterId, rejectingId])
 }
 
 model Follow {
