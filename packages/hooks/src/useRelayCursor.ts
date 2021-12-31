@@ -16,7 +16,7 @@ export type UseQueryHook<TQuery, TVariables> = (
 
 export const useRelayCursor = <
 	TQuery,
-	TVariables,
+	TVariables extends { after?: Maybe<string> },
 	TFieldName extends FieldPath<TQuery> = FieldPath<TQuery>
 >(
 	useQueryHook: UseQueryHook<TQuery, TVariables>,
@@ -30,9 +30,11 @@ export const useRelayCursor = <
 
 	const [cursor, setCursor] = useState<Maybe<string>>(null);
 
+	const variables = { ...options.variables, after: cursor } as TVariables;
+
 	const [result] = useQueryHook({
 		...queryOptions,
-		variables: { ...(options.variables as TVariables), after: cursor }
+		variables
 	});
 
 	const { data, fetching } = result;
@@ -62,9 +64,7 @@ export const useRelayCursor = <
 
 	const getRef = useCallback(
 		(i: number): Maybe<RefCallback<HTMLElement>> => {
-			if (nodes.length < offset) {
-				return i === 0 ? loadMoreRef : null;
-			}
+			if (nodes.length < offset) return i === 0 ? loadMoreRef : null;
 
 			const isOffset = nodes.length - i === offset;
 
