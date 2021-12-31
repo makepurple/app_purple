@@ -2,6 +2,7 @@ export * from "./GetCommentReplies.query.mock";
 export * from "./GetExperiences.query.mock";
 export * from "./GetMyUser.query.mock";
 export * from "./GetPost.query.mock";
+export * from "./GetPostComments.query.mock";
 export * from "./GetPostDraft.query.mock";
 export * from "./GetPosts.query.mock";
 export * from "./GetRepositories.query.mock";

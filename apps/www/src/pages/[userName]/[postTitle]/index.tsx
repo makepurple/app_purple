@@ -1,4 +1,5 @@
 import { Avatar, DocumentEditor, GitHubAvatarImage, Paper } from "@makepurple/components";
+import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
 import { NextPage } from "next";
@@ -6,15 +7,16 @@ import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw from "twin.macro";
-import { useGetPostQuery } from "../../../graphql";
-import { UserPageLayout } from "../../../organisms";
+import { useGetPostCommentsQuery, useGetPostQuery } from "../../../graphql";
+import { CommentCard, LoadingCommentCard, UserPageLayout } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
 
 const Content = tw(Paper)`
 	flex
 	flex-col
 	items-stretch
-	p-6
+	p-4
+	sm:p-6
 `;
 
 const Title = tw.h1`
@@ -62,7 +64,7 @@ export const Page: NextPage<PageProps> = () => {
 	const userName = router?.query.userName as string;
 	const postTitle = router?.query.postTitle as string;
 
-	const [{ data }] = useGetPostQuery({
+	const [{ data: postData }] = useGetPostQuery({
 		requestPolicy: "cache-first",
 		variables: {
 			where: {
@@ -74,7 +76,32 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const post = data?.post;
+	/**
+	 * !HACK
+	 * @description Type is too deep/complex, so TS is throwing an error, even when it is correct.
+	 * Ignoring this error, so that we can keep the types without it erroring.
+	 * @author David Lee
+	 * @date December 30, 2021
+	 */
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	const [{ data: commentsData, fetching }, getLoadMoreRef] = useRelayCursor(
+		useGetPostCommentsQuery,
+		{
+			direction: "y",
+			field: "comments",
+			offset: 0,
+			requestPolicy: "cache-first",
+			variables: {
+				first: 8,
+				userName,
+				postTitle
+			}
+		}
+	);
+
+	const post = postData?.post;
+	const comments = commentsData?.comments.nodes ?? [];
 
 	const content = useMemo(() => {
 		const validator = DocumentEditorValue.destruct();
@@ -123,6 +150,17 @@ export const Page: NextPage<PageProps> = () => {
 				<Editor readOnly value={content}>
 					<Editable />
 				</Editor>
+			</Content>
+			<Content tw="mt-6">
+				{comments.map((comment, i) => (
+					<CommentCard
+						key={comment.id}
+						ref={getLoadMoreRef(i)}
+						comment={comment}
+						replies={comment.replies}
+					/>
+				))}
+				{fetching && Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
 			</Content>
 		</UserPageLayout>
 	);

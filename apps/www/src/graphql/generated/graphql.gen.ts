@@ -121,6 +121,8 @@ export type CommentWhereInput = {
   readonly author?: InputMaybe<UserWhereInput>;
   readonly authorId?: InputMaybe<StringNullableFilter>;
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
+  readonly post?: InputMaybe<PostWhereInput>;
+  readonly postId?: InputMaybe<StringNullableFilter>;
   readonly updatedAt?: InputMaybe<DateTimeNullableFilter>;
 };
 
@@ -620,6 +622,8 @@ export type PostUpdateInput = {
 
 export type PostWhereInput = {
   readonly author?: InputMaybe<UserWhereInput>;
+  readonly authorName?: InputMaybe<StringNullableFilter>;
+  readonly urlSlug?: InputMaybe<StringNullableFilter>;
 };
 
 export type PostWhereUniqueInput = {
@@ -1014,6 +1018,8 @@ export type UserWhereUniqueInput = {
 
 export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
+export type CommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } };
+
 export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null | undefined };
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined } } };
@@ -1138,8 +1144,6 @@ export type UpvotePostMutationVariables = Exact<{
 
 export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
 
-export type GetCommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } };
-
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1169,6 +1173,16 @@ export type GetPostQueryVariables = Exact<{
 
 
 export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string, readonly thumbnailUrl?: string | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null | undefined } } | null | undefined };
+
+export type GetPostCommentsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  postTitle: Scalars['String'];
+  userName: Scalars['String'];
+}>;
+
+
+export type GetPostCommentsQuery = { readonly __typename: 'Query', readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetPostDraftQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1228,6 +1242,49 @@ export type SuggestSkillsQueryVariables = Exact<{
 
 export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
 
+export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
+    fragment CommentCardComment on Comment {
+  __typename
+  id
+  author {
+    __typename
+    id
+    image
+    name
+  }
+  content
+  createdAt
+  updatedAt
+  upvotes
+  viewerUpvote
+}
+    `;
+export const CommentRepliesCommentConnectionFragmentDoc = /*#__PURE__*/ gql`
+    fragment CommentRepliesCommentConnection on CommentConnection {
+  __typename
+  edges {
+    __typename
+    cursor
+    node {
+      __typename
+      id
+    }
+  }
+  nodes {
+    __typename
+    id
+    ...CommentCardComment
+  }
+  totalCount
+  pageInfo {
+    __typename
+    endCursor
+    hasNextPage
+    hasPreviousPage
+    startCursor
+  }
+}
+    ${CommentCardCommentFragmentDoc}`;
 export const CreateRepositoryFormOptionGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
     fragment CreateRepositoryFormOptionGitHubRepository on GitHubRepository {
   __typename
@@ -1441,49 +1498,6 @@ export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     `;
-export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
-    fragment CommentCardComment on Comment {
-  __typename
-  id
-  author {
-    __typename
-    id
-    image
-    name
-  }
-  content
-  createdAt
-  updatedAt
-  upvotes
-  viewerUpvote
-}
-    `;
-export const GetCommentRepliesCommentConnectionFragmentDoc = /*#__PURE__*/ gql`
-    fragment GetCommentRepliesCommentConnection on CommentConnection {
-  __typename
-  edges {
-    __typename
-    cursor
-    node {
-      __typename
-      id
-    }
-  }
-  nodes {
-    __typename
-    id
-    ...CommentCardComment
-  }
-  totalCount
-  pageInfo {
-    __typename
-    endCursor
-    hasNextPage
-    hasPreviousPage
-    startCursor
-  }
-}
-    ${CommentCardCommentFragmentDoc}`;
 export const CreateExperienceDocument = /*#__PURE__*/ gql`
     mutation CreateExperience($data: ExperienceCreateInput!) {
   createExperience(data: $data) {
@@ -1742,20 +1756,20 @@ export const GetCommentRepliesDocument = /*#__PURE__*/ gql`
     id
     replies(after: $after, first: $first) {
       __typename
-      ...GetCommentRepliesCommentConnection
+      ...CommentRepliesCommentConnection
       nodes {
         __typename
         id
         ...CommentCardComment
         replies(first: $first) {
           __typename
-          ...GetCommentRepliesCommentConnection
+          ...CommentRepliesCommentConnection
         }
       }
     }
   }
 }
-    ${GetCommentRepliesCommentConnectionFragmentDoc}
+    ${CommentRepliesCommentConnectionFragmentDoc}
 ${CommentCardCommentFragmentDoc}`;
 
 export function useGetCommentRepliesQuery(options: Omit<Urql.UseQueryArgs<GetCommentRepliesQueryVariables>, 'query'> = {}) {
@@ -1831,6 +1845,41 @@ export const GetPostDocument = /*#__PURE__*/ gql`
 
 export function useGetPostQuery(options: Omit<Urql.UseQueryArgs<GetPostQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetPostQuery>({ query: GetPostDocument, ...options });
+};
+export const GetPostCommentsDocument = /*#__PURE__*/ gql`
+    query GetPostComments($after: String, $first: Int, $postTitle: String!, $userName: String!) {
+  comments(
+    after: $after
+    first: $first
+    where: {post: {authorName: {equals: $userName}, urlSlug: {equals: $postTitle}}}
+  ) {
+    __typename
+    ...CommentRepliesCommentConnection
+    nodes {
+      __typename
+      id
+      ...CommentCardComment
+      replies(first: $first) {
+        __typename
+        ...CommentRepliesCommentConnection
+        nodes {
+          __typename
+          id
+          ...CommentCardComment
+          replies(first: $first) {
+            __typename
+            ...CommentRepliesCommentConnection
+          }
+        }
+      }
+    }
+  }
+}
+    ${CommentRepliesCommentConnectionFragmentDoc}
+${CommentCardCommentFragmentDoc}`;
+
+export function useGetPostCommentsQuery(options: Omit<Urql.UseQueryArgs<GetPostCommentsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetPostCommentsQuery>({ query: GetPostCommentsDocument, ...options });
 };
 export const GetPostDraftDocument = /*#__PURE__*/ gql`
     query GetPostDraft {

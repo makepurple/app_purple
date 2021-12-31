@@ -1,7 +1,7 @@
 import { GetCommentRepliesQuery } from "../../generated";
 import { Comment_fragment_mock } from "../fragments/Comment.fragment.mock";
 
-const DATA_SIZE = 6;
+const DATA_SIZE = 8;
 
 const replies = Array.from({ length: DATA_SIZE }, (_, i) => ({
 	...Comment_fragment_mock,

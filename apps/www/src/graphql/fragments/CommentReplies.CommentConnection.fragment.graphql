@@ -1,0 +1,24 @@
+fragment CommentRepliesCommentConnection on CommentConnection {
+	__typename
+	edges {
+		__typename
+		cursor
+		node {
+			__typename
+			id
+		}
+	}
+	nodes {
+		__typename
+		id
+		...CommentCardComment
+	}
+	totalCount
+	pageInfo {
+		__typename
+		endCursor
+		hasNextPage
+		hasPreviousPage
+		startCursor
+	}
+}

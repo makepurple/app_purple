@@ -1,0 +1,42 @@
+query GetPostComments(
+	$after: String
+	$first: Int
+	$postTitle: String!
+	$userName: String!
+) {
+	comments(
+		after: $after
+		first: $first
+		where: {
+			post: {
+				authorName: {
+					equals: $userName
+				}
+				urlSlug: {
+					equals: $postTitle
+				}
+			}
+		}
+	) {
+		__typename
+		...CommentRepliesCommentConnection
+		nodes {
+			__typename
+			id
+			...CommentCardComment
+			replies(first: $first) {
+				__typename
+				...CommentRepliesCommentConnection
+				nodes {
+					__typename
+					id
+					...CommentCardComment
+					replies(first: $first) {
+						__typename
+						...CommentRepliesCommentConnection
+					}
+				}
+			}
+		}
+	}
+}

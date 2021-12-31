@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	CommentCardCommentFragment,
-	GetCommentRepliesCommentConnectionFragment,
+	CommentRepliesCommentConnectionFragment,
 	useGetCommentRepliesQuery,
 	useUnvoteCommentMutation,
 	useUpvoteCommentMutation
@@ -150,7 +150,7 @@ const LoadMoreButton = tw(Button)`
 export interface CommentCardProps {
 	className?: string;
 	comment: CommentCardCommentFragment;
-	replies?: GetCommentRepliesCommentConnectionFragment;
+	replies?: CommentRepliesCommentConnectionFragment;
 	style?: CSSProperties;
 }
 
@@ -173,7 +173,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	});
 
 	const commentReplies: readonly (CommentCardCommentFragment & {
-		replies?: GetCommentRepliesCommentConnectionFragment;
+		replies?: CommentRepliesCommentConnectionFragment;
 	})[] = replies?.nodes ?? data?.comment?.replies.nodes ?? [];
 	const pageInfo = replies?.pageInfo ?? data?.comment?.replies.pageInfo;
 

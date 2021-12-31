@@ -62,6 +62,8 @@ input CommentWhereInput {
   author: UserWhereInput
   authorId: StringNullableFilter
   createdAt: DateTimeNullableFilter
+  post: PostWhereInput
+  postId: StringNullableFilter
   updatedAt: DateTimeNullableFilter
 }
 
@@ -399,6 +401,8 @@ input PostUpdateInput {
 
 input PostWhereInput {
   author: UserWhereInput
+  authorName: StringNullableFilter
+  urlSlug: StringNullableFilter
 }
 
 input PostWhereUniqueInput {
