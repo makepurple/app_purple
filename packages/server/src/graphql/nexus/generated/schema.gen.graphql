@@ -236,6 +236,15 @@ type Follow {
   updatedAt: DateTime!
 }
 
+type FollowUserPayload implements MutationPayload {
+  query: Query!
+  record: Follow!
+}
+
+input FollowWhereUniqueInput {
+  id: String
+}
+
 type Friendship {
   friender: User!
   frienderId: String!
@@ -343,6 +352,7 @@ type Mutation {
 
   """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
+  followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(
@@ -351,6 +361,7 @@ type Mutation {
   ): RejectFriendshipPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
+  unfollowUser(where: FollowWhereUniqueInput!): UnfollowUserPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
@@ -700,6 +711,11 @@ type TopLanguages {
 A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 """
 scalar URL
+
+type UnfollowUserPayload implements MutationPayload {
+  query: Query!
+  record: Follow!
+}
 
 type UnvoteCommentPayload implements MutationPayload {
   query: Query!

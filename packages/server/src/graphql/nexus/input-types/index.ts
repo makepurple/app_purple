@@ -10,6 +10,7 @@ export * from "./ExperienceOrderByInput";
 export * from "./ExperienceUpdateInput";
 export * from "./ExperienceWhereInput";
 export * from "./ExperienceWhereUniqueInput";
+export * from "./FollowWhereUniqueInput";
 export * from "./FriendshipWhereUniqueInput";
 export * from "./PostAuthorNameUrlSlugCompoundUniqueInput";
 export * from "./PostDraftUpdateInput";
