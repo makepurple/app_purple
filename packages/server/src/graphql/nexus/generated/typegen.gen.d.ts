@@ -214,6 +214,12 @@ export interface NexusGenInputs {
   SuggestExperiencesWhereInput: { // input type
     name: string; // String!
   }
+  SuggestFriendsWhereInput: { // input type
+    desiredSkillsThreshold?: number | null; // Float
+    jitter: number | null; // Float
+    jitterSeed?: number | null; // Int
+    skillsThreshold?: number | null; // Float
+  }
   SuggestRepositoriesWhereInput: { // input type
     name: string; // String!
   }
@@ -1410,6 +1416,7 @@ export interface NexusGenArgTypes {
     suggestFriends: { // args
       after?: string | null; // String
       first?: number | null; // Int
+      where: NexusGenInputs['SuggestFriendsWhereInput']; // SuggestFriendsWhereInput!
     }
     suggestRepositories: { // args
       first?: number | null; // Int

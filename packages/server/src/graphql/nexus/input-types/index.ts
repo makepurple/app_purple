@@ -25,6 +25,7 @@ export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillWhereUniqueInput";
 export * from "./StringNullableFilter";
 export * from "./SuggestExperiencesWhereInput";
+export * from "./SuggestFriendsWhereInput";
 export * from "./SuggestRepositoriesWhereInput";
 export * from "./SuggestSkillsWhereInput";
 export * from "./UpdateDesiredSkillsInput";

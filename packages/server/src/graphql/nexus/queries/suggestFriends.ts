@@ -2,8 +2,9 @@ import {
 	findManyCursorConnection,
 	PrismaFindManyArguments
 } from "@devoxa/prisma-relay-cursor-connection";
+import { LangUtils } from "@makepurple/utils";
 import { Prisma, User } from "@prisma/client";
-import { intArg, nonNull, queryField, stringArg } from "nexus";
+import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 /** 
@@ -28,11 +29,8 @@ export const suggestFriends = queryField("suggestFriends", {
 	type: nonNull("UserConnection"),
 	args: {
 		after: stringArg(),
-		first: intArg()
-		/**
-		 * TODO
-		 * @description Add where input for seed, shared skills thresholds,
-		 */
+		first: intArg(),
+		where: nonNull(arg({ type: "SuggestFriendsWhereInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;
@@ -40,21 +38,28 @@ export const suggestFriends = queryField("suggestFriends", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const where = {
-			desiredSkillsThreshold: 0.2,
-			jitterSeed: 1_234_567,
-			jitter: 0.15,
-			skillsThreshold: 0.2
-		};
+		const where = PrismaUtils.nonNull({
+			...args.where,
+			jitter: 0.15
+		});
 
-		const skillsThreshold = Prisma.raw(`${where.skillsThreshold ?? "0.0"}`);
-		const desiredSkillsThreshold = Prisma.raw(`${where.desiredSkillsThreshold ?? "0.0"}`);
+		const skillsThreshold = Prisma.raw(
+			Math.max(Math.min(where.skillsThreshold ?? 0, 1), 0).toFixed(1)
+		);
+		const desiredSkillsThreshold = Prisma.raw(
+			Math.max(Math.min(where.desiredSkillsThreshold ?? 0, 1), 0).toFixed(1)
+		);
 		const jitterSeed = Prisma.raw(
-			`${Math.max(Math.min((where.jitterSeed % 100) / 100, 1), 0)}`
+			`${Math.max(Math.min(((where.jitterSeed ?? 0) % 100) / 100, 1), 0)}`
 		);
 		const jitter = Math.ceil(Math.max(Math.min(where.jitter, 1), 0) * 100);
 
 		const getUsers = ({ cursor, skip, take }: PrismaFindManyArguments<{ id: string }>) => {
+			// Maybe set random seed if jitterSeed is provided
+			const setSeed = LangUtils.isNil(where.jitterSeed)
+				? Prisma.raw(`''`)
+				: Prisma.raw(`CAST(SETSEED(${jitterSeed}) AS TEXT)`);
+
 			// Every value can randomly be reduced by up to jitter %
 			const jitterFactor = Prisma.raw(`(RANDOM() * ${100 - jitter + 1} + ${jitter})`);
 
@@ -92,6 +97,7 @@ export const suggestFriends = queryField("suggestFriends", {
 				GROUP BY "dsu0"."userId"
 			)`;
 
+			// Pagination cursor, if one exists
 			const cursorOrder = cursor?.id
 				? Prisma.sql`(
 					SELECT "SuggestedFriends"."hidden_order" AS "User_hidden_order"
@@ -105,7 +111,7 @@ export const suggestFriends = queryField("suggestFriends", {
 			return Prisma.sql`
 				WITH "SuggestedFriends" AS (
 					(
-						SELECT CAST(SETSEED(${jitterSeed}) AS TEXT) AS "hidden_seed", NULL AS "hidden_order", "User".*
+						SELECT ${setSeed} AS "hidden_seed", NULL AS "hidden_order", "User".*
 						FROM "User"
 						WHERE "User"."id" = ${user.id}
 					)
@@ -138,6 +144,7 @@ export const suggestFriends = queryField("suggestFriends", {
 					"SuggestedFriends",
 					${cursorOrder} as "orderCmp"
 				${
+					// Paginate after the cursor, if one exists
 					cursor?.id
 						? Prisma.sql`WHERE "SuggestedFriends"."hidden_order" >= "orderCmp"."User_hidden_order"`
 						: Prisma.empty
