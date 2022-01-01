@@ -217,6 +217,25 @@ input ExperienceWhereUniqueInput {
   id: String!
 }
 
+type Follow {
+  follower: User!
+  followerId: String!
+  following: User!
+  followingId: String!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+type Friendship {
+  friender: User!
+  frienderId: String!
+  friending: User!
+  friendingId: String!
+  id: ID!
+  rejected: Boolean!
+  updatedAt: DateTime!
+}
+
 type GitHubLanguage {
   color: String
   id: String!
@@ -727,6 +746,8 @@ type User {
   desiredSkills: [Skill!]!
   email: String!
   experiences: [Experience!]!
+  followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  following(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friendRequests(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubUser!

@@ -58,6 +58,90 @@ export const User = objectType({
 			}
 		});
 		t.field(NexusPrisma.User.experiences);
+		t.nonNull.field("followers", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const user = prisma.user.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<_User, { id: string }>(
+					(paginationArgs) =>
+						user
+							.followedBy({
+								...paginationArgs,
+								where: {
+									followingId: parent.id,
+									follower: PrismaUtils.nonNull(args.where)
+								},
+								include: { follower: true }
+							})
+							.then((friendRequests) =>
+								friendRequests.map((friendRequest) => friendRequest.follower)
+							),
+					() =>
+						prisma.follow.count({
+							where: {
+								followingId: parent.id,
+								follower: PrismaUtils.nonNull(args.where)
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
+		t.nonNull.field("following", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const user = prisma.user.findUnique({
+					where: { id: parent.id }
+				});
+
+				const connection = await findManyCursorConnection<_User, { id: string }>(
+					(paginationArgs) =>
+						user
+							.following({
+								...paginationArgs,
+								where: {
+									followerId: parent.id,
+									following: PrismaUtils.nonNull(args.where)
+								},
+								include: { follower: true }
+							})
+							.then((friendRequests) =>
+								friendRequests.map((friendRequest) => friendRequest.follower)
+							),
+					() =>
+						prisma.follow.count({
+							where: {
+								followerId: parent.id,
+								following: PrismaUtils.nonNull(args.where)
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("friendRequests", {
 			type: "UserConnection",
 			args: {
@@ -82,7 +166,8 @@ export const User = objectType({
 								...paginationArgs,
 								where: {
 									frienderId: parent.id,
-									friending: PrismaUtils.nonNull(args.where)
+									friending: PrismaUtils.nonNull(args.where),
+									rejected: false
 								},
 								include: { friending: true }
 							})

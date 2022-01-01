@@ -346,6 +346,19 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Experience']; // Experience!
   }
+  Follow: { // root type
+    followerId: string; // String!
+    followingId: string; // String!
+    id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Friendship: { // root type
+    frienderId: string; // String!
+    friendingId: string; // String!
+    id: string; // ID!
+    rejected: boolean; // Boolean!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   GitHubLanguage: { // root type
     color?: string | null; // String
     id: string; // String!
@@ -621,6 +634,23 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Experience']; // Experience!
   }
+  Follow: { // field return type
+    follower: NexusGenRootTypes['User']; // User!
+    followerId: string; // String!
+    following: NexusGenRootTypes['User']; // User!
+    followingId: string; // String!
+    id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Friendship: { // field return type
+    friender: NexusGenRootTypes['User']; // User!
+    frienderId: string; // String!
+    friending: NexusGenRootTypes['User']; // User!
+    friendingId: string; // String!
+    id: string; // ID!
+    rejected: boolean; // Boolean!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   GitHubLanguage: { // field return type
     color: string | null; // String
     id: string; // String!
@@ -866,6 +896,8 @@ export interface NexusGenFieldTypes {
     desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     email: string; // String!
     experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
+    followers: NexusGenRootTypes['UserConnection']; // UserConnection!
+    following: NexusGenRootTypes['UserConnection']; // UserConnection!
     friendRequests: NexusGenRootTypes['UserConnection']; // UserConnection!
     friends: NexusGenRootTypes['UserConnection']; // UserConnection!
     github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
@@ -984,6 +1016,23 @@ export interface NexusGenFieldTypeNames {
   ExperienceEdge: { // field return type name
     cursor: 'String'
     node: 'Experience'
+  }
+  Follow: { // field return type name
+    follower: 'User'
+    followerId: 'String'
+    following: 'User'
+    followingId: 'String'
+    id: 'ID'
+    updatedAt: 'DateTime'
+  }
+  Friendship: { // field return type name
+    friender: 'User'
+    frienderId: 'String'
+    friending: 'User'
+    friendingId: 'String'
+    id: 'ID'
+    rejected: 'Boolean'
+    updatedAt: 'DateTime'
   }
   GitHubLanguage: { // field return type name
     color: 'String'
@@ -1230,6 +1279,8 @@ export interface NexusGenFieldTypeNames {
     desiredSkills: 'Skill'
     email: 'String'
     experiences: 'Experience'
+    followers: 'UserConnection'
+    following: 'UserConnection'
     friendRequests: 'UserConnection'
     friends: 'UserConnection'
     github: 'GitHubUser'
@@ -1457,6 +1508,20 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
       where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
+    }
+    followers: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    following: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
     friendRequests: { // args
       after?: string | null; // String

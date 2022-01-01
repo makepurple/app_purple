@@ -15,6 +15,8 @@ export * from "./DownvoteCommentPayload";
 export * from "./Experience";
 export * from "./ExperienceConnection";
 export * from "./ExperienceEdge";
+export * from "./Follow";
+export * from "./Friendship";
 export * from "./GitHubLanguage";
 export * from "./GitHubLicense";
 export * from "./GitHubOrganization";
