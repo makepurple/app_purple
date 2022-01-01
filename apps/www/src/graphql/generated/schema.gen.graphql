@@ -430,9 +430,11 @@ type Query {
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
+  suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
+  users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
 }
 
@@ -501,6 +503,12 @@ input SkillNameOwnerCompoundUniqueInput {
   owner: String!
 }
 
+input SkillWhereInput {
+  AND: [SkillWhereInput!]
+  name: StringNullableFilter
+  owner: StringNullableFilter
+}
+
 input SkillWhereUniqueInput {
   id: String
   name_owner: SkillNameOwnerCompoundUniqueInput
@@ -527,6 +535,37 @@ type SuggestExperiences {
 
 input SuggestExperiencesWhereInput {
   name: String!
+}
+
+input SuggestFriendsWeightsInput {
+  desiredSkillsOverlap: Float = 1
+  skillsOverlap: Float = 1
+}
+
+input SuggestFriendsWhereInput {
+  # The min % overlap of suggested users' skills to the viewer's desired-skills.
+  #
+  # This is clamped to [0, 1], and is 0 by default.
+  desiredSkillsThreshold: Float = 0
+
+  # Each suggested user's scoring metric (for ordering), can be randomly reduced by a % which is the jitter. The larger the jitter, the more random the results can be.
+  #
+  # This is clamped to [0, 1], and is 0.15 by default.
+  jitter: Float = 0.15
+
+  # Seeds the jitter, so that pagination will be deterministic on the same seed.
+  #
+  # If not provided, the results will be non-deterministically random.
+  jitterSeed: Int
+
+  # Filters suggested users by their known skills.
+  skills: SkillWhereInput
+
+  # The min % overlap of suggested users' skills to the viewer's skills.
+  #
+  # This is clamped to [0, 1], and is 0 by default.
+  skillsThreshold: Float = 0
+  weights: SuggestFriendsWeightsInput = {desiredSkillsOverlap: 1, skillsOverlap: 1}
 }
 
 type SuggestRepositories {
@@ -651,10 +690,13 @@ type UpvotePostPayload implements MutationPayload {
 
 type User {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
+  createdAt: DateTime!
   description: String
   desiredSkills: [Skill!]!
   email: String!
   experiences: [Experience!]!
+  friendRequests(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubUser!
   githubUrl: URL!
   id: ID!
@@ -678,6 +720,11 @@ type UserConnection implements Connection {
 type UserEdge {
   cursor: String!
   node: User!
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  updatedAt: SortOrder
 }
 
 input UserWhereInput {

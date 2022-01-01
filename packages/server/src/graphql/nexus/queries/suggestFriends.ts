@@ -39,12 +39,12 @@ export const suggestFriends = queryField("suggestFriends", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const where = PrismaUtils.nonNull({
-			...args.where,
-			desiredSkillsThreshold: 0,
-			jitter: 0.15,
-			skillsThreshold: 0
-		});
+		const where = PrismaUtils.nonNull(args.where);
+
+		const weights = {
+			desiredSkillsOverlap: where.weights?.desiredSkillsOverlap ?? 1,
+			skillsOverlap: where.weights?.skillsOverlap ?? 1
+		};
 
 		const skillIds =
 			where.skills &&
@@ -57,15 +57,15 @@ export const suggestFriends = queryField("suggestFriends", {
 				.then((results) => results.map((result) => result.id)));
 
 		const skillsThreshold = Prisma.raw(
-			Math.max(Math.min(where.skillsThreshold, 1), 0).toFixed(1)
+			Math.max(Math.min(where.skillsThreshold ?? 0, 1), 0).toFixed(1)
 		);
 		const desiredSkillsThreshold = Prisma.raw(
-			Math.max(Math.min(where.desiredSkillsThreshold, 1), 0).toFixed(1)
+			Math.max(Math.min(where.desiredSkillsThreshold ?? 0, 1), 0).toFixed(1)
 		);
 		const jitterSeed = Prisma.raw(
 			`${Math.max(Math.min(((where.jitterSeed ?? 0) % 100) / 100, 1), 0)}`
 		);
-		const jitter = Math.ceil(Math.max(Math.min(where.jitter, 1), 0) * 100);
+		const jitter = Math.ceil(Math.max(Math.min(where.jitter ?? 0.15, 1), 0) * 100);
 
 		const sixMonthsAgo = dayjs(new Date()).subtract(6, "months").toDate();
 
@@ -168,10 +168,18 @@ export const suggestFriends = queryField("suggestFriends", {
 					(
 						SELECT
 							'',
-							${jitterFactor} * CAST(
-								(COALESCE("skillOverlap"."count", 0) + COALESCE("desiredSkillOverlap"."count", 0))
-								AS DECIMAL
-							) / GREATEST("skillTotal"."total" + "desiredSkillTotal"."total", 1),
+							${jitterFactor} * (
+								(
+									${weights.skillsOverlap}
+									* CAST(COALESCE("skillOverlap"."count", 0) AS DECIMAL)
+									/ GREATEST("skillTotal"."total", 1)
+								)
+								+ (
+									${weights.desiredSkillsOverlap}
+									* CAST(COALESCE("desiredSkillOverlap"."count", 0) AS DECIMAL)
+									/ GREATEST("desiredSkillTotal"."total", 1)
+								)
+							),
 							"User".*
 						FROM
 							${skillTotal} AS "skillTotal",

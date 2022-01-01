@@ -651,9 +651,11 @@ export type Query = {
   readonly posts: PostConnection;
   readonly repositories: RepositoryConnection;
   readonly suggestExperiences: SuggestExperiences;
+  readonly suggestFriends: UserConnection;
   readonly suggestRepositories: SuggestRepositories;
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
+  readonly users: UserConnection;
   readonly viewer?: Maybe<User>;
 };
 
@@ -720,6 +722,14 @@ export type QuerySuggestExperiencesArgs = {
 
 
 /** Root query type */
+export type QuerySuggestFriendsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestFriendsWhereInput;
+};
+
+
+/** Root query type */
 export type QuerySuggestRepositoriesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestRepositoriesWhereInput;
@@ -736,6 +746,17 @@ export type QuerySuggestSkillsArgs = {
 /** Root query type */
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+/** Root query type */
+export type QueryUsersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<UserOrderByInput>>;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 export type RemovePostThumbnailPayload = MutationPayload & {
@@ -808,6 +829,12 @@ export type SkillNameOwnerCompoundUniqueInput = {
   readonly owner: Scalars['String'];
 };
 
+export type SkillWhereInput = {
+  readonly AND?: InputMaybe<ReadonlyArray<SkillWhereInput>>;
+  readonly name?: InputMaybe<StringNullableFilter>;
+  readonly owner?: InputMaybe<StringNullableFilter>;
+};
+
 export type SkillWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['String']>;
   readonly name_owner?: InputMaybe<SkillNameOwnerCompoundUniqueInput>;
@@ -835,6 +862,41 @@ export type SuggestExperiences = {
 
 export type SuggestExperiencesWhereInput = {
   readonly name: Scalars['String'];
+};
+
+export type SuggestFriendsWeightsInput = {
+  readonly desiredSkillsOverlap?: InputMaybe<Scalars['Float']>;
+  readonly skillsOverlap?: InputMaybe<Scalars['Float']>;
+};
+
+export type SuggestFriendsWhereInput = {
+  /**
+   * The min % overlap of suggested users' skills to the viewer's desired-skills.
+   *
+   * This is clamped to [0, 1], and is 0 by default.
+   */
+  readonly desiredSkillsThreshold?: InputMaybe<Scalars['Float']>;
+  /**
+   * Each suggested user's scoring metric (for ordering), can be randomly reduced by a % which is the jitter. The larger the jitter, the more random the results can be.
+   *
+   * This is clamped to [0, 1], and is 0.15 by default.
+   */
+  readonly jitter?: InputMaybe<Scalars['Float']>;
+  /**
+   * Seeds the jitter, so that pagination will be deterministic on the same seed.
+   *
+   * If not provided, the results will be non-deterministically random.
+   */
+  readonly jitterSeed?: InputMaybe<Scalars['Int']>;
+  /** Filters suggested users by their known skills. */
+  readonly skills?: InputMaybe<SkillWhereInput>;
+  /**
+   * The min % overlap of suggested users' skills to the viewer's skills.
+   *
+   * This is clamped to [0, 1], and is 0 by default.
+   */
+  readonly skillsThreshold?: InputMaybe<Scalars['Float']>;
+  readonly weights?: InputMaybe<SuggestFriendsWeightsInput>;
 };
 
 export type SuggestRepositories = {
@@ -965,10 +1027,13 @@ export type UpvotePostPayload = MutationPayload & {
 export type User = {
   readonly __typename: 'User';
   readonly comments: CommentConnection;
+  readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
   readonly experiences: ReadonlyArray<Experience>;
+  readonly friendRequests: UserConnection;
+  readonly friends: UserConnection;
   readonly github: GitHubUser;
   readonly githubUrl: Scalars['URL'];
   readonly id: Scalars['ID'];
@@ -990,6 +1055,24 @@ export type UserCommentsArgs = {
   where?: InputMaybe<CommentWhereInput>;
 };
 
+
+export type UserFriendRequestsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type UserFriendsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
 /** Relay-style connection for User types. */
 export type UserConnection = Connection & {
   readonly __typename: 'UserConnection';
@@ -1004,6 +1087,11 @@ export type UserEdge = {
   readonly __typename: 'UserEdge';
   readonly cursor: Scalars['String'];
   readonly node: User;
+};
+
+export type UserOrderByInput = {
+  readonly createdAt?: InputMaybe<SortOrder>;
+  readonly updatedAt?: InputMaybe<SortOrder>;
 };
 
 export type UserWhereInput = {

@@ -45,5 +45,12 @@ export const SuggestFriendsWhereInput = inputObjectType({
 				This is clamped to [0, 1], and is 0 by default.
 			`
 		});
+		t.field("weights", {
+			default: {
+				desiredSkillsOverlap: 1,
+				skillsOverlap: 1
+			},
+			type: "SuggestFriendsWeightsInput"
+		});
 	}
 });

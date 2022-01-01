@@ -219,12 +219,17 @@ export interface NexusGenInputs {
   SuggestExperiencesWhereInput: { // input type
     name: string; // String!
   }
+  SuggestFriendsWeightsInput: { // input type
+    desiredSkillsOverlap: number | null; // Float
+    skillsOverlap: number | null; // Float
+  }
   SuggestFriendsWhereInput: { // input type
     desiredSkillsThreshold?: number | null; // Float
     jitter: number | null; // Float
     jitterSeed?: number | null; // Int
     skills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     skillsThreshold?: number | null; // Float
+    weights: NexusGenInputs['SuggestFriendsWeightsInput'] | null; // SuggestFriendsWeightsInput
   }
   SuggestRepositoriesWhereInput: { // input type
     name: string; // String!

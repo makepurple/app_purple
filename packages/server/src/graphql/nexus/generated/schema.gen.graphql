@@ -553,6 +553,11 @@ input SuggestExperiencesWhereInput {
   name: String!
 }
 
+input SuggestFriendsWeightsInput {
+  desiredSkillsOverlap: Float = 1
+  skillsOverlap: Float = 1
+}
+
 input SuggestFriendsWhereInput {
   """
   The min % overlap of suggested users' skills to the viewer's desired-skills.
@@ -573,7 +578,7 @@ input SuggestFriendsWhereInput {
   
   If not provided, the results will be non-deterministically random.
   """
-  jitterSeed: Int = 0
+  jitterSeed: Int
 
   """Filters suggested users by their known skills."""
   skills: SkillWhereInput
@@ -584,6 +589,7 @@ input SuggestFriendsWhereInput {
   This is clamped to [0, 1], and is 0 by default.
   """
   skillsThreshold: Float = 0
+  weights: SuggestFriendsWeightsInput = {desiredSkillsOverlap: 1, skillsOverlap: 1}
 }
 
 type SuggestRepositories {
