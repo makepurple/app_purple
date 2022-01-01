@@ -74,8 +74,6 @@ model User {
   // The GitHub name of the user
   name            String                 @unique
   posts           Post[]                 @relation("PostAuthor")
-  rejectedBy      FriendshipRejection[]  @relation("rejecter")
-  rejecting       FriendshipRejection[]  @relation("rejecting")
   repositories    Repository[]
   // Self written summary or description
   sessions        Session[]
@@ -92,20 +90,10 @@ model Friendship {
   frienderId  String
   friending   User     @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId String
+  rejected    Boolean  @default(false)
   updatedAt   DateTime @updatedAt
 
   @@unique([frienderId, friendingId])
-}
-
-model FriendshipRejection {
-  id          String   @id @default(cuid())
-  rejecter    User     @relation("rejecter", fields: [rejecterId], references: [id], onDelete: Cascade)
-  rejecterId  String
-  rejecting   User     @relation("rejecting", fields: [rejectingId], references: [id], onDelete: Cascade)
-  rejectingId String
-  updatedAt   DateTime @updatedAt
-
-  @@unique([rejecterId, rejectingId])
 }
 
 model Follow {

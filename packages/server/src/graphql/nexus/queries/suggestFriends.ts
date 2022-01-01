@@ -2,7 +2,7 @@ import {
 	findManyCursorConnection,
 	PrismaFindManyArguments
 } from "@devoxa/prisma-relay-cursor-connection";
-import { dayjs, LangUtils } from "@makepurple/utils";
+import { dayjs, LangUtils, MathUtils } from "@makepurple/utils";
 import { Prisma, User } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -42,11 +42,6 @@ export const suggestFriends = queryField("suggestFriends", {
 
 		const where = PrismaUtils.nonNull(args.where);
 
-		const weights = {
-			desiredSkillsOverlap: where.weights?.desiredSkillsOverlap ?? 1,
-			skillsOverlap: where.weights?.skillsOverlap ?? 1
-		};
-
 		const skillIds =
 			where.skills &&
 			(await prisma.skill
@@ -58,15 +53,15 @@ export const suggestFriends = queryField("suggestFriends", {
 				.then((results) => results.map((result) => result.id)));
 
 		const skillsThreshold = Prisma.raw(
-			Math.max(Math.min(where.skillsThreshold ?? 0, 1), 0).toFixed(1)
+			MathUtils.clamp(where.skillsThreshold ?? 0, [0, 1]).toFixed(1)
 		);
 		const desiredSkillsThreshold = Prisma.raw(
-			Math.max(Math.min(where.desiredSkillsThreshold ?? 0, 1), 0).toFixed(1)
+			MathUtils.clamp(where.desiredSkillsThreshold ?? 0, [0, 1]).toFixed(1)
 		);
 		const jitterSeed = Prisma.raw(
-			`${Math.max(Math.min(((where.jitterSeed ?? 0) % 100) / 100, 1), 0)}`
+			MathUtils.clamp(((where.jitterSeed ?? 0) % 100) / 100, [0, 1]).toFixed(1)
 		);
-		const jitter = Math.ceil(Math.max(Math.min(where.jitter ?? 0.15, 1), 0) * 100);
+		const jitter = Math.ceil(MathUtils.clamp(where.jitter ?? 0.15, [0, 1]) * 100);
 
 		const sixMonthsAgo = dayjs(new Date()).subtract(6, "months").toDate();
 
@@ -124,27 +119,30 @@ export const suggestFriends = queryField("suggestFriends", {
 
 			// Users that have friended the viewer
 			// or have been friend requested by the viewer in the last 6 months
+			// or have rejected a friend request of the viewer
 			const nonFriended = Prisma.sql`(
 				SELECT "Friendship"."id"
 				FROM "Friendship"
 				WHERE (
-					"Friendship"."frienderId" = "User"."id"
-					AND "Friendship"."friendingId" = ${user.id}
+					"Friendship"."rejected" = FALSE
+					AND (
+						(
+							"Friendship"."frienderId" = "User"."id"
+							AND "Friendship"."friendingId" = ${user.id}
+						)
+						OR (
+							"Friendship"."frienderId" = ${user.id}
+							AND "Friendship"."friendingId" = "User"."id"
+							AND "Friendship"."updatedAt" <= ${sixMonthsAgo}
+						)
+					)
 				)
 				OR (
-					"Friendship"."frienderId" = ${user.id}
-					AND "Friendship"."friendingId" = "User"."id"
+					"Friendship"."rejected" = TRUE
+					AND "Friendship"."frienderId" = ${user.id}
 					AND "Friendship"."updatedAt" <= ${sixMonthsAgo}
 				)
-			)`;
-
-			// Users that have rejected the viewer's friend request in the last 6 months
-			const friendRejected = Prisma.sql`(
-				SELECT "FriendshipRejection"."id"
-				FROM "FriendshipRejection"
-				WHERE "FriendshipRejection"."rejecterId" = "User"."id"
-				AND "FriendshipRejection"."rejectingId" = ${user.id}
-				AND "FriendshipRejection"."updatedAt" = ${sixMonthsAgo}
+				
 			)`;
 
 			// Pagination cursor, if one exists
@@ -171,12 +169,12 @@ export const suggestFriends = queryField("suggestFriends", {
 							'',
 							${jitterFactor} * (
 								(
-									${weights.skillsOverlap}
+									${MathUtils.clamp(where.weights?.skillsOverlap ?? 1, [0, 1]).toFixed(1)}
 									* CAST(COALESCE("skillOverlap"."count", 0) AS DECIMAL)
 									/ GREATEST("skillTotal"."total", 1)
 								)
 								+ (
-									${weights.desiredSkillsOverlap}
+									${MathUtils.clamp(where.weights?.desiredSkillsOverlap ?? 1, [0, 1]).toFixed(1)}
 									* CAST(COALESCE("desiredSkillOverlap"."count", 0) AS DECIMAL)
 									/ GREATEST("desiredSkillTotal"."total", 1)
 								)
@@ -200,7 +198,6 @@ export const suggestFriends = queryField("suggestFriends", {
 							ON ("User"."id") = ("desiredSkillOverlap"."userId")
 						WHERE (
 							NOT EXISTS ${nonFriended}
-							AND NOT EXISTS ${friendRejected}
 							AND COALESCE("skillOverlap"."count", 0) >= (${skillsThreshold} * "skillTotal"."total")
 							AND COALESCE("desiredSkillOverlap"."count", 0) >= (${desiredSkillsThreshold} * "desiredSkillTotal"."total")
 						)
