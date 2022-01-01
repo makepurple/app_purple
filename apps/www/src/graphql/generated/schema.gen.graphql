@@ -1,3 +1,8 @@
+type AcceptFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
+}
+
 # The `BigInt` scalar type represents non-fractional signed whole numeric values.
 # @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
 scalar BigInt
@@ -119,6 +124,11 @@ type DeleteExperiencePayload implements MutationPayload {
   record: Experience!
 }
 
+type DeleteFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
+}
+
 type DeletePostPayload implements MutationPayload {
   query: Query!
   record: Post!
@@ -207,6 +217,38 @@ input ExperienceWhereUniqueInput {
   id: String!
 }
 
+type Follow {
+  follower: User!
+  followerId: String!
+  following: User!
+  followingId: String!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+type FollowUserPayload implements MutationPayload {
+  query: Query!
+  record: Follow!
+}
+
+input FollowWhereUniqueInput {
+  id: String
+}
+
+type Friendship {
+  friender: User!
+  frienderId: String!
+  friending: User!
+  friendingId: String!
+  id: ID!
+  rejected: Boolean!
+  updatedAt: DateTime!
+}
+
+input FriendshipWhereUniqueInput {
+  id: String
+}
+
 type GitHubLanguage {
   color: String
   id: String!
@@ -275,6 +317,10 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 # Root mutation type
 type Mutation {
+  acceptFriendship(
+    # Find friendship from requester -> viewer
+    where: FriendshipWhereUniqueInput!
+  ): AcceptFriendshipPayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
@@ -285,12 +331,23 @@ type Mutation {
 
   # Users can delete their own experiences.
   deleteExperience(where: ExperienceWhereUniqueInput!): DeleteExperiencePayload!
+  deleteFriendship(
+    # Find friendship from viewer -> friend
+    where: FriendshipWhereUniqueInput!
+  ): DeleteFriendshipPayload!
 
   # Users can delete their own posts.
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
+  followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
+  rejectFriendship(
+    # Find friendship from requester -> viewer
+    where: FriendshipWhereUniqueInput!
+  ): RejectFriendshipPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
+  unfollowUser(where: FollowWhereUniqueInput!): UnfollowUserPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
@@ -438,6 +495,11 @@ type Query {
   viewer: User
 }
 
+type RejectFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
+}
+
 type RemovePostThumbnailPayload implements MutationPayload {
   query: Query!
   record: Post
@@ -488,6 +550,11 @@ input RepositoryWhereInput {
 input RepositoryWhereUniqueInput {
   id: String
   name_owner: RepositoryNameOwnerCompoundUniqueInput
+}
+
+type RequestFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
 }
 
 type Skill {
@@ -613,6 +680,11 @@ type TopLanguages {
 # A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 scalar URL
 
+type UnfollowUserPayload implements MutationPayload {
+  query: Query!
+  record: Follow!
+}
+
 type UnvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
@@ -695,6 +767,8 @@ type User {
   desiredSkills: [Skill!]!
   email: String!
   experiences: [Experience!]!
+  followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  following(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friendRequests(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubUser!

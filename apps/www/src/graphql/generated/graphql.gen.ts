@@ -32,6 +32,12 @@ export type Scalars = {
   Upload: File;
 };
 
+export type AcceptFriendshipPayload = MutationPayload & {
+  readonly __typename: 'AcceptFriendshipPayload';
+  readonly query: Query;
+  readonly record: Friendship;
+};
+
 export type Comment = {
   readonly __typename: 'Comment';
   readonly author: User;
@@ -178,6 +184,12 @@ export type DeleteExperiencePayload = MutationPayload & {
   readonly record: Experience;
 };
 
+export type DeleteFriendshipPayload = MutationPayload & {
+  readonly __typename: 'DeleteFriendshipPayload';
+  readonly query: Query;
+  readonly record: Friendship;
+};
+
 export type DeletePostPayload = MutationPayload & {
   readonly __typename: 'DeletePostPayload';
   readonly query: Query;
@@ -271,6 +283,41 @@ export type ExperienceWhereUniqueInput = {
   readonly id: Scalars['String'];
 };
 
+export type Follow = {
+  readonly __typename: 'Follow';
+  readonly follower: User;
+  readonly followerId: Scalars['String'];
+  readonly following: User;
+  readonly followingId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
+};
+
+export type FollowUserPayload = MutationPayload & {
+  readonly __typename: 'FollowUserPayload';
+  readonly query: Query;
+  readonly record: Follow;
+};
+
+export type FollowWhereUniqueInput = {
+  readonly id?: InputMaybe<Scalars['String']>;
+};
+
+export type Friendship = {
+  readonly __typename: 'Friendship';
+  readonly friender: User;
+  readonly frienderId: Scalars['String'];
+  readonly friending: User;
+  readonly friendingId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly rejected: Scalars['Boolean'];
+  readonly updatedAt: Scalars['DateTime'];
+};
+
+export type FriendshipWhereUniqueInput = {
+  readonly id?: InputMaybe<Scalars['String']>;
+};
+
 export type GitHubLanguage = {
   readonly __typename: 'GitHubLanguage';
   readonly color?: Maybe<Scalars['String']>;
@@ -342,6 +389,7 @@ export type GitHubUser = GitHubRepositoryOwner & {
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
+  readonly acceptFriendship: AcceptFriendshipPayload;
   readonly createComment: CreateCommentPayload;
   readonly createExperience: CreateExperiencePayload;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
@@ -350,11 +398,16 @@ export type Mutation = {
   readonly deleteComment: DeleteCommentPayload;
   /** Users can delete their own experiences. */
   readonly deleteExperience: DeleteExperiencePayload;
+  readonly deleteFriendship: DeleteFriendshipPayload;
   /** Users can delete their own posts. */
   readonly deletePost: DeletePostPayload;
+  readonly followUser: FollowUserPayload;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
+  readonly rejectFriendship: RejectFriendshipPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
+  readonly requestFriendship: RequestFriendshipPayload;
+  readonly unfollowUser: UnfollowUserPayload;
   readonly unvoteComment: UnvoteCommentPayload;
   readonly updateComment: UpdateCommentPayload;
   readonly updateDesiredSkills: UpdateDesiredSkillsPayload;
@@ -367,6 +420,12 @@ export type Mutation = {
   readonly upvoteComment: UpvoteCommentPayload;
   readonly upvotePost: UpvotePostPayload;
   readonly viewer?: Maybe<User>;
+};
+
+
+/** Root mutation type */
+export type MutationAcceptFriendshipArgs = {
+  where: FriendshipWhereUniqueInput;
 };
 
 
@@ -401,8 +460,20 @@ export type MutationDeleteExperienceArgs = {
 
 
 /** Root mutation type */
+export type MutationDeleteFriendshipArgs = {
+  where: FriendshipWhereUniqueInput;
+};
+
+
+/** Root mutation type */
 export type MutationDeletePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationFollowUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 
@@ -414,8 +485,26 @@ export type MutationPublishPostArgs = {
 
 
 /** Root mutation type */
+export type MutationRejectFriendshipArgs = {
+  where: FriendshipWhereUniqueInput;
+};
+
+
+/** Root mutation type */
 export type MutationRemovePostThumbnailArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationRequestFriendshipArgs = {
+  where: UserWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUnfollowUserArgs = {
+  where: FollowWhereUniqueInput;
 };
 
 
@@ -759,6 +848,12 @@ export type QueryUsersArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+export type RejectFriendshipPayload = MutationPayload & {
+  readonly __typename: 'RejectFriendshipPayload';
+  readonly query: Query;
+  readonly record: Friendship;
+};
+
 export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
   readonly query: Query;
@@ -813,6 +908,12 @@ export type RepositoryWhereInput = {
 export type RepositoryWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['String']>;
   readonly name_owner?: InputMaybe<RepositoryNameOwnerCompoundUniqueInput>;
+};
+
+export type RequestFriendshipPayload = MutationPayload & {
+  readonly __typename: 'RequestFriendshipPayload';
+  readonly query: Query;
+  readonly record: Friendship;
 };
 
 export type Skill = {
@@ -941,6 +1042,12 @@ export type TopLanguages = {
   readonly totalSize: Scalars['Int'];
 };
 
+export type UnfollowUserPayload = MutationPayload & {
+  readonly __typename: 'UnfollowUserPayload';
+  readonly query: Query;
+  readonly record: Follow;
+};
+
 export type UnvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UnvoteCommentPayload';
   readonly query: Query;
@@ -1032,6 +1139,8 @@ export type User = {
   readonly desiredSkills: ReadonlyArray<Skill>;
   readonly email: Scalars['String'];
   readonly experiences: ReadonlyArray<Experience>;
+  readonly followers: UserConnection;
+  readonly following: UserConnection;
   readonly friendRequests: UserConnection;
   readonly friends: UserConnection;
   readonly github: GitHubUser;
@@ -1053,6 +1162,24 @@ export type UserCommentsArgs = {
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<CommentOrderByInput>;
   where?: InputMaybe<CommentWhereInput>;
+};
+
+
+export type UserFollowersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type UserFollowingArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 
