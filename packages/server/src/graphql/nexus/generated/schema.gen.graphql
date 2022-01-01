@@ -134,6 +134,11 @@ type DeleteExperiencePayload implements MutationPayload {
   record: Experience!
 }
 
+type DeleteFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
+}
+
 type DeletePostPayload implements MutationPayload {
   query: Query!
   record: Post!
@@ -315,7 +320,10 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 """Root mutation type"""
 type Mutation {
-  acceptFriendship(where: FriendshipWhereUniqueInput!): AcceptFriendshipPayload!
+  acceptFriendship(
+    """Find friendship from requester -> viewer"""
+    where: FriendshipWhereUniqueInput!
+  ): AcceptFriendshipPayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
@@ -328,12 +336,19 @@ type Mutation {
 
   """Users can delete their own experiences."""
   deleteExperience(where: ExperienceWhereUniqueInput!): DeleteExperiencePayload!
+  deleteFriendship(
+    """Find friendship from viewer -> friend"""
+    where: FriendshipWhereUniqueInput!
+  ): DeleteFriendshipPayload!
 
   """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
-  rejectFriendship(where: FriendshipWhereUniqueInput!): RejectFriendshipPayload!
+  rejectFriendship(
+    """Find friendship from requester -> viewer"""
+    where: FriendshipWhereUniqueInput!
+  ): RejectFriendshipPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!

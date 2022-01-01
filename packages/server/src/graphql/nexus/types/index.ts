@@ -11,6 +11,7 @@ export * from "./CreatePostPayload";
 export * from "./CreateRepositoryPayload";
 export * from "./DeleteCommentPayload";
 export * from "./DeleteExperiencePayload";
+export * from "./DeleteFriendshipPayload";
 export * from "./DeletePostPayload";
 export * from "./DownvoteCommentPayload";
 export * from "./Experience";

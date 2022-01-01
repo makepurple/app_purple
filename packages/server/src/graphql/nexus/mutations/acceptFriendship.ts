@@ -1,10 +1,18 @@
+import { stripIndents } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const acceptFriendship = mutationField("acceptFriendship", {
 	type: nonNull("AcceptFriendshipPayload"),
 	args: {
-		where: nonNull(arg({ type: "FriendshipWhereUniqueInput" }))
+		where: nonNull(
+			arg({
+				type: "FriendshipWhereUniqueInput",
+				description: stripIndents`
+					Find friendship from requester -> viewer
+				`
+			})
+		)
 	},
 	authorize: async (parent, args, { prisma, user }) => {
 		if (!user) return false;

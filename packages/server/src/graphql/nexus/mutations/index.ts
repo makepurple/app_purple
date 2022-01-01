@@ -5,6 +5,7 @@ export * from "./createPost";
 export * from "./createRepository";
 export * from "./deleteComment";
 export * from "./deleteExperience";
+export * from "./deleteFriendship";
 export * from "./deletePost";
 export * from "./publishPost";
 export * from "./rejectFriendship";
