@@ -1,3 +1,4 @@
+export * from "./acceptFriendship";
 export * from "./createComment";
 export * from "./createExperience";
 export * from "./createPost";
@@ -6,7 +7,9 @@ export * from "./deleteComment";
 export * from "./deleteExperience";
 export * from "./deletePost";
 export * from "./publishPost";
+export * from "./rejectFriendship";
 export * from "./removePostThumbnail";
+export * from "./requestFriendship";
 export * from "./unvoteComment";
 export * from "./updateComment";
 export * from "./updateDesiredSkills";

@@ -2,6 +2,11 @@
 ### Do not make changes to this file directly
 
 
+type AcceptFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
+}
+
 """
 The `BigInt` scalar type represents non-fractional signed whole numeric values.
 @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
@@ -236,6 +241,10 @@ type Friendship {
   updatedAt: DateTime!
 }
 
+input FriendshipWhereUniqueInput {
+  id: String
+}
+
 type GitHubLanguage {
   color: String
   id: String!
@@ -306,6 +315,7 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 
 """Root mutation type"""
 type Mutation {
+  acceptFriendship(where: FriendshipWhereUniqueInput!): AcceptFriendshipPayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
@@ -323,7 +333,9 @@ type Mutation {
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
+  rejectFriendship(where: FriendshipWhereUniqueInput!): RejectFriendshipPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
@@ -473,6 +485,11 @@ type Query {
   viewer: User
 }
 
+type RejectFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
+}
+
 type RemovePostThumbnailPayload implements MutationPayload {
   query: Query!
   record: Post
@@ -523,6 +540,11 @@ input RepositoryWhereInput {
 input RepositoryWhereUniqueInput {
   id: String
   name_owner: RepositoryNameOwnerCompoundUniqueInput
+}
+
+type RequestFriendshipPayload implements MutationPayload {
+  query: Query!
+  record: Friendship!
 }
 
 type Skill {
