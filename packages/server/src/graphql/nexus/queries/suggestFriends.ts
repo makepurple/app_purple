@@ -20,8 +20,9 @@ filter by
 [x] #skills > threshold % viewer desired-skills
 
 order by
-* jitter: randomInt[jitter, 100 - jitter + 1] * (
-	((# overlap skills:skills) + (# overlap skills:desired-skills)) / (#skills + #desiredSkills)
+* jitter * (
+	(weight * % overlap skills:skills)
+	+ (weight * % overlap skills:desired-skills)
 )
 
 */
