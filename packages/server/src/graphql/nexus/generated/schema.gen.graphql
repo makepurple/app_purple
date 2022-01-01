@@ -519,6 +519,12 @@ input SkillNameOwnerCompoundUniqueInput {
   owner: String!
 }
 
+input SkillWhereInput {
+  AND: [SkillWhereInput!]
+  name: StringNullableFilter
+  owner: StringNullableFilter
+}
+
 input SkillWhereUniqueInput {
   id: String
   name_owner: SkillNameOwnerCompoundUniqueInput
@@ -548,6 +554,8 @@ input SuggestExperiencesWhereInput {
 }
 
 input SuggestFriendsWhereInput {
+  desiredSkills: SkillWhereInput
+
   """
   The min % overlap of suggested users' skills to the viewer's desired-skills.
   
@@ -568,6 +576,7 @@ input SuggestFriendsWhereInput {
   If not provided, the results will be non-deterministically random.
   """
   jitterSeed: Int = 0
+  skills: SkillWhereInput
 
   """
   The min % overlap of suggested users' skills to the viewer's skills.

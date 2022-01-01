@@ -22,6 +22,7 @@ export * from "./RepositoryUpdateInput";
 export * from "./RepositoryWhereInput";
 export * from "./RepositoryWhereUniqueInput";
 export * from "./SkillNameOwnerCompoundUniqueInput";
+export * from "./SkillWhereInput";
 export * from "./SkillWhereUniqueInput";
 export * from "./StringNullableFilter";
 export * from "./SuggestExperiencesWhereInput";

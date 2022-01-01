@@ -40,14 +40,36 @@ export const suggestFriends = queryField("suggestFriends", {
 
 		const where = PrismaUtils.nonNull({
 			...args.where,
-			jitter: 0.15
+			desiredSkillsThreshold: 0,
+			jitter: 0.15,
+			skillsThreshold: 0
 		});
 
+		const desiredSkillIds =
+			where.desiredSkills &&
+			(await prisma.skill
+				.findMany({
+					take: 50,
+					where: where.desiredSkills,
+					select: { id: true }
+				})
+				.then((results) => results.map((result) => result.id)));
+
+		const skillIds =
+			where.skills &&
+			(await prisma.skill
+				.findMany({
+					take: 50,
+					where: where.skills,
+					select: { id: true }
+				})
+				.then((results) => results.map((result) => result.id)));
+
 		const skillsThreshold = Prisma.raw(
-			Math.max(Math.min(where.skillsThreshold ?? 0, 1), 0).toFixed(1)
+			Math.max(Math.min(where.skillsThreshold, 1), 0).toFixed(1)
 		);
 		const desiredSkillsThreshold = Prisma.raw(
-			Math.max(Math.min(where.desiredSkillsThreshold ?? 0, 1), 0).toFixed(1)
+			Math.max(Math.min(where.desiredSkillsThreshold, 1), 0).toFixed(1)
 		);
 		const jitterSeed = Prisma.raw(
 			`${Math.max(Math.min(((where.jitterSeed ?? 0) % 100) / 100, 1), 0)}`
@@ -75,6 +97,18 @@ export const suggestFriends = queryField("suggestFriends", {
 				SELECT COUNT(*) AS "total"
 				FROM "DesiredSkillsOnUsers" AS "dsuTotal"
 				WHERE "dsuTotal"."userId" = ${user.id}
+			)`;
+
+			const desiredSkills = Prisma.sql`(
+				SELECT "DesiredSkillsOnUsers"."userId"
+				FROM "DesiredSkillsOnUsers"
+				WHERE "DesiredSkillsOnUsers"."skillId" IN ${Prisma.join(desiredSkillIds ?? [])}
+			)`;
+
+			const skills = Prisma.sql`(
+				SELECT "SkillsOnUsers"."userId"
+				FROM "SkillsOnUsers"
+				WHERE "SkillsOnUsers"."skillId" IN ${Prisma.join(skillIds ?? [])}
 			)`;
 
 			// Aggregate users by # of skills shared with the user
@@ -128,6 +162,22 @@ export const suggestFriends = queryField("suggestFriends", {
 							${skillTotal} AS "skillTotal",
 							${desiredSkillTotal} AS "desiredSkillTotal",
 							"User"
+							${
+								desiredSkillIds
+									? Prisma.sql`
+										INNER JOIN ${desiredSkills} as "dsu0"
+										ON ("User"."id") = ("dsu0"."userId")
+									`
+									: Prisma.empty
+							}
+							${
+								skillIds
+									? Prisma.sql`
+										INNER JOIN ${skills} as "su0"
+										ON ("User"."id") = ("su0"."userId")
+									`
+									: Prisma.empty
+							}
 							LEFT JOIN ${skillOverlap} AS "skillOverlap"
 							ON ("User"."id") = ("skillOverlap"."userId")
 							LEFT JOIN ${desiredSkillOverlap} AS "desiredSkillOverlap"
@@ -143,12 +193,13 @@ export const suggestFriends = queryField("suggestFriends", {
 				FROM
 					"SuggestedFriends",
 					${cursorOrder} as "orderCmp"
-				${
-					// Paginate after the cursor, if one exists
-					cursor?.id
-						? Prisma.sql`WHERE "SuggestedFriends"."hidden_order" >= "orderCmp"."User_hidden_order"`
-						: Prisma.empty
-				}
+				WHERE
+					${
+						// Paginate after the cursor, if one exists
+						cursor?.id
+							? Prisma.sql`"SuggestedFriends"."hidden_order" >= "orderCmp"."User_hidden_order"`
+							: Prisma.sql`1 = 1`
+					}
 				ORDER BY "SuggestedFriends"."hidden_order"
 				LIMIT ${take}
 				OFFSET ${skip};

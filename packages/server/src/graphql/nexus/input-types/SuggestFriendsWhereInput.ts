@@ -4,6 +4,7 @@ import { inputObjectType } from "nexus";
 export const SuggestFriendsWhereInput = inputObjectType({
 	name: "SuggestFriendsWhereInput",
 	definition: (t) => {
+		t.field("desiredSkills", { type: "SkillWhereInput" });
 		t.float("desiredSkillsThreshold", {
 			default: 0,
 			description: stripIndents`
@@ -32,6 +33,7 @@ export const SuggestFriendsWhereInput = inputObjectType({
 				If not provided, the results will be non-deterministically random.
 			`
 		});
+		t.field("skills", { type: "SkillWhereInput" });
 		t.float("skillsThreshold", {
 			default: 0,
 			description: stripIndents`

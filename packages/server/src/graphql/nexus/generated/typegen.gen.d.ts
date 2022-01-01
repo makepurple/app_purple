@@ -199,6 +199,11 @@ export interface NexusGenInputs {
     name: string; // String!
     owner: string; // String!
   }
+  SkillWhereInput: { // input type
+    AND?: NexusGenInputs['SkillWhereInput'][] | null; // [SkillWhereInput!]
+    name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    owner?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+  }
   SkillWhereUniqueInput: { // input type
     id?: string | null; // String
     name_owner?: NexusGenInputs['SkillNameOwnerCompoundUniqueInput'] | null; // SkillNameOwnerCompoundUniqueInput
@@ -215,9 +220,11 @@ export interface NexusGenInputs {
     name: string; // String!
   }
   SuggestFriendsWhereInput: { // input type
+    desiredSkills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     desiredSkillsThreshold?: number | null; // Float
     jitter: number | null; // Float
     jitterSeed?: number | null; // Int
+    skills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     skillsThreshold?: number | null; // Float
   }
   SuggestRepositoriesWhereInput: { // input type
