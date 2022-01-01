@@ -4,7 +4,6 @@ import { inputObjectType } from "nexus";
 export const SuggestFriendsWhereInput = inputObjectType({
 	name: "SuggestFriendsWhereInput",
 	definition: (t) => {
-		t.field("desiredSkills", { type: "SkillWhereInput" });
 		t.float("desiredSkillsThreshold", {
 			default: 0,
 			description: stripIndents`
@@ -26,14 +25,18 @@ export const SuggestFriendsWhereInput = inputObjectType({
 			`
 		});
 		t.int("jitterSeed", {
-			default: 0,
 			description: stripIndents`
 				Seeds the jitter, so that pagination will be deterministic on the same seed.
 
 				If not provided, the results will be non-deterministically random.
 			`
 		});
-		t.field("skills", { type: "SkillWhereInput" });
+		t.field("skills", {
+			type: "SkillWhereInput",
+			description: stripIndents`
+				Filters suggested users by their known skills.
+			`
+		});
 		t.float("skillsThreshold", {
 			default: 0,
 			description: stripIndents`

@@ -92,7 +92,7 @@ model Friendship {
   frienderId  String
   friending   User     @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId String
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@unique([frienderId, friendingId])
 }
@@ -103,7 +103,7 @@ model FriendshipRejection {
   rejecterId  String
   rejecting   User     @relation("rejecting", fields: [rejectingId], references: [id], onDelete: Cascade)
   rejectingId String
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@unique([rejecterId, rejectingId])
 }
@@ -114,7 +114,7 @@ model Follow {
   followerId  String
   following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@unique([followerId, followingId])
 }

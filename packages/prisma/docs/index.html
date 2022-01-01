@@ -108,7 +108,7 @@
                   <div class="mt-1 ml-2">
                     <div class="mb-1 font-medium text-gray-600"><a href="#model-Friendship-fields">Fields</a></div>
                       <ul class="pl-3 ml-1 border-l-2 border-gray-400">
-                      <li><a href="#model-Friendship-id">id</a></li><li><a href="#model-Friendship-friender">friender</a></li><li><a href="#model-Friendship-frienderId">frienderId</a></li><li><a href="#model-Friendship-friending">friending</a></li><li><a href="#model-Friendship-friendingId">friendingId</a></li><li><a href="#model-Friendship-createdAt">createdAt</a></li>
+                      <li><a href="#model-Friendship-id">id</a></li><li><a href="#model-Friendship-friender">friender</a></li><li><a href="#model-Friendship-frienderId">frienderId</a></li><li><a href="#model-Friendship-friending">friending</a></li><li><a href="#model-Friendship-friendingId">friendingId</a></li><li><a href="#model-Friendship-updatedAt">updatedAt</a></li>
                       </ul>
                   </div>
                   <div class="mt-2 ml-2">
@@ -128,7 +128,7 @@
                   <div class="mt-1 ml-2">
                     <div class="mb-1 font-medium text-gray-600"><a href="#model-FriendshipRejection-fields">Fields</a></div>
                       <ul class="pl-3 ml-1 border-l-2 border-gray-400">
-                      <li><a href="#model-FriendshipRejection-id">id</a></li><li><a href="#model-FriendshipRejection-rejecter">rejecter</a></li><li><a href="#model-FriendshipRejection-rejecterId">rejecterId</a></li><li><a href="#model-FriendshipRejection-rejecting">rejecting</a></li><li><a href="#model-FriendshipRejection-rejectingId">rejectingId</a></li><li><a href="#model-FriendshipRejection-createdAt">createdAt</a></li>
+                      <li><a href="#model-FriendshipRejection-id">id</a></li><li><a href="#model-FriendshipRejection-rejecter">rejecter</a></li><li><a href="#model-FriendshipRejection-rejecterId">rejecterId</a></li><li><a href="#model-FriendshipRejection-rejecting">rejecting</a></li><li><a href="#model-FriendshipRejection-rejectingId">rejectingId</a></li><li><a href="#model-FriendshipRejection-updatedAt">updatedAt</a></li>
                       </ul>
                   </div>
                   <div class="mt-2 ml-2">
@@ -148,7 +148,7 @@
                   <div class="mt-1 ml-2">
                     <div class="mb-1 font-medium text-gray-600"><a href="#model-Follow-fields">Fields</a></div>
                       <ul class="pl-3 ml-1 border-l-2 border-gray-400">
-                      <li><a href="#model-Follow-id">id</a></li><li><a href="#model-Follow-follower">follower</a></li><li><a href="#model-Follow-followerId">followerId</a></li><li><a href="#model-Follow-following">following</a></li><li><a href="#model-Follow-followingId">followingId</a></li><li><a href="#model-Follow-createdAt">createdAt</a></li>
+                      <li><a href="#model-Follow-id">id</a></li><li><a href="#model-Follow-follower">follower</a></li><li><a href="#model-Follow-followerId">followerId</a></li><li><a href="#model-Follow-following">following</a></li><li><a href="#model-Follow-followingId">followingId</a></li><li><a href="#model-Follow-updatedAt">updatedAt</a></li>
                       </ul>
                   </div>
                   <div class="mt-2 ml-2">
@@ -3401,16 +3401,16 @@
       </td>
     </tr>
     
-    <tr id="model-Friendship-createdAt">
+    <tr id="model-Friendship-updatedAt">
       <td class="px-4 py-2 border">
-       createdAt 
+       updatedAt 
       </td>
       <td class="px-4 py-2 border">
        DateTime
       </td>
       <td class="px-4 py-2 border">
         <ul>
-          <li><strong>@default(now())</strong></li>
+          <li><strong>@updatedAt</strong></li>
         </ul>
       </td>
       <td class="px-4 py-2 border">
@@ -4184,16 +4184,16 @@
       </td>
     </tr>
     
-    <tr id="model-FriendshipRejection-createdAt">
+    <tr id="model-FriendshipRejection-updatedAt">
       <td class="px-4 py-2 border">
-       createdAt 
+       updatedAt 
       </td>
       <td class="px-4 py-2 border">
        DateTime
       </td>
       <td class="px-4 py-2 border">
         <ul>
-          <li><strong>@default(now())</strong></li>
+          <li><strong>@updatedAt</strong></li>
         </ul>
       </td>
       <td class="px-4 py-2 border">
@@ -4967,16 +4967,16 @@
       </td>
     </tr>
     
-    <tr id="model-Follow-createdAt">
+    <tr id="model-Follow-updatedAt">
       <td class="px-4 py-2 border">
-       createdAt 
+       updatedAt 
       </td>
       <td class="px-4 py-2 border">
        DateTime
       </td>
       <td class="px-4 py-2 border">
         <ul>
-          <li><strong>@default(now())</strong></li>
+          <li><strong>@updatedAt</strong></li>
         </ul>
       </td>
       <td class="px-4 py-2 border">
@@ -18198,7 +18198,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeFilter">DateTimeFilter</a> | DateTime
       </td>
@@ -18286,7 +18286,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -18390,7 +18390,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -18526,7 +18526,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeWithAggregatesFilter">DateTimeWithAggregatesFilter</a> | DateTime
       </td>
@@ -18650,7 +18650,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeFilter">DateTimeFilter</a> | DateTime
       </td>
@@ -18738,7 +18738,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -18842,7 +18842,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -18978,7 +18978,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeWithAggregatesFilter">DateTimeWithAggregatesFilter</a> | DateTime
       </td>
@@ -19102,7 +19102,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeFilter">DateTimeFilter</a> | DateTime
       </td>
@@ -19190,7 +19190,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -19294,7 +19294,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -19430,7 +19430,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeWithAggregatesFilter">DateTimeWithAggregatesFilter</a> | DateTime
       </td>
@@ -28814,7 +28814,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -28902,7 +28902,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -28942,7 +28942,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29030,7 +29030,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29094,7 +29094,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29134,7 +29134,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29198,7 +29198,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29238,7 +29238,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29326,7 +29326,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29366,7 +29366,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29454,7 +29454,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29518,7 +29518,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29558,7 +29558,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29622,7 +29622,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29662,7 +29662,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29750,7 +29750,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29790,7 +29790,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29878,7 +29878,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -29942,7 +29942,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -29982,7 +29982,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -30046,7 +30046,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -40346,7 +40346,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40410,7 +40410,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40474,7 +40474,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40578,7 +40578,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40642,7 +40642,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40706,7 +40706,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40810,7 +40810,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40874,7 +40874,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -40938,7 +40938,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-SortOrder">SortOrder</a>
       </td>
@@ -65210,7 +65210,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65274,7 +65274,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65394,7 +65394,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65458,7 +65458,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65578,7 +65578,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65642,7 +65642,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65762,7 +65762,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -65826,7 +65826,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -66370,7 +66370,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -66434,7 +66434,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -66554,7 +66554,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -66618,7 +66618,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -68922,7 +68922,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeFilter">DateTimeFilter</a> | DateTime
       </td>
@@ -69286,7 +69286,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeFilter">DateTimeFilter</a> | DateTime
       </td>
@@ -69966,7 +69966,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         <a href="#type-inputType-DateTimeFilter">DateTimeFilter</a> | DateTime
       </td>
@@ -97690,7 +97690,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -97742,7 +97742,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -97794,7 +97794,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -97846,7 +97846,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -98034,7 +98034,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -98086,7 +98086,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -99598,7 +99598,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99662,7 +99662,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99714,7 +99714,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99754,7 +99754,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99818,7 +99818,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99858,7 +99858,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99922,7 +99922,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -99974,7 +99974,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100014,7 +100014,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100078,7 +100078,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100598,7 +100598,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100662,7 +100662,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100714,7 +100714,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100754,7 +100754,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -100818,7 +100818,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime | <a href="#type-inputType-DateTimeFieldUpdateOperationsInput">DateTimeFieldUpdateOperationsInput</a>
       </td>
@@ -104316,7 +104316,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -104404,7 +104404,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -104492,7 +104492,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -106556,7 +106556,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -106708,7 +106708,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -106860,7 +106860,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -110440,7 +110440,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         Int
       </td>
@@ -110516,7 +110516,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -110580,7 +110580,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -110644,7 +110644,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         Int
       </td>
@@ -110720,7 +110720,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -110784,7 +110784,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -110848,7 +110848,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         Int
       </td>
@@ -110924,7 +110924,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>
@@ -110988,7 +110988,7 @@
     
     <tr>
       <td class="px-4 py-2 border">
-        createdAt </td>
+        updatedAt </td>
       <td class="px-4 py-2 border">
         DateTime
       </td>

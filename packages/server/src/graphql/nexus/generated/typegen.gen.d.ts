@@ -220,7 +220,6 @@ export interface NexusGenInputs {
     name: string; // String!
   }
   SuggestFriendsWhereInput: { // input type
-    desiredSkills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     desiredSkillsThreshold?: number | null; // Float
     jitter: number | null; // Float
     jitterSeed?: number | null; // Int

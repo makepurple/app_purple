@@ -2,7 +2,7 @@ import {
 	findManyCursorConnection,
 	PrismaFindManyArguments
 } from "@devoxa/prisma-relay-cursor-connection";
-import { LangUtils } from "@makepurple/utils";
+import { dayjs, LangUtils } from "@makepurple/utils";
 import { Prisma, User } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -12,11 +12,12 @@ import { PrismaUtils } from "../../../utils";
 Simple Recommender Criteria
 
 filter by
-* viewer did not already friend request within 6 months
-* did not reject reviewer within 6 months
-* is not the viewer themselves
-* #skills > 20% viewer skills
-* #skills > 20% viewer desired-skills
+[x] is not a friender to the viewer
+[x] was not friend requested by the viewer within 6 months
+[x] did not reject reviewer within 6 months
+[x] is not the viewer themselves
+[x] #skills > threshold % viewer skills
+[x] #skills > threshold % viewer desired-skills
 
 order by
 * jitter: randomInt[jitter, 100 - jitter + 1] * (
@@ -45,16 +46,6 @@ export const suggestFriends = queryField("suggestFriends", {
 			skillsThreshold: 0
 		});
 
-		const desiredSkillIds =
-			where.desiredSkills &&
-			(await prisma.skill
-				.findMany({
-					take: 50,
-					where: where.desiredSkills,
-					select: { id: true }
-				})
-				.then((results) => results.map((result) => result.id)));
-
 		const skillIds =
 			where.skills &&
 			(await prisma.skill
@@ -76,6 +67,8 @@ export const suggestFriends = queryField("suggestFriends", {
 		);
 		const jitter = Math.ceil(Math.max(Math.min(where.jitter, 1), 0) * 100);
 
+		const sixMonthsAgo = dayjs(new Date()).subtract(6, "months").toDate();
+
 		const getUsers = ({ cursor, skip, take }: PrismaFindManyArguments<{ id: string }>) => {
 			// Maybe set random seed if jitterSeed is provided
 			const setSeed = LangUtils.isNil(where.jitterSeed)
@@ -85,33 +78,30 @@ export const suggestFriends = queryField("suggestFriends", {
 			// Every value can randomly be reduced by up to jitter %
 			const jitterFactor = Prisma.raw(`(RANDOM() * ${100 - jitter + 1} + ${jitter})`);
 
-			// Get total count of user's skills
+			// Get total count of viewer's skills
 			const skillTotal = Prisma.sql`(
 				SELECT COUNT(*) AS "total"
 				FROM "SkillsOnUsers" AS "suTotal"
 				WHERE "suTotal"."userId" = ${user.id}
 			)`;
 
-			// Get total count of user's desired skills
+			// Get total count of viewer's desired skills
 			const desiredSkillTotal = Prisma.sql`(
 				SELECT COUNT(*) AS "total"
 				FROM "DesiredSkillsOnUsers" AS "dsuTotal"
 				WHERE "dsuTotal"."userId" = ${user.id}
 			)`;
 
-			const desiredSkills = Prisma.sql`(
-				SELECT "DesiredSkillsOnUsers"."userId"
-				FROM "DesiredSkillsOnUsers"
-				WHERE "DesiredSkillsOnUsers"."skillId" IN ${Prisma.join(desiredSkillIds ?? [])}
-			)`;
+			// Filter suggestions by users' skills
+			const skills = skillIds?.length
+				? Prisma.sql`(
+					SELECT "SkillsOnUsers"."userId"
+					FROM "SkillsOnUsers"
+					WHERE "SkillsOnUsers"."skillId" IN (${Prisma.join(skillIds)})
+				)`
+				: Prisma.empty;
 
-			const skills = Prisma.sql`(
-				SELECT "SkillsOnUsers"."userId"
-				FROM "SkillsOnUsers"
-				WHERE "SkillsOnUsers"."skillId" IN ${Prisma.join(skillIds ?? [])}
-			)`;
-
-			// Aggregate users by # of skills shared with the user
+			// Aggregate users by # of skills shared with the viewer
 			const skillOverlap = Prisma.sql`(
 				SELECT "su0"."userId", COUNT("su0"."skillId")
 				FROM "SkillsOnUsers" AS "su0"
@@ -121,7 +111,7 @@ export const suggestFriends = queryField("suggestFriends", {
 				GROUP BY "su0"."userId"
 			)`;
 
-			// Aggregate users by # of skills desired by the user
+			// Aggregate users by # of skills desired by the viewer
 			const desiredSkillOverlap = Prisma.sql`(
 				SELECT "dsu0"."userId", COUNT("dsu0"."skillId")
 				FROM "SkillsOnUsers" AS "dsu0"
@@ -129,6 +119,31 @@ export const suggestFriends = queryField("suggestFriends", {
 				ON "dsu0"."skillId" = "dsu1"."skillId"
 				WHERE "dsu1"."userId" = ${user.id}
 				GROUP BY "dsu0"."userId"
+			)`;
+
+			// Users that have friended the viewer
+			// or have been friend requested by the viewer in the last 6 months
+			const nonFriended = Prisma.sql`(
+				SELECT "Friendship"."id"
+				FROM "Friendship"
+				WHERE (
+					"Friendship"."frienderId" = "User"."id"
+					AND "Friendship"."friendingId" = ${user.id}
+				)
+				OR (
+					"Friendship"."frienderId" = ${user.id}
+					AND "Friendship"."friendingId" = "User"."id"
+					AND "Friendship"."updatedAt" <= ${sixMonthsAgo}
+				)
+			)`;
+
+			// Users that have rejected the viewer's friend request in the last 6 months
+			const friendRejected = Prisma.sql`(
+				SELECT "FriendshipRejection"."id"
+				FROM "FriendshipRejection"
+				WHERE "FriendshipRejection"."rejecterId" = "User"."id"
+				AND "FriendshipRejection"."rejectingId" = ${user.id}
+				AND "FriendshipRejection"."updatedAt" = ${sixMonthsAgo}
 			)`;
 
 			// Pagination cursor, if one exists
@@ -163,15 +178,7 @@ export const suggestFriends = queryField("suggestFriends", {
 							${desiredSkillTotal} AS "desiredSkillTotal",
 							"User"
 							${
-								desiredSkillIds
-									? Prisma.sql`
-										INNER JOIN ${desiredSkills} as "dsu0"
-										ON ("User"."id") = ("dsu0"."userId")
-									`
-									: Prisma.empty
-							}
-							${
-								skillIds
+								skillIds?.length
 									? Prisma.sql`
 										INNER JOIN ${skills} as "su0"
 										ON ("User"."id") = ("su0"."userId")
@@ -183,8 +190,10 @@ export const suggestFriends = queryField("suggestFriends", {
 							LEFT JOIN ${desiredSkillOverlap} AS "desiredSkillOverlap"
 							ON ("User"."id") = ("desiredSkillOverlap"."userId")
 						WHERE (
-							COALESCE("skillOverlap"."count", 0) >= (${skillsThreshold} * "skillTotal"."total") AND
-							COALESCE("desiredSkillOverlap"."count", 0) >= (${desiredSkillsThreshold} * "desiredSkillTotal"."total")
+							NOT EXISTS ${nonFriended}
+							AND NOT EXISTS ${friendRejected}
+							AND COALESCE("skillOverlap"."count", 0) >= (${skillsThreshold} * "skillTotal"."total")
+							AND COALESCE("desiredSkillOverlap"."count", 0) >= (${desiredSkillsThreshold} * "desiredSkillTotal"."total")
 						)
 					)
 					OFFSET 1
@@ -194,6 +203,7 @@ export const suggestFriends = queryField("suggestFriends", {
 					"SuggestedFriends",
 					${cursorOrder} as "orderCmp"
 				WHERE
+					"SuggestedFriends"."id" != ${user.id} AND
 					${
 						// Paginate after the cursor, if one exists
 						cursor?.id
@@ -208,7 +218,10 @@ export const suggestFriends = queryField("suggestFriends", {
 
 		const connection = await findManyCursorConnection<User, { id: string }>(
 			(paginationArgs) => prisma.$queryRaw<User[]>(getUsers(paginationArgs)),
-			() => prisma.user.count(),
+			() =>
+				prisma.user.count({
+					where: { id: { not: { equals: user.id } } }
+				}),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 			{ ...PrismaUtils.handleRelayCursor }
 		);

@@ -2698,7 +2698,7 @@ export interface Friendship {
     resolve: NexusCore.FieldResolver<'Friendship', 'friendingId'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.createdAt`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.updatedAt`.
     *
     * ### ️⚠️ You have not writen documentation for model Friendship
     *
@@ -2707,7 +2707,7 @@ export interface Friendship {
     * ```prisma
     * model Friendship {
     *   /// Lorem ipsum dolor sit amet.
-    *   createdAt  DateTime
+    *   updatedAt  DateTime
     * }
     * ```
     *
@@ -2722,15 +2722,15 @@ export interface Friendship {
     *   name: Friendship.$name
     *   description: Friendship.$description
     *   definition(t) {
-    *     t.field(Friendship.createdAt)
+    *     t.field(Friendship.updatedAt)
     *   }
     * })
     */
-  createdAt: {
+  updatedAt: {
     /**
      * The name of this field.
      */
-    name: 'createdAt'
+    name: 'updatedAt'
   
     /**
      * The type of this field.
@@ -2747,7 +2747,7 @@ export interface Friendship {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Friendship', 'createdAt'>
+    resolve: NexusCore.FieldResolver<'Friendship', 'updatedAt'>
   }
 }
 
@@ -3045,7 +3045,7 @@ export interface FriendshipRejection {
     resolve: NexusCore.FieldResolver<'FriendshipRejection', 'rejectingId'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.createdAt`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `FriendshipRejection.updatedAt`.
     *
     * ### ️⚠️ You have not writen documentation for model FriendshipRejection
     *
@@ -3054,7 +3054,7 @@ export interface FriendshipRejection {
     * ```prisma
     * model FriendshipRejection {
     *   /// Lorem ipsum dolor sit amet.
-    *   createdAt  DateTime
+    *   updatedAt  DateTime
     * }
     * ```
     *
@@ -3069,15 +3069,15 @@ export interface FriendshipRejection {
     *   name: FriendshipRejection.$name
     *   description: FriendshipRejection.$description
     *   definition(t) {
-    *     t.field(FriendshipRejection.createdAt)
+    *     t.field(FriendshipRejection.updatedAt)
     *   }
     * })
     */
-  createdAt: {
+  updatedAt: {
     /**
      * The name of this field.
      */
-    name: 'createdAt'
+    name: 'updatedAt'
   
     /**
      * The type of this field.
@@ -3094,7 +3094,7 @@ export interface FriendshipRejection {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'createdAt'>
+    resolve: NexusCore.FieldResolver<'FriendshipRejection', 'updatedAt'>
   }
 }
 
@@ -3392,7 +3392,7 @@ export interface Follow {
     resolve: NexusCore.FieldResolver<'Follow', 'followingId'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.createdAt`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.updatedAt`.
     *
     * ### ️⚠️ You have not writen documentation for model Follow
     *
@@ -3401,7 +3401,7 @@ export interface Follow {
     * ```prisma
     * model Follow {
     *   /// Lorem ipsum dolor sit amet.
-    *   createdAt  DateTime
+    *   updatedAt  DateTime
     * }
     * ```
     *
@@ -3416,15 +3416,15 @@ export interface Follow {
     *   name: Follow.$name
     *   description: Follow.$description
     *   definition(t) {
-    *     t.field(Follow.createdAt)
+    *     t.field(Follow.updatedAt)
     *   }
     * })
     */
-  createdAt: {
+  updatedAt: {
     /**
      * The name of this field.
      */
-    name: 'createdAt'
+    name: 'updatedAt'
   
     /**
      * The type of this field.
@@ -3441,7 +3441,7 @@ export interface Follow {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Follow', 'createdAt'>
+    resolve: NexusCore.FieldResolver<'Follow', 'updatedAt'>
   }
 }
 

@@ -554,8 +554,6 @@ input SuggestExperiencesWhereInput {
 }
 
 input SuggestFriendsWhereInput {
-  desiredSkills: SkillWhereInput
-
   """
   The min % overlap of suggested users' skills to the viewer's desired-skills.
   
@@ -576,6 +574,8 @@ input SuggestFriendsWhereInput {
   If not provided, the results will be non-deterministically random.
   """
   jitterSeed: Int = 0
+
+  """Filters suggested users by their known skills."""
   skills: SkillWhereInput
 
   """
