@@ -26,6 +26,7 @@
 		"@makepurple/validators": "workspace:*",
 		"@next-auth/prisma-adapter": "^1.0.1",
 		"@prisma/client": "^3.7.0",
+		"@seznam/compose-react-refs": "^1.0.6",
 		"@tailwindcss/aspect-ratio": "0.3.0",
 		"@types/common-tags": "^1.8.1",
 		"@types/graphql-upload": "^8.0.7",

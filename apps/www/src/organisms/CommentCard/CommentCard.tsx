@@ -8,9 +8,11 @@ import {
 	ThumbsUpIcon
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
-import React, { CSSProperties, forwardRef, useState } from "react";
+import composeRefs from "@seznam/compose-react-refs";
+import React, { CSSProperties, forwardRef, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import toast from "react-hot-toast";
+import { useIntersection } from "react-use";
 import tw, { styled } from "twin.macro";
 import {
 	CommentCardCommentFragment,
@@ -157,12 +159,18 @@ export interface CommentCardProps {
 export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, ref) => {
 	const { className, comment, replies, style } = props;
 
+	const rootRef = useRef<HTMLDivElement>(null);
+	const composedRef = composeRefs(ref, rootRef);
+
+	const intersection = useIntersection(rootRef, { threshold: 1 });
+	const isInView = (intersection?.intersectionRatio ?? 0) >= 1;
+
 	const [collapsed, setCollapsed] = useState<boolean>(false);
 
 	const [cursor, setCursor] = useState<string | null>(null);
 
 	const [{ data, fetching }, getReplies] = useGetCommentRepliesQuery({
-		pause: !!replies,
+		pause: !isInView || !!replies,
 		variables: {
 			after: cursor,
 			first: 8,
@@ -181,7 +189,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const [{ fetching: upvoting }, upvoteComment] = useUpvoteCommentMutation();
 
 	return (
-		<Root ref={ref} className={className} style={style}>
+		<Root ref={composedRef} className={className} style={style}>
 			<CommenterInfo $collapsed={collapsed}>
 				{collapsed && (
 					<ExpandButton
