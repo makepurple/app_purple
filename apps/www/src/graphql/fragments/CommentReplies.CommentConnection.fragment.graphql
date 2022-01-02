@@ -16,9 +16,6 @@ fragment CommentRepliesCommentConnection on CommentConnection {
 	totalCount
 	pageInfo {
 		__typename
-		endCursor
-		hasNextPage
-		hasPreviousPage
-		startCursor
+		...PageInfoFragment
 	}
 }

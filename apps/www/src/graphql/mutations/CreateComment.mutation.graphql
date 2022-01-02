@@ -1,0 +1,29 @@
+mutation CreateComment($data: CommentCreateInput!) {
+	createComment(data: $data) {
+		record {
+			id
+			content
+			author {
+				id
+				name
+			}
+			authorId
+			parent {
+				id
+				replies {
+					...CommentRepliesCommentConnection
+				}
+			}
+			post {
+				id
+				comments {
+					...CommentRepliesCommentConnection
+				}
+			}
+			postId
+			updatedAt
+			upvotes
+			viewerUpvote
+		}
+	}
+}

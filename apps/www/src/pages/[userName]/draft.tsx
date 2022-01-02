@@ -74,10 +74,6 @@ const ThumbnailPreview = tw(Paper)`
 	overflow-hidden
 `;
 
-const StyledDocumentEditor = tw(DocumentEditor)`
-	shadow-none
-`;
-
 const FormActions = tw.div`
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
@@ -260,7 +256,7 @@ export const Page: NextPage<PageProps> = () => {
 							control={control}
 							name="content"
 							render={({ field: { name, onChange, value } }) => (
-								<StyledDocumentEditor
+								<DocumentEditor
 									onChange={(newContent) => onChange(newContent)}
 									value={value}
 								>
@@ -283,7 +279,7 @@ export const Page: NextPage<PageProps> = () => {
 										placeholder="Tell the class things you've learned..."
 										aria-label="content"
 									/>
-								</StyledDocumentEditor>
+								</DocumentEditor>
 							)}
 						/>
 						<FormHelperText error={(errors.content as any)?.message} />

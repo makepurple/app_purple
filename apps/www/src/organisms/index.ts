@@ -1,5 +1,5 @@
 export * from "./CommentCard";
-export * from "./CommentInput";
+export * from "./CreateCommentForm";
 export * from "./CreateExperienceForm";
 export * from "./CreateRepositoryForm";
 export * from "./CreateRepositoryFormOption";

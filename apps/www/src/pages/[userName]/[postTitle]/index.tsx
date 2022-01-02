@@ -1,14 +1,20 @@
-import { Avatar, DocumentEditor, GitHubAvatarImage, Paper } from "@makepurple/components";
+import { Avatar, Divider, DocumentEditor, GitHubAvatarImage, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw from "twin.macro";
 import { useGetPostCommentsQuery, useGetPostQuery } from "../../../graphql";
-import { CommentCard, LoadingCommentCard, UserPageLayout } from "../../../organisms";
+import {
+	CommentCard,
+	CreateCommentForm,
+	LoadingCommentCard,
+	UserPageLayout
+} from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
 
 const Content = tw(Paper)`
@@ -56,10 +62,32 @@ const Editable = tw(DocumentEditor.Editable)`
 	p-0
 `;
 
+const CommentsSection = tw(Paper)`
+	flex
+	flex-col
+	items-stretch
+	py-4
+	sm:py-6
+`;
+
+const CommentFormContainer = tw.div`
+	px-4
+	sm:px-6
+`;
+
+const CommentsContainer = tw.div`
+	px-4
+	sm:px-6
+`;
+
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
+
+	const { data: sessionData } = useSession();
+
+	const viewer = sessionData?.user;
 
 	const userName = router?.query.userName as string;
 	const postTitle = router?.query.postTitle as string;
@@ -151,17 +179,28 @@ export const Page: NextPage<PageProps> = () => {
 					<Editable />
 				</Editor>
 			</Content>
-			<Content tw="mt-6">
-				{comments.map((comment, i) => (
-					<CommentCard
-						key={comment.id}
-						ref={getLoadMoreRef(i)}
-						comment={comment}
-						replies={comment.replies}
-					/>
-				))}
-				{fetching && Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
-			</Content>
+			<CommentsSection tw="mt-6">
+				{!!viewer && (
+					<>
+						<CommentFormContainer>
+							<CreateCommentForm target={{ type: "post", id: post.id }} />
+						</CommentFormContainer>
+						<Divider tw="my-4 sm:my-6" />
+					</>
+				)}
+				<CommentsContainer>
+					{comments.map((comment, i) => (
+						<CommentCard
+							key={comment.id}
+							ref={getLoadMoreRef(i)}
+							comment={comment}
+							replies={comment.replies}
+						/>
+					))}
+					{fetching &&
+						Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
+				</CommentsContainer>
+			</CommentsSection>
 		</UserPageLayout>
 	);
 };
