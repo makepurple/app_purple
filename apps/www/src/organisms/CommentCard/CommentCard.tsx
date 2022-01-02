@@ -220,97 +220,91 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 					<CreatedAt>{dayjs(comment.createdAt).fromNow()}</CreatedAt>
 				</CommenterInfoContent>
 			</CommenterInfo>
-			{!collapsed && (
-				<Body>
-					<CollapseBar
-						onClick={() => {
-							setCollapsed(true);
-						}}
-						tw="mt-1 ml-2 mr-4"
-					>
-						<Threadline />
-					</CollapseBar>
-					<Content>
-						{comment.content ? (
-							<Editor readOnly value={comment.content as DocumentEditorValue}>
-								<Editable />
-							</Editor>
-						) : (
-							<DeletedComment>[removed]</DeletedComment>
-						)}
-						<Actions tw="mt-2">
-							<UpvoteButton
-								onClick={async (e) => {
-									e.preventDefault();
+			<Body style={!collapsed ? {} : { display: "none" }}>
+				<CollapseBar
+					onClick={() => {
+						setCollapsed(true);
+					}}
+					tw="mt-1 ml-2 mr-4"
+				>
+					<Threadline />
+				</CollapseBar>
+				<Content>
+					{comment.content ? (
+						<Editor readOnly value={comment.content as DocumentEditorValue}>
+							<Editable />
+						</Editor>
+					) : (
+						<DeletedComment>[removed]</DeletedComment>
+					)}
+					<Actions tw="mt-2">
+						<UpvoteButton
+							onClick={async (e) => {
+								e.preventDefault();
 
-									if (comment.viewerUpvote) {
-										await unvoteComment({
-											where: { id: comment.id }
-										}).catch(() => null);
-
-										return;
-									}
-
-									const record = await upvoteComment({
-										data: { upvote: true },
+								if (comment.viewerUpvote) {
+									await unvoteComment({
 										where: { id: comment.id }
-									})
-										.then((result) => result.data?.upvoteComment.record)
-										.catch(() => null);
+									}).catch(() => null);
 
-									if (!record?.viewerUpvote) return;
+									return;
+								}
 
-									toast.success("You liked this post! 🎉");
-								}}
-								size="small"
-								type="button"
-								variant="secondary"
-								$upvoted={!!comment.viewerUpvote}
-							>
-								{unvoting || upvoting ? (
-									<Spinner height={16} width={16} tw="mr-1" />
-								) : (
-									<ThumbsUpIcon height={16} width={16} tw="mr-1" />
-								)}
-								<span>{comment.upvotes.toLocaleString()}</span>
-							</UpvoteButton>
-							<ActionButton size="small" variant="secondary">
-								<CommentIcon height={16} width={16} tw="mr-1" />
-								<span>Reply</span>
-							</ActionButton>
-						</Actions>
-						<Replies tw="mt-2">
-							{commentReplies.map((reply) => (
-								<CommentCard
-									key={reply.id}
-									comment={reply}
-									replies={reply.replies}
-								/>
-							))}
-							{fetching &&
-								Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
-						</Replies>
-						{pageInfo?.hasNextPage && (
-							<LoadMoreButton
-								disabled={fetching}
-								onClick={() => {
-									flushSync(() => {
-										pageInfo.endCursor && setCursor(pageInfo.endCursor);
-									});
+								const record = await upvoteComment({
+									data: { upvote: true },
+									where: { id: comment.id }
+								})
+									.then((result) => result.data?.upvoteComment.record)
+									.catch(() => null);
 
-									getReplies();
-								}}
-								size="small"
-								type="button"
-								variant="secondary"
-								tw="mt-1"
-							>
-								Load more
-							</LoadMoreButton>
-						)}
-					</Content>
-				</Body>
-			)}
+								if (!record?.viewerUpvote) return;
+
+								toast.success("You liked this post! 🎉");
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+							$upvoted={!!comment.viewerUpvote}
+						>
+							{unvoting || upvoting ? (
+								<Spinner height={16} width={16} tw="mr-1" />
+							) : (
+								<ThumbsUpIcon height={16} width={16} tw="mr-1" />
+							)}
+							<span>{comment.upvotes.toLocaleString()}</span>
+						</UpvoteButton>
+						<ActionButton size="small" variant="secondary">
+							<CommentIcon height={16} width={16} tw="mr-1" />
+							<span>Reply</span>
+						</ActionButton>
+					</Actions>
+					<Replies tw="mt-2">
+						{commentReplies.map((reply) => (
+							<CommentCard key={reply.id} comment={reply} replies={reply.replies} />
+						))}
+						{fetching &&
+							Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
+					</Replies>
+					{pageInfo?.hasNextPage && (
+						<LoadMoreButton
+							disabled={fetching}
+							onClick={() => {
+								flushSync(() => {
+									pageInfo.endCursor && setCursor(pageInfo.endCursor);
+								});
+
+								getReplies();
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+							tw="mt-1"
+						>
+							Load more
+						</LoadMoreButton>
+					)}
+				</Content>
+			</Body>
 		</Root>
 	);
 });
