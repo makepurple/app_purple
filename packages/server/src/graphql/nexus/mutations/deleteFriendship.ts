@@ -30,12 +30,12 @@ export const deleteFriendship = mutationField("deleteFriendship", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const record = await prisma.$transaction(async () => {
-			const deleted = await prisma.friendship.delete({
+		const record = await prisma.$transaction(async (transaction) => {
+			const deleted = await transaction.friendship.delete({
 				where: PrismaUtils.nonNull(args.where)
 			});
 
-			await prisma.friendship.update({
+			await transaction.friendship.update({
 				where: {
 					frienderId_friendingId: {
 						frienderId: deleted.friendingId,
