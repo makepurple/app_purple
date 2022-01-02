@@ -1,3 +1,4 @@
+export * from "./array.util";
 export * from "./color.util";
 export * from "./dayjs";
 export * from "./function.util";
