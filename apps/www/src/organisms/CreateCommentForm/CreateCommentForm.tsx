@@ -13,7 +13,7 @@ import { CommentCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, FC, useEffect } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
@@ -27,11 +27,17 @@ const ActionsContainer = tw.div`
 
 export interface CreateCommentFormProps {
 	className?: string;
+	onCancel?: (event?: SyntheticEvent) => void;
 	style?: CSSProperties;
 	target: { id: string } & ({ type: "comment" } | { type: "post" });
 }
 
-export const CreateCommentForm: FC<CreateCommentFormProps> = ({ className, style, target }) => {
+export const CreateCommentForm: FC<CreateCommentFormProps> = ({
+	className,
+	onCancel,
+	style,
+	target
+}) => {
 	const { data: sessionData } = useSession();
 
 	const viewer = sessionData?.user;
@@ -125,11 +131,22 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({ className, style
 				/>
 				{isSubmitted && <FormHelperText error={(errors.content as any)?.message} />}
 			</FormGroup>
-			<ActionsContainer tw="mt-8">
+			<ActionsContainer tw="mt-6">
 				<FormButton disabled={!isValid} type="submit" variant="primary">
 					<span>Comment</span>
 					{creating && <Spinner tw="ml-2" />}
 				</FormButton>
+				{!!onCancel && (
+					<FormButton
+						onClick={(e) => {
+							onCancel?.(e);
+						}}
+						type="button"
+						variant="alert"
+					>
+						Cancel
+					</FormButton>
+				)}
 			</ActionsContainer>
 		</Form>
 	);

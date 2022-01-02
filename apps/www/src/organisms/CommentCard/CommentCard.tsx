@@ -1,6 +1,7 @@
 import {
 	Avatar,
 	Button,
+	Divider,
 	DocumentEditor,
 	DocumentEditorValue,
 	GitHubAvatarImage,
@@ -22,6 +23,7 @@ import {
 	useUpvoteCommentMutation
 } from "../../graphql";
 import { CommentIcon, UnfoldIcon } from "../../svgs";
+import { CreateCommentForm } from "../CreateCommentForm";
 import { LoadingCommentCard } from "../LoadingCommentCard";
 
 const Root = tw.div`
@@ -77,9 +79,12 @@ const Body = tw.div`
 	items-stretch
 `;
 
-const Content = tw.div``;
+const Content = tw.div`
+	flex-grow
+`;
 
 const CollapseBar = tw.div`
+	flex-shrink-0
 	flex
 	items-stretch
 	justify-center
@@ -188,6 +193,8 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const [{ fetching: unvoting }, unvoteComment] = useUnvoteCommentMutation();
 	const [{ fetching: upvoting }, upvoteComment] = useUpvoteCommentMutation();
 
+	const [showReplyForm, setShowReplyForm] = useState<boolean>(false);
+
 	return (
 		<Root ref={composedRef} className={className} style={style}>
 			<CommenterInfo $collapsed={collapsed}>
@@ -273,11 +280,27 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 							)}
 							<span>{comment.upvotes.toLocaleString()}</span>
 						</UpvoteButton>
-						<ActionButton size="small" variant="secondary">
+						<ActionButton
+							onClick={() => {
+								setShowReplyForm((oldShowReplyForm) => !oldShowReplyForm);
+							}}
+							size="small"
+							variant="secondary"
+						>
 							<CommentIcon height={16} width={16} tw="mr-1" />
 							<span>Reply</span>
 						</ActionButton>
 					</Actions>
+					{showReplyForm && (
+						<div tw="py-4">
+							<CreateCommentForm
+								onCancel={() => {
+									setShowReplyForm(false);
+								}}
+								target={{ type: "comment", id: comment.id }}
+							/>
+						</div>
+					)}
 					<Replies tw="mt-2">
 						{commentReplies.map((reply) => (
 							<CommentCard key={reply.id} comment={reply} replies={reply.replies} />
