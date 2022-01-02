@@ -6,6 +6,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "services": "docker-compose up -d",
+    "services:stop": "docker-compose down",
     "turbo": "turbo"
   },
   "turbo": {
