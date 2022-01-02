@@ -1,6 +1,6 @@
 import { UrlUtils } from "@makepurple/utils";
 import React, { FC, useCallback } from "react";
-import { Descendant, Editor, Range, Transforms } from "slate";
+import { Descendant, Editor, Element, Path, Range, Transforms } from "slate";
 import { RenderElementProps, useSlateStatic } from "slate-react";
 import { Anchor } from "../../../atoms";
 import { LinkIcon } from "../../../svgs";
@@ -19,9 +19,7 @@ export type LinkElement = {
 const wrapLink = (editor: Editor, url: string): void => {
 	const isLinkActive = isBlockActive(editor, "link");
 
-	if (isLinkActive) {
-		toggleBlock(editor, "link", false);
-	}
+	if (isLinkActive) toggleBlock(editor, "link", false);
 
 	const isCollapsed = editor.selection && Range.isCollapsed(editor.selection);
 
@@ -40,7 +38,7 @@ const wrapLink = (editor: Editor, url: string): void => {
 };
 
 export const withLinks = (editor: Editor): Editor => {
-	const { insertData, insertText, isInline } = editor;
+	const { insertBreak, insertData, insertText, isInline } = editor;
 
 	editor.isInline = (element) => {
 		return element.type === "link" ? true : isInline(element);
@@ -62,6 +60,34 @@ export const withLinks = (editor: Editor): Editor => {
 		} else {
 			insertData(data);
 		}
+	};
+
+	/**
+	 * @description We're not allowing for multi-line links. If a user inserts a break at or before
+	 * a link, a new empty paragraph is inserted after the link and the cursor is moved there
+	 * instead.
+	 * @author David Lee
+	 * @date January 1, 2022
+	 */
+	editor.insertBreak = (...args) => {
+		if (!editor.selection) {
+			return insertBreak(...args);
+		}
+
+		const [elementNode, elementPath] = Editor.parent(editor, editor.selection.focus.path);
+
+		if ((elementNode as Element).type !== "link") {
+			return insertBreak(...args);
+		}
+
+		const [, parentPath] = Editor.parent(editor, elementPath);
+		const nextPath = Path.next(parentPath);
+
+		Transforms.insertNodes(
+			editor,
+			{ type: "paragraph", children: [{ text: "" }] },
+			{ at: nextPath, select: true }
+		);
 	};
 
 	return editor;
@@ -88,9 +114,15 @@ export const LinkToolbarButton: FC<Record<string, never>> = () => {
 			onMouseDown={(event) => {
 				event.preventDefault();
 
-				const isLinkActive = isBlockActive(editor, "link");
+				if (!isActive("link")) {
+					makeLink();
 
-				isLinkActive ? toggleBlock(editor, "link", false) : makeLink();
+					return;
+				}
+
+				Transforms.unwrapNodes(editor, {
+					match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === "link"
+				});
 			}}
 			title="link"
 			aria-label="link"

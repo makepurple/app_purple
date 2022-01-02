@@ -53,6 +53,19 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 		return (
 			<EditableContainer ref={ref} className={className} style={style} $readOnly={readOnly}>
 				<Editable
+					/**
+					 * !HACK
+					 * @magic
+					 * @description For some reason, when we return a truthy value from this event
+					 * handler, we can press -> (right arrow) at the end of a link element to move
+					 * to the next text node (toggling off the link type), which desired.
+					 *
+					 * If this behavior ever breaks, consider replacing this with something more
+					 * manual with slate operations.
+					 * @author David Lee
+					 * @date January 1, 2021
+					 */
+					onKeyDown={() => 1}
 					renderElement={renderElement}
 					renderLeaf={renderLeaf}
 					renderPlaceholder={Placeholder}

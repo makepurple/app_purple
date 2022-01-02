@@ -13,6 +13,7 @@ import { DocumentEditorInfo } from "./DocumentEditorInfo";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
+import { withKeyCommands } from "./plugins";
 import { DocumentEditorToolbar } from "./Toolbar";
 
 const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
@@ -20,10 +21,11 @@ const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
 		outline-none
 		ring-indigo-500
 		ring-opacity-80
-		focus-within:ring-2
 		transition
 		duration-300
 		ease-in-out
+		shadow-none
+		focus-within:ring-2
 		[& > *]:first:rounded-t-lg
 		[& > *]:last:rounded-b-lg
 	`}
@@ -83,7 +85,8 @@ const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 			withHistory,
 			withCodeBlock,
 			withLinks,
-			withImages
+			withImages,
+			withKeyCommands
 		);
 
 		return composed(createEditor());
