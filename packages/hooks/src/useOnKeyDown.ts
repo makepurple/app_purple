@@ -16,6 +16,22 @@ export interface UseOnKeyDownOptions {
 	key: KeyCode;
 }
 
+export const keyDown = <T extends HTMLElement>(key: KeyCode, callback: KeyboardEventHandler) => {
+	return (event: KeyboardEvent<T>) => {
+		const valueCode = Keycode[`VALUE_${key}`] ?? null;
+		const keyCode = Keycode[`KEY_${key}`] ?? null;
+		const codeCode = Keycode[`CODE_${key}`] ?? null;
+
+		const isKey = !!valueCode && event.key === valueCode;
+		const isKeyCode = !!keyCode && event.keyCode === keyCode;
+		const isCode = !!codeCode && event.code === codeCode;
+
+		if (isKey || isKeyCode || isCode) callback(event);
+
+		return event;
+	};
+};
+
 /**
  * !HACK
  * @description
