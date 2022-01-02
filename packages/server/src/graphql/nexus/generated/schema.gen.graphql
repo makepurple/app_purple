@@ -808,7 +808,7 @@ type User {
   id: ID!
   image: String
   name: String!
-  posts: [Post!]!
+  posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
   skills: [Skill!]!
   upvotedPosts: [Post!]!

@@ -959,7 +959,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     image: string | null; // String
     name: string; // String!
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
     upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
@@ -1372,7 +1372,7 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     image: 'String'
     name: 'String'
-    posts: 'Post'
+    posts: 'PostConnection'
     repositories: 'Repository'
     skills: 'Skill'
     upvotedPosts: 'Post'
@@ -1638,6 +1638,13 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    posts: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
   }
 }
