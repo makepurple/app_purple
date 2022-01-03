@@ -54,6 +54,14 @@ model Session {
   userId       String
 }
 
+model VerificationToken {
+  expires    DateTime
+  identifier String
+  token      String   @unique
+
+  @@unique([identifier, token])
+}
+
 model User {
   accounts        Account[]
   comments        Comment[]
@@ -105,14 +113,6 @@ model Follow {
   updatedAt   DateTime @updatedAt
 
   @@unique([followerId, followingId])
-}
-
-model VerificationToken {
-  expires    DateTime
-  identifier String
-  token      String   @unique
-
-  @@unique([identifier, token])
 }
 
 model Post {

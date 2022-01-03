@@ -5,7 +5,7 @@ import chalk from "chalk";
 const prisma = new PrismaClient();
 
 const main = async () => {
-	console.log(chalk.blue("prisma:seeding", new Date()));
+	console.log(chalk.blue("prisma:seeding"), chalk.magenta(new Date()));
 
 	await Promise.resolve();
 };
