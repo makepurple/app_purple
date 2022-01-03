@@ -9,8 +9,12 @@ faker.seed(1);
 
 const prisma = new PrismaClient();
 
+const log = (...args: string[]): void => {
+	console.log(chalk.blue("prisma:seeding"), ...args);
+};
+
 const main = async () => {
-	console.log(chalk.blue("prisma:seeding"), chalk.magenta(new Date()));
+	log(chalk.magenta(new Date()));
 
 	if (myUser) {
 		await prisma.user.upsert({
@@ -20,34 +24,30 @@ const main = async () => {
 		});
 	}
 
-	console.log(chalk.blue("prisma:seeding"), chalk.magenta("skills"));
+	log(chalk.magenta("skills"));
 	await prisma.$transaction(skills.map((data) => prisma.skill.create({ data })));
 
-	console.log(chalk.blue("prisma:seeding"), chalk.magenta("user"));
+	log(chalk.magenta("user"));
 	await prisma.$transaction(users.map((data) => prisma.user.create({ data })));
 
-	console.log(chalk.blue("prisma:seeding"), chalk.magenta("organization"));
+	log(chalk.magenta("organization"));
 	await prisma.$transaction(organizations.map((data) => prisma.organization.create({ data })));
 
-	console.log(chalk.blue("prisma:seeding"), chalk.magenta("repository"));
+	log(chalk.magenta("repository"));
 	await prisma.$transaction(repositories.map((data) => prisma.repository.create({ data })));
 
-	console.log(chalk.blue("prisma:seeding"), chalk.magenta("experiences"));
+	log(chalk.magenta("experiences"));
 	await prisma.$transaction(experiences.map((data) => prisma.experience.create({ data })));
 };
 
 main()
 	.catch((e) => {
-		console.log(chalk.red("prisma:seed-error"), e.message);
+		log(chalk.red("prisma:seed-error"), e.message);
 
 		process.exit(1);
 	})
 	.finally(async () => {
-		console.log(
-			chalk.blue("prisma:seeding"),
-			chalk.greenBright("done"),
-			chalk.magenta(new Date())
-		);
+		log(chalk.greenBright("done"), chalk.magenta(new Date()));
 
 		await prisma.$disconnect();
 
