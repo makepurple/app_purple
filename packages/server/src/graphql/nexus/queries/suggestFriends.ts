@@ -14,7 +14,7 @@ Simple Recommender Criteria
 filter by
 [x] is not a friender to the viewer
 [x] was not friend requested by the viewer within 6 months
-[x] did not reject reviewer within 6 months
+[x] did not reject viewer within 6 months
 [x] is not the viewer themselves
 [x] #skills > threshold % viewer skills
 [x] #skills > threshold % viewer desired-skills
