@@ -229,7 +229,7 @@ export const suggestFriends = queryField("suggestFriends", {
 					where: { id: { not: { equals: user.id } } }
 				}),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-			{ ...PrismaUtils.handleRelayCursor }
+			{ ...PrismaUtils.handleRelayCursor() }
 		);
 
 		return connection;

@@ -44,7 +44,7 @@ export const Comment = objectType({
 							where: { user: PrismaUtils.nonNull(args.where) }
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -77,7 +77,7 @@ export const Comment = objectType({
 						}),
 					() => prisma.comment.count(),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -115,7 +115,7 @@ export const Comment = objectType({
 							where: { user: PrismaUtils.nonNull(args.where) }
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;

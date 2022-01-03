@@ -32,7 +32,7 @@ export const User = objectType({
 						}),
 					() => prisma.comment.count(),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -94,7 +94,7 @@ export const User = objectType({
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -136,7 +136,7 @@ export const User = objectType({
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -182,7 +182,7 @@ export const User = objectType({
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -224,7 +224,7 @@ export const User = objectType({
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;
@@ -279,9 +279,15 @@ export const User = objectType({
 							...paginationArgs,
 							where: PrismaUtils.nonNull(args.where)
 						}),
-					() => prisma.post.count({ where: PrismaUtils.nonNull(args.where) }),
+					() =>
+						prisma.post.count({
+							where: {
+								...PrismaUtils.nonNull(args.where),
+								author: { id: { equals: parent.id } }
+							}
+						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-					{ ...PrismaUtils.handleRelayCursor }
+					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
 				return connection;

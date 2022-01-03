@@ -26,7 +26,7 @@ export const users = queryField("users", {
 					where: {}
 				}),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-			{ ...PrismaUtils.handleRelayCursor }
+			{ ...PrismaUtils.handleRelayCursor() }
 		);
 
 		return connection;

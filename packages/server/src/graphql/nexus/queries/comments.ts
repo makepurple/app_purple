@@ -23,7 +23,7 @@ export const comments = queryField("comments", {
 				}),
 			() => prisma.comment.count(),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
-			{ ...PrismaUtils.handleRelayCursor }
+			{ ...PrismaUtils.handleRelayCursor() }
 		);
 
 		return connection;
