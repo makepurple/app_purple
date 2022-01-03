@@ -20,13 +20,20 @@ const main = async () => {
 		});
 	}
 
+	console.log(chalk.blue("prisma:seeding"), chalk.magenta("skills"));
 	await prisma.$transaction(skills.map((data) => prisma.skill.create({ data })));
-	await prisma.$transaction(users.map((data) => prisma.user.create({ data })));
-	await prisma.$transaction(organizations.map((data) => prisma.organization.create({ data })));
-	await prisma.$transaction(repositories.map((data) => prisma.repository.create({ data })));
-	await prisma.$transaction(experiences.map((data) => prisma.experience.create({ data })));
 
-	await Promise.resolve();
+	console.log(chalk.blue("prisma:seeding"), chalk.magenta("user"));
+	await prisma.$transaction(users.map((data) => prisma.user.create({ data })));
+
+	console.log(chalk.blue("prisma:seeding"), chalk.magenta("organization"));
+	await prisma.$transaction(organizations.map((data) => prisma.organization.create({ data })));
+
+	console.log(chalk.blue("prisma:seeding"), chalk.magenta("repository"));
+	await prisma.$transaction(repositories.map((data) => prisma.repository.create({ data })));
+
+	console.log(chalk.blue("prisma:seeding"), chalk.magenta("experiences"));
+	await prisma.$transaction(experiences.map((data) => prisma.experience.create({ data })));
 };
 
 main()
@@ -36,6 +43,12 @@ main()
 		process.exit(1);
 	})
 	.finally(async () => {
+		console.log(
+			chalk.blue("prisma:seeding"),
+			chalk.greenBright("done"),
+			chalk.magenta(new Date())
+		);
+
 		await prisma.$disconnect();
 
 		process.exit(0);

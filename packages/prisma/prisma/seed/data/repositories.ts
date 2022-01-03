@@ -5,7 +5,7 @@ export const repositories: readonly Prisma.RepositoryCreateInput[] = [
 		name: "dogehouse",
 		user: {
 			connect: {
-				name: "bedawad"
+				name: "benawad"
 			}
 		}
 	},

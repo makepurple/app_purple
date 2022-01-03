@@ -38,13 +38,55 @@ const main = async () => {
 	const userCreate: Prisma.UserCreateInput | null = myUser
 		? {
 				...myUser,
-				accounts: { create: myUser.accounts },
-				desiredSkills: { create: myUser.desiredSkills },
-				experiences: { create: myUser.experiences },
-				posts: { create: myUser.posts },
-				repositories: { create: myUser.repositories },
-				sessions: { create: myUser.sessions },
-				skills: { create: myUser.skills }
+				accounts: {
+					create: myUser.accounts.map((account) => {
+						const { userId, ...data } = account;
+
+						return data;
+					})
+				},
+				desiredSkills: {
+					create: myUser.desiredSkills.map((desiredSkill) => {
+						const { userId, ...data } = desiredSkill;
+
+						return data;
+					})
+				},
+				experiences: {
+					create: myUser.experiences.map((experience) => {
+						const { userId, ...data } = experience;
+
+						return data;
+					})
+				},
+				posts: {
+					create: myUser.posts.map((post) => {
+						const { authorName, ...data } = post;
+
+						return data;
+					})
+				},
+				repositories: {
+					create: myUser.repositories.map((repository) => {
+						const { owner, ...data } = repository;
+
+						return data;
+					})
+				},
+				sessions: {
+					create: myUser.sessions.map((session) => {
+						const { userId, ...data } = session;
+
+						return data;
+					})
+				},
+				skills: {
+					create: myUser.skills.map((skill) => {
+						const { userId, ...data } = skill;
+
+						return data;
+					})
+				}
 		  }
 		: null;
 
