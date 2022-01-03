@@ -5,7 +5,7 @@
 	"compilerOptions": {
 		"downlevelIteration": true,
 		"moduleResolution": "node",
-		"rootDir": "src",
+		"rootDirs": ["src", "prisma/seed"],
 		"outDir": "dist"
 	}
 }

@@ -17,7 +17,7 @@
 		"prisma:docs": "prisma-docs-generator serve --port 4002",
 		"prisma:format": "prisma format",
 		"prisma:migrate": "prisma migrate dev",
-		"prisma:reset": "prisma migrate reset",
+		"prisma:reset": "pnpm prisma:save-user && prisma migrate reset",
 		"prisma:seed": "pnpm prisma:save-user && prisma db seed",
 		"prisma:studio": "prisma studio"
 	},
@@ -31,8 +31,10 @@
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
+		"@types/faker": "^5.5.9",
 		"@types/fs-extra": "^9.0.13",
 		"dotenv-cli": "^4.1.1",
+		"faker": "^5.5.3",
 		"fs-extra": "^10.0.0",
 		"graphql": "15.7.2",
 		"prettier": "^2.5.1",
