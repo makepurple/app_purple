@@ -88,19 +88,14 @@ export const Post = objectType({
 		t.field(NexusPrisma.Post.updatedAt);
 		t.nonNull.int("upvotes", {
 			resolve: async (parent, args, { prisma }) => {
-				const upvotes = await prisma.postUpvoter.count({
-					where: {
-						postId: parent.id,
-						upvote: true
-					}
+				const groups = await prisma.postUpvoter.groupBy({
+					_count: true,
+					by: ["upvote"],
+					where: { postId: parent.id }
 				});
 
-				const downvotes = await prisma.postUpvoter.count({
-					where: {
-						postId: parent.id,
-						upvote: false
-					}
-				});
+				const upvotes = groups.find((group) => group.upvote)?._count ?? 0;
+				const downvotes = groups.find((group) => !group.upvote)?._count ?? 0;
 
 				return upvotes - downvotes;
 			}
