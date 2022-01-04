@@ -19,11 +19,7 @@ query GetRepositories(
 			...RepositoryCardRepository
 		}
 		pageInfo {
-			__typename
-			endCursor
-			hasNextPage
-			hasPreviousPage
-			startCursor
+			...PageInfoFragment
 		}
 	}
 }

@@ -43,6 +43,8 @@ export * from "./RepositoryConnection";
 export * from "./RepositoryEdge";
 export * from "./RequestFriendshipPayload";
 export * from "./Skill";
+export * from "./SkillConnection";
+export * from "./SkillEdge";
 export * from "./SuggestExperiences";
 export * from "./SuggestRepositories";
 export * from "./SuggestSkills";

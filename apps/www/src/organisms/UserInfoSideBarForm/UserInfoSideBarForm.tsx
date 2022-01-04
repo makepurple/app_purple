@@ -97,8 +97,8 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		desiredSkills: readonly { name: string; owner: string }[];
 	}>({
 		defaultValues: {
-			skills: user?.skills ?? [],
-			desiredSkills: user?.desiredSkills ?? []
+			skills: user?.skills.nodes ?? [],
+			desiredSkills: user?.desiredSkills.nodes ?? []
 		}
 	});
 
@@ -183,8 +183,8 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 		if (!user) return;
 
 		reset({
-			skills: user.skills,
-			desiredSkills: user.desiredSkills
+			skills: user.skills.nodes,
+			desiredSkills: user.desiredSkills.nodes
 		});
 	}, [reset, user]);
 

@@ -181,9 +181,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					<Divider />
 					<SkillsContainer>
 						<SubTitle>Highlighted Skills</SubTitle>
-						{user.skills.length ? (
+						{user.skills.nodes.length ? (
 							<Skills type="positive">
-								{user.skills.map((skill) => (
+								{user.skills.nodes.map((skill) => (
 									<Tags.Tag key={skill.id} id={skill.id.toString()}>
 										{skill.name}
 									</Tags.Tag>
@@ -193,9 +193,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							<NoDataText tw="mt-4">This user has not added any skills</NoDataText>
 						)}
 						<SubTitle>Currently Learning</SubTitle>
-						{user.desiredSkills.length ? (
+						{user.desiredSkills.nodes.length ? (
 							<Skills type="negative">
-								{user.desiredSkills.map((skill) => (
+								{user.desiredSkills.nodes.map((skill) => (
 									<Tags.Tag key={skill.id} id={skill.id.toString()}>
 										{skill.name}
 									</Tags.Tag>

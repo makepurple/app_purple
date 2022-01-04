@@ -581,6 +581,18 @@ type Skill {
   users: [User!]!
 }
 
+type SkillConnection implements Connection {
+  edges: [SkillEdge!]!
+  nodes: [Skill!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SkillEdge {
+  cursor: String!
+  node: Skill!
+}
+
 input SkillNameOwnerCompoundUniqueInput {
   name: String!
   owner: String!
@@ -796,7 +808,7 @@ type User {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String
-  desiredSkills: [Skill!]!
+  desiredSkills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   email: String!
   experiences: [Experience!]!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -810,8 +822,9 @@ type User {
   name: String!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
-  skills: [Skill!]!
-  upvotedPosts: [Post!]!
+  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
+  viewerFollowing: Boolean!
 }
 
 """Relay-style connection for User types."""

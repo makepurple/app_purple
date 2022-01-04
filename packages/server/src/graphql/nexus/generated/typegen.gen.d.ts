@@ -488,6 +488,15 @@ export interface NexusGenObjects {
     name: string; // String!
     owner: string; // String!
   }
+  SkillConnection: { // root type
+    edges: NexusGenRootTypes['SkillEdge'][]; // [SkillEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  SkillEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Skill']; // Skill!
+  }
   SuggestExperiences: { // root type
     nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
     totalCount: number; // Int!
@@ -564,7 +573,7 @@ export interface NexusGenObjects {
 }
 
 export interface NexusGenInterfaces {
-  Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
+  Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
 }
@@ -873,6 +882,16 @@ export interface NexusGenFieldTypes {
     owner: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
+  SkillConnection: { // field return type
+    edges: NexusGenRootTypes['SkillEdge'][]; // [SkillEdge!]!
+    nodes: NexusGenRootTypes['Skill'][]; // [Skill!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  SkillEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Skill']; // Skill!
+  }
   SuggestExperiences: { // field return type
     nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
     totalCount: number; // Int!
@@ -947,7 +966,7 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
-    desiredSkills: NexusGenRootTypes['Skill'][]; // [Skill!]!
+    desiredSkills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     email: string; // String!
     experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
     followers: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -961,8 +980,9 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
-    skills: NexusGenRootTypes['Skill'][]; // [Skill!]!
-    upvotedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
+    skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
+    upvotedPosts: NexusGenRootTypes['PostConnection']; // PostConnection!
+    viewerFollowing: boolean; // Boolean!
   }
   UserConnection: { // field return type
     edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
@@ -1286,6 +1306,16 @@ export interface NexusGenFieldTypeNames {
     owner: 'String'
     users: 'User'
   }
+  SkillConnection: { // field return type name
+    edges: 'SkillEdge'
+    nodes: 'Skill'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  SkillEdge: { // field return type name
+    cursor: 'String'
+    node: 'Skill'
+  }
   SuggestExperiences: { // field return type name
     nodes: 'GitHubOrganization'
     totalCount: 'Int'
@@ -1360,7 +1390,7 @@ export interface NexusGenFieldTypeNames {
     comments: 'CommentConnection'
     createdAt: 'DateTime'
     description: 'String'
-    desiredSkills: 'Skill'
+    desiredSkills: 'SkillConnection'
     email: 'String'
     experiences: 'Experience'
     followers: 'UserConnection'
@@ -1374,8 +1404,9 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     posts: 'PostConnection'
     repositories: 'Repository'
-    skills: 'Skill'
-    upvotedPosts: 'Post'
+    skills: 'SkillConnection'
+    upvotedPosts: 'PostConnection'
+    viewerFollowing: 'Boolean'
   }
   UserConnection: { // field return type name
     edges: 'UserEdge'
@@ -1611,6 +1642,13 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
       where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
     }
+    desiredSkills: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
+    }
     followers: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -1646,11 +1684,25 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
+    skills: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
+    }
+    upvotedPosts: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
+    }
   }
 }
 
 export interface NexusGenAbstractTypeMembers {
-  Connection: "CommentConnection" | "ExperienceConnection" | "PostConnection" | "RepositoryConnection" | "UserConnection"
+  Connection: "CommentConnection" | "ExperienceConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserConnection"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationPayload: "AcceptFriendshipPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowUserPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemovePostThumbnailPayload" | "RequestFriendshipPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
 }
@@ -1677,6 +1729,7 @@ export interface NexusGenTypeInterfaces {
   RemovePostThumbnailPayload: "MutationPayload"
   RepositoryConnection: "Connection"
   RequestFriendshipPayload: "MutationPayload"
+  SkillConnection: "Connection"
   UnfollowUserPayload: "MutationPayload"
   UnvoteCommentPayload: "MutationPayload"
   UpdateCommentPayload: "MutationPayload"

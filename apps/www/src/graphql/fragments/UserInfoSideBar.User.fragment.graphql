@@ -2,8 +2,21 @@ fragment UserInfoSideBarUser on User {
 	__typename
 	desiredSkills {
 		__typename
-		id
-		name
+		pageInfo {
+			...PageInfoFragment
+		}
+		edges {
+			cursor
+			node {
+				__typename
+				id
+			}
+		}
+		nodes {
+			__typename
+			id
+			name
+		}
 	}
 	github {
 		__typename
@@ -23,8 +36,21 @@ fragment UserInfoSideBarUser on User {
 	name
 	skills {
 		__typename
-		id
-		name
+		pageInfo {
+			...PageInfoFragment
+		}
+		edges {
+			cursor
+			node {
+				__typename
+				id
+			}
+		}
+		nodes {
+			__typename
+			id
+			name
+		}
 	}
 	...UserAvatarUser
 }

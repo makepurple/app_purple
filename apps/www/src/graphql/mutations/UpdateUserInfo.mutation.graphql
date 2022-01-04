@@ -7,8 +7,19 @@ mutation UpdateUserInfo(
 			__typename
 			id
 			skills {
-				__typename
-				...UpdateUserInfoSkill
+				pageInfo {
+					...PageInfoFragment
+				}
+				edges {
+					cursor
+					node {
+						__typename
+						id
+					}
+				}
+				nodes {
+					...UpdateUserInfoSkill
+				}
 			}
 		}
 	}
@@ -17,8 +28,19 @@ mutation UpdateUserInfo(
 			__typename
 			id
 			skills {
-				__typename
-				...UpdateUserInfoSkill
+				pageInfo {
+					...PageInfoFragment
+				}
+				edges {
+					cursor
+					node {
+						__typename
+						id
+					}
+				}
+				nodes {
+					...UpdateUserInfoSkill
+				}
 			}
 		}
 	}

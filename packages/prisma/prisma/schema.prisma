@@ -195,21 +195,23 @@ model Skill {
 }
 
 model SkillsOnUsers {
+  id      String @id @default(cuid())
   skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
   skillId String
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
 
-  @@id([skillId, userId])
+  @@unique([skillId, userId])
 }
 
 model DesiredSkillsOnUsers {
+  id      String @id @default(cuid())
   skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
   skillId String
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
 
-  @@id([skillId, userId])
+  @@unique([skillId, userId])
 }
 
 model Repository {
