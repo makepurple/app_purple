@@ -11,15 +11,17 @@ export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
 
 export type TagType = "positive" | "neutral" | "negative";
 
-export const Root = styled.span<{ type?: TagType }>`
+export const Root = styled.span<{ type?: TagType; $editable?: boolean }>`
 	${tw`
 		inline-flex
 		items-stretch
 		justify-center
 		h-6
+		px-3.5
 		rounded
-		text-base
-		font-medium
+		font-size[inherit]
+		line-height[inherit]
+		font-weight[inherit]
 		text-white
 	`}
 	background-color: ${({ type }): any => {
@@ -34,14 +36,17 @@ export const Root = styled.span<{ type?: TagType }>`
 				return "initial";
 		}
 	}};
+	${({ $editable }) =>
+		$editable &&
+		tw`
+			pl-1
+			pr-0
+		`}
 `;
 
 const Text = tw.span`
 	flex
 	items-center
-	px-3.5
-	not-last:pr-0
-	not-last:pl-1
 `;
 
 const CloseButton = tw.span`
@@ -59,7 +64,7 @@ export const Tag = styled((props: TagProps) => {
 	const context = useContext(TagsContext);
 
 	return (
-		<Root {...restTagProps}>
+		<Root {...restTagProps} $editable={context.editable}>
 			<Text>{children}</Text>
 			{context.editable && (
 				<CloseButton

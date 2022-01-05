@@ -28,6 +28,8 @@ const Root = styled.div<{ editable?: boolean; type?: TagType }>`
 		flex-row
 		flex-wrap
 		gap-1.5
+		text-base
+		font-medium
 	`}
 
 	${({ editable }) =>
