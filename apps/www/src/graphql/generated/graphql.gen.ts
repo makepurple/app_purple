@@ -416,6 +416,7 @@ export type Mutation = {
   readonly updatePostDraft: UpdatePostDraftPayload;
   readonly updateRepository: UpdateRepositoryPayload;
   readonly updateSkills: UpdateSkillsPayload;
+  readonly updateUserFromGitHub: UpdateUserFromGitHubPayload;
   readonly uploadPostImage: UploadPostImagePayload;
   readonly upvoteComment: UpvoteCommentPayload;
   readonly upvotePost: UpvotePostPayload;
@@ -1118,6 +1119,12 @@ export type UpdateSkillsPayload = MutationPayload & {
   readonly record: User;
 };
 
+export type UpdateUserFromGitHubPayload = MutationPayload & {
+  readonly __typename: 'UpdateUserFromGitHubPayload';
+  readonly query: Query;
+  readonly record: User;
+};
+
 export type UploadPostImageInput = {
   /** The file of the image to be uploaded */
   readonly image: Scalars['Upload'];
@@ -1296,7 +1303,7 @@ export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: s
 
 export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
-export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } }> } };
+export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
@@ -1389,6 +1396,11 @@ export type UpdateRepositoryMutationVariables = Exact<{
 
 
 export type UpdateRepositoryMutation = { readonly __typename: 'Mutation', readonly updateRepository: { readonly __typename: 'UpdateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } };
+
+export type UpdateUserFromGitHubMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UpdateUserFromGitHubMutation = { readonly __typename: 'Mutation', readonly updateUserFromGitHub: { readonly __typename: 'UpdateUserFromGitHubPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly description?: string | null | undefined, readonly image?: string | null | undefined, readonly name: string } } };
 
 export type UpdateUserInfoMutationVariables = Exact<{
   skills: ReadonlyArray<SkillWhereUniqueInput> | SkillWhereUniqueInput;
@@ -1682,40 +1694,33 @@ export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
 export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment SuggestedFriendCardUser on User {
   __typename
+  desiredSkills {
+    nodes {
+      id
+      name
+      owner
+    }
+  }
   id
   image
   name
   posts(first: 1) {
-    __typename
-    totalCount
-    edges {
-      __typename
-      cursor
-      node {
-        __typename
-        id
-      }
-    }
     nodes {
-      __typename
       id
       authorName
       description
       publishedAt
       thumbnailUrl
       title
-      upvoters {
-        edges {
-          cursor
-          node {
-            id
-          }
-        }
-        nodes {
-          id
-        }
-      }
+      upvotes
       urlSlug
+    }
+  }
+  skills {
+    nodes {
+      id
+      name
+      owner
     }
   }
 }
@@ -2053,6 +2058,22 @@ export const UpdateRepositoryDocument = /*#__PURE__*/ gql`
 
 export function useUpdateRepositoryMutation() {
   return Urql.useMutation<UpdateRepositoryMutation, UpdateRepositoryMutationVariables>(UpdateRepositoryDocument);
+};
+export const UpdateUserFromGitHubDocument = /*#__PURE__*/ gql`
+    mutation UpdateUserFromGitHub {
+  updateUserFromGitHub {
+    record {
+      id
+      description
+      image
+      name
+    }
+  }
+}
+    `;
+
+export function useUpdateUserFromGitHubMutation() {
+  return Urql.useMutation<UpdateUserFromGitHubMutation, UpdateUserFromGitHubMutationVariables>(UpdateUserFromGitHubDocument);
 };
 export const UpdateUserInfoDocument = /*#__PURE__*/ gql`
     mutation UpdateUserInfo($skills: [SkillWhereUniqueInput!]!, $desiredSkills: [SkillWhereUniqueInput!]!) {

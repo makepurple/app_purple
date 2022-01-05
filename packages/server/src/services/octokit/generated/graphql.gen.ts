@@ -14497,8 +14497,8 @@ export type Push = Node & {
   readonly permalink: Scalars['URI'];
   /** The SHA before the push */
   readonly previousSha?: Maybe<Scalars['GitObjectID']>;
-  /** The user who pushed */
-  readonly pusher: User;
+  /** The actor who pushed */
+  readonly pusher: Actor;
   /** The repository that was pushed to */
   readonly repository: Repository;
 };
@@ -22783,6 +22783,11 @@ export type GetRepositoryToCreateQueryVariables = Exact<{
 
 
 export type GetRepositoryToCreateQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename?: 'Repository', readonly id: string } | null | undefined };
+
+export type GetUserForUpdateUserFromGitHubQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserForUpdateUserFromGitHubQuery = { readonly __typename?: 'Query', readonly viewer: { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly login: string, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined } };
 
 export type SuggestOrganizationsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;

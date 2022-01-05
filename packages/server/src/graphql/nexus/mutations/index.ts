@@ -21,6 +21,7 @@ export * from "./updatePost";
 export * from "./updatePostDraft";
 export * from "./updateRepository";
 export * from "./updateSkills";
+export * from "./updateUserFromGitHub";
 export * from "./uploadPostImage";
 export * from "./upvoteComment";
 export * from "./upvotePost";

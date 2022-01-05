@@ -59,6 +59,7 @@ export * from "./UpdatePostDraftPayload";
 export * from "./UpdatePostPayload";
 export * from "./UpdateRepositoryPayload";
 export * from "./UpdateSkillsPayload";
+export * from "./UpdateUserFromGitHubPayload";
 export * from "./UploadPostImagePayload";
 export * from "./UpvoteCommentPayload";
 export * from "./UpvotePostPayload";

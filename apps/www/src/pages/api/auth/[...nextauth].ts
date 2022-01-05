@@ -6,6 +6,13 @@ import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { theme } from "twin.macro";
 
+/**
+ * TODO
+ * @description Find best way to update user's github information including their image and
+ * description on prisma
+ * @author David Lee
+ * @date January 4, 2022
+ */
 const authHandler: NextApiHandler = (req, res) =>
 	NextAuth(req, res, {
 		adapter: PrismaAdapter(prisma),
@@ -22,16 +29,48 @@ const authHandler: NextApiHandler = (req, res) =>
 				});
 			}
 		},
+		events: {
+			signIn: async (params) => {
+				const { account, profile } = params;
+
+				if (!profile) return;
+
+				await prisma.user
+					.update({
+						where: { name: profile.name },
+						data: {
+							description: profile.description,
+							accounts: {
+								update: {
+									where: {
+										provider_providerAccountId: {
+											provider: account.provider,
+											providerAccountId: account.providerAccountId
+										}
+									},
+									data: {
+										access_token: account.access_token
+									}
+								}
+							}
+						}
+					})
+					.catch(() => null);
+			}
+		},
 		providers: [
 			GitHubProvider({
 				clientId: process.env.GITHUB_CLIENT_ID,
 				clientSecret: process.env.GITHUB_CLIENT_SECRET,
-				profile: (profile) => ({
-					id: (profile.id as number).toString(),
-					name: profile.login as string,
-					email: profile.email as string,
-					image: profile.avatar_url as string
-				}),
+				profile: (profile) => {
+					return {
+						id: profile.id,
+						name: profile.login as string,
+						description: profile.bio,
+						email: profile.email as string,
+						image: profile.avatar_url as string
+					};
+				},
 				authorization: {
 					params: {
 						scope: "public_repo read:user user:email"

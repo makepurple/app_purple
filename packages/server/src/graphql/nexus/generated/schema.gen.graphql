@@ -370,6 +370,7 @@ type Mutation {
   updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): UpdatePostDraftPayload!
   updateRepository(data: RepositoryUpdateInput!, where: RepositoryWhereUniqueInput!): UpdateRepositoryPayload!
   updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
+  updateUserFromGitHub: UpdateUserFromGitHubPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
@@ -773,6 +774,11 @@ input UpdateSkillsInput {
 }
 
 type UpdateSkillsPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
+type UpdateUserFromGitHubPayload implements MutationPayload {
   query: Query!
   record: User!
 }

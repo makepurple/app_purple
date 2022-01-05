@@ -1,0 +1,10 @@
+mutation UpdateUserFromGitHub {
+	updateUserFromGitHub {
+		record {
+			id
+			description
+			image
+			name
+		}
+	}
+}
