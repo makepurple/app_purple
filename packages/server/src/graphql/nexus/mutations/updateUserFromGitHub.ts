@@ -25,8 +25,6 @@ export const updateUserFromGitHub = mutationField("updateUserFromGitHub", {
 			.then((result) => result.viewer)
 			.catch(() => null);
 
-		console.log("githubViewer", githubViewer);
-
 		const record = await prisma.user.update({
 			where: { id: user.id },
 			data: {
