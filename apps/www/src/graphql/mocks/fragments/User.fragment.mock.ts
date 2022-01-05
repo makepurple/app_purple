@@ -18,6 +18,7 @@ export const User_fragment_mock: User = {
 		nodes: []
 	},
 	createdAt: dayjs(1318781876406).toDate(),
+	description: "I learn things and work on MakePurple",
 	desiredSkills: {
 		__typename: "SkillConnection",
 		pageInfo: {

@@ -24,6 +24,7 @@ export * from "./RepositoryCard";
 export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
+export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";
 export * from "./UpdateExperienceForm";
 export * from "./UrqlProvider";

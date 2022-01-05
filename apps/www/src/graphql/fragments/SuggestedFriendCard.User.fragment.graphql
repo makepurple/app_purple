@@ -1,39 +1,33 @@
 fragment SuggestedFriendCardUser on User {
 	__typename
+	description
+	desiredSkills {
+		nodes {
+			id
+			name
+			owner
+		}
+	}
 	id
 	image
 	name
 	posts(first: 1) {
-		__typename
-		totalCount
-		edges {
-			__typename
-			cursor
-			node {
-				__typename
-				id
-			}
-		}
 		nodes {
-			__typename
 			id
 			authorName
 			description
 			publishedAt
 			thumbnailUrl
 			title
-			upvoters {
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					id
-				}
-			}
+			upvotes
 			urlSlug
+		}
+	}
+	skills {
+		nodes {
+			id
+			name
+			owner
 		}
 	}
 }
