@@ -8,12 +8,28 @@ declare module "next-auth" {
 		user: {
 			id: string,
 			name: string;
-			email?: string | null | undefined;
-			image?: string | null | undefined;
+			email: string;
+			image: string | null | undefined;
 			accessToken?: string | null | undefined;
 		}
 		accessToken: string;
 		expires: string;
+	}
+
+	interface Profile {
+		id: string;
+		name: string;
+		email: string;
+		description?: string | null | undefined;
+		image: string;
+	}
+
+	interface User {
+		id: string;
+		name: string;
+		email: string;
+		description?: string | null | undefined;
+		image: string;
 	}
 }
 

@@ -4,17 +4,18 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
 import prettier from "prettier";
+import { myUser } from "./generated/myUser";
 
 export const prisma = new PrismaClient();
 
-const output = path.resolve(__dirname, "./generated/myUser.ts");
+const output = path.resolve(__dirname, "./generated/toSaveUser.ts");
 
 const main = async () => {
 	console.log(chalk.blue("prisma:saving-user"), chalk.magenta(new Date()));
 
 	fs.ensureFileSync(output);
 
-	const myUser = process.env.MY_USERNAME
+	const toSaveUser = process.env.MY_USERNAME
 		? await prisma.user.findUnique({
 				where: {
 					name: process.env.MY_USERNAME
@@ -35,66 +36,66 @@ const main = async () => {
 		  })
 		: null;
 
-	const userCreate: Prisma.UserCreateInput | null = myUser
+	const userCreate: Prisma.UserCreateInput | null = toSaveUser
 		? {
-				...myUser,
+				...toSaveUser,
 				accounts: {
-					create: myUser.accounts.map((account) => {
+					create: toSaveUser.accounts.map((account) => {
 						const { userId, ...data } = account;
 
 						return data;
 					})
 				},
 				desiredSkills: {
-					create: myUser.desiredSkills.map((desiredSkill) => {
+					create: toSaveUser.desiredSkills.map((desiredSkill) => {
 						const { userId, ...data } = desiredSkill;
 
 						return data;
 					})
 				},
 				experiences: {
-					create: myUser.experiences.map((experience) => {
+					create: toSaveUser.experiences.map((experience) => {
 						const { userId, ...data } = experience;
 
 						return data;
 					})
 				},
 				posts: {
-					create: myUser.posts.map((post) => {
+					create: toSaveUser.posts.map((post) => {
 						const { authorName, ...data } = post;
 
 						return data;
 					})
 				},
 				repositories: {
-					create: myUser.repositories.map((repository) => {
+					create: toSaveUser.repositories.map((repository) => {
 						const { owner, ...data } = repository;
 
 						return data;
 					})
 				},
 				sessions: {
-					create: myUser.sessions.map((session) => {
+					create: toSaveUser.sessions.map((session) => {
 						const { userId, ...data } = session;
 
 						return data;
 					})
 				},
 				skills: {
-					create: myUser.skills.map((skill) => {
+					create: toSaveUser.skills.map((skill) => {
 						const { userId, ...data } = skill;
 
 						return data;
 					})
 				}
 		  }
-		: null;
+		: myUser;
 
 	const savedUserCode = prettier.format(
 		`
 			import { Prisma } from "@prisma/client";
 
-			export const myUser: Prisma.UserCreateInput | null = ${JSON.stringify(userCreate, null, 4)};
+			export const toSaveUser: Prisma.UserCreateInput | null = ${JSON.stringify(userCreate, null, 4)};
 		`,
 		{
 			parser: "typescript",
