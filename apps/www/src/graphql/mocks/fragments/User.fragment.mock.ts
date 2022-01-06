@@ -154,5 +154,6 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
-	viewerFollowing: false
+	viewerFollowing: false,
+	viewerFriended: false
 };

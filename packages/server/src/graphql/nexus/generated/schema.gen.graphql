@@ -831,6 +831,7 @@ type User {
   skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerFollowing: Boolean!
+  viewerFriended: Boolean!
 }
 
 """Relay-style connection for User types."""

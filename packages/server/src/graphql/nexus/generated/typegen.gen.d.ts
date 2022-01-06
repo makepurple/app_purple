@@ -991,6 +991,7 @@ export interface NexusGenFieldTypes {
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     upvotedPosts: NexusGenRootTypes['PostConnection']; // PostConnection!
     viewerFollowing: boolean; // Boolean!
+    viewerFriended: boolean; // Boolean!
   }
   UserConnection: { // field return type
     edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
@@ -1420,6 +1421,7 @@ export interface NexusGenFieldTypeNames {
     skills: 'SkillConnection'
     upvotedPosts: 'PostConnection'
     viewerFollowing: 'Boolean'
+    viewerFriended: 'Boolean'
   }
   UserConnection: { // field return type name
     edges: 'UserEdge'

@@ -1174,6 +1174,7 @@ export type User = {
   readonly skills: SkillConnection;
   readonly upvotedPosts: PostConnection;
   readonly viewerFollowing: Scalars['Boolean'];
+  readonly viewerFriended: Scalars['Boolean'];
 };
 
 

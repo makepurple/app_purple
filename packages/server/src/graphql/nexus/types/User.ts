@@ -407,16 +407,32 @@ export const User = objectType({
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
 
-				const followers = await prisma.user
-					.findUnique({
-						where: { id: user.id }
-					})
-					.followedBy({
-						take: 1,
-						where: { id: { equals: user.id } }
-					});
+				const follow = await prisma.follow.findUnique({
+					where: {
+						followerId_followingId: {
+							followerId: user.id,
+							followingId: parent.id
+						}
+					}
+				});
 
-				return !!followers.length;
+				return !!follow;
+			}
+		});
+		t.nonNull.boolean("viewerFriended", {
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const friendship = await prisma.friendship.findUnique({
+					where: {
+						frienderId_friendingId: {
+							frienderId: user.id,
+							friendingId: parent.id
+						}
+					}
+				});
+
+				return !!friendship;
 			}
 		});
 	}
