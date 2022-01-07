@@ -4,6 +4,7 @@ export * from "./GitHubOrganization.fragment.mock";
 export * from "./GitHubRepository.fragment.mock";
 export * from "./GitHubUser.fragment.mock";
 export * from "./Organization.fragment.mock";
+export * from "./PageInfo.fragment.mock";
 export * from "./Post.fragment.mock";
 export * from "./Repository.fragment.mock";
 export * from "./TopLanguages.fragment.mock";

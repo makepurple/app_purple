@@ -1,0 +1,20 @@
+query SuggestFriends(
+	$after: String
+	$first: Int
+	$where: SuggestFriendsWhereInput!
+) {
+	suggestFriends(where: $where) {
+		pageInfo {
+			...PageInfoFragment
+		}
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
+		nodes {
+			...SuggestedFriendCardUser
+		}
+	}
+}

@@ -2,22 +2,29 @@ import { Avatar, Divider, GitHubAvatarImage, Paper, Tags } from "@makepurple/com
 import { RenderComponentProps as MasonicRenderProps } from "masonic";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { SuggestedFriendCardUserFragment } from "../../graphql";
 
 const MAX_SKILLS_SHOWN = 5;
 
-const Root = tw(Paper)`
-	flex
-	flex-col
-	items-stretch
+const Root = styled(Paper)<{ $withPost: boolean }>`
+	${tw`
+		flex
+		flex-col
+		items-stretch
+	`}
+
+	${({ $withPost }) => !$withPost && tw`hover:bg-indigo-50`}
 `;
 
 const ThumbnailContainer = tw.div`
 	relative
+	min-height[5rem]
 	rounded-t-lg
 	overflow-hidden
+	cursor-pointer
 `;
 
 const PostThumbnail = tw.a`
@@ -43,6 +50,7 @@ const PostInfo = tw.a`
 	flex-col
 	items-stretch
 	p-3
+	hover:bg-indigo-50
 `;
 
 const PostTitle = tw.div`
@@ -62,6 +70,7 @@ const UserInfo = tw.a`
 	flex-col
 	items-stretch
 	p-3
+	hover:bg-indigo-50
 `;
 
 const UserName = tw.div`
@@ -93,6 +102,8 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 	(props, ref) => {
 		const { className, data: user, style } = props;
 
+		const router = useRouter();
+
 		const post = user.posts.nodes[0];
 
 		const skills = user.skills.nodes;
@@ -102,15 +113,25 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 		const desiredSkillsExtra = desiredSkills.length - MAX_SKILLS_SHOWN;
 
 		return (
-			<Root ref={ref} className={className} style={style}>
-				<ThumbnailContainer>
+			<Root ref={ref} className={className} style={style} $withPost={!!post}>
+				<ThumbnailContainer
+					onClick={async () => {
+						await router.push("/[userName]", `/${user.name}`);
+					}}
+				>
 					{post?.thumbnailUrl && (
 						<NextLink
 							href="/[userName]/[postTitle]"
 							as={`/${user.name}/${post.urlSlug}`}
 							passHref
 						>
-							<PostThumbnail tabIndex={-1} tw="mb-0.5">
+							<PostThumbnail
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								tabIndex={-1}
+								tw="mb-0.5"
+							>
 								<NextImage
 									alt={post.title ?? ""}
 									src={post.thumbnailUrl}
@@ -154,7 +175,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 						</>
 					)}
 					<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-						<UserInfo>
+						<UserInfo className="userInfo">
 							<UserName>{user.name}</UserName>
 							{user.description && (
 								<UserDescription tw="mt-1">{user.description}</UserDescription>

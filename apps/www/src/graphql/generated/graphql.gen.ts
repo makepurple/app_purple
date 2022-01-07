@@ -1517,6 +1517,15 @@ export type SuggestExperiencesQueryVariables = Exact<{
 
 export type SuggestExperiencesQuery = { readonly __typename: 'Query', readonly suggestExperiences: { readonly __typename: 'SuggestExperiences', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined }> } };
 
+export type SuggestFriendsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestFriendsWhereInput;
+}>;
+
+
+export type SuggestFriendsQuery = { readonly __typename: 'Query', readonly suggestFriends: { readonly __typename: 'UserConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } };
+
 export type SuggestRepositoriesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestRepositoriesWhereInput;
@@ -2423,6 +2432,29 @@ export const SuggestExperiencesDocument = /*#__PURE__*/ gql`
 
 export function useSuggestExperiencesQuery(options: Omit<Urql.UseQueryArgs<SuggestExperiencesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<SuggestExperiencesQuery>({ query: SuggestExperiencesDocument, ...options });
+};
+export const SuggestFriendsDocument = /*#__PURE__*/ gql`
+    query SuggestFriends($after: String, $first: Int, $where: SuggestFriendsWhereInput!) {
+  suggestFriends(where: $where) {
+    pageInfo {
+      ...PageInfoFragment
+    }
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+    nodes {
+      ...SuggestedFriendCardUser
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${SuggestedFriendCardUserFragmentDoc}`;
+
+export function useSuggestFriendsQuery(options: Omit<Urql.UseQueryArgs<SuggestFriendsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SuggestFriendsQuery>({ query: SuggestFriendsDocument, ...options });
 };
 export const SuggestRepositoriesDocument = /*#__PURE__*/ gql`
     query SuggestRepositories($first: Int, $where: SuggestRepositoriesWhereInput!) {
