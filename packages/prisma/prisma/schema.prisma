@@ -64,6 +64,7 @@ model VerificationToken {
 
 model User {
   accounts        Account[]
+  activities      UserActivity[]
   comments        Comment[]
   // When this account was registered
   createdAt       DateTime               @default(now())
@@ -91,31 +92,59 @@ model User {
   upvotedPosts    PostUpvoter[]
 }
 
+enum UserActivityType {
+  CommentPost
+  CommentReply
+  FollowUser
+  FriendUser
+  PublishPost
+  UpvotePost
+}
+
+model UserActivity {
+  id         String           @id @default(cuid())
+  comment    Comment?
+  createdAt  DateTime         @default(now())
+  follow     Follow?
+  friendship Friendship?
+  post       Post?
+  type       UserActivityType
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+}
+
 // These are uni-directional match requests. If matched 2-way, then it is a confirmed match.
 model Friendship {
-  id          String   @id @default(cuid())
-  friender    User     @relation("friender", fields: [frienderId], references: [id], onDelete: Cascade)
+  id          String       @id @default(cuid())
+  activity    UserActivity @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  activityId  String       @unique
+  friender    User         @relation("friender", fields: [frienderId], references: [id], onDelete: Cascade)
   frienderId  String
-  friending   User     @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
+  friending   User         @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId String
-  rejected    Boolean  @default(false)
-  updatedAt   DateTime @updatedAt
+  rejected    Boolean      @default(false)
+  updatedAt   DateTime     @updatedAt
 
   @@unique([frienderId, friendingId])
 }
 
+// These are uni-directional follows. If matched 2-way, then the users are following each-other.
 model Follow {
-  id          String   @id @default(cuid())
-  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  id          String       @id @default(cuid())
+  activity    UserActivity @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  activityId  String       @unique
+  follower    User         @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
   followerId  String
-  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  following   User         @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime     @updatedAt
 
   @@unique([followerId, followingId])
 }
 
 model Post {
+  activity     UserActivity  @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  activityId   String        @unique
   author       User          @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName   String
   comments     Comment[]
@@ -157,18 +186,20 @@ model PostImage {
 }
 
 model Comment {
-  id        String           @id @default(cuid())
-  author    User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId  String
-  content   Json?
-  createdAt DateTime         @default(now())
-  parent    Comment?         @relation("CommentReplies", fields: [parentId], references: [id])
-  parentId  String?
-  post      Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String?
-  replies   Comment[]        @relation("CommentReplies")
-  updatedAt DateTime         @updatedAt
-  upvoters  CommentUpvoter[]
+  id         String           @id @default(cuid())
+  activity   UserActivity     @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  activityId String           @unique
+  author     User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId   String
+  content    Json?
+  createdAt  DateTime         @default(now())
+  parent     Comment?         @relation("CommentReplies", fields: [parentId], references: [id])
+  parentId   String?
+  post       Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId     String?
+  replies    Comment[]        @relation("CommentReplies")
+  updatedAt  DateTime         @updatedAt
+  upvoters   CommentUpvoter[]
 }
 
 model CommentUpvoter {
