@@ -17,6 +17,12 @@ const Root = tw(MainContainer)`
 export const Page: NextPage = () => {
 	const jitterSeed = useRef<number>(new Date().getTime());
 
+	/**
+	 * TODO
+	 * @description Allow users to configure this in settings
+	 * @author David Lee
+	 * @date January 6, 2022
+	 */
 	const [{ data }, getLoadMoreRef] = useRelayCursor(useSuggestFriendsQuery, {
 		field: "suggestFriends",
 		requestPolicy: "cache-first",
