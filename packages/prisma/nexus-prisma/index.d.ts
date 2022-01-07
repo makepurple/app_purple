@@ -3141,7 +3141,7 @@ export interface Friendship {
     * ```prisma
     * model Friendship {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity
+    *   activity  UserActivity?
     * }
     * ```
     *
@@ -3170,7 +3170,7 @@ export interface Friendship {
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'UserActivity'>
+    ? NexusCore.NexusNullDef<'UserActivity'>
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -3193,7 +3193,7 @@ export interface Friendship {
     * ```prisma
     * model Friendship {
     *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String
+    *   activityId  String?
     * }
     * ```
     *
@@ -3222,7 +3222,7 @@ export interface Friendship {
      * The type of this field.
      */
     type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
+    ? NexusCore.NexusNullDef<'String'>
     : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
@@ -3644,7 +3644,7 @@ export interface Follow {
     * ```prisma
     * model Follow {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity
+    *   activity  UserActivity?
     * }
     * ```
     *
@@ -3673,7 +3673,7 @@ export interface Follow {
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'UserActivity'>
+    ? NexusCore.NexusNullDef<'UserActivity'>
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -3696,7 +3696,7 @@ export interface Follow {
     * ```prisma
     * model Follow {
     *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String
+    *   activityId  String?
     * }
     * ```
     *
@@ -3725,7 +3725,7 @@ export interface Follow {
      * The type of this field.
      */
     type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
+    ? NexusCore.NexusNullDef<'String'>
     : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
@@ -4043,7 +4043,7 @@ export interface Post {
     * ```prisma
     * model Post {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity
+    *   activity  UserActivity?
     * }
     * ```
     *
@@ -4072,7 +4072,7 @@ export interface Post {
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'UserActivity'>
+    ? NexusCore.NexusNullDef<'UserActivity'>
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -4095,7 +4095,7 @@ export interface Post {
     * ```prisma
     * model Post {
     *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String
+    *   activityId  String?
     * }
     * ```
     *
@@ -4124,7 +4124,7 @@ export interface Post {
      * The type of this field.
      */
     type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
+    ? NexusCore.NexusNullDef<'String'>
     : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
@@ -5656,7 +5656,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity
+    *   activity  UserActivity?
     * }
     * ```
     *
@@ -5685,7 +5685,7 @@ export interface Comment {
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'UserActivity'>
+    ? NexusCore.NexusNullDef<'UserActivity'>
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -5708,7 +5708,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String
+    *   activityId  String?
     * }
     * ```
     *
@@ -5737,7 +5737,7 @@ export interface Comment {
      * The type of this field.
      */
     type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
+    ? NexusCore.NexusNullDef<'String'>
     : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
@@ -8960,7 +8960,8 @@ export interface Experience {
   *   CommentPost
   *   CommentReply
   *   FollowUser
-  *   FriendUser
+  *   FriendAcceptUser
+  *   Joined
   *   PublishPost
   *   UpvotePost
   * }
@@ -8968,7 +8969,7 @@ export interface Experience {
   *
   * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
   *
-  * Contains these members: CommentPost, CommentReply, FollowUser, FriendUser, PublishPost, UpvotePost
+  * Contains these members: CommentPost, CommentReply, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvotePost
   *
   * @example
   *
@@ -8980,7 +8981,7 @@ export interface Experience {
 export interface UserActivityType {
   name: 'UserActivityType'
   description: undefined
-  members: ['CommentPost', 'CommentReply', 'FollowUser', 'FriendUser', 'PublishPost', 'UpvotePost']
+  members: ['CommentPost', 'CommentReply', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvotePost']
 }
 
 /**

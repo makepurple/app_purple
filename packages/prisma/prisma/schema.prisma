@@ -96,7 +96,8 @@ enum UserActivityType {
   CommentPost
   CommentReply
   FollowUser
-  FriendUser
+  FriendAcceptUser
+  Joined
   PublishPost
   UpvotePost
 }
@@ -115,36 +116,36 @@ model UserActivity {
 
 // These are uni-directional match requests. If matched 2-way, then it is a confirmed match.
 model Friendship {
-  id          String       @id @default(cuid())
-  activity    UserActivity @relation(fields: [activityId], references: [id], onDelete: Restrict)
-  activityId  String       @unique
-  friender    User         @relation("friender", fields: [frienderId], references: [id], onDelete: Cascade)
+  id          String        @id @default(cuid())
+  activity    UserActivity? @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  activityId  String?       @unique
+  friender    User          @relation("friender", fields: [frienderId], references: [id], onDelete: Cascade)
   frienderId  String
-  friending   User         @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
+  friending   User          @relation("friending", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId String
-  rejected    Boolean      @default(false)
-  updatedAt   DateTime     @updatedAt
+  rejected    Boolean       @default(false)
+  updatedAt   DateTime      @updatedAt
 
   @@unique([frienderId, friendingId])
 }
 
 // These are uni-directional follows. If matched 2-way, then the users are following each-other.
 model Follow {
-  id          String       @id @default(cuid())
-  activity    UserActivity @relation(fields: [activityId], references: [id], onDelete: Restrict)
-  activityId  String       @unique
-  follower    User         @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  id          String        @id @default(cuid())
+  activity    UserActivity? @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  activityId  String?       @unique
+  follower    User          @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
   followerId  String
-  following   User         @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  following   User          @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
-  updatedAt   DateTime     @updatedAt
+  updatedAt   DateTime      @updatedAt
 
   @@unique([followerId, followingId])
 }
 
 model Post {
-  activity     UserActivity  @relation(fields: [activityId], references: [id], onDelete: Restrict)
-  activityId   String        @unique
+  activity     UserActivity? @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  activityId   String?       @unique
   author       User          @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName   String
   comments     Comment[]
@@ -187,8 +188,8 @@ model PostImage {
 
 model Comment {
   id         String           @id @default(cuid())
-  activity   UserActivity     @relation(fields: [activityId], references: [id], onDelete: Restrict)
-  activityId String           @unique
+  activity   UserActivity?    @relation(fields: [activityId], references: [id], onDelete: SetNull)
+  activityId String?          @unique
   author     User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId   String
   content    Json?
