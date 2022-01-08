@@ -1,3 +1,4 @@
+import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -12,21 +13,42 @@ export const upvotePost = mutationField("upvotePost", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
+		const post = await prisma.post.findUnique({
+			where: PrismaUtils.nonNull(args.where),
+			include: {
+				activities: {
+					where: {
+						type: UserActivityType.UpvotePost,
+						user: { id: { equals: user.id } }
+					}
+				}
+			}
+		});
+
+		if (!post) throw new Error("This post does not exist");
+
 		const record = await prisma.post.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
+				...(post.activities.length
+					? {
+							activities: {
+								create: {
+									type: UserActivityType.UpvotePost,
+									user: { connect: { id: user.id } }
+								}
+							}
+					  }
+					: {}),
 				upvoters: {
 					connectOrCreate: {
 						where: {
 							userId_postId: {
-								// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-								postId: args.where.id!,
+								postId: post.id,
 								userId: user.id
 							}
 						},
-						create: {
-							userId: user.id
-						}
+						create: { userId: user.id }
 					}
 				}
 			}

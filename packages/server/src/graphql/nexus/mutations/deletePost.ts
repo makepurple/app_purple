@@ -39,10 +39,18 @@ export const deletePost = mutationField("deletePost", {
 			})
 		);
 
-		const record = await prisma.post.delete({
-			where: {
-				id: args.where.id ?? undefined
-			}
+		const record = await prisma.$transaction(async (transaction) => {
+			const deleted = await transaction.post.delete({
+				where: PrismaUtils.nonNull(args.where)
+			});
+
+			await transaction.userActivity.deleteMany({
+				where: {
+					post: { id: { equals: deleted.id } }
+				}
+			});
+
+			return deleted;
 		});
 
 		return { record };

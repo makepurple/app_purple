@@ -1,3 +1,4 @@
+import { UserActivityType } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -39,6 +40,17 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 
 		if (!pendingFriendship) throw new Error();
 
+		const existing = await prisma.friendship.findUnique({
+			where: {
+				frienderId_friendingId: {
+					frienderId: user.id,
+					friendingId: pendingFriendship.frienderId
+				}
+			}
+		});
+
+		if (existing && !existing.rejected) return { record: existing };
+
 		const record = await prisma.friendship.upsert({
 			where: {
 				frienderId_friendingId: {
@@ -47,28 +59,25 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 				}
 			},
 			create: {
-				friender: {
-					connect: {
-						id: user.id
+				activities: {
+					create: {
+						type: UserActivityType.FriendAcceptUser,
+						user: { connect: { id: user.id } }
 					}
 				},
-				friending: {
-					connect: {
-						id: pendingFriendship.frienderId
-					}
-				}
+				friender: { connect: { id: user.id } },
+				friending: { connect: { id: pendingFriendship.frienderId } }
 			},
 			update: {
-				friender: {
-					connect: {
-						id: user.id
+				activities: {
+					create: {
+						type: UserActivityType.FriendAcceptUser,
+						user: { connect: { id: user.id } }
 					}
 				},
-				friending: {
-					connect: {
-						id: pendingFriendship.frienderId
-					}
-				}
+				friender: { connect: { id: user.id } },
+				friending: { connect: { id: pendingFriendship.frienderId } },
+				rejected: false
 			}
 		});
 

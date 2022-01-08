@@ -22,8 +22,16 @@ export const unfollowUser = mutationField("unfollowUser", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const record = await prisma.follow.delete({
-			where: PrismaUtils.nonNull(args.where)
+		const record = await prisma.$transaction(async (transaction) => {
+			const deleted = await transaction.follow.delete({
+				where: PrismaUtils.nonNull(args.where)
+			});
+
+			await transaction.userActivity.deleteMany({
+				where: { follow: { id: { equals: deleted.id } } }
+			});
+
+			return deleted;
 		});
 
 		return { record };

@@ -1,3 +1,4 @@
+import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -14,11 +15,13 @@ export const followUser = mutationField("followUser", {
 
 		const record = await prisma.follow.create({
 			data: {
-				follower: {
-					connect: {
-						id: user.id
+				activities: {
+					create: {
+						type: UserActivityType.FollowUser,
+						user: { connect: { id: user.id } }
 					}
 				},
+				follower: { connect: { id: user.id } },
 				following: {
 					connect: PrismaUtils.nonNull(args.where)
 				}

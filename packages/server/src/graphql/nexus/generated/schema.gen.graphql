@@ -834,6 +834,76 @@ type User {
   viewerFriended: Boolean!
 }
 
+interface UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+union UserActivityItem = UserActivityItemCommentPost | UserActivityItemFollowUser | UserActivityItemFriendAcceptUser | UserActivityItemJoined | UserActivityItemPublishPost | UserActivityItemUpvotePost
+
+type UserActivityItemCommentPost implements UserActivity {
+  comment: Comment!
+  commentId: String!
+  createdAt: DateTime!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemFollowUser implements UserActivity {
+  createdAt: DateTime!
+  follow: Follow!
+  followId: String!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemFriendAcceptUser implements UserActivity {
+  createdAt: DateTime!
+  friendship: Friendship!
+  friendshipId: String!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemJoined implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemPublishPost implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  post: Post!
+  postId: String!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemUpvotePost implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  post: Post!
+  postId: String!
+  user: User!
+  userId: String!
+}
+
+enum UserActivityType {
+  CommentPost
+  FollowUser
+  FriendAcceptUser
+  Joined
+  PublishPost
+  UpvotePost
+}
+
 """Relay-style connection for User types."""
 type UserConnection implements Connection {
   edges: [UserEdge!]!

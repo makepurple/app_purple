@@ -2681,6 +2681,58 @@ export interface UserActivity {
     resolve: NexusCore.FieldResolver<'UserActivity', 'comment'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.commentId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model UserActivity
+    *
+    * Replace this default advisory JSDoc with your own documentation about model UserActivity
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model UserActivity {
+    *   /// Lorem ipsum dolor sit amet.
+    *   commentId  String?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { UserActivity } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: UserActivity.$name
+    *   description: UserActivity.$description
+    *   definition(t) {
+    *     t.field(UserActivity.commentId)
+    *   }
+    * })
+    */
+  commentId: {
+    /**
+     * The name of this field.
+     */
+    name: 'commentId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'UserActivity', 'commentId'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.createdAt`.
     *
     * ### ️⚠️ You have not writen documentation for model UserActivity
@@ -2785,6 +2837,58 @@ export interface UserActivity {
     resolve: NexusCore.FieldResolver<'UserActivity', 'follow'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.followId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model UserActivity
+    *
+    * Replace this default advisory JSDoc with your own documentation about model UserActivity
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model UserActivity {
+    *   /// Lorem ipsum dolor sit amet.
+    *   followId  String?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { UserActivity } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: UserActivity.$name
+    *   description: UserActivity.$description
+    *   definition(t) {
+    *     t.field(UserActivity.followId)
+    *   }
+    * })
+    */
+  followId: {
+    /**
+     * The name of this field.
+     */
+    name: 'followId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'UserActivity', 'followId'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.friendship`.
     *
     * ### ️⚠️ You have not writen documentation for model UserActivity
@@ -2837,6 +2941,58 @@ export interface UserActivity {
     resolve: NexusCore.FieldResolver<'UserActivity', 'friendship'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.friendshipId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model UserActivity
+    *
+    * Replace this default advisory JSDoc with your own documentation about model UserActivity
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model UserActivity {
+    *   /// Lorem ipsum dolor sit amet.
+    *   friendshipId  String?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { UserActivity } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: UserActivity.$name
+    *   description: UserActivity.$description
+    *   definition(t) {
+    *     t.field(UserActivity.friendshipId)
+    *   }
+    * })
+    */
+  friendshipId: {
+    /**
+     * The name of this field.
+     */
+    name: 'friendshipId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'UserActivity', 'friendshipId'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.post`.
     *
     * ### ️⚠️ You have not writen documentation for model UserActivity
@@ -2887,6 +3043,58 @@ export interface UserActivity {
      * The resolver of this field
      */
     resolve: NexusCore.FieldResolver<'UserActivity', 'post'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.postId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model UserActivity
+    *
+    * Replace this default advisory JSDoc with your own documentation about model UserActivity
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model UserActivity {
+    *   /// Lorem ipsum dolor sit amet.
+    *   postId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { UserActivity } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: UserActivity.$name
+    *   description: UserActivity.$description
+    *   definition(t) {
+    *     t.field(UserActivity.postId)
+    *   }
+    * })
+    */
+  postId: {
+    /**
+     * The name of this field.
+     */
+    name: 'postId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'UserActivity', 'postId'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `UserActivity.type`.
@@ -3132,7 +3340,7 @@ export interface Friendship {
     resolve: NexusCore.FieldResolver<'Friendship', 'id'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.activity`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.activities`.
     *
     * ### ️⚠️ You have not writen documentation for model Friendship
     *
@@ -3141,7 +3349,7 @@ export interface Friendship {
     * ```prisma
     * model Friendship {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity?
+    *   activities  UserActivity
     * }
     * ```
     *
@@ -3156,21 +3364,21 @@ export interface Friendship {
     *   name: Friendship.$name
     *   description: Friendship.$description
     *   definition(t) {
-    *     t.field(Friendship.activity)
+    *     t.field(Friendship.activities)
     *   }
     * })
     */
-  activity: {
+  activities: {
     /**
      * The name of this field.
      */
-    name: 'activity'
+    name: 'activities'
   
     /**
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'UserActivity'>
+    ? (NexusCore.NexusListDef<'UserActivity'> | NexusCore.NexusNonNullDef<'UserActivity'>)
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -3181,59 +3389,7 @@ export interface Friendship {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Friendship', 'activity'>
-  }
-  /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.activityId`.
-    *
-    * ### ️⚠️ You have not writen documentation for model Friendship
-    *
-    * Replace this default advisory JSDoc with your own documentation about model Friendship
-    * by documenting it in your Prisma schema. For example:
-    * ```prisma
-    * model Friendship {
-    *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String?
-    * }
-    * ```
-    *
-    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
-    *
-    * @example
-    *
-    * import { objectType } from 'nexus'
-    * import { Friendship } from 'nexus-prisma'
-    *
-    * objectType({
-    *   name: Friendship.$name
-    *   description: Friendship.$description
-    *   definition(t) {
-    *     t.field(Friendship.activityId)
-    *   }
-    * })
-    */
-  activityId: {
-    /**
-     * The name of this field.
-     */
-    name: 'activityId'
-  
-    /**
-     * The type of this field.
-     */
-    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'String'>
-    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
-  
-    /**
-     * The documentation of this field.
-     */
-    description: undefined
-  
-    /**
-     * The resolver of this field
-     */
-    resolve: NexusCore.FieldResolver<'Friendship', 'activityId'>
+    resolve: NexusCore.FieldResolver<'Friendship', 'activities'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.friender`.
@@ -3635,7 +3791,7 @@ export interface Follow {
     resolve: NexusCore.FieldResolver<'Follow', 'id'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.activity`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.activities`.
     *
     * ### ️⚠️ You have not writen documentation for model Follow
     *
@@ -3644,7 +3800,7 @@ export interface Follow {
     * ```prisma
     * model Follow {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity?
+    *   activities  UserActivity
     * }
     * ```
     *
@@ -3659,21 +3815,21 @@ export interface Follow {
     *   name: Follow.$name
     *   description: Follow.$description
     *   definition(t) {
-    *     t.field(Follow.activity)
+    *     t.field(Follow.activities)
     *   }
     * })
     */
-  activity: {
+  activities: {
     /**
      * The name of this field.
      */
-    name: 'activity'
+    name: 'activities'
   
     /**
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'UserActivity'>
+    ? (NexusCore.NexusListDef<'UserActivity'> | NexusCore.NexusNonNullDef<'UserActivity'>)
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -3684,59 +3840,7 @@ export interface Follow {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Follow', 'activity'>
-  }
-  /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.activityId`.
-    *
-    * ### ️⚠️ You have not writen documentation for model Follow
-    *
-    * Replace this default advisory JSDoc with your own documentation about model Follow
-    * by documenting it in your Prisma schema. For example:
-    * ```prisma
-    * model Follow {
-    *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String?
-    * }
-    * ```
-    *
-    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
-    *
-    * @example
-    *
-    * import { objectType } from 'nexus'
-    * import { Follow } from 'nexus-prisma'
-    *
-    * objectType({
-    *   name: Follow.$name
-    *   description: Follow.$description
-    *   definition(t) {
-    *     t.field(Follow.activityId)
-    *   }
-    * })
-    */
-  activityId: {
-    /**
-     * The name of this field.
-     */
-    name: 'activityId'
-  
-    /**
-     * The type of this field.
-     */
-    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'String'>
-    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
-  
-    /**
-     * The documentation of this field.
-     */
-    description: undefined
-  
-    /**
-     * The resolver of this field
-     */
-    resolve: NexusCore.FieldResolver<'Follow', 'activityId'>
+    resolve: NexusCore.FieldResolver<'Follow', 'activities'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.follower`.
@@ -4034,7 +4138,7 @@ export interface Post {
   $name: 'Post'
   $description: undefined
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.activity`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.activities`.
     *
     * ### ️⚠️ You have not writen documentation for model Post
     *
@@ -4043,7 +4147,7 @@ export interface Post {
     * ```prisma
     * model Post {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity?
+    *   activities  UserActivity
     * }
     * ```
     *
@@ -4058,21 +4162,21 @@ export interface Post {
     *   name: Post.$name
     *   description: Post.$description
     *   definition(t) {
-    *     t.field(Post.activity)
+    *     t.field(Post.activities)
     *   }
     * })
     */
-  activity: {
+  activities: {
     /**
      * The name of this field.
      */
-    name: 'activity'
+    name: 'activities'
   
     /**
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'UserActivity'>
+    ? (NexusCore.NexusListDef<'UserActivity'> | NexusCore.NexusNonNullDef<'UserActivity'>)
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -4083,59 +4187,7 @@ export interface Post {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Post', 'activity'>
-  }
-  /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.activityId`.
-    *
-    * ### ️⚠️ You have not writen documentation for model Post
-    *
-    * Replace this default advisory JSDoc with your own documentation about model Post
-    * by documenting it in your Prisma schema. For example:
-    * ```prisma
-    * model Post {
-    *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String?
-    * }
-    * ```
-    *
-    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
-    *
-    * @example
-    *
-    * import { objectType } from 'nexus'
-    * import { Post } from 'nexus-prisma'
-    *
-    * objectType({
-    *   name: Post.$name
-    *   description: Post.$description
-    *   definition(t) {
-    *     t.field(Post.activityId)
-    *   }
-    * })
-    */
-  activityId: {
-    /**
-     * The name of this field.
-     */
-    name: 'activityId'
-  
-    /**
-     * The type of this field.
-     */
-    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'String'>
-    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
-  
-    /**
-     * The documentation of this field.
-     */
-    description: undefined
-  
-    /**
-     * The resolver of this field
-     */
-    resolve: NexusCore.FieldResolver<'Post', 'activityId'>
+    resolve: NexusCore.FieldResolver<'Post', 'activities'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.author`.
@@ -5647,7 +5699,7 @@ export interface Comment {
     resolve: NexusCore.FieldResolver<'Comment', 'id'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.activity`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.activities`.
     *
     * ### ️⚠️ You have not writen documentation for model Comment
     *
@@ -5656,7 +5708,7 @@ export interface Comment {
     * ```prisma
     * model Comment {
     *   /// Lorem ipsum dolor sit amet.
-    *   activity  UserActivity?
+    *   activities  UserActivity
     * }
     * ```
     *
@@ -5671,21 +5723,21 @@ export interface Comment {
     *   name: Comment.$name
     *   description: Comment.$description
     *   definition(t) {
-    *     t.field(Comment.activity)
+    *     t.field(Comment.activities)
     *   }
     * })
     */
-  activity: {
+  activities: {
     /**
      * The name of this field.
      */
-    name: 'activity'
+    name: 'activities'
   
     /**
      * The type of this field.
      */
     type: 'UserActivity' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'UserActivity'>
+    ? (NexusCore.NexusListDef<'UserActivity'> | NexusCore.NexusNonNullDef<'UserActivity'>)
     : 'Warning/Error: The type \'UserActivity\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'UserActivity\' to your GraphQL API.'
   
     /**
@@ -5696,59 +5748,7 @@ export interface Comment {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Comment', 'activity'>
-  }
-  /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.activityId`.
-    *
-    * ### ️⚠️ You have not writen documentation for model Comment
-    *
-    * Replace this default advisory JSDoc with your own documentation about model Comment
-    * by documenting it in your Prisma schema. For example:
-    * ```prisma
-    * model Comment {
-    *   /// Lorem ipsum dolor sit amet.
-    *   activityId  String?
-    * }
-    * ```
-    *
-    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
-    *
-    * @example
-    *
-    * import { objectType } from 'nexus'
-    * import { Comment } from 'nexus-prisma'
-    *
-    * objectType({
-    *   name: Comment.$name
-    *   description: Comment.$description
-    *   definition(t) {
-    *     t.field(Comment.activityId)
-    *   }
-    * })
-    */
-  activityId: {
-    /**
-     * The name of this field.
-     */
-    name: 'activityId'
-  
-    /**
-     * The type of this field.
-     */
-    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNullDef<'String'>
-    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
-  
-    /**
-     * The documentation of this field.
-     */
-    description: undefined
-  
-    /**
-     * The resolver of this field
-     */
-    resolve: NexusCore.FieldResolver<'Comment', 'activityId'>
+    resolve: NexusCore.FieldResolver<'Comment', 'activities'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Comment.author`.
@@ -8958,7 +8958,6 @@ export interface Experience {
   * /// Lorem ipsum dolor sit amet...
   * enum UserActivityType {
   *   CommentPost
-  *   CommentReply
   *   FollowUser
   *   FriendAcceptUser
   *   Joined
@@ -8969,7 +8968,7 @@ export interface Experience {
   *
   * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
   *
-  * Contains these members: CommentPost, CommentReply, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvotePost
+  * Contains these members: CommentPost, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvotePost
   *
   * @example
   *
@@ -8981,7 +8980,7 @@ export interface Experience {
 export interface UserActivityType {
   name: 'UserActivityType'
   description: undefined
-  members: ['CommentPost', 'CommentReply', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvotePost']
+  members: ['CommentPost', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvotePost']
 }
 
 /**

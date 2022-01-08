@@ -1,4 +1,5 @@
 import { PostPublishInput } from "@makepurple/validators";
+import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -19,10 +20,14 @@ export const publishPost = mutationField("publishPost", {
 
 		return true;
 	},
-	resolve: async (parent, args, { prisma }) => {
-		const where = PrismaUtils.nonNull(args.where);
+	resolve: async (parent, args, { prisma, user }) => {
+		if (!user) throw new Error();
 
-		const post = await prisma.post.findUnique({ where });
+		const post = await prisma.post.findUnique({
+			where: PrismaUtils.nonNull(args.where)
+		});
+
+		if (post?.publishedAt) return { record: post };
 
 		const dataInput = PostPublishInput.validator({
 			content: args.data?.content ?? undefined,
@@ -47,11 +52,17 @@ export const publishPost = mutationField("publishPost", {
 		const record = await prisma.post.update({
 			data: {
 				...dataInput,
+				activities: {
+					create: {
+						type: UserActivityType.PublishPost,
+						user: { connect: { id: user.id } }
+					}
+				},
 				publishedAt: new Date(),
 				readTime: args.data?.readTime ?? undefined,
 				urlSlug
 			},
-			where
+			where: PrismaUtils.nonNull(args.where)
 		});
 
 		return { record };

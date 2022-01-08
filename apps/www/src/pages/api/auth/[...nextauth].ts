@@ -1,5 +1,6 @@
 import { prisma } from "@makepurple/server/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { UserActivityType } from "@prisma/client";
 import produce from "immer";
 import type { NextApiHandler } from "next";
 import NextAuth from "next-auth";
@@ -31,9 +32,18 @@ const authHandler: NextApiHandler = (req, res) =>
 		},
 		events: {
 			signIn: async (params) => {
-				const { account, profile } = params;
+				const { account, profile, isNewUser } = params;
 
 				if (!profile) return;
+
+				if (isNewUser) {
+					await prisma.userActivity.create({
+						data: {
+							type: UserActivityType.Joined,
+							user: { connect: { name: profile.name } }
+						}
+					});
+				}
 
 				await prisma.user
 					.update({

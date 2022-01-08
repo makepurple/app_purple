@@ -9,5 +9,6 @@ export const enumTypes = [
 			Asc: "asc",
 			Desc: "desc"
 		}
-	})
+	}),
+	enumType(NexusPrisma.UserActivityType)
 ];

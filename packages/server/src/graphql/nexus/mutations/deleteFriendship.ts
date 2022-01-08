@@ -35,6 +35,10 @@ export const deleteFriendship = mutationField("deleteFriendship", {
 				where: PrismaUtils.nonNull(args.where)
 			});
 
+			await transaction.userActivity.deleteMany({
+				where: { friendship: { id: { equals: deleted.id } } }
+			});
+
 			await transaction.friendship.update({
 				where: {
 					frienderId_friendingId: {

@@ -273,6 +273,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
   SortOrder: "asc" | "desc"
+  UserActivityType: "CommentPost" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvotePost"
 }
 
 export interface NexusGenScalars {
@@ -564,6 +565,46 @@ export interface NexusGenObjects {
     image?: string | null; // String
     name: string; // String!
   }
+  UserActivityItemCommentPost: { // root type
+    comment: NexusGenRootTypes['Comment']; // Comment!
+    commentId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    userId: string; // String!
+  }
+  UserActivityItemFollowUser: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    follow: NexusGenRootTypes['Follow']; // Follow!
+    followId: string; // String!
+    id: string; // ID!
+    userId: string; // String!
+  }
+  UserActivityItemFriendAcceptUser: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    friendship: NexusGenRootTypes['Friendship']; // Friendship!
+    friendshipId: string; // String!
+    id: string; // ID!
+    userId: string; // String!
+  }
+  UserActivityItemJoined: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    userId: string; // String!
+  }
+  UserActivityItemPublishPost: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    post: NexusGenRootTypes['Post']; // Post!
+    postId: string; // String!
+    userId: string; // String!
+  }
+  UserActivityItemUpvotePost: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    post: NexusGenRootTypes['Post']; // Post!
+    postId: string; // String!
+    userId: string; // String!
+  }
   UserConnection: { // root type
     edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
@@ -579,12 +620,14 @@ export interface NexusGenInterfaces {
   Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
+  UserActivity: core.Discriminate<'UserActivityItemCommentPost', 'required'> | core.Discriminate<'UserActivityItemFollowUser', 'required'> | core.Discriminate<'UserActivityItemFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityItemJoined', 'required'> | core.Discriminate<'UserActivityItemPublishPost', 'required'> | core.Discriminate<'UserActivityItemUpvotePost', 'required'>;
 }
 
 export interface NexusGenUnions {
+  UserActivityItem: core.Discriminate<'UserActivityItemCommentPost', 'required'> | core.Discriminate<'UserActivityItemFollowUser', 'required'> | core.Discriminate<'UserActivityItemFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityItemJoined', 'required'> | core.Discriminate<'UserActivityItemPublishPost', 'required'> | core.Discriminate<'UserActivityItemUpvotePost', 'required'>;
 }
 
-export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects
+export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects & NexusGenUnions
 
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
@@ -993,6 +1036,52 @@ export interface NexusGenFieldTypes {
     viewerFollowing: boolean; // Boolean!
     viewerFriended: boolean; // Boolean!
   }
+  UserActivityItemCommentPost: { // field return type
+    comment: NexusGenRootTypes['Comment']; // Comment!
+    commentId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  UserActivityItemFollowUser: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    follow: NexusGenRootTypes['Follow']; // Follow!
+    followId: string; // String!
+    id: string; // ID!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  UserActivityItemFriendAcceptUser: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    friendship: NexusGenRootTypes['Friendship']; // Friendship!
+    friendshipId: string; // String!
+    id: string; // ID!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  UserActivityItemJoined: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  UserActivityItemPublishPost: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    post: NexusGenRootTypes['Post']; // Post!
+    postId: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  UserActivityItemUpvotePost: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    post: NexusGenRootTypes['Post']; // Post!
+    postId: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
   UserConnection: { // field return type
     edges: NexusGenRootTypes['UserEdge'][]; // [UserEdge!]!
     nodes: NexusGenRootTypes['User'][]; // [User!]!
@@ -1015,6 +1104,12 @@ export interface NexusGenFieldTypes {
   }
   MutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
+  }
+  UserActivity: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
   }
 }
 
@@ -1423,6 +1518,52 @@ export interface NexusGenFieldTypeNames {
     viewerFollowing: 'Boolean'
     viewerFriended: 'Boolean'
   }
+  UserActivityItemCommentPost: { // field return type name
+    comment: 'Comment'
+    commentId: 'String'
+    createdAt: 'DateTime'
+    id: 'ID'
+    user: 'User'
+    userId: 'String'
+  }
+  UserActivityItemFollowUser: { // field return type name
+    createdAt: 'DateTime'
+    follow: 'Follow'
+    followId: 'String'
+    id: 'ID'
+    user: 'User'
+    userId: 'String'
+  }
+  UserActivityItemFriendAcceptUser: { // field return type name
+    createdAt: 'DateTime'
+    friendship: 'Friendship'
+    friendshipId: 'String'
+    id: 'ID'
+    user: 'User'
+    userId: 'String'
+  }
+  UserActivityItemJoined: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    user: 'User'
+    userId: 'String'
+  }
+  UserActivityItemPublishPost: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    post: 'Post'
+    postId: 'String'
+    user: 'User'
+    userId: 'String'
+  }
+  UserActivityItemUpvotePost: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    post: 'Post'
+    postId: 'String'
+    user: 'User'
+    userId: 'String'
+  }
   UserConnection: { // field return type name
     edges: 'UserEdge'
     nodes: 'User'
@@ -1445,6 +1586,12 @@ export interface NexusGenFieldTypeNames {
   }
   MutationPayload: { // field return type name
     query: 'Query'
+  }
+  UserActivity: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    user: 'User'
+    userId: 'String'
   }
 }
 
@@ -1717,9 +1864,11 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
+  UserActivityItem: "UserActivityItemCommentPost" | "UserActivityItemFollowUser" | "UserActivityItemFriendAcceptUser" | "UserActivityItemJoined" | "UserActivityItemPublishPost" | "UserActivityItemUpvotePost"
   Connection: "CommentConnection" | "ExperienceConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserConnection"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationPayload: "AcceptFriendshipPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowUserPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemovePostThumbnailPayload" | "RequestFriendshipPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
+  UserActivity: "UserActivityItemCommentPost" | "UserActivityItemFollowUser" | "UserActivityItemFriendAcceptUser" | "UserActivityItemJoined" | "UserActivityItemPublishPost" | "UserActivityItemUpvotePost"
 }
 
 export interface NexusGenTypeInterfaces {
@@ -1758,6 +1907,12 @@ export interface NexusGenTypeInterfaces {
   UploadPostImagePayload: "MutationPayload"
   UpvoteCommentPayload: "MutationPayload"
   UpvotePostPayload: "MutationPayload"
+  UserActivityItemCommentPost: "UserActivity"
+  UserActivityItemFollowUser: "UserActivity"
+  UserActivityItemFriendAcceptUser: "UserActivity"
+  UserActivityItemJoined: "UserActivity"
+  UserActivityItemPublishPost: "UserActivity"
+  UserActivityItemUpvotePost: "UserActivity"
   UserConnection: "Connection"
 }
 
@@ -1771,7 +1926,7 @@ export type NexusGenInterfaceNames = keyof NexusGenInterfaces;
 
 export type NexusGenScalarNames = keyof NexusGenScalars;
 
-export type NexusGenUnionNames = never;
+export type NexusGenUnionNames = keyof NexusGenUnions;
 
 export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
 
