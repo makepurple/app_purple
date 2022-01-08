@@ -572,6 +572,16 @@ export interface NexusGenObjects {
     id: string; // ID!
     userId: string; // String!
   }
+  UserActivityItemConnection: { // root type
+    edges: NexusGenRootTypes['UserActivityItemEdge'][]; // [UserActivityItemEdge!]!
+    nodes: NexusGenRootTypes['UserActivityItem'][]; // [UserActivityItem!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  UserActivityItemEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['UserActivityItem']; // UserActivityItem!
+  }
   UserActivityItemFollowUser: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     follow: NexusGenRootTypes['Follow']; // Follow!
@@ -617,7 +627,7 @@ export interface NexusGenObjects {
 }
 
 export interface NexusGenInterfaces {
-  Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
+  Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserActivityItemConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
   UserActivity: core.Discriminate<'UserActivityItemCommentPost', 'required'> | core.Discriminate<'UserActivityItemFollowUser', 'required'> | core.Discriminate<'UserActivityItemFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityItemJoined', 'required'> | core.Discriminate<'UserActivityItemPublishPost', 'required'> | core.Discriminate<'UserActivityItemUpvotePost', 'required'>;
@@ -1043,6 +1053,16 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
+  }
+  UserActivityItemConnection: { // field return type
+    edges: NexusGenRootTypes['UserActivityItemEdge'][]; // [UserActivityItemEdge!]!
+    nodes: NexusGenRootTypes['UserActivityItem'][]; // [UserActivityItem!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  UserActivityItemEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['UserActivityItem']; // UserActivityItem!
   }
   UserActivityItemFollowUser: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1526,6 +1546,16 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     userId: 'String'
   }
+  UserActivityItemConnection: { // field return type name
+    edges: 'UserActivityItemEdge'
+    nodes: 'UserActivityItem'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  UserActivityItemEdge: { // field return type name
+    cursor: 'String'
+    node: 'UserActivityItem'
+  }
   UserActivityItemFollowUser: { // field return type name
     createdAt: 'DateTime'
     follow: 'Follow'
@@ -1865,7 +1895,7 @@ export interface NexusGenArgTypes {
 
 export interface NexusGenAbstractTypeMembers {
   UserActivityItem: "UserActivityItemCommentPost" | "UserActivityItemFollowUser" | "UserActivityItemFriendAcceptUser" | "UserActivityItemJoined" | "UserActivityItemPublishPost" | "UserActivityItemUpvotePost"
-  Connection: "CommentConnection" | "ExperienceConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserConnection"
+  Connection: "CommentConnection" | "ExperienceConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserActivityItemConnection" | "UserConnection"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationPayload: "AcceptFriendshipPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowUserPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemovePostThumbnailPayload" | "RequestFriendshipPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
   UserActivity: "UserActivityItemCommentPost" | "UserActivityItemFollowUser" | "UserActivityItemFriendAcceptUser" | "UserActivityItemJoined" | "UserActivityItemPublishPost" | "UserActivityItemUpvotePost"
@@ -1908,6 +1938,7 @@ export interface NexusGenTypeInterfaces {
   UpvoteCommentPayload: "MutationPayload"
   UpvotePostPayload: "MutationPayload"
   UserActivityItemCommentPost: "UserActivity"
+  UserActivityItemConnection: "Connection"
   UserActivityItemFollowUser: "UserActivity"
   UserActivityItemFriendAcceptUser: "UserActivity"
   UserActivityItemJoined: "UserActivity"

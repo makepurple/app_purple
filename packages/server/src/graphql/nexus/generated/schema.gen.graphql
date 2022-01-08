@@ -852,6 +852,18 @@ type UserActivityItemCommentPost implements UserActivity {
   userId: String!
 }
 
+type UserActivityItemConnection implements Connection {
+  edges: [UserActivityItemEdge!]!
+  nodes: [UserActivityItem!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserActivityItemEdge {
+  cursor: String!
+  node: UserActivityItem!
+}
+
 type UserActivityItemFollowUser implements UserActivity {
   createdAt: DateTime!
   follow: Follow!

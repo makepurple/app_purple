@@ -67,6 +67,8 @@ export * from "./User";
 export * from "./UserActivity";
 export * from "./UserActivityItem";
 export * from "./UserActivityItemCommentPost";
+export * from "./UserActivityItemConnection";
+export * from "./UserActivityItemEdge";
 export * from "./UserActivityItemFollowUser";
 export * from "./UserActivityItemFriendAcceptUser";
 export * from "./UserActivityItemJoined";
