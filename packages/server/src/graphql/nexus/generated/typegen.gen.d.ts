@@ -256,6 +256,10 @@ export interface NexusGenInputs {
   UpvoteCommentInput: { // input type
     upvote?: boolean | null; // Boolean
   }
+  UserActivityWhereInput: { // input type
+    type?: NexusGenEnums['UserActivityType'] | null; // UserActivityType
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
   UserOrderByInput: { // input type
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -574,7 +578,6 @@ export interface NexusGenObjects {
   }
   UserActivityItemConnection: { // root type
     edges: NexusGenRootTypes['UserActivityItemEdge'][]; // [UserActivityItemEdge!]!
-    nodes: NexusGenRootTypes['UserActivityItem'][]; // [UserActivityItem!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
     totalCount: number; // Int!
   }
@@ -901,6 +904,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
     viewer: NexusGenRootTypes['User'] | null; // User
+    viewerActivityFeed: NexusGenRootTypes['UserActivityItemConnection']; // UserActivityItemConnection!
   }
   RejectFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
@@ -1393,6 +1397,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     users: 'UserConnection'
     viewer: 'User'
+    viewerActivityFeed: 'UserActivityItemConnection'
   }
   RejectFriendshipPayload: { // field return type name
     query: 'Query'
@@ -1823,6 +1828,13 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    viewerActivityFeed: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
     }
   }
   User: {

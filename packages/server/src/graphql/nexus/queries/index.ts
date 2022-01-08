@@ -11,3 +11,4 @@ export * from "./suggestRepositories";
 export * from "./suggestSkills";
 export * from "./user";
 export * from "./users";
+export * from "./viewerActivityFeed";

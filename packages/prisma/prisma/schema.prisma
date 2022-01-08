@@ -111,7 +111,7 @@ model UserActivity {
   friendship   Friendship?      @relation(fields: [friendshipId], references: [id], onDelete: Cascade)
   friendshipId String?
   post         Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId       String
+  postId       String?
   type         UserActivityType
   user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String

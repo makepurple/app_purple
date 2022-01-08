@@ -510,6 +510,7 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
+  viewerActivityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityItemConnection!
 }
 
 type RejectFriendshipPayload implements MutationPayload {
@@ -914,6 +915,11 @@ enum UserActivityType {
   Joined
   PublishPost
   UpvotePost
+}
+
+input UserActivityWhereInput {
+  type: UserActivityType
+  user: UserWhereInput
 }
 
 """Relay-style connection for User types."""

@@ -3054,7 +3054,7 @@ export interface UserActivity {
     * ```prisma
     * model UserActivity {
     *   /// Lorem ipsum dolor sit amet.
-    *   postId  String
+    *   postId  String?
     * }
     * ```
     *
@@ -3083,7 +3083,7 @@ export interface UserActivity {
      * The type of this field.
      */
     type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
+    ? NexusCore.NexusNullDef<'String'>
     : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
   
     /**
