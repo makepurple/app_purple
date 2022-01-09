@@ -34,6 +34,8 @@ const reservedWords = [
 	"favicon",
 	"features",
 	"feedback",
+	"followers",
+	"following",
 	"graphql",
 	"help",
 	"index",

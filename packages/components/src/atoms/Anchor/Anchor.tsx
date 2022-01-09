@@ -9,6 +9,7 @@ export const Anchor = styled.a`
 		text-cyan-600
 		cursor-pointer
 		no-underline
+		whitespace-pre
 		hover:text-cyan-600
 		hover:underline
 	`}

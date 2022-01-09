@@ -1,4 +1,5 @@
 import {
+	Anchor,
 	Button,
 	Divider,
 	GitHubIcon,
@@ -10,9 +11,11 @@ import {
 } from "@makepurple/components";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
+import NextLink from "next/link";
 import React, { CSSProperties, FC, useState } from "react";
 import tw from "twin.macro";
 import { useGetUserInfoSideBarQuery } from "../../graphql";
+import { PeopleIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { TopLanguages } from "../TopLanguages";
 import { UserAvatar } from "../UserAvatar";
@@ -86,6 +89,30 @@ const Actions = tw.div`
 	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
 	gap-4
 	mt-4
+`;
+
+const FollowContainer = tw.div`
+	flex
+	flex-row
+	items-center
+	text-black
+`;
+
+const FollowAnchor = tw(Anchor)`
+	text-gray-500
+	[& > *]:text-gray-500
+	hover:[& > *]:text-cyan-600
+`;
+
+const FollowCount = tw.span`
+	text-black!
+	font-semibold
+`;
+
+const Delimiter = tw.div`
+	after:content["·"]
+	mx-1
+	font-bold
 `;
 
 const Skills = tw(Tags)`
@@ -170,6 +197,26 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						</Button>
 					</Actions>
 				)}
+				<FollowContainer tw="mt-4">
+					<NextLink href="/[userName]/followers" as={`/${user.name}/followers`} passHref>
+						<FollowAnchor tw="flex items-center">
+							<PeopleIcon height={24} width={24} tw="mr-2" />
+							<span tw="whitespace-pre">
+								<FollowCount>
+									{user.followers.totalCount.toLocaleString()}
+								</FollowCount>{" "}
+								Followers
+							</span>
+						</FollowAnchor>
+					</NextLink>
+					<Delimiter tw="mx-2" />
+					<NextLink href="/[userName]/following" as={`/${user.name}/following`} passHref>
+						<FollowAnchor>
+							<FollowCount>{user.following.totalCount.toLocaleString()}</FollowCount>{" "}
+							Following
+						</FollowAnchor>
+					</NextLink>
+				</FollowContainer>
 			</MainInfoContainer>
 			<Divider />
 			{!formOpen ? (
