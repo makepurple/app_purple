@@ -2,10 +2,10 @@ import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const followUser = mutationField("followUser", {
+export const followSkill = mutationField("followSkill", {
 	type: nonNull("FollowUserPayload"),
 	args: {
-		where: nonNull(arg({ type: "UserWhereUniqueInput" }))
+		where: nonNull(arg({ type: "SkillWhereUniqueInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;
@@ -13,14 +13,14 @@ export const followUser = mutationField("followUser", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const record = await prisma.followUser
+		const record = await prisma.followSkill
 			.create({
 				data: {
 					follow: {
 						create: {
 							activities: {
 								create: {
-									type: UserActivityType.FollowUser,
+									type: UserActivityType.FollowSkill,
 									user: { connect: { id: user.id } }
 								}
 							}

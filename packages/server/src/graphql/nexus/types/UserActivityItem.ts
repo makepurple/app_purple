@@ -5,6 +5,7 @@ export const UserActivityItem = unionType({
 	definition: (t) => {
 		t.members(
 			"UserActivityItemCommentPost",
+			"UserActivityItemFollowSkill",
 			"UserActivityItemFollowUser",
 			"UserActivityItemFriendAcceptUser",
 			"UserActivityItemJoined",

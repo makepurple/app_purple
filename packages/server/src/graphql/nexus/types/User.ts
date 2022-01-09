@@ -1,6 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { Comment, Post, Prisma, Skill, User as _User } from "@prisma/client";
+import { Comment, Follow, Post, Prisma, Skill, User as _User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
@@ -100,13 +100,10 @@ export const User = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
 				const connection = await findManyCursorConnection<_User, { id: string }>(
 					(paginationArgs) =>
-						user
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
 							.followedBy({
 								...paginationArgs,
 								where: {
@@ -119,7 +116,7 @@ export const User = objectType({
 								friendRequests.map((friendRequest) => friendRequest.follower)
 							),
 					() =>
-						prisma.follow.count({
+						prisma.followUser.count({
 							where: {
 								followingId: parent.id,
 								follower: PrismaUtils.nonNull(args.where)
@@ -133,38 +130,53 @@ export const User = objectType({
 			}
 		});
 		t.nonNull.field("following", {
-			type: "UserConnection",
+			type: "FollowConnection",
 			args: {
 				after: stringArg(),
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
-				where: arg({ type: "UserWhereInput" })
+				where: arg({ type: "FollowWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
-				const connection = await findManyCursorConnection<_User, { id: string }>(
+				const connection = await findManyCursorConnection<Follow, { id: string }>(
 					(paginationArgs) =>
-						user
-							.following({
-								...paginationArgs,
-								where: {
-									followerId: parent.id,
-									following: PrismaUtils.nonNull(args.where)
-								},
-								include: { follower: true }
-							})
-							.then((friendRequests) =>
-								friendRequests.map((friendRequest) => friendRequest.follower)
-							),
+						prisma.follow.findMany({
+							...paginationArgs,
+							where: {
+								OR: [
+									{
+										followingSkill: {
+											followerId: { equals: parent.id },
+											following: PrismaUtils.nonNull(args.where?.skill)
+										}
+									},
+									{
+										followingUser: {
+											followerId: { equals: parent.id },
+											following: PrismaUtils.nonNull(args.where?.user)
+										}
+									}
+								]
+							}
+						}),
 					() =>
 						prisma.follow.count({
 							where: {
-								followerId: parent.id,
-								following: PrismaUtils.nonNull(args.where)
+								OR: [
+									{
+										followingSkill: {
+											followerId: { equals: parent.id },
+											following: PrismaUtils.nonNull(args.where?.skill)
+										}
+									},
+									{
+										followingUser: {
+											followerId: { equals: parent.id },
+											following: PrismaUtils.nonNull(args.where?.user)
+										}
+									}
+								]
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
@@ -407,7 +419,7 @@ export const User = objectType({
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
 
-				const follow = await prisma.follow.findUnique({
+				const follow = await prisma.followUser.findUnique({
 					where: {
 						followerId_followingId: {
 							followerId: user.id,

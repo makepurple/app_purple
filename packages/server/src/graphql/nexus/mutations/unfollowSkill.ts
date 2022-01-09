@@ -1,15 +1,15 @@
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const unfollowUser = mutationField("unfollowUser", {
-	type: nonNull("UnfollowUserPayload"),
+export const unfollowSkill = mutationField("unfollowSkill", {
+	type: nonNull("UnfollowSkillPayload"),
 	args: {
 		where: nonNull(arg({ type: "FollowWhereUniqueInput" }))
 	},
 	authorize: async (parent, args, { prisma, user }) => {
 		if (!user) return false;
 
-		const follower = await prisma.followSkill
+		const follower = await prisma.followUser
 			.findUnique({
 				where: PrismaUtils.nonNull(args.where)
 			})

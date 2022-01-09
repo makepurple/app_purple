@@ -31,12 +31,16 @@ export const viewerActivityFeed = queryField("viewerActivityFeed", {
 									comment: { isNot: null }
 								},
 								{
+									type: UserActivityType.FollowSkill,
+									follow: { isNot: null as any }
+								},
+								{
 									type: UserActivityType.FollowUser,
-									follow: { isNot: null }
+									follow: { isNot: null as any }
 								},
 								{
 									type: UserActivityType.FriendAcceptUser,
-									follow: { isNot: null }
+									follow: { isNot: null as any }
 								},
 								{
 									type: UserActivityType.Joined
