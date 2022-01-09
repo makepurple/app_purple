@@ -4,6 +4,13 @@ import { enumType } from "nexus";
 export const enumTypes = [
 	enumType(NexusPrisma.ExperienceType),
 	enumType({
+		name: "FollowingType",
+		members: {
+			Skill: "Skill",
+			User: "User"
+		}
+	}),
+	enumType({
 		name: "SortOrder",
 		members: {
 			Asc: "asc",

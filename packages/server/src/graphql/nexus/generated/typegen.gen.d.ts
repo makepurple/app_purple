@@ -146,6 +146,7 @@ export interface NexusGenInputs {
   }
   FollowWhereInput: { // input type
     skill?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
+    type?: NexusGenEnums['FollowingType'] | null; // FollowingType
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   FollowWhereUniqueInput: { // input type
@@ -280,6 +281,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
+  FollowingType: "Skill" | "User"
   SortOrder: "asc" | "desc"
   UserActivityType: "CommentPost" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvotePost"
 }

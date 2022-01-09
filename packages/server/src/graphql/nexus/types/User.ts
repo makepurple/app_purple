@@ -139,46 +139,34 @@ export const User = objectType({
 				where: arg({ type: "FollowWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
+				const skillOnly: boolean = args.where?.type === "Skill";
+				const userOnly: boolean = args.where?.type === "User";
+
+				const where: Prisma.FollowWhereInput = {
+					...(skillOnly
+						? { followingSkill: { isNot: null } }
+						: userOnly
+						? { followingUser: { isNot: null } }
+						: {}),
+					OR: [
+						{
+							followingSkill: {
+								followerId: { equals: parent.id },
+								following: PrismaUtils.nonNull(args.where?.skill)
+							}
+						},
+						{
+							followingUser: {
+								followerId: { equals: parent.id },
+								following: PrismaUtils.nonNull(args.where?.user)
+							}
+						}
+					]
+				};
+
 				const connection = await findManyCursorConnection<Follow, { id: string }>(
-					(paginationArgs) =>
-						prisma.follow.findMany({
-							...paginationArgs,
-							where: {
-								OR: [
-									{
-										followingSkill: {
-											followerId: { equals: parent.id },
-											following: PrismaUtils.nonNull(args.where?.skill)
-										}
-									},
-									{
-										followingUser: {
-											followerId: { equals: parent.id },
-											following: PrismaUtils.nonNull(args.where?.user)
-										}
-									}
-								]
-							}
-						}),
-					() =>
-						prisma.follow.count({
-							where: {
-								OR: [
-									{
-										followingSkill: {
-											followerId: { equals: parent.id },
-											following: PrismaUtils.nonNull(args.where?.skill)
-										}
-									},
-									{
-										followingUser: {
-											followerId: { equals: parent.id },
-											following: PrismaUtils.nonNull(args.where?.user)
-										}
-									}
-								]
-							}
-						}),
+					(paginationArgs) => prisma.follow.findMany({ ...paginationArgs, where }),
+					() => prisma.follow.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
@@ -199,32 +187,25 @@ export const User = objectType({
 				return user?.id === parent.id;
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
+				const where: Prisma.FriendshipWhereInput = {
+					frienderId: parent.id,
+					friending: PrismaUtils.nonNull(args.where),
+					rejected: false
+				};
 
 				const connection = await findManyCursorConnection<_User, { id: string }>(
 					(paginationArgs) =>
-						user
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
 							.friending({
 								...paginationArgs,
-								where: {
-									frienderId: parent.id,
-									friending: PrismaUtils.nonNull(args.where),
-									rejected: false
-								},
+								where,
 								include: { friending: true }
 							})
 							.then((friendRequests) =>
 								friendRequests.map((friendRequest) => friendRequest.friending)
 							),
-					() =>
-						prisma.friendship.count({
-							where: {
-								frienderId: parent.id,
-								friending: PrismaUtils.nonNull(args.where)
-							}
-						}),
+					() => prisma.friendship.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);

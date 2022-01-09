@@ -258,6 +258,7 @@ type FollowUserPayload implements MutationPayload {
 
 input FollowWhereInput {
   skill: SkillWhereInput
+  type: FollowingType
   user: UserWhereInput
 }
 
@@ -266,6 +267,11 @@ input FollowWhereUniqueInput {
 }
 
 union Following = Skill | User
+
+enum FollowingType {
+  Skill
+  User
+}
 
 type Friendship {
   friender: User!

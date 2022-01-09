@@ -18,6 +18,12 @@ fragment UserInfoSideBarUser on User {
 			name
 		}
 	}
+	followers {
+		totalCount
+	}
+	following {
+		totalCount
+	}
 	github {
 		__typename
 		id
