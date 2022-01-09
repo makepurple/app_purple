@@ -285,12 +285,30 @@ export type ExperienceWhereUniqueInput = {
 
 export type Follow = {
   readonly __typename: 'Follow';
+  readonly createdAt: Scalars['DateTime'];
   readonly follower: User;
-  readonly followerId: Scalars['String'];
-  readonly following: User;
-  readonly followingId: Scalars['String'];
+  readonly following: Following;
   readonly id: Scalars['ID'];
-  readonly updatedAt: Scalars['DateTime'];
+};
+
+export type FollowConnection = Connection & {
+  readonly __typename: 'FollowConnection';
+  readonly edges: ReadonlyArray<FollowEdge>;
+  readonly nodes: ReadonlyArray<Follow>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type FollowEdge = {
+  readonly __typename: 'FollowEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Follow;
+};
+
+export type FollowSkillPayload = MutationPayload & {
+  readonly __typename: 'FollowSkillPayload';
+  readonly query: Query;
+  readonly record: Follow;
 };
 
 export type FollowUserPayload = MutationPayload & {
@@ -299,9 +317,16 @@ export type FollowUserPayload = MutationPayload & {
   readonly record: Follow;
 };
 
+export type FollowWhereInput = {
+  readonly skill?: InputMaybe<SkillWhereInput>;
+  readonly user?: InputMaybe<UserWhereInput>;
+};
+
 export type FollowWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['String']>;
 };
+
+export type Following = Skill | User;
 
 export type Friendship = {
   readonly __typename: 'Friendship';
@@ -401,12 +426,14 @@ export type Mutation = {
   readonly deleteFriendship: DeleteFriendshipPayload;
   /** Users can delete their own posts. */
   readonly deletePost: DeletePostPayload;
+  readonly followSkill: FollowUserPayload;
   readonly followUser: FollowUserPayload;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
   readonly rejectFriendship: RejectFriendshipPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
   readonly requestFriendship: RequestFriendshipPayload;
+  readonly unfollowSkill: UnfollowSkillPayload;
   readonly unfollowUser: UnfollowUserPayload;
   readonly unvoteComment: UnvoteCommentPayload;
   readonly updateComment: UpdateCommentPayload;
@@ -473,6 +500,12 @@ export type MutationDeletePostArgs = {
 
 
 /** Root mutation type */
+export type MutationFollowSkillArgs = {
+  where: SkillWhereUniqueInput;
+};
+
+
+/** Root mutation type */
 export type MutationFollowUserArgs = {
   where: UserWhereUniqueInput;
 };
@@ -500,6 +533,12 @@ export type MutationRemovePostThumbnailArgs = {
 /** Root mutation type */
 export type MutationRequestFriendshipArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUnfollowSkillArgs = {
+  where: FollowWhereUniqueInput;
 };
 
 
@@ -747,6 +786,7 @@ export type Query = {
   readonly user?: Maybe<User>;
   readonly users: UserConnection;
   readonly viewer?: Maybe<User>;
+  readonly viewerActivityFeed: UserActivityItemConnection;
 };
 
 
@@ -847,6 +887,16 @@ export type QueryUsersArgs = {
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<ReadonlyArray<UserOrderByInput>>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+
+/** Root query type */
+export type QueryViewerActivityFeedArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserActivityWhereInput>;
 };
 
 export type RejectFriendshipPayload = MutationPayload & {
@@ -1057,6 +1107,12 @@ export type TopLanguages = {
   readonly totalSize: Scalars['Int'];
 };
 
+export type UnfollowSkillPayload = MutationPayload & {
+  readonly __typename: 'UnfollowSkillPayload';
+  readonly query: Query;
+  readonly record: Follow;
+};
+
 export type UnfollowUserPayload = MutationPayload & {
   readonly __typename: 'UnfollowUserPayload';
   readonly query: Query;
@@ -1161,7 +1217,7 @@ export type User = {
   readonly email: Scalars['String'];
   readonly experiences: ReadonlyArray<Experience>;
   readonly followers: UserConnection;
-  readonly following: UserConnection;
+  readonly following: FollowConnection;
   readonly friendRequests: UserConnection;
   readonly friends: UserConnection;
   readonly github: GitHubUser;
@@ -1211,7 +1267,7 @@ export type UserFollowingArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<UserWhereInput>;
+  where?: InputMaybe<FollowWhereInput>;
 };
 
 
@@ -1257,6 +1313,112 @@ export type UserUpvotedPostsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<PostWhereInput>;
+};
+
+export type UserActivity = {
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItem = UserActivityItemCommentPost | UserActivityItemFollowSkill | UserActivityItemFollowUser | UserActivityItemFriendAcceptUser | UserActivityItemJoined | UserActivityItemPublishPost | UserActivityItemUpvotePost;
+
+export type UserActivityItemCommentPost = UserActivity & {
+  readonly __typename: 'UserActivityItemCommentPost';
+  readonly comment: Comment;
+  readonly commentId: Scalars['String'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItemConnection = Connection & {
+  readonly __typename: 'UserActivityItemConnection';
+  readonly edges: ReadonlyArray<UserActivityItemEdge>;
+  readonly nodes: ReadonlyArray<UserActivityItem>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type UserActivityItemEdge = {
+  readonly __typename: 'UserActivityItemEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: UserActivityItem;
+};
+
+export type UserActivityItemFollowSkill = UserActivity & {
+  readonly __typename: 'UserActivityItemFollowSkill';
+  readonly createdAt: Scalars['DateTime'];
+  readonly follow: Follow;
+  readonly followId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItemFollowUser = UserActivity & {
+  readonly __typename: 'UserActivityItemFollowUser';
+  readonly createdAt: Scalars['DateTime'];
+  readonly follow: Follow;
+  readonly followId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItemFriendAcceptUser = UserActivity & {
+  readonly __typename: 'UserActivityItemFriendAcceptUser';
+  readonly createdAt: Scalars['DateTime'];
+  readonly friendship: Friendship;
+  readonly friendshipId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItemJoined = UserActivity & {
+  readonly __typename: 'UserActivityItemJoined';
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItemPublishPost = UserActivity & {
+  readonly __typename: 'UserActivityItemPublishPost';
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly post: Post;
+  readonly postId: Scalars['String'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type UserActivityItemUpvotePost = UserActivity & {
+  readonly __typename: 'UserActivityItemUpvotePost';
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly post: Post;
+  readonly postId: Scalars['String'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export enum UserActivityType {
+  CommentPost = 'CommentPost',
+  FollowSkill = 'FollowSkill',
+  FollowUser = 'FollowUser',
+  FriendAcceptUser = 'FriendAcceptUser',
+  Joined = 'Joined',
+  PublishPost = 'PublishPost',
+  UpvotePost = 'UpvotePost'
+}
+
+export type UserActivityWhereInput = {
+  readonly type?: InputMaybe<UserActivityType>;
+  readonly user?: InputMaybe<UserWhereInput>;
 };
 
 /** Relay-style connection for User types. */

@@ -55,7 +55,7 @@ export const User_fragment_mock: User = {
 		nodes: []
 	},
 	following: {
-		__typename: "UserConnection",
+		__typename: "FollowConnection",
 		pageInfo: {
 			__typename: "PageInfo",
 			endCursor: null,

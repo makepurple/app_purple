@@ -218,12 +218,27 @@ input ExperienceWhereUniqueInput {
 }
 
 type Follow {
+  createdAt: DateTime!
   follower: User!
-  followerId: String!
-  following: User!
-  followingId: String!
+  following: Following!
   id: ID!
-  updatedAt: DateTime!
+}
+
+type FollowConnection implements Connection {
+  edges: [FollowEdge!]!
+  nodes: [Follow!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type FollowEdge {
+  cursor: String!
+  node: Follow!
+}
+
+type FollowSkillPayload implements MutationPayload {
+  query: Query!
+  record: Follow!
 }
 
 type FollowUserPayload implements MutationPayload {
@@ -231,9 +246,16 @@ type FollowUserPayload implements MutationPayload {
   record: Follow!
 }
 
+input FollowWhereInput {
+  skill: SkillWhereInput
+  user: UserWhereInput
+}
+
 input FollowWhereUniqueInput {
   id: String
 }
+
+union Following = Skill | User
 
 type Friendship {
   friender: User!
@@ -338,6 +360,7 @@ type Mutation {
 
   # Users can delete their own posts.
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
+  followSkill(where: SkillWhereUniqueInput!): FollowUserPayload!
   followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   ok: Boolean!
   publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
@@ -347,6 +370,7 @@ type Mutation {
   ): RejectFriendshipPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
+  unfollowSkill(where: FollowWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: FollowWhereUniqueInput!): UnfollowUserPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
@@ -494,6 +518,7 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
+  viewerActivityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityItemConnection!
 }
 
 type RejectFriendshipPayload implements MutationPayload {
@@ -693,6 +718,11 @@ type TopLanguages {
 # A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 scalar URL
 
+type UnfollowSkillPayload implements MutationPayload {
+  query: Query!
+  record: Follow!
+}
+
 type UnfollowUserPayload implements MutationPayload {
   query: Query!
   record: Follow!
@@ -786,7 +816,7 @@ type User {
   email: String!
   experiences: [Experience!]!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
-  following(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  following(after: String, before: String, first: Int, last: Int, where: FollowWhereInput): FollowConnection!
   friendRequests(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubUser!
@@ -800,6 +830,103 @@ type User {
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerFollowing: Boolean!
   viewerFriended: Boolean!
+}
+
+interface UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+union UserActivityItem = UserActivityItemCommentPost | UserActivityItemFollowSkill | UserActivityItemFollowUser | UserActivityItemFriendAcceptUser | UserActivityItemJoined | UserActivityItemPublishPost | UserActivityItemUpvotePost
+
+type UserActivityItemCommentPost implements UserActivity {
+  comment: Comment!
+  commentId: String!
+  createdAt: DateTime!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemConnection implements Connection {
+  edges: [UserActivityItemEdge!]!
+  nodes: [UserActivityItem!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserActivityItemEdge {
+  cursor: String!
+  node: UserActivityItem!
+}
+
+type UserActivityItemFollowSkill implements UserActivity {
+  createdAt: DateTime!
+  follow: Follow!
+  followId: String!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemFollowUser implements UserActivity {
+  createdAt: DateTime!
+  follow: Follow!
+  followId: String!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemFriendAcceptUser implements UserActivity {
+  createdAt: DateTime!
+  friendship: Friendship!
+  friendshipId: String!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemJoined implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemPublishPost implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  post: Post!
+  postId: String!
+  user: User!
+  userId: String!
+}
+
+type UserActivityItemUpvotePost implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  post: Post!
+  postId: String!
+  user: User!
+  userId: String!
+}
+
+enum UserActivityType {
+  CommentPost
+  FollowSkill
+  FollowUser
+  FriendAcceptUser
+  Joined
+  PublishPost
+  UpvotePost
+}
+
+input UserActivityWhereInput {
+  type: UserActivityType
+  user: UserWhereInput
 }
 
 # Relay-style connection for User types.
