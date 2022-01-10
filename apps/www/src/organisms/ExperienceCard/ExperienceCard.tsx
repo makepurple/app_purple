@@ -149,7 +149,12 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 
 	return (
 		<Root ref={ref} className={className} style={style}>
-			<StyledAvatar border={4}>
+			<StyledAvatar
+				border={4}
+				href={githubOrganization.url}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				<GitHubAvatarImage
 					alt={githubOrganization.name ?? ""}
 					src={githubOrganization.avatarUrl}

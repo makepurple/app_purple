@@ -13,6 +13,7 @@ fragment ExperienceCardExperience on Experience {
 			id
 			login
 			name
+			url
 		}
 	}
 	positionName
