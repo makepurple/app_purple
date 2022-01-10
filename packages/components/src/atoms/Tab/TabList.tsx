@@ -15,9 +15,9 @@ export const TabList: typeof Tab.List = styled(Tab.List).attrs<TabListProps>(
 		grid
 		grid-flow-row
 		auto-rows-fr
-		sm:grid-flow-col
-		sm:auto-cols-fr
 		p-1
 		rounded-lg
+		md:grid-flow-col
+		md:auto-cols-fr
 	`}
 `;

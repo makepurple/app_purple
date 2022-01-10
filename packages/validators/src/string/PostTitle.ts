@@ -45,6 +45,7 @@ const reservedWords = [
 	"logout",
 	"media",
 	"new",
+	"overview",
 	"post",
 	"posts",
 	"press",

@@ -1779,10 +1779,10 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     unfollowSkill: { // args
-      where: NexusGenInputs['FollowWhereUniqueInput']; // FollowWhereUniqueInput!
+      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
     }
     unfollowUser: { // args
-      where: NexusGenInputs['FollowWhereUniqueInput']; // FollowWhereUniqueInput!
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     unvoteComment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!

@@ -133,14 +133,7 @@ export const Page: NextPage<PageProps> = () => {
 					/>
 				) : (
 					<Experiences>
-						{fetching ? (
-							Array.from({ length: 3 }, (_, i) => (
-								<Fragment key={i}>
-									{!!i && <Divider tw="ml-22" />}
-									<LoadingExperienceCard />
-								</Fragment>
-							))
-						) : !experiences.length ? (
+						{!experiences.length ? (
 							<NonIdealState
 								title="There's nothing here"
 								subTitle="We couldn't find any experiences"
@@ -160,6 +153,13 @@ export const Page: NextPage<PageProps> = () => {
 								</Fragment>
 							))
 						)}
+						{fetching &&
+							Array.from({ length: 3 }, (_, i) => (
+								<Fragment key={i}>
+									{(!!i || !!experiences.length) && <Divider tw="ml-22" />}
+									<LoadingExperienceCard />
+								</Fragment>
+							))}
 					</Experiences>
 				)}
 			</Content>

@@ -36,7 +36,7 @@ const PageTabs = tw(UserPageTabs)`
 
 export interface UserPageLayoutProps {
 	children?: ReactNode;
-	selectedTab?: "posts" | "repositories" | "experiences";
+	selectedTab?: "overview" | "posts" | "repositories" | "experiences";
 	userName: string;
 }
 

@@ -1,12 +1,16 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { GetPostDraft_mock, GetUserInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
-import Page from "@makepurple/www/src/pages/[userName]";
+import {
+	GetPostDraft_mock,
+	GetUserFollowers_mock,
+	GetUserInfoSideBar_mock
+} from "@makepurple/www/src/graphql/mocks";
+import { Page } from "@makepurple/www/src/pages/[userName]/followers";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/[userName]",
+	title: "pages/[userName]/followers",
 	component: Page,
 	decorators: [
 		(Story) => (
@@ -38,6 +42,8 @@ Standard.parameters = {
 		switch (getOperationName(op.query)) {
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFollowers":
+				return { data: GetUserFollowers_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:

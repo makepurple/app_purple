@@ -1,9 +1,17 @@
-import { HexagonIcon, NextLinkAs, NoteIcon, Paper, RepoIcon, Tab } from "@makepurple/components";
+import {
+	BookIcon,
+	HexagonIcon,
+	NextLinkAs,
+	NoteIcon,
+	Paper,
+	RepoIcon,
+	Tab
+} from "@makepurple/components";
 import React, { CSSProperties, FC, Fragment, useMemo } from "react";
 
 export interface UserPageTabsProps {
 	className?: string;
-	selectedTab?: "posts" | "repositories" | "experiences";
+	selectedTab?: "overview" | "posts" | "repositories" | "experiences";
 	style?: CSSProperties;
 	userName: string;
 }
@@ -16,12 +24,14 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 }) => {
 	const defaultIndex = useMemo(() => {
 		switch (selectedTab) {
-			case "posts":
+			case "overview":
 				return 0;
-			case "repositories":
+			case "posts":
 				return 1;
-			case "experiences":
+			case "repositories":
 				return 2;
+			case "experiences":
+				return 3;
 			default:
 				return undefined;
 		}
@@ -36,6 +46,19 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 							as={Tab.Button}
 							forwardedAs="a"
 							href={`/${userName}`}
+							{...tabProps}
+						>
+							<BookIcon height={20} tw="mr-2" width={20} />
+							Overview
+						</NextLinkAs>
+					)}
+				</Tab>
+				<Tab as={Fragment}>
+					{(tabProps) => (
+						<NextLinkAs
+							as={Tab.Button}
+							forwardedAs="a"
+							href={`/${userName}/posts`}
 							{...tabProps}
 						>
 							<NoteIcon height={20} tw="mr-2" width={20} />

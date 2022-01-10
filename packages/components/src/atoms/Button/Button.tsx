@@ -16,13 +16,10 @@ export const Button = styled.button<{
 		flex
 		items-center
 		justify-center
-		px-3
-		py-3.5
 		border
 		border-solid
 		border-transparent
 		rounded-md
-		text-lg
 		leading-none
 		bg-indigo-500
 		text-white
@@ -39,7 +36,6 @@ export const Button = styled.button<{
 		not-disabled:active:shadow-none
 		not-disabled:hover:shadow-md
 		not-disabled:hover:opacity-90
-		
 		disabled:after:absolute
 		disabled:after:inset-0
 		disabled:after:pointer-events-auto
@@ -84,19 +80,21 @@ export const Button = styled.button<{
 				return tw`
 					px-4
 					py-5
-				`;
-			case "medium":
-				return tw`
-					px-3
-					py-3.5
+					text-lg
 				`;
 			case "small":
 				return tw`
-					px-1
+					px-2
 					py-1.5
+					text-base
 				`;
+			case "medium":
 			default:
-				return null;
+				return tw`
+					px-3
+					py-3.5
+					text-lg
+				`;
 		}
 	}}
 `;

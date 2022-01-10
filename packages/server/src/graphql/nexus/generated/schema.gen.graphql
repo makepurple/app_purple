@@ -390,8 +390,8 @@ type Mutation {
   ): RejectFriendshipPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
-  unfollowSkill(where: FollowWhereUniqueInput!): UnfollowSkillPayload!
-  unfollowUser(where: FollowWhereUniqueInput!): UnfollowUserPayload!
+  unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
+  unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!

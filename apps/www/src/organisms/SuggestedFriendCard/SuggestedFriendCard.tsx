@@ -106,11 +106,11 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 
 		const post = user.posts.nodes[0];
 
-		const skills = user.skills.nodes;
-		const desiredSkills = user.desiredSkills.nodes;
+		const skills = user.skills.nodes.slice(0, MAX_SKILLS_SHOWN);
+		const desiredSkills = user.desiredSkills.nodes.slice(0, MAX_SKILLS_SHOWN);
 
-		const skillsExtra = skills.length - MAX_SKILLS_SHOWN;
-		const desiredSkillsExtra = desiredSkills.length - MAX_SKILLS_SHOWN;
+		const skillsExtra = user.skills.totalCount - MAX_SKILLS_SHOWN;
+		const desiredSkillsExtra = user.desiredSkills.totalCount - MAX_SKILLS_SHOWN;
 
 		return (
 			<Root ref={ref} className={className} style={style} $withPost={!!post}>
@@ -184,7 +184,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 								<UserSkills tw="mt-3">
 									{!!skills.length && (
 										<Tags type="positive">
-											{skills.slice(0, MAX_SKILLS_SHOWN).map((skill) => (
+											{skills.map((skill) => (
 												<Tags.Tag key={skill.id} id={skill.id} tw="px-1">
 													{skill.name}
 												</Tags.Tag>
@@ -199,7 +199,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 									)}
 									{!!desiredSkills.length && (
 										<Tags type="negative">
-											{desiredSkills.slice(0, 5).map((skill) => (
+											{desiredSkills.map((skill) => (
 												<Tags.Tag key={skill.id} id={skill.id} tw="px-1">
 													{skill.name}
 												</Tags.Tag>

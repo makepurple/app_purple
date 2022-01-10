@@ -121,7 +121,7 @@ export const User_fragment_mock: User = {
 			hasPreviousPage: false,
 			startCursor: null
 		},
-		totalCount: 5,
+		totalCount: 8,
 		edges: [],
 		nodes: [
 			"Next.js",

@@ -1,0 +1,12 @@
+mutation UnfollowUser($where: UserWhereUniqueInput!) {
+	unfollowUser(where: $where) {
+		record {
+			following {
+				... on User {
+					id
+					viewerFollowing
+				}
+			}
+		}
+	}
+}

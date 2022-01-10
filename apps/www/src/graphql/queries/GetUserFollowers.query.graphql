@@ -1,0 +1,29 @@
+query GetUserFollowers(
+	$after: String
+	$first: Int
+	$name: String!
+) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		name
+		followers(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...UserFollowCardUser
+			}
+		}
+	}
+}

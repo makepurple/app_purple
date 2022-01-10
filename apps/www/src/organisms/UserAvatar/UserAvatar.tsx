@@ -10,7 +10,10 @@ export interface UserAvatarProps extends AvatarProps {
 }
 
 export const UserAvatar = forwardRef<HTMLAnchorElement, UserAvatarProps>((props, ref) => {
-	const { border = 1, height = 48, user, width = 48, ...avatarProps } = props;
+	const { border = 1, height: _height, user, width: _width, ...avatarProps } = props;
+
+	const height: number = _height ?? _width ?? 48;
+	const width: number = _width ?? _height ?? 48;
 
 	return (
 		<NextLink href="/[userName]" as={`/${user.name}`} passHref>
