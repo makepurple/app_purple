@@ -1,4 +1,6 @@
 import { GlobalStyles } from "@makepurple/components";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
 import { addons } from "@storybook/addons";
 import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
@@ -62,7 +64,11 @@ export const parameters = {
 		},
 	},
 	nextRouter: {
-		Provider: RouterContext.Provider,	
+		Provider: RouterContext.Provider,
+		push(...args) {
+			action("nextRouter.push")(...args);
+			linkTo(`pages${args[0]}`)();
+		}
 	},
 	options: {
 		storySort: alphabeticSort

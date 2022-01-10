@@ -7,7 +7,7 @@ import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/index",
+	title: "pages",
 	component: Page,
 	decorators: [
 		(Story) => (

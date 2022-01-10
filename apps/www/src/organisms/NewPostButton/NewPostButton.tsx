@@ -31,7 +31,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 		if (process.env.NODE_ENV === "test") return;
 
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		router?.prefetch(`/${userName}/draft`);
+		router?.prefetch("/[userName]/draft", `/${userName}/draft`);
 	}, [router, userName]);
 
 	return (
@@ -55,7 +55,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 
 				if (!didSucceed) return;
 
-				await router.push(`/${userName}/draft`);
+				await router.push("/[userName]/draft", `/${userName}/draft`);
 			}}
 			style={style}
 			type="button"

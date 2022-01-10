@@ -45,7 +45,8 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 						<NextLinkAs
 							as={Tab.Button}
 							forwardedAs="a"
-							href={`/${userName}`}
+							href="/[userName]"
+							linkAs={`/${userName}`}
 							{...tabProps}
 						>
 							<BookIcon height={20} tw="mr-2" width={20} />
@@ -58,7 +59,8 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 						<NextLinkAs
 							as={Tab.Button}
 							forwardedAs="a"
-							href={`/${userName}/posts`}
+							href="/[userName]/posts"
+							linkAs={`/${userName}/posts`}
 							{...tabProps}
 						>
 							<NoteIcon height={20} tw="mr-2" width={20} />
@@ -71,7 +73,8 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 						<NextLinkAs
 							as={Tab.Button}
 							forwardedAs="a"
-							href={`/${userName}/repositories`}
+							href="/[userName]/repositories"
+							linkAs={`/${userName}/repositories`}
 							{...tabProps}
 						>
 							<RepoIcon height={20} tw="mr-2" width={20} />
@@ -84,7 +87,8 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 						<NextLinkAs
 							as={Tab.Button}
 							forwardedAs="a"
-							href={`/${userName}/experiences`}
+							href="/[userName]/experiences"
+							linkAs={`/${userName}/experiences`}
 							{...tabProps}
 						>
 							<HexagonIcon height={20} tw="mr-2" width={20} />
