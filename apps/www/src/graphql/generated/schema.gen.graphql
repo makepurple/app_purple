@@ -591,6 +591,7 @@ type RequestFriendshipPayload implements MutationPayload {
 
 type Skill {
   desiringUsers: [User!]!
+  github: GitHubRepository!
   id: ID!
   name: String!
   owner: String!

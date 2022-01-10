@@ -976,6 +976,7 @@ export type RequestFriendshipPayload = MutationPayload & {
 export type Skill = {
   readonly __typename: 'Skill';
   readonly desiringUsers: ReadonlyArray<User>;
+  readonly github: GitHubRepository;
   readonly id: Scalars['ID'];
   readonly name: Scalars['String'];
   readonly owner: Scalars['String'];

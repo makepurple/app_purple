@@ -979,6 +979,7 @@ export interface NexusGenFieldTypes {
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
+    github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
     id: string; // ID!
     name: string; // String!
     owner: string; // String!
@@ -1498,6 +1499,7 @@ export interface NexusGenFieldTypeNames {
   }
   Skill: { // field return type name
     desiringUsers: 'User'
+    github: 'GitHubRepository'
     id: 'ID'
     name: 'String'
     owner: 'String'

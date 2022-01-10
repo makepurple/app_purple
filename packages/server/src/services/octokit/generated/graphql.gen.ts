@@ -6375,6 +6375,8 @@ export enum FundingPlatform {
   Issuehunt = 'ISSUEHUNT',
   /** Ko-fi funding platform. */
   KoFi = 'KO_FI',
+  /** LFX Crowdfunding funding platform. */
+  LfxCrowdfunding = 'LFX_CROWDFUNDING',
   /** Liberapay funding platform. */
   Liberapay = 'LIBERAPAY',
   /** Open Collective funding platform. */
@@ -10605,6 +10607,20 @@ export type OrgEnableTwoFactorRequirementAuditEntry = AuditEntry & Node & Organi
   readonly userUrl?: Maybe<Scalars['URI']>;
 };
 
+/** Ordering options for an organization's enterprise owner connections. */
+export type OrgEnterpriseOwnerOrder = {
+  /** The ordering direction. */
+  readonly direction: OrderDirection;
+  /** The field to order enterprise owners by. */
+  readonly field: OrgEnterpriseOwnerOrderField;
+};
+
+/** Properties by which enterprise owners can be ordered. */
+export enum OrgEnterpriseOwnerOrderField {
+  /** Order enterprise owners by login. */
+  Login = 'LOGIN'
+}
+
 /** Audit log entry for a org.invite_member event. */
 export type OrgInviteMemberAuditEntry = AuditEntry & Node & OrganizationAuditEntryData & {
   readonly __typename?: 'OrgInviteMemberAuditEntry';
@@ -11398,6 +11414,8 @@ export type Organization = Actor & MemberStatusable & Node & PackageOwner & Prof
   readonly domains?: Maybe<VerifiableDomainConnection>;
   /** The organization's public email. */
   readonly email?: Maybe<Scalars['String']>;
+  /** A list of owners of the organization's enterprise account. */
+  readonly enterpriseOwners: OrganizationEnterpriseOwnerConnection;
   /** The estimated next GitHub Sponsors payout for this user/organization in cents (USD). */
   readonly estimatedNextSponsorsPayoutInCents: Scalars['Int'];
   /** True if this user/organization has a GitHub Sponsors listing. */
@@ -11562,6 +11580,18 @@ export type OrganizationDomainsArgs = {
   isVerified?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<VerifiableDomainOrder>;
+};
+
+
+/** An account on GitHub, with one or more owners, that has repositories, members and teams. */
+export type OrganizationEnterpriseOwnersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<OrgEnterpriseOwnerOrder>;
+  organizationRole?: InputMaybe<RoleInOrganization>;
+  query?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -11863,6 +11893,30 @@ export type OrganizationEdge = {
   readonly cursor: Scalars['String'];
   /** The item at the end of the edge. */
   readonly node?: Maybe<Organization>;
+};
+
+/** The connection type for User. */
+export type OrganizationEnterpriseOwnerConnection = {
+  readonly __typename?: 'OrganizationEnterpriseOwnerConnection';
+  /** A list of edges. */
+  readonly edges?: Maybe<ReadonlyArray<Maybe<OrganizationEnterpriseOwnerEdge>>>;
+  /** A list of nodes. */
+  readonly nodes?: Maybe<ReadonlyArray<Maybe<User>>>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** Identifies the total count of items in the connection. */
+  readonly totalCount: Scalars['Int'];
+};
+
+/** An enterprise owner in the context of an organization that is part of the enterprise. */
+export type OrganizationEnterpriseOwnerEdge = {
+  readonly __typename?: 'OrganizationEnterpriseOwnerEdge';
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node?: Maybe<User>;
+  /** The role of the owner with respect to the organization. */
+  readonly organizationRole: RoleInOrganization;
 };
 
 /** An Identity Provider configured to provision SAML and SCIM identities for Organizations */
@@ -22842,6 +22896,14 @@ export type GetGitHubRepositoryQueryVariables = Exact<{
 
 
 export type GetGitHubRepositoryQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } | null | undefined };
+
+export type GetGitHubRepositoryForSkillQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetGitHubRepositoryForSkillQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } | null | undefined };
 
 export type GetGitHubUserQueryVariables = Exact<{
   login: Scalars['String'];
