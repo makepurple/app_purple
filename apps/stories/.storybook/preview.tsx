@@ -67,6 +67,12 @@ export const parameters = {
 		Provider: RouterContext.Provider,
 		push(...args) {
 			action("nextRouter.push")(...args);
+			/**
+			 * !HACK
+			 * @description Assume webpage stories to be under the pages root story.
+			 * @author David Lee
+			 * @date January 10, 2022
+			 */
 			linkTo(`pages${args[0]}`)();
 		}
 	},
