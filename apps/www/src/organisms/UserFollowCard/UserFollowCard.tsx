@@ -1,4 +1,5 @@
-import { Button, Spinner, Tags } from "@makepurple/components";
+import { Anchor, Button, Spinner, Tags } from "@makepurple/components";
+import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -20,9 +21,11 @@ const Content = tw.div`
 	flex-grow
 	flex
 	flex-col
+	items-start
 `;
 
-const UserName = tw.div`
+const UserName = tw(Anchor)`
+	text-black
 	text-lg
 	leading-none
 	font-semibold
@@ -65,7 +68,9 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 				<UserAvatar border={3} height={64} width={64} user={user} tw="flex-shrink-0 mr-4" />
 			)}
 			<Content>
-				<UserName>{user.name}</UserName>
+				<NextLink href="/[userName/" as={`/${user.name}`} passHref>
+					<UserName>{user.name}</UserName>
+				</NextLink>
 				{user.description && <Bio tw="mt-1">{user.description}</Bio>}
 				{!!skills.length && (
 					<Tags type="positive" tw="mt-2">
@@ -100,6 +105,7 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 			</Content>
 			<Actions>
 				<Button
+					disabled={loading}
 					onClick={async () => {
 						user.viewerFollowing
 							? await unfollowUser({ where: { id: user.id } }).catch(() => null)
