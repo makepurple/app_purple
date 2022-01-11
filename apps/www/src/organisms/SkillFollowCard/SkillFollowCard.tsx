@@ -19,14 +19,11 @@ import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../
 const Root = tw.div`
 	flex
 	items-start
-	items-start
 	py-4
 `;
 
 const StyledAvatar = tw(Avatar)`
 	flex-shrink-0
-	h-16
-	w-16
 	rounded-md
 `;
 

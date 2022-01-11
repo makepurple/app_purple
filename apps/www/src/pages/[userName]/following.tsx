@@ -4,8 +4,13 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetUserFollowersQuery } from "../../graphql";
-import { LoadingUserFollowCard, UserFollowCard, UserPageLayout } from "../../organisms";
+import { useGetUserFollowingQuery } from "../../graphql";
+import {
+	LoadingUserFollowCard,
+	SkillFollowCard,
+	UserFollowCard,
+	UserPageLayout
+} from "../../organisms";
 
 const BATCH_SIZE = 20;
 
@@ -22,7 +27,7 @@ const Title = tw.h2`
 	font-bold
 `;
 
-const Followers = tw.div`
+const Following = tw.div`
 	flex
 	flex-col
 	items-stretch
@@ -33,8 +38,8 @@ export const Page: NextPage = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetUserFollowersQuery, {
-		field: "user.followers",
+	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetUserFollowingQuery, {
+		field: "user.following",
 		requestPolicy: "cache-first",
 		variables: {
 			after: null,
@@ -44,7 +49,7 @@ export const Page: NextPage = () => {
 	});
 
 	const user = data?.user;
-	const followers = user?.followers.nodes ?? [];
+	const follows = user?.following.nodes ?? [];
 
 	if (!user) return null;
 
@@ -52,32 +57,42 @@ export const Page: NextPage = () => {
 		<UserPageLayout selectedTab="overview" userName={userName}>
 			<Content>
 				<Title tw="mb-6">Followers</Title>
-				<Followers>
-					{!followers.length ? (
+				<Following>
+					{!follows.length ? (
 						<NonIdealState
 							title="There's nothing here"
-							subTitle="We couldn't find any followers"
+							subTitle="This user is not following anything"
 							tw="shadow-none"
 						/>
 					) : (
-						followers.map((follower, i) => (
-							<Fragment key={follower.id}>
+						follows.map((follow, i) => (
+							<Fragment key={follow.id}>
 								{!!i && <Divider />}
-								<UserFollowCard ref={getLoadMoreRef(i)} user={follower} />
+								{follow.following.__typename === "Skill" ? (
+									<SkillFollowCard
+										ref={getLoadMoreRef(i)}
+										skill={follow.following}
+									/>
+								) : follow.following.__typename === "User" ? (
+									<UserFollowCard
+										ref={getLoadMoreRef(i)}
+										user={follow.following}
+									/>
+								) : (
+									<div ref={getLoadMoreRef(i)} tw="hidden" />
+								)}
 							</Fragment>
 						))
 					)}
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => (
 							<Fragment key={i}>
-								{(!!i || !!followers.length) && <Divider />}
+								{(!!i || !!follows.length) && <Divider />}
 								<LoadingUserFollowCard />
 							</Fragment>
 						))}
-				</Followers>
+				</Following>
 			</Content>
 		</UserPageLayout>
 	);
 };
-
-export default Page;

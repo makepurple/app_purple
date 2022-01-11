@@ -39,8 +39,6 @@ const Root = styled.div`
 
 const StyledAvatar = tw(Avatar)`
 	flex-shrink-0
-	h-16
-	w-16
 	mr-6
 	rounded-md
 `;
