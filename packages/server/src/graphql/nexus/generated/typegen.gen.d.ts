@@ -665,10 +665,9 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
-  Following: core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'>;
 }
 
-export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects & NexusGenUnions
+export type NexusGenRootTypes = NexusGenInterfaces & NexusGenObjects
 
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
@@ -765,7 +764,7 @@ export interface NexusGenFieldTypes {
   Follow: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     follower: NexusGenRootTypes['User']; // User!
-    following: NexusGenRootTypes['Following']; // Following!
+    following: NexusGenRootTypes['Followable']; // Followable!
     id: string; // ID!
   }
   FollowConnection: { // field return type
@@ -1292,7 +1291,7 @@ export interface NexusGenFieldTypeNames {
   Follow: { // field return type name
     createdAt: 'DateTime'
     follower: 'User'
-    following: 'Following'
+    following: 'Followable'
     id: 'ID'
   }
   FollowConnection: { // field return type name
@@ -2024,7 +2023,6 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
-  Following: "Skill" | "User"
   Connection: "CommentConnection" | "ExperienceConnection" | "FollowConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserActivityConnection" | "UserConnection"
   ConnectionEdge: "CommentEdge" | "ExperienceEdge" | "FollowEdge" | "PostEdge" | "RepositoryEdge" | "SkillEdge" | "UserActivityEdge" | "UserEdge"
   Followable: "Skill" | "User"
@@ -2103,7 +2101,7 @@ export type NexusGenInterfaceNames = keyof NexusGenInterfaces;
 
 export type NexusGenScalarNames = keyof NexusGenScalars;
 
-export type NexusGenUnionNames = keyof NexusGenUnions;
+export type NexusGenUnionNames = never;
 
 export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
 

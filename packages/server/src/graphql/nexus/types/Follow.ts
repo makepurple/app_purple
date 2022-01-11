@@ -27,7 +27,7 @@ export const Follow = objectType({
 			}
 		});
 		t.nonNull.field("following", {
-			type: "Following",
+			type: "Followable",
 			resolve: async (parent, args, { prisma }) => {
 				const follow = await prisma.follow.findUnique({
 					where: { id: parent.id },

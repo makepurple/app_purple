@@ -22,7 +22,6 @@ export * from "./Follow";
 export * from "./Followable";
 export * from "./FollowConnection";
 export * from "./FollowEdge";
-export * from "./Following";
 export * from "./FollowSkillPayload";
 export * from "./FollowUserPayload";
 export * from "./Friendship";

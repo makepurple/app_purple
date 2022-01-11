@@ -291,7 +291,7 @@ export type Follow = {
   readonly __typename: 'Follow';
   readonly createdAt: Scalars['DateTime'];
   readonly follower: User;
-  readonly following: Following;
+  readonly following: Followable;
   readonly id: Scalars['ID'];
 };
 
@@ -334,8 +334,6 @@ export type FollowWhereUniqueInput = {
 export type Followable = {
   readonly viewerFollowing: Scalars['Boolean'];
 };
-
-export type Following = Skill | User;
 
 export enum FollowingType {
   Skill = 'Skill',
@@ -1732,6 +1730,15 @@ export type GetUserFollowersQueryVariables = Exact<{
 
 export type GetUserFollowersQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> } }> } } | null | undefined };
 
+export type GetUserFollowingQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  name: Scalars['String'];
+}>;
+
+
+export type GetUserFollowingQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'FollowEdge', readonly cursor: string, readonly node: { readonly __typename: 'Follow', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Follow', readonly id: string, readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } } | { readonly __typename: 'User', readonly viewerFollowing: boolean, readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> } } }> } } | null | undefined };
+
 export type GetUserInfoSideBarQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
@@ -2819,6 +2826,44 @@ ${UserFollowCardUserFragmentDoc}`;
 
 export function useGetUserFollowersQuery(options: Omit<Urql.UseQueryArgs<GetUserFollowersQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetUserFollowersQuery>({ query: GetUserFollowersDocument, ...options });
+};
+export const GetUserFollowingDocument = /*#__PURE__*/ gql`
+    query GetUserFollowing($after: String, $first: Int, $name: String!) {
+  user(where: {name: $name}) {
+    id
+    name
+    following(after: $after, first: $first) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+      totalCount
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        id
+        following {
+          viewerFollowing
+          ... on Skill {
+            ...SkillFollowCardSkill
+          }
+          ... on User {
+            ...UserFollowCardUser
+          }
+        }
+      }
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${SkillFollowCardSkillFragmentDoc}
+${UserFollowCardUserFragmentDoc}`;
+
+export function useGetUserFollowingQuery(options: Omit<Urql.UseQueryArgs<GetUserFollowingQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserFollowingQuery>({ query: GetUserFollowingDocument, ...options });
 };
 export const GetUserInfoSideBarDocument = /*#__PURE__*/ gql`
     query GetUserInfoSideBar($name: String!) {

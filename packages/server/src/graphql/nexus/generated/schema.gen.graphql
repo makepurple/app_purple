@@ -234,7 +234,7 @@ input ExperienceWhereUniqueInput {
 type Follow {
   createdAt: DateTime!
   follower: User!
-  following: Following!
+  following: Followable!
   id: ID!
 }
 
@@ -273,8 +273,6 @@ input FollowWhereUniqueInput {
 interface Followable {
   viewerFollowing: Boolean!
 }
-
-union Following = Skill | User
 
 enum FollowingType {
   Skill

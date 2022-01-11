@@ -1,0 +1,38 @@
+query GetUserFollowing(
+	$after: String
+	$first: Int
+	$name: String!
+) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		name
+		following(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				id
+				following {
+					viewerFollowing
+					... on Skill {
+						...SkillFollowCardSkill
+					}
+					... on User {
+						...UserFollowCardUser
+					}
+				}
+			}
+		}
+	}
+}
