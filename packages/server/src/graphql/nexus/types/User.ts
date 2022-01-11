@@ -10,6 +10,7 @@ export const User = objectType({
 	name: NexusPrisma.User.$name,
 	description: NexusPrisma.User.$description,
 	definition: (t) => {
+		t.implements("Followable");
 		t.nonNull.field("comments", {
 			type: "CommentConnection",
 			args: {

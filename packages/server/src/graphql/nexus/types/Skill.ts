@@ -10,6 +10,7 @@ export const Skill = objectType({
 	name: NexusPrisma.Skill.$name,
 	description: NexusPrisma.Skill.$description,
 	definition: (t) => {
+		t.implements("Followable");
 		t.nonNull.field("desiringUsers", {
 			type: "UserConnection",
 			args: {

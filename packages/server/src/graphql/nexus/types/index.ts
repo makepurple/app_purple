@@ -19,6 +19,7 @@ export * from "./Experience";
 export * from "./ExperienceConnection";
 export * from "./ExperienceEdge";
 export * from "./Follow";
+export * from "./Followable";
 export * from "./FollowConnection";
 export * from "./FollowEdge";
 export * from "./Following";

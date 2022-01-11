@@ -270,6 +270,10 @@ input FollowWhereUniqueInput {
   id: String
 }
 
+interface Followable {
+  viewerFollowing: Boolean!
+}
+
 union Following = Skill | User
 
 enum FollowingType {
@@ -609,7 +613,7 @@ type RequestFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
-type Skill {
+type Skill implements Followable {
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
   id: ID!
@@ -852,7 +856,7 @@ type UpvotePostPayload implements MutationPayload {
   record: Post!
 }
 
-type User {
+type User implements Followable {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String
@@ -899,7 +903,7 @@ type UserActivityConnection implements Connection {
   totalCount: Int!
 }
 
-type UserActivityEdge {
+type UserActivityEdge implements ConnectionEdge {
   cursor: String!
   node: UserActivity!
 }
