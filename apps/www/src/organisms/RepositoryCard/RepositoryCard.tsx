@@ -363,7 +363,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 				</Info>
 			</Details>
 			{editing && (
-				<SaveButton type="submit" tw="ml-2">
+				<SaveButton size="small" type="submit" tw="ml-2">
 					{updating ? <Spinner /> : "Save"}
 				</SaveButton>
 			)}

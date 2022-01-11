@@ -42,6 +42,11 @@ const Actions = tw.div`
 	ml-4
 `;
 
+const FollowButton = tw(Button)`
+	flex-shrink-0
+	w-20	
+`;
+
 export interface UserFollowCardProps {
 	className?: string;
 	style?: CSSProperties;
@@ -104,7 +109,7 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 				)}
 			</Content>
 			<Actions>
-				<Button
+				<FollowButton
 					disabled={loading}
 					onClick={async () => {
 						user.viewerFollowing
@@ -116,7 +121,7 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 					variant="secondary"
 				>
 					{loading ? <Spinner /> : user.viewerFollowing ? "Unfollow" : "Follow"}
-				</Button>
+				</FollowButton>
 			</Actions>
 		</Root>
 	);

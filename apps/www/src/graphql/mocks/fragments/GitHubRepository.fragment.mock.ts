@@ -18,7 +18,7 @@ export const GitHubRepository_fragment_mock: GitHubRepository = {
 	},
 	name: "react",
 	owner: {
-		...({ __typename: "GitHubUser" } as any),
+		...({ __typename: "GitHubOrganization" } as any),
 		avatarUrl: "https://avatars.githubusercontent.com/u/69631?v=4",
 		id: "MDEyOk9yZ2FuaXphdGlvbjY5NjMx",
 		login: "facebook",
