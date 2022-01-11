@@ -420,8 +420,8 @@ export const User = objectType({
 				const friendship = await prisma.friendship.findUnique({
 					where: {
 						frienderId_friendingId: {
-							frienderId: user.id,
-							friendingId: parent.id
+							frienderId: parent.id,
+							friendingId: user.id
 						}
 					}
 				});
