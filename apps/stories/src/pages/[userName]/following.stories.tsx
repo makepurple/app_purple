@@ -4,6 +4,7 @@ import {
 	GetUserFollowing_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]/following";
 import { Page } from "@makepurple/www/src/pages/[userName]/following";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -21,7 +22,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};

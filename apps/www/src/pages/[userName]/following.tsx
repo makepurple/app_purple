@@ -11,6 +11,7 @@ import {
 	UserFollowCard,
 	UserPageLayout
 } from "../../organisms";
+import { pageProps, PageProps } from "../../page-props/[userName]/following";
 
 const BATCH_SIZE = 20;
 
@@ -33,7 +34,9 @@ const Following = tw.div`
 	items-stretch
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
