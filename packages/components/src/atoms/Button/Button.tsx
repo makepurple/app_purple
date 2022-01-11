@@ -78,21 +78,18 @@ export const Button = styled.button<{
 		switch (size) {
 			case "large":
 				return tw`
-					px-4
-					py-5
+					p-3.5
 					text-lg
 				`;
 			case "small":
 				return tw`
-					px-2
-					py-1.5
+					p-1.5
 					text-base
 				`;
 			case "medium":
 			default:
 				return tw`
-					px-3
-					py-3.5
+					p-2.5
 					text-lg
 				`;
 		}
