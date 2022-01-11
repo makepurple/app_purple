@@ -108,7 +108,7 @@ export type CommentCreateInput = {
 };
 
 /** Relay-style edge for Comment types. */
-export type CommentEdge = {
+export type CommentEdge = ConnectionEdge & {
   readonly __typename: 'CommentEdge';
   readonly cursor: Scalars['String'];
   readonly node: Comment;
@@ -139,6 +139,10 @@ export type CommentWhereUniqueInput = {
 export type Connection = {
   readonly pageInfo: PageInfo;
   readonly totalCount: Scalars['Int'];
+};
+
+export type ConnectionEdge = {
+  readonly cursor: Scalars['String'];
 };
 
 export type CreateCommentPayload = MutationPayload & {
@@ -242,7 +246,7 @@ export type ExperienceCreateInput = {
 };
 
 /** Relay-style edge for Experience types. */
-export type ExperienceEdge = {
+export type ExperienceEdge = ConnectionEdge & {
   readonly __typename: 'ExperienceEdge';
   readonly cursor: Scalars['String'];
   readonly node: Experience;
@@ -299,7 +303,7 @@ export type FollowConnection = Connection & {
   readonly totalCount: Scalars['Int'];
 };
 
-export type FollowEdge = {
+export type FollowEdge = ConnectionEdge & {
   readonly __typename: 'FollowEdge';
   readonly cursor: Scalars['String'];
   readonly node: Follow;
@@ -325,6 +329,10 @@ export type FollowWhereInput = {
 
 export type FollowWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['String']>;
+};
+
+export type Followable = {
+  readonly viewerFollowing: Scalars['Boolean'];
 };
 
 export type Following = Skill | User;
@@ -726,7 +734,7 @@ export type PostDraftUpdateInput = {
 };
 
 /** Relay-style edge for Post types. */
-export type PostEdge = {
+export type PostEdge = ConnectionEdge & {
   readonly __typename: 'PostEdge';
   readonly cursor: Scalars['String'];
   readonly node: Post;
@@ -792,7 +800,7 @@ export type Query = {
   readonly user?: Maybe<User>;
   readonly users: UserConnection;
   readonly viewer?: Maybe<User>;
-  readonly viewerActivityFeed: UserActivityItemConnection;
+  readonly viewerActivityFeed: UserActivityConnection;
 };
 
 
@@ -941,7 +949,7 @@ export type RepositoryCreateInput = {
 };
 
 /** Relay-style edge for Repository type */
-export type RepositoryEdge = {
+export type RepositoryEdge = ConnectionEdge & {
   readonly __typename: 'RepositoryEdge';
   readonly cursor: Scalars['String'];
   readonly node: Repository;
@@ -973,7 +981,7 @@ export type RequestFriendshipPayload = MutationPayload & {
   readonly record: Friendship;
 };
 
-export type Skill = {
+export type Skill = Followable & {
   readonly __typename: 'Skill';
   readonly desiringUsers: UserConnection;
   readonly github: GitHubRepository;
@@ -1010,7 +1018,7 @@ export type SkillConnection = Connection & {
   readonly totalCount: Scalars['Int'];
 };
 
-export type SkillEdge = {
+export type SkillEdge = ConnectionEdge & {
   readonly __typename: 'SkillEdge';
   readonly cursor: Scalars['String'];
   readonly node: Skill;
@@ -1234,7 +1242,7 @@ export type UpvotePostPayload = MutationPayload & {
   readonly record: Post;
 };
 
-export type User = {
+export type User = Followable & {
   readonly __typename: 'User';
   readonly comments: CommentConnection;
   readonly createdAt: Scalars['DateTime'];
@@ -1348,10 +1356,8 @@ export type UserActivity = {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityItem = UserActivityItemCommentPost | UserActivityItemFollowSkill | UserActivityItemFollowUser | UserActivityItemFriendAcceptUser | UserActivityItemJoined | UserActivityItemPublishPost | UserActivityItemUpvotePost;
-
-export type UserActivityItemCommentPost = UserActivity & {
-  readonly __typename: 'UserActivityItemCommentPost';
+export type UserActivityCommentPost = UserActivity & {
+  readonly __typename: 'UserActivityCommentPost';
   readonly comment: Comment;
   readonly commentId: Scalars['String'];
   readonly createdAt: Scalars['DateTime'];
@@ -1360,22 +1366,22 @@ export type UserActivityItemCommentPost = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityItemConnection = Connection & {
-  readonly __typename: 'UserActivityItemConnection';
-  readonly edges: ReadonlyArray<UserActivityItemEdge>;
-  readonly nodes: ReadonlyArray<UserActivityItem>;
+export type UserActivityConnection = Connection & {
+  readonly __typename: 'UserActivityConnection';
+  readonly edges: ReadonlyArray<UserActivityEdge>;
+  readonly nodes: ReadonlyArray<UserActivity>;
   readonly pageInfo: PageInfo;
   readonly totalCount: Scalars['Int'];
 };
 
-export type UserActivityItemEdge = {
-  readonly __typename: 'UserActivityItemEdge';
+export type UserActivityEdge = ConnectionEdge & {
+  readonly __typename: 'UserActivityEdge';
   readonly cursor: Scalars['String'];
-  readonly node: UserActivityItem;
+  readonly node: UserActivity;
 };
 
-export type UserActivityItemFollowSkill = UserActivity & {
-  readonly __typename: 'UserActivityItemFollowSkill';
+export type UserActivityFollowSkill = UserActivity & {
+  readonly __typename: 'UserActivityFollowSkill';
   readonly createdAt: Scalars['DateTime'];
   readonly follow: Follow;
   readonly followId: Scalars['String'];
@@ -1384,8 +1390,8 @@ export type UserActivityItemFollowSkill = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityItemFollowUser = UserActivity & {
-  readonly __typename: 'UserActivityItemFollowUser';
+export type UserActivityFollowUser = UserActivity & {
+  readonly __typename: 'UserActivityFollowUser';
   readonly createdAt: Scalars['DateTime'];
   readonly follow: Follow;
   readonly followId: Scalars['String'];
@@ -1394,8 +1400,8 @@ export type UserActivityItemFollowUser = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityItemFriendAcceptUser = UserActivity & {
-  readonly __typename: 'UserActivityItemFriendAcceptUser';
+export type UserActivityFriendAcceptUser = UserActivity & {
+  readonly __typename: 'UserActivityFriendAcceptUser';
   readonly createdAt: Scalars['DateTime'];
   readonly friendship: Friendship;
   readonly friendshipId: Scalars['String'];
@@ -1404,26 +1410,16 @@ export type UserActivityItemFriendAcceptUser = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityItemJoined = UserActivity & {
-  readonly __typename: 'UserActivityItemJoined';
+export type UserActivityJoined = UserActivity & {
+  readonly __typename: 'UserActivityJoined';
   readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityItemPublishPost = UserActivity & {
-  readonly __typename: 'UserActivityItemPublishPost';
-  readonly createdAt: Scalars['DateTime'];
-  readonly id: Scalars['ID'];
-  readonly post: Post;
-  readonly postId: Scalars['String'];
-  readonly user: User;
-  readonly userId: Scalars['String'];
-};
-
-export type UserActivityItemUpvotePost = UserActivity & {
-  readonly __typename: 'UserActivityItemUpvotePost';
+export type UserActivityPublishPost = UserActivity & {
+  readonly __typename: 'UserActivityPublishPost';
   readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
   readonly post: Post;
@@ -1442,6 +1438,16 @@ export enum UserActivityType {
   UpvotePost = 'UpvotePost'
 }
 
+export type UserActivityUpvotePost = UserActivity & {
+  readonly __typename: 'UserActivityUpvotePost';
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly post: Post;
+  readonly postId: Scalars['String'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
 export type UserActivityWhereInput = {
   readonly type?: InputMaybe<UserActivityType>;
   readonly user?: InputMaybe<UserWhereInput>;
@@ -1457,7 +1463,7 @@ export type UserConnection = Connection & {
 };
 
 /** Relay-style edge for User types. */
-export type UserEdge = {
+export type UserEdge = ConnectionEdge & {
   readonly __typename: 'UserEdge';
   readonly cursor: Scalars['String'];
   readonly node: User;

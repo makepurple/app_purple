@@ -49,7 +49,7 @@ input CommentCreateInput {
 }
 
 # Relay-style edge for Comment types.
-type CommentEdge {
+type CommentEdge implements ConnectionEdge {
   cursor: String!
   node: Comment!
 }
@@ -79,6 +79,10 @@ input CommentWhereUniqueInput {
 interface Connection {
   pageInfo: PageInfo!
   totalCount: Int!
+}
+
+interface ConnectionEdge {
+  cursor: String!
 }
 
 type CreateCommentPayload implements MutationPayload {
@@ -177,7 +181,7 @@ input ExperienceCreateInput {
 }
 
 # Relay-style edge for Experience types.
-type ExperienceEdge {
+type ExperienceEdge implements ConnectionEdge {
   cursor: String!
   node: Experience!
 }
@@ -231,7 +235,7 @@ type FollowConnection implements Connection {
   totalCount: Int!
 }
 
-type FollowEdge {
+type FollowEdge implements ConnectionEdge {
   cursor: String!
   node: Follow!
 }
@@ -254,6 +258,10 @@ input FollowWhereInput {
 
 input FollowWhereUniqueInput {
   id: String
+}
+
+interface Followable {
+  viewerFollowing: Boolean!
 }
 
 union Following = Skill | User
@@ -460,7 +468,7 @@ input PostDraftUpdateInput {
 }
 
 # Relay-style edge for Post types.
-type PostEdge {
+type PostEdge implements ConnectionEdge {
   cursor: String!
   node: Post!
 }
@@ -524,7 +532,7 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
-  viewerActivityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityItemConnection!
+  viewerActivityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
 }
 
 type RejectFriendshipPayload implements MutationPayload {
@@ -559,7 +567,7 @@ input RepositoryCreateInput {
 }
 
 # Relay-style edge for Repository type
-type RepositoryEdge {
+type RepositoryEdge implements ConnectionEdge {
   cursor: String!
   node: Repository!
 }
@@ -589,7 +597,7 @@ type RequestFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
-type Skill {
+type Skill implements Followable {
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
   id: ID!
@@ -606,7 +614,7 @@ type SkillConnection implements Connection {
   totalCount: Int!
 }
 
-type SkillEdge {
+type SkillEdge implements ConnectionEdge {
   cursor: String!
   node: Skill!
 }
@@ -816,7 +824,7 @@ type UpvotePostPayload implements MutationPayload {
   record: Post!
 }
 
-type User {
+type User implements Followable {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String
@@ -847,9 +855,7 @@ interface UserActivity {
   userId: String!
 }
 
-union UserActivityItem = UserActivityItemCommentPost | UserActivityItemFollowSkill | UserActivityItemFollowUser | UserActivityItemFriendAcceptUser | UserActivityItemJoined | UserActivityItemPublishPost | UserActivityItemUpvotePost
-
-type UserActivityItemCommentPost implements UserActivity {
+type UserActivityCommentPost implements UserActivity {
   comment: Comment!
   commentId: String!
   createdAt: DateTime!
@@ -858,19 +864,19 @@ type UserActivityItemCommentPost implements UserActivity {
   userId: String!
 }
 
-type UserActivityItemConnection implements Connection {
-  edges: [UserActivityItemEdge!]!
-  nodes: [UserActivityItem!]!
+type UserActivityConnection implements Connection {
+  edges: [UserActivityEdge!]!
+  nodes: [UserActivity!]!
   pageInfo: PageInfo!
   totalCount: Int!
 }
 
-type UserActivityItemEdge {
+type UserActivityEdge implements ConnectionEdge {
   cursor: String!
-  node: UserActivityItem!
+  node: UserActivity!
 }
 
-type UserActivityItemFollowSkill implements UserActivity {
+type UserActivityFollowSkill implements UserActivity {
   createdAt: DateTime!
   follow: Follow!
   followId: String!
@@ -879,7 +885,7 @@ type UserActivityItemFollowSkill implements UserActivity {
   userId: String!
 }
 
-type UserActivityItemFollowUser implements UserActivity {
+type UserActivityFollowUser implements UserActivity {
   createdAt: DateTime!
   follow: Follow!
   followId: String!
@@ -888,7 +894,7 @@ type UserActivityItemFollowUser implements UserActivity {
   userId: String!
 }
 
-type UserActivityItemFriendAcceptUser implements UserActivity {
+type UserActivityFriendAcceptUser implements UserActivity {
   createdAt: DateTime!
   friendship: Friendship!
   friendshipId: String!
@@ -897,23 +903,14 @@ type UserActivityItemFriendAcceptUser implements UserActivity {
   userId: String!
 }
 
-type UserActivityItemJoined implements UserActivity {
+type UserActivityJoined implements UserActivity {
   createdAt: DateTime!
   id: ID!
   user: User!
   userId: String!
 }
 
-type UserActivityItemPublishPost implements UserActivity {
-  createdAt: DateTime!
-  id: ID!
-  post: Post!
-  postId: String!
-  user: User!
-  userId: String!
-}
-
-type UserActivityItemUpvotePost implements UserActivity {
+type UserActivityPublishPost implements UserActivity {
   createdAt: DateTime!
   id: ID!
   post: Post!
@@ -932,6 +929,15 @@ enum UserActivityType {
   UpvotePost
 }
 
+type UserActivityUpvotePost implements UserActivity {
+  createdAt: DateTime!
+  id: ID!
+  post: Post!
+  postId: String!
+  user: User!
+  userId: String!
+}
+
 input UserActivityWhereInput {
   type: UserActivityType
   user: UserWhereInput
@@ -946,7 +952,7 @@ type UserConnection implements Connection {
 }
 
 # Relay-style edge for User types.
-type UserEdge {
+type UserEdge implements ConnectionEdge {
   cursor: String!
   node: User!
 }
