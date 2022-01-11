@@ -975,12 +975,31 @@ export type RequestFriendshipPayload = MutationPayload & {
 
 export type Skill = {
   readonly __typename: 'Skill';
-  readonly desiringUsers: ReadonlyArray<User>;
+  readonly desiringUsers: UserConnection;
   readonly github: GitHubRepository;
   readonly id: Scalars['ID'];
   readonly name: Scalars['String'];
   readonly owner: Scalars['String'];
-  readonly users: ReadonlyArray<User>;
+  readonly users: UserConnection;
+  readonly viewerFollowing: Scalars['Boolean'];
+};
+
+
+export type SkillDesiringUsersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type SkillUsersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
 };
 
 export type SkillConnection = Connection & {
@@ -1473,7 +1492,7 @@ export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: s
 
 export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
-export type SkillFollowCardSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } };
+export type SkillFollowCardSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } };
 
 export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
@@ -1517,6 +1536,13 @@ export type CreateRepositoryMutationVariables = Exact<{
 
 export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly repositories: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string }> } | null | undefined } } };
 
+export type FollowSkillMutationVariables = Exact<{
+  where: SkillWhereUniqueInput;
+}>;
+
+
+export type FollowSkillMutation = { readonly __typename: 'Mutation', readonly followSkill: { readonly __typename: 'FollowUserPayload', readonly record: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | { readonly __typename: 'User' } } } };
+
 export type FollowUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
@@ -1538,6 +1564,13 @@ export type RemovePostThumbnailMutationVariables = Exact<{
 
 
 export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null | undefined } | null | undefined } };
+
+export type UnfollowSkillMutationVariables = Exact<{
+  where: SkillWhereUniqueInput;
+}>;
+
+
+export type UnfollowSkillMutation = { readonly __typename: 'Mutation', readonly unfollowSkill: { readonly __typename: 'UnfollowSkillPayload', readonly record: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | { readonly __typename: 'User' } } } };
 
 export type UnfollowUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -1934,6 +1967,7 @@ export const SkillFollowCardSkillFragmentDoc = /*#__PURE__*/ gql`
     stargazerCount
     url
   }
+  viewerFollowing
 }
     `;
 export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
@@ -2241,6 +2275,24 @@ export const CreateRepositoryDocument = /*#__PURE__*/ gql`
 export function useCreateRepositoryMutation() {
   return Urql.useMutation<CreateRepositoryMutation, CreateRepositoryMutationVariables>(CreateRepositoryDocument);
 };
+export const FollowSkillDocument = /*#__PURE__*/ gql`
+    mutation FollowSkill($where: SkillWhereUniqueInput!) {
+  followSkill(where: $where) {
+    record {
+      following {
+        ... on Skill {
+          id
+          viewerFollowing
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useFollowSkillMutation() {
+  return Urql.useMutation<FollowSkillMutation, FollowSkillMutationVariables>(FollowSkillDocument);
+};
 export const FollowUserDocument = /*#__PURE__*/ gql`
     mutation FollowUser($where: UserWhereUniqueInput!) {
   followUser(where: $where) {
@@ -2292,6 +2344,24 @@ export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
 
 export function useRemovePostThumbnailMutation() {
   return Urql.useMutation<RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables>(RemovePostThumbnailDocument);
+};
+export const UnfollowSkillDocument = /*#__PURE__*/ gql`
+    mutation UnfollowSkill($where: SkillWhereUniqueInput!) {
+  unfollowSkill(where: $where) {
+    record {
+      following {
+        ... on Skill {
+          id
+          viewerFollowing
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useUnfollowSkillMutation() {
+  return Urql.useMutation<UnfollowSkillMutation, UnfollowSkillMutationVariables>(UnfollowSkillDocument);
 };
 export const UnfollowUserDocument = /*#__PURE__*/ gql`
     mutation UnfollowUser($where: UserWhereUniqueInput!) {

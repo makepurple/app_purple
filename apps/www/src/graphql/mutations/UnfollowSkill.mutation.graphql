@@ -1,0 +1,12 @@
+mutation UnfollowSkill($where: SkillWhereUniqueInput!) {
+	unfollowSkill(where: $where) {
+		record {
+			following {
+				... on Skill {
+					id
+					viewerFollowing
+				}
+			}
+		}
+	}
+}

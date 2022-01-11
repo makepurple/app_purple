@@ -606,12 +606,13 @@ type RequestFriendshipPayload implements MutationPayload {
 }
 
 type Skill {
-  desiringUsers: [User!]!
+  desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
   id: ID!
   name: String!
   owner: String!
-  users: [User!]!
+  users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  viewerFollowing: Boolean!
 }
 
 type SkillConnection implements Connection {

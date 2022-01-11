@@ -978,12 +978,13 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Friendship']; // Friendship!
   }
   Skill: { // field return type
-    desiringUsers: NexusGenRootTypes['User'][]; // [User!]!
+    desiringUsers: NexusGenRootTypes['UserConnection']; // UserConnection!
     github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
     id: string; // ID!
     name: string; // String!
     owner: string; // String!
-    users: NexusGenRootTypes['User'][]; // [User!]!
+    users: NexusGenRootTypes['UserConnection']; // UserConnection!
+    viewerFollowing: boolean; // Boolean!
   }
   SkillConnection: { // field return type
     edges: NexusGenRootTypes['SkillEdge'][]; // [SkillEdge!]!
@@ -1498,12 +1499,13 @@ export interface NexusGenFieldTypeNames {
     record: 'Friendship'
   }
   Skill: { // field return type name
-    desiringUsers: 'User'
+    desiringUsers: 'UserConnection'
     github: 'GitHubRepository'
     id: 'ID'
     name: 'String'
     owner: 'String'
-    users: 'User'
+    users: 'UserConnection'
+    viewerFollowing: 'Boolean'
   }
   SkillConnection: { // field return type name
     edges: 'SkillEdge'
@@ -1922,6 +1924,22 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
+    }
+  }
+  Skill: {
+    desiringUsers: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    users: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
   User: {

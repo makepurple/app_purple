@@ -1,13 +1,53 @@
+import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { objectType } from "nexus";
+import { User } from "@prisma/client";
+import { arg, intArg, objectType, stringArg } from "nexus";
 import { octokit } from "../../../services";
 import { GitHubRepository } from "../../../services/octokit";
+import { PrismaUtils } from "../../../utils";
 
 export const Skill = objectType({
 	name: NexusPrisma.Skill.$name,
 	description: NexusPrisma.Skill.$description,
 	definition: (t) => {
-		t.field(NexusPrisma.Skill.id);
+		t.nonNull.field("desiringUsers", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						prisma.skill
+							.findUnique({
+								where: {
+									id: parent.id
+								}
+							})
+							.desiringUsers({
+								...paginationArgs,
+								include: { user: true }
+							})
+							.then((items) => items.map((item) => item.user)),
+					() =>
+						prisma.user.count({
+							where: {
+								desiredSkills: {
+									some: { skillId: { equals: parent.id } }
+								}
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("github", {
 			type: "GitHubRepository",
 			resolve: async (parent, args, { octokit: graphql }) => {
@@ -44,40 +84,61 @@ export const Skill = objectType({
 				return repository;
 			}
 		});
+		t.field(NexusPrisma.Skill.id);
 		t.field(NexusPrisma.Skill.name);
 		t.field(NexusPrisma.Skill.owner);
-		t.nonNull.list.nonNull.field("users", {
-			type: "User",
-			resolve: async (root, args, { prisma }) => {
-				const users = await prisma.skill
-					.findUnique({
-						where: {
-							name_owner: {
-								name: root.name,
-								owner: root.owner
+		t.nonNull.field("users", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						prisma.skill
+							.findUnique({
+								where: {
+									id: parent.id
+								}
+							})
+							.users({
+								...paginationArgs,
+								include: { user: true }
+							})
+							.then((items) => items.map((item) => item.user)),
+					() =>
+						prisma.user.count({
+							where: {
+								skills: {
+									some: { skillId: { equals: parent.id } }
+								}
 							}
-						}
-					})
-					.users({ include: { user: true } });
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
 
-				return users.map(({ user }) => user);
+				return connection;
 			}
 		});
-		t.nonNull.list.nonNull.field("desiringUsers", {
-			type: "User",
-			resolve: async (root, args, { prisma }) => {
-				const users = await prisma.skill
-					.findUnique({
-						where: {
-							name_owner: {
-								name: root.name,
-								owner: root.owner
-							}
-						}
-					})
-					.desiringUsers({ include: { user: true } });
+		t.nonNull.boolean("viewerFollowing", {
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
 
-				return users.map(({ user }) => user);
+				const follow = await prisma.followSkill.findUnique({
+					where: {
+						followerId_followingId: {
+							followerId: user.id,
+							followingId: parent.id
+						}
+					}
+				});
+
+				return !!follow;
 			}
 		});
 	}

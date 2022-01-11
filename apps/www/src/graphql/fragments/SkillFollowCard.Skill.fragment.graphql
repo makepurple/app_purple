@@ -33,4 +33,5 @@ fragment SkillFollowCardSkill on Skill {
 		stargazerCount
 		url
 	}
+	viewerFollowing
 }

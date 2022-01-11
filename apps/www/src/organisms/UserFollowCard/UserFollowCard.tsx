@@ -17,7 +17,11 @@ const Root = tw.div`
 	py-4
 `;
 
-const Content = tw.div`
+const StyledAvatar = tw(UserAvatar)`
+	flex-shrink-0
+`;
+
+const Details = tw.div`
 	flex-grow
 	flex
 	flex-col
@@ -39,7 +43,6 @@ const Bio = tw.p`
 
 const Actions = tw.div`
 	flex-shrink-0
-	ml-4
 `;
 
 const FollowButton = tw(Button)`
@@ -70,9 +73,15 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 	return (
 		<Root ref={ref} className={className} style={style}>
 			{user.image && (
-				<UserAvatar border={3} height={64} width={64} user={user} tw="flex-shrink-0 mr-4" />
+				<StyledAvatar
+					border={3}
+					height={64}
+					width={64}
+					user={user}
+					tw="flex-shrink-0 mr-6"
+				/>
 			)}
-			<Content>
+			<Details>
 				<NextLink href="/[userName/" as={`/${user.name}`} passHref>
 					<UserName>{user.name}</UserName>
 				</NextLink>
@@ -107,8 +116,8 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 						)}
 					</Tags>
 				)}
-			</Content>
-			<Actions>
+			</Details>
+			<Actions tw="ml-4">
 				<FollowButton
 					disabled={loading}
 					onClick={async () => {

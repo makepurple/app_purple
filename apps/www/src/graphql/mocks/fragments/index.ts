@@ -7,5 +7,6 @@ export * from "./Organization.fragment.mock";
 export * from "./PageInfo.fragment.mock";
 export * from "./Post.fragment.mock";
 export * from "./Repository.fragment.mock";
+export * from "./Skill.fragment.mock";
 export * from "./TopLanguages.fragment.mock";
 export * from "./User.fragment.mock";

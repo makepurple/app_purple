@@ -1,6 +1,32 @@
 import { dayjs } from "@makepurple/utils";
 import type { User } from "../../generated";
 import { GitHubUser_fragment_mock } from "./GitHubUser.fragment.mock";
+import { Skill_fragment_mock } from "./Skill.fragment.mock";
+
+const desiredSkills = ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map(
+	(skill, i) => ({
+		...Skill_fragment_mock,
+		id: `DesiredSkill_${i}`,
+		name: skill,
+		owner: "github"
+	})
+);
+
+const skills = [
+	"Next.js",
+	"Prisma",
+	"Nexus",
+	"Urql",
+	"TypeScript",
+	"Storybook",
+	"Figma",
+	"Framer-Motion"
+].map((skill, i) => ({
+	...Skill_fragment_mock,
+	id: `Skill_${i}`,
+	name: skill,
+	owner: "github"
+}));
 
 export const User_fragment_mock: User = {
 	__typename: "User" as const,
@@ -29,15 +55,12 @@ export const User_fragment_mock: User = {
 			startCursor: null
 		},
 		totalCount: 5,
-		edges: [],
-		nodes: ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map((skill, i) => ({
-			__typename: "Skill",
-			id: `DesiredSkill_${i}`,
-			name: skill,
-			owner: "github",
-			users: [],
-			desiringUsers: []
-		}))
+		edges: desiredSkills.map((skill) => ({
+			__typename: "SkillEdge",
+			cursor: skill.id,
+			node: skill
+		})),
+		nodes: desiredSkills
 	},
 	email: "lee.david.cs@test.com",
 	experiences: [],
@@ -121,25 +144,13 @@ export const User_fragment_mock: User = {
 			hasPreviousPage: false,
 			startCursor: null
 		},
-		totalCount: 8,
-		edges: [],
-		nodes: [
-			"Next.js",
-			"Prisma",
-			"Nexus",
-			"Urql",
-			"TypeScript",
-			"Storybook",
-			"Figma",
-			"Framer-Motion"
-		].map((skill, i) => ({
-			__typename: "Skill",
-			id: `Skill_${i}`,
-			name: skill,
-			owner: "github",
-			users: [],
-			desiringUsers: []
-		}))
+		totalCount: 5,
+		edges: skills.map((skill) => ({
+			__typename: "SkillEdge",
+			cursor: skill.id,
+			node: skill
+		})),
+		nodes: skills
 	},
 	upvotedPosts: {
 		__typename: "PostConnection",
