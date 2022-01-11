@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
 
-export const UserActivityItemJoined = objectType({
-	name: "UserActivityItemJoined",
+export const UserActivityJoined = objectType({
+	name: "UserActivityJoined",
 	definition: (t) => {
 		t.implements("UserActivity");
 	}

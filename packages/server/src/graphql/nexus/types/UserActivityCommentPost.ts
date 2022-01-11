@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
 
-export const UserActivityItemCommentPost = objectType({
-	name: "UserActivityItemCommentPost",
+export const UserActivityCommentPost = objectType({
+	name: "UserActivityCommentPost",
 	definition: (t) => {
 		t.implements("UserActivity");
 		t.nonNull.field("comment", { type: "Comment" });

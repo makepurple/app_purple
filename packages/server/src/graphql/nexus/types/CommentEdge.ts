@@ -7,7 +7,7 @@ export const CommentEdge = objectType({
 		Relay-style edge for Comment types.
 	`,
 	definition: (t) => {
-		t.nonNull.string("cursor");
+		t.implements("ConnectionEdge");
 		t.nonNull.field("node", { type: "Comment" });
 	}
 });

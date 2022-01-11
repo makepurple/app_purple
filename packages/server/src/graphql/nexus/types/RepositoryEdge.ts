@@ -7,7 +7,7 @@ export const RepositoryEdge = objectType({
 		Relay-style edge for Repository type
 	`,
 	definition: (t) => {
-		t.nonNull.string("cursor");
+		t.implements("ConnectionEdge");
 		t.nonNull.field("node", { type: "Repository" });
 	}
 });

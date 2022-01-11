@@ -7,7 +7,7 @@ export const ExperienceEdge = objectType({
 		Relay-style edge for Experience types.
 	`,
 	definition: (t) => {
-		t.nonNull.string("cursor");
+		t.implements("ConnectionEdge");
 		t.nonNull.field("node", { type: "Experience" });
 	}
 });

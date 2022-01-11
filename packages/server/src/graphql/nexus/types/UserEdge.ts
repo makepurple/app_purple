@@ -7,7 +7,7 @@ export const UserEdge = objectType({
 		Relay-style edge for User types.
 	`,
 	definition: (t) => {
-		t.nonNull.string("cursor");
+		t.implements("ConnectionEdge");
 		t.nonNull.field("node", { type: "User" });
 	}
 });

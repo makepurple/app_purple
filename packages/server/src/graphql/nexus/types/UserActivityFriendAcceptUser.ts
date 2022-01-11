@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
 
-export const UserActivityItemFriendAcceptUser = objectType({
-	name: "UserActivityItemFriendAcceptUser",
+export const UserActivityFriendAcceptUser = objectType({
+	name: "UserActivityFriendAcceptUser",
 	definition: (t) => {
 		t.implements("UserActivity");
 		t.nonNull.field("friendship", { type: "Friendship" });

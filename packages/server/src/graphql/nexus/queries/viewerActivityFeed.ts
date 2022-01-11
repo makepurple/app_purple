@@ -4,7 +4,7 @@ import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const viewerActivityFeed = queryField("viewerActivityFeed", {
-	type: nonNull("UserActivityItemConnection"),
+	type: nonNull("UserActivityConnection"),
 	args: {
 		after: stringArg(),
 		before: stringArg(),
@@ -72,7 +72,7 @@ export const viewerActivityFeed = queryField("viewerActivityFeed", {
 					})
 					.then((items) => {
 						return items.map((item) => ({
-							__typename: `UserActivityItem${item.type}`,
+							__typename: `UserActivity${item.type}`,
 							...item
 						}));
 					}),
