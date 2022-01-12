@@ -1,14 +1,9 @@
 import { oneLine } from "common-tags";
-import { RedisStore } from "graphql-rate-limit";
 import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import path from "path";
-import { getClientIp } from "request-ip";
-import { redis } from "../../redis";
 import { AuthorizationError } from "../../utils";
-import { ServerContext } from "../context";
 import * as inputTypes from "./input-types";
 import * as mutations from "./mutations";
-import { rateLimitPlugin } from "./plugins";
 import * as queries from "./queries";
 import * as types from "./types";
 
@@ -37,19 +32,7 @@ export const schema = makeSchema({
 		fieldAuthorizePlugin({
 			formatError: () => new AuthorizationError("Not authorized")
 		}),
-		queryComplexityPlugin(),
-		rateLimitPlugin({
-			defaultRateLimit: { max: 60, window: "1s" },
-			identifyContext: ({ user, req }: ServerContext): string => {
-				const userId: Maybe<string> = user?.id;
-				const ip: Maybe<string> = getClientIp(req);
-
-				const identityKey: number | string = userId ?? ip ?? "";
-
-				return identityKey.toString();
-			},
-			store: new RedisStore(redis.instance)
-		})
+		queryComplexityPlugin()
 	],
 	sourceTypes: {
 		headers: [

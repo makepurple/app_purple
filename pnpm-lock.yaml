@@ -582,7 +582,6 @@ importers:
       graphql-depth-limit: ^1.1.0
       graphql-middleware: ^6.1.13
       graphql-query-complexity: ^0.11.0
-      graphql-rate-limit: ^3.3.0
       graphql-scalars: ^1.14.1
       graphql-upload: ^13.0.0
       ioredis: ^4.28.2
@@ -619,7 +618,6 @@ importers:
       graphql-depth-limit: 1.1.0_graphql@15.7.2
       graphql-middleware: 6.1.13_graphql@15.7.2
       graphql-query-complexity: 0.11.0_graphql@15.7.2
-      graphql-rate-limit: 3.3.0_9eee82bbd73364b10695df1a64efd8ed
       graphql-scalars: 1.14.1_graphql@15.7.2
       graphql-upload: 13.0.0_graphql@15.7.2
       ioredis: 4.28.2
@@ -725,13 +723,6 @@ packages:
     resolution: {integrity: sha512-xCcXpoz52rI4ksJSdOCxeOCn2DLocxwHf9dVT/Q90Pte1LX+LY+91SFtJF3KXVHH8kEin+g1KKCQPKBjZJfWNA==}
     dependencies:
       xss: 1.0.10
-    dev: false
-
-  /@ardatan/aggregate-error/0.0.6:
-    resolution: {integrity: sha512-vyrkEHG1jrukmzTPtyWB4NLPauUw5bQeg4uhn8f+1SSynmrOcyvlb1GKQjjgoBzElLdfXCRYX8UnBlhklOHYRQ==}
-    engines: {node: '>=8'}
-    dependencies:
-      tslib: 2.0.3
     dev: false
 
   /@babel/code-frame/7.10.4:
@@ -4057,17 +4048,6 @@ packages:
       - bufferutil
       - utf-8-validate
     dev: true
-
-  /@graphql-tools/utils/7.10.0_graphql@15.7.2:
-    resolution: {integrity: sha512-d334r6bo9mxdSqZW6zWboEnnOOFRrAPVQJ7LkU8/6grglrbcu6WhwCLzHb90E94JI3TD3ricC3YGbUqIi9Xg0w==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0
-    dependencies:
-      '@ardatan/aggregate-error': 0.0.6
-      camel-case: 4.1.2
-      graphql: 15.7.2
-      tslib: 2.2.0
-    dev: false
 
   /@graphql-tools/utils/8.5.4_graphql@15.7.2:
     resolution: {integrity: sha512-ViupMJH590be75tCiyHs/wgJ2KPbWMzc+jopen6P6MliHWoqRlGWMMvYQE1hDj25v4fxObCVq20maQCow0T9nQ==}
@@ -7663,10 +7643,6 @@ packages:
       '@types/node': 17.0.8
     dev: true
     optional: true
-
-  /@types/yup/0.29.11:
-    resolution: {integrity: sha512-9cwk3c87qQKZrT251EDoibiYRILjCmxBvvcb4meofCmx1vdnNcR9gyildy5vOHASpOKMsn42CugxUvcwK5eu1g==}
-    dev: false
 
   /@typescript-eslint/eslint-plugin-tslint/4.33.0_a97940f591f81b978e98b10ae6e1af3b:
     resolution: {integrity: sha512-o3ujMErtZJPgiNRETRJefo1bFNrloocOa5dMU49OW/G+Rq92IbXTY6FSF5MOwrdQK1X+VBEcA8y6PhUPWGlYqA==}
@@ -13221,21 +13197,6 @@ packages:
       lodash.get: 4.4.2
     dev: false
 
-  /graphql-rate-limit/3.3.0_9eee82bbd73364b10695df1a64efd8ed:
-    resolution: {integrity: sha512-mbbEv5z3SjkDLvVVdHi0XrVLavw2Mwo93GIqgQB/fx8dhcNSEv3eYI1OGdp8mhsm/MsZm7hjrRlwQMVRKBVxhA==}
-    engines: {node: '>=12.0', pnpm: '>=6'}
-    peerDependencies:
-      graphql: '*'
-    dependencies:
-      '@graphql-tools/utils': 7.10.0_graphql@15.7.2
-      graphql: 15.7.2
-      graphql-shield: 7.5.0_9eee82bbd73364b10695df1a64efd8ed
-      lodash.get: 4.4.2
-      ms: 2.1.3
-    transitivePeerDependencies:
-      - graphql-middleware
-    dev: false
-
   /graphql-request/3.7.0_graphql@15.7.2:
     resolution: {integrity: sha512-dw5PxHCgBneN2DDNqpWu8QkbbJ07oOziy8z+bK/TAXufsOLaETuVO4GkXrbs0WjhdKhBMN3BkpN/RIvUHkmNUQ==}
     peerDependencies:
@@ -13255,19 +13216,6 @@ packages:
     dependencies:
       graphql: 15.7.2
       tslib: 2.3.1
-    dev: false
-
-  /graphql-shield/7.5.0_9eee82bbd73364b10695df1a64efd8ed:
-    resolution: {integrity: sha512-T1A6OreOe/dHDk/1Qg3AHCrKLmTkDJ3fPFGYpSOmUbYXyDnjubK4J5ab5FjHdKHK5fWQRZNTvA0SrBObYsyfaw==}
-    peerDependencies:
-      graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
-      graphql-middleware: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^6.0.0
-    dependencies:
-      '@types/yup': 0.29.11
-      graphql: 15.7.2
-      graphql-middleware: 6.1.13_graphql@15.7.2
-      object-hash: 2.2.0
-      yup: 0.31.1
     dev: false
 
   /graphql-sse/1.0.6_graphql@15.7.2:
@@ -15602,10 +15550,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-
-  /lodash-es/4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
@@ -18182,10 +18126,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-
-  /property-expr/2.0.4:
-    resolution: {integrity: sha512-sFPkHQjVKheDNnPvotjQmm3KD3uk1fWKUN7CrpdbwmUx3CrG3QiM8QpTSimvig5vTXmTvjz7+TDvXOI9+4rkcg==}
-    dev: false
 
   /property-information/5.6.0:
     resolution: {integrity: sha512-YUHSPk+A30YPv+0Qf8i9Mbfe/C0hdPXk1s1jPVToV8pk8BQtpw10ct89Eo7OWkutrwqvT0eicAxlOg3dOAu8JA==}
@@ -20969,10 +20909,6 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
 
-  /toposort/2.0.2:
-    resolution: {integrity: sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=}
-    dev: false
-
   /totalist/1.1.0:
     resolution: {integrity: sha512-gduQwd1rOdDMGxFG1gEvhV88Oirdo2p+KjoYFU7k2g+i7n6AFFbDQ5kMPUsW0pNbfQsB/cwXvT1i4Bue0s9g5g==}
     engines: {node: '>=6'}
@@ -21140,10 +21076,6 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
-
-  /tslib/2.0.3:
-    resolution: {integrity: sha512-uZtkfKblCEQtZKBF6EBXVZeQNl82yqtDQdv+eck8u7tdPxjLu2/lp5/uPW+um2tpuxINHWy3GhiccY7QgEaVHQ==}
-    dev: false
 
   /tslib/2.2.0:
     resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
@@ -22445,17 +22377,6 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-
-  /yup/0.31.1:
-    resolution: {integrity: sha512-Lf6648jDYOWR75IlWkVfwesPyW6oj+50NpxlKvsQlpPsB8eI+ndI7b4S1VrwbmeV9hIZDu1MzrlIL4W+gK1jPw==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@babel/runtime': 7.16.3
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      property-expr: 2.0.4
-      toposort: 2.0.2
-    dev: false
 
   /zip-stream/3.0.1:
     resolution: {integrity: sha512-r+JdDipt93ttDjsOVPU5zaq5bAyY+3H19bDrThkvuVxC0xMQzU1PJcS6D+KrP3u96gH9XLomcHPb+2skoDjulQ==}

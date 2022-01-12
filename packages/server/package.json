@@ -37,7 +37,6 @@
 		"graphql-depth-limit": "^1.1.0",
 		"graphql-middleware": "^6.1.13",
 		"graphql-query-complexity": "^0.11.0",
-		"graphql-rate-limit": "^3.3.0",
 		"graphql-scalars": "^1.14.1",
 		"graphql-upload": "^13.0.0",
 		"ioredis": "^4.28.2",
