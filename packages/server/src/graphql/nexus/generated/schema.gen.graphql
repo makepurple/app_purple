@@ -386,7 +386,7 @@ type Mutation {
   followSkill(where: SkillWhereUniqueInput!): FollowUserPayload!
   followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   ok: Boolean!
-  publishPost(data: PostPublishInput, where: PostWhereUniqueInput!): PublishPostPayload!
+  publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(
     """Find friendship from requester -> viewer"""
     where: FriendshipWhereUniqueInput!
@@ -441,6 +441,7 @@ type Post {
   images: [PostImage!]!
   publishedAt: DateTime
   readTime: Int
+  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   thumbnailUrl: String
   title: String
   updatedAt: DateTime!
@@ -474,6 +475,7 @@ type PostConnection implements Connection {
 input PostDraftUpdateInput {
   content: Json
   description: String
+  skills: [SkillWhereUniqueInput!]!
   thumbnailUrl: String
   title: String
 }
@@ -492,17 +494,19 @@ type PostImage {
 }
 
 input PostPublishInput {
-  content: Json
-  description: String
+  content: Json!
+  description: String!
   readTime: Int
-  thumbnailUrl: String
-  title: String
+  skills: [SkillWhereUniqueInput!]!
+  thumbnailUrl: String!
+  title: String!
 }
 
 input PostUpdateInput {
   content: Json
   description: String
   readTime: Int
+  skills: [SkillWhereUniqueInput!]
   thumbnailUrl: String
 }
 

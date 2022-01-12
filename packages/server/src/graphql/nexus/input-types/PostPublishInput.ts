@@ -3,10 +3,11 @@ import { inputObjectType } from "nexus";
 export const PostPublishInput = inputObjectType({
 	name: "PostPublishInput",
 	definition: (t) => {
-		t.field("content", { type: "Json" });
-		t.string("description");
+		t.nonNull.field("content", { type: "Json" });
+		t.nonNull.string("description");
 		t.int("readTime");
-		t.string("title");
-		t.string("thumbnailUrl");
+		t.nonNull.list.nonNull.field("skills", { type: "SkillWhereUniqueInput" });
+		t.nonNull.string("title");
+		t.nonNull.string("thumbnailUrl");
 	}
 });

@@ -161,20 +161,23 @@ export interface NexusGenInputs {
   PostDraftUpdateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     description?: string | null; // String
+    skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
   }
   PostPublishInput: { // input type
-    content?: NexusGenScalars['Json'] | null; // Json
-    description?: string | null; // String
+    content: NexusGenScalars['Json']; // Json!
+    description: string; // String!
     readTime?: number | null; // Int
-    thumbnailUrl?: string | null; // String
-    title?: string | null; // String
+    skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
+    thumbnailUrl: string; // String!
+    title: string; // String!
   }
   PostUpdateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     description?: string | null; // String
     readTime?: number | null; // Int
+    skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
     thumbnailUrl?: string | null; // String
   }
   PostWhereInput: { // input type
@@ -900,6 +903,7 @@ export interface NexusGenFieldTypes {
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
     readTime: number | null; // Int
+    skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     thumbnailUrl: string | null; // String
     title: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1429,6 +1433,7 @@ export interface NexusGenFieldTypeNames {
     images: 'PostImage'
     publishedAt: 'DateTime'
     readTime: 'Int'
+    skills: 'SkillConnection'
     thumbnailUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'
@@ -1785,7 +1790,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     publishPost: { // args
-      data?: NexusGenInputs['PostPublishInput'] | null; // PostPublishInput
+      data: NexusGenInputs['PostPublishInput']; // PostPublishInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     rejectFriendship: { // args
@@ -1859,6 +1864,13 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    skills: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     upvoters: { // args
       after?: string | null; // String

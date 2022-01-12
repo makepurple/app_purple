@@ -1,12 +1,13 @@
+import { PromiseUtils } from "@makepurple/utils";
 import { PostPublishInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../../utils";
+import { NotFoundError, PrismaUtils } from "../../../utils";
 
 export const publishPost = mutationField("publishPost", {
 	type: nonNull("PublishPostPayload"),
 	args: {
-		data: arg({ type: "PostPublishInput" }),
+		data: nonNull(arg({ type: "PostPublishInput" })),
 		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
 	},
 	authorize: async (parent, args, { prisma, user }) => {
@@ -27,13 +28,16 @@ export const publishPost = mutationField("publishPost", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (post?.publishedAt) return { record: post };
+		if (!post) throw new NotFoundError("This post does not exist.");
+
+		if (post.publishedAt) return { record: post };
 
 		const dataInput = PostPublishInput.validator({
-			content: args.data?.content ?? undefined,
-			description: args.data?.description ?? undefined,
-			thumbnailUrl: args.data?.thumbnailUrl ?? undefined,
-			title: args.data?.title ?? post?.title ?? undefined
+			content: args.data.content,
+			description: args.data.description,
+			skills: args.data.skills as any,
+			thumbnailUrl: args.data.thumbnailUrl,
+			title: args.data.title
 		});
 
 		const postTitle = dataInput.title;
@@ -49,20 +53,69 @@ export const publishPost = mutationField("publishPost", {
 			.join("-")
 			.trim();
 
-		const record = await prisma.post.update({
-			data: {
-				...dataInput,
-				activities: {
-					create: {
-						type: UserActivityType.PublishPost,
-						user: { connect: { id: user.id } }
-					}
+		const skillIds = args.data.skills
+			.filter((skill) => !!skill.id)
+			.map((skill) => skill.id) as string[];
+
+		const skillNameOwners = args.data.skills
+			.filter((skill) => !!skill.name_owner)
+			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
+
+		const skillsById = await prisma.skill.findMany({
+			where: { id: { in: skillIds } }
+		});
+
+		const record = await prisma.$transaction(async (transaction) => {
+			await transaction.post.update({
+				where: PrismaUtils.nonNull(args.where),
+				data: { skills: { deleteMany: {} } }
+			});
+
+			const skillsByNameOwner = await PromiseUtils.map(
+				skillNameOwners,
+				{ concurrency: 2 },
+				async ({ name, owner }) => {
+					return await transaction.skill.upsert({
+						where: { name_owner: { name, owner } },
+						create: { name, owner },
+						update: {}
+					});
+				}
+			);
+
+			const skillsToConnect = [...skillsById, ...skillsByNameOwner];
+
+			return await transaction.post.update({
+				data: {
+					activities: {
+						create: {
+							type: UserActivityType.PublishPost,
+							user: { connect: { id: user.id } }
+						}
+					},
+					content: dataInput.content,
+					description: dataInput.description,
+					publishedAt: new Date(),
+					readTime: args.data?.readTime ?? undefined,
+					skills: {
+						connectOrCreate: skillsToConnect.map((skill) => ({
+							where: {
+								skillId_postId: {
+									skillId: skill.id,
+									postId: post.id
+								}
+							},
+							create: {
+								skillId: skill.id,
+								postId: post.id
+							}
+						}))
+					},
+					title: dataInput.title,
+					urlSlug
 				},
-				publishedAt: new Date(),
-				readTime: args.data?.readTime ?? undefined,
-				urlSlug
-			},
-			where: PrismaUtils.nonNull(args.where)
+				where: PrismaUtils.nonNull(args.where)
+			});
 		});
 
 		return { record };

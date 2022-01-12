@@ -1,6 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { Comment, User } from "@prisma/client";
+import { Comment, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -83,6 +83,40 @@ export const Post = objectType({
 		t.field(NexusPrisma.Post.images);
 		t.field(NexusPrisma.Post.publishedAt);
 		t.field(NexusPrisma.Post.readTime);
+		t.nonNull.field("skills", {
+			type: "SkillConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "SkillWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<Skill, { id: string }>(
+					(paginationArgs) =>
+						prisma.post
+							.findUnique({ where: { id: parent.id } })
+							.skills({
+								...paginationArgs,
+								where: PrismaUtils.nonNull(args.where),
+								include: { skill: true }
+							})
+							.then((items) => items.map((item) => item.skill)),
+					() =>
+						prisma.skillsOnPosts.count({
+							where: {
+								post: { id: { equals: parent.id } },
+								skill: PrismaUtils.nonNull(args.where)
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.field(NexusPrisma.Post.thumbnailUrl);
 		t.field(NexusPrisma.Post.title);
 		t.field(NexusPrisma.Post.updatedAt);

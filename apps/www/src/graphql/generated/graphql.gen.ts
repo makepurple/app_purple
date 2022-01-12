@@ -525,7 +525,7 @@ export type MutationFollowUserArgs = {
 
 /** Root mutation type */
 export type MutationPublishPostArgs = {
-  data?: InputMaybe<PostPublishInput>;
+  data: PostPublishInput;
   where: PostWhereUniqueInput;
 };
 
@@ -666,6 +666,7 @@ export type Post = {
   readonly images: ReadonlyArray<PostImage>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   readonly readTime?: Maybe<Scalars['Int']>;
+  readonly skills: SkillConnection;
   readonly thumbnailUrl?: Maybe<Scalars['String']>;
   readonly title?: Maybe<Scalars['String']>;
   readonly updatedAt: Scalars['DateTime'];
@@ -702,6 +703,15 @@ export type PostDownvotersArgs = {
 };
 
 
+export type PostSkillsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SkillWhereInput>;
+};
+
+
 export type PostUpvotersArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -727,6 +737,7 @@ export type PostConnection = Connection & {
 export type PostDraftUpdateInput = {
   readonly content?: InputMaybe<Scalars['Json']>;
   readonly description?: InputMaybe<Scalars['String']>;
+  readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
   readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
   readonly title?: InputMaybe<Scalars['String']>;
 };
@@ -747,17 +758,19 @@ export type PostImage = {
 };
 
 export type PostPublishInput = {
-  readonly content?: InputMaybe<Scalars['Json']>;
-  readonly description?: InputMaybe<Scalars['String']>;
+  readonly content: Scalars['Json'];
+  readonly description: Scalars['String'];
   readonly readTime?: InputMaybe<Scalars['Int']>;
-  readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
-  readonly title?: InputMaybe<Scalars['String']>;
+  readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
+  readonly thumbnailUrl: Scalars['String'];
+  readonly title: Scalars['String'];
 };
 
 export type PostUpdateInput = {
   readonly content?: InputMaybe<Scalars['Json']>;
   readonly description?: InputMaybe<Scalars['String']>;
   readonly readTime?: InputMaybe<Scalars['Int']>;
+  readonly skills?: InputMaybe<ReadonlyArray<SkillWhereUniqueInput>>;
   readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
 };
 
