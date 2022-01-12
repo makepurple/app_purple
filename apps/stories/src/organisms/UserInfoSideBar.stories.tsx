@@ -21,7 +21,7 @@ const Template: Story<UserInfoSideBarProps> = (args) => {
 Template.args = {};
 Template.parameters = {};
 
-export const Standard: any = Template.bind({});
+export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
@@ -35,6 +35,93 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const ViewerIsFriend = Template.bind({});
+ViewerIsFriend.args = { ...Template.args };
+ViewerIsFriend.parameters = {
+	...Template.parameters,
+	urql: async (op: any) => {
+		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return {
+					data: {
+						...GetUserInfoSideBar_mock,
+						user: {
+							...GetUserInfoSideBar_mock.user,
+							id: "1",
+							viewerIsFriend: true
+						}
+					}
+				};
+			default:
+				return {};
+		}
+	}
+};
+
+export const ViewerCantFriend = Template.bind({});
+ViewerCantFriend.args = { ...Template.args };
+ViewerCantFriend.parameters = {
+	...Template.parameters,
+	urql: async (op: any) => {
+		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return {
+					data: {
+						...GetUserInfoSideBar_mock,
+						user: {
+							...GetUserInfoSideBar_mock.user,
+							id: "1",
+							viewerCanFriend: false
+						}
+					}
+				};
+			default:
+				return {};
+		}
+	}
+};
+
+export const ViewerFollowing = Template.bind({});
+ViewerFollowing.args = { ...Template.args };
+ViewerFollowing.parameters = {
+	...Template.parameters,
+	urql: async (op: any) => {
+		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return {
+					data: {
+						...GetUserInfoSideBar_mock,
+						user: {
+							...GetUserInfoSideBar_mock.user,
+							id: "1",
+							viewerFollowing: true
+						}
+					}
+				};
 			default:
 				return {};
 		}

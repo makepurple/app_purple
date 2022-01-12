@@ -58,5 +58,8 @@ fragment UserInfoSideBarUser on User {
 			name
 		}
 	}
+	viewerCanFriend
+	viewerFollowing
+	viewerIsFriend
 	...UserAvatarUser
 }

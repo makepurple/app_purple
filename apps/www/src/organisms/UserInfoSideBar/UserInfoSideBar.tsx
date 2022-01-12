@@ -6,6 +6,7 @@ import {
 	NoDataText,
 	OpenbaseIcon,
 	Paper,
+	Spinner,
 	Tags,
 	TwitterIcon
 } from "@makepurple/components";
@@ -14,8 +15,14 @@ import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useState } from "react";
 import tw from "twin.macro";
-import { useGetUserInfoSideBarQuery } from "../../graphql";
-import { PeopleIcon } from "../../svgs";
+import {
+	useFollowUserMutation,
+	useFriendRequestUserMutation,
+	useGetUserInfoSideBarQuery,
+	useUnfollowUserMutation,
+	useUnfriendUserMutation
+} from "../../graphql";
+import { CancelIcon, PeopleIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { TopLanguages } from "../TopLanguages";
 import { UserAvatar } from "../UserAvatar";
@@ -86,7 +93,7 @@ const SocialLink = tw.a`
 
 const Actions = tw.div`
 	grid
-	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	grid-template-columns[repeat(auto-fill, minmax(9rem, 1fr))]
 	gap-4
 	mt-4
 `;
@@ -132,6 +139,12 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 		}
 	});
 
+	const [{ fetching: following }, followUser] = useFollowUserMutation();
+	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
+
+	const [{ fetching: friendRequesting }, friendRequestUser] = useFriendRequestUserMutation();
+	const [{ fetching: unfriending }, unfriendUser] = useUnfriendUserMutation();
+
 	const { data: session } = useSession();
 
 	const [formOpen, setFormOpen] = useState<boolean>(false);
@@ -142,6 +155,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	if (!user) return null;
 
 	const displayName: string = user.github.name ?? user.name;
+
+	const loadingFollow = following || unfollowing;
+	const loadingFriend = friendRequesting || unfriending;
 
 	return (
 		<Paper className={className} style={style}>
@@ -194,6 +210,44 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							variant="secondary"
 						>
 							Edit Profile
+						</Button>
+					</Actions>
+				)}
+				{!isMyUser && (
+					<Actions>
+						<Button
+							disabled={
+								loadingFriend || (!user.viewerIsFriend && !user.viewerCanFriend)
+							}
+							onClick={async () => {
+								user.viewerIsFriend
+									? await unfriendUser({ where: { name: user.name } })
+									: await friendRequestUser({ where: { name: user.name } });
+							}}
+							type="button"
+							variant={user.viewerIsFriend ? "alert" : "primary"}
+						>
+							{user.viewerIsFriend ? (
+								<>
+									<CancelIcon height={24} width={24} tw="flex-shrink-0 mr-1" />
+									Connection
+								</>
+							) : (
+								"Connect"
+							)}
+						</Button>
+						<Button
+							disabled={loadingFollow}
+							onClick={async () => {
+								user.viewerFollowing
+									? await unfollowUser({ where: { name: user.name } })
+									: await followUser({ where: { name: user.name } });
+							}}
+							type="button"
+							variant="secondary"
+						>
+							{user.viewerFollowing ? "Unfollow" : "Follow"}
+							{loadingFollow && <Spinner tw="ml-2" />}
 						</Button>
 					</Actions>
 				)}

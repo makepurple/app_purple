@@ -3,7 +3,6 @@ import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import type { ServerContext as ctx } from "./../../context"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
 import type { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
-import type { FieldRateLimitResolver } from "../../nexus/plugins/rate-limit.plugin"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -1094,8 +1093,10 @@ export interface NexusGenFieldTypes {
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     upvotedPosts: NexusGenRootTypes['PostConnection']; // PostConnection!
+    viewerCanFriend: boolean; // Boolean!
     viewerFollowing: boolean; // Boolean!
     viewerFriended: boolean; // Boolean!
+    viewerIsFriend: boolean; // Boolean!
   }
   UserActivityCommentPost: { // field return type
     comment: NexusGenRootTypes['Comment']; // Comment!
@@ -1621,8 +1622,10 @@ export interface NexusGenFieldTypeNames {
     repositories: 'Repository'
     skills: 'SkillConnection'
     upvotedPosts: 'PostConnection'
+    viewerCanFriend: 'Boolean'
     viewerFollowing: 'Boolean'
     viewerFriended: 'Boolean'
+    viewerIsFriend: 'Boolean'
   }
   UserActivityCommentPost: { // field return type name
     comment: 'Comment'
@@ -1770,7 +1773,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
     }
     deleteFriendship: { // args
-      where: NexusGenInputs['FriendshipWhereUniqueInput']; // FriendshipWhereUniqueInput!
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     deletePost: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
@@ -2163,10 +2166,6 @@ declare global {
      * complexity for this field.
      */
     complexity?: QueryComplexity<TypeName, FieldName>
-    /**
-     * Rate limit plugin for an individual field. Uses the same directive args as `graphql-rate-limit`.
-     */
-    rateLimit?: FieldRateLimitResolver<TypeName, FieldName>
   }
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
   }

@@ -1,0 +1,21 @@
+mutation UnfriendUser($where: UserWhereUniqueInput!) {
+	deleteFriendship(where: $where) {
+		record {
+			id
+			friender {
+				id
+				name
+				viewerCanFriend
+				viewerFriended
+				viewerIsFriend
+			}
+			friending {
+				id
+				name
+				viewerCanFriend
+				viewerFriended
+				viewerIsFriend
+			}
+		}
+	}
+}

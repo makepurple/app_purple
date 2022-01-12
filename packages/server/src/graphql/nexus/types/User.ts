@@ -1,5 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
+import { dayjs } from "@makepurple/utils";
 import { Comment, Follow, Post, Prisma, Skill, User as _User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
@@ -397,6 +398,39 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.boolean("viewerCanFriend", {
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return true;
+
+				const friendship = await prisma.friendship.findUnique({
+					where: {
+						frienderId_friendingId: {
+							frienderId: user.id,
+							friendingId: parent.id
+						}
+					}
+				});
+
+				const friendshipReturned = await prisma.friendship.findUnique({
+					where: {
+						frienderId_friendingId: {
+							frienderId: parent.id,
+							friendingId: user.id
+						}
+					}
+				});
+
+				if (!friendship) return true;
+
+				const isMutualFriend: boolean = !!friendship && !!friendshipReturned;
+
+				if (isMutualFriend) return false;
+
+				const monthsAgo = dayjs().diff(friendship.updatedAt, "month");
+
+				return monthsAgo <= 6;
+			}
+		});
 		t.nonNull.boolean("viewerFollowing", {
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
@@ -420,13 +454,38 @@ export const User = objectType({
 				const friendship = await prisma.friendship.findUnique({
 					where: {
 						frienderId_friendingId: {
+							frienderId: user.id,
+							friendingId: parent.id
+						}
+					}
+				});
+
+				return !!friendship;
+			}
+		});
+		t.nonNull.boolean("viewerIsFriend", {
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const friendship = await prisma.friendship.findUnique({
+					where: {
+						frienderId_friendingId: {
+							frienderId: user.id,
+							friendingId: parent.id
+						}
+					}
+				});
+
+				const friendshipReturned = await prisma.friendship.findUnique({
+					where: {
+						frienderId_friendingId: {
 							frienderId: parent.id,
 							friendingId: user.id
 						}
 					}
 				});
 
-				return !!friendship;
+				return !!friendship && !!friendshipReturned;
 			}
 		});
 	}

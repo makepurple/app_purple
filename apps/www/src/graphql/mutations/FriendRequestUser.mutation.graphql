@@ -1,0 +1,11 @@
+mutation FriendRequestUser($where: UserWhereUniqueInput!) {
+	requestFriendship(where: $where) {
+		record {
+			id
+			friender {
+				id
+				viewerFriended
+			}
+		}
+	}
+}

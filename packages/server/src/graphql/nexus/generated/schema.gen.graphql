@@ -379,10 +379,7 @@ type Mutation {
 
   """Users can delete their own experiences."""
   deleteExperience(where: ExperienceWhereUniqueInput!): DeleteExperiencePayload!
-  deleteFriendship(
-    """Find friendship from viewer -> friend"""
-    where: FriendshipWhereUniqueInput!
-  ): DeleteFriendshipPayload!
+  deleteFriendship(where: UserWhereUniqueInput!): DeleteFriendshipPayload!
 
   """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
@@ -874,8 +871,10 @@ type User implements Followable {
   repositories: [Repository!]!
   skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
+  viewerCanFriend: Boolean!
   viewerFollowing: Boolean!
   viewerFriended: Boolean!
+  viewerIsFriend: Boolean!
 }
 
 interface UserActivity {
