@@ -7,8 +7,8 @@
 	"dependencies": {
 		"@makepurple/tsconfig": "workspace:*",
 		"@types/react": "^17.0.38",
-		"@types/styled-components": "^5.1.19",
-		"next-auth": "^4.0.6",
+		"@types/styled-components": "^5.1.20",
+		"next-auth": "^4.1.0",
 		"twin.macro": "^2.8.2"
 	},
 	"devDependencies": {

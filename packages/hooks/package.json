@@ -11,11 +11,11 @@
 		"@types/react": "^17.0.38",
 		"@types/react-dom": "^17.0.11",
 		"downshift": "^6.1.7",
-		"framer-motion": "^5.5.6",
+		"framer-motion": "^5.5.8",
 		"keycode-js": "^3.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-hook-form": "^7.22.5",
+		"react-hook-form": "^7.23.0",
 		"react-use": "^17.3.2",
 		"urql": "^2.0.6"
 	},

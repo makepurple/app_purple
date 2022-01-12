@@ -8,7 +8,7 @@
 	"dependencies": {
 		"@makepurple/typings": "workspace:*",
 		"dayjs": "^1.10.7",
-		"react-hook-form": "^7.22.5"
+		"react-hook-form": "^7.23.0"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
