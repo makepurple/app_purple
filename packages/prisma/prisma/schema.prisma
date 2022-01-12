@@ -168,22 +168,23 @@ model FollowSkill {
 
 model Post {
   activities   UserActivity[]
-  author       User           @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
+  author       User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName   String
   comments     Comment[]
   content      Json?
-  createdAt    DateTime       @default(now())
+  createdAt    DateTime        @default(now())
   description  String?
-  id           String         @id @default(cuid())
+  id           String          @id @default(cuid())
   images       PostImage[]
   publishedAt  DateTime?
   // Estimated time in minutes to read this post
   readTime     Int?
+  skills       SkillsOnPosts[]
   title        String?
   thumbnailUrl String?
-  updatedAt    DateTime       @updatedAt
+  updatedAt    DateTime        @updatedAt
   upvoters     PostUpvoter[]
-  urlSlug      String         @default("draft")
+  urlSlug      String          @default("draft")
 
   @@unique([authorName, urlSlug])
 }
@@ -242,10 +243,22 @@ model Skill {
   owner         String
   users         SkillsOnUsers[]
   desiringUsers DesiredSkillsOnUsers[]
+  posts         SkillsOnPosts[]
   repositories  SkillsOnRepositories[]
   followedBy    FollowSkill[]
 
   @@unique([name, owner])
+}
+
+model SkillsOnPosts {
+  id      String @id @default(cuid())
+  post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId  String
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillId String
+
+
+  @@unique([skillId, postId])
 }
 
 model SkillsOnUsers {
@@ -279,12 +292,13 @@ model Repository {
 }
 
 model SkillsOnRepositories {
+  id           String     @id @default(cuid())
   skill        Skill      @relation(fields: [skillId], references: [id], onDelete: Cascade)
   skillId      String
   repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
   repositoryId String
 
-  @@id([skillId, repositoryId])
+  @@unique([skillId, repositoryId])
 }
 
 model Organization {
