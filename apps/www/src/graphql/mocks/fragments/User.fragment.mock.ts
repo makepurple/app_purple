@@ -144,7 +144,7 @@ export const User_fragment_mock: User = {
 			hasPreviousPage: false,
 			startCursor: null
 		},
-		totalCount: 5,
+		totalCount: 8,
 		edges: skills.map((skill) => ({
 			__typename: "SkillEdge",
 			cursor: skill.id,

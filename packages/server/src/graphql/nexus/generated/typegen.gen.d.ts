@@ -161,7 +161,7 @@ export interface NexusGenInputs {
   PostDraftUpdateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     description?: string | null; // String
-    skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
+    skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
   }

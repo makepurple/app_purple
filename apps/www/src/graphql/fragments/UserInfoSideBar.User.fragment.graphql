@@ -56,6 +56,7 @@ fragment UserInfoSideBarUser on User {
 			__typename
 			id
 			name
+			owner
 		}
 	}
 	viewerCanFriend

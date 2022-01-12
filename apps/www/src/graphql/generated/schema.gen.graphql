@@ -459,7 +459,7 @@ type PostConnection implements Connection {
 input PostDraftUpdateInput {
   content: Json
   description: String
-  skills: [SkillWhereUniqueInput!]!
+  skills: [SkillWhereUniqueInput!]
   thumbnailUrl: String
   title: String
 }

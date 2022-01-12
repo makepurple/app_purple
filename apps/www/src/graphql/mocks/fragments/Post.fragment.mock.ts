@@ -1,9 +1,26 @@
 import { dayjs } from "@makepurple/utils";
 import faker from "faker";
 import type { Post } from "../../generated";
+import { Skill_fragment_mock } from "./Skill.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
 faker.seed(1);
+
+const skills = [
+	"Next.js",
+	"Prisma",
+	"Nexus",
+	"Urql",
+	"TypeScript",
+	"Storybook",
+	"Figma",
+	"Framer-Motion"
+].map((skill, i) => ({
+	...Skill_fragment_mock,
+	id: `Skill_${i}`,
+	name: skill,
+	owner: "github"
+}));
 
 export const Post_fragment_mock: Post = {
 	__typename: "Post",
@@ -296,6 +313,7 @@ export const Post_fragment_mock: Post = {
 			]
 		}
 	],
+	createdAt: dayjs(1318781876406).toDate(),
 	description: faker.lorem.sentences(1),
 	downvoters: {
 		__typename: "UserConnection",
@@ -313,9 +331,25 @@ export const Post_fragment_mock: Post = {
 	id: "0",
 	images: [],
 	publishedAt: faker.date.past(),
+	skills: {
+		__typename: "SkillConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 8,
+		edges: skills.map((skill) => ({
+			__typename: "SkillEdge",
+			cursor: skill.id,
+			node: skill
+		})),
+		nodes: skills
+	},
 	thumbnailUrl: "/static/pngs/test-thumbnail.png",
 	title: "Not a Real Blog Post Title",
-	createdAt: dayjs(1318781876406).toDate(),
 	updatedAt: dayjs(1318781876406).toDate(),
 	upvotes: faker.datatype.number({ max: 2_000 }),
 	upvoters: {

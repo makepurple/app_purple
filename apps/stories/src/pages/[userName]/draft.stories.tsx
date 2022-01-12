@@ -3,6 +3,7 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetPost_mock,
 	RemovePostThumbnail_mock,
+	SuggestSkills_mock,
 	UploadPostImage_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/draft";
@@ -49,6 +50,10 @@ Standard.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: RemovePostThumbnail_mock };
+			case "SuggestSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestSkills_mock };
 			case "UploadPostImage":
 				await PromiseUtils.wait(ms("1s"));
 
