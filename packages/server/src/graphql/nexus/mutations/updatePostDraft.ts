@@ -35,11 +35,11 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 			title: args.data.title ?? undefined
 		});
 
-		const skillIds = args.data.skills
+		const skillIds = (args.data.skills ?? [])
 			.filter((skill) => !!skill.id)
 			.map((skill) => skill.id) as string[];
 
-		const skillNameOwners = args.data.skills
+		const skillNameOwners = (args.data.skills ?? [])
 			.filter((skill) => !!skill.name_owner)
 			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
 
