@@ -175,7 +175,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const thumbnailUrl = watch("thumbnailUrl");
 
-	const [redItems, setRedItems] = useState<SuggestedSkill[]>([]);
+	const [skillItems, setSkillItems] = useState<SuggestedSkill[]>([]);
 
 	const urqlClient = useClient();
 
@@ -207,12 +207,12 @@ export const Page: NextPage<PageProps> = () => {
 	const combobox = useComboBoxState<SuggestedSkill>({
 		debounce: ms("0.3s"),
 		id: "skills-autosuggest",
-		items: redItems,
+		items: skillItems,
 		itemToString: (item) => item?.name ?? "",
 		onInputValueChange: async ({ inputValue }) => {
 			const suggestions = await getSuggestedSkills(inputValue);
 
-			setRedItems(suggestions);
+			setSkillItems(suggestions);
 		},
 		onSelectedItemChange: ({ selectedItem }) => {
 			if (!selectedItem) return;
@@ -231,7 +231,9 @@ export const Page: NextPage<PageProps> = () => {
 
 		if (!owner || !name) return;
 
-		const newSelectedItem = redItems.find((item) => item.name === name && item.owner === owner);
+		const newSelectedItem = skillItems.find(
+			(item) => item.name === name && item.owner === owner
+		);
 
 		if (!newSelectedItem) return;
 
@@ -384,7 +386,7 @@ export const Page: NextPage<PageProps> = () => {
 									? Array.from({ length: 3 }, (_, i) => (
 											<Skeleton key={i} tw="h-8" />
 									  ))
-									: redItems.map((item, i) => (
+									: skillItems.map((item, i) => (
 											<ComboBox.Option
 												key={`${item.owner}:${item.name}`}
 												{...combobox.getItemProps({
