@@ -986,6 +986,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     name: string; // String!
     owner: string; // String!
+    posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
     viewerFollowing: boolean; // Boolean!
   }
@@ -1516,6 +1517,7 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     name: 'String'
     owner: 'String'
+    posts: 'PostConnection'
     users: 'UserConnection'
     viewerFollowing: 'Boolean'
   }
@@ -1960,6 +1962,13 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    posts: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
     users: { // args
       after?: string | null; // String

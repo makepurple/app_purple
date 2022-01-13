@@ -1,6 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { User } from "@prisma/client";
+import { Post, User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { octokit } from "../../../services";
 import { GitHubRepository } from "../../../services/octokit";
@@ -88,6 +88,44 @@ export const Skill = objectType({
 		t.field(NexusPrisma.Skill.id);
 		t.field(NexusPrisma.Skill.name);
 		t.field(NexusPrisma.Skill.owner);
+		t.nonNull.field("posts", {
+			type: "PostConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "PostWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<Post, { id: string }>(
+					(paginationArgs) =>
+						prisma.skill
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.posts({
+								...paginationArgs,
+								where: {
+									post: PrismaUtils.nonNull(args.where)
+								},
+								include: { post: true }
+							})
+							.then((items) => items.map((item) => item.post)),
+					() =>
+						prisma.skillsOnPosts.count({
+							where: {
+								skill: { id: { equals: parent.id } },
+								post: PrismaUtils.nonNull(args.where)
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("users", {
 			type: "UserConnection",
 			args: {
