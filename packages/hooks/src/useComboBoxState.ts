@@ -45,14 +45,14 @@ export const useComboBoxState = ObjectUtils.setStatic(
 			}
 		});
 
-		const isPending = !!changes && isReady() === false;
+		const isPending = !!changes?.inputValue && isReady() === false;
 
-		const isOpen = combobox.isOpen;
+		const isOpen = combobox.isOpen && !!changes?.inputValue;
 		const hasItems = !!props.items.length;
 
 		return {
 			...combobox,
-			isOpen: isOpen || loading || hasItems,
+			isOpen: (isOpen && hasItems) || loading || isPending,
 			loading: loading || isPending
 		};
 	},
