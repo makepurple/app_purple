@@ -575,7 +575,7 @@ type RemoveSkillMutationPayload implements MutationPayload {
   record: User!
 }
 
-type Repository {
+type Repository implements WithGitHubRepository {
   github: GitHubRepository!
   id: ID!
   name: String!
@@ -627,7 +627,7 @@ type RequestFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
-type Skill implements Followable {
+type Skill implements Followable & WithGitHubRepository {
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
   id: ID!
@@ -1010,4 +1010,10 @@ input UserWhereUniqueInput {
   email: String
   id: String
   name: String
+}
+
+interface WithGitHubRepository {
+  github: GitHubRepository!
+  name: String!
+  owner: String!
 }

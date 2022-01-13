@@ -1005,7 +1005,7 @@ export type RemoveSkillMutationPayload = MutationPayload & {
   readonly record: User;
 };
 
-export type Repository = {
+export type Repository = WithGitHubRepository & {
   readonly __typename: 'Repository';
   readonly github: GitHubRepository;
   readonly id: Scalars['ID'];
@@ -1061,7 +1061,7 @@ export type RequestFriendshipPayload = MutationPayload & {
   readonly record: Friendship;
 };
 
-export type Skill = Followable & {
+export type Skill = Followable & WithGitHubRepository & {
   readonly __typename: 'Skill';
   readonly desiringUsers: UserConnection;
   readonly github: GitHubRepository;
@@ -1583,6 +1583,12 @@ export type UserWhereUniqueInput = {
   readonly email?: InputMaybe<Scalars['String']>;
   readonly id?: InputMaybe<Scalars['String']>;
   readonly name?: InputMaybe<Scalars['String']>;
+};
+
+export type WithGitHubRepository = {
+  readonly github: GitHubRepository;
+  readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
 };
 
 export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
