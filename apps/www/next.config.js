@@ -47,6 +47,13 @@ const config = {
 		CLOUDINARY_API_SECRET:     process.env.CLOUDINARY_API_SECRET,
 		CLOUDINARY_API_VARIABLE:   process.env.CLOUDINARY_API_VARIABLE,
 	},
+	redirects: async () => [
+		{
+			source: "/r",
+			destination: "/repositories",
+			permanent: true
+		}
+	],
 	webpack5: true,
 	webpack: (config, { dev, isServer }) => {
 		if (!isServer) {
