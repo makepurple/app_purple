@@ -7,6 +7,16 @@ type AcceptFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
+type AddDesiredSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
+type AddSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
 """
 The `BigInt` scalar type represents non-fractional signed whole numeric values.
 @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
@@ -367,6 +377,8 @@ type Mutation {
     """Find friendship from requester -> viewer"""
     where: FriendshipWhereUniqueInput!
   ): AcceptFriendshipPayload!
+  addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
+  addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
@@ -391,7 +403,9 @@ type Mutation {
     """Find friendship from requester -> viewer"""
     where: FriendshipWhereUniqueInput!
   ): RejectFriendshipPayload!
+  removeDesiredSkill(where: SkillWhereUniqueInput!): RemoveDesiredSkillMutationPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
@@ -555,9 +569,19 @@ type RejectFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
+type RemoveDesiredSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
 type RemovePostThumbnailPayload implements MutationPayload {
   query: Query!
   record: Post
+}
+
+type RemoveSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
 }
 
 type Repository {

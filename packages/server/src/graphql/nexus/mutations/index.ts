@@ -1,4 +1,6 @@
 export * from "./acceptFriendship";
+export * from "./addDesiredSkill";
+export * from "./addSkill";
 export * from "./createComment";
 export * from "./createExperience";
 export * from "./createPost";
@@ -11,7 +13,9 @@ export * from "./followSkill";
 export * from "./followUser";
 export * from "./publishPost";
 export * from "./rejectFriendship";
+export * from "./removeDesiredSkill";
 export * from "./removePostThumbnail";
+export * from "./removeSkill";
 export * from "./requestFriendship";
 export * from "./unfollowSkill";
 export * from "./unfollowUser";
