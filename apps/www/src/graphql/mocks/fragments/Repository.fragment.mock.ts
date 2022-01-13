@@ -1,5 +1,6 @@
 import { Repository } from "../../generated";
 import { GitHubRepository_fragment_mock } from "./GitHubRepository.fragment.mock";
+import { Skill_fragment_mock } from "./Skill.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
 export const Repository_fragment_mock: Repository = {
@@ -9,19 +10,15 @@ export const Repository_fragment_mock: Repository = {
 	name: "react",
 	skills: [
 		{
-			__typename: "Skill",
-			name: "react",
+			...Skill_fragment_mock,
 			id: "0",
-			desiringUsers: [],
-			users: [],
+			name: "react",
 			owner: "facebook"
 		},
 		{
-			__typename: "Skill",
-			name: "typescript",
+			...Skill_fragment_mock,
 			id: "1",
-			desiringUsers: [],
-			users: [],
+			name: "typescript",
 			owner: "microsoft"
 		}
 	],

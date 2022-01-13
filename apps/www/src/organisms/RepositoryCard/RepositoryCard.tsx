@@ -1,7 +1,9 @@
 import {
 	Anchor,
+	Avatar,
 	Form,
 	FormButton,
+	GitHubAvatarImage,
 	HiddenInput,
 	MaybeAnchor,
 	Spinner,
@@ -23,6 +25,11 @@ const Root = styled.div`
 		py-4
 		cursor-pointer
 	`}
+`;
+
+const StyledAvatar = tw(Avatar)`
+	flex-shrink-0
+	rounded-md
 `;
 
 const Details = tw.div`
@@ -108,6 +115,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 		}
 	});
 
+	const owner = repository.github.owner;
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
 	const parent = editing ? (
@@ -154,6 +162,17 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 		parent,
 		{ className, style },
 		<>
+			{owner.__typename === "GitHubOrganization" && owner.avatarUrl && (
+				<StyledAvatar border={4} tw="mr-6">
+					<GitHubAvatarImage
+						alt={owner.login}
+						src={owner.avatarUrl}
+						height={64}
+						width={64}
+						title={owner.login}
+					/>
+				</StyledAvatar>
+			)}
 			<Details>
 				<Anchor href={repository.github.url} target="_blank" rel="noopener noreferrer">
 					<Name>{repository.name}</Name>

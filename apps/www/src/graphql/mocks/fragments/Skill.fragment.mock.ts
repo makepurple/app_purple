@@ -18,6 +18,19 @@ export const Skill_fragment_mock: Skill = {
 		nodes: []
 	},
 	github: GitHubRepository_fragment_mock,
+	posts: {
+		__typename: "PostConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	name: "react",
 	owner: "facebook",
 	users: {

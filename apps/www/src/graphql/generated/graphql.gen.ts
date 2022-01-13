@@ -38,6 +38,18 @@ export type AcceptFriendshipPayload = MutationPayload & {
   readonly record: Friendship;
 };
 
+export type AddDesiredSkillMutationPayload = MutationPayload & {
+  readonly __typename: 'AddDesiredSkillMutationPayload';
+  readonly query: Query;
+  readonly record: User;
+};
+
+export type AddSkillMutationPayload = MutationPayload & {
+  readonly __typename: 'AddSkillMutationPayload';
+  readonly query: Query;
+  readonly record: User;
+};
+
 export type Comment = {
   readonly __typename: 'Comment';
   readonly author: User;
@@ -427,6 +439,8 @@ export type GitHubUser = GitHubRepositoryOwner & {
 export type Mutation = {
   readonly __typename: 'Mutation';
   readonly acceptFriendship: AcceptFriendshipPayload;
+  readonly addDesiredSkill: AddDesiredSkillMutationPayload;
+  readonly addSkill: AddSkillMutationPayload;
   readonly createComment: CreateCommentPayload;
   readonly createExperience: CreateExperiencePayload;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
@@ -443,7 +457,9 @@ export type Mutation = {
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
   readonly rejectFriendship: RejectFriendshipPayload;
+  readonly removeDesiredSkill: RemoveDesiredSkillMutationPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
+  readonly removeSkill: RemoveSkillMutationPayload;
   readonly requestFriendship: RequestFriendshipPayload;
   readonly unfollowSkill: UnfollowSkillPayload;
   readonly unfollowUser: UnfollowUserPayload;
@@ -466,6 +482,18 @@ export type Mutation = {
 /** Root mutation type */
 export type MutationAcceptFriendshipArgs = {
   where: FriendshipWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationAddDesiredSkillArgs = {
+  where: SkillWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationAddSkillArgs = {
+  where: SkillWhereUniqueInput;
 };
 
 
@@ -537,8 +565,20 @@ export type MutationRejectFriendshipArgs = {
 
 
 /** Root mutation type */
+export type MutationRemoveDesiredSkillArgs = {
+  where: SkillWhereUniqueInput;
+};
+
+
+/** Root mutation type */
 export type MutationRemovePostThumbnailArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationRemoveSkillArgs = {
+  where: SkillWhereUniqueInput;
 };
 
 
@@ -634,6 +674,10 @@ export type MutationUpvotePostArgs = {
 
 export type MutationPayload = {
   readonly query: Query;
+};
+
+export type OrderByRelationAggregateInput = {
+  readonly _count?: InputMaybe<SortOrder>;
 };
 
 export type Organization = {
@@ -804,6 +848,8 @@ export type Query = {
   /** Relay-style connection on Post types. */
   readonly posts: PostConnection;
   readonly repositories: RepositoryConnection;
+  /** Relay-style connection on Skill types. */
+  readonly skills: SkillConnection;
   readonly suggestExperiences: SuggestExperiences;
   readonly suggestFriends: UserConnection;
   readonly suggestRepositories: SuggestRepositories;
@@ -870,6 +916,17 @@ export type QueryRepositoriesArgs = {
 
 
 /** Root query type */
+export type QuerySkillsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<SkillOrderByInput>>;
+  where?: InputMaybe<SkillWhereInput>;
+};
+
+
+/** Root query type */
 export type QuerySuggestExperiencesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestExperiencesWhereInput;
@@ -930,10 +987,22 @@ export type RejectFriendshipPayload = MutationPayload & {
   readonly record: Friendship;
 };
 
+export type RemoveDesiredSkillMutationPayload = MutationPayload & {
+  readonly __typename: 'RemoveDesiredSkillMutationPayload';
+  readonly query: Query;
+  readonly record: User;
+};
+
 export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
   readonly query: Query;
   readonly record?: Maybe<Post>;
+};
+
+export type RemoveSkillMutationPayload = MutationPayload & {
+  readonly __typename: 'RemoveSkillMutationPayload';
+  readonly query: Query;
+  readonly record: User;
 };
 
 export type Repository = {
@@ -1048,6 +1117,13 @@ export type SkillEdge = ConnectionEdge & {
 export type SkillNameOwnerCompoundUniqueInput = {
   readonly name: Scalars['String'];
   readonly owner: Scalars['String'];
+};
+
+export type SkillOrderByInput = {
+  readonly desiringUsers?: InputMaybe<OrderByRelationAggregateInput>;
+  readonly name?: InputMaybe<SortOrder>;
+  readonly owner?: InputMaybe<SortOrder>;
+  readonly users?: InputMaybe<OrderByRelationAggregateInput>;
 };
 
 export type SkillWhereInput = {
@@ -1306,6 +1382,7 @@ export type UserDesiredSkillsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<SkillOrderByInput>>;
   where?: InputMaybe<SkillWhereInput>;
 };
 
@@ -1360,6 +1437,7 @@ export type UserSkillsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<SkillOrderByInput>>;
   where?: InputMaybe<SkillWhereInput>;
 };
 
@@ -1519,7 +1597,7 @@ export type PageInfoFragmentFragment = { readonly __typename: 'PageInfo', readon
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
-export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
+export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
 export type SkillFollowCardSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } };
 
@@ -1563,7 +1641,7 @@ export type CreateRepositoryMutationVariables = Exact<{
 }>;
 
 
-export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly repositories: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string }> } | null | undefined } } };
+export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly repositories: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string }> } | null | undefined } } };
 
 export type FollowSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
@@ -1758,7 +1836,7 @@ export type GetRepositoriesQueryVariables = Exact<{
 }>;
 
 
-export type GetRepositoriesQuery = { readonly __typename: 'Query', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
+export type GetRepositoriesQuery = { readonly __typename: 'Query', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
 export type GetUserFollowersQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -1963,6 +2041,11 @@ export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
       url
     }
     name
+    owner {
+      id
+      avatarUrl
+      login
+    }
     primaryLanguage {
       __typename
       color

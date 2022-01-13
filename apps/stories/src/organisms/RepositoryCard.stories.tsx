@@ -34,3 +34,31 @@ Standard.parameters = {
 		}
 	}
 };
+
+export const AsUserOwned = Template.bind({});
+AsUserOwned.args = {
+	...Template.args,
+	repository: {
+		...(Repository_fragment_mock as any),
+		github: {
+			...Repository_fragment_mock.github,
+			owner: {
+				...Repository_fragment_mock.github.owner,
+				__typename: "GitHubUser"
+			}
+		}
+	}
+};
+AsUserOwned.parameters = {
+	...Template.parameters,
+	urql: async (op: any) => {
+		switch (getOperationName(op.query)) {
+			case "SuggestSkills":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: SuggestSkills_mock };
+			default:
+				return {};
+		}
+	}
+};

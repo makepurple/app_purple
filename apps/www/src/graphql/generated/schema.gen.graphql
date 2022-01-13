@@ -3,6 +3,16 @@ type AcceptFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
+type AddDesiredSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
+type AddSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
 # The `BigInt` scalar type represents non-fractional signed whole numeric values.
 # @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
 scalar BigInt
@@ -355,6 +365,8 @@ type Mutation {
     # Find friendship from requester -> viewer
     where: FriendshipWhereUniqueInput!
   ): AcceptFriendshipPayload!
+  addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
+  addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
@@ -377,7 +389,9 @@ type Mutation {
     # Find friendship from requester -> viewer
     where: FriendshipWhereUniqueInput!
   ): RejectFriendshipPayload!
+  removeDesiredSkill(where: SkillWhereUniqueInput!): RemoveDesiredSkillMutationPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
@@ -398,6 +412,10 @@ type Mutation {
 
 interface MutationPayload {
   query: Query!
+}
+
+input OrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 type Organization {
@@ -524,6 +542,9 @@ type Query {
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
+
+  # Relay-style connection on Skill types.
+  skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
   suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
@@ -539,9 +560,19 @@ type RejectFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
+type RemoveDesiredSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
+}
+
 type RemovePostThumbnailPayload implements MutationPayload {
   query: Query!
   record: Post
+}
+
+type RemoveSkillMutationPayload implements MutationPayload {
+  query: Query!
+  record: User!
 }
 
 type Repository {
@@ -622,6 +653,13 @@ type SkillEdge implements ConnectionEdge {
 input SkillNameOwnerCompoundUniqueInput {
   name: String!
   owner: String!
+}
+
+input SkillOrderByInput {
+  desiringUsers: OrderByRelationAggregateInput
+  name: SortOrder
+  owner: SortOrder
+  users: OrderByRelationAggregateInput
 }
 
 input SkillWhereInput {
@@ -828,7 +866,7 @@ type User implements Followable {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String
-  desiredSkills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  desiredSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   email: String!
   experiences: [Experience!]!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -842,7 +880,7 @@ type User implements Followable {
   name: String!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
-  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerCanFriend: Boolean!
   viewerFollowing: Boolean!
