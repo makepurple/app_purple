@@ -428,6 +428,10 @@ interface MutationPayload {
   query: Query!
 }
 
+input OrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
 type Organization {
   experiences: [Experience!]!
   github: GitHubOrganization!
@@ -554,6 +558,9 @@ type Query {
   """Relay-style connection on Post types."""
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
+
+  """Relay-style connection on Skill types."""
+  skills(after: String, before: String, first: Int, last: Int, orderBy: SkillOrderByInput, where: SkillWhereInput): SkillConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
   suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
@@ -662,6 +669,13 @@ type SkillEdge implements ConnectionEdge {
 input SkillNameOwnerCompoundUniqueInput {
   name: String!
   owner: String!
+}
+
+input SkillOrderByInput {
+  desiringUsers: OrderByRelationAggregateInput
+  name: SortOrder
+  owner: SortOrder
+  users: OrderByRelationAggregateInput
 }
 
 input SkillWhereInput {

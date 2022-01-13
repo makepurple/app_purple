@@ -154,6 +154,9 @@ export interface NexusGenInputs {
   FriendshipWhereUniqueInput: { // input type
     id?: string | null; // String
   }
+  OrderByRelationAggregateInput: { // input type
+    _count?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   PostAuthorNameUrlSlugCompoundUniqueInput: { // input type
     authorName: string; // String!
     urlSlug: string; // String!
@@ -211,6 +214,12 @@ export interface NexusGenInputs {
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
     owner: string; // String!
+  }
+  SkillOrderByInput: { // input type
+    desiringUsers?: NexusGenInputs['OrderByRelationAggregateInput'] | null; // OrderByRelationAggregateInput
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    owner?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    users?: NexusGenInputs['OrderByRelationAggregateInput'] | null; // OrderByRelationAggregateInput
   }
   SkillWhereInput: { // input type
     AND?: NexusGenInputs['SkillWhereInput'][] | null; // [SkillWhereInput!]
@@ -965,6 +974,7 @@ export interface NexusGenFieldTypes {
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
+    skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
     suggestRepositories: NexusGenRootTypes['SuggestRepositories']; // SuggestRepositories!
@@ -1516,6 +1526,7 @@ export interface NexusGenFieldTypeNames {
     postDraft: 'Post'
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
+    skills: 'SkillConnection'
     suggestExperiences: 'SuggestExperiences'
     suggestFriends: 'UserConnection'
     suggestRepositories: 'SuggestRepositories'
@@ -1982,6 +1993,14 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where: NexusGenInputs['RepositoryWhereInput']; // RepositoryWhereInput!
+    }
+    skills: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['SkillOrderByInput'] | null; // SkillOrderByInput
+      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     suggestExperiences: { // args
       first?: number | null; // Int
