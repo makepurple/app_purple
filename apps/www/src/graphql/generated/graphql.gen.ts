@@ -999,6 +999,7 @@ export type Skill = Followable & {
   readonly id: Scalars['ID'];
   readonly name: Scalars['String'];
   readonly owner: Scalars['String'];
+  readonly posts: PostConnection;
   readonly users: UserConnection;
   readonly viewerFollowing: Scalars['Boolean'];
 };
@@ -1010,6 +1011,15 @@ export type SkillDesiringUsersArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type SkillPostsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<PostWhereInput>;
 };
 
 

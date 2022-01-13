@@ -602,6 +602,7 @@ type Skill implements Followable {
   id: ID!
   name: String!
   owner: String!
+  posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   viewerFollowing: Boolean!
 }
