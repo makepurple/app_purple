@@ -26,9 +26,15 @@ export interface SkillAutosuggestProps {
 	className?: string;
 	onSelect?: (skill: SkillAutosuggestItem) => void;
 	style?: CSSProperties;
+	"aria-label"?: string;
 }
 
-export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({ className, onSelect, style }) => {
+export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
+	className,
+	onSelect,
+	style,
+	"aria-label": ariaLabel
+}) => {
 	const [skillItems, setSkillItems] = useState<SkillAutosuggestItem[]>([]);
 
 	const urqlClient = useClient();
@@ -103,7 +109,7 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({ className, onSelec
 					as={Tags.Editable}
 					onKeyDown={onEnterSkill}
 					placeholder="[repo_owner]/[repo_name]"
-					aria-label="new desired skill"
+					aria-label={ariaLabel}
 					tw="w-52"
 				/>
 			</ComboBox>
@@ -112,7 +118,7 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({ className, onSelec
 					? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} tw="h-8" />)
 					: skillItems.map((item, i) => (
 							<ComboBox.Option
-								key={`${item.owner}:${item.name}`}
+								key={`${item.owner}/${item.name}`}
 								{...combobox.getItemProps({
 									item,
 									index: i
