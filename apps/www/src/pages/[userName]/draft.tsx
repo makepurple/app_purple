@@ -1,6 +1,5 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
-	ComboBox,
 	DocumentEditor,
 	DocumentEditorInfoRef,
 	Form,
@@ -12,35 +11,25 @@ import {
 	Input,
 	MainContainer,
 	Paper,
-	Skeleton,
 	Tags,
 	TextArea
 } from "@makepurple/components";
-import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import { PostDraftUpdateInput } from "@makepurple/validators";
 import type { Type } from "computed-types";
-import ms from "ms";
 import { NextPage } from "next";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
-import { useClient } from "urql";
-import {
-	SuggestSkillsDocument,
-	SuggestSkillsQuery,
-	SuggestSkillsQueryVariables,
-	useGetPostQuery,
-	usePublishPostMutation,
-	useUpdatePostDraftMutation
-} from "../../graphql";
+import { useGetPostQuery, usePublishPostMutation, useUpdatePostDraftMutation } from "../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
 	PostImageInput,
-	RemovePostThumbnailButton
+	RemovePostThumbnailButton,
+	SkillAutosuggest
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/draft";
 
@@ -54,13 +43,6 @@ const Root = tw(MainContainer)`
 	lg:flex-row
 	lg:items-start
 	my-12
-`;
-
-const SkillsSuggest = tw(ComboBox.Options)`
-	bottom-0
-	inset-x-0
-	transform
-	translate-y-full
 `;
 
 const Content = tw(Paper)`
@@ -110,11 +92,6 @@ const SideBar = tw(PostGuidelines)`
 	lg:ml-6
 	xl:ml-8
 `;
-
-type SuggestedSkill = {
-	name: string;
-	owner: string;
-};
 
 export const getServerSideProps = pageProps;
 
@@ -174,71 +151,6 @@ export const Page: NextPage<PageProps> = () => {
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
 	const thumbnailUrl = watch("thumbnailUrl");
-
-	const [skillItems, setSkillItems] = useState<SuggestedSkill[]>([]);
-
-	const urqlClient = useClient();
-
-	const getSuggestedSkills = useCallback(
-		async (input: Maybe<string>) => {
-			if (!input) return [];
-
-			const [owner, name] = input.split("/");
-
-			if (!owner || !name) return [];
-
-			const result = await urqlClient
-				.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
-					where: { name, owner }
-				})
-				.toPromise();
-
-			return (
-				result.data?.suggestSkills.nodes.map((repo) => ({
-					id: repo.id,
-					name: repo.name,
-					owner: repo.owner.login
-				})) ?? []
-			);
-		},
-		[urqlClient]
-	);
-
-	const combobox = useComboBoxState<SuggestedSkill>({
-		debounce: ms("0.3s"),
-		id: "skills-autosuggest",
-		items: skillItems,
-		itemToString: (item) => item?.name ?? "",
-		onInputValueChange: async ({ inputValue }) => {
-			const suggestions = await getSuggestedSkills(inputValue);
-
-			setSkillItems(suggestions);
-		},
-		onSelectedItemChange: ({ selectedItem }) => {
-			if (!selectedItem) return;
-
-			skills.append({ name_owner: selectedItem });
-			combobox.setInputValue("");
-		}
-	});
-
-	const onEnterSkill = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
-		const inputValue = e.currentTarget.value;
-
-		if (!inputValue) return;
-
-		const [owner, name] = inputValue.split("/");
-
-		if (!owner || !name) return;
-
-		const newSelectedItem = skillItems.find(
-			(item) => item.name === name && item.owner === owner
-		);
-
-		if (!newSelectedItem) return;
-
-		combobox.selectItem(newSelectedItem);
-	});
 
 	useEffect(() => {
 		!!post &&
@@ -371,33 +283,16 @@ export const Page: NextPage<PageProps> = () => {
 									<span>{(field as any).name_owner.name}</span>
 								</Tags.Tag>
 							))}
-							<ComboBox {...combobox.getComboboxProps()} tw="flex-grow">
-								<ComboBox.Input
-									{...combobox.getInputProps()}
-									as={Tags.Editable}
-									onKeyDown={onEnterSkill}
-									placeholder="[repo_owner]/[repo_name]"
-									aria-label="new desired skill"
-									tw="w-52"
-								/>
-							</ComboBox>
-							<SkillsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen}>
-								{combobox.loading
-									? Array.from({ length: 3 }, (_, i) => (
-											<Skeleton key={i} tw="h-8" />
-									  ))
-									: skillItems.map((item, i) => (
-											<ComboBox.Option
-												key={`${item.owner}:${item.name}`}
-												{...combobox.getItemProps({
-													item,
-													index: i
-												})}
-											>
-												{item.name}
-											</ComboBox.Option>
-									  ))}
-							</SkillsSuggest>
+							<SkillAutosuggest
+								onSelect={(newSkill) => {
+									skills.append({
+										name_owner: {
+											name: newSkill.name,
+											owner: newSkill.owner
+										}
+									});
+								}}
+							/>
 						</Tags>
 						<FormHelperText error={(errors.skills as any)?.message} />
 					</FormGroup>
