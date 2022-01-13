@@ -1,30 +1,20 @@
 import {
 	Anchor,
-	ComboBox,
 	Form,
 	FormButton,
 	HiddenInput,
 	MaybeAnchor,
-	Skeleton,
 	Spinner,
 	Tags
 } from "@makepurple/components";
-import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
-import ms from "ms";
-import React, { cloneElement, CSSProperties, forwardRef, useCallback, useState } from "react";
+import React, { cloneElement, CSSProperties, forwardRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { useClient } from "urql";
-import {
-	RepositoryCardRepositoryFragment,
-	SuggestSkillsDocument,
-	SuggestSkillsQuery,
-	SuggestSkillsQueryVariables,
-	useUpdateRepositoryMutation
-} from "../../graphql";
+import { RepositoryCardRepositoryFragment, useUpdateRepositoryMutation } from "../../graphql";
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
+import { SkillAutosuggest } from "../SkillAutosuggest";
 
 const Root = styled.div`
 	${tw`
@@ -87,13 +77,6 @@ const SaveButton = tw(FormButton)`
 	w-20
 `;
 
-const SkillsSuggest = tw(ComboBox.Options)`
-	bottom-0
-	inset-x-0
-	transform
-	translate-y-full
-`;
-
 interface SuggestedSkill {
 	name: string;
 	owner: string;
@@ -126,68 +109,6 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 	});
 
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
-
-	const urqlClient = useClient();
-
-	const getSuggestedSkills = useCallback(
-		async (input: Maybe<string>): Promise<SuggestedSkill[]> => {
-			if (!input) return [];
-
-			const [owner, name] = input.split("/");
-
-			if (!owner || !name) return [];
-
-			const result = await urqlClient
-				.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
-					where: { name, owner }
-				})
-				.toPromise();
-
-			return (
-				result.data?.suggestSkills.nodes.map((repo) => ({
-					name: repo.name,
-					owner: repo.owner.login
-				})) ?? []
-			);
-		},
-		[urqlClient]
-	);
-
-	const [suggestions, setSuggestions] = useState<SuggestedSkill[]>([]);
-
-	const combobox = useComboBoxState({
-		debounce: ms("0.3s"),
-		id: "repository-skills-combobox",
-		items: suggestions,
-		itemToString: (item) => item?.name ?? "",
-		onInputValueChange: async ({ inputValue }) => {
-			const newSuggestions = await getSuggestedSkills(inputValue);
-
-			setSuggestions(newSuggestions);
-		},
-		onSelectedItemChange: ({ selectedItem }) => {
-			if (!selectedItem) return;
-
-			skills.append(selectedItem);
-			combobox.setInputValue("");
-		}
-	});
-
-	const onEnterSkill = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
-		const inputValue = e.currentTarget.value;
-
-		if (!inputValue) return;
-
-		const [owner, name] = inputValue.split("/");
-
-		const newSelectedItem = suggestions.find(
-			(item) => item.name === name && item.owner === owner
-		);
-
-		if (!newSelectedItem) return;
-
-		combobox.selectItem(newSelectedItem);
-	});
 
 	const parent = editing ? (
 		<Root
@@ -272,31 +193,15 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 							<span>{field.name}</span>
 						</Tags.Tag>
 					))}
-					<ComboBox {...combobox.getComboboxProps()} tw="flex-grow">
-						<ComboBox.Input
-							{...combobox.getInputProps()}
-							as={Tags.Editable}
-							onKeyDown={onEnterSkill}
-							placeholder="[repo_owner]/[repo_name]"
-							aria-label="new skill"
-							tw="w-52"
-						/>
-					</ComboBox>
-					<SkillsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen}>
-						{combobox.loading
-							? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} tw="h-8" />)
-							: suggestions.map((item, i) => (
-									<ComboBox.Option
-										key={`${item.owner}:${item.name}`}
-										{...combobox.getItemProps({
-											item,
-											index: i
-										})}
-									>
-										{item.name}
-									</ComboBox.Option>
-							  ))}
-					</SkillsSuggest>
+					<SkillAutosuggest
+						onSelect={(newSkill) => {
+							skills.append({
+								name: newSkill.name,
+								owner: newSkill.owner
+							});
+						}}
+						aria-label="new skill"
+					/>
 				</Tags>
 				<Info
 					onClick={(e) => {
