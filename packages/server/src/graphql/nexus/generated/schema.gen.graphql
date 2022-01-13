@@ -560,7 +560,7 @@ type Query {
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
 
   """Relay-style connection on Skill types."""
-  skills(after: String, before: String, first: Int, last: Int, orderBy: SkillOrderByInput, where: SkillWhereInput): SkillConnection!
+  skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
   suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
@@ -898,7 +898,7 @@ type User implements Followable {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String
-  desiredSkills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  desiredSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   email: String!
   experiences: [Experience!]!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -912,7 +912,7 @@ type User implements Followable {
   name: String!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
-  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerCanFriend: Boolean!
   viewerFollowing: Boolean!

@@ -2,7 +2,7 @@ import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { dayjs } from "@makepurple/utils";
 import { Comment, Follow, Post, Prisma, Skill, User as _User } from "@prisma/client";
-import { arg, intArg, objectType, stringArg } from "nexus";
+import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
 import { PrismaUtils } from "../../../utils";
@@ -55,18 +55,19 @@ export const User = objectType({
 				last: intArg(),
 				after: stringArg(),
 				before: stringArg(),
+				orderBy: list(nonNull(arg({ type: "SkillOrderByInput" }))),
 				where: arg({ type: "SkillWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
 				const connection = await findManyCursorConnection<Skill, { id: string }>(
 					(paginationArgs) =>
-						user
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
 							.skills({
 								...paginationArgs,
+								orderBy: PrismaUtils.nonNull(args.orderBy)?.map((orderBy) => ({
+									skill: orderBy
+								})),
 								where: PrismaUtils.nonNull(args.where),
 								select: { skill: true }
 							})
@@ -331,18 +332,19 @@ export const User = objectType({
 				last: intArg(),
 				after: stringArg(),
 				before: stringArg(),
+				orderBy: list(nonNull(arg({ type: "SkillOrderByInput" }))),
 				where: arg({ type: "SkillWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
 				const connection = await findManyCursorConnection<Skill, { id: string }>(
 					(paginationArgs) =>
-						user
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
 							.skills({
 								...paginationArgs,
+								orderBy: PrismaUtils.nonNull(args.orderBy)?.map((orderBy) => ({
+									skill: orderBy
+								})),
 								where: PrismaUtils.nonNull(args.where),
 								select: { skill: true }
 							})

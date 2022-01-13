@@ -1999,7 +1999,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs['SkillOrderByInput'] | null; // SkillOrderByInput
+      orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     suggestExperiences: { // args
@@ -2075,6 +2075,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     followers: { // args
@@ -2117,6 +2118,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     upvotedPosts: { // args

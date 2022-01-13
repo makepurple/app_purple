@@ -1,7 +1,7 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { Skill } from "@prisma/client";
 import { oneLine } from "common-tags";
-import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
+import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const skills = queryField("skills", {
@@ -14,7 +14,7 @@ export const skills = queryField("skills", {
 		before: stringArg(),
 		first: intArg(),
 		last: intArg(),
-		orderBy: arg({ type: "SkillOrderByInput" }),
+		orderBy: list(nonNull(arg({ type: "SkillOrderByInput" }))),
 		where: arg({ type: "SkillWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
