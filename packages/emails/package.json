@@ -20,7 +20,7 @@
 		"@types/react-dom": "^17.0.11",
 		"common-tags": "^1.8.2",
 		"fs-extra": "^10.0.0",
-		"goober": "^2.1.6",
+		"goober": "^2.1.7",
 		"juice": "^8.0.0",
 		"mjml": "^4.11.0",
 		"mjml-react": "^2.0.3",
