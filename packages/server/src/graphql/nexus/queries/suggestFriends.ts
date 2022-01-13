@@ -1,7 +1,4 @@
-import {
-	findManyCursorConnection,
-	PrismaFindManyArguments
-} from "@devoxa/prisma-relay-cursor-connection";
+import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { dayjs, LangUtils, MathUtils } from "@makepurple/utils";
 import { Prisma, User } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
@@ -65,7 +62,7 @@ export const suggestFriends = queryField("suggestFriends", {
 
 		const sixMonthsAgo = dayjs(new Date()).subtract(6, "months").toDate();
 
-		const getSuggestedFriends = ({ cursor }: PrismaFindManyArguments<{ id: string }> = {}) => {
+		const getSuggestedFriends = () => {
 			// Maybe set random seed if jitterSeed is provided
 			const setSeed = LangUtils.isNil(where.jitterSeed)
 				? Prisma.raw(`''`)
@@ -212,11 +209,9 @@ export const suggestFriends = queryField("suggestFriends", {
 
 				return await prisma.$queryRaw<User[]>(
 					Prisma.sql`
-						WITH "SuggestedFriends" AS (${getSuggestedFriends({ cursor })})
+						WITH "SuggestedFriends" AS (${getSuggestedFriends()})
 						SELECT "SuggestedFriends".*
-						FROM
-							"SuggestedFriends",
-							(${cursorOrder}) as "orderCmp"
+						FROM "SuggestedFriends", (${cursorOrder}) as "orderCmp"
 						WHERE
 							"SuggestedFriends"."id" != ${user.id} AND
 							${
