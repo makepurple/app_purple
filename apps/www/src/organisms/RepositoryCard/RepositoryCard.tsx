@@ -163,7 +163,13 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 		{ className, style },
 		<>
 			{owner.__typename === "GitHubOrganization" && owner.avatarUrl && (
-				<StyledAvatar border={4} tw="mr-6">
+				<StyledAvatar
+					border={4}
+					href={repository.github.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					tw="mr-6"
+				>
 					<GitHubAvatarImage
 						alt={owner.login}
 						src={owner.avatarUrl}
