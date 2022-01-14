@@ -26,6 +26,7 @@ export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
 export * from "./SkillAutosuggest";
+export * from "./SkillCard";
 export * from "./SkillFollowCard";
 export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";

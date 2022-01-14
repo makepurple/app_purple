@@ -1,0 +1,35 @@
+fragment SkillCardSkill on Skill {
+	id
+	github {
+		id
+		description
+		forkCount
+		issueCount
+		licenseInfo {
+			__typename
+			id
+			name
+			nickname
+			spdxId
+			url
+		}
+		name
+		owner {
+			id
+			avatarUrl
+			login
+		}
+		primaryLanguage {
+			__typename
+			color
+			id
+			name
+		}
+		pullRequestCount
+		pushedAt
+		stargazerCount
+		url
+	}
+	name
+	owner
+}
