@@ -25,9 +25,9 @@ const Content = tw(Paper)`
 
 const Title = tw.h2`
 	flex
-	mb-6
 	text-xl
 	font-bold
+	leading-none
 `;
 
 const EditButton = tw(Button)`
@@ -90,7 +90,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="repositories" userName={userName}>
 			<Content>
-				<Title>
+				<Title tw="mb-6">
 					<span tw="flex-grow">
 						{mode === "create"
 							? "Add Repository"

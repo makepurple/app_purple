@@ -26,6 +26,7 @@ const Title = tw.h2`
 	flex
 	text-xl
 	font-bold
+	leading-none
 `;
 
 const Following = tw.div`
@@ -59,7 +60,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
 			<Content>
-				<Title tw="mb-6">Followers</Title>
+				<Title tw="mb-6">Following</Title>
 				<Following>
 					{!follows.length ? (
 						<NonIdealState

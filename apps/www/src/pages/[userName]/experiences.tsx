@@ -28,7 +28,6 @@ const Content = tw(Paper)`
 
 const Title = tw.h2`
 	flex
-	mb-6
 	text-xl
 	font-bold
 `;
@@ -87,7 +86,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="experiences" userName={userName}>
 			<Content>
-				<Title>
+				<Title tw="mb-6">
 					<span tw="flex-grow">
 						{isCreate
 							? "Add Experience"

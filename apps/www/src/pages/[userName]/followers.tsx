@@ -21,6 +21,7 @@ const Title = tw.h2`
 	flex
 	text-xl
 	font-bold
+	leading-none
 `;
 
 const Followers = tw.div`
