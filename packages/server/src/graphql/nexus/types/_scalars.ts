@@ -12,7 +12,7 @@ export const scalarTypes = [
 		description: GraphQLUpload?.description,
 		serialize: GraphQLUpload?.serialize,
 		parseValue: GraphQLUpload?.parseValue,
-		parseLiteral: GraphQLUpload?.parseLiteral
+		parseLiteral: GraphQLUpload?.parseLiteral as any
 	}),
 	scalarType({
 		name: URLResolver.name,

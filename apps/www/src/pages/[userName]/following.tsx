@@ -100,3 +100,5 @@ export const Page: NextPage<PageProps> = () => {
 		</UserPageLayout>
 	);
 };
+
+export default Page;
