@@ -24,6 +24,7 @@ const Root = styled.div`
 		items-start
 		py-4
 		cursor-pointer
+		active:bg-indigo-50
 	`}
 `;
 

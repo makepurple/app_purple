@@ -12,6 +12,7 @@ const Root = tw.div`
 	items-start
 	py-4
 	cursor-pointer
+	active:bg-indigo-50
 `;
 
 const StyledAvatar = tw(Avatar)`
