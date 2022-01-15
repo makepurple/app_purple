@@ -10,6 +10,10 @@ const skills = Array.from({ length: DATA_SIZE }, (_, i) => ({
 
 export const GetSkills_mock: GetSkillsQuery = {
 	__typename: "Query",
+	skill: {
+		...Skill_fragment_mock,
+		id: "-1"
+	} as any,
 	skills: {
 		__typename: "SkillConnection",
 		pageInfo: {
@@ -32,9 +36,6 @@ export const GetSkills_mock: GetSkillsQuery = {
 export const GetSkills_variables_mock: GetSkillsQueryVariables = {
 	after: null,
 	first: DATA_SIZE,
-	where: {
-		name: {
-			contains: ""
-		}
-	}
+	name: "",
+	owner: ""
 };

@@ -81,14 +81,15 @@ export const Page: NextPage = () => {
 				{ desiringUsers: { _count: SortOrder.Desc } },
 				{ name: SortOrder.Desc }
 			],
-			where: {
-				name: { contains: searchName },
-				owner: { contains: searchOwner }
-			}
+			name: searchName,
+			owner: searchOwner
 		}
 	});
 
+	const exactMatch = data?.skill;
 	const skills = data?.skills.nodes ?? [];
+
+	const hasSkills = !!exactMatch || !!skills.length;
 
 	return (
 		<Root>
@@ -121,13 +122,13 @@ export const Page: NextPage = () => {
 			</SideBar>
 			<Content>
 				<Title>Repositories</Title>
-				{!!skills.length && (
+				{hasSkills && (
 					<Description tw="mt-4">
 						Popular skills by developers and programmers on MakePurple
 					</Description>
 				)}
 				<Skills tw="mt-6">
-					{!skills.length ? (
+					{!hasSkills ? (
 						<NonIdealState
 							title="There's nothing here"
 							subTitle="We couldn't find any repositories"
@@ -136,12 +137,15 @@ export const Page: NextPage = () => {
 							<BookIcon />
 						</NonIdealState>
 					) : (
-						skills.map((skill, i) => (
-							<Fragment key={skill.id}>
-								{!!i && <Divider />}
-								<SkillCard ref={getLoadMoreRef(i)} skill={skill} />
-							</Fragment>
-						))
+						<>
+							{!!exactMatch && <SkillCard skill={exactMatch} />}
+							{skills.map((skill, i) => (
+								<Fragment key={skill.id}>
+									{(!!i || !!exactMatch) && <Divider />}
+									<SkillCard ref={getLoadMoreRef(i)} skill={skill} />
+								</Fragment>
+							))}
+						</>
 					)}
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => (

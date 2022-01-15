@@ -223,6 +223,7 @@ export interface NexusGenInputs {
   }
   SkillWhereInput: { // input type
     AND?: NexusGenInputs['SkillWhereInput'][] | null; // [SkillWhereInput!]
+    NOT?: NexusGenInputs['SkillWhereInput'][] | null; // [SkillWhereInput!]
     name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     owner?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
@@ -975,6 +976,7 @@ export interface NexusGenFieldTypes {
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
+    skill: NexusGenRootTypes['Skill'] | null; // Skill
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1532,6 +1534,7 @@ export interface NexusGenFieldTypeNames {
     postDraft: 'Post'
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
+    skill: 'Skill'
     skills: 'SkillConnection'
     suggestExperiences: 'SuggestExperiences'
     suggestFriends: 'UserConnection'
@@ -2004,6 +2007,9 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where: NexusGenInputs['RepositoryWhereInput']; // RepositoryWhereInput!
+    }
+    skill: { // args
+      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
     }
     skills: { // args
       after?: string | null; // String

@@ -5,6 +5,7 @@ export * from "./post";
 export * from "./postDraft";
 export * from "./posts";
 export * from "./repositories";
+export * from "./skill";
 export * from "./skills";
 export * from "./suggestExperiences";
 export * from "./suggestFriends";

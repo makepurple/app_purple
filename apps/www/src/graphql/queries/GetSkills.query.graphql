@@ -2,9 +2,39 @@ query GetSkills(
 	$after: String
 	$first: Int
 	$orderBy: [SkillOrderByInput!]
-	$where: SkillWhereInput
+	$name: String!
+	$owner: String!
 ) {
-	skills(after: $after, first: $first, where: $where) {
+	skill(
+		where: {
+			name_owner: {
+				name: $name
+				owner: $owner
+			}
+		}
+	) {
+		...SkillCardSkill
+	}
+	skills(
+		after: $after,
+		first: $first,
+		where: {
+			NOT: {
+				name: {
+					equals: $name
+				}
+				owner: {
+					equals: $owner
+				}
+			}
+			name: {
+				contains: $name
+			}
+			owner: {
+				contains: $owner
+			}
+		}
+	) {
 		pageInfo {
 			...PageInfoFragment
 		}

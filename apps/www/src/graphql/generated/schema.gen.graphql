@@ -542,6 +542,7 @@ type Query {
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
+  skill(where: SkillWhereUniqueInput!): Skill
 
   # Relay-style connection on Skill types.
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
@@ -664,6 +665,7 @@ input SkillOrderByInput {
 
 input SkillWhereInput {
   AND: [SkillWhereInput!]
+  NOT: [SkillWhereInput!]
   name: StringNullableFilter
   owner: StringNullableFilter
 }
