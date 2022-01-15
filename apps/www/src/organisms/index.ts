@@ -11,6 +11,7 @@ export * from "./LoadingCreateRepositoryFormOption";
 export * from "./LoadingExperienceCard";
 export * from "./LoadingPostCard";
 export * from "./LoadingRepositoryCard";
+export * from "./LoadingSkillCard";
 export * from "./LoadingUserFollowCard";
 export * from "./LoginButton";
 export * from "./LogoutButton";

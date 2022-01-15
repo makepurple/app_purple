@@ -33,7 +33,7 @@ export const GetRepositories_mock: GetRepositoriesQuery = {
 
 export const GetRepositories_variables_mock: GetRepositoriesQueryVariables = {
 	after: null,
-	first: 20,
+	first: DATA_SIZE,
 	where: {
 		user: {
 			name: {

@@ -1,19 +1,157 @@
-import { MainContainer } from "@makepurple/components";
+import {
+	Button,
+	Divider,
+	FormGroup,
+	FormLabel,
+	Input,
+	MainContainer,
+	NonIdealState,
+	Paper
+} from "@makepurple/components";
+import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { Fragment, useState } from "react";
 import tw from "twin.macro";
+import { SortOrder, useGetSkillsQuery } from "../../graphql";
+import { LoadingSkillCard, SkillCard } from "../../organisms";
+import { BookIcon, SearchIcon } from "../../svgs";
+
+const BATCH_SIZE = 20;
 
 const Root = tw(MainContainer)`
 	flex
 	flex-col
 	items-stretch
 	my-12
+	lg:flex-row-reverse
+	lg:items-start
+`;
+
+const SideBar = tw(Paper)`
+	flex-shrink-0
+	flex
+	flex-col
+	items-stretch
+	w-full
+	p-6
+	lg:w-96
+`;
+
+const Content = tw(Paper)`
+	flex
+	flex-col
+	items-stretch
+	p-6
+`;
+
+const Title = tw.h1`
+	flex
+	text-xl
+	font-bold
+	leading-none
+`;
+
+const Description = tw.p`
+	text-base
+	leading-none
+	text-gray-500
+`;
+
+const Skills = tw.div`
+	flex
+	flex-col
+	items-stretch
 `;
 
 export const Page: NextPage = () => {
+	const router = useRouter();
+
+	const [searchName, setSearchName] = useState<string>((router?.query.name as string) ?? "");
+	const [searchOwner, setSearchOwner] = useState<string>((router?.query.owner as string) ?? "");
+
+	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetSkillsQuery, {
+		field: "skills",
+		requestPolicy: "cache-first",
+		variables: {
+			after: null,
+			first: BATCH_SIZE,
+			orderBy: [
+				{ users: { _count: SortOrder.Desc } },
+				{ desiringUsers: { _count: SortOrder.Desc } },
+				{ name: SortOrder.Desc }
+			],
+			where: {
+				name: { contains: searchName },
+				owner: { contains: searchOwner }
+			}
+		}
+	});
+
+	const skills = data?.skills.nodes ?? [];
+
 	return (
 		<Root>
-			<div>Repositories page works~!</div>
+			<SideBar tw="mb-6 lg:ml-4 xl:ml-6">
+				<Title as="div" tw="mb-6">
+					Filter Repositories
+				</Title>
+				<FormGroup>
+					<FormLabel>Repository owner</FormLabel>
+					<Input
+						onChange={(e) => {
+							setSearchOwner(e.target.value);
+						}}
+						placeholder="Repository owner"
+					/>
+				</FormGroup>
+				<FormGroup tw="mt-4">
+					<FormLabel>Repository name</FormLabel>
+					<Input
+						onChange={(e) => {
+							setSearchName(e.target.value);
+						}}
+						placeholder="Repository name"
+					/>
+				</FormGroup>
+				<Button type="button" tw="mt-8">
+					<SearchIcon height={24} width={24} tw="mr-1" />
+					<span>Search</span>
+				</Button>
+			</SideBar>
+			<Content>
+				<Title>Repositories</Title>
+				{!!skills.length && (
+					<Description tw="mt-4">
+						Popular skills by developers and programmers on MakePurple
+					</Description>
+				)}
+				<Skills tw="mt-6">
+					{!skills.length ? (
+						<NonIdealState
+							title="There's nothing here"
+							subTitle="We couldn't find any repositories"
+							tw="shadow-none"
+						>
+							<BookIcon />
+						</NonIdealState>
+					) : (
+						skills.map((skill, i) => (
+							<Fragment key={skill.id}>
+								{!!i && <Divider />}
+								<SkillCard ref={getLoadMoreRef(i)} skill={skill} />
+							</Fragment>
+						))
+					)}
+					{fetching &&
+						Array.from({ length: 3 }, (_, i) => (
+							<Fragment key={i}>
+								{(!!i || !!skills.length) && <Divider />}
+								<LoadingSkillCard />
+							</Fragment>
+						))}
+				</Skills>
+			</Content>
 		</Root>
 	);
 };

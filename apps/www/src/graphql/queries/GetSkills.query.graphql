@@ -1,0 +1,22 @@
+query GetSkills(
+	$after: String
+	$first: Int
+	$orderBy: [SkillOrderByInput!]
+	$where: SkillWhereInput
+) {
+	skills(after: $after, first: $first, where: $where) {
+		pageInfo {
+			...PageInfoFragment
+		}
+		totalCount
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
+		nodes {
+			...SkillCardSkill
+		}
+	}
+}

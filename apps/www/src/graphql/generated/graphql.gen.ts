@@ -1846,6 +1846,16 @@ export type GetRepositoriesQueryVariables = Exact<{
 
 export type GetRepositoriesQuery = { readonly __typename: 'Query', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } } };
 
+export type GetSkillsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<SkillOrderByInput> | SkillOrderByInput>;
+  where?: InputMaybe<SkillWhereInput>;
+}>;
+
+
+export type GetSkillsQuery = { readonly __typename: 'Query', readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } }> } };
+
 export type GetUserFollowersQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -3030,6 +3040,30 @@ ${PageInfoFragmentFragmentDoc}`;
 
 export function useGetRepositoriesQuery(options: Omit<Urql.UseQueryArgs<GetRepositoriesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetRepositoriesQuery>({ query: GetRepositoriesDocument, ...options });
+};
+export const GetSkillsDocument = /*#__PURE__*/ gql`
+    query GetSkills($after: String, $first: Int, $orderBy: [SkillOrderByInput!], $where: SkillWhereInput) {
+  skills(after: $after, first: $first, where: $where) {
+    pageInfo {
+      ...PageInfoFragment
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+    nodes {
+      ...SkillCardSkill
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${SkillCardSkillFragmentDoc}`;
+
+export function useGetSkillsQuery(options: Omit<Urql.UseQueryArgs<GetSkillsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetSkillsQuery>({ query: GetSkillsDocument, ...options });
 };
 export const GetUserFollowersDocument = /*#__PURE__*/ gql`
     query GetUserFollowers($after: String, $first: Int, $name: String!) {

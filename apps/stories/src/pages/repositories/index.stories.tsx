@@ -1,13 +1,13 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { SuggestFriends_mock } from "@makepurple/www/src/graphql/mocks";
-import { Page } from "@makepurple/www/src/pages";
+import { GetSkills_mock } from "@makepurple/www/src/graphql/mocks";
+import { Page } from "@makepurple/www/src/pages/repositories";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages",
+	title: "pages/repositories",
 	component: Page,
 	decorators: [
 		(Story) => (
@@ -22,9 +22,6 @@ const Template: Story = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};
-Template.parameters = {
-	layout: "fullscreen"
-};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
@@ -35,8 +32,8 @@ Standard.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "SuggestFriends":
-				return { data: SuggestFriends_mock };
+			case "GetSkills":
+				return { data: GetSkills_mock };
 			default:
 				return {};
 		}
