@@ -42,6 +42,11 @@ const config = {
 		POSTMARK_API_TOKEN:        process.env.POSTMARK_API_TOKEN,
 		POSTMARK_FROM_EMAIL:       process.env.POSTMARK_FROM_EMAIL,
 
+		PUSHER_APP_ID:             process.env.PUSHER_APP_ID,
+		PUSHER_KEY:                process.env.PUSHER_KEY,
+		PUSHER_SECRET:             process.env.PUSHER_SECRET,
+		PUSHER_CLUSTER:            process.env.PUSHER_CLUSTER,
+
 		CLOUDINARY_CLOUD_NAME:     process.env.CLOUDINARY_CLOUD_NAME,
 		CLOUDINARY_API_KEY:        process.env.CLOUDINARY_API_KEY,
 		CLOUDINARY_API_SECRET:     process.env.CLOUDINARY_API_SECRET,
