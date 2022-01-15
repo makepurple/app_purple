@@ -23,7 +23,19 @@ export const skills = queryField("skills", {
 				prisma.skill.findMany({
 					...paginationArgs,
 					orderBy: PrismaUtils.nonNull(args.orderBy),
-					where: PrismaUtils.nonNull(args.where)
+					where: {
+						...PrismaUtils.nonNull(args.where),
+						/**
+						 * @description Only get skills for which there is at least 1 user or
+						 * desiring user.
+						 * @author David Lee
+						 * @date January 15, 2022
+						 */
+						AND: {
+							OR: [{ users: { some: {} } }, { desiringUsers: { some: {} } }],
+							...PrismaUtils.nonNull(args.where)?.AND
+						}
+					}
 				}),
 			() => prisma.skill.count({ where: PrismaUtils.nonNull(args.where) }),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
