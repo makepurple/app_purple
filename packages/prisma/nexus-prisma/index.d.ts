@@ -5490,6 +5490,58 @@ export interface ChatMessage {
      */
     resolve: NexusCore.FieldResolver<'ChatMessage', 'senderId'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.createdAt`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   createdAt  DateTime
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.createdAt)
+    *   }
+    * })
+    */
+  createdAt: {
+    /**
+     * The name of this field.
+     */
+    name: 'createdAt'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'DateTime' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'DateTime'>
+    : 'Warning/Error: The type \'DateTime\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'DateTime\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'createdAt'>
+  }
 }
 
 /**

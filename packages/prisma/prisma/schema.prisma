@@ -175,12 +175,13 @@ model Chat {
 }
 
 model ChatMessage {
-  id       String @id @default(cuid())
-  chat     Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId   String
-  content  Json
-  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
-  senderId String
+  id        String   @id @default(cuid())
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId    String
+  content   Json
+  sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId  String
+  createdAt DateTime @default(now())
 }
 
 model ChatsOnUsers {

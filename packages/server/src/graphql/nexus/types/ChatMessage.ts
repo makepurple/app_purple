@@ -9,6 +9,7 @@ export const ChatMessage = objectType({
 		t.field(NexusPrisma.ChatMessage.chat);
 		t.field(NexusPrisma.ChatMessage.chatId);
 		t.field(NexusPrisma.ChatMessage.content);
+		t.field(NexusPrisma.ChatMessage.createdAt);
 		t.field(NexusPrisma.ChatMessage.sender);
 		t.field(NexusPrisma.ChatMessage.senderId);
 	}

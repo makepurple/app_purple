@@ -17,6 +17,7 @@ export * from "./removeDesiredSkill";
 export * from "./removePostThumbnail";
 export * from "./removeSkill";
 export * from "./requestFriendship";
+export * from "./sendChatMessage";
 export * from "./unfollowSkill";
 export * from "./unfollowUser";
 export * from "./unvoteComment";

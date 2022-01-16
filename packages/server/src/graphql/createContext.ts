@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "../db";
 import { redis } from "../redis";
-import { cloudinary, octokit } from "../services";
+import { cloudinary, octokit, pusher } from "../services";
 import { ServerContext } from "./context";
 
 export interface CreateContextParams {
@@ -21,6 +21,7 @@ export const createContext = async (params: CreateContextParams): Promise<Server
 		jwt,
 		octokit: octokit.client.graphql(jwt?.accessToken),
 		prisma,
+		pusher: pusher.client,
 		redis,
 		req,
 		res,

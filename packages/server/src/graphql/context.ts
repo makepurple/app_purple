@@ -4,6 +4,7 @@ import type { JWT } from "next-auth/jwt";
 import type { RedisService } from "../redis/types";
 import type { CloudinaryClient } from "../services/cloudinary";
 import type { OctokitClient } from "../services/octokit";
+import type { PusherClient } from "../services/pusher";
 
 export interface ServerContextUser {
 	id: string;
@@ -16,6 +17,7 @@ export interface ServerContext {
 	jwt: Maybe<JWT>;
 	octokit: ReturnType<OctokitClient["graphql"]>;
 	prisma: PrismaClient;
+	pusher: PusherClient;
 	redis: RedisService;
 	req: NextApiRequest;
 	res: NextApiResponse;

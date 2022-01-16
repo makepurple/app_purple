@@ -57,6 +57,7 @@ export * from "./Repository";
 export * from "./RepositoryConnection";
 export * from "./RepositoryEdge";
 export * from "./RequestFriendshipPayload";
+export * from "./SendChatMessagePayload";
 export * from "./Skill";
 export * from "./SkillConnection";
 export * from "./SkillEdge";

@@ -1,4 +1,7 @@
+export * from "./ChatMessageCreateInput";
+export * from "./ChatMessageOrderByInput";
 export * from "./ChatWhereInput";
+export * from "./ChatWhereUniqueInput";
 export * from "./CommentCreateInput";
 export * from "./CommentOrderByInput";
 export * from "./CommentUpdateInput";
@@ -26,6 +29,7 @@ export * from "./RepositoryNameOwnerCompoundUniqueInput";
 export * from "./RepositoryUpdateInput";
 export * from "./RepositoryWhereInput";
 export * from "./RepositoryWhereUniqueInput";
+export * from "./SendChatMessageInput";
 export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillOrderByInput";
 export * from "./SkillWhereInput";

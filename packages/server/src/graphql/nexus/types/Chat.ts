@@ -11,6 +11,13 @@ export const Chat = objectType({
 		t.field(NexusPrisma.Chat.id);
 		t.nonNull.field("messages", {
 			type: "ChatMessageConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				orderBy: arg({ type: "ChatMessageOrderByInput" })
+			},
 			authorize: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
 
@@ -44,7 +51,9 @@ export const Chat = objectType({
 								}
 							})
 							.chat()
-							.messages({ ...paginationArgs }),
+							.messages({
+								...paginationArgs
+							}),
 					() =>
 						prisma.chatMessage.count({
 							where: {

@@ -77,8 +77,17 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ChatMessageCreateInput: { // input type
+    content: NexusGenScalars['Json']; // Json!
+  }
+  ChatMessageOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   ChatWhereInput: { // input type
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
+  ChatWhereUniqueInput: { // input type
+    id?: string | null; // String
   }
   CommentCreateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
@@ -214,6 +223,9 @@ export interface NexusGenInputs {
     id?: string | null; // String
     name_owner?: NexusGenInputs['RepositoryNameOwnerCompoundUniqueInput'] | null; // RepositoryNameOwnerCompoundUniqueInput
   }
+  SendChatMessageInput: { // input type
+    messages: NexusGenInputs['ChatMessageCreateInput'][]; // [ChatMessageCreateInput!]!
+  }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
     owner: string; // String!
@@ -341,6 +353,7 @@ export interface NexusGenObjects {
   ChatMessage: { // root type
     chatId: string; // String!
     content: NexusGenScalars['Json']; // Json!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     senderId: string; // String!
   }
@@ -558,6 +571,9 @@ export interface NexusGenObjects {
   RequestFriendshipPayload: { // root type
     record: NexusGenRootTypes['Friendship']; // Friendship!
   }
+  SendChatMessagePayload: { // root type
+    record: NexusGenRootTypes['Chat']; // Chat!
+  }
   Skill: { // root type
     id: string; // ID!
     name: string; // String!
@@ -714,7 +730,7 @@ export interface NexusGenInterfaces {
   ConnectionEdge: core.Discriminate<'ChatEdge', 'required'> | core.Discriminate<'ChatMessageEdge', 'required'> | core.Discriminate<'CommentEdge', 'required'> | core.Discriminate<'ExperienceEdge', 'required'> | core.Discriminate<'FollowEdge', 'required'> | core.Discriminate<'PostEdge', 'required'> | core.Discriminate<'RepositoryEdge', 'required'> | core.Discriminate<'SkillEdge', 'required'> | core.Discriminate<'UserActivityEdge', 'required'> | core.Discriminate<'UserEdge', 'required'>;
   Followable: core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
-  MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'AddDesiredSkillMutationPayload', 'required'> | core.Discriminate<'AddSkillMutationPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowSkillPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemoveDesiredSkillMutationPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RemoveSkillMutationPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'UnfollowSkillPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
+  MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'AddDesiredSkillMutationPayload', 'required'> | core.Discriminate<'AddSkillMutationPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowSkillPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemoveDesiredSkillMutationPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RemoveSkillMutationPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'SendChatMessagePayload', 'required'> | core.Discriminate<'UnfollowSkillPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
   UserActivity: core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   WithGitHubRepository: core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'>;
 }
@@ -758,6 +774,7 @@ export interface NexusGenFieldTypes {
     chat: NexusGenRootTypes['Chat']; // Chat!
     chatId: string; // String!
     content: NexusGenScalars['Json']; // Json!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     sender: NexusGenRootTypes['User']; // User!
     senderId: string; // String!
@@ -961,6 +978,7 @@ export interface NexusGenFieldTypes {
     removePostThumbnail: NexusGenRootTypes['RemovePostThumbnailPayload']; // RemovePostThumbnailPayload!
     removeSkill: NexusGenRootTypes['RemoveSkillMutationPayload']; // RemoveSkillMutationPayload!
     requestFriendship: NexusGenRootTypes['RequestFriendshipPayload']; // RequestFriendshipPayload!
+    sendChatMessage: NexusGenRootTypes['SendChatMessagePayload']; // SendChatMessagePayload!
     unfollowSkill: NexusGenRootTypes['UnfollowSkillPayload']; // UnfollowSkillPayload!
     unfollowUser: NexusGenRootTypes['UnfollowUserPayload']; // UnfollowUserPayload!
     unvoteComment: NexusGenRootTypes['UnvoteCommentPayload']; // UnvoteCommentPayload!
@@ -1087,6 +1105,10 @@ export interface NexusGenFieldTypes {
   RequestFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship']; // Friendship!
+  }
+  SendChatMessagePayload: { // field return type
+    query: NexusGenRootTypes['Query']; // Query!
+    record: NexusGenRootTypes['Chat']; // Chat!
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1350,6 +1372,7 @@ export interface NexusGenFieldTypeNames {
     chat: 'Chat'
     chatId: 'String'
     content: 'Json'
+    createdAt: 'DateTime'
     id: 'ID'
     sender: 'User'
     senderId: 'String'
@@ -1553,6 +1576,7 @@ export interface NexusGenFieldTypeNames {
     removePostThumbnail: 'RemovePostThumbnailPayload'
     removeSkill: 'RemoveSkillMutationPayload'
     requestFriendship: 'RequestFriendshipPayload'
+    sendChatMessage: 'SendChatMessagePayload'
     unfollowSkill: 'UnfollowSkillPayload'
     unfollowUser: 'UnfollowUserPayload'
     unvoteComment: 'UnvoteCommentPayload'
@@ -1679,6 +1703,10 @@ export interface NexusGenFieldTypeNames {
   RequestFriendshipPayload: { // field return type name
     query: 'Query'
     record: 'Friendship'
+  }
+  SendChatMessagePayload: { // field return type name
+    query: 'Query'
+    record: 'Chat'
   }
   Skill: { // field return type name
     desiringUsers: 'UserConnection'
@@ -1912,6 +1940,13 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Chat: {
+    messages: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['ChatMessageOrderByInput'] | null; // ChatMessageOrderByInput
+    }
     users: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -1999,6 +2034,10 @@ export interface NexusGenArgTypes {
     }
     requestFriendship: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    sendChatMessage: { // args
+      data: NexusGenInputs['SendChatMessageInput']; // SendChatMessageInput!
+      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
     }
     unfollowSkill: { // args
       where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
@@ -2267,7 +2306,7 @@ export interface NexusGenAbstractTypeMembers {
   ConnectionEdge: "ChatEdge" | "ChatMessageEdge" | "CommentEdge" | "ExperienceEdge" | "FollowEdge" | "PostEdge" | "RepositoryEdge" | "SkillEdge" | "UserActivityEdge" | "UserEdge"
   Followable: "Skill" | "User"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
-  MutationPayload: "AcceptFriendshipPayload" | "AddDesiredSkillMutationPayload" | "AddSkillMutationPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowSkillPayload" | "FollowUserPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemoveDesiredSkillMutationPayload" | "RemovePostThumbnailPayload" | "RemoveSkillMutationPayload" | "RequestFriendshipPayload" | "UnfollowSkillPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
+  MutationPayload: "AcceptFriendshipPayload" | "AddDesiredSkillMutationPayload" | "AddSkillMutationPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowSkillPayload" | "FollowUserPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemoveDesiredSkillMutationPayload" | "RemovePostThumbnailPayload" | "RemoveSkillMutationPayload" | "RequestFriendshipPayload" | "SendChatMessagePayload" | "UnfollowSkillPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
   UserActivity: "UserActivityCommentPost" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvotePost"
   WithGitHubRepository: "Repository" | "Skill"
 }
@@ -2310,6 +2349,7 @@ export interface NexusGenTypeInterfaces {
   RepositoryConnection: "Connection"
   RepositoryEdge: "ConnectionEdge"
   RequestFriendshipPayload: "MutationPayload"
+  SendChatMessagePayload: "MutationPayload"
   Skill: "Followable" | "WithGitHubRepository"
   SkillConnection: "Connection"
   SkillEdge: "ConnectionEdge"
