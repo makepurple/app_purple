@@ -80,8 +80,9 @@ export interface NexusGenInputs {
   ChatMessageCreateInput: { // input type
     content: NexusGenScalars['Json']; // Json!
   }
-  ChatMessageOrderByInput: { // input type
-    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  ChatMessageWhereInput: { // input type
+    chatId: string; // String!
+    id?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   ChatWhereInput: { // input type
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
@@ -1049,6 +1050,7 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Post']; // Post!
   }
   Query: { // field return type
+    chatMessages: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
     comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
@@ -1647,6 +1649,7 @@ export interface NexusGenFieldTypeNames {
     record: 'Post'
   }
   Query: { // field return type name
+    chatMessages: 'ChatMessage'
     comment: 'Comment'
     comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
@@ -1945,7 +1948,6 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs['ChatMessageOrderByInput'] | null; // ChatMessageOrderByInput
     }
     users: { // args
       after?: string | null; // String
@@ -2118,6 +2120,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    chatMessages: { // args
+      where: NexusGenInputs['ChatMessageWhereInput']; // ChatMessageWhereInput!
+    }
     comment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }

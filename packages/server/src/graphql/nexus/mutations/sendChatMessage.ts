@@ -10,7 +10,7 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { prisma, user }) => {
+	resolve: async (parent, args, { prisma, pusher, user }) => {
 		if (!user) throw new Error();
 
 		const chat = await prisma.chat.findUnique({
@@ -49,6 +49,11 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 			});
 
 		if (!record) throw new Error();
+
+		await pusher.trigger("chat", "chat-message-sent", {
+			sender: user.id,
+			messages: record.messages.map((message) => message.id)
+		});
 
 		return { record };
 	}

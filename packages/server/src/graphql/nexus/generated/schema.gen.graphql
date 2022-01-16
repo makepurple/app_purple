@@ -28,7 +28,7 @@ scalar Bytes
 
 type Chat {
   id: ID!
-  messages(after: String, before: String, first: Int, last: Int, orderBy: ChatMessageOrderByInput): ChatMessageConnection!
+  messages(after: String, before: String, first: Int, last: Int): ChatMessageConnection!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
 }
 
@@ -70,8 +70,9 @@ type ChatMessageEdge implements ConnectionEdge {
   node: ChatMessage!
 }
 
-input ChatMessageOrderByInput {
-  createdAt: SortOrder
+input ChatMessageWhereInput {
+  chatId: String!
+  id: StringNullableFilter
 }
 
 input ChatWhereInput {
@@ -603,6 +604,8 @@ type PublishPostPayload implements MutationPayload {
 
 """Root query type"""
 type Query {
+  """This is to update a subscribed chat with new messages when received."""
+  chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!

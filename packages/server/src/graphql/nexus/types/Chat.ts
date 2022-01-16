@@ -15,8 +15,7 @@ export const Chat = objectType({
 				after: stringArg(),
 				before: stringArg(),
 				first: intArg(),
-				last: intArg(),
-				orderBy: arg({ type: "ChatMessageOrderByInput" })
+				last: intArg()
 			},
 			authorize: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
@@ -52,7 +51,10 @@ export const Chat = objectType({
 							})
 							.chat()
 							.messages({
-								...paginationArgs
+								...paginationArgs,
+								orderBy: {
+									createdAt: "desc"
+								}
 							}),
 					() =>
 						prisma.chatMessage.count({

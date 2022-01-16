@@ -1,5 +1,5 @@
 export * from "./ChatMessageCreateInput";
-export * from "./ChatMessageOrderByInput";
+export * from "./ChatMessageWhereInput";
 export * from "./ChatWhereInput";
 export * from "./ChatWhereUniqueInput";
 export * from "./CommentCreateInput";
