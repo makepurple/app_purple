@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import chalk from "chalk";
 import faker from "faker";
 import { experiences, organizations, repositories, skills, users } from "./data";
-import { myUser } from "./generated/myUser";
+import { toSaveUser } from "./generated/toSaveUser";
 
 faker.seed(1);
 
@@ -16,10 +16,10 @@ const log = (...args: string[]): void => {
 const main = async () => {
 	log(chalk.magenta(new Date()));
 
-	if (myUser) {
+	if (toSaveUser) {
 		await prisma.user.upsert({
-			where: { name: myUser.name },
-			create: myUser,
+			where: { name: toSaveUser.name },
+			create: toSaveUser,
 			update: {}
 		});
 	}

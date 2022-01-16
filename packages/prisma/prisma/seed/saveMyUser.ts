@@ -4,7 +4,6 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
 import prettier from "prettier";
-import { myUser } from "./generated/myUser";
 
 export const prisma = new PrismaClient();
 
@@ -12,8 +11,6 @@ const output = path.resolve(__dirname, "./generated/toSaveUser.ts");
 
 const main = async () => {
 	console.log(chalk.blue("prisma:saving-user"), chalk.magenta(new Date()));
-
-	fs.ensureFileSync(output);
 
 	const toSaveUser = process.env.MY_USERNAME
 		? await prisma.user.findUnique({
@@ -89,7 +86,7 @@ const main = async () => {
 					})
 				}
 		  }
-		: myUser;
+		: null;
 
 	const savedUserCode = prettier.format(
 		`
@@ -105,6 +102,7 @@ const main = async () => {
 		}
 	);
 
+	fs.ensureFileSync(output);
 	fs.writeFileSync(output, savedUserCode, { flag: "w" });
 };
 
