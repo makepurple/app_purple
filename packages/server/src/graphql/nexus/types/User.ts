@@ -1,7 +1,7 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { dayjs } from "@makepurple/utils";
-import { Comment, Follow, Post, Prisma, Skill, User as _User } from "@prisma/client";
+import { Chat, Comment, Follow, Post, Prisma, Skill, User as _User } from "@prisma/client";
 import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
@@ -12,6 +12,46 @@ export const User = objectType({
 	description: NexusPrisma.User.$description,
 	definition: (t) => {
 		t.implements("Followable");
+		t.nonNull.field("chats", {
+			type: "ChatConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "ChatWhereInput" })
+			},
+			authorize: (parent, args, { user }) => {
+				return user?.id === parent.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<Chat, { id: string }>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({
+								where: {
+									id: parent.id
+								}
+							})
+							.chats({
+								...paginationArgs,
+								where: PrismaUtils.nonNull(args.where),
+								include: { chat: true }
+							})
+							.then((items) => items.map((item) => item.chat)),
+					() =>
+						prisma.chatsOnUsers.count({
+							where: {
+								user: { id: { equals: parent.id } }
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("comments", {
 			type: "CommentConnection",
 			args: {
@@ -19,8 +59,8 @@ export const User = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
-				where: arg({ type: "CommentWhereInput" }),
-				orderBy: arg({ type: "CommentOrderByInput" })
+				orderBy: arg({ type: "CommentOrderByInput" }),
+				where: arg({ type: "CommentWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const user = prisma.user.findUnique({ where: { id: parent.id } });

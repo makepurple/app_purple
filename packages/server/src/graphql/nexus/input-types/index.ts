@@ -1,3 +1,4 @@
+export * from "./ChatWhereInput";
 export * from "./CommentCreateInput";
 export * from "./CommentOrderByInput";
 export * from "./CommentUpdateInput";

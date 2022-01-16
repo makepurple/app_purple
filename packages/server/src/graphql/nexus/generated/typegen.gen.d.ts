@@ -77,6 +77,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ChatWhereInput: { // input type
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+  }
   CommentCreateInput: { // input type
     content?: NexusGenScalars['Json'] | null; // Json
     parent?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
@@ -322,6 +325,33 @@ export interface NexusGenObjects {
   }
   AddSkillMutationPayload: { // root type
     record: NexusGenRootTypes['User']; // User!
+  }
+  Chat: { // root type
+    id: string; // ID!
+  }
+  ChatConnection: { // root type
+    edges: NexusGenRootTypes['ChatEdge'][]; // [ChatEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  ChatEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Chat']; // Chat!
+  }
+  ChatMessage: { // root type
+    chatId: string; // String!
+    content: NexusGenScalars['Json']; // Json!
+    id: string; // ID!
+    senderId: string; // String!
+  }
+  ChatMessageConnection: { // root type
+    edges: NexusGenRootTypes['ChatMessageEdge'][]; // [ChatMessageEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  ChatMessageEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['ChatMessage']; // ChatMessage!
   }
   Comment: { // root type
     authorId: string; // String!
@@ -680,8 +710,8 @@ export interface NexusGenObjects {
 }
 
 export interface NexusGenInterfaces {
-  Connection: core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'FollowConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserActivityConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
-  ConnectionEdge: core.Discriminate<'CommentEdge', 'required'> | core.Discriminate<'ExperienceEdge', 'required'> | core.Discriminate<'FollowEdge', 'required'> | core.Discriminate<'PostEdge', 'required'> | core.Discriminate<'RepositoryEdge', 'required'> | core.Discriminate<'SkillEdge', 'required'> | core.Discriminate<'UserActivityEdge', 'required'> | core.Discriminate<'UserEdge', 'required'>;
+  Connection: core.Discriminate<'ChatConnection', 'required'> | core.Discriminate<'ChatMessageConnection', 'required'> | core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'FollowConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserActivityConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
+  ConnectionEdge: core.Discriminate<'ChatEdge', 'required'> | core.Discriminate<'ChatMessageEdge', 'required'> | core.Discriminate<'CommentEdge', 'required'> | core.Discriminate<'ExperienceEdge', 'required'> | core.Discriminate<'FollowEdge', 'required'> | core.Discriminate<'PostEdge', 'required'> | core.Discriminate<'RepositoryEdge', 'required'> | core.Discriminate<'SkillEdge', 'required'> | core.Discriminate<'UserActivityEdge', 'required'> | core.Discriminate<'UserEdge', 'required'>;
   Followable: core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'AddDesiredSkillMutationPayload', 'required'> | core.Discriminate<'AddSkillMutationPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowSkillPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemoveDesiredSkillMutationPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RemoveSkillMutationPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'UnfollowSkillPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
@@ -708,6 +738,39 @@ export interface NexusGenFieldTypes {
   AddSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+  }
+  Chat: { // field return type
+    id: string; // ID!
+    messages: NexusGenRootTypes['ChatMessageConnection']; // ChatMessageConnection!
+    users: NexusGenRootTypes['UserConnection']; // UserConnection!
+  }
+  ChatConnection: { // field return type
+    edges: NexusGenRootTypes['ChatEdge'][]; // [ChatEdge!]!
+    nodes: NexusGenRootTypes['Chat'][]; // [Chat!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  ChatEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Chat']; // Chat!
+  }
+  ChatMessage: { // field return type
+    chat: NexusGenRootTypes['Chat']; // Chat!
+    chatId: string; // String!
+    content: NexusGenScalars['Json']; // Json!
+    id: string; // ID!
+    sender: NexusGenRootTypes['User']; // User!
+    senderId: string; // String!
+  }
+  ChatMessageConnection: { // field return type
+    edges: NexusGenRootTypes['ChatMessageEdge'][]; // [ChatMessageEdge!]!
+    nodes: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+    totalCount: number; // Int!
+  }
+  ChatMessageEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['ChatMessage']; // ChatMessage!
   }
   Comment: { // field return type
     author: NexusGenRootTypes['User']; // User!
@@ -1124,6 +1187,7 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Post']; // Post!
   }
   User: { // field return type
+    chats: NexusGenRootTypes['ChatConnection']; // ChatConnection!
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -1266,6 +1330,39 @@ export interface NexusGenFieldTypeNames {
   AddSkillMutationPayload: { // field return type name
     query: 'Query'
     record: 'User'
+  }
+  Chat: { // field return type name
+    id: 'ID'
+    messages: 'ChatMessageConnection'
+    users: 'UserConnection'
+  }
+  ChatConnection: { // field return type name
+    edges: 'ChatEdge'
+    nodes: 'Chat'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  ChatEdge: { // field return type name
+    cursor: 'String'
+    node: 'Chat'
+  }
+  ChatMessage: { // field return type name
+    chat: 'Chat'
+    chatId: 'String'
+    content: 'Json'
+    id: 'ID'
+    sender: 'User'
+    senderId: 'String'
+  }
+  ChatMessageConnection: { // field return type name
+    edges: 'ChatMessageEdge'
+    nodes: 'ChatMessage'
+    pageInfo: 'PageInfo'
+    totalCount: 'Int'
+  }
+  ChatMessageEdge: { // field return type name
+    cursor: 'String'
+    node: 'ChatMessage'
   }
   Comment: { // field return type name
     author: 'User'
@@ -1682,6 +1779,7 @@ export interface NexusGenFieldTypeNames {
     record: 'Post'
   }
   User: { // field return type name
+    chats: 'ChatConnection'
     comments: 'CommentConnection'
     createdAt: 'DateTime'
     description: 'String'
@@ -1813,6 +1911,15 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Chat: {
+    users: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+  }
   Comment: {
     downvoters: { // args
       after?: string | null; // String
@@ -2079,6 +2186,13 @@ export interface NexusGenArgTypes {
     }
   }
   User: {
+    chats: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['ChatWhereInput'] | null; // ChatWhereInput
+    }
     comments: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -2149,8 +2263,8 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
-  Connection: "CommentConnection" | "ExperienceConnection" | "FollowConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserActivityConnection" | "UserConnection"
-  ConnectionEdge: "CommentEdge" | "ExperienceEdge" | "FollowEdge" | "PostEdge" | "RepositoryEdge" | "SkillEdge" | "UserActivityEdge" | "UserEdge"
+  Connection: "ChatConnection" | "ChatMessageConnection" | "CommentConnection" | "ExperienceConnection" | "FollowConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserActivityConnection" | "UserConnection"
+  ConnectionEdge: "ChatEdge" | "ChatMessageEdge" | "CommentEdge" | "ExperienceEdge" | "FollowEdge" | "PostEdge" | "RepositoryEdge" | "SkillEdge" | "UserActivityEdge" | "UserEdge"
   Followable: "Skill" | "User"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationPayload: "AcceptFriendshipPayload" | "AddDesiredSkillMutationPayload" | "AddSkillMutationPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowSkillPayload" | "FollowUserPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemoveDesiredSkillMutationPayload" | "RemovePostThumbnailPayload" | "RemoveSkillMutationPayload" | "RequestFriendshipPayload" | "UnfollowSkillPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
@@ -2162,6 +2276,10 @@ export interface NexusGenTypeInterfaces {
   AcceptFriendshipPayload: "MutationPayload"
   AddDesiredSkillMutationPayload: "MutationPayload"
   AddSkillMutationPayload: "MutationPayload"
+  ChatConnection: "Connection"
+  ChatEdge: "ConnectionEdge"
+  ChatMessageConnection: "Connection"
+  ChatMessageEdge: "ConnectionEdge"
   CommentConnection: "Connection"
   CommentEdge: "ConnectionEdge"
   CreateCommentPayload: "MutationPayload"

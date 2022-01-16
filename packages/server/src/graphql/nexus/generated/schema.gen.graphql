@@ -26,6 +26,49 @@ scalar BigInt
 """The `Byte` scalar type represents byte value as a Buffer"""
 scalar Bytes
 
+type Chat {
+  id: ID!
+  messages: ChatMessageConnection!
+  users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+}
+
+type ChatConnection implements Connection {
+  edges: [ChatEdge!]!
+  nodes: [Chat!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ChatEdge implements ConnectionEdge {
+  cursor: String!
+  node: Chat!
+}
+
+type ChatMessage {
+  chat: Chat!
+  chatId: String!
+  content: Json!
+  id: ID!
+  sender: User!
+  senderId: String!
+}
+
+type ChatMessageConnection implements Connection {
+  edges: [ChatMessageEdge!]!
+  nodes: [ChatMessage!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ChatMessageEdge implements ConnectionEdge {
+  cursor: String!
+  node: ChatMessage!
+}
+
+input ChatWhereInput {
+  user: UserWhereInput
+}
+
 type Comment {
   author: User!
   authorId: String!
@@ -897,6 +940,7 @@ type UpvotePostPayload implements MutationPayload {
 }
 
 type User implements Followable {
+  chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String

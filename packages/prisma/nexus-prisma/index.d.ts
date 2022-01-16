@@ -1450,6 +1450,110 @@ export interface User {
     resolve: NexusCore.FieldResolver<'User', 'activities'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.chats`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   chats  ChatsOnUsers
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.chats)
+    *   }
+    * })
+    */
+  chats: {
+    /**
+     * The name of this field.
+     */
+    name: 'chats'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ChatsOnUsers' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'ChatsOnUsers'> | NexusCore.NexusNonNullDef<'ChatsOnUsers'>)
+    : 'Warning/Error: The type \'ChatsOnUsers\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ChatsOnUsers\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'chats'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.chatMessages`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   chatMessages  ChatMessage
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.chatMessages)
+    *   }
+    * })
+    */
+  chatMessages: {
+    /**
+     * The name of this field.
+     */
+    name: 'chatMessages'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ChatMessage' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'ChatMessage'> | NexusCore.NexusNonNullDef<'ChatMessage'>)
+    : 'Warning/Error: The type \'ChatMessage\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ChatMessage\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'chatMessages'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.comments`.
     *
     * ### ️⚠️ You have not writen documentation for model User
@@ -4847,6 +4951,839 @@ export interface FollowSkill {
      * The resolver of this field
      */
     resolve: NexusCore.FieldResolver<'FollowSkill', 'followingId'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `Chat`.
+  *
+  * ### ️⚠️ You have not writen documentation for model Chat
+  *
+  * Replace this default advisory JSDoc with your own documentation about model Chat
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model Chat {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { Chat } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: Chat.$name
+  *   description: Chat.$description
+  *   definition(t) {
+  *     t.field(Chat.id)
+  *   }
+  * })
+  */
+export interface Chat {
+  $name: 'Chat'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Chat.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Chat
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Chat
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Chat {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Chat } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Chat.$name
+    *   description: Chat.$description
+    *   definition(t) {
+    *     t.field(Chat.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Chat', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Chat.messages`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Chat
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Chat
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Chat {
+    *   /// Lorem ipsum dolor sit amet.
+    *   messages  ChatMessage
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Chat } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Chat.$name
+    *   description: Chat.$description
+    *   definition(t) {
+    *     t.field(Chat.messages)
+    *   }
+    * })
+    */
+  messages: {
+    /**
+     * The name of this field.
+     */
+    name: 'messages'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ChatMessage' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'ChatMessage'> | NexusCore.NexusNonNullDef<'ChatMessage'>)
+    : 'Warning/Error: The type \'ChatMessage\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ChatMessage\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Chat', 'messages'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Chat.users`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Chat
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Chat
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Chat {
+    *   /// Lorem ipsum dolor sit amet.
+    *   users  ChatsOnUsers
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Chat } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Chat.$name
+    *   description: Chat.$description
+    *   definition(t) {
+    *     t.field(Chat.users)
+    *   }
+    * })
+    */
+  users: {
+    /**
+     * The name of this field.
+     */
+    name: 'users'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ChatsOnUsers' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'ChatsOnUsers'> | NexusCore.NexusNonNullDef<'ChatsOnUsers'>)
+    : 'Warning/Error: The type \'ChatsOnUsers\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ChatsOnUsers\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Chat', 'users'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `ChatMessage`.
+  *
+  * ### ️⚠️ You have not writen documentation for model ChatMessage
+  *
+  * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model ChatMessage {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { ChatMessage } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: ChatMessage.$name
+  *   description: ChatMessage.$description
+  *   definition(t) {
+  *     t.field(ChatMessage.id)
+  *   }
+  * })
+  */
+export interface ChatMessage {
+  $name: 'ChatMessage'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.chat`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   chat  Chat
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.chat)
+    *   }
+    * })
+    */
+  chat: {
+    /**
+     * The name of this field.
+     */
+    name: 'chat'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Chat' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Chat'>
+    : 'Warning/Error: The type \'Chat\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Chat\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'chat'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.chatId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   chatId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.chatId)
+    *   }
+    * })
+    */
+  chatId: {
+    /**
+     * The name of this field.
+     */
+    name: 'chatId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'chatId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.content`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   content  Json
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.content)
+    *   }
+    * })
+    */
+  content: {
+    /**
+     * The name of this field.
+     */
+    name: 'content'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Json' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Json'>
+    : 'Warning/Error: The type \'Json\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Json\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'content'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.sender`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   sender  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.sender)
+    *   }
+    * })
+    */
+  sender: {
+    /**
+     * The name of this field.
+     */
+    name: 'sender'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'sender'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatMessage.senderId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatMessage
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatMessage
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatMessage {
+    *   /// Lorem ipsum dolor sit amet.
+    *   senderId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatMessage } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatMessage.$name
+    *   description: ChatMessage.$description
+    *   definition(t) {
+    *     t.field(ChatMessage.senderId)
+    *   }
+    * })
+    */
+  senderId: {
+    /**
+     * The name of this field.
+     */
+    name: 'senderId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatMessage', 'senderId'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `ChatsOnUsers`.
+  *
+  * ### ️⚠️ You have not writen documentation for model ChatsOnUsers
+  *
+  * Replace this default advisory JSDoc with your own documentation about model ChatsOnUsers
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model ChatsOnUsers {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { ChatsOnUsers } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: ChatsOnUsers.$name
+  *   description: ChatsOnUsers.$description
+  *   definition(t) {
+  *     t.field(ChatsOnUsers.id)
+  *   }
+  * })
+  */
+export interface ChatsOnUsers {
+  $name: 'ChatsOnUsers'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatsOnUsers.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatsOnUsers
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatsOnUsers
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatsOnUsers {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatsOnUsers } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatsOnUsers.$name
+    *   description: ChatsOnUsers.$description
+    *   definition(t) {
+    *     t.field(ChatsOnUsers.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatsOnUsers', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatsOnUsers.chat`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatsOnUsers
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatsOnUsers
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatsOnUsers {
+    *   /// Lorem ipsum dolor sit amet.
+    *   chat  Chat
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatsOnUsers } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatsOnUsers.$name
+    *   description: ChatsOnUsers.$description
+    *   definition(t) {
+    *     t.field(ChatsOnUsers.chat)
+    *   }
+    * })
+    */
+  chat: {
+    /**
+     * The name of this field.
+     */
+    name: 'chat'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Chat' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Chat'>
+    : 'Warning/Error: The type \'Chat\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Chat\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatsOnUsers', 'chat'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatsOnUsers.chatId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatsOnUsers
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatsOnUsers
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatsOnUsers {
+    *   /// Lorem ipsum dolor sit amet.
+    *   chatId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatsOnUsers } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatsOnUsers.$name
+    *   description: ChatsOnUsers.$description
+    *   definition(t) {
+    *     t.field(ChatsOnUsers.chatId)
+    *   }
+    * })
+    */
+  chatId: {
+    /**
+     * The name of this field.
+     */
+    name: 'chatId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatsOnUsers', 'chatId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatsOnUsers.user`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatsOnUsers
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatsOnUsers
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatsOnUsers {
+    *   /// Lorem ipsum dolor sit amet.
+    *   user  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatsOnUsers } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatsOnUsers.$name
+    *   description: ChatsOnUsers.$description
+    *   definition(t) {
+    *     t.field(ChatsOnUsers.user)
+    *   }
+    * })
+    */
+  user: {
+    /**
+     * The name of this field.
+     */
+    name: 'user'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatsOnUsers', 'user'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `ChatsOnUsers.userId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model ChatsOnUsers
+    *
+    * Replace this default advisory JSDoc with your own documentation about model ChatsOnUsers
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model ChatsOnUsers {
+    *   /// Lorem ipsum dolor sit amet.
+    *   userId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { ChatsOnUsers } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: ChatsOnUsers.$name
+    *   description: ChatsOnUsers.$description
+    *   definition(t) {
+    *     t.field(ChatsOnUsers.userId)
+    *   }
+    * })
+    */
+  userId: {
+    /**
+     * The name of this field.
+     */
+    name: 'userId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'ChatsOnUsers', 'userId'>
   }
 }
 
@@ -10305,6 +11242,12 @@ export const Follow: Follow
 export const FollowUser: FollowUser
 
 export const FollowSkill: FollowSkill
+
+export const Chat: Chat
+
+export const ChatMessage: ChatMessage
+
+export const ChatsOnUsers: ChatsOnUsers
 
 export const Post: Post
 

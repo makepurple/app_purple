@@ -65,6 +65,8 @@ model VerificationToken {
 model User {
   accounts        Account[]
   activities      UserActivity[]
+  chats           ChatsOnUsers[]
+  chatMessages    ChatMessage[]
   comments        Comment[]
   // When this account was registered
   createdAt       DateTime               @default(now())
@@ -164,6 +166,31 @@ model FollowSkill {
   followingId String
 
   @@unique([followerId, followingId])
+}
+
+model Chat {
+  id       String         @id @default(cuid())
+  messages ChatMessage[]
+  users    ChatsOnUsers[]
+}
+
+model ChatMessage {
+  id       String @id @default(cuid())
+  chat     Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId   String
+  content  Json
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId String
+}
+
+model ChatsOnUsers {
+  id     String @id @default(cuid())
+  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([chatId, userId])
 }
 
 model Post {
