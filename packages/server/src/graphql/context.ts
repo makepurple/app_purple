@@ -1,9 +1,9 @@
 import type { PrismaClient } from "@makepurple/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getToken, JWT } from "next-auth/jwt";
-import { prisma } from "../db";
-import { redis } from "../redis";
-import { cloudinary, octokit } from "../services";
+import type { JWT } from "next-auth/jwt";
+import type { RedisService } from "../redis/types";
+import type { CloudinaryClient } from "../services/cloudinary";
+import type { OctokitClient } from "../services/octokit";
 
 export interface ServerContextUser {
 	id: string;
@@ -12,39 +12,12 @@ export interface ServerContextUser {
 }
 
 export interface ServerContext {
-	cloudinary: typeof cloudinary;
+	cloudinary: CloudinaryClient;
 	jwt: Maybe<JWT>;
-	octokit: ReturnType<typeof octokit["client"]["graphql"]>;
+	octokit: ReturnType<OctokitClient["graphql"]>;
 	prisma: PrismaClient;
-	redis: typeof redis;
+	redis: RedisService;
 	req: NextApiRequest;
 	res: NextApiResponse;
 	user: Maybe<ServerContextUser>;
 }
-
-interface CreateContextParams {
-	req: NextApiRequest;
-	res: NextApiResponse;
-}
-
-export const createContext = async (params: CreateContextParams): Promise<ServerContext> => {
-	const { req, res } = params;
-
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! });
-
-	return {
-		cloudinary,
-		jwt,
-		octokit: octokit.client.graphql(jwt?.accessToken),
-		prisma,
-		redis,
-		req,
-		res,
-		user: jwt && {
-			id: jwt.sub,
-			name: jwt.name,
-			email: jwt.email
-		}
-	};
-};

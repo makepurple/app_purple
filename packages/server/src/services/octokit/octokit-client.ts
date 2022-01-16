@@ -8,9 +8,12 @@ import { oneLine } from "common-tags";
 import { redis } from "../../redis";
 import { Logger } from "../../utils";
 
-const connection = new Bottleneck.IORedisConnection({ client: redis.instance });
+const connection =
+	process.env.AS_SCRIPT === "true"
+		? null
+		: new Bottleneck.IORedisConnection({ client: redis.instance });
 
-connection.on("error", (err) => {
+connection?.on("error", (err) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	Logger.error(err.toString?.());
 });
@@ -37,7 +40,7 @@ export class OctokitClient {
 				);
 			},
 			id: "makepurple",
-			Bottleneck
+			Bottleneck: process.env.AS_SCRIPT === "true" ? undefined : Bottleneck
 		}
 	});
 

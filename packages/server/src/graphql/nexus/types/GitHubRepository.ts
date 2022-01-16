@@ -1,5 +1,5 @@
 import { objectType } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 
 export const GitHubRepository = objectType({
 	name: "GitHubRepository",

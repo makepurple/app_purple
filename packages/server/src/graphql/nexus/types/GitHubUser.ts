@@ -1,6 +1,6 @@
 import { oneLine } from "common-tags";
 import { nonNull, objectType } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 
 export const GitHubUser = objectType({
 	name: "GitHubUser",

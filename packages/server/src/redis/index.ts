@@ -1,5 +1,6 @@
 import { RedisClient } from "./client";
+import { RedisService } from "./types";
 
-export const redis = {
+export const redis: RedisService = {
 	instance: RedisClient
 };

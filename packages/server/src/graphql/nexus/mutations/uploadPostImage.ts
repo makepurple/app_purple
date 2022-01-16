@@ -30,7 +30,7 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 		// eslint-disable-next-line @typescript-eslint/await-thenable
 		const image = await args.data.image;
 
-		const uploadResponse = await cloudinary.client.uploadImageFile(image, {
+		const uploadResponse = await cloudinary.uploadImageFile(image, {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			folder: user!.id
 		});

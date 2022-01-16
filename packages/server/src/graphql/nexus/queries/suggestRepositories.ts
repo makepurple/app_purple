@@ -1,5 +1,5 @@
 import { arg, intArg, nonNull, queryField } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 import { GitHubRepository } from "../../../services/octokit";
 
 export const suggestRepositories = queryField("suggestRepositories", {

@@ -1,5 +1,5 @@
 import { mutationField, nonNull } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
 
 export const updateUserFromGitHub = mutationField("updateUserFromGitHub", {

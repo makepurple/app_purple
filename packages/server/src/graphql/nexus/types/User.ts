@@ -226,13 +226,10 @@ export const User = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
 				const connection = await findManyCursorConnection<_User, { id: string }>(
 					(paginationArgs) =>
-						user
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
 							.friending({
 								...paginationArgs,
 								where: {

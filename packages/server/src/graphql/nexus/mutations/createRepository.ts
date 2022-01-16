@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 
 export const createRepository = mutationField("createRepository", {
 	type: nonNull("CreateRepositoryPayload"),

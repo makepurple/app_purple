@@ -1,5 +1,5 @@
 import { interfaceType } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 import { GitHubRepository } from "../../../services/octokit";
 
 export const WithGitHubRepository = interfaceType({

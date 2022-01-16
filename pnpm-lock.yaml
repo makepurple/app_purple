@@ -577,6 +577,7 @@ importers:
       chalk: ^4.1.2
       cloudinary: ^1.28.1
       common-tags: ^1.8.2
+      cross-env: ^7.0.3
       dotenv-cli: ^4.1.1
       graphql: 15.7.2
       graphql-depth-limit: ^1.1.0
@@ -634,6 +635,7 @@ importers:
       '@graphql-codegen/typescript': 2.4.2_graphql@15.7.2
       '@graphql-codegen/typescript-operations': 2.2.2_graphql@15.7.2
       '@makepurple/tsconfig': link:../tsconfig
+      cross-env: 7.0.3
       dotenv-cli: 4.1.1
       graphql: 15.7.2
       prisma: 3.8.0

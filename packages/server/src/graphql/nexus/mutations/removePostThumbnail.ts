@@ -46,7 +46,7 @@ export const removePostThumbnail = mutationField("removePostThumbnail", {
 			return { record };
 		}
 
-		await cloudinary.client.deleteImageFile(thumbnailImage.id);
+		await cloudinary.deleteImageFile(thumbnailImage.id);
 
 		record = await prisma.$transaction(async (transaction) => {
 			await transaction.postImage.delete({

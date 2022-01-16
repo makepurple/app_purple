@@ -11,7 +11,8 @@
 		"generate:codegen:github": "graphql-codegen --config ./codegen.github.yml --require dotenv/config",
 		"generate:prisma": "prisma generate",
 		"generate:nexus": "pnpm run script src/graphql/nexus/schema -- --nexus-exit",
-		"script": "dotenv -- ts-node -P tsconfig.json -T"
+		"script": "cross-env AS_SCRIPT=true dotenv -- ts-node -P tsconfig.json -T",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@devoxa/prisma-relay-cursor-connection": "^2.0.3",
@@ -53,6 +54,7 @@
 		"@graphql-codegen/typescript": "^2.4.2",
 		"@graphql-codegen/typescript-operations": "^2.2.2",
 		"@makepurple/tsconfig": "workspace:*",
+		"cross-env": "^7.0.3",
 		"dotenv-cli": "^4.1.1",
 		"graphql": "15.7.2",
 		"prisma": "^3.8.0",
