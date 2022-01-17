@@ -2,6 +2,7 @@ import { MainContainer, Paper } from "@makepurple/components";
 import { NextPage } from "next";
 import React from "react";
 import tw from "twin.macro";
+import { ChatList } from "../../organisms";
 
 const Root = tw(MainContainer)`
 	flex
@@ -18,8 +19,18 @@ const SideBar = tw(Paper)`
 	flex-col
 	items-stretch
 	w-full
-	p-6
+	overflow-hidden
 	lg:w-96
+`;
+
+const SideBarTopContainer = tw.div`
+	pt-6
+	px-6
+`;
+
+const Chats = tw(ChatList)`
+	max-height[36rem]
+	overflow-y-auto
 `;
 
 const Content = tw(Paper)`
@@ -41,7 +52,10 @@ export const Page: NextPage = () => {
 	return (
 		<Root>
 			<SideBar tw="mb-6 lg:ml-4 xl:ml-6">
-				<Title>Messaging</Title>
+				<SideBarTopContainer>
+					<Title>Messaging</Title>
+				</SideBarTopContainer>
+				<Chats tw="mt-6" />
 			</SideBar>
 			<Content />
 		</Root>

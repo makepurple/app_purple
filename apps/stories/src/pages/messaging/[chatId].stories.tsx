@@ -1,5 +1,5 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { GetSkills_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetChats_mock } from "@makepurple/www/src/graphql/mocks";
 import { Page } from "@makepurple/www/src/pages/messaging/[chatId]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -36,8 +36,38 @@ Standard.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "GetSkills":
-				return { data: GetSkills_mock };
+			case "GetChats":
+				return { data: GetChats_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoChats = Template.bind({});
+NoChats.args = { ...Template.args };
+NoChats.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetChats":
+				return {
+					data: {
+						...GetChats_mock,
+						viewer: {
+							...GetChats_mock.viewer,
+							chats: {
+								...GetChats_mock.viewer?.chats,
+								edges: [],
+								nodes: []
+							}
+						}
+					}
+				};
 			default:
 				return {};
 		}

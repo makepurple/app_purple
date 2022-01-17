@@ -7,7 +7,7 @@ import { ChatIcon } from "../../svgs";
 import { ChatCard } from "../ChatCard";
 import { LoadingChatCard } from "../LoadingChatCard";
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 10;
 
 const Root = tw.div`
 	flex
@@ -50,7 +50,7 @@ export const ChatList: FC<ChatListProps> = ({ className, query, style }) => {
 				<NonIdealState
 					title="You have no messages"
 					subTitle="Connect with users to be able to chat with them"
-					tw="shadow-none"
+					tw="border-none shadow-none"
 				>
 					<ChatIcon height={96} width={96} />
 				</NonIdealState>

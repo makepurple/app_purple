@@ -1,7 +1,7 @@
 import { GetChatsQuery, GetChatsQueryVariables } from "../../generated";
 import { Chat_fragment_mock } from "../fragments";
 
-const DATA_SIZE = 20;
+const DATA_SIZE = 10;
 
 const chats = Array.from({ length: DATA_SIZE }, (_, i) => ({
 	...Chat_fragment_mock,

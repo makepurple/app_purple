@@ -23,7 +23,7 @@ const SubTitle = tw.div`
 	text-lg
 	leading-none
 	text-gray-500
-	whitespace-pre
+	whitespace-pre-wrap
 	text-center
 `;
 
