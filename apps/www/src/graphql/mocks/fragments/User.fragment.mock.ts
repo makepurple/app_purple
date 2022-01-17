@@ -30,6 +30,19 @@ const skills = [
 
 export const User_fragment_mock: User = {
 	__typename: "User" as const,
+	chats: {
+		__typename: "ChatConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	comments: {
 		__typename: "CommentConnection",
 		pageInfo: {

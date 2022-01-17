@@ -1,0 +1,17 @@
+fragment ChatCardChat on Chat {
+	id
+	messages(first: 1) {
+		nodes {
+			id
+			content
+			createdAt
+		}
+	}
+	users(first: 6) {
+		nodes {
+			id
+			image
+			name
+		}
+	}
+}

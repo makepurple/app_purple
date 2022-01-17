@@ -1,3 +1,5 @@
+export * from "./Chat.fragment.mock";
+export * from "./ChatMessage.fragment.mock";
 export * from "./Comment.fragment.mock";
 export * from "./Experience.fragment.mock";
 export * from "./GitHubOrganization.fragment.mock";

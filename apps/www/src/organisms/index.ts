@@ -1,4 +1,5 @@
 export * from "./AuthDecoratorProfile";
+export * from "./ChatCard";
 export * from "./CommentCard";
 export * from "./CreateCommentForm";
 export * from "./CreateExperienceForm";
