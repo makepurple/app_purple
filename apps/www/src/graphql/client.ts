@@ -56,7 +56,9 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 	if (WindowUtils.isSsr() || !urqlClient) {
 		urqlClient = createClient({
 			exchanges: [
-				...(process.env.NODE_ENV === "development" ? [devtoolsExchange] : []),
+				...(process.env.NODE_ENV === "development" && !process.env.STORYBOOK
+					? [devtoolsExchange]
+					: []),
 				dedupExchange,
 				createCache(),
 				errorExchange({
