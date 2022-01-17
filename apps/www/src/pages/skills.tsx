@@ -13,9 +13,9 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw from "twin.macro";
-import { SortOrder, useGetSkillsQuery } from "../../graphql";
-import { LoadingSkillCard, SkillCard } from "../../organisms";
-import { BookIcon, SearchIcon } from "../../svgs";
+import { SortOrder, useGetSkillsQuery } from "../graphql";
+import { LoadingSkillCard, SkillCard } from "../organisms";
+import { BookIcon, SearchIcon } from "../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -95,7 +95,7 @@ export const Page: NextPage = () => {
 		<Root>
 			<SideBar tw="mb-6 lg:ml-4 xl:ml-6">
 				<Title as="div" tw="mb-6">
-					Filter Repositories
+					Filter Skills
 				</Title>
 				<FormGroup>
 					<FormLabel>Repository owner</FormLabel>
@@ -121,7 +121,7 @@ export const Page: NextPage = () => {
 				</Button>
 			</SideBar>
 			<Content>
-				<Title>Repositories</Title>
+				<Title>Skills</Title>
 				{hasSkills && (
 					<Description tw="mt-4">
 						Popular skills by developers and programmers on MakePurple

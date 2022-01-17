@@ -1,13 +1,13 @@
 import { SiteWideLayout } from "@makepurple/www";
 import { GetSkills_mock } from "@makepurple/www/src/graphql/mocks";
-import { Page } from "@makepurple/www/src/pages/repositories";
+import { Page } from "@makepurple/www/src/pages/skills";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/repositories",
+	title: "pages/skills",
 	component: Page,
 	decorators: [
 		(Story) => (
