@@ -1,3 +1,4 @@
+import { dayjs } from "@makepurple/utils";
 import { Chat } from "../../generated";
 import { ChatMessage_fragment_mock } from "./ChatMessage.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
@@ -27,7 +28,7 @@ export const Chat_fragment_mock: Chat = {
 			hasPreviousPage: false,
 			startCursor: null
 		},
-		totalCount: 0,
+		totalCount: MESSAGES_SIZE,
 		edges: messages.map((message) => ({
 			__typename: "ChatMessageEdge",
 			cursor: message.id,
@@ -35,6 +36,7 @@ export const Chat_fragment_mock: Chat = {
 		})),
 		nodes: messages
 	},
+	updatedAt: dayjs(1318781876406).toDate(),
 	users: {
 		__typename: "UserConnection",
 		pageInfo: {
@@ -44,7 +46,7 @@ export const Chat_fragment_mock: Chat = {
 			hasPreviousPage: false,
 			startCursor: null
 		},
-		totalCount: 0,
+		totalCount: USERS_SIZE,
 		edges: users.map((user) => ({
 			__typename: "UserEdge",
 			cursor: user.id,

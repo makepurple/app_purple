@@ -23,6 +23,7 @@ scalar Bytes
 type Chat {
   id: ID!
   messages(after: String, before: String, first: Int, last: Int): ChatMessageConnection!
+  updatedAt: DateTime!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
 }
 

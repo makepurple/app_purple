@@ -8,6 +8,7 @@ fragment ChatCardChat on Chat {
 		}
 	}
 	users(first: 6) {
+		totalCount
 		nodes {
 			id
 			image

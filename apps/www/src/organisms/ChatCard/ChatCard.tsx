@@ -99,7 +99,13 @@ export const ChatCard = forwardRef<HTMLAnchorElement, ChatCardProps>((props, ref
 		[chat, session]
 	);
 
-	const [firstParticipant, ...restParticipants] = chat.users.nodes;
+	/**
+	 * @description Subtract 1 for the viewer and another for the first participant.
+	 * @author David Lee
+	 * @date January 17, 2022
+	 */
+	const countOthers = Math.max(chat.users.totalCount - 2, 0);
+	const firstParticipant = participants[0];
 	const lastMessage = chat.messages.nodes[0];
 
 	if (status !== "authenticated") return null;
@@ -132,9 +138,7 @@ export const ChatCard = forwardRef<HTMLAnchorElement, ChatCardProps>((props, ref
 					</ParticipantAvatars>
 					<Title tw="ml-4">
 						<ParticipantName>{firstParticipant.name}</ParticipantName>
-						{!!restParticipants.length && (
-							<Others>+{restParticipants.length.toLocaleString()} others</Others>
-						)}
+						{!!countOthers && <Others>+{countOthers.toLocaleString()} others</Others>}
 					</Title>
 					<LastMessageAt tw="ml-2">
 						{dayjs(lastMessage.createdAt).format("MMM D")}
