@@ -1,0 +1,23 @@
+query GetChats(
+	$after: String
+	$first: Int
+	$where: ChatWhereInput
+) {
+	viewer {
+		id
+		chats(after: $after, first: $first, where: $where) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...ChatCardChat
+			}
+		}
+	}
+}

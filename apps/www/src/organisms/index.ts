@@ -1,5 +1,6 @@
 export * from "./AuthDecoratorProfile";
 export * from "./ChatCard";
+export * from "./ChatList";
 export * from "./CommentCard";
 export * from "./CreateCommentForm";
 export * from "./CreateExperienceForm";
@@ -7,6 +8,7 @@ export * from "./CreateRepositoryForm";
 export * from "./CreateRepositoryFormOption";
 export * from "./DocumentEditorPostImageButton";
 export * from "./ExperienceCard";
+export * from "./LoadingChatCard";
 export * from "./LoadingCommentCard";
 export * from "./LoadingCreateRepositoryFormOption";
 export * from "./LoadingExperienceCard";

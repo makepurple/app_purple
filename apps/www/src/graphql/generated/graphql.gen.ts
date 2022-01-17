@@ -1910,6 +1910,15 @@ export type UpvotePostMutationVariables = Exact<{
 
 export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
 
+export type GetChatsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ChatWhereInput>;
+}>;
+
+
+export type GetChatsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly chats: { readonly __typename: 'ChatConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'ChatEdge', readonly cursor: string, readonly node: { readonly __typename: 'Chat', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } }> } } | null | undefined };
+
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2973,6 +2982,32 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
 
 export function useUpvotePostMutation() {
   return Urql.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(UpvotePostDocument);
+};
+export const GetChatsDocument = /*#__PURE__*/ gql`
+    query GetChats($after: String, $first: Int, $where: ChatWhereInput) {
+  viewer {
+    id
+    chats(after: $after, first: $first, where: $where) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        ...ChatCardChat
+      }
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${ChatCardChatFragmentDoc}`;
+
+export function useGetChatsQuery(options: Omit<Urql.UseQueryArgs<GetChatsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetChatsQuery>({ query: GetChatsDocument, ...options });
 };
 export const GetCommentRepliesDocument = /*#__PURE__*/ gql`
     query GetCommentReplies($after: String, $first: Int, $where: CommentWhereUniqueInput!) {
