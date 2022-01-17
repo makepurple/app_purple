@@ -22,10 +22,14 @@ const Template: Story = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};
+Template.parameters = {
+	layout: "fullscreen"
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
+	...Template.parameters,
 	urql: (op: Operation) => {
 		const operationName = getOperationName(op.query);
 
