@@ -3,6 +3,7 @@ import { useOnClickOutside } from "./useOnClickOutside";
 import { useOnKeyDown } from "./useOnKeyDown";
 
 export interface UseContextMenuOptions {
+	disabled?: boolean;
 	onClose?: (event: SyntheticEvent) => void;
 }
 
@@ -10,18 +11,23 @@ export const useContextMenu = <TElement extends HTMLElement>(
 	ref: RefObject<TElement>,
 	options: UseContextMenuOptions = {}
 ) => {
-	const { onClose } = options;
+	const { disabled, onClose } = options;
 
 	const [position, setPosition] = useState<Maybe<{ x: number; y: number }>>();
 
-	const onContextMenu = useCallback((event: MouseEvent) => {
-		event.preventDefault();
+	const onContextMenu = useCallback(
+		(event: MouseEvent) => {
+			event.preventDefault();
 
-		setPosition({
-			x: event.pageX,
-			y: event.pageY
-		});
-	}, []);
+			if (disabled) return;
+
+			setPosition({
+				x: event.pageX,
+				y: event.pageY
+			});
+		},
+		[disabled]
+	);
 
 	useOnClickOutside(ref, (event) => {
 		setPosition(null);
