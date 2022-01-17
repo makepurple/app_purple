@@ -1,4 +1,5 @@
 import { Avatar, AvatarProps } from "@makepurple/components";
+import { UrlUtils } from "@makepurple/utils";
 import type { Meta, Story } from "@storybook/react";
 import NextImage from "next/image";
 import React from "react";
@@ -13,8 +14,9 @@ const Template: Story<AvatarProps> = (args) => {
 		<Avatar {...args}>
 			<NextImage
 				src="https://avatars.githubusercontent.com/u/810438?v=4"
-				height={64}
-				width={64}
+				height={48}
+				width={48}
+				loader={({ src, width }) => UrlUtils.appendQuery(src, { s: width })}
 			/>
 		</Avatar>
 	);
