@@ -207,6 +207,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 			</Info>
 			<EditorWrapper ref={composedRef} style={shadesOfPurple.plain as any}>
 				<StyledCodeEditor
+					disabled={readOnly}
 					highlight={(value) => (
 						<Highlight
 							{...defaultProps}
@@ -249,6 +250,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 					padding={"0.5rem"}
 					readOnly={readOnly}
 					value={code}
+					aria-readonly={readOnly}
 				/>
 				<ContextMenu contentEditable={false} {...contextMenuProps}>
 					<ContextMenuItem
