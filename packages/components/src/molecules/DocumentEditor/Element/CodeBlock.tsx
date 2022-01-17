@@ -165,7 +165,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 	const editor = useSlateStatic();
 
 	const rootRef = useRef<HTMLDivElement>(null);
-	const { contextMenuProps } = useContextMenu(rootRef);
+	const { contextMenuProps } = useContextMenu(rootRef, { disabled: readOnly });
 
 	const composedRef = composeRefs(rootRef, attributes.ref);
 
