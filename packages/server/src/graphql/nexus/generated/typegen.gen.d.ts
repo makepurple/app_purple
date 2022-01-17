@@ -341,6 +341,7 @@ export interface NexusGenObjects {
   }
   Chat: { // root type
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   ChatConnection: { // root type
     edges: NexusGenRootTypes['ChatEdge'][]; // [ChatEdge!]!
@@ -759,6 +760,7 @@ export interface NexusGenFieldTypes {
   Chat: { // field return type
     id: string; // ID!
     messages: NexusGenRootTypes['ChatMessageConnection']; // ChatMessageConnection!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
   }
   ChatConnection: { // field return type
@@ -1358,6 +1360,7 @@ export interface NexusGenFieldTypeNames {
   Chat: { // field return type name
     id: 'ID'
     messages: 'ChatMessageConnection'
+    updatedAt: 'DateTime'
     users: 'UserConnection'
   }
   ChatConnection: { // field return type name

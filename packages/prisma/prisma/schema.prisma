@@ -172,6 +172,7 @@ model Chat {
   id       String         @id @default(cuid())
   messages ChatMessage[]
   users    ChatsOnUsers[]
+  updatedAt DateTime @updatedAt
 }
 
 model ChatMessage {

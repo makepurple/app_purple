@@ -69,6 +69,7 @@ export const Chat = objectType({
 				return connection;
 			}
 		});
+		t.field(NexusPrisma.Chat.updatedAt);
 		t.nonNull.field("users", {
 			type: "UserConnection",
 			args: {
