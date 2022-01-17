@@ -5,6 +5,10 @@ fragment ChatCardChat on Chat {
 			id
 			content
 			createdAt
+			sender {
+				id
+				name
+			}
 		}
 	}
 	users(first: 6) {

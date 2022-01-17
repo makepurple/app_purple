@@ -1,6 +1,7 @@
 export * from "./useComboBoxState";
 export * from "./useContextMenu";
 export * from "./useHover";
+export * from "./useIsClamped";
 export * from "./useNoSsr";
 export * from "./useOnClickOutside";
 export * from "./useOnKeyDown";

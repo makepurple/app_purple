@@ -17,3 +17,25 @@ Template.args = {
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
+
+export const WithShortMessage = Template.bind({});
+WithShortMessage.args = {
+	...Template.args,
+	chat: {
+		...Chat_fragment_mock,
+		messages: {
+			...Chat_fragment_mock.messages,
+			nodes: [
+				{
+					...Chat_fragment_mock.messages.nodes[0],
+					content: [
+						{
+							type: "paragraph",
+							children: [{ text: "Hello world~!" }]
+						}
+					]
+				}
+			]
+		}
+	}
+};

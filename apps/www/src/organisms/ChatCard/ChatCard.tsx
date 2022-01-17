@@ -6,19 +6,23 @@ import {
 	FadedEdge,
 	GitHubAvatarImage
 } from "@makepurple/components";
+import { useIsClamped } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, forwardRef, Fragment, useMemo } from "react";
+import { useRouter } from "next/router";
+import React, { CSSProperties, forwardRef, Fragment, useMemo, useState } from "react";
 import tw from "twin.macro";
 import { ChatCardChatFragment } from "../../graphql";
 
-const Root = tw.a`
+const Root = tw.div`
 	flex
 	flex-col
 	bg-white
 	cursor-pointer
-	active:bg-indigo-50
+	[& *]:cursor-pointer!
+	hover:bg-indigo-50
+	active:bg-indigo-100
 `;
 
 const Participants = tw.div`
@@ -33,7 +37,7 @@ const ParticipantAvatars = tw(AvatarGroup)`
 	flex-shrink-0
 `;
 
-const Title = tw.div`
+const Title = tw.a`
 	flex-grow
 	flex
 	flex-wrap
@@ -64,14 +68,26 @@ const LastMessageAt = tw.div`
 	whitespace-nowrap
 `;
 
-const Message = tw(DocumentEditor)`
+const MessageContainer = tw.div`
 	relative
-	max-h-36
+	flex
+	flex-row
+	overflow-hidden
 	pb-4
 	px-4
-	overflow-hidden
+	h-16
+`;
+
+const MessageSender = tw.div`
+	text-base
+	text-gray-500
+`;
+
+const Message = tw(DocumentEditor)`
+	flex-grow
 	border-none
 	shadow-none
+	bg-transparent
 	text-gray-500
 `;
 
@@ -85,9 +101,10 @@ export interface ChatCardProps {
 	style?: CSSProperties;
 }
 
-export const ChatCard = forwardRef<HTMLAnchorElement, ChatCardProps>((props, ref) => {
+export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) => {
 	const { chat, className, style } = props;
 
+	const router = useRouter();
 	const { data: session, status } = useSession();
 
 	const participants = useMemo(
@@ -108,50 +125,65 @@ export const ChatCard = forwardRef<HTMLAnchorElement, ChatCardProps>((props, ref
 	const firstParticipant = participants[0];
 	const lastMessage = chat.messages.nodes[0];
 
+	const lastSender = useMemo(
+		() => (lastMessage.sender.id === session?.user.id ? "You" : lastMessage.sender.name),
+		[lastMessage, session]
+	);
+
+	const [messageElem, messageRef] = useState<HTMLDivElement | null>(null);
+
+	const isClamped = useIsClamped({ current: messageElem });
+
 	if (status !== "authenticated") return null;
 	if (!participants.length) return null;
 
 	return (
-		<NextLink href="/messaging/[chatId]" as={`/messaging/${chat.id}`} passHref>
-			<Root ref={ref} className={className} style={style}>
-				<Participants>
-					<ParticipantAvatars>
-						{participants.map((participant) => (
-							<Fragment key={participant.id}>
-								{!!participant.image && (
-									<NextLink
-										href="/[userName]"
-										as={`/${participant.name}`}
-										passHref
-									>
-										<Avatar border={2}>
-											<GitHubAvatarImage
-												src={participant.image}
-												height={40}
-												width={40}
-											/>
-										</Avatar>
-									</NextLink>
-								)}
-							</Fragment>
-						))}
-					</ParticipantAvatars>
+		<Root
+			ref={ref}
+			className={className}
+			onClick={async () => {
+				await router.push("/messaging/[chatId]", `/messaging/${chat.id}`);
+			}}
+			style={style}
+		>
+			<Participants>
+				<ParticipantAvatars>
+					{participants.map((participant) => (
+						<Fragment key={participant.id}>
+							{!!participant.image && (
+								<NextLink href="/[userName]" as={`/${participant.name}`} passHref>
+									<Avatar border={2}>
+										<GitHubAvatarImage
+											src={participant.image}
+											height={40}
+											width={40}
+										/>
+									</Avatar>
+								</NextLink>
+							)}
+						</Fragment>
+					))}
+				</ParticipantAvatars>
+				<NextLink href="/messaging/[chatId]" as={`/messaging/${chat.id}`} passHref>
 					<Title tw="ml-4">
 						<ParticipantName>{firstParticipant.name}</ParticipantName>
 						{!!countOthers && <Others>+{countOthers.toLocaleString()} others</Others>}
 					</Title>
-					<LastMessageAt tw="ml-2">
-						{dayjs(lastMessage.createdAt).format("MMM D")}
-					</LastMessageAt>
-				</Participants>
-				{!!lastMessage && (
-					<Message readOnly value={lastMessage.content as DocumentEditorValue} tw="mt-4">
+				</NextLink>
+				<LastMessageAt tw="ml-2">
+					{dayjs(lastMessage.createdAt).format("MMM D")}
+				</LastMessageAt>
+			</Participants>
+			{!!lastMessage && (
+				<MessageContainer ref={messageRef} tw="mt-3">
+					<MessageSender tw="mr-2">{lastSender}:</MessageSender>
+					<Message readOnly value={lastMessage.content as DocumentEditorValue}>
 						<MessageEditable />
-						<FadedEdge side="bottom" size={64} />
 					</Message>
-				)}
-			</Root>
-		</NextLink>
+					{isClamped && <FadedEdge side="bottom" size={64} />}
+				</MessageContainer>
+			)}
+		</Root>
 	);
 });
 
