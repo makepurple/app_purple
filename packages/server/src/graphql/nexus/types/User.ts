@@ -113,12 +113,14 @@ export const User = objectType({
 							})
 							.then((skills) => skills.map((skill) => skill.skill)),
 					() =>
-						prisma.skillsOnUsers.count({
-							where: {
-								user: { id: parent.id },
-								skill: PrismaUtils.nonNull(args.where)
-							}
-						}),
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								include: {
+									_count: { select: { desiredSkills: true } }
+								}
+							})
+							.then((result) => result?._count.desiredSkills ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args, 100) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
@@ -334,13 +336,9 @@ export const User = objectType({
 				where: arg({ type: "PostWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
 				const connection = await findManyCursorConnection<Post, { id: string }>(
 					(paginationArgs) =>
-						user.posts({
+						prisma.user.findUnique({ where: { id: parent.id } }).posts({
 							...paginationArgs,
 							where: PrismaUtils.nonNull(args.where),
 							orderBy: {
@@ -348,12 +346,14 @@ export const User = objectType({
 							}
 						}),
 					() =>
-						prisma.post.count({
-							where: {
-								...PrismaUtils.nonNull(args.where),
-								author: { id: { equals: parent.id } }
-							}
-						}),
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								include: {
+									_count: { select: { posts: true } }
+								}
+							})
+							.then((result) => result?._count.posts ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
@@ -387,12 +387,18 @@ export const User = objectType({
 							})
 							.then((skills) => skills.map((skill) => skill.skill)),
 					() =>
-						prisma.skillsOnUsers.count({
-							where: {
-								user: { id: parent.id },
-								skill: PrismaUtils.nonNull(args.where)
-							}
-						}),
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								include: {
+									_count: {
+										select: {
+											skills: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.skills ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args, 100) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);

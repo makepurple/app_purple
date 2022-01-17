@@ -16,19 +16,18 @@ type ContextFunction = (params: ContextFunctionParams) => MaybePromise<Record<st
 export interface GetApolloServerConfig {
 	schema: GraphQLSchema;
 	context?: Record<string, any> | ContextFunction;
-	maxComplexity?: number;
 	maxDepth?: number;
 }
 
 export const getApolloServer = (config: GetApolloServerConfig): ApolloServer => {
-	const { schema, context = {}, maxComplexity = Infinity, maxDepth = Infinity } = config;
+	const { schema, context = {}, maxDepth = Infinity } = config;
 
 	const server = new ApolloServer({
 		context,
 		dataSources: () => ({}),
 		debug: !isProd,
 		introspection: !isProd,
-		plugins: getPlugins({ schema, maxComplexity }),
+		plugins: getPlugins(),
 		schema,
 		validationRules: getValidationRules({ maxDepth })
 	});

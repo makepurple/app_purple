@@ -12,7 +12,6 @@ export const config = {
 const server = getApolloServer({
 	schema,
 	context: createContext,
-	maxComplexity: 500,
 	maxDepth: 10
 });
 

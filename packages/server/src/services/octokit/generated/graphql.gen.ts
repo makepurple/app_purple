@@ -14419,6 +14419,8 @@ export type PullRequestTimelineItemsEdge = {
 
 /** The possible item types found in a timeline. */
 export enum PullRequestTimelineItemsItemType {
+  /** Represents a 'added_to_merge_queue' event on a given pull request. */
+  AddedToMergeQueueEvent = 'ADDED_TO_MERGE_QUEUE_EVENT',
   /** Represents a 'added_to_project' event on a given issue or pull request. */
   AddedToProjectEvent = 'ADDED_TO_PROJECT_EVENT',
   /** Represents an 'assigned' event on any assignable object. */
@@ -14501,6 +14503,8 @@ export enum PullRequestTimelineItemsItemType {
   ReadyForReviewEvent = 'READY_FOR_REVIEW_EVENT',
   /** Represents a 'referenced' event on a given `ReferencedSubject`. */
   ReferencedEvent = 'REFERENCED_EVENT',
+  /** Represents a 'removed_from_merge_queue' event on a given pull request. */
+  RemovedFromMergeQueueEvent = 'REMOVED_FROM_MERGE_QUEUE_EVENT',
   /** Represents a 'removed_from_project' event on a given issue or pull request. */
   RemovedFromProjectEvent = 'REMOVED_FROM_PROJECT_EVENT',
   /** Represents a 'renamed' event on a given issue or pull request */
@@ -22889,13 +22893,12 @@ export type GetGitHubOrganizationQueryVariables = Exact<{
 
 export type GetGitHubOrganizationQuery = { readonly __typename?: 'Query', readonly organization?: { readonly __typename: 'Organization', readonly avatarUrl: string, readonly description?: string | null | undefined, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } | null | undefined };
 
-export type GetGitHubRepositoryQueryVariables = Exact<{
-  name: Scalars['String'];
-  owner: Scalars['String'];
+export type GetGitHubUserQueryVariables = Exact<{
+  login: Scalars['String'];
 }>;
 
 
-export type GetGitHubRepositoryQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } | null | undefined };
+export type GetGitHubUserQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly login: string, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined } | null | undefined };
 
 export type GetGitHubRepositoryForSkillQueryVariables = Exact<{
   name: Scalars['String'];
@@ -22904,13 +22907,6 @@ export type GetGitHubRepositoryForSkillQueryVariables = Exact<{
 
 
 export type GetGitHubRepositoryForSkillQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } | null | undefined };
-
-export type GetGitHubUserQueryVariables = Exact<{
-  login: Scalars['String'];
-}>;
-
-
-export type GetGitHubUserQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly login: string, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined } | null | undefined };
 
 export type GitHubLanguageFragment = { readonly __typename: 'Language', readonly color?: string | null | undefined, readonly id: string, readonly name: string };
 

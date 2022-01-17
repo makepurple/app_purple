@@ -43,6 +43,8 @@ const authHandler: NextApiHandler = (req, res) =>
 							user: { connect: { name: profile.name } }
 						}
 					});
+
+					return;
 				}
 
 				await prisma.user

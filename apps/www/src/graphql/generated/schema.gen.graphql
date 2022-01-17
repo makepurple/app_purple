@@ -20,6 +20,63 @@ scalar BigInt
 # The `Byte` scalar type represents byte value as a Buffer
 scalar Bytes
 
+type Chat {
+  id: ID!
+  messages(after: String, before: String, first: Int, last: Int): ChatMessageConnection!
+  users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+}
+
+type ChatConnection implements Connection {
+  edges: [ChatEdge!]!
+  nodes: [Chat!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ChatEdge implements ConnectionEdge {
+  cursor: String!
+  node: Chat!
+}
+
+type ChatMessage {
+  chat: Chat!
+  chatId: String!
+  content: Json!
+  createdAt: DateTime!
+  id: ID!
+  sender: User!
+  senderId: String!
+}
+
+type ChatMessageConnection implements Connection {
+  edges: [ChatMessageEdge!]!
+  nodes: [ChatMessage!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input ChatMessageCreateInput {
+  content: Json!
+}
+
+type ChatMessageEdge implements ConnectionEdge {
+  cursor: String!
+  node: ChatMessage!
+}
+
+input ChatMessageWhereInput {
+  chatId: String!
+  id: StringNullableFilter
+}
+
+input ChatWhereInput {
+  user: UserWhereInput
+}
+
+input ChatWhereUniqueInput {
+  id: String
+}
+
 type Comment {
   author: User!
   authorId: String!
@@ -393,6 +450,7 @@ type Mutation {
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
+  sendChatMessage(data: SendChatMessageInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
@@ -530,6 +588,8 @@ type PublishPostPayload implements MutationPayload {
 
 # Root query type
 type Query {
+  # This is to update a subscribed chat with new messages when received.
+  chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
@@ -628,6 +688,15 @@ type RequestFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
+input SendChatMessageInput {
+  messages: [ChatMessageCreateInput!]!
+}
+
+type SendChatMessagePayload implements MutationPayload {
+  query: Query!
+  record: Chat!
+}
+
 type Skill implements Followable & WithGitHubRepository {
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
@@ -717,7 +786,7 @@ input SuggestFriendsWhereInput {
   # Seeds the jitter, so that pagination will be deterministic on the same seed.
   #
   # If not provided, the results will be non-deterministically random.
-  jitterSeed: Int
+  jitterSeed: DateTime
 
   # Filters suggested users by their known skills.
   skills: SkillWhereInput
@@ -865,6 +934,7 @@ type UpvotePostPayload implements MutationPayload {
 }
 
 type User implements Followable {
+  chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String

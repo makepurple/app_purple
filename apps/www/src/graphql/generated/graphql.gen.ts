@@ -50,6 +50,86 @@ export type AddSkillMutationPayload = MutationPayload & {
   readonly record: User;
 };
 
+export type Chat = {
+  readonly __typename: 'Chat';
+  readonly id: Scalars['ID'];
+  readonly messages: ChatMessageConnection;
+  readonly users: UserConnection;
+};
+
+
+export type ChatMessagesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type ChatUsersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type ChatConnection = Connection & {
+  readonly __typename: 'ChatConnection';
+  readonly edges: ReadonlyArray<ChatEdge>;
+  readonly nodes: ReadonlyArray<Chat>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type ChatEdge = ConnectionEdge & {
+  readonly __typename: 'ChatEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Chat;
+};
+
+export type ChatMessage = {
+  readonly __typename: 'ChatMessage';
+  readonly chat: Chat;
+  readonly chatId: Scalars['String'];
+  readonly content: Scalars['Json'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly sender: User;
+  readonly senderId: Scalars['String'];
+};
+
+export type ChatMessageConnection = Connection & {
+  readonly __typename: 'ChatMessageConnection';
+  readonly edges: ReadonlyArray<ChatMessageEdge>;
+  readonly nodes: ReadonlyArray<ChatMessage>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type ChatMessageCreateInput = {
+  readonly content: Scalars['Json'];
+};
+
+export type ChatMessageEdge = ConnectionEdge & {
+  readonly __typename: 'ChatMessageEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: ChatMessage;
+};
+
+export type ChatMessageWhereInput = {
+  readonly chatId: Scalars['String'];
+  readonly id?: InputMaybe<StringNullableFilter>;
+};
+
+export type ChatWhereInput = {
+  readonly user?: InputMaybe<UserWhereInput>;
+};
+
+export type ChatWhereUniqueInput = {
+  readonly id?: InputMaybe<Scalars['String']>;
+};
+
 export type Comment = {
   readonly __typename: 'Comment';
   readonly author: User;
@@ -461,6 +541,7 @@ export type Mutation = {
   readonly removePostThumbnail: RemovePostThumbnailPayload;
   readonly removeSkill: RemoveSkillMutationPayload;
   readonly requestFriendship: RequestFriendshipPayload;
+  readonly sendChatMessage: SendChatMessagePayload;
   readonly unfollowSkill: UnfollowSkillPayload;
   readonly unfollowUser: UnfollowUserPayload;
   readonly unvoteComment: UnvoteCommentPayload;
@@ -585,6 +666,13 @@ export type MutationRemoveSkillArgs = {
 /** Root mutation type */
 export type MutationRequestFriendshipArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationSendChatMessageArgs = {
+  data: SendChatMessageInput;
+  where: ChatWhereUniqueInput;
 };
 
 
@@ -838,6 +926,8 @@ export type PublishPostPayload = MutationPayload & {
 /** Root query type */
 export type Query = {
   readonly __typename: 'Query';
+  /** This is to update a subscribed chat with new messages when received. */
+  readonly chatMessages: ReadonlyArray<ChatMessage>;
   readonly comment?: Maybe<Comment>;
   readonly comments: CommentConnection;
   readonly experiences: ExperienceConnection;
@@ -859,6 +949,12 @@ export type Query = {
   readonly users: UserConnection;
   readonly viewer?: Maybe<User>;
   readonly viewerActivityFeed: UserActivityConnection;
+};
+
+
+/** Root query type */
+export type QueryChatMessagesArgs = {
+  where: ChatMessageWhereInput;
 };
 
 
@@ -1068,6 +1164,16 @@ export type RequestFriendshipPayload = MutationPayload & {
   readonly record: Friendship;
 };
 
+export type SendChatMessageInput = {
+  readonly messages: ReadonlyArray<ChatMessageCreateInput>;
+};
+
+export type SendChatMessagePayload = MutationPayload & {
+  readonly __typename: 'SendChatMessagePayload';
+  readonly query: Query;
+  readonly record: Chat;
+};
+
 export type Skill = Followable & WithGitHubRepository & {
   readonly __typename: 'Skill';
   readonly desiringUsers: UserConnection;
@@ -1192,7 +1298,7 @@ export type SuggestFriendsWhereInput = {
    *
    * If not provided, the results will be non-deterministically random.
    */
-  readonly jitterSeed?: InputMaybe<Scalars['Int']>;
+  readonly jitterSeed?: InputMaybe<Scalars['DateTime']>;
   /** Filters suggested users by their known skills. */
   readonly skills?: InputMaybe<SkillWhereInput>;
   /**
@@ -1349,6 +1455,7 @@ export type UpvotePostPayload = MutationPayload & {
 
 export type User = Followable & {
   readonly __typename: 'User';
+  readonly chats: ChatConnection;
   readonly comments: CommentConnection;
   readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
@@ -1372,6 +1479,15 @@ export type User = Followable & {
   readonly viewerFollowing: Scalars['Boolean'];
   readonly viewerFriended: Scalars['Boolean'];
   readonly viewerIsFriend: Scalars['Boolean'];
+};
+
+
+export type UserChatsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ChatWhereInput>;
 };
 
 
@@ -3188,7 +3304,7 @@ export function useSuggestExperiencesQuery(options: Omit<Urql.UseQueryArgs<Sugge
 };
 export const SuggestFriendsDocument = /*#__PURE__*/ gql`
     query SuggestFriends($after: String, $first: Int, $where: SuggestFriendsWhereInput!) {
-  suggestFriends(where: $where) {
+  suggestFriends(after: $after, first: $first, where: $where) {
     pageInfo {
       ...PageInfoFragment
     }

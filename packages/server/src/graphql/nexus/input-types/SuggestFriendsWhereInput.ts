@@ -24,7 +24,7 @@ export const SuggestFriendsWhereInput = inputObjectType({
 				This is clamped to [0, 1], and is 0.15 by default.
 			`
 		});
-		t.int("jitterSeed", {
+		t.dateTime("jitterSeed", {
 			description: stripIndents`
 				Seeds the jitter, so that pagination will be deterministic on the same seed.
 

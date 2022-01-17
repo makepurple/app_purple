@@ -15,7 +15,7 @@ const Root = tw(MainContainer)`
 `;
 
 export const Page: NextPage = () => {
-	const jitterSeed = useRef<number>(new Date().getTime());
+	const jitterSeed = useRef<Date>(new Date());
 
 	/**
 	 * TODO

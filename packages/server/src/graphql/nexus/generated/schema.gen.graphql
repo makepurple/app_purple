@@ -808,7 +808,7 @@ input SuggestFriendsWhereInput {
   
   If not provided, the results will be non-deterministically random.
   """
-  jitterSeed: Int
+  jitterSeed: DateTime
 
   """Filters suggested users by their known skills."""
   skills: SkillWhereInput

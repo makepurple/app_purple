@@ -265,7 +265,7 @@ export interface NexusGenInputs {
   SuggestFriendsWhereInput: { // input type
     desiredSkillsThreshold?: number | null; // Float
     jitter: number | null; // Float
-    jitterSeed?: number | null; // Int
+    jitterSeed?: NexusGenScalars['DateTime'] | null; // DateTime
     skills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     skillsThreshold?: number | null; // Float
     weights: NexusGenInputs['SuggestFriendsWeightsInput'] | null; // SuggestFriendsWeightsInput

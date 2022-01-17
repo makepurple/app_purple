@@ -55,9 +55,10 @@ export const suggestFriends = queryField("suggestFriends", {
 		const desiredSkillsThreshold = Prisma.raw(
 			MathUtils.clamp(where.desiredSkillsThreshold ?? 0, [0, 1]).toFixed(1)
 		);
-		const jitterSeed = Prisma.raw(
-			MathUtils.clamp(((where.jitterSeed ?? 0) % 100) / 100, [0, 1]).toFixed(1)
-		);
+
+		const whereJitterSeed: number = where.jitterSeed?.getTime() ?? 0;
+
+		const jitterSeed = MathUtils.clamp((whereJitterSeed % 100) / 100, [0, 1]).toFixed(1);
 		const jitter = Math.ceil(MathUtils.clamp(where.jitter ?? 0.15, [0, 1]) * 100);
 
 		const sixMonthsAgo = dayjs(new Date()).subtract(6, "months").toDate();
@@ -147,7 +148,7 @@ export const suggestFriends = queryField("suggestFriends", {
 					SELECT
 						DISTINCT "User"."id" as "userId",
 						${setSeed} AS "hidden_seed",
-						NULL AS "hidden_order",
+						0.0 AS "hidden_order",
 						"User".*
 					FROM "User"
 					WHERE "User"."id" = ${user.id}
@@ -156,19 +157,19 @@ export const suggestFriends = queryField("suggestFriends", {
 				(
 					SELECT
 						DISTINCT "User"."id" as "userId",
-						'',
+						'' as "hidden_seed",
 						${jitterFactor} * (
 							(
-								${MathUtils.clamp(where.weights?.skillsOverlap ?? 1, [0, 1]).toFixed(1)}
+								${parseFloat(MathUtils.clamp(where.weights?.skillsOverlap ?? 1, [0, 1]).toFixed(1))}
 								* CAST(COALESCE("skillOverlap"."count", 0) AS DECIMAL)
 								/ GREATEST("skillTotal"."total", 1)
 							)
 							+ (
-								${MathUtils.clamp(where.weights?.desiredSkillsOverlap ?? 1, [0, 1]).toFixed(1)}
+								${parseFloat(MathUtils.clamp(where.weights?.desiredSkillsOverlap ?? 1, [0, 1]).toFixed(1))}
 								* CAST(COALESCE("desiredSkillOverlap"."count", 0) AS DECIMAL)
 								/ GREATEST("desiredSkillTotal"."total", 1)
 							)
-						),
+						) as "hidden_order",
 						"User".*
 					FROM
 						${skillTotal} AS "skillTotal",
@@ -231,7 +232,7 @@ export const suggestFriends = queryField("suggestFriends", {
 					.$queryRaw<{ count: number }>(
 						Prisma.sql`
 							SELECT COUNT(*) as "count"
-							FROM (${getSuggestedFriends()});
+							FROM (${getSuggestedFriends()}) as "SuggestedFriends";
 						`
 					)
 					.then((result) => result.count),

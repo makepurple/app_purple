@@ -3,7 +3,11 @@ query SuggestFriends(
 	$first: Int
 	$where: SuggestFriendsWhereInput!
 ) {
-	suggestFriends(where: $where) {
+	suggestFriends(
+		after: $after
+		first: $first
+		where: $where
+	) {
 		pageInfo {
 			...PageInfoFragment
 		}
