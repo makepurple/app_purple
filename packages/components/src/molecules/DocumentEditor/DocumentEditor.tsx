@@ -1,6 +1,6 @@
 import { useUncontrolledProp } from "@makepurple/hooks";
 import { FunctionUtils, ObjectUtils } from "@makepurple/utils";
-import React, { CSSProperties, FC, ReactNode, useContext, useMemo } from "react";
+import React, { CSSProperties, forwardRef, ReactNode, useContext, useMemo } from "react";
 import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
@@ -16,7 +16,7 @@ import { CustomText } from "./Leaf";
 import { withKeyCommands } from "./plugins";
 import { DocumentEditorToolbar } from "./Toolbar";
 
-const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
+const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean; $readOnly?: boolean }>`
 	${tw`
 		outline-none
 		ring-indigo-500
@@ -29,8 +29,13 @@ const Root = styled(Paper)<{ disabled?: boolean; error?: boolean }>`
 		[& > *]:first:rounded-t-lg
 		[& > *]:last:rounded-b-lg
 	`}
-	${({ disabled }) =>
-		disabled &&
+	${({ $readOnly }) =>
+		$readOnly &&
+		css`
+			background-color: inherit;
+		`}
+	${({ $disabled }) =>
+		$disabled &&
 		css`
 			${tw`
 				cursor-not-allowed
@@ -71,7 +76,7 @@ export interface DocumentEditorProps {
 	value?: DocumentEditorValue;
 }
 
-const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
+const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, ref) => {
 	const { children, className, onChange, readOnly, style, value: _value } = props;
 
 	const [value, setValue] = useUncontrolledProp<DocumentEditorValue>(_value, []);
@@ -97,10 +102,12 @@ const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 
 	return (
 		<Root
+			ref={ref}
 			className={className}
 			style={style}
-			disabled={disabled}
 			error={error}
+			$disabled={disabled}
+			$readOnly={readOnly}
 			aria-disabled={disabled}
 		>
 			<Slate
@@ -117,7 +124,7 @@ const _DocumentEditor: FC<DocumentEditorProps> = (props) => {
 			</Slate>
 		</Root>
 	);
-};
+});
 
 _DocumentEditor.displayName = "DocumentEditor";
 

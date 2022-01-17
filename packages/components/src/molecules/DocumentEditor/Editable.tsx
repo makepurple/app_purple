@@ -1,7 +1,7 @@
 import { InferComponentProps } from "@makepurple/typings";
 import React, { forwardRef, useCallback, useContext } from "react";
 import { Editable, RenderElementProps, RenderLeafProps } from "slate-react";
-import tw, { styled } from "twin.macro";
+import tw, { css, styled } from "twin.macro";
 import { DocumentEditorContext } from "./context";
 import { Element } from "./Element";
 import { Leaf } from "./Leaf";
@@ -29,8 +29,8 @@ const EditableContainer = styled.div<{ $readOnly?: boolean }>`
 
 	${({ $readOnly }) =>
 		$readOnly &&
-		tw`
-			bg-white
+		css`
+			background-color: inherit;
 		`}
 `;
 
