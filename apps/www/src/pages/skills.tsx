@@ -39,6 +39,7 @@ const SideBar = tw(Paper)`
 `;
 
 const Content = tw(Paper)`
+	flex-grow
 	flex
 	flex-col
 	items-stretch
