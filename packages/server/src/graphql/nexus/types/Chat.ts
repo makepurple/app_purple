@@ -52,16 +52,22 @@ export const Chat = objectType({
 							.chat()
 							.messages({
 								...paginationArgs,
-								orderBy: {
-									createdAt: "desc"
-								}
+								orderBy: { createdAt: "desc" }
 							}),
 					() =>
-						prisma.chatMessage.count({
-							where: {
-								chat: { id: { equals: parent.id } }
-							}
-						}),
+						prisma.chatsOnUsers
+							.findUnique({
+								where: {
+									chatId_userId: {
+										chatId: parent.id,
+										userId: user.id
+									}
+								}
+							})
+							.chat({
+								include: { _count: { select: { messages: true } } }
+							})
+							.then((result) => result?._count.messages ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
@@ -93,12 +99,12 @@ export const Chat = objectType({
 							})
 							.then((items) => items.map((item) => item.user)),
 					() =>
-						prisma.chatsOnUsers.count({
-							where: {
-								chat: { id: { equals: parent.id } },
-								user: PrismaUtils.nonNull(args.where)
-							}
-						}),
+						prisma.chat
+							.findUnique({
+								where: { id: parent.id },
+								include: { _count: { select: { users: true } } }
+							})
+							.then((result) => result?._count.users ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
