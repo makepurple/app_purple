@@ -103,7 +103,7 @@ export const User = objectType({
 					(paginationArgs) =>
 						prisma.user
 							.findUnique({ where: { id: parent.id } })
-							.skills({
+							.desiredSkills({
 								...paginationArgs,
 								orderBy: PrismaUtils.nonNull(args.orderBy)?.map((orderBy) => ({
 									skill: orderBy
