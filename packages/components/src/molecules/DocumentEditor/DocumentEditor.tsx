@@ -25,9 +25,12 @@ const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean; $readOnly?: b
 		duration-300
 		ease-in-out
 		shadow-none
+		rounded-lg
 		focus-within:ring-2
-		[& > *]:first:rounded-t-lg
-		[& > *]:last:rounded-b-lg
+		[& > *]:first:border-top-left-radius[inherit]
+		[& > *]:first:border-top-right-radius[inherit]
+		[& > *]:last:border-bottom-left-radius[inherit]
+		[& > *]:last:border-bottom-right-radius[inherit]
 	`}
 	${({ $readOnly }) =>
 		$readOnly &&

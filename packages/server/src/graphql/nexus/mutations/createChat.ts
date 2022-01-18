@@ -1,3 +1,4 @@
+import { Chat } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -26,7 +27,9 @@ export const createChat = mutationField("createChat", {
 
 		const inviteeIds = invitees.map((invitee) => invitee.id);
 
-		const existing = await prisma.chat.findFirst({
+		let chat: Chat | null;
+
+		chat = await prisma.chat.findFirst({
 			where: {
 				users: {
 					every: {
@@ -39,23 +42,39 @@ export const createChat = mutationField("createChat", {
 			}
 		});
 
-		if (existing) return { record: existing };
-
-		const record = await prisma.chat.create({
-			data: {
-				users: {
-					create: [
-						{
-							user: { connect: { id: user.id } }
-						},
-						...inviteeIds.map((inviteeId) => ({
-							user: { connect: { id: inviteeId } }
-						}))
-					]
+		if (!chat) {
+			chat = await prisma.chat.create({
+				data: {
+					users: {
+						create: [
+							{
+								user: { connect: { id: user.id } }
+							},
+							...inviteeIds.map((inviteeId) => ({
+								user: { connect: { id: inviteeId } }
+							}))
+						]
+					}
 				}
-			}
-		});
+			});
+		}
 
-		return { record };
+		if (args.data.message) {
+			chat = await prisma.chat.update({
+				where: {
+					id: chat.id
+				},
+				data: {
+					messages: {
+						create: {
+							content: args.data.message,
+							sender: { connect: { id: user.id } }
+						}
+					}
+				}
+			});
+		}
+
+		return { record: chat };
 	}
 });

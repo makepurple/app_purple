@@ -303,7 +303,9 @@ export const Page: NextPage<PageProps> = () => {
 							name="content"
 							render={({ field: { name, onChange, value } }) => (
 								<DocumentEditor
-									onChange={(newContent) => onChange(newContent)}
+									onChange={(newContent) => {
+										onChange(newContent);
+									}}
 									value={value}
 								>
 									<DocumentEditor.Info ref={infoRef} />

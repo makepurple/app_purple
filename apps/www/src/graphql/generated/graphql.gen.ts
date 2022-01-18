@@ -238,6 +238,17 @@ export type ConnectionEdge = {
   readonly cursor: Scalars['String'];
 };
 
+export type CreateChatInput = {
+  readonly message?: InputMaybe<Scalars['Json']>;
+  readonly users: UserWhereInput;
+};
+
+export type CreateChatPayload = MutationPayload & {
+  readonly __typename: 'CreateChatPayload';
+  readonly query: Query;
+  readonly record: Chat;
+};
+
 export type CreateCommentPayload = MutationPayload & {
   readonly __typename: 'CreateCommentPayload';
   readonly query: Query;
@@ -516,12 +527,19 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly websiteUrl?: Maybe<Scalars['String']>;
 };
 
+export type LeaveChatPayload = MutationPayload & {
+  readonly __typename: 'LeaveChatPayload';
+  readonly query: Query;
+  readonly record: Chat;
+};
+
 /** Root mutation type */
 export type Mutation = {
   readonly __typename: 'Mutation';
   readonly acceptFriendship: AcceptFriendshipPayload;
   readonly addDesiredSkill: AddDesiredSkillMutationPayload;
   readonly addSkill: AddSkillMutationPayload;
+  readonly createChat: CreateChatPayload;
   readonly createComment: CreateCommentPayload;
   readonly createExperience: CreateExperiencePayload;
   /** Creates a new draft if the user doesn't have a draft pending to be published already */
@@ -535,6 +553,7 @@ export type Mutation = {
   readonly deletePost: DeletePostPayload;
   readonly followSkill: FollowUserPayload;
   readonly followUser: FollowUserPayload;
+  readonly leaveChat: LeaveChatPayload;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
   readonly rejectFriendship: RejectFriendshipPayload;
@@ -576,6 +595,12 @@ export type MutationAddDesiredSkillArgs = {
 /** Root mutation type */
 export type MutationAddSkillArgs = {
   where: SkillWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationCreateChatArgs = {
+  data: CreateChatInput;
 };
 
 
@@ -630,6 +655,12 @@ export type MutationFollowSkillArgs = {
 /** Root mutation type */
 export type MutationFollowUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationLeaveChatArgs = {
+  where: ChatWhereUniqueInput;
 };
 
 
@@ -1701,6 +1732,7 @@ export type UserOrderByInput = {
 };
 
 export type UserWhereInput = {
+  readonly id?: InputMaybe<StringNullableFilter>;
   readonly name?: InputMaybe<StringNullableFilter>;
 };
 
@@ -1749,6 +1781,13 @@ export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id:
 export type UserFollowCardUserFragment = { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFollowing: boolean, readonly viewerIsFriend: boolean, readonly image?: string | null | undefined, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
+
+export type CreateChatMutationVariables = Exact<{
+  data: CreateChatInput;
+}>;
+
+
+export type CreateChatMutation = { readonly __typename: 'Mutation', readonly createChat: { readonly __typename: 'CreateChatPayload', readonly record: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json }> }, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly chats: { readonly __typename: 'ChatConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Chat', readonly id: string }> } } | null | undefined } } };
 
 export type CreateCommentMutationVariables = Exact<{
   data: CommentCreateInput;
@@ -2054,6 +2093,13 @@ export type SuggestSkillsQueryVariables = Exact<{
 
 
 export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
+
+export type SuggestViewerFriendsQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type SuggestViewerFriendsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly friends: { readonly __typename: 'UserConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly name: string }> } } | null | undefined };
 
 export const ChatCardChatFragmentDoc = /*#__PURE__*/ gql`
     fragment ChatCardChat on Chat {
@@ -2541,6 +2587,42 @@ export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     `;
+export const CreateChatDocument = /*#__PURE__*/ gql`
+    mutation CreateChat($data: CreateChatInput!) {
+  createChat(data: $data) {
+    record {
+      id
+      messages(first: 1) {
+        nodes {
+          id
+          content
+        }
+      }
+      users(first: 10) {
+        nodes {
+          id
+          image
+          name
+        }
+      }
+    }
+    query {
+      viewer {
+        id
+        chats(first: 20) {
+          nodes {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useCreateChatMutation() {
+  return Urql.useMutation<CreateChatMutation, CreateChatMutationVariables>(CreateChatDocument);
+};
 export const CreateCommentDocument = /*#__PURE__*/ gql`
     mutation CreateComment($data: CommentCreateInput!) {
   createComment(data: $data) {
@@ -3426,4 +3508,30 @@ export const SuggestSkillsDocument = /*#__PURE__*/ gql`
 
 export function useSuggestSkillsQuery(options: Omit<Urql.UseQueryArgs<SuggestSkillsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<SuggestSkillsQuery>({ query: SuggestSkillsDocument, ...options });
+};
+export const SuggestViewerFriendsDocument = /*#__PURE__*/ gql`
+    query SuggestViewerFriends($name: String!) {
+  viewer {
+    id
+    friends(first: 5, where: {name: {contains: $name}}) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}`;
+
+export function useSuggestViewerFriendsQuery(options: Omit<Urql.UseQueryArgs<SuggestViewerFriendsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SuggestViewerFriendsQuery>({ query: SuggestViewerFriendsDocument, ...options });
 };

@@ -1,0 +1,30 @@
+mutation CreateChat($data: CreateChatInput!) {
+	createChat(data: $data) {
+		record {
+			id
+			messages(first: 1) {
+				nodes {
+					id
+					content
+				}
+			}
+			users(first: 10) {
+				nodes {
+					id
+					image
+					name
+				}
+			}
+		}
+		query {
+			viewer {
+				id
+				chats(first: 20) {
+					nodes {
+						id
+					}
+				}
+			}
+		}
+	}
+}
