@@ -5,7 +5,7 @@ import { addons } from "@storybook/addons";
 import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
 import { domMax, LazyMotion } from "framer-motion";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "../../www/node_modules/react-hot-toast";
 import "twin.macro";
 import "tippy.js/dist/tippy.css";
 import { RouterContext } from "../../www/node_modules/next/dist/shared/lib/router-context";
