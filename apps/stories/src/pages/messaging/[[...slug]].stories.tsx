@@ -23,7 +23,12 @@ const Template: Story = (args) => {
 };
 Template.args = {};
 Template.parameters = {
-	layout: "fullscreen"
+	layout: "fullscreen",
+	nextRouter: {
+		query: {
+			slug: ["0"]
+		}
+	}
 };
 
 export const Standard = Template.bind({});
