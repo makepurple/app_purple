@@ -8,11 +8,22 @@ export const createCache = () => {
 			TopLanguage: () => null
 		},
 		resolvers: {
+			Chat: {
+				messages: relayPagination()
+			},
 			Comment: {
 				replies: relayPagination()
 			},
 			Query: {
-				posts: relayPagination()
+				experiences: relayPagination(),
+				repositories: relayPagination(),
+				posts: relayPagination(),
+				skills: relayPagination()
+			},
+			User: {
+				chats: relayPagination(),
+				followers: relayPagination(),
+				following: relayPagination()
 			}
 		}
 	});
