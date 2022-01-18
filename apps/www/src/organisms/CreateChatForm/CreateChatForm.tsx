@@ -8,8 +8,8 @@ import {
 	Tags
 } from "@makepurple/components";
 import { ChatMessageContent } from "@makepurple/validators";
-import Schema, { string, Type } from "computed-types";
-import React, { CSSProperties, FC, useEffect } from "react";
+import Schema, { array, string, Type } from "computed-types";
+import React, { CSSProperties, FC, useEffect, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import tw from "twin.macro";
@@ -45,10 +45,11 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, s
 
 	const {
 		control,
-		formState: { errors, isValid },
+		formState: { errors, isSubmitted, isValid },
 		handleSubmit,
 		register,
-		reset
+		reset,
+		watch
 	} = useForm<{
 		message: Type<typeof ChatMessageContent>;
 		invitees: readonly { name: string }[];
@@ -60,12 +61,27 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, s
 		resolver: computedTypesResolver(
 			Schema({
 				message: ChatMessageContent.error("Message malformed"),
-				invitees: string
+				invitees: array
+					.of(
+						Schema({
+							name: string
+						})
+					)
 					.min(1, "At least 1 user required")
 					.max(10, "Up to 10 users allowed at once")
 			})
 		)
 	});
+
+	const formMessage = watch("message");
+
+	const isMessageValid = useMemo((): boolean => {
+		const validator = ChatMessageContent.destruct();
+
+		const [, validated] = validator(formMessage);
+
+		return !!validated;
+	}, [formMessage]);
 
 	const invitees = useFieldArray({
 		control,
@@ -74,7 +90,8 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, s
 	});
 
 	useEffect(() => {
-		if (!isValid) return;
+		if (!isSubmitted) return;
+		if (isValid) return;
 
 		if (errors.invitees) {
 			toast.error((errors.invitees as any)?.message);
@@ -89,7 +106,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, s
 			},
 			{ keepValues: true }
 		);
-	}, [errors, isValid, reset]);
+	}, [errors, isSubmitted, isValid, reset]);
 
 	return (
 		<Root
@@ -172,7 +189,12 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, s
 								<DocumentEditor.Toolbar.Code />
 								<DocumentEditor.Toolbar.Link />
 								<SendButtonContainer>
-									<FormButton size="small" type="submit" tw="flex-grow">
+									<FormButton
+										disabled={!isMessageValid}
+										size="small"
+										type="submit"
+										tw="flex-grow"
+									>
 										Send
 									</FormButton>
 								</SendButtonContainer>
