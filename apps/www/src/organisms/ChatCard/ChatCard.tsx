@@ -12,17 +12,21 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef, Fragment, useMemo, useState } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { ChatCardChatFragment } from "../../graphql";
 
-const Root = tw.div`
-	flex
-	flex-col
-	bg-white
-	cursor-pointer
-	[& *]:cursor-pointer!
-	hover:bg-indigo-50
-	active:bg-indigo-100
+const Root = styled.div<{ $selected: boolean }>`
+	${tw`
+		flex
+		flex-col
+		bg-white
+		cursor-pointer
+		[& *]:cursor-pointer!
+		hover:bg-indigo-50
+		active:bg-indigo-100
+	`}
+
+	${({ $selected }) => $selected && tw`bg-indigo-100!`}
 `;
 
 const Participants = tw.div`
@@ -98,11 +102,12 @@ const MessageEditable = tw(DocumentEditor.Editable)`
 export interface ChatCardProps {
 	chat: ChatCardChatFragment;
 	className?: string;
+	selected?: boolean;
 	style?: CSSProperties;
 }
 
 export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) => {
-	const { chat, className, style } = props;
+	const { chat, className, selected, style } = props;
 
 	const router = useRouter();
 	const { data: session, status } = useSession();
@@ -145,6 +150,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 				await router.push("/messaging/[chatId]", `/messaging/${chat.id}`);
 			}}
 			style={style}
+			$selected={!!selected}
 		>
 			<Participants>
 				<ParticipantAvatars>

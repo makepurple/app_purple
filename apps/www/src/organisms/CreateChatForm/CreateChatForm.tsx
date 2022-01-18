@@ -9,6 +9,7 @@ import {
 } from "@makepurple/components";
 import { ChatMessageContent } from "@makepurple/validators";
 import Schema, { array, string, Type } from "computed-types";
+import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -36,12 +37,13 @@ const SendButtonContainer = tw.div`
 
 export interface CreateChatFormProps {
 	className?: string;
-	onSubmit?: (chatId: string) => void;
 	style?: CSSProperties;
 }
 
-export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, style }) => {
+export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) => {
 	const [{ fetching }, createChat] = useCreateChatMutation();
+
+	const router = useRouter();
 
 	const {
 		control,
@@ -132,7 +134,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, onSubmit, s
 					return;
 				}
 
-				onSubmit?.(newChat.id);
+				await router.push("/messaging/[chatId]", `/messaging/${newChat.id}`);
 			})}
 			style={style}
 		>

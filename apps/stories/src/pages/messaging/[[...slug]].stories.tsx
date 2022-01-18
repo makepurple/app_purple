@@ -1,13 +1,13 @@
 import { SiteWideLayout } from "@makepurple/www";
 import { GetChats_mock } from "@makepurple/www/src/graphql/mocks";
-import { Page } from "@makepurple/www/src/pages/messaging/[chatId]";
+import { Page } from "@makepurple/www/src/pages/messaging/[[...slug]]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/messaging/[chatId]",
+	title: "pages/messaging/[[...slug]]",
 	component: Page,
 	decorators: [
 		(Story) => (

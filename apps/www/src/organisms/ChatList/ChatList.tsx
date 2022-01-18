@@ -18,10 +18,11 @@ const Root = tw.div`
 export interface ChatListProps {
 	className?: string;
 	query?: string;
+	selectedChatId?: string;
 	style?: CSSProperties;
 }
 
-export const ChatList: FC<ChatListProps> = ({ className, query, style }) => {
+export const ChatList: FC<ChatListProps> = ({ className, query, selectedChatId, style }) => {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetChatsQuery, {
@@ -58,7 +59,11 @@ export const ChatList: FC<ChatListProps> = ({ className, query, style }) => {
 				chats.map((chat, i) => (
 					<Fragment key={chat.id}>
 						{!!i && <Divider />}
-						<ChatCard ref={getLoadMoreRef(i)} chat={chat} />
+						<ChatCard
+							ref={getLoadMoreRef(i)}
+							chat={chat}
+							selected={selectedChatId === chat.id}
+						/>
 					</Fragment>
 				))
 			)}

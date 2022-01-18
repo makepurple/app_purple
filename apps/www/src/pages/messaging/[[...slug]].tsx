@@ -1,5 +1,6 @@
 import { MainContainer, Paper } from "@makepurple/components";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
 import { ChatList } from "../../organisms";
@@ -49,13 +50,17 @@ const Title = tw.h1`
 `;
 
 export const Page: NextPage = () => {
+	const router = useRouter();
+
+	const chatId: string | undefined = (router?.query.slug as readonly string[])[0];
+
 	return (
 		<Root>
 			<SideBar tw="mb-6 lg:ml-4 xl:ml-6">
 				<SideBarTopContainer>
 					<Title>Messaging</Title>
 				</SideBarTopContainer>
-				<Chats tw="mt-6" />
+				<Chats selectedChatId={chatId} tw="mt-6" />
 			</SideBar>
 			<Content />
 		</Root>
