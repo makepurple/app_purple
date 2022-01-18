@@ -28,13 +28,7 @@ Template.parameters = {
 		query: {
 			slug: ["0"]
 		}
-	}
-};
-
-export const Standard = Template.bind({});
-Standard.args = { ...Template.args };
-Standard.parameters = {
-	...Template.parameters,
+	},
 	urql: (op: Operation) => {
 		const operationName = getOperationName(op.query);
 
@@ -45,6 +39,23 @@ Standard.parameters = {
 				return { data: GetChats_mock };
 			default:
 				return {};
+		}
+	}
+};
+
+export const Standard = Template.bind({});
+Standard.args = { ...Template.args };
+Standard.parameters = {
+	...Template.parameters
+};
+
+export const NewChat = Template.bind({});
+NewChat.args = { ...Template.args };
+NewChat.parameters = {
+	...Template.parameters,
+	nextRouter: {
+		query: {
+			slug: []
 		}
 	}
 };
