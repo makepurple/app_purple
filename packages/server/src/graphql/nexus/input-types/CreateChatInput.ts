@@ -1,0 +1,8 @@
+import { inputObjectType } from "nexus";
+
+export const CreateChatInput = inputObjectType({
+	name: "CreateChatInput",
+	definition: (t) => {
+		t.nonNull.field("users", { type: "UserWhereInput" });
+	}
+});

@@ -7,6 +7,7 @@ export * from "./CommentOrderByInput";
 export * from "./CommentUpdateInput";
 export * from "./CommentWhereInput";
 export * from "./CommentWhereUniqueInput";
+export * from "./CreateChatInput";
 export * from "./DateTimeNullableFilter";
 export * from "./EnumExperienceTypeNullableFilter";
 export * from "./ExperienceCreateInput";
