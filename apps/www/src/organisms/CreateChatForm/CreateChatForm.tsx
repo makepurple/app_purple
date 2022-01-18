@@ -139,7 +139,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 			style={style}
 		>
 			<FormGroup>
-				<Tags editable type="neutral" tw="relative rounded-b-none">
+				<Tags editable type="neutral" tw="relative rounded-none">
 					{invitees.fields.map((field, i) => (
 						<Tags.Tag
 							key={field._id}
