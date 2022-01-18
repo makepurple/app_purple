@@ -147,7 +147,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 			ref={ref}
 			className={className}
 			onClick={async () => {
-				await router.push("/messaging/[chatId]", `/messaging/${chat.id}`);
+				await router.push("/messaging/[[...slug]]", `/messaging/${chat.id}`);
 			}}
 			style={style}
 			$selected={!!selected}
@@ -170,7 +170,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 						</Fragment>
 					))}
 				</ParticipantAvatars>
-				<NextLink href="/messaging/[chatId]" as={`/messaging/${chat.id}`} passHref>
+				<NextLink href="/messaging/[[...slug]]" as={`/messaging/${chat.id}`} passHref>
 					<Title tw="ml-4">
 						<ParticipantName>{firstParticipant.name}</ParticipantName>
 						{!!countOthers && <Others>+{countOthers.toLocaleString()} others</Others>}
