@@ -132,26 +132,26 @@ export const Page: NextPage<PageProps> = () => {
 					/>
 				) : (
 					<Experiences>
-						{!experiences.length ? (
-							<NonIdealState
-								title="There's nothing here"
-								subTitle="We couldn't find any experiences"
-								tw="shadow-none"
-							>
-								<HexagonIcon height={96} width={96} />
-							</NonIdealState>
-						) : (
-							experiences.map((experience, i) => (
-								<Fragment key={experience.id}>
-									{!!i && <Divider tw="ml-22" />}
-									<ExperienceCard
-										ref={getLoadMoreRef(i)}
-										experience={experience}
-										onEdit={() => setEditExperience(experience)}
-									/>
-								</Fragment>
-							))
-						)}
+						{!experiences.length
+							? !fetching && (
+									<NonIdealState
+										title="There's nothing here"
+										subTitle="We couldn't find any experiences"
+										tw="shadow-none"
+									>
+										<HexagonIcon height={96} width={96} />
+									</NonIdealState>
+							  )
+							: experiences.map((experience, i) => (
+									<Fragment key={experience.id}>
+										{!!i && <Divider tw="ml-22" />}
+										<ExperienceCard
+											ref={getLoadMoreRef(i)}
+											experience={experience}
+											onEdit={() => setEditExperience(experience)}
+										/>
+									</Fragment>
+							  ))}
 						{fetching &&
 							Array.from({ length: 3 }, (_, i) => (
 								<Fragment key={i}>

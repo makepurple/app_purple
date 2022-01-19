@@ -47,26 +47,26 @@ export const ChatList: FC<ChatListProps> = ({ className, query, selectedChatId, 
 
 	return (
 		<Root className={className} style={style}>
-			{!chats.length ? (
-				<NonIdealState
-					title="You have no messages"
-					subTitle="Connect with users to be able to chat with them"
-					tw="border-none shadow-none"
-				>
-					<ChatIcon height={96} width={96} />
-				</NonIdealState>
-			) : (
-				chats.map((chat, i) => (
-					<Fragment key={chat.id}>
-						{!!i && <Divider />}
-						<ChatCard
-							ref={getLoadMoreRef(i)}
-							chat={chat}
-							selected={selectedChatId === chat.id}
-						/>
-					</Fragment>
-				))
-			)}
+			{!chats.length
+				? !fetching && (
+						<NonIdealState
+							title="You have no messages"
+							subTitle="Connect with users to be able to chat with them"
+							tw="border-none shadow-none"
+						>
+							<ChatIcon height={96} width={96} />
+						</NonIdealState>
+				  )
+				: chats.map((chat, i) => (
+						<Fragment key={chat.id}>
+							{!!i && <Divider />}
+							<ChatCard
+								ref={getLoadMoreRef(i)}
+								chat={chat}
+								selected={selectedChatId === chat.id}
+							/>
+						</Fragment>
+				  ))}
 			{fetching &&
 				Array.from({ length: 3 }, (_, i) => (
 					<Fragment key={i}>

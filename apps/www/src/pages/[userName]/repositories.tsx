@@ -129,33 +129,33 @@ export const Page: NextPage<PageProps> = () => {
 					/>
 				) : (
 					<Repositories>
-						{fetching ? (
+						{!repositories.length
+							? !fetching && (
+									<NonIdealState
+										title="There's nothing here"
+										subTitle="We couldn't find any repositories"
+										tw="shadow-none"
+									>
+										<RepoIcon height={96} width={96} />
+									</NonIdealState>
+							  )
+							: repositories.map((repository, i) => (
+									<Fragment key={repository.id}>
+										{!!i && <Divider tw="ml-22" />}
+										<RepositoryCard
+											ref={getLoadMoreRef(i)}
+											editing={mode === "update"}
+											repository={repository}
+										/>
+									</Fragment>
+							  ))}
+						{fetching &&
 							Array.from({ length: 3 }, (_, i) => (
 								<Fragment key={i}>
-									{!!i && <Divider />}
+									{!!i && <Divider tw="ml-22" />}
 									<LoadingRepositoryCard />
 								</Fragment>
-							))
-						) : !repositories.length ? (
-							<NonIdealState
-								title="There's nothing here"
-								subTitle="We couldn't find any repositories"
-								tw="shadow-none"
-							>
-								<RepoIcon height={96} width={96} />
-							</NonIdealState>
-						) : (
-							repositories.map((repository, i) => (
-								<Fragment key={repository.id}>
-									{!!i && <Divider />}
-									<RepositoryCard
-										ref={getLoadMoreRef(i)}
-										editing={mode === "update"}
-										repository={repository}
-									/>
-								</Fragment>
-							))
-						)}
+							))}
 					</Repositories>
 				)}
 			</Content>

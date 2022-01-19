@@ -42,20 +42,19 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="posts" userName={userName}>
 			<Posts>
-				{fetching ? (
-					Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)
-				) : !posts.length ? (
-					<NonIdealState
-						title="There's nothing here"
-						subTitle="We couldn't find any posts"
-					>
-						<NoteIcon height={96} width={96} />
-					</NonIdealState>
-				) : (
-					posts.map((post, i) => (
-						<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
-					))
-				)}
+				{!posts.length
+					? !fetching && (
+							<NonIdealState
+								title="There's nothing here"
+								subTitle="We couldn't find any posts"
+							>
+								<NoteIcon height={96} width={96} />
+							</NonIdealState>
+					  )
+					: posts.map((post, i) => (
+							<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
+					  ))}
+				{fetching && Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)}
 			</Posts>
 		</UserPageLayout>
 	);

@@ -130,19 +130,21 @@ export const Page: NextPage = () => {
 				)}
 				<Skills tw="mt-6">
 					{!hasSkills ? (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="We couldn't find any repositories"
-							tw="shadow-none"
-						>
-							<BookIcon />
-						</NonIdealState>
+						!fetching && (
+							<NonIdealState
+								title="There's nothing here"
+								subTitle="We couldn't find any repositories"
+								tw="shadow-none"
+							>
+								<BookIcon />
+							</NonIdealState>
+						)
 					) : (
 						<>
 							{!!exactMatch && <SkillCard skill={exactMatch} />}
 							{skills.map((skill, i) => (
 								<Fragment key={skill.id}>
-									{(!!i || !!exactMatch) && <Divider />}
+									{(!!i || !!exactMatch) && <Divider tw="ml-22" />}
 									<SkillCard ref={getLoadMoreRef(i)} skill={skill} />
 								</Fragment>
 							))}
@@ -151,7 +153,7 @@ export const Page: NextPage = () => {
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => (
 							<Fragment key={i}>
-								{(!!i || !!skills.length) && <Divider />}
+								{(!!i || !!skills.length) && <Divider tw="ml-22" />}
 								<LoadingSkillCard />
 							</Fragment>
 						))}

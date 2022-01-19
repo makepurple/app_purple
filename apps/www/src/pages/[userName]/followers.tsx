@@ -57,20 +57,20 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				<Title tw="mb-6">Followers</Title>
 				<Followers>
-					{!followers.length ? (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="We couldn't find any followers"
-							tw="shadow-none"
-						/>
-					) : (
-						followers.map((follower, i) => (
-							<Fragment key={follower.id}>
-								{!!i && <Divider />}
-								<UserFollowCard ref={getLoadMoreRef(i)} user={follower} />
-							</Fragment>
-						))
-					)}
+					{!followers.length
+						? !fetching && (
+								<NonIdealState
+									title="There's nothing here"
+									subTitle="We couldn't find any followers"
+									tw="shadow-none"
+								/>
+						  )
+						: followers.map((follower, i) => (
+								<Fragment key={follower.id}>
+									{!!i && <Divider />}
+									<UserFollowCard ref={getLoadMoreRef(i)} user={follower} />
+								</Fragment>
+						  ))}
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => (
 							<Fragment key={i}>

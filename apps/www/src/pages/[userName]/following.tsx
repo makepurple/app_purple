@@ -62,32 +62,32 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				<Title tw="mb-6">Following</Title>
 				<Following>
-					{!follows.length ? (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="This user is not following anything"
-							tw="shadow-none"
-						/>
-					) : (
-						follows.map((follow, i) => (
-							<Fragment key={follow.id}>
-								{!!i && <Divider />}
-								{follow.following.__typename === "Skill" ? (
-									<SkillFollowCard
-										ref={getLoadMoreRef(i)}
-										skill={follow.following}
-									/>
-								) : follow.following.__typename === "User" ? (
-									<UserFollowCard
-										ref={getLoadMoreRef(i)}
-										user={follow.following}
-									/>
-								) : (
-									<div ref={getLoadMoreRef(i)} tw="hidden" />
-								)}
-							</Fragment>
-						))
-					)}
+					{!follows.length
+						? !fetching && (
+								<NonIdealState
+									title="There's nothing here"
+									subTitle="This user is not following anything"
+									tw="shadow-none"
+								/>
+						  )
+						: follows.map((follow, i) => (
+								<Fragment key={follow.id}>
+									{!!i && <Divider />}
+									{follow.following.__typename === "Skill" ? (
+										<SkillFollowCard
+											ref={getLoadMoreRef(i)}
+											skill={follow.following}
+										/>
+									) : follow.following.__typename === "User" ? (
+										<UserFollowCard
+											ref={getLoadMoreRef(i)}
+											user={follow.following}
+										/>
+									) : (
+										<div ref={getLoadMoreRef(i)} tw="hidden" />
+									)}
+								</Fragment>
+						  ))}
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => (
 							<Fragment key={i}>
