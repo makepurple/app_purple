@@ -1073,6 +1073,7 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['Post']; // Post!
   }
   Query: { // field return type
+    chat: NexusGenRootTypes['Chat'] | null; // Chat
     chatMessages: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
     comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
@@ -1683,6 +1684,7 @@ export interface NexusGenFieldTypeNames {
     record: 'Post'
   }
   Query: { // field return type name
+    chat: 'Chat'
     chatMessages: 'ChatMessage'
     comment: 'Comment'
     comments: 'CommentConnection'
@@ -2161,6 +2163,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    chat: { // args
+      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
+    }
     chatMessages: { // args
       where: NexusGenInputs['ChatMessageWhereInput']; // ChatMessageWhereInput!
     }

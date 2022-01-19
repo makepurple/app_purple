@@ -1,3 +1,4 @@
+export * from "./chat";
 export * from "./chatMessages";
 export * from "./comment";
 export * from "./comments";

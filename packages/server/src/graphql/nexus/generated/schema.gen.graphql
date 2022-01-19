@@ -622,6 +622,8 @@ type PublishPostPayload implements MutationPayload {
 
 """Root query type"""
 type Query {
+  chat(where: ChatWhereUniqueInput!): Chat
+
   """This is to update a subscribed chat with new messages when received."""
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   comment(where: CommentWhereUniqueInput!): Comment
