@@ -1982,6 +1982,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      offset?: number | null; // Int
     }
     users: { // args
       after?: string | null; // String

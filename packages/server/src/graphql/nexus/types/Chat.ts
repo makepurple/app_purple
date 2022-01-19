@@ -15,7 +15,8 @@ export const Chat = objectType({
 				after: stringArg(),
 				before: stringArg(),
 				first: intArg(),
-				last: intArg()
+				last: intArg(),
+				offset: intArg()
 			},
 			authorize: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
@@ -39,7 +40,7 @@ export const Chat = objectType({
 				if (!user) throw new Error();
 
 				const connection = await findManyCursorConnection<ChatMessage, { id: string }>(
-					(paginationArgs) =>
+					({ cursor, skip, take }) =>
 						prisma.chatsOnUsers
 							.findUnique({
 								where: {
@@ -51,7 +52,9 @@ export const Chat = objectType({
 							})
 							.chat()
 							.messages({
-								...paginationArgs,
+								cursor,
+								skip: (args.offset ?? 0) + (skip ?? 0),
+								take,
 								orderBy: { createdAt: "desc" }
 							}),
 					() =>
