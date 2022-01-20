@@ -1,0 +1,9 @@
+fragment ChatRoomMessageChatMessage on ChatMessage {
+	id
+	content
+	sender {
+		id
+		image
+		name
+	}
+}

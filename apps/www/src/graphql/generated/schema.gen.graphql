@@ -22,7 +22,7 @@ scalar Bytes
 
 type Chat {
   id: ID!
-  messages(after: String, before: String, first: Int, last: Int): ChatMessageConnection!
+  messages(after: String, before: String, first: Int, last: Int, offset: Int): ChatMessageConnection!
   updatedAt: DateTime!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
 }
@@ -606,6 +606,8 @@ type PublishPostPayload implements MutationPayload {
 
 # Root query type
 type Query {
+  chat(where: ChatWhereUniqueInput!): Chat
+
   # This is to update a subscribed chat with new messages when received.
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   comment(where: CommentWhereUniqueInput!): Comment

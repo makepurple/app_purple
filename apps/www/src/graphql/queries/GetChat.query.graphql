@@ -1,0 +1,29 @@
+query GetChat(
+	$where: ChatWhereUniqueInput!
+	$messageLimit: Int
+	$messageOffset: Int
+) {
+	chat(where: $where) {
+		id
+		messages(
+			first: $messageLimit
+			offset: $messageOffset
+		) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...ChatRoomMessageChatMessage
+			}
+		}
+		users(first: 11) {
+			nodes {
+				id
+				name
+			}
+		}
+	}
+}

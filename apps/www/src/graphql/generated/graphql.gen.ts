@@ -64,6 +64,7 @@ export type ChatMessagesArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -958,6 +959,7 @@ export type PublishPostPayload = MutationPayload & {
 /** Root query type */
 export type Query = {
   readonly __typename: 'Query';
+  readonly chat?: Maybe<Chat>;
   /** This is to update a subscribed chat with new messages when received. */
   readonly chatMessages: ReadonlyArray<ChatMessage>;
   readonly comment?: Maybe<Comment>;
@@ -981,6 +983,12 @@ export type Query = {
   readonly users: UserConnection;
   readonly viewer?: Maybe<User>;
   readonly viewerActivityFeed: UserActivityConnection;
+};
+
+
+/** Root query type */
+export type QueryChatArgs = {
+  where: ChatWhereUniqueInput;
 };
 
 
@@ -1750,6 +1758,8 @@ export type WithGitHubRepository = {
 
 export type ChatCardChatFragment = { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } };
 
+export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
 export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type CommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined } };
@@ -1949,6 +1959,15 @@ export type UpvotePostMutationVariables = Exact<{
 
 export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
 
+export type GetChatQueryVariables = Exact<{
+  where: ChatWhereUniqueInput;
+  messageLimit?: InputMaybe<Scalars['Int']>;
+  messageOffset?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetChatQuery = { readonly __typename: 'Query', readonly chat?: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ChatMessageEdge', readonly cursor: string, readonly node: { readonly __typename: 'ChatMessage', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly name: string }> } } | null | undefined };
+
 export type GetChatsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2122,6 +2141,17 @@ export const ChatCardChatFragmentDoc = /*#__PURE__*/ gql`
       image
       name
     }
+  }
+}
+    `;
+export const ChatRoomMessageChatMessageFragmentDoc = /*#__PURE__*/ gql`
+    fragment ChatRoomMessageChatMessage on ChatMessage {
+  id
+  content
+  sender {
+    id
+    image
+    name
   }
 }
     `;
@@ -3064,6 +3094,34 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
 
 export function useUpvotePostMutation() {
   return Urql.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(UpvotePostDocument);
+};
+export const GetChatDocument = /*#__PURE__*/ gql`
+    query GetChat($where: ChatWhereUniqueInput!, $messageLimit: Int, $messageOffset: Int) {
+  chat(where: $where) {
+    id
+    messages(first: $messageLimit, offset: $messageOffset) {
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        ...ChatRoomMessageChatMessage
+      }
+    }
+    users(first: 11) {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
+    ${ChatRoomMessageChatMessageFragmentDoc}`;
+
+export function useGetChatQuery(options: Omit<Urql.UseQueryArgs<GetChatQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetChatQuery>({ query: GetChatDocument, ...options });
 };
 export const GetChatsDocument = /*#__PURE__*/ gql`
     query GetChats($after: String, $first: Int, $where: ChatWhereInput) {
