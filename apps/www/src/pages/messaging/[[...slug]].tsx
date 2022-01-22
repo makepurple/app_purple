@@ -111,9 +111,7 @@ export const Page: NextPage<PageProps> = () => {
 						<span tw="flex-grow">Messaging</span>
 						<AddButton
 							onClick={async () => {
-								await router.push("/messaging/[[...slug]]", `/messaging`, {
-									shallow: true
-								});
+								await router.push("/messaging/[[...slug]]", `/messaging`);
 							}}
 							size="small"
 							type="button"
