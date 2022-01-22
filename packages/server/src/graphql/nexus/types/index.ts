@@ -40,6 +40,7 @@ export * from "./GitHubOrganization";
 export * from "./GitHubRepository";
 export * from "./GitHubRepositoryOwner";
 export * from "./GitHubUser";
+export * from "./InviteToChatPayload";
 export * from "./LeaveChatPayload";
 export * from "./Mutation";
 export * from "./MutationPayload";

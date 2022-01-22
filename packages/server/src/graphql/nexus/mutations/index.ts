@@ -12,6 +12,7 @@ export * from "./deleteFriendship";
 export * from "./deletePost";
 export * from "./followSkill";
 export * from "./followUser";
+export * from "./inviteToChat";
 export * from "./leaveChat";
 export * from "./publishPost";
 export * from "./rejectFriendship";
