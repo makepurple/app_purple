@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
 import { ChatList, ChatRoom, CreateChatForm } from "../../organisms";
+import { pageProps, PageProps } from "../../page-props/messaging/[[...slug]]";
 import { PlusIcon } from "../../svgs";
 
 const Root = tw(MainContainer)`
@@ -78,7 +79,9 @@ const AddButton = tw(Button)`
 	p-0
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const chatRef = useRef<HTMLDivElement>(null);

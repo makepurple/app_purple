@@ -1,10 +1,9 @@
-import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import { GetChats_mock, GetChat_mock } from "@makepurple/www/src/graphql/mocks";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]/";
 import { Page } from "@makepurple/www/src/pages/messaging/[[...slug]]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
-import ms from "ms";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
@@ -20,7 +19,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};
@@ -74,6 +73,8 @@ NoChats.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
+			case "GetChat":
+				return { data: GetChat_mock };
 			case "GetChats":
 				return {
 					data: {
