@@ -1,7 +1,9 @@
+import { PromiseUtils } from "@makepurple/utils";
 import { ChatRoom, ChatRoomProps } from "@makepurple/www";
 import { GetChat_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
+import ms from "ms";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
@@ -15,13 +17,15 @@ const Template: Story<ChatRoomProps> = (args) => {
 };
 Template.args = {};
 Template.parameters = {
-	urql: (op: Operation) => {
+	urql: async (op: Operation) => {
 		const operationName = getOperationName(op.query);
 
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
 			case "GetChat":
+				await PromiseUtils.wait(ms("2s"));
+
 				return { data: GetChat_mock };
 			default:
 				return {};

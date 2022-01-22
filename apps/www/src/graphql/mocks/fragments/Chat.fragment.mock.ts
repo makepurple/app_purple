@@ -1,15 +1,27 @@
 import { dayjs } from "@makepurple/utils";
+import faker from "faker";
 import { Chat } from "../../generated";
 import { ChatMessage_fragment_mock } from "./ChatMessage.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
+faker.seed(1);
+
 const MESSAGES_SIZE = 20;
 const USERS_SIZE = 5;
 
-const messages = Array.from({ length: MESSAGES_SIZE }, (_, i) => ({
-	...ChatMessage_fragment_mock,
-	id: `${i}`
-}));
+const messages = Array.from({ length: MESSAGES_SIZE }, (_, i) => {
+	const senderId = faker.datatype.boolean() ? "0" : "1";
+
+	return {
+		...ChatMessage_fragment_mock,
+		id: `${i}`,
+		sender: {
+			...ChatMessage_fragment_mock.sender,
+			id: senderId
+		},
+		senderId
+	};
+});
 
 const users = Array.from({ length: USERS_SIZE }, (_, i) => ({
 	...User_fragment_mock,

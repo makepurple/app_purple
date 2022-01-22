@@ -1,8 +1,10 @@
+import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
-import { GetChats_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetChats_mock, GetChat_mock } from "@makepurple/www/src/graphql/mocks";
 import { Page } from "@makepurple/www/src/pages/messaging/[[...slug]]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
+import ms from "ms";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
@@ -29,12 +31,16 @@ Template.parameters = {
 			slug: ["0"]
 		}
 	},
-	urql: (op: Operation) => {
+	urql: async (op: Operation) => {
 		const operationName = getOperationName(op.query);
 
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
+			case "GetChat":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: GetChat_mock };
 			case "GetChats":
 				return { data: GetChats_mock };
 			default:

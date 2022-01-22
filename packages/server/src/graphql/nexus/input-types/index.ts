@@ -30,7 +30,6 @@ export * from "./RepositoryNameOwnerCompoundUniqueInput";
 export * from "./RepositoryUpdateInput";
 export * from "./RepositoryWhereInput";
 export * from "./RepositoryWhereUniqueInput";
-export * from "./SendChatMessageInput";
 export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillOrderByInput";
 export * from "./SkillWhereInput";

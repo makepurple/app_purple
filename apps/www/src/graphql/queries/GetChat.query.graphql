@@ -20,8 +20,10 @@ query GetChat(
 			}
 		}
 		users(first: 11) {
+			totalCount
 			nodes {
 				id
+				image
 				name
 			}
 		}

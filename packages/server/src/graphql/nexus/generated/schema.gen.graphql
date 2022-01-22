@@ -482,7 +482,7 @@ type Mutation {
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
-  sendChatMessage(data: SendChatMessageInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
+  sendChatMessage(data: ChatMessageCreateInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
@@ -724,13 +724,9 @@ type RequestFriendshipPayload implements MutationPayload {
   record: Friendship!
 }
 
-input SendChatMessageInput {
-  messages: [ChatMessageCreateInput!]!
-}
-
 type SendChatMessagePayload implements MutationPayload {
   query: Query!
-  record: Chat!
+  record: ChatMessage!
 }
 
 type Skill implements Followable & WithGitHubRepository {

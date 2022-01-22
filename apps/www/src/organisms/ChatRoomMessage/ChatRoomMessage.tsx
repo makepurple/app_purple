@@ -26,8 +26,10 @@ const Content = tw(DocumentEditor)`
 	shadow-lg
 `;
 
-const ContentEditable = tw(DocumentEditor.Editable)`
-
+const Spacer = tw.div`
+	flex-shrink-0
+	h-12
+	w-12
 `;
 
 export interface ChatRoomMessageProps {
@@ -55,14 +57,15 @@ export const ChatRoomMessage = memo(
 			>
 				{sender.image && (
 					<NextLink href="/[userName]" as={`/${sender.name}`} passHref>
-						<Avatar border={2}>
+						<Avatar border={2} tw="flex-shrink-0">
 							<GitHubAvatarImage src={sender.image} height={48} width={48} />
 						</Avatar>
 					</NextLink>
 				)}
 				<Content readOnly value={content as DocumentEditorValue}>
-					<ContentEditable />
+					<DocumentEditor.Editable />
 				</Content>
+				<Spacer />
 			</Root>
 		);
 	})

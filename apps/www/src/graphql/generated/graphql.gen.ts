@@ -704,7 +704,7 @@ export type MutationRequestFriendshipArgs = {
 
 /** Root mutation type */
 export type MutationSendChatMessageArgs = {
-  data: SendChatMessageInput;
+  data: ChatMessageCreateInput;
   where: ChatWhereUniqueInput;
 };
 
@@ -1204,14 +1204,10 @@ export type RequestFriendshipPayload = MutationPayload & {
   readonly record: Friendship;
 };
 
-export type SendChatMessageInput = {
-  readonly messages: ReadonlyArray<ChatMessageCreateInput>;
-};
-
 export type SendChatMessagePayload = MutationPayload & {
   readonly __typename: 'SendChatMessagePayload';
   readonly query: Query;
-  readonly record: Chat;
+  readonly record: ChatMessage;
 };
 
 export type Skill = Followable & WithGitHubRepository & {
@@ -1863,6 +1859,14 @@ export type RemovePostThumbnailMutationVariables = Exact<{
 
 export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null | undefined } | null | undefined } };
 
+export type SendChatMessageMutationVariables = Exact<{
+  data: ChatMessageCreateInput;
+  where: ChatWhereUniqueInput;
+}>;
+
+
+export type SendChatMessageMutation = { readonly __typename: 'Mutation', readonly sendChatMessage: { readonly __typename: 'SendChatMessagePayload', readonly record: { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } };
+
 export type UnfollowSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
@@ -1966,7 +1970,14 @@ export type GetChatQueryVariables = Exact<{
 }>;
 
 
-export type GetChatQuery = { readonly __typename: 'Query', readonly chat?: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ChatMessageEdge', readonly cursor: string, readonly node: { readonly __typename: 'ChatMessage', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly name: string }> } } | null | undefined };
+export type GetChatQuery = { readonly __typename: 'Query', readonly chat?: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ChatMessageEdge', readonly cursor: string, readonly node: { readonly __typename: 'ChatMessage', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } | null | undefined };
+
+export type GetChatMessagesQueryVariables = Exact<{
+  where: ChatMessageWhereInput;
+}>;
+
+
+export type GetChatMessagesQuery = { readonly __typename: 'Query', readonly chatMessages: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> };
 
 export type GetChatsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -2830,6 +2841,19 @@ export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
 export function useRemovePostThumbnailMutation() {
   return Urql.useMutation<RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables>(RemovePostThumbnailDocument);
 };
+export const SendChatMessageDocument = /*#__PURE__*/ gql`
+    mutation SendChatMessage($data: ChatMessageCreateInput!, $where: ChatWhereUniqueInput!) {
+  sendChatMessage(data: $data, where: $where) {
+    record {
+      ...ChatRoomMessageChatMessage
+    }
+  }
+}
+    ${ChatRoomMessageChatMessageFragmentDoc}`;
+
+export function useSendChatMessageMutation() {
+  return Urql.useMutation<SendChatMessageMutation, SendChatMessageMutationVariables>(SendChatMessageDocument);
+};
 export const UnfollowSkillDocument = /*#__PURE__*/ gql`
     mutation UnfollowSkill($where: SkillWhereUniqueInput!) {
   unfollowSkill(where: $where) {
@@ -3111,8 +3135,10 @@ export const GetChatDocument = /*#__PURE__*/ gql`
       }
     }
     users(first: 11) {
+      totalCount
       nodes {
         id
+        image
         name
       }
     }
@@ -3122,6 +3148,17 @@ export const GetChatDocument = /*#__PURE__*/ gql`
 
 export function useGetChatQuery(options: Omit<Urql.UseQueryArgs<GetChatQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetChatQuery>({ query: GetChatDocument, ...options });
+};
+export const GetChatMessagesDocument = /*#__PURE__*/ gql`
+    query GetChatMessages($where: ChatMessageWhereInput!) {
+  chatMessages(where: $where) {
+    ...ChatRoomMessageChatMessage
+  }
+}
+    ${ChatRoomMessageChatMessageFragmentDoc}`;
+
+export function useGetChatMessagesQuery(options: Omit<Urql.UseQueryArgs<GetChatMessagesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetChatMessagesQuery>({ query: GetChatMessagesDocument, ...options });
 };
 export const GetChatsDocument = /*#__PURE__*/ gql`
     query GetChats($after: String, $first: Int, $where: ChatWhereInput) {

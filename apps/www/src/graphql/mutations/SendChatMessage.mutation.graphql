@@ -1,0 +1,10 @@
+mutation SendChatMessage(
+	$data: ChatMessageCreateInput!
+	$where: ChatWhereUniqueInput!
+) {
+	sendChatMessage(data: $data, where: $where) {
+		record {
+			...ChatRoomMessageChatMessage
+		}
+	}
+}

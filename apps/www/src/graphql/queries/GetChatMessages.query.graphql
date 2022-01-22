@@ -1,0 +1,5 @@
+query GetChatMessages($where: ChatMessageWhereInput!) {
+	chatMessages(where: $where) {
+		...ChatRoomMessageChatMessage
+	}
+}

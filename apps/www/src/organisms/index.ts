@@ -13,6 +13,7 @@ export * from "./DocumentEditorPostImageButton";
 export * from "./ExperienceCard";
 export * from "./FriendAutosuggest";
 export * from "./LoadingChatCard";
+export * from "./LoadingChatRoomMessage";
 export * from "./LoadingCommentCard";
 export * from "./LoadingCreateRepositoryFormOption";
 export * from "./LoadingExperienceCard";

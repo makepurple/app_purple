@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { ChatList, CreateChatForm } from "../../organisms";
+import { ChatList, ChatRoom, CreateChatForm } from "../../organisms";
 import { PlusIcon } from "../../svgs";
 
 const Root = tw(MainContainer)`
@@ -45,6 +45,9 @@ const Content = tw(Paper)`
 
 const ContentTitleContainer = tw.div`
 	p-6
+	border-b
+	border-solid
+	border-gray-200
 `;
 
 const Title = tw.h1`
@@ -93,7 +96,11 @@ export const Page: NextPage = () => {
 				<ContentTitleContainer>
 					<Title as="div">New Message</Title>
 				</ContentTitleContainer>
-				{!chatId ? <CreateChatForm tw="flex-grow" /> : null}
+				{chatId ? (
+					<ChatRoom chatId={chatId} tw="flex-grow" />
+				) : (
+					<CreateChatForm tw="flex-grow" />
+				)}
 			</Content>
 		</Root>
 	);

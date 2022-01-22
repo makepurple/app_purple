@@ -228,9 +228,6 @@ export interface NexusGenInputs {
     id?: string | null; // String
     name_owner?: NexusGenInputs['RepositoryNameOwnerCompoundUniqueInput'] | null; // RepositoryNameOwnerCompoundUniqueInput
   }
-  SendChatMessageInput: { // input type
-    messages: NexusGenInputs['ChatMessageCreateInput'][]; // [ChatMessageCreateInput!]!
-  }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
     owner: string; // String!
@@ -585,7 +582,7 @@ export interface NexusGenObjects {
     record: NexusGenRootTypes['Friendship']; // Friendship!
   }
   SendChatMessagePayload: { // root type
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record: NexusGenRootTypes['ChatMessage']; // ChatMessage!
   }
   Skill: { // root type
     id: string; // ID!
@@ -1134,7 +1131,7 @@ export interface NexusGenFieldTypes {
   }
   SendChatMessagePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record: NexusGenRootTypes['ChatMessage']; // ChatMessage!
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1745,7 +1742,7 @@ export interface NexusGenFieldTypeNames {
   }
   SendChatMessagePayload: { // field return type name
     query: 'Query'
-    record: 'Chat'
+    record: 'ChatMessage'
   }
   Skill: { // field return type name
     desiringUsers: 'UserConnection'
@@ -2081,7 +2078,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     sendChatMessage: { // args
-      data: NexusGenInputs['SendChatMessageInput']; // SendChatMessageInput!
+      data: NexusGenInputs['ChatMessageCreateInput']; // ChatMessageCreateInput!
       where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
     }
     unfollowSkill: { // args
