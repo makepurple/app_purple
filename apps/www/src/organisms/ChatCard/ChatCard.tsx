@@ -11,7 +11,7 @@ import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, forwardRef, Fragment, useMemo, useState } from "react";
+import React, { CSSProperties, forwardRef, useMemo, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { ChatCardChatFragment } from "../../graphql";
 
@@ -154,10 +154,15 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 		>
 			<Participants>
 				<ParticipantAvatars>
-					{participants.map((participant) => (
-						<Fragment key={participant.id}>
-							{!!participant.image && (
-								<NextLink href="/[userName]" as={`/${participant.name}`} passHref>
+					{participants.map(
+						(participant) =>
+							!!participant.image && (
+								<NextLink
+									key={participant.id}
+									href="/[userName]"
+									as={`/${participant.name}`}
+									passHref
+								>
 									<Avatar border={2}>
 										<GitHubAvatarImage
 											src={participant.image}
@@ -166,9 +171,8 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 										/>
 									</Avatar>
 								</NextLink>
-							)}
-						</Fragment>
-					))}
+							)
+					)}
 				</ParticipantAvatars>
 				<NextLink href="/messaging/[[...slug]]" as={`/messaging/${chat.id}`} passHref>
 					<Title tw="ml-4">
