@@ -26,8 +26,13 @@ const SideBar = tw(Paper)`
 `;
 
 const SideBarTopContainer = tw.div`
-	pt-6
+	flex
+	items-center
+	h-16
 	px-6
+	border-b
+	border-solid
+	border-gray-200
 `;
 
 const Chats = tw(ChatList)`
@@ -44,13 +49,17 @@ const Content = tw(Paper)`
 `;
 
 const ContentTitleContainer = tw.div`
-	p-6
+	flex
+	items-center
+	h-16
+	px-6
 	border-b
 	border-solid
 	border-gray-200
 `;
 
 const Title = tw.h1`
+	flex-grow
 	flex
 	items-center
 	text-xl
@@ -90,7 +99,7 @@ export const Page: NextPage = () => {
 						</AddButton>
 					</Title>
 				</SideBarTopContainer>
-				<Chats selectedChatId={chatId} tw="mt-6" />
+				<Chats selectedChatId={chatId} />
 			</SideBar>
 			<Content>
 				<ContentTitleContainer>
