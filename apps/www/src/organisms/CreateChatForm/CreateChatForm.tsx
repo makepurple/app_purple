@@ -23,6 +23,10 @@ const Root = tw(Form)`
 	items-stretch
 `;
 
+const Invitees = tw(Tags)`
+	border-gray-300
+`;
+
 const ChatterArea = tw.div`
 	flex-grow
 `;
@@ -33,6 +37,10 @@ const SendButtonContainer = tw.div`
 	flex
 	items-stretch
 	justify-center
+`;
+
+const MessageInput = tw(DocumentEditor)`
+	border-gray-300
 `;
 
 export interface CreateChatFormProps {
@@ -139,7 +147,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 			style={style}
 		>
 			<FormGroup>
-				<Tags editable type="neutral" tw="relative rounded-none">
+				<Invitees editable type="neutral" tw="relative rounded-none">
 					{invitees.fields.map((field, i) => (
 						<Tags.Tag
 							key={field._id}
@@ -159,7 +167,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 						placeholder="Invite members by name"
 						aria-label="new invitee"
 					/>
-				</Tags>
+				</Invitees>
 			</FormGroup>
 			<ChatterArea />
 			<FormGroup>
@@ -167,7 +175,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 					control={control}
 					name="message"
 					render={({ field }) => (
-						<DocumentEditor
+						<MessageInput
 							onChange={(newMessage) => {
 								field.onChange(newMessage);
 							}}
@@ -201,7 +209,7 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 									</FormButton>
 								</SendButtonContainer>
 							</DocumentEditor.Toolbar>
-						</DocumentEditor>
+						</MessageInput>
 					)}
 				/>
 			</FormGroup>

@@ -107,6 +107,7 @@ const Messages = tw.div`
 
 const Message = tw(DocumentEditor)`
 	rounded-t-none
+	border-gray-300
 `;
 
 const SendButtonContainer = tw.div`
