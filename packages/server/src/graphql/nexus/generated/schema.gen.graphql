@@ -5,16 +5,19 @@
 type AcceptFriendshipPayload implements MutationPayload {
   query: Query!
   record: Friendship!
+  viewer: User
 }
 
 type AddDesiredSkillMutationPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 type AddSkillMutationPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 """
@@ -77,6 +80,7 @@ input ChatMessageWhereInput {
 }
 
 input ChatWhereInput {
+  id: StringNullableFilter
   user: UserWhereInput
 }
 
@@ -169,26 +173,31 @@ input CreateChatInput {
 type CreateChatPayload implements MutationPayload {
   query: Query!
   record: Chat!
+  viewer: User
 }
 
 type CreateCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
 }
 
 type CreateExperiencePayload implements MutationPayload {
   query: Query!
   record: Experience!
+  viewer: User
 }
 
 type CreatePostPayload implements MutationPayload {
   query: Query!
   record: Post!
+  viewer: User
 }
 
 type CreateRepositoryPayload implements MutationPayload {
   query: Query!
   record: Repository!
+  viewer: User
 }
 
 """
@@ -209,26 +218,31 @@ scalar Decimal
 type DeleteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
 }
 
 type DeleteExperiencePayload implements MutationPayload {
   query: Query!
   record: Experience!
+  viewer: User
 }
 
 type DeleteFriendshipPayload implements MutationPayload {
   query: Query!
   record: Friendship!
+  viewer: User
 }
 
 type DeletePostPayload implements MutationPayload {
   query: Query!
   record: Post!
+  viewer: User
 }
 
 type DownvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
 }
 
 input EnumExperienceTypeNullableFilter {
@@ -331,11 +345,13 @@ type FollowEdge implements ConnectionEdge {
 type FollowSkillPayload implements MutationPayload {
   query: Query!
   record: Follow!
+  viewer: User
 }
 
 type FollowUserPayload implements MutationPayload {
   query: Query!
   record: Follow!
+  viewer: User
 }
 
 input FollowWhereInput {
@@ -442,6 +458,7 @@ scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 type LeaveChatPayload implements MutationPayload {
   query: Query!
   record: Chat!
+  viewer: User
 }
 
 """Root mutation type"""
@@ -502,6 +519,7 @@ type Mutation {
 
 interface MutationPayload {
   query: Query!
+  viewer: User
 }
 
 input OrderByRelationAggregateInput {
@@ -618,6 +636,7 @@ input PostWhereUniqueInput {
 type PublishPostPayload implements MutationPayload {
   query: Query!
   record: Post!
+  viewer: User
 }
 
 """Root query type"""
@@ -655,21 +674,25 @@ type Query {
 type RejectFriendshipPayload implements MutationPayload {
   query: Query!
   record: Friendship!
+  viewer: User
 }
 
 type RemoveDesiredSkillMutationPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 type RemovePostThumbnailPayload implements MutationPayload {
   query: Query!
   record: Post
+  viewer: User
 }
 
 type RemoveSkillMutationPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 type Repository implements WithGitHubRepository {
@@ -722,11 +745,13 @@ input RepositoryWhereUniqueInput {
 type RequestFriendshipPayload implements MutationPayload {
   query: Query!
   record: Friendship!
+  viewer: User
 }
 
 type SendChatMessagePayload implements MutationPayload {
   query: Query!
   record: ChatMessage!
+  viewer: User
 }
 
 type Skill implements Followable & WithGitHubRepository {
@@ -894,21 +919,25 @@ scalar URL
 type UnfollowSkillPayload implements MutationPayload {
   query: Query!
   record: Follow!
+  viewer: User
 }
 
 type UnfollowUserPayload implements MutationPayload {
   query: Query!
   record: Follow!
+  viewer: User
 }
 
 type UnvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
 }
 
 type UpdateCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
 }
 
 input UpdateDesiredSkillsInput {
@@ -918,26 +947,31 @@ input UpdateDesiredSkillsInput {
 type UpdateDesiredSkillsPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 type UpdateExperiencePayload implements MutationPayload {
   query: Query!
   record: Experience!
+  viewer: User
 }
 
 type UpdatePostDraftPayload implements MutationPayload {
   query: Query!
   record: Post!
+  viewer: User
 }
 
 type UpdatePostPayload implements MutationPayload {
   query: Query!
   record: Post!
+  viewer: User
 }
 
 type UpdateRepositoryPayload implements MutationPayload {
   query: Query!
   record: Repository!
+  viewer: User
 }
 
 input UpdateSkillsInput {
@@ -947,11 +981,13 @@ input UpdateSkillsInput {
 type UpdateSkillsPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 type UpdateUserFromGitHubPayload implements MutationPayload {
   query: Query!
   record: User!
+  viewer: User
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -965,6 +1001,7 @@ input UploadPostImageInput {
 type UploadPostImagePayload implements MutationPayload {
   query: Query!
   record: PostImage!
+  viewer: User
 }
 
 input UpvoteCommentInput {
@@ -974,11 +1011,13 @@ input UpvoteCommentInput {
 type UpvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
 }
 
 type UpvotePostPayload implements MutationPayload {
   query: Query!
   record: Post!
+  viewer: User
 }
 
 type User implements Followable {

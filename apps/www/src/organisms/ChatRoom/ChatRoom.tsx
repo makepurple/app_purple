@@ -2,6 +2,7 @@ import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	Avatar,
 	AvatarGroup,
+	Button,
 	DocumentEditor,
 	Form,
 	FormButton,
@@ -15,6 +16,7 @@ import { useElementScroll } from "framer-motion";
 import ms from "ms";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { Controller, useForm } from "react-hook-form";
@@ -31,9 +33,11 @@ import {
 	GetChatQuery,
 	GetChatQueryVariables,
 	useGetChatQuery,
+	useLeaveChatMutation,
 	useSendChatMessageMutation
 } from "../../graphql";
 import { usePusher } from "../../hooks";
+import { CancelIcon } from "../../svgs";
 import { ChatRoomMessage } from "../ChatRoomMessage";
 import { LoadingChatRoomMessage } from "../LoadingChatRoomMessage";
 
@@ -64,6 +68,11 @@ const Title = tw.a`
 	gap-y-1
 	items-center
 	text-lg
+`;
+
+const NobodyHere = tw.span`
+	font-medium
+	text-gray-500
 `;
 
 const ParticipantName = tw.span`
@@ -108,6 +117,11 @@ const SendButtonContainer = tw.div`
 	justify-center
 `;
 
+const RemoveButton = tw(Button)`
+	flex-shrink-0
+	h-9
+	py-0
+`;
 export interface ChatRoomProps {
 	chatId: string;
 	className?: string;
@@ -116,6 +130,7 @@ export interface ChatRoomProps {
 
 export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const pusher = usePusher();
+	const router = useRouter();
 	const { data: session } = useSession();
 
 	const [cursor, setCursor] = useState<string | null>(null);
@@ -221,7 +236,13 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 
 	const [{ fetching: sendingMessage }, sendMessage] = useSendChatMessageMutation();
 
-	const { control, handleSubmit, reset } = useForm<{
+	const {
+		control,
+		formState: { errors, isSubmitted, isValid },
+		handleSubmit,
+		reset,
+		watch
+	} = useForm<{
 		message: Type<typeof ChatMessageContent>;
 	}>({
 		defaultValues: {
@@ -233,6 +254,27 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 			})
 		)
 	});
+
+	const formMessage = watch("message");
+
+	const isMessageValid = useMemo((): boolean => {
+		const validator = ChatMessageContent.destruct();
+
+		const [, validated] = validator(formMessage);
+
+		return !!validated;
+	}, [formMessage]);
+
+	useEffect(() => {
+		if (!isSubmitted) return;
+		if (isValid) return;
+
+		if (errors.message) {
+			toast.error("Message is malformed");
+		}
+
+		reset({ message: [{ type: "paragraph", children: [{ text: "" }] }] }, { keepValues: true });
+	}, [errors, isSubmitted, isValid, reset]);
 
 	const [messageIdsQ, setMessageIdsQ] = useState<readonly string[]>([]);
 
@@ -277,6 +319,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 			});
 	}, ms("0.2s"));
 
+	const [{ fetching: leavingChat }, leaveChat] = useLeaveChatMutation();
+
 	return (
 		<Root className={className} style={style}>
 			<Participants>
@@ -318,9 +362,40 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 								<Others>+{countOthers.toLocaleString()} others</Others>
 							)}
 						</Title>
+						<RemoveButton
+							disabled={leavingChat}
+							onClick={async () => {
+								if (!chat) return;
+
+								const confirmed = confirm(
+									"Are you sure you want to leave this chat?"
+								);
+
+								if (!confirmed) return;
+
+								const didSucceed = await leaveChat({ chatId: chat.id })
+									.then((result) => !!result.data?.leaveChat)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error("Error while attempting to leave the chat");
+
+									return;
+								}
+
+								await router.push("/messaging/[[...slug]]", "/messaging");
+							}}
+							size="small"
+							type="button"
+							variant="alert"
+							tw="ml-4"
+						>
+							<span>Leave</span>
+							<CancelIcon height={24} width={24} tw="ml-2" />
+						</RemoveButton>
 					</>
 				) : (
-					<span>There&apos;s nobody here</span>
+					<NobodyHere tw="ml-3">There&apos;s nobody here...</NobodyHere>
 				)}
 			</Participants>
 			<Messages ref={messagesRef}>
@@ -379,7 +454,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 								<DocumentEditor.Toolbar.Link />
 								<SendButtonContainer>
 									<FormButton
-										disabled={true}
+										disabled={!chat || !isMessageValid}
 										size="small"
 										type="submit"
 										tw="flex-grow"

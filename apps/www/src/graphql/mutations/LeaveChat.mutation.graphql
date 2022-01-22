@@ -1,0 +1,10 @@
+mutation LeaveChat($chatId: String!) {
+	leaveChat(where: { id: $chatId }) {
+		viewer {
+			id
+		}
+		record {
+			id
+		}
+	}
+}

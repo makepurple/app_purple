@@ -74,7 +74,12 @@ NoChats.parameters = {
 
 		switch (operationName) {
 			case "GetChat":
-				return { data: GetChat_mock };
+				return {
+					data: {
+						...GetChat_mock,
+						chat: null
+					}
+				};
 			case "GetChats":
 				return {
 					data: {

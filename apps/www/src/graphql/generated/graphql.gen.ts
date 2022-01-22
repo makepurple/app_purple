@@ -36,18 +36,21 @@ export type AcceptFriendshipPayload = MutationPayload & {
   readonly __typename: 'AcceptFriendshipPayload';
   readonly query: Query;
   readonly record: Friendship;
+  readonly viewer?: Maybe<User>;
 };
 
 export type AddDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddDesiredSkillMutationPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type AddSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddSkillMutationPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type Chat = {
@@ -125,6 +128,7 @@ export type ChatMessageWhereInput = {
 };
 
 export type ChatWhereInput = {
+  readonly id?: InputMaybe<StringNullableFilter>;
   readonly user?: InputMaybe<UserWhereInput>;
 };
 
@@ -248,30 +252,35 @@ export type CreateChatPayload = MutationPayload & {
   readonly __typename: 'CreateChatPayload';
   readonly query: Query;
   readonly record: Chat;
+  readonly viewer?: Maybe<User>;
 };
 
 export type CreateCommentPayload = MutationPayload & {
   readonly __typename: 'CreateCommentPayload';
   readonly query: Query;
   readonly record: Comment;
+  readonly viewer?: Maybe<User>;
 };
 
 export type CreateExperiencePayload = MutationPayload & {
   readonly __typename: 'CreateExperiencePayload';
   readonly query: Query;
   readonly record: Experience;
+  readonly viewer?: Maybe<User>;
 };
 
 export type CreatePostPayload = MutationPayload & {
   readonly __typename: 'CreatePostPayload';
   readonly query: Query;
   readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
   readonly query: Query;
   readonly record: Repository;
+  readonly viewer?: Maybe<User>;
 };
 
 export type DateTimeNullableFilter = {
@@ -285,30 +294,35 @@ export type DeleteCommentPayload = MutationPayload & {
   readonly __typename: 'DeleteCommentPayload';
   readonly query: Query;
   readonly record: Comment;
+  readonly viewer?: Maybe<User>;
 };
 
 export type DeleteExperiencePayload = MutationPayload & {
   readonly __typename: 'DeleteExperiencePayload';
   readonly query: Query;
   readonly record: Experience;
+  readonly viewer?: Maybe<User>;
 };
 
 export type DeleteFriendshipPayload = MutationPayload & {
   readonly __typename: 'DeleteFriendshipPayload';
   readonly query: Query;
   readonly record: Friendship;
+  readonly viewer?: Maybe<User>;
 };
 
 export type DeletePostPayload = MutationPayload & {
   readonly __typename: 'DeletePostPayload';
   readonly query: Query;
   readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
   readonly query: Query;
   readonly record: Comment;
+  readonly viewer?: Maybe<User>;
 };
 
 export type EnumExperienceTypeNullableFilter = {
@@ -418,12 +432,14 @@ export type FollowSkillPayload = MutationPayload & {
   readonly __typename: 'FollowSkillPayload';
   readonly query: Query;
   readonly record: Follow;
+  readonly viewer?: Maybe<User>;
 };
 
 export type FollowUserPayload = MutationPayload & {
   readonly __typename: 'FollowUserPayload';
   readonly query: Query;
   readonly record: Follow;
+  readonly viewer?: Maybe<User>;
 };
 
 export type FollowWhereInput = {
@@ -532,6 +548,7 @@ export type LeaveChatPayload = MutationPayload & {
   readonly __typename: 'LeaveChatPayload';
   readonly query: Query;
   readonly record: Chat;
+  readonly viewer?: Maybe<User>;
 };
 
 /** Root mutation type */
@@ -795,6 +812,7 @@ export type MutationUpvotePostArgs = {
 
 export type MutationPayload = {
   readonly query: Query;
+  readonly viewer?: Maybe<User>;
 };
 
 export type OrderByRelationAggregateInput = {
@@ -954,6 +972,7 @@ export type PublishPostPayload = MutationPayload & {
   readonly __typename: 'PublishPostPayload';
   readonly query: Query;
   readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 /** Root query type */
@@ -1128,24 +1147,28 @@ export type RejectFriendshipPayload = MutationPayload & {
   readonly __typename: 'RejectFriendshipPayload';
   readonly query: Query;
   readonly record: Friendship;
+  readonly viewer?: Maybe<User>;
 };
 
 export type RemoveDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillMutationPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
   readonly query: Query;
   readonly record?: Maybe<Post>;
+  readonly viewer?: Maybe<User>;
 };
 
 export type RemoveSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillMutationPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type Repository = WithGitHubRepository & {
@@ -1202,12 +1225,14 @@ export type RequestFriendshipPayload = MutationPayload & {
   readonly __typename: 'RequestFriendshipPayload';
   readonly query: Query;
   readonly record: Friendship;
+  readonly viewer?: Maybe<User>;
 };
 
 export type SendChatMessagePayload = MutationPayload & {
   readonly __typename: 'SendChatMessagePayload';
   readonly query: Query;
   readonly record: ChatMessage;
+  readonly viewer?: Maybe<User>;
 };
 
 export type Skill = Followable & WithGitHubRepository & {
@@ -1392,24 +1417,28 @@ export type UnfollowSkillPayload = MutationPayload & {
   readonly __typename: 'UnfollowSkillPayload';
   readonly query: Query;
   readonly record: Follow;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UnfollowUserPayload = MutationPayload & {
   readonly __typename: 'UnfollowUserPayload';
   readonly query: Query;
   readonly record: Follow;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UnvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UnvoteCommentPayload';
   readonly query: Query;
   readonly record: Comment;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdateCommentPayload = MutationPayload & {
   readonly __typename: 'UpdateCommentPayload';
   readonly query: Query;
   readonly record: Comment;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdateDesiredSkillsInput = {
@@ -1420,30 +1449,35 @@ export type UpdateDesiredSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateDesiredSkillsPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdateExperiencePayload = MutationPayload & {
   readonly __typename: 'UpdateExperiencePayload';
   readonly query: Query;
   readonly record: Experience;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdatePostDraftPayload = MutationPayload & {
   readonly __typename: 'UpdatePostDraftPayload';
   readonly query: Query;
   readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdatePostPayload = MutationPayload & {
   readonly __typename: 'UpdatePostPayload';
   readonly query: Query;
   readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdateRepositoryPayload = MutationPayload & {
   readonly __typename: 'UpdateRepositoryPayload';
   readonly query: Query;
   readonly record: Repository;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdateSkillsInput = {
@@ -1454,12 +1488,14 @@ export type UpdateSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateSkillsPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpdateUserFromGitHubPayload = MutationPayload & {
   readonly __typename: 'UpdateUserFromGitHubPayload';
   readonly query: Query;
   readonly record: User;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UploadPostImageInput = {
@@ -1471,6 +1507,7 @@ export type UploadPostImagePayload = MutationPayload & {
   readonly __typename: 'UploadPostImagePayload';
   readonly query: Query;
   readonly record: PostImage;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpvoteCommentInput = {
@@ -1481,12 +1518,14 @@ export type UpvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UpvoteCommentPayload';
   readonly query: Query;
   readonly record: Comment;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UpvotePostPayload = MutationPayload & {
   readonly __typename: 'UpvotePostPayload';
   readonly query: Query;
   readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 export type User = Followable & {
@@ -1843,6 +1882,13 @@ export type FriendRequestUserMutationVariables = Exact<{
 
 
 export type FriendRequestUserMutation = { readonly __typename: 'Mutation', readonly requestFriendship: { readonly __typename: 'RequestFriendshipPayload', readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly viewerFriended: boolean } } } };
+
+export type LeaveChatMutationVariables = Exact<{
+  chatId: Scalars['String'];
+}>;
+
+
+export type LeaveChatMutation = { readonly __typename: 'Mutation', readonly leaveChat: { readonly __typename: 'LeaveChatPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null | undefined, readonly record: { readonly __typename: 'Chat', readonly id: string } } };
 
 export type PublishPostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -2806,6 +2852,22 @@ export const FriendRequestUserDocument = /*#__PURE__*/ gql`
 
 export function useFriendRequestUserMutation() {
   return Urql.useMutation<FriendRequestUserMutation, FriendRequestUserMutationVariables>(FriendRequestUserDocument);
+};
+export const LeaveChatDocument = /*#__PURE__*/ gql`
+    mutation LeaveChat($chatId: String!) {
+  leaveChat(where: {id: $chatId}) {
+    viewer {
+      id
+    }
+    record {
+      id
+    }
+  }
+}
+    `;
+
+export function useLeaveChatMutation() {
+  return Urql.useMutation<LeaveChatMutation, LeaveChatMutationVariables>(LeaveChatDocument);
 };
 export const PublishPostDocument = /*#__PURE__*/ gql`
     mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {

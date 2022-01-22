@@ -85,6 +85,7 @@ export interface NexusGenInputs {
     id?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   ChatWhereInput: { // input type
+    id?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   ChatWhereUniqueInput: { // input type
@@ -756,14 +757,17 @@ export interface NexusGenFieldTypes {
   AcceptFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship']; // Friendship!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddDesiredSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Chat: { // field return type
     id: string; // ID!
@@ -830,42 +834,52 @@ export interface NexusGenFieldTypes {
   CreateChatPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Chat']; // Chat!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateCommentPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment']; // Comment!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateExperiencePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience']; // Experience!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreatePostPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post']; // Post!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateRepositoryPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository']; // Repository!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteCommentPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment']; // Comment!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteExperiencePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience']; // Experience!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship']; // Friendship!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeletePostPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post']; // Post!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   DownvoteCommentPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment']; // Comment!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Experience: { // field return type
     endDate: NexusGenScalars['DateTime'] | null; // DateTime
@@ -908,10 +922,12 @@ export interface NexusGenFieldTypes {
   FollowSkillPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow']; // Follow!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   FollowUserPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow']; // Follow!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Friendship: { // field return type
     friender: NexusGenRootTypes['User']; // User!
@@ -975,6 +991,7 @@ export interface NexusGenFieldTypes {
   LeaveChatPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Chat']; // Chat!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
     acceptFriendship: NexusGenRootTypes['AcceptFriendshipPayload']; // AcceptFriendshipPayload!
@@ -1068,6 +1085,7 @@ export interface NexusGenFieldTypes {
   PublishPostPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post']; // Post!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     chat: NexusGenRootTypes['Chat'] | null; // Chat
@@ -1094,18 +1112,22 @@ export interface NexusGenFieldTypes {
   RejectFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship']; // Friendship!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemovePostThumbnailPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Repository: { // field return type
     github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
@@ -1128,10 +1150,12 @@ export interface NexusGenFieldTypes {
   RequestFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship']; // Friendship!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   SendChatMessagePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['ChatMessage']; // ChatMessage!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1178,58 +1202,72 @@ export interface NexusGenFieldTypes {
   UnfollowSkillPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow']; // Follow!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnfollowUserPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow']; // Follow!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCommentPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment']; // Comment!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateCommentPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment']; // Comment!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateDesiredSkillsPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateExperiencePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience']; // Experience!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostDraftPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post']; // Post!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post']; // Post!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateRepositoryPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository']; // Repository!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateSkillsPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateUserFromGitHubPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User']; // User!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UploadPostImagePayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['PostImage']; // PostImage!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvoteCommentPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment']; // Comment!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvotePostPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post']; // Post!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
     chats: NexusGenRootTypes['ChatConnection']; // ChatConnection!
@@ -1349,6 +1387,7 @@ export interface NexusGenFieldTypes {
   }
   MutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
+    viewer: NexusGenRootTypes['User'] | null; // User
   }
   UserActivity: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1367,14 +1406,17 @@ export interface NexusGenFieldTypeNames {
   AcceptFriendshipPayload: { // field return type name
     query: 'Query'
     record: 'Friendship'
+    viewer: 'User'
   }
   AddDesiredSkillMutationPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   AddSkillMutationPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   Chat: { // field return type name
     id: 'ID'
@@ -1441,42 +1483,52 @@ export interface NexusGenFieldTypeNames {
   CreateChatPayload: { // field return type name
     query: 'Query'
     record: 'Chat'
+    viewer: 'User'
   }
   CreateCommentPayload: { // field return type name
     query: 'Query'
     record: 'Comment'
+    viewer: 'User'
   }
   CreateExperiencePayload: { // field return type name
     query: 'Query'
     record: 'Experience'
+    viewer: 'User'
   }
   CreatePostPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   CreateRepositoryPayload: { // field return type name
     query: 'Query'
     record: 'Repository'
+    viewer: 'User'
   }
   DeleteCommentPayload: { // field return type name
     query: 'Query'
     record: 'Comment'
+    viewer: 'User'
   }
   DeleteExperiencePayload: { // field return type name
     query: 'Query'
     record: 'Experience'
+    viewer: 'User'
   }
   DeleteFriendshipPayload: { // field return type name
     query: 'Query'
     record: 'Friendship'
+    viewer: 'User'
   }
   DeletePostPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   DownvoteCommentPayload: { // field return type name
     query: 'Query'
     record: 'Comment'
+    viewer: 'User'
   }
   Experience: { // field return type name
     endDate: 'DateTime'
@@ -1519,10 +1571,12 @@ export interface NexusGenFieldTypeNames {
   FollowSkillPayload: { // field return type name
     query: 'Query'
     record: 'Follow'
+    viewer: 'User'
   }
   FollowUserPayload: { // field return type name
     query: 'Query'
     record: 'Follow'
+    viewer: 'User'
   }
   Friendship: { // field return type name
     friender: 'User'
@@ -1586,6 +1640,7 @@ export interface NexusGenFieldTypeNames {
   LeaveChatPayload: { // field return type name
     query: 'Query'
     record: 'Chat'
+    viewer: 'User'
   }
   Mutation: { // field return type name
     acceptFriendship: 'AcceptFriendshipPayload'
@@ -1679,6 +1734,7 @@ export interface NexusGenFieldTypeNames {
   PublishPostPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   Query: { // field return type name
     chat: 'Chat'
@@ -1705,18 +1761,22 @@ export interface NexusGenFieldTypeNames {
   RejectFriendshipPayload: { // field return type name
     query: 'Query'
     record: 'Friendship'
+    viewer: 'User'
   }
   RemoveDesiredSkillMutationPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   RemovePostThumbnailPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   RemoveSkillMutationPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   Repository: { // field return type name
     github: 'GitHubRepository'
@@ -1739,10 +1799,12 @@ export interface NexusGenFieldTypeNames {
   RequestFriendshipPayload: { // field return type name
     query: 'Query'
     record: 'Friendship'
+    viewer: 'User'
   }
   SendChatMessagePayload: { // field return type name
     query: 'Query'
     record: 'ChatMessage'
+    viewer: 'User'
   }
   Skill: { // field return type name
     desiringUsers: 'UserConnection'
@@ -1789,58 +1851,72 @@ export interface NexusGenFieldTypeNames {
   UnfollowSkillPayload: { // field return type name
     query: 'Query'
     record: 'Follow'
+    viewer: 'User'
   }
   UnfollowUserPayload: { // field return type name
     query: 'Query'
     record: 'Follow'
+    viewer: 'User'
   }
   UnvoteCommentPayload: { // field return type name
     query: 'Query'
     record: 'Comment'
+    viewer: 'User'
   }
   UpdateCommentPayload: { // field return type name
     query: 'Query'
     record: 'Comment'
+    viewer: 'User'
   }
   UpdateDesiredSkillsPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   UpdateExperiencePayload: { // field return type name
     query: 'Query'
     record: 'Experience'
+    viewer: 'User'
   }
   UpdatePostDraftPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   UpdatePostPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   UpdateRepositoryPayload: { // field return type name
     query: 'Query'
     record: 'Repository'
+    viewer: 'User'
   }
   UpdateSkillsPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   UpdateUserFromGitHubPayload: { // field return type name
     query: 'Query'
     record: 'User'
+    viewer: 'User'
   }
   UploadPostImagePayload: { // field return type name
     query: 'Query'
     record: 'PostImage'
+    viewer: 'User'
   }
   UpvoteCommentPayload: { // field return type name
     query: 'Query'
     record: 'Comment'
+    viewer: 'User'
   }
   UpvotePostPayload: { // field return type name
     query: 'Query'
     record: 'Post'
+    viewer: 'User'
   }
   User: { // field return type name
     chats: 'ChatConnection'
@@ -1960,6 +2036,7 @@ export interface NexusGenFieldTypeNames {
   }
   MutationPayload: { // field return type name
     query: 'Query'
+    viewer: 'User'
   }
   UserActivity: { // field return type name
     createdAt: 'DateTime'
