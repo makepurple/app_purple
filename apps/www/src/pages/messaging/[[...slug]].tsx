@@ -1,7 +1,8 @@
-import { Button, MainContainer, Paper } from "@makepurple/components";
+import { Button, FadedEdge, MainContainer, Paper } from "@makepurple/components";
+import { useElementScroll } from "framer-motion";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
 import { ChatList, ChatRoom, CreateChatForm } from "../../organisms";
 import { PlusIcon } from "../../svgs";
@@ -35,7 +36,11 @@ const SideBarTopContainer = tw.div`
 	border-gray-200
 `;
 
-const Chats = tw(ChatList)`
+const ChatsContainer = tw.div`
+	relative
+`;
+
+const Chats = tw.div`
 	max-height[36rem]
 	overflow-y-auto
 `;
@@ -76,7 +81,24 @@ const AddButton = tw(Button)`
 export const Page: NextPage = () => {
 	const router = useRouter();
 
+	const chatRef = useRef<HTMLDivElement>(null);
+	const { scrollYProgress } = useElementScroll(chatRef);
+
 	const chatId: string | undefined = (router?.query.slug as readonly string[])[0];
+
+	const [topFade, setTopFade] = useState<boolean>(false);
+	const [bottomFade, setBottomFade] = useState<boolean>(false);
+
+	useEffect(() => {
+		const unsubscribe = scrollYProgress.onChange((yProgress) => {
+			setTopFade(yProgress > 0.05);
+			setBottomFade(yProgress < 0.95);
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	}, [scrollYProgress]);
 
 	return (
 		<Root>
@@ -99,7 +121,13 @@ export const Page: NextPage = () => {
 						</AddButton>
 					</Title>
 				</SideBarTopContainer>
-				<Chats selectedChatId={chatId} />
+				<ChatsContainer>
+					{topFade && <FadedEdge side="top" />}
+					{bottomFade && <FadedEdge side="bottom" />}
+					<Chats ref={chatRef}>
+						<ChatList />
+					</Chats>
+				</ChatsContainer>
 			</SideBar>
 			<Content>
 				<ContentTitleContainer>

@@ -31,15 +31,13 @@ Template.parameters = {
 			slug: ["0"]
 		}
 	},
-	urql: async (op: Operation) => {
+	urql: (op: Operation) => {
 		const operationName = getOperationName(op.query);
 
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
 			case "GetChat":
-				await PromiseUtils.wait(ms("1s"));
-
 				return { data: GetChat_mock };
 			case "GetChats":
 				return { data: GetChats_mock };
