@@ -1,5 +1,9 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { GetChats_mock, GetChat_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	GetChats_mock,
+	GetChat_mock,
+	SuggestViewerFriends_mock
+} from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/";
 import { Page } from "@makepurple/www/src/pages/messaging/[[...slug]]";
 import { action } from "@storybook/addon-actions";
@@ -40,6 +44,8 @@ Template.parameters = {
 				return { data: GetChat_mock };
 			case "GetChats":
 				return { data: GetChats_mock };
+			case "SuggestViewerFriends":
+				return { data: SuggestViewerFriends_mock };
 			default:
 				return {};
 		}
@@ -94,6 +100,8 @@ NoChats.parameters = {
 						}
 					}
 				};
+			case "SuggestViewerFriends":
+				return { data: SuggestViewerFriends_mock };
 			default:
 				return {};
 		}

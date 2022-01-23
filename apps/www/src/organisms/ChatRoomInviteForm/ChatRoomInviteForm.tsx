@@ -14,6 +14,13 @@ const Root = tw(Form)`
 	items-stretch
 `;
 
+const Content = tw(Tags)`
+	rounded-none
+	border
+	border-solid
+	border-gray-300
+`;
+
 const Actions = tw.div`
 	flex-shrink-0
 	flex
@@ -86,7 +93,7 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 			})}
 			style={style}
 		>
-			<Tags editable="add-only">
+			<Content editable="add-only" tw="rounded-none">
 				{chat.users.nodes.map((user) => (
 					<Tags.Tag key={user.id} id={user.id}>
 						{user.name}
@@ -122,7 +129,7 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 						Cancel
 					</Action>
 				</Actions>
-			</Tags>
+			</Content>
 		</Root>
 	);
 };
