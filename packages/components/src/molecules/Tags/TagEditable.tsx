@@ -16,18 +16,26 @@ const Root = tw.input`
 	focus-visible:outline-none
 `;
 
-export type TagEditableProps = InferComponentProps<typeof Root>;
+export type TagEditableProps = InferComponentProps<typeof Root> & {
+	editable?: boolean;
+};
 
 export const TagEditable = forwardRef<HTMLInputElement, TagEditableProps>((props, ref) => {
-	const { ...editableTextProps } = props;
+	const { editable, ...editableTextProps } = props;
 
-	const { editable, editableRef } = useContext(TagsContext);
+	const context = useContext(TagsContext);
 
-	const canAdd = editable === true || editable === "add-only";
+	const canAdd = editable ?? (context.editable === true || context.editable === "add-only");
 
 	if (!canAdd) return null;
 
-	return <Root spellCheck={false} {...editableTextProps} ref={composeRefs(ref, editableRef)} />;
+	return (
+		<Root
+			spellCheck={false}
+			{...editableTextProps}
+			ref={composeRefs(ref, context.editableRef)}
+		/>
+	);
 });
 
 TagEditable.displayName = "TagEditable";

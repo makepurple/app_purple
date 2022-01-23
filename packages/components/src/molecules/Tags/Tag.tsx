@@ -5,6 +5,7 @@ import { XIcon } from "../../svgs";
 import { TagsContext } from "./context";
 
 export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
+	editable?: boolean;
 	id: string;
 	onRemove?: (tag: TagProps, event?: SyntheticEvent) => void;
 };
@@ -62,11 +63,11 @@ const CloseButton = tw.span`
 `;
 
 export const Tag = styled((props: TagProps) => {
-	const { children, id, onRemove, ...restTagProps } = props;
+	const { children, editable, id, onRemove, ...restTagProps } = props;
 
 	const context = useContext(TagsContext);
 
-	const canDelete = context.editable === true || context.editable === "remove-only";
+	const canDelete = editable ?? (context.editable === true || context.editable === "remove-only");
 
 	return (
 		<Root {...restTagProps} $canDelete={canDelete}>
