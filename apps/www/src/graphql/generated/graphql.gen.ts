@@ -544,6 +544,17 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly websiteUrl?: Maybe<Scalars['String']>;
 };
 
+export type InviteToChatInput = {
+  readonly users: UserWhereInput;
+};
+
+export type InviteToChatPayload = MutationPayload & {
+  readonly __typename: 'InviteToChatPayload';
+  readonly query: Query;
+  readonly record: Chat;
+  readonly viewer?: Maybe<User>;
+};
+
 export type LeaveChatPayload = MutationPayload & {
   readonly __typename: 'LeaveChatPayload';
   readonly query: Query;
@@ -571,6 +582,7 @@ export type Mutation = {
   readonly deletePost: DeletePostPayload;
   readonly followSkill: FollowUserPayload;
   readonly followUser: FollowUserPayload;
+  readonly inviteToChat: InviteToChatPayload;
   readonly leaveChat: LeaveChatPayload;
   readonly ok: Scalars['Boolean'];
   readonly publishPost: PublishPostPayload;
@@ -673,6 +685,13 @@ export type MutationFollowSkillArgs = {
 /** Root mutation type */
 export type MutationFollowUserArgs = {
   where: UserWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationInviteToChatArgs = {
+  data: InviteToChatInput;
+  where: ChatWhereUniqueInput;
 };
 
 
@@ -1793,7 +1812,7 @@ export type WithGitHubRepository = {
 
 export type ChatCardChatFragment = { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } };
 
-export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null | undefined, readonly createdAt: Date, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
@@ -1883,6 +1902,14 @@ export type FriendRequestUserMutationVariables = Exact<{
 
 export type FriendRequestUserMutation = { readonly __typename: 'Mutation', readonly requestFriendship: { readonly __typename: 'RequestFriendshipPayload', readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly viewerFriended: boolean } } } };
 
+export type InviteToChatMutationVariables = Exact<{
+  data: InviteToChatInput;
+  where: ChatWhereUniqueInput;
+}>;
+
+
+export type InviteToChatMutation = { readonly __typename: 'Mutation', readonly inviteToChat: { readonly __typename: 'InviteToChatPayload', readonly record: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } } };
+
 export type LeaveChatMutationVariables = Exact<{
   chatId: Scalars['String'];
 }>;
@@ -1911,7 +1938,7 @@ export type SendChatMessageMutationVariables = Exact<{
 }>;
 
 
-export type SendChatMessageMutation = { readonly __typename: 'Mutation', readonly sendChatMessage: { readonly __typename: 'SendChatMessagePayload', readonly record: { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } };
+export type SendChatMessageMutation = { readonly __typename: 'Mutation', readonly sendChatMessage: { readonly __typename: 'SendChatMessagePayload', readonly record: { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } };
 
 export type UnfollowSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
@@ -2016,14 +2043,14 @@ export type GetChatQueryVariables = Exact<{
 }>;
 
 
-export type GetChatQuery = { readonly __typename: 'Query', readonly chat?: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ChatMessageEdge', readonly cursor: string, readonly node: { readonly __typename: 'ChatMessage', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } | null | undefined };
+export type GetChatQuery = { readonly __typename: 'Query', readonly chat?: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ChatMessageEdge', readonly cursor: string, readonly node: { readonly __typename: 'ChatMessage', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } | null | undefined };
 
 export type GetChatMessagesQueryVariables = Exact<{
   where: ChatMessageWhereInput;
 }>;
 
 
-export type GetChatMessagesQuery = { readonly __typename: 'Query', readonly chatMessages: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> };
+export type GetChatMessagesQuery = { readonly __typename: 'Query', readonly chatMessages: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> };
 
 export type GetChatsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -2210,6 +2237,7 @@ export const ChatRoomMessageChatMessageFragmentDoc = /*#__PURE__*/ gql`
     image
     name
   }
+  createdAt
 }
     `;
 export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
@@ -2852,6 +2880,32 @@ export const FriendRequestUserDocument = /*#__PURE__*/ gql`
 
 export function useFriendRequestUserMutation() {
   return Urql.useMutation<FriendRequestUserMutation, FriendRequestUserMutationVariables>(FriendRequestUserDocument);
+};
+export const InviteToChatDocument = /*#__PURE__*/ gql`
+    mutation InviteToChat($data: InviteToChatInput!, $where: ChatWhereUniqueInput!) {
+  inviteToChat(data: $data, where: $where) {
+    record {
+      id
+      users {
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          id
+          image
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useInviteToChatMutation() {
+  return Urql.useMutation<InviteToChatMutation, InviteToChatMutationVariables>(InviteToChatDocument);
 };
 export const LeaveChatDocument = /*#__PURE__*/ gql`
     mutation LeaveChat($chatId: String!) {

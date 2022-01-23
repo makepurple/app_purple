@@ -1,0 +1,23 @@
+mutation InviteToChat(
+	$data: InviteToChatInput!
+	$where: ChatWhereUniqueInput!
+) {
+	inviteToChat(data: $data, where: $where) {
+		record {
+			id
+			users {
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+					image
+					name
+				}
+			}
+		}
+	}
+}

@@ -6,4 +6,5 @@ fragment ChatRoomMessageChatMessage on ChatMessage {
 		image
 		name
 	}
+	createdAt
 }
