@@ -2,7 +2,6 @@ import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	Avatar,
 	AvatarGroup,
-	Button,
 	DocumentEditor,
 	Form,
 	FormButton,
@@ -16,7 +15,6 @@ import { useElementScroll } from "framer-motion";
 import ms from "ms";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { Controller, useForm } from "react-hook-form";
@@ -33,11 +31,11 @@ import {
 	GetChatQuery,
 	GetChatQueryVariables,
 	useGetChatQuery,
-	useLeaveChatMutation,
 	useSendChatMessageMutation
 } from "../../graphql";
 import { usePusher } from "../../hooks";
 import { CancelIcon } from "../../svgs";
+import { ChatRoomLeaveButton } from "../ChatRoomLeaveButton";
 import { ChatRoomMessage } from "../ChatRoomMessage";
 import { LoadingChatRoomMessage } from "../LoadingChatRoomMessage";
 
@@ -50,6 +48,7 @@ const Root = tw.div`
 `;
 
 const Participants = tw.div`
+	flex-shrink-0
 	flex
 	items-center
 	h-16
@@ -96,7 +95,6 @@ const Messages = tw.div`
 	gap-6
 	items-stretch
 	overflow-y-scroll
-	max-h-96
 	px-3
 	py-8
 	border-t
@@ -118,7 +116,7 @@ const SendButtonContainer = tw.div`
 	justify-center
 `;
 
-const RemoveButton = tw(Button)`
+const RemoveButton = tw(ChatRoomLeaveButton)`
 	flex-shrink-0
 	h-9
 	py-0
@@ -131,7 +129,6 @@ export interface ChatRoomProps {
 
 export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const pusher = usePusher();
-	const router = useRouter();
 	const { data: session } = useSession();
 
 	const [cursor, setCursor] = useState<string | null>(null);
@@ -320,8 +317,6 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 			});
 	}, ms("0.2s"));
 
-	const [{ fetching: leavingChat }, leaveChat] = useLeaveChatMutation();
-
 	return (
 		<Root className={className} style={style}>
 			<Participants>
@@ -363,37 +358,12 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 								<Others>+{countOthers.toLocaleString()} others</Others>
 							)}
 						</Title>
-						<RemoveButton
-							disabled={leavingChat}
-							onClick={async () => {
-								if (!chat) return;
-
-								const confirmed = confirm(
-									"Are you sure you want to leave this chat?"
-								);
-
-								if (!confirmed) return;
-
-								const didSucceed = await leaveChat({ chatId: chat.id })
-									.then((result) => !!result.data?.leaveChat)
-									.catch(() => false);
-
-								if (!didSucceed) {
-									toast.error("Error while attempting to leave the chat");
-
-									return;
-								}
-
-								await router.push("/messaging/[[...slug]]", "/messaging");
-							}}
-							size="small"
-							type="button"
-							variant="alert"
-							tw="ml-4"
-						>
-							<span>Leave</span>
-							<CancelIcon height={24} width={24} tw="ml-2" />
-						</RemoveButton>
+						{!!chat && (
+							<RemoveButton chatId={chat.id} size="small" variant="alert" tw="ml-4">
+								<span>Leave</span>
+								<CancelIcon height={24} width={24} tw="ml-2" />
+							</RemoveButton>
+						)}
 					</>
 				) : (
 					<NobodyHere tw="ml-3">There&apos;s nobody here...</NobodyHere>

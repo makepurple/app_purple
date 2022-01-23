@@ -23,11 +23,14 @@ const SideBar = tw(Paper)`
 	flex-col
 	items-stretch
 	w-full
+	min-height[32rem]
+	max-height[48rem]
 	overflow-hidden
 	lg:w-96
 `;
 
 const SideBarTopContainer = tw.div`
+	flex-shrink-0
 	flex
 	items-center
 	h-16
@@ -39,10 +42,12 @@ const SideBarTopContainer = tw.div`
 
 const ChatsContainer = tw.div`
 	relative
+	flex
+	flex-col
+	overflow-hidden
 `;
 
 const Chats = tw.div`
-	max-height[36rem]
 	overflow-y-auto
 `;
 
@@ -52,9 +57,11 @@ const Content = tw(Paper)`
 	flex-col
 	items-stretch
 	min-height[32rem]
+	max-height[48rem]
 `;
 
 const ContentTitleContainer = tw.div`
+	flex-shrink-0
 	flex
 	items-center
 	h-16
@@ -135,9 +142,9 @@ export const Page: NextPage<PageProps> = () => {
 					<Title as="div">New Message</Title>
 				</ContentTitleContainer>
 				{chatId ? (
-					<ChatRoom chatId={chatId} tw="flex-grow" />
+					<ChatRoom chatId={chatId} tw="flex-grow overflow-hidden" />
 				) : (
-					<CreateChatForm tw="flex-grow" />
+					<CreateChatForm tw="flex-grow overflow-hidden" />
 				)}
 			</Content>
 		</Root>

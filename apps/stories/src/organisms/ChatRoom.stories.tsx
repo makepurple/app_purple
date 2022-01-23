@@ -13,7 +13,7 @@ export default {
 } as Meta;
 
 const Template: Story<ChatRoomProps> = (args) => {
-	return <ChatRoom {...args} />;
+	return <ChatRoom {...args} tw="height[600px]" />;
 };
 Template.args = {};
 Template.parameters = {
