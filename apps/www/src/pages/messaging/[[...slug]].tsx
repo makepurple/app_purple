@@ -44,7 +44,7 @@ const ChatsContainer = tw.div`
 	relative
 	flex
 	flex-col
-	overflow-hidden
+	min-h-0
 `;
 
 const Chats = tw.div`
@@ -142,9 +142,9 @@ export const Page: NextPage<PageProps> = () => {
 					<Title as="div">New Message</Title>
 				</ContentTitleContainer>
 				{chatId ? (
-					<ChatRoom chatId={chatId} tw="flex-grow overflow-hidden" />
+					<ChatRoom chatId={chatId} tw="flex-grow min-h-0" />
 				) : (
-					<CreateChatForm tw="flex-grow overflow-hidden" />
+					<CreateChatForm tw="flex-grow min-h-0" />
 				)}
 			</Content>
 		</Root>
