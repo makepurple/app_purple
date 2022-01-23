@@ -22,8 +22,9 @@ export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onC
 	onChange?: (newTags: readonly TagProps[], event?: SyntheticEvent) => void;
 };
 
-const Root = styled.div<{ editable?: boolean; type?: TagType }>`
+const Root = styled.div<{ editable?: boolean | "add-only" | "remove-only"; type?: TagType }>`
 	${tw`
+		relative
 		flex
 		flex-row
 		flex-wrap
