@@ -1,5 +1,5 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
-import { Form, FormButton, HiddenInput, Tags } from "@makepurple/components";
+import { Form, FormButton, HiddenInput, Spinner, Tags } from "@makepurple/components";
 import Schema, { array, string } from "computed-types";
 import React, { CSSProperties, FC, SyntheticEvent } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -107,7 +107,8 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 				/>
 				<Actions tw="mt-2">
 					<Action size="small" type="submit">
-						Save
+						<span>Save</span>
+						<Spinner tw="ml-2" />
 					</Action>
 					<Action
 						onClick={() => {
