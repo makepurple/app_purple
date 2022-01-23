@@ -2,6 +2,7 @@ export * from "./AuthDecoratorProfile";
 export * from "./ChatCard";
 export * from "./ChatList";
 export * from "./ChatRoom";
+export * from "./ChatRoomInviteForm";
 export * from "./ChatRoomLeaveButton";
 export * from "./ChatRoomMessage";
 export * from "./CommentCard";

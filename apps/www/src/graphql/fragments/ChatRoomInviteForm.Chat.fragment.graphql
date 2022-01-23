@@ -1,0 +1,9 @@
+fragment ChatRoomInviteFormChat on Chat {
+	id
+	users {
+		nodes {
+			id
+			name
+		}
+	}
+}

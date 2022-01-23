@@ -160,12 +160,11 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 					))}
 					<FriendAutosuggest
 						onSelect={(newFriend) => {
-							invitees.append({
-								name: newFriend.name
-							});
+							invitees.append({ name: newFriend.name });
 						}}
 						placeholder="Invite members by name"
 						aria-label="new invitee"
+						tw="w-52"
 					/>
 				</Invitees>
 			</FormGroup>
