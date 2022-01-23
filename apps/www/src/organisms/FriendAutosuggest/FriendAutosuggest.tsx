@@ -94,14 +94,13 @@ export const FriendAutosuggest: FC<FriendAutosuggestProps> = ({
 
 	return (
 		<>
-			<ComboBox {...combobox.getComboboxProps({ className, style })} tw="flex-grow">
+			<ComboBox {...combobox.getComboboxProps()} tw="flex-grow">
 				<ComboBox.Input
-					{...combobox.getInputProps()}
+					{...combobox.getInputProps({ className, style })}
 					as={Tags.Editable}
 					onKeyDown={onEnterFriend}
 					placeholder={placeholder}
 					aria-label={ariaLabel}
-					tw="w-52"
 				/>
 			</ComboBox>
 			<FriendsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen}>
