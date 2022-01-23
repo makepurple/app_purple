@@ -1,14 +1,18 @@
+import { Menu } from "@headlessui/react";
 import { useContextMenu } from "@makepurple/hooks";
+import { WindowUtils } from "@makepurple/utils";
 import { CodeBlockType } from "@makepurple/validators";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
-import React, { FC, useCallback, useMemo, useRef, useState } from "react";
+import React, { FC, Fragment, useCallback, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { usePopper } from "react-popper";
 import CodeEditor from "react-simple-code-editor";
 import { Descendant, Editor, Element, Node as SlateNode, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw from "twin.macro";
-import { ContextMenu, ContextMenuItem, ListItem, Menu } from "../../../atoms";
+import { ContextMenu, ContextMenuItem, ListItem } from "../../../atoms";
 import { CodeSquareIcon, XIcon } from "../../../svgs";
 import { useInsertBlock } from "../hooks/useInsertBlock";
 import { useIsBlockActive } from "../hooks/useIsBlockActive";
@@ -108,8 +112,25 @@ const supportedLanguages: readonly CodeBlockLanguageOption[] = [
 	["YAML", CodeBlockType.YAML]
 ];
 
+const LanguageItems = tw.div`
+	inline-flex
+	flex-col
+	items-stretch
+	mt-1
+	p-0.5
+	rounded-lg
+	bg-white
+	shadow-2xl
+`;
+
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	const insertBlock = useInsertBlock();
+
+	const [reference, referenceRef] = useState<HTMLButtonElement | null>(null);
+	const [popper, popperRef] = useState<HTMLDivElement | null>(null);
+	const { styles, attributes } = usePopper(reference, popper, {
+		placement: "bottom-start"
+	});
 
 	const isActive = useIsBlockActive();
 
@@ -125,35 +146,45 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 		isActive(CodeBlockType.YAML);
 
 	return (
-		<Menu>
+		<Menu as={Fragment}>
 			<Menu.Button
 				as={ToolbarButton}
+				ref={referenceRef}
 				active={isCodeBlockActive}
 				title="code block"
 				aria-label="code block"
 			>
 				<CodeSquareIcon height={20} width={20} />
 			</Menu.Button>
-			<Menu.Items>
-				{supportedLanguages.map(([name, slateType]) => (
-					<Menu.Item key={slateType}>
-						{(itemProps) => (
-							<ListItem
-								{...itemProps}
-								onClick={() => {
-									insertBlock({
-										type: slateType,
-										children: [{ text: "" }]
-									});
-								}}
-								selected={isActive(slateType)}
-							>
-								{name}
-							</ListItem>
-						)}
-					</Menu.Item>
-				))}
-			</Menu.Items>
+			{WindowUtils.isBrowser() &&
+				createPortal(
+					<Menu.Items
+						as={LanguageItems}
+						ref={popperRef}
+						style={styles.popper}
+						{...attributes.popper}
+					>
+						{supportedLanguages.map(([name, slateType]) => (
+							<Menu.Item key={slateType}>
+								{(itemProps) => (
+									<ListItem
+										{...itemProps}
+										onClick={() => {
+											insertBlock({
+												type: slateType,
+												children: [{ text: "" }]
+											});
+										}}
+										selected={isActive(slateType)}
+									>
+										{name}
+									</ListItem>
+								)}
+							</Menu.Item>
+						))}
+					</Menu.Items>,
+					document.body
+				)}
 		</Menu>
 	);
 };

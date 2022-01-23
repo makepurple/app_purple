@@ -1,9 +1,13 @@
+import { Menu } from "@headlessui/react";
+import { WindowUtils } from "@makepurple/utils";
 import { HeadingType } from "@makepurple/validators";
-import React, { FC } from "react";
+import React, { FC, Fragment, useState } from "react";
+import { createPortal } from "react-dom";
+import { usePopper } from "react-popper";
 import { Descendant } from "slate";
 import { RenderElementProps } from "slate-react";
 import tw from "twin.macro";
-import { ListItem, Menu } from "../../../atoms";
+import { ListItem } from "../../../atoms";
 import { HeadingIcon } from "../../../svgs";
 import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { useToggleBlock } from "../hooks/useToggleBlock";
@@ -57,9 +61,26 @@ const supportedHeadings: readonly HeadingOption[] = [
 	["Heading Six", HeadingType.Six]
 ];
 
+const HeaderItems = tw.div`
+	inline-flex
+	flex-col
+	items-stretch
+	mt-1
+	p-0.5
+	rounded-lg
+	bg-white
+	shadow-2xl
+`;
+
 export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 	const isActive = useIsBlockActive();
 	const toggleBlock = useToggleBlock();
+
+	const [reference, referenceRef] = useState<HTMLButtonElement | null>(null);
+	const [popper, popperRef] = useState<HTMLDivElement | null>(null);
+	const { styles, attributes } = usePopper(reference, popper, {
+		placement: "bottom-start"
+	});
 
 	const isHeadingActive =
 		isActive(HeadingType.One) ||
@@ -70,32 +91,42 @@ export const HeadingToolbarButton: FC<Record<string, never>> = () => {
 		isActive(HeadingType.Six);
 
 	return (
-		<Menu>
+		<Menu as={Fragment}>
 			<Menu.Button
 				as={ToolbarButton}
+				ref={referenceRef}
 				active={isHeadingActive}
 				title="heading"
 				aria-label="heading"
 			>
 				<HeadingIcon height={20} width={20} />
 			</Menu.Button>
-			<Menu.Items>
-				{supportedHeadings.map(([name, slateType]) => (
-					<Menu.Item key={slateType}>
-						{(itemProps) => (
-							<ListItem
-								{...itemProps}
-								onClick={() => {
-									toggleBlock(slateType);
-								}}
-								selected={isActive(slateType)}
-							>
-								{name}
-							</ListItem>
-						)}
-					</Menu.Item>
-				))}
-			</Menu.Items>
+			{WindowUtils.isBrowser() &&
+				createPortal(
+					<Menu.Items
+						as={HeaderItems}
+						ref={popperRef}
+						style={styles.popper}
+						{...attributes.popper}
+					>
+						{supportedHeadings.map(([name, slateType]) => (
+							<Menu.Item key={slateType}>
+								{(itemProps) => (
+									<ListItem
+										{...itemProps}
+										onClick={() => {
+											toggleBlock(slateType);
+										}}
+										selected={isActive(slateType)}
+									>
+										{name}
+									</ListItem>
+								)}
+							</Menu.Item>
+						))}
+					</Menu.Items>,
+					document.body
+				)}
 		</Menu>
 	);
 };

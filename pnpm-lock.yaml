@@ -251,6 +251,7 @@ importers:
       react-hook-form: ^7.23.0
       react-hot-toast: ^2.2.0
       react-is: ^17.0.2
+      react-popper: ^2.2.5
       react-use: ^17.3.2
       styled-components: ^5.3.3
       tailwindcss: 2.2.19
@@ -302,6 +303,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       react-hook-form: 7.23.0_react@17.0.2
       react-hot-toast: 2.2.0_react-dom@17.0.2+react@17.0.2
+      react-popper: 2.2.5_react@17.0.2
       react-use: 17.3.2_react-dom@17.0.2+react@17.0.2
       styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19_f98f8cb1d4c2734d9765edb689db6e16
@@ -374,6 +376,7 @@ importers:
       react-dropzone: ^11.5.1
       react-hook-form: ^7.23.0
       react-is: ^17.0.2
+      react-popper: ^2.2.5
       react-simple-code-editor: ^0.11.0
       react-use: ^17.3.2
       slate: ^0.72.3
@@ -410,6 +413,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       react-dropzone: 11.5.1_react@17.0.2
       react-hook-form: 7.23.0_react@17.0.2
+      react-popper: 2.2.5_react@17.0.2
       react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
       react-use: 17.3.2_react-dom@17.0.2+react@17.0.2
       slate: 0.72.3
@@ -7028,7 +7032,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_f98f8cb1d4c2734d9765edb689db6e16
+      tailwindcss: 2.2.19
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -7037,7 +7041,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19_f98f8cb1d4c2734d9765edb689db6e16
+      tailwindcss: 2.2.19
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -7045,7 +7049,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_f98f8cb1d4c2734d9765edb689db6e16
+      tailwindcss: 2.2.19
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -18368,6 +18372,17 @@ packages:
       react: 17.0.2
       react-fast-compare: 3.2.0
       warning: 4.0.3
+
+  /react-popper/2.2.5_react@17.0.2:
+    resolution: {integrity: sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==}
+    peerDependencies:
+      '@popperjs/core': ^2.0.0
+      react: ^16.8.0 || ^17
+    dependencies:
+      react: 17.0.2
+      react-fast-compare: 3.2.0
+      warning: 4.0.3
+    dev: false
 
   /react-reconciler/0.26.2_react@17.0.2:
     resolution: {integrity: sha512-nK6kgY28HwrMNwDnMui3dvm3rCFjZrcGiuwLc5COUipBK5hWHLOxMJhSnSomirqWwjPBJKV1QcbkI0VJr7Gl1Q==}
