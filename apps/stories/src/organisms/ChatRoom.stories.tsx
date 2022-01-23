@@ -1,6 +1,6 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { ChatRoom, ChatRoomProps } from "@makepurple/www";
-import { GetChat_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetChat_mock, SuggestViewerFriends_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
@@ -27,6 +27,8 @@ Template.parameters = {
 				await PromiseUtils.wait(ms("2s"));
 
 				return { data: GetChat_mock };
+			case "SuggestViewerFriends":
+				return { data: SuggestViewerFriends_mock };
 			default:
 				return {};
 		}

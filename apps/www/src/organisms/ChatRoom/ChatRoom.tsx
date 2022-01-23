@@ -2,6 +2,7 @@ import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	Avatar,
 	AvatarGroup,
+	Button,
 	DocumentEditor,
 	Form,
 	FormButton,
@@ -20,7 +21,7 @@ import { flushSync } from "react-dom";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useInterval } from "react-use";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
 	ChatRoomMessageChatMessageFragment,
@@ -34,7 +35,8 @@ import {
 	useSendChatMessageMutation
 } from "../../graphql";
 import { usePusher } from "../../hooks";
-import { CancelIcon } from "../../svgs";
+import { CancelIcon, PlusIcon } from "../../svgs";
+import { ChatRoomInviteForm } from "../ChatRoomInviteForm";
 import { ChatRoomLeaveButton } from "../ChatRoomLeaveButton";
 import { ChatRoomMessage } from "../ChatRoomMessage";
 import { LoadingChatRoomMessage } from "../LoadingChatRoomMessage";
@@ -117,8 +119,23 @@ const SendButtonContainer = tw.div`
 	justify-center
 `;
 
-const RemoveButton = tw(ChatRoomLeaveButton)`
+const Actions = tw.div`
 	flex-shrink-0
+	grid
+	grid-cols-2
+	gap-2
+`;
+
+const InviteButton = styled(Button)<{ $inviting: boolean }>`
+	${tw`
+		h-9
+		py-0
+	`}
+
+	${({ $inviting }) => $inviting && tw`invisible`}
+`;
+
+const LeaveButton = tw(ChatRoomLeaveButton)`
 	h-9
 	py-0
 `;
@@ -318,6 +335,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 			});
 	}, ms("0.2s"));
 
+	const [inviting, setInviting] = useState<boolean>(false);
+
 	return (
 		<Root className={className} style={style}>
 			<Participants>
@@ -360,16 +379,41 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 							)}
 						</Title>
 						{!!chat && (
-							<RemoveButton chatId={chat.id} size="small" variant="alert" tw="ml-4">
-								<span>Leave</span>
-								<CancelIcon height={24} width={24} tw="ml-2" />
-							</RemoveButton>
+							<Actions tw="ml-4">
+								<InviteButton
+									onClick={() => {
+										setInviting(true);
+									}}
+									size="small"
+									type="button"
+									variant="secondary"
+									$inviting={inviting}
+								>
+									<span>Invite</span>
+									<PlusIcon height={24} width={24} tw="hidden sm:block ml-2" />
+								</InviteButton>
+								<LeaveButton chatId={chat.id} size="small" variant="alert">
+									<span>Leave</span>
+									<CancelIcon height={24} width={24} tw="hidden sm:block ml-2" />
+								</LeaveButton>
+							</Actions>
 						)}
 					</>
 				) : (
 					<NobodyHere tw="ml-3">There&apos;s nobody here...</NobodyHere>
 				)}
 			</Participants>
+			{!!chat && inviting && (
+				<ChatRoomInviteForm
+					chat={chat}
+					onCancel={() => {
+						setInviting(false);
+					}}
+					onCompleted={() => {
+						setInviting(false);
+					}}
+				/>
+			)}
 			<Messages ref={messagesRef}>
 				{messages.map((message) => (
 					<ChatRoomMessage key={message.id} chatMessage={message} />

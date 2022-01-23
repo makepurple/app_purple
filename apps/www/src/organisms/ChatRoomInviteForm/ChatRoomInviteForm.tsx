@@ -10,6 +10,7 @@ import { FriendAutosuggest } from "../FriendAutosuggest";
 
 const Root = tw(Form)`
 	flex
+	flex-col
 	items-stretch
 `;
 
@@ -44,7 +45,7 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 }) => {
 	const { control, handleSubmit, register } = useForm<{ users: readonly { name: string }[] }>({
 		defaultValues: {
-			users: chat.users.nodes
+			users: []
 		},
 		resolver: computedTypesResolver(
 			Schema({
@@ -54,7 +55,7 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 							name: string
 						})
 					)
-					.max(10, "Cannot add more than 10 users")
+					.max(10 - chat.users.nodes.length, "Cannot add more than 10 users")
 			})
 		)
 	});
@@ -108,7 +109,7 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 				<Actions tw="mt-2">
 					<Action size="small" type="submit">
 						<span>Save</span>
-						<Spinner tw="ml-2" />
+						{fetching && <Spinner tw="ml-2" />}
 					</Action>
 					<Action
 						onClick={() => {
