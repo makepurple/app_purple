@@ -11,7 +11,10 @@ export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
 
 export type TagType = "positive" | "neutral" | "negative";
 
-export const Root = styled.span<{ type?: TagType; $editable?: boolean }>`
+export const Root = styled.span<{
+	type?: TagType;
+	$canDelete?: boolean;
+}>`
 	${tw`
 		inline-flex
 		items-stretch
@@ -36,8 +39,8 @@ export const Root = styled.span<{ type?: TagType; $editable?: boolean }>`
 				return "initial";
 		}
 	}};
-	${({ $editable }) =>
-		$editable &&
+	${({ $canDelete }) =>
+		$canDelete &&
 		tw`
 			pl-1
 			pr-0
@@ -63,10 +66,12 @@ export const Tag = styled((props: TagProps) => {
 
 	const context = useContext(TagsContext);
 
+	const canDelete = context.editable === true || context.editable === "remove-only";
+
 	return (
-		<Root {...restTagProps} $editable={context.editable}>
+		<Root {...restTagProps} $canDelete={canDelete}>
 			<Text>{children}</Text>
-			{context.editable && (
+			{canDelete && (
 				<CloseButton
 					onClick={(event) => {
 						context.onRemove?.(props, event);

@@ -23,7 +23,9 @@ export const TagEditable = forwardRef<HTMLInputElement, TagEditableProps>((props
 
 	const { editable, editableRef } = useContext(TagsContext);
 
-	if (!editable) return null;
+	const canAdd = editable === true || editable === "add-only";
+
+	if (!canAdd) return null;
 
 	return <Root spellCheck={false} {...editableTextProps} ref={composeRefs(ref, editableRef)} />;
 });

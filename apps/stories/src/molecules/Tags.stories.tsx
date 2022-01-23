@@ -29,3 +29,15 @@ Template.args = {
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
+
+export const DeleteOnly = Template.bind({});
+DeleteOnly.args = {
+	...Template.args,
+	editable: "remove-only"
+};
+
+export const AddOnly = Template.bind({});
+AddOnly.args = {
+	...Template.args,
+	editable: "add-only"
+};

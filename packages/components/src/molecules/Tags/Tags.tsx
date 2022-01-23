@@ -18,7 +18,7 @@ export type { TagProps, TagType } from "./Tag";
 
 export type TagsProps = Omit<InferComponentProps<typeof Root>, "children" | "onChange"> & {
 	children: ReactNode[];
-	editable?: boolean;
+	editable?: boolean | "add-only" | "remove-only";
 	onChange?: (newTags: readonly TagProps[], event?: SyntheticEvent) => void;
 };
 
