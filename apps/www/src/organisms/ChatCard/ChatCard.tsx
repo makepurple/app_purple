@@ -48,6 +48,7 @@ const Title = tw.a`
 	gap-x-2
 	gap-y-1
 	items-center
+	overflow-hidden
 	text-lg
 `;
 

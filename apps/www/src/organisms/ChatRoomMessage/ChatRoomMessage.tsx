@@ -35,6 +35,7 @@ const SenderInfo = tw.div`
 	flex
 	flex-col
 	gap-1
+	overflow-hidden
 `;
 
 const SenderName = tw.div`
@@ -42,6 +43,7 @@ const SenderName = tw.div`
 	leading-none
 	text-black
 	font-semibold
+	truncate
 `;
 
 const SentAt = tw.div`
