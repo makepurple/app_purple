@@ -23,6 +23,7 @@ const SideBar = tw(Paper)`
 	flex-col
 	items-stretch
 	w-full
+	min-w-0
 	min-height[32rem]
 	max-height[48rem]
 	overflow-hidden
@@ -56,6 +57,7 @@ const Content = tw(Paper)`
 	flex
 	flex-col
 	items-stretch
+	min-w-0
 	min-height[32rem]
 	max-height[48rem]
 `;
