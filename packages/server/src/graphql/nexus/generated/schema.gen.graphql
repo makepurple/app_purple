@@ -525,9 +525,6 @@ type Mutation {
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
-
-  """View notifications, then delete all notifications for this viewer"""
-  viewNotifications: ViewNotificationsPayload!
   viewer: User
 }
 
@@ -538,6 +535,7 @@ interface MutationPayload {
 
 interface Notification {
   id: ID!
+  opened: Boolean!
   type: NotificationType!
   updatedAt: DateTime!
   user: User!
@@ -548,16 +546,30 @@ type NotificationChatMessageReceived implements Notification {
   chat: Chat!
   chatId: String!
   id: ID!
+  opened: Boolean!
   type: NotificationType!
   updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
+type NotificationConnection implements Connection {
+  edges: [NotificationEdge!]!
+  nodes: [Notification!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type NotificationEdge implements ConnectionEdge {
+  cursor: String!
+  node: Notification!
+}
+
 type NotificationFriendshipRequested implements Notification {
   friendship: Friendship!
   friendshipId: String!
   id: ID!
+  opened: Boolean!
   type: NotificationType!
   updatedAt: DateTime!
   user: User!
@@ -566,6 +578,7 @@ type NotificationFriendshipRequested implements Notification {
 
 type NotificationPostCommented implements Notification {
   id: ID!
+  opened: Boolean!
   post: Post!
   postId: String!
   type: NotificationType!
@@ -1228,12 +1241,6 @@ input UserWhereUniqueInput {
   email: String
   id: String
   name: String
-}
-
-type ViewNotificationsPayload implements MutationPayload {
-  query: Query!
-  record: [Notification!]!
-  viewer: User
 }
 
 interface WithGitHubRepository {
