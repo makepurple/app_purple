@@ -1,7 +1,16 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { dayjs } from "@makepurple/utils";
-import { Chat, Comment, Follow, Post, Prisma, Skill, User as _User } from "@prisma/client";
+import {
+	Chat,
+	Comment,
+	Follow,
+	NotificationType,
+	Post,
+	Prisma,
+	Skill,
+	User as _User
+} from "@prisma/client";
 import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
@@ -326,6 +335,61 @@ export const User = objectType({
 		t.field(NexusPrisma.User.id);
 		t.field(NexusPrisma.User.image);
 		t.field(NexusPrisma.User.name);
+		t.nonNull.field("notifications", {
+			type: "NotificationConnection",
+			args: {
+				first: intArg(),
+				last: intArg(),
+				after: stringArg(),
+				before: stringArg()
+			},
+			authorize: (parent, args, { user }) => {
+				return parent.id === user?.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<any, { id: string }>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
+							.notifications({
+								...paginationArgs,
+								where: {
+									OR: [
+										{
+											type: NotificationType.ChatMessageReceived,
+											chat: { isNot: null as any }
+										},
+										{
+											type: NotificationType.FriendshipRequested,
+											friendship: { isNot: null }
+										},
+										{
+											type: NotificationType.PostCommented,
+											post: { isNot: null as any }
+										}
+									]
+								}
+							})
+							.then((items) => {
+								return items.map((item) => ({
+									__typename: `Notification${item.type}`,
+									...item
+								}));
+							}),
+					() =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								include: { _count: { select: { notifications: true } } }
+							})
+							.then((result) => result?._count.notifications ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("posts", {
 			type: "PostConnection",
 			args: {
