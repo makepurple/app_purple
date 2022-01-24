@@ -37,7 +37,20 @@ export const requestFriendship = mutationField("requestFriendship", {
 					}
 				}
 			},
-			update: {}
+			update: {
+				notifications: {
+					updateMany: {
+						where: {
+							type: NotificationType.FriendshipRequested,
+							userId: toFriend.id
+						},
+						data: {
+							opened: false,
+							updatedAt: new Date()
+						}
+					}
+				}
+			}
 		});
 
 		return { record };

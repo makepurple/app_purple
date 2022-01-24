@@ -41,7 +41,6 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 				include: {
 					chat: {
 						include: {
-							notifications: true,
 							users: {
 								where: {
 									user: {
@@ -65,6 +64,19 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 				},
 				data: {
 					notifications: {
+						updateMany: {
+							where: {
+								chatId: chat.id,
+								type: NotificationType.ChatMessageReceived,
+								userId: {
+									notIn: result.chat.users.map((participant) => participant.id)
+								}
+							},
+							data: {
+								opened: false,
+								updatedAt: new Date()
+							}
+						},
 						createMany: {
 							data: result.chat.users.map((participant) => ({
 								type: NotificationType.ChatMessageReceived,

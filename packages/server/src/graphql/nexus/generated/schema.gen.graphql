@@ -525,6 +525,9 @@ type Mutation {
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
+
+  """View notifications, then delete all notifications for this viewer"""
+  viewNotifications: ViewNotificationsPayload!
   viewer: User
 }
 
@@ -1225,6 +1228,12 @@ input UserWhereUniqueInput {
   email: String
   id: String
   name: String
+}
+
+type ViewNotificationsPayload implements MutationPayload {
+  query: Query!
+  record: [Notification!]!
+  viewer: User
 }
 
 interface WithGitHubRepository {

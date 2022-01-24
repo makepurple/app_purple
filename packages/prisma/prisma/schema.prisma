@@ -63,37 +63,38 @@ model VerificationToken {
 }
 
 model User {
-  accounts        Account[]
-  activities      UserActivity[]
-  chats           ChatsOnUsers[]
-  chatMessages    ChatMessage[]
-  comments        Comment[]
+  accounts                  Account[]
+  activities                UserActivity[]
+  chats                     ChatsOnUsers[]
+  chatMessages              ChatMessage[]
+  comments                  Comment[]
   // When this account was registered
-  createdAt       DateTime               @default(now())
-  description     String?
-  desiredSkills   DesiredSkillsOnUsers[]
-  email           String                 @unique
-  emailVerified   DateTime?
-  experiences     Experience[]
-  followedBy      FollowUser[]           @relation("FollowingUser")
-  followingSkill  FollowSkill[]
-  followingUser   FollowUser[]           @relation("FollowerUser")
-  friendedBy      Friendship[]           @relation("FriendingUser")
-  friending       Friendship[]           @relation("FrienderUser")
-  id              String                 @id @default(cuid())
+  createdAt                 DateTime               @default(now())
+  description               String?
+  desiredSkills             DesiredSkillsOnUsers[]
+  email                     String                 @unique
+  emailVerified             DateTime?
+  experiences               Experience[]
+  followedBy                FollowUser[]           @relation("FollowingUser")
+  followingSkill            FollowSkill[]
+  followingUser             FollowUser[]           @relation("FollowerUser")
+  friendedBy                Friendship[]           @relation("FriendingUser")
+  friending                 Friendship[]           @relation("FrienderUser")
+  id                        String                 @id @default(cuid())
   // Avatar image, pulled from GitHub
-  image           String?
+  image                     String?
   // The GitHub name of the user
-  name            String                 @unique
-  notifications   Notification[]         @relation()
-  posts           Post[]                 @relation("PostAuthor")
-  repositories    Repository[]
+  name                      String                 @unique
+  notifications             Notification[]         @relation()
+  notificationsLastOpenedAt DateTime               @default(now())
+  posts                     Post[]                 @relation("PostAuthor")
+  repositories              Repository[]
   // Self written summary or description
-  sessions        Session[]
-  skills          SkillsOnUsers[]
-  updatedAt       DateTime               @updatedAt
-  upvotedComments CommentUpvoter[]
-  upvotedPosts    PostUpvoter[]
+  sessions                  Session[]
+  skills                    SkillsOnUsers[]
+  updatedAt                 DateTime               @updatedAt
+  upvotedComments           CommentUpvoter[]
+  upvotedPosts              PostUpvoter[]
 }
 
 enum UserActivityType {
@@ -134,6 +135,7 @@ model Notification {
   chatId       String?
   friendship   Friendship?      @relation(fields: [friendshipId], references: [id], onDelete: Cascade)
   friendshipId String?
+  opened       Boolean          @default(false)
   post         Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId       String?
   type         NotificationType

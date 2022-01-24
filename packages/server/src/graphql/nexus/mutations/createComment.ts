@@ -42,7 +42,9 @@ export const createComment = mutationField("createComment", {
 							where: { author: { id: { equals: user.id } } }
 						},
 						notifications: {
-							where: { type: NotificationType.PostCommented }
+							where: {
+								type: NotificationType.PostCommented
+							}
 						}
 					}
 				});
@@ -65,7 +67,15 @@ export const createComment = mutationField("createComment", {
 					// Only create a notification if the author doesn't already have one for this
 					// post
 					notifications: post.notifications.length
-						? {}
+						? {
+								update: {
+									where: { id: post.notifications[0].id },
+									data: {
+										opened: false,
+										updatedAt: new Date()
+									}
+								}
+						  }
 						: {
 								create: {
 									type: NotificationType.PostCommented,
