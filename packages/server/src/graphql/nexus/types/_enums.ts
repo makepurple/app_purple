@@ -10,6 +10,7 @@ export const enumTypes = [
 			User: "User"
 		}
 	}),
+	enumType(NexusPrisma.NotificationType),
 	enumType({
 		name: "SortOrder",
 		members: {

@@ -533,6 +533,50 @@ interface MutationPayload {
   viewer: User
 }
 
+interface Notification {
+  id: ID!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type NotificationChatMessageReceived implements Notification {
+  chat: Chat!
+  chatId: String!
+  id: ID!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type NotificationFriendshipRequested implements Notification {
+  friendship: Friendship!
+  friendshipId: String!
+  id: ID!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type NotificationPostCommented implements Notification {
+  id: ID!
+  post: Post!
+  postId: String!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+enum NotificationType {
+  ChatMessageReceived
+  FriendshipRequested
+  PostCommented
+}
+
 input OrderByRelationAggregateInput {
   _count: SortOrder
 }

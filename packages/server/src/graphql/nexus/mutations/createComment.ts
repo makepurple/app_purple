@@ -1,5 +1,5 @@
 import { CommentCreateInput } from "@makepurple/validators";
-import { UserActivityType } from "@prisma/client";
+import { NotificationType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../..";
 
@@ -32,31 +32,48 @@ export const createComment = mutationField("createComment", {
 				}
 			});
 
-			if (args.data.post) {
-				const postComments = await transaction.post
-					.findUnique({
-						where: PrismaUtils.nonNull(args.data.post)
-					})
-					.comments({
-						where: {
-							author: { id: { equals: user.id } }
-						}
-					});
-
-				if (postComments.length) return comment;
-
-				await transaction.comment.update({
-					where: PrismaUtils.nonNull(args.data.post),
-					data: {
-						activities: {
-							create: {
-								type: UserActivityType.CommentPost,
-								user: { connect: { id: user.id } }
-							}
+			const post = await transaction.comment
+				.findUnique({
+					where: { id: comment.id }
+				})
+				.post({
+					include: {
+						comments: {
+							where: { author: { id: { equals: user.id } } }
+						},
+						notifications: {
+							where: { type: NotificationType.PostCommented }
 						}
 					}
 				});
-			}
+
+			if (!post) return comment;
+
+			await transaction.post.update({
+				where: { id: post.id },
+				data: {
+					// Only create a user-activity if the user hasn't previously commented on the
+					// post
+					activities: post.comments.length
+						? {}
+						: {
+								create: {
+									type: UserActivityType.CommentPost,
+									user: { connect: { id: user.id } }
+								}
+						  },
+					// Only create a notification if the author doesn't already have one for this
+					// post
+					notifications: post.notifications.length
+						? {}
+						: {
+								create: {
+									type: NotificationType.PostCommented,
+									user: { connect: { name: post.authorName } }
+								}
+						  }
+				}
+			});
 
 			return comment;
 		});
