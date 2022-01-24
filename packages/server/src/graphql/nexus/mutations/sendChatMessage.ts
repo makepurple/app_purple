@@ -1,4 +1,5 @@
 import { ChatMessageContent } from "@makepurple/validators";
+import { NotificationType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { NotFoundError, PrismaUtils } from "../../../utils";
 
@@ -22,20 +23,59 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 
 		if (!chat) throw new NotFoundError("This chat could not be found");
 
-		const record = await prisma.chatMessage.create({
-			data: {
-				chat: {
-					connect: {
-						id: chat.id
+		const record = await prisma.$transaction(async (transaction) => {
+			const result = await transaction.chatMessage.create({
+				data: {
+					chat: {
+						connect: {
+							id: chat.id
+						}
+					},
+					content: contentInput,
+					sender: {
+						connect: {
+							id: user.id
+						}
 					}
 				},
-				content: contentInput,
-				sender: {
-					connect: {
-						id: user.id
+				include: {
+					chat: {
+						include: {
+							notifications: true,
+							users: {
+								where: {
+									user: {
+										notifications: {
+											none: {
+												type: NotificationType.ChatMessageReceived,
+												chat: { id: { equals: chat.id } }
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
-			}
+			});
+
+			await transaction.chat.update({
+				where: {
+					id: chat.id
+				},
+				data: {
+					notifications: {
+						createMany: {
+							data: result.chat.users.map((participant) => ({
+								type: NotificationType.ChatMessageReceived,
+								userId: participant.id
+							}))
+						}
+					}
+				}
+			});
+
+			return result;
 		});
 
 		if (!record) throw new Error();
