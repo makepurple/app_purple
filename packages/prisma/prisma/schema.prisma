@@ -85,6 +85,7 @@ model User {
   image           String?
   // The GitHub name of the user
   name            String                 @unique
+  notifications   Notification[]         @relation()
   posts           Post[]                 @relation("PostAuthor")
   repositories    Repository[]
   // Self written summary or description
@@ -121,16 +122,37 @@ model UserActivity {
   userId       String
 }
 
+enum NotificationType {
+  ChatMessageReceived
+  FriendshipRequested
+  PostCommented
+}
+
+model Notification {
+  id           String           @id @default(cuid())
+  chat         Chat?            @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId       String?
+  friendship   Friendship?      @relation(fields: [friendshipId], references: [id], onDelete: Cascade)
+  friendshipId String?
+  post         Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId       String?
+  type         NotificationType
+  updatedAt    DateTime         @updatedAt
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+}
+
 // These are uni-directional match requests. If matched 2-way, then it is a confirmed match.
 model Friendship {
-  id          String         @id @default(cuid())
-  activities  UserActivity[]
-  friender    User           @relation("FrienderUser", fields: [frienderId], references: [id], onDelete: Cascade)
-  frienderId  String
-  friending   User           @relation("FriendingUser", fields: [friendingId], references: [id], onDelete: Cascade)
-  friendingId String
-  rejected    Boolean        @default(false)
-  updatedAt   DateTime       @updatedAt
+  id            String         @id @default(cuid())
+  activities    UserActivity[]
+  friender      User           @relation("FrienderUser", fields: [frienderId], references: [id], onDelete: Cascade)
+  frienderId    String
+  friending     User           @relation("FriendingUser", fields: [friendingId], references: [id], onDelete: Cascade)
+  friendingId   String
+  notifications Notification[]
+  rejected      Boolean        @default(false)
+  updatedAt     DateTime       @updatedAt
 
   @@unique([frienderId, friendingId])
 }
@@ -169,10 +191,11 @@ model FollowSkill {
 }
 
 model Chat {
-  id       String         @id @default(cuid())
-  messages ChatMessage[]
-  users    ChatsOnUsers[]
-  updatedAt DateTime @updatedAt
+  id            String         @id @default(cuid())
+  messages      ChatMessage[]
+  notifications Notification[]
+  users         ChatsOnUsers[]
+  updatedAt     DateTime       @updatedAt
 }
 
 model ChatMessage {
@@ -196,24 +219,25 @@ model ChatsOnUsers {
 }
 
 model Post {
-  activities   UserActivity[]
-  author       User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
-  authorName   String
-  comments     Comment[]
-  content      Json?
-  createdAt    DateTime        @default(now())
-  description  String?
-  id           String          @id @default(cuid())
-  images       PostImage[]
-  publishedAt  DateTime?
+  activities    UserActivity[]
+  author        User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
+  authorName    String
+  comments      Comment[]
+  content       Json?
+  createdAt     DateTime        @default(now())
+  description   String?
+  id            String          @id @default(cuid())
+  images        PostImage[]
+  notifications Notification[]
+  publishedAt   DateTime?
   // Estimated time in minutes to read this post
-  readTime     Int?
-  skills       SkillsOnPosts[]
-  title        String?
-  thumbnailUrl String?
-  updatedAt    DateTime        @updatedAt
-  upvoters     PostUpvoter[]
-  urlSlug      String          @default("draft")
+  readTime      Int?
+  skills        SkillsOnPosts[]
+  title         String?
+  thumbnailUrl  String?
+  updatedAt     DateTime        @updatedAt
+  upvoters      PostUpvoter[]
+  urlSlug       String          @default("draft")
 
   @@unique([authorName, urlSlug])
 }
