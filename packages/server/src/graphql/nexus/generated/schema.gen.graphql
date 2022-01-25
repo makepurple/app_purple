@@ -1092,6 +1092,7 @@ type UpvotePostPayload implements MutationPayload {
 }
 
 type User implements Followable {
+  activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
@@ -1108,6 +1109,7 @@ type User implements Followable {
   id: ID!
   image: String
   name: String!
+  notifications(after: String, before: String, first: Int, last: Int): NotificationConnection!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!

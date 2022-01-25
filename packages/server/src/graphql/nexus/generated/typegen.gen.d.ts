@@ -1360,6 +1360,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
+    activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     chats: NexusGenRootTypes['ChatConnection']; // ChatConnection!
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1376,6 +1377,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     image: string | null; // String
     name: string; // String!
+    notifications: NexusGenRootTypes['NotificationConnection']; // NotificationConnection!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
@@ -2063,6 +2065,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   User: { // field return type name
+    activityFeed: 'UserActivityConnection'
     chats: 'ChatConnection'
     comments: 'CommentConnection'
     createdAt: 'DateTime'
@@ -2079,6 +2082,7 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     image: 'String'
     name: 'String'
+    notifications: 'NotificationConnection'
     posts: 'PostConnection'
     repositories: 'Repository'
     skills: 'SkillConnection'
@@ -2506,6 +2510,13 @@ export interface NexusGenArgTypes {
     }
   }
   User: {
+    activityFeed: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
+    }
     chats: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -2556,6 +2567,12 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    notifications: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
     posts: { // args
       after?: string | null; // String

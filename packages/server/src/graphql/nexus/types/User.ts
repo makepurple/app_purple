@@ -9,7 +9,8 @@ import {
 	Post,
 	Prisma,
 	Skill,
-	User as _User
+	User as _User,
+	UserActivityType
 } from "@prisma/client";
 import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
@@ -21,6 +22,90 @@ export const User = objectType({
 	description: NexusPrisma.User.$description,
 	definition: (t) => {
 		t.implements("Followable");
+		t.nonNull.field("activityFeed", {
+			type: "UserActivityConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserActivityWhereInput" })
+			},
+			authorize: (parent, args, { user }) => {
+				return parent.id === user?.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<any, { id: string }>(
+					(paginationArgs) =>
+						prisma.userActivity
+							.findMany({
+								...paginationArgs,
+								where: {
+									...PrismaUtils.nonNull(args.where),
+									OR: [
+										{
+											type: UserActivityType.CommentPost,
+											comment: { isNot: null }
+										},
+										{
+											type: UserActivityType.FollowSkill,
+											follow: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.FollowUser,
+											follow: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.FriendAcceptUser,
+											follow: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.Joined
+										},
+										{
+											type: UserActivityType.PublishPost,
+											post: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.UpvotePost,
+											post: { isNot: null as any }
+										}
+									],
+									user: {
+										followedBy: {
+											some: {
+												follower: { id: { equals: parent.id } }
+											}
+										}
+									}
+								}
+							})
+							.then((items) => {
+								return items.map((item) => ({
+									__typename: `UserActivity${item.type}`,
+									...item
+								}));
+							}),
+					() =>
+						prisma.userActivity.count({
+							where: {
+								...PrismaUtils.nonNull(args.where),
+								user: {
+									followedBy: {
+										some: {
+											follower: { id: { equals: parent.id } }
+										}
+									}
+								}
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("chats", {
 			type: "ChatConnection",
 			args: {
