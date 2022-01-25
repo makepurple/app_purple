@@ -4,6 +4,7 @@ import {
 	CreateExperience_mock,
 	CreatePost_mock,
 	GetExperiences_mock,
+	GetNotificationCount_mock,
 	GetPostDraft_mock,
 	GetUserInfoSideBar_mock,
 	SuggestExperiences_mock
@@ -56,6 +57,8 @@ Standard.parameters = {
 				return { data: CreatePost_mock };
 			case "GetExperiences":
 				return { data: GetExperiences_mock };
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
@@ -88,6 +91,8 @@ Loading.parameters = {
 				await PromiseUtils.wait(ms("5s"));
 
 				return { data: GetExperiences_mock };
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
@@ -134,6 +139,8 @@ NoResults.parameters = {
 						}
 					}
 				};
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return {
 					data: {

@@ -1,5 +1,9 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { GetPostDraft_mock, GetUserInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	GetNotificationCount_mock,
+	GetPostDraft_mock,
+	GetUserInfoSideBar_mock
+} from "@makepurple/www/src/graphql/mocks";
 import Page from "@makepurple/www/src/pages/[userName]";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -36,6 +40,8 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: (op: Operation) => {
 		switch (getOperationName(op.query)) {
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":

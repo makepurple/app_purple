@@ -1,6 +1,7 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
+	GetNotificationCount_mock,
 	GetPostDraft_mock,
 	GetRepositories_mock,
 	GetUserInfoSideBar_mock,
@@ -45,6 +46,8 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetRepositories":
@@ -69,6 +72,8 @@ Loading.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetRepositories":
@@ -95,6 +100,8 @@ NoResults.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
+			case "GetNotificationCount":
+				return { data: GetNotificationCount_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetRepositories":

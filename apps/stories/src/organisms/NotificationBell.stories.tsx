@@ -36,8 +36,8 @@ Standard.parameters = {
 };
 
 export const WithNotifications = Template.bind({});
-Standard.args = { ...Template.args };
-Standard.parameters = {
+WithNotifications.args = { ...Template.args };
+WithNotifications.parameters = {
 	...Template.parameters,
 	urql: (op: Operation) => {
 		const operationName = getOperationName(op.query);
