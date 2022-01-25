@@ -1907,6 +1907,8 @@ export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __ty
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } } };
 
+export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } };
+
 export type PageInfoFragmentFragment = { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined };
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null | undefined, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
@@ -2443,6 +2445,19 @@ export const ExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
   positionName
   startDate
   type
+}
+    `;
+export const NotificationCardPostCommentedNotificationPostCommentedFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardPostCommentedNotificationPostCommented on NotificationPostCommented {
+  id
+  post {
+    id
+    authorName
+    title
+    urlSlug
+  }
+  postId
+  updatedAt
 }
     `;
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`

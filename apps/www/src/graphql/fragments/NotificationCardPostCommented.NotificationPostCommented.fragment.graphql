@@ -1,0 +1,11 @@
+fragment NotificationCardPostCommentedNotificationPostCommented on NotificationPostCommented {
+	id
+	post {
+		id
+		authorName
+		title
+		urlSlug
+	}
+	postId
+	updatedAt
+}
