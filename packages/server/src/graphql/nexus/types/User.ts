@@ -22,6 +22,81 @@ export const User = objectType({
 	description: NexusPrisma.User.$description,
 	definition: (t) => {
 		t.implements("Followable");
+		t.nonNull.field("activities", {
+			type: "UserActivityConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserActivityWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<any, { id: string }>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
+							.activities({
+								...paginationArgs,
+								where: {
+									...PrismaUtils.nonNull(args.where),
+									OR: [
+										{
+											type: UserActivityType.CommentPost,
+											comment: { isNot: null }
+										},
+										{
+											type: UserActivityType.FollowSkill,
+											follow: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.FollowUser,
+											follow: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.FriendAcceptUser,
+											follow: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.Joined
+										},
+										{
+											type: UserActivityType.PublishPost,
+											post: { isNot: null as any }
+										},
+										{
+											type: UserActivityType.UpvotePost,
+											post: { isNot: null as any }
+										}
+									]
+								}
+							})
+							.then((items) => {
+								return items.map((item) => ({
+									__typename: `UserActivity${item.type}`,
+									...item
+								}));
+							}),
+					() =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								include: {
+									_count: {
+										select: {
+											activities: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.activities ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("activityFeed", {
 			type: "UserActivityConnection",
 			args: {

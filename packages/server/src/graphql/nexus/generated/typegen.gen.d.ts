@@ -1197,7 +1197,6 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
     viewer: NexusGenRootTypes['User'] | null; // User
-    viewerActivityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
   }
   RejectFriendshipPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
@@ -1360,6 +1359,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
+    activities: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     chats: NexusGenRootTypes['ChatConnection']; // ChatConnection!
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
@@ -1902,7 +1902,6 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     users: 'UserConnection'
     viewer: 'User'
-    viewerActivityFeed: 'UserActivityConnection'
   }
   RejectFriendshipPayload: { // field return type name
     query: 'Query'
@@ -2065,6 +2064,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   User: { // field return type name
+    activities: 'UserActivityConnection'
     activityFeed: 'UserActivityConnection'
     chats: 'ChatConnection'
     comments: 'CommentConnection'
@@ -2478,13 +2478,6 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
-    viewerActivityFeed: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
-    }
   }
   Skill: {
     desiringUsers: { // args
@@ -2510,6 +2503,13 @@ export interface NexusGenArgTypes {
     }
   }
   User: {
+    activities: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
+    }
     activityFeed: { // args
       after?: string | null; // String
       before?: string | null; // String
