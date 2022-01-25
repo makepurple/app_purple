@@ -519,6 +519,66 @@ interface MutationPayload {
   viewer: User
 }
 
+interface Notification {
+  id: ID!
+  opened: Boolean!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type NotificationChatMessageReceived implements Notification {
+  chat: Chat!
+  chatId: String!
+  id: ID!
+  opened: Boolean!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type NotificationConnection implements Connection {
+  edges: [NotificationEdge!]!
+  nodes: [Notification!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type NotificationEdge implements ConnectionEdge {
+  cursor: String!
+  node: Notification!
+}
+
+type NotificationFriendshipRequested implements Notification {
+  friendship: Friendship!
+  friendshipId: String!
+  id: ID!
+  opened: Boolean!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type NotificationPostCommented implements Notification {
+  id: ID!
+  opened: Boolean!
+  post: Post!
+  postId: String!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+enum NotificationType {
+  ChatMessageReceived
+  FriendshipRequested
+  PostCommented
+}
+
 input OrderByRelationAggregateInput {
   _count: SortOrder
 }
@@ -663,7 +723,6 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
-  viewerActivityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
 }
 
 type RejectFriendshipPayload implements MutationPayload {
@@ -1000,6 +1059,8 @@ type UpvotePostPayload implements MutationPayload {
 }
 
 type User implements Followable {
+  activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
+  activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
@@ -1016,6 +1077,7 @@ type User implements Followable {
   id: ID!
   image: String
   name: String!
+  notifications(after: String, before: String, first: Int, last: Int): NotificationConnection!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!

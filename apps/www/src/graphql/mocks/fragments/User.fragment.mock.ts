@@ -30,6 +30,32 @@ const skills = [
 
 export const User_fragment_mock: User = {
 	__typename: "User" as const,
+	activities: {
+		__typename: "UserActivityConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
+	activityFeed: {
+		__typename: "UserActivityConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	chats: {
 		__typename: "ChatConnection",
 		pageInfo: {
@@ -134,6 +160,19 @@ export const User_fragment_mock: User = {
 	id: "0",
 	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
 	name: "leedavidcs",
+	notifications: {
+		__typename: "NotificationConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	posts: {
 		__typename: "PostConnection",
 		pageInfo: {

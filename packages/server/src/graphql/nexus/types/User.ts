@@ -508,34 +508,39 @@ export const User = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const connection = await findManyCursorConnection<any, { id: string }>(
-					(paginationArgs) =>
-						prisma.user
-							.findUnique({ where: { id: parent.id } })
-							.notifications({
-								...paginationArgs,
-								where: {
-									OR: [
-										{
-											type: NotificationType.ChatMessageReceived,
-											chat: { isNot: null as any }
-										},
-										{
-											type: NotificationType.FriendshipRequested,
-											friendship: { isNot: null }
-										},
-										{
-											type: NotificationType.PostCommented,
-											post: { isNot: null as any }
+					async ({ cursor, skip, take }) =>
+						!take
+							? // Skip running any query if take is 0
+							  await Promise.resolve([])
+							: await prisma.user
+									.findUnique({ where: { id: parent.id } })
+									.notifications({
+										cursor,
+										skip,
+										take,
+										where: {
+											OR: [
+												{
+													type: NotificationType.ChatMessageReceived,
+													chat: { isNot: null as any }
+												},
+												{
+													type: NotificationType.FriendshipRequested,
+													friendship: { isNot: null }
+												},
+												{
+													type: NotificationType.PostCommented,
+													post: { isNot: null as any }
+												}
+											]
 										}
-									]
-								}
-							})
-							.then((items) => {
-								return items.map((item) => ({
-									__typename: `Notification${item.type}`,
-									...item
-								}));
-							}),
+									})
+									.then((items) => {
+										return items.map((item) => ({
+											__typename: `Notification${item.type}`,
+											...item
+										}));
+									}),
 					() =>
 						prisma.user
 							.findUnique({

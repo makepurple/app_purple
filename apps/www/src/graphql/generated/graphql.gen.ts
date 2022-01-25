@@ -834,6 +834,71 @@ export type MutationPayload = {
   readonly viewer?: Maybe<User>;
 };
 
+export type Notification = {
+  readonly id: Scalars['ID'];
+  readonly opened: Scalars['Boolean'];
+  readonly type: NotificationType;
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type NotificationChatMessageReceived = Notification & {
+  readonly __typename: 'NotificationChatMessageReceived';
+  readonly chat: Chat;
+  readonly chatId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly opened: Scalars['Boolean'];
+  readonly type: NotificationType;
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type NotificationConnection = Connection & {
+  readonly __typename: 'NotificationConnection';
+  readonly edges: ReadonlyArray<NotificationEdge>;
+  readonly nodes: ReadonlyArray<Notification>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type NotificationEdge = ConnectionEdge & {
+  readonly __typename: 'NotificationEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: Notification;
+};
+
+export type NotificationFriendshipRequested = Notification & {
+  readonly __typename: 'NotificationFriendshipRequested';
+  readonly friendship: Friendship;
+  readonly friendshipId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly opened: Scalars['Boolean'];
+  readonly type: NotificationType;
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export type NotificationPostCommented = Notification & {
+  readonly __typename: 'NotificationPostCommented';
+  readonly id: Scalars['ID'];
+  readonly opened: Scalars['Boolean'];
+  readonly post: Post;
+  readonly postId: Scalars['String'];
+  readonly type: NotificationType;
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
+export enum NotificationType {
+  ChatMessageReceived = 'ChatMessageReceived',
+  FriendshipRequested = 'FriendshipRequested',
+  PostCommented = 'PostCommented'
+}
+
 export type OrderByRelationAggregateInput = {
   readonly _count?: InputMaybe<SortOrder>;
 };
@@ -1020,7 +1085,6 @@ export type Query = {
   readonly user?: Maybe<User>;
   readonly users: UserConnection;
   readonly viewer?: Maybe<User>;
-  readonly viewerActivityFeed: UserActivityConnection;
 };
 
 
@@ -1150,16 +1214,6 @@ export type QueryUsersArgs = {
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<ReadonlyArray<UserOrderByInput>>;
   where?: InputMaybe<UserWhereInput>;
-};
-
-
-/** Root query type */
-export type QueryViewerActivityFeedArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<UserActivityWhereInput>;
 };
 
 export type RejectFriendshipPayload = MutationPayload & {
@@ -1549,6 +1603,8 @@ export type UpvotePostPayload = MutationPayload & {
 
 export type User = Followable & {
   readonly __typename: 'User';
+  readonly activities: UserActivityConnection;
+  readonly activityFeed: UserActivityConnection;
   readonly chats: ChatConnection;
   readonly comments: CommentConnection;
   readonly createdAt: Scalars['DateTime'];
@@ -1565,6 +1621,7 @@ export type User = Followable & {
   readonly id: Scalars['ID'];
   readonly image?: Maybe<Scalars['String']>;
   readonly name: Scalars['String'];
+  readonly notifications: NotificationConnection;
   readonly posts: PostConnection;
   readonly repositories: ReadonlyArray<Repository>;
   readonly skills: SkillConnection;
@@ -1573,6 +1630,24 @@ export type User = Followable & {
   readonly viewerFollowing: Scalars['Boolean'];
   readonly viewerFriended: Scalars['Boolean'];
   readonly viewerIsFriend: Scalars['Boolean'];
+};
+
+
+export type UserActivitiesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserActivityWhereInput>;
+};
+
+
+export type UserActivityFeedArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserActivityWhereInput>;
 };
 
 
@@ -1638,6 +1713,14 @@ export type UserFriendsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type UserNotificationsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -2085,6 +2168,11 @@ export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
+
+export type GetNotificationCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNotificationCountQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null | undefined };
 
 export type GetPostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3383,6 +3471,19 @@ export const GetMyUserDocument = /*#__PURE__*/ gql`
 
 export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
+};
+export const GetNotificationCountDocument = /*#__PURE__*/ gql`
+    query GetNotificationCount {
+  viewer {
+    notifications(first: 0) {
+      totalCount
+    }
+  }
+}
+    `;
+
+export function useGetNotificationCountQuery(options: Omit<Urql.UseQueryArgs<GetNotificationCountQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetNotificationCountQuery>({ query: GetNotificationCountDocument, ...options });
 };
 export const GetPostDocument = /*#__PURE__*/ gql`
     query GetPost($where: PostWhereUniqueInput!) {

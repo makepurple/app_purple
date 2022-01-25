@@ -1,0 +1,7 @@
+query GetNotificationCount {
+	viewer {
+		notifications(first: 0) {
+			totalCount
+		}
+	}
+}

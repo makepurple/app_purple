@@ -27,6 +27,7 @@ export * from "./LoginButton";
 export * from "./LogoutButton";
 export * from "./MobileAppDrawer";
 export * from "./NewPostButton";
+export * from "./NotificationBell";
 export * from "./OrganizationInput";
 export * from "./PostCard";
 export * from "./PostGuidelines";
