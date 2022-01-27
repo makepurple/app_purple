@@ -1,4 +1,3 @@
-import { NotificationType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { NotFoundError, PrismaUtils } from "../../../utils";
 
@@ -29,28 +28,9 @@ export const requestFriendship = mutationField("requestFriendship", {
 			},
 			create: {
 				friender: { connect: { id: user.id } },
-				friending: { connect: PrismaUtils.nonNull(args.where) },
-				notifications: {
-					create: {
-						type: NotificationType.FriendshipRequested,
-						user: { connect: { id: toFriend.id } }
-					}
-				}
+				friending: { connect: PrismaUtils.nonNull(args.where) }
 			},
-			update: {
-				notifications: {
-					updateMany: {
-						where: {
-							type: NotificationType.FriendshipRequested,
-							userId: toFriend.id
-						},
-						data: {
-							opened: false,
-							updatedAt: new Date()
-						}
-					}
-				}
-			}
+			update: {}
 		});
 
 		return { record };

@@ -551,17 +551,6 @@ type NotificationEdge implements ConnectionEdge {
   node: Notification!
 }
 
-type NotificationFriendshipRequested implements Notification {
-  friendship: Friendship!
-  friendshipId: String!
-  id: ID!
-  opened: Boolean!
-  type: NotificationType!
-  updatedAt: DateTime!
-  user: User!
-  userId: String!
-}
-
 type NotificationPostCommented implements Notification {
   id: ID!
   opened: Boolean!
@@ -575,7 +564,6 @@ type NotificationPostCommented implements Notification {
 
 enum NotificationType {
   ChatMessageReceived
-  FriendshipRequested
   PostCommented
 }
 

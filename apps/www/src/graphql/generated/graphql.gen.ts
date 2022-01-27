@@ -869,18 +869,6 @@ export type NotificationEdge = ConnectionEdge & {
   readonly node: Notification;
 };
 
-export type NotificationFriendshipRequested = Notification & {
-  readonly __typename: 'NotificationFriendshipRequested';
-  readonly friendship: Friendship;
-  readonly friendshipId: Scalars['String'];
-  readonly id: Scalars['ID'];
-  readonly opened: Scalars['Boolean'];
-  readonly type: NotificationType;
-  readonly updatedAt: Scalars['DateTime'];
-  readonly user: User;
-  readonly userId: Scalars['String'];
-};
-
 export type NotificationPostCommented = Notification & {
   readonly __typename: 'NotificationPostCommented';
   readonly id: Scalars['ID'];
@@ -895,7 +883,6 @@ export type NotificationPostCommented = Notification & {
 
 export enum NotificationType {
   ChatMessageReceived = 'ChatMessageReceived',
-  FriendshipRequested = 'FriendshipRequested',
   PostCommented = 'PostCommented'
 }
 
