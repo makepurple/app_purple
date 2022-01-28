@@ -1098,6 +1098,7 @@ type User implements Followable {
   image: String
   name: String!
   notifications(after: String, before: String, first: Int, last: Int): NotificationConnection!
+  notificationsLastOpenedAt: DateTime!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!

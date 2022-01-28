@@ -551,6 +551,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.field(NexusPrisma.User.notificationsLastOpenedAt);
 		t.nonNull.field("posts", {
 			type: "PostConnection",
 			args: {

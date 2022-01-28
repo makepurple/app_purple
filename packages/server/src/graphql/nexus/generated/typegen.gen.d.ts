@@ -702,6 +702,7 @@ export interface NexusGenObjects {
     id: string; // ID!
     image?: string | null; // String
     name: string; // String!
+    notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   UserActivityCommentPost: { // root type
     comment: NexusGenRootTypes['Comment']; // Comment!
@@ -1359,6 +1360,7 @@ export interface NexusGenFieldTypes {
     image: string | null; // String
     name: string; // String!
     notifications: NexusGenRootTypes['NotificationConnection']; // NotificationConnection!
+    notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
@@ -2054,6 +2056,7 @@ export interface NexusGenFieldTypeNames {
     image: 'String'
     name: 'String'
     notifications: 'NotificationConnection'
+    notificationsLastOpenedAt: 'DateTime'
     posts: 'PostConnection'
     repositories: 'Repository'
     skills: 'SkillConnection'
