@@ -28,6 +28,7 @@ export * from "./LogoutButton";
 export * from "./MobileAppDrawer";
 export * from "./NewPostButton";
 export * from "./NotificationBell";
+export * from "./NotificationCardChatMessageReceived";
 export * from "./NotificationCardPostCommented";
 export * from "./OrganizationInput";
 export * from "./PostCard";

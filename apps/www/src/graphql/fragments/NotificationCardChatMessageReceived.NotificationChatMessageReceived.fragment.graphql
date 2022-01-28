@@ -1,0 +1,17 @@
+fragment NotificationCardChatMessageReceived on NotificationChatMessageReceived {
+	id
+	chat {
+		id
+		users(first: 3) {
+			totalCount
+			nodes {
+				id
+				image
+				name
+			}
+		}
+	}
+	chatId
+	opened
+	updatedAt
+}

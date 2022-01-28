@@ -1382,6 +1382,7 @@ export type StringNullableFilter = {
   readonly endsWith?: InputMaybe<Scalars['String']>;
   readonly equals?: InputMaybe<Scalars['String']>;
   readonly in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly not?: InputMaybe<StringNullableFilter>;
   readonly notIn?: InputMaybe<ReadonlyArray<Scalars['String']>>;
   readonly startsWith?: InputMaybe<Scalars['String']>;
 };
@@ -1609,6 +1610,7 @@ export type User = Followable & {
   readonly image?: Maybe<Scalars['String']>;
   readonly name: Scalars['String'];
   readonly notifications: NotificationConnection;
+  readonly notificationsLastOpenedAt: Scalars['DateTime'];
   readonly posts: PostConnection;
   readonly repositories: ReadonlyArray<Repository>;
   readonly skills: SkillConnection;
@@ -1894,7 +1896,9 @@ export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __ty
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } } };
 
-export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } };
+export type NotificationCardChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } };
+
+export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } };
 
 export type PageInfoFragmentFragment = { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined };
 
@@ -2434,9 +2438,29 @@ export const ExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
   type
 }
     `;
+export const NotificationCardChatMessageReceivedFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardChatMessageReceived on NotificationChatMessageReceived {
+  id
+  chat {
+    id
+    users(first: 3) {
+      totalCount
+      nodes {
+        id
+        image
+        name
+      }
+    }
+  }
+  chatId
+  opened
+  updatedAt
+}
+    `;
 export const NotificationCardPostCommentedNotificationPostCommentedFragmentDoc = /*#__PURE__*/ gql`
     fragment NotificationCardPostCommentedNotificationPostCommented on NotificationPostCommented {
   id
+  opened
   post {
     id
     authorName

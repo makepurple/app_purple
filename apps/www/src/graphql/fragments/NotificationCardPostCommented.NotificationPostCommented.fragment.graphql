@@ -1,5 +1,6 @@
 fragment NotificationCardPostCommentedNotificationPostCommented on NotificationPostCommented {
 	id
+	opened
 	post {
 		id
 		authorName

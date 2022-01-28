@@ -8,8 +8,8 @@ import { NotificationCardPostCommentedNotificationPostCommentedFragment } from "
 
 const Root = tw.div`
 	flex
-	items-stretch
-	py-4
+	items-center
+	h-24
 	cursor-pointer
 	active:bg-indigo-50
 `;
@@ -84,17 +84,17 @@ export const NotificationCardPostCommented = forwardRef<
 					</div>
 				</StyledAvatar>
 			</NextLink>
-			<Details>
-				<NextLink
-					href="/[userName]/[postTitle]"
-					as={`/${post.authorName}/${post.urlSlug}`}
-					passHref
-				>
+			<NextLink
+				href="/[userName]/[postTitle]"
+				as={`/${post.authorName}/${post.urlSlug}`}
+				passHref
+			>
+				<Details>
 					<Title>
 						You have new comments on: <b>&quot;{post.title}&quot;</b>
 					</Title>
-				</NextLink>
-			</Details>
+				</Details>
+			</NextLink>
 			<LeftContent tw="ml-6">
 				<UpdatedAt>{dayjs(notification.updatedAt).fromNow()}</UpdatedAt>
 			</LeftContent>
