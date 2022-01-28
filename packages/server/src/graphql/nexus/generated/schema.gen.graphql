@@ -869,6 +869,7 @@ input StringNullableFilter {
   endsWith: String
   equals: String
   in: [String!]
+  not: StringNullableFilter
   notIn: [String!]
   startsWith: String
 }

@@ -257,6 +257,7 @@ export interface NexusGenInputs {
     endsWith?: string | null; // String
     equals?: string | null; // String
     in?: string[] | null; // [String!]
+    not?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
