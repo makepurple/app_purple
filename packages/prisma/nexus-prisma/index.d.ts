@@ -3704,58 +3704,6 @@ export interface Notification {
     resolve: NexusCore.FieldResolver<'Notification', 'chatId'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Notification.opened`.
-    *
-    * ### ️⚠️ You have not writen documentation for model Notification
-    *
-    * Replace this default advisory JSDoc with your own documentation about model Notification
-    * by documenting it in your Prisma schema. For example:
-    * ```prisma
-    * model Notification {
-    *   /// Lorem ipsum dolor sit amet.
-    *   opened  Boolean
-    * }
-    * ```
-    *
-    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
-    *
-    * @example
-    *
-    * import { objectType } from 'nexus'
-    * import { Notification } from 'nexus-prisma'
-    *
-    * objectType({
-    *   name: Notification.$name
-    *   description: Notification.$description
-    *   definition(t) {
-    *     t.field(Notification.opened)
-    *   }
-    * })
-    */
-  opened: {
-    /**
-     * The name of this field.
-     */
-    name: 'opened'
-  
-    /**
-     * The type of this field.
-     */
-    type: 'Boolean' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Boolean'>
-    : 'Warning/Error: The type \'Boolean\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Boolean\' to your GraphQL API.'
-  
-    /**
-     * The documentation of this field.
-     */
-    description: undefined
-  
-    /**
-     * The resolver of this field
-     */
-    resolve: NexusCore.FieldResolver<'Notification', 'opened'>
-  }
-  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Notification.post`.
     *
     * ### ️⚠️ You have not writen documentation for model Notification

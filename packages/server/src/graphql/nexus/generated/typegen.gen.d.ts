@@ -524,7 +524,6 @@ export interface NexusGenObjects {
     chat: NexusGenRootTypes['Chat']; // Chat!
     chatId: string; // String!
     id: string; // ID!
-    opened: boolean; // Boolean!
     type: NexusGenEnums['NotificationType']; // NotificationType!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
@@ -540,7 +539,6 @@ export interface NexusGenObjects {
   }
   NotificationPostCommented: { // root type
     id: string; // ID!
-    opened: boolean; // Boolean!
     post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
     type: NexusGenEnums['NotificationType']; // NotificationType!
