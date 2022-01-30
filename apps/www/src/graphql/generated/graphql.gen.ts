@@ -1922,9 +1922,9 @@ export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __ty
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null | undefined, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null | undefined, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null | undefined, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null | undefined, readonly url: string } } };
 
-export type NotificationCardChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } };
+export type NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } };
 
-export type NotificationCardFriendshipAcceptedFragment = { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } };
+export type NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment = { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } };
 
 export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } };
 
@@ -2194,6 +2194,14 @@ export type GetNotificationCountQueryVariables = Exact<{ [key: string]: never; }
 
 
 export type GetNotificationCountQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null | undefined };
+
+export type GetNotificationsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } }> }, readonly notificationCount: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null | undefined };
 
 export type GetPostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -2466,8 +2474,8 @@ export const ExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
   type
 }
     `;
-export const NotificationCardChatMessageReceivedFragmentDoc = /*#__PURE__*/ gql`
-    fragment NotificationCardChatMessageReceived on NotificationChatMessageReceived {
+export const NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardChatMessageReceivedNotificationChatMessageReceived on NotificationChatMessageReceived {
   id
   chat {
     id
@@ -2485,8 +2493,8 @@ export const NotificationCardChatMessageReceivedFragmentDoc = /*#__PURE__*/ gql`
   updatedAt
 }
     `;
-export const NotificationCardFriendshipAcceptedFragmentDoc = /*#__PURE__*/ gql`
-    fragment NotificationCardFriendshipAccepted on NotificationFriendshipAccepted {
+export const NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardFriendshipAcceptedNotificationFriendshipAccepted on NotificationFriendshipAccepted {
   id
   opened
   friendship {
@@ -3546,7 +3554,7 @@ export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQuery
 export const GetNotificationCountDocument = /*#__PURE__*/ gql`
     query GetNotificationCount {
   viewer {
-    notifications(first: 0) {
+    notifications(first: 0, where: {opened: false}) {
       totalCount
     }
   }
@@ -3555,6 +3563,42 @@ export const GetNotificationCountDocument = /*#__PURE__*/ gql`
 
 export function useGetNotificationCountQuery(options: Omit<Urql.UseQueryArgs<GetNotificationCountQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetNotificationCountQuery>({ query: GetNotificationCountDocument, ...options });
+};
+export const GetNotificationsDocument = /*#__PURE__*/ gql`
+    query GetNotifications($after: String, $first: Int) {
+  viewer {
+    notifications(after: $after, first: $first) {
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        __typename
+        id
+        ... on NotificationChatMessageReceived {
+          ...NotificationCardChatMessageReceivedNotificationChatMessageReceived
+        }
+        ... on NotificationFriendshipAccepted {
+          ...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
+        }
+        ... on NotificationPostCommented {
+          ...NotificationCardPostCommentedNotificationPostCommented
+        }
+      }
+    }
+    notificationCount: notifications(first: 0, where: {opened: false}) {
+      totalCount
+    }
+  }
+}
+    ${NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc}
+${NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragmentDoc}
+${NotificationCardPostCommentedNotificationPostCommentedFragmentDoc}`;
+
+export function useGetNotificationsQuery(options: Omit<Urql.UseQueryArgs<GetNotificationsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetNotificationsQuery>({ query: GetNotificationsDocument, ...options });
 };
 export const GetPostDocument = /*#__PURE__*/ gql`
     query GetPost($where: PostWhereUniqueInput!) {

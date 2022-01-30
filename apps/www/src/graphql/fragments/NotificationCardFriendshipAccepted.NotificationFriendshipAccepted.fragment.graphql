@@ -1,4 +1,4 @@
-fragment NotificationCardFriendshipAccepted on NotificationFriendshipAccepted {
+fragment NotificationCardFriendshipAcceptedNotificationFriendshipAccepted on NotificationFriendshipAccepted {
 	id
 	opened
 	friendship {

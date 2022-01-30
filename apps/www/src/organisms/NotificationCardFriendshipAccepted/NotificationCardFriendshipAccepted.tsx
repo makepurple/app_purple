@@ -3,7 +3,7 @@ import { dayjs } from "@makepurple/utils";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
-import { NotificationCardFriendshipAcceptedFragment } from "../../graphql";
+import { NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment } from "../../graphql";
 import { NotificationCardBase } from "../NotificationCardBase";
 
 const StyledAvatar = tw(Avatar)`
@@ -35,7 +35,7 @@ const UpdatedAt = tw.span`
 
 export interface NotificationCardFriendshipAcceptedProps {
 	className?: string;
-	notification: NotificationCardFriendshipAcceptedFragment;
+	notification: NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment;
 	style?: CSSProperties;
 }
 

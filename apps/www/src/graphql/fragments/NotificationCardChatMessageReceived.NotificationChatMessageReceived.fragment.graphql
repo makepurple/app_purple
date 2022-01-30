@@ -1,4 +1,4 @@
-fragment NotificationCardChatMessageReceived on NotificationChatMessageReceived {
+fragment NotificationCardChatMessageReceivedNotificationChatMessageReceived on NotificationChatMessageReceived {
 	id
 	chat {
 		id

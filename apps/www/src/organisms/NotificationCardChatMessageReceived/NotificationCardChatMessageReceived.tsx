@@ -5,7 +5,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw from "twin.macro";
-import { NotificationCardChatMessageReceivedFragment } from "../../graphql";
+import { NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment } from "../../graphql";
 import { NotificationCardBase } from "../NotificationCardBase";
 
 const ParticipantAvatars = tw(AvatarGroup)`
@@ -59,7 +59,7 @@ const UpdatedAt = tw.span`
 
 export interface NotificationCardChatMessageReceivedProps {
 	className?: string;
-	notification: NotificationCardChatMessageReceivedFragment;
+	notification: NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment;
 	style?: CSSProperties;
 }
 

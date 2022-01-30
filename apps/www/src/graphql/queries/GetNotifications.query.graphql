@@ -1,0 +1,36 @@
+query GetNotifications($after: String, $first: Int) {
+	viewer {
+		notifications(
+			after: $after
+			first: $first
+		) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				__typename
+				id
+				... on NotificationChatMessageReceived {
+					...NotificationCardChatMessageReceivedNotificationChatMessageReceived
+				}
+				... on NotificationFriendshipAccepted {
+					...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
+				}
+				... on NotificationPostCommented {
+					...NotificationCardPostCommentedNotificationPostCommented
+				}
+			}
+		}
+		notificationCount: notifications(
+			first: 0
+			where: {
+				opened: false
+			}
+		) {
+			totalCount
+		}
+	}
+}
