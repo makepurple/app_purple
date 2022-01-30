@@ -535,6 +535,10 @@ export const User = objectType({
 													chat: { isNot: null as any }
 												},
 												{
+													type: NotificationType.FriendshipAccepted,
+													friendship: { isNot: null as any }
+												},
+												{
 													type: NotificationType.PostCommented,
 													post: { isNot: null as any }
 												}

@@ -320,7 +320,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
   FollowingType: "Skill" | "User"
-  NotificationType: "ChatMessageReceived" | "PostCommented"
+  NotificationType: "ChatMessageReceived" | "FriendshipAccepted" | "PostCommented"
   SortOrder: "asc" | "desc"
   UserActivityType: "CommentPost" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvotePost"
 }
@@ -540,6 +540,14 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Notification']; // Notification!
   }
+  NotificationFriendshipAccepted: { // root type
+    friendship: NexusGenRootTypes['Friendship']; // Friendship!
+    friendshipId: string; // String!
+    id: string; // ID!
+    type: NexusGenEnums['NotificationType']; // NotificationType!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
   NotificationPostCommented: { // root type
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
@@ -712,8 +720,8 @@ export interface NexusGenObjects {
   UserActivityCommentPost: { // root type
     comment: NexusGenRootTypes['Comment']; // Comment!
     commentId: string; // String!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityConnection: { // root type
@@ -726,43 +734,43 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['UserActivity']; // UserActivity!
   }
   UserActivityFollowSkill: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     follow: NexusGenRootTypes['Follow']; // Follow!
     followId: string; // String!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityFollowUser: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     follow: NexusGenRootTypes['Follow']; // Follow!
     followId: string; // String!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityFriendAcceptUser: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     friendship: NexusGenRootTypes['Friendship']; // Friendship!
     friendshipId: string; // String!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityJoined: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityPublishPost: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityUpvotePost: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserConnection: { // root type
@@ -782,7 +790,7 @@ export interface NexusGenInterfaces {
   Followable: core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'AddDesiredSkillMutationPayload', 'required'> | core.Discriminate<'AddSkillMutationPayload', 'required'> | core.Discriminate<'CreateChatPayload', 'required'> | core.Discriminate<'CreateCommentPayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowSkillPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'InviteToChatPayload', 'required'> | core.Discriminate<'LeaveChatPayload', 'required'> | core.Discriminate<'OpenNotificationsPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemoveDesiredSkillMutationPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RemoveSkillMutationPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'SendChatMessagePayload', 'required'> | core.Discriminate<'UnfollowSkillPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'>;
-  Notification: core.Discriminate<'NotificationChatMessageReceived', 'required'> | core.Discriminate<'NotificationPostCommented', 'required'>;
+  Notification: core.Discriminate<'NotificationChatMessageReceived', 'required'> | core.Discriminate<'NotificationFriendshipAccepted', 'required'> | core.Discriminate<'NotificationPostCommented', 'required'>;
   UserActivity: core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   WithGitHubRepository: core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'>;
 }
@@ -1101,6 +1109,16 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Notification']; // Notification!
   }
+  NotificationFriendshipAccepted: { // field return type
+    friendship: NexusGenRootTypes['Friendship']; // Friendship!
+    friendshipId: string; // String!
+    id: string; // ID!
+    opened: boolean; // Boolean!
+    type: NexusGenEnums['NotificationType']; // NotificationType!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
   NotificationPostCommented: { // field return type
     id: string; // ID!
     opened: boolean; // Boolean!
@@ -1384,8 +1402,8 @@ export interface NexusGenFieldTypes {
   UserActivityCommentPost: { // field return type
     comment: NexusGenRootTypes['Comment']; // Comment!
     commentId: string; // String!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
@@ -1400,48 +1418,48 @@ export interface NexusGenFieldTypes {
     node: NexusGenRootTypes['UserActivity']; // UserActivity!
   }
   UserActivityFollowSkill: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     follow: NexusGenRootTypes['Follow']; // Follow!
     followId: string; // String!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
   UserActivityFollowUser: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     follow: NexusGenRootTypes['Follow']; // Follow!
     followId: string; // String!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
   UserActivityFriendAcceptUser: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     friendship: NexusGenRootTypes['Friendship']; // Friendship!
     friendshipId: string; // String!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
   UserActivityJoined: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
   UserActivityPublishPost: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
   UserActivityUpvotePost: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
@@ -1484,8 +1502,8 @@ export interface NexusGenFieldTypes {
     userId: string; // String!
   }
   UserActivity: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
@@ -1803,6 +1821,16 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'Notification'
   }
+  NotificationFriendshipAccepted: { // field return type name
+    friendship: 'Friendship'
+    friendshipId: 'String'
+    id: 'ID'
+    opened: 'Boolean'
+    type: 'NotificationType'
+    updatedAt: 'DateTime'
+    user: 'User'
+    userId: 'String'
+  }
   NotificationPostCommented: { // field return type name
     id: 'ID'
     opened: 'Boolean'
@@ -2086,8 +2114,8 @@ export interface NexusGenFieldTypeNames {
   UserActivityCommentPost: { // field return type name
     comment: 'Comment'
     commentId: 'String'
-    createdAt: 'DateTime'
     id: 'ID'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
@@ -2102,48 +2130,48 @@ export interface NexusGenFieldTypeNames {
     node: 'UserActivity'
   }
   UserActivityFollowSkill: { // field return type name
-    createdAt: 'DateTime'
     follow: 'Follow'
     followId: 'String'
     id: 'ID'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
   UserActivityFollowUser: { // field return type name
-    createdAt: 'DateTime'
     follow: 'Follow'
     followId: 'String'
     id: 'ID'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
   UserActivityFriendAcceptUser: { // field return type name
-    createdAt: 'DateTime'
     friendship: 'Friendship'
     friendshipId: 'String'
     id: 'ID'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
   UserActivityJoined: { // field return type name
-    createdAt: 'DateTime'
     id: 'ID'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
   UserActivityPublishPost: { // field return type name
-    createdAt: 'DateTime'
     id: 'ID'
     post: 'Post'
     postId: 'String'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
   UserActivityUpvotePost: { // field return type name
-    createdAt: 'DateTime'
     id: 'ID'
     post: 'Post'
     postId: 'String'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
@@ -2186,8 +2214,8 @@ export interface NexusGenFieldTypeNames {
     userId: 'String'
   }
   UserActivity: { // field return type name
-    createdAt: 'DateTime'
     id: 'ID'
+    updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
   }
@@ -2597,7 +2625,7 @@ export interface NexusGenAbstractTypeMembers {
   Followable: "Skill" | "User"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationPayload: "AcceptFriendshipPayload" | "AddDesiredSkillMutationPayload" | "AddSkillMutationPayload" | "CreateChatPayload" | "CreateCommentPayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DownvoteCommentPayload" | "FollowSkillPayload" | "FollowUserPayload" | "InviteToChatPayload" | "LeaveChatPayload" | "OpenNotificationsPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemoveDesiredSkillMutationPayload" | "RemovePostThumbnailPayload" | "RemoveSkillMutationPayload" | "RequestFriendshipPayload" | "SendChatMessagePayload" | "UnfollowSkillPayload" | "UnfollowUserPayload" | "UnvoteCommentPayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCommentPayload" | "UpvotePostPayload"
-  Notification: "NotificationChatMessageReceived" | "NotificationPostCommented"
+  Notification: "NotificationChatMessageReceived" | "NotificationFriendshipAccepted" | "NotificationPostCommented"
   UserActivity: "UserActivityCommentPost" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvotePost"
   WithGitHubRepository: "Repository" | "Skill"
 }
@@ -2635,6 +2663,7 @@ export interface NexusGenTypeInterfaces {
   NotificationChatMessageReceived: "Notification"
   NotificationConnection: "Connection"
   NotificationEdge: "ConnectionEdge"
+  NotificationFriendshipAccepted: "Notification"
   NotificationPostCommented: "Notification"
   OpenNotificationsPayload: "MutationPayload"
   PostConnection: "Connection"

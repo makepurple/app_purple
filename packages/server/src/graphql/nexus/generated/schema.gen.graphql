@@ -566,6 +566,17 @@ type NotificationEdge implements ConnectionEdge {
   node: Notification!
 }
 
+type NotificationFriendshipAccepted implements Notification {
+  friendship: Friendship!
+  friendshipId: String!
+  id: ID!
+  opened: Boolean!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
 type NotificationPostCommented implements Notification {
   id: ID!
   opened: Boolean!
@@ -579,6 +590,7 @@ type NotificationPostCommented implements Notification {
 
 enum NotificationType {
   ChatMessageReceived
+  FriendshipAccepted
   PostCommented
 }
 
@@ -1122,8 +1134,8 @@ type User implements Followable {
 }
 
 interface UserActivity {
-  createdAt: DateTime!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -1131,8 +1143,8 @@ interface UserActivity {
 type UserActivityCommentPost implements UserActivity {
   comment: Comment!
   commentId: String!
-  createdAt: DateTime!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -1150,44 +1162,44 @@ type UserActivityEdge implements ConnectionEdge {
 }
 
 type UserActivityFollowSkill implements UserActivity {
-  createdAt: DateTime!
   follow: Follow!
   followId: String!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityFollowUser implements UserActivity {
-  createdAt: DateTime!
   follow: Follow!
   followId: String!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityFriendAcceptUser implements UserActivity {
-  createdAt: DateTime!
   friendship: Friendship!
   friendshipId: String!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityJoined implements UserActivity {
-  createdAt: DateTime!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityPublishPost implements UserActivity {
-  createdAt: DateTime!
   id: ID!
   post: Post!
   postId: String!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -1203,10 +1215,10 @@ enum UserActivityType {
 }
 
 type UserActivityUpvotePost implements UserActivity {
-  createdAt: DateTime!
   id: ID!
   post: Post!
   postId: String!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }

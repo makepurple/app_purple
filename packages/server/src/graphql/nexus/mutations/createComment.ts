@@ -71,7 +71,6 @@ export const createComment = mutationField("createComment", {
 								update: {
 									where: { id: post.notifications[0].id },
 									data: {
-										opened: false,
 										updatedAt: new Date()
 									}
 								}

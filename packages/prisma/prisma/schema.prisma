@@ -111,7 +111,6 @@ model UserActivity {
   id           String           @id @default(cuid())
   comment      Comment?         @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId    String?
-  createdAt    DateTime         @default(now())
   follow       Follow?          @relation(fields: [followId], references: [id], onDelete: Cascade)
   followId     String?
   friendship   Friendship?      @relation(fields: [friendshipId], references: [id], onDelete: Cascade)
@@ -119,12 +118,14 @@ model UserActivity {
   post         Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId       String?
   type         UserActivityType
+  updatedAt    DateTime         @updatedAt
   user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
 }
 
 enum NotificationType {
   ChatMessageReceived
+  FriendshipAccepted
   PostCommented
 }
 
@@ -132,6 +133,8 @@ model Notification {
   id           String           @id @default(cuid())
   chat         Chat?            @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId       String?
+  friendship   Friendship?      @relation(fields: [friendshipId], references: [id], onDelete: Cascade)
+  friendshipId String?
   post         Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId       String?
   type         NotificationType
@@ -148,6 +151,7 @@ model Friendship {
   frienderId    String
   friending     User           @relation("FriendingUser", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId   String
+  notifications Notification[]
   rejected      Boolean        @default(false)
   updatedAt     DateTime       @updatedAt
 

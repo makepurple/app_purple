@@ -48,6 +48,7 @@ export * from "./Notification";
 export * from "./NotificationChatMessageReceived";
 export * from "./NotificationConnection";
 export * from "./NotificationEdge";
+export * from "./NotificationFriendshipAccepted";
 export * from "./NotificationPostCommented";
 export * from "./OpenNotificationsPayload";
 export * from "./Organization";

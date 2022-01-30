@@ -73,7 +73,6 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 								}
 							},
 							data: {
-								opened: false,
 								updatedAt: new Date()
 							}
 						},
