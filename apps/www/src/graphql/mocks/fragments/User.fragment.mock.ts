@@ -129,7 +129,20 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
-	friendRequests: {
+	friendRequestsReceived: {
+		__typename: "UserConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
+	friendRequestsSent: {
 		__typename: "UserConnection",
 		pageInfo: {
 			__typename: "PageInfo",

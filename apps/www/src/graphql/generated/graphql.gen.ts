@@ -1627,7 +1627,8 @@ export type User = Followable & {
   readonly experiences: ReadonlyArray<Experience>;
   readonly followers: UserConnection;
   readonly following: FollowConnection;
-  readonly friendRequests: UserConnection;
+  readonly friendRequestsReceived: UserConnection;
+  readonly friendRequestsSent: UserConnection;
   readonly friends: UserConnection;
   readonly github: GitHubUser;
   readonly githubUrl: Scalars['URL'];
@@ -1712,7 +1713,16 @@ export type UserFollowingArgs = {
 };
 
 
-export type UserFriendRequestsArgs = {
+export type UserFriendRequestsReceivedArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type UserFriendRequestsSentArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;

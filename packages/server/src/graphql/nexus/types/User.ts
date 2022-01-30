@@ -388,7 +388,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.field("friendRequests", {
+		t.nonNull.field("friendRequestsReceived", {
 			type: "UserConnection",
 			args: {
 				after: stringArg(),
@@ -402,7 +402,58 @@ export const User = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const where: Prisma.FriendshipWhereInput = {
-					frienderId: parent.id,
+					friender: PrismaUtils.nonNull(args.where),
+					friending: {
+						id: { equals: parent.id },
+						friending: {
+							none: {
+								friending: { id: { equals: parent.id } }
+							}
+						}
+					},
+					rejected: false
+				};
+
+				const connection = await findManyCursorConnection<_User, { id: string }>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({ where: { id: parent.id } })
+							.friendedBy({
+								...paginationArgs,
+								where,
+								include: { friender: true }
+							})
+							.then((items) => items.map((item) => item.friender)),
+					() => prisma.friendship.count({ where }),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
+		t.nonNull.field("friendRequestsSent", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			authorize: (parent, args, { user }) => {
+				return user?.id === parent.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const where: Prisma.FriendshipWhereInput = {
+					friender: {
+						id: { equals: parent.id },
+						friending: {
+							none: {
+								friending: { id: { equals: parent.id } }
+							}
+						}
+					},
 					friending: PrismaUtils.nonNull(args.where),
 					rejected: false
 				};
@@ -416,9 +467,7 @@ export const User = objectType({
 								where,
 								include: { friending: true }
 							})
-							.then((friendRequests) =>
-								friendRequests.map((friendRequest) => friendRequest.friending)
-							),
+							.then((items) => items.map((item) => item.friending)),
 					() => prisma.friendship.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }

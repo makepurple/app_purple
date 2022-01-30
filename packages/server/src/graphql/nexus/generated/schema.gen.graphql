@@ -1114,7 +1114,8 @@ type User implements Followable {
   experiences: [Experience!]!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   following(after: String, before: String, first: Int, last: Int, where: FollowWhereInput): FollowConnection!
-  friendRequests(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  friendRequestsReceived(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  friendRequestsSent(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubUser!
   githubUrl: URL!

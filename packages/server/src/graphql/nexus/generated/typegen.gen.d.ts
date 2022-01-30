@@ -1381,7 +1381,8 @@ export interface NexusGenFieldTypes {
     experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
     followers: NexusGenRootTypes['UserConnection']; // UserConnection!
     following: NexusGenRootTypes['FollowConnection']; // FollowConnection!
-    friendRequests: NexusGenRootTypes['UserConnection']; // UserConnection!
+    friendRequestsReceived: NexusGenRootTypes['UserConnection']; // UserConnection!
+    friendRequestsSent: NexusGenRootTypes['UserConnection']; // UserConnection!
     friends: NexusGenRootTypes['UserConnection']; // UserConnection!
     github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
     githubUrl: NexusGenScalars['URL']; // URL!
@@ -2093,7 +2094,8 @@ export interface NexusGenFieldTypeNames {
     experiences: 'Experience'
     followers: 'UserConnection'
     following: 'FollowConnection'
-    friendRequests: 'UserConnection'
+    friendRequestsReceived: 'UserConnection'
+    friendRequestsSent: 'UserConnection'
     friends: 'UserConnection'
     github: 'GitHubUser'
     githubUrl: 'URL'
@@ -2573,7 +2575,14 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       where?: NexusGenInputs['FollowWhereInput'] | null; // FollowWhereInput
     }
-    friendRequests: { // args
+    friendRequestsReceived: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    friendRequestsSent: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
