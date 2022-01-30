@@ -543,7 +543,8 @@ export const User = objectType({
 													post: { isNot: null as any }
 												}
 											]
-										}
+										},
+										orderBy: [{ updatedAt: "desc" }]
 									})
 									.then((items) => {
 										return items.map((item) => ({
