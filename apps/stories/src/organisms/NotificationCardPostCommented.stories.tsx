@@ -16,4 +16,19 @@ Template.args = {
 };
 
 export const Standard = Template.bind({});
-Standard.args = { ...Template.args };
+Standard.args = {
+	...Template.args,
+	notification: {
+		...NotificationPostCommented_mock,
+		opened: true
+	}
+};
+
+export const Unopened = Template.bind({});
+Unopened.args = {
+	...Template.args,
+	notification: {
+		...NotificationPostCommented_mock,
+		opened: false
+	}
+};

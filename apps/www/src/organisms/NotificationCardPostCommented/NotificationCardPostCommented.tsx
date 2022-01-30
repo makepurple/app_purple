@@ -7,8 +7,6 @@ import tw from "twin.macro";
 import { NotificationCardPostCommentedNotificationPostCommentedFragment } from "../../graphql";
 import { NotificationCardBase } from "../NotificationCardBase";
 
-const Root = tw(NotificationCardBase)``;
-
 const StyledAvatar = tw(Avatar)`
 	flex-shrink-0
 	rounded-md
@@ -54,7 +52,7 @@ export const NotificationCardPostCommented = forwardRef<
 	const post = notification.post;
 
 	return (
-		<Root
+		<NotificationCardBase
 			ref={ref}
 			className={className}
 			onClick={async () => {
@@ -67,7 +65,7 @@ export const NotificationCardPostCommented = forwardRef<
 				);
 			}}
 			style={style}
-			unread
+			unread={!notification.opened}
 		>
 			<NextLink
 				href="/[userName]/[postTitle]"
@@ -94,7 +92,7 @@ export const NotificationCardPostCommented = forwardRef<
 			<LeftContent tw="ml-6">
 				<UpdatedAt>{dayjs(notification.updatedAt).fromNow()}</UpdatedAt>
 			</LeftContent>
-		</Root>
+		</NotificationCardBase>
 	);
 });
 

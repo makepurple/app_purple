@@ -2,12 +2,11 @@ import { Avatar, AvatarGroup, GitHubAvatarImage } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw from "twin.macro";
 import { NotificationCardChatMessageReceivedFragment } from "../../graphql";
 import { NotificationCardBase } from "../NotificationCardBase";
-
-const Root = tw(NotificationCardBase)``;
 
 const ParticipantAvatars = tw(AvatarGroup)`
 	flex-shrink-0
@@ -70,6 +69,7 @@ export const NotificationCardChatMessageReceived = forwardRef<
 >((props, ref) => {
 	const { className, notification, style } = props;
 
+	const router = useRouter();
 	const { data: session, status } = useSession();
 
 	const chat = notification.chat;
@@ -94,7 +94,18 @@ export const NotificationCardChatMessageReceived = forwardRef<
 	if (status !== "authenticated") return null;
 
 	return (
-		<Root ref={ref} className={className} style={style} unread>
+		<NotificationCardBase
+			ref={ref}
+			className={className}
+			onClick={async () => {
+				await router.push("/messaging/[[...slug]]", `/messaging/${chat.id}`);
+			}}
+			onMouseOver={async () => {
+				await router.prefetch("/messaging/[[...slug]]", `/messaging/${chat.id}`);
+			}}
+			style={style}
+			unread={!notification.opened}
+		>
 			<ParticipantAvatars tw="mr-6">
 				{participants.map(
 					(participant) =>
@@ -132,7 +143,7 @@ export const NotificationCardChatMessageReceived = forwardRef<
 			<LeftContent tw="ml-6">
 				<UpdatedAt>{dayjs(notification.updatedAt).fromNow()}</UpdatedAt>
 			</LeftContent>
-		</Root>
+		</NotificationCardBase>
 	);
 });
 

@@ -8,6 +8,7 @@ export const NotificationCardBase = styled.div<{ unread: boolean }>`
 		flex
 		items-center
 		h-24
+		px-4
 		border-l-4
 		border-solid
 		border-transparent
@@ -18,7 +19,6 @@ export const NotificationCardBase = styled.div<{ unread: boolean }>`
 	${({ unread }) =>
 		unread &&
 		tw`
-			px-4
 			border-indigo-500
 			bg-indigo-50
 		`}
