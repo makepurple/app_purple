@@ -12,14 +12,14 @@ const ParticipantAvatars = tw(AvatarGroup)`
 	flex-shrink-0
 `;
 
-const Details = tw.div`
+const Details = tw.a`
 	flex-grow
 	flex
 	flex-row
 	items-center
 `;
 
-const Title = tw.a`
+const Title = tw.span`
 	text-base
 	leading-tight
 `;

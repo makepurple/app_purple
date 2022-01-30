@@ -1,5 +1,5 @@
 import { NotificationCardPostCommented, NotificationCardPostCommentedProps } from "@makepurple/www";
-import { NotificationPostCommented_mock } from "@makepurple/www/src/graphql/mocks";
+import { NotificationPostCommented_fragment_mock } from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
@@ -12,14 +12,14 @@ const Template: Story<NotificationCardPostCommentedProps> = (args) => {
 	return <NotificationCardPostCommented {...args} />;
 };
 Template.args = {
-	notification: NotificationPostCommented_mock
+	notification: NotificationPostCommented_fragment_mock
 };
 
 export const Standard = Template.bind({});
 Standard.args = {
 	...Template.args,
 	notification: {
-		...NotificationPostCommented_mock,
+		...NotificationPostCommented_fragment_mock,
 		opened: true
 	}
 };
@@ -28,7 +28,7 @@ export const Unopened = Template.bind({});
 Unopened.args = {
 	...Template.args,
 	notification: {
-		...NotificationPostCommented_mock,
+		...NotificationPostCommented_fragment_mock,
 		opened: false
 	}
 };

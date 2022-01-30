@@ -3,7 +3,7 @@ import { NotificationChatMessageReceived, NotificationType } from "../../generat
 import { Chat_fragment_mock } from "./Chat.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
-export const NotificationChatMessageReceived_mock: NotificationChatMessageReceived = {
+export const NotificationChatMessageReceived_fragment_mock: NotificationChatMessageReceived = {
 	__typename: "NotificationChatMessageReceived",
 	id: "0",
 	opened: false,

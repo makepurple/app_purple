@@ -1924,6 +1924,8 @@ export type ExperienceCardExperienceFragment = { readonly __typename: 'Experienc
 
 export type NotificationCardChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } };
 
+export type NotificationCardFriendshipAcceptedFragment = { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } };
+
 export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } };
 
 export type PageInfoFragmentFragment = { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined };
@@ -2480,6 +2482,23 @@ export const NotificationCardChatMessageReceivedFragmentDoc = /*#__PURE__*/ gql`
   }
   chatId
   opened
+  updatedAt
+}
+    `;
+export const NotificationCardFriendshipAcceptedFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardFriendshipAccepted on NotificationFriendshipAccepted {
+  id
+  opened
+  friendship {
+    id
+    friender {
+      id
+      image
+      name
+    }
+    frienderId
+  }
+  friendshipId
   updatedAt
 }
     `;

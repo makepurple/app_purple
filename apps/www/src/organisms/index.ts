@@ -30,6 +30,7 @@ export * from "./NewPostButton";
 export * from "./NotificationBell";
 export * from "./NotificationCardBase";
 export * from "./NotificationCardChatMessageReceived";
+export * from "./NotificationCardFriendshipAccepted";
 export * from "./NotificationCardPostCommented";
 export * from "./OrganizationInput";
 export * from "./PostCard";

@@ -12,14 +12,24 @@ const StyledAvatar = tw(Avatar)`
 	rounded-md
 `;
 
-const Details = tw.div`
+const AvatarIconContainer = tw.div`
+	flex
+	items-center
+	justify-center
+	h-16
+	w-16
+	bg-white
+	z-index[1]
+`;
+
+const Details = tw.a`
 	flex-grow
 	flex
 	flex-row
 	items-center
 `;
 
-const Title = tw.a`
+const Title = tw.span`
 	text-base
 	leading-tight
 `;
@@ -73,9 +83,9 @@ export const NotificationCardPostCommented = forwardRef<
 				passHref
 			>
 				<StyledAvatar border={4} aria-label={post.title ?? ""} tw="mr-6">
-					<div tw="flex items-center justify-center h-16 w-16 bg-white z-index[1]">
+					<AvatarIconContainer>
 						<BookIcon height={48} width={48} />
-					</div>
+					</AvatarIconContainer>
 				</StyledAvatar>
 			</NextLink>
 			<NextLink

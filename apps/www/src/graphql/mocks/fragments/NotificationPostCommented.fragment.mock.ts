@@ -3,7 +3,7 @@ import { NotificationPostCommented, NotificationType } from "../../generated";
 import { Post_fragment_mock } from "./Post.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
-export const NotificationPostCommented_mock: NotificationPostCommented = {
+export const NotificationPostCommented_fragment_mock: NotificationPostCommented = {
 	__typename: "NotificationPostCommented",
 	id: "0",
 	opened: false,

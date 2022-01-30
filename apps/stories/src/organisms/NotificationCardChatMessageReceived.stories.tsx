@@ -2,7 +2,7 @@ import {
 	NotificationCardChatMessageReceived,
 	NotificationCardChatMessageReceivedProps
 } from "@makepurple/www";
-import { NotificationChatMessageReceived_mock } from "@makepurple/www/src/graphql/mocks";
+import { NotificationChatMessageReceived_fragment_mock } from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
@@ -15,14 +15,14 @@ const Template: Story<NotificationCardChatMessageReceivedProps> = (args) => {
 	return <NotificationCardChatMessageReceived {...args} />;
 };
 Template.args = {
-	notification: NotificationChatMessageReceived_mock
+	notification: NotificationChatMessageReceived_fragment_mock
 };
 
 export const Standard = Template.bind({});
 Standard.args = {
 	...Template.args,
 	notification: {
-		...NotificationChatMessageReceived_mock,
+		...NotificationChatMessageReceived_fragment_mock,
 		opened: true
 	}
 };
@@ -31,7 +31,7 @@ export const Unopened = Template.bind({});
 Unopened.args = {
 	...Template.args,
 	notification: {
-		...NotificationChatMessageReceived_mock,
+		...NotificationChatMessageReceived_fragment_mock,
 		opened: false
 	}
 };

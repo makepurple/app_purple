@@ -1,0 +1,15 @@
+fragment NotificationCardFriendshipAccepted on NotificationFriendshipAccepted {
+	id
+	opened
+	friendship {
+		id
+		friender {
+			id
+			image
+			name
+		}
+		frienderId
+	}
+	friendshipId
+	updatedAt
+}
