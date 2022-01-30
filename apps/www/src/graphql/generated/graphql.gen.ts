@@ -2201,7 +2201,7 @@ export type GetNotificationsQueryVariables = Exact<{
 }>;
 
 
-export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } }> }, readonly notificationCount: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null | undefined };
+export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string }> } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null | undefined, readonly urlSlug: string } }> } } | null | undefined };
 
 export type GetPostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3568,6 +3568,9 @@ export const GetNotificationsDocument = /*#__PURE__*/ gql`
     query GetNotifications($after: String, $first: Int) {
   viewer {
     notifications(after: $after, first: $first) {
+      pageInfo {
+        ...PageInfoFragment
+      }
       edges {
         cursor
         node {
@@ -3588,12 +3591,10 @@ export const GetNotificationsDocument = /*#__PURE__*/ gql`
         }
       }
     }
-    notificationCount: notifications(first: 0, where: {opened: false}) {
-      totalCount
-    }
   }
 }
-    ${NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc}
+    ${PageInfoFragmentFragmentDoc}
+${NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc}
 ${NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragmentDoc}
 ${NotificationCardPostCommentedNotificationPostCommentedFragmentDoc}`;
 

@@ -4,6 +4,9 @@ query GetNotifications($after: String, $first: Int) {
 			after: $after
 			first: $first
 		) {
+			pageInfo {
+				...PageInfoFragment
+			}
 			edges {
 				cursor
 				node {
@@ -23,14 +26,6 @@ query GetNotifications($after: String, $first: Int) {
 					...NotificationCardPostCommentedNotificationPostCommented
 				}
 			}
-		}
-		notificationCount: notifications(
-			first: 0
-			where: {
-				opened: false
-			}
-		) {
-			totalCount
 		}
 	}
 }
