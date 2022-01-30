@@ -14,6 +14,7 @@ export * from "./followSkill";
 export * from "./followUser";
 export * from "./inviteToChat";
 export * from "./leaveChat";
+export * from "./openNotifications";
 export * from "./publishPost";
 export * from "./rejectFriendship";
 export * from "./removeDesiredSkill";

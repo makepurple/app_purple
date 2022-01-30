@@ -501,6 +501,7 @@ type Mutation {
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
   leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
   ok: Boolean!
+  openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(
     """Find friendship from requester -> viewer"""
@@ -579,6 +580,12 @@ type NotificationPostCommented implements Notification {
 enum NotificationType {
   ChatMessageReceived
   PostCommented
+}
+
+type OpenNotificationsPayload implements MutationPayload {
+  query: Query!
+  record: User!
+  viewer: User
 }
 
 input OrderByRelationAggregateInput {
