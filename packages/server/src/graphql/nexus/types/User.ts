@@ -528,9 +528,7 @@ export const User = objectType({
 										skip,
 										take,
 										where: {
-											updatedAt: {
-												gt: lastOpenedAt
-											},
+											updatedAt: { gt: lastOpenedAt },
 											OR: [
 												{
 													type: NotificationType.ChatMessageReceived,
@@ -553,9 +551,7 @@ export const User = objectType({
 						prisma.notification.count({
 							where: {
 								user: { id: { equals: parent.id } },
-								updatedAt: {
-									gt: lastOpenedAt
-								}
+								updatedAt: { gt: lastOpenedAt }
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
