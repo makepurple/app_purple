@@ -5,14 +5,9 @@ import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import { NotificationCardPostCommentedNotificationPostCommentedFragment } from "../../graphql";
+import { NotificationCardBase } from "../NotificationCardBase";
 
-const Root = tw.div`
-	flex
-	items-center
-	h-24
-	cursor-pointer
-	active:bg-indigo-50
-`;
+const Root = tw(NotificationCardBase)``;
 
 const StyledAvatar = tw(Avatar)`
 	flex-shrink-0
@@ -72,6 +67,7 @@ export const NotificationCardPostCommented = forwardRef<
 				);
 			}}
 			style={style}
+			unread
 		>
 			<NextLink
 				href="/[userName]/[postTitle]"

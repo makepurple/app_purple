@@ -5,14 +5,9 @@ import NextLink from "next/link";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw from "twin.macro";
 import { NotificationCardChatMessageReceivedFragment } from "../../graphql";
+import { NotificationCardBase } from "../NotificationCardBase";
 
-const Root = tw.div`
-	flex
-	items-center
-	h-24
-	cursor-pointer
-	active:bg-indigo-50
-`;
+const Root = tw(NotificationCardBase)``;
 
 const ParticipantAvatars = tw(AvatarGroup)`
 	flex-shrink-0
@@ -99,7 +94,7 @@ export const NotificationCardChatMessageReceived = forwardRef<
 	if (status !== "authenticated") return null;
 
 	return (
-		<Root ref={ref} className={className} style={style}>
+		<Root ref={ref} className={className} style={style} unread>
 			<ParticipantAvatars tw="mr-6">
 				{participants.map(
 					(participant) =>
