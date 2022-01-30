@@ -19,6 +19,7 @@ export * from "./FollowWhereInput";
 export * from "./FollowWhereUniqueInput";
 export * from "./FriendshipWhereUniqueInput";
 export * from "./InviteToChatInput";
+export * from "./NotificationsWhereInput";
 export * from "./OrderByRelationAggregateInput";
 export * from "./PostAuthorNameUrlSlugCompoundUniqueInput";
 export * from "./PostDraftUpdateInput";

@@ -501,12 +501,21 @@ export const User = objectType({
 				first: intArg(),
 				last: intArg(),
 				after: stringArg(),
-				before: stringArg()
+				before: stringArg(),
+				where: arg({ type: "NotificationsWhereInput" })
 			},
 			authorize: (parent, args, { user }) => {
 				return parent.id === user?.id;
 			},
 			resolve: async (parent, args, { prisma }) => {
+				const lastOpenedAt: Date | undefined = args.where?.opened
+					? await prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.then((user) => user?.notificationsLastOpenedAt)
+					: undefined;
+
 				const connection = await findManyCursorConnection<any, { id: string }>(
 					async ({ cursor, skip, take }) =>
 						!take
@@ -519,6 +528,9 @@ export const User = objectType({
 										skip,
 										take,
 										where: {
+											updatedAt: {
+												gt: lastOpenedAt
+											},
 											OR: [
 												{
 													type: NotificationType.ChatMessageReceived,
@@ -538,12 +550,14 @@ export const User = objectType({
 										}));
 									}),
 					() =>
-						prisma.user
-							.findUnique({
-								where: { id: parent.id },
-								include: { _count: { select: { notifications: true } } }
-							})
-							.then((result) => result?._count.notifications ?? 0),
+						prisma.notification.count({
+							where: {
+								user: { id: { equals: parent.id } },
+								updatedAt: {
+									gt: lastOpenedAt
+								}
+							}
+						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);

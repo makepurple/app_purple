@@ -175,6 +175,9 @@ export interface NexusGenInputs {
   InviteToChatInput: { // input type
     users: NexusGenInputs['UserWhereInput']; // UserWhereInput!
   }
+  NotificationsWhereInput: { // input type
+    opened?: boolean | null; // Boolean
+  }
   OrderByRelationAggregateInput: { // input type
     _count?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
@@ -2561,6 +2564,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      where?: NexusGenInputs['NotificationsWhereInput'] | null; // NotificationsWhereInput
     }
     posts: { // args
       after?: string | null; // String

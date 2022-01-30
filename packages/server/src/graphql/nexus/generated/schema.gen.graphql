@@ -582,6 +582,10 @@ enum NotificationType {
   PostCommented
 }
 
+input NotificationsWhereInput {
+  opened: Boolean
+}
+
 type OpenNotificationsPayload implements MutationPayload {
   query: Query!
   record: User!
@@ -1105,7 +1109,7 @@ type User implements Followable {
   id: ID!
   image: String
   name: String!
-  notifications(after: String, before: String, first: Int, last: Int): NotificationConnection!
+  notifications(after: String, before: String, first: Int, last: Int, where: NotificationsWhereInput): NotificationConnection!
   notificationsLastOpenedAt: DateTime!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
