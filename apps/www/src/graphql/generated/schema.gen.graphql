@@ -487,6 +487,7 @@ type Mutation {
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
   leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
   ok: Boolean!
+  openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(
     # Find friendship from requester -> viewer
@@ -551,6 +552,17 @@ type NotificationEdge implements ConnectionEdge {
   node: Notification!
 }
 
+type NotificationFriendshipAccepted implements Notification {
+  friendship: Friendship!
+  friendshipId: String!
+  id: ID!
+  opened: Boolean!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
 type NotificationPostCommented implements Notification {
   id: ID!
   opened: Boolean!
@@ -564,7 +576,18 @@ type NotificationPostCommented implements Notification {
 
 enum NotificationType {
   ChatMessageReceived
+  FriendshipAccepted
   PostCommented
+}
+
+input NotificationsWhereInput {
+  opened: Boolean
+}
+
+type OpenNotificationsPayload implements MutationPayload {
+  query: Query!
+  record: User!
+  viewer: User
 }
 
 input OrderByRelationAggregateInput {
@@ -1066,7 +1089,7 @@ type User implements Followable {
   id: ID!
   image: String
   name: String!
-  notifications(after: String, before: String, first: Int, last: Int): NotificationConnection!
+  notifications(after: String, before: String, first: Int, last: Int, where: NotificationsWhereInput): NotificationConnection!
   notificationsLastOpenedAt: DateTime!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
@@ -1079,8 +1102,8 @@ type User implements Followable {
 }
 
 interface UserActivity {
-  createdAt: DateTime!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -1088,8 +1111,8 @@ interface UserActivity {
 type UserActivityCommentPost implements UserActivity {
   comment: Comment!
   commentId: String!
-  createdAt: DateTime!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -1107,44 +1130,44 @@ type UserActivityEdge implements ConnectionEdge {
 }
 
 type UserActivityFollowSkill implements UserActivity {
-  createdAt: DateTime!
   follow: Follow!
   followId: String!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityFollowUser implements UserActivity {
-  createdAt: DateTime!
   follow: Follow!
   followId: String!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityFriendAcceptUser implements UserActivity {
-  createdAt: DateTime!
   friendship: Friendship!
   friendshipId: String!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityJoined implements UserActivity {
-  createdAt: DateTime!
   id: ID!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
 type UserActivityPublishPost implements UserActivity {
-  createdAt: DateTime!
   id: ID!
   post: Post!
   postId: String!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -1160,10 +1183,10 @@ enum UserActivityType {
 }
 
 type UserActivityUpvotePost implements UserActivity {
-  createdAt: DateTime!
   id: ID!
   post: Post!
   postId: String!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }

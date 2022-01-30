@@ -173,6 +173,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	notificationsLastOpenedAt: dayjs(1318781876406).toDate(),
 	posts: {
 		__typename: "PostConnection",
 		pageInfo: {

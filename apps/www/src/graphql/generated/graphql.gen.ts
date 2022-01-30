@@ -585,6 +585,7 @@ export type Mutation = {
   readonly inviteToChat: InviteToChatPayload;
   readonly leaveChat: LeaveChatPayload;
   readonly ok: Scalars['Boolean'];
+  readonly openNotifications: OpenNotificationsPayload;
   readonly publishPost: PublishPostPayload;
   readonly rejectFriendship: RejectFriendshipPayload;
   readonly removeDesiredSkill: RemoveDesiredSkillMutationPayload;
@@ -869,6 +870,18 @@ export type NotificationEdge = ConnectionEdge & {
   readonly node: Notification;
 };
 
+export type NotificationFriendshipAccepted = Notification & {
+  readonly __typename: 'NotificationFriendshipAccepted';
+  readonly friendship: Friendship;
+  readonly friendshipId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly opened: Scalars['Boolean'];
+  readonly type: NotificationType;
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
 export type NotificationPostCommented = Notification & {
   readonly __typename: 'NotificationPostCommented';
   readonly id: Scalars['ID'];
@@ -883,8 +896,20 @@ export type NotificationPostCommented = Notification & {
 
 export enum NotificationType {
   ChatMessageReceived = 'ChatMessageReceived',
+  FriendshipAccepted = 'FriendshipAccepted',
   PostCommented = 'PostCommented'
 }
+
+export type NotificationsWhereInput = {
+  readonly opened?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type OpenNotificationsPayload = MutationPayload & {
+  readonly __typename: 'OpenNotificationsPayload';
+  readonly query: Query;
+  readonly record: User;
+  readonly viewer?: Maybe<User>;
+};
 
 export type OrderByRelationAggregateInput = {
   readonly _count?: InputMaybe<SortOrder>;
@@ -1710,6 +1735,7 @@ export type UserNotificationsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<NotificationsWhereInput>;
 };
 
 
@@ -1741,8 +1767,8 @@ export type UserUpvotedPostsArgs = {
 };
 
 export type UserActivity = {
-  readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
@@ -1751,8 +1777,8 @@ export type UserActivityCommentPost = UserActivity & {
   readonly __typename: 'UserActivityCommentPost';
   readonly comment: Comment;
   readonly commentId: Scalars['String'];
-  readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
@@ -1773,48 +1799,48 @@ export type UserActivityEdge = ConnectionEdge & {
 
 export type UserActivityFollowSkill = UserActivity & {
   readonly __typename: 'UserActivityFollowSkill';
-  readonly createdAt: Scalars['DateTime'];
   readonly follow: Follow;
   readonly followId: Scalars['String'];
   readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
 
 export type UserActivityFollowUser = UserActivity & {
   readonly __typename: 'UserActivityFollowUser';
-  readonly createdAt: Scalars['DateTime'];
   readonly follow: Follow;
   readonly followId: Scalars['String'];
   readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
 
 export type UserActivityFriendAcceptUser = UserActivity & {
   readonly __typename: 'UserActivityFriendAcceptUser';
-  readonly createdAt: Scalars['DateTime'];
   readonly friendship: Friendship;
   readonly friendshipId: Scalars['String'];
   readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
 
 export type UserActivityJoined = UserActivity & {
   readonly __typename: 'UserActivityJoined';
-  readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
 
 export type UserActivityPublishPost = UserActivity & {
   readonly __typename: 'UserActivityPublishPost';
-  readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
   readonly post: Post;
   readonly postId: Scalars['String'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
@@ -1831,10 +1857,10 @@ export enum UserActivityType {
 
 export type UserActivityUpvotePost = UserActivity & {
   readonly __typename: 'UserActivityUpvotePost';
-  readonly createdAt: Scalars['DateTime'];
   readonly id: Scalars['ID'];
   readonly post: Post;
   readonly postId: Scalars['String'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly user: User;
   readonly userId: Scalars['String'];
 };
