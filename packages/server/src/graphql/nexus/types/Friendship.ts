@@ -10,7 +10,8 @@ export const Friendship = objectType({
 		t.field(NexusPrisma.Friendship.friending);
 		t.field(NexusPrisma.Friendship.friendingId);
 		t.field(NexusPrisma.Friendship.id);
-		t.field(NexusPrisma.Friendship.rejected);
+		t.nonNull.boolean("rejected", { resolve: (parent) => !!parent.rejectedAt });
+		t.field(NexusPrisma.Friendship.rejectedAt);
 		t.field(NexusPrisma.Friendship.updatedAt);
 	}
 });

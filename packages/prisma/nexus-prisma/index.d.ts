@@ -4519,7 +4519,7 @@ export interface Friendship {
     resolve: NexusCore.FieldResolver<'Friendship', 'notifications'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.rejected`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.rejectedAt`.
     *
     * ### ️⚠️ You have not writen documentation for model Friendship
     *
@@ -4528,7 +4528,7 @@ export interface Friendship {
     * ```prisma
     * model Friendship {
     *   /// Lorem ipsum dolor sit amet.
-    *   rejected  Boolean
+    *   rejectedAt  DateTime?
     * }
     * ```
     *
@@ -4543,22 +4543,22 @@ export interface Friendship {
     *   name: Friendship.$name
     *   description: Friendship.$description
     *   definition(t) {
-    *     t.field(Friendship.rejected)
+    *     t.field(Friendship.rejectedAt)
     *   }
     * })
     */
-  rejected: {
+  rejectedAt: {
     /**
      * The name of this field.
      */
-    name: 'rejected'
+    name: 'rejectedAt'
   
     /**
      * The type of this field.
      */
-    type: 'Boolean' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'Boolean'>
-    : 'Warning/Error: The type \'Boolean\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Boolean\' to your GraphQL API.'
+    type: 'DateTime' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'DateTime'>
+    : 'Warning/Error: The type \'DateTime\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'DateTime\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -4568,7 +4568,7 @@ export interface Friendship {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Friendship', 'rejected'>
+    resolve: NexusCore.FieldResolver<'Friendship', 'rejectedAt'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Friendship.updatedAt`.

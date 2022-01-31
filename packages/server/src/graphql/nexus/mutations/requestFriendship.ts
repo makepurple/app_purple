@@ -1,3 +1,4 @@
+import { dayjs } from "@makepurple/utils";
 import { arg, mutationField, nonNull } from "nexus";
 import { NotFoundError, PrismaUtils } from "../../../utils";
 
@@ -19,18 +20,35 @@ export const requestFriendship = mutationField("requestFriendship", {
 
 		if (!toFriend) throw new NotFoundError("User could not be found");
 
-		const record = await prisma.friendship.upsert({
+		const existing = await prisma.friendship.findUnique({
 			where: {
 				frienderId_friendingId: {
 					frienderId: user.id,
 					friendingId: toFriend.id
 				}
-			},
-			create: {
-				friender: { connect: { id: user.id } },
-				friending: { connect: PrismaUtils.nonNull(args.where) }
-			},
-			update: {}
+			}
+		});
+
+		if (existing?.rejectedAt && existing.rejectedAt > dayjs().subtract(6, "months").toDate()) {
+			return { record: existing };
+		}
+
+		const record = await prisma.$transaction(async (transaction) => {
+			return await transaction.friendship.upsert({
+				where: {
+					frienderId_friendingId: {
+						frienderId: user.id,
+						friendingId: toFriend.id
+					}
+				},
+				create: {
+					friender: { connect: { id: user.id } },
+					friending: { connect: PrismaUtils.nonNull(args.where) }
+				},
+				update: {
+					rejectedAt: { set: null }
+				}
+			});
 		});
 
 		return { record };

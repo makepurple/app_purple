@@ -152,7 +152,7 @@ model Friendship {
   friending     User           @relation("FriendingUser", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId   String
   notifications Notification[]
-  rejected      Boolean        @default(false)
+  rejectedAt    DateTime?
   updatedAt     DateTime       @updatedAt
 
   @@unique([frienderId, friendingId])

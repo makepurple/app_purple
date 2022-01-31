@@ -33,7 +33,7 @@ export const rejectFriendship = mutationField("rejectFriendship", {
 		const record = await prisma.friendship.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
-				rejected: true
+				rejectedAt: new Date()
 			}
 		});
 
