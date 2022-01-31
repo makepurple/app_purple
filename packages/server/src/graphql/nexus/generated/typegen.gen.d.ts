@@ -469,7 +469,7 @@ export interface NexusGenObjects {
     frienderId: string; // String!
     friendingId: string; // String!
     id: string; // ID!
-    rejected: boolean; // Boolean!
+    rejectedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   GitHubLanguage: { // root type
@@ -985,6 +985,7 @@ export interface NexusGenFieldTypes {
     friendingId: string; // String!
     id: string; // ID!
     rejected: boolean; // Boolean!
+    rejectedAt: NexusGenScalars['DateTime'] | null; // DateTime
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   GitHubLanguage: { // field return type
@@ -1698,6 +1699,7 @@ export interface NexusGenFieldTypeNames {
     friendingId: 'String'
     id: 'ID'
     rejected: 'Boolean'
+    rejectedAt: 'DateTime'
     updatedAt: 'DateTime'
   }
   GitHubLanguage: { // field return type name

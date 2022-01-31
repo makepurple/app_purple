@@ -380,6 +380,7 @@ type Friendship {
   friendingId: String!
   id: ID!
   rejected: Boolean!
+  rejectedAt: DateTime
   updatedAt: DateTime!
 }
 

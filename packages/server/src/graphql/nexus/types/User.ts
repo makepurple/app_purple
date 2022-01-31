@@ -411,7 +411,7 @@ export const User = objectType({
 							}
 						}
 					},
-					rejected: false
+					rejectedAt: { not: { equals: null } }
 				};
 
 				const connection = await findManyCursorConnection<_User, { id: string }>(
@@ -446,16 +446,16 @@ export const User = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const where: Prisma.FriendshipWhereInput = {
-					friender: {
-						id: { equals: parent.id },
+					friender: { id: { equals: parent.id } },
+					friending: {
+						...PrismaUtils.nonNull(args.where),
 						friending: {
 							none: {
 								friending: { id: { equals: parent.id } }
 							}
 						}
 					},
-					friending: PrismaUtils.nonNull(args.where),
-					rejected: false
+					rejectedAt: { equals: null }
 				};
 
 				const connection = await findManyCursorConnection<_User, { id: string }>(
@@ -486,28 +486,36 @@ export const User = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
+				const frienderIds: string[] = await prisma.user
+					.findMany({
+						where: PrismaUtils.nonNull(args.where),
+						select: { id: true }
+					})
+					.then((items) => items.map((item) => item.id));
+
+				const where: Prisma.FriendshipWhereInput = {
+					friender: { id: { in: frienderIds } },
+					friending: {
+						id: { equals: parent.id },
+						friending: {
+							some: {
+								friending: { id: { in: frienderIds } }
+							}
+						}
+					}
+				};
+
 				const connection = await findManyCursorConnection<_User, { id: string }>(
 					(paginationArgs) =>
 						prisma.user
 							.findUnique({ where: { id: parent.id } })
 							.friending({
 								...paginationArgs,
-								where: {
-									friender: PrismaUtils.nonNull(args.where),
-									friendingId: parent.id
-								},
+								where,
 								include: { friender: true }
 							})
-							.then((friendRequests) =>
-								friendRequests.map((friendRequest) => friendRequest.friender)
-							),
-					() =>
-						prisma.friendship.count({
-							where: {
-								friender: PrismaUtils.nonNull(args.where),
-								friendingId: parent.id
-							}
-						}),
+							.then((items) => items.map((item) => item.friender)),
+					() => prisma.friendship.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
