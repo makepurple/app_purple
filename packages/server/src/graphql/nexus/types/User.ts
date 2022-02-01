@@ -117,42 +117,67 @@ export const User = objectType({
 								...paginationArgs,
 								where: {
 									...PrismaUtils.nonNull(args.where),
-									OR: [
+									AND: [
 										{
-											type: UserActivityType.CommentPost,
-											comment: { isNot: null }
+											OR: [
+												{
+													type: UserActivityType.CommentPost,
+													comment: { isNot: null }
+												},
+												{
+													type: UserActivityType.FollowSkill,
+													follow: { isNot: null as any }
+												},
+												{
+													type: UserActivityType.FollowUser,
+													follow: { isNot: null as any }
+												},
+												{
+													type: UserActivityType.FriendAcceptUser,
+													follow: { isNot: null as any }
+												},
+												{
+													type: UserActivityType.Joined
+												},
+												{
+													type: UserActivityType.PublishPost,
+													post: { isNot: null as any }
+												},
+												{
+													type: UserActivityType.UpvotePost,
+													post: { isNot: null as any }
+												}
+											]
 										},
 										{
-											type: UserActivityType.FollowSkill,
-											follow: { isNot: null as any }
-										},
-										{
-											type: UserActivityType.FollowUser,
-											follow: { isNot: null as any }
-										},
-										{
-											type: UserActivityType.FriendAcceptUser,
-											follow: { isNot: null as any }
-										},
-										{
-											type: UserActivityType.Joined
-										},
-										{
-											type: UserActivityType.PublishPost,
-											post: { isNot: null as any }
-										},
-										{
-											type: UserActivityType.UpvotePost,
-											post: { isNot: null as any }
+											OR: [
+												{
+													skills: {
+														some: {
+															followedBy: {
+																some: {
+																	follower: {
+																		id: { equals: parent.id }
+																	}
+																}
+															}
+														}
+													}
+												},
+												{
+													user: {
+														followedBy: {
+															some: {
+																follower: {
+																	id: { equals: parent.id }
+																}
+															}
+														}
+													}
+												}
+											]
 										}
-									],
-									user: {
-										followedBy: {
-											some: {
-												follower: { id: { equals: parent.id } }
-											}
-										}
-									}
+									]
 								}
 							})
 							.then((items) => {

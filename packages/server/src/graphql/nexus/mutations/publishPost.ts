@@ -89,6 +89,11 @@ export const publishPost = mutationField("publishPost", {
 				data: {
 					activities: {
 						create: {
+							skills: {
+								connect: skillsToConnect.map((skill) => ({
+									id: skill.id
+								}))
+							},
 							type: UserActivityType.PublishPost,
 							user: { connect: { id: user.id } }
 						}

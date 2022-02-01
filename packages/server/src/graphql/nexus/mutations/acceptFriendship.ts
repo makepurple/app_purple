@@ -34,7 +34,9 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 		const pendingFriendship = await prisma.friendship.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
-				rejected: false
+				rejectedAt: {
+					set: null
+				}
 			}
 		});
 
@@ -72,7 +74,7 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 			return { record };
 		}
 
-		if (!existing.rejected) return { record: existing };
+		if (!existing.rejectedAt) return { record: existing };
 
 		const activity = await prisma.userActivity.findFirst({
 			where: {
@@ -121,7 +123,9 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 					  },
 				friender: { connect: { id: user.id } },
 				friending: { connect: { id: pendingFriendship.frienderId } },
-				rejected: false
+				rejectedAt: {
+					set: null
+				}
 			}
 		});
 
