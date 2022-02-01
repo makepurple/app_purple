@@ -24,6 +24,9 @@ fragment UserInfoSideBarUser on User {
 	following {
 		totalCount
 	}
+	friends {
+		totalCount
+	}
 	github {
 		__typename
 		id

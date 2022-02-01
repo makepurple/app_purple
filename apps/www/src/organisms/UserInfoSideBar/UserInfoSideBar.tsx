@@ -98,11 +98,23 @@ const Actions = tw.div`
 	mt-4
 `;
 
+const ConnectionsContainer = tw.div`
+	flex
+	flex-row
+	items-start
+	text-black
+`;
+
+const ConnectionsContents = tw.div`
+	flex
+	flex-col
+	items-start
+`;
+
 const FollowContainer = tw.div`
 	flex
 	flex-row
-	items-center
-	text-black
+	items-start
 `;
 
 const FollowAnchor = tw(Anchor)`
@@ -251,26 +263,52 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						</Button>
 					</Actions>
 				)}
-				<FollowContainer tw="mt-4">
-					<NextLink href="/[userName]/followers" as={`/${user.name}/followers`} passHref>
-						<FollowAnchor tw="flex items-center">
-							<PeopleIcon height={24} width={24} tw="mr-2" />
-							<span tw="whitespace-pre">
+				<ConnectionsContainer tw="mt-4">
+					<PeopleIcon height={24} width={24} tw="mr-2" />
+					<ConnectionsContents>
+						<FollowContainer>
+							<NextLink
+								href="/[userName]/followers"
+								as={`/${user.name}/followers`}
+								passHref
+							>
+								<FollowAnchor tw="flex items-center">
+									<span tw="whitespace-pre">
+										<FollowCount>
+											{user.followers.totalCount.toLocaleString()}
+										</FollowCount>{" "}
+										Followers
+									</span>
+								</FollowAnchor>
+							</NextLink>
+							<Delimiter tw="mx-2" />
+							<NextLink
+								href="/[userName]/following"
+								as={`/${user.name}/following`}
+								passHref
+							>
+								<FollowAnchor>
+									<FollowCount>
+										{user.following.totalCount.toLocaleString()}
+									</FollowCount>{" "}
+									Following
+								</FollowAnchor>
+							</NextLink>
+						</FollowContainer>
+						<NextLink
+							href="/[userName]/connections"
+							as={`/${user.name}/connections`}
+							passHref
+						>
+							<FollowAnchor>
 								<FollowCount>
-									{user.followers.totalCount.toLocaleString()}
+									{user.friends.totalCount.toLocaleString()}
 								</FollowCount>{" "}
-								Followers
-							</span>
-						</FollowAnchor>
-					</NextLink>
-					<Delimiter tw="mx-2" />
-					<NextLink href="/[userName]/following" as={`/${user.name}/following`} passHref>
-						<FollowAnchor>
-							<FollowCount>{user.following.totalCount.toLocaleString()}</FollowCount>{" "}
-							Following
-						</FollowAnchor>
-					</NextLink>
-				</FollowContainer>
+								Connections
+							</FollowAnchor>
+						</NextLink>
+					</ConnectionsContents>
+				</ConnectionsContainer>
 			</MainInfoContainer>
 			<Divider />
 			{!formOpen ? (
