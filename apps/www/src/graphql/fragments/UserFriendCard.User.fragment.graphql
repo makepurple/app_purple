@@ -1,0 +1,42 @@
+fragment UserFriendCardUser on User {
+	description
+	desiredSkills(first: 5) {
+		__typename
+		pageInfo {
+			...PageInfoFragment
+		}
+		totalCount
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
+		nodes {
+			id
+			name
+		}
+	}
+	id
+	image
+	name
+	skills(first: 5) {
+		__typename
+		pageInfo {
+			...PageInfoFragment
+		}
+		totalCount
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
+		nodes {
+			id
+			name
+			owner
+		}
+	}
+	viewerFollowing
+}
