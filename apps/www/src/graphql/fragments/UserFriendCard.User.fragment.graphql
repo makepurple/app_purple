@@ -38,5 +38,5 @@ fragment UserFriendCardUser on User {
 			owner
 		}
 	}
-	viewerFollowing
+	viewerIsFriend
 }
