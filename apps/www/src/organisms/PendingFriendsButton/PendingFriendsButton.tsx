@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import { useGetNotificationCountsQuery } from "../../graphql";
-import { BellIcon } from "../../svgs";
+import { PeopleIcon } from "../../svgs";
 
 const Root = tw(Button)`
 	relative
@@ -16,7 +16,7 @@ const Root = tw(Button)`
 	bg-transparent
 `;
 
-const NotificationCount = tw.span`
+const PendingFriendsCount = tw.span`
 	absolute
 	top-0
 	right-0
@@ -37,27 +37,27 @@ const NotificationCount = tw.span`
 	rounded-full
 `;
 
-export interface NotificationBellButtonProps {
+export interface PendingFriendsButtonProps {
 	className?: string;
 	style?: CSSProperties;
 }
 
-export const NotificationBellButton: FC<NotificationBellButtonProps> = ({ className, style }) => {
+export const PendingFriendsButton: FC<PendingFriendsButtonProps> = ({ className, style }) => {
 	const { status } = useSession();
 
 	const [{ data }] = useGetNotificationCountsQuery({
 		requestPolicy: "cache-only"
 	});
 
-	const count = data?.viewer?.notifications.totalCount ?? 0;
+	const count = data?.viewer?.friendRequestsReceived.totalCount ?? 0;
 
 	if (status !== "authenticated") return null;
 
 	return (
-		<NextLink href="/notifications" passHref>
+		<NextLink href="/connections/requests" passHref>
 			<Root as="a" className={className} style={style} type="button">
-				<BellIcon height={24} width={24} />
-				{!!count && <NotificationCount>{count}</NotificationCount>}
+				<PeopleIcon height={24} width={24} />
+				{!!count && <PendingFriendsCount>{count}</PendingFriendsCount>}
 			</Root>
 		</NextLink>
 	);

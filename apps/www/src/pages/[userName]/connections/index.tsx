@@ -4,10 +4,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetUserFriendsQuery } from "../../graphql";
-import { LoadingUserFriendCard, UserFriendCard, UserPageLayout } from "../../organisms";
-import { PageProps, pageProps } from "../../page-props/[userName]/connections";
-import { PersonIcon } from "../../svgs";
+import { useGetUserFriendsQuery } from "../../../graphql";
+import { LoadingUserFriendCard, UserFriendCard, UserPageLayout } from "../../../organisms";
+import { PageProps, pageProps } from "../../../page-props/[userName]/connections";
+import { PersonIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 

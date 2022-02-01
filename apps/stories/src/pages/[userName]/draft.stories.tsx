@@ -1,7 +1,7 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
-	GetNotificationCount_mock,
+	GetNotificationCounts_mock,
 	GetPost_mock,
 	RemovePostThumbnail_mock,
 	SuggestSkills_mock,
@@ -45,8 +45,8 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetPost":
 				return { data: GetPost_mock };
 			case "RemovePostThumbnail":

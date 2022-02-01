@@ -2,7 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetCommentReplies_mock,
-	GetNotificationCount_mock,
+	GetNotificationCounts_mock,
 	GetPostComments_mock,
 	GetPostDraft_mock,
 	GetPost_mock,
@@ -56,8 +56,8 @@ Standard.parameters = {
 				await PromiseUtils.wait(ms("0.5s"));
 
 				return { data: GetCommentReplies_mock };
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetPost":
 				return { data: GetPost_mock };
 			case "GetPostComments":

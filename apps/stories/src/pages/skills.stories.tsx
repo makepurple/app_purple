@@ -1,5 +1,5 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { GetNotificationCount_mock, GetSkills_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetNotificationCounts_mock, GetSkills_mock } from "@makepurple/www/src/graphql/mocks";
 import { Page } from "@makepurple/www/src/pages/skills";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -36,8 +36,8 @@ Standard.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetSkills":
 				return { data: GetSkills_mock };
 			default:

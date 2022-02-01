@@ -415,15 +415,19 @@ export const User = objectType({
 				};
 
 				const connection = await findManyCursorConnection<_User, { id: string }>(
-					(paginationArgs) =>
-						prisma.user
-							.findUnique({ where: { id: parent.id } })
-							.friendedBy({
-								...paginationArgs,
-								where,
-								include: { friender: true }
-							})
-							.then((items) => items.map((item) => item.friender)),
+					async ({ cursor, skip, take }) =>
+						take === 0
+							? await Promise.resolve([])
+							: await prisma.user
+									.findUnique({ where: { id: parent.id } })
+									.friendedBy({
+										cursor,
+										skip,
+										take,
+										where,
+										include: { friender: true }
+									})
+									.then((items) => items.map((item) => item.friender)),
 					() => prisma.friendship.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
@@ -575,7 +579,7 @@ export const User = objectType({
 
 				const connection = await findManyCursorConnection<any, { id: string }>(
 					async ({ cursor, skip, take }) =>
-						!take
+						take === 0
 							? // Skip running any query if take is 0
 							  await Promise.resolve([])
 							: await prisma.user

@@ -2210,10 +2210,10 @@ export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null | undefined } | null | undefined };
 
-export type GetNotificationCountQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetNotificationCountsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNotificationCountQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null | undefined };
+export type GetNotificationCountsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null | undefined };
 
 export type GetNotificationsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3647,9 +3647,12 @@ export const GetMyUserDocument = /*#__PURE__*/ gql`
 export function useGetMyUserQuery(options: Omit<Urql.UseQueryArgs<GetMyUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetMyUserQuery>({ query: GetMyUserDocument, ...options });
 };
-export const GetNotificationCountDocument = /*#__PURE__*/ gql`
-    query GetNotificationCount {
+export const GetNotificationCountsDocument = /*#__PURE__*/ gql`
+    query GetNotificationCounts {
   viewer {
+    friendRequestsReceived(first: 0) {
+      totalCount
+    }
     notifications(first: 0, where: {opened: false}) {
       totalCount
     }
@@ -3657,8 +3660,8 @@ export const GetNotificationCountDocument = /*#__PURE__*/ gql`
 }
     `;
 
-export function useGetNotificationCountQuery(options: Omit<Urql.UseQueryArgs<GetNotificationCountQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetNotificationCountQuery>({ query: GetNotificationCountDocument, ...options });
+export function useGetNotificationCountsQuery(options: Omit<Urql.UseQueryArgs<GetNotificationCountsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetNotificationCountsQuery>({ query: GetNotificationCountsDocument, ...options });
 };
 export const GetNotificationsDocument = /*#__PURE__*/ gql`
     query GetNotifications($after: String, $first: Int) {

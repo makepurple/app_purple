@@ -13,6 +13,7 @@ import NextError from "next/error";
 import NextHead from "next/head";
 import React from "react";
 import { Toaster } from "react-hot-toast";
+import { useGlobalGraphQL } from "../hooks";
 import { AuthDecoratorProvider, SiteWideLayout, UrqlProvider } from "../organisms";
 
 const NextProgressBar = dynamic<NextProgressBarProps>(
@@ -26,6 +27,8 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 	Component,
 	pageProps
 }) => {
+	useGlobalGraphQL();
+
 	return (
 		<>
 			<NextHead>

@@ -1,6 +1,6 @@
 import { SiteWideLayout } from "@makepurple/www";
 import {
-	GetNotificationCount_mock,
+	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetUserFollowers_mock,
 	GetUserInfoSideBar_mock
@@ -42,8 +42,8 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: (op: Operation) => {
 		switch (getOperationName(op.query)) {
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetUserFollowers":

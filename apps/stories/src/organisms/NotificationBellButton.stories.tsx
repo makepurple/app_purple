@@ -1,5 +1,5 @@
 import { NotificationBellButton, NotificationBellButtonProps } from "@makepurple/www";
-import { GetNotificationCount_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetNotificationCounts_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -21,8 +21,8 @@ Template.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			default:
 				return {};
 		}
@@ -45,14 +45,14 @@ WithNotifications.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "GetNotificationCount":
+			case "GetNotificationCounts":
 				return {
 					data: {
-						...GetNotificationCount_mock,
+						...GetNotificationCounts_mock,
 						viewer: {
-							...GetNotificationCount_mock.viewer,
+							...GetNotificationCounts_mock.viewer,
 							notifications: {
-								...GetNotificationCount_mock.viewer?.notifications,
+								...GetNotificationCounts_mock.viewer?.notifications,
 								totalCount: 5
 							}
 						}

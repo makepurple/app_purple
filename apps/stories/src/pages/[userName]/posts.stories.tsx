@@ -2,7 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	CreatePost_mock,
-	GetNotificationCount_mock,
+	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetPosts_mock,
 	GetUserInfoSideBar_mock
@@ -49,8 +49,8 @@ Standard.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetPosts":
@@ -73,8 +73,8 @@ Loading.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
 			case "GetPosts":
@@ -99,8 +99,8 @@ NoResults.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetNotificationCount":
-				return { data: GetNotificationCount_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return {
 					data: {

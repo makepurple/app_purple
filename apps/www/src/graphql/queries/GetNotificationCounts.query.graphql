@@ -1,5 +1,8 @@
-query GetNotificationCount {
+query GetNotificationCounts {
 	viewer {
+		friendRequestsReceived(first: 0) {
+			totalCount
+		}
 		notifications(
 			first: 0
 			where: {
