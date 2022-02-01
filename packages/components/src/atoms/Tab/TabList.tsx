@@ -13,11 +13,9 @@ export const TabList: typeof Tab.List = styled(Tab.List).attrs<TabListProps>(
 )<TabListProps>`
 	${tw`
 		grid
-		grid-flow-row
+		grid-template-columns[repeat(auto-fill, minmax(12rem, 1fr))]
 		auto-rows-fr
 		p-1
 		rounded-lg
-		md:grid-flow-col
-		md:auto-cols-fr
 	`}
 `;
