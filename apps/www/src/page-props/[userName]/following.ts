@@ -7,7 +7,7 @@ import {
 	GetPostDraftDocument,
 	GetPostDraftQuery,
 	GetPostDraftQueryVariables,
-	GetRepositoriesDocument,
+	GetUserFollowingDocument,
 	GetUserFollowingQuery,
 	GetUserFollowingQueryVariables,
 	GetUserInfoSideBarDocument,
@@ -26,11 +26,14 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 
 	await Promise.all([
 		urqlClient
-			.query<GetUserFollowingQuery, GetUserFollowingQueryVariables>(GetRepositoriesDocument, {
-				after: null,
-				first: BATCH_SIZE,
-				name: query.userName as string
-			})
+			.query<GetUserFollowingQuery, GetUserFollowingQueryVariables>(
+				GetUserFollowingDocument,
+				{
+					after: null,
+					first: BATCH_SIZE,
+					name: query.userName as string
+				}
+			)
 			.toPromise(),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
