@@ -1,0 +1,29 @@
+query GetUserFriends(
+	$after: String
+	$first: Int
+	$name: String!
+) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		name
+		friends(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...UserFriendCardUser
+			}
+		}
+	}
+}

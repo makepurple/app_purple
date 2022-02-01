@@ -13,6 +13,7 @@ export * from "./GetRepositories.query.mock";
 export * from "./GetSkills.query.mock";
 export * from "./GetUserFollowers.query.mock";
 export * from "./GetUserFollowing.query.mock";
+export * from "./GetUserFriends.query.mock";
 export * from "./GetUserInfoSideBar.query.mock";
 export * from "./SuggestExperiences.query.mock";
 export * from "./SuggestFriends.query.mock";

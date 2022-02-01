@@ -24,6 +24,7 @@ export * from "./LoadingPostCard";
 export * from "./LoadingRepositoryCard";
 export * from "./LoadingSkillCard";
 export * from "./LoadingUserFollowCard";
+export * from "./LoadingUserFriendCard";
 export * from "./LoginButton";
 export * from "./LogoutButton";
 export * from "./MobileAppDrawer";
