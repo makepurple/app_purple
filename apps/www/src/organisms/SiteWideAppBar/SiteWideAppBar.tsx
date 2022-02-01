@@ -14,7 +14,7 @@ import tw from "twin.macro";
 import { LoginButton } from "../LoginButton";
 import { LogoutButton } from "../LogoutButton";
 import { MobileAppDrawer } from "../MobileAppDrawer";
-import { NotificationBell } from "../NotificationBell";
+import { NotificationBellButton } from "../NotificationBellButton";
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
@@ -142,7 +142,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						</>
 					) : (
 						<>
-							<NotificationBell />
+							<NotificationBellButton />
 							<StyledLogoutButton label="Logout" />
 						</>
 					)}

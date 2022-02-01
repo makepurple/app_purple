@@ -1,4 +1,4 @@
-import { NotificationBell, NotificationBellProps } from "@makepurple/www";
+import { NotificationBellButton, NotificationBellButtonProps } from "@makepurple/www";
 import { GetNotificationCount_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -6,12 +6,12 @@ import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "organisms/NotificationBell",
-	component: NotificationBell
+	title: "organisms/NotificationBellButton",
+	component: NotificationBellButton
 } as Meta;
 
-const Template: Story<NotificationBellProps> = (args) => {
-	return <NotificationBell {...args} />;
+const Template: Story<NotificationBellButtonProps> = (args) => {
+	return <NotificationBellButton {...args} />;
 };
 Template.args = {};
 Template.parameters = {

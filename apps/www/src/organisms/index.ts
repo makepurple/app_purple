@@ -29,7 +29,7 @@ export * from "./LoginButton";
 export * from "./LogoutButton";
 export * from "./MobileAppDrawer";
 export * from "./NewPostButton";
-export * from "./NotificationBell";
+export * from "./NotificationBellButton";
 export * from "./NotificationCard";
 export * from "./NotificationCardBase";
 export * from "./NotificationCardChatMessageReceived";

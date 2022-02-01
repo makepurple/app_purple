@@ -38,12 +38,12 @@ const NotificationCount = tw.span`
 	rounded-full
 `;
 
-export interface NotificationBellProps {
+export interface NotificationBellButtonProps {
 	className?: string;
 	style?: CSSProperties;
 }
 
-export const NotificationBell: FC<NotificationBellProps> = ({ className, style }) => {
+export const NotificationBellButton: FC<NotificationBellButtonProps> = ({ className, style }) => {
 	const { status } = useSession();
 
 	const [{ data, fetching }, getCount] = useGetNotificationCountQuery({
