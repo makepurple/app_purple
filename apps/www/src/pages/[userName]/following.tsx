@@ -58,7 +58,7 @@ export const Page: NextPage<PageProps> = () => {
 	if (!user) return null;
 
 	return (
-		<UserPageLayout selectedTab="overview" userName={userName}>
+		<UserPageLayout selectedTab="connections" userName={userName}>
 			<Content>
 				<Title tw="mb-6">Following</Title>
 				<Following>
