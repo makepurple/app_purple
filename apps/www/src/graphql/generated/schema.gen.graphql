@@ -490,10 +490,7 @@ type Mutation {
   ok: Boolean!
   openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
-  rejectFriendship(
-    # Find friendship from requester -> viewer
-    where: FriendshipWhereUniqueInput!
-  ): RejectFriendshipPayload!
+  rejectFriendship(where: UserWhereUniqueInput!): RejectFriendshipPayload!
   removeDesiredSkill(where: SkillWhereUniqueInput!): RemoveDesiredSkillMutationPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
   removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!

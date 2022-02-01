@@ -712,7 +712,7 @@ export type MutationPublishPostArgs = {
 
 /** Root mutation type */
 export type MutationRejectFriendshipArgs = {
-  where: FriendshipWhereUniqueInput;
+  where: UserWhereUniqueInput;
 };
 
 
@@ -1963,6 +1963,8 @@ export type UserFollowCardUserFragment = { readonly __typename: 'User', readonly
 
 export type UserFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerIsFriend: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
+export type UserFriendRequestCardUserFragment = { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerIsFriend: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
+
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFollowing: boolean, readonly viewerIsFriend: boolean, readonly image?: string | null | undefined, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number }, readonly friends: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null | undefined, readonly company?: string | null | undefined, readonly name?: string | null | undefined, readonly twitterUsername?: string | null | undefined, readonly url: string, readonly websiteUrl?: string | null | undefined, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type CreateChatMutationVariables = Exact<{
@@ -2050,6 +2052,13 @@ export type PublishPostMutationVariables = Exact<{
 
 
 export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null | undefined, readonly description?: string | null | undefined, readonly publishedAt?: Date | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly urlSlug: string } } };
+
+export type RejectFriendshipMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type RejectFriendshipMutation = { readonly __typename: 'Mutation', readonly rejectFriendship: { readonly __typename: 'RejectFriendshipPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null | undefined, readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string } } } };
 
 export type RemovePostThumbnailMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -2291,6 +2300,14 @@ export type GetUserFollowingQueryVariables = Exact<{
 
 
 export type GetUserFollowingQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'FollowEdge', readonly cursor: string, readonly node: { readonly __typename: 'Follow', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Follow', readonly id: string, readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } } | { readonly __typename: 'User', readonly viewerFollowing: boolean, readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }> } } | null | undefined };
+
+export type GetUserFriendRequestsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetUserFriendRequestsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerIsFriend: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } } | null | undefined };
 
 export type GetUserFriendsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -2836,6 +2853,50 @@ export const UserFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
   viewerIsFriend
 }
     ${PageInfoFragmentFragmentDoc}`;
+export const UserFriendRequestCardUserFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserFriendRequestCardUser on User {
+  description
+  desiredSkills(first: 5) {
+    __typename
+    pageInfo {
+      ...PageInfoFragment
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+    nodes {
+      id
+      name
+    }
+  }
+  id
+  image
+  name
+  skills(first: 5) {
+    __typename
+    pageInfo {
+      ...PageInfoFragment
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+    nodes {
+      id
+      name
+      owner
+    }
+  }
+  viewerIsFriend
+}
+    ${PageInfoFragmentFragmentDoc}`;
 export const TopLanguagesFragmentDoc = /*#__PURE__*/ gql`
     fragment TopLanguages on TopLanguages {
   __typename
@@ -3218,6 +3279,26 @@ export const PublishPostDocument = /*#__PURE__*/ gql`
 
 export function usePublishPostMutation() {
   return Urql.useMutation<PublishPostMutation, PublishPostMutationVariables>(PublishPostDocument);
+};
+export const RejectFriendshipDocument = /*#__PURE__*/ gql`
+    mutation RejectFriendship($where: UserWhereUniqueInput!) {
+  rejectFriendship(where: $where) {
+    viewer {
+      id
+    }
+    record {
+      id
+      friender {
+        id
+      }
+      frienderId
+    }
+  }
+}
+    `;
+
+export function useRejectFriendshipMutation() {
+  return Urql.useMutation<RejectFriendshipMutation, RejectFriendshipMutationVariables>(RejectFriendshipDocument);
 };
 export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
     mutation RemovePostThumbnail($where: PostWhereUniqueInput!) {
@@ -3946,6 +4027,34 @@ ${UserFollowCardUserFragmentDoc}`;
 
 export function useGetUserFollowingQuery(options: Omit<Urql.UseQueryArgs<GetUserFollowingQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetUserFollowingQuery>({ query: GetUserFollowingDocument, ...options });
+};
+export const GetUserFriendRequestsDocument = /*#__PURE__*/ gql`
+    query GetUserFriendRequests($after: String, $first: Int) {
+  viewer {
+    id
+    name
+    friendRequestsReceived(after: $after, first: $first) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+      totalCount
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        ...UserFriendCardUser
+      }
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${UserFriendCardUserFragmentDoc}`;
+
+export function useGetUserFriendRequestsQuery(options: Omit<Urql.UseQueryArgs<GetUserFriendRequestsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserFriendRequestsQuery>({ query: GetUserFriendRequestsDocument, ...options });
 };
 export const GetUserFriendsDocument = /*#__PURE__*/ gql`
     query GetUserFriends($after: String, $first: Int, $name: String!) {

@@ -1,0 +1,24 @@
+query GetUserFriendRequests(
+	$after: String
+	$first: Int
+) {
+	viewer {
+		id
+		name
+		friendRequestsReceived(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...UserFriendCardUser
+			}
+		}
+	}
+}

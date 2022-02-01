@@ -1,7 +1,12 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import { gql } from "urql";
-import type { DeleteFriendshipPayload, LeaveChatPayload, User } from "../generated";
+import type {
+	DeleteFriendshipPayload,
+	LeaveChatPayload,
+	RejectFriendshipPayload,
+	User
+} from "../generated";
 
 export const createCache = () => {
 	return cacheExchange({
@@ -98,6 +103,44 @@ export const createCache = () => {
 					cache.writeFragment(fragment, {
 						id: `User:${result.viewer.id}`,
 						chats: {
+							edges: filteredEdges,
+							nodes: filteredEdges.map((edge) => edge.node)
+						}
+					});
+				},
+				rejectFriendship: (result: RejectFriendshipPayload, _, cache) => {
+					const viewer = result.viewer;
+
+					if (!viewer) return;
+
+					const fragment = gql`
+						fragment _ on User {
+							id
+							friendRequestsReceived {
+								edges {
+									cursor
+									node {
+										id
+									}
+								}
+								nodes {
+									id
+								}
+							}
+						}
+					`;
+
+					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
+
+					if (!old) return;
+
+					const filteredEdges = (old as User).friendRequestsReceived.edges.filter(
+						(friendRequest) => friendRequest.node.id !== result.record.friender.id
+					);
+
+					cache.writeFragment(fragment, {
+						id: `User:${result.viewer.id}`,
+						friendRequestsReceived: {
 							edges: filteredEdges,
 							nodes: filteredEdges.map((edge) => edge.node)
 						}
