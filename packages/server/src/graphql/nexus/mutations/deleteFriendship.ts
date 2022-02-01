@@ -40,7 +40,7 @@ export const deleteFriendship = mutationField("deleteFriendship", {
 					}
 				},
 				data: {
-					rejected: true
+					rejectedAt: new Date()
 				}
 			});
 
