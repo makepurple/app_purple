@@ -5,6 +5,7 @@ import React, { Fragment } from "react";
 import tw from "twin.macro";
 import { useGetNotificationCountQuery, useGetNotificationsQuery } from "../graphql";
 import { LoadingNotificationCard, NotificationCard } from "../organisms";
+import { SearchIcon } from "../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -68,7 +69,9 @@ export const Page: NextPage = () => {
 									title="There's nothing here"
 									subTitle="You don't have any notifications yet"
 									tw="shadow-none"
-								/>
+								>
+									<SearchIcon height={96} width={96} />
+								</NonIdealState>
 						  )
 						: notifications.map((notification, i) => (
 								<Fragment key={notification.id}>

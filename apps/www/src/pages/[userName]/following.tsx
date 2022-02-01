@@ -12,6 +12,7 @@ import {
 	UserPageLayout
 } from "../../organisms";
 import { pageProps, PageProps } from "../../page-props/[userName]/following";
+import { PersonIcon } from "../../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -68,7 +69,9 @@ export const Page: NextPage<PageProps> = () => {
 									title="There's nothing here"
 									subTitle="This user is not following anything"
 									tw="shadow-none"
-								/>
+								>
+									<PersonIcon height={96} width={96} />
+								</NonIdealState>
 						  )
 						: follows.map((follow, i) => (
 								<Fragment key={follow.id}>

@@ -7,6 +7,7 @@ import tw from "twin.macro";
 import { useGetUserFollowersQuery } from "../../graphql";
 import { LoadingUserFollowCard, UserFollowCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/followers";
+import { PersonIcon } from "../../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -63,7 +64,9 @@ export const Page: NextPage<PageProps> = () => {
 									title="There's nothing here"
 									subTitle="We couldn't find any followers"
 									tw="shadow-none"
-								/>
+								>
+									<PersonIcon height={96} width={96} />
+								</NonIdealState>
 						  )
 						: followers.map((follower, i) => (
 								<Fragment key={follower.id}>

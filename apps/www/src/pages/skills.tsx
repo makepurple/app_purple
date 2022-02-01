@@ -136,7 +136,7 @@ export const Page: NextPage = () => {
 								subTitle="We couldn't find any repositories"
 								tw="shadow-none"
 							>
-								<BookIcon />
+								<BookIcon height={96} width={96} />
 							</NonIdealState>
 						)
 					) : (
