@@ -82,7 +82,7 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 				/>
 			)}
 			<Details>
-				<NextLink href="/[userName/" as={`/${user.name}`} passHref>
+				<NextLink href="/[userName" as={`/${user.name}`} passHref>
 					<UserName>{user.name}</UserName>
 				</NextLink>
 				{user.description && <Bio tw="mt-1">{user.description}</Bio>}

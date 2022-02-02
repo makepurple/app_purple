@@ -54,6 +54,7 @@ export * from "./UrqlProvider";
 export * from "./UserAvatar";
 export * from "./UserFollowCard";
 export * from "./UserFriendCard";
+export * from "./UserFriendRequestCard";
 export * from "./UserInfoSideBar";
 export * from "./UserInfoSideBarForm";
 export * from "./UserPageLayout";

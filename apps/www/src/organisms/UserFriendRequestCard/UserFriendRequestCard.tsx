@@ -2,11 +2,7 @@ import { Anchor, Button, Spinner, Tags } from "@makepurple/components";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
-import {
-	useFriendRequestUserMutation,
-	useRejectFriendshipMutation,
-	UserFriendRequestCardUserFragment
-} from "../../graphql";
+import { useRejectFriendshipMutation, UserFriendRequestCardUserFragment } from "../../graphql";
 import { UserAvatar } from "../UserAvatar";
 
 const MAX_SKILLS_SHOWN = 5;
@@ -60,16 +56,13 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 	(props, ref) => {
 		const { className, style, user } = props;
 
-		const [{ fetching: requesting }, friendRequest] = useFriendRequestUserMutation();
-		const [{ fetching: rejecting }, rejectRequest] = useRejectFriendshipMutation();
+		const [{ fetching }, rejectRequest] = useRejectFriendshipMutation();
 
 		const skills = user.skills.nodes.slice(0, MAX_SKILLS_SHOWN);
 		const desiredSkills = user.desiredSkills.nodes.slice(0, MAX_SKILLS_SHOWN);
 
 		const skillsExtra = user.skills.totalCount - MAX_SKILLS_SHOWN;
 		const desiredSkillsExtra = user.desiredSkills.totalCount - MAX_SKILLS_SHOWN;
-
-		const loading: boolean = requesting || rejecting;
 
 		return (
 			<Root ref={ref} className={className} style={style}>
@@ -83,7 +76,7 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 					/>
 				)}
 				<Details>
-					<NextLink href="/[userName/" as={`/${user.name}`} passHref>
+					<NextLink href="/[userName" as={`/${user.name}`} passHref>
 						<UserName>{user.name}</UserName>
 					</NextLink>
 					{user.description && <Bio tw="mt-1">{user.description}</Bio>}
@@ -120,17 +113,17 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 				</Details>
 				<Actions tw="ml-4">
 					<FollowButton
-						disabled={loading}
+						disabled={fetching}
 						onClick={async () => {
-							user.viewerIsFriend
-								? await rejectRequest({ where: { id: user.id } }).catch(() => null)
-								: await friendRequest({ where: { id: user.id } }).catch(() => null);
+							if (user.viewerIsFriend) return;
+
+							await rejectRequest({ where: { id: user.id } }).catch(() => null);
 						}}
 						size="small"
 						type="button"
 						variant="secondary"
 					>
-						{loading ? <Spinner /> : user.viewerIsFriend ? "Ignore" : "Connect"}
+						{fetching ? <Spinner /> : "Ignore"}
 					</FollowButton>
 				</Actions>
 			</Root>
