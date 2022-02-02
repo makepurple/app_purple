@@ -15,6 +15,7 @@ import { LoginButton } from "../LoginButton";
 import { LogoutButton } from "../LogoutButton";
 import { MobileAppDrawer } from "../MobileAppDrawer";
 import { NotificationBellButton } from "../NotificationBellButton";
+import { PendingFriendsButton } from "../PendingFriendsButton";
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
@@ -71,8 +72,8 @@ export interface SiteWideAppBarProps {
 }
 
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
-	const { data: session } = useSession();
-	const isAuthenticated = !!session?.user;
+	const { status } = useSession();
+	const isAuthenticated = status === "authenticated";
 
 	const { scrollY, scrollYProgress } = useViewportScroll();
 
@@ -142,6 +143,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						</>
 					) : (
 						<>
+							<PendingFriendsButton />
 							<NotificationBellButton />
 							<StyledLogoutButton label="Logout" />
 						</>

@@ -1,8 +1,9 @@
 import { SiteWideAppBar, SiteWideAppBarProps } from "@makepurple/www";
-import { GetMyUser_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetMyUser_mock, GetNotificationCounts_mock } from "@makepurple/www/src/graphql/mocks";
+import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
-import { getOperationName } from "urql";
+import { getOperationName, Operation } from "urql";
 
 export default {
 	title: "organisms/SiteWideAppBar",
@@ -16,23 +17,64 @@ const Template: Story<SiteWideAppBarProps> = (args) => (
 	</>
 );
 Template.args = {};
+Template.parameters = {
+	layout: "fullscreen",
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetMyUser":
+				return { data: GetMyUser_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			default:
+				return {};
+		}
+	}
+};
 
 export const Standard: any = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
-	layout: "fullscreen",
-	urql: () => ({})
+	...Template.parameters,
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetMyUser":
+				return {
+					data: {
+						viewer: null
+					}
+				};
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			default:
+				return {};
+		}
+	}
 };
 
 export const LoggedIn: any = Template.bind({});
 LoggedIn.args = { ...Template.args };
 LoggedIn.parameters = {
-	layout: "fullscreen",
-	urql: (op: any) => {
-		if (getOperationName(op.query) === "GetMyUser") {
-			return { data: GetMyUser_mock };
-		}
+	...Template.parameters,
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
 
-		return {};
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetMyUser":
+				return { data: GetMyUser_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			default:
+				return {};
+		}
 	}
 };
