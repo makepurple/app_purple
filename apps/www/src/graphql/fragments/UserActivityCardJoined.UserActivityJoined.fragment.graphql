@@ -1,0 +1,4 @@
+fragment UserActivityCardJoinedUserActivityJoined on UserActivityJoined {
+	id
+	...UserActivityCardHeaderUserActivity
+}

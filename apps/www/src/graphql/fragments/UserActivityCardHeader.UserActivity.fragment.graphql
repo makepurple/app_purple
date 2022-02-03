@@ -1,0 +1,10 @@
+fragment UserActivityCardHeaderUserActivity on UserActivity {
+	id
+	updatedAt
+	user {
+		id
+		image
+		name
+	}
+	userId
+}

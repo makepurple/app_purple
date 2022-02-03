@@ -165,11 +165,9 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 				</PostedDetails>
 				<KarmaContainer tw="mt-2">
 					<UpvoteButton
-						disabled={!!post.viewerUpvote}
+						disabled={fetching || !!post.viewerUpvote}
 						onClick={async (e) => {
 							e.stopPropagation();
-
-							if (fetching) return;
 
 							const didSucceed = await upvotePost({ where: { id: post.id } })
 								.then((result) => !!result.data?.upvotePost.record)

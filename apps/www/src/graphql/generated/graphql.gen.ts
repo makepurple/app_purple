@@ -1957,6 +1957,26 @@ export type UpdateExperienceFormExperienceFragment = { readonly __typename: 'Exp
 
 export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string };
 
+type UserActivityCardHeaderUserActivity_UserActivityCommentPost_Fragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+type UserActivityCardHeaderUserActivity_UserActivityFollowSkill_Fragment = { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+type UserActivityCardHeaderUserActivity_UserActivityFollowUser_Fragment = { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+type UserActivityCardHeaderUserActivity_UserActivityFriendAcceptUser_Fragment = { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+type UserActivityCardHeaderUserActivity_UserActivityJoined_Fragment = { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+type UserActivityCardHeaderUserActivity_UserActivityPublishPost_Fragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+type UserActivityCardHeaderUserActivity_UserActivityUpvotePost_Fragment = { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+export type UserActivityCardHeaderUserActivityFragment = UserActivityCardHeaderUserActivity_UserActivityCommentPost_Fragment | UserActivityCardHeaderUserActivity_UserActivityFollowSkill_Fragment | UserActivityCardHeaderUserActivity_UserActivityFollowUser_Fragment | UserActivityCardHeaderUserActivity_UserActivityFriendAcceptUser_Fragment | UserActivityCardHeaderUserActivity_UserActivityJoined_Fragment | UserActivityCardHeaderUserActivity_UserActivityPublishPost_Fragment | UserActivityCardHeaderUserActivity_UserActivityUpvotePost_Fragment;
+
+export type UserActivityCardJoinedUserActivityJoinedFragment = { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+export type UserActivityCardPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
 export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null | undefined };
 
 export type UserFollowCardUserFragment = { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
@@ -2765,6 +2785,49 @@ export const UpdateUserInfoSkillFragmentDoc = /*#__PURE__*/ gql`
   owner
 }
     `;
+export const UserActivityCardHeaderUserActivityFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardHeaderUserActivity on UserActivity {
+  id
+  updatedAt
+  user {
+    id
+    image
+    name
+  }
+  userId
+}
+    `;
+export const UserActivityCardJoinedUserActivityJoinedFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardJoinedUserActivityJoined on UserActivityJoined {
+  id
+  ...UserActivityCardHeaderUserActivity
+}
+    ${UserActivityCardHeaderUserActivityFragmentDoc}`;
+export const UserActivityCardPublishPostFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardPublishPost on UserActivityPublishPost {
+  id
+  post {
+    description
+    id
+    publishedAt
+    readTime
+    skills(first: 5) {
+      totalCount
+      nodes {
+        id
+        name
+        owner
+      }
+    }
+    thumbnailUrl
+    title
+    upvotes
+    viewerUpvote
+  }
+  postId
+  ...UserActivityCardHeaderUserActivity
+}
+    ${UserActivityCardHeaderUserActivityFragmentDoc}`;
 export const UserFollowCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserFollowCardUser on User {
   description

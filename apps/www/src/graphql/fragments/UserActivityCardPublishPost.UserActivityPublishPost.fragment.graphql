@@ -1,0 +1,23 @@
+fragment UserActivityCardPublishPost on UserActivityPublishPost {
+	id
+	post {
+		description
+		id
+		publishedAt
+		readTime
+		skills(first: 5) {
+			totalCount
+			nodes {
+				id
+				name
+				owner
+			}
+		}
+		thumbnailUrl
+		title
+		upvotes
+		viewerUpvote
+	}
+	postId
+	...UserActivityCardHeaderUserActivity
+}

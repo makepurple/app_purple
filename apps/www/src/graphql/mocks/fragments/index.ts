@@ -16,3 +16,6 @@ export * from "./Repository.fragment.mock";
 export * from "./Skill.fragment.mock";
 export * from "./TopLanguages.fragment.mock";
 export * from "./User.fragment.mock";
+export * from "./UserActivity.fragment.mock";
+export * from "./UserActivityJoined.fragment.mock";
+export * from "./UserActivityPublishPost.fragment.mock";

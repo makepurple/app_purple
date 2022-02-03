@@ -8,7 +8,7 @@ export default {
 	component: UserAvatar
 } as Meta;
 
-const Template: Story<UserAvatarProps> = (args: any) => {
+const Template: Story<UserAvatarProps> = (args) => {
 	return <UserAvatar {...args} />;
 };
 Template.args = {
