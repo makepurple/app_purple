@@ -52,6 +52,7 @@ export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";
 export * from "./UpdateExperienceForm";
 export * from "./UrqlProvider";
+export * from "./UserActivityCard";
 export * from "./UserActivityCardCommentPost";
 export * from "./UserActivityCardFollowSkill";
 export * from "./UserActivityCardFollowUser";
