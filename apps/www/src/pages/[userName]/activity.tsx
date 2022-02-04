@@ -2,10 +2,16 @@ import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { Fragment } from "react";
 import tw from "twin.macro";
 import { useGetUserActivitiesQuery } from "../../graphql";
-import { UserActivityCard, UserPageLayout } from "../../organisms";
+import {
+	LoadingUserActivityCardPost,
+	LoadingUserActivityCardSkill,
+	LoadingUserActivityCardUser,
+	UserActivityCard,
+	UserPageLayout
+} from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/activity";
 import { PulseIcon } from "../../svgs";
 
@@ -36,7 +42,8 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const activities = data?.user?.activities.nodes ?? [];
+	const user = data?.user;
+	const activities = user?.activities.nodes ?? [];
 
 	return (
 		<UserPageLayout selectedTab="activity" userName={userName}>
@@ -45,7 +52,7 @@ export const Page: NextPage<PageProps> = () => {
 					? !fetching && (
 							<NonIdealState
 								title="There's nothing here"
-								subTitle="We couldn't find any activity"
+								subTitle={`${user?.name} hasn't done anything yet`}
 							>
 								<PulseIcon height={96} width={96} />
 							</NonIdealState>
@@ -57,6 +64,13 @@ export const Page: NextPage<PageProps> = () => {
 								userActivity={activity}
 							/>
 					  ))}
+				{fetching && (
+					<>
+						<LoadingUserActivityCardPost />
+						<LoadingUserActivityCardSkill />
+						<LoadingUserActivityCardUser />
+					</>
+				)}
 			</Activities>
 		</UserPageLayout>
 	);
