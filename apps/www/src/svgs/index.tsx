@@ -634,6 +634,28 @@ export const PullRequestIcon = React.memo(
 	))
 );
 
+export const PulseIcon = React.memo(
+	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+		<svg
+			height={24}
+			width={24}
+			viewBox="0 0 24 24"
+			xmlns="http://www.w3.org/2000/svg"
+			ref={ref}
+			{...props}
+		>
+			<polyline
+				fill="none"
+				stroke="currentColor"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth={2}
+				points="22 12 18 12 15 21 9 3 6 12 2 12"
+			/>
+		</svg>
+	))
+);
+
 export const QuoteIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
