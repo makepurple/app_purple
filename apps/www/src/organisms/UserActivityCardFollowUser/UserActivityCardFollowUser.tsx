@@ -76,7 +76,14 @@ export const UserActivityCardFollowUser = forwardRef<
 	const [{ fetching: following }, followUser] = useFollowUserMutation();
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
 
-	if (follow.following.__typename === "Skill") return null;
+	/**
+	 * !HACK
+	 * @description Should not reach here, but in-case it does, return a div so that we don't break
+	 * pagination. It does mean that there might be an unexpected gap though.
+	 * @author David Lee
+	 * @date February 3, 2022
+	 */
+	if (follow.following.__typename === "Skill") return <div ref={ref} />;
 
 	const followedUser = follow.following;
 
