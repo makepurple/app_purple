@@ -23,6 +23,7 @@ const Content = tw.div`
 const UserAction = tw.span`
 	text-base
 	leading-none
+	truncate
 `;
 
 const UpdatedAt = tw.span`

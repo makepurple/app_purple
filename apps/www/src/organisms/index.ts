@@ -53,6 +53,7 @@ export * from "./TopLanguages";
 export * from "./UpdateExperienceForm";
 export * from "./UrqlProvider";
 export * from "./UserActivityCardFollowUser";
+export * from "./UserActivityCardFriendAcceptUser";
 export * from "./UserActivityCardHeader";
 export * from "./UserActivityCardJoined";
 export * from "./UserActivityCardPublishPost";
