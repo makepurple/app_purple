@@ -8,6 +8,7 @@ import tw, { styled } from "twin.macro";
 import { UserActivityCardUpvotePostFragment, useUpvotePostMutation } from "../../graphql";
 import { ThumbsUpIcon } from "../../svgs";
 import { UserActivityCardHeader } from "../UserActivityCardHeader";
+
 const Root = tw.div`
 	flex
 	flex-col
@@ -22,7 +23,7 @@ const Content = tw(Paper)`
 	p-4
 `;
 
-const ThumbnailContainer = tw.div`
+const ThumbnailContainer = tw.a`
 	flex-shrink-0
 	w-64
 `;
@@ -41,7 +42,7 @@ const PostContent = tw.div`
 	items-start
 `;
 
-const Title = tw.span`
+const Title = tw(Anchor)`
 	text-xl
 	font-bold
 	leading-none
@@ -49,7 +50,7 @@ const Title = tw.span`
 	line-clamp-2
 `;
 
-const DescriptionContainer = tw.div`
+const DescriptionContainer = tw.a`
 	flex-grow
 `;
 
@@ -127,18 +128,40 @@ export const UserActivityCardUpvotePost = forwardRef<
 			</UserActivityCardHeader>
 			<Content tw="mt-2">
 				{!!post.thumbnailUrl && (
-					<ThumbnailContainer tw="mr-4">
-						<Thumbnail>
-							<NextImage src={post.thumbnailUrl} layout="fill" objectFit="cover" />
-						</Thumbnail>
-					</ThumbnailContainer>
+					<NextLink
+						href="/[userName]/[postTitle]"
+						as={`/${user.name}/${post.title}`}
+						passHref
+					>
+						<ThumbnailContainer tw="mr-4">
+							<Thumbnail>
+								<NextImage
+									src={post.thumbnailUrl}
+									layout="fill"
+									objectFit="cover"
+								/>
+							</Thumbnail>
+						</ThumbnailContainer>
+					</NextLink>
 				)}
 				<PostContent>
-					<Title>{post.title}</Title>
+					<NextLink
+						href="/[userName]/[postTitle]"
+						as={`/${user.name}/${post.title}`}
+						passHref
+					>
+						<Title>{post.title}</Title>
+					</NextLink>
 					{post.description && (
-						<DescriptionContainer>
-							<Description>{post.description}</Description>
-						</DescriptionContainer>
+						<NextLink
+							href="/[userName]/[postTitle]"
+							as={`/${user.name}/${post.title}`}
+							passHref
+						>
+							<DescriptionContainer>
+								<Description>{post.description}</Description>
+							</DescriptionContainer>
+						</NextLink>
 					)}
 					<PostedDetails>
 						<NextLink href={`/${user.name}`} passHref>
