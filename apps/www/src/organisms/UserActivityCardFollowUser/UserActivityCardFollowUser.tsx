@@ -102,7 +102,7 @@ export const UserActivityCardFollowUser = forwardRef<
 						border={3}
 						height={64}
 						width={64}
-						user={user}
+						user={followedUser}
 						tw="flex-shrink-0 mr-6"
 					/>
 				)}
