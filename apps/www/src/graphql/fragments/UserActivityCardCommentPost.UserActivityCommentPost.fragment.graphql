@@ -1,0 +1,28 @@
+fragment UserActivityCardCommentPost on UserActivityCommentPost {
+	id
+	comment {
+		id
+		post {
+			authorName
+			description
+			id
+			publishedAt
+			readTime
+			skills(first: 5) {
+				totalCount
+				nodes {
+					id
+					name
+					owner
+				}
+			}
+			thumbnailUrl
+			title
+			upvotes
+			viewerUpvote
+		}
+		postId
+	}
+	commentId
+	...UserActivityCardHeaderUserActivity
+}
