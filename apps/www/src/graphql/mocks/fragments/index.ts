@@ -18,6 +18,7 @@ export * from "./TopLanguages.fragment.mock";
 export * from "./User.fragment.mock";
 export * from "./UserActivity.fragment.mock";
 export * from "./UserActivityCommentPost.fragment.mock";
+export * from "./UserActivityFollowSkill.fragment.mock";
 export * from "./UserActivityFollowUser.fragment.mock";
 export * from "./UserActivityFriendAcceptUser.fragment.mock";
 export * from "./UserActivityJoined.fragment.mock";

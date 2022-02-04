@@ -1959,6 +1959,8 @@ export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readon
 
 export type UserActivityCardCommentPostFragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null | undefined, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null | undefined }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
+export type UserActivityCardFollowSkillUserActivityFollowSkillFragment = { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
 export type UserActivityCardFollowUserUserActivityFollowUserFragment = { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment = { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly friendshipId: string, readonly updatedAt: Date, readonly userId: string, readonly friendship: { readonly __typename: 'Friendship', readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
@@ -2832,6 +2834,54 @@ export const UserActivityCardCommentPostFragmentDoc = /*#__PURE__*/ gql`
     postId
   }
   commentId
+  ...UserActivityCardHeaderUserActivity
+}
+    ${UserActivityCardHeaderUserActivityFragmentDoc}`;
+export const UserActivityCardFollowSkillUserActivityFollowSkillFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardFollowSkillUserActivityFollowSkill on UserActivityFollowSkill {
+  id
+  follow {
+    following {
+      viewerFollowing
+      ... on Skill {
+        id
+        name
+        owner
+        github {
+          __typename
+          id
+          description
+          forkCount
+          issueCount
+          licenseInfo {
+            __typename
+            id
+            name
+            nickname
+            spdxId
+            url
+          }
+          name
+          owner {
+            id
+            avatarUrl
+            login
+          }
+          primaryLanguage {
+            __typename
+            color
+            id
+            name
+          }
+          pullRequestCount
+          pushedAt
+          stargazerCount
+          url
+        }
+      }
+    }
+  }
+  followId
   ...UserActivityCardHeaderUserActivity
 }
     ${UserActivityCardHeaderUserActivityFragmentDoc}`;
