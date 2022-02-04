@@ -1,4 +1,4 @@
-fragment UserActivityCardCommentPost on UserActivityCommentPost {
+fragment UserActivityCardCommentPostUserActivityCommentPost on UserActivityCommentPost {
 	id
 	comment {
 		id

@@ -5,7 +5,10 @@ import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { UserActivityCardCommentPostFragment, useUpvotePostMutation } from "../../graphql";
+import {
+	UserActivityCardCommentPostUserActivityCommentPostFragment,
+	useUpvotePostMutation
+} from "../../graphql";
 import { ThumbsUpIcon } from "../../svgs";
 import { UserActivityCardHeader } from "../UserActivityCardHeader";
 
@@ -108,7 +111,7 @@ const UpvoteCount = tw.span`
 export interface UserActivityCardCommentPostProps {
 	className?: string;
 	style?: CSSProperties;
-	userActivity: UserActivityCardCommentPostFragment;
+	userActivity: UserActivityCardCommentPostUserActivityCommentPostFragment;
 }
 
 export const UserActivityCardCommentPost = forwardRef<

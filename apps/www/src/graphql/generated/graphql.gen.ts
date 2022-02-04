@@ -1957,7 +1957,7 @@ export type UpdateExperienceFormExperienceFragment = { readonly __typename: 'Exp
 
 export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string };
 
-export type UserActivityCardCommentPostFragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null | undefined, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null | undefined }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type UserActivityCardCommentPostUserActivityCommentPostFragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null | undefined, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null | undefined }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type UserActivityCardFollowSkillUserActivityFollowSkillFragment = { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
@@ -1983,9 +1983,9 @@ export type UserActivityCardHeaderUserActivityFragment = UserActivityCardHeaderU
 
 export type UserActivityCardJoinedUserActivityJoinedFragment = { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
-export type UserActivityCardPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type UserActivityCardPublishPostUserActivityPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
-export type UserActivityCardUpvotePostFragment = { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type UserActivityCardUpvotePostUserActivityUpvotePostFragment = { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null | undefined };
 
@@ -2312,6 +2312,15 @@ export type GetSkillsQueryVariables = Exact<{
 
 
 export type GetSkillsQuery = { readonly __typename: 'Query', readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } } | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } }> } };
+
+export type GetUserActivitiesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  name: Scalars['String'];
+}>;
+
+
+export type GetUserActivitiesQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly activities: { readonly __typename: 'UserActivityConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserActivityEdge', readonly cursor: string, readonly node: { readonly __typename: 'UserActivityCommentPost', readonly id: string } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string } | { readonly __typename: 'UserActivityFollowUser', readonly id: string } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string } | { readonly __typename: 'UserActivityJoined', readonly id: string } | { readonly __typename: 'UserActivityPublishPost', readonly id: string } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null | undefined, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null | undefined }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null | undefined, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null | undefined, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null | undefined, readonly spdxId?: string | null | undefined, readonly url?: string | null | undefined } | null | undefined, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null | undefined, readonly id: string, readonly name: string } | null | undefined } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } | { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly friendshipId: string, readonly updatedAt: Date, readonly userId: string, readonly friendship: { readonly __typename: 'Friendship', readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } | { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } | { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } }> } } | null | undefined };
 
 export type GetUserFollowersQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -2807,8 +2816,8 @@ export const UserActivityCardHeaderUserActivityFragmentDoc = /*#__PURE__*/ gql`
   userId
 }
     `;
-export const UserActivityCardCommentPostFragmentDoc = /*#__PURE__*/ gql`
-    fragment UserActivityCardCommentPost on UserActivityCommentPost {
+export const UserActivityCardCommentPostUserActivityCommentPostFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardCommentPostUserActivityCommentPost on UserActivityCommentPost {
   id
   comment {
     id
@@ -2998,8 +3007,8 @@ export const UserActivityCardJoinedUserActivityJoinedFragmentDoc = /*#__PURE__*/
   ...UserActivityCardHeaderUserActivity
 }
     ${UserActivityCardHeaderUserActivityFragmentDoc}`;
-export const UserActivityCardPublishPostFragmentDoc = /*#__PURE__*/ gql`
-    fragment UserActivityCardPublishPost on UserActivityPublishPost {
+export const UserActivityCardPublishPostUserActivityPublishPostFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardPublishPostUserActivityPublishPost on UserActivityPublishPost {
   id
   post {
     authorName
@@ -3024,8 +3033,8 @@ export const UserActivityCardPublishPostFragmentDoc = /*#__PURE__*/ gql`
   ...UserActivityCardHeaderUserActivity
 }
     ${UserActivityCardHeaderUserActivityFragmentDoc}`;
-export const UserActivityCardUpvotePostFragmentDoc = /*#__PURE__*/ gql`
-    fragment UserActivityCardUpvotePost on UserActivityUpvotePost {
+export const UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardUpvotePostUserActivityUpvotePost on UserActivityUpvotePost {
   id
   post {
     authorName
@@ -4246,6 +4255,61 @@ ${PageInfoFragmentFragmentDoc}`;
 
 export function useGetSkillsQuery(options: Omit<Urql.UseQueryArgs<GetSkillsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetSkillsQuery>({ query: GetSkillsDocument, ...options });
+};
+export const GetUserActivitiesDocument = /*#__PURE__*/ gql`
+    query GetUserActivities($after: String, $first: Int, $name: String!) {
+  user(where: {name: $name}) {
+    id
+    activities(after: $after, first: $first) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        ...UserActivityCardHeaderUserActivity
+        ... on UserActivityCommentPost {
+          ...UserActivityCardCommentPostUserActivityCommentPost
+        }
+        ... on UserActivityFollowSkill {
+          ...UserActivityCardFollowSkillUserActivityFollowSkill
+        }
+        ... on UserActivityFollowUser {
+          ...UserActivityCardFollowUserUserActivityFollowUser
+        }
+        ... on UserActivityFriendAcceptUser {
+          ...UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser
+        }
+        ... on UserActivityJoined {
+          ...UserActivityCardJoinedUserActivityJoined
+        }
+        ... on UserActivityPublishPost {
+          ...UserActivityCardPublishPostUserActivityPublishPost
+        }
+        ... on UserActivityUpvotePost {
+          ...UserActivityCardUpvotePostUserActivityUpvotePost
+        }
+      }
+    }
+    name
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${UserActivityCardHeaderUserActivityFragmentDoc}
+${UserActivityCardCommentPostUserActivityCommentPostFragmentDoc}
+${UserActivityCardFollowSkillUserActivityFollowSkillFragmentDoc}
+${UserActivityCardFollowUserUserActivityFollowUserFragmentDoc}
+${UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragmentDoc}
+${UserActivityCardJoinedUserActivityJoinedFragmentDoc}
+${UserActivityCardPublishPostUserActivityPublishPostFragmentDoc}
+${UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc}`;
+
+export function useGetUserActivitiesQuery(options: Omit<Urql.UseQueryArgs<GetUserActivitiesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserActivitiesQuery>({ query: GetUserActivitiesDocument, ...options });
 };
 export const GetUserFollowersDocument = /*#__PURE__*/ gql`
     query GetUserFollowers($after: String, $first: Int, $name: String!) {
