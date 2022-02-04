@@ -8,11 +8,17 @@ import {
 	Tab
 } from "@makepurple/components";
 import React, { CSSProperties, FC, Fragment, useMemo } from "react";
-import { PeopleIcon } from "../../svgs";
+import { PeopleIcon, PulseIcon } from "../../svgs";
 
 export interface UserPageTabsProps {
 	className?: string;
-	selectedTab?: "overview" | "posts" | "repositories" | "experiences" | "connections";
+	selectedTab?:
+		| "overview"
+		| "posts"
+		| "repositories"
+		| "experiences"
+		| "connections"
+		| "activity";
 	style?: CSSProperties;
 	userName: string;
 }
@@ -35,6 +41,8 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 				return 3;
 			case "connections":
 				return 4;
+			case "activity":
+				return 5;
 			default:
 				return undefined;
 		}
@@ -110,6 +118,20 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 						>
 							<PeopleIcon height={20} tw="mr-2" width={20} />
 							Connections
+						</NextLinkAs>
+					)}
+				</Tab>
+				<Tab as={Fragment}>
+					{(tabProps) => (
+						<NextLinkAs
+							as={Tab.Button}
+							forwardedAs="a"
+							href="/[userName]/activity"
+							linkAs={`/${userName}/activity`}
+							{...tabProps}
+						>
+							<PulseIcon height={20} tw="mr-2" width={20} />
+							Activity
 						</NextLinkAs>
 					)}
 				</Tab>

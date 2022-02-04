@@ -7,7 +7,7 @@ const reservedWords = [
 	"about",
 	"account",
 	"accounts",
-	"activities",
+	"activity",
 	"admin",
 	"analytics",
 	"api",
