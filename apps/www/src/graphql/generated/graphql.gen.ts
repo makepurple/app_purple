@@ -1975,7 +1975,9 @@ export type UserActivityCardHeaderUserActivityFragment = UserActivityCardHeaderU
 
 export type UserActivityCardJoinedUserActivityJoinedFragment = { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
-export type UserActivityCardPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+export type UserActivityCardPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
+export type UserActivityCardUpvotePostFragment = { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null | undefined, readonly id: string, readonly publishedAt?: Date | null | undefined, readonly readTime?: number | null | undefined, readonly thumbnailUrl?: string | null | undefined, readonly title?: string | null | undefined, readonly upvotes: number, readonly viewerUpvote?: boolean | null | undefined, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null | undefined };
 
@@ -2807,6 +2809,33 @@ export const UserActivityCardPublishPostFragmentDoc = /*#__PURE__*/ gql`
     fragment UserActivityCardPublishPost on UserActivityPublishPost {
   id
   post {
+    authorName
+    description
+    id
+    publishedAt
+    readTime
+    skills(first: 5) {
+      totalCount
+      nodes {
+        id
+        name
+        owner
+      }
+    }
+    thumbnailUrl
+    title
+    upvotes
+    viewerUpvote
+  }
+  postId
+  ...UserActivityCardHeaderUserActivity
+}
+    ${UserActivityCardHeaderUserActivityFragmentDoc}`;
+export const UserActivityCardUpvotePostFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardUpvotePost on UserActivityUpvotePost {
+  id
+  post {
+    authorName
     description
     id
     publishedAt

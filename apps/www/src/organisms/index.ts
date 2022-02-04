@@ -55,6 +55,7 @@ export * from "./UrqlProvider";
 export * from "./UserActivityCardHeader";
 export * from "./UserActivityCardJoined";
 export * from "./UserActivityCardPublishPost";
+export * from "./UserActivityCardUpvotePost";
 export * from "./UserAvatar";
 export * from "./UserFollowCard";
 export * from "./UserFriendCard";

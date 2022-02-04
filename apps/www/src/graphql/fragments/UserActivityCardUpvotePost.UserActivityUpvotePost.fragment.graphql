@@ -1,4 +1,4 @@
-fragment UserActivityCardPublishPost on UserActivityPublishPost {
+fragment UserActivityCardUpvotePost on UserActivityUpvotePost {
 	id
 	post {
 		authorName

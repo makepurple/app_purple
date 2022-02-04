@@ -5,7 +5,7 @@ import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { UserActivityCardPublishPostFragment, useUpvotePostMutation } from "../../graphql";
+import { UserActivityCardUpvotePostFragment, useUpvotePostMutation } from "../../graphql";
 import { ThumbsUpIcon } from "../../svgs";
 import { UserActivityCardHeader } from "../UserActivityCardHeader";
 const Root = tw.div`
@@ -104,15 +104,15 @@ const UpvoteCount = tw.span`
 	sm:leading-5
 `;
 
-export interface UserActivityCardPublishPostProps {
+export interface UserActivityCardUpvotePostProps {
 	className?: string;
 	style?: CSSProperties;
-	userActivity: UserActivityCardPublishPostFragment;
+	userActivity: UserActivityCardUpvotePostFragment;
 }
 
-export const UserActivityCardPublishPost = forwardRef<
+export const UserActivityCardUpvotePost = forwardRef<
 	HTMLDivElement,
-	UserActivityCardPublishPostProps
+	UserActivityCardUpvotePostProps
 >((props, ref) => {
 	const { className, style, userActivity } = props;
 
@@ -123,7 +123,7 @@ export const UserActivityCardPublishPost = forwardRef<
 	return (
 		<Root ref={ref} className={className} style={style}>
 			<UserActivityCardHeader userActivity={userActivity}>
-				published a new post
+				upvoted a post
 			</UserActivityCardHeader>
 			<Content tw="mt-2">
 				{!!post.thumbnailUrl && (
@@ -186,4 +186,4 @@ export const UserActivityCardPublishPost = forwardRef<
 	);
 });
 
-UserActivityCardPublishPost.displayName = "UserActivityCardPublishPost";
+UserActivityCardUpvotePost.displayName = "UserActivityCardUpvotePost";
