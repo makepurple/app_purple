@@ -38,6 +38,9 @@ export const User = objectType({
 							.findUnique({ where: { id: parent.id } })
 							.activities({
 								...paginationArgs,
+								orderBy: {
+									updatedAt: "desc"
+								},
 								where: {
 									...PrismaUtils.nonNull(args.where),
 									OR: [
@@ -115,6 +118,9 @@ export const User = objectType({
 						prisma.userActivity
 							.findMany({
 								...paginationArgs,
+								orderBy: {
+									updatedAt: "desc"
+								},
 								where: {
 									...PrismaUtils.nonNull(args.where),
 									AND: [
