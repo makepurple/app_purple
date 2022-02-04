@@ -1957,6 +1957,8 @@ export type UpdateExperienceFormExperienceFragment = { readonly __typename: 'Exp
 
 export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string };
 
+export type UserActivityCardFollowUserUserActivityFollowUserFragment = { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null | undefined, readonly id: string, readonly image?: string | null | undefined, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null | undefined, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null | undefined }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
+
 type UserActivityCardHeaderUserActivity_UserActivityCommentPost_Fragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
 
 type UserActivityCardHeaderUserActivity_UserActivityFollowSkill_Fragment = { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null | undefined, readonly name: string } };
@@ -2799,6 +2801,60 @@ export const UserActivityCardHeaderUserActivityFragmentDoc = /*#__PURE__*/ gql`
   userId
 }
     `;
+export const UserActivityCardFollowUserUserActivityFollowUserFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserActivityCardFollowUserUserActivityFollowUser on UserActivityFollowUser {
+  id
+  follow {
+    following {
+      viewerFollowing
+      ... on User {
+        description
+        desiredSkills(first: 5) {
+          __typename
+          pageInfo {
+            ...PageInfoFragment
+          }
+          totalCount
+          edges {
+            cursor
+            node {
+              id
+            }
+          }
+          nodes {
+            id
+            name
+          }
+        }
+        id
+        image
+        name
+        skills(first: 5) {
+          __typename
+          pageInfo {
+            ...PageInfoFragment
+          }
+          totalCount
+          edges {
+            cursor
+            node {
+              id
+            }
+          }
+          nodes {
+            id
+            name
+            owner
+          }
+        }
+      }
+    }
+  }
+  followId
+  ...UserActivityCardHeaderUserActivity
+}
+    ${PageInfoFragmentFragmentDoc}
+${UserActivityCardHeaderUserActivityFragmentDoc}`;
 export const UserActivityCardJoinedUserActivityJoinedFragmentDoc = /*#__PURE__*/ gql`
     fragment UserActivityCardJoinedUserActivityJoined on UserActivityJoined {
   id
