@@ -65,6 +65,7 @@ const reservedWords = [
 	"repository",
 	"repositories",
 	"robots",
+	"s",
 	"search",
 	"settings",
 	"skill",

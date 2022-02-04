@@ -87,14 +87,14 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 			ref={ref}
 			className={className}
 			onClick={async () => {
-				await router.push("/r/[skillOwner]/[skillName]", `/r/${skill.owner}/${skill.name}`);
+				await router.push("/s/[skillOwner]/[skillName]", `/s/${skill.owner}/${skill.name}`);
 			}}
 			style={style}
 		>
 			{owner.__typename === "GitHubOrganization" && owner.avatarUrl && (
 				<NextLink
-					href="/r/[skillOwner]/[skillName]"
-					as={`/r/${skill.owner}/${skill.name}`}
+					href="/s/[skillOwner]/[skillName]"
+					as={`/s/${skill.owner}/${skill.name}`}
 					passHref
 				>
 					<StyledAvatar border={4} tw="mr-6">
@@ -110,8 +110,8 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 			)}
 			<Details>
 				<NextLink
-					href="/r/[skillOwner]/[skillName]"
-					as={`/r/${skill.owner}/${skill.name}`}
+					href="/s/[skillOwner]/[skillName]"
+					as={`/s/${skill.owner}/${skill.name}`}
 					passHref
 				>
 					<Anchor>
@@ -120,8 +120,8 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 				</NextLink>
 				{skill.github.description && (
 					<NextLink
-						href="/r/[skillOwner]/[skillName]"
-						as={`/r/${skill.owner}/${skill.name}`}
+						href="/s/[skillOwner]/[skillName]"
+						as={`/s/${skill.owner}/${skill.name}`}
 						passHref
 					>
 						<a tabIndex={-1} tw="focus:ring-0">
