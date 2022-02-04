@@ -71,7 +71,7 @@ export const UserActivityCardFollowUser = forwardRef<
 >((props, ref) => {
 	const { className, style, userActivity } = props;
 
-	const { follow, user } = userActivity;
+	const { follow } = userActivity;
 
 	const [{ fetching: following }, followUser] = useFollowUserMutation();
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
@@ -104,7 +104,7 @@ export const UserActivityCardFollowUser = forwardRef<
 				</NextLink>
 			</UserActivityCardHeader>
 			<Content tw="mt-2">
-				{user.image && (
+				{followedUser.image && (
 					<StyledAvatar
 						border={3}
 						height={64}
@@ -154,8 +154,12 @@ export const UserActivityCardFollowUser = forwardRef<
 						disabled={loading}
 						onClick={async () => {
 							followedUser.viewerFollowing
-								? await unfollowUser({ where: { id: user.id } }).catch(() => null)
-								: await followUser({ where: { id: user.id } }).catch(() => null);
+								? await unfollowUser({ where: { id: followedUser.id } }).catch(
+										() => null
+								  )
+								: await followUser({ where: { id: followedUser.id } }).catch(
+										() => null
+								  );
 						}}
 						size="small"
 						type="button"

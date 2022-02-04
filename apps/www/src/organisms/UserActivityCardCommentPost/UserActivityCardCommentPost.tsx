@@ -117,7 +117,7 @@ export const UserActivityCardCommentPost = forwardRef<
 >((props, ref) => {
 	const { className, style, userActivity } = props;
 
-	const { comment, user } = userActivity;
+	const { comment } = userActivity;
 	const { post } = comment;
 
 	const [{ fetching }, upvotePost] = useUpvotePostMutation();
@@ -140,7 +140,7 @@ export const UserActivityCardCommentPost = forwardRef<
 				{!!post.thumbnailUrl && (
 					<NextLink
 						href="/[userName]/[postTitle]"
-						as={`/${user.name}/${post.title}`}
+						as={`/${post.authorName}/${post.title}`}
 						passHref
 					>
 						<ThumbnailContainer tw="mr-4">
@@ -157,7 +157,7 @@ export const UserActivityCardCommentPost = forwardRef<
 				<PostContent>
 					<NextLink
 						href="/[userName]/[postTitle]"
-						as={`/${user.name}/${post.title}`}
+						as={`/${post.authorName}/${post.title}`}
 						passHref
 					>
 						<Title>{post.title}</Title>
@@ -165,7 +165,7 @@ export const UserActivityCardCommentPost = forwardRef<
 					{post.description && (
 						<NextLink
 							href="/[userName]/[postTitle]"
-							as={`/${user.name}/${post.title}`}
+							as={`/${post.authorName}/${post.title}`}
 							passHref
 						>
 							<DescriptionContainer>
@@ -174,8 +174,11 @@ export const UserActivityCardCommentPost = forwardRef<
 						</NextLink>
 					)}
 					<PostedDetails>
-						<NextLink href={`/${user.name}`} passHref>
-							<AuthorName onClick={(e) => e.stopPropagation()} title={user.name}>
+						<NextLink href={`/${post.authorName}`} passHref>
+							<AuthorName
+								onClick={(e) => e.stopPropagation()}
+								title={post.authorName}
+							>
 								{post.authorName}
 							</AuthorName>
 						</NextLink>

@@ -71,7 +71,7 @@ export const UserActivityCardFriendAcceptUser = forwardRef<
 >((props, ref) => {
 	const { className, style, userActivity } = props;
 
-	const { friendship, user } = userActivity;
+	const { friendship } = userActivity;
 
 	const [{ fetching: following }, followUser] = useFollowUserMutation();
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
@@ -95,7 +95,7 @@ export const UserActivityCardFriendAcceptUser = forwardRef<
 				</NextLink>
 			</UserActivityCardHeader>
 			<Content tw="mt-2">
-				{user.image && (
+				{friendedUser.image && (
 					<StyledAvatar
 						border={3}
 						height={64}
@@ -145,8 +145,12 @@ export const UserActivityCardFriendAcceptUser = forwardRef<
 						disabled={loading}
 						onClick={async () => {
 							friendedUser.viewerFollowing
-								? await unfollowUser({ where: { id: user.id } }).catch(() => null)
-								: await followUser({ where: { id: user.id } }).catch(() => null);
+								? await unfollowUser({ where: { id: friendedUser.id } }).catch(
+										() => null
+								  )
+								: await followUser({ where: { id: friendedUser.id } }).catch(
+										() => null
+								  );
 						}}
 						size="small"
 						type="button"
