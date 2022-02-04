@@ -1,5 +1,5 @@
 import { InferComponentProps } from "@makepurple/typings";
-import React, { SyntheticEvent, useContext } from "react";
+import React, { forwardRef, SyntheticEvent, useContext } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { XIcon } from "../../svgs";
 import { TagsContext } from "./context";
@@ -12,7 +12,7 @@ export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
 
 export type TagType = "positive" | "neutral" | "negative";
 
-export const Root = styled.span<{
+export const Root = styled.a<{
 	type?: TagType;
 	$canDelete?: boolean;
 }>`
@@ -62,28 +62,34 @@ const CloseButton = tw.span`
 	cursor-pointer
 `;
 
-export const Tag = styled((props: TagProps) => {
-	const { children, editable, id, onRemove, ...restTagProps } = props;
+export const Tag = styled(
+	// eslint-disable-next-line react/display-name
+	forwardRef<HTMLAnchorElement, TagProps>((props, ref) => {
+		const { children, editable, href, id, onRemove, ...restTagProps } = props;
 
-	const context = useContext(TagsContext);
+		const context = useContext(TagsContext);
 
-	const canDelete = editable ?? (context.editable === true || context.editable === "remove-only");
+		const canDelete =
+			editable ?? (context.editable === true || context.editable === "remove-only");
 
-	return (
-		<Root {...restTagProps} $canDelete={canDelete}>
-			<Text>{children}</Text>
-			{canDelete && (
-				<CloseButton
-					onClick={(event) => {
-						context.onRemove?.(props, event);
-						onRemove?.(props, event);
-					}}
-				>
-					<XIcon width={16} height={16} />
-				</CloseButton>
-			)}
-		</Root>
-	);
-})<TagProps>``;
+		const type = href ? "a" : "span";
+
+		return (
+			<Root as={type} {...restTagProps} ref={ref} $canDelete={canDelete}>
+				<Text>{children}</Text>
+				{canDelete && (
+					<CloseButton
+						onClick={(event) => {
+							context.onRemove?.(props, event);
+							onRemove?.(props, event);
+						}}
+					>
+						<XIcon width={16} height={16} />
+					</CloseButton>
+				)}
+			</Root>
+		);
+	})
+)<TagProps>``;
 
 Tag.displayName = "Tag";
