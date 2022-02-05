@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { faker } from "@faker-js/faker";
 import type { Prisma } from "@prisma/client";
-import faker from "faker";
 import { skills } from "./skills";
 
 faker.seed(1);

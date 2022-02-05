@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
+import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
 import chalk from "chalk";
-import faker from "faker";
 import { experiences, organizations, repositories, skills, users } from "./data";
 import { toSaveUser } from "./generated/toSaveUser";
 
