@@ -90,7 +90,6 @@ const authHandler: NextApiHandler = (req, res) =>
 				}
 			})
 		],
-		secret: process.env.NEXTAUTH_SECRET,
 		session: {
 			strategy: "jwt"
 		},
