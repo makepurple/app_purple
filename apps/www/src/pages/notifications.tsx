@@ -58,7 +58,7 @@ export const Page: NextPage<PageProps> = () => {
 	const unopenedCount = countData?.viewer?.notifications.totalCount ?? 0;
 
 	return (
-		<Root>
+		<Root size="small">
 			<Content>
 				<Title>
 					{unopenedCount
