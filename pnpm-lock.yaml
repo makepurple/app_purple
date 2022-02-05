@@ -177,6 +177,7 @@ importers:
 
   apps/www:
     specifiers:
+      '@faker-js/faker': ^6.0.0-alpha.5
       '@graphql-codegen/cli': ^2.5.0
       '@graphql-codegen/schema-ast': ^2.4.1
       '@graphql-codegen/typescript': ^2.4.3
@@ -202,7 +203,6 @@ importers:
       '@tailwindcss/forms': 0.3.4
       '@tailwindcss/line-clamp': 0.2.2
       '@types/common-tags': ^1.8.1
-      '@types/faker': ^5.5.9
       '@types/fs-extra': ^9.0.13
       '@types/glob': ^7.2.0
       '@types/graphql-upload': ^8.0.10
@@ -225,7 +225,6 @@ importers:
       dotenv-cli: ^4.1.1
       downshift: ^6.1.7
       encoding: ^0.1.13
-      faker: ^5.5.3
       fast-deep-equal: ^3.1.3
       framer-motion: ^6.2.4
       fs-extra: ^10.0.0
@@ -260,6 +259,7 @@ importers:
       urql: ^2.1.3
       webpack-filter-warnings-plugin: ^1.2.1
     dependencies:
+      '@faker-js/faker': 6.0.0-alpha.5
       '@headlessui/react': 1.4.3_react-dom@17.0.2+react@17.0.2
       '@hookform/resolvers': 2.8.8_react-hook-form@7.26.0
       '@makepurple/components': link:../../packages/components
@@ -321,7 +321,6 @@ importers:
       '@svgr/plugin-svgo': 6.2.0_@svgr+core@6.2.1
       '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.19
       '@tailwindcss/line-clamp': 0.2.2_tailwindcss@2.2.19
-      '@types/faker': 5.5.9
       '@types/fs-extra': 9.0.13
       '@types/glob': 7.2.0
       '@urql/devtools': 2.0.3_@urql+core@2.4.1+graphql@15.7.2
@@ -331,7 +330,6 @@ importers:
       cross-env: 7.0.3
       dotenv-cli: 4.1.1
       encoding: 0.1.13
-      faker: 5.5.3
       fs-extra: 10.0.0
       glob: 7.2.0
       graphql: 15.7.2
@@ -6764,7 +6762,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_395544cfbe1472baf4d44cf7709a657a
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -6773,7 +6771,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_395544cfbe1472baf4d44cf7709a657a
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -6781,7 +6779,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_395544cfbe1472baf4d44cf7709a657a
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -8672,7 +8670,7 @@ packages:
       '@babel/helper-module-imports': 7.16.0
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
-      styled-components: 5.3.3
+      styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}

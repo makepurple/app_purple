@@ -1,5 +1,5 @@
+import { faker } from "@faker-js/faker";
 import { dayjs } from "@makepurple/utils";
-import faker from "faker";
 import { Chat } from "../../generated";
 import { ChatMessage_fragment_mock } from "./ChatMessage.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";

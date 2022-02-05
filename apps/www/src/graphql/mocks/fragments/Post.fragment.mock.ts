@@ -1,5 +1,5 @@
+import { faker } from "@faker-js/faker";
 import { dayjs } from "@makepurple/utils";
-import faker from "faker";
 import type { Post } from "../../generated";
 import { Skill_fragment_mock } from "./Skill.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";

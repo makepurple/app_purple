@@ -1,4 +1,4 @@
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import { SuggestFriendsQuery } from "../../generated";
 import { PageInfo_fragment_mock, Post_fragment_mock, User_fragment_mock } from "../fragments";
 

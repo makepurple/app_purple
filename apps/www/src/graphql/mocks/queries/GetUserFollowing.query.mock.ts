@@ -1,4 +1,4 @@
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import { GetUserFollowingQuery, GetUserFollowingQueryVariables } from "../../generated";
 import { PageInfo_fragment_mock, Skill_fragment_mock, User_fragment_mock } from "../fragments";
 

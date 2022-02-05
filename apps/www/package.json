@@ -16,6 +16,7 @@
 		"script": "dotenv -- ts-node -P tsconfig.script.json -T"
 	},
 	"dependencies": {
+		"@faker-js/faker": "^6.0.0-alpha.5",
 		"@headlessui/react": "^1.4.3",
 		"@hookform/resolvers": "^2.8.8",
 		"@makepurple/components": "workspace:*",
@@ -78,7 +79,6 @@
 		"@svgr/plugin-svgo": "^6.2.0",
 		"@tailwindcss/forms": "0.3.4",
 		"@tailwindcss/line-clamp": "0.2.2",
-		"@types/faker": "^5.5.9",
 		"@types/fs-extra": "^9.0.13",
 		"@types/glob": "^7.2.0",
 		"@urql/devtools": "^2.0.3",
@@ -88,7 +88,6 @@
 		"cross-env": "^7.0.3",
 		"dotenv-cli": "^4.1.1",
 		"encoding": "^0.1.13",
-		"faker": "^5.5.3",
 		"fs-extra": "^10.0.0",
 		"glob": "^7.2.0",
 		"graphql": "15.7.2",
