@@ -3,8 +3,9 @@ import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetNotificationCountQuery, useGetNotificationsQuery } from "../graphql";
+import { useGetNotificationCountsQuery, useGetNotificationsQuery } from "../graphql";
 import { LoadingNotificationCard, NotificationCard } from "../organisms";
+import { PageProps, pageProps } from "../page-props/notifications";
 import { SearchIcon } from "../svgs";
 
 const BATCH_SIZE = 20;
@@ -39,8 +40,10 @@ const Notifications = tw.div`
 	items-stretch
 `;
 
-export const Page: NextPage = () => {
-	const [{ data: countData }] = useGetNotificationCountQuery({ requestPolicy: "cache-first" });
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
+	const [{ data: countData }] = useGetNotificationCountsQuery({ requestPolicy: "cache-first" });
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetNotificationsQuery, {
 		field: "viewer.notifications",

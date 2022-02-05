@@ -1,9 +1,9 @@
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
-	GetNotifications_mock,
-	GetSkills_mock
+	GetNotifications_mock
 } from "@makepurple/www/src/graphql/mocks";
+import { PageProps } from "@makepurple/www/src/page-props/notifications";
 import { Page } from "@makepurple/www/src/pages/notifications";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -22,7 +22,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};

@@ -14,6 +14,7 @@ export * from "./CreateRepositoryFormOption";
 export * from "./DocumentEditorPostImageButton";
 export * from "./ExperienceCard";
 export * from "./FriendAutosuggest";
+export * from "./GlobalGraphQL";
 export * from "./LoadingChatCard";
 export * from "./LoadingChatRoomMessage";
 export * from "./LoadingCommentCard";

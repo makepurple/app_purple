@@ -15,6 +15,7 @@ import React, { Fragment, useState } from "react";
 import tw from "twin.macro";
 import { SortOrder, useGetSkillsQuery } from "../graphql";
 import { LoadingSkillCard, SkillCard } from "../organisms";
+import { PageProps, pageProps } from "../page-props/skills";
 import { BookIcon, SearchIcon } from "../svgs";
 
 const BATCH_SIZE = 20;
@@ -65,7 +66,9 @@ const Skills = tw.div`
 	items-stretch
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const [searchName, setSearchName] = useState<string>((router?.query.name as string) ?? "");

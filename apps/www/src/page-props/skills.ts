@@ -4,43 +4,41 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	SuggestFriendsDocument,
-	SuggestFriendsQuery,
-	SuggestFriendsQueryVariables
+	GetSkillsDocument,
+	GetSkillsQuery,
+	GetSkillsQueryVariables,
+	SortOrder
 } from "../graphql";
 import { NextUtils } from "../utils";
 
-const BATCH_SIZE = 50;
+const BATCH_SIZE = 20;
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { req } = ctx;
+	const { query, req } = ctx;
 
-	const jitterSeed = new Date();
+	const { name = "", owner = "" } = query as { name: string; owner: string };
 
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
 	await Promise.all([
 		urqlClient
-			.query<SuggestFriendsQuery, SuggestFriendsQueryVariables>(SuggestFriendsDocument, {
+			.query<GetSkillsQuery, GetSkillsQueryVariables>(GetSkillsDocument, {
+				after: null,
 				first: BATCH_SIZE,
-				where: {
-					desiredSkillsThreshold: 0,
-					skillsThreshold: 0,
-					jitter: 0.15,
-					jitterSeed,
-					weights: {
-						skillsOverlap: 1,
-						desiredSkillsOverlap: 1
-					}
-				}
+				orderBy: [
+					{ users: { _count: SortOrder.Desc } },
+					{ desiringUsers: { _count: SortOrder.Desc } },
+					{ name: SortOrder.Desc }
+				],
+				name,
+				owner
 			})
 			.toPromise()
 	]);
 
 	return addUrqlState(ssr, {
 		props: {
-			jitterSeed: jitterSeed.toDateString(),
 			session: await getSession(ctx)
 		}
 	});
