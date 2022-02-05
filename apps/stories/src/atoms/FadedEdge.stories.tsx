@@ -1,6 +1,6 @@
+import { faker } from "@faker-js/faker";
 import { FadedEdge, FadedEdgeProps } from "@makepurple/components";
 import type { Meta, Story } from "@storybook/react";
-import faker from "faker";
 import React from "react";
 
 faker.seed(1);
