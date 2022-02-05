@@ -1,4 +1,3 @@
-export * from "./AuthDecoratorProfile";
 export * from "./ChatCard";
 export * from "./ChatList";
 export * from "./ChatRoom";

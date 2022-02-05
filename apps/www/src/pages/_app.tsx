@@ -13,7 +13,7 @@ import NextError from "next/error";
 import NextHead from "next/head";
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import { AuthDecoratorProvider, GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
+import { GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
 
 const NextProgressBar = dynamic<NextProgressBarProps>(
 	() => import("@makepurple/components").then((mod) => mod.NextProgressBar),
@@ -41,15 +41,13 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>
 						<UrqlProvider pageProps={pageProps}>
 							<GlobalGraphQL />
-							<AuthDecoratorProvider>
-								<NextProgressBar />
-								<LazyMotion>
-									<SiteWideLayout>
-										{error ? fallback : <Component {...pageProps} />}
-									</SiteWideLayout>
-								</LazyMotion>
-								<Toaster position="top-center" />
-							</AuthDecoratorProvider>
+							<NextProgressBar />
+							<LazyMotion>
+								<SiteWideLayout>
+									{error ? fallback : <Component {...pageProps} />}
+								</SiteWideLayout>
+							</LazyMotion>
+							<Toaster position="top-center" />
 						</UrqlProvider>
 					</SessionProvider>
 				)}
