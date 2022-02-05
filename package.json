@@ -33,5 +33,6 @@
     "twin": {
       "preset": "styled-components"
     }
-  }
+  },
+  "packageManager": "pnpm@6.27.1"
 }
