@@ -1,3 +1,4 @@
+export * from "./GetActivityFeed.query.mock";
 export * from "./GetChat.query.mock";
 export * from "./GetChats.query.mock";
 export * from "./GetCommentReplies.query.mock";

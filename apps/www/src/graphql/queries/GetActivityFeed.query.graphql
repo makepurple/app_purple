@@ -1,0 +1,44 @@
+query GetActivityFeed(
+	$after: String
+	$first: Int
+) {
+	viewer {
+		id
+		activityFeed(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...UserActivityCardHeaderUserActivity
+				... on UserActivityCommentPost {
+					...UserActivityCardCommentPostUserActivityCommentPost
+				}
+				... on UserActivityFollowSkill {
+					...UserActivityCardFollowSkillUserActivityFollowSkill
+				}
+				... on UserActivityFollowUser {
+					...UserActivityCardFollowUserUserActivityFollowUser
+				}
+				... on UserActivityFriendAcceptUser {
+					...UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser
+				}
+				... on UserActivityJoined {
+					...UserActivityCardJoinedUserActivityJoined
+				}
+				... on UserActivityPublishPost {
+					...UserActivityCardPublishPostUserActivityPublishPost
+				}
+				... on UserActivityUpvotePost {
+					...UserActivityCardUpvotePostUserActivityUpvotePost
+				}
+			}
+		}
+		name
+	}
+}
