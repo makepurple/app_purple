@@ -10,7 +10,7 @@
     "turbo": "turbo"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.21",
+    "@types/styled-components": "^5.1.22",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/eslint-plugin-tslint": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
