@@ -177,7 +177,7 @@ importers:
 
   apps/www:
     specifiers:
-      '@faker-js/faker': ^6.0.0-alpha.5
+      '@faker-js/faker': 6.0.0-alpha.5
       '@graphql-codegen/cli': ^2.5.0
       '@graphql-codegen/schema-ast': ^2.4.1
       '@graphql-codegen/typescript': ^2.4.3
@@ -259,7 +259,6 @@ importers:
       urql: ^2.1.3
       webpack-filter-warnings-plugin: ^1.2.1
     dependencies:
-      '@faker-js/faker': 6.0.0-alpha.5
       '@headlessui/react': 1.4.3_react-dom@17.0.2+react@17.0.2
       '@hookform/resolvers': 2.8.8_react-hook-form@7.26.0
       '@makepurple/components': link:../../packages/components
@@ -309,6 +308,7 @@ importers:
       twin.macro: 2.8.2_ts-node@10.4.0
       urql: 2.1.3_graphql@15.7.2+react@17.0.2
     devDependencies:
+      '@faker-js/faker': 6.0.0-alpha.5
       '@graphql-codegen/cli': 2.5.0_3fc0ca595a16e0352254a72e626beea4
       '@graphql-codegen/schema-ast': 2.4.1_graphql@15.7.2
       '@graphql-codegen/typescript': 2.4.3_encoding@0.1.13+graphql@15.7.2
@@ -3154,7 +3154,6 @@ packages:
   /@faker-js/faker/6.0.0-alpha.5:
     resolution: {integrity: sha512-8Is/xFxNgricqmhQR/AJ4Vi0cKzSR7FcpE0ImG9dWciuSxUkyCiK+B5/hTQP8jrVbtgTjpFC1AaTCnALJOBDmw==}
     engines: {node: '>=12.0.0', npm: '>=7.0.0'}
-    dev: false
 
   /@gar/promisify/1.1.2:
     resolution: {integrity: sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==}
