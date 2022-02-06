@@ -1195,6 +1195,7 @@ export interface NexusGenFieldTypes {
     comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
+    followableSkills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
@@ -1909,6 +1910,7 @@ export interface NexusGenFieldTypeNames {
     comment: 'Comment'
     comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
+    followableSkills: 'SkillConnection'
     ok: 'Boolean'
     post: 'Post'
     postDraft: 'Post'
@@ -2444,6 +2446,14 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['ExperienceOrderByInput'] | null; // ExperienceOrderByInput
       where?: NexusGenInputs['ExperienceWhereInput'] | null; // ExperienceWhereInput
+    }
+    followableSkills: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
+      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     post: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!

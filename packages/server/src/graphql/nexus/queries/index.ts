@@ -3,6 +3,7 @@ export * from "./chatMessages";
 export * from "./comment";
 export * from "./comments";
 export * from "./experiences";
+export * from "./followableSkills";
 export * from "./post";
 export * from "./postDraft";
 export * from "./posts";

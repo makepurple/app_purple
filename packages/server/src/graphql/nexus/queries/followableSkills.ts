@@ -4,7 +4,7 @@ import { oneLine } from "common-tags";
 import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
-export const skills = queryField("skills", {
+export const followableSkills = queryField("followableSkills", {
 	type: nonNull("SkillConnection"),
 	description: oneLine`
 		Relay-style connection on Skill types.
@@ -17,7 +17,7 @@ export const skills = queryField("skills", {
 		orderBy: list(nonNull(arg({ type: "SkillOrderByInput" }))),
 		where: arg({ type: "SkillWhereInput" })
 	},
-	resolve: async (parent, args, { prisma }) => {
+	resolve: async (parent, args, { prisma, user }) => {
 		const connection = await findManyCursorConnection<Skill, { id: string }>(
 			(paginationArgs) =>
 				prisma.skill.findMany({
@@ -25,9 +25,10 @@ export const skills = queryField("skills", {
 					orderBy: PrismaUtils.nonNull(args.orderBy),
 					where: {
 						...PrismaUtils.nonNull(args.where),
+						...(user ? { some: { id: { equals: user.id } } } : {}),
 						/**
-						 * @description Only get skills for which there is at least 1 user or
-						 * desiring user.
+						 * @description Only get skills for which there is at least 1 user,
+						 * desiring user or post.
 						 * @author David Lee
 						 * @date January 15, 2022
 						 */
