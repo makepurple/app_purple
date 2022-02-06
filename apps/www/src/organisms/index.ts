@@ -1,3 +1,4 @@
+export * from "./ActivityFeedInfo";
 export * from "./ChatCard";
 export * from "./ChatList";
 export * from "./ChatRoom";
