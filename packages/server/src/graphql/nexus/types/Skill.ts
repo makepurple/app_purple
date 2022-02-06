@@ -21,18 +21,22 @@ export const Skill = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const connection = await findManyCursorConnection<User, { id: string }>(
-					(paginationArgs) =>
-						prisma.skill
-							.findUnique({
-								where: {
-									id: parent.id
-								}
-							})
-							.desiringUsers({
-								...paginationArgs,
-								include: { user: true }
-							})
-							.then((items) => items.map((item) => item.user)),
+					async ({ cursor, skip, take }) =>
+						take === 0
+							? await Promise.resolve([])
+							: await prisma.skill
+									.findUnique({
+										where: {
+											id: parent.id
+										}
+									})
+									.desiringUsers({
+										cursor,
+										skip,
+										take,
+										include: { user: true }
+									})
+									.then((items) => items.map((item) => item.user)),
 					() =>
 						prisma.user.count({
 							where: {
@@ -98,18 +102,22 @@ export const Skill = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const connection = await findManyCursorConnection<User, { id: string }>(
-					(paginationArgs) =>
-						prisma.skill
-							.findUnique({
-								where: {
-									id: parent.id
-								}
-							})
-							.users({
-								...paginationArgs,
-								include: { user: true }
-							})
-							.then((items) => items.map((item) => item.user)),
+					async ({ cursor, skip, take }) =>
+						take === 0
+							? await Promise.resolve([])
+							: await prisma.skill
+									.findUnique({
+										where: {
+											id: parent.id
+										}
+									})
+									.users({
+										cursor,
+										skip,
+										take,
+										include: { user: true }
+									})
+									.then((items) => items.map((item) => item.user)),
 					() =>
 						prisma.user.count({
 							where: {
