@@ -213,7 +213,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				</SocialLinks>
 				{isMyUser && !formOpen && (
 					<Actions>
-						<NewPostButton userName={userName}>New Post</NewPostButton>
+						<NewPostButton userName={userName}>
+							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+						</NewPostButton>
 						<Button
 							onClick={() => {
 								setFormOpen(true);

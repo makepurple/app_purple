@@ -1,23 +1,30 @@
 import { Button } from "@makepurple/components";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { CSSProperties, FC, ReactNode, useEffect } from "react";
+import React, { CSSProperties, FC, ReactNode, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
-import { useCreatePostMutation, useGetPostDraftQuery } from "../../graphql";
+import { GetPostDraftQuery, useCreatePostMutation, useGetPostDraftQuery } from "../../graphql";
+
+export interface NewPostButtonRenderProps {
+	draft?: GetPostDraftQuery["postDraft"];
+}
 
 export interface NewPostButtonProps {
-	children?: ReactNode;
+	children?: ReactNode | FC<NewPostButtonRenderProps>;
 	className?: string;
 	style?: CSSProperties;
 	userName: string;
 }
 
 export const NewPostButton: FC<NewPostButtonProps> = ({
-	children = "New Post",
+	children: Children = "New Post",
 	className,
 	style,
 	userName
 }) => {
 	const router = useRouter();
+
+	const { status } = useSession();
 
 	const [{ data }] = useGetPostDraftQuery({
 		requestPolicy: "cache-first"
@@ -27,6 +34,11 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 
 	const draft = data?.postDraft;
 
+	const child = useMemo(
+		() => (typeof Children === "function" ? <Children draft={draft} /> : Children),
+		[Children, draft]
+	);
+
 	useEffect(() => {
 		if (process.env.NODE_ENV === "test") return;
 
@@ -34,11 +46,19 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 		router?.prefetch("/[userName]/draft", `/${userName}/draft`);
 	}, [router, userName]);
 
+	if (status !== "authenticated") return null;
+
 	return (
 		<Button
 			className={className}
-			disabled={!!draft && !creatingPost}
+			disabled={creatingPost}
 			onClick={async () => {
+				if (draft) {
+					await router.push("/[userName]/draft", `/${userName}/draft`);
+
+					return;
+				}
+
 				const didSucceed = await createPost()
 					.then((result) => !!result.data?.createPost.record)
 					.catch(() => {
@@ -60,7 +80,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 			style={style}
 			type="button"
 		>
-			{children}
+			{child}
 		</Button>
 	);
 };
