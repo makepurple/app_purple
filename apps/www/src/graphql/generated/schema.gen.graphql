@@ -705,6 +705,7 @@ type PublishPostPayload implements MutationPayload {
 
 # Root query type
 type Query {
+  activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chat(where: ChatWhereUniqueInput!): Chat
 
   # This is to update a subscribed chat with new messages when received.

@@ -7,8 +7,7 @@ import {
 	UserActivityFriendAcceptUser_fragment_mock,
 	UserActivityJoined_fragment_mock,
 	UserActivityPublishPost_fragment_mock,
-	UserActivityUpvotePost_fragment_mock,
-	User_fragment_mock
+	UserActivityUpvotePost_fragment_mock
 } from "../fragments";
 
 faker.seed(1);
@@ -34,23 +33,20 @@ const activities = Array.from({ length: DATA_SIZE }, (_, i) => {
 
 export const GetActivityFeed_mock: GetActivityFeedQuery = {
 	__typename: "Query",
-	viewer: {
-		...User_fragment_mock,
-		activityFeed: {
-			__typename: "UserActivityConnection",
-			pageInfo: {
-				__typename: "PageInfo",
-				endCursor: null,
-				hasNextPage: false,
-				hasPreviousPage: false,
-				startCursor: null
-			},
-			edges: activities.map((activity) => ({
-				__typename: "UserActivityEdge",
-				cursor: activity.id,
-				node: activity
-			})),
-			nodes: activities as any
-		}
+	activityFeed: {
+		__typename: "UserActivityConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		edges: activities.map((activity) => ({
+			__typename: "UserActivityEdge",
+			cursor: activity.id,
+			node: activity
+		})),
+		nodes: activities as any
 	}
 };

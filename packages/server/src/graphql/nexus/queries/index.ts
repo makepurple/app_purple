@@ -1,3 +1,4 @@
+export * from "./activityFeed";
 export * from "./chat";
 export * from "./chatMessages";
 export * from "./comment";

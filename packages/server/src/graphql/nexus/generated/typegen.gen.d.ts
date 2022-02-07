@@ -1190,6 +1190,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     chat: NexusGenRootTypes['Chat'] | null; // Chat
     chatMessages: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
     comment: NexusGenRootTypes['Comment'] | null; // Comment
@@ -1905,6 +1906,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Query: { // field return type name
+    activityFeed: 'UserActivityConnection'
     chat: 'Chat'
     chatMessages: 'ChatMessage'
     comment: 'Comment'
@@ -2422,6 +2424,13 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    activityFeed: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
+    }
     chat: { // args
       where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
     }

@@ -53,7 +53,7 @@ export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetActivityFeedQuery, {
-		field: "viewer.activityFeed",
+		field: "activityFeed",
 		requestPolicy: "cache-first",
 		variables: {
 			after: null,
@@ -61,8 +61,7 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const viewer = data?.viewer;
-	const activities = viewer?.activityFeed.nodes ?? [];
+	const activities = data?.activityFeed.nodes ?? [];
 
 	return (
 		<Root>
