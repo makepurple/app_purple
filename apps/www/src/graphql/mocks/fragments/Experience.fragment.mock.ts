@@ -10,9 +10,9 @@ export const Experience_fragment_mock: Experience = {
 	__typename: "Experience",
 	endDate: null,
 	highlights: [
-		"Did a thing, then did another thing that was really incredible",
-		"Did a thing, then did another thing that was really incredible",
-		"Did a thing, then did another thing that was really incredible"
+		"Did a thing, then did another thing",
+		"Did a thing, then did another thing",
+		"Did a thing, then did another thing"
 	],
 	id: "0",
 	location: "San Francisco, CA",

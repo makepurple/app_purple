@@ -435,10 +435,15 @@ type GitHubUser implements GitHubRepositoryOwner {
   login: String!
   name: String
   topLanguages: TopLanguages!
+  totalCommits(where: GitHubUserTotalCommitsWhereInput): Int!
   twitterUsername: String
   url: URL!
   user: User!
   websiteUrl: String
+}
+
+input GitHubUserTotalCommitsWhereInput {
+  createdAt: DateTimeNullableFilter
 }
 
 input InviteToChatInput {
@@ -714,7 +719,7 @@ type Query {
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
-  experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
+  experiences(after: String, before: String, first: Int, last: Int, orderBy: [ExperienceOrderByInput!], where: ExperienceWhereInput): ExperienceConnection!
 
   # Relay-style connection on Skill types.
   followableSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
@@ -726,7 +731,7 @@ type Query {
 
   # Relay-style connection on Post types.
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
-  repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput!): RepositoryConnection!
+  repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skill(where: SkillWhereUniqueInput!): Skill
 
   # Relay-style connection on Skill types.
@@ -1084,7 +1089,7 @@ type User implements Followable {
   description: String
   desiredSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   email: String!
-  experiences: [Experience!]!
+  experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   following(after: String, before: String, first: Int, last: Int, where: FollowWhereInput): FollowConnection!
   friendRequestsReceived(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -1100,7 +1105,7 @@ type User implements Followable {
   postUpvotes: Int!
   postViews: Int!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
-  repositories: [Repository!]!
+  repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
 
   # Posts this user has upvoted

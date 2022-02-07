@@ -1,0 +1,53 @@
+query GetUserOverview($name: String!) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		commentUpvotes
+		createdAt
+		experiences(first: 3) {
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...UserOverviewExperienceCardExperience
+			}
+		}
+		github {
+			id
+			totalCommits
+		}
+		posts(first: 1) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...PostCardPost
+			}
+			totalCount
+		}
+		postUpvotes
+		postViews
+		repositories(first: 3) {
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...RepositoryCardRepository
+			}
+		}
+	}
+}

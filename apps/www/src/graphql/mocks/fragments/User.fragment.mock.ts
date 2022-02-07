@@ -82,6 +82,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	commentUpvotes: 0,
 	createdAt: dayjs(1318781876406).toDate(),
 	description: "I learn things and work on MakePurple",
 	desiredSkills: {
@@ -102,7 +103,19 @@ export const User_fragment_mock: User = {
 		nodes: desiredSkills
 	},
 	email: "lee.david.cs@test.com",
-	experiences: [],
+	experiences: {
+		__typename: "ExperienceConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	followers: {
 		__typename: "UserConnection",
 		pageInfo: {
@@ -200,7 +213,21 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
-	repositories: [],
+	postUpvotes: 0,
+	postViews: 0,
+	repositories: {
+		__typename: "RepositoryConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	skills: {
 		__typename: "SkillConnection",
 		pageInfo: {

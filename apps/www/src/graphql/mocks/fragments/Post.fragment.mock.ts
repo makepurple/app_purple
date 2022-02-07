@@ -366,5 +366,18 @@ export const Post_fragment_mock: Post = {
 		}
 	},
 	urlSlug: "not-a-real-blog-post-title",
+	viewers: {
+		__typename: "UserConnection",
+		edges: [],
+		nodes: [],
+		totalCount: 0,
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		}
+	},
 	viewerUpvote: false
 };
