@@ -144,13 +144,12 @@ export const Post = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const post = prisma.post.findUnique({
-					where: { id: parent.id }
-				});
-
 				const connection = await findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
-						post
+						prisma.post
+							.findUnique({
+								where: { id: parent.id }
+							})
 							.upvoters({
 								...paginationArgs,
 								where: {
@@ -161,9 +160,18 @@ export const Post = objectType({
 							})
 							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
 					() =>
-						prisma.postUpvoter.count({
-							where: { user: PrismaUtils.nonNull(args.where) }
-						}),
+						prisma.post
+							.findUnique({
+								where: { id: parent.id },
+								include: {
+									_count: {
+										select: {
+											upvoters: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.upvoters ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
@@ -172,6 +180,50 @@ export const Post = objectType({
 			}
 		});
 		t.field(NexusPrisma.Post.urlSlug);
+		t.nonNull.field("viewers", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						prisma.post
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.viewers({
+								...paginationArgs,
+								where: {
+									user: PrismaUtils.nonNull(args.where)
+								},
+								include: { user: true }
+							})
+							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
+					() =>
+						prisma.post
+							.findUnique({
+								where: { id: parent.id },
+								include: {
+									_count: {
+										select: {
+											viewers: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.viewers ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.boolean("viewerUpvote", {
 			description: stripIndents`
 				How the viewer has voted on this post.

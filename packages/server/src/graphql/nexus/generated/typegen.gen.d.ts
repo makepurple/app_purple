@@ -1167,6 +1167,7 @@ export interface NexusGenFieldTypes {
     upvotes: number; // Int!
     urlSlug: string; // String!
     viewerUpvote: boolean | null; // Boolean
+    viewers: NexusGenRootTypes['UserConnection']; // UserConnection!
   }
   PostConnection: { // field return type
     edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
@@ -1396,6 +1397,7 @@ export interface NexusGenFieldTypes {
     notifications: NexusGenRootTypes['NotificationConnection']; // NotificationConnection!
     notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     postUpvotes: number; // Int!
+    postViews: number; // Int!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
@@ -1885,6 +1887,7 @@ export interface NexusGenFieldTypeNames {
     upvotes: 'Int'
     urlSlug: 'String'
     viewerUpvote: 'Boolean'
+    viewers: 'UserConnection'
   }
   PostConnection: { // field return type name
     edges: 'PostEdge'
@@ -2114,6 +2117,7 @@ export interface NexusGenFieldTypeNames {
     notifications: 'NotificationConnection'
     notificationsLastOpenedAt: 'DateTime'
     postUpvotes: 'Int'
+    postViews: 'Int'
     posts: 'PostConnection'
     repositories: 'Repository'
     skills: 'SkillConnection'
@@ -2420,6 +2424,13 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     upvoters: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    viewers: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int

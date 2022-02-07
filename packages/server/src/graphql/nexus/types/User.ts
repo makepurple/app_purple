@@ -723,6 +723,20 @@ export const User = objectType({
 				return result._count._all;
 			}
 		});
+		t.nonNull.int("postViews", {
+			resolve: async (parent, args, { prisma }) => {
+				const result = await prisma.postViewer.aggregate({
+					_count: { _all: true },
+					where: {
+						post: {
+							author: { id: { equals: parent.id } }
+						}
+					}
+				});
+
+				return result._count._all;
+			}
+		});
 		t.field(NexusPrisma.User.repositories);
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
