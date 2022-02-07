@@ -172,6 +172,9 @@ export interface NexusGenInputs {
   FriendshipWhereUniqueInput: { // input type
     id?: string | null; // String
   }
+  GitHubUserTotalCommitsWhereInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+  }
   InviteToChatInput: { // input type
     users: NexusGenInputs['UserWhereInput']; // UserWhereInput!
   }
@@ -2298,6 +2301,11 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+  }
+  GitHubUser: {
+    totalCommits: { // args
+      where?: NexusGenInputs['GitHubUserTotalCommitsWhereInput'] | null; // GitHubUserTotalCommitsWhereInput
     }
   }
   Mutation: {

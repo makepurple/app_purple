@@ -1,5 +1,6 @@
+import { dayjs } from "@makepurple/utils";
 import { oneLine } from "common-tags";
-import { nonNull, objectType } from "nexus";
+import { arg, nonNull, objectType } from "nexus";
 import type { octokit } from "../../../services";
 
 export const GitHubUser = objectType({
@@ -103,7 +104,15 @@ export const GitHubUser = objectType({
 			}
 		});
 		t.nonNull.int("totalCommits", {
+			args: {
+				where: arg({ type: "GitHubUserTotalCommitsWhereInput" })
+			},
 			resolve: async (parent, args, { octokit: graphql, prisma }) => {
+				const createdAt = args.where?.createdAt;
+				const from =
+					createdAt?.gt ?? createdAt?.gte ?? dayjs().subtract(1, "year").toDate();
+				const to = createdAt?.lt ?? createdAt?.lte ?? undefined;
+
 				const user = await prisma.user.findUnique({
 					where: {
 						name: parent.login
@@ -113,10 +122,10 @@ export const GitHubUser = objectType({
 				if (!user?.name) return 0;
 
 				const userContributions = await graphql`
-					query GetUserCommitCounts($login: String!) {
+					query GetUserCommitCounts($from: DateTime, $login: String!, $to: DateTime) {
 						user(login: $login) {
 							id
-							contributionsCollection {
+							contributionsCollection(from: $from, to: $to) {
 								restrictedContributionsCount
 								totalCommitContributions
 							}
@@ -126,7 +135,7 @@ export const GitHubUser = objectType({
 					.cast<
 						octokit.GetUserCommitCountsQuery,
 						octokit.GetUserCommitCountsQueryVariables
-					>({ login: user.name })
+					>({ from, login: user.name, to })
 					.catch(() => null);
 
 				const contributions = userContributions?.user?.contributionsCollection;

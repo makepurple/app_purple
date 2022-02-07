@@ -445,11 +445,15 @@ type GitHubUser implements GitHubRepositoryOwner {
   login: String!
   name: String
   topLanguages: TopLanguages!
-  totalCommits: Int!
+  totalCommits(where: GitHubUserTotalCommitsWhereInput): Int!
   twitterUsername: String
   url: URL!
   user: User!
   websiteUrl: String
+}
+
+input GitHubUserTotalCommitsWhereInput {
+  createdAt: DateTimeNullableFilter
 }
 
 input InviteToChatInput {

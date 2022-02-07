@@ -15,7 +15,7 @@ export type Scalars = {
   /** An ISO-8601 encoded date string. */
   Date: any;
   /** An ISO-8601 encoded UTC date string. */
-  DateTime: any;
+  DateTime: Date;
   /** A Git object ID. */
   GitObjectID: any;
   /** Git SSH string */
@@ -23293,7 +23293,7 @@ export type SuggestRepositoriesQueryVariables = Exact<{
 }>;
 
 
-export type SuggestRepositoriesQuery = { readonly __typename?: 'Query', readonly search: { readonly __typename?: 'SearchResultItemConnection', readonly totalCount: number, readonly nodes?: ReadonlyArray<{ readonly __typename?: 'App' } | { readonly __typename?: 'Discussion' } | { readonly __typename?: 'Issue' } | { readonly __typename?: 'MarketplaceListing' } | { readonly __typename?: 'Organization' } | { readonly __typename?: 'PullRequest' } | { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string } | null } | { readonly __typename?: 'User' } | null> | null } };
+export type SuggestRepositoriesQuery = { readonly __typename?: 'Query', readonly search: { readonly __typename?: 'SearchResultItemConnection', readonly totalCount: number, readonly nodes?: ReadonlyArray<{ readonly __typename?: 'App' } | { readonly __typename?: 'Discussion' } | { readonly __typename?: 'Issue' } | { readonly __typename?: 'MarketplaceListing' } | { readonly __typename?: 'Organization' } | { readonly __typename?: 'PullRequest' } | { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string } | null } | { readonly __typename?: 'User' } | null> | null } };
 
 export type GetRepositoryIssueCountQueryVariables = Exact<{
   name: Scalars['String'];
@@ -23319,11 +23319,13 @@ export type GetUserTopLanguagesQueryVariables = Exact<{
 export type GetUserTopLanguagesQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly id: string, readonly repositories: { readonly __typename?: 'RepositoryConnection', readonly nodes?: ReadonlyArray<{ readonly __typename?: 'Repository', readonly name: string, readonly languages?: { readonly __typename?: 'LanguageConnection', readonly edges?: ReadonlyArray<{ readonly __typename?: 'LanguageEdge', readonly size: number, readonly node: { readonly __typename?: 'Language', readonly name: string, readonly color?: string | null } } | null> | null } | null } | null> | null } } | null };
 
 export type GetUserCommitCountsQueryVariables = Exact<{
+  from?: InputMaybe<Scalars['DateTime']>;
   login: Scalars['String'];
+  to?: InputMaybe<Scalars['DateTime']>;
 }>;
 
 
-export type GetUserCommitCountsQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly id: string, readonly contributionsCollection: { readonly __typename?: 'ContributionsCollection', readonly totalCommitContributions: number, readonly restrictedContributionsCount: number } } | null };
+export type GetUserCommitCountsQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly id: string, readonly contributionsCollection: { readonly __typename?: 'ContributionsCollection', readonly restrictedContributionsCount: number, readonly totalCommitContributions: number } } | null };
 
 export type GetGitHubOrganizationQueryVariables = Exact<{
   login: Scalars['String'];
@@ -23345,7 +23347,7 @@ export type GetGitHubRepositoryForSkillQueryVariables = Exact<{
 }>;
 
 
-export type GetGitHubRepositoryForSkillQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string } | null } | null };
+export type GetGitHubRepositoryForSkillQuery = { readonly __typename?: 'Query', readonly repository?: { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string } | null } | null };
 
 export type GitHubLanguageFragment = { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string };
 
@@ -23353,7 +23355,7 @@ export type GitHubLicenseFragment = { readonly __typename: 'License', readonly d
 
 export type GitHubOrganizationFragment = { readonly __typename: 'Organization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string };
 
-export type GitHubRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly pushedAt?: any | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string } | null };
+export type GitHubRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'License', readonly id: string, readonly description?: string | null, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'Organization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string } | { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'Language', readonly color?: string | null, readonly id: string, readonly name: string } | null };
 
 type GitHubRepositoryOwner_Organization_Fragment = { readonly __typename: 'Organization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string };
 
