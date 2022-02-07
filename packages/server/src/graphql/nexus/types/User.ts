@@ -727,14 +727,18 @@ export const User = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const connection = await findManyCursorConnection<Post, { id: string }>(
-					(paginationArgs) =>
-						prisma.user.findUnique({ where: { id: parent.id } }).posts({
-							...paginationArgs,
-							where: PrismaUtils.nonNull(args.where),
-							orderBy: {
-								createdAt: Prisma.SortOrder.desc
-							}
-						}),
+					async ({ cursor, skip, take }) =>
+						take === 0
+							? await Promise.resolve([])
+							: await prisma.user.findUnique({ where: { id: parent.id } }).posts({
+									cursor,
+									skip,
+									take,
+									where: PrismaUtils.nonNull(args.where),
+									orderBy: {
+										createdAt: Prisma.SortOrder.desc
+									}
+							  }),
 					() =>
 						prisma.user
 							.findUnique({

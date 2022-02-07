@@ -445,6 +445,7 @@ type GitHubUser implements GitHubRepositoryOwner {
   login: String!
   name: String
   topLanguages: TopLanguages!
+  totalCommits: Int!
   twitterUsername: String
   url: URL!
   user: User!

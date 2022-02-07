@@ -26,6 +26,7 @@ export const GitHubUser = objectType({
 				const userTopLanguages: octokit.GetUserTopLanguagesQuery | null = await graphql`
 					query GetUserTopLanguages($login: String!) {
 						user(login: $login) {
+							id
 							repositories(ownerAffiliations: [OWNER], isFork: false, first: 50) {
 								nodes {
 									name
@@ -99,6 +100,43 @@ export const GitHubUser = objectType({
 				return {
 					nodes: topLangs
 				};
+			}
+		});
+		t.nonNull.int("totalCommits", {
+			resolve: async (parent, args, { octokit: graphql, prisma }) => {
+				const user = await prisma.user.findUnique({
+					where: {
+						name: parent.login
+					}
+				});
+
+				if (!user?.name) return 0;
+
+				const userContributions = await graphql`
+					query GetUserCommitCounts($login: String!) {
+						user(login: $login) {
+							id
+							contributionsCollection {
+								restrictedContributionsCount
+								totalCommitContributions
+							}
+						}
+					}
+				`
+					.cast<
+						octokit.GetUserCommitCountsQuery,
+						octokit.GetUserCommitCountsQueryVariables
+					>({ login: user.name })
+					.catch(() => null);
+
+				const contributions = userContributions?.user?.contributionsCollection;
+
+				if (!contributions) return 0;
+
+				return (
+					contributions.restrictedContributionsCount +
+					contributions.totalCommitContributions
+				);
 			}
 		});
 		t.string("twitterUsername");

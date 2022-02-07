@@ -1036,6 +1036,7 @@ export interface NexusGenFieldTypes {
     login: string; // String!
     name: string | null; // String
     topLanguages: NexusGenRootTypes['TopLanguages']; // TopLanguages!
+    totalCommits: number; // Int!
     twitterUsername: string | null; // String
     url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
@@ -1762,6 +1763,7 @@ export interface NexusGenFieldTypeNames {
     login: 'String'
     name: 'String'
     topLanguages: 'TopLanguages'
+    totalCommits: 'Int'
     twitterUsername: 'String'
     url: 'URL'
     user: 'User'
