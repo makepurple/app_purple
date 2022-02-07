@@ -524,6 +524,7 @@ type Mutation {
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
+  viewPost(where: PostWhereUniqueInput!): ViewPostPayload!
   viewer: User
 }
 
@@ -1265,6 +1266,12 @@ input UserWhereUniqueInput {
   email: String
   id: String
   name: String
+}
+
+type ViewPostPayload implements MutationPayload {
+  query: Query!
+  record: Post!
+  viewer: User
 }
 
 interface WithGitHubRepository {

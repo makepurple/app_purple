@@ -14,6 +14,7 @@ export interface ServerContextUser {
 
 export interface ServerContext {
 	cloudinary: CloudinaryClient;
+	ip: Maybe<string>;
 	jwt: Maybe<JWT>;
 	octokit: ReturnType<OctokitClient["graphql"]>;
 	prisma: PrismaClient;

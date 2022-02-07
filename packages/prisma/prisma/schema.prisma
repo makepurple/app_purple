@@ -247,13 +247,14 @@ model Post {
 }
 
 model PostViewer {
-  id     String @id @default(cuid())
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  id     String  @id @default(cuid())
+  ip     String
+  post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
 
-  @@unique([userId, postId])
+  @@unique([ip, postId])
 }
 
 model PostUpvoter {

@@ -103,4 +103,5 @@ export * from "./UserActivityPublishPost";
 export * from "./UserActivityUpvotePost";
 export * from "./UserConnection";
 export * from "./UserEdge";
+export * from "./ViewPostPayload";
 export * from "./WithGitHubRepository";

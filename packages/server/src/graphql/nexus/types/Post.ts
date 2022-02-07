@@ -199,11 +199,15 @@ export const Post = objectType({
 							.viewers({
 								...paginationArgs,
 								where: {
-									user: PrismaUtils.nonNull(args.where)
+									user: {
+										...PrismaUtils.nonNull(args.where),
+										isNot: null as any
+									}
 								},
 								include: { user: true }
 							})
-							.then((upvoters) => upvoters.map((upvoter) => upvoter.user)),
+							// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+							.then((upvoters) => upvoters.map((upvoter) => upvoter.user!)),
 					() =>
 						prisma.post
 							.findUnique({
