@@ -12,6 +12,7 @@ import {
 	User as _User,
 	UserActivityType
 } from "@prisma/client";
+import { stripIndents } from "common-tags";
 import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubUser } from "../../../services/octokit";
@@ -769,6 +770,9 @@ export const User = objectType({
 		});
 		t.nonNull.field("upvotedPosts", {
 			type: "PostConnection",
+			description: stripIndents`
+				Posts this user has upvoted
+			`,
 			args: {
 				first: intArg(),
 				last: intArg(),
