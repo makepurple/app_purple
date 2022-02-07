@@ -18,16 +18,27 @@ export const createCache = () => {
 			Comment: {
 				replies: relayPagination()
 			},
+			Post: {
+				comments: relayPagination()
+			},
 			Query: {
+				activityFeed: relayPagination(),
+				comments: relayPagination(),
 				experiences: relayPagination(),
 				repositories: relayPagination(),
 				posts: relayPagination(),
-				skills: relayPagination()
+				skills: relayPagination(),
+				suggestFriends: relayPagination()
 			},
 			User: {
+				activities: relayPagination(),
 				chats: relayPagination(),
 				followers: relayPagination(),
-				following: relayPagination()
+				following: relayPagination(),
+				friends: relayPagination(),
+				friendRequestsReceived: relayPagination(),
+				notifications: relayPagination(),
+				repositories: relayPagination()
 			}
 		},
 		updates: {
