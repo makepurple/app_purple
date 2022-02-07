@@ -1,4 +1,5 @@
 import { Brand, Button, Paper } from "@makepurple/components";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
@@ -36,13 +37,31 @@ export interface ActivityFeedInfoProps {
 }
 
 export const ActivityFeedInfo: FC<ActivityFeedInfoProps> = ({ className, style }) => {
+	const { status } = useSession();
+
+	if (status === "loading") return null;
+
 	return (
 		<Root className={className} style={style}>
 			<Title>Latest Activities</Title>
-			<Description tw="mt-4">
-				Here is your personal <Brand tw="text-base" /> front-page. Come here to find the
-				latest activities of developers and skills you follow.
-			</Description>
+			{status === "authenticated" ? (
+				<Description tw="mt-4">
+					Here is your personal{" "}
+					<NextLink href="/" passHref>
+						<Brand tw="text-base" />
+					</NextLink>{" "}
+					front-page. Come here to find the latest activities of developers and skills you
+					follow.
+				</Description>
+			) : (
+				<Description tw="mt-4">
+					Here are the latest activities of developers from the{" "}
+					<NextLink href="/" passHref>
+						<Brand tw="text-base" />
+					</NextLink>{" "}
+					community.
+				</Description>
+			)}
 			<DiscoverMore tw="mt-6">Want to discover more?</DiscoverMore>
 			<NextLink href="/explore" passHref>
 				<Button as="a" tw="mt-3">
