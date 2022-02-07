@@ -10,7 +10,7 @@ export const repositories = queryField("repositories", {
 		before: stringArg(),
 		first: intArg(),
 		last: intArg(),
-		where: nonNull(arg({ type: "RepositoryWhereInput" }))
+		where: arg({ type: "RepositoryWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
 		const connection = await findManyCursorConnection<Repository, { id: string }>(
@@ -19,7 +19,10 @@ export const repositories = queryField("repositories", {
 					...paginationArgs,
 					where: PrismaUtils.nonNull(args.where)
 				}),
-			() => prisma.experience.count(),
+			() =>
+				prisma.repository.count({
+					where: PrismaUtils.nonNull(args.where)
+				}),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 			{ ...PrismaUtils.handleRelayCursor() }
 		);

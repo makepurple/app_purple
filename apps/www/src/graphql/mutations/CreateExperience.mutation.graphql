@@ -31,7 +31,9 @@ mutation CreateExperience($data: ExperienceCreateInput!) {
 			viewer {
 				id
 				experiences {
-					id
+					nodes {
+						id
+					}
 				}
 			}
 		}

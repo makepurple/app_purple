@@ -1387,7 +1387,7 @@ export interface NexusGenFieldTypes {
     description: string | null; // String
     desiredSkills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     email: string; // String!
-    experiences: NexusGenRootTypes['Experience'][]; // [Experience!]!
+    experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
     followers: NexusGenRootTypes['UserConnection']; // UserConnection!
     following: NexusGenRootTypes['FollowConnection']; // FollowConnection!
     friendRequestsReceived: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1403,7 +1403,7 @@ export interface NexusGenFieldTypes {
     postUpvotes: number; // Int!
     postViews: number; // Int!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
-    repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
+    repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     upvotedPosts: NexusGenRootTypes['PostConnection']; // PostConnection!
     viewerCanFriend: boolean; // Boolean!
@@ -2113,7 +2113,7 @@ export interface NexusGenFieldTypeNames {
     description: 'String'
     desiredSkills: 'SkillConnection'
     email: 'String'
-    experiences: 'Experience'
+    experiences: 'ExperienceConnection'
     followers: 'UserConnection'
     following: 'FollowConnection'
     friendRequestsReceived: 'UserConnection'
@@ -2129,7 +2129,7 @@ export interface NexusGenFieldTypeNames {
     postUpvotes: 'Int'
     postViews: 'Int'
     posts: 'PostConnection'
-    repositories: 'Repository'
+    repositories: 'RepositoryConnection'
     skills: 'SkillConnection'
     upvotedPosts: 'PostConnection'
     viewerCanFriend: 'Boolean'
@@ -2486,7 +2486,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-      orderBy?: NexusGenInputs['ExperienceOrderByInput'] | null; // ExperienceOrderByInput
+      orderBy?: NexusGenInputs['ExperienceOrderByInput'][] | null; // [ExperienceOrderByInput!]
       where?: NexusGenInputs['ExperienceWhereInput'] | null; // ExperienceWhereInput
     }
     followableSkills: { // args
@@ -2512,7 +2512,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-      where: NexusGenInputs['RepositoryWhereInput']; // RepositoryWhereInput!
+      where?: NexusGenInputs['RepositoryWhereInput'] | null; // RepositoryWhereInput
     }
     skill: { // args
       where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
@@ -2615,6 +2615,14 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
+    experiences: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['ExperienceOrderByInput'] | null; // ExperienceOrderByInput
+      where?: NexusGenInputs['ExperienceWhereInput'] | null; // ExperienceWhereInput
+    }
     followers: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -2663,6 +2671,13 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
+    }
+    repositories: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['RepositoryWhereInput'] | null; // RepositoryWhereInput
     }
     skills: { // args
       after?: string | null; // String

@@ -4,10 +4,12 @@ import { dayjs } from "@makepurple/utils";
 import {
 	Chat,
 	Comment,
+	Experience,
 	Follow,
 	NotificationType,
 	Post,
 	Prisma,
+	Repository,
 	Skill,
 	User as _User,
 	UserActivityType
@@ -349,7 +351,47 @@ export const User = objectType({
 				return user?.id === parent.id;
 			}
 		});
-		t.field(NexusPrisma.User.experiences);
+		t.nonNull.field("experiences", {
+			type: "ExperienceConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				orderBy: arg({ type: "ExperienceOrderByInput" }),
+				where: arg({ type: "ExperienceWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<Experience, { id: string }>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.experiences({
+								...paginationArgs,
+								where: PrismaUtils.nonNull(args.where)
+							}),
+					() =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: {
+										select: {
+											experiences: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.experiences ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("followers", {
 			type: "UserConnection",
 			args: {
@@ -737,7 +779,46 @@ export const User = objectType({
 				return result._count._all;
 			}
 		});
-		t.field(NexusPrisma.User.repositories);
+		t.nonNull.field("repositories", {
+			type: "RepositoryConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "RepositoryWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await findManyCursorConnection<Repository, { id: string }>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.repositories({
+								...paginationArgs,
+								where: PrismaUtils.nonNull(args.where)
+							}),
+					() =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: {
+										select: {
+											repositories: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.repositories ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
 			args: {

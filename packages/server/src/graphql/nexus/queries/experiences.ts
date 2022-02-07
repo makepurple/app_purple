@@ -1,6 +1,6 @@
 import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { Experience } from "@prisma/client";
-import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
+import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const experiences = queryField("experiences", {
@@ -10,7 +10,7 @@ export const experiences = queryField("experiences", {
 		before: stringArg(),
 		first: intArg(),
 		last: intArg(),
-		orderBy: arg({ type: "ExperienceOrderByInput" }),
+		orderBy: list(nonNull(arg({ type: "ExperienceOrderByInput" }))),
 		where: arg({ type: "ExperienceWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
@@ -18,9 +18,10 @@ export const experiences = queryField("experiences", {
 			(paginationArgs) =>
 				prisma.experience.findMany({
 					...paginationArgs,
+					orderBy: PrismaUtils.nonNull(args.orderBy),
 					where: PrismaUtils.nonNull(args.where)
 				}),
-			() => prisma.experience.count(),
+			() => prisma.experience.count({ where: PrismaUtils.nonNull(args.where) }),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 			{ ...PrismaUtils.handleRelayCursor() }
 		);
