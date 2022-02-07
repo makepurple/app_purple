@@ -1,0 +1,16 @@
+fragment ActivityFeedFollowableSkillCardSkill on Skill {
+	id
+	github {
+		id
+		owner {
+			id
+			avatarUrl
+		}
+	}
+	name
+	owner
+	users(first: 0) {
+		totalCount
+	}
+	viewerFollowing
+}

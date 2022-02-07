@@ -1,4 +1,4 @@
-import { Button, Paper } from "@makepurple/components";
+import { Brand, Button, Paper } from "@makepurple/components";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
@@ -30,11 +30,6 @@ const DiscoverMore = tw.p`
 	leading-snug
 `;
 
-const ExploreButton = tw(Button)`
-	w-full
-	mx-auto
-`;
-
 export interface ActivityFeedInfoProps {
 	className?: string;
 	style?: CSSProperties;
@@ -45,13 +40,14 @@ export const ActivityFeedInfo: FC<ActivityFeedInfoProps> = ({ className, style }
 		<Root className={className} style={style}>
 			<Title>Latest Activities</Title>
 			<Description tw="mt-4">
-				The latest activities of developers you follow, or whose skills you follow.
+				Here is your personal <Brand tw="text-base" /> front-page. Come here to find the
+				latest activities of developers and skills you follow.
 			</Description>
 			<DiscoverMore tw="mt-6">Want to discover more?</DiscoverMore>
 			<NextLink href="/explore" passHref>
-				<ExploreButton as="a" tw="mt-3">
+				<Button as="a" tw="mt-3">
 					Explore
-				</ExploreButton>
+				</Button>
 			</NextLink>
 		</Root>
 	);

@@ -5,6 +5,8 @@ import React from "react";
 import tw from "twin.macro";
 import { useGetActivityFeedQuery } from "../graphql";
 import {
+	ActivityFeedFollowableSkills,
+	ActivityFeedInfo,
 	LoadingUserActivityCardPost,
 	LoadingUserActivityCardSkill,
 	LoadingUserActivityCardUser,
@@ -20,9 +22,26 @@ const Root = tw(MainContainer)`
 	flex-col
 	items-stretch
 	my-12
+	lg:flex-row-reverse
+	lg:items-start
+`;
+
+const SideBar = tw.div`
+	flex-shrink-0
+	flex
+	flex-col
+	items-stretch
+	gap-4
+	w-full
+	mb-6
+	lg:w-96
+	lg:ml-4
+	xl:gap-6
+	xl:ml-6
 `;
 
 const Activities = tw.div`
+	flex-grow
 	flex
 	flex-col
 	items-stretch
@@ -46,7 +65,11 @@ export const Page: NextPage<PageProps> = () => {
 	const activities = viewer?.activityFeed.nodes ?? [];
 
 	return (
-		<Root size="small">
+		<Root>
+			<SideBar>
+				<ActivityFeedInfo />
+				<ActivityFeedFollowableSkills />
+			</SideBar>
 			<Activities>
 				{!activities.length
 					? !fetching && (

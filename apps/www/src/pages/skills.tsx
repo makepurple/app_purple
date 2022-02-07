@@ -1,4 +1,5 @@
 import {
+	Brand,
 	Button,
 	Divider,
 	FormGroup,
@@ -10,6 +11,7 @@ import {
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw from "twin.macro";
@@ -83,6 +85,7 @@ export const Page: NextPage<PageProps> = () => {
 			orderBy: [
 				{ users: { _count: SortOrder.Desc } },
 				{ desiringUsers: { _count: SortOrder.Desc } },
+				{ owner: SortOrder.Desc },
 				{ name: SortOrder.Desc }
 			],
 			name: searchName,
@@ -128,7 +131,10 @@ export const Page: NextPage<PageProps> = () => {
 				<Title>Skills</Title>
 				{hasSkills && (
 					<Description tw="mt-4">
-						Popular skills by developers and programmers on MakePurple
+						Popular skills by developers and programmers on{" "}
+						<NextLink href="/" passHref>
+							<Brand tw="text-base" />
+						</NextLink>
 					</Description>
 				)}
 				<Skills tw="mt-6">

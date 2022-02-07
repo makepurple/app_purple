@@ -1,0 +1,14 @@
+query GetFollowableSkills {
+	followableSkills(
+		first: 5
+		orderBy: [
+			{ users: { _count: Desc } },
+			{ owner: Desc },
+			{ name: Desc }
+		]
+	) {
+		nodes {
+			...ActivityFeedFollowableSkillCardSkill
+		}
+	}
+}

@@ -1,3 +1,5 @@
+export * from "./ActivityFeedFollowableSkillCard";
+export * from "./ActivityFeedFollowableSkills";
 export * from "./ActivityFeedInfo";
 export * from "./ChatCard";
 export * from "./ChatList";

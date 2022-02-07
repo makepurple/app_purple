@@ -1081,6 +1081,8 @@ export type Query = {
   readonly comment?: Maybe<Comment>;
   readonly comments: CommentConnection;
   readonly experiences: ExperienceConnection;
+  /** Relay-style connection on Skill types. */
+  readonly followableSkills: SkillConnection;
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
   readonly post?: Maybe<Post>;
@@ -1138,6 +1140,17 @@ export type QueryExperiencesArgs = {
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<ExperienceOrderByInput>;
   where?: InputMaybe<ExperienceWhereInput>;
+};
+
+
+/** Root query type */
+export type QueryFollowableSkillsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<SkillOrderByInput>>;
+  where?: InputMaybe<SkillWhereInput>;
 };
 
 
@@ -1919,6 +1932,8 @@ export type WithGitHubRepository = {
   readonly owner: Scalars['String'];
 };
 
+export type ActivityFeedFollowableSkillCardSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string } }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number } };
+
 export type ChatCardChatFragment = { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } };
 
 export type ChatRoomInviteFormChatFragment = { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly name: string }> } };
@@ -2252,6 +2267,11 @@ export type GetExperiencesQueryVariables = Exact<{
 
 export type GetExperiencesQuery = { readonly __typename: 'Query', readonly experiences: { readonly __typename: 'ExperienceConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organizationName: string, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string, readonly description?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
 
+export type GetFollowableSkillsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFollowableSkillsQuery = { readonly __typename: 'Query', readonly followableSkills: { readonly __typename: 'SkillConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string } }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number } }> } };
+
 export type GetMyUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2416,6 +2436,24 @@ export type SuggestViewerFriendsQueryVariables = Exact<{
 
 export type SuggestViewerFriendsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly friends: { readonly __typename: 'UserConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly name: string }> } } | null };
 
+export const ActivityFeedFollowableSkillCardSkillFragmentDoc = /*#__PURE__*/ gql`
+    fragment ActivityFeedFollowableSkillCardSkill on Skill {
+  id
+  github {
+    id
+    owner {
+      id
+      avatarUrl
+    }
+  }
+  name
+  owner
+  users(first: 0) {
+    totalCount
+  }
+  viewerFollowing
+}
+    `;
 export const ChatCardChatFragmentDoc = /*#__PURE__*/ gql`
     fragment ChatCardChat on Chat {
   id
@@ -4070,6 +4108,22 @@ ${PageInfoFragmentFragmentDoc}`;
 
 export function useGetExperiencesQuery(options: Omit<Urql.UseQueryArgs<GetExperiencesQueryVariables>, 'query'>) {
   return Urql.useQuery<GetExperiencesQuery>({ query: GetExperiencesDocument, ...options });
+};
+export const GetFollowableSkillsDocument = /*#__PURE__*/ gql`
+    query GetFollowableSkills {
+  followableSkills(
+    first: 5
+    orderBy: [{users: {_count: Asc}}, {owner: Asc}, {name: Asc}]
+  ) {
+    nodes {
+      ...ActivityFeedFollowableSkillCardSkill
+    }
+  }
+}
+    ${ActivityFeedFollowableSkillCardSkillFragmentDoc}`;
+
+export function useGetFollowableSkillsQuery(options?: Omit<Urql.UseQueryArgs<GetFollowableSkillsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetFollowableSkillsQuery>({ query: GetFollowableSkillsDocument, ...options });
 };
 export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {
