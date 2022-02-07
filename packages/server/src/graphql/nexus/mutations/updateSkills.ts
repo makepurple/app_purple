@@ -36,7 +36,15 @@ export const updateSkills = mutationField("updateSkills", {
 				async ({ name, owner }) => {
 					return await transaction.skill.upsert({
 						where: { name_owner: { name, owner } },
-						create: { name, owner },
+						create: {
+							name,
+							organization: {
+								connectOrCreate: {
+									where: { name },
+									create: { name }
+								}
+							}
+						},
 						update: {}
 					});
 				}

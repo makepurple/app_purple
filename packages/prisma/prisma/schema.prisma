@@ -312,6 +312,7 @@ model Skill {
   owner         String
   users         SkillsOnUsers[]
   desiringUsers DesiredSkillsOnUsers[]
+  organization  Organization           @relation(fields: [owner], references: [name], onDelete: Cascade)
   posts         SkillsOnPosts[]
   repositories  SkillsOnRepositories[]
   followedBy    FollowSkill[]
@@ -325,7 +326,6 @@ model SkillsOnPosts {
   postId  String
   skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
   skillId String
-
 
   @@unique([skillId, postId])
 }
@@ -374,6 +374,7 @@ model Organization {
   id          String       @id @default(cuid())
   name        String       @unique
   experiences Experience[]
+  skills      Skill[]
 }
 
 enum ExperienceType {

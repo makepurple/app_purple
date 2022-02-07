@@ -1,0 +1,13 @@
+fragment UserOverviewExperienceCardExperience on Experience {
+	id
+	organization {
+		id
+		github {
+			id
+			avatarUrl
+			name
+		}
+		name
+	}
+	organizationName
+}
