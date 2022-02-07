@@ -145,7 +145,7 @@ export const Page: NextPage<PageProps> = () => {
 		if (!post?.id) return;
 
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		viewPost({ where: { id: post.id } });
+		viewPost({ where: { id: post.id } }).catch(() => null);
 	}, [post?.id, viewPost]);
 
 	/**
