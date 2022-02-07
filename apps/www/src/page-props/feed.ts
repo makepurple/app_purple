@@ -6,7 +6,10 @@ import {
 	createUrqlClient,
 	GetActivityFeedDocument,
 	GetActivityFeedQuery,
-	GetActivityFeedQueryVariables
+	GetActivityFeedQueryVariables,
+	GetFollowableSkillsDocument,
+	GetFollowableSkillsQuery,
+	GetFollowableSkillsQueryVariables
 } from "../graphql";
 import { NextUtils } from "../utils";
 
@@ -24,6 +27,11 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				after: null,
 				first: BATCH_SIZE
 			})
+			.toPromise(),
+		urqlClient
+			.query<GetFollowableSkillsQuery, GetFollowableSkillsQueryVariables>(
+				GetFollowableSkillsDocument
+			)
 			.toPromise()
 	]);
 
