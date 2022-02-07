@@ -1376,6 +1376,7 @@ export interface NexusGenFieldTypes {
     activities: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     chats: NexusGenRootTypes['ChatConnection']; // ChatConnection!
+    commentUpvotes: number; // Int!
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
@@ -1394,6 +1395,7 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     notifications: NexusGenRootTypes['NotificationConnection']; // NotificationConnection!
     notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
+    postUpvotes: number; // Int!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['Repository'][]; // [Repository!]!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
@@ -2092,6 +2094,7 @@ export interface NexusGenFieldTypeNames {
     activities: 'UserActivityConnection'
     activityFeed: 'UserActivityConnection'
     chats: 'ChatConnection'
+    commentUpvotes: 'Int'
     comments: 'CommentConnection'
     createdAt: 'DateTime'
     description: 'String'
@@ -2110,6 +2113,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     notifications: 'NotificationConnection'
     notificationsLastOpenedAt: 'DateTime'
+    postUpvotes: 'Int'
     posts: 'PostConnection'
     repositories: 'Repository'
     skills: 'SkillConnection'

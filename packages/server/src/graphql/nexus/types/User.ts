@@ -286,6 +286,20 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("commentUpvotes", {
+			resolve: async (parent, args, { prisma }) => {
+				const result = await prisma.commentUpvoter.aggregate({
+					_count: { _all: true },
+					where: {
+						comment: {
+							author: { id: { equals: parent.id } }
+						}
+					}
+				});
+
+				return result._count._all;
+			}
+		});
 		t.nonNull.field(NexusPrisma.User.createdAt);
 		t.field(NexusPrisma.User.description);
 		t.nonNull.field("desiredSkills", {
@@ -692,6 +706,20 @@ export const User = objectType({
 				);
 
 				return connection;
+			}
+		});
+		t.nonNull.int("postUpvotes", {
+			resolve: async (parent, args, { prisma }) => {
+				const result = await prisma.postUpvoter.aggregate({
+					_count: { _all: true },
+					where: {
+						post: {
+							author: { id: { equals: parent.id } }
+						}
+					}
+				});
+
+				return result._count._all;
 			}
 		});
 		t.field(NexusPrisma.User.repositories);
