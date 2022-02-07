@@ -20,7 +20,6 @@ export const Button = styled.button<{
 		border-solid
 		border-transparent
 		rounded-md
-		leading-none
 		bg-indigo-500
 		text-white
 		font-semibold
@@ -41,7 +40,9 @@ export const Button = styled.button<{
 		disabled:after:pointer-events-auto
 		disabled:after:cursor-not-allowed
 	`}
+
 	${({ bounce }) => bounce && tw`not-disabled:hover:-translate-y-0.5`}
+
 	${({ hasInput, variant = "primary" }) => {
 		switch (variant) {
 			case "alert":
@@ -74,6 +75,7 @@ export const Button = styled.button<{
 				return null;
 		}
 	}}
+
 	${({ size = "medium" }) => {
 		switch (size) {
 			case "large":
@@ -94,6 +96,10 @@ export const Button = styled.button<{
 				`;
 		}
 	}}
+	
+	${tw`
+		leading-snug
+	`}
 `;
 
 Button.defaultProps = {
