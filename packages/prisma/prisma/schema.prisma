@@ -95,6 +95,7 @@ model User {
   updatedAt                 DateTime               @updatedAt
   upvotedComments           CommentUpvoter[]
   upvotedPosts              PostUpvoter[]
+  viewedPosts               PostViewer[]
 }
 
 enum UserActivityType {
@@ -240,8 +241,19 @@ model Post {
   updatedAt     DateTime        @updatedAt
   upvoters      PostUpvoter[]
   urlSlug       String          @default("draft")
+  viewers       PostViewer[]
 
   @@unique([authorName, urlSlug])
+}
+
+model PostViewer {
+  id     String @id @default(cuid())
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([userId, postId])
 }
 
 model PostUpvoter {

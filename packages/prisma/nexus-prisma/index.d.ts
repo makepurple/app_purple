@@ -2801,6 +2801,58 @@ export interface User {
      */
     resolve: NexusCore.FieldResolver<'User', 'upvotedPosts'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.viewedPosts`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   viewedPosts  PostViewer
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.viewedPosts)
+    *   }
+    * })
+    */
+  viewedPosts: {
+    /**
+     * The name of this field.
+     */
+    name: 'viewedPosts'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'PostViewer' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'PostViewer'> | NexusCore.NexusNonNullDef<'PostViewer'>)
+    : 'Warning/Error: The type \'PostViewer\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'PostViewer\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'viewedPosts'>
+  }
 }
 
 /**
@@ -7727,6 +7779,353 @@ export interface Post {
      */
     resolve: NexusCore.FieldResolver<'Post', 'urlSlug'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Post.viewers`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Post
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Post
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Post {
+    *   /// Lorem ipsum dolor sit amet.
+    *   viewers  PostViewer
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Post } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Post.$name
+    *   description: Post.$description
+    *   definition(t) {
+    *     t.field(Post.viewers)
+    *   }
+    * })
+    */
+  viewers: {
+    /**
+     * The name of this field.
+     */
+    name: 'viewers'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'PostViewer' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'PostViewer'> | NexusCore.NexusNonNullDef<'PostViewer'>)
+    : 'Warning/Error: The type \'PostViewer\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'PostViewer\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Post', 'viewers'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `PostViewer`.
+  *
+  * ### ️⚠️ You have not writen documentation for model PostViewer
+  *
+  * Replace this default advisory JSDoc with your own documentation about model PostViewer
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model PostViewer {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { PostViewer } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: PostViewer.$name
+  *   description: PostViewer.$description
+  *   definition(t) {
+  *     t.field(PostViewer.id)
+  *   }
+  * })
+  */
+export interface PostViewer {
+  $name: 'PostViewer'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `PostViewer.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model PostViewer
+    *
+    * Replace this default advisory JSDoc with your own documentation about model PostViewer
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model PostViewer {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { PostViewer } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: PostViewer.$name
+    *   description: PostViewer.$description
+    *   definition(t) {
+    *     t.field(PostViewer.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'PostViewer', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `PostViewer.post`.
+    *
+    * ### ️⚠️ You have not writen documentation for model PostViewer
+    *
+    * Replace this default advisory JSDoc with your own documentation about model PostViewer
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model PostViewer {
+    *   /// Lorem ipsum dolor sit amet.
+    *   post  Post
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { PostViewer } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: PostViewer.$name
+    *   description: PostViewer.$description
+    *   definition(t) {
+    *     t.field(PostViewer.post)
+    *   }
+    * })
+    */
+  post: {
+    /**
+     * The name of this field.
+     */
+    name: 'post'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Post' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Post'>
+    : 'Warning/Error: The type \'Post\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Post\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'PostViewer', 'post'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `PostViewer.postId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model PostViewer
+    *
+    * Replace this default advisory JSDoc with your own documentation about model PostViewer
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model PostViewer {
+    *   /// Lorem ipsum dolor sit amet.
+    *   postId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { PostViewer } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: PostViewer.$name
+    *   description: PostViewer.$description
+    *   definition(t) {
+    *     t.field(PostViewer.postId)
+    *   }
+    * })
+    */
+  postId: {
+    /**
+     * The name of this field.
+     */
+    name: 'postId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'PostViewer', 'postId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `PostViewer.user`.
+    *
+    * ### ️⚠️ You have not writen documentation for model PostViewer
+    *
+    * Replace this default advisory JSDoc with your own documentation about model PostViewer
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model PostViewer {
+    *   /// Lorem ipsum dolor sit amet.
+    *   user  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { PostViewer } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: PostViewer.$name
+    *   description: PostViewer.$description
+    *   definition(t) {
+    *     t.field(PostViewer.user)
+    *   }
+    * })
+    */
+  user: {
+    /**
+     * The name of this field.
+     */
+    name: 'user'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'PostViewer', 'user'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `PostViewer.userId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model PostViewer
+    *
+    * Replace this default advisory JSDoc with your own documentation about model PostViewer
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model PostViewer {
+    *   /// Lorem ipsum dolor sit amet.
+    *   userId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { PostViewer } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: PostViewer.$name
+    *   description: PostViewer.$description
+    *   definition(t) {
+    *     t.field(PostViewer.userId)
+    *   }
+    * })
+    */
+  userId: {
+    /**
+     * The name of this field.
+     */
+    name: 'userId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'PostViewer', 'userId'>
+  }
 }
 
 /**
@@ -12361,6 +12760,8 @@ export const ChatMessage: ChatMessage
 export const ChatsOnUsers: ChatsOnUsers
 
 export const Post: Post
+
+export const PostViewer: PostViewer
 
 export const PostUpvoter: PostUpvoter
 
