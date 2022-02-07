@@ -1,0 +1,10 @@
+mutation ViewPost($where: PostWhereUniqueInput!) {
+	viewPost(where: $where) {
+		record {
+			id
+			viewers {
+				totalCount
+			}
+		}
+	}
+}

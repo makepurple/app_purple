@@ -608,6 +608,7 @@ export type Mutation = {
   readonly uploadPostImage: UploadPostImagePayload;
   readonly upvoteComment: UpvoteCommentPayload;
   readonly upvotePost: UpvotePostPayload;
+  readonly viewPost: ViewPostPayload;
   readonly viewer?: Maybe<User>;
 };
 
@@ -831,6 +832,12 @@ export type MutationUpvotePostArgs = {
   where: PostWhereUniqueInput;
 };
 
+
+/** Root mutation type */
+export type MutationViewPostArgs = {
+  where: PostWhereUniqueInput;
+};
+
 export type MutationPayload = {
   readonly query: Query;
   readonly viewer?: Maybe<User>;
@@ -961,6 +968,7 @@ export type Post = {
    * null: didn't vote
    */
   readonly viewerUpvote?: Maybe<Scalars['Boolean']>;
+  readonly viewers: UserConnection;
 };
 
 
@@ -993,6 +1001,15 @@ export type PostSkillsArgs = {
 
 
 export type PostUpvotersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type PostViewersArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1644,6 +1661,7 @@ export type User = Followable & {
   readonly activities: UserActivityConnection;
   readonly activityFeed: UserActivityConnection;
   readonly chats: ChatConnection;
+  readonly commentUpvotes: Scalars['Int'];
   readonly comments: CommentConnection;
   readonly createdAt: Scalars['DateTime'];
   readonly description?: Maybe<Scalars['String']>;
@@ -1662,9 +1680,12 @@ export type User = Followable & {
   readonly name: Scalars['String'];
   readonly notifications: NotificationConnection;
   readonly notificationsLastOpenedAt: Scalars['DateTime'];
+  readonly postUpvotes: Scalars['Int'];
+  readonly postViews: Scalars['Int'];
   readonly posts: PostConnection;
   readonly repositories: ReadonlyArray<Repository>;
   readonly skills: SkillConnection;
+  /** Posts this user has upvoted */
   readonly upvotedPosts: PostConnection;
   readonly viewerCanFriend: Scalars['Boolean'];
   readonly viewerFollowing: Scalars['Boolean'];
@@ -1935,6 +1956,13 @@ export type UserWhereUniqueInput = {
   readonly email?: InputMaybe<Scalars['String']>;
   readonly id?: InputMaybe<Scalars['String']>;
   readonly name?: InputMaybe<Scalars['String']>;
+};
+
+export type ViewPostPayload = MutationPayload & {
+  readonly __typename: 'ViewPostPayload';
+  readonly query: Query;
+  readonly record: Post;
+  readonly viewer?: Maybe<User>;
 };
 
 export type WithGitHubRepository = {
@@ -2226,6 +2254,13 @@ export type UpvotePostMutationVariables = Exact<{
 
 
 export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+
+export type ViewPostMutationVariables = Exact<{
+  where: PostWhereUniqueInput;
+}>;
+
+
+export type ViewPostMutation = { readonly __typename: 'Mutation', readonly viewPost: { readonly __typename: 'ViewPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly viewers: { readonly __typename: 'UserConnection', readonly totalCount: number } } } };
 
 export type GetActivityFeedQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3942,6 +3977,22 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
 
 export function useUpvotePostMutation() {
   return Urql.useMutation<UpvotePostMutation, UpvotePostMutationVariables>(UpvotePostDocument);
+};
+export const ViewPostDocument = /*#__PURE__*/ gql`
+    mutation ViewPost($where: PostWhereUniqueInput!) {
+  viewPost(where: $where) {
+    record {
+      id
+      viewers {
+        totalCount
+      }
+    }
+  }
+}
+    `;
+
+export function useViewPostMutation() {
+  return Urql.useMutation<ViewPostMutation, ViewPostMutationVariables>(ViewPostDocument);
 };
 export const GetActivityFeedDocument = /*#__PURE__*/ gql`
     query GetActivityFeed($after: String, $first: Int) {

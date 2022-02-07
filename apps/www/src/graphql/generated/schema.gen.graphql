@@ -510,6 +510,7 @@ type Mutation {
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
+  viewPost(where: PostWhereUniqueInput!): ViewPostPayload!
   viewer: User
 }
 
@@ -633,6 +634,7 @@ type Post {
   # false: downvoted
   # null: didn't vote
   viewerUpvote: Boolean
+  viewers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
 }
 
 input PostAuthorNameUrlSlugCompoundUniqueInput {
@@ -1076,6 +1078,7 @@ type User implements Followable {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
+  commentUpvotes: Int!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
   description: String
@@ -1094,9 +1097,13 @@ type User implements Followable {
   name: String!
   notifications(after: String, before: String, first: Int, last: Int, where: NotificationsWhereInput): NotificationConnection!
   notificationsLastOpenedAt: DateTime!
+  postUpvotes: Int!
+  postViews: Int!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories: [Repository!]!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
+
+  # Posts this user has upvoted
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerCanFriend: Boolean!
   viewerFollowing: Boolean!
@@ -1227,6 +1234,12 @@ input UserWhereUniqueInput {
   email: String
   id: String
   name: String
+}
+
+type ViewPostPayload implements MutationPayload {
+  query: Query!
+  record: Post!
+  viewer: User
 }
 
 interface WithGitHubRepository {

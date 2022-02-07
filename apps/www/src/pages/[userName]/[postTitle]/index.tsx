@@ -6,9 +6,9 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import tw from "twin.macro";
-import { useGetPostCommentsQuery, useGetPostQuery } from "../../../graphql";
+import { useGetPostCommentsQuery, useGetPostQuery, useViewPostMutation } from "../../../graphql";
 import {
 	CommentCard,
 	CreateCommentForm,
@@ -104,6 +104,8 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
+	const [, viewPost] = useViewPostMutation();
+
 	/**
 	 * !HACK
 	 * @description Type is too deep/complex, so TS is throwing an error, even when it is correct.
@@ -138,6 +140,13 @@ export const Page: NextPage<PageProps> = () => {
 
 		return resolved;
 	}, [post?.content]);
+
+	useEffect(() => {
+		if (!post?.id) return;
+
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		viewPost({ where: { id: post.id } });
+	}, [post?.id, viewPost]);
 
 	/**
 	 * TODO
