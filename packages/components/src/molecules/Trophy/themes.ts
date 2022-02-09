@@ -1,0 +1,51 @@
+import { TrophyTheme } from "./types";
+
+export const TrophyThemeDefault: TrophyTheme = {
+	BACKGROUND: "#FFF",
+	TITLE: "#000",
+	ICON_CIRCLE: "#FFF",
+	TEXT: "#666",
+	LAUREL: "#009366",
+	SECRET_RANK_1: "red",
+	SECRET_RANK_2: "fuchsia",
+	SECRET_RANK_3: "blue",
+	SECRET_RANK_TEXT: "fuchsia",
+	NEXT_RANK_BAR: "#0366d6",
+	S_RANK_BASE: "#FAD200",
+	S_RANK_SHADOW: "#C8A090",
+	S_RANK_TEXT: "#886000",
+	A_RANK_BASE: "#B0B0B0",
+	A_RANK_SHADOW: "#9090C0",
+	A_RANK_TEXT: "#505050",
+	B_RANK_BASE: "#A18D66",
+	B_RANK_SHADOW: "#816D96",
+	B_RANK_TEXT: "#412D06",
+	DEFAULT_RANK_BASE: "#777",
+	DEFAULT_RANK_SHADOW: "#333",
+	DEFAULT_RANK_TEXT: "#333"
+};
+
+export const TrophyThemeOneDark: TrophyTheme = {
+	BACKGROUND: "#282c34",
+	TITLE: "#e5c07b",
+	ICON_CIRCLE: "#FFF",
+	TEXT: "#e06c75",
+	LAUREL: "#98c379",
+	SECRET_RANK_1: "#e06c75",
+	SECRET_RANK_2: "#c678dd",
+	SECRET_RANK_3: "#61afef",
+	SECRET_RANK_TEXT: "#c678dd",
+	NEXT_RANK_BAR: "#e5c07b",
+	S_RANK_BASE: "#e5c07b",
+	S_RANK_SHADOW: "#e5c07b",
+	S_RANK_TEXT: "#282c34",
+	A_RANK_BASE: "#56b6c2",
+	A_RANK_SHADOW: "#56b6c2",
+	A_RANK_TEXT: "#282c34",
+	B_RANK_BASE: "#c678dd",
+	B_RANK_SHADOW: "#c678dd",
+	B_RANK_TEXT: "#282c34",
+	DEFAULT_RANK_BASE: "#abb2bf",
+	DEFAULT_RANK_SHADOW: "#abb2bf",
+	DEFAULT_RANK_TEXT: "#282c34"
+};
