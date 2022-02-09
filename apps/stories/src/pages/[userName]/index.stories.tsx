@@ -2,7 +2,8 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
-	GetUserInfoSideBar_mock
+	GetUserInfoSideBar_mock,
+	GetUserOverview_mock
 } from "@makepurple/www/src/graphql/mocks";
 import Page from "@makepurple/www/src/pages/[userName]";
 import type { Meta, Story } from "@storybook/react";
@@ -46,6 +47,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "GetUserOverview":
+				return { data: GetUserOverview_mock };
 			default:
 				return {};
 		}

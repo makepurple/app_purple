@@ -18,6 +18,7 @@ query GetUserOverview($name: String!) {
 				...UserOverviewExperienceCardExperience
 			}
 		}
+		githubUrl
 		posts(first: 1) {
 			edges {
 				cursor

@@ -1,3 +1,4 @@
+import { FormatUtils } from "@makepurple/utils";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled } from "twin.macro";
 import { Paper } from "../../atoms";
@@ -89,7 +90,7 @@ export const Trophy: FC<TrophyProps> = ({
 					fontSize={10}
 					fill={theme.TEXT}
 				>
-					{score}
+					{typeof score === "number" ? FormatUtils.toGitHubFixed(score) : score}
 				</text>
 			</Svg>
 		</Root>
