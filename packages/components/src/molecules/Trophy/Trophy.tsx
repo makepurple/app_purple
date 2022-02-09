@@ -12,6 +12,7 @@ const Root = styled(Paper)<{ $bg: string }>`
 		inline-flex
 		items-center
 		justify-center
+		rounded-md
 		shadow
 	`}
 	background-color: ${({ $bg }) => $bg};
