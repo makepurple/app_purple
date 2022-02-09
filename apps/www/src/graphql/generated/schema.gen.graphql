@@ -1107,6 +1107,7 @@ type User implements Followable {
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
+  trophies: UserTrophies!
 
   # Posts this user has upvoted
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
@@ -1228,6 +1229,17 @@ type UserEdge implements ConnectionEdge {
 input UserOrderByInput {
   createdAt: SortOrder
   updatedAt: SortOrder
+}
+
+type UserTrophies {
+  # The id of the user who these trophies belong to
+  id: ID!
+  totalCommentUpvotes: Int!
+  totalFollowers: Int!
+  totalPostUpvotes: Int!
+  totalPostViews: Int!
+  totalYearlyCommits: Int!
+  totalYearlyPosts: Int!
 }
 
 input UserWhereInput {

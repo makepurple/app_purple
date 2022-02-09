@@ -2,6 +2,7 @@ import { dayjs } from "@makepurple/utils";
 import type { User } from "../../generated";
 import { GitHubUser_fragment_mock } from "./GitHubUser.fragment.mock";
 import { Skill_fragment_mock } from "./Skill.fragment.mock";
+import { UserTrophies_fragment_mock } from "./UserTrophies.fragment.mock";
 
 const desiredSkills = ["PostgreSQL", "Kubernetes", "Terraform", "Blender", "Inkscape"].map(
 	(skill, i) => ({
@@ -245,6 +246,7 @@ export const User_fragment_mock: User = {
 		})),
 		nodes: skills
 	},
+	trophies: UserTrophies_fragment_mock,
 	upvotedPosts: {
 		__typename: "PostConnection",
 		pageInfo: {
