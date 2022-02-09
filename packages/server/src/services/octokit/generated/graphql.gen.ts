@@ -7464,8 +7464,10 @@ export type IssueFilters = {
   readonly labels?: InputMaybe<ReadonlyArray<Scalars['String']>>;
   /** List issues where the given name is mentioned in the issue. */
   readonly mentioned?: InputMaybe<Scalars['String']>;
-  /** List issues by given milestone argument. If an string representation of an integer is passed, it should refer to a milestone by its number field. Pass in `null` for issues with no milestone, and `*` for issues that are assigned to any milestone. */
+  /** List issues by given milestone argument. If an string representation of an integer is passed, it should refer to a milestone by its database ID. Pass in `null` for issues with no milestone, and `*` for issues that are assigned to any milestone. */
   readonly milestone?: InputMaybe<Scalars['String']>;
+  /** List issues by given milestone argument. If an string representation of an integer is passed, it should refer to a milestone by its number field. Pass in `null` for issues with no milestone, and `*` for issues that are assigned to any milestone. */
+  readonly milestoneNumber?: InputMaybe<Scalars['String']>;
   /** List issues that have been updated at or after the given date. */
   readonly since?: InputMaybe<Scalars['DateTime']>;
   /** List issues filtered by the list of states given. */
@@ -13852,6 +13854,7 @@ export type PullRequestClosingIssuesReferencesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<IssueOrder>;
+  userLinkedOnly?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -23340,6 +23343,15 @@ export type GetGitHubUserQueryVariables = Exact<{
 
 
 export type GetGitHubUserQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null, readonly company?: string | null, readonly login: string, readonly name?: string | null, readonly twitterUsername?: string | null, readonly url: string, readonly websiteUrl?: string | null } | null };
+
+export type GetUserTrophyCommitCountsQueryVariables = Exact<{
+  from?: InputMaybe<Scalars['DateTime']>;
+  login: Scalars['String'];
+  to?: InputMaybe<Scalars['DateTime']>;
+}>;
+
+
+export type GetUserTrophyCommitCountsQuery = { readonly __typename?: 'Query', readonly user?: { readonly __typename?: 'User', readonly id: string, readonly contributionsCollection: { readonly __typename?: 'ContributionsCollection', readonly restrictedContributionsCount: number, readonly totalCommitContributions: number } } | null };
 
 export type GetGitHubRepositoryForSkillQueryVariables = Exact<{
   name: Scalars['String'];

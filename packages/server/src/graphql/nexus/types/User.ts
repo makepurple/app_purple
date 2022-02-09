@@ -867,6 +867,12 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.field("trophies", {
+			type: "UserTrophies",
+			resolve: (parent) => {
+				return { id: parent.id };
+			}
+		});
 		t.nonNull.field("upvotedPosts", {
 			type: "PostConnection",
 			description: stripIndents`

@@ -103,5 +103,6 @@ export * from "./UserActivityPublishPost";
 export * from "./UserActivityUpvotePost";
 export * from "./UserConnection";
 export * from "./UserEdge";
+export * from "./UserTrophies";
 export * from "./ViewPostPayload";
 export * from "./WithGitHubRepository";

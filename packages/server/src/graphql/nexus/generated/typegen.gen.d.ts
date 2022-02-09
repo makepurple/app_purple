@@ -785,6 +785,9 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['User']; // User!
   }
+  UserTrophies: { // root type
+    id: string; // ID!
+  }
   ViewPostPayload: { // root type
     record: NexusGenRootTypes['Post']; // Post!
   }
@@ -1409,6 +1412,7 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
+    trophies: NexusGenRootTypes['UserTrophies']; // UserTrophies!
     upvotedPosts: NexusGenRootTypes['PostConnection']; // PostConnection!
     viewerCanFriend: boolean; // Boolean!
     viewerFollowing: boolean; // Boolean!
@@ -1488,6 +1492,15 @@ export interface NexusGenFieldTypes {
   UserEdge: { // field return type
     cursor: string; // String!
     node: NexusGenRootTypes['User']; // User!
+  }
+  UserTrophies: { // field return type
+    id: string; // ID!
+    totalCommentUpvotes: number; // Int!
+    totalFollowers: number; // Int!
+    totalPostUpvotes: number; // Int!
+    totalPostViews: number; // Int!
+    totalYearlyCommits: number; // Int!
+    totalYearlyPosts: number; // Int!
   }
   ViewPostPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
@@ -2136,6 +2149,7 @@ export interface NexusGenFieldTypeNames {
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
     skills: 'SkillConnection'
+    trophies: 'UserTrophies'
     upvotedPosts: 'PostConnection'
     viewerCanFriend: 'Boolean'
     viewerFollowing: 'Boolean'
@@ -2215,6 +2229,15 @@ export interface NexusGenFieldTypeNames {
   UserEdge: { // field return type name
     cursor: 'String'
     node: 'User'
+  }
+  UserTrophies: { // field return type name
+    id: 'ID'
+    totalCommentUpvotes: 'Int'
+    totalFollowers: 'Int'
+    totalPostUpvotes: 'Int'
+    totalPostViews: 'Int'
+    totalYearlyCommits: 'Int'
+    totalYearlyPosts: 'Int'
   }
   ViewPostPayload: { // field return type name
     query: 'Query'
