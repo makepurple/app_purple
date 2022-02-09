@@ -15,9 +15,9 @@ const Template: Story<TrophyProps> = (args) => {
 	return <Trophy {...args} />;
 };
 Template.args = {
+	achievement: "Deep Committer",
 	rank: TrophyRank.SS,
 	score: 3_100,
-	subTitle: "Deep Committer",
 	theme: TrophyThemeDefault,
 	title: "Commits"
 };

@@ -18,22 +18,26 @@ const Root = styled(Paper)<{ $bg: string }>`
 	background-color: ${({ $bg }) => $bg};
 `;
 
+const Svg = tw.svg`
+	w-full
+`;
+
 export interface TrophyProps {
+	achievement: string;
 	className?: string;
 	rank: TrophyRank;
 	score: number | string;
 	style?: CSSProperties;
-	subTitle: string;
 	theme?: TrophyTheme;
 	title: string;
 }
 
 export const Trophy: FC<TrophyProps> = ({
+	achievement,
 	className,
 	rank,
 	score,
 	style,
-	subTitle,
 	theme = TrophyThemeDefault,
 	title
 }) => {
@@ -44,7 +48,7 @@ export const Trophy: FC<TrophyProps> = ({
 
 	return (
 		<Root className={className} style={style} $bg={theme.BACKGROUND}>
-			<svg
+			<Svg
 				x={x}
 				y={y}
 				width={width}
@@ -74,7 +78,7 @@ export const Trophy: FC<TrophyProps> = ({
 					fontSize={10.5}
 					fill={theme.TEXT}
 				>
-					{subTitle}
+					{achievement}
 				</text>
 				<text
 					x="50%"
@@ -87,7 +91,7 @@ export const Trophy: FC<TrophyProps> = ({
 				>
 					{score}
 				</text>
-			</svg>
+			</Svg>
 		</Root>
 	);
 };
