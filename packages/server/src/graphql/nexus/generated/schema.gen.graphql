@@ -1266,10 +1266,10 @@ input UserOrderByInput {
 type UserTrophies {
   """The id of the user who these trophies belong to"""
   id: ID!
-  totalCommentUpvotes: Int!
   totalFollowers: Int!
-  totalPostUpvotes: Int!
   totalPostViews: Int!
+  totalSkills: Int!
+  totalUpvotes: Int!
   totalYearlyCommits: Int!
   totalYearlyPosts: Int!
 }

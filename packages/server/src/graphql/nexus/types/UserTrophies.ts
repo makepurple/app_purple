@@ -11,20 +11,6 @@ export const UserTrophies = objectType({
 				The id of the user who these trophies belong to
 			`
 		});
-		t.nonNull.int("totalCommentUpvotes", {
-			resolve: async (parent, args, { prisma }) => {
-				const result = await prisma.commentUpvoter.aggregate({
-					_count: { _all: true },
-					where: {
-						comment: {
-							author: { id: { equals: parent.id } }
-						}
-					}
-				});
-
-				return result._count._all;
-			}
-		});
 		t.nonNull.int("totalFollowers", {
 			resolve: async (parent, args, { prisma }) => {
 				return await prisma.user
@@ -35,20 +21,6 @@ export const UserTrophies = objectType({
 						}
 					})
 					.then((result) => result?._count.followedBy ?? 0);
-			}
-		});
-		t.nonNull.int("totalPostUpvotes", {
-			resolve: async (parent, args, { prisma }) => {
-				const result = await prisma.postUpvoter.aggregate({
-					_count: { _all: true },
-					where: {
-						post: {
-							author: { id: { equals: parent.id } }
-						}
-					}
-				});
-
-				return result._count._all;
 			}
 		});
 		t.nonNull.int("totalPostViews", {
@@ -63,6 +35,44 @@ export const UserTrophies = objectType({
 				});
 
 				return result._count._all;
+			}
+		});
+		t.nonNull.int("totalSkills", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.user
+					.findUnique({
+						where: { id: parent.id },
+						select: {
+							_count: { select: { skills: true } }
+						}
+					})
+					.then((result) => result?._count.skills ?? 0);
+			}
+		});
+		t.nonNull.int("totalUpvotes", {
+			resolve: async (parent, args, { prisma }) => {
+				const postUpvoters = await prisma.postUpvoter.aggregate({
+					_count: { _all: true },
+					where: {
+						post: {
+							author: { id: { equals: parent.id } }
+						}
+					}
+				});
+
+				const commentUpvoters = await prisma.commentUpvoter.aggregate({
+					_count: { _all: true },
+					where: {
+						comment: {
+							author: { id: { equals: parent.id } }
+						}
+					}
+				});
+
+				const postUpvotes = postUpvoters._count._all;
+				const commentUpvotes = commentUpvoters._count._all;
+
+				return postUpvotes + commentUpvotes;
 			}
 		});
 		t.nonNull.int("totalYearlyCommits", {

@@ -43,10 +43,10 @@ query GetUserOverview($name: String!) {
 		}
 		trophies {
 			id
-			totalCommentUpvotes
 			totalFollowers
-			totalPostUpvotes
 			totalPostViews
+			totalSkills
+			totalUpvotes
 			totalYearlyCommits
 			totalYearlyPosts
 		}

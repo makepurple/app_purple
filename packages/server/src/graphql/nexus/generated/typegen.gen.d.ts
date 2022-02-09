@@ -1495,10 +1495,10 @@ export interface NexusGenFieldTypes {
   }
   UserTrophies: { // field return type
     id: string; // ID!
-    totalCommentUpvotes: number; // Int!
     totalFollowers: number; // Int!
-    totalPostUpvotes: number; // Int!
     totalPostViews: number; // Int!
+    totalSkills: number; // Int!
+    totalUpvotes: number; // Int!
     totalYearlyCommits: number; // Int!
     totalYearlyPosts: number; // Int!
   }
@@ -2232,10 +2232,10 @@ export interface NexusGenFieldTypeNames {
   }
   UserTrophies: { // field return type name
     id: 'ID'
-    totalCommentUpvotes: 'Int'
     totalFollowers: 'Int'
-    totalPostUpvotes: 'Int'
     totalPostViews: 'Int'
+    totalSkills: 'Int'
+    totalUpvotes: 'Int'
     totalYearlyCommits: 'Int'
     totalYearlyPosts: 'Int'
   }
