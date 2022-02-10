@@ -33,12 +33,14 @@ export const createCache = () => {
 			User: {
 				activities: relayPagination(),
 				chats: relayPagination(),
+				desiredSkills: relayPagination(),
 				followers: relayPagination(),
 				following: relayPagination(),
 				friends: relayPagination(),
 				friendRequestsReceived: relayPagination(),
 				notifications: relayPagination(),
-				repositories: relayPagination()
+				repositories: relayPagination(),
+				skills: relayPagination()
 			}
 		},
 		updates: {
