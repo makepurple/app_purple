@@ -86,7 +86,13 @@ export const Page: NextPage = () => {
 				Join GitHub-powered communities in discussing technologies, projects, best-practices
 				and much more!
 			</Description>
-			<SignUpButton onClick={() => signIn("github")} size="large" tw="mt-16">
+			<SignUpButton
+				onClick={async () => {
+					await signIn("github", { callbackUrl: "/" });
+				}}
+				size="large"
+				tw="mt-16"
+			>
 				<GitHubIcon height={24} width={24} tw="mr-3" />
 				<span>Sign up with GitHub</span>
 			</SignUpButton>

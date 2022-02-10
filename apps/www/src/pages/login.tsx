@@ -71,7 +71,13 @@ export const Page: NextPage = () => {
 		<Root>
 			<Header>MakePurple Login</Header>
 			<Greeting tw="mt-3">Welcome back!</Greeting>
-			<LoginButton onClick={() => signIn("github")} size="large" tw="mt-16">
+			<LoginButton
+				onClick={async () => {
+					await signIn("github", { callbackUrl: "/" });
+				}}
+				size="large"
+				tw="mt-16"
+			>
 				<GitHubIcon height={24} width={24} tw="mr-3" />
 				<span>Login with GitHub</span>
 			</LoginButton>
