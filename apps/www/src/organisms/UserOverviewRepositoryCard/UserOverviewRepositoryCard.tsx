@@ -29,7 +29,7 @@ const DescriptionContainer = tw.a`
 const Description = tw.p`
 	text-sm
 	text-gray-500
-	truncate
+	line-clamp-2
 `;
 
 const Info = tw.div`

@@ -60,6 +60,7 @@ const Experiences = tw(Paper)`
 	flex
 	flex-col
 	items-stretch
+	[& > div]:flex-grow
 `;
 
 const Repositories = tw(Paper)`
@@ -67,6 +68,7 @@ const Repositories = tw(Paper)`
 	flex
 	flex-col
 	items-stretch
+	[& > div]:flex-grow
 `;
 
 export const Page: NextPage = () => {
