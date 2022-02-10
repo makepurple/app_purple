@@ -3360,42 +3360,36 @@ export const UserAvatarUserFragmentDoc = /*#__PURE__*/ gql`
     `;
 export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserInfoSideBarUser on User {
-  __typename
-  desiredSkills {
-    __typename
+  desiredSkills(first: 100) {
     pageInfo {
       ...PageInfoFragment
     }
     edges {
       cursor
       node {
-        __typename
         id
       }
     }
     nodes {
-      __typename
       id
       name
     }
   }
-  followers {
+  followers(first: 1) {
     totalCount
   }
-  following {
+  following(first: 1) {
     totalCount
   }
-  friends {
+  friends(first: 1) {
     totalCount
   }
   github {
-    __typename
     id
     bio
     company
     name
     topLanguages {
-      __typename
       ...TopLanguages
     }
     twitterUsername
@@ -3404,20 +3398,17 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
   }
   id
   name
-  skills {
-    __typename
+  skills(first: 100) {
     pageInfo {
       ...PageInfoFragment
     }
     edges {
       cursor
       node {
-        __typename
         id
       }
     }
     nodes {
-      __typename
       id
       name
       owner
@@ -4305,10 +4296,10 @@ export const GetNotificationCountsDocument = /*#__PURE__*/ gql`
     query GetNotificationCounts {
   viewer {
     id
-    friendRequestsReceived {
+    friendRequestsReceived(first: 1) {
       totalCount
     }
-    notifications(where: {opened: false}) {
+    notifications(first: 1, where: {opened: false}) {
       totalCount
     }
   }
