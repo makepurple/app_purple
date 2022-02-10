@@ -45,6 +45,7 @@ const SectionTitle = tw(Anchor)`
 	self-start
 	text-black
 	text-xl
+	leading-none
 	font-bold
 `;
 
