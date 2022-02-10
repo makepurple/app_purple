@@ -2548,7 +2548,7 @@ export const ActivityFeedFollowableSkillCardSkillFragmentDoc = /*#__PURE__*/ gql
   }
   name
   owner
-  users(first: 0) {
+  users {
     totalCount
   }
   viewerFollowing
@@ -4304,10 +4304,10 @@ export function useGetMyUserQuery(options?: Omit<Urql.UseQueryArgs<GetMyUserQuer
 export const GetNotificationCountsDocument = /*#__PURE__*/ gql`
     query GetNotificationCounts {
   viewer {
-    friendRequestsReceived(first: 0) {
+    friendRequestsReceived {
       totalCount
     }
-    notifications(first: 0, where: {opened: false}) {
+    notifications(where: {opened: false}) {
       totalCount
     }
   }
@@ -4754,7 +4754,7 @@ export const GetUserOverviewDocument = /*#__PURE__*/ gql`
         ...PostCardPost
       }
     }
-    repositories(first: 3) {
+    repositories(first: 2) {
       totalCount
       edges {
         cursor
