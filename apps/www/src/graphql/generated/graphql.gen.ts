@@ -2131,7 +2131,7 @@ export type CreateRepositoryMutationVariables = Exact<{
 }>;
 
 
-export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly repositories: { readonly __typename: 'RepositoryConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string }> } } | null } } };
+export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string }> } } | null } } };
 
 export type DeleteFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -2373,7 +2373,7 @@ export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: {
 export type GetNotificationCountsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNotificationCountsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null };
+export type GetNotificationCountsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null };
 
 export type GetNotificationsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -2381,7 +2381,7 @@ export type GetNotificationsQueryVariables = Exact<{
 }>;
 
 
-export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } }> } } | null };
+export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } }> } } | null };
 
 export type GetPostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3621,6 +3621,7 @@ export const CreateRepositoryDocument = /*#__PURE__*/ gql`
     }
     query {
       viewer {
+        id
         repositories {
           nodes {
             id
@@ -4290,7 +4291,6 @@ export function useGetFollowableSkillsQuery(options?: Omit<Urql.UseQueryArgs<Get
 export const GetMyUserDocument = /*#__PURE__*/ gql`
     query GetMyUser {
   viewer {
-    __typename
     id
     name
     image
@@ -4304,6 +4304,7 @@ export function useGetMyUserQuery(options?: Omit<Urql.UseQueryArgs<GetMyUserQuer
 export const GetNotificationCountsDocument = /*#__PURE__*/ gql`
     query GetNotificationCounts {
   viewer {
+    id
     friendRequestsReceived {
       totalCount
     }
@@ -4320,6 +4321,7 @@ export function useGetNotificationCountsQuery(options?: Omit<Urql.UseQueryArgs<G
 export const GetNotificationsDocument = /*#__PURE__*/ gql`
     query GetNotifications($after: String, $first: Int) {
   viewer {
+    id
     notifications(after: $after, first: $first) {
       pageInfo {
         ...PageInfoFragment

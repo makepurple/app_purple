@@ -1,6 +1,5 @@
 query GetMyUser {
 	viewer {
-		__typename
 		id
 		name
 		image

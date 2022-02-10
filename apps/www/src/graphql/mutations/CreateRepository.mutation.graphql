@@ -5,6 +5,7 @@ mutation CreateRepository($data: RepositoryCreateInput!) {
 		}
 		query {
 			viewer {
+				id
 				repositories {
 					nodes {
 						id
