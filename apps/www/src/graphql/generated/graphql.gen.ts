@@ -3573,7 +3573,7 @@ export const CreateExperienceDocument = /*#__PURE__*/ gql`
     query {
       viewer {
         id
-        experiences {
+        experiences(first: 100) {
           nodes {
             id
           }
@@ -3613,7 +3613,7 @@ export const CreateRepositoryDocument = /*#__PURE__*/ gql`
     query {
       viewer {
         id
-        repositories {
+        repositories(first: 100) {
           nodes {
             id
           }
@@ -3705,7 +3705,7 @@ export const InviteToChatDocument = /*#__PURE__*/ gql`
   inviteToChat(data: $data, where: $where) {
     record {
       id
-      users {
+      users(first: 11) {
         edges {
           cursor
           node {
@@ -3975,7 +3975,7 @@ export const UpdateUserInfoDocument = /*#__PURE__*/ gql`
     record {
       __typename
       id
-      skills {
+      skills(first: 1) {
         pageInfo {
           ...PageInfoFragment
         }
@@ -3996,7 +3996,7 @@ export const UpdateUserInfoDocument = /*#__PURE__*/ gql`
     record {
       __typename
       id
-      skills {
+      skills(first: 1) {
         pageInfo {
           ...PageInfoFragment
         }
@@ -4055,7 +4055,7 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
     record {
       id
       upvotes
-      upvoters {
+      upvoters(first: 6) {
         edges {
           cursor
           node {
