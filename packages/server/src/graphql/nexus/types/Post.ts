@@ -200,8 +200,7 @@ export const Post = objectType({
 								...paginationArgs,
 								where: {
 									user: {
-										...PrismaUtils.nonNull(args.where),
-										isNot: null as any
+										...PrismaUtils.nonNull(args.where)
 									}
 								},
 								include: { user: true }

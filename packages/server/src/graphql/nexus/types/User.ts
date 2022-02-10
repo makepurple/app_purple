@@ -49,30 +49,30 @@ export const User = objectType({
 									OR: [
 										{
 											type: UserActivityType.CommentPost,
-											comment: { isNot: null }
+											comment: {}
 										},
 										{
 											type: UserActivityType.FollowSkill,
-											follow: { isNot: null as any }
+											follow: {}
 										},
 										{
 											type: UserActivityType.FollowUser,
-											follow: { isNot: null as any }
+											follow: {}
 										},
 										{
 											type: UserActivityType.FriendAcceptUser,
-											follow: { isNot: null as any }
+											follow: {}
 										},
 										{
 											type: UserActivityType.Joined
 										},
 										{
 											type: UserActivityType.PublishPost,
-											post: { isNot: null as any }
+											post: {}
 										},
 										{
 											type: UserActivityType.UpvotePost,
-											post: { isNot: null as any }
+											post: {}
 										}
 									]
 								}
@@ -131,30 +131,30 @@ export const User = objectType({
 											OR: [
 												{
 													type: UserActivityType.CommentPost,
-													comment: { isNot: null }
+													comment: {}
 												},
 												{
 													type: UserActivityType.FollowSkill,
-													follow: { isNot: null as any }
+													follow: {}
 												},
 												{
 													type: UserActivityType.FollowUser,
-													follow: { isNot: null as any }
+													follow: {}
 												},
 												{
 													type: UserActivityType.FriendAcceptUser,
-													follow: { isNot: null as any }
+													follow: {}
 												},
 												{
 													type: UserActivityType.Joined
 												},
 												{
 													type: UserActivityType.PublishPost,
-													post: { isNot: null as any }
+													post: {}
 												},
 												{
 													type: UserActivityType.UpvotePost,
-													post: { isNot: null as any }
+													post: {}
 												}
 											]
 										},
@@ -445,11 +445,7 @@ export const User = objectType({
 				const userOnly: boolean = args.where?.type === "User";
 
 				const where: Prisma.FollowWhereInput = {
-					...(skillOnly
-						? { followingSkill: { isNot: null } }
-						: userOnly
-						? { followingUser: { isNot: null } }
-						: {}),
+					...(skillOnly ? { followingSkill: {} } : userOnly ? { followingUser: {} } : {}),
 					OR: [
 						{
 							followingSkill: {
@@ -681,15 +677,15 @@ export const User = objectType({
 											OR: [
 												{
 													type: NotificationType.ChatMessageReceived,
-													chat: { isNot: null as any }
+													chat: {}
 												},
 												{
 													type: NotificationType.FriendshipAccepted,
-													friendship: { isNot: null as any }
+													friendship: {}
 												},
 												{
 													type: NotificationType.PostCommented,
-													post: { isNot: null as any }
+													post: {}
 												}
 											]
 										},

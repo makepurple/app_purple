@@ -28,30 +28,30 @@ export const activityFeed = queryField("activityFeed", {
 									OR: [
 										{
 											type: UserActivityType.CommentPost,
-											comment: { isNot: null }
+											comment: {}
 										},
 										{
 											type: UserActivityType.FollowSkill,
-											follow: { isNot: null as any }
+											follow: {}
 										},
 										{
 											type: UserActivityType.FollowUser,
-											follow: { isNot: null as any }
+											follow: {}
 										},
 										{
 											type: UserActivityType.FriendAcceptUser,
-											follow: { isNot: null as any }
+											follow: {}
 										},
 										{
 											type: UserActivityType.Joined
 										},
 										{
 											type: UserActivityType.PublishPost,
-											post: { isNot: null as any }
+											post: {}
 										},
 										{
 											type: UserActivityType.UpvotePost,
-											post: { isNot: null as any }
+											post: {}
 										}
 									]
 								},
