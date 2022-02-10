@@ -10,6 +10,7 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 		id: "0",
 		posts: {
 			__typename: "PostConnection",
+			totalCount: 20,
 			edges: [
 				{
 					__typename: "PostEdge",

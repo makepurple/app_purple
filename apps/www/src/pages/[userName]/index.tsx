@@ -1,4 +1,4 @@
-import { Anchor, Paper } from "@makepurple/components";
+import { Anchor, Button, Paper } from "@makepurple/components";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -122,6 +122,13 @@ export const Page: NextPage = () => {
 							<SectionTitle>Latest Post</SectionTitle>
 						</NextLink>
 						<PostCard post={post} tw="mt-2" />
+						{user.posts.totalCount > 1 && (
+							<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+								<Button as="a" tw="mt-4">
+									See {(user.posts.totalCount - 1).toLocaleString()} more
+								</Button>
+							</NextLink>
+						)}
 					</Section>
 				)}
 			</Contents>

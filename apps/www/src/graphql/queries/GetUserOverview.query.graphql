@@ -20,6 +20,7 @@ query GetUserOverview($name: String!) {
 		}
 		githubUrl
 		posts(first: 1) {
+			totalCount
 			edges {
 				cursor
 				node {
