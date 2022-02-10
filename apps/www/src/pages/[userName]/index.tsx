@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw from "twin.macro";
 import { useGetUserOverviewQuery } from "../../graphql";
-import { PostCard, UserPageLayout, UserTrophy } from "../../organisms";
+import { PostCard, UserOverviewExperienceCard, UserPageLayout, UserTrophy } from "../../organisms";
 
 const Contents = tw.div`
 	flex
@@ -42,6 +42,22 @@ const SectionTitle = tw(Anchor)`
 	font-bold
 `;
 
+const BottomContent = tw.div`
+
+`;
+
+const Experiences = tw(Paper)`
+	flex
+	flex-col
+	items-stretch
+`;
+
+const Repositories = tw(Paper)`
+	flex
+	flex-col
+	items-stretch
+`;
+
 export const Page: NextPage = () => {
 	const router = useRouter();
 
@@ -68,6 +84,7 @@ export const Page: NextPage = () => {
 
 	const trophies = user.trophies;
 	const post = user.posts.nodes[0] ?? null;
+	const experiences = user.experiences.nodes ?? [];
 
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
@@ -124,8 +141,38 @@ export const Page: NextPage = () => {
 						<PostCard post={post} tw="mt-2" />
 						{user.posts.totalCount > 1 && (
 							<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-								<Button as="a" tw="mt-4">
+								<Button as="a" size="small" tw="mt-4">
 									See {(user.posts.totalCount - 1).toLocaleString()} more
+								</Button>
+							</NextLink>
+						)}
+					</Section>
+				)}
+				{!!experiences.length && (
+					<Section>
+						<NextLink
+							href="/[userName]/experiences"
+							as={`/${userName}/experiences`}
+							passHref
+						>
+							<SectionTitle>Experience</SectionTitle>
+						</NextLink>
+						<Experiences tw="mt-2">
+							{experiences.map((experience) => (
+								<UserOverviewExperienceCard
+									key={experience.id}
+									experience={experience}
+								/>
+							))}
+						</Experiences>
+						{user.experiences.totalCount > 3 && (
+							<NextLink
+								href="/[userName]/experiences"
+								as={`/${userName}/experiences`}
+								passHref
+							>
+								<Button as="a" size="small" tw="mt-4">
+									See {(user.experiences.totalCount - 3).toLocaleString()} more
 								</Button>
 							</NextLink>
 						)}

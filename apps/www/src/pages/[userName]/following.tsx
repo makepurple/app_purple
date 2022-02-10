@@ -61,7 +61,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="connections" userName={userName}>
 			<Content>
-				<Title tw="mb-6">Following</Title>
+				<Title tw="mb-4">Following</Title>
 				<Following>
 					{!follows.length
 						? !fetching && (

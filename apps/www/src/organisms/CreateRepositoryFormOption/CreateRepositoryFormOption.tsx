@@ -56,8 +56,8 @@ const AddButton = tw(Button)`
 	flex
 	items-center
 	justify-center
-	h-12
-	w-12
+	h-10
+	w-10
 	p-0
 `;
 

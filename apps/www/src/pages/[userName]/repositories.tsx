@@ -32,15 +32,15 @@ const Title = tw.h2`
 
 const EditButton = tw(Button)`
 	flex-shrink-0
-	h-12
-	w-12
+	h-10
+	w-10
 	p-0
 `;
 
 const AddButton = tw(Button)`
 	flex-shrink-0
-	h-12
-	w-12
+	h-10
+	w-10
 	p-0
 `;
 
@@ -90,7 +90,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="repositories" userName={userName}>
 			<Content>
-				<Title tw="mb-6">
+				<Title tw="mb-4">
 					<span tw="flex-grow">
 						{mode === "create"
 							? "Add Repository"

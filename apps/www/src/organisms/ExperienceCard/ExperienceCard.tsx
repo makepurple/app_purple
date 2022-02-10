@@ -6,8 +6,8 @@ import { ExperienceCardExperienceFragment, ExperienceType } from "../../graphql"
 
 const EditButton = tw(Button)`
 	flex-shrink-0
-	h-12
-	w-12
+	h-10
+	w-10
 	p-0
 	ml-2
 	opacity-100
