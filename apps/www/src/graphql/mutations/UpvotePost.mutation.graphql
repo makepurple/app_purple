@@ -3,7 +3,7 @@ mutation UpvotePost($where: PostWhereUniqueInput!) {
 		record {
 			id
 			upvotes
-			upvoters {
+			upvoters(first: 6) {
 				edges {
 					cursor
 					node {

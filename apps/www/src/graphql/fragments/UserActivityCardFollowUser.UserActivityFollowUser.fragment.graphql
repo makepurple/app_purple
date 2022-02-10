@@ -5,7 +5,7 @@ fragment UserActivityCardFollowUserUserActivityFollowUser on UserActivityFollowU
 			viewerFollowing
 			... on User {
 				description
-				desiredSkills(first: 5) {
+				desiredSkills(first: 6) {
 					__typename
 					pageInfo {
 						...PageInfoFragment
@@ -25,7 +25,7 @@ fragment UserActivityCardFollowUserUserActivityFollowUser on UserActivityFollowU
 				id
 				image
 				name
-				skills(first: 5) {
+				skills(first: 6) {
 					__typename
 					pageInfo {
 						...PageInfoFragment

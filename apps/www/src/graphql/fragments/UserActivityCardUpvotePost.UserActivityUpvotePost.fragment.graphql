@@ -6,7 +6,7 @@ fragment UserActivityCardUpvotePostUserActivityUpvotePost on UserActivityUpvoteP
 		id
 		publishedAt
 		readTime
-		skills(first: 5) {
+		skills(first: 6) {
 			totalCount
 			nodes {
 				id

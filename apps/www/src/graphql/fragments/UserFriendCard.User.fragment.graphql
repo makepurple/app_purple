@@ -1,6 +1,6 @@
 fragment UserFriendCardUser on User {
 	description
-	desiredSkills(first: 5) {
+	desiredSkills(first: 6) {
 		__typename
 		pageInfo {
 			...PageInfoFragment
@@ -20,7 +20,7 @@ fragment UserFriendCardUser on User {
 	id
 	image
 	name
-	skills(first: 5) {
+	skills(first: 6) {
 		__typename
 		pageInfo {
 			...PageInfoFragment

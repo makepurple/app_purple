@@ -30,7 +30,7 @@ mutation CreateExperience($data: ExperienceCreateInput!) {
 		query {
 			viewer {
 				id
-				experiences {
+				experiences(first: 100) {
 					nodes {
 						id
 					}

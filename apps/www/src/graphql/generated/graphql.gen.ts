@@ -2897,7 +2897,7 @@ export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment SuggestedFriendCardUser on User {
   __typename
   description
-  desiredSkills {
+  desiredSkills(first: 6) {
     totalCount
     nodes {
       id
@@ -2920,7 +2920,7 @@ export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
       urlSlug
     }
   }
-  skills {
+  skills(first: 6) {
     totalCount
     nodes {
       id
@@ -3048,7 +3048,7 @@ export const UserActivityCardFollowUserUserActivityFollowUserFragmentDoc = /*#__
       viewerFollowing
       ... on User {
         description
-        desiredSkills(first: 5) {
+        desiredSkills(first: 6) {
           __typename
           pageInfo {
             ...PageInfoFragment
@@ -3068,7 +3068,7 @@ export const UserActivityCardFollowUserUserActivityFollowUserFragmentDoc = /*#__
         id
         image
         name
-        skills(first: 5) {
+        skills(first: 6) {
           __typename
           pageInfo {
             ...PageInfoFragment
@@ -3100,7 +3100,7 @@ export const UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragmen
   friendship {
     friending {
       description
-      desiredSkills(first: 5) {
+      desiredSkills(first: 6) {
         __typename
         pageInfo {
           ...PageInfoFragment
@@ -3120,7 +3120,7 @@ export const UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragmen
       id
       image
       name
-      skills(first: 5) {
+      skills(first: 6) {
         __typename
         pageInfo {
           ...PageInfoFragment
@@ -3162,7 +3162,7 @@ export const UserActivityCardPublishPostUserActivityPublishPostFragmentDoc = /*#
     id
     publishedAt
     readTime
-    skills(first: 5) {
+    skills(first: 6) {
       totalCount
       nodes {
         id
@@ -3188,7 +3188,7 @@ export const UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc = /*#__
     id
     publishedAt
     readTime
-    skills(first: 5) {
+    skills(first: 6) {
       totalCount
       nodes {
         id
@@ -3208,7 +3208,7 @@ export const UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc = /*#__
 export const UserFollowCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserFollowCardUser on User {
   description
-  desiredSkills(first: 5) {
+  desiredSkills(first: 6) {
     __typename
     pageInfo {
       ...PageInfoFragment
@@ -3228,7 +3228,7 @@ export const UserFollowCardUserFragmentDoc = /*#__PURE__*/ gql`
   id
   image
   name
-  skills(first: 5) {
+  skills(first: 6) {
     __typename
     pageInfo {
       ...PageInfoFragment
@@ -3252,7 +3252,7 @@ export const UserFollowCardUserFragmentDoc = /*#__PURE__*/ gql`
 export const UserFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserFriendCardUser on User {
   description
-  desiredSkills(first: 5) {
+  desiredSkills(first: 6) {
     __typename
     pageInfo {
       ...PageInfoFragment
@@ -3272,7 +3272,7 @@ export const UserFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
   id
   image
   name
-  skills(first: 5) {
+  skills(first: 6) {
     __typename
     pageInfo {
       ...PageInfoFragment
@@ -3296,7 +3296,7 @@ export const UserFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
 export const UserFriendRequestCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment UserFriendRequestCardUser on User {
   description
-  desiredSkills(first: 5) {
+  desiredSkills(first: 6) {
     __typename
     pageInfo {
       ...PageInfoFragment
@@ -3316,7 +3316,7 @@ export const UserFriendRequestCardUserFragmentDoc = /*#__PURE__*/ gql`
   id
   image
   name
-  skills(first: 5) {
+  skills(first: 6) {
     __typename
     pageInfo {
       ...PageInfoFragment
@@ -4079,7 +4079,7 @@ export const ViewPostDocument = /*#__PURE__*/ gql`
   viewPost(where: $where) {
     record {
       id
-      viewers {
+      viewers(first: 1) {
         totalCount
       }
     }
@@ -4846,7 +4846,7 @@ export function useSuggestRepositoriesQuery(options: Omit<Urql.UseQueryArgs<Sugg
 };
 export const SuggestSkillsDocument = /*#__PURE__*/ gql`
     query SuggestSkills($where: SuggestSkillsWhereInput!) {
-  suggestSkills(where: $where) {
+  suggestSkills(first: 6, where: $where) {
     __typename
     nodes {
       __typename

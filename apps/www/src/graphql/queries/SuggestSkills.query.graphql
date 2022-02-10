@@ -1,5 +1,5 @@
 query SuggestSkills($where: SuggestSkillsWhereInput!) {
-	suggestSkills(where: $where) {
+	suggestSkills(first: 6, where: $where) {
 		__typename
 		nodes {
 			__typename

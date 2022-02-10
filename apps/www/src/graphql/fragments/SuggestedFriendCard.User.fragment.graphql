@@ -1,7 +1,7 @@
 fragment SuggestedFriendCardUser on User {
 	__typename
 	description
-	desiredSkills {
+	desiredSkills(first: 6) {
 		totalCount
 		nodes {
 			id
@@ -24,7 +24,7 @@ fragment SuggestedFriendCardUser on User {
 			urlSlug
 		}
 	}
-	skills {
+	skills(first: 6) {
 		totalCount
 		nodes {
 			id

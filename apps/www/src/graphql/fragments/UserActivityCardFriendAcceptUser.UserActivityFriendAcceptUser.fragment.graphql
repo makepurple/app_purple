@@ -3,7 +3,7 @@ fragment UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser on UserAct
 	friendship {
 		friending {
 			description
-			desiredSkills(first: 5) {
+			desiredSkills(first: 6) {
 				__typename
 				pageInfo {
 					...PageInfoFragment
@@ -23,7 +23,7 @@ fragment UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser on UserAct
 			id
 			image
 			name
-			skills(first: 5) {
+			skills(first: 6) {
 				__typename
 				pageInfo {
 					...PageInfoFragment

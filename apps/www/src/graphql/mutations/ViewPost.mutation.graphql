@@ -2,7 +2,7 @@ mutation ViewPost($where: PostWhereUniqueInput!) {
 	viewPost(where: $where) {
 		record {
 			id
-			viewers {
+			viewers(first: 1) {
 				totalCount
 			}
 		}

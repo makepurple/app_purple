@@ -6,7 +6,7 @@ mutation UpdateUserInfo(
 		record {
 			__typename
 			id
-			skills {
+			skills(first: 1) {
 				pageInfo {
 					...PageInfoFragment
 				}
@@ -27,7 +27,7 @@ mutation UpdateUserInfo(
 		record {
 			__typename
 			id
-			skills {
+			skills(first: 1) {
 				pageInfo {
 					...PageInfoFragment
 				}

@@ -5,7 +5,7 @@ mutation InviteToChat(
 	inviteToChat(data: $data, where: $where) {
 		record {
 			id
-			users {
+			users(first: 11) {
 				edges {
 					cursor
 					node {
