@@ -5,6 +5,7 @@ import {
 	GetUserInfoSideBar_mock,
 	GetUserOverview_mock
 } from "@makepurple/www/src/graphql/mocks";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]";
 import Page from "@makepurple/www/src/pages/[userName]";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -22,7 +23,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};

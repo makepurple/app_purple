@@ -7,14 +7,16 @@ import {
 	GetPostDraftDocument,
 	GetPostDraftQuery,
 	GetPostDraftQueryVariables,
+	GetPostsDocument,
+	GetPostsQuery,
+	GetPostsQueryVariables,
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
-	GetUserInfoSideBarQueryVariables,
-	GetUserOverviewDocument,
-	GetUserOverviewQuery,
-	GetUserOverviewQueryVariables
+	GetUserInfoSideBarQueryVariables
 } from "../../graphql";
 import { NextUtils } from "../../utils";
+
+const BATCH_SIZE = 20;
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const { query, req } = ctx;
@@ -22,12 +24,18 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	const userName = query.userName as string;
-
 	await Promise.all([
 		urqlClient
-			.query<GetUserOverviewQuery, GetUserOverviewQueryVariables>(GetUserOverviewDocument, {
-				name: userName
+			.query<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, {
+				first: BATCH_SIZE,
+				where: {
+					author: {
+						name: {
+							equals: query.userName as string
+						}
+					}
+				},
+				after: null
 			})
 			.toPromise(),
 		urqlClient

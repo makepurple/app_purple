@@ -6,7 +6,7 @@ import React from "react";
 import tw from "twin.macro";
 import { useGetPostsQuery } from "../../graphql";
 import { LoadingPostCard, PostCard, UserPageLayout } from "../../organisms";
-import { PageProps, pageProps } from "../../page-props/[userName]";
+import { PageProps, pageProps } from "../../page-props/[userName]/posts";
 
 const BATCH_SIZE = 20;
 

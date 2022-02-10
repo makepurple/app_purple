@@ -12,6 +12,7 @@ import {
 	UserPageLayout,
 	UserTrophy
 } from "../../organisms";
+import { PageProps, pageProps } from "../../page-props/[userName]";
 
 const Contents = tw.div`
 	flex
@@ -71,7 +72,9 @@ const Repositories = tw(Paper)`
 	[& > div]:flex-grow
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
