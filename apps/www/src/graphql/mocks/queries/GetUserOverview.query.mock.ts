@@ -1,5 +1,5 @@
 import type { GetUserOverviewQuery, GetUserOverviewQueryVariables } from "../../generated";
-import { User_fragment_mock } from "../fragments";
+import { Post_fragment_mock, User_fragment_mock } from "../fragments";
 import { UserTrophies_fragment_mock } from "../fragments/UserTrophies.fragment.mock";
 
 export const GetUserOverview_mock: GetUserOverviewQuery = {
@@ -8,6 +8,17 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 		...User_fragment_mock,
 		__typename: "User",
 		id: "0",
+		posts: {
+			__typename: "PostConnection",
+			edges: [
+				{
+					__typename: "PostEdge",
+					cursor: Post_fragment_mock.id,
+					node: Post_fragment_mock
+				}
+			],
+			nodes: [Post_fragment_mock]
+		},
 		trophies: {
 			...UserTrophies_fragment_mock,
 			totalFollowers: 5,

@@ -31,7 +31,7 @@ const MainAnchor = tw.a`
 	flex-col
 `;
 
-const Title = tw.h2`
+const Title = tw.span`
 	mb-2
 	text-xl
 	font-bold
