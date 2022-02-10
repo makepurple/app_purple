@@ -31,22 +31,18 @@ const UserInfoSideBarForm = dynamic(() => import("../UserInfoSideBarForm"), { ss
 
 const MainInfoContainer = tw.div`
 	p-6
-	sm:p-8
 `;
 
 const TopLanguagesContainer = tw.div`
 	p-6
-	sm:p-8
 `;
 
 const SkillsContainer = tw.div`
 	p-6
-	sm:p-8
 `;
 
 const FormContainer = tw.div`
 	p-6
-	sm:p-8
 `;
 
 const SubTitle = tw.h2`
@@ -174,7 +170,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	return (
 		<Paper className={className} style={style}>
 			<MainInfoContainer>
-				<UserAvatar border={4} height={128} user={user} width={128} />
+				<UserAvatar border={6} height={156} user={user} width={156} />
 				<UserName>
 					<DisplayName>{displayName}</DisplayName>
 					{!!user.github.name && <SecondaryName>{user.name}</SecondaryName>}
