@@ -11,11 +11,11 @@ import { PostCardPostFragment, useUpvotePostMutation } from "../../graphql";
 const Root = tw(Paper)`
 	flex
 	flex-col-reverse
-	h-80
+	height[22rem]
 	p-3
 	sm:flex-row
 	sm:h-52
-	sm:p-6
+	sm:p-4
 	cursor-pointer
 `;
 
@@ -105,11 +105,11 @@ const UpvoteCount = tw.span`
 const Thumbnail = tw.a`
 	relative
 	flex-shrink-0
-	h-40
+	h-44
 	w-full
 	mb-3
-	sm:w-40
-	sm:ml-6
+	sm:w-44
+	sm:ml-4
 	sm:mb-0
 	overflow-hidden
 	rounded-md

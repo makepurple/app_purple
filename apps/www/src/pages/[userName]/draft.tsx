@@ -90,7 +90,6 @@ const SideBar = tw(PostGuidelines)`
 	lg:block
 	lg:w-96
 	lg:ml-6
-	xl:ml-8
 `;
 
 export const getServerSideProps = pageProps;

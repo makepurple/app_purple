@@ -6,6 +6,7 @@ const Title = tw.div`
 	p-4
 	pb-2
 	text-xl
+	leading-none
 	font-bold
 `;
 
