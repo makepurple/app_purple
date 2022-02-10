@@ -55,7 +55,8 @@ const Info = tw.div`
 	flex
 	flex-wrap
 	items-center
-	gap-3.5
+	gap-y-2
+	gap-x-3
 	text-sm
 	text-black
 `;

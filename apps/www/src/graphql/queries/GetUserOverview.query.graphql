@@ -31,7 +31,7 @@ query GetUserOverview($name: String!) {
 				...PostCardPost
 			}
 		}
-		repositories(first: 3) {
+		repositories(first: 2) {
 			totalCount
 			edges {
 				cursor
@@ -40,7 +40,7 @@ query GetUserOverview($name: String!) {
 				}
 			}
 			nodes {
-				...RepositoryCardRepository
+				...UserOverviewRepositoryCardRepository
 			}
 		}
 		trophies {

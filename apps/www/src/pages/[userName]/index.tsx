@@ -1,11 +1,17 @@
-import { Anchor, Button, Paper } from "@makepurple/components";
+import { Anchor, Button, Divider, Paper } from "@makepurple/components";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { Fragment, useMemo } from "react";
 import tw from "twin.macro";
 import { useGetUserOverviewQuery } from "../../graphql";
-import { PostCard, UserOverviewExperienceCard, UserPageLayout, UserTrophy } from "../../organisms";
+import {
+	PostCard,
+	UserOverviewExperienceCard,
+	UserOverviewRepositoryCard,
+	UserPageLayout,
+	UserTrophy
+} from "../../organisms";
 
 const Contents = tw.div`
 	flex
@@ -43,16 +49,20 @@ const SectionTitle = tw(Anchor)`
 `;
 
 const BottomContent = tw.div`
-
+	grid
+	grid-template-columns[repeat(auto-fit, minmax(20rem, 1fr))]
+	gap-4
 `;
 
 const Experiences = tw(Paper)`
+	flex-grow
 	flex
 	flex-col
 	items-stretch
 `;
 
 const Repositories = tw(Paper)`
+	flex-grow
 	flex
 	flex-col
 	items-stretch
@@ -85,6 +95,7 @@ export const Page: NextPage = () => {
 	const trophies = user.trophies;
 	const post = user.posts.nodes[0] ?? null;
 	const experiences = user.experiences.nodes ?? [];
+	const repositories = user.repositories.nodes ?? [];
 
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
@@ -148,35 +159,72 @@ export const Page: NextPage = () => {
 						)}
 					</Section>
 				)}
-				{!!experiences.length && (
-					<Section>
-						<NextLink
-							href="/[userName]/experiences"
-							as={`/${userName}/experiences`}
-							passHref
-						>
-							<SectionTitle>Experience</SectionTitle>
-						</NextLink>
-						<Experiences tw="mt-2">
-							{experiences.map((experience) => (
-								<UserOverviewExperienceCard
-									key={experience.id}
-									experience={experience}
-								/>
-							))}
-						</Experiences>
-						{user.experiences.totalCount > 3 && (
-							<NextLink
-								href="/[userName]/experiences"
-								as={`/${userName}/experiences`}
-								passHref
-							>
-								<Button as="a" size="small" tw="mt-4">
-									See {(user.experiences.totalCount - 3).toLocaleString()} more
-								</Button>
-							</NextLink>
+				{(!!experiences.length || !!repositories.length) && (
+					<BottomContent>
+						{!!experiences.length && (
+							<Section>
+								<NextLink
+									href="/[userName]/experiences"
+									as={`/${userName}/experiences`}
+									passHref
+								>
+									<SectionTitle>Experiences</SectionTitle>
+								</NextLink>
+								<Experiences tw="mt-2">
+									{experiences.map((experience, i) => (
+										<Fragment key={experience.id}>
+											{!!i && <Divider />}
+											<UserOverviewExperienceCard experience={experience} />
+										</Fragment>
+									))}
+								</Experiences>
+								{user.experiences.totalCount > 3 && (
+									<NextLink
+										href="/[userName]/experiences"
+										as={`/${userName}/experiences`}
+										passHref
+									>
+										<Button as="a" size="small" tw="mt-4">
+											See {(user.experiences.totalCount - 3).toLocaleString()}{" "}
+											more
+										</Button>
+									</NextLink>
+								)}
+							</Section>
 						)}
-					</Section>
+						{!!repositories.length && (
+							<Section>
+								<NextLink
+									href="/[userName]/repositories"
+									as={`/${userName}/repositories`}
+									passHref
+								>
+									<SectionTitle>Repositories</SectionTitle>
+								</NextLink>
+								<Repositories tw="mt-2">
+									{repositories.map((repository, i) => (
+										<Fragment key={repository.id}>
+											{!!i && <Divider />}
+											<UserOverviewRepositoryCard repository={repository} />
+										</Fragment>
+									))}
+								</Repositories>
+								{user.repositories.totalCount > 2 && (
+									<NextLink
+										href="/[userName]/repositories"
+										as={`/${userName}/repositories`}
+										passHref
+									>
+										<Button as="a" size="small" tw="mt-4">
+											See{" "}
+											{(user.repositories.totalCount - 2).toLocaleString()}{" "}
+											more
+										</Button>
+									</NextLink>
+								)}
+							</Section>
+						)}
+					</BottomContent>
 				)}
 			</Contents>
 		</UserPageLayout>

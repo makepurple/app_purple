@@ -1,0 +1,25 @@
+fragment UserOverviewRepositoryCardRepository on Repository {
+	id
+	github {
+		id
+		description
+		name
+		owner {
+			id
+			login
+		}
+		primaryLanguage {
+			color
+			id
+			name
+		}
+		pushedAt
+		url
+	}
+	name
+	skills {
+		id
+		name
+		owner
+	}
+}

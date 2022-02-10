@@ -1,5 +1,6 @@
 fragment UserOverviewExperienceCardExperience on Experience {
 	id
+	endDate
 	organization {
 		id
 		github {
@@ -10,4 +11,7 @@ fragment UserOverviewExperienceCardExperience on Experience {
 		name
 	}
 	organizationName
+	positionName
+	startDate
+	type
 }

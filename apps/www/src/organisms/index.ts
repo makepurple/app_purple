@@ -74,6 +74,7 @@ export * from "./UserFriendRequestCard";
 export * from "./UserInfoSideBar";
 export * from "./UserInfoSideBarForm";
 export * from "./UserOverviewExperienceCard";
+export * from "./UserOverviewRepositoryCard";
 export * from "./UserPageLayout";
 export * from "./UserPageTabs";
 export * from "./UserTrophy";

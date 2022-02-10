@@ -1,32 +1,57 @@
 import { Avatar } from "@makepurple/components";
 import { useOnKeyDown } from "@makepurple/hooks";
+import { dayjs } from "@makepurple/utils";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, useMemo } from "react";
 import tw from "twin.macro";
-import { UserOverviewExperienceCardExperienceFragment } from "../../graphql";
+import { ExperienceType, UserOverviewExperienceCardExperienceFragment } from "../../graphql";
 
 const Root = tw.div`
 	flex
 	flex-row
-	items-center
-	px-6
-	py-2
+	items-start
+	p-2
 	cursor-pointer
 	hover:bg-indigo-50
 `;
 
 const StyledAvatar = tw(Avatar)`
+	flex-shrink-0
 	rounded-md
 `;
 
-const Name = tw.a`
+const Contents = tw.a`
+	self-stretch
+	flex-grow
+	flex
+	flex-col
+`;
+
+const PositionName = tw.span`
 	leading-none
 	font-semibold
 	text-black
-	focus:ring-0
-	focus-visible:ring-0
+`;
+
+const PositionType = tw.span`
+	text-sm
+	leading-none
+	text-gray-500
+	font-normal
+`;
+
+const OrganizationName = tw.span`
+	text-sm
+	leading-none
+	text-gray-500
+`;
+
+const Timeframe = tw.div`
+	text-sm
+	leading-none
+	text-black
 `;
 
 export interface UserOverviewExperienceCardProps {
@@ -43,6 +68,47 @@ export const UserOverviewExperienceCard: FC<UserOverviewExperienceCardProps> = (
 	const router = useRouter();
 
 	const organization = experience.organization.github;
+
+	const experienceType = useMemo(() => {
+		switch (experience.type) {
+			case ExperienceType.Contract:
+				return "contract";
+			case ExperienceType.FullTime:
+				return "full-time";
+			case ExperienceType.Intern:
+				return "intern";
+			case ExperienceType.OpenSource:
+				return "open-source";
+			case ExperienceType.PartTime:
+				return "part-time";
+			default:
+				return null;
+		}
+	}, [experience.type]);
+
+	const startDate = useMemo(
+		() => experience.startDate && dayjs(experience.startDate).format("MMM YYYY"),
+		[experience.startDate]
+	);
+
+	const endDate = useMemo(
+		() => (experience.endDate ? dayjs(experience.endDate).format("MMM YYYY") : "Present"),
+		[experience.endDate]
+	);
+
+	const duration = useMemo(() => {
+		if (!experience.startDate) return null;
+
+		const experienceEnd = experience.endDate ?? new Date();
+
+		return dayjs(experienceEnd).to(experience.startDate, true);
+	}, [experience.startDate, experience.endDate]);
+
+	const timeframe = useMemo(() => {
+		if (!startDate || !duration) return null;
+
+		return `${startDate} – ${endDate} • ${duration}`;
+	}, [startDate, endDate, duration]);
 
 	const onEnter = useOnKeyDown({ key: "ENTER", global: false }, async () => {
 		await router.push("/s/[skillOwner]", `/s/${organization.name}`);
@@ -72,13 +138,18 @@ export const UserOverviewExperienceCard: FC<UserOverviewExperienceCardProps> = (
 				</StyledAvatar>
 			</NextLink>
 			<NextLink href="/s/[skillOwner]" as={`/s/${organization.name}`} passHref>
-				<Name
-					onClick={(e) => {
-						e.stopPropagation();
-					}}
-				>
-					{organization.name}
-				</Name>
+				<Contents>
+					{experience.positionName && (
+						<PositionName>
+							{experience.positionName}
+							{experienceType && (
+								<PositionType tw="ml-2">({experienceType})</PositionType>
+							)}
+						</PositionName>
+					)}
+					<OrganizationName tw="mt-1">@{organization.name}</OrganizationName>
+					{timeframe && <Timeframe tw="mt-2">{timeframe}</Timeframe>}
+				</Contents>
 			</NextLink>
 		</Root>
 	);

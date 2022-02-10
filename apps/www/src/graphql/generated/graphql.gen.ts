@@ -2094,7 +2094,9 @@ export type UserFriendRequestCardUserFragment = { readonly __typename: 'User', r
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFollowing: boolean, readonly viewerIsFriend: boolean, readonly image?: string | null, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number }, readonly friends: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null, readonly company?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly url: string, readonly websiteUrl?: string | null, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
-export type UserOverviewExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly id: string, readonly organizationName: string, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } };
+export type UserOverviewExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } };
+
+export type UserOverviewRepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
 export type CreateChatMutationVariables = Exact<{
   data: CreateChatInput;
@@ -2488,7 +2490,7 @@ export type GetUserOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetUserOverviewQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly createdAt: Date, readonly githubUrl: string, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly organizationName: string, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } }> }, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }> }, readonly trophies: { readonly __typename: 'UserTrophies', readonly id: string, readonly totalFollowers: number, readonly totalPostViews: number, readonly totalSkills: number, readonly totalUpvotes: number, readonly totalYearlyCommits: number, readonly totalYearlyPosts: number } } | null };
+export type GetUserOverviewQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly createdAt: Date, readonly githubUrl: string, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } }> }, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }> }, readonly trophies: { readonly __typename: 'UserTrophies', readonly id: string, readonly totalFollowers: number, readonly totalPostViews: number, readonly totalSkills: number, readonly totalUpvotes: number, readonly totalYearlyCommits: number, readonly totalYearlyPosts: number } } | null };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3432,6 +3434,7 @@ ${UserAvatarUserFragmentDoc}`;
 export const UserOverviewExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
     fragment UserOverviewExperienceCardExperience on Experience {
   id
+  endDate
   organization {
     id
     github {
@@ -3442,6 +3445,36 @@ export const UserOverviewExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql
     name
   }
   organizationName
+  positionName
+  startDate
+  type
+}
+    `;
+export const UserOverviewRepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserOverviewRepositoryCardRepository on Repository {
+  id
+  github {
+    id
+    description
+    name
+    owner {
+      id
+      login
+    }
+    primaryLanguage {
+      color
+      id
+      name
+    }
+    pushedAt
+    url
+  }
+  name
+  skills {
+    id
+    name
+    owner
+  }
 }
     `;
 export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
@@ -4730,7 +4763,7 @@ export const GetUserOverviewDocument = /*#__PURE__*/ gql`
         }
       }
       nodes {
-        ...RepositoryCardRepository
+        ...UserOverviewRepositoryCardRepository
       }
     }
     trophies {
@@ -4746,7 +4779,7 @@ export const GetUserOverviewDocument = /*#__PURE__*/ gql`
 }
     ${UserOverviewExperienceCardExperienceFragmentDoc}
 ${PostCardPostFragmentDoc}
-${RepositoryCardRepositoryFragmentDoc}`;
+${UserOverviewRepositoryCardRepositoryFragmentDoc}`;
 
 export function useGetUserOverviewQuery(options: Omit<Urql.UseQueryArgs<GetUserOverviewQueryVariables>, 'query'>) {
   return Urql.useQuery<GetUserOverviewQuery>({ query: GetUserOverviewDocument, ...options });
