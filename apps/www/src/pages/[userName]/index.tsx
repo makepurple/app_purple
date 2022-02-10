@@ -16,10 +16,10 @@ const Contents = tw.div`
 
 const Trophies = tw(Paper)`
 	grid
-	grid-template-columns[repeat(auto-fill, minmax(10rem, 1fr))]
+	grid-template-columns[repeat(auto-fit, minmax(6rem, 1fr))]
 	auto-rows-auto
-	gap-4
-	p-4
+	gap-2
+	p-3
 `;
 
 const TrophyContainer = tw.a`
