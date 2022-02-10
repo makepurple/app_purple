@@ -46,7 +46,8 @@ export const PendingFriendsButton: FC<PendingFriendsButtonProps> = ({ className,
 	const { status } = useSession();
 
 	const [{ data }] = useGetNotificationCountsQuery({
-		requestPolicy: "cache-only"
+		pause: status !== "authenticated",
+		requestPolicy: "cache-first"
 	});
 
 	const count = data?.viewer?.friendRequestsReceived.totalCount ?? 0;

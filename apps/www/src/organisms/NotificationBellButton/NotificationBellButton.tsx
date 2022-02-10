@@ -46,7 +46,7 @@ export const NotificationBellButton: FC<NotificationBellButtonProps> = ({ classN
 	const { status } = useSession();
 
 	const [{ data }] = useGetNotificationCountsQuery({
-		requestPolicy: "cache-only"
+		requestPolicy: "cache-first"
 	});
 
 	const count = data?.viewer?.notifications.totalCount ?? 0;

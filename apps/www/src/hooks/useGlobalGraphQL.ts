@@ -8,7 +8,7 @@ const usePollNotificationCounts = () => {
 
 	const [{ fetching }, getCounts] = useGetNotificationCountsQuery({
 		pause: status !== "authenticated",
-		requestPolicy: "cache-and-network"
+		requestPolicy: "cache-first"
 	});
 
 	useEffect(() => {
@@ -16,7 +16,9 @@ const usePollNotificationCounts = () => {
 		if (fetching) return;
 
 		const timerId = setTimeout(() => {
-			getCounts({ requestPolicy: "network-only" });
+			getCounts({
+				requestPolicy: "cache-and-network"
+			});
 		}, ms("20s"));
 
 		return () => {
