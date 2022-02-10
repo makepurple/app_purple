@@ -31,8 +31,6 @@ export * from "./LoadingUserActivityCardSkill";
 export * from "./LoadingUserActivityCardUser";
 export * from "./LoadingUserFollowCard";
 export * from "./LoadingUserFriendCard";
-export * from "./LoginButton";
-export * from "./LogoutButton";
 export * from "./MobileAppDrawer";
 export * from "./NewPostButton";
 export * from "./NotificationBellButton";

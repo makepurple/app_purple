@@ -1,18 +1,18 @@
 import {
 	AppBar,
 	Brand,
+	Button,
 	HamburgerMenuButton,
 	MainContainer,
 	PageContainer
 } from "@makepurple/components";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import tw from "twin.macro";
-import { LoginButton } from "../LoginButton";
-import { LogoutButton } from "../LogoutButton";
 import { MobileAppDrawer } from "../MobileAppDrawer";
 import { NotificationBellButton } from "../NotificationBellButton";
 import { PendingFriendsButton } from "../PendingFriendsButton";
@@ -50,7 +50,7 @@ const Actions = tw.div`
 	[& > *]:not-last:mr-4
 `;
 
-const StyledLoginButton = tw(LoginButton)`
+const StyledLoginButton = tw(Button)`
 	w-32
 	bg-transparent
 	text-black
@@ -58,11 +58,11 @@ const StyledLoginButton = tw(LoginButton)`
 	hover:shadow-md
 `;
 
-const SignUpButton = tw(LoginButton)`
+const SignUpButton = tw(Button)`
 	w-32
 `;
 
-const StyledLogoutButton = tw(LogoutButton)`
+const StyledLogoutButton = tw(Button)`
 	w-32
 `;
 
@@ -72,6 +72,10 @@ export interface SiteWideAppBarProps {
 }
 
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
+	const router = useRouter();
+
+	const isAuthPage = router.pathname === "/login" || router.pathname === "signup";
+
 	const { status } = useSession();
 	const isAuthenticated = status === "authenticated";
 
@@ -135,20 +139,32 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						<Brand />
 					</NextLink>
 				</BrandContainer>
-				<Actions>
-					{!isAuthenticated ? (
-						<>
-							<StyledLoginButton icon={null} label="Login" />
-							<SignUpButton label="Sign Up" />
-						</>
-					) : (
-						<>
-							<PendingFriendsButton />
-							<NotificationBellButton />
-							<StyledLogoutButton label="Logout" />
-						</>
-					)}
-				</Actions>
+				{!isAuthPage && (
+					<Actions>
+						{!isAuthenticated ? (
+							<>
+								<NextLink href="/login" passHref>
+									<StyledLoginButton as="a">Login</StyledLoginButton>
+								</NextLink>
+								<NextLink href="/signup" passHref>
+									<SignUpButton as="a">Sign Up</SignUpButton>
+								</NextLink>
+							</>
+						) : (
+							<>
+								<PendingFriendsButton />
+								<NotificationBellButton />
+								<StyledLogoutButton
+									onClick={async () => {
+										await signOut();
+									}}
+								>
+									Logout
+								</StyledLogoutButton>
+							</>
+						)}
+					</Actions>
+				)}
 			</Content>
 			<MobileAppDrawer
 				onClose={() => {

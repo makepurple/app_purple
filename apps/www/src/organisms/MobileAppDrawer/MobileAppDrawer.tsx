@@ -1,9 +1,17 @@
 import { Dialog } from "@headlessui/react";
-import { Backdrop, Brand, HamburgerMenuButton, Paper, SideDrawer } from "@makepurple/components";
+import {
+	Backdrop,
+	Brand,
+	Button,
+	GitHubIcon,
+	HamburgerMenuButton,
+	Paper,
+	SideDrawer
+} from "@makepurple/components";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
-import { LoginButton } from "../LoginButton";
 
 const Root = tw(SideDrawer)`
 	flex
@@ -16,10 +24,6 @@ const TopContent = tw(Paper)`
 	p-4
 	rounded-none
 	shadow-sm
-`;
-
-const CloseButton = tw(HamburgerMenuButton)`
-	mr-2
 `;
 
 const Content = tw.div`
@@ -47,7 +51,7 @@ const AuthBrand = tw(Brand)`
 	line-height[1.375rem]
 `;
 
-const StyledLoginButton = tw(LoginButton)`
+const StyledLoginButton = tw(Button)`
 	bg-transparent
 	text-black
 	border-gray-300
@@ -65,31 +69,45 @@ export type MobileAppDrawerProps = {
 export const MobileAppDrawer: FC<MobileAppDrawerProps> = (props) => {
 	const { className, onClose, open, style } = props;
 
+	const { status } = useSession();
+
 	return (
 		<Root className={className} onClose={onClose} open={open} style={style}>
 			<Dialog.Overlay as={Backdrop} />
 			<TopContent>
-				<CloseButton
+				<HamburgerMenuButton
 					onClick={() => {
 						onClose();
 					}}
 					open={open}
+					tw="mr-3"
 				/>
 				<NextLink href="/" passHref>
 					<Brand />
 				</NextLink>
 			</TopContent>
 			<Content>
-				<AuthContainer>
-					<AuthInfo>
-						<NextLink href="/" passHref>
-							<AuthBrand />
-						</NextLink>{" "}
-						is a community where developers collaborate, share and mutually grow.
-					</AuthInfo>
-					<LoginButton label="Sign Up" tw="mt-4" />
-					<StyledLoginButton icon={null} label="Login" tw="mt-2" />
-				</AuthContainer>
+				{status === "unauthenticated" && (
+					<AuthContainer>
+						<AuthInfo>
+							<NextLink href="/" passHref>
+								<AuthBrand />
+							</NextLink>{" "}
+							is a community where developers collaborate, share and mutually grow.
+						</AuthInfo>
+						<NextLink href="/signup" passHref>
+							<Button as="a" tw="mt-4">
+								Sign Up
+							</Button>
+						</NextLink>
+						<NextLink href="/login" passHref>
+							<StyledLoginButton as="a" tw="mt-2">
+								<GitHubIcon height={24} width={24} tw="mr-2" />
+								<span>Login</span>
+							</StyledLoginButton>
+						</NextLink>
+					</AuthContainer>
+				)}
 			</Content>
 		</Root>
 	);
