@@ -1,0 +1,11 @@
+fragment UserGitHubContributionHeatmapGitHubUserContributionCalendar on GitHubUserContributionCalendar {
+	totalContributions
+	weeks {
+		contributionDays {
+			contributionCount
+			contributionLevel
+			date
+			weekday
+		}
+	}
+}

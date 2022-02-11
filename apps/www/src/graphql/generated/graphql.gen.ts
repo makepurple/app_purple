@@ -535,6 +535,7 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly avatarUrl: Scalars['URL'];
   readonly bio?: Maybe<Scalars['String']>;
   readonly company?: Maybe<Scalars['String']>;
+  readonly contributionCalendar: GitHubUserContributionCalendar;
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;
@@ -551,6 +552,34 @@ export type GitHubUser = GitHubRepositoryOwner & {
 export type GitHubUserTotalCommitsArgs = {
   where?: InputMaybe<GitHubUserTotalCommitsWhereInput>;
 };
+
+export type GitHubUserContributionCalendar = {
+  readonly __typename: 'GitHubUserContributionCalendar';
+  readonly totalContributions: Scalars['Int'];
+  readonly weeks: ReadonlyArray<GitHubUserContributionCalendarWeek>;
+};
+
+export type GitHubUserContributionCalendarDay = {
+  readonly __typename: 'GitHubUserContributionCalendarDay';
+  readonly contributionCount: Scalars['Int'];
+  readonly contributionLevel: GitHubUserContributionLevel;
+  readonly date: Scalars['DateTime'];
+  readonly weekday: Scalars['Int'];
+};
+
+export type GitHubUserContributionCalendarWeek = {
+  readonly __typename: 'GitHubUserContributionCalendarWeek';
+  readonly contributionDays: ReadonlyArray<GitHubUserContributionCalendarDay>;
+  readonly firstDay: Scalars['DateTime'];
+};
+
+export enum GitHubUserContributionLevel {
+  FirstQuartile = 'FirstQuartile',
+  FourthQuartile = 'FourthQuartile',
+  None = 'None',
+  SecondQuartile = 'SecondQuartile',
+  ThirdQuartile = 'ThirdQuartile'
+}
 
 export type GitHubUserTotalCommitsWhereInput = {
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
@@ -2092,6 +2121,8 @@ export type UserFriendCardUserFragment = { readonly __typename: 'User', readonly
 
 export type UserFriendRequestCardUserFragment = { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerIsFriend: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
+export type UserGitHubContributionHeatmapGitHubUserContributionCalendarFragment = { readonly __typename: 'GitHubUserContributionCalendar', readonly totalContributions: number, readonly weeks: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarWeek', readonly contributionDays: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarDay', readonly contributionCount: number, readonly contributionLevel: GitHubUserContributionLevel, readonly date: Date, readonly weekday: number }> }> };
+
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFollowing: boolean, readonly viewerIsFriend: boolean, readonly image?: string | null, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number }, readonly friends: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null, readonly company?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly url: string, readonly websiteUrl?: string | null, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type UserOverviewExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } };
@@ -3337,6 +3368,19 @@ export const UserFriendRequestCardUserFragmentDoc = /*#__PURE__*/ gql`
   viewerIsFriend
 }
     ${PageInfoFragmentFragmentDoc}`;
+export const UserGitHubContributionHeatmapGitHubUserContributionCalendarFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserGitHubContributionHeatmapGitHubUserContributionCalendar on GitHubUserContributionCalendar {
+  totalContributions
+  weeks {
+    contributionDays {
+      contributionCount
+      contributionLevel
+      date
+      weekday
+    }
+  }
+}
+    `;
 export const TopLanguagesFragmentDoc = /*#__PURE__*/ gql`
     fragment TopLanguages on TopLanguages {
   __typename
@@ -3375,13 +3419,13 @@ export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ gql`
       name
     }
   }
-  followers(first: 1) {
+  followers(first: 0) {
     totalCount
   }
-  following(first: 1) {
+  following(first: 0) {
     totalCount
   }
-  friends(first: 1) {
+  friends(first: 0) {
     totalCount
   }
   github {
@@ -4079,7 +4123,7 @@ export const ViewPostDocument = /*#__PURE__*/ gql`
   viewPost(where: $where) {
     record {
       id
-      viewers(first: 1) {
+      viewers(first: 0) {
         totalCount
       }
     }
@@ -4296,10 +4340,10 @@ export const GetNotificationCountsDocument = /*#__PURE__*/ gql`
     query GetNotificationCounts {
   viewer {
     id
-    friendRequestsReceived(first: 1) {
+    friendRequestsReceived(first: 0) {
       totalCount
     }
-    notifications(first: 1, where: {opened: false}) {
+    notifications(first: 0, where: {opened: false}) {
       totalCount
     }
   }

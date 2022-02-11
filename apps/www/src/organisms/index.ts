@@ -69,6 +69,7 @@ export * from "./UserAvatar";
 export * from "./UserFollowCard";
 export * from "./UserFriendCard";
 export * from "./UserFriendRequestCard";
+export * from "./UserGitHubContributionHeatmap";
 export * from "./UserInfoSideBar";
 export * from "./UserInfoSideBarForm";
 export * from "./UserOverviewExperienceCard";
