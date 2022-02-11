@@ -18,6 +18,13 @@ query GetUserOverview($name: String!) {
 				...UserOverviewExperienceCardExperience
 			}
 		}
+		github {
+			id
+			contributionCalendar {
+				totalContributions
+				...UserGitHubContributionHeatmapGitHubUserContributionCalendar
+			}
+		}
 		githubUrl
 		posts(first: 1) {
 			totalCount

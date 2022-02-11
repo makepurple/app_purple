@@ -7,6 +7,7 @@ import { RectCell } from "@visx/heatmap/lib/heatmaps/HeatmapRect";
 import { ParentSize } from "@visx/responsive";
 import { scaleLinear } from "@visx/scale";
 import React, { CSSProperties, memo, useCallback, useMemo } from "react";
+import { useWindowSize } from "react-use";
 import tw from "twin.macro";
 import {
 	GitHubUserContributionLevel,
@@ -14,8 +15,9 @@ import {
 } from "../../graphql";
 
 const GAP = 4;
-const MARGIN_TOP = 25;
+const MARGIN_TOP = 20;
 const MARGIN_LEFT = 35;
+const MARGIN_RIGHT = 2;
 
 const Rect = tw.rect`
 	cursor-pointer
@@ -29,6 +31,8 @@ export interface UserGitHubContributionHeatmapProps {
 
 export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapProps>((props) => {
 	const { className, contributionCalendar, style } = props;
+
+	useWindowSize();
 
 	const weeks = useMemo(() => contributionCalendar.weeks.slice(), [contributionCalendar.weeks]);
 
@@ -68,7 +72,7 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 				const height = Math.floor((width * 25) / 165);
 				const binWidth = width / weeks.length;
 
-				xScale.range([0, width - MARGIN_LEFT]);
+				xScale.range([0, width - MARGIN_LEFT - MARGIN_RIGHT]);
 				yScale.range([height - MARGIN_TOP, 0]);
 
 				return (
@@ -79,6 +83,9 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 							scale={xScale}
 							tickFormat={(week) => {
 								const todayOfWeek = dayjs().day();
+								const weeksBefore = 52 - week.valueOf();
+
+								if (weeksBefore <= 1) return "";
 
 								const date = dayjs().subtract(52 - week.valueOf(), "week");
 								const dayOfMonth = parseInt(date.format("D")) - todayOfWeek;
