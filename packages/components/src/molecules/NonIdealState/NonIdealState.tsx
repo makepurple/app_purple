@@ -38,7 +38,7 @@ export interface NonIdealStateProps {
 	children?: ReactNode;
 	className?: string;
 	style?: CSSProperties;
-	subTitle?: string;
+	subTitle?: ReactNode;
 	title?: string;
 }
 

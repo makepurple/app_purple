@@ -1,6 +1,7 @@
-import { MainContainer, NonIdealState } from "@makepurple/components";
+import { Button, MainContainer, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import NextLink from "next/link";
 import React from "react";
 import tw from "twin.macro";
 import { useGetActivityFeedQuery } from "../graphql";
@@ -49,6 +50,10 @@ const Activities = tw.div`
 	xl:gap-6
 `;
 
+const ExploreButton = tw(Button)`
+	w-36
+`;
+
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
@@ -72,7 +77,19 @@ export const Page: NextPage<PageProps> = () => {
 			<Activities>
 				{!activities.length
 					? !fetching && (
-							<NonIdealState>
+							<NonIdealState
+								title="There's nothing here"
+								subTitle={
+									<div tw="flex flex-col items-center">
+										<div>Discover developers and skills</div>
+										<NextLink href="/explore" passHref>
+											<ExploreButton as="a" size="small" tw="mt-3">
+												Explore
+											</ExploreButton>
+										</NextLink>
+									</div>
+								}
+							>
 								<PulseIcon height={96} width={96} />
 							</NonIdealState>
 					  )

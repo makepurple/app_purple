@@ -52,3 +52,41 @@ Standard.parameters = {
 		}
 	}
 };
+
+export const NoActivities = Template.bind({});
+NoActivities.args = { ...Template.args };
+NoActivities.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetActivityFeed":
+				return {
+					data: {
+						...GetActivityFeed_mock,
+						activityFeed: {
+							...GetActivityFeed_mock.activityFeed,
+							pageInfo: {
+								__typename: "PageInfo",
+								endCursor: null,
+								hasNextPage: false,
+								hasPreviousPage: false,
+								startCursor: null
+							},
+							edges: [],
+							nodes: []
+						}
+					}
+				};
+			case "GetFollowableSkills":
+				return { data: GetFollowableSkills_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			default:
+				return {};
+		}
+	}
+};
