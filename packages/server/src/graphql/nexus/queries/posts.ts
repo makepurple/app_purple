@@ -1,6 +1,6 @@
 import { Post } from "@makepurple/prisma";
 import { oneLine } from "common-tags";
-import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
+import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const posts = queryField("posts", {
@@ -13,6 +13,7 @@ export const posts = queryField("posts", {
 		before: stringArg(),
 		first: intArg(),
 		last: intArg(),
+		orderBy: list(nonNull(arg({ type: "PostOrderByInput" }))),
 		where: arg({ type: "PostWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
@@ -20,11 +21,8 @@ export const posts = queryField("posts", {
 			(paginationArgs) =>
 				prisma.post.findMany({
 					...paginationArgs,
-					where: {
-						author: {
-							name: PrismaUtils.nonNull(args.where?.author?.name)
-						}
-					}
+					orderBy: PrismaUtils.nonNull(args.orderBy),
+					where: PrismaUtils.nonNull(args.where)
 				}),
 			() => prisma.post.count(),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },

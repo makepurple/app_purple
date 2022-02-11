@@ -195,6 +195,10 @@ export interface NexusGenInputs {
     thumbnailUrl?: string | null; // String
     title?: string | null; // String
   }
+  PostOrderByInput: { // input type
+    publishedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    upvoters?: NexusGenInputs['OrderByRelationAggregateInput'] | null; // OrderByRelationAggregateInput
+  }
   PostPublishInput: { // input type
     content: NexusGenScalars['Json']; // Json!
     description: string; // String!
@@ -213,6 +217,7 @@ export interface NexusGenInputs {
   PostWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    publishedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     urlSlug?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   PostWhereUniqueInput: { // input type
@@ -2583,6 +2588,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['PostOrderByInput'][] | null; // [PostOrderByInput!]
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     }
     repositories: { // args

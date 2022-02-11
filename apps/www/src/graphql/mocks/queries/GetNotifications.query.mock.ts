@@ -29,6 +29,7 @@ export const GetNotifications_mock: GetNotificationsQuery = {
 	__typename: "Query",
 	viewer: {
 		__typename: "User",
+		id: "0",
 		notifications: {
 			__typename: "NotificationConnection",
 			pageInfo: {

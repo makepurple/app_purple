@@ -24,6 +24,7 @@ export * from "./NotificationsWhereInput";
 export * from "./OrderByRelationAggregateInput";
 export * from "./PostAuthorNameUrlSlugCompoundUniqueInput";
 export * from "./PostDraftUpdateInput";
+export * from "./PostOrderByInput";
 export * from "./PostPublishInput";
 export * from "./PostUpdateInput";
 export * from "./PostWhereInput";
