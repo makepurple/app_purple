@@ -14,7 +14,7 @@ import {
 	UserGitHubContributionHeatmapGitHubUserContributionCalendarFragment
 } from "../../graphql";
 
-const GAP = 4;
+const GAP = 3;
 const MARGIN_TOP = 20;
 const MARGIN_LEFT = 35;
 const MARGIN_RIGHT = 2;
