@@ -14,13 +14,13 @@ fragment UserInfoSideBarUser on User {
 			name
 		}
 	}
-	followers(first: 1) {
+	followers(first: 0) {
 		totalCount
 	}
-	following(first: 1) {
+	following(first: 0) {
 		totalCount
 	}
-	friends(first: 1) {
+	friends(first: 0) {
 		totalCount
 	}
 	github {
