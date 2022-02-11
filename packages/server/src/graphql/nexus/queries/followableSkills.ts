@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { Skill } from "@prisma/client";
 import { oneLine } from "common-tags";
 import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
@@ -18,7 +17,7 @@ export const followableSkills = queryField("followableSkills", {
 		where: arg({ type: "SkillWhereInput" })
 	},
 	resolve: async (parent, args, { prisma, user }) => {
-		const connection = await findManyCursorConnection<Skill, { id: string }>(
+		const connection = await PrismaUtils.findManyCursorConnection<Skill, { id: string }>(
 			(paginationArgs) =>
 				prisma.skill.findMany({
 					...paginationArgs,

@@ -9,7 +9,7 @@ documents:
 generates:
   src/services/octokit/generated/graphql.gen.ts:
     config:
-      immutableTypes: true
+      immutableTypes: false
       preResolveTypes: true
       pureMagicComment: true
       useTypeImports: true

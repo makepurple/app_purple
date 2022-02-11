@@ -323,6 +323,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
   FollowingType: "Skill" | "User"
+  GitHubUserContributionLevel: "FIRST_QUARTILE" | "FOURTH_QUARTILE" | "NONE" | "SECOND_QUARTILE" | "THIRD_QUARTILE"
   NotificationType: "ChatMessageReceived" | "FriendshipAccepted" | "PostCommented"
   SortOrder: "asc" | "desc"
   UserActivityType: "CommentPost" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvotePost"
@@ -518,6 +519,20 @@ export interface NexusGenObjects {
     twitterUsername?: string | null; // String
     url: NexusGenScalars['URL']; // URL!
     websiteUrl?: string | null; // String
+  }
+  GitHubUserContributionCalendar: { // root type
+    totalContributions: number; // Int!
+    weeks: NexusGenRootTypes['GitHubUserContributionCalendarWeek'][]; // [GitHubUserContributionCalendarWeek!]!
+  }
+  GitHubUserContributionCalendarDay: { // root type
+    contributionCount: number; // Int!
+    contributionLevel: NexusGenEnums['GitHubUserContributionLevel']; // GitHubUserContributionLevel!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    weekday: number; // Int!
+  }
+  GitHubUserContributionCalendarWeek: { // root type
+    contributionDays: NexusGenRootTypes['GitHubUserContributionCalendarDay'][]; // [GitHubUserContributionCalendarDay!]!
+    firstDay: NexusGenScalars['DateTime']; // DateTime!
   }
   InviteToChatPayload: { // root type
     record: NexusGenRootTypes['Chat']; // Chat!
@@ -1038,6 +1053,7 @@ export interface NexusGenFieldTypes {
     avatarUrl: NexusGenScalars['URL']; // URL!
     bio: string | null; // String
     company: string | null; // String
+    contributionCalendar: NexusGenRootTypes['GitHubUserContributionCalendar']; // GitHubUserContributionCalendar!
     id: string; // String!
     login: string; // String!
     name: string | null; // String
@@ -1047,6 +1063,20 @@ export interface NexusGenFieldTypes {
     url: NexusGenScalars['URL']; // URL!
     user: NexusGenRootTypes['User']; // User!
     websiteUrl: string | null; // String
+  }
+  GitHubUserContributionCalendar: { // field return type
+    totalContributions: number; // Int!
+    weeks: NexusGenRootTypes['GitHubUserContributionCalendarWeek'][]; // [GitHubUserContributionCalendarWeek!]!
+  }
+  GitHubUserContributionCalendarDay: { // field return type
+    contributionCount: number; // Int!
+    contributionLevel: NexusGenEnums['GitHubUserContributionLevel']; // GitHubUserContributionLevel!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    weekday: number; // Int!
+  }
+  GitHubUserContributionCalendarWeek: { // field return type
+    contributionDays: NexusGenRootTypes['GitHubUserContributionCalendarDay'][]; // [GitHubUserContributionCalendarDay!]!
+    firstDay: NexusGenScalars['DateTime']; // DateTime!
   }
   InviteToChatPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
@@ -1775,6 +1805,7 @@ export interface NexusGenFieldTypeNames {
     avatarUrl: 'URL'
     bio: 'String'
     company: 'String'
+    contributionCalendar: 'GitHubUserContributionCalendar'
     id: 'String'
     login: 'String'
     name: 'String'
@@ -1784,6 +1815,20 @@ export interface NexusGenFieldTypeNames {
     url: 'URL'
     user: 'User'
     websiteUrl: 'String'
+  }
+  GitHubUserContributionCalendar: { // field return type name
+    totalContributions: 'Int'
+    weeks: 'GitHubUserContributionCalendarWeek'
+  }
+  GitHubUserContributionCalendarDay: { // field return type name
+    contributionCount: 'Int'
+    contributionLevel: 'GitHubUserContributionLevel'
+    date: 'DateTime'
+    weekday: 'Int'
+  }
+  GitHubUserContributionCalendarWeek: { // field return type name
+    contributionDays: 'GitHubUserContributionCalendarDay'
+    firstDay: 'DateTime'
   }
   InviteToChatPayload: { // field return type name
     query: 'Query'

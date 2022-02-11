@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { dayjs, LangUtils, MathUtils } from "@makepurple/utils";
 import { Prisma, User } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
@@ -197,7 +196,7 @@ export const suggestFriends = queryField("suggestFriends", {
 			`;
 		};
 
-		const connection = await findManyCursorConnection<User, { id: string }>(
+		const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 			async ({ cursor, skip = 0, take = 20 }) => {
 				// Pagination cursor, if one exists
 				const cursorOrder = cursor?.id

@@ -91,7 +91,7 @@ export const UserTrophies = objectType({
 					query GetUserTrophyCommitCounts($from: DateTime!, $login: String!) {
 						user(login: $login) {
 							id
-							contributionsCollection(from: $from, to: $to) {
+							contributionsCollection(from: $from) {
 								restrictedContributionsCount
 								totalCommitContributions
 							}

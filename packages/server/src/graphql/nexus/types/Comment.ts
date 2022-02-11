@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment as _Comment, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
@@ -27,7 +26,7 @@ export const Comment = objectType({
 					where: { id: parent.id }
 				});
 
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
 						comment
 							.upvoters({
@@ -68,7 +67,10 @@ export const Comment = objectType({
 			resolve: async (parent, args, { prisma }) => {
 				const comment = prisma.comment.findUnique({ where: { id: parent.id } });
 
-				const connection = await findManyCursorConnection<_Comment, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<
+					_Comment,
+					{ id: string }
+				>(
 					(paginationArgs) =>
 						comment.replies({
 							...paginationArgs,
@@ -98,7 +100,7 @@ export const Comment = objectType({
 					where: { id: parent.id }
 				});
 
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
 						comment
 							.upvoters({

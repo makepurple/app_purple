@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { User } from "@prisma/client";
 import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -14,7 +13,7 @@ export const users = queryField("users", {
 		where: arg({ type: "UserWhereInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const connection = await findManyCursorConnection<User, { id: string }>(
+		const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 			(paginationArgs) =>
 				prisma.user.findMany({
 					...paginationArgs,

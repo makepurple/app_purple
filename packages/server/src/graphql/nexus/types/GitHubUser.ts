@@ -12,7 +12,53 @@ export const GitHubUser = objectType({
 		t.implements("GitHubRepositoryOwner");
 		t.string("bio");
 		t.string("company");
+		t.nonNull.string("login");
 		t.string("name");
+		t.nonNull.field("contributionCalendar", {
+			type: "GitHubUserContributionCalendar",
+			resolve: async (parent, args, { octokit: graphql }) => {
+				const from = dayjs().subtract(1, "year").toDate();
+
+				const userContributions = await graphql`
+					query GetUserContributionCalendar($from: DateTime!, $login: String!) {
+						user(login: $login) {
+							id
+							contributionsCollection(from: $from) {
+								contributionCalendar {
+									totalContributions
+									weeks {
+										contributionDays {
+											contributionCount
+											contributionLevel
+											date
+											weekday
+										}
+										firstDay
+									}
+								}
+							}
+						}
+					}
+				`
+					.cast<
+						octokit.GetUserContributionCalendarQuery,
+						octokit.GetUserContributionCalendarQueryVariables
+					>({
+						from,
+						login: parent.login
+					})
+					.catch(() => null);
+
+				const contributions =
+					userContributions?.user?.contributionsCollection.contributionCalendar;
+
+				if (!contributions) {
+					throw new Error("Coult not retrieve contribution data for user");
+				}
+
+				return contributions;
+			}
+		});
 		t.field("topLanguages", {
 			type: nonNull("TopLanguages"),
 			resolve: async (parent, args, { octokit: graphql, prisma }) => {

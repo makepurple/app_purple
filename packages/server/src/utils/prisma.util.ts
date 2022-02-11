@@ -1,4 +1,9 @@
-import type { ConnectionArguments, Edge, Options } from "@devoxa/prisma-relay-cursor-connection";
+import {
+	ConnectionArguments,
+	Edge,
+	findManyCursorConnection,
+	Options
+} from "@devoxa/prisma-relay-cursor-connection";
 import { LangUtils } from "@makepurple/utils";
 
 type DeepNonNullArgs<T> = T extends null
@@ -46,6 +51,35 @@ export class PrismaUtils {
 		}
 
 		return input as DeepNonNullArgs<T>;
+	};
+
+	public static findManyCursorConnection: typeof findManyCursorConnection = async (
+		findMany,
+		aggregate,
+		args,
+		pOptions
+	) => {
+		const { first, last } = args ?? {};
+
+		/**
+		 * @description This is to allow getting connections without data (first/last = 0)
+		 * @author David Lee
+		 * @date February 10, 2022
+		 */
+		if (first === 0 || last === 0) {
+			return {
+				edges: [],
+				pageInfo: {
+					endCursor: undefined,
+					hasNextPage: false,
+					hasPreviousPage: false,
+					startCursor: undefined
+				},
+				totalCount: await aggregate()
+			};
+		}
+
+		return await findManyCursorConnection(findMany, aggregate, args, pOptions);
 	};
 
 	public static mapRelayEdgesToNodes = <T>(edges: Edge<T>[]): T[] => {

@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Post, User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
@@ -20,7 +19,7 @@ export const Skill = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					async ({ cursor, skip, take }) =>
 						take === 0
 							? await Promise.resolve([])
@@ -63,7 +62,7 @@ export const Skill = objectType({
 				where: arg({ type: "PostWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<Post, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<Post, { id: string }>(
 					(paginationArgs) =>
 						prisma.skill
 							.findUnique({
@@ -101,7 +100,7 @@ export const Skill = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					async ({ cursor, skip, take }) =>
 						take === 0
 							? await Promise.resolve([])

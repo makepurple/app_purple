@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { Comment as _Comment } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -14,7 +13,7 @@ export const comments = queryField("comments", {
 		orderBy: arg({ type: "CommentOrderByInput" })
 	},
 	resolve: async (parent, args, { prisma }) => {
-		const connection = await findManyCursorConnection<_Comment, { id: string }>(
+		const connection = await PrismaUtils.findManyCursorConnection<_Comment, { id: string }>(
 			(paginationArgs) =>
 				prisma.comment.findMany({
 					...paginationArgs,

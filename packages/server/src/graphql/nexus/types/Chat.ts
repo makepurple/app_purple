@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { ChatMessage, User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
@@ -39,7 +38,10 @@ export const Chat = objectType({
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) throw new Error();
 
-				const connection = await findManyCursorConnection<ChatMessage, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<
+					ChatMessage,
+					{ id: string }
+				>(
 					({ cursor, skip, take }) =>
 						prisma.chatsOnUsers
 							.findUnique({
@@ -89,7 +91,7 @@ export const Chat = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
 						prisma.chat
 							.findUnique({ where: { id: parent.id } })

@@ -1,4 +1,3 @@
-import { findManyCursorConnection } from "@devoxa/prisma-relay-cursor-connection";
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
@@ -24,7 +23,10 @@ export const Post = objectType({
 			resolve: async (parent, args, { prisma }) => {
 				const post = prisma.post.findUnique({ where: { id: parent.id } });
 
-				const connection = await findManyCursorConnection<Comment, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<
+					Comment,
+					{ id: string }
+				>(
 					(paginationArgs) =>
 						post.comments({
 							...paginationArgs,
@@ -56,7 +58,7 @@ export const Post = objectType({
 					where: { id: parent.id }
 				});
 
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
 						post
 							.upvoters({
@@ -93,7 +95,10 @@ export const Post = objectType({
 				where: arg({ type: "SkillWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<Skill, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<
+					Skill,
+					{ id: string }
+				>(
 					(paginationArgs) =>
 						prisma.post
 							.findUnique({ where: { id: parent.id } })
@@ -144,7 +149,7 @@ export const Post = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
 						prisma.post
 							.findUnique({
@@ -190,7 +195,7 @@ export const Post = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const connection = await findManyCursorConnection<User, { id: string }>(
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 					(paginationArgs) =>
 						prisma.post
 							.findUnique({

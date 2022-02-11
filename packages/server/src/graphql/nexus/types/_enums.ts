@@ -10,6 +10,16 @@ export const enumTypes = [
 			User: "User"
 		}
 	}),
+	enumType({
+		name: "GitHubUserContributionLevel",
+		members: {
+			None: "NONE",
+			FirstQuartile: "FIRST_QUARTILE",
+			SecondQuartile: "SECOND_QUARTILE",
+			ThirdQuartile: "THIRD_QUARTILE",
+			FourthQuartile: "FOURTH_QUARTILE"
+		}
+	}),
 	enumType(NexusPrisma.NotificationType),
 	enumType({
 		name: "SortOrder",

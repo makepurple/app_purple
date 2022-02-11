@@ -441,6 +441,7 @@ type GitHubUser implements GitHubRepositoryOwner {
   avatarUrl: URL!
   bio: String
   company: String
+  contributionCalendar: GitHubUserContributionCalendar!
   id: String!
   login: String!
   name: String
@@ -450,6 +451,31 @@ type GitHubUser implements GitHubRepositoryOwner {
   url: URL!
   user: User!
   websiteUrl: String
+}
+
+type GitHubUserContributionCalendar {
+  totalContributions: Int!
+  weeks: [GitHubUserContributionCalendarWeek!]!
+}
+
+type GitHubUserContributionCalendarDay {
+  contributionCount: Int!
+  contributionLevel: GitHubUserContributionLevel!
+  date: DateTime!
+  weekday: Int!
+}
+
+type GitHubUserContributionCalendarWeek {
+  contributionDays: [GitHubUserContributionCalendarDay!]!
+  firstDay: DateTime!
+}
+
+enum GitHubUserContributionLevel {
+  FirstQuartile
+  FourthQuartile
+  None
+  SecondQuartile
+  ThirdQuartile
 }
 
 input GitHubUserTotalCommitsWhereInput {
