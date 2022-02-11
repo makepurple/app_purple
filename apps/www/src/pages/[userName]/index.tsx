@@ -1,4 +1,4 @@
-import { Anchor, Button, Divider, Paper } from "@makepurple/components";
+import { Anchor, Button, Divider, NonIdealState, Paper } from "@makepurple/components";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import {
 	UserTrophy
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]";
+import { HexagonIcon, NoteIcon, RepoIcon, TrophyIcon } from "../../svgs";
 
 const Contents = tw.div`
 	flex
@@ -122,17 +123,24 @@ export const Page: NextPage<PageProps> = () => {
 	if (!user) return null;
 
 	const trophies = user.trophies;
+	const contributionCalendar = user.github.contributionCalendar;
 	const post = user.posts.nodes[0] ?? null;
 	const experiences = user.experiences.nodes ?? [];
 	const repositories = user.repositories.nodes ?? [];
 
-	const githubContributions =
-		user.github.contributionCalendar.totalContributions.toLocaleString();
+	const githubContributions = contributionCalendar.totalContributions.toLocaleString();
 
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
 			<Contents>
-				{hasTrophies && (
+				{!hasTrophies ? (
+					<NonIdealState
+						title="There's nothing here"
+						subTitle={`${user.name} hasn't earned any trophies yet`}
+					>
+						<TrophyIcon height={96} width={96} />
+					</NonIdealState>
+				) : (
 					<Trophies>
 						<TrophyContainer
 							href={user.githubUrl}
@@ -184,37 +192,57 @@ export const Page: NextPage<PageProps> = () => {
 					</ContributionTitle>
 					<ContributionContent>
 						<UserGitHubContributionHeatmap
-							contributionCalendar={user.github.contributionCalendar}
+							contributionCalendar={contributionCalendar}
 						/>
 					</ContributionContent>
 				</ContributionSection>
-				{!!post && (
-					<Section>
-						<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-							<SectionTitle>Latest Post</SectionTitle>
-						</NextLink>
-						<PostCard post={post} tw="mt-2" />
-						{user.posts.totalCount > 1 && (
-							<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-								<Button as="a" size="small" tw="mt-4">
-									See {(user.posts.totalCount - 1).toLocaleString()} more
-								</Button>
-							</NextLink>
-						)}
-					</Section>
-				)}
-				{(!!experiences.length || !!repositories.length) && (
-					<BottomContent>
-						{!!experiences.length && (
-							<Section>
+				<Section>
+					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+						<SectionTitle tw="mb-2">Latest Post</SectionTitle>
+					</NextLink>
+					{!post ? (
+						<NonIdealState
+							title="There's nothing here"
+							subTitle={`${user.name} hasn't published anything yet`}
+						>
+							<NoteIcon height={96} width={96} />
+						</NonIdealState>
+					) : (
+						<>
+							<PostCard post={post} />
+							{user.posts.totalCount > 1 && (
 								<NextLink
-									href="/[userName]/experiences"
-									as={`/${userName}/experiences`}
+									href="/[userName]/posts"
+									as={`/${userName}/posts`}
 									passHref
 								>
-									<SectionTitle>Experiences</SectionTitle>
+									<Button as="a" size="small" tw="mt-4">
+										See {(user.posts.totalCount - 1).toLocaleString()} more
+									</Button>
 								</NextLink>
-								<Experiences tw="mt-2">
+							)}
+						</>
+					)}
+				</Section>
+				<BottomContent>
+					<Section>
+						<NextLink
+							href="/[userName]/experiences"
+							as={`/${userName}/experiences`}
+							passHref
+						>
+							<SectionTitle tw="mb-2">Experiences</SectionTitle>
+						</NextLink>
+						{!experiences.length ? (
+							<NonIdealState
+								title="There's nothing here"
+								subTitle={`${user.name} hasn't added any experiences yet`}
+							>
+								<HexagonIcon height={96} width={96} />
+							</NonIdealState>
+						) : (
+							<>
+								<Experiences>
 									{experiences.map((experience, i) => (
 										<Fragment key={experience.id}>
 											{!!i && <Divider />}
@@ -234,18 +262,27 @@ export const Page: NextPage<PageProps> = () => {
 										</Button>
 									</NextLink>
 								)}
-							</Section>
+							</>
 						)}
-						{!!repositories.length && (
-							<Section>
-								<NextLink
-									href="/[userName]/repositories"
-									as={`/${userName}/repositories`}
-									passHref
-								>
-									<SectionTitle>Repositories</SectionTitle>
-								</NextLink>
-								<Repositories tw="mt-2">
+					</Section>
+					<Section>
+						<NextLink
+							href="/[userName]/repositories"
+							as={`/${userName}/repositories`}
+							passHref
+						>
+							<SectionTitle tw="mb-2">Repositories</SectionTitle>
+						</NextLink>
+						{!repositories.length ? (
+							<NonIdealState
+								title="There's nothing here"
+								subTitle={`${user.name} hasn't added any repositories yet`}
+							>
+								<RepoIcon height={96} width={96} />
+							</NonIdealState>
+						) : (
+							<>
+								<Repositories>
 									{repositories.map((repository, i) => (
 										<Fragment key={repository.id}>
 											{!!i && <Divider />}
@@ -266,10 +303,10 @@ export const Page: NextPage<PageProps> = () => {
 										</Button>
 									</NextLink>
 								)}
-							</Section>
+							</>
 						)}
-					</BottomContent>
-				)}
+					</Section>
+				</BottomContent>
 			</Contents>
 		</UserPageLayout>
 	);

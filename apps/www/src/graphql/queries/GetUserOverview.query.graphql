@@ -26,6 +26,7 @@ query GetUserOverview($name: String!) {
 			}
 		}
 		githubUrl
+		name
 		posts(first: 1) {
 			totalCount
 			edges {

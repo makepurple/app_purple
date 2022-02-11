@@ -5,6 +5,7 @@ import {
 	GetUserInfoSideBar_mock,
 	GetUserOverview_mock
 } from "@makepurple/www/src/graphql/mocks";
+import { UserTrophies_fragment_mock } from "@makepurple/www/src/graphql/mocks/fragments/UserTrophies.fragment.mock";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]";
 import Page from "@makepurple/www/src/pages/[userName]";
 import type { Meta, Story } from "@storybook/react";
@@ -50,6 +51,180 @@ Standard.parameters = {
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
 				return { data: GetUserOverview_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoTrophies = Template.bind({});
+NoTrophies.args = { ...Template.args };
+NoTrophies.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			case "GetUserOverview":
+				return {
+					data: {
+						...GetUserOverview_mock,
+						user: {
+							...GetUserOverview_mock.user,
+							trophies: {
+								...UserTrophies_fragment_mock,
+								totalFollowers: 0,
+								totalPostViews: 0,
+								totalSkills: 0,
+								totalUpvotes: 0,
+								totalYearlyCommits: 0,
+								totalYearlyPosts: 0
+							}
+						}
+					}
+				};
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoPosts = Template.bind({});
+NoPosts.args = { ...Template.args };
+NoPosts.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			case "GetUserOverview":
+				return {
+					data: {
+						...GetUserOverview_mock,
+						user: {
+							...GetUserOverview_mock.user,
+							posts: {
+								__typename: "PostConnection",
+								totalCount: 0,
+								edges: [],
+								nodes: []
+							}
+						}
+					}
+				};
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoExperiences = Template.bind({});
+NoExperiences.args = { ...Template.args };
+NoExperiences.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			case "GetUserOverview":
+				return {
+					data: {
+						...GetUserOverview_mock,
+						user: {
+							...GetUserOverview_mock.user,
+							experiences: {
+								__typename: "ExperienceConnection",
+								totalCount: 0,
+								edges: [],
+								nodes: []
+							}
+						}
+					}
+				};
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoRepositories = Template.bind({});
+NoRepositories.args = { ...Template.args };
+NoRepositories.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			case "GetUserOverview":
+				return {
+					data: {
+						...GetUserOverview_mock,
+						user: {
+							...GetUserOverview_mock.user,
+							repositories: {
+								__typename: "RepositoryConnection",
+								totalCount: 0,
+								edges: [],
+								nodes: []
+							}
+						}
+					}
+				};
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoExperiencesRepositories = Template.bind({});
+NoExperiencesRepositories.args = { ...Template.args };
+NoExperiencesRepositories.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			case "GetUserOverview":
+				return {
+					data: {
+						...GetUserOverview_mock,
+						user: {
+							...GetUserOverview_mock.user,
+							experiences: {
+								__typename: "ExperienceConnection",
+								totalCount: 0,
+								edges: [],
+								nodes: []
+							},
+							repositories: {
+								__typename: "RepositoryConnection",
+								totalCount: 0,
+								edges: [],
+								nodes: []
+							}
+						}
+					}
+				};
 			default:
 				return {};
 		}
