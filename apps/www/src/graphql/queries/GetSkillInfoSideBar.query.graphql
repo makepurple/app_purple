@@ -1,0 +1,12 @@
+query GetSkillInfoSideBar($name: String!, $owner: String!) {
+	skill(
+		where: {
+			name_owner: {
+				name: $name
+				owner: $owner
+			}
+		}
+	) {
+		...SkillInfoSideBarSkill
+	}
+}

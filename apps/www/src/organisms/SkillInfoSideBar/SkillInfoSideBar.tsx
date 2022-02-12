@@ -3,7 +3,7 @@ import { dayjs } from "@makepurple/utils";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
-import { SkillInfoSideBarSkillFragment } from "../../graphql";
+import { SkillInfoSideBarSkillFragment, useGetSkillInfoSideBarQuery } from "../../graphql";
 import {
 	ForkIcon,
 	GitHubIcon,
@@ -115,11 +115,28 @@ const FollowCount = tw.span`
 
 export interface SkillInfoSideBarProps {
 	className?: string;
-	skill: SkillInfoSideBarSkillFragment;
+	skillName: string;
+	skillOwner: string;
 	style?: CSSProperties;
 }
 
-export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({ className, skill, style }) => {
+export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
+	className,
+	skillName,
+	skillOwner,
+	style
+}) => {
+	const [{ data }] = useGetSkillInfoSideBarQuery({
+		variables: {
+			name: skillName,
+			owner: skillOwner
+		}
+	});
+
+	const skill = data?.skill;
+
+	if (!skill) return null;
+
 	const github = skill.github;
 	const owner = github.owner;
 

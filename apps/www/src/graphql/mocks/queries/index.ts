@@ -12,6 +12,7 @@ export * from "./GetPostComments.query.mock";
 export * from "./GetPostDraft.query.mock";
 export * from "./GetPosts.query.mock";
 export * from "./GetRepositories.query.mock";
+export * from "./GetSkillInfoSideBar.query.mock";
 export * from "./GetSkills.query.mock";
 export * from "./GetUserActivities.query.mock";
 export * from "./GetUserFollowers.query.mock";
