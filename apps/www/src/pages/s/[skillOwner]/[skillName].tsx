@@ -1,50 +1,28 @@
-import { MainContainer } from "@makepurple/components";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
+import { SkillPageLayout } from "../../../organisms";
 
-const Root = tw(MainContainer)`
+const Contents = tw.div`
 	flex
 	flex-col
 	items-stretch
-	my-12
-	lg:flex-row-reverse
-	lg:items-start
-`;
-
-const SideBar = tw.div`
-	flex-shrink-0
-	flex
-	flex-col
-	items-stretch
-	gap-4
-	w-full
-	mb-6
-	lg:w-96
-	lg:ml-4
-	xl:gap-6
-	xl:ml-6
-`;
-
-const Posts = tw.div`
-	flex-grow
-	flex
-	flex-col
-	items-stretch
-	gap-4
-	xl:gap-6
+	gap-6
 `;
 
 export const Page: NextPage = () => {
+	const router = useRouter();
+
+	const skillName = router?.query.skillName as string;
+	const skillOwner = router?.query.skillOwner as string;
+
 	return (
-		<Root>
-			<SideBar>
+		<SkillPageLayout selectedTab="posts" skillName={skillName} skillOwner={skillOwner}>
+			<Contents>
 				<div />
-			</SideBar>
-			<Posts>
-				<div />
-			</Posts>
-		</Root>
+			</Contents>
+		</SkillPageLayout>
 	);
 };
 
