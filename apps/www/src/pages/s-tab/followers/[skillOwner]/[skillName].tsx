@@ -46,10 +46,6 @@ export const Page: NextPage = () => {
 		}
 	});
 
-	const skill = data?.skill;
-
-	if (!skill) return null;
-
 	const followers = data?.skill?.followers.nodes ?? [];
 
 	return (

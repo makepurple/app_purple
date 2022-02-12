@@ -1,3 +1,4 @@
+import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
@@ -8,6 +9,7 @@ import {
 import { Page } from "@makepurple/www/src/pages/s-tab/followers/[skillOwner]/[skillName]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
+import ms from "ms";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
@@ -51,6 +53,44 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetSkillFollowers":
 				return { data: GetSkillFollowers_mock };
+			case "GetSkillInfoSideBar":
+				return { data: GetSkillInfoSideBar_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const Loading = Template.bind({});
+Loading.args = { ...Template.args };
+Loading.parameters = {
+	...Template.parameters,
+	urql: async (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetSkillFollowers":
+				await PromiseUtils.wait(ms("5s"));
+
+				return {
+					data: {
+						...GetSkillFollowers_mock,
+						skill: {
+							...GetSkillFollowers_mock.skill,
+							followers: {
+								__typename: "UserConnection",
+								pageInfo: PageInfo_fragment_mock,
+								totalCount: 0,
+								edges: [],
+								nodes: []
+							}
+						}
+					}
+				};
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
 			default:
