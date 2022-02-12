@@ -1,0 +1,37 @@
+fragment SkillInfoSideBarSkill on Skill {
+	id
+	followers(first: 0) {
+		totalCount
+	}
+	github {
+		id
+		description
+		forkCount
+		issueCount
+		licenseInfo {
+			id
+			name
+			nickname
+			spdxId
+			url
+		}
+		name
+		primaryLanguage {
+			color
+			id
+			name
+		}
+		pullRequestCount
+		owner {
+			avatarUrl
+			id
+			login
+			url
+		}
+		stargazerCount
+		url
+	}
+	name
+	owner
+	viewerFollowing
+}

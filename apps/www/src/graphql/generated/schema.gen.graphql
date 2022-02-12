@@ -702,6 +702,11 @@ type PostImage {
   url: String!
 }
 
+input PostOrderByInput {
+  publishedAt: SortOrder
+  upvoters: OrderByRelationAggregateInput
+}
+
 input PostPublishInput {
   content: Json!
   description: String!
@@ -722,6 +727,7 @@ input PostUpdateInput {
 input PostWhereInput {
   author: UserWhereInput
   authorName: StringNullableFilter
+  publishedAt: DateTimeNullableFilter
   urlSlug: StringNullableFilter
 }
 
@@ -756,7 +762,7 @@ type Query {
   postDraft: Post
 
   # Relay-style connection on Post types.
-  posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
+  posts(after: String, before: String, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skill(where: SkillWhereUniqueInput!): Skill
 
@@ -856,6 +862,7 @@ type SendChatMessagePayload implements MutationPayload {
 
 type Skill implements Followable & WithGitHubRepository {
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
   id: ID!
   name: String!
