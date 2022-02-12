@@ -31,7 +31,18 @@ export const SkillPageTabs: FC<SkillPageTabsProps> = ({
 	}, [selectedTab]);
 
 	return (
-		<Tab.Group defaultIndex={defaultIndex}>
+		<Tab.Group
+			defaultIndex={defaultIndex}
+			manual
+			/**
+			 * !HACK
+			 * @description This appears to disable right-click changing the tab, which we
+			 * want. Not sure why this works.
+			 * @author David Lee
+			 * @date February 12, 2022
+			 */
+			onChange={() => undefined}
+		>
 			<Tab.List forwardedAs={Paper} className={className} style={style}>
 				<Tab as={Fragment}>
 					{(tabProps) => (
