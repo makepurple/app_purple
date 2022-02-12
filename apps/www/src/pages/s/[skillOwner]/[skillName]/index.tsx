@@ -6,6 +6,7 @@ import React from "react";
 import tw from "twin.macro";
 import { useGetPostsQuery } from "../../../../graphql";
 import { LoadingPostCard, PostCard, SkillPageLayout } from "../../../../organisms";
+import { PageProps, pageProps } from "../../../../page-props/s/[skillOwner]/[skillName]";
 import { NoteIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 20;
@@ -18,7 +19,9 @@ const Posts = tw.div`
 	xl:gap-6
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const skillName = router?.query.skillName as string;
@@ -28,6 +31,7 @@ export const Page: NextPage = () => {
 		field: "posts",
 		requestPolicy: "cache-first",
 		variables: {
+			after: null,
 			first: BATCH_SIZE,
 			where: {
 				skills: {
@@ -36,8 +40,7 @@ export const Page: NextPage = () => {
 						owner: { equals: skillOwner }
 					}
 				}
-			},
-			after: null
+			}
 		}
 	});
 

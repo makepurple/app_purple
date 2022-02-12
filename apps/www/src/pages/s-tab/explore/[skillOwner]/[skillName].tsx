@@ -7,6 +7,10 @@ import React, { useMemo, useRef } from "react";
 import tw from "twin.macro";
 import { useSuggestFriendsQuery } from "../../../../graphql";
 import { SkillPageLayout, SuggestedFriendCard } from "../../../../organisms";
+import {
+	PageProps,
+	pageProps
+} from "../../../../page-props/s/[skillOwner]/[skillName]/tab=explore";
 import { PersonIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 50;
@@ -15,13 +19,15 @@ const Root = tw(MainContainer)`
 	w-full
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 	const router = useRouter();
 
 	const skillName = router?.query.skillName as string;
 	const skillOwner = router?.query.skillOwner as string;
 
-	const jitterSeedRef = useRef<Date>(new Date());
+	const jitterSeedRef = useRef<Date>(new Date(jitterSeed));
 
 	const [{ data }, getLoadMoreRef] = useRelayCursor(useSuggestFriendsQuery, {
 		field: "suggestFriends",

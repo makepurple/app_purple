@@ -40,7 +40,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 
 	return addUrqlState(ssr, {
 		props: {
-			jitterSeed: jitterSeed.toDateString(),
+			jitterSeed: jitterSeed.getTime(),
 			session: await getSession(ctx)
 		}
 	});

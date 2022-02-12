@@ -7,6 +7,7 @@ import {
 	GetSkillInfoSideBar_mock,
 	PageInfo_fragment_mock
 } from "@makepurple/www/src/graphql/mocks";
+import { PageProps } from "@makepurple/www/src/page-props/s/[skillOwner]/[skillName]/tab=followers";
 import { Page } from "@makepurple/www/src/pages/s-tab/followers/[skillOwner]/[skillName]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -26,7 +27,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};

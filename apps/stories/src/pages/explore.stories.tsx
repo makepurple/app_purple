@@ -22,7 +22,9 @@ export default {
 const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
-Template.args = {};
+Template.args = {
+	jitterSeed: 0
+};
 Template.parameters = {
 	layout: "fullscreen"
 };

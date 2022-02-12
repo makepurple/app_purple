@@ -6,6 +6,10 @@ import React, { Fragment } from "react";
 import tw from "twin.macro";
 import { useGetSkillFollowersQuery } from "../../../../graphql";
 import { LoadingUserFollowCard, SkillPageLayout, UserFollowCard } from "../../../../organisms";
+import {
+	PageProps,
+	pageProps
+} from "../../../../page-props/s/[skillOwner]/[skillName]/tab=followers";
 import { PersonIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 20;
@@ -30,7 +34,9 @@ const Followers = tw.div`
 	items-stretch
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const skillName = router?.query.skillName as string;
