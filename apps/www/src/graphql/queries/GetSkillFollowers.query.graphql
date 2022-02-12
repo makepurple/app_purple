@@ -1,0 +1,34 @@
+query GetSkillFollowers(
+	$after: String
+	$first: Int
+	$name: String!
+	$owner: String!
+) {
+	skill(
+		where: {
+			name_owner: {
+				name: $name
+				owner: $owner
+			}
+		}
+	) {
+		id
+		followers(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...UserFollowCardUser
+			}
+		}
+		name
+		owner
+	}
+}
