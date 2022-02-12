@@ -112,7 +112,30 @@ export const Skill = objectType({
 							.posts({
 								...paginationArgs,
 								where: {
-									post: PrismaUtils.nonNull(args.where)
+									post: {
+										...PrismaUtils.nonNull(args.where),
+										...(args.where?.skills
+											? {
+													skills: {
+														every: {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.every
+															)
+														},
+														none: {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.none
+															)
+														},
+														some: {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.some
+															)
+														}
+													}
+											  }
+											: {})
+									}
 								},
 								include: { post: true }
 							})

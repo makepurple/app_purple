@@ -753,7 +753,30 @@ export const User = objectType({
 									cursor,
 									skip,
 									take,
-									where: PrismaUtils.nonNull(args.where),
+									where: {
+										...PrismaUtils.nonNull(args.where),
+										...(args.where?.skills
+											? {
+													skills: {
+														every: {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.every
+															)
+														},
+														none: {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.none
+															)
+														},
+														some: {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.some
+															)
+														}
+													}
+											  }
+											: {})
+									},
 									orderBy: {
 										createdAt: Prisma.SortOrder.desc
 									}
@@ -915,12 +938,31 @@ export const User = objectType({
 					where: { id: parent.id }
 				});
 
+				const where: Prisma.PostWhereInput = {
+					...PrismaUtils.nonNull(args.where),
+					...(args.where?.skills
+						? {
+								skills: {
+									every: {
+										skill: PrismaUtils.nonNull(args.where?.skills?.every)
+									},
+									none: {
+										skill: PrismaUtils.nonNull(args.where?.skills?.none)
+									},
+									some: {
+										skill: PrismaUtils.nonNull(args.where?.skills?.some)
+									}
+								}
+						  }
+						: {})
+				};
+
 				const connection = await PrismaUtils.findManyCursorConnection<Post, { id: string }>(
 					(paginationArgs) =>
 						user
 							.upvotedPosts({
 								...paginationArgs,
-								where: { post: PrismaUtils.nonNull(args.where) },
+								where: { post: where },
 								select: { post: true }
 							})
 							.then((posts) => posts.map((p) => p.post)),
@@ -928,7 +970,7 @@ export const User = objectType({
 						prisma.postUpvoter.count({
 							where: {
 								user: { id: parent.id },
-								post: PrismaUtils.nonNull(args.where)
+								post: where
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },

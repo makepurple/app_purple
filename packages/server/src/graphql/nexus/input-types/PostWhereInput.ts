@@ -6,6 +6,7 @@ export const PostWhereInput = inputObjectType({
 		t.field("author", { type: "UserWhereInput" });
 		t.field("authorName", { type: "StringNullableFilter" });
 		t.field("publishedAt", { type: "DateTimeNullableFilter" });
+		t.field("skills", { type: "SkillListRelationFilter" });
 		t.field("urlSlug", { type: "StringNullableFilter" });
 	}
 });

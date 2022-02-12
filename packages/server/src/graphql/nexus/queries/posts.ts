@@ -22,7 +22,24 @@ export const posts = queryField("posts", {
 				prisma.post.findMany({
 					...paginationArgs,
 					orderBy: PrismaUtils.nonNull(args.orderBy),
-					where: PrismaUtils.nonNull(args.where)
+					where: {
+						...PrismaUtils.nonNull(args.where),
+						...(args.where?.skills
+							? {
+									skills: {
+										every: {
+											skill: PrismaUtils.nonNull(args.where?.skills?.every)
+										},
+										none: {
+											skill: PrismaUtils.nonNull(args.where?.skills?.none)
+										},
+										some: {
+											skill: PrismaUtils.nonNull(args.where?.skills?.some)
+										}
+									}
+							  }
+							: {})
+					}
 				}),
 			() => prisma.post.count(),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },

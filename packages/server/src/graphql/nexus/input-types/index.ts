@@ -34,6 +34,7 @@ export * from "./RepositoryNameOwnerCompoundUniqueInput";
 export * from "./RepositoryUpdateInput";
 export * from "./RepositoryWhereInput";
 export * from "./RepositoryWhereUniqueInput";
+export * from "./SkillListRelationFilter";
 export * from "./SkillNameOwnerCompoundUniqueInput";
 export * from "./SkillOrderByInput";
 export * from "./SkillWhereInput";

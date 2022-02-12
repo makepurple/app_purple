@@ -218,6 +218,7 @@ export interface NexusGenInputs {
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     publishedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    skills?: NexusGenInputs['SkillListRelationFilter'] | null; // SkillListRelationFilter
     urlSlug?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   PostWhereUniqueInput: { // input type
@@ -242,6 +243,11 @@ export interface NexusGenInputs {
   RepositoryWhereUniqueInput: { // input type
     id?: string | null; // String
     name_owner?: NexusGenInputs['RepositoryNameOwnerCompoundUniqueInput'] | null; // RepositoryNameOwnerCompoundUniqueInput
+  }
+  SkillListRelationFilter: { // input type
+    every?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
+    none?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
+    some?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
   }
   SkillNameOwnerCompoundUniqueInput: { // input type
     name: string; // String!
