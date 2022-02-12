@@ -19,7 +19,7 @@ import type { Type } from "computed-types";
 import { NextPage } from "next";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
@@ -100,6 +100,8 @@ export const Page: NextPage<PageProps> = () => {
 	const infoRef = useRef<DocumentEditorInfoRef>(null);
 
 	const authorName = router?.query.userName as string;
+	const skillName = router?.query.skillName as string | undefined;
+	const skillOwner = router?.query.skillOwner as string | undefined;
 
 	const [{ data }] = useGetPostQuery({
 		requestPolicy: "cache-first",
@@ -118,6 +120,24 @@ export const Page: NextPage<PageProps> = () => {
 
 	const post = data?.post;
 
+	const defaultSkills = useMemo(() => {
+		const postSkills = (post?.skills.nodes ?? []).map((skill) => ({
+			name_owner: {
+				name: skill.name,
+				owner: skill.owner
+			}
+		}));
+
+		if (!skillName || !skillOwner) return postSkills;
+
+		return [
+			{ name_owner: { name: skillName, owner: skillOwner } },
+			...postSkills.filter(({ name_owner: { name, owner } }) => {
+				return name === skillName && owner === skillOwner;
+			})
+		];
+	}, [post, skillName, skillOwner]);
+
 	const {
 		control,
 		formState: { errors },
@@ -131,12 +151,7 @@ export const Page: NextPage<PageProps> = () => {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
 			title: post?.title ?? "",
 			description: post?.description ?? "",
-			skills: (post?.skills.nodes ?? []).map((skill) => ({
-				name_owner: {
-					name: skill.name,
-					owner: skill.owner
-				}
-			})),
+			skills: defaultSkills,
 			content: [
 				{
 					type: "paragraph",
@@ -157,12 +172,7 @@ export const Page: NextPage<PageProps> = () => {
 				thumbnailUrl: post.thumbnailUrl ?? "",
 				title: post.title ?? "",
 				description: post.description ?? "",
-				skills: (post?.skills.nodes ?? []).map((skill) => ({
-					name_owner: {
-						name: skill.name,
-						owner: skill.owner
-					}
-				})),
+				skills: defaultSkills,
 				content: (post.content as any) ?? [
 					{
 						type: "paragraph",
@@ -170,7 +180,7 @@ export const Page: NextPage<PageProps> = () => {
 					}
 				]
 			});
-	}, [post, reset]);
+	}, [defaultSkills, post, reset]);
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
