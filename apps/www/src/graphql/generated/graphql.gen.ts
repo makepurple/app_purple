@@ -1122,6 +1122,7 @@ export type PostWhereInput = {
   readonly author?: InputMaybe<UserWhereInput>;
   readonly authorName?: InputMaybe<StringNullableFilter>;
   readonly publishedAt?: InputMaybe<DateTimeNullableFilter>;
+  readonly skills?: InputMaybe<SkillListRelationFilter>;
   readonly urlSlug?: InputMaybe<StringNullableFilter>;
 };
 
@@ -1472,6 +1473,12 @@ export type SkillEdge = ConnectionEdge & {
   readonly __typename: 'SkillEdge';
   readonly cursor: Scalars['String'];
   readonly node: Skill;
+};
+
+export type SkillListRelationFilter = {
+  readonly every?: InputMaybe<SkillWhereInput>;
+  readonly none?: InputMaybe<SkillWhereInput>;
+  readonly some?: InputMaybe<SkillWhereInput>;
 };
 
 export type SkillNameOwnerCompoundUniqueInput = {

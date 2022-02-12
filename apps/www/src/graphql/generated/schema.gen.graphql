@@ -730,6 +730,7 @@ input PostWhereInput {
   author: UserWhereInput
   authorName: StringNullableFilter
   publishedAt: DateTimeNullableFilter
+  skills: SkillListRelationFilter
   urlSlug: StringNullableFilter
 }
 
@@ -884,6 +885,12 @@ type SkillConnection implements Connection {
 type SkillEdge implements ConnectionEdge {
   cursor: String!
   node: Skill!
+}
+
+input SkillListRelationFilter {
+  every: SkillWhereInput
+  none: SkillWhereInput
+  some: SkillWhereInput
 }
 
 input SkillNameOwnerCompoundUniqueInput {

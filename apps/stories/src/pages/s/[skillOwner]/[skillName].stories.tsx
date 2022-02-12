@@ -1,11 +1,14 @@
+import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
+	GetPosts_mock,
 	GetSkillInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
 import Page from "@makepurple/www/src/pages/s/[skillOwner]/[skillName]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
+import ms from "ms";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
@@ -47,6 +50,70 @@ Standard.parameters = {
 		switch (operationName) {
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPosts":
+				return { data: GetPosts_mock };
+			case "GetSkillInfoSideBar":
+				return { data: GetSkillInfoSideBar_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const Loading = Template.bind({});
+Loading.args = { ...Template.args };
+Loading.parameters = {
+	...Template.parameters,
+	urql: async (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPosts":
+				await PromiseUtils.wait(ms("5s"));
+
+				return { data: GetPosts_mock };
+			case "GetSkillInfoSideBar":
+				return { data: GetSkillInfoSideBar_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoResults = Template.bind({});
+NoResults.args = { ...Template.args };
+NoResults.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPosts":
+				return {
+					data: {
+						__typename: "Query",
+						posts: {
+							__typename: "PostConnection",
+							edges: [],
+							nodes: [],
+							pageInfo: {
+								__typename: "PageInfo",
+								endCursor: null,
+								hasNextPage: false,
+								hasPreviousPage: false,
+								startCursor: null
+							}
+						}
+					}
+				};
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
 			default:
