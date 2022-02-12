@@ -1,9 +1,22 @@
-import { Anchor, Avatar, GitHubAvatarImage, MaybeAnchor, Paper } from "@makepurple/components";
+import {
+	Anchor,
+	Avatar,
+	Button,
+	GitHubAvatarImage,
+	MaybeAnchor,
+	Paper,
+	Spinner
+} from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
-import { SkillInfoSideBarSkillFragment, useGetSkillInfoSideBarQuery } from "../../graphql";
+import {
+	useFollowSkillMutation,
+	useGetSkillInfoSideBarQuery,
+	useUnfollowSkillMutation
+} from "../../graphql";
 import {
 	ForkIcon,
 	GitHubIcon,
@@ -15,6 +28,7 @@ import {
 	StarIcon,
 	TwitterIcon
 } from "../../svgs";
+import { NewPostButton } from "../NewPostButton";
 
 const Root = tw(Paper)`
 	p-6
@@ -89,6 +103,12 @@ const SocialLink = tw.a`
 	inline-flex
 `;
 
+const Actions = tw.div`
+	grid
+	grid-template-columns[repeat(auto-fill, minmax(9rem, 1fr))]
+	gap-4
+`;
+
 const ConnectionsContainer = tw.div`
 	flex
 	flex-row
@@ -126,12 +146,17 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	skillOwner,
 	style
 }) => {
+	const { data: session, status } = useSession();
+
 	const [{ data }] = useGetSkillInfoSideBarQuery({
 		variables: {
 			name: skillName,
 			owner: skillOwner
 		}
 	});
+
+	const [{ fetching: following }, followSkill] = useFollowSkillMutation();
+	const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
 	const skill = data?.skill;
 
@@ -142,6 +167,8 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 
 	const primaryLanguage = skill.github.primaryLanguage;
 	const license = skill.github.licenseInfo;
+
+	const loading: boolean = following || unfollowing;
 
 	return (
 		<Root className={className} style={style}>
@@ -257,6 +284,38 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					</SocialLink>
 				)}
 			</SocialLinks>
+			{status === "authenticated" && (
+				<Actions tw="mt-4">
+					<NewPostButton
+						skillName={skillName}
+						skillOwner={skillOwner}
+						userName={session.user.name}
+					>
+						{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+					</NewPostButton>
+					<Button
+						disabled={loading}
+						onClick={async () => {
+							skill.viewerFollowing
+								? await unfollowSkill({
+										where: {
+											name_owner: { name: skillName, owner: skillOwner }
+										}
+								  })
+								: await followSkill({
+										where: {
+											name_owner: { name: skillName, owner: skillOwner }
+										}
+								  });
+						}}
+						type="button"
+						variant="secondary"
+					>
+						{skill.viewerFollowing ? "Unfollow" : "Follow"}
+						{loading && <Spinner tw="ml-2" />}
+					</Button>
+				</Actions>
+			)}
 			<ConnectionsContainer tw="mt-4">
 				<PeopleIcon height={24} width={24} tw="mr-2" />
 				<ConnectionsContents>

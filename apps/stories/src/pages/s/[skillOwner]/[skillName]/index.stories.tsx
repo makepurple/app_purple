@@ -2,6 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
+	GetPostDraft_mock,
 	GetPosts_mock,
 	GetSkillInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -50,6 +51,8 @@ Standard.parameters = {
 		switch (operationName) {
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetPosts":
 				return { data: GetPosts_mock };
 			case "GetSkillInfoSideBar":
@@ -72,6 +75,8 @@ Loading.parameters = {
 		switch (operationName) {
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetPosts":
 				await PromiseUtils.wait(ms("5s"));
 
@@ -96,6 +101,8 @@ NoResults.parameters = {
 		switch (operationName) {
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetPosts":
 				return {
 					data: {
