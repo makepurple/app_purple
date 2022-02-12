@@ -65,22 +65,20 @@ const DisplayName = tw.div`
 `;
 
 const SecondaryName = tw.div`
-	mt-1
 	text-lg
 	leading-none
 	text-gray-500
 `;
 
 const Bio = tw.p`
-	mt-3
 	text-gray-500
 	line-clamp-4
 `;
 
 const SocialLinks = tw.div`
-	mt-4
+	inline-flex
+	gap-4
 	text-indigo-800
-	[& > *]:not-first:ml-4
 `;
 
 const SocialLink = tw.a`
@@ -91,7 +89,6 @@ const Actions = tw.div`
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(9rem, 1fr))]
 	gap-4
-	mt-4
 `;
 
 const ConnectionsContainer = tw.div`
@@ -126,13 +123,9 @@ const FollowCount = tw.span`
 
 const Delimiter = tw.div`
 	after:content["·"]
-	mx-1
 	font-bold
 `;
 
-const Skills = tw(Tags)`
-	mt-4
-`;
 export interface UserInfoSideBarProps {
 	className?: string;
 	style?: CSSProperties;
@@ -173,10 +166,10 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				<UserAvatar border={6} height={156} user={user} width={156} />
 				<UserName>
 					<DisplayName>{displayName}</DisplayName>
-					{!!user.github.name && <SecondaryName>{user.name}</SecondaryName>}
+					{!!user.github.name && <SecondaryName tw="mt-1">{user.name}</SecondaryName>}
 				</UserName>
-				{user.github.bio && <Bio>{user.github.bio}</Bio>}
-				<SocialLinks>
+				{user.github.bio && <Bio tw="mt-3">{user.github.bio}</Bio>}
+				<SocialLinks tw="mt-4">
 					<SocialLink
 						href={user.github.url}
 						target="_blank"
@@ -208,7 +201,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					</SocialLink>
 				</SocialLinks>
 				{isMyUser && !formOpen && (
-					<Actions>
+					<Actions tw="mt-4">
 						<NewPostButton userName={userName}>
 							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
 						</NewPostButton>
@@ -224,7 +217,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					</Actions>
 				)}
 				{!isMyUser && (
-					<Actions>
+					<Actions tw="mt-4">
 						<Button
 							disabled={
 								loadingFriend || (!user.viewerIsFriend && !user.viewerCanFriend)
@@ -319,25 +312,25 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					<SkillsContainer>
 						<SubTitle>Highlighted Skills</SubTitle>
 						{user.skills.nodes.length ? (
-							<Skills type="positive">
+							<Tags type="positive" tw="mt-4">
 								{user.skills.nodes.map((skill) => (
 									<Tags.Tag key={skill.id} id={skill.id.toString()}>
 										{skill.name}
 									</Tags.Tag>
 								))}
-							</Skills>
+							</Tags>
 						) : (
 							<NoDataText tw="mt-4">This user has not added any skills</NoDataText>
 						)}
 						<SubTitle>Currently Learning</SubTitle>
 						{user.desiredSkills.nodes.length ? (
-							<Skills type="negative">
+							<Tags type="negative" tw="mt-4">
 								{user.desiredSkills.nodes.map((skill) => (
 									<Tags.Tag key={skill.id} id={skill.id.toString()}>
 										{skill.name}
 									</Tags.Tag>
 								))}
-							</Skills>
+							</Tags>
 						) : (
 							<NoDataText tw="mt-4">
 								This user has not added any desired skills

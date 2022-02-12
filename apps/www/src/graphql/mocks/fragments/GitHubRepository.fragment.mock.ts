@@ -22,7 +22,9 @@ export const GitHubRepository_fragment_mock: GitHubRepository = {
 		avatarUrl: "https://avatars.githubusercontent.com/u/69631?v=4",
 		id: "MDEyOk9yZ2FuaXphdGlvbjY5NjMx",
 		login: "facebook",
-		url: "https://github.com/facebook"
+		twitterUsername: "MetaOpenSource",
+		url: "https://github.com/facebook",
+		websiteUrl: "https://opensource.fb.com"
 	},
 	primaryLanguage: {
 		__typename: "GitHubLanguage",

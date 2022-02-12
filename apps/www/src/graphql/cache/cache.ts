@@ -30,6 +30,10 @@ export const createCache = () => {
 				skills: relayPagination(),
 				suggestFriends: relayPagination()
 			},
+			Skill: {
+				posts: relayPagination(),
+				users: relayPagination()
+			},
 			User: {
 				activities: relayPagination(),
 				chats: relayPagination(),

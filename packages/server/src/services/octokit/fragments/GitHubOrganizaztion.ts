@@ -8,6 +8,8 @@ export const GitHubOrganization = gql`
 		id
 		login
 		name
+		twitterUsername
 		url
+		websiteUrl
 	}
 `;

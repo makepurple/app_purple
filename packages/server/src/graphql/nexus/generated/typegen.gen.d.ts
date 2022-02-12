@@ -500,7 +500,9 @@ export interface NexusGenObjects {
     id: string; // String!
     login: string; // String!
     name?: string | null; // String
+    twitterUsername?: string | null; // String
     url: NexusGenScalars['URL']; // URL!
+    websiteUrl?: string | null; // String
   }
   GitHubRepository: { // root type
     description?: string | null; // String
@@ -1037,7 +1039,9 @@ export interface NexusGenFieldTypes {
     login: string; // String!
     name: string | null; // String
     organization: NexusGenRootTypes['Organization']; // Organization!
+    twitterUsername: string | null; // String
     url: NexusGenScalars['URL']; // URL!
+    websiteUrl: string | null; // String
   }
   GitHubRepository: { // field return type
     description: string | null; // String
@@ -1790,7 +1794,9 @@ export interface NexusGenFieldTypeNames {
     login: 'String'
     name: 'String'
     organization: 'Organization'
+    twitterUsername: 'String'
     url: 'URL'
+    websiteUrl: 'String'
   }
   GitHubRepository: { // field return type name
     description: 'String'

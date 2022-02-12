@@ -22,11 +22,20 @@ fragment SkillInfoSideBarSkill on Skill {
 			name
 		}
 		pullRequestCount
+		pushedAt
 		owner {
 			avatarUrl
 			id
 			login
 			url
+			... on GitHubOrganization {
+				twitterUsername
+				websiteUrl
+			}
+			... on GitHubUser {
+				twitterUsername
+				websiteUrl
+			}
 		}
 		stargazerCount
 		url

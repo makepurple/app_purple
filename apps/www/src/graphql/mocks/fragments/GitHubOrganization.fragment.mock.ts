@@ -12,5 +12,7 @@ export const GitHubOrganization_fragment_mock: GitHubOrganization = {
 	login: "facebook",
 	name: "Meta",
 	organization: null as any,
-	url: "https://github.com/facebook"
+	twitterUsername: "MetaOpenSource",
+	url: "https://github.com/facebook",
+	websiteUrl: "https://opensource.fb.com"
 };

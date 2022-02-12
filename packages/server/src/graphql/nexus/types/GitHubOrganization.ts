@@ -22,5 +22,7 @@ export const GitHubOrganization = objectType({
 				return organization;
 			}
 		});
+		t.string("twitterUsername");
+		t.string("websiteUrl");
 	}
 });

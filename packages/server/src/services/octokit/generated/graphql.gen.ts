@@ -13292,6 +13292,8 @@ export type ProjectNext = Closable & Node & Updatable & {
   owner: ProjectNextOwner;
   /** Returns true if the project is public. */
   public: Scalars['Boolean'];
+  /** The repositories the project is linked to. */
+  repositories: RepositoryConnection;
   /** The HTTP path for this project */
   resourcePath: Scalars['URI'];
   /** The project's short description. */
@@ -13318,6 +13320,15 @@ export type ProjectNextFieldsArgs = {
 
 /** New projects that manage issues, pull requests and drafts using tables and boards. */
 export type ProjectNextItemsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** New projects that manage issues, pull requests and drafts using tables and boards. */
+export type ProjectNextRepositoriesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -17134,8 +17145,12 @@ export type Repository = Node & PackageOwner & ProjectOwner & RepositoryInfo & S
   primaryLanguage?: Maybe<Language>;
   /** Find project by number. */
   project?: Maybe<Project>;
+  /** Finds and returns the Project (beta) according to the provided Project (beta) number. */
+  projectNext?: Maybe<ProjectNext>;
   /** A list of projects under the owner. */
   projects: ProjectConnection;
+  /** List of projects (beta) linked to this repository. */
+  projectsNext: ProjectNextConnection;
   /** The HTTP path listing the repository's projects */
   projectsResourcePath: Scalars['URI'];
   /** The HTTP URL listing the repository's projects */
@@ -17470,6 +17485,12 @@ export type RepositoryProjectArgs = {
 
 
 /** A repository contains the content for a project. */
+export type RepositoryProjectNextArgs = {
+  number: Scalars['Int'];
+};
+
+
+/** A repository contains the content for a project. */
 export type RepositoryProjectsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -17478,6 +17499,17 @@ export type RepositoryProjectsArgs = {
   orderBy?: InputMaybe<ProjectOrder>;
   search?: InputMaybe<Scalars['String']>;
   states?: InputMaybe<Array<ProjectState>>;
+};
+
+
+/** A repository contains the content for a project. */
+export type RepositoryProjectsNextArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  query?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<ProjectNextOrderField>;
 };
 
 
@@ -23323,7 +23355,7 @@ export type SuggestOrganizationsQueryVariables = Exact<{
 }>;
 
 
-export type SuggestOrganizationsQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', totalCount: number, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, url: string } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null> | null } };
+export type SuggestOrganizationsQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', totalCount: number, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | { __typename?: 'PullRequest' } | { __typename?: 'Repository' } | { __typename?: 'User' } | null> | null } };
 
 export type SuggestRepositoriesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -23378,7 +23410,7 @@ export type GetGitHubOrganizationQueryVariables = Exact<{
 }>;
 
 
-export type GetGitHubOrganizationQuery = { __typename?: 'Query', organization?: { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, url: string } | null };
+export type GetGitHubOrganizationQuery = { __typename?: 'Query', organization?: { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | null };
 
 export type GetGitHubUserQueryVariables = Exact<{
   login: Scalars['String'];
@@ -23407,7 +23439,7 @@ export type GitHubLanguageFragment = { __typename: 'Language', color?: string | 
 
 export type GitHubLicenseFragment = { __typename: 'License', description?: string | null, id: string, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null };
 
-export type GitHubOrganizationFragment = { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, url: string };
+export type GitHubOrganizationFragment = { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null };
 
 export type GitHubRepositoryFragment = { __typename: 'Repository', id: string, description?: string | null, forkCount: number, name: string, pushedAt?: Date | null, stargazerCount: number, url: string, licenseInfo?: { __typename: 'License', id: string, description?: string | null, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null } | null, owner: { __typename: 'Organization', id: string, avatarUrl: string, login: string, url: string } | { __typename: 'User', id: string, avatarUrl: string, login: string, url: string }, primaryLanguage?: { __typename: 'Language', color?: string | null, id: string, name: string } | null };
 

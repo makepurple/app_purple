@@ -17,6 +17,19 @@ export const Skill_fragment_mock: Skill = {
 		edges: [],
 		nodes: []
 	},
+	followers: {
+		__typename: "UserConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	github: GitHubRepository_fragment_mock,
 	posts: {
 		__typename: "PostConnection",

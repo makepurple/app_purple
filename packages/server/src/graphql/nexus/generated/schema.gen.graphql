@@ -410,7 +410,9 @@ type GitHubOrganization implements GitHubRepositoryOwner {
   login: String!
   name: String
   organization: Organization!
+  twitterUsername: String
   url: URL!
+  websiteUrl: String
 }
 
 type GitHubRepository {
