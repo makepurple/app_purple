@@ -1,4 +1,5 @@
 import { Button } from "@makepurple/components";
+import { UrlUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { CSSProperties, FC, ReactNode, useEffect, useMemo } from "react";
@@ -12,6 +13,8 @@ export interface NewPostButtonRenderProps {
 export interface NewPostButtonProps {
 	children?: ReactNode | FC<NewPostButtonRenderProps>;
 	className?: string;
+	skillName?: string;
+	skillOwner?: string;
 	style?: CSSProperties;
 	userName: string;
 }
@@ -19,6 +22,8 @@ export interface NewPostButtonProps {
 export const NewPostButton: FC<NewPostButtonProps> = ({
 	children: Children = "New Post",
 	className,
+	skillName,
+	skillOwner,
 	style,
 	userName
 }) => {
@@ -39,12 +44,19 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 		[Children, draft]
 	);
 
+	const draftUrl = useMemo(() => {
+		return UrlUtils.appendQuery(`/${userName}/draft`, {
+			skillName,
+			skillOwner
+		});
+	}, [skillName, skillOwner, userName]);
+
 	useEffect(() => {
 		if (process.env.NODE_ENV === "test") return;
 
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		router?.prefetch("/[userName]/draft", `/${userName}/draft`);
-	}, [router, userName]);
+		router?.prefetch("/[userName]/draft", draftUrl);
+	}, [draftUrl, router]);
 
 	if (status !== "authenticated") return null;
 
@@ -54,7 +66,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 			disabled={creatingPost}
 			onClick={async () => {
 				if (draft) {
-					await router.push("/[userName]/draft", `/${userName}/draft`);
+					await router.push("/[userName]/draft", draftUrl);
 
 					return;
 				}
@@ -76,6 +88,9 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 				if (!didSucceed) return;
 
 				await router.push("/[userName]/draft", `/${userName}/draft`);
+			}}
+			onMouseOver={async () => {
+				await router?.prefetch("/[userName]/draft", draftUrl);
 			}}
 			style={style}
 			type="button"

@@ -1,14 +1,21 @@
+import { LangUtils } from "./lang.util";
+
 export class UrlUtils {
 	public static toQuery(
-		params: Record<string, number | string>,
+		params: Record<string, Maybe<number | string>>,
 		delimiter: string = "&"
 	): string {
 		return Object.keys(params)
+			.filter((key) => !LangUtils.isNil(params[key]))
 			.map((key) => `${key}=${params[key]}`)
 			.join(delimiter);
 	}
 
-	public static appendQuery(url: string, params: Record<string, number | string>): string {
+	public static appendQuery(url: string, params: Record<string, Maybe<number | string>>): string {
+		const query = UrlUtils.toQuery(params);
+
+		if (!Object.keys(query).length) return url;
+
 		return `${url}${url.indexOf("?") === -1 ? "?" : "&"}${UrlUtils.toQuery(params)}`;
 	}
 
