@@ -5,10 +5,11 @@ import { addons } from "@storybook/addons";
 import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
 import { domMax, LazyMotion } from "framer-motion";
-import { Toaster } from "../../www/node_modules/react-hot-toast";
-import "twin.macro";
 import "tippy.js/dist/tippy.css";
-import { RouterContext } from "../../www/node_modules/next/dist/shared/lib/router-context";
+import "twin.macro";
+import { RouterContext as ComponentsRouterContext } from "../../../packages/components/node_modules/next/dist/shared/lib/router-context";
+import { RouterContext as WwwRouterContext } from "../../www/node_modules/next/dist/shared/lib/router-context";
+import { Toaster } from "../../www/node_modules/react-hot-toast";
 
 /**
  * !HACK
@@ -64,7 +65,13 @@ export const parameters = {
 		},
 	},
 	nextRouter: {
-		Provider: RouterContext.Provider,
+		Provider: ({ children, value }) => (
+			<ComponentsRouterContext.Provider value={value}>
+				<WwwRouterContext.Provider value={value}>
+					{children}
+				</WwwRouterContext.Provider>
+			</ComponentsRouterContext.Provider>
+		),
 		push(...args) {
 			action("nextRouter.push")(...args);
 			/**
