@@ -5,7 +5,7 @@ import {
 	GetPosts_mock,
 	GetSkillInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
-import Page from "@makepurple/www/src/pages/s/[skillOwner]/[skillName]";
+import { Page } from "@makepurple/www/src/pages/s/[skillOwner]/[skillName]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";

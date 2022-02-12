@@ -21,9 +21,9 @@ export const SkillPageTabs: FC<SkillPageTabsProps> = ({
 		switch (selectedTab) {
 			case "posts":
 				return 0;
-			case "followers":
-				return 1;
 			case "explore":
+				return 1;
+			case "followers":
 				return 2;
 			default:
 				return undefined;
