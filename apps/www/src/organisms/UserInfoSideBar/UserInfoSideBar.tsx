@@ -147,7 +147,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	const [{ fetching: friendRequesting }, friendRequestUser] = useFriendRequestUserMutation();
 	const [{ fetching: unfriending }, unfriendUser] = useUnfriendUserMutation();
 
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 
 	const [formOpen, setFormOpen] = useState<boolean>(false);
 
@@ -201,59 +201,70 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						<OpenbaseIcon height={24} width={24} />
 					</SocialLink>
 				</SocialLinks>
-				{isMyUser && !formOpen && (
-					<Actions tw="mt-4">
-						<NewPostButton userName={userName}>
-							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
-						</NewPostButton>
-						<Button
-							onClick={() => {
-								setFormOpen(true);
-							}}
-							type="button"
-							variant="secondary"
-						>
-							Edit Profile
-						</Button>
-					</Actions>
-				)}
-				{!isMyUser && (
-					<Actions tw="mt-4">
-						<Button
-							disabled={
-								loadingFriend || (!user.viewerIsFriend && !user.viewerCanFriend)
-							}
-							onClick={async () => {
-								user.viewerIsFriend
-									? await unfriendUser({ where: { name: user.name } })
-									: await friendRequestUser({ where: { name: user.name } });
-							}}
-							type="button"
-							variant={user.viewerIsFriend ? "alert" : "primary"}
-						>
-							{user.viewerIsFriend ? (
-								<>
-									<CancelIcon height={24} width={24} tw="flex-shrink-0 mr-1" />
-									Connection
-								</>
-							) : (
-								"Connect"
-							)}
-						</Button>
-						<Button
-							disabled={loadingFollow}
-							onClick={async () => {
-								user.viewerFollowing
-									? await unfollowUser({ where: { name: user.name } })
-									: await followUser({ where: { name: user.name } });
-							}}
-							type="button"
-							variant="secondary"
-						>
-							{user.viewerFollowing ? "Unfollow" : "Follow"}
-							{loadingFollow && <Spinner tw="ml-2" />}
-						</Button>
-					</Actions>
+				{status === "authenticated" && (
+					<>
+						{isMyUser && !formOpen && (
+							<Actions tw="mt-4">
+								<NewPostButton userName={userName}>
+									{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+								</NewPostButton>
+								<Button
+									onClick={() => {
+										setFormOpen(true);
+									}}
+									type="button"
+									variant="secondary"
+								>
+									Edit Profile
+								</Button>
+							</Actions>
+						)}
+						{!isMyUser && (
+							<Actions tw="mt-4">
+								<Button
+									disabled={
+										loadingFriend ||
+										(!user.viewerIsFriend && !user.viewerCanFriend)
+									}
+									onClick={async () => {
+										user.viewerIsFriend
+											? await unfriendUser({ where: { name: user.name } })
+											: await friendRequestUser({
+													where: { name: user.name }
+											  });
+									}}
+									type="button"
+									variant={user.viewerIsFriend ? "alert" : "primary"}
+								>
+									{user.viewerIsFriend ? (
+										<>
+											<CancelIcon
+												height={24}
+												width={24}
+												tw="flex-shrink-0 mr-1"
+											/>
+											Connection
+										</>
+									) : (
+										"Connect"
+									)}
+								</Button>
+								<Button
+									disabled={loadingFollow}
+									onClick={async () => {
+										user.viewerFollowing
+											? await unfollowUser({ where: { name: user.name } })
+											: await followUser({ where: { name: user.name } });
+									}}
+									type="button"
+									variant="secondary"
+								>
+									{user.viewerFollowing ? "Unfollow" : "Follow"}
+									{loadingFollow && <Spinner tw="ml-2" />}
+								</Button>
+							</Actions>
+						)}
+					</>
 				)}
 				<ConnectionsContainer tw="mt-4">
 					<PeopleIcon height={24} width={24} tw="mr-2" />
