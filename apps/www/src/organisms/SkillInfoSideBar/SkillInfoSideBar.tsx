@@ -1,5 +1,5 @@
 import { Anchor, Avatar, GitHubAvatarImage, MaybeAnchor, Paper } from "@makepurple/components";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, FormatUtils } from "@makepurple/utils";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
@@ -268,7 +268,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 						<FollowAnchor tw="flex items-center">
 							<span tw="whitespace-pre">
 								<FollowCount>
-									{skill.followers.totalCount.toLocaleString()}
+									{FormatUtils.toGitHubFixed(skill.followers.totalCount)}
 								</FollowCount>{" "}
 								Followers
 							</span>

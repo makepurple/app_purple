@@ -10,6 +10,7 @@ import {
 	Tags,
 	TwitterIcon
 } from "@makepurple/components";
+import { FormatUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
@@ -266,7 +267,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 								<FollowAnchor tw="flex items-center">
 									<span tw="whitespace-pre">
 										<FollowCount>
-											{user.followers.totalCount.toLocaleString()}
+											{FormatUtils.toGitHubFixed(user.followers.totalCount)}
 										</FollowCount>{" "}
 										Followers
 									</span>
@@ -280,7 +281,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							>
 								<FollowAnchor>
 									<FollowCount>
-										{user.following.totalCount.toLocaleString()}
+										{FormatUtils.toGitHubFixed(user.following.totalCount)}
 									</FollowCount>{" "}
 									Following
 								</FollowAnchor>
@@ -293,7 +294,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						>
 							<FollowAnchor>
 								<FollowCount>
-									{user.friends.totalCount.toLocaleString()}
+									{FormatUtils.toGitHubFixed(user.friends.totalCount)}
 								</FollowCount>{" "}
 								Connections
 							</FollowAnchor>
