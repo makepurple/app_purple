@@ -420,21 +420,21 @@ export const User = objectType({
 							.followedBy({
 								...paginationArgs,
 								where: {
-									followingId: parent.id,
+									following: { id: { equals: parent.id } },
 									follower: PrismaUtils.nonNull(args.where)
 								},
 								include: { follower: true }
 							})
-							.then((friendRequests) =>
-								friendRequests.map((friendRequest) => friendRequest.follower)
-							),
+							.then((items) => items.map((item) => item.follower)),
 					() =>
-						prisma.followUser.count({
-							where: {
-								followingId: parent.id,
-								follower: PrismaUtils.nonNull(args.where)
-							}
-						}),
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: { select: { followedBy: true } }
+								}
+							})
+							.then((result) => result?._count.followedBy ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);

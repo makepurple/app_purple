@@ -1309,6 +1309,7 @@ export interface NexusGenFieldTypes {
   }
   Skill: { // field return type
     desiringUsers: NexusGenRootTypes['UserConnection']; // UserConnection!
+    followers: NexusGenRootTypes['UserConnection']; // UserConnection!
     github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
     id: string; // ID!
     name: string; // String!
@@ -2061,6 +2062,7 @@ export interface NexusGenFieldTypeNames {
   }
   Skill: { // field return type name
     desiringUsers: 'UserConnection'
+    followers: 'UserConnection'
     github: 'GitHubRepository'
     id: 'ID'
     name: 'String'
@@ -2640,6 +2642,13 @@ export interface NexusGenArgTypes {
   }
   Skill: {
     desiringUsers: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    followers: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int

@@ -51,6 +51,47 @@ export const Skill = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.field("followers", {
+			type: "UserConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "UserWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
+					(paginationArgs) =>
+						prisma.skill
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.followedBy({
+								...paginationArgs,
+								where: {
+									following: { id: { equals: parent.id } },
+									follower: PrismaUtils.nonNull(args.where)
+								},
+								include: { follower: true }
+							})
+							.then((items) => items.map((item) => item.follower)),
+					() =>
+						prisma.skill
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: { select: { followedBy: true } }
+								}
+							})
+							.then((result) => result?._count.followedBy ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.field(NexusPrisma.Skill.id);
 		t.nonNull.field("posts", {
 			type: "PostConnection",
