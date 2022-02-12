@@ -1,4 +1,4 @@
-import { SkillInfoSideBar, SkillInfoSideBarProps } from "@makepurple/www";
+import { SkillPageLayout, SkillPageLayoutProps } from "@makepurple/www";
 import { GetSkillInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -6,12 +6,12 @@ import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "organisms/SkillInfoSideBar",
-	compoent: SkillInfoSideBar
+	title: "organisms/SkillPageLayout",
+	compoent: SkillPageLayout
 } as Meta;
 
-const Template: Story<SkillInfoSideBarProps> = (args) => {
-	return <SkillInfoSideBar {...args} />;
+const Template: Story<SkillPageLayoutProps> = (args) => {
+	return <SkillPageLayout {...args} />;
 };
 Template.args = {
 	skillName: "react",
