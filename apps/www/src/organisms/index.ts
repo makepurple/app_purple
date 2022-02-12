@@ -53,6 +53,7 @@ export * from "./SkillAutosuggest";
 export * from "./SkillCard";
 export * from "./SkillFollowCard";
 export * from "./SkillInfoSideBar";
+export * from "./SkillPageTabs";
 export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";
 export * from "./UpdateExperienceForm";
