@@ -26,6 +26,7 @@ export const Page: NextPage = () => {
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetPostsQuery, {
 		field: "posts",
+		requestPolicy: "cache-first",
 		variables: {
 			first: BATCH_SIZE,
 			where: {

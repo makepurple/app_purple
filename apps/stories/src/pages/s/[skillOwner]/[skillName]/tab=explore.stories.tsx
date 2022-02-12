@@ -1,7 +1,9 @@
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
-	GetSkillInfoSideBar_mock
+	GetSkillInfoSideBar_mock,
+	PageInfo_fragment_mock,
+	SuggestFriends_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { Page } from "@makepurple/www/src/pages/s-tab/explore/[skillOwner]/[skillName]";
 import { action } from "@storybook/addon-actions";
@@ -49,6 +51,39 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
+			case "SuggestFriends":
+				return { data: SuggestFriends_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const NoResults = Template.bind({});
+NoResults.args = { ...Template.args };
+NoResults.parameters = {
+	...Template.parameters,
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetSkillInfoSideBar":
+				return { data: GetSkillInfoSideBar_mock };
+			case "SuggestFriends":
+				return {
+					data: {
+						...SuggestFriends_mock,
+						suggestFriends: {
+							pageInfo: PageInfo_fragment_mock,
+							edges: [],
+							nodes: []
+						}
+					}
+				};
 			default:
 				return {};
 		}

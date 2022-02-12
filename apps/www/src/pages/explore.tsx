@@ -1,4 +1,4 @@
-import { MainContainer } from "@makepurple/components";
+import { MainContainer, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { Masonry } from "masonic";
 import { NextPage } from "next";
@@ -7,13 +7,12 @@ import tw from "twin.macro";
 import { useSuggestFriendsQuery } from "../graphql";
 import { SuggestedFriendCard } from "../organisms";
 import { PageProps, pageProps } from "../page-props/explore";
+import { PersonIcon } from "../svgs";
 
 const BATCH_SIZE = 50;
 
 const Root = tw(MainContainer)`
-	flex
-	flex-col
-	items-stretch
+	w-full
 	my-12
 `;
 
@@ -32,6 +31,7 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 		field: "suggestFriends",
 		requestPolicy: "cache-first",
 		variables: {
+			after: null,
 			first: BATCH_SIZE,
 			where: {
 				desiredSkillsThreshold: 0,
@@ -53,15 +53,27 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 
 	return (
 		<Root>
-			<Masonry
-				columnGutter={8}
-				columnWidth={240}
-				items={suggestedFriends}
-				overscanBy={5}
-				render={(friendProps) => (
-					<SuggestedFriendCard ref={getLoadMoreRef(friendProps.index)} {...friendProps} />
-				)}
-			/>
+			{!suggestedFriends.length ? (
+				<NonIdealState
+					title="There's nobody here"
+					subTitle="We couldn't find anyone to suggest"
+				>
+					<PersonIcon height={96} width={96} />
+				</NonIdealState>
+			) : (
+				<Masonry
+					columnGutter={8}
+					columnWidth={240}
+					items={suggestedFriends}
+					overscanBy={5}
+					render={(friendProps) => (
+						<SuggestedFriendCard
+							ref={getLoadMoreRef(friendProps.index)}
+							{...friendProps}
+						/>
+					)}
+				/>
+			)}
 		</Root>
 	);
 };

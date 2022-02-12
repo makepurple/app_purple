@@ -38,6 +38,7 @@ export const Page: NextPage = () => {
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetSkillFollowersQuery, {
 		field: "skill.followers",
+		requestPolicy: "cache-first",
 		variables: {
 			after: null,
 			first: BATCH_SIZE,
