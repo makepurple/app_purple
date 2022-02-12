@@ -296,17 +296,11 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					<Button
 						disabled={loading}
 						onClick={async () => {
+							const nameOwner = { name: skillName, owner: skillOwner };
+
 							skill.viewerFollowing
-								? await unfollowSkill({
-										where: {
-											name_owner: { name: skillName, owner: skillOwner }
-										}
-								  })
-								: await followSkill({
-										where: {
-											name_owner: { name: skillName, owner: skillOwner }
-										}
-								  });
+								? await unfollowSkill({ where: { name_owner: nameOwner } })
+								: await followSkill({ where: { name_owner: nameOwner } });
 						}}
 						type="button"
 						variant="secondary"
