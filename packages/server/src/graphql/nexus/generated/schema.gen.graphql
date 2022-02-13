@@ -388,6 +388,11 @@ input FriendshipWhereUniqueInput {
   id: String
 }
 
+type GitHub {
+  repository(where: GitHubRepositoryWhereUniqueInput!): GitHubRepository
+  repositoryOwner(where: GitHubRepositoryOwnerWhereUniqueInput!): GitHubRepositoryOwner
+}
+
 type GitHubLanguage {
   color: String
   id: String!
@@ -427,6 +432,7 @@ type GitHubRepository {
   pullRequestCount: Int!
   pushedAt: DateTime
   repository: Repository
+  skill: Skill
   stargazerCount: Int!
   url: URL!
 }
@@ -440,6 +446,11 @@ interface GitHubRepositoryOwner {
 
 input GitHubRepositoryOwnerWhereUniqueInput {
   login: String!
+}
+
+input GitHubRepositoryWhereUniqueInput {
+  name: String!
+  owner: String!
 }
 
 """Data for a user from that user's connected GitHub account."""
@@ -778,6 +789,7 @@ type Query {
 
   """Relay-style connection on Skill types."""
   followableSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
+  github: GitHub!
   ok: Boolean!
 
   """A user-created post."""
@@ -788,7 +800,6 @@ type Query {
   posts(after: String, before: String, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skill(where: SkillWhereUniqueInput!): Skill
-  skillOwner(where: GitHubRepositoryOwnerWhereUniqueInput!): GitHubRepositoryOwner
 
   """Relay-style connection on Skill types."""
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!

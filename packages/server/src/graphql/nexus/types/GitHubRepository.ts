@@ -34,6 +34,7 @@ export const GitHubRepository = objectType({
 		});
 		t.field("licenseInfo", { type: "GitHubLicense" });
 		t.nonNull.string("name");
+		t.nonNull.field("owner", { type: "GitHubRepositoryOwner" });
 		t.field("primaryLanguage", { type: "GitHubLanguage" });
 		t.nonNull.int("pullRequestCount", {
 			resolve: async (parent, args, { octokit: graphql }) => {
@@ -74,7 +75,19 @@ export const GitHubRepository = objectType({
 				});
 			}
 		});
-		t.nonNull.field("owner", { type: "GitHubRepositoryOwner" });
+		t.field("skill", {
+			type: "Skill",
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.skill.findUnique({
+					where: {
+						name_owner: {
+							name: parent.name,
+							owner: parent.owner.login
+						}
+					}
+				});
+			}
+		});
 		t.nonNull.int("stargazerCount");
 		t.nonNull.url("url");
 	}

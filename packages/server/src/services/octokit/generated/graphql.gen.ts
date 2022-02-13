@@ -23372,6 +23372,14 @@ export type SuggestRepositoriesQueryVariables = Exact<{
 
 export type SuggestRepositoriesQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', totalCount: number, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename: 'Repository', id: string, description?: string | null, forkCount: number, name: string, pushedAt?: Date | null, stargazerCount: number, url: string, licenseInfo?: { __typename: 'License', id: string, description?: string | null, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null } | null, owner: { __typename: 'Organization', id: string, avatarUrl: string, login: string, url: string } | { __typename: 'User', id: string, avatarUrl: string, login: string, url: string }, primaryLanguage?: { __typename: 'Language', color?: string | null, id: string, name: string } | null } | { __typename?: 'User' } | null> | null } };
 
+export type GetRepositoryQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetRepositoryQuery = { __typename?: 'Query', repository?: { __typename: 'Repository', id: string, description?: string | null, forkCount: number, name: string, pushedAt?: Date | null, stargazerCount: number, url: string, licenseInfo?: { __typename: 'License', id: string, description?: string | null, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null } | null, owner: { __typename: 'Organization', id: string, avatarUrl: string, login: string, url: string } | { __typename: 'User', id: string, avatarUrl: string, login: string, url: string }, primaryLanguage?: { __typename: 'Language', color?: string | null, id: string, name: string } | null } | null };
+
 export type GetRepositoryIssueCountQueryVariables = Exact<{
   name: Scalars['String'];
   owner: Scalars['String'];

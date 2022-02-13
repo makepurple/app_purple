@@ -175,6 +175,10 @@ export interface NexusGenInputs {
   GitHubRepositoryOwnerWhereUniqueInput: { // input type
     login: string; // String!
   }
+  GitHubRepositoryWhereUniqueInput: { // input type
+    name: string; // String!
+    owner: string; // String!
+  }
   GitHubUserTotalCommitsWhereInput: { // input type
     createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
@@ -490,6 +494,7 @@ export interface NexusGenObjects {
     rejectedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
+  GitHub: {};
   GitHubLanguage: { // root type
     color?: string | null; // String
     id: string; // String!
@@ -1027,6 +1032,10 @@ export interface NexusGenFieldTypes {
     rejectedAt: NexusGenScalars['DateTime'] | null; // DateTime
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
+  GitHub: { // field return type
+    repository: NexusGenRootTypes['GitHubRepository'] | null; // GitHubRepository
+    repositoryOwner: NexusGenRootTypes['GitHubRepositoryOwner'] | null; // GitHubRepositoryOwner
+  }
   GitHubLanguage: { // field return type
     color: string | null; // String
     id: string; // String!
@@ -1063,6 +1072,7 @@ export interface NexusGenFieldTypes {
     pullRequestCount: number; // Int!
     pushedAt: NexusGenScalars['DateTime'] | null; // DateTime
     repository: NexusGenRootTypes['Repository'] | null; // Repository
+    skill: NexusGenRootTypes['Skill'] | null; // Skill
     stargazerCount: number; // Int!
     url: NexusGenScalars['URL']; // URL!
   }
@@ -1256,13 +1266,13 @@ export interface NexusGenFieldTypes {
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
     followableSkills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
+    github: NexusGenRootTypes['GitHub']; // GitHub!
     ok: boolean; // Boolean!
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     skill: NexusGenRootTypes['Skill'] | null; // Skill
-    skillOwner: NexusGenRootTypes['GitHubRepositoryOwner'] | null; // GitHubRepositoryOwner
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1783,6 +1793,10 @@ export interface NexusGenFieldTypeNames {
     rejectedAt: 'DateTime'
     updatedAt: 'DateTime'
   }
+  GitHub: { // field return type name
+    repository: 'GitHubRepository'
+    repositoryOwner: 'GitHubRepositoryOwner'
+  }
   GitHubLanguage: { // field return type name
     color: 'String'
     id: 'String'
@@ -1819,6 +1833,7 @@ export interface NexusGenFieldTypeNames {
     pullRequestCount: 'Int'
     pushedAt: 'DateTime'
     repository: 'Repository'
+    skill: 'Skill'
     stargazerCount: 'Int'
     url: 'URL'
   }
@@ -2012,13 +2027,13 @@ export interface NexusGenFieldTypeNames {
     comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
     followableSkills: 'SkillConnection'
+    github: 'GitHub'
     ok: 'Boolean'
     post: 'Post'
     postDraft: 'Post'
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
     skill: 'Skill'
-    skillOwner: 'GitHubRepositoryOwner'
     skills: 'SkillConnection'
     suggestExperiences: 'SuggestExperiences'
     suggestFriends: 'UserConnection'
@@ -2394,6 +2409,14 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
+  GitHub: {
+    repository: { // args
+      where: NexusGenInputs['GitHubRepositoryWhereUniqueInput']; // GitHubRepositoryWhereUniqueInput!
+    }
+    repositoryOwner: { // args
+      where: NexusGenInputs['GitHubRepositoryOwnerWhereUniqueInput']; // GitHubRepositoryOwnerWhereUniqueInput!
+    }
+  }
   GitHubUser: {
     totalCommits: { // args
       where?: NexusGenInputs['GitHubUserTotalCommitsWhereInput'] | null; // GitHubUserTotalCommitsWhereInput
@@ -2618,9 +2641,6 @@ export interface NexusGenArgTypes {
     }
     skill: { // args
       where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    skillOwner: { // args
-      where: NexusGenInputs['GitHubRepositoryOwnerWhereUniqueInput']; // GitHubRepositoryOwnerWhereUniqueInput!
     }
     skills: { // args
       after?: string | null; // String

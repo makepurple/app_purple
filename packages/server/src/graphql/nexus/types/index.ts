@@ -34,6 +34,7 @@ export * from "./FollowEdge";
 export * from "./FollowSkillPayload";
 export * from "./FollowUserPayload";
 export * from "./Friendship";
+export * from "./GitHub";
 export * from "./GitHubLanguage";
 export * from "./GitHubLicense";
 export * from "./GitHubOrganization";
