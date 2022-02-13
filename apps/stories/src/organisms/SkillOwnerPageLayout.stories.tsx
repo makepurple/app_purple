@@ -1,20 +1,19 @@
-import { SkillPageLayout, SkillPageLayoutProps } from "@makepurple/www";
-import { GetPostDraft_mock, GetSkillInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
+import { SkillOwnerPageLayout, SkillOwnerPageLayoutProps } from "@makepurple/www";
+import { GetSkillOwnerInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "organisms/SkillPageLayout",
-	compoent: SkillPageLayout
+	title: "organisms/SkillOwnerPageLayout",
+	compoent: SkillOwnerPageLayout
 } as Meta;
 
-const Template: Story<SkillPageLayoutProps> = (args) => {
-	return <SkillPageLayout {...args} />;
+const Template: Story<SkillOwnerPageLayoutProps> = (args) => {
+	return <SkillOwnerPageLayout {...args} />;
 };
 Template.args = {
-	skillName: "react",
 	skillOwner: "facebook"
 };
 Template.parameters = {
@@ -24,10 +23,8 @@ Template.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "GetPostDraft":
-				return { data: GetPostDraft_mock };
-			case "GetSkillInfoSideBar":
-				return { data: GetSkillInfoSideBar_mock };
+			case "GetSkillOwnerInfoSideBar":
+				return { data: GetSkillOwnerInfoSideBar_mock };
 			default:
 				return {};
 		}
