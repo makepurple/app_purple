@@ -7,9 +7,13 @@
 		}]
 	],
 	"plugins": [
-		"babel-plugin-twin",
-		"babel-plugin-macros",
-		["babel-plugin-styled-components", {
+		"twin",
+		["macros", {
+			"twin": {
+				"preset": "styled-components"
+			}
+		}],
+		["styled-components", {
 			"ssr": true
 		}]
 	]

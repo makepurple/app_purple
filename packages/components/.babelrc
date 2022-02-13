@@ -8,7 +8,11 @@
 	],
 	"plugins": [
 		"twin",
-		"macros",
+		["macros", {
+			"twin": {
+				"preset": "styled-components"
+			}
+		}],
 		["styled-components", {
 			"ssr": true
 		}]
