@@ -85,3 +85,5 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 		</SkillPageLayout>
 	);
 };
+
+export default Page;

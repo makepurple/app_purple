@@ -246,6 +246,7 @@ importers:
       next-auth: ^4.2.1
       next-compose-plugins: ^2.2.1
       next-transpile-modules: ^9.0.0
+      path-to-regexp: ^6.2.0
       postcss: ^8.4.6
       prisma: ^3.9.2
       pusher-js: ^7.0.6
@@ -306,6 +307,7 @@ importers:
       ms: 2.1.3
       next: 12.0.10_a2e1e28ac7d7744bd11a0f193315a179
       next-auth: 4.2.1_react-dom@17.0.2+react@17.0.2
+      path-to-regexp: 6.2.0
       pusher-js: 7.0.6
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -7147,7 +7149,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_27d966e3a2f4b84fbc8a2f9653dbb362
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -7156,7 +7158,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_27d966e3a2f4b84fbc8a2f9653dbb362
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -7164,7 +7166,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_27d966e3a2f4b84fbc8a2f9653dbb362
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -9186,7 +9188,7 @@ packages:
       '@babel/helper-module-imports': 7.16.0
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
-      styled-components: 5.3.3
+      styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
@@ -17777,6 +17779,10 @@ packages:
 
   /path-to-regexp/0.1.7:
     resolution: {integrity: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=}
+
+  /path-to-regexp/6.2.0:
+    resolution: {integrity: sha512-f66KywYG6+43afgE/8j/GoiNyygk/bnoCbps++3ErRKsIYkGGupyv07R2Ok5m9i67Iqc+T2g1eAUGUPzWhYTyg==}
+    dev: false
 
   /path-type/3.0.0:
     resolution: {integrity: sha512-T2ZUsdZFHgA3u4e5PfPbjd7HDDpxPnQb5jN0SrDsjNSuVXHJqtwTnWqG0B1jZrgmJ/7lj1EmVIByWt1gxGkWvg==}

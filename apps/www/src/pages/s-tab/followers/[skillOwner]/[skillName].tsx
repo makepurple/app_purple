@@ -88,3 +88,5 @@ export const Page: NextPage<PageProps> = () => {
 		</SkillPageLayout>
 	);
 };
+
+export default Page;
