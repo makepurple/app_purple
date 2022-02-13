@@ -1,0 +1,9 @@
+query GetSkillOwnerInfoSideBar($owner: String!) {
+	skillOwner(
+		where: {
+			login: $owner
+		}
+	) {
+		...SkillOwnerInfoSideBarGitHubRepositoryOwner
+	}
+}

@@ -428,6 +428,10 @@ interface GitHubRepositoryOwner {
   url: URL!
 }
 
+input GitHubRepositoryOwnerWhereUniqueInput {
+  login: String!
+}
+
 # Data for a user from that user's connected GitHub account.
 type GitHubUser implements GitHubRepositoryOwner {
   avatarUrl: URL!
@@ -768,6 +772,7 @@ type Query {
   posts(after: String, before: String, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skill(where: SkillWhereUniqueInput!): Skill
+  skillOwner(where: GitHubRepositoryOwnerWhereUniqueInput!): GitHubRepositoryOwner
 
   # Relay-style connection on Skill types.
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!

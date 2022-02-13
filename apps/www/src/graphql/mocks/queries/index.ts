@@ -14,6 +14,7 @@ export * from "./GetPosts.query.mock";
 export * from "./GetRepositories.query.mock";
 export * from "./GetSkillFollowers.query.mock";
 export * from "./GetSkillInfoSideBar.query.mock";
+export * from "./GetSkillOwnerInfoSideBar.query.mock";
 export * from "./GetSkills.query.mock";
 export * from "./GetUserActivities.query.mock";
 export * from "./GetUserFollowers.query.mock";

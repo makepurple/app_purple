@@ -1,0 +1,18 @@
+fragment SkillOwnerInfoSideBarGitHubRepositoryOwner on GitHubRepositoryOwner {
+	avatarUrl
+	id
+	login
+	url
+	... on GitHubOrganization {
+		description
+		name
+		twitterUsername
+		websiteUrl
+	}
+	... on GitHubUser {
+		bio
+		name
+		twitterUsername
+		websiteUrl
+	}
+}
