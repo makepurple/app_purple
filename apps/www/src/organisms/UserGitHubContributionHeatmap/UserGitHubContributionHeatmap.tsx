@@ -76,7 +76,7 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 				yScale.range([height - MARGIN_TOP, 0]);
 
 				return (
-					<svg height={height} width={width}>
+					<svg height={Math.max(height, 0)} width={Math.max(width, 0)}>
 						<AxisTop
 							top={MARGIN_TOP}
 							left={MARGIN_LEFT}
@@ -168,8 +168,8 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 													content={`${count.toLocaleString()} contributions on ${date}`}
 												>
 													<Rect
-														width={bin.width}
-														height={bin.height}
+														width={Math.max(bin.width, 0)}
+														height={Math.max(bin.height, 0)}
 														x={bin.x + GAP / 2}
 														y={bin.y - GAP}
 														stroke="#888"
