@@ -51,6 +51,11 @@ export const UserTrophyUpvotes: FC<UserTrophyUpvotesProps> = ({ className, style
 					achievement: "First Upvote",
 					rank: TrophyRank.C,
 					score: 1
+				},
+				{
+					achievement: "Neutral",
+					rank: TrophyRank.UNKNOWN,
+					score: 0
 				}
 			]),
 		[value]

@@ -51,6 +51,11 @@ export const UserTrophySkills: FC<UserTrophySkillsProps> = ({ className, style, 
 					achievement: "First Skill",
 					rank: TrophyRank.C,
 					score: 1
+				},
+				{
+					achievement: "Student",
+					rank: TrophyRank.UNKNOWN,
+					score: 0
 				}
 			]),
 		[value]

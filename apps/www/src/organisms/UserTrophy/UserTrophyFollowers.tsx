@@ -51,6 +51,11 @@ export const UserTrophyFollowers: FC<UserTrophyFollowersProps> = ({ className, s
 					achievement: "First Friend",
 					rank: TrophyRank.C,
 					score: 1
+				},
+				{
+					achievement: "Solo",
+					rank: TrophyRank.UNKNOWN,
+					score: 0
 				}
 			]),
 		[value]

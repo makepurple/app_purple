@@ -51,6 +51,11 @@ export const UserTrophyPostViews: FC<UserTrophyPostViewsProps> = ({ className, s
 					achievement: "First View",
 					rank: TrophyRank.C,
 					score: 1
+				},
+				{
+					achievement: "Stealth",
+					rank: TrophyRank.UNKNOWN,
+					score: 0
 				}
 			]),
 		[value]

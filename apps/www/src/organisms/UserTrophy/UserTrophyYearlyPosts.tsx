@@ -55,6 +55,11 @@ export const UserTrophyYearlyPosts: FC<UserTrophyYearlyPostsProps> = ({
 					achievement: "First Post",
 					rank: TrophyRank.C,
 					score: 1
+				},
+				{
+					achievement: "Lurker",
+					rank: TrophyRank.UNKNOWN,
+					score: 0
 				}
 			]),
 		[value]

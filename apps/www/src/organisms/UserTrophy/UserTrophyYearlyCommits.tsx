@@ -55,6 +55,11 @@ export const UserTrophyYearlyCommits: FC<UserTrophyYearlyCommitsProps> = ({
 					achievement: "First Commit",
 					rank: TrophyRank.C,
 					score: 1
+				},
+				{
+					achievement: "Inactive",
+					rank: TrophyRank.UNKNOWN,
+					score: 0
 				}
 			]),
 		[value]
