@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import { SkillOwnerPageLayout } from "../../../organisms";
 
+const MAX_SKILLS = 6;
+const BATCH_SIZE = 20;
+
 export const Page: NextPage = () => {
 	const router = useRouter();
 
