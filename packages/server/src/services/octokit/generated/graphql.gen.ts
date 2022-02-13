@@ -23349,6 +23349,13 @@ export type GetUserForUpdateUserFromGitHubQueryVariables = Exact<{ [key: string]
 
 export type GetUserForUpdateUserFromGitHubQuery = { __typename?: 'Query', viewer: { __typename: 'User', id: string, avatarUrl: string, bio?: string | null, company?: string | null, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } };
 
+export type GetRepositoryOwnerQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type GetRepositoryOwnerQuery = { __typename?: 'Query', repositoryOwner?: { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | { __typename: 'User', id: string, avatarUrl: string, bio?: string | null, company?: string | null, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | null };
+
 export type SuggestOrganizationsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   searchQuery: Scalars['String'];

@@ -10,6 +10,7 @@ export * from "./postDraft";
 export * from "./posts";
 export * from "./repositories";
 export * from "./skill";
+export * from "./skillOwner";
 export * from "./skills";
 export * from "./suggestExperiences";
 export * from "./suggestFriends";

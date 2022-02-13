@@ -172,6 +172,9 @@ export interface NexusGenInputs {
   FriendshipWhereUniqueInput: { // input type
     id?: string | null; // String
   }
+  GitHubRepositoryOwnerWhereUniqueInput: { // input type
+    login: string; // String!
+  }
   GitHubUserTotalCommitsWhereInput: { // input type
     createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
   }
@@ -1259,6 +1262,7 @@ export interface NexusGenFieldTypes {
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     skill: NexusGenRootTypes['Skill'] | null; // Skill
+    skillOwner: NexusGenRootTypes['GitHubRepositoryOwner'] | null; // GitHubRepositoryOwner
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -2014,6 +2018,7 @@ export interface NexusGenFieldTypeNames {
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
     skill: 'Skill'
+    skillOwner: 'GitHubRepositoryOwner'
     skills: 'SkillConnection'
     suggestExperiences: 'SuggestExperiences'
     suggestFriends: 'UserConnection'
@@ -2613,6 +2618,9 @@ export interface NexusGenArgTypes {
     }
     skill: { // args
       where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
+    }
+    skillOwner: { // args
+      where: NexusGenInputs['GitHubRepositoryOwnerWhereUniqueInput']; // GitHubRepositoryOwnerWhereUniqueInput!
     }
     skills: { // args
       after?: string | null; // String

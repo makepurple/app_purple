@@ -18,6 +18,7 @@ export * from "./ExperienceWhereUniqueInput";
 export * from "./FollowWhereInput";
 export * from "./FollowWhereUniqueInput";
 export * from "./FriendshipWhereUniqueInput";
+export * from "./GitHubRepositoryOwnerWhereUniqueInput";
 export * from "./GitHubUserTotalCommitsWhereInput";
 export * from "./InviteToChatInput";
 export * from "./NotificationsWhereInput";

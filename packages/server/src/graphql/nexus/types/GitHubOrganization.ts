@@ -23,6 +23,7 @@ export const GitHubOrganization = objectType({
 			}
 		});
 		t.string("twitterUsername");
+		t.nonNull.url("url");
 		t.string("websiteUrl");
 	}
 });
