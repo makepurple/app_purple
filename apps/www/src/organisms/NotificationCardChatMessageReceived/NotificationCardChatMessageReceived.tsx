@@ -77,7 +77,7 @@ export const NotificationCardChatMessageReceived = forwardRef<
 	const participants = useMemo(
 		() =>
 			chat.users.nodes
-				.filter((user) => user.id !== session?.user.id)
+				.filter((user) => user.name !== session?.user.name)
 				.sort((a, b) => a.name.localeCompare(b.name))
 				.slice(0, 2),
 		[chat, session]

@@ -28,6 +28,20 @@ const authHandler: NextApiHandler = (req, res) =>
 
 					return newToken;
 				});
+			},
+			session: ({ session, token }) => {
+				return produce(session, (newSession) => {
+					newSession.accessToken = token.accessToken;
+
+					newSession.user = produce(session.user, (newUser) => {
+						newUser.accessToken = token.accessToken;
+						newUser.id = token.sub;
+
+						return newUser;
+					});
+
+					return newSession;
+				});
 			}
 		},
 		events: {

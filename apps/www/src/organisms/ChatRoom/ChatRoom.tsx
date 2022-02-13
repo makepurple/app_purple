@@ -176,7 +176,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const participants = useMemo(
 		() =>
 			users
-				.filter((user) => user.id !== session?.user.id)
+				.filter((user) => user.name !== session?.user.name)
 				.sort((a, b) => a.name.localeCompare(b.name))
 				.slice(0, 5),
 		[session, users]

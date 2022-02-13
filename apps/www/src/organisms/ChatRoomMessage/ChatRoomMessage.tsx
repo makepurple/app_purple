@@ -88,7 +88,7 @@ export const ChatRoomMessage = memo(
 
 		return (
 			<Root ref={ref} className={className} style={style}>
-				<MessageInfo $isViewer={viewer?.id === sender.id}>
+				<MessageInfo $isViewer={viewer?.name === sender.name}>
 					{sender.image && (
 						<NextLink href="/[userName]" as={`/${sender.name}`} passHref>
 							<Avatar border={2} tw="flex-shrink-0">

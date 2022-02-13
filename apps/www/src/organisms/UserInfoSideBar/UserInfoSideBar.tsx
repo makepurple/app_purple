@@ -152,7 +152,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	const [formOpen, setFormOpen] = useState<boolean>(false);
 
 	const user = data?.user;
-	const isMyUser = user?.id === session?.user.id;
+	const isMyUser = user?.name === session?.user.name;
 
 	if (!user) return null;
 
@@ -332,7 +332,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 								))}
 							</Tags>
 						) : (
-							<NoDataText tw="mt-4">This user has not added any skills</NoDataText>
+							<NoDataText tw="mt-4">{user.name} has not added any skills</NoDataText>
 						)}
 						<SubTitle>Currently Learning</SubTitle>
 						{user.desiredSkills.nodes.length ? (
@@ -345,7 +345,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</Tags>
 						) : (
 							<NoDataText tw="mt-4">
-								This user has not added any desired skills
+								{user.name} has not added any desired skills
 							</NoDataText>
 						)}
 					</SkillsContainer>

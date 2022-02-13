@@ -116,7 +116,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 	const participants = useMemo(
 		() =>
 			chat.users.nodes
-				.filter((user) => user.id !== session?.user.id)
+				.filter((user) => user.name !== session?.user.name)
 				.sort((a, b) => a.name.localeCompare(b.name))
 				.slice(0, 5),
 		[chat, session]
@@ -132,7 +132,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 	const lastMessage = chat.messages.nodes[0];
 
 	const lastSender = useMemo(
-		() => (lastMessage.sender.id === session?.user.id ? "You" : lastMessage.sender.name),
+		() => (lastMessage.sender.name === session?.user.name ? "You" : lastMessage.sender.name),
 		[lastMessage, session]
 	);
 
