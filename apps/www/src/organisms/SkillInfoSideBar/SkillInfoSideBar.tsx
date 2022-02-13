@@ -284,7 +284,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					</SocialLink>
 				)}
 			</SocialLinks>
-			{status === "authenticated" && (
+			{status === "authenticated" && session && (
 				<Actions tw="mt-4">
 					<NewPostButton
 						skillName={skillName}
