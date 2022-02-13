@@ -11,6 +11,9 @@ import type {
 export const createCache = () => {
 	return cacheExchange({
 		keys: {
+			GitHubUserContributionCalendar: () => null,
+			GitHubUserContributionCalendarDay: () => null,
+			GitHubUserContributionCalendarWeek: () => null,
 			TopLanguages: () => null,
 			TopLanguage: () => null
 		},
