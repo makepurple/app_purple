@@ -540,7 +540,6 @@ export interface NexusGenObjects {
   GitHubUserContributionCalendarDay: { // root type
     contributionCount: number; // Int!
     contributionLevel: NexusGenEnums['GitHubUserContributionLevel']; // GitHubUserContributionLevel!
-    date: NexusGenScalars['DateTime']; // DateTime!
     weekday: number; // Int!
   }
   GitHubUserContributionCalendarWeek: { // root type
