@@ -23336,6 +23336,14 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+export type VerifySkillQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type VerifySkillQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', id: string } | null };
+
 export type GetRepositoryToCreateQueryVariables = Exact<{
   name: Scalars['String'];
   owner: Scalars['String'];
@@ -23348,13 +23356,6 @@ export type GetUserForUpdateUserFromGitHubQueryVariables = Exact<{ [key: string]
 
 
 export type GetUserForUpdateUserFromGitHubQuery = { __typename?: 'Query', viewer: { __typename: 'User', id: string, avatarUrl: string, bio?: string | null, company?: string | null, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } };
-
-export type GetRepositoryOwnerQueryVariables = Exact<{
-  login: Scalars['String'];
-}>;
-
-
-export type GetRepositoryOwnerQuery = { __typename?: 'Query', repositoryOwner?: { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | { __typename: 'User', id: string, avatarUrl: string, bio?: string | null, company?: string | null, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | null };
 
 export type SuggestOrganizationsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -23379,6 +23380,13 @@ export type GetRepositoryQueryVariables = Exact<{
 
 
 export type GetRepositoryQuery = { __typename?: 'Query', repository?: { __typename: 'Repository', id: string, description?: string | null, forkCount: number, name: string, pushedAt?: Date | null, stargazerCount: number, url: string, licenseInfo?: { __typename: 'License', id: string, description?: string | null, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null } | null, owner: { __typename: 'Organization', id: string, avatarUrl: string, login: string, url: string } | { __typename: 'User', id: string, avatarUrl: string, login: string, url: string }, primaryLanguage?: { __typename: 'Language', color?: string | null, id: string, name: string } | null } | null };
+
+export type GetRepositoryOwnerQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type GetRepositoryOwnerQuery = { __typename?: 'Query', repositoryOwner?: { __typename: 'Organization', avatarUrl: string, description?: string | null, id: string, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | { __typename: 'User', id: string, avatarUrl: string, bio?: string | null, company?: string | null, login: string, name?: string | null, twitterUsername?: string | null, url: string, websiteUrl?: string | null } | null };
 
 export type GetRepositoryIssueCountQueryVariables = Exact<{
   name: Scalars['String'];
