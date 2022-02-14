@@ -477,6 +477,22 @@ export type FriendshipWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['String']>;
 };
 
+export type GitHub = {
+  readonly __typename: 'GitHub';
+  readonly repository?: Maybe<GitHubRepository>;
+  readonly repositoryOwner?: Maybe<GitHubRepositoryOwner>;
+};
+
+
+export type GitHubRepositoryArgs = {
+  where: GitHubRepositoryWhereUniqueInput;
+};
+
+
+export type GitHubRepositoryOwnerArgs = {
+  where: GitHubRepositoryOwnerWhereUniqueInput;
+};
+
 export type GitHubLanguage = {
   readonly __typename: 'GitHubLanguage';
   readonly color?: Maybe<Scalars['String']>;
@@ -520,6 +536,7 @@ export type GitHubRepository = {
   readonly pullRequestCount: Scalars['Int'];
   readonly pushedAt?: Maybe<Scalars['DateTime']>;
   readonly repository?: Maybe<Repository>;
+  readonly skill?: Maybe<Skill>;
   readonly stargazerCount: Scalars['Int'];
   readonly url: Scalars['URL'];
 };
@@ -533,6 +550,11 @@ export type GitHubRepositoryOwner = {
 
 export type GitHubRepositoryOwnerWhereUniqueInput = {
   readonly login: Scalars['String'];
+};
+
+export type GitHubRepositoryWhereUniqueInput = {
+  readonly name: Scalars['String'];
+  readonly owner: Scalars['String'];
 };
 
 /** Data for a user from that user's connected GitHub account. */
@@ -1154,6 +1176,7 @@ export type Query = {
   readonly experiences: ExperienceConnection;
   /** Relay-style connection on Skill types. */
   readonly followableSkills: SkillConnection;
+  readonly github: GitHub;
   readonly ok: Scalars['Boolean'];
   /** A user-created post. */
   readonly post?: Maybe<Post>;
@@ -1162,7 +1185,6 @@ export type Query = {
   readonly posts: PostConnection;
   readonly repositories: RepositoryConnection;
   readonly skill?: Maybe<Skill>;
-  readonly skillOwner?: Maybe<GitHubRepositoryOwner>;
   /** Relay-style connection on Skill types. */
   readonly skills: SkillConnection;
   readonly suggestExperiences: SuggestExperiences;
@@ -1266,12 +1288,6 @@ export type QueryRepositoriesArgs = {
 /** Root query type */
 export type QuerySkillArgs = {
   where: SkillWhereUniqueInput;
-};
-
-
-/** Root query type */
-export type QuerySkillOwnerArgs = {
-  where: GitHubRepositoryOwnerWhereUniqueInput;
 };
 
 
@@ -2112,7 +2128,7 @@ export type SkillCardSkillFragment = { readonly __typename: 'Skill', readonly id
 
 export type SkillFollowCardSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } };
 
-export type SkillInfoSideBarSkillFragment = { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } } };
+export type SkillInfoSideBarGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number } } | null };
 
 type SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubOrganization_Fragment = { readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string };
 
@@ -2515,14 +2531,14 @@ export type GetSkillInfoSideBarQueryVariables = Exact<{
 }>;
 
 
-export type GetSkillInfoSideBarQuery = { readonly __typename: 'Query', readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } } } | null };
+export type GetSkillInfoSideBarQuery = { readonly __typename: 'Query', readonly github: { readonly __typename: 'GitHub', readonly repository?: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number } } | null } | null } };
 
 export type GetSkillOwnerInfoSideBarQueryVariables = Exact<{
   owner: Scalars['String'];
 }>;
 
 
-export type GetSkillOwnerInfoSideBarQuery = { readonly __typename: 'Query', readonly skillOwner?: { readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | null };
+export type GetSkillOwnerInfoSideBarQuery = { readonly __typename: 'Query', readonly github: { readonly __typename: 'GitHub', readonly repositoryOwner?: { readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | null } };
 
 export type GetSkillsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -2994,52 +3010,52 @@ export const SkillFollowCardSkillFragmentDoc = /*#__PURE__*/ gql`
   viewerFollowing
 }
     `;
-export const SkillInfoSideBarSkillFragmentDoc = /*#__PURE__*/ gql`
-    fragment SkillInfoSideBarSkill on Skill {
+export const SkillInfoSideBarGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment SkillInfoSideBarGitHubRepository on GitHubRepository {
   id
-  followers(first: 0) {
-    totalCount
-  }
-  github {
+  description
+  forkCount
+  issueCount
+  licenseInfo {
     id
-    description
-    forkCount
-    issueCount
-    licenseInfo {
-      id
-      name
-      nickname
-      spdxId
-      url
-    }
     name
-    primaryLanguage {
-      color
-      id
-      name
-    }
-    pullRequestCount
-    pushedAt
-    owner {
-      avatarUrl
-      id
-      login
-      url
-      ... on GitHubOrganization {
-        twitterUsername
-        websiteUrl
-      }
-      ... on GitHubUser {
-        twitterUsername
-        websiteUrl
-      }
-    }
-    stargazerCount
+    nickname
+    spdxId
     url
   }
   name
-  owner
-  viewerFollowing
+  owner {
+    avatarUrl
+    id
+    login
+    url
+    ... on GitHubOrganization {
+      twitterUsername
+      websiteUrl
+    }
+    ... on GitHubUser {
+      twitterUsername
+      websiteUrl
+    }
+  }
+  primaryLanguage {
+    color
+    id
+    name
+  }
+  pullRequestCount
+  pushedAt
+  skill {
+    id
+    followers(first: 0) {
+      totalCount
+    }
+    name
+    owner
+    viewerFollowing
+  }
+  stargazerCount
+  url
 }
     `;
 export const SkillOwnerInfoSideBarGitHubRepositoryOwnerFragmentDoc = /*#__PURE__*/ gql`
@@ -4710,19 +4726,23 @@ export function useGetSkillFollowersQuery(options: Omit<Urql.UseQueryArgs<GetSki
 };
 export const GetSkillInfoSideBarDocument = /*#__PURE__*/ gql`
     query GetSkillInfoSideBar($name: String!, $owner: String!) {
-  skill(where: {name_owner: {name: $name, owner: $owner}}) {
-    ...SkillInfoSideBarSkill
+  github {
+    repository(where: {name: $name, owner: $owner}) {
+      ...SkillInfoSideBarGitHubRepository
+    }
   }
 }
-    ${SkillInfoSideBarSkillFragmentDoc}`;
+    ${SkillInfoSideBarGitHubRepositoryFragmentDoc}`;
 
 export function useGetSkillInfoSideBarQuery(options: Omit<Urql.UseQueryArgs<GetSkillInfoSideBarQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSkillInfoSideBarQuery>({ query: GetSkillInfoSideBarDocument, ...options });
 };
 export const GetSkillOwnerInfoSideBarDocument = /*#__PURE__*/ gql`
     query GetSkillOwnerInfoSideBar($owner: String!) {
-  skillOwner(where: {login: $owner}) {
-    ...SkillOwnerInfoSideBarGitHubRepositoryOwner
+  github {
+    repositoryOwner(where: {login: $owner}) {
+      ...SkillOwnerInfoSideBarGitHubRepositoryOwner
+    }
   }
 }
     ${SkillOwnerInfoSideBarGitHubRepositoryOwnerFragmentDoc}`;

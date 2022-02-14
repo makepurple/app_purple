@@ -158,15 +158,18 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 	const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
-	const skill = data?.skill;
+	const repository = data?.github.repository;
+	const skill = repository?.skill;
 
-	if (!skill) return null;
+	if (!repository) return null;
 
-	const github = skill.github;
-	const owner = github.owner;
+	const owner = repository.owner;
 
-	const primaryLanguage = skill.github.primaryLanguage;
-	const license = skill.github.licenseInfo;
+	const primaryLanguage = repository.primaryLanguage;
+	const license = repository.licenseInfo;
+
+	const viewerFollowing = skill?.viewerFollowing ?? false;
+	const followerCount = skill?.followers.totalCount ?? 0;
 
 	const loading: boolean = following || unfollowing;
 
@@ -175,7 +178,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 			{owner.__typename === "GitHubOrganization" && (
 				<StyledAvatar
 					border={6}
-					href={github.url}
+					href={repository.url}
 					target="_blank"
 					rel="noreferrer noopener"
 				>
@@ -183,15 +186,17 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 				</StyledAvatar>
 			)}
 			<Name>
-				<NextLink href="/s/[skillOwner]" as={`/s/${skill.owner}`} passHref>
-					<OwnerName>{skill.owner}</OwnerName>
+				<NextLink href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
+					<OwnerName>{owner.login}</OwnerName>
 				</NextLink>
 				<NameDelimiter tw="mx-1">/</NameDelimiter>
-				<SkillName href={github.url} target="_blank" rel="noreferrer noopener">
-					{skill.name}
+				<SkillName href={repository.url} target="_blank" rel="noreferrer noopener">
+					{repository.name}
 				</SkillName>
 			</Name>
-			{!!github.description && <Description tw="mt-3">{github.description}</Description>}
+			{!!repository.description && (
+				<Description tw="mt-3">{repository.description}</Description>
+			)}
 			<Info
 				onClick={(e) => {
 					e.stopPropagation();
@@ -216,44 +221,44 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					</StyledMaybeAnchor>
 				)}
 				<StyledMaybeAnchor
-					href={`${skill.github.url}/network/members`}
+					href={`${repository.url}/network/members`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					<ForkIcon height={16} width={16} tw="mr-1" />
-					<span>{skill.github.forkCount.toLocaleString()}</span>
+					<span>{repository.forkCount.toLocaleString()}</span>
 				</StyledMaybeAnchor>
 				<StyledMaybeAnchor
-					href={`${skill.github.url}/stargazers`}
+					href={`${repository.url}/stargazers`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					<StarIcon height={16} width={16} tw="mr-1" />
-					<span>{skill.github.stargazerCount.toLocaleString()}</span>
+					<span>{repository.stargazerCount.toLocaleString()}</span>
 				</StyledMaybeAnchor>
 				<StyledMaybeAnchor
-					href={`${skill.github.url}/issues`}
+					href={`${repository.url}/issues`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					<IssueIcon height={16} width={16} tw="mr-1" />
-					<span>{skill.github.issueCount.toLocaleString()}</span>
+					<span>{repository.issueCount.toLocaleString()}</span>
 				</StyledMaybeAnchor>
 				<StyledMaybeAnchor
-					href={`${skill.github.url}/pulls`}
+					href={`${repository.url}/pulls`}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					<PullRequestIcon height={16} width={16} tw="mr-1" />
-					<span>{skill.github.pullRequestCount.toLocaleString()}</span>
+					<span>{repository.pullRequestCount.toLocaleString()}</span>
 				</StyledMaybeAnchor>
-				{!!skill.github.pushedAt && (
-					<span>Updated {dayjs(skill.github.pushedAt).fromNow()}</span>
+				{!!repository.pushedAt && (
+					<span>Updated {dayjs(repository.pushedAt).fromNow()}</span>
 				)}
 			</Info>
 			<SocialLinks tw="mt-4">
 				<SocialLink
-					href={github.url}
+					href={repository.url}
 					target="_blank"
 					rel="nofollow noopener noreferer"
 					aria-label="github"
@@ -298,14 +303,14 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 						onClick={async () => {
 							const nameOwner = { name: skillName, owner: skillOwner };
 
-							skill.viewerFollowing
+							viewerFollowing
 								? await unfollowSkill({ where: { name_owner: nameOwner } })
 								: await followSkill({ where: { name_owner: nameOwner } });
 						}}
 						type="button"
 						variant="secondary"
 					>
-						{skill.viewerFollowing ? "Unfollow" : "Follow"}
+						{viewerFollowing ? "Unfollow" : "Follow"}
 						{loading && <Spinner tw="ml-2" />}
 					</Button>
 				</Actions>
@@ -315,13 +320,13 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 				<ConnectionsContents>
 					<NextLink
 						href="/s/[skillOwner]/[skillName]"
-						as={`/s/${skill.owner}/${skill.name}?tab=followers`}
+						as={`/s/${owner.login}/${repository.name}?tab=followers`}
 						passHref
 					>
 						<FollowAnchor tw="flex items-center">
 							<span tw="whitespace-pre">
 								<FollowCount>
-									{FormatUtils.toGitHubFixed(skill.followers.totalCount)}
+									{FormatUtils.toGitHubFixed(followerCount)}
 								</FollowCount>{" "}
 								Followers
 							</span>

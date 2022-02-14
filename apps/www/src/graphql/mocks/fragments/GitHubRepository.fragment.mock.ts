@@ -35,6 +35,7 @@ export const GitHubRepository_fragment_mock: GitHubRepository = {
 	pullRequestCount: 12,
 	pushedAt: dayjs("2021-12-24T06:57:42Z").toDate(),
 	repository: null,
+	skill: null,
 	stargazerCount: 179641,
 	url: "https://github.com/facebook/react"
 };

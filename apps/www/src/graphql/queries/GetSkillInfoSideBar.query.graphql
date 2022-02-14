@@ -1,12 +1,12 @@
 query GetSkillInfoSideBar($name: String!, $owner: String!) {
-	skill(
-		where: {
-			name_owner: {
+	github {
+		repository(
+			where: {
 				name: $name
 				owner: $owner
 			}
+		) {
+			...SkillInfoSideBarGitHubRepository
 		}
-	) {
-		...SkillInfoSideBarSkill
 	}
 }

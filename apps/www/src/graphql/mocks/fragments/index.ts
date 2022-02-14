@@ -3,6 +3,7 @@ export * from "./ChatMessage.fragment.mock";
 export * from "./Comment.fragment.mock";
 export * from "./Experience.fragment.mock";
 export * from "./Friendship.fragment.mock";
+export * from "./GitHub.fragment.mock";
 export * from "./GitHubOrganization.fragment.mock";
 export * from "./GitHubRepository.fragment.mock";
 export * from "./GitHubUser.fragment.mock";

@@ -57,7 +57,7 @@ export const SkillOwnerInfoSideBar: FC<SkillOwnerInfoSideBarProps> = ({
 		}
 	});
 
-	const owner = data?.skillOwner;
+	const owner = data?.github?.repositoryOwner;
 
 	if (!owner) return null;
 

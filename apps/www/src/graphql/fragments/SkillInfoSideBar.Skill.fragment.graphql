@@ -1,46 +1,46 @@
-fragment SkillInfoSideBarSkill on Skill {
+fragment SkillInfoSideBarGitHubRepository on GitHubRepository {
 	id
-	followers(first: 0) {
-		totalCount
-	}
-	github {
+	description
+	forkCount
+	issueCount
+	licenseInfo {
 		id
-		description
-		forkCount
-		issueCount
-		licenseInfo {
-			id
-			name
-			nickname
-			spdxId
-			url
-		}
 		name
-		primaryLanguage {
-			color
-			id
-			name
-		}
-		pullRequestCount
-		pushedAt
-		owner {
-			avatarUrl
-			id
-			login
-			url
-			... on GitHubOrganization {
-				twitterUsername
-				websiteUrl
-			}
-			... on GitHubUser {
-				twitterUsername
-				websiteUrl
-			}
-		}
-		stargazerCount
+		nickname
+		spdxId
 		url
 	}
 	name
-	owner
-	viewerFollowing
+	owner {
+		avatarUrl
+		id
+		login
+		url
+		... on GitHubOrganization {
+			twitterUsername
+			websiteUrl
+		}
+		... on GitHubUser {
+			twitterUsername
+			websiteUrl
+		}
+	}
+	primaryLanguage {
+		color
+		id
+		name
+	}
+	pullRequestCount
+	pushedAt
+	skill {
+		id
+		followers(first: 0) {
+			totalCount
+		}
+		name
+		owner
+		viewerFollowing
+	}
+	stargazerCount
+	url
 }
