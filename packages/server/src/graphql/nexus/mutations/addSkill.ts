@@ -13,51 +13,28 @@ export const addSkill = mutationField("addSkill", {
 	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
 		if (!user) throw new Error();
 
-		if (!args.where.id || !args.where.name_owner) throw new Error("Invalid input");
+		if (!args.where.id && !args.where.name_owner) throw new Error("Invalid input");
+
+		const existingId =
+			args.where.id ??
+			(await prisma.skill
+				.findUnique({ where: PrismaUtils.nonNull(args.where) })
+				.then((skill) => skill?.id));
 
 		/**
 		 * @description If an id is provided, assume this skill already exists.
 		 */
-		if (args.where.id) {
+		if (existingId) {
 			const record = await prisma.skillsOnUsers
 				.upsert({
 					where: {
 						skillId_userId: {
-							skillId: args.where.id,
+							skillId: existingId,
 							userId: user.id
 						}
 					},
 					create: {
-						skillId: args.where.id,
-						userId: user.id
-					},
-					update: {}
-				})
-				.user();
-
-			if (!record) throw new Error();
-
-			return { record };
-		}
-
-		/**
-		 * @description If this skill already exists otherwise, just look-up and set on user
-		 */
-		const skill = await prisma.skill.findUnique({
-			where: PrismaUtils.nonNull(args.where)
-		});
-
-		if (skill) {
-			const record = await prisma.skillsOnUsers
-				.upsert({
-					where: {
-						skillId_userId: {
-							skillId: skill.id,
-							userId: user.id
-						}
-					},
-					create: {
-						skillId: skill.id,
+						skillId: existingId,
 						userId: user.id
 					},
 					update: {}
@@ -72,6 +49,8 @@ export const addSkill = mutationField("addSkill", {
 		/**
 		 * @description Skill doesn't exist. Verify and create it before setting on user
 		 */
+		if (!args.where.name_owner) throw new Error("Invalid input");
+
 		const { name, owner } = args.where.name_owner;
 
 		const verified = await graphql`
