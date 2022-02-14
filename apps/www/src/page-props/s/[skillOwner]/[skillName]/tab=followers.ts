@@ -48,7 +48,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				{ name: skillName, owner: skillOwner }
 			)
 			.toPromise()
-			.then((result) => result.data?.skill ?? null)
+			.then((result) => result.data?.github.repository ?? null)
 			.catch(() => null)
 	]);
 
