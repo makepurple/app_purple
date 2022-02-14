@@ -514,13 +514,32 @@ export type GitHubOrganization = GitHubRepositoryOwner & {
   readonly __typename: 'GitHubOrganization';
   readonly avatarUrl: Scalars['URL'];
   readonly description?: Maybe<Scalars['String']>;
+  readonly experiencers: UserConnection;
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;
   readonly organization: Organization;
+  readonly repositories: GitHubRepositoryConnection;
   readonly twitterUsername?: Maybe<Scalars['String']>;
   readonly url: Scalars['URL'];
   readonly websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+export type GitHubOrganizationExperiencersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type GitHubOrganizationRepositoriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 export type GitHubRepository = {
@@ -541,11 +560,44 @@ export type GitHubRepository = {
   readonly url: Scalars['URL'];
 };
 
+export type GitHubRepositoryConnection = Connection & {
+  readonly __typename: 'GitHubRepositoryConnection';
+  readonly edges: ReadonlyArray<GitHubRepositoryEdge>;
+  readonly nodes: ReadonlyArray<GitHubRepository>;
+  readonly pageInfo: PageInfo;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type GitHubRepositoryEdge = ConnectionEdge & {
+  readonly __typename: 'GitHubRepositoryEdge';
+  readonly cursor: Scalars['String'];
+  readonly node: GitHubRepository;
+};
+
 export type GitHubRepositoryOwner = {
   readonly avatarUrl: Scalars['URL'];
+  readonly experiencers: UserConnection;
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
+  readonly repositories: GitHubRepositoryConnection;
   readonly url: Scalars['URL'];
+};
+
+
+export type GitHubRepositoryOwnerExperiencersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+export type GitHubRepositoryOwnerRepositoriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 export type GitHubRepositoryOwnerWhereUniqueInput = {
@@ -564,15 +616,36 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly bio?: Maybe<Scalars['String']>;
   readonly company?: Maybe<Scalars['String']>;
   readonly contributionCalendar: GitHubUserContributionCalendar;
+  readonly experiencers: UserConnection;
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;
+  readonly repositories: GitHubRepositoryConnection;
   readonly topLanguages: TopLanguages;
   readonly totalCommits: Scalars['Int'];
   readonly twitterUsername?: Maybe<Scalars['String']>;
   readonly url: Scalars['URL'];
   readonly user: User;
   readonly websiteUrl?: Maybe<Scalars['String']>;
+};
+
+
+/** Data for a user from that user's connected GitHub account. */
+export type GitHubUserExperiencersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+
+/** Data for a user from that user's connected GitHub account. */
+export type GitHubUserRepositoriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -2136,6 +2209,8 @@ type SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubUser_Fragment = { readonly
 
 export type SkillOwnerInfoSideBarGitHubRepositoryOwnerFragment = SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubOrganization_Fragment | SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubUser_Fragment;
 
+export type SkillOwnerRepositoryCardGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly stargazerCount: number, readonly url: string, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | null };
+
 export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
@@ -2533,12 +2608,29 @@ export type GetSkillInfoSideBarQueryVariables = Exact<{
 
 export type GetSkillInfoSideBarQuery = { readonly __typename: 'Query', readonly github: { readonly __typename: 'GitHub', readonly repository?: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number } } | null } | null } };
 
+export type GetSkillOwnerExperiencersQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<UserWhereInput>;
+  skillOwner: Scalars['String'];
+}>;
+
+
+export type GetSkillOwnerExperiencersQuery = { readonly __typename: 'Query', readonly github: { readonly __typename: 'GitHub', readonly repositoryOwner?: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly experiencers: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } } | { readonly __typename: 'GitHubUser', readonly id: string, readonly experiencers: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } } | null } };
+
 export type GetSkillOwnerInfoSideBarQueryVariables = Exact<{
   owner: Scalars['String'];
 }>;
 
 
 export type GetSkillOwnerInfoSideBarQuery = { readonly __typename: 'Query', readonly github: { readonly __typename: 'GitHub', readonly repositoryOwner?: { readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly websiteUrl?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string, readonly url: string } | null } };
+
+export type GetSkillOwnerRepositoriesQueryVariables = Exact<{
+  skillOwner: Scalars['String'];
+}>;
+
+
+export type GetSkillOwnerRepositoriesQuery = { readonly __typename: 'Query', readonly github: { readonly __typename: 'GitHub', readonly repositoryOwner?: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly repositories: { readonly __typename: 'GitHubRepositoryConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'GitHubRepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'GitHubRepository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly stargazerCount: number, readonly url: string, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | null }> } } | { readonly __typename: 'GitHubUser', readonly id: string, readonly repositories: { readonly __typename: 'GitHubRepositoryConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'GitHubRepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'GitHubRepository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly stargazerCount: number, readonly url: string, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | null }> } } | null } };
 
 export type GetSkillsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3076,6 +3168,27 @@ export const SkillOwnerInfoSideBarGitHubRepositoryOwnerFragmentDoc = /*#__PURE__
     twitterUsername
     websiteUrl
   }
+}
+    `;
+export const SkillOwnerRepositoryCardGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment SkillOwnerRepositoryCardGitHubRepository on GitHubRepository {
+  __typename
+  id
+  description
+  forkCount
+  name
+  primaryLanguage {
+    __typename
+    color
+    id
+    name
+  }
+  skill {
+    id
+    viewerFollowing
+  }
+  stargazerCount
+  url
 }
     `;
 export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
@@ -4737,6 +4850,35 @@ export const GetSkillInfoSideBarDocument = /*#__PURE__*/ gql`
 export function useGetSkillInfoSideBarQuery(options: Omit<Urql.UseQueryArgs<GetSkillInfoSideBarQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSkillInfoSideBarQuery>({ query: GetSkillInfoSideBarDocument, ...options });
 };
+export const GetSkillOwnerExperiencersDocument = /*#__PURE__*/ gql`
+    query GetSkillOwnerExperiencers($after: String, $first: Int, $where: UserWhereInput, $skillOwner: String!) {
+  github {
+    repositoryOwner(where: {login: $skillOwner}) {
+      id
+      experiencers(after: $after, first: $first, where: $where) {
+        pageInfo {
+          ...PageInfoFragment
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          ...UserFollowCardUser
+        }
+      }
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${UserFollowCardUserFragmentDoc}`;
+
+export function useGetSkillOwnerExperiencersQuery(options: Omit<Urql.UseQueryArgs<GetSkillOwnerExperiencersQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetSkillOwnerExperiencersQuery>({ query: GetSkillOwnerExperiencersDocument, ...options });
+};
 export const GetSkillOwnerInfoSideBarDocument = /*#__PURE__*/ gql`
     query GetSkillOwnerInfoSideBar($owner: String!) {
   github {
@@ -4749,6 +4891,35 @@ export const GetSkillOwnerInfoSideBarDocument = /*#__PURE__*/ gql`
 
 export function useGetSkillOwnerInfoSideBarQuery(options: Omit<Urql.UseQueryArgs<GetSkillOwnerInfoSideBarQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSkillOwnerInfoSideBarQuery>({ query: GetSkillOwnerInfoSideBarDocument, ...options });
+};
+export const GetSkillOwnerRepositoriesDocument = /*#__PURE__*/ gql`
+    query GetSkillOwnerRepositories($skillOwner: String!) {
+  github {
+    repositoryOwner(where: {login: $skillOwner}) {
+      id
+      repositories(first: 6) {
+        pageInfo {
+          ...PageInfoFragment
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          ...SkillOwnerRepositoryCardGitHubRepository
+        }
+      }
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${SkillOwnerRepositoryCardGitHubRepositoryFragmentDoc}`;
+
+export function useGetSkillOwnerRepositoriesQuery(options: Omit<Urql.UseQueryArgs<GetSkillOwnerRepositoriesQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetSkillOwnerRepositoriesQuery>({ query: GetSkillOwnerRepositoriesDocument, ...options });
 };
 export const GetSkillsDocument = /*#__PURE__*/ gql`
     query GetSkills($after: String, $first: Int, $orderBy: [SkillOrderByInput!], $name: String!, $owner: String!) {

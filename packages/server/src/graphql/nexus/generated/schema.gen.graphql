@@ -411,10 +411,12 @@ type GitHubLicense {
 type GitHubOrganization implements GitHubRepositoryOwner {
   avatarUrl: URL!
   description: String
+  experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: String!
   login: String!
   name: String
   organization: Organization!
+  repositories(after: String, before: String, first: Int, last: Int): GitHubRepositoryConnection!
   twitterUsername: String
   url: URL!
   websiteUrl: String
@@ -437,10 +439,24 @@ type GitHubRepository {
   url: URL!
 }
 
+type GitHubRepositoryConnection implements Connection {
+  edges: [GitHubRepositoryEdge!]!
+  nodes: [GitHubRepository!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type GitHubRepositoryEdge implements ConnectionEdge {
+  cursor: String!
+  node: GitHubRepository!
+}
+
 interface GitHubRepositoryOwner {
   avatarUrl: URL!
+  experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: String!
   login: String!
+  repositories(after: String, before: String, first: Int, last: Int): GitHubRepositoryConnection!
   url: URL!
 }
 
@@ -459,9 +475,11 @@ type GitHubUser implements GitHubRepositoryOwner {
   bio: String
   company: String
   contributionCalendar: GitHubUserContributionCalendar!
+  experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: String!
   login: String!
   name: String
+  repositories(after: String, before: String, first: Int, last: Int): GitHubRepositoryConnection!
   topLanguages: TopLanguages!
   totalCommits(where: GitHubUserTotalCommitsWhereInput): Int!
   twitterUsername: String

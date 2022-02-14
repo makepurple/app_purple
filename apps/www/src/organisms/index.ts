@@ -55,6 +55,7 @@ export * from "./SkillFollowCard";
 export * from "./SkillInfoSideBar";
 export * from "./SkillOwnerInfoSideBar";
 export * from "./SkillOwnerPageLayout";
+export * from "./SkillOwnerRepositoryCard";
 export * from "./SkillPageLayout";
 export * from "./SkillPageTabs";
 export * from "./SuggestedFriendCard";

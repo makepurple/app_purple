@@ -8,10 +8,36 @@ export const GitHubOrganization_fragment_mock: GitHubOrganization = {
 		We are working to build community through open source technology. NB: members must have
 		two-factor auth.
 	`,
+	experiencers: {
+		__typename: "UserConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	id: "0",
 	login: "facebook",
 	name: "Meta",
 	organization: null as any,
+	repositories: {
+		__typename: "GitHubRepositoryConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	twitterUsername: "MetaOpenSource",
 	url: "https://github.com/facebook",
 	websiteUrl: "https://opensource.fb.com"

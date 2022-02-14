@@ -1,0 +1,26 @@
+query GetSkillOwnerRepositories($skillOwner: String!) {
+	github {
+		repositoryOwner(
+			where: {
+				login: $skillOwner
+			}
+		) {
+			id
+			repositories(first: 6) {
+				pageInfo {
+					...PageInfoFragment
+				}
+				totalCount
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					...SkillOwnerRepositoryCardGitHubRepository
+				}
+			}
+		}
+	}
+}

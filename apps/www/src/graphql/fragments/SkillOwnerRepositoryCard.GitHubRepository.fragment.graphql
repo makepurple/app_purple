@@ -1,0 +1,19 @@
+fragment SkillOwnerRepositoryCardGitHubRepository on GitHubRepository {
+	__typename
+	id
+	description
+	forkCount
+	name
+	primaryLanguage {
+		__typename
+		color
+		id
+		name
+	}
+	skill {
+		id
+		viewerFollowing
+	}
+	stargazerCount
+	url
+}

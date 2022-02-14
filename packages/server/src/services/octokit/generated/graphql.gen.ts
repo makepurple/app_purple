@@ -23404,6 +23404,17 @@ export type GetRepositoryPullRequestCountQueryVariables = Exact<{
 
 export type GetRepositoryPullRequestCountQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', pullRequests: { __typename?: 'PullRequestConnection', totalCount: number } } | null };
 
+export type GetRepositoryOwnerRepositoriesQueryVariables = Exact<{
+  owner: Scalars['String'];
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetRepositoryOwnerRepositoriesQuery = { __typename?: 'Query', repositoryOwner?: { __typename?: 'Organization', id: string, repositories: { __typename?: 'RepositoryConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null }, edges?: Array<{ __typename?: 'RepositoryEdge', cursor: string, node?: { __typename: 'Repository', id: string, description?: string | null, forkCount: number, name: string, pushedAt?: Date | null, stargazerCount: number, url: string, licenseInfo?: { __typename: 'License', id: string, description?: string | null, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null } | null, owner: { __typename: 'Organization', id: string, avatarUrl: string, login: string, url: string } | { __typename: 'User', id: string, avatarUrl: string, login: string, url: string }, primaryLanguage?: { __typename: 'Language', color?: string | null, id: string, name: string } | null } | null } | null> | null } } | { __typename?: 'User', id: string, repositories: { __typename?: 'RepositoryConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null }, edges?: Array<{ __typename?: 'RepositoryEdge', cursor: string, node?: { __typename: 'Repository', id: string, description?: string | null, forkCount: number, name: string, pushedAt?: Date | null, stargazerCount: number, url: string, licenseInfo?: { __typename: 'License', id: string, description?: string | null, name: string, nickname?: string | null, spdxId?: string | null, url?: string | null } | null, owner: { __typename: 'Organization', id: string, avatarUrl: string, login: string, url: string } | { __typename: 'User', id: string, avatarUrl: string, login: string, url: string }, primaryLanguage?: { __typename: 'Language', color?: string | null, id: string, name: string } | null } | null } | null> | null } } | null };
+
 export type GetUserContributionCalendarQueryVariables = Exact<{
   from: Scalars['DateTime'];
   login: Scalars['String'];
