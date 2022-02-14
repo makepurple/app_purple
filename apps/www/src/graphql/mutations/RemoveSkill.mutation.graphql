@@ -1,0 +1,25 @@
+mutation RemoveSkill($where: SkillWhereUniqueInput!) {
+	removeSkill(where: $where) {
+		viewer {
+			id
+			skills(first: 100) {
+				pageInfo {
+					...PageInfoFragment
+				}
+				totalCount
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+				}
+			}
+		}
+		record {
+			...SkillFollowCardSkill
+		}
+	}
+}

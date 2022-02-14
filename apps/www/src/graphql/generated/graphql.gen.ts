@@ -42,14 +42,14 @@ export type AcceptFriendshipPayload = MutationPayload & {
 export type AddDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddDesiredSkillMutationPayload';
   readonly query: Query;
-  readonly record: User;
+  readonly record: Skill;
   readonly viewer?: Maybe<User>;
 };
 
 export type AddSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddSkillMutationPayload';
   readonly query: Query;
-  readonly record: User;
+  readonly record: Skill;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1444,7 +1444,7 @@ export type RemovePostThumbnailPayload = MutationPayload & {
 export type RemoveSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillMutationPayload';
   readonly query: Query;
-  readonly record: User;
+  readonly record: Skill;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2265,6 +2265,13 @@ export type UserOverviewExperienceCardExperienceFragment = { readonly __typename
 
 export type UserOverviewRepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
+export type AddSkillMutationVariables = Exact<{
+  where: SkillWhereUniqueInput;
+}>;
+
+
+export type AddSkillMutation = { readonly __typename: 'Mutation', readonly addSkill: { readonly __typename: 'AddSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } } };
+
 export type CreateChatMutationVariables = Exact<{
   data: CreateChatInput;
 }>;
@@ -2364,6 +2371,13 @@ export type RemovePostThumbnailMutationVariables = Exact<{
 
 
 export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null } | null } };
+
+export type RemoveSkillMutationVariables = Exact<{
+  where: SkillWhereUniqueInput;
+}>;
+
+
+export type RemoveSkillMutation = { readonly __typename: 'Mutation', readonly removeSkill: { readonly __typename: 'RemoveSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } } };
 
 export type SendChatMessageMutationVariables = Exact<{
   data: ChatMessageCreateInput;
@@ -3807,6 +3821,38 @@ export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     `;
+export const AddSkillDocument = /*#__PURE__*/ gql`
+    mutation AddSkill($where: SkillWhereUniqueInput!) {
+  addSkill(where: $where) {
+    viewer {
+      id
+      skills(first: 100) {
+        pageInfo {
+          ...PageInfoFragment
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          id
+        }
+      }
+    }
+    record {
+      ...SkillFollowCardSkill
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${SkillFollowCardSkillFragmentDoc}`;
+
+export function useAddSkillMutation() {
+  return Urql.useMutation<AddSkillMutation, AddSkillMutationVariables>(AddSkillDocument);
+};
 export const CreateChatDocument = /*#__PURE__*/ gql`
     mutation CreateChat($data: CreateChatInput!) {
   createChat(data: $data) {
@@ -4106,6 +4152,38 @@ export const RemovePostThumbnailDocument = /*#__PURE__*/ gql`
 
 export function useRemovePostThumbnailMutation() {
   return Urql.useMutation<RemovePostThumbnailMutation, RemovePostThumbnailMutationVariables>(RemovePostThumbnailDocument);
+};
+export const RemoveSkillDocument = /*#__PURE__*/ gql`
+    mutation RemoveSkill($where: SkillWhereUniqueInput!) {
+  removeSkill(where: $where) {
+    viewer {
+      id
+      skills(first: 100) {
+        pageInfo {
+          ...PageInfoFragment
+        }
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          id
+        }
+      }
+    }
+    record {
+      ...SkillFollowCardSkill
+    }
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${SkillFollowCardSkillFragmentDoc}`;
+
+export function useRemoveSkillMutation() {
+  return Urql.useMutation<RemoveSkillMutation, RemoveSkillMutationVariables>(RemoveSkillDocument);
 };
 export const SendChatMessageDocument = /*#__PURE__*/ gql`
     mutation SendChatMessage($data: ChatMessageCreateInput!, $where: ChatWhereUniqueInput!) {
