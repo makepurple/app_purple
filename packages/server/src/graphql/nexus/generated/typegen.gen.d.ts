@@ -367,10 +367,10 @@ export interface NexusGenObjects {
     record: NexusGenRootTypes['Friendship']; // Friendship!
   }
   AddDesiredSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
   }
   AddSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
   }
   Chat: { // root type
     id: string; // ID!
@@ -657,7 +657,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   RemoveSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
   }
   Repository: { // root type
     id: string; // ID!
@@ -863,12 +863,12 @@ export interface NexusGenFieldTypes {
   }
   AddDesiredSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Chat: { // field return type
@@ -1322,7 +1322,7 @@ export interface NexusGenFieldTypes {
   }
   RemoveSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Repository: { // field return type
@@ -1640,12 +1640,12 @@ export interface NexusGenFieldTypeNames {
   }
   AddDesiredSkillMutationPayload: { // field return type name
     query: 'Query'
-    record: 'User'
+    record: 'Skill'
     viewer: 'User'
   }
   AddSkillMutationPayload: { // field return type name
     query: 'Query'
-    record: 'User'
+    record: 'Skill'
     viewer: 'User'
   }
   Chat: { // field return type name
@@ -2099,7 +2099,7 @@ export interface NexusGenFieldTypeNames {
   }
   RemoveSkillMutationPayload: { // field return type name
     query: 'Query'
-    record: 'User'
+    record: 'Skill'
     viewer: 'User'
   }
   Repository: { // field return type name

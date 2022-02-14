@@ -4,6 +4,6 @@ export const AddSkillMutationPayload = objectType({
 	name: "AddSkillMutationPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "User" });
+		t.nonNull.field("record", { type: "Skill" });
 	}
 });

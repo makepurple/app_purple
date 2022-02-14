@@ -10,13 +10,13 @@ type AcceptFriendshipPayload implements MutationPayload {
 
 type AddDesiredSkillMutationPayload implements MutationPayload {
   query: Query!
-  record: User!
+  record: Skill!
   viewer: User
 }
 
 type AddSkillMutationPayload implements MutationPayload {
   query: Query!
-  record: User!
+  record: Skill!
   viewer: User
 }
 
@@ -850,7 +850,7 @@ type RemovePostThumbnailPayload implements MutationPayload {
 
 type RemoveSkillMutationPayload implements MutationPayload {
   query: Query!
-  record: User!
+  record: Skill!
   viewer: User
 }
 

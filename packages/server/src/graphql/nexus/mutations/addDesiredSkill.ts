@@ -39,7 +39,7 @@ export const addDesiredSkill = mutationField("addDesiredSkill", {
 					},
 					update: {}
 				})
-				.user();
+				.skill();
 
 			if (!record) throw new Error();
 
@@ -90,7 +90,7 @@ export const addDesiredSkill = mutationField("addDesiredSkill", {
 					},
 					update: {}
 				})
-				.user();
+				.skill();
 		});
 
 		if (!record) throw new Error();
