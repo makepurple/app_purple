@@ -13,8 +13,11 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import {
+	useAddDesiredSkillMutation,
+	useAddSkillMutation,
 	useFollowSkillMutation,
 	useGetSkillInfoSideBarQuery,
+	useRemoveBothSkillMutation,
 	useUnfollowSkillMutation
 } from "../../graphql";
 import {
@@ -31,12 +34,27 @@ import {
 import { NewPostButton } from "../NewPostButton";
 
 const Root = tw(Paper)`
-	p-6
+	p-4
+	sm:p-6
+`;
+
+const TopContainer = tw.div`
+	flex
+	items-start
+	gap-4
 `;
 
 const StyledAvatar = tw(Avatar)`
+	flex-shrink-0
 	self-start
 	rounded-2xl
+`;
+
+const SkillActions = tw.div`
+	grid
+	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	gap-4
+	[& > *]:px-0
 `;
 
 const Name = tw.h1`
@@ -44,6 +62,7 @@ const Name = tw.h1`
 	text-2xl
 	leading-none
 	font-medium
+	truncate
 `;
 
 const OwnerName = tw(Anchor)`
@@ -158,6 +177,11 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 	const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
+	const [{ fetching: adding }, add] = useAddSkillMutation();
+	const [{ fetching: addingDesired }, addDesired] = useAddDesiredSkillMutation();
+
+	const [{ fetching: removing }, remove] = useRemoveBothSkillMutation();
+
 	const repository = data?.github.repository;
 	const skill = repository?.skill;
 
@@ -171,20 +195,24 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	const viewerFollowing = skill?.viewerFollowing ?? false;
 	const followerCount = skill?.followers.totalCount ?? 0;
 
-	const loading: boolean = following || unfollowing;
+	const shouldRemoveSkill = skill?.viewerDesiredSkill || skill?.viewerSkill;
+
+	const loading: boolean = following || unfollowing || adding || addingDesired || removing;
 
 	return (
 		<Root className={className} style={style}>
-			{owner.__typename === "GitHubOrganization" && (
-				<StyledAvatar
-					border={6}
-					href={repository.url}
-					target="_blank"
-					rel="noreferrer noopener"
-				>
-					<GitHubAvatarImage src={owner.avatarUrl} height={156} width={156} />
-				</StyledAvatar>
-			)}
+			<TopContainer>
+				{owner.__typename === "GitHubOrganization" && (
+					<StyledAvatar
+						border={6}
+						href={repository.url}
+						target="_blank"
+						rel="noreferrer noopener"
+					>
+						<GitHubAvatarImage src={owner.avatarUrl} height={156} width={156} />
+					</StyledAvatar>
+				)}
+			</TopContainer>
 			<Name>
 				<NextLink href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
 					<OwnerName>{owner.login}</OwnerName>
@@ -194,6 +222,58 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					{repository.name}
 				</SkillName>
 			</Name>
+			<SkillActions tw="mt-3">
+				{shouldRemoveSkill ? (
+					<Button
+						onClick={async () => {
+							const nameOwner = {
+								name: skillName,
+								owner: skillOwner
+							};
+
+							await remove({ where: { name_owner: nameOwner } });
+						}}
+						size="small"
+						type="button"
+						variant="alert"
+					>
+						Remove Skill
+					</Button>
+				) : (
+					<>
+						<Button
+							onClick={async () => {
+								const nameOwner = {
+									name: skillName,
+									owner: skillOwner
+								};
+
+								await add({ where: { name_owner: nameOwner } });
+							}}
+							size="small"
+							type="button"
+							variant="success"
+						>
+							I know this!
+						</Button>
+						<Button
+							onClick={async () => {
+								const nameOwner = {
+									name: skillName,
+									owner: skillOwner
+								};
+
+								await addDesired({ where: { name_owner: nameOwner } });
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+						>
+							I&apos;m learning
+						</Button>
+					</>
+				)}
+			</SkillActions>
 			{!!repository.description && (
 				<Description tw="mt-3">{repository.description}</Description>
 			)}
@@ -290,30 +370,32 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 				)}
 			</SocialLinks>
 			{status === "authenticated" && session && (
-				<Actions tw="mt-4">
-					<NewPostButton
-						skillName={skillName}
-						skillOwner={skillOwner}
-						userName={session.user.name}
-					>
-						{({ draft }) => (draft ? "Edit Draft" : "New Post")}
-					</NewPostButton>
-					<Button
-						disabled={loading}
-						onClick={async () => {
-							const nameOwner = { name: skillName, owner: skillOwner };
+				<>
+					<Actions tw="mt-4">
+						<NewPostButton
+							skillName={skillName}
+							skillOwner={skillOwner}
+							userName={session.user.name}
+						>
+							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+						</NewPostButton>
+						<Button
+							disabled={loading}
+							onClick={async () => {
+								const nameOwner = { name: skillName, owner: skillOwner };
 
-							viewerFollowing
-								? await unfollowSkill({ where: { name_owner: nameOwner } })
-								: await followSkill({ where: { name_owner: nameOwner } });
-						}}
-						type="button"
-						variant="secondary"
-					>
-						{viewerFollowing ? "Unfollow" : "Follow"}
-						{loading && <Spinner tw="ml-2" />}
-					</Button>
-				</Actions>
+								viewerFollowing
+									? await unfollowSkill({ where: { name_owner: nameOwner } })
+									: await followSkill({ where: { name_owner: nameOwner } });
+							}}
+							type="button"
+							variant="secondary"
+						>
+							{viewerFollowing ? "Unfollow" : "Follow"}
+							{loading && <Spinner tw="ml-2" />}
+						</Button>
+					</Actions>
+				</>
 			)}
 			<ConnectionsContainer tw="mt-4">
 				<PeopleIcon height={24} width={24} tw="mr-2" />

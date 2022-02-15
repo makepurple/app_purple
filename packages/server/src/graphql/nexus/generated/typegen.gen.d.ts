@@ -651,7 +651,7 @@ export interface NexusGenObjects {
     record: NexusGenRootTypes['Friendship']; // Friendship!
   }
   RemoveDesiredSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
   }
   RemovePostThumbnailPayload: { // root type
     record?: NexusGenRootTypes['Post'] | null; // Post
@@ -1312,7 +1312,7 @@ export interface NexusGenFieldTypes {
   }
   RemoveDesiredSkillMutationPayload: { // field return type
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['Skill']; // Skill!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemovePostThumbnailPayload: { // field return type
@@ -2091,7 +2091,7 @@ export interface NexusGenFieldTypeNames {
   }
   RemoveDesiredSkillMutationPayload: { // field return type name
     query: 'Query'
-    record: 'User'
+    record: 'Skill'
     viewer: 'User'
   }
   RemovePostThumbnailPayload: { // field return type name

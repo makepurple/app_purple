@@ -39,7 +39,9 @@ fragment SkillInfoSideBarGitHubRepository on GitHubRepository {
 		}
 		name
 		owner
+		viewerDesiredSkill
 		viewerFollowing
+		viewerSkill
 	}
 	stargazerCount
 	url

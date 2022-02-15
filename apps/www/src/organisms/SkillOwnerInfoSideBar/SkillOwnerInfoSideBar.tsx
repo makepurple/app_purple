@@ -5,7 +5,8 @@ import { useGetSkillOwnerInfoSideBarQuery } from "../../graphql";
 import { GitHubIcon, LinkIcon, TwitterIcon } from "../../svgs";
 
 const Root = tw(Paper)`
-	p-6
+	p-4
+	sm:p-6
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -18,6 +19,7 @@ const Name = tw.h1`
 	text-2xl
 	leading-none
 	font-medium
+	truncate
 `;
 
 const OwnerName = tw(Anchor)`

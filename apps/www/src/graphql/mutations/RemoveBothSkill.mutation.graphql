@@ -1,0 +1,48 @@
+mutation RemoveBothSkill($where: SkillWhereUniqueInput!) {
+	removeDesiredSkill(where: $where) {
+		viewer {
+			id
+			skills(first: 100) {
+				pageInfo {
+					...PageInfoFragment
+				}
+				totalCount
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+				}
+			}
+		}
+		record {
+			...SkillFollowCardSkill
+		}
+	}
+	removeSkill(where: $where) {
+		viewer {
+			id
+			skills(first: 100) {
+				pageInfo {
+					...PageInfoFragment
+				}
+				totalCount
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+				}
+			}
+		}
+		record {
+			...SkillFollowCardSkill
+		}
+	}
+}

@@ -27,7 +27,7 @@ export const removeDesiredSkill = mutationField("removeDesiredSkill", {
 					}
 				}
 			})
-			.user();
+			.skill();
 
 		if (!record) throw new Error();
 

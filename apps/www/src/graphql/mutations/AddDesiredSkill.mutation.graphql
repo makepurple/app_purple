@@ -1,0 +1,26 @@
+mutation AddDesiredSkill($where: SkillWhereUniqueInput!) {
+	addDesiredSkill(where: $where) {
+		viewer {
+			id
+			skills(first: 100) {
+				pageInfo {
+					...PageInfoFragment
+				}
+				totalCount
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+				}
+			}
+		}
+		record {
+			...SkillFollowCardSkill
+			viewerSkill
+		}
+	}
+}

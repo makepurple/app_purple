@@ -838,7 +838,7 @@ type RejectFriendshipPayload implements MutationPayload {
 
 type RemoveDesiredSkillMutationPayload implements MutationPayload {
   query: Query!
-  record: User!
+  record: Skill!
   viewer: User
 }
 
