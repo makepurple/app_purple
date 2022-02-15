@@ -647,6 +647,7 @@ enum NotificationType {
 
 input NotificationsWhereInput {
   opened: Boolean
+  type: [NotificationType!]
 }
 
 type OpenNotificationsPayload implements MutationPayload {

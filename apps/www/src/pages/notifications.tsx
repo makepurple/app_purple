@@ -1,9 +1,13 @@
 import { Divider, MainContainer, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import tw from "twin.macro";
-import { useGetNotificationCountsQuery, useGetNotificationsQuery } from "../graphql";
+import {
+	useGetNotificationCountsQuery,
+	useGetNotificationsQuery,
+	useOpenNotificationsMutation
+} from "../graphql";
 import { LoadingNotificationCard, NotificationCard } from "../organisms";
 import { PageProps, pageProps } from "../page-props/notifications";
 import { SearchIcon } from "../svgs";
@@ -54,8 +58,15 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
+	const [, updateCounts] = useOpenNotificationsMutation();
+
 	const notifications = data?.viewer?.notifications.nodes ?? [];
 	const unopenedCount = countData?.viewer?.notifications.totalCount ?? 0;
+
+	useEffect(() => {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		updateCounts();
+	}, [updateCounts]);
 
 	return (
 		<Root size="small">

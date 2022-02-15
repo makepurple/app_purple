@@ -1051,6 +1051,7 @@ export enum NotificationType {
 
 export type NotificationsWhereInput = {
   readonly opened?: InputMaybe<Scalars['Boolean']>;
+  readonly type?: InputMaybe<ReadonlyArray<NotificationType>>;
 };
 
 export type OpenNotificationsPayload = MutationPayload & {
@@ -2358,6 +2359,11 @@ export type LeaveChatMutationVariables = Exact<{
 
 
 export type LeaveChatMutation = { readonly __typename: 'Mutation', readonly leaveChat: { readonly __typename: 'LeaveChatPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record: { readonly __typename: 'Chat', readonly id: string } } };
+
+export type OpenNotificationsMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type OpenNotificationsMutation = { readonly __typename: 'Mutation', readonly openNotifications: { readonly __typename: 'OpenNotificationsPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } } };
 
 export type PublishPostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -4151,6 +4157,22 @@ export const LeaveChatDocument = /*#__PURE__*/ gql`
 
 export function useLeaveChatMutation() {
   return Urql.useMutation<LeaveChatMutation, LeaveChatMutationVariables>(LeaveChatDocument);
+};
+export const OpenNotificationsDocument = /*#__PURE__*/ gql`
+    mutation OpenNotifications {
+  openNotifications {
+    record {
+      id
+      notifications(first: 0, where: {opened: false}) {
+        totalCount
+      }
+    }
+  }
+}
+    `;
+
+export function useOpenNotificationsMutation() {
+  return Urql.useMutation<OpenNotificationsMutation, OpenNotificationsMutationVariables>(OpenNotificationsDocument);
 };
 export const PublishPostDocument = /*#__PURE__*/ gql`
     mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {
