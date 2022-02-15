@@ -14,6 +14,7 @@ import {
 	SkillOwnerRepositoryCard,
 	UserFollowCard
 } from "../../../organisms";
+import { PageProps, pageProps } from "../../../page-props/s/[skillOwner]";
 import { PersonIcon, RepoIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
@@ -45,7 +46,9 @@ const ExperiencersContent = tw.div`
 	items-stretch
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const skillOwner = router?.query.skillOwner as string;

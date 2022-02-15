@@ -187,6 +187,7 @@ export interface NexusGenInputs {
   }
   NotificationsWhereInput: { // input type
     opened?: boolean | null; // Boolean
+    type?: NexusGenEnums['NotificationType'][] | null; // [NotificationType!]
   }
   OrderByRelationAggregateInput: { // input type
     _count?: NexusGenEnums['SortOrder'] | null; // SortOrder

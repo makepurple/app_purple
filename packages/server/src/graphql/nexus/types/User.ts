@@ -696,6 +696,9 @@ export const User = objectType({
 										skip,
 										take,
 										where: {
+											...(args.where?.type
+												? { type: { in: args.where.type } }
+												: {}),
 											updatedAt: { gt: lastOpenedAt },
 											OR: [
 												{
@@ -723,6 +726,7 @@ export const User = objectType({
 					() =>
 						prisma.notification.count({
 							where: {
+								...(args.where?.type ? { type: { in: args.where.type } } : {}),
 								user: { id: { equals: parent.id } },
 								updatedAt: { gt: lastOpenedAt }
 							}
