@@ -1362,7 +1362,9 @@ export interface NexusGenFieldTypes {
     owner: string; // String!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
+    viewerDesiredSkill: boolean; // Boolean!
     viewerFollowing: boolean; // Boolean!
+    viewerSkill: boolean; // Boolean!
   }
   SkillConnection: { // field return type
     edges: NexusGenRootTypes['SkillEdge'][]; // [SkillEdge!]!
@@ -2139,7 +2141,9 @@ export interface NexusGenFieldTypeNames {
     owner: 'String'
     posts: 'PostConnection'
     users: 'UserConnection'
+    viewerDesiredSkill: 'Boolean'
     viewerFollowing: 'Boolean'
+    viewerSkill: 'Boolean'
   }
   SkillConnection: { // field return type name
     edges: 'SkillEdge'

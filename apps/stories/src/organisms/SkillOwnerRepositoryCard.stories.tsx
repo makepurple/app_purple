@@ -1,5 +1,8 @@
 import { SkillOwnerRepositoryCard, SkillOwnerRepositoryCardProps } from "@makepurple/www";
-import { GitHubRepository_fragment_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	GitHubRepository_fragment_mock,
+	Skill_fragment_mock
+} from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
@@ -12,7 +15,10 @@ const Template: Story<SkillOwnerRepositoryCardProps> = (args) => {
 	return <SkillOwnerRepositoryCard {...args} />;
 };
 Template.args = {
-	repository: GitHubRepository_fragment_mock,
+	repository: {
+		...GitHubRepository_fragment_mock,
+		skill: Skill_fragment_mock
+	},
 	skillOwner: "facebook"
 };
 

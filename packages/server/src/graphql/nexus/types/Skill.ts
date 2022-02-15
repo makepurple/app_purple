@@ -196,6 +196,26 @@ export const Skill = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.boolean("viewerDesiredSkill", {
+			authorize: (parent, args, { user }) => {
+				return !!user;
+			},
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) throw new Error();
+
+				return await prisma.desiredSkillsOnUsers
+					.findUnique({
+						where: {
+							skillId_userId: {
+								skillId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.then((result) => !!result)
+					.catch(() => false);
+			}
+		});
 		t.nonNull.boolean("viewerFollowing", {
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) return false;
@@ -210,6 +230,26 @@ export const Skill = objectType({
 				});
 
 				return !!follow;
+			}
+		});
+		t.nonNull.boolean("viewerSkill", {
+			authorize: (parent, args, { user }) => {
+				return !!user;
+			},
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) throw new Error();
+
+				return await prisma.skillsOnUsers
+					.findUnique({
+						where: {
+							skillId_userId: {
+								skillId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.then((result) => !!result)
+					.catch(() => false);
 			}
 		});
 	}

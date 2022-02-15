@@ -14,7 +14,7 @@ import {
 	SkillOwnerRepositoryCard,
 	UserFollowCard
 } from "../../../organisms";
-import { PersonIcon } from "../../../svgs";
+import { PersonIcon, RepoIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -74,13 +74,22 @@ export const Page: NextPage = () => {
 	return (
 		<SkillOwnerPageLayout skillOwner={skillOwner}>
 			<Repositories>
-				{repositories.map((repository) => (
-					<SkillOwnerRepositoryCard
-						key={repository.id}
-						repository={repository}
-						skillOwner={skillOwner}
-					/>
-				))}
+				{!repositories.length ? (
+					<NonIdealState
+						title="There's nothing here"
+						subTitle={`We couldn't find any repositories for ${skillOwner}`}
+					>
+						<RepoIcon height={96} width={96} />
+					</NonIdealState>
+				) : (
+					repositories.map((repository) => (
+						<SkillOwnerRepositoryCard
+							key={repository.id}
+							repository={repository}
+							skillOwner={skillOwner}
+						/>
+					))
+				)}
 			</Repositories>
 			<Experiencers tw="mt-4">
 				<Title tw="mb-4">Developers</Title>

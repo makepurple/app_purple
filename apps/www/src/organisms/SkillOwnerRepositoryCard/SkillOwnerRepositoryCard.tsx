@@ -8,6 +8,7 @@ import {
 	useFollowSkillMutation,
 	useUnfollowSkillMutation
 } from "../../graphql";
+import { useAddSkill } from "../../hooks";
 import { ForkIcon, RepoIcon, StarIcon } from "../../svgs";
 
 const Root = tw(Paper)`
@@ -89,10 +90,13 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 		const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 		const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
-		const loading = following || unfollowing;
-
 		const primaryLanguage = repository.primaryLanguage;
 		const viewerFollowing = repository.skill?.viewerFollowing ?? false;
+		const viewerSkill = repository.skill?.viewerSkill ?? false;
+
+		const [{ fetching: adding }, add] = useAddSkill(viewerSkill);
+
+		const loading = following || unfollowing || adding;
 
 		return (
 			<Root ref={ref} className={className} style={style}>
@@ -152,8 +156,21 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 					 * @author David Lee
 					 * @date February 14, 2022
 					 */}
-					<Button disabled={loading} size="small" type="button" variant="success">
-						I know this!
+					<Button
+						disabled={loading}
+						onClick={async () => {
+							const nameOwner = {
+								name: repository.name,
+								owner: skillOwner
+							};
+
+							await add({ where: { name_owner: nameOwner } });
+						}}
+						size="small"
+						type="button"
+						variant={viewerSkill ? "alert" : "success"}
+					>
+						{viewerSkill ? "Remove" : "I know this!"}
 					</Button>
 					<Button
 						disabled={loading}

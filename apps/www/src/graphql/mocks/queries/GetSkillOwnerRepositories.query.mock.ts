@@ -3,13 +3,19 @@ import {
 	GitHubOrganization_fragment_mock,
 	GitHubRepository_fragment_mock,
 	GitHub_fragment_mock,
-	PageInfo_fragment_mock
+	PageInfo_fragment_mock,
+	Skill_fragment_mock
 } from "../fragments";
 
 const DATA_SIZE = 6;
 
 const repositories = Array.from({ length: DATA_SIZE }, (_, i) => ({
 	...GitHubRepository_fragment_mock,
+	skill: {
+		...Skill_fragment_mock,
+		viewerFollowing: i % 2 === 1,
+		viewerSkill: i % 2 === 0
+	},
 	id: `${i}`
 }));
 

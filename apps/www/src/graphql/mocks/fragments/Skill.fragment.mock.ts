@@ -59,5 +59,7 @@ export const Skill_fragment_mock: Skill = {
 		edges: [],
 		nodes: []
 	},
-	viewerFollowing: true
+	viewerDesiredSkill: false,
+	viewerFollowing: true,
+	viewerSkill: false
 };

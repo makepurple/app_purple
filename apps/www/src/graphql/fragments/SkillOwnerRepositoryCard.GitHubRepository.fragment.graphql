@@ -13,6 +13,7 @@ fragment SkillOwnerRepositoryCardGitHubRepository on GitHubRepository {
 	skill {
 		id
 		viewerFollowing
+		viewerSkill
 	}
 	stargazerCount
 	url

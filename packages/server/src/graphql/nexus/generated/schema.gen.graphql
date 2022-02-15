@@ -922,7 +922,9 @@ type Skill implements Followable & WithGitHubRepository {
   owner: String!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  viewerDesiredSkill: Boolean!
   viewerFollowing: Boolean!
+  viewerSkill: Boolean!
 }
 
 type SkillConnection implements Connection {
