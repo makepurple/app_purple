@@ -6,7 +6,7 @@ module.exports = {
 				id: "0",
 				email: "storybook@test-makepurple.com",
 				name: "leedavidcs",
-				image: "testuser.png"
+				image: "https://avatars.githubusercontent.com/u/15151154"
 			}	
 		},
 		status: "authenticated"
