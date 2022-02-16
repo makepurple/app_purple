@@ -1,5 +1,10 @@
 import { SiteWideLayout } from "@makepurple/www";
-import { GetNotificationCounts_mock, GetSkills_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	GetNotificationCounts_mock,
+	GetPostDraft_mock,
+	GetSkills_mock,
+	GetUserFriendRequestCount_mock
+} from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/skills";
 import { Page } from "@makepurple/www/src/pages/skills";
 import { action } from "@storybook/addon-actions";
@@ -39,8 +44,12 @@ Standard.parameters = {
 		switch (operationName) {
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetSkills":
 				return { data: GetSkills_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

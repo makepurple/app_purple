@@ -2,7 +2,9 @@ import { PromiseUtils } from "@makepurple/utils";
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
+	GetPostDraft_mock,
 	GetPost_mock,
+	GetUserFriendRequestCount_mock,
 	RemovePostThumbnail_mock,
 	SuggestSkills_mock,
 	UploadPostImage_mock
@@ -49,6 +51,10 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPost":
 				return { data: GetPost_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "RemovePostThumbnail":
 				await PromiseUtils.wait(ms("1s"));
 

@@ -3,6 +3,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSkillInfoSideBar_mock,
+	GetUserFriendRequestCount_mock,
 	PageInfo_fragment_mock,
 	SuggestFriends_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -55,6 +56,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "SuggestFriends":
 				return { data: SuggestFriends_mock };
 			default:
@@ -79,6 +82,8 @@ NoResults.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "SuggestFriends":
 				return {
 					data: {

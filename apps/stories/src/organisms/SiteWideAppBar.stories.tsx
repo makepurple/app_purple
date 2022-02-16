@@ -1,5 +1,10 @@
 import { SiteWideAppBar, SiteWideAppBarProps } from "@makepurple/www";
-import { GetMyUser_mock, GetNotificationCounts_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	GetMyUser_mock,
+	GetNotificationCounts_mock,
+	GetPostDraft_mock,
+	GetUserFriendRequestCount_mock
+} from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -25,10 +30,12 @@ Template.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
-			case "GetMyUser":
-				return { data: GetMyUser_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

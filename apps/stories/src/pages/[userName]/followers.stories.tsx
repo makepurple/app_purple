@@ -3,6 +3,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetUserFollowers_mock,
+	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/followers";
@@ -48,6 +49,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetUserFollowers":
 				return { data: GetUserFollowers_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:

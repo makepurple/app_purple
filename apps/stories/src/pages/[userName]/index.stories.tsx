@@ -2,6 +2,7 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
 	GetUserOverview_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -47,6 +48,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -67,6 +70,8 @@ NoTrophies.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -103,6 +108,8 @@ NoPosts.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -136,6 +143,8 @@ NoExperiences.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -169,6 +178,8 @@ NoRepositories.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -202,6 +213,8 @@ NoExperiencesRepositories.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":

@@ -6,6 +6,7 @@ import {
 	GetPostComments_mock,
 	GetPostDraft_mock,
 	GetPost_mock,
+	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/[postTitle]";
@@ -64,6 +65,8 @@ Standard.parameters = {
 				return { data: GetPostComments_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:

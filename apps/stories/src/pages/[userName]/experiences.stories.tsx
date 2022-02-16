@@ -6,6 +6,7 @@ import {
 	GetExperiences_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
 	SuggestExperiences_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -61,6 +62,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "SuggestExperiences":
@@ -95,6 +98,8 @@ Loading.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "SuggestExperiences":
@@ -148,6 +153,8 @@ NoResults.parameters = {
 						postDraft: null
 					}
 				};
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "SuggestExperiences":

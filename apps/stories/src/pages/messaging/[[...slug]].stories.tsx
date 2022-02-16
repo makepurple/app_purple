@@ -3,6 +3,8 @@ import {
 	GetChats_mock,
 	GetChat_mock,
 	GetNotificationCounts_mock,
+	GetPostDraft_mock,
+	GetUserFriendRequestCount_mock,
 	SuggestViewerFriends_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/";
@@ -47,6 +49,10 @@ Template.parameters = {
 				return { data: GetChats_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "SuggestViewerFriends":
 				return { data: SuggestViewerFriends_mock };
 			default:
@@ -105,6 +111,10 @@ NoChats.parameters = {
 				};
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "SuggestViewerFriends":
 				return { data: SuggestViewerFriends_mock };
 			default:

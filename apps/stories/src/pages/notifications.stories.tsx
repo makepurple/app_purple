@@ -1,7 +1,9 @@
 import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
-	GetNotifications_mock
+	GetNotifications_mock,
+	GetPostDraft_mock,
+	GetUserFriendRequestCount_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/notifications";
 import { Page } from "@makepurple/www/src/pages/notifications";
@@ -44,6 +46,10 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetNotifications":
 				return { data: GetNotifications_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

@@ -4,7 +4,8 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetPosts_mock,
-	GetSkillInfoSideBar_mock
+	GetSkillInfoSideBar_mock,
+	GetUserFriendRequestCount_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/s/[skillOwner]/[skillName]";
 import { Page } from "@makepurple/www/src/pages/s/[skillOwner]/[skillName]";
@@ -58,6 +59,8 @@ Standard.parameters = {
 				return { data: GetPosts_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}
@@ -84,6 +87,8 @@ Loading.parameters = {
 				return { data: GetPosts_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}
@@ -124,6 +129,8 @@ NoResults.parameters = {
 				};
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

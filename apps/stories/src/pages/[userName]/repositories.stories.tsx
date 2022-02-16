@@ -4,6 +4,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetRepositories_mock,
+	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
 	SuggestRepositories_mock,
 	SuggestSkills_mock
@@ -52,6 +53,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetRepositories":
 				return { data: GetRepositories_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "SuggestRepositories":
@@ -82,6 +85,8 @@ Loading.parameters = {
 				return { data: GetRepositories_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "SuggestRepositories":
 				return { data: SuggestRepositories_mock };
 			case "SuggestSkills":
@@ -122,6 +127,8 @@ NoResults.parameters = {
 						}
 					}
 				};
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "SuggestRepositories":
