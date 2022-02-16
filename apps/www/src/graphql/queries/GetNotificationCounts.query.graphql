@@ -4,8 +4,17 @@ query GetNotificationCounts {
 		friendRequestsReceived(first: 0) {
 			totalCount
 		}
+		messages: notifications(
+			first: 0
+			where: {
+				opened: false,
+				type: [ChatMessageReceived]
+			}
+		) {
+			totalCount
+		}
 		notifications(
-			first: 0,
+			first: 0
 			where: {
 				opened: false
 			}

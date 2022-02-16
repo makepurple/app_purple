@@ -2576,7 +2576,7 @@ export type GetMyUserQuery = { readonly __typename: 'Query', readonly viewer?: {
 export type GetNotificationCountsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNotificationCountsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null };
+export type GetNotificationCountsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly messages: { readonly __typename: 'NotificationConnection', readonly totalCount: number }, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null };
 
 export type GetNotificationsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -4816,6 +4816,12 @@ export const GetNotificationCountsDocument = /*#__PURE__*/ gql`
   viewer {
     id
     friendRequestsReceived(first: 0) {
+      totalCount
+    }
+    messages: notifications(
+      first: 0
+      where: {opened: false, type: [ChatMessageReceived]}
+    ) {
       totalCount
     }
     notifications(first: 0, where: {opened: false}) {

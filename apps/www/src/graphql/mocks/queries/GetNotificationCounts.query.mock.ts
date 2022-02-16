@@ -3,5 +3,11 @@ import { User_fragment_mock } from "../fragments";
 
 export const GetNotificationCounts_mock: GetNotificationCountsQuery = {
 	__typename: "Query",
-	viewer: User_fragment_mock
+	viewer: {
+		...User_fragment_mock,
+		messages: {
+			__typename: "NotificationConnection",
+			totalCount: 12
+		}
+	}
 };
