@@ -2915,8 +2915,34 @@ export const GitHubUser_fragment_mock: GitHubUser = {
 			}
 		]
 	},
+	experiencers: {
+		__typename: "UserConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	login: "leedavidcs",
 	name: "David Lee",
+	repositories: {
+		__typename: "GitHubRepositoryConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	topLanguages: {
 		...TopLanguages_fragment_mock,
 		__typename: "TopLanguages"
