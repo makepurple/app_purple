@@ -27,11 +27,7 @@ Root.defaultProps = {
 
 export type MenuProps = InferComponentProps<typeof Menu>;
 
-export const Menu: typeof HUIMenu & {
-	Button: typeof HUIMenu.Button;
-	Item: typeof HUIMenu.Item;
-	Items: typeof HUIMenu.Items;
-} = ObjectUtils.setStatic(Root as typeof HUIMenu, {
+export const Menu = ObjectUtils.setStatic(Root, {
 	Button: MenuButton,
 	Item: MenuItem,
 	Items: MenuItems

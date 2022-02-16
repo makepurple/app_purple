@@ -8,6 +8,10 @@ export const GetNotificationCounts_mock: GetNotificationCountsQuery = {
 		messages: {
 			__typename: "NotificationConnection",
 			totalCount: 12
+		},
+		notifications: {
+			__typename: "NotificationConnection",
+			totalCount: 123
 		}
 	}
 };

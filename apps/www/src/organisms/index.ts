@@ -49,6 +49,7 @@ export * from "./RepositoryCard";
 export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
+export * from "./SiteWideUserMenu";
 export * from "./SkillAutosuggest";
 export * from "./SkillCard";
 export * from "./SkillFollowCard";

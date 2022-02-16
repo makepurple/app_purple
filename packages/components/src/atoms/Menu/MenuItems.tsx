@@ -2,7 +2,7 @@ import { Menu } from "@headlessui/react";
 import { StyleUtils } from "@makepurple/utils";
 import tw, { styled } from "twin.macro";
 
-export const MenuItems: typeof Menu.Items = styled(Menu.Items)`
+export const MenuItems = styled(Menu.Items)`
 	${tw`
 		absolute
 		origin-top-right
@@ -19,4 +19,4 @@ export const MenuItems: typeof Menu.Items = styled(Menu.Items)`
 		empty:hidden
 	`}
 	z-index: ${StyleUtils.getZIndex("menu")};
-` as typeof Menu.Items;
+`;

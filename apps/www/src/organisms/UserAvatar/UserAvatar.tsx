@@ -4,32 +4,41 @@ import React, { forwardRef } from "react";
 import { UserAvatarUserFragment } from "../../graphql";
 
 export interface UserAvatarProps extends AvatarProps {
+	asLink?: boolean;
 	height?: number;
 	user: UserAvatarUserFragment;
 	width?: number;
 }
 
 export const UserAvatar = forwardRef<HTMLAnchorElement, UserAvatarProps>((props, ref) => {
-	const { border = 1, height: _height, user, width: _width, ...avatarProps } = props;
+	const {
+		asLink = true,
+		border = 1,
+		height: _height,
+		user,
+		width: _width,
+		...avatarProps
+	} = props;
 
 	const height: number = _height ?? _width ?? 48;
 	const width: number = _width ?? _height ?? 48;
 
-	return (
+	const component = (
+		<Avatar border={border} {...avatarProps} ref={ref}>
+			{user.image ? (
+				<GitHubAvatarImage alt={user.name} src={user.image} height={height} width={width} />
+			) : (
+				<PersonIcon height={height} width={width} />
+			)}
+		</Avatar>
+	);
+
+	return asLink ? (
 		<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-			<Avatar border={border} {...avatarProps} ref={ref}>
-				{user.image ? (
-					<GitHubAvatarImage
-						alt={user.name}
-						src={user.image}
-						height={height}
-						width={width}
-					/>
-				) : (
-					<PersonIcon height={height} width={width} />
-				)}
-			</Avatar>
+			{component}
 		</NextLink>
+	) : (
+		component
 	);
 });
 

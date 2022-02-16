@@ -46,6 +46,7 @@ export const NotificationBellButton: FC<NotificationBellButtonProps> = ({ classN
 	const { status } = useSession();
 
 	const [{ data }] = useGetNotificationCountsQuery({
+		pause: status !== "authenticated",
 		requestPolicy: "cache-first"
 	});
 

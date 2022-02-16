@@ -2706,6 +2706,11 @@ export type GetUserFollowingQueryVariables = Exact<{
 
 export type GetUserFollowingQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'FollowEdge', readonly cursor: string, readonly node: { readonly __typename: 'Follow', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Follow', readonly id: string, readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | { readonly __typename: 'User', readonly viewerFollowing: boolean, readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }> } } | null };
 
+export type GetUserFriendRequestCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserFriendRequestCountQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly friendRequestsReceived: { readonly __typename: 'UserConnection', readonly totalCount: number } } | null };
+
 export type GetUserFriendRequestsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5286,6 +5291,20 @@ ${UserFollowCardUserFragmentDoc}`;
 
 export function useGetUserFollowingQuery(options: Omit<Urql.UseQueryArgs<GetUserFollowingQueryVariables>, 'query'>) {
   return Urql.useQuery<GetUserFollowingQuery>({ query: GetUserFollowingDocument, ...options });
+};
+export const GetUserFriendRequestCountDocument = /*#__PURE__*/ gql`
+    query GetUserFriendRequestCount {
+  viewer {
+    id
+    friendRequestsReceived(first: 0) {
+      totalCount
+    }
+  }
+}
+    `;
+
+export function useGetUserFriendRequestCountQuery(options?: Omit<Urql.UseQueryArgs<GetUserFriendRequestCountQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetUserFriendRequestCountQuery>({ query: GetUserFriendRequestCountDocument, ...options });
 };
 export const GetUserFriendRequestsDocument = /*#__PURE__*/ gql`
     query GetUserFriendRequests($after: String, $first: Int) {

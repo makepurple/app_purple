@@ -51,10 +51,12 @@ export type AvatarProps = InferComponentProps<"a"> & {
 };
 
 export const Avatar = forwardRef<HTMLAnchorElement, AvatarProps>((props, ref) => {
-	const { border, children, ...restAnchorProps } = props;
+	const { border, children, href, ...restAnchorProps } = props;
+
+	const Type = href ? "a" : "div";
 
 	return (
-		<Root {...restAnchorProps} ref={ref} $border={border}>
+		<Root {...restAnchorProps} as={Type} ref={ref} href={href} $border={border}>
 			<Content>{children}</Content>
 		</Root>
 	);

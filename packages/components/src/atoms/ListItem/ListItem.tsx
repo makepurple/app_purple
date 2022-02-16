@@ -11,8 +11,7 @@ export const ListItem = styled.li<{
 	${tw`
 		flex
 		items-center
-		py-2
-		px-3
+		p-3
 		border-none
 		rounded-md
 		whitespace-nowrap

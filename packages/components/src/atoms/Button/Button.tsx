@@ -67,7 +67,7 @@ export const Button = styled.button<{
 				return tw`
 					bg-white
 					text-black
-					border-gray-400
+					border-gray-300
 				`;
 			case "success":
 				return tw`bg-blue-500`;

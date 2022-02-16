@@ -1,6 +1,5 @@
 import { SiteWideAppBar, SiteWideAppBarProps } from "@makepurple/www";
 import {
-	GetMyUser_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetUserFriendRequestCount_mock
@@ -44,44 +43,4 @@ Template.parameters = {
 
 export const Standard: any = Template.bind({});
 Standard.args = { ...Template.args };
-Standard.parameters = {
-	...Template.parameters,
-	urql: (op: Operation) => {
-		const operationName = getOperationName(op.query);
-
-		operationName && action(operationName)(op.variables);
-
-		switch (operationName) {
-			case "GetMyUser":
-				return {
-					data: {
-						viewer: null
-					}
-				};
-			case "GetNotificationCounts":
-				return { data: GetNotificationCounts_mock };
-			default:
-				return {};
-		}
-	}
-};
-
-export const LoggedIn: any = Template.bind({});
-LoggedIn.args = { ...Template.args };
-LoggedIn.parameters = {
-	...Template.parameters,
-	urql: (op: Operation) => {
-		const operationName = getOperationName(op.query);
-
-		operationName && action(operationName)(op.variables);
-
-		switch (operationName) {
-			case "GetMyUser":
-				return { data: GetMyUser_mock };
-			case "GetNotificationCounts":
-				return { data: GetNotificationCounts_mock };
-			default:
-				return {};
-		}
-	}
-};
+Standard.parameters = { ...Template.parameters };

@@ -6,16 +6,18 @@ import {
 	MainContainer,
 	PageContainer
 } from "@makepurple/components";
+import { FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
+import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
+import { BellIcon, ChatIcon, PeopleIcon } from "../../svgs";
 import { MobileAppDrawer } from "../MobileAppDrawer";
-import { NotificationBellButton } from "../NotificationBellButton";
-import { PendingFriendsButton } from "../PendingFriendsButton";
+import { SiteWideUserMenu } from "../SiteWideUserMenu";
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
@@ -44,17 +46,15 @@ const MobileMenuButton = tw(HamburgerMenuButton)`
 `;
 
 const Actions = tw.div`
-	hidden
+	flex
 	justify-end
-	sm:flex
-	[& > *]:not-last:mr-4
+	gap-4
 `;
 
 const StyledLoginButton = tw(Button)`
 	w-32
 	bg-transparent
 	text-black
-	border-gray-300
 	hover:shadow-md
 `;
 
@@ -62,8 +62,44 @@ const SignUpButton = tw(Button)`
 	w-32
 `;
 
-const StyledLogoutButton = tw(Button)`
-	w-32
+const IconButton = tw(Button)`
+	hidden
+	relative
+	bg-transparent
+	sm:flex
+`;
+
+const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
+	${tw`
+		absolute
+		bottom-0
+		left-1/2
+		-translate-x-1/2
+		translate-y-1/2
+		inline-flex
+		items-center
+		px-1
+		py-0.5
+		rounded-full
+		text-xs
+		leading-none
+		text-white
+		bg-pink-600
+	`}
+
+	${({ $variant }) => {
+		switch ($variant) {
+			case "alert":
+				return tw`bg-pink-600`;
+			case "success":
+			default:
+				return tw`bg-blue-500`;
+		}
+	}}
+`;
+
+const UserMenu = tw(SiteWideUserMenu)`
+	flex-shrink-0
 `;
 
 export interface SiteWideAppBarProps {
@@ -83,6 +119,20 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
 	const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
+		pause: status !== "authenticated",
+		requestPolicy: "cache-first"
+	});
+
+	const invitationsCount = invitationsData?.viewer?.friendRequestsReceived.totalCount ?? 0;
+
+	const [{ data: notificationsData }] = useGetNotificationCountsQuery({
+		requestPolicy: "cache-only"
+	});
+
+	const messageCount = notificationsData?.viewer?.messages.totalCount ?? 0;
+	const notificationCount = notificationsData?.viewer?.notifications.totalCount ?? 0;
 
 	useEffect(() => {
 		const unsubscribeScrollY = scrollY.onChange((y) => {
@@ -152,15 +202,31 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 							</>
 						) : (
 							<>
-								<PendingFriendsButton />
-								<NotificationBellButton />
-								<StyledLogoutButton
-									onClick={async () => {
-										await signOut();
-									}}
-								>
-									Logout
-								</StyledLogoutButton>
+								<IconButton type="button" variant="secondary">
+									<PeopleIcon height={24} width={24} />
+									{!!invitationsCount && (
+										<AlertCount $variant="success">
+											{FormatUtils.toGitHubFixed(invitationsCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+								<IconButton type="button" variant="secondary">
+									<ChatIcon height={24} width={24} />
+									{!!messageCount && (
+										<AlertCount $variant="alert">
+											{FormatUtils.toGitHubFixed(messageCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+								<IconButton type="button" variant="secondary">
+									<BellIcon height={24} width={24} />
+									{!!notificationCount && (
+										<AlertCount $variant="alert">
+											{FormatUtils.toGitHubFixed(notificationCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+								<UserMenu />
 							</>
 						)}
 					</Actions>
