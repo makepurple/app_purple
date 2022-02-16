@@ -33,6 +33,16 @@ declare module "next-auth" {
 	}
 }
 
+declare module "next-auth/react" {
+	interface User {
+		id: string;
+		name: string;
+		email: string;
+		description?: string | null | undefined;
+		image: string;
+	}
+}
+
 declare module "next-auth/jwt" {
 	/**
 	 * Returned by `getToken`
