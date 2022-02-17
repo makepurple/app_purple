@@ -1,5 +1,6 @@
 import { SiteWideSideDrawer, SiteWideSideDrawerProps } from "@makepurple/www";
 import type { Meta, Story } from "@storybook/react";
+import { SessionProvider } from "next-auth/react";
 import React from "react";
 
 export default {
@@ -17,3 +18,13 @@ Template.args = {
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
+Standard.decorators = [
+	(Base) => (
+		<SessionProvider session={null}>
+			<Base />
+		</SessionProvider>
+	)
+];
+
+export const Authenticated = Template.bind({});
+Authenticated.args = { ...Template.args };
