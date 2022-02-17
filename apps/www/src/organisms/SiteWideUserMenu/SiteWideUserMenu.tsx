@@ -6,11 +6,7 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC, useState } from "react";
 import { usePopper } from "react-popper";
 import tw, { styled } from "twin.macro";
-import {
-	useGetNotificationCountsQuery,
-	useGetPostDraftQuery,
-	useGetUserFriendRequestCountQuery
-} from "../../graphql";
+import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
 import { BookIcon, ChatIcon, PeopleIcon, SignOutIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
@@ -68,13 +64,6 @@ export interface SiteWideUserMenuProps {
 
 export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }) => {
 	const { data: session, status } = useSession();
-
-	const [{ data: draftData }] = useGetPostDraftQuery({
-		pause: status !== "authenticated",
-		requestPolicy: "cache-first"
-	});
-
-	const hasDraft = !!draftData?.postDraft;
 
 	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
 		pause: status !== "authenticated",
