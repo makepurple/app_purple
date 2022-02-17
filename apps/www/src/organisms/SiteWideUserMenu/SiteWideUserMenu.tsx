@@ -164,28 +164,38 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 								</Menu.Item>
 								<Menu.Item>
 									{(itemProps) => (
-										<ListItem as={MobileLink} {...itemProps}>
-											<PeopleIcon height={24} width={24} tw="mr-2" />
-											<span>Invitations</span>
-											{!!invitationsCount && (
-												<AlertCount $variant="success" tw="ml-2">
-													{FormatUtils.toGitHubFixed(invitationsCount)}
-												</AlertCount>
-											)}
-										</ListItem>
+										<NextLink
+											href="/[userName]/connections/requests"
+											as={`/${user.name}/connections/requests`}
+											passHref
+										>
+											<ListItem as={MobileLink} {...itemProps}>
+												<PeopleIcon height={24} width={24} tw="mr-2" />
+												<span>Invitations</span>
+												{!!invitationsCount && (
+													<AlertCount $variant="success" tw="ml-2">
+														{FormatUtils.toGitHubFixed(
+															invitationsCount
+														)}
+													</AlertCount>
+												)}
+											</ListItem>
+										</NextLink>
 									)}
 								</Menu.Item>
 								<Menu.Item>
 									{(itemProps) => (
-										<ListItem as={MobileLink} {...itemProps}>
-											<ChatIcon height={24} width={24} tw="mr-2" />
-											<span>Messages</span>
-											{!!messageCount && (
-												<AlertCount $variant="alert" tw="ml-2">
-													{FormatUtils.toGitHubFixed(messageCount)}
-												</AlertCount>
-											)}
-										</ListItem>
+										<NextLink href="/messaging" passHref>
+											<ListItem as={MobileLink} {...itemProps}>
+												<ChatIcon height={24} width={24} tw="mr-2" />
+												<span>Messages</span>
+												{!!messageCount && (
+													<AlertCount $variant="alert" tw="ml-2">
+														{FormatUtils.toGitHubFixed(messageCount)}
+													</AlertCount>
+												)}
+											</ListItem>
+										</NextLink>
 									)}
 								</Menu.Item>
 								<Divider tw="m-0.5" />
