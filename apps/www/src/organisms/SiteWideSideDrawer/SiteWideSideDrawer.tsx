@@ -166,10 +166,12 @@ export const SiteWideSideDrawer = forwardRef<HTMLDivElement, SiteWideSideDrawerP
 					)}
 					{status === "authenticated" && !!user && (
 						<>
-							<Button as="a">
-								<TelescopeIcon height={24} width={24} tw="mr-3" />
-								<span>Explore</span>
-							</Button>
+							<NextLink href="/explore" passHref>
+								<Button as="a">
+									<TelescopeIcon height={24} width={24} tw="mr-3" />
+									<span>Explore</span>
+								</Button>
+							</NextLink>
 							<Following tw="mt-3">
 								<SectionTitle>Following</SectionTitle>
 								<SectionContent tw="mt-1">
