@@ -1,14 +1,19 @@
 import { MouseEvent, RefObject, SyntheticEvent, TouchEvent, useCallback, useEffect } from "react";
 
+export const didClickIn = <T extends HTMLElement>(
+	elem: Maybe<T>,
+	e: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>
+): boolean => {
+	return !elem || elem.contains(e.target as Node | null);
+};
+
 export const useOnClickOutside = (
 	ref: RefObject<HTMLElement>,
 	handler: (event: SyntheticEvent<HTMLElement>) => void
 ) => {
 	const listener = useCallback(
 		(event: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>) => {
-			const didClickIn = !ref.current || ref.current.contains(event.target as Node | null);
-
-			if (didClickIn) return;
+			if (didClickIn(ref.current, event)) return;
 
 			handler(event);
 		},

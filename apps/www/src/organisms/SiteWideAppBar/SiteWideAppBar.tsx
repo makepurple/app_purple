@@ -7,7 +7,7 @@ import {
 	HamburgerMenuButton,
 	PageContainer
 } from "@makepurple/components";
-import { useOnClickOutside, useOnKeyDown } from "@makepurple/hooks";
+import { didClickIn, useOnClickOutside, useOnKeyDown } from "@makepurple/hooks";
 import { FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
@@ -154,9 +154,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const [drawerElem, drawerRef] = useState<HTMLDivElement | null>(null);
 
 	useOnClickOutside({ current: drawerElem }, (e) => {
-		const didClickIn = !elem || elem.contains(e.target as Node | null);
-
-		if (didClickIn) return;
+		if (didClickIn(elem, e)) return;
 
 		setMenuOpen(false);
 	});
