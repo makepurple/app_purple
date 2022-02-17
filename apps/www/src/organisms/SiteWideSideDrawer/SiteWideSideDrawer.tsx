@@ -7,11 +7,15 @@ import {
 	Paper,
 	SideDrawer
 } from "@makepurple/components";
+import { useOnClickOutside } from "@makepurple/hooks";
 import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, FC, ReactNode, useState } from "react";
+import React, { CSSProperties, FC, forwardRef, ReactNode, useRef, useState } from "react";
 import tw from "twin.macro";
-import { useGetSiteWideSideDrawerQuery } from "../../graphql";
+import {
+	useGetSiteWideSideDrawerQuery,
+	UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragmentDoc
+} from "../../graphql";
 import { BellIcon, BookIcon, ChatIcon, PeopleIcon, SignOutIcon, TelescopeIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
@@ -103,175 +107,188 @@ const NewPostItem = tw(NewPostButton)`
 export type SiteWideSideDrawerProps = {
 	children?: ReactNode;
 	className?: string;
-	onClose: () => void;
 	open: boolean;
 	style?: CSSProperties;
 };
 
-export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
-	const { children, className, onClose, open, style } = props;
+export const SiteWideSideDrawer = forwardRef<HTMLDivElement, SiteWideSideDrawerProps>(
+	(props, ref) => {
+		const { children, className, open, style } = props;
 
-	const { data: session, status } = useSession();
+		const { data: session, status } = useSession();
 
-	const user = session?.user;
+		const user = session?.user;
 
-	const [after, setAfter] = useState<string | null>(null);
+		const [after, setAfter] = useState<string | null>(null);
 
-	const [{ data, fetching }] = useGetSiteWideSideDrawerQuery({
-		pause: status !== "authenticated",
-		variables: {
-			after,
-			first: BATCH_SIZE
-		}
-	});
+		const [{ data, fetching }] = useGetSiteWideSideDrawerQuery({
+			pause: status !== "authenticated",
+			variables: {
+				after,
+				first: BATCH_SIZE
+			}
+		});
 
-	const following = data?.viewer?.following.nodes ?? [];
-	const followingInfo = data?.viewer?.following.pageInfo;
+		const following = data?.viewer?.following.nodes ?? [];
+		const followingInfo = data?.viewer?.following.pageInfo;
 
-	return (
-		<Root className={className} onClose={onClose} open={open} style={style}>
-			<Content>
-				{status === "unauthenticated" && (
-					<AuthContainer>
-						<AuthInfo>
-							<NextLink href="/" passHref>
-								<AuthBrand />
-							</NextLink>{" "}
-							is a community where developers collaborate, share and mutually grow.
-						</AuthInfo>
-						<NextLink href="/signup" passHref>
-							<Button as="a" tw="mt-4">
-								Sign Up
-							</Button>
-						</NextLink>
-						<NextLink href="/login" passHref>
-							<StyledLoginButton as="a" tw="mt-2">
-								<GitHubIcon height={24} width={24} tw="mr-2" />
-								<span>Login</span>
-							</StyledLoginButton>
-						</NextLink>
-					</AuthContainer>
-				)}
-				{status === "authenticated" && !!user && (
-					<>
-						<Button as="a">
-							<TelescopeIcon height={24} width={24} tw="mr-3" />
-							<span>Explore</span>
-						</Button>
-						<Following tw="mt-3">
-							<SectionTitle>Following</SectionTitle>
-							<SectionContent tw="mt-1">
-								{!following.length
-									? !fetching && (
-											<NonIdealState
-												title={null}
-												subTitle={
-													<div tw="flex flex-col items-center">
-														<div>Discover developers and skills</div>
-														<NextLink href="/explore" passHref>
-															<ExploreButton
-																as="a"
-																size="small"
-																tw="mt-4"
-															>
-																Explore
-															</ExploreButton>
-														</NextLink>
-													</div>
-												}
-												tw="shadow-none"
-											/>
-									  )
-									: following.map((follow) => (
-											<SiteWideSideDrawerFollowLink
-												key={follow.id}
-												followable={follow.following}
-											/>
-									  ))}
-								{fetching &&
-									Array.from({ length: 3 }, (_, i) => (
-										<LoadingSiteWideSideDrawerFollowLink key={i} />
-									))}
-							</SectionContent>
-							{followingInfo?.hasNextPage && (
-								<Button
-									disabled={fetching}
-									onClick={() => {
-										const endCursor = followingInfo.endCursor;
-
-										endCursor && setAfter(endCursor);
-									}}
-									size="small"
-									type="button"
-									variant="secondary"
-									tw="mt-2"
-								>
-									Load more
+		return (
+			<Root
+				ref={ref}
+				className={className}
+				onClose={() => undefined}
+				open={open}
+				static
+				style={style}
+			>
+				<Content>
+					{status === "unauthenticated" && (
+						<AuthContainer>
+							<AuthInfo>
+								<NextLink href="/" passHref>
+									<AuthBrand />
+								</NextLink>{" "}
+								is a community where developers collaborate, share and mutually
+								grow.
+							</AuthInfo>
+							<NextLink href="/signup" passHref>
+								<Button as="a" tw="mt-4">
+									Sign Up
 								</Button>
-							)}
-						</Following>
-						<Other tw="mt-3">
-							<SectionTitle>Other</SectionTitle>
-							<SectionContent tw="mt-1">
-								<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-									<ListItem as="a">
-										<UserAvatar
-											asLink={false}
-											border={1}
-											height={24}
-											width={24}
-											user={{ __typename: "User", ...user }}
-											tw="mr-3"
-										/>
-										<ListItemText>{user.name}</ListItemText>
+							</NextLink>
+							<NextLink href="/login" passHref>
+								<StyledLoginButton as="a" tw="mt-2">
+									<GitHubIcon height={24} width={24} tw="mr-2" />
+									<span>Login</span>
+								</StyledLoginButton>
+							</NextLink>
+						</AuthContainer>
+					)}
+					{status === "authenticated" && !!user && (
+						<>
+							<Button as="a">
+								<TelescopeIcon height={24} width={24} tw="mr-3" />
+								<span>Explore</span>
+							</Button>
+							<Following tw="mt-3">
+								<SectionTitle>Following</SectionTitle>
+								<SectionContent tw="mt-1">
+									{!following.length
+										? !fetching && (
+												<NonIdealState
+													title={null}
+													subTitle={
+														<div tw="flex flex-col items-center">
+															<div>
+																Discover developers and skills
+															</div>
+															<NextLink href="/explore" passHref>
+																<ExploreButton
+																	as="a"
+																	size="small"
+																	tw="mt-4"
+																>
+																	Explore
+																</ExploreButton>
+															</NextLink>
+														</div>
+													}
+													tw="shadow-none"
+												/>
+										  )
+										: following.map((follow) => (
+												<SiteWideSideDrawerFollowLink
+													key={follow.id}
+													followable={follow.following}
+												/>
+										  ))}
+									{fetching &&
+										Array.from({ length: 3 }, (_, i) => (
+											<LoadingSiteWideSideDrawerFollowLink key={i} />
+										))}
+								</SectionContent>
+								{followingInfo?.hasNextPage && (
+									<Button
+										disabled={fetching}
+										onClick={() => {
+											const endCursor = followingInfo.endCursor;
+
+											endCursor && setAfter(endCursor);
+										}}
+										size="small"
+										type="button"
+										variant="secondary"
+										tw="mt-2"
+									>
+										Load more
+									</Button>
+								)}
+							</Following>
+							<Other tw="mt-3">
+								<SectionTitle>Other</SectionTitle>
+								<SectionContent tw="mt-1">
+									<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+										<ListItem as="a">
+											<UserAvatar
+												asLink={false}
+												border={1}
+												height={24}
+												width={24}
+												user={{ __typename: "User", ...user }}
+												tw="mr-3"
+											/>
+											<ListItemText>{user.name}</ListItemText>
+										</ListItem>
+									</NextLink>
+									<ListItem as={NewPostItem} userName={user.name}>
+										{({ draft }) => (
+											<>
+												<BookIcon height={24} width={24} tw="mr-3" />
+												<span>{draft ? "Edit Draft" : "New Post"}</span>
+											</>
+										)}
 									</ListItem>
-								</NextLink>
-								<ListItem as={NewPostItem} userName={user.name}>
-									{({ draft }) => (
-										<>
-											<BookIcon height={24} width={24} tw="mr-3" />
-											<span>{draft ? "Edit Draft" : "New Post"}</span>
-										</>
-									)}
-								</ListItem>
-								<NextLink
-									href="/[userName]/connections/requests"
-									as={`/${user.name}/connections/requests`}
-									passHref
-								>
-									<ListItem as="a">
-										<PeopleIcon height={24} width={24} tw="mr-3" />
-										<span>Invitations</span>
+									<NextLink
+										href="/[userName]/connections/requests"
+										as={`/${user.name}/connections/requests`}
+										passHref
+									>
+										<ListItem as="a">
+											<PeopleIcon height={24} width={24} tw="mr-3" />
+											<span>Invitations</span>
+										</ListItem>
+									</NextLink>
+									<NextLink href="/messaging" passHref>
+										<ListItem as="a">
+											<ChatIcon height={24} width={24} tw="mr-3" />
+											<span>Messages</span>
+										</ListItem>
+									</NextLink>
+									<NextLink href="/notifications" passHref>
+										<ListItem as="a">
+											<BellIcon height={24} width={24} tw="mr-3" />
+											<span>Notifications</span>
+										</ListItem>
+									</NextLink>
+									<ListItem
+										as="button"
+										onClick={async () => {
+											await signOut({ callbackUrl: "/" });
+										}}
+										type="button"
+									>
+										<SignOutIcon height={24} width={24} tw="mr-3" />
+										<span>Logout</span>
 									</ListItem>
-								</NextLink>
-								<NextLink href="/messaging" passHref>
-									<ListItem as="a">
-										<ChatIcon height={24} width={24} tw="mr-3" />
-										<span>Messages</span>
-									</ListItem>
-								</NextLink>
-								<NextLink href="/notifications" passHref>
-									<ListItem as="a">
-										<BellIcon height={24} width={24} tw="mr-3" />
-										<span>Notifications</span>
-									</ListItem>
-								</NextLink>
-								<ListItem
-									as="button"
-									onClick={async () => {
-										await signOut({ callbackUrl: "/" });
-									}}
-									type="button"
-								>
-									<SignOutIcon height={24} width={24} tw="mr-3" />
-									<span>Logout</span>
-								</ListItem>
-							</SectionContent>
-						</Other>
-					</>
-				)}
-				{children}
-			</Content>
-		</Root>
-	);
-};
+								</SectionContent>
+							</Other>
+						</>
+					)}
+					{children}
+				</Content>
+			</Root>
+		);
+	}
+);
+
+SiteWideSideDrawer.displayName = "SiteWideSideDrawer";

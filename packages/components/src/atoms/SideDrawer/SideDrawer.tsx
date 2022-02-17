@@ -2,7 +2,7 @@ import { Dialog as HUIDialog } from "@headlessui/react";
 import { InferComponentProps } from "@makepurple/typings";
 import { StyleUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
-import React, { ReactElement } from "react";
+import React, { forwardRef } from "react";
 import tw, { styled } from "twin.macro";
 
 export type SideDrawerProps = InferComponentProps<typeof HUIDialog> & {
@@ -22,7 +22,7 @@ const Root = styled(m.div)`
 `;
 
 /* eslint-disable react/display-name */
-export const SideDrawer = (props: SideDrawerProps): ReactElement | null => {
+export const SideDrawer = forwardRef<HTMLDivElement, SideDrawerProps>((props, ref) => {
 	const { open, ...divProps } = props;
 
 	return (
@@ -30,6 +30,7 @@ export const SideDrawer = (props: SideDrawerProps): ReactElement | null => {
 			{open && (
 				<HUIDialog
 					as={Root}
+					ref={ref}
 					initial={{ x: "-100%" }}
 					animate={{ x: "0%" }}
 					exit={{ x: "-100%" }}
@@ -44,6 +45,6 @@ export const SideDrawer = (props: SideDrawerProps): ReactElement | null => {
 			)}
 		</AnimatePresence>
 	);
-};
+});
 
 SideDrawer.displayName = "SideDrawer";

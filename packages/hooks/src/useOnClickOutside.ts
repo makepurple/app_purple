@@ -8,9 +8,7 @@ export const useOnClickOutside = (
 		(event: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>) => {
 			const didClickIn = !ref.current || ref.current.contains(event.target as Node | null);
 
-			if (didClickIn) {
-				return;
-			}
+			if (didClickIn) return;
 
 			handler(event);
 		},
