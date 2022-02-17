@@ -25,7 +25,7 @@ const UserName = tw.span`
 
 const MobileLink = tw.div`
 	flex
-	sm:hidden
+	md:hidden
 `;
 
 const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`

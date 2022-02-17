@@ -58,7 +58,7 @@ const IconButton = tw(Button)`
 	hidden
 	relative
 	bg-transparent
-	sm:flex
+	md:flex
 `;
 
 const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
