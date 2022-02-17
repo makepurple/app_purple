@@ -2,7 +2,7 @@ import { MouseEvent, RefObject, SyntheticEvent, TouchEvent, useCallback, useEffe
 
 export const didClickIn = <T extends HTMLElement>(
 	elem: Maybe<T>,
-	e: MouseEvent<HTMLElement> | TouchEvent<HTMLElement>
+	e: SyntheticEvent<HTMLElement>
 ): boolean => {
 	return !elem || elem.contains(e.target as Node | null);
 };
