@@ -112,8 +112,9 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 
 	const isAuthPage = router.pathname === "/login" || router.pathname === "signup";
 
-	const { status } = useSession();
-	const isAuthenticated = status === "authenticated";
+	const { data: session, status } = useSession();
+
+	const user = session?.user;
 
 	const { scrollY, scrollYProgress } = useViewportScroll();
 
@@ -199,7 +200,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 			</BrandContainer>
 			{!isAuthPage && (
 				<Actions>
-					{!isAuthenticated ? (
+					{status !== "authenticated" || !user ? (
 						<>
 							<NextLink href="/login" passHref>
 								<StyledLoginButton as="a">Login</StyledLoginButton>
@@ -210,30 +211,40 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						</>
 					) : (
 						<>
-							<IconButton type="button" variant="secondary">
-								<PeopleIcon height={24} width={24} />
-								{!!invitationsCount && (
-									<AlertCount $variant="success">
-										{FormatUtils.toGitHubFixed(invitationsCount)}
-									</AlertCount>
-								)}
-							</IconButton>
-							<IconButton type="button" variant="secondary">
-								<ChatIcon height={24} width={24} />
-								{!!messageCount && (
-									<AlertCount $variant="alert">
-										{FormatUtils.toGitHubFixed(messageCount)}
-									</AlertCount>
-								)}
-							</IconButton>
-							<NotificationButton type="button" variant="secondary">
-								<BellIcon height={24} width={24} />
-								{!!notificationCount && (
-									<AlertCount $variant="alert">
-										{FormatUtils.toGitHubFixed(notificationCount)}
-									</AlertCount>
-								)}
-							</NotificationButton>
+							<NextLink
+								href="/[userName]/connections/requests"
+								as={`/${user.name}/connections/requests`}
+								passHref
+							>
+								<IconButton as="a" variant="secondary">
+									<PeopleIcon height={24} width={24} />
+									{!!invitationsCount && (
+										<AlertCount $variant="success">
+											{FormatUtils.toGitHubFixed(invitationsCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+							</NextLink>
+							<NextLink href="/messaging" passHref>
+								<IconButton as="a" variant="secondary">
+									<ChatIcon height={24} width={24} />
+									{!!messageCount && (
+										<AlertCount $variant="alert">
+											{FormatUtils.toGitHubFixed(messageCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+							</NextLink>
+							<NextLink href="/notifications" passHref>
+								<NotificationButton as="a" variant="secondary">
+									<BellIcon height={24} width={24} />
+									{!!notificationCount && (
+										<AlertCount $variant="alert">
+											{FormatUtils.toGitHubFixed(notificationCount)}
+										</AlertCount>
+									)}
+								</NotificationButton>
+							</NextLink>
 							<UserMenu />
 						</>
 					)}
