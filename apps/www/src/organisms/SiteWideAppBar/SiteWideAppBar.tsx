@@ -61,6 +61,10 @@ const IconButton = tw(Button)`
 	md:flex
 `;
 
+const NotificationButton = tw(IconButton)`
+	flex
+`;
+
 const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
 	${tw`
 		absolute
@@ -222,14 +226,14 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 									</AlertCount>
 								)}
 							</IconButton>
-							<IconButton type="button" variant="secondary">
+							<NotificationButton type="button" variant="secondary">
 								<BellIcon height={24} width={24} />
 								{!!notificationCount && (
 									<AlertCount $variant="alert">
 										{FormatUtils.toGitHubFixed(notificationCount)}
 									</AlertCount>
 								)}
-							</IconButton>
+							</NotificationButton>
 							<UserMenu />
 						</>
 					)}

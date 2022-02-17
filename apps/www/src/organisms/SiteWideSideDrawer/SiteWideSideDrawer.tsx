@@ -95,8 +95,9 @@ const ListItemText = tw.span`
 const NewPostItem = tw(NewPostButton)`
 	justify-start
 	shadow-none
-	hover:shadow-none!
-	hover:opacity-100!
+	not-disabled:hover:shadow-none!
+	not-disabled:hover:opacity-100!
+	not-disabled:hover:translate-y-0!
 `;
 
 export type SiteWideSideDrawerProps = {

@@ -11,7 +11,8 @@ import {
 	useGetPostDraftQuery,
 	useGetUserFriendRequestCountQuery
 } from "../../graphql";
-import { BellIcon, BookIcon, ChatIcon, PeopleIcon, SignOutIcon } from "../../svgs";
+import { BookIcon, ChatIcon, PeopleIcon, SignOutIcon } from "../../svgs";
+import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
 
 const List = tw(m.div)`
@@ -23,9 +24,17 @@ const UserName = tw.span`
 	truncate
 `;
 
-const MobileLink = tw.div`
+const MobileLink = tw.a`
 	flex
 	md:hidden
+`;
+
+const NewPostItem = tw(NewPostButton)`
+	justify-start
+	shadow-none
+	not-disabled:hover:shadow-none!
+	not-disabled:hover:opacity-100!
+	not-disabled:hover:translate-y-0!
 `;
 
 const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
@@ -79,7 +88,6 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 	});
 
 	const messageCount = notificationsData?.viewer?.messages.totalCount ?? 0;
-	const notificationCount = notificationsData?.viewer?.notifications.totalCount ?? 0;
 
 	const [refElem, ref] = useState<HTMLElement | null>(null);
 	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
@@ -149,9 +157,19 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 								<Divider tw="m-0.5" />
 								<Menu.Item>
 									{(itemProps) => (
-										<ListItem as="div" {...itemProps}>
-											<BookIcon height={24} width={24} tw="mr-2" />
-											<span>{hasDraft ? "Edit Draft" : "Create Post"}</span>
+										<ListItem
+											as={NewPostItem}
+											userName={user.name}
+											{...itemProps}
+										>
+											{({ draft }) => (
+												<>
+													<BookIcon height={24} width={24} tw="mr-2" />
+													<span>
+														{draft ? "Edit Draft" : "Create Post"}
+													</span>
+												</>
+											)}
 										</ListItem>
 									)}
 								</Menu.Item>
@@ -176,19 +194,6 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 											{!!messageCount && (
 												<AlertCount $variant="alert" tw="ml-2">
 													{FormatUtils.toGitHubFixed(messageCount)}
-												</AlertCount>
-											)}
-										</ListItem>
-									)}
-								</Menu.Item>
-								<Menu.Item>
-									{(itemProps) => (
-										<ListItem as={MobileLink} {...itemProps}>
-											<BellIcon height={24} width={24} tw="mr-2" />
-											<span>Notifications</span>
-											{!!notificationCount && (
-												<AlertCount $variant="alert" tw="ml-2">
-													{FormatUtils.toGitHubFixed(notificationCount)}
 												</AlertCount>
 											)}
 										</ListItem>
