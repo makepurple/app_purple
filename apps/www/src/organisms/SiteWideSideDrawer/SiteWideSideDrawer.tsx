@@ -9,7 +9,7 @@ import {
 } from "@makepurple/components";
 import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, FC, useState } from "react";
+import React, { CSSProperties, FC, ReactNode, useState } from "react";
 import tw from "twin.macro";
 import { useGetSiteWideSideDrawerQuery } from "../../graphql";
 import { BellIcon, BookIcon, ChatIcon, PeopleIcon, SignOutIcon, TelescopeIcon } from "../../svgs";
@@ -100,13 +100,15 @@ const NewPostItem = tw(NewPostButton)`
 `;
 
 export type SiteWideSideDrawerProps = {
+	children?: ReactNode;
 	className?: string;
+	onClose: () => void;
 	open: boolean;
 	style?: CSSProperties;
 };
 
 export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
-	const { className, open, style } = props;
+	const { children, className, onClose, open, style } = props;
 
 	const { data: session, status } = useSession();
 
@@ -126,7 +128,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 	const followingInfo = data?.viewer?.following.pageInfo;
 
 	return (
-		<Root className={className} onClose={() => undefined} open={open} style={style}>
+		<Root className={className} onClose={onClose} open={open} style={style}>
 			<Content>
 				{status === "unauthenticated" && (
 					<AuthContainer>
@@ -267,6 +269,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 						</Other>
 					</>
 				)}
+				{children}
 			</Content>
 		</Root>
 	);

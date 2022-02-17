@@ -1,9 +1,10 @@
+import { Dialog } from "@headlessui/react";
 import {
 	AppBar,
+	Backdrop,
 	Brand,
 	Button,
 	HamburgerMenuButton,
-	MainContainer,
 	PageContainer
 } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
@@ -141,7 +142,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		};
 	}, [scrollY, scrollYProgress]);
 
-	const animate: boolean = menuOpen || isThreshold;
+	const animate = menuOpen ? "open" : isThreshold ? "scrolled" : "default";
 
 	return (
 		<Root
@@ -149,7 +150,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 			className={className}
 			style={style}
 			initial={false}
-			animate={animate ? "scrolled" : "default"}
+			animate={animate}
 			variants={{
 				default: {
 					backgroundColor: "rgba(255, 255, 255, 0)",
@@ -168,6 +169,15 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						0 1px 5px 0 rgba(0, 0, 0, 0.12)
 					`,
 					backdropFilter: "blur(10px)"
+				},
+				open: {
+					backgroundColor: "rgba(255, 255, 255, 1)",
+					boxShadow: oneLine`
+						0 2px 2px 0 rgba(0, 0, 0, 0.14),
+						0 3px 1px -2px rgba(0, 0, 0, 0.2),
+						0 1px 5px 0 rgba(0, 0, 0, 0.12)
+					`,
+					backdropFilter: "blur(0px)"
 				}
 			}}
 		>
@@ -225,7 +235,14 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					)}
 				</Actions>
 			)}
-			<SideDrawer open={menuOpen} />
+			<SideDrawer
+				onClose={() => {
+					setMenuOpen(false);
+				}}
+				open={menuOpen}
+			>
+				<Dialog.Overlay as={Backdrop} open={menuOpen} />
+			</SideDrawer>
 		</Root>
 	);
 };
