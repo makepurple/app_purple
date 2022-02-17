@@ -1,4 +1,4 @@
-import { UserActivityType } from "@prisma/client";
+import { FollowType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -23,7 +23,8 @@ export const followUser = mutationField("followUser", {
 									type: UserActivityType.FollowUser,
 									user: { connect: { id: user.id } }
 								}
-							}
+							},
+							type: FollowType.User
 						}
 					},
 					follower: { connect: { id: user.id } },

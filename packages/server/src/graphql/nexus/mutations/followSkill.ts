@@ -1,4 +1,4 @@
-import { UserActivityType } from "@prisma/client";
+import { FollowType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
@@ -33,7 +33,8 @@ export const followSkill = mutationField("followSkill", {
 										type: UserActivityType.FollowSkill,
 										user: { connect: { id: user.id } }
 									}
-								}
+								},
+								type: FollowType.Skill
 							}
 						},
 						follower: { connect: { id: user.id } },
@@ -88,7 +89,8 @@ export const followSkill = mutationField("followSkill", {
 										type: UserActivityType.FollowSkill,
 										user: { connect: { id: user.id } }
 									}
-								}
+								},
+								type: FollowType.Skill
 							}
 						},
 						follower: { connect: { id: user.id } },

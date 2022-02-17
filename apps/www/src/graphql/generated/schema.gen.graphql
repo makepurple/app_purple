@@ -346,7 +346,7 @@ type FollowUserPayload implements MutationPayload {
 
 input FollowWhereInput {
   skill: SkillWhereInput
-  type: FollowingType
+  type: FollowType
   user: UserWhereInput
 }
 
@@ -358,7 +358,7 @@ interface Followable {
   viewerFollowing: Boolean!
 }
 
-enum FollowingType {
+enum FollowType {
   Skill
   User
 }

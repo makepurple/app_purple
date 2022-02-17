@@ -444,7 +444,7 @@ export type FollowUserPayload = MutationPayload & {
 
 export type FollowWhereInput = {
   readonly skill?: InputMaybe<SkillWhereInput>;
-  readonly type?: InputMaybe<FollowingType>;
+  readonly type?: InputMaybe<FollowType>;
   readonly user?: InputMaybe<UserWhereInput>;
 };
 
@@ -456,7 +456,7 @@ export type Followable = {
   readonly viewerFollowing: Scalars['Boolean'];
 };
 
-export enum FollowingType {
+export enum FollowType {
   Skill = 'Skill',
   User = 'User'
 }
