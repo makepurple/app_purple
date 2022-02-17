@@ -1,7 +1,8 @@
 import { InferComponentProps } from "@makepurple/typings";
-import { StyleUtils } from "@makepurple/utils";
+import { StyleUtils, WindowUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
+import { createPortal } from "react-dom";
 import tw, { styled } from "twin.macro";
 
 const Root = styled(m.div)`
@@ -21,7 +22,9 @@ export type BackdropProps = InferComponentProps<"div"> & {
 export const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
 	const { open, ...divProps } = props;
 
-	return (
+	if (WindowUtils.isSsr()) return null;
+
+	return createPortal(
 		<AnimatePresence initial={false}>
 			{open && (
 				<Root
@@ -36,7 +39,8 @@ export const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) =
 					ref={ref}
 				/>
 			)}
-		</AnimatePresence>
+		</AnimatePresence>,
+		document.body
 	);
 });
 

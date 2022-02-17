@@ -2,7 +2,7 @@ import { Dialog as HUIDialog } from "@headlessui/react";
 import { InferComponentProps } from "@makepurple/typings";
 import { StyleUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import tw, { styled } from "twin.macro";
 
 export type SideDrawerProps = InferComponentProps<typeof HUIDialog> & {
