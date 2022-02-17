@@ -6,22 +6,22 @@ const Root = tw(Paper)`
 	flex
 	flex-col
 	items-center
+	gap-3.5
 	p-6
 	sm:p-8
 `;
 
 const Title = tw.div`
 	text-2xl
-	leading-none
+	leading-tight
 	font-bold
 	text-black
 	text-center
 `;
 
 const SubTitle = tw.div`
-	mt-3
 	text-lg
-	leading-none
+	leading-tight
 	text-gray-500
 	whitespace-pre-wrap
 	text-center
@@ -30,7 +30,6 @@ const SubTitle = tw.div`
 const Content = tw.div`
 	flex
 	items-stretch
-	mt-4
 	text-gray-500
 `;
 
@@ -39,7 +38,7 @@ export interface NonIdealStateProps {
 	className?: string;
 	style?: CSSProperties;
 	subTitle?: ReactNode;
-	title?: string;
+	title?: Maybe<string>;
 }
 
 export const NonIdealState: FC<NonIdealStateProps> = ({
@@ -51,7 +50,7 @@ export const NonIdealState: FC<NonIdealStateProps> = ({
 }) => {
 	return (
 		<Root className={className} style={style}>
-			<Title>{title}</Title>
+			{!!title && <Title>{title}</Title>}
 			{!!subTitle && <SubTitle>{subTitle}</SubTitle>}
 			{!!children && <Content>{children}</Content>}
 		</Root>

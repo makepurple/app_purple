@@ -26,23 +26,14 @@ const MotionAppBar = m(AppBar);
 
 const Root = tw(PageContainer)`
 	flex
-` as typeof MotionAppBar;
-
-const Content = tw(MainContainer)`
-	flex
-	flex-row
 	items-center
-`;
+	justify-between
+` as typeof MotionAppBar;
 
 const BrandContainer = tw.div`
 	flex-grow
 	flex
 	items-center
-`;
-
-const MobileMenuButton = tw(HamburgerMenuButton)`
-	mr-2
-	sm:hidden
 `;
 
 const Actions = tw.div`
@@ -102,6 +93,10 @@ const UserMenu = tw(SiteWideUserMenu)`
 	flex-shrink-0
 `;
 
+const SideDrawer = tw(SiteWideSideDrawer)`
+	pt-16
+`;
+
 export interface SiteWideAppBarProps {
 	className?: string;
 	style?: CSSProperties;
@@ -146,13 +141,15 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		};
 	}, [scrollY, scrollYProgress]);
 
+	const animate: boolean = menuOpen || isThreshold;
+
 	return (
 		<Root
 			as={MotionAppBar}
 			className={className}
 			style={style}
 			initial={false}
-			animate={isThreshold ? "scrolled" : "default"}
+			animate={animate ? "scrolled" : "default"}
 			variants={{
 				default: {
 					backgroundColor: "rgba(255, 255, 255, 0)",
@@ -174,71 +171,61 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 				}
 			}}
 		>
-			<Content>
-				<BrandContainer>
-					{!isAuthenticated && (
-						<MobileMenuButton
-							onClick={() => {
-								setMenuOpen(true);
-							}}
-							open={menuOpen}
-							tw="mr-2"
-						/>
+			<BrandContainer>
+				<HamburgerMenuButton
+					onClick={() => {
+						setMenuOpen((oldMenuOpen) => !oldMenuOpen);
+					}}
+					open={menuOpen}
+					tw="mr-3"
+				/>
+				<NextLink href="/" passHref>
+					<Brand />
+				</NextLink>
+			</BrandContainer>
+			{!isAuthPage && (
+				<Actions>
+					{!isAuthenticated ? (
+						<>
+							<NextLink href="/login" passHref>
+								<StyledLoginButton as="a">Login</StyledLoginButton>
+							</NextLink>
+							<NextLink href="/signup" passHref>
+								<SignUpButton as="a">Sign Up</SignUpButton>
+							</NextLink>
+						</>
+					) : (
+						<>
+							<IconButton type="button" variant="secondary">
+								<PeopleIcon height={24} width={24} />
+								{!!invitationsCount && (
+									<AlertCount $variant="success">
+										{FormatUtils.toGitHubFixed(invitationsCount)}
+									</AlertCount>
+								)}
+							</IconButton>
+							<IconButton type="button" variant="secondary">
+								<ChatIcon height={24} width={24} />
+								{!!messageCount && (
+									<AlertCount $variant="alert">
+										{FormatUtils.toGitHubFixed(messageCount)}
+									</AlertCount>
+								)}
+							</IconButton>
+							<IconButton type="button" variant="secondary">
+								<BellIcon height={24} width={24} />
+								{!!notificationCount && (
+									<AlertCount $variant="alert">
+										{FormatUtils.toGitHubFixed(notificationCount)}
+									</AlertCount>
+								)}
+							</IconButton>
+							<UserMenu />
+						</>
 					)}
-					<NextLink href="/" passHref>
-						<Brand />
-					</NextLink>
-				</BrandContainer>
-				{!isAuthPage && (
-					<Actions>
-						{!isAuthenticated ? (
-							<>
-								<NextLink href="/login" passHref>
-									<StyledLoginButton as="a">Login</StyledLoginButton>
-								</NextLink>
-								<NextLink href="/signup" passHref>
-									<SignUpButton as="a">Sign Up</SignUpButton>
-								</NextLink>
-							</>
-						) : (
-							<>
-								<IconButton type="button" variant="secondary">
-									<PeopleIcon height={24} width={24} />
-									{!!invitationsCount && (
-										<AlertCount $variant="success">
-											{FormatUtils.toGitHubFixed(invitationsCount)}
-										</AlertCount>
-									)}
-								</IconButton>
-								<IconButton type="button" variant="secondary">
-									<ChatIcon height={24} width={24} />
-									{!!messageCount && (
-										<AlertCount $variant="alert">
-											{FormatUtils.toGitHubFixed(messageCount)}
-										</AlertCount>
-									)}
-								</IconButton>
-								<IconButton type="button" variant="secondary">
-									<BellIcon height={24} width={24} />
-									{!!notificationCount && (
-										<AlertCount $variant="alert">
-											{FormatUtils.toGitHubFixed(notificationCount)}
-										</AlertCount>
-									)}
-								</IconButton>
-								<UserMenu />
-							</>
-						)}
-					</Actions>
-				)}
-			</Content>
-			<SiteWideSideDrawer
-				onClose={() => {
-					setMenuOpen(false);
-				}}
-				open={menuOpen}
-				tw="sm:hidden"
-			/>
+				</Actions>
+			)}
+			<SideDrawer open={menuOpen} />
 		</Root>
 	);
 };

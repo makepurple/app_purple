@@ -2,6 +2,7 @@ import { SiteWideLayout, SiteWideLayoutProps } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
@@ -30,6 +31,8 @@ Template.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			default:

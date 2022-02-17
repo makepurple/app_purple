@@ -5,6 +5,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetPosts_mock,
+	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -56,6 +57,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetPosts":
 				return { data: GetPosts_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
@@ -84,6 +87,8 @@ Loading.parameters = {
 				await PromiseUtils.wait(ms("5s"));
 
 				return { data: GetPosts_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
@@ -131,6 +136,8 @@ NoResults.parameters = {
 						}
 					}
 				};
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":

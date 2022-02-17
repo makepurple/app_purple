@@ -3,6 +3,7 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetSiteWideSideDrawer_mock,
 	GetSkillFollowers_mock,
 	GetSkillInfoSideBar_mock,
 	GetUserFriendRequestCount_mock,
@@ -56,6 +57,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillFollowers":
 				return { data: GetSkillFollowers_mock };
 			case "GetSkillInfoSideBar":
@@ -82,6 +85,8 @@ Loading.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillFollowers":
 				await PromiseUtils.wait(ms("5s"));
 
@@ -124,6 +129,8 @@ NoResults.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillFollowers":
 				return {
 					data: {

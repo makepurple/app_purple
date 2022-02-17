@@ -1,0 +1,10 @@
+fragment SiteWideSideDrawerFollowable on Followable {
+	__typename
+	viewerFollowing
+	... on Skill {
+		...SiteWideSideDrawerSkillFollowLinkSkill
+	}
+	... on User {
+		...SiteWideSideDrawerUserFollowLinkUser
+	}
+}

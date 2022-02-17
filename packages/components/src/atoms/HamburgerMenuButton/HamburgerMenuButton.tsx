@@ -31,7 +31,7 @@ const Root = styled.button`
 		w-9
 		border
 		border-solid
-		border-gray-200
+		border-gray-300
 		rounded-md
 	`}
 

@@ -6,6 +6,7 @@ import {
 	GetExperiences_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
 	SuggestExperiences_mock
@@ -62,6 +63,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
@@ -98,6 +101,8 @@ Loading.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
@@ -153,6 +158,8 @@ NoResults.parameters = {
 						postDraft: null
 					}
 				};
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":

@@ -1,0 +1,5 @@
+fragment SiteWideSideDrawerUserFollowLinkUser on User {
+	id
+	image
+	name
+}

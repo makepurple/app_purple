@@ -2,6 +2,7 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetSiteWideSideDrawer_mock,
 	GetSkillInfoSideBar_mock,
 	GetUserFriendRequestCount_mock,
 	PageInfo_fragment_mock,
@@ -54,6 +55,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
 			case "GetUserFriendRequestCount":
@@ -80,6 +83,8 @@ NoResults.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
 			case "GetUserFriendRequestCount":

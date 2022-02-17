@@ -2,6 +2,7 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
+	GetSiteWideSideDrawer_mock,
 	GetSkillOwnerExperiencers_mock,
 	GetSkillOwnerInfoSideBar_mock,
 	GetSkillOwnerRepositories_mock,
@@ -53,6 +54,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillOwnerExperiencers":
 				return { data: GetSkillOwnerExperiencers_mock };
 			case "GetSkillOwnerInfoSideBar":

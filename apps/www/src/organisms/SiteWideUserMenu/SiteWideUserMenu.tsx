@@ -198,10 +198,11 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 								<Menu.Item>
 									{(itemProps) => (
 										<ListItem
-											as="div"
+											as="button"
 											onClick={async () => {
 												await signOut({ callbackUrl: "/" });
 											}}
+											type="button"
 											{...itemProps}
 										>
 											<SignOutIcon height={24} width={24} tw="mr-2" />

@@ -8,9 +8,9 @@ export const ZIndicies = [
 	 * @date December 28, 2021
 	 */
 	"extra",
-	"app-bar",
-	"backdrop",
 	"page-drawer",
+	"backdrop",
+	"app-bar",
 	"menu"
 ] as const;
 

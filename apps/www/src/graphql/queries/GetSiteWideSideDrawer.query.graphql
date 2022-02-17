@@ -1,0 +1,32 @@
+query GetSiteWideSideDrawer(
+	$after: String
+	$first: Int
+) {
+	viewer {
+		id
+		following(
+			after: $after
+			first: $first
+			orderBy: {
+				type: Desc
+			}
+		) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				id
+				following {
+					...SiteWideSideDrawerFollowable
+				}
+			}
+		}
+	}
+}

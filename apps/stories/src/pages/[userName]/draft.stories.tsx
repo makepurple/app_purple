@@ -4,6 +4,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetPost_mock,
+	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock,
 	RemovePostThumbnail_mock,
 	SuggestSkills_mock,
@@ -53,6 +54,8 @@ Standard.parameters = {
 				return { data: GetPost_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "RemovePostThumbnail":

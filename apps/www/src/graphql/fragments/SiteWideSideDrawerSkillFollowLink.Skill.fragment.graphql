@@ -1,0 +1,13 @@
+fragment SiteWideSideDrawerSkillFollowLinkSkill on Skill {
+	github {
+		id
+		owner {
+			__typename
+			avatarUrl
+			id
+		}
+	}
+	id
+	name
+	owner
+}
