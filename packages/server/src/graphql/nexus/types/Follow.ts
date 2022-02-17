@@ -49,5 +49,6 @@ export const Follow = objectType({
 			}
 		});
 		t.field(NexusPrisma.Follow.createdAt);
+		t.field(NexusPrisma.Follow.type);
 	}
 });

@@ -161,9 +161,12 @@ export interface NexusGenInputs {
   ExperienceWhereUniqueInput: { // input type
     id: string; // String!
   }
+  FollowOrderByInput: { // input type
+    type?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   FollowWhereInput: { // input type
     skill?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
-    type?: NexusGenEnums['FollowingType'] | null; // FollowingType
+    type?: NexusGenEnums['FollowType'] | null; // FollowType
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
   }
   FollowWhereUniqueInput: { // input type
@@ -341,7 +344,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
-  FollowingType: "Skill" | "User"
+  FollowType: "Skill" | "User"
   GitHubUserContributionLevel: "FIRST_QUARTILE" | "FOURTH_QUARTILE" | "NONE" | "SECOND_QUARTILE" | "THIRD_QUARTILE"
   NotificationType: "ChatMessageReceived" | "FriendshipAccepted" | "PostCommented"
   SortOrder: "asc" | "desc"
@@ -472,6 +475,7 @@ export interface NexusGenObjects {
   Follow: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    type: NexusGenEnums['FollowType']; // FollowType!
   }
   FollowConnection: { // root type
     edges: NexusGenRootTypes['FollowEdge'][]; // [FollowEdge!]!
@@ -1011,6 +1015,7 @@ export interface NexusGenFieldTypes {
     follower: NexusGenRootTypes['User']; // User!
     following: NexusGenRootTypes['Followable']; // Followable!
     id: string; // ID!
+    type: NexusGenEnums['FollowType']; // FollowType!
   }
   FollowConnection: { // field return type
     edges: NexusGenRootTypes['FollowEdge'][]; // [FollowEdge!]!
@@ -1790,6 +1795,7 @@ export interface NexusGenFieldTypeNames {
     follower: 'User'
     following: 'Followable'
     id: 'ID'
+    type: 'FollowType'
   }
   FollowConnection: { // field return type name
     edges: 'FollowEdge'
@@ -2841,6 +2847,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['FollowOrderByInput'] | null; // FollowOrderByInput
       where?: NexusGenInputs['FollowWhereInput'] | null; // FollowWhereInput
     }
     friendRequestsReceived: { // args

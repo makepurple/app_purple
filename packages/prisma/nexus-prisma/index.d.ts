@@ -5021,6 +5021,58 @@ export interface Follow {
      */
     resolve: NexusCore.FieldResolver<'Follow', 'followingUser'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.type`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Follow
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Follow
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Follow {
+    *   /// Lorem ipsum dolor sit amet.
+    *   type  FollowType
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Follow } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Follow.$name
+    *   description: Follow.$description
+    *   definition(t) {
+    *     t.field(Follow.type)
+    *   }
+    * })
+    */
+  type: {
+    /**
+     * The name of this field.
+     */
+    name: 'type'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'FollowType' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'FollowType'>
+    : 'Warning/Error: The type \'FollowType\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'FollowType\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Follow', 'type'>
+  }
 }
 
 /**
@@ -12835,6 +12887,39 @@ export interface NotificationType {
 }
 
 /**
+  * Generated Nexus `enumType` configuration based on your Prisma schema's enum `FollowType`.
+  *
+  * ### ️⚠️ You have not writen documentation for enum FollowType
+  *
+  * Replace this default advisory JSDoc with your own documentation about enum FollowType
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * enum FollowType {
+  *   Skill
+  *   User
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * Contains these members: Skill, User
+  *
+  * @example
+  *
+  * import { enumType } from 'nexus'
+  * import { FollowType } from 'nexus-prisma'
+  *
+  * enumType(FollowType)
+  */
+export interface FollowType {
+  name: 'FollowType'
+  description: undefined
+  members: ['Skill', 'User']
+}
+
+/**
   * Generated Nexus `enumType` configuration based on your Prisma schema's enum `ExperienceType`.
   *
   * ### ️⚠️ You have not writen documentation for enum ExperienceType
@@ -12955,6 +13040,8 @@ export const Experience: Experience
 export const UserActivityType: UserActivityType
 
 export const NotificationType: NotificationType
+
+export const FollowType: FollowType
 
 export const ExperienceType: ExperienceType
 

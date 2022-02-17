@@ -160,12 +160,18 @@ model Friendship {
   @@unique([frienderId, friendingId])
 }
 
+enum FollowType {
+  Skill
+  User
+}
+
 model Follow {
   id             String         @id @default(cuid())
   activities     UserActivity[]
   createdAt      DateTime       @default(now())
   followingSkill FollowSkill?
   followingUser  FollowUser?
+  type           FollowType
 }
 
 // These are uni-directional follows. If matched 2-way, then the users are following each-other.
