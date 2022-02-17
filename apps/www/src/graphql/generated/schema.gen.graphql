@@ -318,6 +318,7 @@ type Follow {
   follower: User!
   following: Followable!
   id: ID!
+  type: FollowType!
 }
 
 type FollowConnection implements Connection {
@@ -332,10 +333,19 @@ type FollowEdge implements ConnectionEdge {
   node: Follow!
 }
 
+input FollowOrderByInput {
+  type: SortOrder
+}
+
 type FollowSkillPayload implements MutationPayload {
   query: Query!
   record: Follow!
   viewer: User
+}
+
+enum FollowType {
+  Skill
+  User
 }
 
 type FollowUserPayload implements MutationPayload {
@@ -356,11 +366,6 @@ input FollowWhereUniqueInput {
 
 interface Followable {
   viewerFollowing: Boolean!
-}
-
-enum FollowType {
-  Skill
-  User
 }
 
 type Friendship {
@@ -1170,7 +1175,7 @@ type User implements Followable {
   email: String!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
-  following(after: String, before: String, first: Int, last: Int, where: FollowWhereInput): FollowConnection!
+  following(after: String, before: String, first: Int, last: Int, orderBy: FollowOrderByInput, where: FollowWhereInput): FollowConnection!
   friendRequestsReceived(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friendRequestsSent(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friends(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!

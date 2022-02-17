@@ -16,7 +16,7 @@ import React, { CSSProperties, FC, useEffect, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
 import { BellIcon, ChatIcon, PeopleIcon } from "../../svgs";
-import { MobileAppDrawer } from "../MobileAppDrawer";
+import { SiteWideSideDrawer } from "../SiteWideSideDrawer";
 import { SiteWideUserMenu } from "../SiteWideUserMenu";
 
 const SCROLL_THRESHOLD = 32;
@@ -232,7 +232,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					</Actions>
 				)}
 			</Content>
-			<MobileAppDrawer
+			<SiteWideSideDrawer
 				onClose={() => {
 					setMenuOpen(false);
 				}}

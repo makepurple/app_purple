@@ -412,6 +412,7 @@ export type Follow = {
   readonly follower: User;
   readonly following: Followable;
   readonly id: Scalars['ID'];
+  readonly type: FollowType;
 };
 
 export type FollowConnection = Connection & {
@@ -428,12 +429,21 @@ export type FollowEdge = ConnectionEdge & {
   readonly node: Follow;
 };
 
+export type FollowOrderByInput = {
+  readonly type?: InputMaybe<SortOrder>;
+};
+
 export type FollowSkillPayload = MutationPayload & {
   readonly __typename: 'FollowSkillPayload';
   readonly query: Query;
   readonly record: Follow;
   readonly viewer?: Maybe<User>;
 };
+
+export enum FollowType {
+  Skill = 'Skill',
+  User = 'User'
+}
 
 export type FollowUserPayload = MutationPayload & {
   readonly __typename: 'FollowUserPayload';
@@ -455,11 +465,6 @@ export type FollowWhereUniqueInput = {
 export type Followable = {
   readonly viewerFollowing: Scalars['Boolean'];
 };
-
-export enum FollowType {
-  Skill = 'Skill',
-  User = 'User'
-}
 
 export type Friendship = {
   readonly __typename: 'Friendship';
@@ -1935,6 +1940,7 @@ export type UserFollowingArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<FollowOrderByInput>;
   where?: InputMaybe<FollowWhereInput>;
 };
 

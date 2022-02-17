@@ -59,14 +59,14 @@ const StyledLoginButton = tw(Button)`
 
 `;
 
-export type MobileAppDrawerProps = {
+export type SiteWideSideDrawerProps = {
 	className?: string;
 	onClose: () => void;
 	open: boolean;
 	style?: CSSProperties;
 };
 
-export const MobileAppDrawer: FC<MobileAppDrawerProps> = (props) => {
+export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 	const { className, onClose, open, style } = props;
 
 	const { status } = useSession();

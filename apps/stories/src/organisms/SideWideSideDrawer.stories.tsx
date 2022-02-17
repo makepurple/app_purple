@@ -1,14 +1,14 @@
-import { MobileAppDrawer, MobileAppDrawerProps } from "@makepurple/www";
+import { SiteWideSideDrawer, SiteWideSideDrawerProps } from "@makepurple/www";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
 export default {
-	title: "organisms/MobileAppDrawer",
-	component: MobileAppDrawer
+	title: "organisms/SiteWideSideDrawer",
+	component: SiteWideSideDrawer
 } as Meta;
 
-const Template: Story<MobileAppDrawerProps> = (args) => {
-	return <MobileAppDrawer {...args} />;
+const Template: Story<SiteWideSideDrawerProps> = (args) => {
+	return <SiteWideSideDrawer {...args} />;
 };
 Template.args = {
 	open: true,
