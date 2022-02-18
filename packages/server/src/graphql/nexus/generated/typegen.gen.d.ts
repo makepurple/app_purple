@@ -289,9 +289,6 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
-  SuggestExperiencesWhereInput: { // input type
-    name: string; // String!
-  }
   SuggestFriendsWeightsInput: { // input type
     desiredSkillsOverlap: number | null; // Float
     skillsOverlap: number | null; // Float
@@ -303,6 +300,9 @@ export interface NexusGenInputs {
     skills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     skillsThreshold?: number | null; // Float
     weights: NexusGenInputs['SuggestFriendsWeightsInput'] | null; // SuggestFriendsWeightsInput
+  }
+  SuggestOrganizationsWhereInput: { // input type
+    name: string; // String!
   }
   SuggestRepositoriesWhereInput: { // input type
     name: string; // String!
@@ -698,7 +698,7 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Skill']; // Skill!
   }
-  SuggestExperiences: { // root type
+  SuggestOrganizations: { // root type
     nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
     totalCount: number; // Int!
   }
@@ -1303,8 +1303,8 @@ export interface NexusGenFieldTypes {
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     skill: NexusGenRootTypes['Skill'] | null; // Skill
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
-    suggestExperiences: NexusGenRootTypes['SuggestExperiences']; // SuggestExperiences!
     suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
+    suggestOrganizations: NexusGenRootTypes['SuggestOrganizations']; // SuggestOrganizations!
     suggestRepositories: NexusGenRootTypes['SuggestRepositories']; // SuggestRepositories!
     suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
@@ -1382,7 +1382,7 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Skill']; // Skill!
   }
-  SuggestExperiences: { // field return type
+  SuggestOrganizations: { // field return type
     nodes: NexusGenRootTypes['GitHubOrganization'][]; // [GitHubOrganization!]!
     totalCount: number; // Int!
   }
@@ -2083,8 +2083,8 @@ export interface NexusGenFieldTypeNames {
     repositories: 'RepositoryConnection'
     skill: 'Skill'
     skills: 'SkillConnection'
-    suggestExperiences: 'SuggestExperiences'
     suggestFriends: 'UserConnection'
+    suggestOrganizations: 'SuggestOrganizations'
     suggestRepositories: 'SuggestRepositories'
     suggestSkills: 'SuggestSkills'
     user: 'User'
@@ -2162,7 +2162,7 @@ export interface NexusGenFieldTypeNames {
     cursor: 'String'
     node: 'Skill'
   }
-  SuggestExperiences: { // field return type name
+  SuggestOrganizations: { // field return type name
     nodes: 'GitHubOrganization'
     totalCount: 'Int'
   }
@@ -2730,14 +2730,14 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
-    suggestExperiences: { // args
-      first?: number | null; // Int
-      where: NexusGenInputs['SuggestExperiencesWhereInput']; // SuggestExperiencesWhereInput!
-    }
     suggestFriends: { // args
       after?: string | null; // String
       first?: number | null; // Int
       where: NexusGenInputs['SuggestFriendsWhereInput']; // SuggestFriendsWhereInput!
+    }
+    suggestOrganizations: { // args
+      first?: number | null; // Int
+      where: NexusGenInputs['SuggestOrganizationsWhereInput']; // SuggestOrganizationsWhereInput!
     }
     suggestRepositories: { // args
       first?: number | null; // Int

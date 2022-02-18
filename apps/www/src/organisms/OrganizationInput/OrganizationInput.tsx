@@ -3,7 +3,7 @@ import { StyleUtils } from "@makepurple/utils";
 import { useCombobox } from "downshift";
 import React, { CSSProperties, FC, useMemo } from "react";
 import tw, { styled } from "twin.macro";
-import { useSuggestExperiencesQuery } from "../../graphql";
+import { useSuggestOrganizationsQuery } from "../../graphql";
 
 const Root = tw.div`
 	relative
@@ -66,7 +66,7 @@ export const OrganizationInput: FC<OrganizationInputProps> = ({
 	style,
 	value
 }) => {
-	const [{ data, fetching }] = useSuggestExperiencesQuery({
+	const [{ data, fetching }] = useSuggestOrganizationsQuery({
 		pause: !value,
 		variables: {
 			first: 3,
@@ -76,7 +76,7 @@ export const OrganizationInput: FC<OrganizationInputProps> = ({
 		}
 	});
 
-	const organizations = useMemo(() => data?.suggestExperiences.nodes.slice() ?? [], [data]);
+	const organizations = useMemo(() => data?.suggestOrganizations.nodes.slice() ?? [], [data]);
 
 	const {
 		getComboboxProps,

@@ -48,6 +48,7 @@ export * from "./RepositoryCard";
 export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
+export * from "./SiteWideSearch";
 export * from "./SiteWideSideDrawer";
 export * from "./SiteWideUserMenu";
 export * from "./SkillAutosuggest";

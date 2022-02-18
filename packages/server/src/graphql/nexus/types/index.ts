@@ -77,7 +77,7 @@ export * from "./SendChatMessagePayload";
 export * from "./Skill";
 export * from "./SkillConnection";
 export * from "./SkillEdge";
-export * from "./SuggestExperiences";
+export * from "./SuggestOrganizations";
 export * from "./SuggestRepositories";
 export * from "./SuggestSkills";
 export * from "./TopLanguage";

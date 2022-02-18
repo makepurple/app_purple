@@ -2,7 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { UpdateExperienceForm, UpdateExperienceFormProps } from "@makepurple/www";
 import {
 	Experience_fragment_mock,
-	SuggestExperiences_mock,
+	SuggestOrganizations_mock,
 	UpdateExperience_mock
 } from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
@@ -28,10 +28,10 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "SuggestExperiences":
+			case "SuggestOrganizations":
 				await PromiseUtils.wait(ms("1s"));
 
-				return { data: SuggestExperiences_mock };
+				return { data: SuggestOrganizations_mock };
 			case "UpdateExperience":
 				await PromiseUtils.wait(ms("1s"));
 

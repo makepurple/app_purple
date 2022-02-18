@@ -1,0 +1,12 @@
+query SuggestOrganizations($first: Int, $where: SuggestOrganizationsWhereInput!) {
+	suggestOrganizations(first: $first, where: $where) {
+		totalCount
+		nodes {
+			avatarUrl
+			description
+			id
+			login
+			name
+		}
+	}
+}

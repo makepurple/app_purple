@@ -1,12 +1,12 @@
-import { SuggestExperiencesQuery } from "../../generated";
+import { SuggestOrganizationsQuery } from "../../generated";
 import { GitHubOrganization_fragment_mock } from "../fragments";
 
 const DATA_SIZE = 5;
 
-export const SuggestExperiences_mock: SuggestExperiencesQuery = {
+export const SuggestOrganizations_mock: SuggestOrganizationsQuery = {
 	__typename: "Query",
-	suggestExperiences: {
-		__typename: "SuggestExperiences",
+	suggestOrganizations: {
+		__typename: "SuggestOrganizations",
 		totalCount: 5,
 		nodes: Array(DATA_SIZE)
 			.fill(null)

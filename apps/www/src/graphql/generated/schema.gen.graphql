@@ -811,8 +811,8 @@ type Query {
 
   # Relay-style connection on Skill types.
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
-  suggestExperiences(first: Int, where: SuggestExperiencesWhereInput!): SuggestExperiences!
   suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
+  suggestOrganizations(first: Int, where: SuggestOrganizationsWhereInput!): SuggestOrganizations!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
@@ -974,15 +974,6 @@ input StringNullableFilter {
   startsWith: String
 }
 
-type SuggestExperiences {
-  nodes: [GitHubOrganization!]!
-  totalCount: Int!
-}
-
-input SuggestExperiencesWhereInput {
-  name: String!
-}
-
 input SuggestFriendsWeightsInput {
   desiredSkillsOverlap: Float = 1
   skillsOverlap: Float = 1
@@ -1012,6 +1003,15 @@ input SuggestFriendsWhereInput {
   # This is clamped to [0, 1], and is 0 by default.
   skillsThreshold: Float = 0
   weights: SuggestFriendsWeightsInput = {desiredSkillsOverlap: 1, skillsOverlap: 1}
+}
+
+type SuggestOrganizations {
+  nodes: [GitHubOrganization!]!
+  totalCount: Int!
+}
+
+input SuggestOrganizationsWhereInput {
+  name: String!
 }
 
 type SuggestRepositories {

@@ -1,6 +1,6 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { OrganizationInput, OrganizationInputProps } from "@makepurple/www";
-import { SuggestExperiences_mock } from "@makepurple/www/src/graphql/mocks";
+import { SuggestOrganizations_mock } from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import { getOperationName } from "@urql/core";
 import ms from "ms";
@@ -34,10 +34,10 @@ Standard.parameters = {
 	...Template.parameters,
 	urql: async (op: any) => {
 		switch (getOperationName(op.query)) {
-			case "SuggestExperiences":
+			case "SuggestOrganizations":
 				await PromiseUtils.wait(ms("1s"));
 
-				return { data: SuggestExperiences_mock };
+				return { data: SuggestOrganizations_mock };
 			default:
 				return {};
 		}

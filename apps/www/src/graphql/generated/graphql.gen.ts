@@ -1266,8 +1266,8 @@ export type Query = {
   readonly skill?: Maybe<Skill>;
   /** Relay-style connection on Skill types. */
   readonly skills: SkillConnection;
-  readonly suggestExperiences: SuggestExperiences;
   readonly suggestFriends: UserConnection;
+  readonly suggestOrganizations: SuggestOrganizations;
   readonly suggestRepositories: SuggestRepositories;
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
@@ -1382,17 +1382,17 @@ export type QuerySkillsArgs = {
 
 
 /** Root query type */
-export type QuerySuggestExperiencesArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  where: SuggestExperiencesWhereInput;
-};
-
-
-/** Root query type */
 export type QuerySuggestFriendsArgs = {
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestFriendsWhereInput;
+};
+
+
+/** Root query type */
+export type QuerySuggestOrganizationsArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestOrganizationsWhereInput;
 };
 
 
@@ -1628,16 +1628,6 @@ export type StringNullableFilter = {
   readonly startsWith?: InputMaybe<Scalars['String']>;
 };
 
-export type SuggestExperiences = {
-  readonly __typename: 'SuggestExperiences';
-  readonly nodes: ReadonlyArray<GitHubOrganization>;
-  readonly totalCount: Scalars['Int'];
-};
-
-export type SuggestExperiencesWhereInput = {
-  readonly name: Scalars['String'];
-};
-
 export type SuggestFriendsWeightsInput = {
   readonly desiredSkillsOverlap?: InputMaybe<Scalars['Float']>;
   readonly skillsOverlap?: InputMaybe<Scalars['Float']>;
@@ -1671,6 +1661,16 @@ export type SuggestFriendsWhereInput = {
    */
   readonly skillsThreshold?: InputMaybe<Scalars['Float']>;
   readonly weights?: InputMaybe<SuggestFriendsWeightsInput>;
+};
+
+export type SuggestOrganizations = {
+  readonly __typename: 'SuggestOrganizations';
+  readonly nodes: ReadonlyArray<GitHubOrganization>;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type SuggestOrganizationsWhereInput = {
+  readonly name: Scalars['String'];
 };
 
 export type SuggestRepositories = {
@@ -2771,13 +2771,13 @@ export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OkQuery = { readonly __typename: 'Query', readonly ok: boolean };
 
-export type SuggestExperiencesQueryVariables = Exact<{
+export type SuggestOrganizationsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
-  where: SuggestExperiencesWhereInput;
+  where: SuggestOrganizationsWhereInput;
 }>;
 
 
-export type SuggestExperiencesQuery = { readonly __typename: 'Query', readonly suggestExperiences: { readonly __typename: 'SuggestExperiences', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null }> } };
+export type SuggestOrganizationsQuery = { readonly __typename: 'Query', readonly suggestOrganizations: { readonly __typename: 'SuggestOrganizations', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null }> } };
 
 export type SuggestFriendsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -5541,9 +5541,9 @@ export const OkDocument = /*#__PURE__*/ gql`
 export function useOkQuery(options?: Omit<Urql.UseQueryArgs<OkQueryVariables>, 'query'>) {
   return Urql.useQuery<OkQuery>({ query: OkDocument, ...options });
 };
-export const SuggestExperiencesDocument = /*#__PURE__*/ gql`
-    query SuggestExperiences($first: Int, $where: SuggestExperiencesWhereInput!) {
-  suggestExperiences(first: $first, where: $where) {
+export const SuggestOrganizationsDocument = /*#__PURE__*/ gql`
+    query SuggestOrganizations($first: Int, $where: SuggestOrganizationsWhereInput!) {
+  suggestOrganizations(first: $first, where: $where) {
     totalCount
     nodes {
       avatarUrl
@@ -5556,8 +5556,8 @@ export const SuggestExperiencesDocument = /*#__PURE__*/ gql`
 }
     `;
 
-export function useSuggestExperiencesQuery(options: Omit<Urql.UseQueryArgs<SuggestExperiencesQueryVariables>, 'query'>) {
-  return Urql.useQuery<SuggestExperiencesQuery>({ query: SuggestExperiencesDocument, ...options });
+export function useSuggestOrganizationsQuery(options: Omit<Urql.UseQueryArgs<SuggestOrganizationsQueryVariables>, 'query'>) {
+  return Urql.useQuery<SuggestOrganizationsQuery>({ query: SuggestOrganizationsDocument, ...options });
 };
 export const SuggestFriendsDocument = /*#__PURE__*/ gql`
     query SuggestFriends($after: String, $first: Int, $where: SuggestFriendsWhereInput!) {

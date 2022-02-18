@@ -2,11 +2,11 @@ import { arg, intArg, nonNull, queryField } from "nexus";
 import type { octokit } from "../../../services";
 import { GitHubOrganization } from "../../../services/octokit";
 
-export const suggestExperiences = queryField("suggestExperiences", {
-	type: nonNull("SuggestExperiences"),
+export const suggestOrganizations = queryField("suggestOrganizations", {
+	type: nonNull("SuggestOrganizations"),
 	args: {
 		first: intArg(),
-		where: nonNull(arg({ type: "SuggestExperiencesWhereInput" }))
+		where: nonNull(arg({ type: "SuggestOrganizationsWhereInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;

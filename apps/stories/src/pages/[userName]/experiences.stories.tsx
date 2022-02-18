@@ -9,7 +9,7 @@ import {
 	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
-	SuggestExperiences_mock
+	SuggestOrganizations_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/experiences";
 import Page from "@makepurple/www/src/pages/[userName]/experiences";
@@ -69,10 +69,10 @@ Standard.parameters = {
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
-			case "SuggestExperiences":
+			case "SuggestOrganizations":
 				await PromiseUtils.wait(ms("1s"));
 
-				return { data: SuggestExperiences_mock };
+				return { data: SuggestOrganizations_mock };
 			default:
 				return {};
 		}
@@ -107,10 +107,10 @@ Loading.parameters = {
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
-			case "SuggestExperiences":
+			case "SuggestOrganizations":
 				await PromiseUtils.wait(ms("1s"));
 
-				return { data: SuggestExperiences_mock };
+				return { data: SuggestOrganizations_mock };
 			default:
 				return {};
 		}
@@ -164,10 +164,10 @@ NoResults.parameters = {
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
-			case "SuggestExperiences":
+			case "SuggestOrganizations":
 				await PromiseUtils.wait(ms("1s"));
 
-				return { data: SuggestExperiences_mock };
+				return { data: SuggestOrganizations_mock };
 			default:
 				return {};
 		}
