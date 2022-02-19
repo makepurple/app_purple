@@ -12,6 +12,13 @@ export const suggestSkills = queryField("suggestSkills", {
 		return !!user;
 	},
 	resolve: async (parent, args, { octokit: graphql }) => {
+		const searchQuery = [
+			args.where.owner ? `user:${args.where.owner}` : "",
+			`${args.where.name} in:name`
+		]
+			.filter((part) => !!part)
+			.join(" ");
+
 		const searchData = await graphql`
 			query SuggestRepositories($first: Int, $searchQuery: String!) {
 				search(first: $first, query: $searchQuery, type: REPOSITORY) {
@@ -27,7 +34,7 @@ export const suggestSkills = queryField("suggestSkills", {
 		`
 			.cast<octokit.SuggestRepositoriesQuery, octokit.SuggestRepositoriesQueryVariables>({
 				first: Math.min(args.first ?? 10, 10),
-				searchQuery: `user:${args.where.owner} ${args.where.name} in:name`
+				searchQuery
 			})
 			.catch(() => null);
 

@@ -307,9 +307,12 @@ export interface NexusGenInputs {
   SuggestRepositoriesWhereInput: { // input type
     name: string; // String!
   }
+  SuggestSkillOwnersWhereInput: { // input type
+    name: string; // String!
+  }
   SuggestSkillsWhereInput: { // input type
     name: string; // String!
-    owner: string; // String!
+    owner?: string | null; // String
   }
   UpdateDesiredSkillsInput: { // input type
     skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
@@ -704,6 +707,10 @@ export interface NexusGenObjects {
   }
   SuggestRepositories: { // root type
     nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
+    totalCount: number; // Int!
+  }
+  SuggestSkillOwners: { // root type
+    nodes: NexusGenRootTypes['GitHubRepositoryOwner'][]; // [GitHubRepositoryOwner!]!
     totalCount: number; // Int!
   }
   SuggestSkills: { // root type
@@ -1306,6 +1313,7 @@ export interface NexusGenFieldTypes {
     suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
     suggestOrganizations: NexusGenRootTypes['SuggestOrganizations']; // SuggestOrganizations!
     suggestRepositories: NexusGenRootTypes['SuggestRepositories']; // SuggestRepositories!
+    suggestSkillOwners: NexusGenRootTypes['SuggestSkillOwners']; // SuggestSkillOwners!
     suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
@@ -1388,6 +1396,10 @@ export interface NexusGenFieldTypes {
   }
   SuggestRepositories: { // field return type
     nodes: NexusGenRootTypes['GitHubRepository'][]; // [GitHubRepository!]!
+    totalCount: number; // Int!
+  }
+  SuggestSkillOwners: { // field return type
+    nodes: NexusGenRootTypes['GitHubRepositoryOwner'][]; // [GitHubRepositoryOwner!]!
     totalCount: number; // Int!
   }
   SuggestSkills: { // field return type
@@ -2086,6 +2098,7 @@ export interface NexusGenFieldTypeNames {
     suggestFriends: 'UserConnection'
     suggestOrganizations: 'SuggestOrganizations'
     suggestRepositories: 'SuggestRepositories'
+    suggestSkillOwners: 'SuggestSkillOwners'
     suggestSkills: 'SuggestSkills'
     user: 'User'
     users: 'UserConnection'
@@ -2168,6 +2181,10 @@ export interface NexusGenFieldTypeNames {
   }
   SuggestRepositories: { // field return type name
     nodes: 'GitHubRepository'
+    totalCount: 'Int'
+  }
+  SuggestSkillOwners: { // field return type name
+    nodes: 'GitHubRepositoryOwner'
     totalCount: 'Int'
   }
   SuggestSkills: { // field return type name
@@ -2742,6 +2759,10 @@ export interface NexusGenArgTypes {
     suggestRepositories: { // args
       first?: number | null; // Int
       where: NexusGenInputs['SuggestRepositoriesWhereInput']; // SuggestRepositoriesWhereInput!
+    }
+    suggestSkillOwners: { // args
+      first?: number | null; // Int
+      where: NexusGenInputs['SuggestSkillOwnersWhereInput']; // SuggestSkillOwnersWhereInput!
     }
     suggestSkills: { // args
       first?: number | null; // Int

@@ -15,6 +15,7 @@ export * from "./skills";
 export * from "./suggestFriends";
 export * from "./suggestOrganizations";
 export * from "./suggestRepositories";
+export * from "./suggestSkillOwners";
 export * from "./suggestSkills";
 export * from "./user";
 export * from "./users";

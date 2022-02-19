@@ -47,6 +47,7 @@ export * from "./SuggestFriendsWeightsInput";
 export * from "./SuggestFriendsWhereInput";
 export * from "./SuggestOrganizationsWhereInput";
 export * from "./SuggestRepositoriesWhereInput";
+export * from "./SuggestSkillOwnersWhereInput";
 export * from "./SuggestSkillsWhereInput";
 export * from "./UpdateDesiredSkillsInput";
 export * from "./UpdateSkillsInput";

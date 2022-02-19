@@ -4,6 +4,6 @@ export const SuggestSkillsWhereInput = inputObjectType({
 	name: "SuggestSkillsWhereInput",
 	definition: (t) => {
 		t.nonNull.string("name");
-		t.nonNull.string("owner");
+		t.string("owner");
 	}
 });

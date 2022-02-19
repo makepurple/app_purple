@@ -79,6 +79,7 @@ export * from "./SkillConnection";
 export * from "./SkillEdge";
 export * from "./SuggestOrganizations";
 export * from "./SuggestRepositories";
+export * from "./SuggestSkillOwners";
 export * from "./SuggestSkills";
 export * from "./TopLanguage";
 export * from "./TopLanguages";
