@@ -1,0 +1,14 @@
+fragment SuggestSkillOwnersGitHubRepositoryOwner on GitHubRepositoryOwner {
+	__typename
+	avatarUrl
+	id
+	login
+	... on GitHubOrganization {
+		description
+		name
+	}
+	... on GitHubUser {
+		bio
+		name
+	}
+}

@@ -1,0 +1,9 @@
+query SuggestSkillOwners($first: Int, $where: SuggestSkillOwnersWhereInput!) {
+	suggestSkillOwners(first: $first, where: $where) {
+		totalCount
+		nodes {
+			__typename
+			...SuggestSkillOwnersGitHubRepositoryOwner
+		}
+	}
+}

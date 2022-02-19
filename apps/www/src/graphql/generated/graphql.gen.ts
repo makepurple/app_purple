@@ -1269,6 +1269,7 @@ export type Query = {
   readonly suggestFriends: UserConnection;
   readonly suggestOrganizations: SuggestOrganizations;
   readonly suggestRepositories: SuggestRepositories;
+  readonly suggestSkillOwners: SuggestSkillOwners;
   readonly suggestSkills: SuggestSkills;
   readonly user?: Maybe<User>;
   readonly users: UserConnection;
@@ -1400,6 +1401,13 @@ export type QuerySuggestOrganizationsArgs = {
 export type QuerySuggestRepositoriesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestRepositoriesWhereInput;
+};
+
+
+/** Root query type */
+export type QuerySuggestSkillOwnersArgs = {
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestSkillOwnersWhereInput;
 };
 
 
@@ -1683,6 +1691,16 @@ export type SuggestRepositoriesWhereInput = {
   readonly name: Scalars['String'];
 };
 
+export type SuggestSkillOwners = {
+  readonly __typename: 'SuggestSkillOwners';
+  readonly nodes: ReadonlyArray<GitHubRepositoryOwner>;
+  readonly totalCount: Scalars['Int'];
+};
+
+export type SuggestSkillOwnersWhereInput = {
+  readonly name: Scalars['String'];
+};
+
 export type SuggestSkills = {
   readonly __typename: 'SuggestSkills';
   readonly nodes: ReadonlyArray<GitHubRepository>;
@@ -1691,7 +1709,7 @@ export type SuggestSkills = {
 
 export type SuggestSkillsWhereInput = {
   readonly name: Scalars['String'];
-  readonly owner: Scalars['String'];
+  readonly owner?: InputMaybe<Scalars['String']>;
 };
 
 /** One of the most used languages by a user */
@@ -2229,6 +2247,14 @@ type SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubUser_Fragment = { readonly
 export type SkillOwnerInfoSideBarGitHubRepositoryOwnerFragment = SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubOrganization_Fragment | SkillOwnerInfoSideBarGitHubRepositoryOwner_GitHubUser_Fragment;
 
 export type SkillOwnerRepositoryCardGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly stargazerCount: number, readonly url: string, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean, readonly viewerSkill: boolean } | null };
+
+type SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment = { readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string };
+
+type SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment = { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string };
+
+export type SuggestSkillOwnersGitHubRepositoryOwnerFragment = SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment | SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment;
+
+export type SuggestSkillsGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } };
 
 export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
@@ -2771,14 +2797,6 @@ export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type OkQuery = { readonly __typename: 'Query', readonly ok: boolean };
 
-export type SuggestOrganizationsQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']>;
-  where: SuggestOrganizationsWhereInput;
-}>;
-
-
-export type SuggestOrganizationsQuery = { readonly __typename: 'Query', readonly suggestOrganizations: { readonly __typename: 'SuggestOrganizations', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null }> } };
-
 export type SuggestFriendsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2788,6 +2806,14 @@ export type SuggestFriendsQueryVariables = Exact<{
 
 export type SuggestFriendsQuery = { readonly __typename: 'Query', readonly suggestFriends: { readonly __typename: 'UserConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } };
 
+export type SuggestOrganizationsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestOrganizationsWhereInput;
+}>;
+
+
+export type SuggestOrganizationsQuery = { readonly __typename: 'Query', readonly suggestOrganizations: { readonly __typename: 'SuggestOrganizations', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null }> } };
+
 export type SuggestRepositoriesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   where: SuggestRepositoriesWhereInput;
@@ -2795,6 +2821,14 @@ export type SuggestRepositoriesQueryVariables = Exact<{
 
 
 export type SuggestRepositoriesQuery = { readonly __typename: 'Query', readonly suggestRepositories: { readonly __typename: 'SuggestRepositories', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null }> } };
+
+export type SuggestSkillOwnersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  where: SuggestSkillOwnersWhereInput;
+}>;
+
+
+export type SuggestSkillOwnersQuery = { readonly __typename: 'Query', readonly suggestSkillOwners: { readonly __typename: 'SuggestSkillOwners', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string }> } };
 
 export type SuggestSkillsQueryVariables = Exact<{
   where: SuggestSkillsWhereInput;
@@ -3292,6 +3326,34 @@ export const SkillOwnerRepositoryCardGitHubRepositoryFragmentDoc = /*#__PURE__*/
   }
   stargazerCount
   url
+}
+    `;
+export const SuggestSkillOwnersGitHubRepositoryOwnerFragmentDoc = /*#__PURE__*/ gql`
+    fragment SuggestSkillOwnersGitHubRepositoryOwner on GitHubRepositoryOwner {
+  __typename
+  avatarUrl
+  id
+  login
+  ... on GitHubOrganization {
+    description
+    name
+  }
+  ... on GitHubUser {
+    bio
+    name
+  }
+}
+    `;
+export const SuggestSkillsGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment SuggestSkillsGitHubRepository on GitHubRepository {
+  id
+  description
+  name
+  owner {
+    __typename
+    id
+    login
+  }
 }
     `;
 export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
@@ -5541,24 +5603,6 @@ export const OkDocument = /*#__PURE__*/ gql`
 export function useOkQuery(options?: Omit<Urql.UseQueryArgs<OkQueryVariables>, 'query'>) {
   return Urql.useQuery<OkQuery>({ query: OkDocument, ...options });
 };
-export const SuggestOrganizationsDocument = /*#__PURE__*/ gql`
-    query SuggestOrganizations($first: Int, $where: SuggestOrganizationsWhereInput!) {
-  suggestOrganizations(first: $first, where: $where) {
-    totalCount
-    nodes {
-      avatarUrl
-      description
-      id
-      login
-      name
-    }
-  }
-}
-    `;
-
-export function useSuggestOrganizationsQuery(options: Omit<Urql.UseQueryArgs<SuggestOrganizationsQueryVariables>, 'query'>) {
-  return Urql.useQuery<SuggestOrganizationsQuery>({ query: SuggestOrganizationsDocument, ...options });
-};
 export const SuggestFriendsDocument = /*#__PURE__*/ gql`
     query SuggestFriends($after: String, $first: Int, $where: SuggestFriendsWhereInput!) {
   suggestFriends(after: $after, first: $first, where: $where) {
@@ -5582,6 +5626,24 @@ ${SuggestedFriendCardUserFragmentDoc}`;
 export function useSuggestFriendsQuery(options: Omit<Urql.UseQueryArgs<SuggestFriendsQueryVariables>, 'query'>) {
   return Urql.useQuery<SuggestFriendsQuery>({ query: SuggestFriendsDocument, ...options });
 };
+export const SuggestOrganizationsDocument = /*#__PURE__*/ gql`
+    query SuggestOrganizations($first: Int, $where: SuggestOrganizationsWhereInput!) {
+  suggestOrganizations(first: $first, where: $where) {
+    totalCount
+    nodes {
+      avatarUrl
+      description
+      id
+      login
+      name
+    }
+  }
+}
+    `;
+
+export function useSuggestOrganizationsQuery(options: Omit<Urql.UseQueryArgs<SuggestOrganizationsQueryVariables>, 'query'>) {
+  return Urql.useQuery<SuggestOrganizationsQuery>({ query: SuggestOrganizationsDocument, ...options });
+};
 export const SuggestRepositoriesDocument = /*#__PURE__*/ gql`
     query SuggestRepositories($first: Int, $where: SuggestRepositoriesWhereInput!) {
   suggestRepositories(first: $first, where: $where) {
@@ -5599,25 +5661,31 @@ export const SuggestRepositoriesDocument = /*#__PURE__*/ gql`
 export function useSuggestRepositoriesQuery(options: Omit<Urql.UseQueryArgs<SuggestRepositoriesQueryVariables>, 'query'>) {
   return Urql.useQuery<SuggestRepositoriesQuery>({ query: SuggestRepositoriesDocument, ...options });
 };
+export const SuggestSkillOwnersDocument = /*#__PURE__*/ gql`
+    query SuggestSkillOwners($first: Int, $where: SuggestSkillOwnersWhereInput!) {
+  suggestSkillOwners(first: $first, where: $where) {
+    totalCount
+    nodes {
+      __typename
+      ...SuggestSkillOwnersGitHubRepositoryOwner
+    }
+  }
+}
+    ${SuggestSkillOwnersGitHubRepositoryOwnerFragmentDoc}`;
+
+export function useSuggestSkillOwnersQuery(options: Omit<Urql.UseQueryArgs<SuggestSkillOwnersQueryVariables>, 'query'>) {
+  return Urql.useQuery<SuggestSkillOwnersQuery>({ query: SuggestSkillOwnersDocument, ...options });
+};
 export const SuggestSkillsDocument = /*#__PURE__*/ gql`
     query SuggestSkills($where: SuggestSkillsWhereInput!) {
   suggestSkills(first: 6, where: $where) {
-    __typename
     nodes {
-      __typename
-      id
-      description
-      name
-      owner {
-        __typename
-        id
-        login
-      }
+      ...SuggestSkillsGitHubRepository
     }
     totalCount
   }
 }
-    `;
+    ${SuggestSkillsGitHubRepositoryFragmentDoc}`;
 
 export function useSuggestSkillsQuery(options: Omit<Urql.UseQueryArgs<SuggestSkillsQueryVariables>, 'query'>) {
   return Urql.useQuery<SuggestSkillsQuery>({ query: SuggestSkillsDocument, ...options });

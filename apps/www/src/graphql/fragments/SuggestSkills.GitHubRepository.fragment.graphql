@@ -1,0 +1,10 @@
+fragment SuggestSkillsGitHubRepository on GitHubRepository {
+	id
+	description
+	name
+	owner {
+		__typename
+		id
+		login
+	}
+}

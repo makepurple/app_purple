@@ -814,6 +814,7 @@ type Query {
   suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
   suggestOrganizations(first: Int, where: SuggestOrganizationsWhereInput!): SuggestOrganizations!
   suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
+  suggestSkillOwners(first: Int, where: SuggestSkillOwnersWhereInput!): SuggestSkillOwners!
   suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
@@ -1023,6 +1024,15 @@ input SuggestRepositoriesWhereInput {
   name: String!
 }
 
+type SuggestSkillOwners {
+  nodes: [GitHubRepositoryOwner!]!
+  totalCount: Int!
+}
+
+input SuggestSkillOwnersWhereInput {
+  name: String!
+}
+
 type SuggestSkills {
   nodes: [GitHubRepository!]!
   totalCount: Int!
@@ -1030,7 +1040,7 @@ type SuggestSkills {
 
 input SuggestSkillsWhereInput {
   name: String!
-  owner: String!
+  owner: String
 }
 
 # One of the most used languages by a user

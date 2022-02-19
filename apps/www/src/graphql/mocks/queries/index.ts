@@ -30,5 +30,6 @@ export * from "./GetUserOverview.query.mock";
 export * from "./SuggestOrganizations.query.mock";
 export * from "./SuggestFriends.query.mock";
 export * from "./SuggestRepositories.query.mock";
+export * from "./SuggestSkillOwners.query.mock";
 export * from "./SuggestSkills.query.mock";
 export * from "./SuggestViewerFriends.query.mock";
