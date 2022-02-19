@@ -11,7 +11,7 @@ export const ComboBoxOption = tw.div`
 	text-base
 	leading-none
 	font-semibold
-	text-purple-800
+	text-black
 	bg-transparent
 	hover:bg-gray-50
 	hover:bg-opacity-80
