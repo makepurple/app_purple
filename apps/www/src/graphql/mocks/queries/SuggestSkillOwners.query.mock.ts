@@ -12,7 +12,7 @@ const organizations = Array.from({ length: ORGANIZATIONS_SIZE }, (_, i) => ({
 
 const users = userNames.map((userName, i) => ({
 	...GitHubUser_fragment_mock,
-	id: `${i}`,
+	id: `${ORGANIZATIONS_SIZE + i}`,
 	login: userName,
 	name: userName
 }));

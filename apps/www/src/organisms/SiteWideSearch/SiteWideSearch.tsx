@@ -1,7 +1,8 @@
-import { Input, ListItem, Paper, Popover } from "@makepurple/components";
+import { Button, ComboBox, Input, Paper, Popover } from "@makepurple/components";
 import { useComboBoxState } from "@makepurple/hooks";
+import composeRefs from "@seznam/compose-react-refs";
 import ms from "ms";
-import React, { CSSProperties, FC, useMemo, useState } from "react";
+import React, { CSSProperties, forwardRef, memo, useMemo, useState } from "react";
 import { usePopper } from "react-popper";
 import tw from "twin.macro";
 import { useClient } from "urql";
@@ -15,6 +16,7 @@ import {
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables
 } from "../../graphql";
+import { SearchIcon } from "../../svgs";
 
 const Root = tw.div`
 	flex
@@ -22,7 +24,7 @@ const Root = tw.div`
 	items-stretch
 	rounded-lg
 	border
-	border-gray-400
+	border-gray-300
 `;
 
 const SearchInputContainer = tw.div`
@@ -43,16 +45,23 @@ const SearchInput = tw(Input)`
 
 const OwnerSearch = tw(SearchInput)`
 	rounded-r-none
-	border-r-gray-400/80
+	border-r-gray-300/80
 `;
 
 const SkillSearch = tw(SearchInput)`
-	rounded-l-none
-	border-l-gray-400/80
+	rounded-none
+	border-l-gray-300/80
 `;
 
 const Results = tw(Paper)`
 	rounded-t-none
+`;
+
+const SkillButton = tw(Button)`
+	h-10
+	w-10
+	p-0
+	rounded-l-none
 `;
 
 export interface SiteWideSearchProps {
@@ -61,112 +70,175 @@ export interface SiteWideSearchProps {
 	style?: CSSProperties;
 }
 
-export const SiteWideSearch: FC<SiteWideSearchProps> = ({ className, offset, style }) => {
-	const offsetModifier = useMemo(() => Popover.Modifiers.Offset({ offset }), [offset]);
+export const SiteWideSearch = memo<SiteWideSearchProps>(
+	forwardRef<HTMLDivElement, SiteWideSearchProps>((props, ref) => {
+		const { className, offset, style } = props;
 
-	const [refElem, refRef] = useState<HTMLDivElement | null>(null);
-	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
-	const { attributes, styles } = usePopper(refElem, popperElem, {
-		modifiers: [offsetModifier, Popover.Modifiers.SameWidth],
-		placement: "bottom-start"
-	});
+		const offsetModifier = useMemo(() => Popover.Modifiers.Offset({ offset }), [offset]);
 
-	const urqlClient = useClient();
+		const [refElem, refRef] = useState<HTMLDivElement | null>(null);
+		const [ownerPopperElem, ownerPopperRef] = useState<HTMLElement | null>(null);
+		const ownerPopper = usePopper(refElem, ownerPopperElem, {
+			modifiers: [offsetModifier, Popover.Modifiers.SameWidth],
+			placement: "bottom-start"
+		});
+		const [skillPopperElem, skillPopperRef] = useState<HTMLElement | null>(null);
+		const skillPopper = usePopper(refElem, skillPopperElem, {
+			modifiers: [offsetModifier, Popover.Modifiers.SameWidth],
+			placement: "bottom-start"
+		});
 
-	const [owners, setOwners] = useState<SuggestSkillOwnersGitHubRepositoryOwnerFragment[]>([]);
-	const ownerBox = useComboBoxState({
-		items: owners,
-		itemToString: (item) => item?.name ?? item?.login ?? "",
-		debounce: ms("0.3s"),
-		onInputValueChange: async ({ inputValue }) => {
-			if (!inputValue) return;
+		const [ownerInput, ownerInputRef] = useState<HTMLInputElement | null>(null);
+		const [skillInput, skillInputRef] = useState<HTMLInputElement | null>(null);
 
-			const nodes = await urqlClient
-				.query<SuggestSkillOwnersQuery, SuggestSkillOwnersQueryVariables>(
-					SuggestSkillOwnersDocument,
-					{ where: { name: inputValue } }
-				)
-				.toPromise()
-				.then((result) => result.data?.suggestSkillOwners.nodes ?? []);
+		const urqlClient = useClient();
 
-			setOwners(nodes.slice());
-		}
-	});
+		const [owners, setOwners] = useState<SuggestSkillOwnersGitHubRepositoryOwnerFragment[]>([]);
+		const ownerBox = useComboBoxState({
+			id: "site-wide-search-skill-owners",
+			items: owners,
+			itemToString: (item) => item?.name ?? item?.login ?? "",
+			debounce: ms("0.3s"),
+			onInputValueChange: async ({ inputValue }) => {
+				if (!inputValue) return;
 
-	const [skills, setSkills] = useState<SuggestSkillsGitHubRepositoryFragment[]>([]);
-	const skillBox = useComboBoxState({
-		items: skills,
-		itemToString: (item) => item?.name ?? "",
-		debounce: ms("0.3s"),
-		onInputValueChange: async ({ inputValue }) => {
-			if (!inputValue) return;
+				const nodes = await urqlClient
+					.query<SuggestSkillOwnersQuery, SuggestSkillOwnersQueryVariables>(
+						SuggestSkillOwnersDocument,
+						{ where: { name: inputValue } }
+					)
+					.toPromise()
+					.then((result) => result.data?.suggestSkillOwners.nodes ?? []);
 
-			const nodes = await urqlClient
-				.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
-					where: {
-						name: inputValue,
-						owner: ownerBox.inputValue
-					}
-				})
-				.toPromise()
-				.then((result) => result.data?.suggestSkills.nodes ?? []);
+				setOwners(nodes.slice());
+			}
+		});
 
-			setSkills(nodes.slice());
-		}
-	});
+		const [skills, setSkills] = useState<SuggestSkillsGitHubRepositoryFragment[]>([]);
+		const skillBox = useComboBoxState({
+			id: "site-wide-search-skills",
+			items: skills,
+			itemToString: (item) => item?.name ?? "",
+			debounce: ms("0.3s"),
+			onInputValueChange: async ({ inputValue }) => {
+				if (!inputValue) return;
 
-	return (
-		<>
-			<Root ref={refRef} className={className} style={style}>
-				<SearchInputContainer {...ownerBox.getComboboxProps()}>
-					<OwnerSearch
-						{...ownerBox.getInputProps({
-							onChange: () => {
-								skillBox.closeMenu();
-							},
-							onFocus: () => {
-								skillBox.closeMenu();
+				const nodes = await urqlClient
+					.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
+						where: {
+							name: inputValue,
+							owner: ownerBox.inputValue
+						}
+					})
+					.toPromise()
+					.then((result) => result.data?.suggestSkills.nodes ?? []);
 
-								!!ownerBox.inputValue && ownerBox.openMenu();
-							},
-							placeholder: "Search organizations or users..."
-						})}
-					/>
-				</SearchInputContainer>
-				<SearchInputContainer {...skillBox.getComboboxProps()}>
-					<SkillSearch
-						{...skillBox.getComboboxProps({
-							onChange: () => {
-								ownerBox.closeMenu();
-							},
-							onFocus: () => {
-								ownerBox.closeMenu();
+				setSkills(nodes.slice());
+			}
+		});
 
-								!!skillBox.inputValue && skillBox.openMenu();
-							},
-							placeholder: "Search repositories or skills..."
-						})}
-					/>
-				</SearchInputContainer>
-			</Root>
-			<Results
-				ref={popperRef}
-				{...attributes.popper}
-				style={{
-					...styles.popper,
-					...(ownerBox.isOpen ? {} : { display: "none" })
-				}}
-			>
-				<ListItem>
-					<div>Test</div>
-				</ListItem>
-				<ListItem>
-					<div>Test</div>
-				</ListItem>
-				<ListItem>
-					<div>Test</div>
-				</ListItem>
-			</Results>
-		</>
-	);
-};
+		return (
+			<>
+				<Root
+					ref={composeRefs<HTMLDivElement>(refRef, ref)}
+					className={className}
+					style={style}
+				>
+					<SearchInputContainer {...ownerBox.getComboboxProps()}>
+						<OwnerSearch
+							{...ownerBox.getInputProps({
+								ref: ownerInputRef,
+								onChange: () => {
+									skillBox.closeMenu();
+								},
+								onFocus: () => {
+									skillBox.closeMenu();
+
+									!!ownerBox.inputValue && ownerBox.openMenu();
+								},
+								placeholder: "Organizations or users..."
+							})}
+						/>
+					</SearchInputContainer>
+					<SearchInputContainer {...skillBox.getComboboxProps()}>
+						<SkillSearch
+							{...skillBox.getInputProps({
+								ref: skillInputRef,
+								onChange: () => {
+									ownerBox.closeMenu();
+								},
+								onFocus: () => {
+									ownerBox.closeMenu();
+
+									!!skillBox.inputValue && skillBox.openMenu();
+								},
+								placeholder: "Repositories or skills..."
+							})}
+						/>
+					</SearchInputContainer>
+					<SkillButton
+						bounce={false}
+						onClick={() => {
+							if (skillBox.inputValue) {
+								skillInput?.focus();
+
+								return;
+							}
+
+							if (ownerBox.inputValue) ownerInput?.focus();
+						}}
+						type="button"
+						variant="secondary"
+						aria-label="site-wide search"
+					>
+						<SearchIcon height={24} width={24} />
+					</SkillButton>
+				</Root>
+				<ComboBox.Options
+					as={Results}
+					{...ownerBox.getMenuProps({
+						...ownerPopper.attributes.popper,
+						ref: ownerPopperRef,
+						style: ownerPopper.styles.popper
+					})}
+					isOpen={ownerBox.isOpen}
+				>
+					{owners.map((owner, i) => (
+						<ComboBox.Option
+							key={owner.id}
+							{...ownerBox.getItemProps({
+								item: owner,
+								index: i
+							})}
+						>
+							<span>{owner.name ?? owner.login}</span>
+						</ComboBox.Option>
+					))}
+				</ComboBox.Options>
+				<ComboBox.Options
+					as={Results}
+					{...skillBox.getMenuProps({
+						...skillPopper.attributes.popper,
+						ref: skillPopperRef,
+						style: skillPopper.styles.popper
+					})}
+					isOpen={skillBox.isOpen}
+				>
+					{skills.map((skill, i) => (
+						<ComboBox.Option
+							key={skill.id}
+							{...skillBox.getItemProps({
+								item: skill,
+								index: i
+							})}
+						>
+							<span>{skill.name ?? skill.owner.login}</span>
+						</ComboBox.Option>
+					))}
+				</ComboBox.Options>
+			</>
+		);
+	})
+);
+
+SiteWideSearch.displayName = "SiteWideSearch";
