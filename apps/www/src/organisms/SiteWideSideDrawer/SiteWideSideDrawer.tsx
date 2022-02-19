@@ -7,15 +7,11 @@ import {
 	Paper,
 	SideDrawer
 } from "@makepurple/components";
-import { useOnClickOutside } from "@makepurple/hooks";
 import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, FC, forwardRef, ReactNode, useRef, useState } from "react";
+import React, { CSSProperties, forwardRef, ReactNode, useState } from "react";
 import tw from "twin.macro";
-import {
-	useGetSiteWideSideDrawerQuery,
-	UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragmentDoc
-} from "../../graphql";
+import { useGetSiteWideSideDrawerQuery } from "../../graphql";
 import { BellIcon, BookIcon, ChatIcon, PeopleIcon, SignOutIcon, TelescopeIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
@@ -101,7 +97,6 @@ const NewPostItem = tw(NewPostButton)`
 	shadow-none
 	not-disabled:hover:shadow-none!
 	not-disabled:hover:opacity-100!
-	not-disabled:hover:translate-y-0!
 `;
 
 export type SiteWideSideDrawerProps = {
@@ -242,7 +237,7 @@ export const SiteWideSideDrawer = forwardRef<HTMLDivElement, SiteWideSideDrawerP
 											<ListItemText>{user.name}</ListItemText>
 										</ListItem>
 									</NextLink>
-									<ListItem as={NewPostItem} userName={user.name}>
+									<ListItem as={NewPostItem} bounce={false} userName={user.name}>
 										{({ draft }) => (
 											<>
 												<BookIcon height={24} width={24} tw="mr-3" />

@@ -30,7 +30,6 @@ const NewPostItem = tw(NewPostButton)`
 	shadow-none
 	not-disabled:hover:shadow-none!
 	not-disabled:hover:opacity-100!
-	not-disabled:hover:translate-y-0!
 `;
 
 const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
@@ -148,6 +147,7 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 									{(itemProps) => (
 										<ListItem
 											as={NewPostItem}
+											bounce={false}
 											userName={user.name}
 											{...itemProps}
 										>

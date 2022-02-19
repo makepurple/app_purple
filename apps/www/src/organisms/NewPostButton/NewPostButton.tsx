@@ -11,6 +11,7 @@ export interface NewPostButtonRenderProps {
 }
 
 export interface NewPostButtonProps {
+	bounce?: boolean;
 	children?: ReactNode | FC<NewPostButtonRenderProps>;
 	className?: string;
 	skillName?: string;
@@ -20,6 +21,7 @@ export interface NewPostButtonProps {
 }
 
 export const NewPostButton: FC<NewPostButtonProps> = ({
+	bounce,
 	children: Children = "New Post",
 	className,
 	skillName,
@@ -63,6 +65,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 	return (
 		<Button
 			className={className}
+			bounce={bounce}
 			disabled={creatingPost}
 			onClick={async () => {
 				if (draft) {

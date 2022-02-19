@@ -33,12 +33,15 @@ const Template: Story<ComboBoxProps> = (args) => {
 	return (
 		<>
 			<ComboBox {...combobox} {...args}>
-				<ComboBox.Input {...combobox} />
+				<ComboBox.Input {...combobox.getInputProps()} />
 			</ComboBox>
-			<ComboBox.LoadingState {...combobox} style={{ width: 256 }} />
 			<ComboBox.Options {...combobox}>
-				{items.map((item, i) => (
-					<ComboBox.Option key={item.id} {...combobox} item={item} index={i}>
+				{items.map((item) => (
+					<ComboBox.Option
+						key={item.id}
+						{...combobox.getInputProps()}
+						isOpen={combobox.isOpen}
+					>
 						{item.name}
 					</ComboBox.Option>
 				))}
