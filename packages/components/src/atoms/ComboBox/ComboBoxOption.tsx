@@ -22,6 +22,8 @@ export const ComboBoxOption = tw.div`
 	[&[aria-selected="true"]]:text-white
 	[&[aria-selected="true"]]:bg-indigo-500
 	[&[aria-selected="true"]]:hover:bg-indigo-500
+	[&[data-selected="true"]]:text-white
+	[&[data-selected="true"]]:bg-indigo-500
 `;
 
 export type ComboBoxOptionProps = InferComponentProps<typeof ComboBoxOption>;
