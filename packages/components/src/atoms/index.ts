@@ -29,6 +29,7 @@ export * from "./HiddenInput";
 export * from "./Input";
 export * from "./LazyMotion";
 export * from "./ListItem";
+export * from "./Logo";
 export * from "./MainContainer";
 export * from "./MaybeAnchor";
 export * from "./Menu";

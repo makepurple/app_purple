@@ -5,6 +5,7 @@ import {
 	Brand,
 	Button,
 	HamburgerMenuButton,
+	Logo,
 	PageContainer
 } from "@makepurple/components";
 import { didClickIn, useOnClickOutside, useOnKeyDown } from "@makepurple/hooks";
@@ -225,7 +226,8 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						}}
 						open={menuOpen}
 					/>
-					<StyledBrand tw="ml-3" />
+					<Logo tw="ml-3" />
+					<StyledBrand tw="ml-1" />
 				</BrandContainer>
 				<Search
 					onBlur={() => {
