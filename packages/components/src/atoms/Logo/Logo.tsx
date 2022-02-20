@@ -36,6 +36,10 @@ const Icon = tw.svg`
 
 const Cursor = styled.path`
 	animation: ${blinkKeyframes} 1.2s linear infinite;
+
+	${tw`
+		motion-reduce:animate-none
+	`}
 `;
 
 export interface LogoProps {
