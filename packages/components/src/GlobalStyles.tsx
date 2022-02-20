@@ -59,10 +59,15 @@ input[type="search"]::-webkit-search-cancel-button {
 	`}
 }
 
-input[type="search"]:placeholder-shown::-webkit-search-cancel-button {
-	${tw`
-		hidden
-	`}
+input[type="search"] {
+	&:placeholder-shown,
+	&:not(:focus) {
+		&::-webkit-search-cancel-button {
+			${tw`
+				hidden
+			`}
+		}
+	}
 }
 `;
 
