@@ -2,6 +2,8 @@ import { Button, ComboBox, Input, Paper, Popover } from "@makepurple/components"
 import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
 import ms from "ms";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, {
 	CSSProperties,
 	FocusEvent,
@@ -132,6 +134,8 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 	forwardRef<HTMLFormElement, SiteWideSearchProps>((props, ref) => {
 		const { className, offset, onBlur, onFocus: _onFocus, style } = props;
 
+		const router = useRouter();
+
 		const offsetModifier = useMemo(() => Popover.Modifiers.Offset({ offset }), [offset]);
 
 		const [refElem, refRef] = useState<HTMLFormElement | null>(null);
@@ -172,8 +176,10 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 
 				setOwners(nodes.slice());
 			},
-			onSelectedItemChange: ({ selectedItem }) => {
+			onSelectedItemChange: async ({ selectedItem }) => {
 				if (!selectedItem) return;
+
+				await router.push("/s/[skillOwner]", `/s/${selectedItem.login}`);
 
 				ownerBox.setInputValue("");
 			}
@@ -214,8 +220,13 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 
 				setSkills(nodes.slice());
 			},
-			onSelectedItemChange: ({ selectedItem }) => {
+			onSelectedItemChange: async ({ selectedItem }) => {
 				if (!selectedItem) return;
+
+				await router.push(
+					"/s/[skillOwner]/[skillName]",
+					`/s/${selectedItem.owner.login}/${selectedItem.name}`
+				);
 
 				skillBox.setInputValue("");
 			}
@@ -330,16 +341,23 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					isOpen={ownerBox.isOpen}
 				>
 					{owners.map((owner, i) => (
-						<ComboBox.Option
+						<NextLink
 							key={owner.id}
-							{...ownerBox.getItemProps({
-								item: owner,
-								index: i
-							})}
-							data-selected={ownerBox.selectedItem?.id === owner.id}
+							href="/s/[skillOwner]"
+							as={`/s/${owner.login}`}
+							passHref
 						>
-							<span>{owner.name ?? owner.login}</span>
-						</ComboBox.Option>
+							<ComboBox.Option
+								as="a"
+								{...ownerBox.getItemProps({
+									item: owner,
+									index: i
+								})}
+								data-selected={ownerBox.selectedItem?.id === owner.id}
+							>
+								<span>{owner.name ?? owner.login}</span>
+							</ComboBox.Option>
+						</NextLink>
 					))}
 				</ComboBox.Options>
 				<ComboBox.Options
@@ -352,15 +370,22 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					isOpen={skillBox.isOpen}
 				>
 					{skills.map((skill, i) => (
-						<ComboBox.Option
+						<NextLink
 							key={skill.id}
-							{...skillBox.getItemProps({
-								item: skill,
-								index: i
-							})}
+							href="/s/[skillOwner]/[skillName]"
+							as={`/s/${skill.owner.login}/${skill.name}`}
+							passHref
 						>
-							<span>{skill.name ?? skill.owner.login}</span>
-						</ComboBox.Option>
+							<ComboBox.Option
+								as="a"
+								{...skillBox.getItemProps({
+									item: skill,
+									index: i
+								})}
+							>
+								<span>{skill.name ?? skill.owner.login}</span>
+							</ComboBox.Option>
+						</NextLink>
 					))}
 				</ComboBox.Options>
 			</Root>
