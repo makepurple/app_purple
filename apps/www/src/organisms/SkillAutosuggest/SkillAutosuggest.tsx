@@ -88,12 +88,12 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 
 		if (!inputValue) return;
 
-		const [owner, name] = inputValue.split("/");
+		const [owner, name] = inputValue.toLowerCase().split("/");
 
 		if (!owner || !name) return;
 
 		const newSelectedItem = skillItems.find(
-			(item) => item.name === name && item.owner === owner
+			(item) => item.name.toLowerCase() === name && item.owner.toLowerCase() === owner
 		);
 
 		if (!newSelectedItem) return;
