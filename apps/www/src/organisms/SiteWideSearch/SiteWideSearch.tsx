@@ -96,7 +96,6 @@ const Root = styled.form`
 		& ${InputContainer as any} {
 			${tw`
 				border-gray-300
-				sm:border-transparent
 			`}
 		}
 
