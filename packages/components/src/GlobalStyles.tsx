@@ -39,6 +39,8 @@ input[type="search"]::-webkit-search-cancel-button {
 		relative
 		h-5
 		w-5
+		ml-2.5
+		mr-0
 		border
 		border-solid
 		border-gray-300
