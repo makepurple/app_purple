@@ -27,8 +27,8 @@ const Root = styled.button`
 		flex
 		items-center
 		justify-center
-		h-9
-		w-9
+		h-11
+		w-11
 		border
 		border-solid
 		border-gray-300

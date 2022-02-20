@@ -18,6 +18,7 @@ import React, { CSSProperties, FC, useEffect, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
 import { BellIcon, ChatIcon, PeopleIcon } from "../../svgs";
+import { SiteWideSearch } from "../SiteWideSearch";
 import { SiteWideSideDrawer } from "../SiteWideSideDrawer";
 import { SiteWideUserMenu } from "../SiteWideUserMenu";
 
@@ -30,15 +31,26 @@ const Root = tw(PageContainer)`
 	flex
 	items-center
 	justify-between
+	gap-4
 ` as typeof MotionAppBar;
 
 const BrandContainer = tw.div`
-	flex-grow
+	flex-shrink-0
 	flex
 	items-center
 `;
 
+const StyledBrand = tw(Brand)`
+	hidden
+	md:block
+`;
+
+const Search = tw(SiteWideSearch)`
+
+`;
+
 const Actions = tw.div`
+	flex-shrink-0
 	flex
 	justify-end
 	gap-4
@@ -56,10 +68,12 @@ const SignUpButton = tw(Button)`
 `;
 
 const IconButton = tw(Button)`
-	hidden
 	relative
+	hidden
+	h-11
+	w-11
 	bg-transparent
-	md:flex
+	lg:flex
 `;
 
 const NotificationButton = tw(IconButton)`
@@ -163,6 +177,8 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		setMenuOpen(false);
 	});
 
+	const [searching, setSearching] = useState<boolean>(false);
+
 	return (
 		<>
 			<Root
@@ -211,6 +227,14 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					/>
 					<StyledBrand tw="ml-3" />
 				</BrandContainer>
+				<Search
+					onBlur={() => {
+						setSearching(false);
+					}}
+					onFocus={() => {
+						setSearching(true);
+					}}
+				/>
 				{!isAuthPage && (
 					<Actions>
 						{status !== "authenticated" || !user ? (

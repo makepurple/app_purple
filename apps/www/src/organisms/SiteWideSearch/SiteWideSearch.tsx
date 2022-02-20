@@ -3,7 +3,7 @@ import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
 import { m } from "framer-motion";
 import ms from "ms";
-import React, { CSSProperties, forwardRef, memo, useMemo, useState } from "react";
+import React, { CSSProperties, FocusEvent, forwardRef, memo, useMemo, useState } from "react";
 import { usePopper } from "react-popper";
 import { useLockBodyScroll } from "react-use";
 import tw from "twin.macro";
@@ -75,12 +75,14 @@ const SkillButton = tw(Button)`
 export interface SiteWideSearchProps {
 	className?: string;
 	offset?: number;
+	onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+	onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
 	style?: CSSProperties;
 }
 
 export const SiteWideSearch = memo<SiteWideSearchProps>(
 	forwardRef<HTMLFormElement, SiteWideSearchProps>((props, ref) => {
-		const { className, offset, style } = props;
+		const { className, offset, onBlur, onFocus, style } = props;
 
 		const offsetModifier = useMemo(() => Popover.Modifiers.Offset({ offset }), [offset]);
 
@@ -208,10 +210,13 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						<OwnerSearch
 							{...ownerBox.getInputProps({
 								ref: ownerInputRef,
+								onBlur,
 								onChange: () => {
 									skillBox.closeMenu();
 								},
-								onFocus: () => {
+								onFocus: (e) => {
+									onFocus?.(e);
+
 									skillBox.closeMenu();
 
 									!!ownerBox.inputValue && ownerBox.openMenu();
@@ -226,10 +231,13 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						<SkillSearch
 							{...skillBox.getInputProps({
 								ref: skillInputRef,
+								onBlur,
 								onChange: () => {
 									ownerBox.closeMenu();
 								},
-								onFocus: () => {
+								onFocus: (e) => {
+									onFocus?.(e);
+
 									ownerBox.closeMenu();
 
 									!!skillBox.inputValue && skillBox.openMenu();

@@ -11,6 +11,11 @@ import { BookIcon, ChatIcon, PeopleIcon, SignOutIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
 
+const StyledAvatar = tw(UserAvatar)`
+	h-11
+	w-11
+`;
+
 const List = tw(m.div)`
 	shadow-lg
 	w-56
@@ -22,7 +27,7 @@ const UserName = tw.span`
 
 const MobileLink = tw.a`
 	flex
-	md:hidden
+	lg:hidden
 `;
 
 const NewPostItem = tw(NewPostButton)`
@@ -94,7 +99,7 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 			{({ open }) => (
 				<>
 					<Menu.Button
-						as={UserAvatar}
+						as={StyledAvatar}
 						ref={ref}
 						asLink={false}
 						border={2}
