@@ -6,7 +6,7 @@ import { User_fragment_mock } from "./User.fragment.mock";
 
 faker.seed(1);
 
-const MESSAGES_SIZE = 20;
+const MESSAGES_SIZE = 5;
 const USERS_SIZE = 5;
 
 const messages = Array.from({ length: MESSAGES_SIZE }, (_, i) => {
@@ -25,7 +25,8 @@ const messages = Array.from({ length: MESSAGES_SIZE }, (_, i) => {
 
 const users = Array.from({ length: USERS_SIZE }, (_, i) => ({
 	...User_fragment_mock,
-	id: `${i}`
+	id: `${i}`,
+	name: faker.name.firstName()
 }));
 
 export const Chat_fragment_mock: Chat = {
