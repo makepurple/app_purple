@@ -1,20 +1,22 @@
 import { SuggestSkillOwnersQuery } from "../../generated";
 import { GitHubOrganization_fragment_mock, GitHubUser_fragment_mock } from "../fragments";
 
-const ORGANIZATIONS_SIZE = 5;
-const userNames = ["leedavidcs", "dsklyar", "jameshly", "haejinjo", "OwlsAreCool1"] as const;
+const organizationLogins = ["facebook", "openbaseio", "toastel", "onfleet", "outwardinc"];
+const userLogins = ["leedavidcs", "dsklyar", "jameshly", "haejinjo", "OwlsAreCool1"] as const;
 
-const organizations = Array.from({ length: ORGANIZATIONS_SIZE }, (_, i) => ({
+const organizations = organizationLogins.map((login, i) => ({
 	...GitHubOrganization_fragment_mock,
 	__typename: "GitHubOrganization" as const,
-	id: `${i}`
+	id: `${i}`,
+	login,
+	name: login
 }));
 
-const users = userNames.map((userName, i) => ({
+const users = userLogins.map((login, i) => ({
 	...GitHubUser_fragment_mock,
-	id: `${ORGANIZATIONS_SIZE + i}`,
-	login: userName,
-	name: userName
+	id: `${organizationLogins.length + i}`,
+	login,
+	name: login
 }));
 
 const nodes = [...organizations, ...users];
@@ -23,7 +25,7 @@ export const SuggestSkillOwners_mock: SuggestSkillOwnersQuery = {
 	__typename: "Query",
 	suggestSkillOwners: {
 		__typename: "SuggestSkillOwners",
-		totalCount: 5,
+		totalCount: organizationLogins.length,
 		nodes
 	}
 };
