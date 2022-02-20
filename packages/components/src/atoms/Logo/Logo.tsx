@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import React, { CSSProperties, FC, ReactNode } from "react";
+import React, { CSSProperties, FC } from "react";
 import { keyframes } from "styled-components";
 import tw, { styled, theme } from "twin.macro";
 
@@ -46,7 +46,7 @@ export interface LogoProps {
 export const Logo: FC<LogoProps> = ({ className, style }) => {
 	return (
 		<NextLink href="/" passHref>
-			<Root className={className} style={style}>
+			<Root className={className} style={style} aria-label="home">
 				<Icon
 					width={200}
 					height={200}
