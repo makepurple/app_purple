@@ -5,7 +5,9 @@ import {
 	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
-	GetUserOverview_mock
+	GetUserOverview_mock,
+	SuggestSkillOwners_mock,
+	SuggestSkills_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { UserTrophies_fragment_mock } from "@makepurple/www/src/graphql/mocks/fragments/UserTrophies.fragment.mock";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]";
@@ -57,6 +59,10 @@ Standard.parameters = {
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
 				return { data: GetUserOverview_mock };
+			case "SuggestSkillOwners":
+				return { data: SuggestSkillOwners_mock };
+			case "SuggestSkills":
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -97,6 +103,10 @@ NoTrophies.parameters = {
 						}
 					}
 				};
+			case "SuggestSkillOwners":
+				return { data: SuggestSkillOwners_mock };
+			case "SuggestSkills":
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -134,6 +144,10 @@ NoPosts.parameters = {
 						}
 					}
 				};
+			case "SuggestSkillOwners":
+				return { data: SuggestSkillOwners_mock };
+			case "SuggestSkills":
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -171,6 +185,10 @@ NoExperiences.parameters = {
 						}
 					}
 				};
+			case "SuggestSkillOwners":
+				return { data: SuggestSkillOwners_mock };
+			case "SuggestSkills":
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -208,6 +226,10 @@ NoRepositories.parameters = {
 						}
 					}
 				};
+			case "SuggestSkillOwners":
+				return { data: SuggestSkillOwners_mock };
+			case "SuggestSkills":
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
@@ -251,6 +273,10 @@ NoExperiencesRepositories.parameters = {
 						}
 					}
 				};
+			case "SuggestSkillOwners":
+				return { data: SuggestSkillOwners_mock };
+			case "SuggestSkills":
+				return { data: SuggestSkills_mock };
 			default:
 				return {};
 		}
