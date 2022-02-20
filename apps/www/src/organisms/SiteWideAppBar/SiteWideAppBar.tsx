@@ -208,11 +208,8 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 							setMenuOpen((oldMenuOpen) => !oldMenuOpen);
 						}}
 						open={menuOpen}
-						tw="mr-3"
 					/>
-					<NextLink href="/" passHref>
-						<Brand />
-					</NextLink>
+					<StyledBrand tw="ml-3" />
 				</BrandContainer>
 				{!isAuthPage && (
 					<Actions>

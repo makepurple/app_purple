@@ -59,11 +59,7 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 		<Root className={className} style={style}>
 			<Title>Popular Skills</Title>
 			<Description tw="mt-4">
-				Popular skills known by developers from the{" "}
-				<NextLink href="/" passHref>
-					<Brand tw="text-base" />
-				</NextLink>{" "}
-				community.
+				Popular skills known by developers from the <Brand tw="text-base" /> community.
 			</Description>
 			<Skills tw="mt-3">
 				{skills.map((skill, i) => (

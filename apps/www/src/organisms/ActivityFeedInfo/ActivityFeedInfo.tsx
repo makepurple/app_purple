@@ -46,19 +46,12 @@ export const ActivityFeedInfo: FC<ActivityFeedInfoProps> = ({ className, style }
 			<Title>Latest Activities</Title>
 			{status === "authenticated" ? (
 				<Description tw="mt-4">
-					Here is your personal{" "}
-					<NextLink href="/" passHref>
-						<Brand tw="text-base" />
-					</NextLink>{" "}
-					front-page. Come here to find the latest activities of developers and skills you
-					follow.
+					Here is your personal <Brand tw="text-base" /> front-page. Come here to find the
+					latest activities of developers and skills you follow.
 				</Description>
 			) : (
 				<Description tw="mt-4">
-					Here are the latest activities of developers from the{" "}
-					<NextLink href="/" passHref>
-						<Brand tw="text-base" />
-					</NextLink>{" "}
+					Here are the latest activities of developers from the <Brand tw="text-base" />{" "}
 					community.
 				</Description>
 			)}

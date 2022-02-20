@@ -46,9 +46,7 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 		<Root as={Footer} className={className} style={style}>
 			<Content>
 				<BrandContainer>
-					<NextLink href="/" passHref>
-						<Brand />
-					</NextLink>
+					<Brand />
 				</BrandContainer>
 				<LinksContainer>
 					<NextLink href="/blog" passHref>

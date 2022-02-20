@@ -55,10 +55,7 @@ export const UserActivityCardJoined = forwardRef<HTMLDivElement, UserActivityCar
 		return (
 			<Root className={className} ref={ref} style={style}>
 				<UserActivityCardHeader userActivity={userActivity}>
-					joins{" "}
-					<NextLink href="/" passHref>
-						<Brand tw="text-base" />
-					</NextLink>
+					joins <Brand tw="text-base" />
 				</UserActivityCardHeader>
 				<Content tw="mt-2">
 					{!!user.image && (
@@ -70,11 +67,7 @@ export const UserActivityCardJoined = forwardRef<HTMLDivElement, UserActivityCar
 					)}
 					<Greetings>
 						<span>
-							Welcome to{" "}
-							<NextLink href="/" passHref>
-								<Brand tw="text-2xl sm:text-3xl" />
-							</NextLink>
-							,
+							Welcome to <Brand tw="text-2xl sm:text-3xl" />,
 						</span>
 						<UserNameContainer tw="mt-1">
 							<NextLink href="/[userName]" as={`/${user.name}`} passHref>

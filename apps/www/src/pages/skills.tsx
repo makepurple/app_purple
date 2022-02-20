@@ -131,10 +131,7 @@ export const Page: NextPage<PageProps> = () => {
 				<Title>Skills</Title>
 				{hasSkills && (
 					<Description tw="mt-4">
-						Popular skills by developers and programmers on{" "}
-						<NextLink href="/" passHref>
-							<Brand tw="text-base" />
-						</NextLink>
+						Popular skills by developers and programmers on <Brand tw="text-base" />
 					</Description>
 				)}
 				<Skills tw="mt-6">

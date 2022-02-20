@@ -140,11 +140,8 @@ export const SiteWideSideDrawer = forwardRef<HTMLDivElement, SiteWideSideDrawerP
 					{status === "unauthenticated" && (
 						<AuthContainer>
 							<AuthInfo>
-								<NextLink href="/" passHref>
-									<AuthBrand />
-								</NextLink>{" "}
-								is a community where developers collaborate, share and mutually
-								grow.
+								<AuthBrand /> is a community where developers collaborate, share and
+								mutually grow.
 							</AuthInfo>
 							<NextLink href="/signup" passHref>
 								<Button as="a" tw="mt-4">

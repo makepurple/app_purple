@@ -1,6 +1,7 @@
 import { config } from "@makepurple/config";
 import { InferComponentProps } from "@makepurple/typings";
 import { oneLine } from "common-tags";
+import NextLink from "next/link";
 import React, { forwardRef } from "react";
 import tw, { styled, theme } from "twin.macro";
 
@@ -25,13 +26,27 @@ const Root = styled.a`
 	-webkit-text-fill-color: transparent;
 `;
 
-export type BrandProps = InferComponentProps<typeof Root>;
+export type BrandProps = InferComponentProps<typeof Root> & {
+	asLink?: boolean;
+};
 
 export const Brand = forwardRef<HTMLAnchorElement, BrandProps>((props, ref) => {
+	const { asLink = true, href = "/", ...restProps } = props;
+
+	if (!asLink || !href) {
+		return (
+			<Root as="div" {...(restProps as any)} ref={ref as any}>
+				{config.brand}
+			</Root>
+		);
+	}
+
 	return (
-		<Root {...props} ref={ref}>
-			{config.brand}
-		</Root>
+		<NextLink href={href} passHref>
+			<Root {...restProps} ref={ref}>
+				{config.brand}
+			</Root>
+		</NextLink>
 	);
 });
 
