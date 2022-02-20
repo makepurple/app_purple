@@ -11,7 +11,6 @@ import {
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
-import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw from "twin.macro";
