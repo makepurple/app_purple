@@ -39,14 +39,15 @@ const Cursor = styled.path`
 `;
 
 export interface LogoProps {
+	"aria-label"?: string;
 	className?: string;
 	style?: CSSProperties;
 }
 
-export const Logo: FC<LogoProps> = ({ className, style }) => {
+export const Logo: FC<LogoProps> = ({ "aria-label": ariaLabel = "home", className, style }) => {
 	return (
 		<NextLink href="/" passHref>
-			<Root className={className} style={style} aria-label="home">
+			<Root className={className} style={style} aria-label={ariaLabel}>
 				<Icon
 					width={200}
 					height={200}

@@ -1,12 +1,11 @@
 import { Button, ComboBox, Input, Paper, Popover } from "@makepurple/components";
 import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
-import { m } from "framer-motion";
 import ms from "ms";
 import React, { CSSProperties, FocusEvent, forwardRef, memo, useMemo, useState } from "react";
 import { usePopper } from "react-popper";
 import { useLockBodyScroll } from "react-use";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
 	SuggestSkillOwnersDocument,
@@ -20,16 +19,14 @@ import {
 } from "../../graphql";
 import { SearchIcon } from "../../svgs";
 
-const Root = tw(m.form)`
-`;
-
 const InputContainer = tw(ComboBox)`
 	flex
 	flex-row
 	items-stretch
 	rounded-lg
 	border
-	border-gray-300
+	border-transparent
+	sm:border-gray-300
 `;
 
 const SearchInputContainer = tw.div`
@@ -46,6 +43,7 @@ const SearchInputContainer = tw.div`
 
 const SearchInput = tw(Input)`
 	border-transparent
+	h-11
 `;
 
 const OwnerSearch = tw(SearchInput)`
@@ -62,14 +60,57 @@ const Results = tw(Paper)`
 	rounded-t-none
 `;
 
-const SkillButton = tw(Button)`
-	h-10
-	w-10
+const SearchButton = tw(Button)`
+	flex-shrink-0
+	h-11
+	w-11
+	ml-auto
 	p-0
-	rounded-l-none
-	border-0
-	border-l
-	border-opacity-60
+	bg-transparent
+	not-disabled:hover:-translate-y-0.5
+	sm:border-0
+	sm:border-l
+	sm:border-opacity-60
+	sm:rounded-l-none
+	sm:not-disabled:hover:translate-y-0
+`;
+
+const Root = styled.form`
+	&:not(:focus-within) {
+		& ${SearchInputContainer as any} {
+			${tw`
+				flex-grow-0
+				sm:flex-grow
+			`}
+		}
+
+		& ${OwnerSearch as any}, & ${SkillSearch as any} {
+			${tw`
+				opacity-0
+				sm:opacity-100
+			`}
+		}
+	}
+
+	&:focus-within {
+		& ${InputContainer as any} {
+			${tw`
+				border-gray-300
+				sm:border-transparent
+			`}
+		}
+
+		${SearchButton as any} {
+			${tw`
+				bg-white
+				border-0
+				border-l
+				border-opacity-60
+				rounded-l-none
+				sm:bg-transparent
+			`}
+		}
+	}
 `;
 
 export interface SiteWideSearchProps {
@@ -248,8 +289,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 							})}
 						/>
 					</SearchInputContainer>
-					<SkillButton
-						bounce={false}
+					<SearchButton
 						onClick={() => {
 							!ownerBox.inputValue || !!skillBox.inputValue
 								? skillInput?.focus()
@@ -260,7 +300,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						aria-label="site-wide search"
 					>
 						<SearchIcon height={24} width={24} />
-					</SkillButton>
+					</SearchButton>
 				</InputContainer>
 				<ComboBox.Options
 					as={Results}

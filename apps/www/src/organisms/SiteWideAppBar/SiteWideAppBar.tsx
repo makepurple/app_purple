@@ -26,15 +26,6 @@ import { SiteWideUserMenu } from "../SiteWideUserMenu";
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
 
-const MotionAppBar = m(AppBar);
-
-const Root = tw(PageContainer)`
-	flex
-	items-center
-	justify-between
-	gap-4
-` as typeof MotionAppBar;
-
 const BrandContainer = tw.div`
 	flex-shrink-0
 	flex
@@ -47,7 +38,8 @@ const StyledBrand = tw(Brand)`
 `;
 
 const Search = tw(SiteWideSearch)`
-
+	ml-auto
+	sm:ml-0
 `;
 
 const Actions = tw.div`
@@ -117,6 +109,33 @@ const UserMenu = tw(SiteWideUserMenu)`
 const SideDrawer = tw(SiteWideSideDrawer)`
 	pt-16
 `;
+
+const MotionAppBar = m(AppBar);
+
+const Root = styled(PageContainer)`
+	${tw`
+		flex
+		items-center
+		justify-between
+		gap-4
+	`}
+
+	&[data-searching="true"] {
+		& ${BrandContainer as any}, & ${Actions as any} {
+			${tw`
+				hidden
+				sm:flex
+			`}
+		}
+
+		& ${StyledBrand as any} {
+			${tw`
+				hidden
+				md:block
+			`}
+		}
+	}
+` as typeof MotionAppBar;
 
 export interface SiteWideAppBarProps {
 	className?: string;
@@ -218,6 +237,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						backdropFilter: "blur(0px)"
 					}
 				}}
+				data-searching={searching}
 			>
 				<BrandContainer>
 					<HamburgerMenuButton
