@@ -65,7 +65,8 @@ const IconButton = tw(Button)`
 	hidden
 	h-11
 	w-11
-	bg-transparent
+	bg-white
+	bg-opacity-80
 	lg:flex
 `;
 
@@ -219,13 +220,13 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						backdropFilter: "blur(0px)"
 					},
 					scrolled: {
-						backgroundColor: "rgba(255, 255, 255, 0.8)",
+						backgroundColor: "rgba(255, 255, 255, 0.85)",
 						boxShadow: oneLine`
 							0 2px 2px 0 rgba(0, 0, 0, 0.14),
 							0 3px 1px -2px rgba(0, 0, 0, 0.2),
 							0 1px 5px 0 rgba(0, 0, 0, 0.12)
 						`,
-						backdropFilter: "blur(10px)"
+						backdropFilter: "blur(8px)"
 					},
 					open: {
 						backgroundColor: "rgba(255, 255, 255, 1)",

@@ -76,7 +76,8 @@ const SearchButton = tw(Button)`
 	w-11
 	ml-auto
 	p-0
-	bg-transparent
+	bg-white
+	bg-opacity-80
 	not-disabled:hover:-translate-y-0.5
 	sm:border-0
 	sm:border-l
