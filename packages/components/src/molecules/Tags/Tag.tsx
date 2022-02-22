@@ -85,9 +85,11 @@ export const Tag = styled(
 				<Text>{children}</Text>
 				{canDelete && (
 					<CloseButton
-						onClick={(event) => {
-							context.onRemove?.(props, event);
-							onRemove?.(props, event);
+						onClick={(e) => {
+							e.stopPropagation();
+
+							context.onRemove?.(props, e);
+							onRemove?.(props, e);
 						}}
 					>
 						<XIcon width={16} height={16} />
