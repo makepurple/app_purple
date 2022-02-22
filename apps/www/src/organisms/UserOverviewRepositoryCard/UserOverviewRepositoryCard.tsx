@@ -1,5 +1,6 @@
 import { Anchor, Tags } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
+import NextLink from "next/link";
 import React, { CSSProperties, FC, useMemo } from "react";
 import tw from "twin.macro";
 import { UserOverviewRepositoryCardRepositoryFragment } from "../../graphql";
@@ -96,14 +97,28 @@ export const UserOverviewRepositoryCard: FC<UserOverviewRepositoryCardProps> = (
 			)}
 			<Tags type="positive" tw="mt-1">
 				{skills.map((skill) => (
-					<Tags.Tag key={skill.id} id={skill.id}>
-						{skill.name}
-					</Tags.Tag>
+					<NextLink
+						key={skill.id}
+						href="/s/[skillOwner]/[skillName]"
+						as={`/s/${skill.owner}/${skill.name}`}
+						passHref
+					>
+						<Tags.Tag
+							id={skill.id}
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+						>
+							{skill.name}
+						</Tags.Tag>
+					</NextLink>
 				))}
 				{!!otherSkills && (
-					<Tags.Tag id={`${repository.name}:skill-count`}>
-						+{otherSkills} other{otherSkills === 1 ? "" : "s"}
-					</Tags.Tag>
+					<NextLink href="/[userName]" as={`/${repository.github.owner.login}`} passHref>
+						<Tags.Tag id={`${repository.name}:skill-count`}>
+							+{otherSkills} other{otherSkills === 1 ? "" : "s"}
+						</Tags.Tag>
+					</NextLink>
 				)}
 			</Tags>
 			<Info
