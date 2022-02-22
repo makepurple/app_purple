@@ -1,0 +1,23 @@
+fragment RepositorySearchResultGitHubRepository on GitHubRepository {
+	description
+	forkCount
+	id
+	name
+	owner {
+		__typename
+		avatarUrl
+		login
+		... on GitHubOrganization {
+			name
+		}
+		... on GitHubUser {
+			name
+		}
+	}
+	primaryLanguage {
+		color
+		id
+		name
+	}
+	stargazerCount
+}

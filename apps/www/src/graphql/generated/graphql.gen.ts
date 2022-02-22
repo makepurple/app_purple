@@ -2226,6 +2226,8 @@ export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: s
 
 export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
+export type RepositorySearchResultGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly description?: string | null, readonly forkCount: number, readonly id: string, readonly name: string, readonly stargazerCount: number, readonly owner: { readonly __typename: 'GitHubOrganization', readonly name?: string | null, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly name?: string | null, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null };
+
 type SiteWideSideDrawerFollowable_Skill_Fragment = { readonly __typename: 'Skill', readonly viewerFollowing: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string } | { readonly __typename: 'GitHubUser', readonly avatarUrl: string, readonly id: string } } };
 
 type SiteWideSideDrawerFollowable_User_Fragment = { readonly __typename: 'User', readonly viewerFollowing: boolean, readonly id: string, readonly image?: string | null, readonly name: string };
@@ -2255,8 +2257,6 @@ type SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment = { rea
 type SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment = { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null, readonly login: string, readonly name?: string | null };
 
 export type SuggestSkillOwnersGitHubRepositoryOwnerFragment = SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment | SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment;
-
-export type SuggestSkillsGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } };
 
 export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
@@ -2839,7 +2839,7 @@ export type SuggestSkillsQueryVariables = Exact<{
 }>;
 
 
-export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string } }> } };
+export type SuggestSkillsQuery = { readonly __typename: 'Query', readonly suggestSkills: { readonly __typename: 'SuggestSkills', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubRepository', readonly description?: string | null, readonly forkCount: number, readonly id: string, readonly name: string, readonly stargazerCount: number, readonly owner: { readonly __typename: 'GitHubOrganization', readonly name?: string | null, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly name?: string | null, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }> } };
 
 export type SuggestViewerFriendsQueryVariables = Exact<{
   name: Scalars['String'];
@@ -3129,6 +3129,31 @@ export const RepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     `;
+export const RepositorySearchResultGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
+    fragment RepositorySearchResultGitHubRepository on GitHubRepository {
+  description
+  forkCount
+  id
+  name
+  owner {
+    __typename
+    avatarUrl
+    login
+    ... on GitHubOrganization {
+      name
+    }
+    ... on GitHubUser {
+      name
+    }
+  }
+  primaryLanguage {
+    color
+    id
+    name
+  }
+  stargazerCount
+}
+    `;
 export const SiteWideSideDrawerSkillFollowLinkSkillFragmentDoc = /*#__PURE__*/ gql`
     fragment SiteWideSideDrawerSkillFollowLinkSkill on Skill {
   github {
@@ -3318,7 +3343,6 @@ export const SkillOwnerRepositoryCardGitHubRepositoryFragmentDoc = /*#__PURE__*/
   forkCount
   name
   primaryLanguage {
-    __typename
     color
     id
     name
@@ -3363,18 +3387,6 @@ export const SuggestSkillOwnersGitHubRepositoryOwnerFragmentDoc = /*#__PURE__*/ 
 }
     ${OrganizationSearchResultGitHubOrganizationFragmentDoc}
 ${UserSearchResultGitHubUserFragmentDoc}`;
-export const SuggestSkillsGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
-    fragment SuggestSkillsGitHubRepository on GitHubRepository {
-  id
-  description
-  name
-  owner {
-    __typename
-    id
-    login
-  }
-}
-    `;
 export const SuggestedFriendCardUserFragmentDoc = /*#__PURE__*/ gql`
     fragment SuggestedFriendCardUser on User {
   __typename
@@ -5695,12 +5707,12 @@ export const SuggestSkillsDocument = /*#__PURE__*/ gql`
     query SuggestSkills($where: SuggestSkillsWhereInput!) {
   suggestSkills(first: 6, where: $where) {
     nodes {
-      ...SuggestSkillsGitHubRepository
+      ...RepositorySearchResultGitHubRepository
     }
     totalCount
   }
 }
-    ${SuggestSkillsGitHubRepositoryFragmentDoc}`;
+    ${RepositorySearchResultGitHubRepositoryFragmentDoc}`;
 
 export function useSuggestSkillsQuery(options: Omit<Urql.UseQueryArgs<SuggestSkillsQueryVariables>, 'query'>) {
   return Urql.useQuery<SuggestSkillsQuery>({ query: SuggestSkillsDocument, ...options });

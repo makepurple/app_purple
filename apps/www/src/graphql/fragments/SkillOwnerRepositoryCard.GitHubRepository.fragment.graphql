@@ -5,7 +5,6 @@ fragment SkillOwnerRepositoryCardGitHubRepository on GitHubRepository {
 	forkCount
 	name
 	primaryLanguage {
-		__typename
 		color
 		id
 		name

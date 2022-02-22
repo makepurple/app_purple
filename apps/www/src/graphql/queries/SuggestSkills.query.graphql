@@ -1,7 +1,7 @@
 query SuggestSkills($where: SuggestSkillsWhereInput!) {
 	suggestSkills(first: 6, where: $where) {
 		nodes {
-			...SuggestSkillsGitHubRepository
+			...RepositorySearchResultGitHubRepository
 		}
 		totalCount
 	}

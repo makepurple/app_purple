@@ -5,6 +5,7 @@ import React, { CSSProperties, FC, useCallback, useState } from "react";
 import tw from "twin.macro";
 import { useClient } from "urql";
 import {
+	RepositorySearchResultGitHubRepositoryFragment,
 	SuggestSkillsDocument,
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables
@@ -17,14 +18,9 @@ const SkillsSuggest = tw(ComboBox.Options)`
 	translate-y-full
 `;
 
-export interface SkillAutosuggestItem {
-	name: string;
-	owner: string;
-}
-
 export interface SkillAutosuggestProps {
 	className?: string;
-	onSelect?: (skill: SkillAutosuggestItem) => void;
+	onSelect?: (skill: RepositorySearchResultGitHubRepositoryFragment) => void;
 	style?: CSSProperties;
 	"aria-label"?: string;
 }
@@ -35,7 +31,9 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 	style,
 	"aria-label": ariaLabel
 }) => {
-	const [skillItems, setSkillItems] = useState<SkillAutosuggestItem[]>([]);
+	const [skillItems, setSkillItems] = useState<RepositorySearchResultGitHubRepositoryFragment[]>(
+		[]
+	);
 
 	const urqlClient = useClient();
 
@@ -53,18 +51,12 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 				})
 				.toPromise();
 
-			return (
-				result.data?.suggestSkills.nodes.map((repo) => ({
-					id: repo.id,
-					name: repo.name,
-					owner: repo.owner.login
-				})) ?? []
-			);
+			return result.data?.suggestSkills.nodes ?? [];
 		},
 		[urqlClient]
 	);
 
-	const combobox = useComboBoxState<SkillAutosuggestItem>({
+	const combobox = useComboBoxState<RepositorySearchResultGitHubRepositoryFragment>({
 		debounce: ms("0.3s"),
 		id: "skills-autosuggest",
 		items: skillItems,
@@ -72,7 +64,7 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 		onInputValueChange: async ({ inputValue }) => {
 			const suggestions = await getSkillAutosuggestItems(inputValue);
 
-			setSkillItems(suggestions);
+			setSkillItems(suggestions.slice());
 		},
 		onSelectedItemChange: ({ selectedItem }) => {
 			if (!selectedItem) return;
@@ -92,9 +84,14 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 
 		if (!owner || !name) return;
 
-		const newSelectedItem = skillItems.find(
-			(item) => item.name.toLowerCase() === name && item.owner.toLowerCase() === owner
-		);
+		const newSelectedItem = skillItems.find((item) => {
+			const matchOwner =
+				item.owner.login.toLowerCase() === owner ||
+				item.owner.name?.toLowerCase() === owner;
+			const matchSkill = item.name.toLowerCase() === name;
+
+			return matchOwner && matchSkill;
+		});
 
 		if (!newSelectedItem) return;
 

@@ -1,7 +1,11 @@
 import { Tags } from "@makepurple/components";
 import { PromiseUtils } from "@makepurple/utils";
-import { SkillAutosuggest, SkillAutosuggestItem, SkillAutosuggestProps } from "@makepurple/www";
-import { SuggestSkills_mock } from "@makepurple/www/src/graphql/mocks";
+import { SkillAutosuggest, SkillAutosuggestProps } from "@makepurple/www";
+import { RepositorySearchResultGitHubRepositoryFragment } from "@makepurple/www/src/graphql";
+import {
+	GitHubRepository_fragment_mock,
+	SuggestSkills_mock
+} from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
 import React, { useState } from "react";
@@ -13,8 +17,8 @@ export default {
 } as Meta;
 
 const Template: Story<SkillAutosuggestProps> = (args) => {
-	const [items, setItems] = useState<readonly SkillAutosuggestItem[]>([
-		{ name: "react", owner: "facebook" }
+	const [items, setItems] = useState<readonly RepositorySearchResultGitHubRepositoryFragment[]>([
+		GitHubRepository_fragment_mock as any
 	]);
 
 	return (
