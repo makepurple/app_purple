@@ -27,7 +27,7 @@ export const suggestOrganizations = queryField("suggestOrganizations", {
 		`
 			.cast<octokit.SuggestOrganizationsQuery, octokit.SuggestOrganizationsQueryVariables>({
 				first: Math.min(args.first ?? 10, 10),
-				searchQuery: `type:org ${args.where.name} in:name`
+				searchQuery: `type:org ${args.where.name} in:login in:name`
 			})
 			.catch(() => null);
 
