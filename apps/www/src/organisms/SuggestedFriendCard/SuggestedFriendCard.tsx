@@ -43,6 +43,7 @@ const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
+	cursor-pointer
 `;
 
 const PostInfo = tw.a`
@@ -65,7 +66,7 @@ const PostDescription = tw.div`
 	text-gray-500
 `;
 
-const UserInfo = tw.a`
+const UserInfo = tw.div`
 	flex
 	flex-col
 	items-stretch
@@ -73,12 +74,13 @@ const UserInfo = tw.a`
 	hover:bg-indigo-50
 `;
 
-const UserName = tw.div`
+const UserName = tw.a`
 	leading-none
 	text-indigo-600
+	truncate
 `;
 
-const UserDescription = tw.div`
+const UserDescription = tw.a`
 	text-left
 	text-sm
 	line-clamp-2
@@ -174,48 +176,105 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 							<Divider />
 						</>
 					)}
-					<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-						<UserInfo className="userInfo">
+					<UserInfo
+						className="userInfo"
+						onClick={async () => {
+							await router.push("/[userName]", `/${user.name}`);
+						}}
+					>
+						<NextLink href="/[userName]" as={`/${user.name}`} passHref>
 							<UserName>{user.name}</UserName>
-							{user.description && (
+						</NextLink>
+						{user.description && (
+							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
 								<UserDescription tw="mt-1">{user.description}</UserDescription>
-							)}
-							{(!!skills.length || !!desiredSkills.length) && (
-								<UserSkills tw="mt-3">
-									{!!skills.length && (
-										<Tags type="positive">
-											{skills.map((skill) => (
-												<Tags.Tag key={skill.id} id={skill.id} tw="px-1">
+							</NextLink>
+						)}
+						{(!!skills.length || !!desiredSkills.length) && (
+							<UserSkills tw="mt-3">
+								{!!skills.length && (
+									<Tags type="positive">
+										{skills.map((skill) => (
+											<NextLink
+												key={skill.id}
+												href="/s/[skillOwner]/[skillName]"
+												as={`/s/${skill.owner}/${skill.name}`}
+												passHref
+											>
+												<Tags.Tag
+													id={skill.id}
+													onClick={(e) => {
+														e.stopPropagation();
+													}}
+													tw="px-1"
+												>
 													{skill.name}
 												</Tags.Tag>
-											))}
-											{skillsExtra > 0 && (
-												<Tags.Tag id="see-more" tw="px-1">
+											</NextLink>
+										))}
+										{skillsExtra > 0 && (
+											<NextLink
+												href="/[userName]"
+												as={`/${user.name}`}
+												passHref
+											>
+												<Tags.Tag
+													id="see-more"
+													onClick={(e) => {
+														e.stopPropagation();
+													}}
+													tw="px-1"
+												>
 													+{skillsExtra} other
 													{skillsExtra === 1 ? "" : "s"}
 												</Tags.Tag>
-											)}
-										</Tags>
-									)}
-									{!!desiredSkills.length && (
-										<Tags type="negative">
-											{desiredSkills.map((skill) => (
-												<Tags.Tag key={skill.id} id={skill.id} tw="px-1">
+											</NextLink>
+										)}
+									</Tags>
+								)}
+								{!!desiredSkills.length && (
+									<Tags type="negative">
+										{desiredSkills.map((skill) => (
+											<NextLink
+												key={skill.id}
+												href="/s/[skillOwner]/[skillName]"
+												as={`/s/${skill.owner}/${skill.name}`}
+												passHref
+											>
+												<Tags.Tag
+													id={skill.id}
+													onClick={(e) => {
+														e.stopPropagation();
+													}}
+													tw="px-1"
+												>
 													{skill.name}
 												</Tags.Tag>
-											))}
-											{desiredSkillsExtra > 0 && (
-												<Tags.Tag id="see-more" tw="px-1">
+											</NextLink>
+										))}
+										{desiredSkillsExtra > 0 && (
+											<NextLink
+												href="/[userName]"
+												as={`/${user.name}`}
+												passHref
+											>
+												<Tags.Tag
+													id="see-more"
+													onClick={(e) => {
+														e.stopPropagation();
+													}}
+													tw="px-1"
+												>
 													+{desiredSkillsExtra} other
 													{desiredSkillsExtra === 1 ? "" : "s"}
 												</Tags.Tag>
-											)}
-										</Tags>
-									)}
-								</UserSkills>
-							)}
-						</UserInfo>
-					</NextLink>
+											</NextLink>
+										)}
+									</Tags>
+								)}
+							</UserSkills>
+						)}
+					</UserInfo>
 				</Content>
 			</Root>
 		);
