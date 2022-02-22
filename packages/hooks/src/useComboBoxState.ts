@@ -1,12 +1,12 @@
-import { ObjectUtils } from "@makepurple/utils";
+import { FunctionUtils, ObjectUtils } from "@makepurple/utils";
 import {
 	useCombobox,
 	UseComboboxProps,
 	UseComboboxReturnValue,
 	UseComboboxStateChange
 } from "downshift";
-import { useState } from "react";
-import { useDebounce, useMountedState } from "react-use";
+import { useMemo, useState } from "react";
+import { useMountedState } from "react-use";
 
 export type UseComboBoxProps<T> = UseComboboxProps<T> & {
 	debounce?: number;
@@ -16,38 +16,44 @@ export type UseComboBoxState<T> = UseComboboxReturnValue<T> & { loading: boolean
 
 export const useComboBoxState = ObjectUtils.setStatic(
 	<T>(props: UseComboBoxProps<T>): UseComboBoxState<T> => {
-		const { debounce = 0, ...downshiftProps } = props;
+		const { debounce = 0, inputValue, onInputValueChange, ...downshiftProps } = props;
 
 		const isMounted = useMountedState();
 
-		const [changes, setChanges] = useState<UseComboboxStateChange<T> | null>(null);
-
 		const [loading, setLoading] = useState<boolean>(false);
-		const [isReady] = useDebounce(
-			async () => {
-				if (!changes) return;
+		const [isReady, setIsReady] = useState<boolean>(false);
 
-				setLoading(true);
+		const debouncedValueChange = useMemo(
+			() =>
+				FunctionUtils.debounce(
+					async (changes: UseComboboxStateChange<T> | null) => {
+						setIsReady(true);
 
-				await Promise.resolve(props.onInputValueChange?.(changes));
+						if (!changes) return;
 
-				isMounted() && setLoading(false);
-			},
-			debounce,
-			[changes]
+						setLoading(true);
+
+						await Promise.resolve(onInputValueChange?.(changes));
+
+						isMounted() && setLoading(false);
+					},
+					{ wait: debounce }
+				),
+			[debounce, isMounted, onInputValueChange]
 		);
-
 		const combobox = useCombobox({
 			id: "autocomplete",
 			...downshiftProps,
-			onInputValueChange: (newChanges) => {
-				setChanges(newChanges);
+			onInputValueChange: async (newChanges) => {
+				setIsReady(false);
+
+				await debouncedValueChange(newChanges);
 			}
 		});
 
-		const isPending = !!changes?.inputValue && isReady() === false;
+		const isPending = !!combobox.inputValue && isReady === false;
 
-		const isOpen = combobox.isOpen && !!changes?.inputValue;
+		const isOpen = combobox.isOpen && !!combobox.inputValue;
 		const hasItems = !!props.items.length;
 
 		return {
