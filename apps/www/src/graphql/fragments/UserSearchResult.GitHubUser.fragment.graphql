@@ -1,0 +1,7 @@
+fragment UserSearchResultGitHubUser on GitHubUser {
+	avatarUrl
+	bio
+	id
+	login
+	name
+}

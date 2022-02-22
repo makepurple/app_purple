@@ -2250,9 +2250,9 @@ export type SkillOwnerInfoSideBarGitHubRepositoryOwnerFragment = SkillOwnerInfoS
 
 export type SkillOwnerRepositoryCardGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly name: string, readonly stargazerCount: number, readonly url: string, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean, readonly viewerSkill: boolean } | null };
 
-type SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment = { readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string };
+type SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment = { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly description?: string | null, readonly login: string, readonly name?: string | null };
 
-type SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment = { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string };
+type SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment = { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null, readonly login: string, readonly name?: string | null };
 
 export type SuggestSkillOwnersGitHubRepositoryOwnerFragment = SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment | SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment;
 
@@ -2311,6 +2311,8 @@ export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonl
 export type UserOverviewExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } };
 
 export type UserOverviewRepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
+
+export type UserSearchResultGitHubUserFragment = { readonly __typename: 'GitHubUser', readonly avatarUrl: string, readonly bio?: string | null, readonly id: string, readonly login: string, readonly name?: string | null };
 
 export type AddDesiredSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
@@ -2830,7 +2832,7 @@ export type SuggestSkillOwnersQueryVariables = Exact<{
 }>;
 
 
-export type SuggestSkillOwnersQuery = { readonly __typename: 'Query', readonly suggestSkillOwners: { readonly __typename: 'SuggestSkillOwners', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly description?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly bio?: string | null, readonly name?: string | null, readonly avatarUrl: string, readonly id: string, readonly login: string }> } };
+export type SuggestSkillOwnersQuery = { readonly __typename: 'Query', readonly suggestSkillOwners: { readonly __typename: 'SuggestSkillOwners', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly description?: string | null, readonly login: string, readonly name?: string | null } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly bio?: string | null, readonly login: string, readonly name?: string | null }> } };
 
 export type SuggestSkillsQueryVariables = Exact<{
   where: SuggestSkillsWhereInput;
@@ -3063,15 +3065,6 @@ export const NotificationCardPostCommentedNotificationPostCommentedFragmentDoc =
   }
   postId
   updatedAt
-}
-    `;
-export const OrganizationSearchResultGitHubOrganizationFragmentDoc = /*#__PURE__*/ gql`
-    fragment OrganizationSearchResultGitHubOrganization on GitHubOrganization {
-  avatarUrl
-  description
-  id
-  login
-  name
 }
     `;
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
@@ -3339,22 +3332,37 @@ export const SkillOwnerRepositoryCardGitHubRepositoryFragmentDoc = /*#__PURE__*/
   url
 }
     `;
+export const OrganizationSearchResultGitHubOrganizationFragmentDoc = /*#__PURE__*/ gql`
+    fragment OrganizationSearchResultGitHubOrganization on GitHubOrganization {
+  avatarUrl
+  description
+  id
+  login
+  name
+}
+    `;
+export const UserSearchResultGitHubUserFragmentDoc = /*#__PURE__*/ gql`
+    fragment UserSearchResultGitHubUser on GitHubUser {
+  avatarUrl
+  bio
+  id
+  login
+  name
+}
+    `;
 export const SuggestSkillOwnersGitHubRepositoryOwnerFragmentDoc = /*#__PURE__*/ gql`
     fragment SuggestSkillOwnersGitHubRepositoryOwner on GitHubRepositoryOwner {
   __typename
-  avatarUrl
   id
-  login
   ... on GitHubOrganization {
-    description
-    name
+    ...OrganizationSearchResultGitHubOrganization
   }
   ... on GitHubUser {
-    bio
-    name
+    ...UserSearchResultGitHubUser
   }
 }
-    `;
+    ${OrganizationSearchResultGitHubOrganizationFragmentDoc}
+${UserSearchResultGitHubUserFragmentDoc}`;
 export const SuggestSkillsGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
     fragment SuggestSkillsGitHubRepository on GitHubRepository {
   id

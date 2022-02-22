@@ -1,14 +1,10 @@
 fragment SuggestSkillOwnersGitHubRepositoryOwner on GitHubRepositoryOwner {
 	__typename
-	avatarUrl
 	id
-	login
 	... on GitHubOrganization {
-		description
-		name
+		...OrganizationSearchResultGitHubOrganization
 	}
 	... on GitHubUser {
-		bio
-		name
+		...UserSearchResultGitHubUser
 	}
 }

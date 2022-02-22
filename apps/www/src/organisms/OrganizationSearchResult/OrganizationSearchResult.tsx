@@ -37,7 +37,7 @@ const Description = tw.div`
 const Root = styled(ComboBox.Option)`
 	&[aria-selected="true"],
 	&:hover {
-		& ${Description as any} {
+		& ${Name as any}, & ${Description as any} {
 			${tw`
 				text-white
 			`}

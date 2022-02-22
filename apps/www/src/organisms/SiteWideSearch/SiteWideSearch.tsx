@@ -28,6 +28,9 @@ import {
 	SuggestSkillsQueryVariables
 } from "../../graphql";
 import { SearchIcon } from "../../svgs";
+import { LoadingSearchResult } from "../LoadingSearchResult";
+import { OrganizationSearchResult } from "../OrganizationSearchResult";
+import { UserSearchResult } from "../UserSearchResult";
 
 const InputContainer = tw(ComboBox)`
 	flex
@@ -67,7 +70,8 @@ const SkillSearch = tw(SearchInput)`
 `;
 
 const Results = tw(Paper)`
-	rounded-t-none
+	max-h-96
+	overflow-y-auto
 `;
 
 const SearchButton = tw(Button)`
@@ -341,25 +345,28 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					})}
 					isOpen={ownerBox.isOpen}
 				>
-					{owners.map((owner, i) => (
-						<NextLink
-							key={owner.id}
-							href="/s/[skillOwner]"
-							as={`/s/${owner.login}`}
-							passHref
-						>
-							<ComboBox.Option
-								as="a"
-								{...ownerBox.getItemProps({
-									item: owner,
-									index: i
-								})}
-								data-selected={ownerBox.selectedItem?.id === owner.id}
-							>
-								<span>{owner.name ?? owner.login}</span>
-							</ComboBox.Option>
-						</NextLink>
-					))}
+					{ownerBox.loading
+						? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
+						: owners.map((owner, i) => (
+								<NextLink
+									key={owner.id}
+									href="/s/[skillOwner]"
+									as={`/s/${owner.login}`}
+									passHref
+								>
+									{owner.__typename === "GitHubOrganization" ? (
+										<OrganizationSearchResult
+											organization={owner}
+											{...ownerBox.getItemProps({ index: i, item: owner })}
+										/>
+									) : (
+										<UserSearchResult
+											user={owner}
+											{...ownerBox.getItemProps({ index: i, item: owner })}
+										/>
+									)}
+								</NextLink>
+						  ))}
 				</ComboBox.Options>
 				<ComboBox.Options
 					as={Results}

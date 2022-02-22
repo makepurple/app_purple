@@ -1,4 +1,4 @@
-import { Avatar, ComboBox, GitHubAvatarImage, ListItem, Skeleton } from "@makepurple/components";
+import { Avatar, ComboBox, GitHubAvatarImage } from "@makepurple/components";
 import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, useCallback, useMemo, useState } from "react";

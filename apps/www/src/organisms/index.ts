@@ -86,4 +86,5 @@ export * from "./UserOverviewExperienceCard";
 export * from "./UserOverviewRepositoryCard";
 export * from "./UserPageLayout";
 export * from "./UserPageTabs";
+export * from "./UserSearchResult";
 export * from "./UserTrophy";
