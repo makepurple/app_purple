@@ -7,6 +7,9 @@ import { Paper } from "../Paper";
 const Root = styled(Paper)<{ $hidden: boolean }>`
 	${tw`
 		absolute
+		inset-x-0
+		bottom-0
+		translate-y-full
 		flex
 		flex-col
 		items-stretch

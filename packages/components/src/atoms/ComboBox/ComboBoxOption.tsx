@@ -13,15 +13,14 @@ export const ComboBoxOption = tw.div`
 	font-semibold
 	text-black
 	bg-transparent
-	hover:bg-gray-50
-	hover:bg-opacity-80
+	hover:bg-indigo-50/80
 	transition
 	duration-150
 	ease-in-out
 	cursor-pointer
 	[&[aria-selected="true"]]:text-white
 	[&[aria-selected="true"]]:bg-indigo-500
-	[&[aria-selected="true"]]:hover:bg-indigo-500
+	[&[aria-selected="true"]]:hover:bg-indigo-500/80
 	[&[data-selected="true"]]:text-white
 	[&[data-selected="true"]]:bg-indigo-500
 `;
