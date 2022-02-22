@@ -1,6 +1,6 @@
 import { dayjs } from "@makepurple/utils";
 import { User_fragment_mock } from ".";
-import { UserActivityFollowUser } from "../../generated";
+import { FollowType, UserActivityFollowUser } from "../../generated";
 
 export const UserActivityFollowUser_fragment_mock: UserActivityFollowUser = {
 	__typename: "UserActivityFollowUser",
@@ -11,7 +11,8 @@ export const UserActivityFollowUser_fragment_mock: UserActivityFollowUser = {
 		following: {
 			...{ ...User_fragment_mock, id: "1" }
 		},
-		createdAt: dayjs(1318781876406).toDate()
+		createdAt: dayjs(1318781876406).toDate(),
+		type: FollowType.User
 	},
 	followId: "0",
 	id: "0",
