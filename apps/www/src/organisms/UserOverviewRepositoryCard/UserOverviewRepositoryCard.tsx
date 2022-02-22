@@ -78,7 +78,7 @@ export const UserOverviewRepositoryCard: FC<UserOverviewRepositoryCardProps> = (
 		<Root
 			className={className}
 			onClick={() => {
-				location.assign(repository.github.url);
+				window.open(repository.github.url, "_blank");
 			}}
 			style={style}
 		>
@@ -116,7 +116,12 @@ export const UserOverviewRepositoryCard: FC<UserOverviewRepositoryCardProps> = (
 				))}
 				{!!otherSkills && (
 					<NextLink href="/[userName]" as={`/${repository.github.owner.login}`} passHref>
-						<Tags.Tag id={`${repository.name}:skill-count`}>
+						<Tags.Tag
+							id={`${repository.name}:skill-count`}
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+						>
 							+{otherSkills} other{otherSkills === 1 ? "" : "s"}
 						</Tags.Tag>
 					</NextLink>

@@ -6,10 +6,12 @@ import {
 	GitHubAvatarImage,
 	HiddenInput,
 	MaybeAnchor,
+	MaybeWrap,
 	Spinner,
 	Tags
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
+import NextLink from "next/link";
 import React, { cloneElement, CSSProperties, forwardRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -205,20 +207,36 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 					tw="relative mt-3"
 				>
 					{skills.fields.map((field, i) => (
-						<Tags.Tag
+						<MaybeWrap
 							key={field._id}
-							id={field._id}
-							onRemove={() => skills.remove(i)}
-							tw="cursor-auto"
-						>
-							{editing && (
-								<>
-									<HiddenInput {...register(`skills.${i}.name`)} />
-									<HiddenInput {...register(`skills.${i}.owner`)} />
-								</>
+							condition={!editing}
+							wrap={({ child }) => (
+								<NextLink
+									href="/s/[skillOwner]/[skillName]"
+									as={`/s/${field.owner}/${field.name}`}
+									passHref
+								>
+									{child}
+								</NextLink>
 							)}
-							<span>{field.name}</span>
-						</Tags.Tag>
+						>
+							<Tags.Tag
+								id={field._id}
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								onRemove={() => skills.remove(i)}
+								title={`${field.owner}/${field.name}`}
+							>
+								{editing && (
+									<>
+										<HiddenInput {...register(`skills.${i}.name`)} />
+										<HiddenInput {...register(`skills.${i}.owner`)} />
+									</>
+								)}
+								<span>{field.name}</span>
+							</Tags.Tag>
+						</MaybeWrap>
 					))}
 					<SkillAutosuggest
 						onSelect={(newSkill) => {
