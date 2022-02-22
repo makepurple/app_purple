@@ -22,12 +22,12 @@ import React, { CSSProperties, FC, SyntheticEvent, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
-import { OrganizationInput } from "..";
 import {
 	ExperienceType,
 	UpdateExperienceFormExperienceFragment,
 	useUpdateExperienceMutation
 } from "../../graphql";
+import { OrganizationAutosuggest } from "../OrganizationAutosuggest";
 
 const DateSelectorContainer = tw.div`
 	grid
@@ -219,7 +219,7 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 					control={control}
 					name="organizationName"
 					render={({ field }) => (
-						<OrganizationInput
+						<OrganizationAutosuggest
 							name={field.name}
 							onChange={field.onChange}
 							value={field.value ?? ""}

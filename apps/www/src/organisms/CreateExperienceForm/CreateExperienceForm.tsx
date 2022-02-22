@@ -23,7 +23,7 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { ExperienceType, useCreateExperienceMutation } from "../../graphql";
-import { OrganizationInput } from "../OrganizationInput";
+import { OrganizationAutosuggest } from "../OrganizationAutosuggest";
 
 const DateSelectorContainer = tw.div`
 	grid
@@ -204,7 +204,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 					control={control}
 					name="organizationName"
 					render={({ field }) => (
-						<OrganizationInput
+						<OrganizationAutosuggest
 							name={field.name}
 							onChange={field.onChange}
 							value={field.value}
