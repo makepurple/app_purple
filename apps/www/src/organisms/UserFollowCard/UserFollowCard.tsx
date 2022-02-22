@@ -89,30 +89,48 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 				{!!skills.length && (
 					<Tags type="positive" tw="mt-2">
 						{skills.map((skill) => (
-							<Tags.Tag key={skill.id} id={skill.id}>
-								{skill.name}
-							</Tags.Tag>
+							<NextLink
+								key={skill.id}
+								href="/s/[skillOwner]/[skillName]"
+								as={`/s/${skill.owner}/${skill.name}`}
+								passHref
+							>
+								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+									{skill.name}
+								</Tags.Tag>
+							</NextLink>
 						))}
 						{skillsExtra > 0 && (
-							<Tags.Tag id="see-more" tw="px-1">
-								+{skillsExtra} other
-								{skillsExtra === 1 ? "" : "s"}
-							</Tags.Tag>
+							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+								<Tags.Tag id="see-more" tw="px-1">
+									+{skillsExtra} other
+									{skillsExtra === 1 ? "" : "s"}
+								</Tags.Tag>
+							</NextLink>
 						)}
 					</Tags>
 				)}
 				{!!desiredSkills.length && (
 					<Tags type="negative" tw="mt-2">
 						{desiredSkills.map((skill) => (
-							<Tags.Tag key={skill.id} id={skill.id}>
-								{skill.name}
-							</Tags.Tag>
+							<NextLink
+								key={skill.id}
+								href="/s/[skillOwner]/[skillName]"
+								as={`/s/${skill.owner}/${skill.name}`}
+								passHref
+							>
+								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+									{skill.name}
+								</Tags.Tag>
+							</NextLink>
 						))}
 						{desiredSkillsExtra > 0 && (
-							<Tags.Tag id="see-more" tw="px-1">
-								+{desiredSkillsExtra} other
-								{desiredSkillsExtra === 1 ? "" : "s"}
-							</Tags.Tag>
+							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+								<Tags.Tag id="see-more" tw="px-1">
+									+{desiredSkillsExtra} other
+									{desiredSkillsExtra === 1 ? "" : "s"}
+								</Tags.Tag>
+							</NextLink>
 						)}
 					</Tags>
 				)}

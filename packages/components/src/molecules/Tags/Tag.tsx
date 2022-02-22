@@ -13,6 +13,7 @@ export type TagProps = Omit<InferComponentProps<typeof Root>, "id"> & {
 export type TagType = "positive" | "neutral" | "negative";
 
 export const Root = styled.a<{
+	href?: string;
 	type?: TagType;
 	$canDelete?: boolean;
 }>`
@@ -29,6 +30,7 @@ export const Root = styled.a<{
 		text-white
 		cursor-auto
 	`}
+
 	background-color: ${({ type }): any => {
 		switch (type) {
 			case "positive":
@@ -41,6 +43,9 @@ export const Root = styled.a<{
 				return "initial";
 		}
 	}};
+
+	${({ href }) => !!href && tw`cursor-pointer`}
+
 	${({ $canDelete }) =>
 		$canDelete &&
 		tw`
@@ -76,7 +81,7 @@ export const Tag = styled(
 		const type = href ? "a" : "span";
 
 		return (
-			<Root as={type} {...restTagProps} ref={ref} $canDelete={canDelete}>
+			<Root as={type} href={href} {...restTagProps} ref={ref} $canDelete={canDelete}>
 				<Text>{children}</Text>
 				{canDelete && (
 					<CloseButton
