@@ -18,6 +18,7 @@ fragment UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser on UserAct
 				nodes {
 					id
 					name
+					owner
 				}
 			}
 			id

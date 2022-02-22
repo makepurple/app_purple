@@ -20,6 +20,7 @@ fragment UserActivityCardFollowUserUserActivityFollowUser on UserActivityFollowU
 					nodes {
 						id
 						name
+						owner
 					}
 				}
 				id
