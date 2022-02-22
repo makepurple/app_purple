@@ -18,12 +18,12 @@ import { useLockBodyScroll } from "react-use";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
+	RepositorySearchResultGitHubRepositoryFragment,
 	SuggestSkillOwnersDocument,
 	SuggestSkillOwnersGitHubRepositoryOwnerFragment,
 	SuggestSkillOwnersQuery,
 	SuggestSkillOwnersQueryVariables,
 	SuggestSkillsDocument,
-	SuggestSkillsGitHubRepositoryFragment,
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables
 } from "../../graphql";
@@ -202,7 +202,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			);
 		}, [ownerBox.inputValue, owners]);
 
-		const [skills, setSkills] = useState<SuggestSkillsGitHubRepositoryFragment[]>([]);
+		const [skills, setSkills] = useState<RepositorySearchResultGitHubRepositoryFragment[]>([]);
 		const skillBox = useComboBoxState({
 			id: "site-wide-search-skills",
 			items: skills,
