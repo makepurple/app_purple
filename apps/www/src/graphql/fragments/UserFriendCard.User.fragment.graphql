@@ -15,6 +15,7 @@ fragment UserFriendCardUser on User {
 		nodes {
 			id
 			name
+			owner
 		}
 	}
 	id

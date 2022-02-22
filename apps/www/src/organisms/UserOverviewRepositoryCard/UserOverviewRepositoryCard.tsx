@@ -108,6 +108,7 @@ export const UserOverviewRepositoryCard: FC<UserOverviewRepositoryCardProps> = (
 							onClick={(e) => {
 								e.stopPropagation();
 							}}
+							title={`${skill.owner}/${skill.name}`}
 						>
 							{skill.name}
 						</Tags.Tag>
