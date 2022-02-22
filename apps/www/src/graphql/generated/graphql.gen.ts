@@ -2218,6 +2218,8 @@ export type NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFrag
 
 export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } };
 
+export type OrganizationSearchResultGitHubOrganizationFragment = { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null };
+
 export type PageInfoFragmentFragment = { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null };
 
 export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
@@ -3061,6 +3063,15 @@ export const NotificationCardPostCommentedNotificationPostCommentedFragmentDoc =
   }
   postId
   updatedAt
+}
+    `;
+export const OrganizationSearchResultGitHubOrganizationFragmentDoc = /*#__PURE__*/ gql`
+    fragment OrganizationSearchResultGitHubOrganization on GitHubOrganization {
+  avatarUrl
+  description
+  id
+  login
+  name
 }
     `;
 export const PostCardPostFragmentDoc = /*#__PURE__*/ gql`
@@ -5631,15 +5642,11 @@ export const SuggestOrganizationsDocument = /*#__PURE__*/ gql`
   suggestOrganizations(first: $first, where: $where) {
     totalCount
     nodes {
-      avatarUrl
-      description
-      id
-      login
-      name
+      ...OrganizationSearchResultGitHubOrganization
     }
   }
 }
-    `;
+    ${OrganizationSearchResultGitHubOrganizationFragmentDoc}`;
 
 export function useSuggestOrganizationsQuery(options: Omit<Urql.UseQueryArgs<SuggestOrganizationsQueryVariables>, 'query'>) {
   return Urql.useQuery<SuggestOrganizationsQuery>({ query: SuggestOrganizationsDocument, ...options });

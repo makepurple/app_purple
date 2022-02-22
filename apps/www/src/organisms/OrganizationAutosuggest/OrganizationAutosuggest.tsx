@@ -1,9 +1,17 @@
-import { Avatar, GitHubAvatarImage, Input, ListItem, Skeleton } from "@makepurple/components";
-import { StyleUtils } from "@makepurple/utils";
-import { useCombobox } from "downshift";
-import React, { CSSProperties, FC, useMemo } from "react";
-import tw, { styled } from "twin.macro";
-import { useSuggestOrganizationsQuery } from "../../graphql";
+import { Avatar, ComboBox, GitHubAvatarImage, ListItem, Skeleton } from "@makepurple/components";
+import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
+import ms from "ms";
+import React, { CSSProperties, FC, useCallback, useMemo, useState } from "react";
+import tw from "twin.macro";
+import { useClient } from "urql";
+import {
+	OrganizationSearchResultGitHubOrganizationFragment,
+	SuggestOrganizationsDocument,
+	SuggestOrganizationsQuery,
+	SuggestOrganizationsQueryVariables
+} from "../../graphql";
+import { LoadingSearchResult } from "../LoadingSearchResult";
+import { OrganizationSearchResult } from "../OrganizationSearchResult";
 
 const Root = tw.div`
 	relative
@@ -27,28 +35,6 @@ const Description = tw.p`
 	truncate
 `;
 
-const Options = styled.ul`
-	${tw`
-		absolute
-		inset-x-0
-		bottom-0
-		transform
-		translate-y-full
-		inline-flex
-		flex-col
-		items-stretch
-		max-h-80
-		mt-1
-		p-0.5
-		overflow-y-auto
-		rounded-lg
-		bg-white
-		shadow-2xl
-		empty:hidden
-	`}
-	z-index: ${StyleUtils.getZIndex("menu")};
-`;
-
 export interface OrganizationAutosuggestProps {
 	className?: string;
 	name?: string;
@@ -66,31 +52,45 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 	style,
 	value
 }) => {
-	const [{ data, fetching }] = useSuggestOrganizationsQuery({
-		pause: !value,
-		variables: {
-			first: 3,
-			where: {
-				name: value
-			}
-		}
-	});
+	const [organizations, setOrganizations] = useState<
+		OrganizationSearchResultGitHubOrganizationFragment[]
+	>([]);
 
-	const organizations = useMemo(() => data?.suggestOrganizations.nodes.slice() ?? [], [data]);
+	const urqlClient = useClient();
 
-	const {
-		getComboboxProps,
-		getInputProps,
-		getItemProps,
-		getMenuProps,
-		highlightedIndex,
-		isOpen,
-		reset,
-		selectedItem
-	} = useCombobox({
+	const combobox = useComboBoxState({
+		debounce: ms("0.3s"),
 		items: organizations,
+		itemToString: (item) => item?.name ?? item?.login ?? "",
+		onInputValueChange: useCallback(
+			async ({ inputValue }) => {
+				const login = inputValue?.toLowerCase();
+
+				if (!login) return;
+
+				const nodes = await urqlClient
+					.query<SuggestOrganizationsQuery, SuggestOrganizationsQueryVariables>(
+						SuggestOrganizationsDocument,
+						{
+							first: 3,
+							where: { name: login }
+						}
+					)
+					.toPromise()
+					.then((result) => {
+						return result.data?.suggestOrganizations.nodes ?? [];
+					});
+
+				if (!nodes.length) return;
+
+				setOrganizations(nodes.slice());
+			},
+			[urqlClient]
+		),
 		onSelectedItemChange: (changes) => {
 			!!changes.selectedItem && onChange(changes.selectedItem.login);
+
+			combobox.reset();
 		}
 	});
 
@@ -99,6 +99,22 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 			? organizations.find((o) => o.login.toLowerCase() === value.toLowerCase())
 			: null;
 	}, [organizations, value]);
+
+	const onEnter = useOnKeyDown({ key: "ENTER" }, () => {
+		const inputValue = combobox.inputValue?.toLowerCase();
+
+		if (!inputValue) return;
+
+		const newSelected = organizations.find(
+			(organization) =>
+				organization.login.toLowerCase() === inputValue ||
+				organization.name?.toLowerCase() === inputValue
+		);
+
+		if (!newSelected) return;
+
+		combobox.selectItem(newSelected);
+	});
 
 	return (
 		<Root className={className} style={style}>
@@ -115,50 +131,34 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 					</div>
 				</CurrentOrganization>
 			)}
-			<div {...getComboboxProps()}>
-				<Input
-					{...getInputProps({
+			<ComboBox {...combobox.getComboboxProps()}>
+				<ComboBox.Input
+					{...combobox.getInputProps({
 						name,
 						onChange: (e) => {
 							onChange(e.currentTarget.value.toLowerCase());
-
-							reset();
 						},
+						onKeyDown: onEnter,
 						placeholder,
 						spellCheck: false,
 						value
 					})}
 				/>
-			</div>
-			<Options {...getMenuProps()}>
-				{isOpen &&
-					(fetching
-						? Array.from({ length: 3 }, (_, i) => (
-								<ListItem key={i}>
-									<Skeleton tw="h-9 w-full" />
-								</ListItem>
-						  ))
-						: organizations.map((organization, index) => (
-								<ListItem
-									key={organization.id}
-									{...getItemProps({
-										index,
-										item: organization
-									})}
-									active={highlightedIndex === index}
-									selected={selectedItem?.id === organization.id}
-								>
-									<Avatar border={1} tw="mr-2 rounded-md">
-										<GitHubAvatarImage
-											src={organization.avatarUrl}
-											height={36}
-											width={36}
-										/>
-									</Avatar>
-									<div>{organization.login}</div>
-								</ListItem>
-						  )))}
-			</Options>
+			</ComboBox>
+			<ComboBox.Options {...combobox.getMenuProps()} isOpen={combobox.isOpen}>
+				{combobox.loading
+					? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
+					: organizations.map((organization, index) => (
+							<OrganizationSearchResult
+								key={organization.id}
+								organization={organization}
+								{...combobox.getItemProps({
+									index,
+									item: organization
+								})}
+							/>
+					  ))}
+			</ComboBox.Options>
 		</Root>
 	);
 };

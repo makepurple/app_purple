@@ -1,0 +1,7 @@
+fragment OrganizationSearchResultGitHubOrganization on GitHubOrganization {
+	avatarUrl
+	description
+	id
+	login
+	name
+}
