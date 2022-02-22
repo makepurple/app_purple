@@ -120,7 +120,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					onSelect={(newSkill) => {
 						skills.append({
 							name: newSkill.name,
-							owner: newSkill.owner
+							owner: newSkill.owner.login
 						});
 					}}
 					aria-label="new skill"
@@ -143,7 +143,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 					onSelect={(newSkill) => {
 						desiredSkills.append({
 							name: newSkill.name,
-							owner: newSkill.owner
+							owner: newSkill.owner.login
 						});
 					}}
 					aria-label="new desired skill"

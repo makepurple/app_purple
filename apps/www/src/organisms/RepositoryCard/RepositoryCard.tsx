@@ -224,7 +224,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 						onSelect={(newSkill) => {
 							skills.append({
 								name: newSkill.name,
-								owner: newSkill.owner
+								owner: newSkill.owner.login
 							});
 						}}
 						aria-label="new skill"

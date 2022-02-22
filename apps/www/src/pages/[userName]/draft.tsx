@@ -297,7 +297,7 @@ export const Page: NextPage<PageProps> = () => {
 									skills.append({
 										name_owner: {
 											name: newSkill.name,
-											owner: newSkill.owner
+											owner: newSkill.owner.login
 										}
 									});
 								}}
