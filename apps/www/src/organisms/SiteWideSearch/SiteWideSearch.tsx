@@ -30,6 +30,7 @@ import {
 import { SearchIcon } from "../../svgs";
 import { LoadingSearchResult } from "../LoadingSearchResult";
 import { OrganizationSearchResult } from "../OrganizationSearchResult";
+import { RepositorySearchResult } from "../RepositorySearchResult";
 import { UserSearchResult } from "../UserSearchResult";
 
 const InputContainer = tw(ComboBox)`
@@ -169,6 +170,8 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			itemToString: (item) => item?.name ?? item?.login ?? "",
 			debounce: ms("0.3s"),
 			onInputValueChange: async ({ inputValue }) => {
+				ownerPopper.forceUpdate?.();
+
 				if (!inputValue) return;
 
 				const nodes = await urqlClient
@@ -209,6 +212,8 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			itemToString: (item) => item?.name ?? "",
 			debounce: ms("0.3s"),
 			onInputValueChange: async ({ inputValue }) => {
+				skillPopper.forceUpdate?.();
+
 				const skillName = inputValue?.toLowerCase();
 
 				if (!skillName) return;
@@ -263,8 +268,9 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			(e: FocusEvent<HTMLInputElement>) => {
 				_onFocus?.(e);
 
-				setTimeout(async () => {
-					await Promise.all([ownerPopper.forceUpdate?.(), skillPopper.forceUpdate?.()]);
+				setTimeout(() => {
+					ownerPopper.forceUpdate?.();
+					skillPopper.forceUpdate?.();
 				}, ms("0.15s"));
 			},
 			[_onFocus, ownerPopper, skillPopper]
@@ -377,24 +383,24 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					})}
 					isOpen={skillBox.isOpen}
 				>
-					{skills.map((skill, i) => (
-						<NextLink
-							key={skill.id}
-							href="/s/[skillOwner]/[skillName]"
-							as={`/s/${skill.owner.login}/${skill.name}`}
-							passHref
-						>
-							<ComboBox.Option
-								as="a"
-								{...skillBox.getItemProps({
-									item: skill,
-									index: i
-								})}
-							>
-								<span>{skill.name ?? skill.owner.login}</span>
-							</ComboBox.Option>
-						</NextLink>
-					))}
+					{skillBox.loading
+						? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
+						: skills.map((skill, i) => (
+								<NextLink
+									key={skill.id}
+									href="/s/[skillOwner]/[skillName]"
+									as={`/s/${skill.owner.login}/${skill.name}`}
+									passHref
+								>
+									<RepositorySearchResult
+										repository={skill}
+										{...skillBox.getItemProps({
+											item: skill,
+											index: i
+										})}
+									/>
+								</NextLink>
+						  ))}
 				</ComboBox.Options>
 			</Root>
 		);
