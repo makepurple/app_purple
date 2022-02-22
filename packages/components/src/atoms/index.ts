@@ -32,6 +32,7 @@ export * from "./ListItem";
 export * from "./Logo";
 export * from "./MainContainer";
 export * from "./MaybeAnchor";
+export * from "./MaybeWrap";
 export * from "./Menu";
 export * from "./NextLinkAs";
 export * from "./NextProgressBar";
