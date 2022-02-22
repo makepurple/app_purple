@@ -6,8 +6,10 @@ import {
 	NonIdealState,
 	RepoIcon
 } from "@makepurple/components";
+import ms from "ms";
 import React, { CSSProperties, FC, Fragment, SyntheticEvent, useState } from "react";
 import toast from "react-hot-toast";
+import { useDebounce } from "react-use";
 import tw from "twin.macro";
 import { useCreateRepositoryMutation, useSuggestRepositoriesQuery } from "../../graphql";
 import { CreateRepositoryFormOption } from "../CreateRepositoryFormOption";
@@ -37,7 +39,16 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 	onClose,
 	style
 }) => {
+	const [input, setInput] = useState<string>("");
 	const [query, setQuery] = useState<string>("");
+
+	useDebounce(
+		() => {
+			setQuery(input);
+		},
+		ms("0.3s"),
+		[input]
+	);
 
 	const [{ data, fetching }] = useSuggestRepositoriesQuery({
 		variables: {
@@ -58,7 +69,7 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 				<FormLabel>Search your repositories</FormLabel>
 				<Input
 					onChange={(e) => {
-						setQuery(e.target.value);
+						setInput(e.target.value);
 					}}
 					placeholder="Search..."
 					type="search"
