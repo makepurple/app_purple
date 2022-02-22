@@ -326,9 +326,19 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						{user.skills.nodes.length ? (
 							<Tags type="positive" tw="mt-4">
 								{user.skills.nodes.map((skill) => (
-									<Tags.Tag key={skill.id} id={skill.id.toString()}>
-										{skill.name}
-									</Tags.Tag>
+									<NextLink
+										key={skill.id}
+										href="/s/[skillOwner]/[skillName]"
+										as={`/s/${skill.owner}/${skill.name}`}
+										passHref
+									>
+										<Tags.Tag
+											id={skill.id.toString()}
+											title={`${skill.owner}/${skill.name}`}
+										>
+											{skill.name}
+										</Tags.Tag>
+									</NextLink>
 								))}
 							</Tags>
 						) : (
@@ -338,9 +348,19 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						{user.desiredSkills.nodes.length ? (
 							<Tags type="negative" tw="mt-4">
 								{user.desiredSkills.nodes.map((skill) => (
-									<Tags.Tag key={skill.id} id={skill.id.toString()}>
-										{skill.name}
-									</Tags.Tag>
+									<NextLink
+										key={skill.id}
+										href="/s/[skillOwner]/[skillName]"
+										as={`/s/${skill.owner}/${skill.name}`}
+										passHref
+									>
+										<Tags.Tag
+											id={skill.id.toString()}
+											title={`${skill.owner}/${skill.name}`}
+										>
+											{skill.name}
+										</Tags.Tag>
+									</NextLink>
 								))}
 							</Tags>
 						) : (

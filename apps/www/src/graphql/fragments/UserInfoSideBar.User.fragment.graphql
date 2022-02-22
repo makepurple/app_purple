@@ -12,6 +12,7 @@ fragment UserInfoSideBarUser on User {
 		nodes {
 			id
 			name
+			owner
 		}
 	}
 	followers(first: 0) {
