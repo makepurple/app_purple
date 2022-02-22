@@ -71,8 +71,10 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 					<Masonry
 						columnGutter={8}
 						columnWidth={240}
+						itemKey={(item) => item.id}
 						items={suggestedFriends}
 						overscanBy={5}
+						tabIndex={-1}
 						render={(friendProps) => (
 							<SuggestedFriendCard
 								ref={getLoadMoreRef(friendProps.index)}
