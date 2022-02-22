@@ -95,7 +95,13 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 								as={`/s/${skill.owner}/${skill.name}`}
 								passHref
 							>
-								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+								<Tags.Tag
+									id={skill.id}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									title={`${skill.owner}/${skill.name}`}
+								>
 									{skill.name}
 								</Tags.Tag>
 							</NextLink>
@@ -119,7 +125,13 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 								as={`/s/${skill.owner}/${skill.name}`}
 								passHref
 							>
-								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+								<Tags.Tag
+									id={skill.id}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									title={`${skill.owner}/${skill.name}`}
+								>
 									{skill.name}
 								</Tags.Tag>
 							</NextLink>
@@ -138,7 +150,9 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 			<Actions tw="ml-4">
 				<FollowButton
 					disabled={loading}
-					onClick={async () => {
+					onClick={async (e) => {
+						e.stopPropagation();
+
 						user.viewerFollowing
 							? await unfollowUser({ where: { id: user.id } }).catch(() => null)
 							: await followUser({ where: { id: user.id } }).catch(() => null);
