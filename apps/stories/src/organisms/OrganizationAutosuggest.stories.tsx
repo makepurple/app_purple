@@ -1,5 +1,5 @@
 import { PromiseUtils } from "@makepurple/utils";
-import { OrganizationInput, OrganizationInputProps } from "@makepurple/www";
+import { OrganizationAutosuggest, OrganizationAutosuggestProps } from "@makepurple/www";
 import { SuggestOrganizations_mock } from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import { getOperationName } from "@urql/core";
@@ -7,15 +7,15 @@ import ms from "ms";
 import React, { useState } from "react";
 
 export default {
-	title: "organisms/OrganizationInput",
-	component: OrganizationInput
+	title: "organisms/OrganizationAutosuggest",
+	component: OrganizationAutosuggest
 } as Meta;
 
-const Template: Story<OrganizationInputProps> = (args) => {
+const Template: Story<OrganizationAutosuggestProps> = (args) => {
 	const [value, setValue] = useState<string>("");
 
 	return (
-		<OrganizationInput
+		<OrganizationAutosuggest
 			{...args}
 			onChange={(newValue) => {
 				args.onChange?.(newValue);

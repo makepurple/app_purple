@@ -38,7 +38,7 @@ export * from "./NotificationCardBase";
 export * from "./NotificationCardChatMessageReceived";
 export * from "./NotificationCardFriendshipAccepted";
 export * from "./NotificationCardPostCommented";
-export * from "./OrganizationInput";
+export * from "./OrganizationAutosuggest";
 export * from "./PendingFriendsButton";
 export * from "./PostCard";
 export * from "./PostGuidelines";

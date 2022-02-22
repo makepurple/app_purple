@@ -49,7 +49,7 @@ const Options = styled.ul`
 	z-index: ${StyleUtils.getZIndex("menu")};
 `;
 
-export interface OrganizationInputProps {
+export interface OrganizationAutosuggestProps {
 	className?: string;
 	name?: string;
 	onChange: (value: string) => void;
@@ -58,7 +58,7 @@ export interface OrganizationInputProps {
 	value: string;
 }
 
-export const OrganizationInput: FC<OrganizationInputProps> = ({
+export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 	className,
 	name,
 	onChange,
