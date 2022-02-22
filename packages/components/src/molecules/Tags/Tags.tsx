@@ -48,6 +48,7 @@ const Root = styled.div<{ editable?: boolean | "add-only" | "remove-only"; type?
 			transition
 			duration-300
 			ease-in-out
+			cursor-text
 			focus-within:ring-2
 			focus-within:bg-white
 		`}

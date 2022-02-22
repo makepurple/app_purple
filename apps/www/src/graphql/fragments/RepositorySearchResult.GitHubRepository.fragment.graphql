@@ -6,6 +6,7 @@ fragment RepositorySearchResultGitHubRepository on GitHubRepository {
 	owner {
 		__typename
 		avatarUrl
+		id
 		login
 		... on GitHubOrganization {
 			name

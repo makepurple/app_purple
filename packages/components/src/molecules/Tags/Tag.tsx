@@ -27,6 +27,7 @@ export const Root = styled.a<{
 		line-height[inherit]
 		font-weight[inherit]
 		text-white
+		cursor-auto
 	`}
 	background-color: ${({ type }): any => {
 		switch (type) {

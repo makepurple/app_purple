@@ -1,4 +1,4 @@
-import { ComboBox, Skeleton, Tags } from "@makepurple/components";
+import { ComboBox, Tags } from "@makepurple/components";
 import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, useCallback, useState } from "react";
@@ -10,6 +10,8 @@ import {
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables
 } from "../../graphql";
+import { LoadingSearchResult } from "../LoadingSearchResult";
+import { RepositorySearchResult } from "../RepositorySearchResult";
 
 const SkillsSuggest = tw(ComboBox.Options)`
 	bottom-0
@@ -102,27 +104,30 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 		<>
 			<ComboBox {...combobox.getComboboxProps({ className, style })} tw="flex-grow">
 				<ComboBox.Input
-					{...combobox.getInputProps()}
 					as={Tags.Editable}
-					onKeyDown={onEnterSkill}
-					placeholder="[repo_owner]/[repo_name]"
-					aria-label={ariaLabel}
+					{...combobox.getInputProps({
+						onFocus: () => {
+							!!skillItems.length && combobox.openMenu();
+						},
+						onKeyDown: onEnterSkill,
+						placeholder: "[repo_owner]/[repo_name]",
+						"aria-label": ariaLabel
+					})}
 					tw="w-52"
 				/>
 			</ComboBox>
 			<SkillsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen}>
 				{combobox.loading
-					? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} tw="h-8" />)
+					? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
 					: skillItems.map((item, i) => (
-							<ComboBox.Option
+							<RepositorySearchResult
 								key={`${item.owner}/${item.name}`}
+								repository={item}
 								{...combobox.getItemProps({
 									item,
 									index: i
 								})}
-							>
-								{item.name}
-							</ComboBox.Option>
+							/>
 					  ))}
 			</SkillsSuggest>
 		</>
