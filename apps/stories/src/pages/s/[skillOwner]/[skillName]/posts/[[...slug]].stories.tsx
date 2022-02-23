@@ -17,7 +17,7 @@ import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/s/[skillOwner]/[skillName]",
+	title: "pages/s/[skillOwner]/[skillName]/posts/[[...slug]]",
 	component: Page,
 	decorators: [
 		(Story) => (
@@ -132,6 +132,41 @@ NoResults.parameters = {
 						}
 					}
 				};
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
+			case "GetSkillInfoSideBar":
+				return { data: GetSkillInfoSideBar_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const OrderByUpvoters = Template.bind({});
+OrderByUpvoters.args = { ...Template.args };
+OrderByUpvoters.parameters = {
+	...Template.parameters,
+	nextRouter: {
+		query: {
+			skillName: "react",
+			skillOwner: "facebook",
+			slug: ["top"]
+		}
+	},
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetPosts":
+				return { data: GetPosts_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkillInfoSideBar":
