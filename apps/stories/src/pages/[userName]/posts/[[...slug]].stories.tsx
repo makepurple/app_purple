@@ -147,3 +147,37 @@ NoResults.parameters = {
 		}
 	}
 };
+
+export const OrderByUpvoters = Template.bind({});
+OrderByUpvoters.args = { ...Template.args };
+OrderByUpvoters.parameters = {
+	...Template.parameters,
+	nextRouter: {
+		query: {
+			userName: "leedavidcs",
+			slug: ["top"]
+		}
+	},
+	urql: async (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "CreatePost":
+				await PromiseUtils.wait(ms("1s"));
+
+				return { data: CreatePost_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetPosts":
+				return { data: GetPosts_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserFriendRequestCount":
+				return { data: GetUserFriendRequestCount_mock };
+			case "GetUserInfoSideBar":
+				return { data: GetUserInfoSideBar_mock };
+			default:
+				return {};
+		}
+	}
+};

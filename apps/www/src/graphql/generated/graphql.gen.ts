@@ -2657,6 +2657,7 @@ export type GetPostDraftQuery = { readonly __typename: 'Query', readonly postDra
 export type GetPostsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<PostOrderByInput> | PostOrderByInput>;
   where: PostWhereInput;
 }>;
 
@@ -5128,7 +5129,7 @@ export function useGetPostDraftQuery(options?: Omit<Urql.UseQueryArgs<GetPostDra
   return Urql.useQuery<GetPostDraftQuery>({ query: GetPostDraftDocument, ...options });
 };
 export const GetPostsDocument = /*#__PURE__*/ gql`
-    query GetPosts($after: String, $first: Int, $where: PostWhereInput!) {
+    query GetPosts($after: String, $first: Int, $orderBy: [PostOrderByInput!], $where: PostWhereInput!) {
   posts(after: $after, first: $first, where: $where) {
     __typename
     edges {

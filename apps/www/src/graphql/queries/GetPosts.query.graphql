@@ -1,6 +1,7 @@
 query GetPosts(
 	$after: String
 	$first: Int
+	$orderBy: [PostOrderByInput!]
 	$where: PostWhereInput!
 ) {
 	posts(after: $after, first: $first, where: $where) {

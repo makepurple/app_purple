@@ -81,7 +81,7 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 						<NextLinkAs
 							as={Tab.Button}
 							forwardedAs="a"
-							href="/[userName]/posts"
+							href="/[userName]/posts/[[...slug]]"
 							linkAs={`/${userName}/posts`}
 							{...tabProps}
 						>
