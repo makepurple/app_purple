@@ -1,70 +1,8 @@
-import { NonIdealState } from "@makepurple/components";
-import { useRelayCursor } from "@makepurple/hooks";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import React from "react";
-import tw from "twin.macro";
-import { useGetPostsQuery } from "../../../../graphql";
-import { LoadingPostCard, PostCard, SkillPageLayout } from "../../../../organisms";
-import { PageProps, pageProps } from "../../../../page-props/s/[skillOwner]/[skillName]";
-import { NoteIcon } from "../../../../svgs";
-
-const BATCH_SIZE = 20;
-
-const Posts = tw.div`
-	flex
-	flex-col
-	items-stretch
-	gap-4
-	xl:gap-6
-`;
+import { pageProps } from "../../../../page-props/s/[skillOwner]/[skillName]/posts/[[...slug]]";
+import { Page as PostsPage } from "./posts/[[...slug]]";
 
 export const getServerSideProps = pageProps;
 
-export const Page: NextPage<PageProps> = () => {
-	const router = useRouter();
-
-	const skillName = router?.query.skillName as string;
-	const skillOwner = router?.query.skillOwner as string;
-
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetPostsQuery, {
-		field: "posts",
-		requestPolicy: "cache-first",
-		variables: {
-			after: null,
-			first: BATCH_SIZE,
-			where: {
-				skills: {
-					some: {
-						name: { equals: skillName },
-						owner: { equals: skillOwner }
-					}
-				}
-			}
-		}
-	});
-
-	const posts = data?.posts.nodes ?? [];
-
-	return (
-		<SkillPageLayout selectedTab="posts" skillName={skillName} skillOwner={skillOwner}>
-			<Posts>
-				{!posts.length
-					? !fetching && (
-							<NonIdealState
-								title="There's nothing here"
-								subTitle="We couldn't find any posts"
-							>
-								<NoteIcon height={96} width={96} />
-							</NonIdealState>
-					  )
-					: posts.map((post, i) => (
-							<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
-					  ))}
-				{fetching && Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)}
-			</Posts>
-		</SkillPageLayout>
-	);
-};
+export const Page = PostsPage;
 
 export default Page;

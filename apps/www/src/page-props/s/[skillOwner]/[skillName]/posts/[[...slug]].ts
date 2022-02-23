@@ -13,8 +13,8 @@ import {
 	GetSkillInfoSideBarDocument,
 	GetSkillInfoSideBarQuery,
 	GetSkillInfoSideBarQueryVariables
-} from "../../../../graphql";
-import { NextUtils } from "../../../../utils";
+} from "../../../../../graphql";
+import { NextUtils } from "../../../../../utils";
 
 const BATCH_SIZE = 20;
 
