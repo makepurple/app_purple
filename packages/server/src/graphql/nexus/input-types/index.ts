@@ -2,6 +2,7 @@ export * from "./ChatMessageCreateInput";
 export * from "./ChatMessageWhereInput";
 export * from "./ChatWhereInput";
 export * from "./ChatWhereUniqueInput";
+export * from "./CodeExampleCreateInput";
 export * from "./CodeExampleWhereInput";
 export * from "./CodeExampleWhereUniqueInput";
 export * from "./CodeLanguageNullableFilter";

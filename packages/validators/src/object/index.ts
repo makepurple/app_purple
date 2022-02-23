@@ -1,4 +1,5 @@
 export * from "./ChatMessageContent";
+export * from "./CodeExampleCreateInput";
 export * from "./CommentContent";
 export * from "./CommentCreateInput";
 export * from "./CommentUpdateInput";

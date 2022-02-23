@@ -18,6 +18,7 @@ export * from "./CommentEdge";
 export * from "./Connection";
 export * from "./ConnectionEdge";
 export * from "./CreateChatPayload";
+export * from "./CreateCodeExamplePayload";
 export * from "./CreateCommentPayload";
 export * from "./CreateExperiencePayload";
 export * from "./CreatePostPayload";

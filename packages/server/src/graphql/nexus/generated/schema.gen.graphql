@@ -111,6 +111,14 @@ type CodeExampleConnection implements Connection {
   totalCount: Int!
 }
 
+input CodeExampleCreateInput {
+  content: String!
+  description: String
+  language: CodeLanguage!
+  skills: [SkillWhereUniqueInput!]
+  title: String!
+}
+
 type CodeExampleEdge implements ConnectionEdge {
   cursor: String!
   node: CodeExample!
@@ -141,7 +149,7 @@ enum CodeLanguage {
 }
 
 input CodeLanguageNullableFilter {
-  equals: String
+  equals: CodeLanguage
   in: [CodeLanguage!]
   not: CodeLanguageNullableFilter
   notIn: [CodeLanguage!]
@@ -234,6 +242,12 @@ input CreateChatInput {
 type CreateChatPayload implements MutationPayload {
   query: Query!
   record: Chat!
+  viewer: User
+}
+
+type CreateCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
   viewer: User
 }
 
@@ -613,6 +627,7 @@ type Mutation {
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
   addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
   createChat(data: CreateChatInput!): CreateChatPayload!
+  createCodeExample(data: CodeExampleCreateInput!): CreateCodeExamplePayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
