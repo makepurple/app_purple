@@ -4,9 +4,9 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { useGetPostsQuery } from "../../graphql";
-import { LoadingPostCard, PostCard, UserPageLayout } from "../../organisms";
-import { PageProps, pageProps } from "../../page-props/[userName]/posts";
+import { useGetPostsQuery } from "../../../graphql";
+import { LoadingPostCard, PostCard, UserPageLayout } from "../../../organisms";
+import { PageProps, pageProps } from "../../../page-props/[userName]/posts";
 
 const BATCH_SIZE = 20;
 

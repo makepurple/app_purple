@@ -10,14 +10,14 @@ import {
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/posts";
-import Page from "@makepurple/www/src/pages/[userName]/posts";
+import Page from "@makepurple/www/src/pages/[userName]/posts/[[...slug]]";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/[userName]/posts",
+	title: "pages/[userName]/posts/[[...slug]]",
 	component: Page,
 	decorators: [
 		(Story) => (
