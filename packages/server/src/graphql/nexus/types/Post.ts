@@ -21,19 +21,29 @@ export const Post = objectType({
 				orderBy: arg({ type: "CommentOrderByInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const post = prisma.post.findUnique({ where: { id: parent.id } });
-
 				const connection = await PrismaUtils.findManyCursorConnection<
 					Comment,
 					{ id: string }
 				>(
 					(paginationArgs) =>
-						post.comments({
-							...paginationArgs,
-							where: PrismaUtils.nonNull(args.where),
-							orderBy: PrismaUtils.nonNull(args.orderBy)
-						}),
-					() => prisma.comment.count(),
+						prisma.post
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.comments({
+								...paginationArgs,
+								where: PrismaUtils.nonNull(args.where),
+								orderBy: PrismaUtils.nonNull(args.orderBy)
+							}),
+					() =>
+						prisma.post
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: { select: { comments: true } }
+								}
+							})
+							.then((result) => result?._count.comments ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);

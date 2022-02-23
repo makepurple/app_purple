@@ -30,6 +30,10 @@ export const activityFeed = queryField("activityFeed", {
 											comment: {}
 										},
 										{
+											type: UserActivityType.CreateCodeExample,
+											codeExample: {}
+										},
+										{
 											type: UserActivityType.FollowSkill,
 											follow: {}
 										},

@@ -88,9 +88,70 @@ input ChatWhereUniqueInput {
   id: String
 }
 
+type CodeExample {
+  author: User!
+  authorName: String!
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
+  content: String!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  language: CodeLanguage!
+  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  title: String!
+  updatedAt: DateTime!
+  upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  upvotes: Int!
+}
+
+type CodeExampleConnection implements Connection {
+  edges: [CodeExampleEdge!]!
+  nodes: [CodeExample!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CodeExampleEdge implements ConnectionEdge {
+  cursor: String!
+  node: CodeExample!
+}
+
+input CodeExampleWhereInput {
+  authorName: StringNullableFilter
+  createdAt: DateTimeNullableFilter
+  language: CodeLanguageNullableFilter
+  title: StringNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input CodeExampleWhereUniqueInput {
+  id: String
+}
+
+enum CodeLanguage {
+  Go
+  GraphQL
+  HTML
+  JavaScript
+  Python
+  SCSS
+  SQL
+  TypeScript
+  YAML
+}
+
+input CodeLanguageNullableFilter {
+  equals: String
+  in: [CodeLanguage!]
+  not: CodeLanguageNullableFilter
+  notIn: [CodeLanguage!]
+}
+
 type Comment {
   author: User!
   authorId: String!
+  codeExample: CodeExample
+  codeExampleId: String
   content: Json
   createdAt: DateTime!
   downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -921,6 +982,7 @@ type SendChatMessagePayload implements MutationPayload {
 }
 
 type Skill implements Followable & WithGitHubRepository {
+  codeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
@@ -1209,6 +1271,7 @@ type User implements Followable {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
+  codeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
   commentUpvotes: Int!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
@@ -1234,6 +1297,9 @@ type User implements Followable {
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   trophies: UserTrophies!
+
+  """Code examples this user has upvoted"""
+  upvotedCodeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
 
   """Posts this user has upvoted"""
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
@@ -1316,6 +1382,7 @@ type UserActivityPublishPost implements UserActivity {
 
 enum UserActivityType {
   CommentPost
+  CreateCodeExample
   FollowSkill
   FollowUser
   FriendAcceptUser

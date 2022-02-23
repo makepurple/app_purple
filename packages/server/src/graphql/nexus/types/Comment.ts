@@ -10,6 +10,8 @@ export const Comment = objectType({
 	definition: (t) => {
 		t.field(NexusPrisma.Comment.author);
 		t.field(NexusPrisma.Comment.authorId);
+		t.field(NexusPrisma.Comment.codeExample);
+		t.field(NexusPrisma.Comment.codeExampleId);
 		t.field(NexusPrisma.Comment.content);
 		t.field(NexusPrisma.Comment.createdAt);
 		t.nonNull.field("downvoters", {

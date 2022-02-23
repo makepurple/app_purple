@@ -2,6 +2,7 @@ import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { dayjs } from "@makepurple/utils";
 import {
 	Chat,
+	CodeExample,
 	Comment,
 	Experience,
 	Follow,
@@ -49,6 +50,10 @@ export const User = objectType({
 										{
 											type: UserActivityType.CommentPost,
 											comment: {}
+										},
+										{
+											type: UserActivityType.CreateCodeExample,
+											codeExample: {}
 										},
 										{
 											type: UserActivityType.FollowSkill,
@@ -131,6 +136,10 @@ export const User = objectType({
 												{
 													type: UserActivityType.CommentPost,
 													comment: {}
+												},
+												{
+													type: UserActivityType.CreateCodeExample,
+													codeExample: {}
 												},
 												{
 													type: UserActivityType.FollowSkill,
@@ -248,6 +257,49 @@ export const User = objectType({
 							}
 						}),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
+		t.nonNull.field("codeExamples", {
+			type: "CodeExampleConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "CodeExampleWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await PrismaUtils.findManyCursorConnection<
+					CodeExample,
+					{ id: string }
+				>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.codeExamples({
+								...paginationArgs,
+								where: PrismaUtils.nonNull(args.where)
+							}),
+					() =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: {
+										select: {
+											codeExamples: true
+										}
+									}
+								}
+							})
+							.then((result) => result?._count.codeExamples ?? 0),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args, 100) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
 
@@ -931,6 +983,48 @@ export const User = objectType({
 				return { id: parent.id };
 			}
 		});
+		t.nonNull.field("upvotedCodeExamples", {
+			type: "CodeExampleConnection",
+			description: stripIndents`
+				Code examples this user has upvoted
+			`,
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "CodeExampleWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await PrismaUtils.findManyCursorConnection<
+					CodeExample,
+					{ id: string }
+				>(
+					(paginationArgs) =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.upvotedCodeExamples({
+								...paginationArgs,
+								where: { codeExample: PrismaUtils.nonNull(args.where) },
+								select: { codeExample: true }
+							})
+							.then((items) => items.map((item) => item.codeExample)),
+					() =>
+						prisma.codeExampleUpvoter.count({
+							where: {
+								user: { id: parent.id },
+								codeExample: PrismaUtils.nonNull(args.where)
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args, 100) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("upvotedPosts", {
 			type: "PostConnection",
 			description: stripIndents`
@@ -944,10 +1038,6 @@ export const User = objectType({
 				where: arg({ type: "PostWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const user = prisma.user.findUnique({
-					where: { id: parent.id }
-				});
-
 				const where: Prisma.PostWhereInput = {
 					...PrismaUtils.nonNull(args.where),
 					...(args.where?.skills
@@ -969,7 +1059,10 @@ export const User = objectType({
 
 				const connection = await PrismaUtils.findManyCursorConnection<Post, { id: string }>(
 					(paginationArgs) =>
-						user
+						prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
 							.upvotedPosts({
 								...paginationArgs,
 								where: { post: where },

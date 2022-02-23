@@ -1,5 +1,5 @@
 import { NexusPrisma } from "@makepurple/prisma/nexus";
-import { Post, User } from "@prisma/client";
+import { CodeExample, Post, User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -9,6 +9,51 @@ export const Skill = objectType({
 	definition: (t) => {
 		t.implements("Followable");
 		t.implements("WithGitHubRepository");
+		t.nonNull.field("codeExamples", {
+			type: "CodeExampleConnection",
+			args: {
+				after: stringArg(),
+				before: stringArg(),
+				first: intArg(),
+				last: intArg(),
+				where: arg({ type: "CodeExampleWhereInput" })
+			},
+			resolve: async (parent, args, { prisma }) => {
+				const connection = await PrismaUtils.findManyCursorConnection<
+					CodeExample,
+					{ id: string }
+				>(
+					async ({ cursor, skip, take }) =>
+						take === 0
+							? await Promise.resolve([])
+							: await prisma.skill
+									.findUnique({
+										where: {
+											id: parent.id
+										}
+									})
+									.codeExamples({
+										cursor,
+										skip,
+										take,
+										include: { codeExample: true }
+									})
+									.then((items) => items.map((item) => item.codeExample)),
+					() =>
+						prisma.codeExample.count({
+							where: {
+								skills: {
+									some: { skillId: { equals: parent.id } }
+								}
+							}
+						}),
+					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+					{ ...PrismaUtils.handleRelayCursor() }
+				);
+
+				return connection;
+			}
+		});
 		t.nonNull.field("desiringUsers", {
 			type: "UserConnection",
 			args: {

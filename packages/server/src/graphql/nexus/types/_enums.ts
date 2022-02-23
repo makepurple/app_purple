@@ -2,6 +2,7 @@ import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { enumType } from "nexus";
 
 export const enumTypes = [
+	enumType(NexusPrisma.CodeLanguage),
 	enumType(NexusPrisma.ExperienceType),
 	enumType(NexusPrisma.FollowType),
 	enumType({
