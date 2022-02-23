@@ -2,6 +2,8 @@
 
 # user-data
 packages/prisma/prisma/seed/generated/toSaveUser.ts
+packages/prisma/docs
+packages/prisma/ERD.svg
 
 # dependencies
 node_modules
