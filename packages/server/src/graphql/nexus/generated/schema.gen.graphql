@@ -680,6 +680,7 @@ type Mutation {
   sendChatMessage(data: ChatMessageCreateInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
+  unvoteCodeExample(where: CodeExampleWhereUniqueInput!): UnvoteCodeExamplePayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
@@ -1209,6 +1210,12 @@ type UnfollowSkillPayload implements MutationPayload {
 type UnfollowUserPayload implements MutationPayload {
   query: Query!
   record: Follow!
+  viewer: User
+}
+
+type UnvoteCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
   viewer: User
 }
 

@@ -26,6 +26,7 @@ export * from "./requestFriendship";
 export * from "./sendChatMessage";
 export * from "./unfollowSkill";
 export * from "./unfollowUser";
+export * from "./unvoteCodeExample";
 export * from "./unvoteComment";
 export * from "./updateComment";
 export * from "./updateDesiredSkills";
