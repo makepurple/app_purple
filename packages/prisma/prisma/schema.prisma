@@ -254,6 +254,7 @@ model Post {
   urlSlug       String          @default("draft")
   viewers       PostViewer[]
 
+  @@unique([authorName, title])
   @@unique([authorName, urlSlug])
 }
 
@@ -450,6 +451,10 @@ model CodeExample {
   title       String
   updatedAt   DateTime               @updatedAt
   upvoters    CodeExampleUpvoter[]
+  urlSlug     String
+
+  @@unique([authorName, title])
+  @@unique([authorName, urlSlug])
 }
 
 model CodeExampleUpvoter {
