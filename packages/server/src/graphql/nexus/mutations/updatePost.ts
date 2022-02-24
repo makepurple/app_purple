@@ -1,5 +1,6 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { PostUpdateInput } from "@makepurple/validators";
+import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { NotFoundError, PrismaUtils } from "../../../utils";
@@ -72,6 +73,13 @@ export const updatePost = mutationField("updatePost", {
 
 		if (!verified) throw new Error("All skills must be from GitHub");
 
+		const activity = await prisma.userActivity.findFirst({
+			where: {
+				postId: post.id,
+				type: UserActivityType.PublishPost
+			}
+		});
+
 		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.post.update({
 				where: PrismaUtils.nonNull(args.where),
@@ -97,6 +105,18 @@ export const updatePost = mutationField("updatePost", {
 			);
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
+
+			activity &&
+				(await transaction.userActivity.update({
+					where: { id: activity.id },
+					data: {
+						skills: {
+							set: skillsToConnect.map((skill) => ({
+								id: skill.id
+							}))
+						}
+					}
+				}));
 
 			return await transaction.post.update({
 				data: {
