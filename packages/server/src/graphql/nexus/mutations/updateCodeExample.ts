@@ -1,9 +1,8 @@
 import { PromiseUtils, StringUtils } from "@makepurple/utils";
 import { CodeExampleUpdateInput } from "@makepurple/validators";
-import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { PrismaUtils } from "../../../utils";
+import { NotFoundError, PrismaUtils } from "../../../utils";
 
 export const updateCodeExample = mutationField("updateCodeExample", {
 	type: nonNull("UpdateCodeExamplePayload"),
@@ -16,6 +15,12 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 	},
 	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
 		if (!user) throw new Error();
+
+		const codeExample = await prisma.codeExample.findUnique({
+			where: PrismaUtils.nonNull(args.where)
+		});
+
+		if (!codeExample) throw new NotFoundError("This code-example does not exist");
 
 		const dataInput = CodeExampleUpdateInput.validator({
 			content: args.data.content,
@@ -98,28 +103,22 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 
 			return await transaction.codeExample.update({
 				data: {
-					activities: {
-						create: {
-							type: UserActivityType.CreateCodeExample,
-							user: {
-								connect: {
-									id: user.id
-								}
-							}
-						}
-					},
-					author: {
-						connect: {
-							id: user.id
-						}
-					},
 					content: dataInput.content,
 					description: dataInput.description,
 					language: dataInput.language,
 					skills: {
-						createMany: {
-							data: skillsToConnect.map((skill) => ({ skillId: skill.id }))
-						}
+						connectOrCreate: skillsToConnect.map((skill) => ({
+							where: {
+								skillId_codeExampleId: {
+									skillId: skill.id,
+									codeExampleId: codeExample.id
+								}
+							},
+							create: {
+								skillId: skill.id,
+								codeExampleId: codeExample.id
+							}
+						}))
 					},
 					title: dataInput.title,
 					urlSlug
