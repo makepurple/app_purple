@@ -9,5 +9,5 @@ export const PostPublishInput = Schema({
 	description: string.trim().max(140).strictOptional(),
 	skills: array.of(SkillWhereUniqueInput).min(1, "Required").error("Required"),
 	thumbnailUrl: CloudinaryUrl.optional(),
-	title: PostTitle
+	title: PostTitle.error("Required")
 });
