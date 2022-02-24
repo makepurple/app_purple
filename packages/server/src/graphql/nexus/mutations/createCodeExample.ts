@@ -1,4 +1,4 @@
-import { PromiseUtils } from "@makepurple/utils";
+import { PromiseUtils, StringUtils } from "@makepurple/utils";
 import { CodeExampleCreateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
@@ -22,6 +22,8 @@ export const createCodeExample = mutationField("createCodeExample", {
 			skills: args.data.skills as any,
 			title: args.data.title
 		});
+
+		const urlSlug = StringUtils.toUrlSlug(dataInput.title);
 
 		const skillIds = (args.data.skills ?? [])
 			.filter((skill) => !!skill.id)
@@ -114,7 +116,8 @@ export const createCodeExample = mutationField("createCodeExample", {
 							data: skillsToConnect.map((skill) => ({ skillId: skill.id }))
 						}
 					},
-					title: dataInput.title
+					title: dataInput.title,
+					urlSlug
 				}
 			});
 		});

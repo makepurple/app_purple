@@ -4,14 +4,6 @@ export interface StringPartition {
 }
 
 export class StringUtils {
-	public static rename<T>(
-		templateLiteral: (strings: TemplateStringsArray, ...exprs: any[]) => T
-	): (strings: TemplateStringsArray, ...exprs: any[]) => T {
-		return (strings: TemplateStringsArray, ...exprs: any[]) => {
-			return templateLiteral(strings, ...exprs);
-		};
-	}
-
 	public static partition(
 		str: string,
 		ranges: readonly [start: number, end: number][]
@@ -34,5 +26,24 @@ export class StringUtils {
 		if (finalMatch.length > 0) result.push({ value: finalMatch, match: false });
 
 		return result;
+	}
+
+	public static rename<T>(
+		templateLiteral: (strings: TemplateStringsArray, ...exprs: any[]) => T
+	): (strings: TemplateStringsArray, ...exprs: any[]) => T {
+		return (strings: TemplateStringsArray, ...exprs: any[]) => {
+			return templateLiteral(strings, ...exprs);
+		};
+	}
+
+	public static toUrlSlug(name: string): string {
+		const urlSlug: string = name
+			.replace(/[^a-z0-9]/gim, "")
+			.split(/\s+/g)
+			.map((word) => word.toLowerCase())
+			.join("-")
+			.trim();
+
+		return urlSlug;
 	}
 }

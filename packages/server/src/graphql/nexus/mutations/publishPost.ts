@@ -1,4 +1,4 @@
-import { PromiseUtils } from "@makepurple/utils";
+import { PromiseUtils, StringUtils } from "@makepurple/utils";
 import { PostPublishInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
@@ -46,12 +46,7 @@ export const publishPost = mutationField("publishPost", {
 			throw new Error("Posts must have a title to be published!");
 		}
 
-		const urlSlug: string = postTitle
-			.replace(/[^a-z0-9]/gim, "")
-			.split(/\s+/g)
-			.map((word) => word.toLowerCase())
-			.join("-")
-			.trim();
+		const urlSlug = StringUtils.toUrlSlug(postTitle);
 
 		const skillIds = args.data.skills
 			.filter((skill) => !!skill.id)
