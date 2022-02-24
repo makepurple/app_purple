@@ -27,12 +27,12 @@ export const updatePost = mutationField("updatePost", {
 			thumbnailUrl: args.data.thumbnailUrl
 		});
 
-		const skillIds = args.data.skills
-			?.filter((skill) => !!skill.id)
+		const skillIds = (args.data.skills ?? [])
+			.filter((skill) => !!skill.id)
 			.map((skill) => skill.id) as string[];
 
-		const skillNameOwners = args.data.skills
-			?.filter((skill) => !!skill.name_owner)
+		const skillNameOwners = (args.data.skills ?? [])
+			.filter((skill) => !!skill.name_owner)
 			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
 
 		const existingSkills = await prisma.skill.findMany({
