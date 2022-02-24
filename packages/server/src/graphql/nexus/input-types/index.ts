@@ -58,6 +58,7 @@ export * from "./SuggestSkillsWhereInput";
 export * from "./UpdateDesiredSkillsInput";
 export * from "./UpdateSkillsInput";
 export * from "./UploadPostImageInput";
+export * from "./UpvoteCodeExampleInput";
 export * from "./UpvoteCommentInput";
 export * from "./UserActivityWhereInput";
 export * from "./UserOrderByInput";

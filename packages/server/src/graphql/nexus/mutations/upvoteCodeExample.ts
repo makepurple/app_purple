@@ -1,11 +1,11 @@
 import { arg, mutationField, nonNull } from "nexus";
 import { NotFoundError, PrismaUtils } from "../../../utils";
 
-export const upvoteComment = mutationField("upvoteComment", {
-	type: nonNull("UpvoteCommentPayload"),
+export const upvoteCodeExample = mutationField("upvoteCodeExample", {
+	type: nonNull("UpvoteCodeExamplePayload"),
 	args: {
-		data: nonNull(arg({ type: "UpvoteCommentInput" })),
-		where: nonNull(arg({ type: "CommentWhereUniqueInput" }))
+		data: nonNull(arg({ type: "UpvoteCodeExampleInput" })),
+		where: nonNull(arg({ type: "CodeExampleWhereUniqueInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;
@@ -13,20 +13,20 @@ export const upvoteComment = mutationField("upvoteComment", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const comment = await prisma.comment.findUnique({
+		const codeExample = await prisma.codeExample.findUnique({
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!comment) throw new NotFoundError("Comment could not be found");
+		if (!codeExample) throw new NotFoundError("Code-example could not be found");
 
-		const record = await prisma.comment.update({
+		const record = await prisma.codeExample.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
 				upvoters: {
 					connectOrCreate: {
 						where: {
-							commentId_userId: {
-								commentId: comment.id,
+							codeExampleId_userId: {
+								codeExampleId: codeExample.id,
 								userId: user.id
 							}
 						},

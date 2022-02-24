@@ -101,6 +101,7 @@ export * from "./UpdateRepositoryPayload";
 export * from "./UpdateSkillsPayload";
 export * from "./UpdateUserFromGitHubPayload";
 export * from "./UploadPostImagePayload";
+export * from "./UpvoteCodeExamplePayload";
 export * from "./UpvoteCommentPayload";
 export * from "./UpvotePostPayload";
 export * from "./User";

@@ -36,6 +36,7 @@ export * from "./updateRepository";
 export * from "./updateSkills";
 export * from "./updateUserFromGitHub";
 export * from "./uploadPostImage";
+export * from "./upvoteCodeExample";
 export * from "./upvoteComment";
 export * from "./upvotePost";
 export * from "./viewPost";

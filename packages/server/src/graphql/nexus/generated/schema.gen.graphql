@@ -656,6 +656,7 @@ type Mutation {
   """
   createPost: CreatePostPayload!
   createRepository(data: RepositoryCreateInput!): CreateRepositoryPayload!
+  deleteCodeExample(where: CodeExampleWhereUniqueInput!): DeleteCodeExamplePayload!
   deleteComment(where: CommentWhereUniqueInput!): DeleteCommentPayload!
 
   """Users can delete their own experiences."""
@@ -689,6 +690,7 @@ type Mutation {
   updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
   updateUserFromGitHub: UpdateUserFromGitHubPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
+  upvoteCodeExample(data: UpvoteCodeExampleInput!, where: CodeExampleWhereUniqueInput!): UpvoteCodeExamplePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
   viewPost(where: PostWhereUniqueInput!): ViewPostPayload!
@@ -1289,6 +1291,16 @@ input UploadPostImageInput {
 type UploadPostImagePayload implements MutationPayload {
   query: Query!
   record: PostImage!
+  viewer: User
+}
+
+input UpvoteCodeExampleInput {
+  upvote: Boolean
+}
+
+type UpvoteCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
   viewer: User
 }
 
