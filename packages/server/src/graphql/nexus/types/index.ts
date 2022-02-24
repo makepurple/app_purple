@@ -23,6 +23,7 @@ export * from "./CreateCommentPayload";
 export * from "./CreateExperiencePayload";
 export * from "./CreatePostPayload";
 export * from "./CreateRepositoryPayload";
+export * from "./DeleteCodeExamplePayload";
 export * from "./DeleteCommentPayload";
 export * from "./DeleteExperiencePayload";
 export * from "./DeleteFriendshipPayload";

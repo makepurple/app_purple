@@ -7,6 +7,7 @@ export * from "./createComment";
 export * from "./createExperience";
 export * from "./createPost";
 export * from "./createRepository";
+export * from "./deleteCodeExample";
 export * from "./deleteComment";
 export * from "./deleteExperience";
 export * from "./deleteFriendship";

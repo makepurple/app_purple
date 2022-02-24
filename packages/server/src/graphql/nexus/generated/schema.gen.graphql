@@ -304,6 +304,12 @@ input DateTimeNullableFilter {
 """An arbitrary-precision Decimal type"""
 scalar Decimal
 
+type DeleteCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
+  viewer: User
+}
+
 type DeleteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
