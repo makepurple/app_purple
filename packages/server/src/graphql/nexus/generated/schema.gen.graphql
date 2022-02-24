@@ -104,6 +104,11 @@ type CodeExample {
   upvotes: Int!
 }
 
+input CodeExampleAuthorNameUrlSlugCompoundUniqueInput {
+  authorName: String!
+  urlSlug: String!
+}
+
 type CodeExampleConnection implements Connection {
   edges: [CodeExampleEdge!]!
   nodes: [CodeExample!]!
@@ -115,13 +120,21 @@ input CodeExampleCreateInput {
   content: String!
   description: String
   language: CodeLanguage!
-  skills: [SkillWhereUniqueInput!]
+  skills: [SkillWhereUniqueInput!]!
   title: String!
 }
 
 type CodeExampleEdge implements ConnectionEdge {
   cursor: String!
   node: CodeExample!
+}
+
+input CodeExampleUpdateInput {
+  content: String
+  description: String
+  language: CodeLanguage
+  skills: [SkillWhereUniqueInput!]
+  title: String
 }
 
 input CodeExampleWhereInput {
@@ -133,6 +146,7 @@ input CodeExampleWhereInput {
 }
 
 input CodeExampleWhereUniqueInput {
+  authorName_urlSlug: CodeExampleAuthorNameUrlSlugCompoundUniqueInput
   id: String
 }
 
@@ -1193,6 +1207,12 @@ type UnfollowUserPayload implements MutationPayload {
 type UnvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
+}
+
+type UpdateCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
   viewer: User
 }
 

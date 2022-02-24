@@ -90,6 +90,7 @@ export * from "./TopLanguages";
 export * from "./UnfollowSkillPayload";
 export * from "./UnfollowUserPayload";
 export * from "./UnvoteCommentPayload";
+export * from "./UpdateCodeExamplePayload";
 export * from "./UpdateCommentPayload";
 export * from "./UpdateDesiredSkillsPayload";
 export * from "./UpdateExperiencePayload";
