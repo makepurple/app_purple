@@ -1,5 +1,6 @@
 import { PromiseUtils, StringUtils } from "@makepurple/utils";
 import { CodeExampleUpdateInput } from "@makepurple/validators";
+import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { NotFoundError, PrismaUtils } from "../../../utils";
@@ -80,6 +81,13 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 
 		if (!verified) throw new Error("All skills must be from GitHub");
 
+		const activity = await prisma.userActivity.findFirst({
+			where: {
+				codeExample: { id: { equals: codeExample.id } },
+				type: UserActivityType.CreateCodeExample
+			}
+		});
+
 		const record = await prisma.$transaction(async (transaction) => {
 			const newSkills = await PromiseUtils.map(
 				toCreateSkills,
@@ -100,6 +108,18 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			);
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
+
+			activity &&
+				(await transaction.userActivity.update({
+					where: { id: activity.id },
+					data: {
+						skills: {
+							set: skillsToConnect.map((skill) => ({
+								id: skill.id
+							}))
+						}
+					}
+				}));
 
 			return await transaction.codeExample.update({
 				data: {

@@ -95,6 +95,11 @@ export const createCodeExample = mutationField("createCodeExample", {
 				data: {
 					activities: {
 						create: {
+							skills: {
+								connect: skillsToConnect.map((skill) => ({
+									id: skill.id
+								}))
+							},
 							type: UserActivityType.CreateCodeExample,
 							user: {
 								connect: {
