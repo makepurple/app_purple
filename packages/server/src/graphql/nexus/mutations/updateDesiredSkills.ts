@@ -50,7 +50,7 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 			return verified;
 		};
 
-		const verified = await PromiseUtils.some(
+		const verified = await PromiseUtils.every(
 			toCreateSkills,
 			{ concurrency: 2 },
 			async (skill) => await verifySkill(skill.name, skill.owner)

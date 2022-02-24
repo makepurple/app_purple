@@ -3,6 +3,18 @@ export interface PromiseUtilsMapOptions {
 }
 
 export class PromiseUtils {
+	public static every = async <I>(
+		items: I[],
+		options: Maybe<Partial<PromiseUtilsMapOptions>>,
+		predicate: (item: I, index: number) => Promise<boolean>
+	): Promise<boolean> => {
+		return !(await this.some(
+			items,
+			options,
+			async (item, index) => !(await predicate(item, index))
+		));
+	};
+
 	public static map = async <I, R>(
 		items: I[],
 		options: Maybe<Partial<PromiseUtilsMapOptions>>,
