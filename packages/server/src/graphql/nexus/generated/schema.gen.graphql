@@ -206,6 +206,7 @@ type CommentConnection implements Connection {
 }
 
 input CommentCreateInput {
+  codeExample: CodeExampleWhereUniqueInput
   content: Json
   parent: CommentWhereUniqueInput
   post: PostWhereUniqueInput
@@ -759,6 +760,7 @@ type NotificationPostCommented implements Notification {
 
 enum NotificationType {
   ChatMessageReceived
+  CodeExampleCommented
   FriendshipAccepted
   PostCommented
 }

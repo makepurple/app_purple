@@ -4016,6 +4016,110 @@ export interface Notification {
     resolve: NexusCore.FieldResolver<'Notification', 'chatId'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Notification.codeExample`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Notification
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Notification
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Notification {
+    *   /// Lorem ipsum dolor sit amet.
+    *   codeExample  CodeExample?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Notification } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Notification.$name
+    *   description: Notification.$description
+    *   definition(t) {
+    *     t.field(Notification.codeExample)
+    *   }
+    * })
+    */
+  codeExample: {
+    /**
+     * The name of this field.
+     */
+    name: 'codeExample'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'CodeExample' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'CodeExample'>
+    : 'Warning/Error: The type \'CodeExample\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'CodeExample\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Notification', 'codeExample'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Notification.codeExampleId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Notification
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Notification
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Notification {
+    *   /// Lorem ipsum dolor sit amet.
+    *   codeExampleId  String?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Notification } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Notification.$name
+    *   description: Notification.$description
+    *   definition(t) {
+    *     t.field(Notification.codeExampleId)
+    *   }
+    * })
+    */
+  codeExampleId: {
+    /**
+     * The name of this field.
+     */
+    name: 'codeExampleId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Notification', 'codeExampleId'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Notification.friendship`.
     *
     * ### ️⚠️ You have not writen documentation for model Notification
@@ -13973,6 +14077,58 @@ export interface CodeExample {
     resolve: NexusCore.FieldResolver<'CodeExample', 'language'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CodeExample.notifications`.
+    *
+    * ### ️⚠️ You have not writen documentation for model CodeExample
+    *
+    * Replace this default advisory JSDoc with your own documentation about model CodeExample
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model CodeExample {
+    *   /// Lorem ipsum dolor sit amet.
+    *   notifications  Notification
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { CodeExample } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: CodeExample.$name
+    *   description: CodeExample.$description
+    *   definition(t) {
+    *     t.field(CodeExample.notifications)
+    *   }
+    * })
+    */
+  notifications: {
+    /**
+     * The name of this field.
+     */
+    name: 'notifications'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Notification' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Notification'> | NexusCore.NexusNonNullDef<'Notification'>)
+    : 'Warning/Error: The type \'Notification\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Notification\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'CodeExample', 'notifications'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `CodeExample.skills`.
     *
     * ### ️⚠️ You have not writen documentation for model CodeExample
@@ -14634,6 +14790,7 @@ export interface UserActivityType {
   * /// Lorem ipsum dolor sit amet...
   * enum NotificationType {
   *   ChatMessageReceived
+  *   CodeExampleCommented
   *   FriendshipAccepted
   *   PostCommented
   * }
@@ -14641,7 +14798,7 @@ export interface UserActivityType {
   *
   * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
   *
-  * Contains these members: ChatMessageReceived, FriendshipAccepted, PostCommented
+  * Contains these members: ChatMessageReceived, CodeExampleCommented, FriendshipAccepted, PostCommented
   *
   * @example
   *
@@ -14653,7 +14810,7 @@ export interface UserActivityType {
 export interface NotificationType {
   name: 'NotificationType'
   description: undefined
-  members: ['ChatMessageReceived', 'FriendshipAccepted', 'PostCommented']
+  members: ['ChatMessageReceived', 'CodeExampleCommented', 'FriendshipAccepted', 'PostCommented']
 }
 
 /**

@@ -127,6 +127,7 @@ export interface NexusGenInputs {
     notIn?: NexusGenEnums['CodeLanguage'][] | null; // [CodeLanguage!]
   }
   CommentCreateInput: { // input type
+    codeExample?: NexusGenInputs['CodeExampleWhereUniqueInput'] | null; // CodeExampleWhereUniqueInput
     content?: NexusGenScalars['Json'] | null; // Json
     parent?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
     post?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
@@ -388,7 +389,7 @@ export interface NexusGenEnums {
   ExperienceType: "Contract" | "FullTime" | "Intern" | "OpenSource" | "PartTime"
   FollowType: "Skill" | "User"
   GitHubUserContributionLevel: "FIRST_QUARTILE" | "FOURTH_QUARTILE" | "NONE" | "SECOND_QUARTILE" | "THIRD_QUARTILE"
-  NotificationType: "ChatMessageReceived" | "FriendshipAccepted" | "PostCommented"
+  NotificationType: "ChatMessageReceived" | "CodeExampleCommented" | "FriendshipAccepted" | "PostCommented"
   SortOrder: "asc" | "desc"
   UserActivityType: "CommentPost" | "CreateCodeExample" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvotePost"
 }
