@@ -48,6 +48,10 @@ export const User = objectType({
 									...PrismaUtils.nonNull(args.where),
 									OR: [
 										{
+											type: UserActivityType.CommentCodeExample,
+											comment: {}
+										},
+										{
 											type: UserActivityType.CommentPost,
 											comment: {}
 										},
@@ -762,6 +766,10 @@ export const User = objectType({
 												{
 													type: NotificationType.ChatMessageReceived,
 													chat: {}
+												},
+												{
+													type: NotificationType.CodeExampleCommented,
+													codeExample: {}
 												},
 												{
 													type: NotificationType.FriendshipAccepted,

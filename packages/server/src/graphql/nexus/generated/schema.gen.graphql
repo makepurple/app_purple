@@ -1390,6 +1390,15 @@ interface UserActivity {
   userId: String!
 }
 
+type UserActivityCommentCodeExample implements UserActivity {
+  comment: Comment!
+  commentId: String!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
 type UserActivityCommentPost implements UserActivity {
   comment: Comment!
   commentId: String!
@@ -1404,6 +1413,15 @@ type UserActivityConnection implements Connection {
   nodes: [UserActivity!]!
   pageInfo: PageInfo!
   totalCount: Int!
+}
+
+type UserActivityCreateCodeExample implements UserActivity {
+  codeExample: CodeExample!
+  codeExampleId: String!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
 }
 
 type UserActivityEdge implements ConnectionEdge {
@@ -1455,6 +1473,7 @@ type UserActivityPublishPost implements UserActivity {
 }
 
 enum UserActivityType {
+  CommentCodeExample
   CommentPost
   CreateCodeExample
   FollowSkill
