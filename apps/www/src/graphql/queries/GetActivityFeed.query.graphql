@@ -14,8 +14,14 @@ query GetActivityFeed(
 		}
 		nodes {
 			...UserActivityCardHeaderUserActivity
+			... on UserActivityCommentCodeExample {
+				...UserActivityCardCommentCodeExampleUserActivityCommentCodeExample
+			}
 			... on UserActivityCommentPost {
 				...UserActivityCardCommentPostUserActivityCommentPost
+			}
+			... on UserActivityCreateCodeExample {
+				...UserActivityCardCreateCodeExampleUserActivityCreateCodeExample
 			}
 			... on UserActivityFollowSkill {
 				...UserActivityCardFollowSkillUserActivityFollowSkill

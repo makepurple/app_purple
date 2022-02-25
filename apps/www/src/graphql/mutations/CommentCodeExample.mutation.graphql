@@ -1,0 +1,29 @@
+mutation CommentCodeExample($data: CommentCodeExampleInput!) {
+	commentCodeExample(data: $data) {
+		record {
+			id
+			codeExample {
+				id
+				comments {
+					...CommentRepliesCommentConnection
+				}
+			}
+			codeExampleId
+			content
+			author {
+				id
+				name
+			}
+			authorId
+			parent {
+				id
+				replies {
+					...CommentRepliesCommentConnection
+				}
+			}
+			updatedAt
+			upvotes
+			viewerUpvote
+		}
+	}
+}

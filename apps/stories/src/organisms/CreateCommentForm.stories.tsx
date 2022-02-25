@@ -10,7 +10,9 @@ export default {
 const Template: Story<CreateCommentFormProps> = (args) => {
 	return <CreateCommentForm {...args} />;
 };
-Template.args = {};
+Template.args = {
+	postId: "0"
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };

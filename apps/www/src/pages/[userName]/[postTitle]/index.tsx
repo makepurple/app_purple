@@ -192,7 +192,7 @@ export const Page: NextPage<PageProps> = () => {
 				{!!viewer && (
 					<>
 						<CommentFormContainer>
-							<CreateCommentForm target={{ type: "post", id: post.id }} />
+							<CreateCommentForm postId={post.id} />
 						</CommentFormContainer>
 						<Divider tw="my-4 sm:my-6" />
 					</>

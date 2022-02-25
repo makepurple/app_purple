@@ -1,0 +1,12 @@
+fragment UserActivityCardCreateCodeExampleUserActivityCreateCodeExample on UserActivityCreateCodeExample {
+	id
+	codeExample {
+		authorName
+		content
+		createdAt
+		id
+		updatedAt
+	}
+	codeExampleId
+	...UserActivityCardHeaderUserActivity
+}

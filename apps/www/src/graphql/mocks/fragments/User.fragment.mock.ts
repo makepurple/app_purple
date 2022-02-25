@@ -70,6 +70,19 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	codeExamples: {
+		__typename: "CodeExampleConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	comments: {
 		__typename: "CommentConnection",
 		pageInfo: {
@@ -247,6 +260,19 @@ export const User_fragment_mock: User = {
 		nodes: skills
 	},
 	trophies: UserTrophies_fragment_mock,
+	upvotedCodeExamples: {
+		__typename: "CodeExampleConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	upvotedPosts: {
 		__typename: "PostConnection",
 		pageInfo: {

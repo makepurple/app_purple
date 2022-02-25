@@ -190,8 +190,8 @@ type Comment {
 }
 
 input CommentCodeExampleInput {
-  codeExample: CodeExampleWhereUniqueInput
-  content: Json
+  codeExample: CodeExampleWhereUniqueInput!
+  content: Json!
   parent: CommentWhereUniqueInput
 }
 
@@ -209,12 +209,6 @@ type CommentConnection implements Connection {
   totalCount: Int!
 }
 
-input CommentCreateInput {
-  content: Json
-  parent: CommentWhereUniqueInput
-  post: PostWhereUniqueInput
-}
-
 # Relay-style edge for Comment types.
 type CommentEdge implements ConnectionEdge {
   cursor: String!
@@ -224,6 +218,18 @@ type CommentEdge implements ConnectionEdge {
 input CommentOrderByInput {
   createdAt: SortOrder
   updatedAt: SortOrder
+}
+
+input CommentPostInput {
+  content: Json!
+  parent: CommentWhereUniqueInput
+  post: PostWhereUniqueInput!
+}
+
+type CommentPostPayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+  viewer: User
 }
 
 input CommentUpdateInput {
@@ -266,12 +272,6 @@ type CreateChatPayload implements MutationPayload {
 type CreateCodeExamplePayload implements MutationPayload {
   query: Query!
   record: CodeExample!
-  viewer: User
-}
-
-type CreateCommentPayload implements MutationPayload {
-  query: Query!
-  record: Comment!
   viewer: User
 }
 
@@ -647,9 +647,9 @@ type Mutation {
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
   addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
   commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!
+  commentPost(data: CommentPostInput!): CommentPostPayload!
   createChat(data: CreateChatInput!): CreateChatPayload!
   createCodeExample(data: CodeExampleCreateInput!): CreateCodeExamplePayload!
-  createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
   # Creates a new draft if the user doesn't have a draft pending to be published already

@@ -1,0 +1,16 @@
+fragment UserActivityCardCommentCodeExampleUserActivityCommentCodeExample on UserActivityCommentCodeExample {
+	id
+	comment {
+		id
+		codeExample {
+			authorName
+			content
+			createdAt
+			id
+			updatedAt
+		}
+		codeExampleId
+	}
+	commentId
+	...UserActivityCardHeaderUserActivity
+}

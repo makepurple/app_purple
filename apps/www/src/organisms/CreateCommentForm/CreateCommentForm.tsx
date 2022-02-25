@@ -17,7 +17,7 @@ import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
-import { useCreateCommentMutation } from "../../graphql";
+import { useCommentCodeExampleMutation, useCommentPostMutation } from "../../graphql";
 
 const ActionsContainer = tw.div`
 	grid
@@ -27,22 +27,27 @@ const ActionsContainer = tw.div`
 
 export interface CreateCommentFormProps {
 	className?: string;
+	codeExampleId?: Maybe<string>;
+	commentId?: string;
 	onCancel?: (event?: SyntheticEvent) => void;
+	postId?: Maybe<string>;
 	style?: CSSProperties;
-	target: { id: string } & ({ type: "comment" } | { type: "post" });
 }
 
 export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 	className,
+	codeExampleId,
+	commentId,
 	onCancel,
-	style,
-	target
+	postId,
+	style
 }) => {
 	const { data: sessionData } = useSession();
 
 	const viewer = sessionData?.user;
 
-	const [{ fetching: creating }, createComment] = useCreateCommentMutation();
+	const [{ fetching: commentingCode }, commentCode] = useCommentCodeExampleMutation();
+	const [{ fetching: commentingPost }, commentPost] = useCommentPostMutation();
 
 	const {
 		control,
@@ -67,23 +72,35 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 		trigger();
 	}, [trigger]);
 
+	const commenting = commentingCode || commentingPost;
+
 	if (!viewer) return null;
+	if (!codeExampleId && !postId) return null;
 
 	return (
 		<Form
 			className={className}
-			disabled={creating}
+			disabled={commenting}
 			onSubmit={handleSubmit(async (formData) => {
-				const didSucceed = await createComment({
-					data: {
-						content: formData.content,
-						...(target.type === "comment"
-							? { parent: { id: target.id } }
-							: { post: { id: target.id } })
-					}
-				})
-					.then((result) => !!result.data?.createComment.record)
-					.catch(() => false);
+				const didSucceed = codeExampleId
+					? await commentCode({
+							data: {
+								codeExample: { id: codeExampleId },
+								content: formData.content,
+								parent: { id: commentId }
+							}
+					  })
+							.then((result) => !!result.data?.commentCodeExample.record)
+							.catch(() => false)
+					: await commentPost({
+							data: {
+								content: formData.content,
+								parent: { id: commentId },
+								post: { id: postId }
+							}
+					  })
+							.then((result) => !!result.data?.commentPost.record)
+							.catch(() => false);
 
 				if (!didSucceed) {
 					toast.success("Comment could not be posted");
@@ -134,7 +151,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 			<ActionsContainer tw="mt-6">
 				<FormButton disabled={!isValid} size="small" type="submit" variant="primary">
 					<span>Comment</span>
-					{creating && <Spinner tw="ml-2" />}
+					{commenting && <Spinner tw="ml-2" />}
 				</FormButton>
 				{!!onCancel && (
 					<FormButton

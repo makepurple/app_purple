@@ -293,10 +293,12 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 					{showReplyForm && (
 						<div tw="py-4">
 							<CreateCommentForm
+								codeExampleId={comment.codeExampleId}
+								commentId={comment.id}
 								onCancel={() => {
 									setShowReplyForm(false);
 								}}
-								target={{ type: "comment", id: comment.id }}
+								postId={comment.postId}
 							/>
 						</div>
 					)}

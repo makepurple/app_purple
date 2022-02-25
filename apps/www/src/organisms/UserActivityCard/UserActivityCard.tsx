@@ -1,6 +1,8 @@
 import React, { CSSProperties, forwardRef } from "react";
 import {
+	UserActivityCardCommentCodeExampleUserActivityCommentCodeExampleFragment,
 	UserActivityCardCommentPostUserActivityCommentPostFragment,
+	UserActivityCardCreateCodeExampleUserActivityCreateCodeExampleFragment,
 	UserActivityCardFollowSkillUserActivityFollowSkillFragment,
 	UserActivityCardFollowUserUserActivityFollowUserFragment,
 	UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment,
@@ -20,7 +22,9 @@ export interface UserActivityCardProps {
 	className?: string;
 	style?: CSSProperties;
 	userActivity:
+		| UserActivityCardCommentCodeExampleUserActivityCommentCodeExampleFragment
 		| UserActivityCardCommentPostUserActivityCommentPostFragment
+		| UserActivityCardCreateCodeExampleUserActivityCreateCodeExampleFragment
 		| UserActivityCardFollowSkillUserActivityFollowSkillFragment
 		| UserActivityCardFollowUserUserActivityFollowUserFragment
 		| UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment
@@ -33,6 +37,8 @@ export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps
 	const { className, style, userActivity } = props;
 
 	switch (userActivity.__typename) {
+		case "UserActivityCommentCodeExample":
+			return <div ref={ref} />;
 		case "UserActivityCommentPost":
 			return (
 				<UserActivityCardCommentPost
@@ -42,6 +48,8 @@ export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps
 					userActivity={userActivity}
 				/>
 			);
+		case "UserActivityCreateCodeExample":
+			return <div ref={ref} />;
 		case "UserActivityFollowSkill":
 			return (
 				<UserActivityCardFollowSkill

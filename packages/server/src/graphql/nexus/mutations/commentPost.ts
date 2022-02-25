@@ -3,10 +3,10 @@ import { NotificationType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../..";
 
-export const createComment = mutationField("createComment", {
-	type: nonNull("CreateCommentPayload"),
+export const commentPost = mutationField("commentPost", {
+	type: nonNull("CommentPostPayload"),
 	args: {
-		data: nonNull(arg({ type: "CommentCreateInput" }))
+		data: nonNull(arg({ type: "CommentPostInput" }))
 	},
 	authorize: (parent, args, { user }) => {
 		return !!user;

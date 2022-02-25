@@ -1,5 +1,5 @@
-mutation CreateComment($data: CommentCreateInput!) {
-	createComment(data: $data) {
+mutation CommentPost($data: CommentPostInput!) {
+	commentPost(data: $data) {
 		record {
 			id
 			content

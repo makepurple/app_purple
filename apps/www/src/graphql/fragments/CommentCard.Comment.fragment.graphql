@@ -7,8 +7,10 @@ fragment CommentCardComment on Comment {
 		image
 		name
 	}
+	codeExampleId
 	content
 	createdAt
+	postId
 	updatedAt
 	upvotes
 	viewerUpvote

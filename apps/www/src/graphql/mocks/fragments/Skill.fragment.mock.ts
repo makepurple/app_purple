@@ -4,6 +4,19 @@ import { GitHubRepository_fragment_mock } from "./GitHubRepository.fragment.mock
 export const Skill_fragment_mock: Skill = {
 	__typename: "Skill",
 	id: "0",
+	codeExamples: {
+		__typename: "CodeExampleConnection",
+		pageInfo: {
+			__typename: "PageInfo",
+			endCursor: null,
+			hasNextPage: false,
+			hasPreviousPage: false,
+			startCursor: null
+		},
+		totalCount: 0,
+		edges: [],
+		nodes: []
+	},
 	desiringUsers: {
 		__typename: "UserConnection",
 		pageInfo: {
