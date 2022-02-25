@@ -101,6 +101,7 @@ model User {
 }
 
 enum UserActivityType {
+  CommentCodeExample
   CommentPost
   CreateCodeExample
   FollowSkill

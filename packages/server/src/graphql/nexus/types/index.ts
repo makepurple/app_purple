@@ -13,6 +13,7 @@ export * from "./CodeExample";
 export * from "./CodeExampleConnection";
 export * from "./CodeExampleEdge";
 export * from "./Comment";
+export * from "./CommentCodeExamplePayload";
 export * from "./CommentConnection";
 export * from "./CommentEdge";
 export * from "./Connection";

@@ -8,6 +8,7 @@ export * from "./CodeExampleUpdateInput";
 export * from "./CodeExampleWhereInput";
 export * from "./CodeExampleWhereUniqueInput";
 export * from "./CodeLanguageNullableFilter";
+export * from "./CommentCodeExampleInput";
 export * from "./CommentCreateInput";
 export * from "./CommentOrderByInput";
 export * from "./CommentUpdateInput";

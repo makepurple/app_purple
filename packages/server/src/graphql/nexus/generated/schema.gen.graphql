@@ -197,6 +197,18 @@ type Comment {
   viewerUpvote: Boolean
 }
 
+input CommentCodeExampleInput {
+  codeExample: CodeExampleWhereUniqueInput
+  content: Json
+  parent: CommentWhereUniqueInput
+}
+
+type CommentCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+  viewer: User
+}
+
 """Relay-style connection for Comment types."""
 type CommentConnection implements Connection {
   edges: [CommentEdge!]!
@@ -206,7 +218,6 @@ type CommentConnection implements Connection {
 }
 
 input CommentCreateInput {
-  codeExample: CodeExampleWhereUniqueInput
   content: Json
   parent: CommentWhereUniqueInput
   post: PostWhereUniqueInput
@@ -647,6 +658,7 @@ type Mutation {
   ): AcceptFriendshipPayload!
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
   addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
+  commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!
   createChat(data: CreateChatInput!): CreateChatPayload!
   createCodeExample(data: CodeExampleCreateInput!): CreateCodeExamplePayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!

@@ -14750,6 +14750,7 @@ export interface CodeExampleUpvoter {
   * ```prisma
   * /// Lorem ipsum dolor sit amet...
   * enum UserActivityType {
+  *   CommentCodeExample
   *   CommentPost
   *   CreateCodeExample
   *   FollowSkill
@@ -14763,7 +14764,7 @@ export interface CodeExampleUpvoter {
   *
   * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
   *
-  * Contains these members: CommentPost, CreateCodeExample, FollowSkill, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvotePost
+  * Contains these members: CommentCodeExample, CommentPost, CreateCodeExample, FollowSkill, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvotePost
   *
   * @example
   *
@@ -14775,7 +14776,7 @@ export interface CodeExampleUpvoter {
 export interface UserActivityType {
   name: 'UserActivityType'
   description: undefined
-  members: ['CommentPost', 'CreateCodeExample', 'FollowSkill', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvotePost']
+  members: ['CommentCodeExample', 'CommentPost', 'CreateCodeExample', 'FollowSkill', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvotePost']
 }
 
 /**
