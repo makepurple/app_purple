@@ -929,6 +929,7 @@ type Query {
   """This is to update a subscribed chat with new messages when received."""
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   codeExample(where: CodeExampleWhereUniqueInput!): CodeExample
+  codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput!): CodeExampleConnection!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: [ExperienceOrderByInput!], where: ExperienceWhereInput): ExperienceConnection!

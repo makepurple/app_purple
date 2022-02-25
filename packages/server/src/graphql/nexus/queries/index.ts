@@ -2,6 +2,7 @@ export * from "./activityFeed";
 export * from "./chat";
 export * from "./chatMessages";
 export * from "./codeExample";
+export * from "./codeExamples";
 export * from "./comment";
 export * from "./comments";
 export * from "./experiences";

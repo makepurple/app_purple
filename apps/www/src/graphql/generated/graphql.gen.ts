@@ -1437,6 +1437,7 @@ export type Query = {
   /** This is to update a subscribed chat with new messages when received. */
   readonly chatMessages: ReadonlyArray<ChatMessage>;
   readonly codeExample?: Maybe<CodeExample>;
+  readonly codeExamples: CodeExampleConnection;
   readonly comment?: Maybe<Comment>;
   readonly comments: CommentConnection;
   readonly experiences: ExperienceConnection;
@@ -1489,6 +1490,17 @@ export type QueryChatMessagesArgs = {
 /** Root query type */
 export type QueryCodeExampleArgs = {
   where: CodeExampleWhereUniqueInput;
+};
+
+
+/** Root query type */
+export type QueryCodeExamplesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<CodeExampleOrderByInput>>;
+  where: CodeExampleWhereInput;
 };
 
 
@@ -2151,6 +2163,7 @@ export type UserCodeExamplesArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<CodeExampleOrderByInput>>;
   where?: InputMaybe<CodeExampleWhereInput>;
 };
 
@@ -2273,6 +2286,7 @@ export type UserUpvotedCodeExamplesArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<CodeExampleOrderByInput>>;
   where?: InputMaybe<CodeExampleWhereInput>;
 };
 

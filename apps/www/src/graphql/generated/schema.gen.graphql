@@ -913,6 +913,7 @@ type Query {
   # This is to update a subscribed chat with new messages when received.
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   codeExample(where: CodeExampleWhereUniqueInput!): CodeExample
+  codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput!): CodeExampleConnection!
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: [ExperienceOrderByInput!], where: ExperienceWhereInput): ExperienceConnection!
@@ -1322,7 +1323,7 @@ type User implements Followable {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
-  codeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
+  codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
   commentUpvotes: Int!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
@@ -1350,7 +1351,7 @@ type User implements Followable {
   trophies: UserTrophies!
 
   # Code examples this user has upvoted
-  upvotedCodeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
+  upvotedCodeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
 
   # Posts this user has upvoted
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!

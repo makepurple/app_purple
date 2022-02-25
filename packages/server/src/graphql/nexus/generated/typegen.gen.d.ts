@@ -1449,6 +1449,7 @@ export interface NexusGenFieldTypes {
     chat: NexusGenRootTypes['Chat'] | null; // Chat
     chatMessages: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
     codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
+    codeExamples: NexusGenRootTypes['CodeExampleConnection']; // CodeExampleConnection!
     comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
@@ -2316,6 +2317,7 @@ export interface NexusGenFieldTypeNames {
     chat: 'Chat'
     chatMessages: 'ChatMessage'
     codeExample: 'CodeExample'
+    codeExamples: 'CodeExampleConnection'
     comment: 'Comment'
     comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
@@ -3000,6 +3002,14 @@ export interface NexusGenArgTypes {
     }
     codeExample: { // args
       where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
+    }
+    codeExamples: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['CodeExampleOrderByInput'][] | null; // [CodeExampleOrderByInput!]
+      where: NexusGenInputs['CodeExampleWhereInput']; // CodeExampleWhereInput!
     }
     comment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
