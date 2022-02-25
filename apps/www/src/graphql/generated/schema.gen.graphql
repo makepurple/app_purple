@@ -82,9 +82,92 @@ input ChatWhereUniqueInput {
   id: String
 }
 
+type CodeExample {
+  author: User!
+  authorName: String!
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
+  content: String!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  language: CodeLanguage!
+  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  title: String!
+  updatedAt: DateTime!
+  upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  upvotes: Int!
+}
+
+input CodeExampleAuthorNameUrlSlugCompoundUniqueInput {
+  authorName: String!
+  urlSlug: String!
+}
+
+type CodeExampleConnection implements Connection {
+  edges: [CodeExampleEdge!]!
+  nodes: [CodeExample!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input CodeExampleCreateInput {
+  content: String!
+  description: String
+  language: CodeLanguage!
+  skills: [SkillWhereUniqueInput!]!
+  title: String!
+}
+
+type CodeExampleEdge implements ConnectionEdge {
+  cursor: String!
+  node: CodeExample!
+}
+
+input CodeExampleUpdateInput {
+  content: String
+  description: String
+  language: CodeLanguage
+  skills: [SkillWhereUniqueInput!]
+  title: String
+}
+
+input CodeExampleWhereInput {
+  authorName: StringNullableFilter
+  createdAt: DateTimeNullableFilter
+  language: CodeLanguageNullableFilter
+  title: StringNullableFilter
+  updatedAt: DateTimeNullableFilter
+}
+
+input CodeExampleWhereUniqueInput {
+  authorName_urlSlug: CodeExampleAuthorNameUrlSlugCompoundUniqueInput
+  id: String
+}
+
+enum CodeLanguage {
+  Go
+  GraphQL
+  HTML
+  JavaScript
+  Python
+  SCSS
+  SQL
+  TypeScript
+  YAML
+}
+
+input CodeLanguageNullableFilter {
+  equals: CodeLanguage
+  in: [CodeLanguage!]
+  not: CodeLanguageNullableFilter
+  notIn: [CodeLanguage!]
+}
+
 type Comment {
   author: User!
   authorId: String!
+  codeExample: CodeExample
+  codeExampleId: String
   content: Json
   createdAt: DateTime!
   downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -104,6 +187,18 @@ type Comment {
   # false: downvoted
   # null: didn't vote
   viewerUpvote: Boolean
+}
+
+input CommentCodeExampleInput {
+  codeExample: CodeExampleWhereUniqueInput
+  content: Json
+  parent: CommentWhereUniqueInput
+}
+
+type CommentCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: Comment!
+  viewer: User
 }
 
 # Relay-style connection for Comment types.
@@ -168,6 +263,12 @@ type CreateChatPayload implements MutationPayload {
   viewer: User
 }
 
+type CreateCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
+  viewer: User
+}
+
 type CreateCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
@@ -204,6 +305,12 @@ input DateTimeNullableFilter {
 
 # An arbitrary-precision Decimal type
 scalar Decimal
+
+type DeleteCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
+  viewer: User
+}
 
 type DeleteCommentPayload implements MutationPayload {
   query: Query!
@@ -539,13 +646,16 @@ type Mutation {
   ): AcceptFriendshipPayload!
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
   addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
+  commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!
   createChat(data: CreateChatInput!): CreateChatPayload!
+  createCodeExample(data: CodeExampleCreateInput!): CreateCodeExamplePayload!
   createComment(data: CommentCreateInput!): CreateCommentPayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
   # Creates a new draft if the user doesn't have a draft pending to be published already
   createPost: CreatePostPayload!
   createRepository(data: RepositoryCreateInput!): CreateRepositoryPayload!
+  deleteCodeExample(where: CodeExampleWhereUniqueInput!): DeleteCodeExamplePayload!
   deleteComment(where: CommentWhereUniqueInput!): DeleteCommentPayload!
 
   # Users can delete their own experiences.
@@ -569,6 +679,7 @@ type Mutation {
   sendChatMessage(data: ChatMessageCreateInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
+  unvoteCodeExample(where: CodeExampleWhereUniqueInput!): UnvoteCodeExamplePayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
@@ -579,6 +690,7 @@ type Mutation {
   updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
   updateUserFromGitHub: UpdateUserFromGitHubPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
+  upvoteCodeExample(data: UpvoteCodeExampleInput!, where: CodeExampleWhereUniqueInput!): UpvoteCodeExamplePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
   viewPost(where: PostWhereUniqueInput!): ViewPostPayload!
@@ -646,6 +758,7 @@ type NotificationPostCommented implements Notification {
 
 enum NotificationType {
   ChatMessageReceived
+  CodeExampleCommented
   FriendshipAccepted
   PostCommented
 }
@@ -905,6 +1018,7 @@ type SendChatMessagePayload implements MutationPayload {
 }
 
 type Skill implements Followable & WithGitHubRepository {
+  codeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!
@@ -1081,9 +1195,21 @@ type UnfollowUserPayload implements MutationPayload {
   viewer: User
 }
 
+type UnvoteCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
+  viewer: User
+}
+
 type UnvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
+  viewer: User
+}
+
+type UpdateCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
   viewer: User
 }
 
@@ -1157,6 +1283,16 @@ type UploadPostImagePayload implements MutationPayload {
   viewer: User
 }
 
+input UpvoteCodeExampleInput {
+  upvote: Boolean
+}
+
+type UpvoteCodeExamplePayload implements MutationPayload {
+  query: Query!
+  record: CodeExample!
+  viewer: User
+}
+
 input UpvoteCommentInput {
   upvote: Boolean
 }
@@ -1177,6 +1313,7 @@ type User implements Followable {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
+  codeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
   commentUpvotes: Int!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   createdAt: DateTime!
@@ -1203,6 +1340,9 @@ type User implements Followable {
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   trophies: UserTrophies!
 
+  # Code examples this user has upvoted
+  upvotedCodeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
+
   # Posts this user has upvoted
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerCanFriend: Boolean!
@@ -1212,6 +1352,15 @@ type User implements Followable {
 }
 
 interface UserActivity {
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type UserActivityCommentCodeExample implements UserActivity {
+  comment: Comment!
+  commentId: String!
   id: ID!
   updatedAt: DateTime!
   user: User!
@@ -1232,6 +1381,15 @@ type UserActivityConnection implements Connection {
   nodes: [UserActivity!]!
   pageInfo: PageInfo!
   totalCount: Int!
+}
+
+type UserActivityCreateCodeExample implements UserActivity {
+  codeExample: CodeExample!
+  codeExampleId: String!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
 }
 
 type UserActivityEdge implements ConnectionEdge {
@@ -1283,7 +1441,9 @@ type UserActivityPublishPost implements UserActivity {
 }
 
 enum UserActivityType {
+  CommentCodeExample
   CommentPost
+  CreateCodeExample
   FollowSkill
   FollowUser
   FriendAcceptUser
