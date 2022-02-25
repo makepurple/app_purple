@@ -49,7 +49,7 @@ export const NotificationCard = forwardRef<HTMLDivElement, NotificationCardProps
 				/>
 			);
 		default:
-			return null;
+			return <div ref={ref} />;
 	}
 });
 
