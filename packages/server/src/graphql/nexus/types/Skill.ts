@@ -1,6 +1,6 @@
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { CodeExample, Post, User } from "@prisma/client";
-import { arg, intArg, objectType, stringArg } from "nexus";
+import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const Skill = objectType({
@@ -16,6 +16,7 @@ export const Skill = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
+				orderBy: list(nonNull(arg({ type: "CodeExampleOrderByInput" }))),
 				where: arg({ type: "CodeExampleWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
@@ -36,6 +37,12 @@ export const Skill = objectType({
 										cursor,
 										skip,
 										take,
+										orderBy: args.orderBy?.map((orderBy) => ({
+											codeExample: PrismaUtils.nonNull(orderBy)
+										})),
+										where: {
+											codeExample: PrismaUtils.nonNull(args.where)
+										},
 										include: { codeExample: true }
 									})
 									.then((items) => items.map((item) => item.codeExample)),

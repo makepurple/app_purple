@@ -102,6 +102,13 @@ export interface NexusGenInputs {
     skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
     title: string; // String!
   }
+  CodeExampleOrderByInput: { // input type
+    authorName?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    language?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    title?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
   CodeExampleUpdateInput: { // input type
     content?: string | null; // String
     description?: string | null; // String
@@ -1441,6 +1448,7 @@ export interface NexusGenFieldTypes {
     activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     chat: NexusGenRootTypes['Chat'] | null; // Chat
     chatMessages: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
+    codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     comment: NexusGenRootTypes['Comment'] | null; // Comment
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
@@ -2307,6 +2315,7 @@ export interface NexusGenFieldTypeNames {
     activityFeed: 'UserActivityConnection'
     chat: 'Chat'
     chatMessages: 'ChatMessage'
+    codeExample: 'CodeExample'
     comment: 'Comment'
     comments: 'CommentConnection'
     experiences: 'ExperienceConnection'
@@ -2989,6 +2998,9 @@ export interface NexusGenArgTypes {
     chatMessages: { // args
       where: NexusGenInputs['ChatMessageWhereInput']; // ChatMessageWhereInput!
     }
+    codeExample: { // args
+      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
+    }
     comment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }
@@ -3084,6 +3096,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['CodeExampleOrderByInput'][] | null; // [CodeExampleOrderByInput!]
       where?: NexusGenInputs['CodeExampleWhereInput'] | null; // CodeExampleWhereInput
     }
     desiringUsers: { // args

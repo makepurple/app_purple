@@ -4,6 +4,7 @@ export * from "./ChatWhereInput";
 export * from "./ChatWhereUniqueInput";
 export * from "./CodeExampleAuthorNameUrlSlugCompoundUniqueInput";
 export * from "./CodeExampleCreateInput";
+export * from "./CodeExampleOrderByInput";
 export * from "./CodeExampleUpdateInput";
 export * from "./CodeExampleWhereInput";
 export * from "./CodeExampleWhereUniqueInput";
