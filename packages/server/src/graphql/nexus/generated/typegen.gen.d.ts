@@ -3155,6 +3155,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['CodeExampleOrderByInput'][] | null; // [CodeExampleOrderByInput!]
       where?: NexusGenInputs['CodeExampleWhereInput'] | null; // CodeExampleWhereInput
     }
     comments: { // args
@@ -3251,6 +3252,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['CodeExampleOrderByInput'][] | null; // [CodeExampleOrderByInput!]
       where?: NexusGenInputs['CodeExampleWhereInput'] | null; // CodeExampleWhereInput
     }
     upvotedPosts: { // args

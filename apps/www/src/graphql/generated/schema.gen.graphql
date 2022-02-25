@@ -123,6 +123,14 @@ type CodeExampleEdge implements ConnectionEdge {
   node: CodeExample!
 }
 
+input CodeExampleOrderByInput {
+  authorName: SortOrder
+  createdAt: SortOrder
+  language: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
 input CodeExampleUpdateInput {
   content: String
   description: String
@@ -904,6 +912,7 @@ type Query {
 
   # This is to update a subscribed chat with new messages when received.
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
+  codeExample(where: CodeExampleWhereUniqueInput!): CodeExample
   comment(where: CommentWhereUniqueInput!): Comment
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: [ExperienceOrderByInput!], where: ExperienceWhereInput): ExperienceConnection!
@@ -1018,7 +1027,7 @@ type SendChatMessagePayload implements MutationPayload {
 }
 
 type Skill implements Followable & WithGitHubRepository {
-  codeExamples(after: String, before: String, first: Int, last: Int, where: CodeExampleWhereInput): CodeExampleConnection!
+  codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   github: GitHubRepository!

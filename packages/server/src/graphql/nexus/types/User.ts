@@ -274,6 +274,7 @@ export const User = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
+				orderBy: list(nonNull(arg({ type: "CodeExampleOrderByInput" }))),
 				where: arg({ type: "CodeExampleWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
@@ -288,6 +289,7 @@ export const User = objectType({
 							})
 							.codeExamples({
 								...paginationArgs,
+								orderBy: PrismaUtils.nonNull(args.orderBy),
 								where: PrismaUtils.nonNull(args.where)
 							}),
 					() =>
@@ -1001,6 +1003,7 @@ export const User = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
+				orderBy: list(nonNull(arg({ type: "CodeExampleOrderByInput" }))),
 				where: arg({ type: "CodeExampleWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
@@ -1015,6 +1018,9 @@ export const User = objectType({
 							})
 							.upvotedCodeExamples({
 								...paginationArgs,
+								orderBy: args.orderBy?.map((orderBy) => ({
+									codeExample: PrismaUtils.nonNull(orderBy)
+								})),
 								where: { codeExample: PrismaUtils.nonNull(args.where) },
 								select: { codeExample: true }
 							})

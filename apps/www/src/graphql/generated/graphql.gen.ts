@@ -208,6 +208,14 @@ export type CodeExampleEdge = ConnectionEdge & {
   readonly node: CodeExample;
 };
 
+export type CodeExampleOrderByInput = {
+  readonly authorName?: InputMaybe<SortOrder>;
+  readonly createdAt?: InputMaybe<SortOrder>;
+  readonly language?: InputMaybe<SortOrder>;
+  readonly title?: InputMaybe<SortOrder>;
+  readonly updatedAt?: InputMaybe<SortOrder>;
+};
+
 export type CodeExampleUpdateInput = {
   readonly content?: InputMaybe<Scalars['String']>;
   readonly description?: InputMaybe<Scalars['String']>;
@@ -1428,6 +1436,7 @@ export type Query = {
   readonly chat?: Maybe<Chat>;
   /** This is to update a subscribed chat with new messages when received. */
   readonly chatMessages: ReadonlyArray<ChatMessage>;
+  readonly codeExample?: Maybe<CodeExample>;
   readonly comment?: Maybe<Comment>;
   readonly comments: CommentConnection;
   readonly experiences: ExperienceConnection;
@@ -1474,6 +1483,12 @@ export type QueryChatArgs = {
 /** Root query type */
 export type QueryChatMessagesArgs = {
   where: ChatMessageWhereInput;
+};
+
+
+/** Root query type */
+export type QueryCodeExampleArgs = {
+  where: CodeExampleWhereUniqueInput;
 };
 
 
@@ -1726,6 +1741,7 @@ export type SkillCodeExamplesArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ReadonlyArray<CodeExampleOrderByInput>>;
   where?: InputMaybe<CodeExampleWhereInput>;
 };
 
