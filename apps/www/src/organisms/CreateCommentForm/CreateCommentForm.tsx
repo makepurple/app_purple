@@ -21,7 +21,7 @@ import { useCreateCommentMutation } from "../../graphql";
 
 const ActionsContainer = tw.div`
 	grid
-	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	grid-template-columns[repeat(auto-fill, minmax(6rem, 1fr))]
 	gap-4
 `;
 
@@ -132,7 +132,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 				{isSubmitted && <FormHelperText error={(errors.content as any)?.message} />}
 			</FormGroup>
 			<ActionsContainer tw="mt-6">
-				<FormButton disabled={!isValid} type="submit" variant="primary">
+				<FormButton disabled={!isValid} size="small" type="submit" variant="primary">
 					<span>Comment</span>
 					{creating && <Spinner tw="ml-2" />}
 				</FormButton>
@@ -141,6 +141,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 						onClick={(e) => {
 							onCancel?.(e);
 						}}
+						size="small"
 						type="button"
 						variant="alert"
 					>
