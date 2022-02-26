@@ -2737,6 +2737,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['SkillOrderByInput'] | null; // SkillOrderByInput
       where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
     }
     upvoters: { // args

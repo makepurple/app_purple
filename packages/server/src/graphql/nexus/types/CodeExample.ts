@@ -62,6 +62,7 @@ export const CodeExample = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
+				orderBy: arg({ type: "SkillOrderByInput" }),
 				where: arg({ type: "SkillWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
@@ -74,6 +75,9 @@ export const CodeExample = objectType({
 							.findUnique({ where: { id: parent.id } })
 							.skills({
 								...paginationArgs,
+								orderBy: {
+									skill: PrismaUtils.nonNull(args.orderBy)
+								},
 								where: PrismaUtils.nonNull(args.where),
 								include: { skill: true }
 							})
