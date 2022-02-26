@@ -24,3 +24,5 @@ export const Page: NextPage = () => {
 		</UserPageLayout>
 	);
 };
+
+export default Page;
