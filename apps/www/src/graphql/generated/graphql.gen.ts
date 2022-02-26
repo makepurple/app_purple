@@ -146,6 +146,8 @@ export type CodeExample = {
   readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly language: CodeLanguage;
+  readonly primarySkill: Skill;
+  readonly primarySkillId: Scalars['String'];
   readonly skills: SkillConnection;
   readonly title: Scalars['String'];
   readonly updatedAt: Scalars['DateTime'];
@@ -169,6 +171,7 @@ export type CodeExampleSkillsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<SkillOrderByInput>;
   where?: InputMaybe<SkillWhereInput>;
 };
 
@@ -198,6 +201,7 @@ export type CodeExampleCreateInput = {
   readonly content: Scalars['String'];
   readonly description?: InputMaybe<Scalars['String']>;
   readonly language: CodeLanguage;
+  readonly primarySkill?: InputMaybe<SkillWhereUniqueInput>;
   readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
   readonly title: Scalars['String'];
 };
@@ -220,6 +224,7 @@ export type CodeExampleUpdateInput = {
   readonly content?: InputMaybe<Scalars['String']>;
   readonly description?: InputMaybe<Scalars['String']>;
   readonly language?: InputMaybe<CodeLanguage>;
+  readonly primarySkill?: InputMaybe<SkillWhereUniqueInput>;
   readonly skills?: InputMaybe<ReadonlyArray<SkillWhereUniqueInput>>;
   readonly title?: InputMaybe<Scalars['String']>;
 };
@@ -2490,6 +2495,8 @@ export type ChatRoomInviteFormChatFragment = { readonly __typename: 'Chat', read
 
 export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
+export type CodeExampleCardCodeExampleFragment = { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly createdAt: Date, readonly language: CodeLanguage, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } };
+
 export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
 export type CommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } };
@@ -3213,6 +3220,62 @@ export const ChatRoomMessageChatMessageFragmentDoc = /*#__PURE__*/ gql`
     name
   }
   createdAt
+}
+    `;
+export const CodeExampleCardCodeExampleFragmentDoc = /*#__PURE__*/ gql`
+    fragment CodeExampleCardCodeExample on CodeExample {
+  id
+  author {
+    id
+    image
+    name
+  }
+  authorName
+  createdAt
+  language
+  primarySkill {
+    github {
+      id
+      name
+      owner {
+        id
+        avatarUrl
+        login
+      }
+    }
+    id
+    name
+    owner
+  }
+  skills(first: 5) {
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+    nodes {
+      id
+      name
+      owner
+    }
+  }
+  title
+  updatedAt
+  upvotes
+  upvoters(first: 6) {
+    edges {
+      cursor
+      node {
+        id
+      }
+    }
+    nodes {
+      id
+      image
+      name
+    }
+  }
 }
     `;
 export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`

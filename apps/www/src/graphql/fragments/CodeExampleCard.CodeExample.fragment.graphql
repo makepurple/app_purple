@@ -1,0 +1,54 @@
+fragment CodeExampleCardCodeExample on CodeExample {
+	id
+	author {
+		id
+		image
+		name
+	}
+	authorName
+	createdAt
+	language
+	primarySkill {
+		github {
+			id
+			name
+			owner {
+				id
+				avatarUrl
+				login
+			}
+		}
+		id
+		name
+		owner
+	}
+	skills(first: 5) {
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
+		nodes {
+			id
+			name
+			owner
+		}
+	}
+	title
+	updatedAt
+	upvotes
+	upvoters(first: 6) {
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
+		nodes {
+			id
+			image
+			name
+		}
+	}
+}

@@ -91,7 +91,9 @@ type CodeExample {
   description: String
   id: ID!
   language: CodeLanguage!
-  skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  primarySkill: Skill!
+  primarySkillId: String!
+  skills(after: String, before: String, first: Int, last: Int, orderBy: SkillOrderByInput, where: SkillWhereInput): SkillConnection!
   title: String!
   updatedAt: DateTime!
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -114,6 +116,7 @@ input CodeExampleCreateInput {
   content: String!
   description: String
   language: CodeLanguage!
+  primarySkill: SkillWhereUniqueInput
   skills: [SkillWhereUniqueInput!]!
   title: String!
 }
@@ -135,6 +138,7 @@ input CodeExampleUpdateInput {
   content: String
   description: String
   language: CodeLanguage
+  primarySkill: SkillWhereUniqueInput
   skills: [SkillWhereUniqueInput!]
   title: String
 }
