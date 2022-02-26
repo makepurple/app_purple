@@ -55,6 +55,8 @@ export const CodeExample = objectType({
 		t.field(NexusPrisma.CodeExample.createdAt);
 		t.field(NexusPrisma.CodeExample.description);
 		t.field(NexusPrisma.CodeExample.language);
+		t.field(NexusPrisma.CodeExample.primarySkill);
+		t.field(NexusPrisma.CodeExample.primarySkillId);
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
 			args: {

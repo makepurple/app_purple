@@ -99,6 +99,7 @@ export interface NexusGenInputs {
     content: string; // String!
     description?: string | null; // String
     language: NexusGenEnums['CodeLanguage']; // CodeLanguage!
+    primarySkill?: NexusGenInputs['SkillWhereUniqueInput'] | null; // SkillWhereUniqueInput
     skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
     title: string; // String!
   }
@@ -113,6 +114,7 @@ export interface NexusGenInputs {
     content?: string | null; // String
     description?: string | null; // String
     language?: NexusGenEnums['CodeLanguage'] | null; // CodeLanguage
+    primarySkill?: NexusGenInputs['SkillWhereUniqueInput'] | null; // SkillWhereUniqueInput
     skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
     title?: string | null; // String
   }
@@ -466,6 +468,7 @@ export interface NexusGenObjects {
     description?: string | null; // String
     id: string; // ID!
     language: NexusGenEnums['CodeLanguage']; // CodeLanguage!
+    primarySkillId: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -1030,6 +1033,8 @@ export interface NexusGenFieldTypes {
     description: string | null; // String
     id: string; // ID!
     language: NexusGenEnums['CodeLanguage']; // CodeLanguage!
+    primarySkill: NexusGenRootTypes['Skill']; // Skill!
+    primarySkillId: string; // String!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1898,6 +1903,8 @@ export interface NexusGenFieldTypeNames {
     description: 'String'
     id: 'ID'
     language: 'CodeLanguage'
+    primarySkill: 'Skill'
+    primarySkillId: 'String'
     skills: 'SkillConnection'
     title: 'String'
     updatedAt: 'DateTime'

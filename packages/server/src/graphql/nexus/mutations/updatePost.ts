@@ -118,6 +118,15 @@ export const updatePost = mutationField("updatePost", {
 					}
 				}));
 
+			if (skillsToConnect.length) {
+				await transaction.post.update({
+					where: PrismaUtils.nonNull(args.where),
+					data: {
+						skills: { deleteMany: {} }
+					}
+				});
+			}
+
 			return await transaction.post.update({
 				data: {
 					content: dataInput.content,

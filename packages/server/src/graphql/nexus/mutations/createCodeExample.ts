@@ -3,6 +3,7 @@ import { CodeExampleCreateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
+import { PrismaUtils } from "../../../utils";
 
 export const createCodeExample = mutationField("createCodeExample", {
 	type: nonNull("CreateCodeExamplePayload"),
@@ -19,17 +20,21 @@ export const createCodeExample = mutationField("createCodeExample", {
 			content: args.data.content,
 			description: args.data.description ?? undefined,
 			language: args.data.language,
+			primarySkill: args.data.primarySkill as any,
 			skills: args.data.skills as any,
 			title: args.data.title
 		});
 
 		const urlSlug = StringUtils.toUrlSlug(dataInput.title);
 
-		const skillIds = (args.data.skills ?? [])
-			.filter((skill) => !!skill.id)
-			.map((skill) => skill.id) as string[];
+		const originalSkills = args.data.skills ?? [];
+		const skills = args.data.primarySkill
+			? [...originalSkills, args.data.primarySkill]
+			: originalSkills;
 
-		const skillNameOwners = (args.data.skills ?? [])
+		const skillIds = skills.filter((skill) => !!skill.id).map((skill) => skill.id) as string[];
+
+		const skillNameOwners = skills
 			.filter((skill) => !!skill.name_owner)
 			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
 
@@ -91,6 +96,17 @@ export const createCodeExample = mutationField("createCodeExample", {
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
 
+			const primarySkill = args.data.primarySkill
+				? await transaction.skill.findUnique({
+						where: PrismaUtils.nonNull(args.data.primarySkill),
+						rejectOnNotFound: true
+				  })
+				: await transaction.skill.findFirst({
+						orderBy: { users: { _count: "desc" } },
+						where: { id: { in: skillsToConnect.map((skill) => skill.id) } },
+						rejectOnNotFound: true
+				  });
+
 			return await transaction.codeExample.create({
 				data: {
 					activities: {
@@ -102,20 +118,19 @@ export const createCodeExample = mutationField("createCodeExample", {
 							},
 							type: UserActivityType.CreateCodeExample,
 							user: {
-								connect: {
-									id: user.id
-								}
+								connect: { id: user.id }
 							}
 						}
 					},
 					author: {
-						connect: {
-							id: user.id
-						}
+						connect: { id: user.id }
 					},
 					content: dataInput.content,
 					description: dataInput.description,
 					language: dataInput.language,
+					primarySkill: {
+						connect: { id: primarySkill.id }
+					},
 					skills: {
 						createMany: {
 							data: skillsToConnect.map((skill) => ({ skillId: skill.id }))

@@ -6,6 +6,7 @@ export const CodeExampleUpdateInput = inputObjectType({
 		t.string("content");
 		t.string("description");
 		t.field("language", { type: "CodeLanguage" });
+		t.field("primarySkill", { type: "SkillWhereUniqueInput" });
 		t.list.nonNull.field("skills", { type: "SkillWhereUniqueInput" });
 		t.string("title");
 	}

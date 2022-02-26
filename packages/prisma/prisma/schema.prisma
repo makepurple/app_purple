@@ -324,17 +324,18 @@ model CommentUpvoter {
 }
 
 model Skill {
-  activities    UserActivity[]
-  codeExamples  SkillsOnCodeExamples[]
-  desiringUsers DesiredSkillsOnUsers[]
-  followedBy    FollowSkill[]
-  id            String                 @id @default(cuid())
-  name          String
-  owner         String
-  organization  Organization           @relation(fields: [owner], references: [name], onDelete: Cascade)
-  posts         SkillsOnPosts[]
-  repositories  SkillsOnRepositories[]
-  users         SkillsOnUsers[]
+  activities          UserActivity[]
+  codeExamples        SkillsOnCodeExamples[]
+  desiringUsers       DesiredSkillsOnUsers[]
+  followedBy          FollowSkill[]
+  id                  String                 @id @default(cuid())
+  name                String
+  owner               String
+  organization        Organization           @relation(fields: [owner], references: [name], onDelete: Cascade)
+  posts               SkillsOnPosts[]
+  primaryCodeExamples CodeExample[]
+  repositories        SkillsOnRepositories[]
+  users               SkillsOnUsers[]
 
   @@unique([name, owner])
 }
@@ -442,21 +443,23 @@ enum CodeLanguage {
 }
 
 model CodeExample {
-  id            String                 @id @default(cuid())
-  activities    UserActivity[]
-  author        User                   @relation(fields: [authorName], references: [name], onDelete: Cascade)
-  authorName    String
-  comments      Comment[]
-  content       String
-  createdAt     DateTime               @default(now())
-  description   String?
-  language      CodeLanguage
-  notifications Notification[]
-  skills        SkillsOnCodeExamples[]
-  title         String
-  updatedAt     DateTime               @updatedAt
-  upvoters      CodeExampleUpvoter[]
-  urlSlug       String
+  id             String                 @id @default(cuid())
+  activities     UserActivity[]
+  author         User                   @relation(fields: [authorName], references: [name], onDelete: Cascade)
+  authorName     String
+  comments       Comment[]
+  content        String
+  createdAt      DateTime               @default(now())
+  description    String?
+  language       CodeLanguage
+  notifications  Notification[]
+  primarySkill   Skill                  @relation(fields: [primarySkillId], references: [id], onDelete: Cascade)
+  primarySkillId String
+  skills         SkillsOnCodeExamples[]
+  title          String
+  updatedAt      DateTime               @updatedAt
+  upvoters       CodeExampleUpvoter[]
+  urlSlug        String
 
   @@unique([authorName, title])
   @@unique([authorName, urlSlug])

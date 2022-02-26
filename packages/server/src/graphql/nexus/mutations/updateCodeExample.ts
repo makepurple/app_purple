@@ -36,11 +36,14 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 				? StringUtils.toUrlSlug(dataInput.title)
 				: undefined;
 
-		const skillIds = (args.data.skills ?? [])
-			.filter((skill) => !!skill.id)
-			.map((skill) => skill.id) as string[];
+		const originalSkills = args.data.skills ?? [];
+		const skills = args.data.primarySkill
+			? [...originalSkills, args.data.primarySkill]
+			: originalSkills;
 
-		const skillNameOwners = (args.data.skills ?? [])
+		const skillIds = skills.filter((skill) => !!skill.id).map((skill) => skill.id) as string[];
+
+		const skillNameOwners = skills
 			.filter((skill) => !!skill.name_owner)
 			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
 
@@ -109,8 +112,21 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
 
-			activity &&
-				(await transaction.userActivity.update({
+			const primarySkill = args.data.primarySkill
+				? await transaction.skill.findUnique({
+						where: PrismaUtils.nonNull(args.data.primarySkill),
+						rejectOnNotFound: true
+				  })
+				: skillsToConnect.length
+				? await transaction.skill.findFirst({
+						orderBy: { users: { _count: "desc" } },
+						where: { id: { in: skillsToConnect.map((skill) => skill.id) } },
+						rejectOnNotFound: true
+				  })
+				: undefined;
+
+			if (activity) {
+				await transaction.userActivity.update({
 					where: { id: activity.id },
 					data: {
 						skills: {
@@ -119,13 +135,26 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 							}))
 						}
 					}
-				}));
+				});
+			}
+
+			if (skillsToConnect.length) {
+				await transaction.codeExample.update({
+					where: PrismaUtils.nonNull(args.where),
+					data: {
+						skills: { deleteMany: {} }
+					}
+				});
+			}
 
 			return await transaction.codeExample.update({
 				data: {
 					content: dataInput.content,
 					description: dataInput.description,
 					language: dataInput.language,
+					primarySkill: {
+						connect: { id: primarySkill?.id }
+					},
 					skills: {
 						connectOrCreate: skillsToConnect.map((skill) => ({
 							where: {
