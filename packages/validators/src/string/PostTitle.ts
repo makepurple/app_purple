@@ -73,6 +73,7 @@ const reservedWords = [
 	"signin",
 	"signup",
 	"sitemaps",
+	"snippets",
 	"static",
 	"status",
 	"store",

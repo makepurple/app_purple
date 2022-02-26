@@ -42,7 +42,8 @@ export interface UserPageLayoutProps {
 		| "repositories"
 		| "experiences"
 		| "connections"
-		| "activity";
+		| "activity"
+		| "snippets";
 	userName: string;
 }
 
