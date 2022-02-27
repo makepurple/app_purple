@@ -1,15 +1,35 @@
-import clsx from "clsx";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
-import React, { CSSProperties, forwardRef, useMemo } from "react";
+import React, { CSSProperties, FC } from "react";
 import tw, { styled } from "twin.macro";
 
-const Root = styled.pre`
+const Root = tw.div`
+	flex
+	flex-col
+	items-stretch
+	border-2
+	border-solid
+	border-indigo-500
+	rounded-md
+`;
+
+const Info = tw.div`
+	flex
+	flex-row
+	items-center
+	h-8
+	pl-2
+	bg-indigo-500
+	text-white
+	font-semibold
+`;
+
+const LanguageName = tw.div`
+	flex-grow
+`;
+
+const Editor = styled.pre`
 	${tw`
-		border
-		border-solid
-		border-gray-200
-		rounded-md
 		p-2
 		overflow-auto
 		text-sm
@@ -41,47 +61,52 @@ export interface CodeBlockProps {
 	className?: string;
 	code?: string;
 	language?: Language;
+	languageName?: string;
 	style?: CSSProperties;
 }
 
-export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref) => {
+export const CodeBlock: FC<CodeBlockProps> = (props) => {
 	const {
 		children = "",
-		className: _className = "language-tsx",
-		language: _language,
-		style: _style,
+		className = "language-tsx",
+		language = "tsx",
+		languageName,
+		style,
 		code = children,
 		...restProps
 	} = props;
 
-	const language = useMemo(
-		() => _language ?? _className.replace(/language-/, ""),
-		[_className, _language]
-	) as Language;
-
 	return (
-		<Highlight {...defaultProps} code={code.trim()} language={language} theme={shadesOfPurple}>
-			{({ className, style, tokens, getLineProps, getTokenProps }) => (
-				<Root
-					{...restProps}
-					ref={ref}
-					className={clsx({ [code]: _className }, className)}
-					style={style}
-				>
-					{tokens.map((line, i) => (
-						<Line key={i} {...getLineProps({ line, key: i })}>
-							<LineNo>{i + 1}</LineNo>
-							<LineContent>
-								{line.map((token, key) => (
-									<span key={key} {...getTokenProps({ token, key })} />
-								))}
-							</LineContent>
-						</Line>
-					))}
-				</Root>
+		<Root className={className} style={style}>
+			{!!languageName && (
+				<Info>
+					<LanguageName>{languageName}</LanguageName>
+				</Info>
 			)}
-		</Highlight>
+			<Highlight
+				{...defaultProps}
+				code={code.trim()}
+				language={language}
+				theme={shadesOfPurple}
+			>
+				{(highlight) => (
+					<Editor {...restProps} className={highlight.className} style={highlight.style}>
+						{highlight.tokens.map((line, i) => (
+							<Line key={i} {...highlight.getLineProps({ line, key: i })}>
+								<LineNo>{i + 1}</LineNo>
+								<LineContent>
+									{line.map((token, key) => (
+										<span
+											key={key}
+											{...highlight.getTokenProps({ token, key })}
+										/>
+									))}
+								</LineContent>
+							</Line>
+						))}
+					</Editor>
+				)}
+			</Highlight>
+		</Root>
 	);
-});
-
-CodeBlock.displayName = "CodeBlock";
+};
