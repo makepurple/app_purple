@@ -8,7 +8,7 @@ import React, { useMemo } from "react";
 import tw, { styled } from "twin.macro";
 import { PostOrderByInput, PostWhereInput, SortOrder, useGetPostsQuery } from "../../../graphql";
 import { LoadingPostCard, PostCard, UserPageLayout } from "../../../organisms";
-import { PageProps, pageProps } from "../../../page-props/[userName]/posts";
+import { PageProps, pageProps } from "../../../page-props/[userName]/posts/[[...slug]]";
 
 const BATCH_SIZE = 20;
 
@@ -94,13 +94,13 @@ export const Page: NextPage<PageProps> = () => {
 		field: "posts",
 		requestPolicy: "cache-first",
 		variables: {
+			after: null,
 			first: BATCH_SIZE,
 			orderBy,
 			where: {
 				...where,
 				author: { name: { equals: userName } }
-			},
-			after: null
+			}
 		}
 	});
 

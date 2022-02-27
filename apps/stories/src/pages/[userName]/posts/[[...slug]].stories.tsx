@@ -9,7 +9,7 @@ import {
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
-import { PageProps } from "@makepurple/www/src/page-props/[userName]/posts";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]/posts/[[...slug]]";
 import Page from "@makepurple/www/src/pages/[userName]/posts/[[...slug]]";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";

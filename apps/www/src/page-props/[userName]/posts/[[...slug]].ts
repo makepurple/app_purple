@@ -13,8 +13,8 @@ import {
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
 	GetUserInfoSideBarQueryVariables
-} from "../../graphql";
-import { NextUtils } from "../../utils";
+} from "../../../graphql";
+import { NextUtils } from "../../../utils";
 
 const BATCH_SIZE = 20;
 
@@ -27,6 +27,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	await Promise.all([
 		urqlClient
 			.query<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, {
+				after: null,
 				first: BATCH_SIZE,
 				where: {
 					author: {
@@ -34,8 +35,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 							equals: query.userName as string
 						}
 					}
-				},
-				after: null
+				}
 			})
 			.toPromise(),
 		urqlClient
