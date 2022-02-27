@@ -20,6 +20,7 @@ export * from "./FriendAutosuggest";
 export * from "./GlobalGraphQL";
 export * from "./LoadingChatCard";
 export * from "./LoadingChatRoomMessage";
+export * from "./LoadingCodeExampleCard";
 export * from "./LoadingCommentCard";
 export * from "./LoadingCreateRepositoryFormOption";
 export * from "./LoadingExperienceCard";
