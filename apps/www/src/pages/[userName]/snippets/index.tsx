@@ -6,6 +6,7 @@ import React from "react";
 import tw from "twin.macro";
 import { useGetUserCodeExamplesQuery } from "../../../graphql";
 import { CodeExampleCard, LoadingCodeExampleCard, UserPageLayout } from "../../../organisms";
+import { pageProps, PageProps } from "../../../page-props/[userName]/snippets";
 import { CodeIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
@@ -17,7 +18,9 @@ const Content = tw.div`
 	gap-3
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
