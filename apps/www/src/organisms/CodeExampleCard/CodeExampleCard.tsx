@@ -53,6 +53,7 @@ const Title = tw(Anchor)`
 	text-black
 	font-semibold
 	leading-none
+	truncate
 `;
 
 const DescriptionContainer = tw.a`
