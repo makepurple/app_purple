@@ -4,9 +4,9 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { useGetUserCodeExamplesQuery } from "../../graphql";
-import { CodeExampleCard, LoadingCodeExampleCard, UserPageLayout } from "../../organisms";
-import { CodeIcon } from "../../svgs";
+import { useGetUserCodeExamplesQuery } from "../../../graphql";
+import { CodeExampleCard, LoadingCodeExampleCard, UserPageLayout } from "../../../organisms";
+import { CodeIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 
