@@ -1,0 +1,57 @@
+query GetCodeExample(
+	$authorName: String!
+	$urlSlug: String!
+) {
+	codeExample(
+		where: {
+			authorName_urlSlug: {
+				authorName: $authorName
+				urlSlug: $urlSlug
+			}
+		}
+	) {
+		id
+		author {
+			id
+			image
+			name
+		}
+		authorName
+		createdAt
+		description
+		language
+		languageColor
+		primarySkill {
+			github {
+				id
+				name
+				owner {
+					id
+					avatarUrl
+					login
+				}
+			}
+			id
+			name
+			owner
+		}
+		skills(first: 5) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				id
+				name
+				owner
+			}
+		}
+		title
+		updatedAt
+		upvotes
+		urlSlug
+		viewerUpvote
+	}
+}

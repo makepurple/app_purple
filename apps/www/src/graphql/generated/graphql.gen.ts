@@ -2923,6 +2923,14 @@ export type GetChatsQueryVariables = Exact<{
 
 export type GetChatsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly chats: { readonly __typename: 'ChatConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'ChatEdge', readonly cursor: string, readonly node: { readonly __typename: 'Chat', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } }> } } | null };
 
+export type GetCodeExampleQueryVariables = Exact<{
+  authorName: Scalars['String'];
+  urlSlug: Scalars['String'];
+}>;
+
+
+export type GetCodeExampleQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly createdAt: Date, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
+
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5407,6 +5415,61 @@ ${ChatCardChatFragmentDoc}`;
 
 export function useGetChatsQuery(options?: Omit<Urql.UseQueryArgs<GetChatsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetChatsQuery>({ query: GetChatsDocument, ...options });
+};
+export const GetCodeExampleDocument = /*#__PURE__*/ gql`
+    query GetCodeExample($authorName: String!, $urlSlug: String!) {
+  codeExample(
+    where: {authorName_urlSlug: {authorName: $authorName, urlSlug: $urlSlug}}
+  ) {
+    id
+    author {
+      id
+      image
+      name
+    }
+    authorName
+    createdAt
+    description
+    language
+    languageColor
+    primarySkill {
+      github {
+        id
+        name
+        owner {
+          id
+          avatarUrl
+          login
+        }
+      }
+      id
+      name
+      owner
+    }
+    skills(first: 5) {
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        id
+        name
+        owner
+      }
+    }
+    title
+    updatedAt
+    upvotes
+    urlSlug
+    viewerUpvote
+  }
+}
+    `;
+
+export function useGetCodeExampleQuery(options: Omit<Urql.UseQueryArgs<GetCodeExampleQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetCodeExampleQuery>({ query: GetCodeExampleDocument, ...options });
 };
 export const GetCommentRepliesDocument = /*#__PURE__*/ gql`
     query GetCommentReplies($after: String, $first: Int, $where: CommentWhereUniqueInput!) {
