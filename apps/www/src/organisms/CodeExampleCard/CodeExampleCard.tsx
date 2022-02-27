@@ -216,12 +216,12 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 									.catch(() => false);
 
 						if (!didSucceed) {
-							toast.error("Could not like this code-example");
+							toast.error("Could not like this snippet");
 
 							return;
 						}
 
-						toast.success("You liked this code-example! 🎉");
+						toast.success("You liked this snippet! 🎉");
 					}}
 					size="small"
 					variant="secondary"
