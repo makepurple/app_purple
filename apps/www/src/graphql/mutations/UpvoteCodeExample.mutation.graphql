@@ -1,5 +1,5 @@
-mutation UpvotePost($where: PostWhereUniqueInput!) {
-	upvotePost(where: $where) {
+mutation UpvoteCodeExample($where: CodeExampleWhereUniqueInput!) {
+	upvoteCodeExample(where: $where) {
 		record {
 			id
 			upvotes

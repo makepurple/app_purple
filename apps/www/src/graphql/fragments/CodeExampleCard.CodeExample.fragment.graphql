@@ -6,8 +6,9 @@ fragment CodeExampleCardCodeExample on CodeExample {
 		name
 	}
 	authorName
-	createdAt
+	description
 	language
+	languageColor
 	primarySkill {
 		github {
 			id
@@ -36,19 +37,7 @@ fragment CodeExampleCardCodeExample on CodeExample {
 		}
 	}
 	title
-	updatedAt
 	upvotes
-	upvoters(first: 6) {
-		edges {
-			cursor
-			node {
-				id
-			}
-		}
-		nodes {
-			id
-			image
-			name
-		}
-	}
+	urlSlug
+	viewerUpvote
 }

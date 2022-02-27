@@ -7,6 +7,7 @@ export * from "./ChatRoom";
 export * from "./ChatRoomInviteForm";
 export * from "./ChatRoomLeaveButton";
 export * from "./ChatRoomMessage";
+export * from "./CodeExampleCard";
 export * from "./CommentCard";
 export * from "./CreateChatForm";
 export * from "./CreateCommentForm";

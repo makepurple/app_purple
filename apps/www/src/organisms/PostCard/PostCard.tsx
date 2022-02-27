@@ -1,5 +1,5 @@
 import { Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, FormatUtils } from "@makepurple/utils";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -187,7 +187,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						$upvoted={!!post.viewerUpvote}
 					>
 						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
-						<UpvoteCount>{post.upvotes.toLocaleString()}</UpvoteCount>
+						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
 					</UpvoteButton>
 				</KarmaContainer>
 			</Info>

@@ -146,6 +146,7 @@ export type CodeExample = {
   readonly description?: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly language: CodeLanguage;
+  readonly languageColor: Scalars['String'];
   readonly primarySkill: Skill;
   readonly primarySkillId: Scalars['String'];
   readonly skills: SkillConnection;
@@ -153,6 +154,15 @@ export type CodeExample = {
   readonly updatedAt: Scalars['DateTime'];
   readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];
+  readonly urlSlug: Scalars['String'];
+  /**
+   * How the viwer has voted on this code exmaple.
+   *
+   * true: upvoted
+   * false: downvoted
+   * null: didn't vote
+   */
+  readonly viewerUpvote?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1151,7 +1161,7 @@ export type MutationUploadPostImageArgs = {
 
 /** Root mutation type */
 export type MutationUpvoteCodeExampleArgs = {
-  data: UpvoteCodeExampleInput;
+  data?: InputMaybe<UpvoteCodeExampleInput>;
   where: CodeExampleWhereUniqueInput;
 };
 
@@ -2495,7 +2505,7 @@ export type ChatRoomInviteFormChatFragment = { readonly __typename: 'Chat', read
 
 export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
-export type CodeExampleCardCodeExampleFragment = { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly createdAt: Date, readonly language: CodeLanguage, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } };
+export type CodeExampleCardCodeExampleFragment = { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
@@ -2784,6 +2794,13 @@ export type UnfriendUserMutationVariables = Exact<{
 
 export type UnfriendUserMutation = { readonly __typename: 'Mutation', readonly deleteFriendship: { readonly __typename: 'DeleteFriendshipPayload', readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFriended: boolean, readonly viewerIsFriend: boolean }, readonly friending: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFriended: boolean, readonly viewerIsFriend: boolean } } } };
 
+export type UnvoteCodeExampleMutationVariables = Exact<{
+  where: CodeExampleWhereUniqueInput;
+}>;
+
+
+export type UnvoteCodeExampleMutation = { readonly __typename: 'Mutation', readonly unvoteCodeExample: { readonly __typename: 'UnvoteCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+
 export type UnvoteCommentMutationVariables = Exact<{
   where: CommentWhereUniqueInput;
 }>;
@@ -2844,6 +2861,13 @@ export type UploadPostImageMutationVariables = Exact<{
 
 export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly uploadPostImage: { readonly __typename: 'UploadPostImagePayload', readonly record: { readonly __typename: 'PostImage', readonly id: string, readonly url: string } } };
 
+export type UpvoteCodeExampleMutationVariables = Exact<{
+  where: CodeExampleWhereUniqueInput;
+}>;
+
+
+export type UpvoteCodeExampleMutation = { readonly __typename: 'Mutation', readonly upvoteCodeExample: { readonly __typename: 'UpvoteCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+
 export type UpvoteCommentMutationVariables = Exact<{
   data: UpvoteCommentInput;
   where: CommentWhereUniqueInput;
@@ -2857,7 +2881,7 @@ export type UpvotePostMutationVariables = Exact<{
 }>;
 
 
-export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
 
 export type ViewPostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3231,8 +3255,9 @@ export const CodeExampleCardCodeExampleFragmentDoc = /*#__PURE__*/ gql`
     name
   }
   authorName
-  createdAt
+  description
   language
+  languageColor
   primarySkill {
     github {
       id
@@ -3261,21 +3286,9 @@ export const CodeExampleCardCodeExampleFragmentDoc = /*#__PURE__*/ gql`
     }
   }
   title
-  updatedAt
   upvotes
-  upvoters(first: 6) {
-    edges {
-      cursor
-      node {
-        id
-      }
-    }
-    nodes {
-      id
-      image
-      name
-    }
-  }
+  urlSlug
+  viewerUpvote
 }
     `;
 export const CommentCardCommentFragmentDoc = /*#__PURE__*/ gql`
@@ -4989,6 +5002,32 @@ export const UnfriendUserDocument = /*#__PURE__*/ gql`
 export function useUnfriendUserMutation() {
   return Urql.useMutation<UnfriendUserMutation, UnfriendUserMutationVariables>(UnfriendUserDocument);
 };
+export const UnvoteCodeExampleDocument = /*#__PURE__*/ gql`
+    mutation UnvoteCodeExample($where: CodeExampleWhereUniqueInput!) {
+  unvoteCodeExample(where: $where) {
+    record {
+      id
+      upvotes
+      upvoters(first: 6) {
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          id
+        }
+      }
+      viewerUpvote
+    }
+  }
+}
+    `;
+
+export function useUnvoteCodeExampleMutation() {
+  return Urql.useMutation<UnvoteCodeExampleMutation, UnvoteCodeExampleMutationVariables>(UnvoteCodeExampleDocument);
+};
 export const UnvoteCommentDocument = /*#__PURE__*/ gql`
     mutation UnvoteComment($where: CommentWhereUniqueInput!) {
   unvoteComment(where: $where) {
@@ -5151,6 +5190,32 @@ export const UploadPostImageDocument = /*#__PURE__*/ gql`
 export function useUploadPostImageMutation() {
   return Urql.useMutation<UploadPostImageMutation, UploadPostImageMutationVariables>(UploadPostImageDocument);
 };
+export const UpvoteCodeExampleDocument = /*#__PURE__*/ gql`
+    mutation UpvoteCodeExample($where: CodeExampleWhereUniqueInput!) {
+  upvoteCodeExample(where: $where) {
+    record {
+      id
+      upvotes
+      upvoters(first: 6) {
+        edges {
+          cursor
+          node {
+            id
+          }
+        }
+        nodes {
+          id
+        }
+      }
+      viewerUpvote
+    }
+  }
+}
+    `;
+
+export function useUpvoteCodeExampleMutation() {
+  return Urql.useMutation<UpvoteCodeExampleMutation, UpvoteCodeExampleMutationVariables>(UpvoteCodeExampleDocument);
+};
 export const UpvoteCommentDocument = /*#__PURE__*/ gql`
     mutation UpvoteComment($data: UpvoteCommentInput!, $where: CommentWhereUniqueInput!) {
   upvoteComment(data: $data, where: $where) {
@@ -5183,6 +5248,7 @@ export const UpvotePostDocument = /*#__PURE__*/ gql`
           id
         }
       }
+      viewerUpvote
     }
   }
 }

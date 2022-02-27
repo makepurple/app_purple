@@ -471,6 +471,7 @@ export interface NexusGenObjects {
     primarySkillId: string; // String!
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    urlSlug: string; // String!
   }
   CodeExampleConnection: { // root type
     edges: NexusGenRootTypes['CodeExampleEdge'][]; // [CodeExampleEdge!]!
@@ -1033,6 +1034,7 @@ export interface NexusGenFieldTypes {
     description: string | null; // String
     id: string; // ID!
     language: NexusGenEnums['CodeLanguage']; // CodeLanguage!
+    languageColor: string; // String!
     primarySkill: NexusGenRootTypes['Skill']; // Skill!
     primarySkillId: string; // String!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
@@ -1040,6 +1042,8 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     upvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     upvotes: number; // Int!
+    urlSlug: string; // String!
+    viewerUpvote: boolean | null; // Boolean
   }
   CodeExampleConnection: { // field return type
     edges: NexusGenRootTypes['CodeExampleEdge'][]; // [CodeExampleEdge!]!
@@ -1903,6 +1907,7 @@ export interface NexusGenFieldTypeNames {
     description: 'String'
     id: 'ID'
     language: 'CodeLanguage'
+    languageColor: 'String'
     primarySkill: 'Skill'
     primarySkillId: 'String'
     skills: 'SkillConnection'
@@ -1910,6 +1915,8 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
     upvoters: 'UserConnection'
     upvotes: 'Int'
+    urlSlug: 'String'
+    viewerUpvote: 'Boolean'
   }
   CodeExampleConnection: { // field return type name
     edges: 'CodeExampleEdge'
@@ -2942,7 +2949,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
     }
     upvoteCodeExample: { // args
-      data: NexusGenInputs['UpvoteCodeExampleInput']; // UpvoteCodeExampleInput!
+      data?: NexusGenInputs['UpvoteCodeExampleInput'] | null; // UpvoteCodeExampleInput
       where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
     }
     upvoteComment: { // args

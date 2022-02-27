@@ -97,6 +97,7 @@ type CodeExample {
   description: String
   id: ID!
   language: CodeLanguage!
+  languageColor: String!
   primarySkill: Skill!
   primarySkillId: String!
   skills(after: String, before: String, first: Int, last: Int, orderBy: SkillOrderByInput, where: SkillWhereInput): SkillConnection!
@@ -104,6 +105,16 @@ type CodeExample {
   updatedAt: DateTime!
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!
+  urlSlug: String!
+
+  """
+  How the viwer has voted on this code exmaple.
+  
+  true: upvoted
+  false: downvoted
+  null: didn't vote
+  """
+  viewerUpvote: Boolean
 }
 
 input CodeExampleAuthorNameUrlSlugCompoundUniqueInput {
@@ -716,7 +727,7 @@ type Mutation {
   updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
   updateUserFromGitHub: UpdateUserFromGitHubPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
-  upvoteCodeExample(data: UpvoteCodeExampleInput!, where: CodeExampleWhereUniqueInput!): UpvoteCodeExamplePayload!
+  upvoteCodeExample(data: UpvoteCodeExampleInput, where: CodeExampleWhereUniqueInput!): UpvoteCodeExamplePayload!
   upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
   viewPost(where: PostWhereUniqueInput!): ViewPostPayload!

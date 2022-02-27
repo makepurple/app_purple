@@ -431,14 +431,14 @@ model Experience {
 }
 
 enum CodeLanguage {
-  JavaScript
-  TypeScript
-  HTML
-  SCSS
-  GraphQL
-  Python
   Go
+  GraphQL
+  HTML
+  JavaScript
+  Python
+  SCSS
   SQL
+  TypeScript
   YAML
 }
 

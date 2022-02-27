@@ -4,7 +4,7 @@ import { NotFoundError, PrismaUtils } from "../../../utils";
 export const upvoteCodeExample = mutationField("upvoteCodeExample", {
 	type: nonNull("UpvoteCodeExamplePayload"),
 	args: {
-		data: nonNull(arg({ type: "UpvoteCodeExampleInput" })),
+		data: arg({ type: "UpvoteCodeExampleInput" }),
 		where: nonNull(arg({ type: "CodeExampleWhereUniqueInput" }))
 	},
 	authorize: (parent, args, { user }) => {
@@ -31,7 +31,7 @@ export const upvoteCodeExample = mutationField("upvoteCodeExample", {
 							}
 						},
 						create: {
-							upvote: args.data.upvote ?? undefined,
+							upvote: args.data?.upvote ?? undefined,
 							userId: user.id
 						}
 					}

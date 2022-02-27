@@ -1,5 +1,6 @@
 import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment, Skill, User } from "@prisma/client";
+import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -55,6 +56,29 @@ export const CodeExample = objectType({
 		t.field(NexusPrisma.CodeExample.createdAt);
 		t.field(NexusPrisma.CodeExample.description);
 		t.field(NexusPrisma.CodeExample.language);
+		t.nonNull.string("languageColor", {
+			resolve: (parent) => {
+				/**
+				 * !HACK
+				 * @description Taken from (@link: https://raw.githubusercontent.com/ozh/github-colors/master/colors.json)
+				 * @author David Lee
+				 * @date February 26, 2022
+				 */
+				return (
+					{
+						JavaScript: "#f1e05a",
+						TypeScript: "#2b7489",
+						HTML: "#e34c26",
+						SCSS: "#c6538c",
+						GraphQL: "#e10098",
+						Python: "#3572A5",
+						Go: "#00ADD8",
+						SQL: "#e38c00",
+						YAML: "#cb171e"
+					}[parent.language] ?? "#6366f1"
+				);
+			}
+		});
 		t.field(NexusPrisma.CodeExample.primarySkill);
 		t.field(NexusPrisma.CodeExample.primarySkillId);
 		t.nonNull.field("skills", {
@@ -157,6 +181,30 @@ export const CodeExample = objectType({
 				);
 
 				return connection;
+			}
+		});
+		t.field(NexusPrisma.CodeExample.urlSlug);
+		t.boolean("viewerUpvote", {
+			description: stripIndents`
+				How the viwer has voted on this code exmaple.
+
+				true: upvoted
+				false: downvoted
+				null: didn't vote
+			`,
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) return null;
+
+				const codeExampleUpvoter = await prisma.codeExampleUpvoter.findUnique({
+					where: {
+						codeExampleId_userId: {
+							codeExampleId: parent.id,
+							userId: user.id
+						}
+					}
+				});
+
+				return codeExampleUpvoter?.upvote ?? null;
 			}
 		});
 	}
