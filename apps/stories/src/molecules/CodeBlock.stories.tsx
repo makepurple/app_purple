@@ -24,7 +24,7 @@ const Template: Story<CodeBlockProps> = (args) => {
 };
 Template.args = {
 	language: "tsx",
-	languageName: "TypeScript"
+	title: "TypeScript"
 };
 
 export const Standard = Template.bind({});

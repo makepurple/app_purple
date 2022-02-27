@@ -61,26 +61,26 @@ export interface CodeBlockProps {
 	className?: string;
 	code?: string;
 	language?: Language;
-	languageName?: string;
 	style?: CSSProperties;
+	title?: string;
 }
 
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
 	const {
 		children = "",
-		className = "language-tsx",
+		className,
 		language = "tsx",
-		languageName,
 		style,
+		title,
 		code = children,
 		...restProps
 	} = props;
 
 	return (
 		<Root className={className} style={style}>
-			{!!languageName && (
+			{!!title && (
 				<Info>
-					<LanguageName>{languageName}</LanguageName>
+					<LanguageName>{title}</LanguageName>
 				</Info>
 			)}
 			<Highlight
