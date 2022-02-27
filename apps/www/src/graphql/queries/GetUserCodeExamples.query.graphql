@@ -1,0 +1,29 @@
+query GetUserCodeExamples(
+	$after: String
+	$first: Int
+	$name: String!
+) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		codeExamples(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...CodeExampleCardCodeExample
+			}
+		}
+		name
+	}
+}
