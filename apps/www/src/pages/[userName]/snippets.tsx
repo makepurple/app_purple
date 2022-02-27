@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
 import { useGetUserCodeExamplesQuery } from "../../graphql";
-import { CodeExampleCard, UserPageLayout } from "../../organisms";
+import { CodeExampleCard, LoadingCodeExampleCard, UserPageLayout } from "../../organisms";
 import { CodeIcon } from "../../svgs";
 
 const BATCH_SIZE = 20;
@@ -54,6 +54,8 @@ export const Page: NextPage = () => {
 								codeExample={codeExample}
 							/>
 					  ))}
+				{fetching &&
+					Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
 			</Content>
 		</UserPageLayout>
 	);
