@@ -20,6 +20,7 @@ export * from "./GetSkillOwnerInfoSideBar.query.mock";
 export * from "./GetSkillOwnerRepositories.query.mock";
 export * from "./GetSkills.query.mock";
 export * from "./GetUserActivities.query.mock";
+export * from "./GetUserCodeExamples.query.mock";
 export * from "./GetUserFollowers.query.mock";
 export * from "./GetUserFollowing.query.mock";
 export * from "./GetUserFriendRequestCount.query.mock";
