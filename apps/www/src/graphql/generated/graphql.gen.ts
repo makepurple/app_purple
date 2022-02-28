@@ -245,6 +245,7 @@ export type CodeExampleWhereInput = {
   readonly language?: InputMaybe<CodeLanguageNullableFilter>;
   readonly title?: InputMaybe<StringNullableFilter>;
   readonly updatedAt?: InputMaybe<DateTimeNullableFilter>;
+  readonly urlSlug?: InputMaybe<StringNullableFilter>;
 };
 
 export type CodeExampleWhereUniqueInput = {
@@ -381,6 +382,8 @@ export type CommentUpdateInput = {
 export type CommentWhereInput = {
   readonly author?: InputMaybe<UserWhereInput>;
   readonly authorId?: InputMaybe<StringNullableFilter>;
+  readonly codeExample?: InputMaybe<CodeExampleWhereInput>;
+  readonly codeExampleId?: InputMaybe<StringNullableFilter>;
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
   readonly post?: InputMaybe<PostWhereInput>;
   readonly postId?: InputMaybe<StringNullableFilter>;
@@ -2929,7 +2932,17 @@ export type GetCodeExampleQueryVariables = Exact<{
 }>;
 
 
-export type GetCodeExampleQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly content: string, readonly createdAt: Date, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
+export type GetCodeExampleQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly content: string, readonly description?: string | null, readonly language: CodeLanguage, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
+
+export type GetCodeExampleCommentsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  codeExampleTitle: Scalars['String'];
+  userName: Scalars['String'];
+}>;
+
+
+export type GetCodeExampleCommentsQuery = { readonly __typename: 'Query', readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
 
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -5429,10 +5442,8 @@ export const GetCodeExampleDocument = /*#__PURE__*/ gql`
     }
     authorName
     content
-    createdAt
     description
     language
-    languageColor
     primarySkill {
       github {
         id
@@ -5471,6 +5482,36 @@ export const GetCodeExampleDocument = /*#__PURE__*/ gql`
 
 export function useGetCodeExampleQuery(options: Omit<Urql.UseQueryArgs<GetCodeExampleQueryVariables>, 'query'>) {
   return Urql.useQuery<GetCodeExampleQuery>({ query: GetCodeExampleDocument, ...options });
+};
+export const GetCodeExampleCommentsDocument = /*#__PURE__*/ gql`
+    query GetCodeExampleComments($after: String, $first: Int, $codeExampleTitle: String!, $userName: String!) {
+  comments(
+    after: $after
+    first: $first
+    where: {codeExample: {authorName: {equals: $userName}, urlSlug: {equals: $codeExampleTitle}}}
+  ) {
+    ...CommentRepliesCommentConnection
+    nodes {
+      id
+      ...CommentCardComment
+      replies(first: $first) {
+        ...CommentRepliesCommentConnection
+        nodes {
+          id
+          ...CommentCardComment
+          replies(first: $first) {
+            ...CommentRepliesCommentConnection
+          }
+        }
+      }
+    }
+  }
+}
+    ${CommentRepliesCommentConnectionFragmentDoc}
+${CommentCardCommentFragmentDoc}`;
+
+export function useGetCodeExampleCommentsQuery(options: Omit<Urql.UseQueryArgs<GetCodeExampleCommentsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetCodeExampleCommentsQuery>({ query: GetCodeExampleCommentsDocument, ...options });
 };
 export const GetCommentRepliesDocument = /*#__PURE__*/ gql`
     query GetCommentReplies($after: String, $first: Int, $where: CommentWhereUniqueInput!) {
@@ -5664,21 +5705,16 @@ export const GetPostCommentsDocument = /*#__PURE__*/ gql`
     first: $first
     where: {post: {authorName: {equals: $userName}, urlSlug: {equals: $postTitle}}}
   ) {
-    __typename
     ...CommentRepliesCommentConnection
     nodes {
-      __typename
       id
       ...CommentCardComment
       replies(first: $first) {
-        __typename
         ...CommentRepliesCommentConnection
         nodes {
-          __typename
           id
           ...CommentCardComment
           replies(first: $first) {
-            __typename
             ...CommentRepliesCommentConnection
           }
         }

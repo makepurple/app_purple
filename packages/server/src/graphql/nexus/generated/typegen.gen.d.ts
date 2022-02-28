@@ -124,6 +124,7 @@ export interface NexusGenInputs {
     language?: NexusGenInputs['CodeLanguageNullableFilter'] | null; // CodeLanguageNullableFilter
     title?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
+    urlSlug?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   CodeExampleWhereUniqueInput: { // input type
     authorName_urlSlug?: NexusGenInputs['CodeExampleAuthorNameUrlSlugCompoundUniqueInput'] | null; // CodeExampleAuthorNameUrlSlugCompoundUniqueInput
@@ -155,6 +156,8 @@ export interface NexusGenInputs {
   CommentWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     authorId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    codeExample?: NexusGenInputs['CodeExampleWhereInput'] | null; // CodeExampleWhereInput
+    codeExampleId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     post?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
     postId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter

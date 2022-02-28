@@ -158,6 +158,7 @@ input CodeExampleWhereInput {
   language: CodeLanguageNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeNullableFilter
+  urlSlug: StringNullableFilter
 }
 
 input CodeExampleWhereUniqueInput {
@@ -260,6 +261,8 @@ input CommentUpdateInput {
 input CommentWhereInput {
   author: UserWhereInput
   authorId: StringNullableFilter
+  codeExample: CodeExampleWhereInput
+  codeExampleId: StringNullableFilter
   createdAt: DateTimeNullableFilter
   post: PostWhereInput
   postId: StringNullableFilter

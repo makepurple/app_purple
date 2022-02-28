@@ -8,5 +8,6 @@ export const CodeExampleWhereInput = inputObjectType({
 		t.field("language", { type: "CodeLanguageNullableFilter" });
 		t.field("title", { type: "StringNullableFilter" });
 		t.field("updatedAt", { type: "DateTimeNullableFilter" });
+		t.field("urlSlug", { type: "StringNullableFilter" });
 	}
 });

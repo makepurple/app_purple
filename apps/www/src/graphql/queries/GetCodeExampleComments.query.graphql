@@ -1,19 +1,19 @@
-query GetPostComments(
+query GetCodeExampleComments(
 	$after: String
 	$first: Int
-	$postTitle: String!
+	$codeExampleTitle: String!
 	$userName: String!
 ) {
 	comments(
 		after: $after
 		first: $first
 		where: {
-			post: {
+			codeExample: {
 				authorName: {
 					equals: $userName
 				}
 				urlSlug: {
-					equals: $postTitle
+					equals: $codeExampleTitle
 				}
 			}
 		}
