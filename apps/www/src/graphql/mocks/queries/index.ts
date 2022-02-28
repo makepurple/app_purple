@@ -2,6 +2,7 @@ export * from "./GetActivityFeed.query.mock";
 export * from "./GetChat.query.mock";
 export * from "./GetChats.query.mock";
 export * from "./GetCodeExample.query.mock";
+export * from "./GetCodeExampleComments.query.mock";
 export * from "./GetCommentReplies.query.mock";
 export * from "./GetExperiences.query.mock";
 export * from "./GetFollowableSkills.query.mock";
