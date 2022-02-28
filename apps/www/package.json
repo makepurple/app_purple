@@ -16,7 +16,7 @@
 		"script": "dotenv -- ts-node -P tsconfig.script.json -T"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.4.3",
+		"@headlessui/react": "^1.5.0",
 		"@hookform/resolvers": "^2.8.8",
 		"@makepurple/components": "workspace:*",
 		"@makepurple/hooks": "workspace:*",

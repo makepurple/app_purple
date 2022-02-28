@@ -46,7 +46,7 @@ importers:
     specifiers:
       '@babel/core': ^7.17.4
       '@faker-js/faker': 6.0.0-alpha.6
-      '@headlessui/react': ^1.4.3
+      '@headlessui/react': ^1.5.0
       '@makepurple/components': workspace:*
       '@makepurple/hooks': workspace:*
       '@makepurple/server': workspace:*
@@ -111,7 +111,7 @@ importers:
       webpack: ^5.69.0
     dependencies:
       '@faker-js/faker': 6.0.0-alpha.6
-      '@headlessui/react': 1.4.3_react-dom@17.0.2+react@17.0.2
+      '@headlessui/react': 1.5.0_react-dom@17.0.2+react@17.0.2
       '@makepurple/components': link:../../packages/components
       '@makepurple/hooks': link:../../packages/hooks
       '@makepurple/server': link:../../packages/server
@@ -185,7 +185,7 @@ importers:
       '@graphql-codegen/typescript': ^2.4.3
       '@graphql-codegen/typescript-operations': ^2.3.0
       '@graphql-codegen/typescript-urql': ^3.5.1
-      '@headlessui/react': ^1.4.3
+      '@headlessui/react': ^1.5.0
       '@hookform/resolvers': ^2.8.8
       '@makepurple/components': workspace:*
       '@makepurple/hooks': workspace:*
@@ -267,7 +267,7 @@ importers:
       urql: ^2.1.3
       webpack-filter-warnings-plugin: ^1.2.1
     dependencies:
-      '@headlessui/react': 1.4.3_react-dom@17.0.2+react@17.0.2
+      '@headlessui/react': 1.5.0_react-dom@17.0.2+react@17.0.2
       '@hookform/resolvers': 2.8.8_react-hook-form@7.27.0
       '@makepurple/components': link:../../packages/components
       '@makepurple/hooks': link:../../packages/hooks
@@ -358,7 +358,7 @@ importers:
 
   packages/components:
     specifiers:
-      '@headlessui/react': ^1.4.3
+      '@headlessui/react': ^1.5.0
       '@makepurple/config': workspace:*
       '@makepurple/hooks': workspace:*
       '@makepurple/tsconfig': workspace:*
@@ -399,7 +399,7 @@ importers:
       twin.macro: ^2.8.2
       typescript: ^4.5.5
     dependencies:
-      '@headlessui/react': 1.4.3_react-dom@17.0.2+react@17.0.2
+      '@headlessui/react': 1.5.0_react-dom@17.0.2+react@17.0.2
       '@makepurple/config': link:../config
       '@makepurple/hooks': link:../hooks
       '@makepurple/typings': link:../typings
@@ -4287,8 +4287,8 @@ packages:
     resolution: {integrity: sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw==}
     dev: false
 
-  /@headlessui/react/1.4.3_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-n2IQkaaw0aAAlQS5MEXsM4uRK+w18CrM72EqnGRl/UBOQeQajad8oiKXR9Nk15jOzTFQjpxzrZMf1NxHidFBiw==}
+  /@headlessui/react/1.5.0_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-aaRnYxBb3MU2FNJf3Ut9RMTUqqU3as0aI1lQhgo2n9Fa67wRu14iOGqx93xB+uMNVfNwZ5B3y/Ndm7qZGuFeMQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
@@ -13553,7 +13553,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.15.1
+      uglify-js: 3.15.2
 
   /hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}
@@ -15487,7 +15487,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.8
 
   /jsonify/0.0.0:
     resolution: {integrity: sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=}
@@ -21536,8 +21536,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /uglify-js/3.15.1:
-    resolution: {integrity: sha512-FAGKF12fWdkpvNJZENacOH0e/83eG6JyVQyanIJaBXCN1J11TUQv1T1/z8S+Z0CG0ZPk1nPcreF/c7lrTd0TEQ==}
+  /uglify-js/3.15.2:
+    resolution: {integrity: sha512-peeoTk3hSwYdoc9nrdiEJk+gx1ALCtTjdYuKSXMTDqq7n1W7dHPqWDdSi+BPL0ni2YMeHD7hKUSdbj3TZauY2A==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     requiresBuild: true
