@@ -1,5 +1,6 @@
 import { CodeLanguage } from "@prisma/client";
 import Schema, { array, string } from "computed-types";
+import { CodeExampleTitle } from "../string";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 export const CodeExampleUpdateInput = Schema({
@@ -12,8 +13,5 @@ export const CodeExampleUpdateInput = Schema({
 		.min(1, "Required")
 		.max(5, "Maximum of 5 allowed")
 		.strictOptional(),
-	title: string
-		.min(12, "Must be at least 12 characters")
-		.max(100, "100 character limit")
-		.strictOptional()
+	title: CodeExampleTitle.strictOptional()
 });
