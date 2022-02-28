@@ -1,5 +1,6 @@
 import {
 	Avatar,
+	Button,
 	CodeBlock,
 	Divider,
 	GitHubAvatarImage,
@@ -8,18 +9,22 @@ import {
 	Tags
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, FormatUtils } from "@makepurple/utils";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
 import React, { useMemo } from "react";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
 import {
+	CodeExampleWhereUniqueInput,
 	CodeLanguage,
 	useGetCodeExampleCommentsQuery,
-	useGetCodeExampleQuery
+	useGetCodeExampleQuery,
+	useUnvoteCodeExampleMutation,
+	useUpvoteCodeExampleMutation
 } from "../../../graphql";
 import {
 	CommentCard,
@@ -28,11 +33,17 @@ import {
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/snippets/[codeExampleTitle]";
-import { BookIcon, CommentIcon } from "../../../svgs";
+import { BookIcon, CommentIcon, ThumbsUpIcon } from "../../../svgs";
 
 const BATCH_SIZE = 8;
 
 const Content = tw(Paper)`
+	flex
+	flex-col
+	items-stretch
+`;
+
+const CodeExampleContent = tw.div`
 	flex
 	flex-col
 	items-stretch
@@ -103,6 +114,28 @@ const PublishedAt = tw.div`
 	text-gray-500
 `;
 
+const Actions = tw.div`
+	sticky
+	bottom-0
+	p-4
+	border-t
+	border-solid
+	border-gray-300
+	rounded-b-lg
+	bg-white
+	sm:px-6
+`;
+
+const UpvoteButton = tw(Button)`
+	self-start
+	gap-1.5
+`;
+
+const UpvoteCount = tw.span`
+	text-base
+	sm:leading-5
+`;
+
 const CommentsSection = tw(Paper)`
 	flex
 	flex-col
@@ -125,8 +158,10 @@ export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
-
 	const { data: sessionData } = useSession();
+
+	const [{ fetching: upvoting }, upvote] = useUpvoteCodeExampleMutation();
+	const [{ fetching: unvoting }, unvote] = useUnvoteCodeExampleMutation();
 
 	const viewer = sessionData?.user;
 
@@ -147,7 +182,7 @@ export const Page: NextPage<PageProps> = () => {
 	 */
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data: commentsData, fetching }, getRef] = useRelayCursor(
+	const [{ data: commentsData, fetching: fetchingComments }, getRef] = useRelayCursor(
 		useGetCodeExampleCommentsQuery,
 		{
 			direction: "y",
@@ -202,68 +237,109 @@ export const Page: NextPage<PageProps> = () => {
 	const primarySkill = codeExample.primarySkill;
 	const skills = codeExample.skills.nodes ?? [];
 
+	const voting = upvoting || unvoting;
+
 	return (
 		<UserPageLayout selectedTab="snippets" userName={authorName}>
 			<Content>
-				<TopContainer>
-					<TitleContainer>
-						<NextLink
-							href="/s/[skillOwner]/[skillName]"
-							as={`/s/${primarySkill.owner}/${primarySkill.name}`}
-							passHref
-						>
-							<StyledAvatar
-								border={2}
-								aria-label={`${primarySkill.owner}/${primarySkill.name}`}
+				<CodeExampleContent>
+					<TopContainer>
+						<TitleContainer>
+							<NextLink
+								href="/s/[skillOwner]/[skillName]"
+								as={`/s/${primarySkill.owner}/${primarySkill.name}`}
+								passHref
 							>
-								{primarySkill.github.owner.__typename === "GitHubOrganization" ? (
-									<GitHubAvatarImage
-										alt={primarySkill.name}
-										src={primarySkill.github.owner.avatarUrl}
-										height={48}
-										width={48}
-									/>
-								) : (
-									<AvatarIconContainer>
-										<BookIcon height={24} width={24} />
-									</AvatarIconContainer>
-								)}
-							</StyledAvatar>
-						</NextLink>
-						<Title>{codeExample.title}</Title>
-					</TitleContainer>
-					<Skills type="positive">
-						{skills.map((skill) => (
-							<Tags.Tag key={skill.id} id={skill.id}>
-								{skill.name}
-							</Tags.Tag>
-						))}
-					</Skills>
-				</TopContainer>
-				{!!codeExample.description && <Description>{codeExample.description}</Description>}
-				<ByLine>
-					{codeExample.author.image && (
-						<Avatar border={2}>
-							<GitHubAvatarImage
-								alt={codeExample.author.name}
-								src={codeExample.author.image}
-								height={48}
-								width={48}
-							/>
-						</Avatar>
+								<StyledAvatar
+									border={2}
+									aria-label={`${primarySkill.owner}/${primarySkill.name}`}
+								>
+									{primarySkill.github.owner.__typename ===
+									"GitHubOrganization" ? (
+										<GitHubAvatarImage
+											alt={primarySkill.name}
+											src={primarySkill.github.owner.avatarUrl}
+											height={48}
+											width={48}
+										/>
+									) : (
+										<AvatarIconContainer>
+											<BookIcon height={24} width={24} />
+										</AvatarIconContainer>
+									)}
+								</StyledAvatar>
+							</NextLink>
+							<Title>{codeExample.title}</Title>
+						</TitleContainer>
+						<Skills type="positive">
+							{skills.map((skill) => (
+								<Tags.Tag key={skill.id} id={skill.id}>
+									{skill.name}
+								</Tags.Tag>
+							))}
+						</Skills>
+					</TopContainer>
+					{!!codeExample.description && (
+						<Description>{codeExample.description}</Description>
 					)}
-					<div>
-						<div>{codeExample.author.name}</div>
-						<PublishedAt>
-							{dayjs(codeExample.updatedAt).format("MMM DD, YYYY")}
-						</PublishedAt>
-					</div>
-				</ByLine>
-				<CodeBlock
-					code={codeExample.content}
-					language={language}
-					title={codeExample.language}
-				/>
+					<ByLine>
+						{codeExample.author.image && (
+							<Avatar border={2}>
+								<GitHubAvatarImage
+									alt={codeExample.author.name}
+									src={codeExample.author.image}
+									height={48}
+									width={48}
+								/>
+							</Avatar>
+						)}
+						<div>
+							<div>{codeExample.author.name}</div>
+							<PublishedAt>
+								{dayjs(codeExample.updatedAt).format("MMM DD, YYYY")}
+							</PublishedAt>
+						</div>
+					</ByLine>
+					<CodeBlock
+						code={codeExample.content}
+						language={language}
+						title={codeExample.language}
+					/>
+				</CodeExampleContent>
+				<Actions>
+					<UpvoteButton
+						disabled={voting}
+						onClick={async (e) => {
+							e.stopPropagation();
+
+							const where: CodeExampleWhereUniqueInput = {
+								id: codeExample.id
+							};
+
+							const didSucceed = codeExample.viewerUpvote
+								? await unvote({ where })
+										.then((result) => !!result.data?.unvoteCodeExample.record)
+										.catch(() => false)
+								: await upvote({ where })
+										.then((result) => !!result.data?.upvoteCodeExample.record)
+										.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not like this snippet");
+
+								return;
+							}
+
+							toast.success("You liked this snippet! 🎉");
+						}}
+						size="small"
+						type="button"
+						variant="secondary"
+					>
+						<ThumbsUpIcon height={24} width={24} />
+						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
+					</UpvoteButton>
+				</Actions>
 			</Content>
 			<CommentsSection tw="mt-6">
 				{!!viewer && (
@@ -276,7 +352,7 @@ export const Page: NextPage<PageProps> = () => {
 				)}
 				<CommentsContainer>
 					{!comments.length
-						? !fetching && (
+						? !fetchingComments && (
 								<NonIdealState
 									title="There's nothing here"
 									subTitle="We couldn't find any comments"
@@ -293,7 +369,7 @@ export const Page: NextPage<PageProps> = () => {
 									replies={comment.replies}
 								/>
 						  ))}
-					{fetching &&
+					{fetchingComments &&
 						Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
 				</CommentsContainer>
 			</CommentsSection>
