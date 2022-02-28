@@ -1,15 +1,36 @@
-import { Avatar, CodeBlock, GitHubAvatarImage, Paper, Tags } from "@makepurple/components";
+import {
+	Avatar,
+	CodeBlock,
+	Divider,
+	GitHubAvatarImage,
+	NonIdealState,
+	Paper,
+	Tags
+} from "@makepurple/components";
+import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
 import React, { useMemo } from "react";
 import tw from "twin.macro";
-import { CodeLanguage, useGetCodeExampleQuery } from "../../../graphql";
-import { UserPageLayout } from "../../../organisms";
+import {
+	CodeLanguage,
+	useGetCodeExampleCommentsQuery,
+	useGetCodeExampleQuery
+} from "../../../graphql";
+import {
+	CommentCard,
+	CreateCommentForm,
+	LoadingCommentCard,
+	UserPageLayout
+} from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/snippets/[codeExampleTitle]";
-import { BookIcon } from "../../../svgs";
+import { BookIcon, CommentIcon } from "../../../svgs";
+
+const BATCH_SIZE = 8;
 
 const Content = tw(Paper)`
 	flex
@@ -82,20 +103,68 @@ const PublishedAt = tw.div`
 	text-gray-500
 `;
 
+const CommentsSection = tw(Paper)`
+	flex
+	flex-col
+	items-stretch
+	py-4
+	sm:py-6
+`;
+
+const CommentFormContainer = tw.div`
+	px-4
+	sm:px-6
+`;
+
+const CommentsContainer = tw.div`
+	px-4
+	sm:px-6
+`;
+
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
+	const { data: sessionData } = useSession();
+
+	const viewer = sessionData?.user;
+
 	const authorName = router?.query.userName as string;
 	const urlSlug = router?.query.codeExampleTitle as string;
 
-	const [{ data }] = useGetCodeExampleQuery({
+	const [{ data: postData }] = useGetCodeExampleQuery({
 		requestPolicy: "cache-first",
 		variables: { authorName, urlSlug }
 	});
 
-	const codeExample = data?.codeExample;
+	/**
+	 * !HACK
+	 * @description Type is too deep/complex, so TS is throwing an error, even when it is correct.
+	 * Ignoring this error, so that we can keep the types without it erroring.
+	 * @author David Lee
+	 * @date February 27, 2022
+	 */
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	const [{ data: commentsData, fetching }, getRef] = useRelayCursor(
+		useGetCodeExampleCommentsQuery,
+		{
+			direction: "y",
+			field: "comments",
+			offset: 0,
+			requestPolicy: "cache-first",
+			variables: {
+				after: null,
+				first: BATCH_SIZE,
+				userName: authorName,
+				codeExampleTitle: urlSlug
+			}
+		}
+	);
+
+	const codeExample = postData?.codeExample;
+	const comments = commentsData?.comments.nodes ?? [];
 
 	const language = useMemo((): Maybe<Language> => {
 		switch (codeExample?.language) {
@@ -196,6 +265,38 @@ export const Page: NextPage<PageProps> = () => {
 					title={codeExample.language}
 				/>
 			</Content>
+			<CommentsSection tw="mt-6">
+				{!!viewer && (
+					<>
+						<CommentFormContainer>
+							<CreateCommentForm codeExampleId={codeExample.id} />
+						</CommentFormContainer>
+						<Divider tw="my-4 sm:my-6" />
+					</>
+				)}
+				<CommentsContainer>
+					{!comments.length
+						? !fetching && (
+								<NonIdealState
+									title="There's nothing here"
+									subTitle="We couldn't find any comments"
+									tw="shadow-none"
+								>
+									<CommentIcon height={96} width={96} />
+								</NonIdealState>
+						  )
+						: comments.map((comment, i) => (
+								<CommentCard
+									key={comment.id}
+									ref={getRef(i)}
+									comment={comment}
+									replies={comment.replies}
+								/>
+						  ))}
+					{fetching &&
+						Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
+				</CommentsContainer>
+			</CommentsSection>
 		</UserPageLayout>
 	);
 };

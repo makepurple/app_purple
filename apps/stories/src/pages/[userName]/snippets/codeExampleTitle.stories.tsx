@@ -1,5 +1,6 @@
 import { SiteWideLayout } from "@makepurple/www";
 import {
+	GetCodeExampleComments_mock,
 	GetCodeExample_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
@@ -47,6 +48,8 @@ Standard.parameters = {
 		switch (getOperationName(op.query)) {
 			case "GetCodeExample":
 				return { data: GetCodeExample_mock };
+			case "GetCodeExampleComments":
+				return { data: GetCodeExampleComments_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
