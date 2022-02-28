@@ -4,7 +4,6 @@ import { WindowUtils } from "@makepurple/utils";
 import { CodeBlockType } from "@makepurple/validators";
 import composeRefs from "@seznam/compose-react-refs";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
 import React, { FC, Fragment, useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
@@ -14,6 +13,7 @@ import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "sl
 import tw from "twin.macro";
 import { ContextMenu, ContextMenuItem, ListItem } from "../../../atoms";
 import { CodeSquareIcon, XIcon } from "../../../svgs";
+import { CodeBlockTheme } from "../../CodeBlock";
 import { useInsertBlock } from "../hooks/useInsertBlock";
 import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { ToolbarButton } from "../Shared";
@@ -236,7 +236,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 					</CloseIcon>
 				)}
 			</Info>
-			<EditorWrapper ref={composedRef} style={shadesOfPurple.plain as any}>
+			<EditorWrapper ref={composedRef} style={CodeBlockTheme.plain as any}>
 				<StyledCodeEditor
 					disabled={readOnly}
 					highlight={(value) => (
@@ -244,7 +244,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 							{...defaultProps}
 							code={value}
 							language={language}
-							theme={shadesOfPurple}
+							theme={CodeBlockTheme}
 						>
 							{({ tokens, getLineProps, getTokenProps }) =>
 								tokens.map((line, i) => (

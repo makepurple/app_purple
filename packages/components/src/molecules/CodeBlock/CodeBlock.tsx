@@ -1,5 +1,4 @@
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import shadesOfPurple from "prism-react-renderer/themes/shadesOfPurple";
+import Highlight, { defaultProps, Language, PrismTheme } from "prism-react-renderer";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled } from "twin.macro";
 
@@ -11,6 +10,7 @@ const Root = tw.div`
 	border-solid
 	border-indigo-500
 	rounded-md
+	overflow-hidden
 `;
 
 const Info = tw.div`
@@ -56,11 +56,114 @@ const LineContent = tw.span`
 	table-cell
 `;
 
+export const CodeBlockTheme: PrismTheme = {
+	plain: {
+		color: "rgba(221, 221, 221)",
+		backgroundColor: "#0D1217"
+	},
+	styles: [
+		{
+			types: ["prolog", "constant"],
+			style: {
+				color: "rgb(189, 147, 249)"
+			}
+		},
+		{
+			types: ["builtin"],
+			style: {
+				color: "rgb(54, 172, 170)",
+				fontWeight: "bold"
+			}
+		},
+		{
+			types: ["inserted"],
+			style: {
+				color: "rgb(80, 250, 123)"
+			}
+		},
+		{
+			types: ["deleted"],
+			style: {
+				color: "rgb(255, 85, 85)"
+			}
+		},
+		{
+			types: ["changed"],
+			style: {
+				color: "rgb(255, 184, 108)"
+			}
+		},
+		{
+			types: ["punctuation", "symbol"],
+			style: {
+				color: "rgba(221, 221, 221)"
+			}
+		},
+		{
+			types: ["selector"],
+			style: {
+				color: "rgb(255, 121, 198)"
+			}
+		},
+		{
+			types: ["keyword"],
+			style: {
+				color: "rgb(255, 90, 167)",
+				fontWeight: "bold"
+			}
+		},
+		{
+			types: ["null", "nil"],
+			style: {
+				color: "rgb(217, 147, 30)",
+				fontWeight: "bold"
+			}
+		},
+		{
+			types: ["variable"],
+			style: {
+				color: "rgb(189, 147, 249)",
+				fontStyle: "italic"
+			}
+		},
+		{
+			types: ["comment"],
+			style: {
+				color: "rgb(136, 136, 136)"
+			}
+		},
+		{
+			types: ["attr-name"],
+			style: {
+				color: "rgb(217, 147, 30)"
+			}
+		},
+		{
+			types: ["function", "maybe-class-name", "number", "tag"],
+			style: {
+				color: "rgb(96, 167, 250)"
+			}
+		},
+		{
+			types: ["function-variable"],
+			style: {
+				color: "rgba(221, 221, 221)"
+			}
+		},
+		{
+			types: ["char", "string"],
+			style: {
+				color: "rgb(44, 176, 146)"
+			}
+		}
+	]
+};
+
 export interface CodeBlockProps {
 	children?: string;
 	className?: string;
 	code?: string;
-	language?: Language;
+	language?: Maybe<Language>;
 	style?: CSSProperties;
 	title?: string;
 }
@@ -69,12 +172,14 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 	const {
 		children = "",
 		className,
-		language = "tsx",
+		language: _language = "markdown",
 		style,
 		title,
 		code = children,
 		...restProps
 	} = props;
+
+	const language = _language ?? "markdown";
 
 	return (
 		<Root className={className} style={style}>
@@ -87,7 +192,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 				{...defaultProps}
 				code={code.trim()}
 				language={language}
-				theme={shadesOfPurple}
+				theme={CodeBlockTheme}
 			>
 				{(highlight) => (
 					<Editor {...restProps} className={highlight.className} style={highlight.style}>
