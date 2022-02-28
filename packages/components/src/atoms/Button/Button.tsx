@@ -85,7 +85,8 @@ export const Button = styled.button<{
 				`;
 			case "small":
 				return tw`
-					p-1
+					px-1.5
+					py-1
 					text-base
 					rounded
 				`;
