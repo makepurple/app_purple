@@ -85,9 +85,9 @@ export const Button = styled.button<{
 				`;
 			case "small":
 				return tw`
-					px-1.5
-					py-0.5
+					p-1
 					text-base
+					rounded
 				`;
 			case "medium":
 			default:

@@ -148,7 +148,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 				/>
 				{isSubmitted && <FormHelperText error={(errors.content as any)?.message} />}
 			</FormGroup>
-			<ActionsContainer tw="mt-6">
+			<ActionsContainer tw="mt-4">
 				<FormButton disabled={!isValid} size="small" type="submit" variant="primary">
 					<span>Comment</span>
 					{commenting && <Spinner tw="ml-2" />}
