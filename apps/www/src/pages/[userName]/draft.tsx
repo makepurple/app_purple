@@ -281,17 +281,27 @@ export const Page: NextPage<PageProps> = () => {
 					<FormGroup tw="mt-4">
 						<FormLabel>Skills</FormLabel>
 						<Tags editable type="positive" tw="relative">
-							{skills.fields.map((field, i) => (
-								<Tags.Tag
-									key={field._id}
-									id={field._id}
-									onRemove={() => skills.remove(i)}
-								>
-									<HiddenInput {...register(`skills.${i}.name_owner.name`)} />
-									<HiddenInput {...register(`skills.${i}.name_owner.owner`)} />
-									<span>{(field as any).name_owner.name}</span>
-								</Tags.Tag>
-							))}
+							{skills.fields.map((field, i) => {
+								const owner = (field as any).name_owner.owner;
+								const name = (field as any).name_owner.name;
+
+								return (
+									<Tags.Tag
+										key={field._id}
+										id={field._id}
+										onRemove={() => {
+											skills.remove(i);
+										}}
+										aria-label={`${owner}/${name}`}
+									>
+										<HiddenInput
+											{...register(`skills.${i}.name_owner.owner`)}
+										/>
+										<HiddenInput {...register(`skills.${i}.name_owner.name`)} />
+										<span>{name}</span>
+									</Tags.Tag>
+								);
+							})}
 							<SkillAutosuggest
 								onSelect={(newSkill) => {
 									skills.append({
