@@ -2929,7 +2929,7 @@ export type GetCodeExampleQueryVariables = Exact<{
 }>;
 
 
-export type GetCodeExampleQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly createdAt: Date, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
+export type GetCodeExampleQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly content: string, readonly createdAt: Date, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly updatedAt: Date, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
 
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -5428,6 +5428,7 @@ export const GetCodeExampleDocument = /*#__PURE__*/ gql`
       name
     }
     authorName
+    content
     createdAt
     description
     language

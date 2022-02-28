@@ -14,10 +14,30 @@ const upvoters = Array.from({ length: 3 }, (_, i) => ({
 }));
 
 const content = codeBlock`
-	import { EffectCallback, useEffect } from 'react';
+	import { EffectCallback, FC, ReactNode, useEffect } from "react";
+
+	const data = {
+		title: "Grapes of Wrath",
+		description: null,
+		price: 27.99
+	};
 
 	const useEffectOnce = (effect: EffectCallback) => {
+		// Use effect with 0 dependencies, so it only executes once
 		useEffect(effect, []);
+	};
+
+	interface ButtonProps {
+		className?: string;
+		type?: "button" | "submit";
+	}
+
+	const Button: FC<ButtonProps> = ({ children, className, type }) => {
+		return (
+			<button className={className} type={type}>
+				{children}
+			</button>
+		)
 	};
 
 	export default useEffectOnce;
@@ -42,7 +62,7 @@ export const CodeExample_fragment_mock: CodeExample = {
 	},
 	content,
 	createdAt: dayjs(1318781876406).toDate(),
-	description: faker.lorem.paragraphs(2),
+	description: faker.lorem.paragraphs(1),
 	id: "0",
 	language: CodeLanguage.TypeScript,
 	languageColor: "#2b7489",

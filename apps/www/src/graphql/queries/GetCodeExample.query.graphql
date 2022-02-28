@@ -17,10 +17,9 @@ query GetCodeExample(
 			name
 		}
 		authorName
-		createdAt
+		content
 		description
 		language
-		languageColor
 		primarySkill {
 			github {
 				id
