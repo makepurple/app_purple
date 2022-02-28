@@ -1,4 +1,5 @@
 export * from "./CodeBlock";
+export * from "./CodeBlockInput";
 export * from "./DocumentEditor";
 export * from "./ImageInput";
 export * from "./Legend";
