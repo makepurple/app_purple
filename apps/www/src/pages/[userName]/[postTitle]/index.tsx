@@ -1,4 +1,11 @@
-import { Avatar, Divider, DocumentEditor, GitHubAvatarImage, Paper } from "@makepurple/components";
+import {
+	Avatar,
+	Divider,
+	DocumentEditor,
+	GitHubAvatarImage,
+	NonIdealState,
+	Paper
+} from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
@@ -16,6 +23,7 @@ import {
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
+import { CommentIcon } from "../../../svgs";
 
 const Content = tw(Paper)`
 	flex
@@ -115,20 +123,18 @@ export const Page: NextPage<PageProps> = () => {
 	 */
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data: commentsData, fetching }, getLoadMoreRef] = useRelayCursor(
-		useGetPostCommentsQuery,
-		{
-			direction: "y",
-			field: "comments",
-			offset: 0,
-			requestPolicy: "cache-first",
-			variables: {
-				first: 8,
-				userName,
-				postTitle
-			}
+	const [{ data: commentsData, fetching }, getRef] = useRelayCursor(useGetPostCommentsQuery, {
+		direction: "y",
+		field: "comments",
+		offset: 0,
+		requestPolicy: "cache-first",
+		variables: {
+			after: null,
+			first: 8,
+			userName,
+			postTitle
 		}
-	);
+	});
 
 	const post = postData?.post;
 	const comments = commentsData?.comments.nodes ?? [];
@@ -198,14 +204,24 @@ export const Page: NextPage<PageProps> = () => {
 					</>
 				)}
 				<CommentsContainer>
-					{comments.map((comment, i) => (
-						<CommentCard
-							key={comment.id}
-							ref={getLoadMoreRef(i)}
-							comment={comment}
-							replies={comment.replies}
-						/>
-					))}
+					{!comments.length
+						? !fetching && (
+								<NonIdealState
+									title="There's nothing here"
+									subTitle="We couldn't find any comments"
+									tw="shadow-none"
+								>
+									<CommentIcon height={96} width={96} />
+								</NonIdealState>
+						  )
+						: comments.map((comment, i) => (
+								<CommentCard
+									key={comment.id}
+									ref={getRef(i)}
+									comment={comment}
+									replies={comment.replies}
+								/>
+						  ))}
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
 				</CommentsContainer>
