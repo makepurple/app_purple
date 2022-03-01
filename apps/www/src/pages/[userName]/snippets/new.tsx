@@ -18,7 +18,8 @@ import { CodeExampleCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { Language } from "prism-react-renderer";
+import React, { useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
@@ -137,12 +138,38 @@ export const Page: NextPage<PageProps> = () => {
 	});
 
 	const primarySkill = watch("primarySkill.name_owner");
+	const language = watch("language");
 
 	const skills = useFieldArray({
 		control,
 		keyName: "_id",
 		name: "skills"
 	});
+
+	const codeLanguage = useMemo((): Language => {
+		switch (language) {
+			case "Go":
+				return "go";
+			case "GraphQL":
+				return "graphql";
+			case "HTML":
+				return "handlebars";
+			case "JavaScript":
+				return "jsx";
+			case "Python":
+				return "python";
+			case "SCSS":
+				return "scss";
+			case "SQL":
+				return "sql";
+			case "TypeScript":
+				return "tsx";
+			case "YAML":
+				return "yaml";
+			default:
+				return "tsx";
+		}
+	}, [language]);
 
 	const errorPrimaryLanguage =
 		isSubmitted && !isValid && (!primarySkill.name || !primarySkill.owner);
@@ -325,28 +352,29 @@ export const Page: NextPage<PageProps> = () => {
 						<Controller
 							control={control}
 							name="content"
-							render={(content) => (
+							render={({ field: contentField }) => (
 								<CodeBlockInput
-									name={content.field.name}
+									language={codeLanguage}
+									name={contentField.name}
 									onChange={(newValue) => {
-										content.field.onChange(newValue);
+										contentField.onChange(newValue);
 									}}
 									placeholder="// Write some code here!"
 									title={
 										<Controller
 											control={control}
 											name="language"
-											render={(language) => (
+											render={({ field: languageField }) => (
 												<CodeLanguageSelect
-													value={language.field.value as CodeLanguage}
+													value={languageField.value as CodeLanguage}
 													onChange={(newLanguage) => {
-														language.field.onChange(newLanguage);
+														languageField.onChange(newLanguage);
 													}}
 												/>
 											)}
 										/>
 									}
-									value={content.field.value}
+									value={contentField.value}
 								/>
 							)}
 						/>
