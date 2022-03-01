@@ -1,7 +1,13 @@
 import { ComboBox, Tags } from "@makepurple/components";
-import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
+import { UseComboBoxState, useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
 import ms from "ms";
-import React, { CSSProperties, FC, useCallback, useState } from "react";
+import React, {
+	CSSProperties,
+	forwardRef,
+	useCallback,
+	useImperativeHandle,
+	useState
+} from "react";
 import tw from "twin.macro";
 import { useClient } from "urql";
 import {
@@ -27,12 +33,12 @@ export interface SkillAutosuggestProps {
 	"aria-label"?: string;
 }
 
-export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
-	className,
-	onSelect,
-	style,
-	"aria-label": ariaLabel
-}) => {
+export const SkillAutosuggest = forwardRef<
+	UseComboBoxState<RepositorySearchResultGitHubRepositoryFragment>,
+	SkillAutosuggestProps
+>((props, ref) => {
+	const { className, onSelect, style, "aria-label": ariaLabel } = props;
+
 	const [skillItems, setSkillItems] = useState<RepositorySearchResultGitHubRepositoryFragment[]>(
 		[]
 	);
@@ -77,8 +83,11 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 			onSelect?.(selectedItem);
 
 			combobox.setInputValue("");
+			combobox.reset();
 		}
 	});
+
+	useImperativeHandle(ref, () => combobox);
 
 	const onEnterSkill = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
 		const inputValue = e.currentTarget.value;
@@ -135,4 +144,6 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 			</SkillsSuggest>
 		</>
 	);
-};
+});
+
+SkillAutosuggest.displayName = "SkillAutosuggest";

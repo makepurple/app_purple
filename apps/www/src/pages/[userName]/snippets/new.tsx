@@ -235,7 +235,18 @@ export const Page: NextPage<PageProps> = () => {
 										</RepositoryDescription>
 									)}
 								</RepositoryDetails>
-								<RepositoryRemove size="small" variant="secondary">
+								<RepositoryRemove
+									onClick={() => {
+										setRepository(null);
+										setValue("primarySkill.name_owner", {
+											name: "",
+											owner: ""
+										});
+									}}
+									size="small"
+									type="button"
+									variant="secondary"
+								>
 									<XIcon height={24} width={24} />
 								</RepositoryRemove>
 							</CurrentRepository>
@@ -244,21 +255,19 @@ export const Page: NextPage<PageProps> = () => {
 							<></>
 							<SkillAutosuggest
 								onSelect={(newSkill) => {
-									setValue("primarySkill.name_owner", {
-										name: newSkill.name,
-										owner: newSkill.owner.login
-									});
+									const name = newSkill.name;
+									const owner = newSkill.owner.login;
+
+									setValue("primarySkill.name_owner", { name, owner });
+									setRepository(newSkill);
 
 									const shouldAdd = !skills.fields.some((field) => {
 										const skill = (field as any).name_owner;
 
-										return (
-											skill.owner === newSkill.owner.login &&
-											skill.name === newSkill.name
-										);
+										return skill.owner === owner && skill.name === name;
 									});
 
-									shouldAdd && setRepository(newSkill);
+									shouldAdd && skills.prepend({ name_owner: { name, owner } });
 								}}
 							/>
 						</Tags>
@@ -276,6 +285,16 @@ export const Page: NextPage<PageProps> = () => {
 										key={field._id}
 										id={field._id}
 										onRemove={() => {
+											const isPrimarySkill =
+												owner === primarySkill.owner &&
+												name === primarySkill.name;
+
+											if (isPrimarySkill) {
+												toast.error("Cannot remove the primary skill");
+
+												return;
+											}
+
 											skills.remove(i);
 										}}
 										aria-label={`${owner}/${name}`}
