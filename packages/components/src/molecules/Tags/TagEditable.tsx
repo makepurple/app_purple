@@ -2,6 +2,7 @@ import { InferComponentProps } from "@makepurple/typings";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { forwardRef, useContext } from "react";
 import tw from "twin.macro";
+import { FormContext } from "../../atoms/Form/context";
 import { TagsContext } from "./context";
 
 const Root = tw.input`
@@ -23,9 +24,11 @@ export type TagEditableProps = InferComponentProps<typeof Root> & {
 export const TagEditable = forwardRef<HTMLInputElement, TagEditableProps>((props, ref) => {
 	const { editable, ...editableTextProps } = props;
 
-	const context = useContext(TagsContext);
+	const form = useContext(FormContext);
+	const tags = useContext(TagsContext);
 
-	const canAdd = editable ?? (context.editable === true || context.editable === "add-only");
+	const canAdd = editable ?? (tags.editable === true || tags.editable === "add-only");
+	const disabled = props.disabled || form.disabled;
 
 	if (!canAdd) return null;
 
@@ -33,7 +36,8 @@ export const TagEditable = forwardRef<HTMLInputElement, TagEditableProps>((props
 		<Root
 			spellCheck={false}
 			{...editableTextProps}
-			ref={composeRefs(ref, context.editableRef)}
+			disabled={disabled}
+			ref={composeRefs(ref, tags.editableRef)}
 		/>
 	);
 });
