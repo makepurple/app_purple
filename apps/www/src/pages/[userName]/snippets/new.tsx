@@ -20,6 +20,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import tw from "twin.macro";
 import {
 	CodeLanguage,
@@ -153,7 +154,36 @@ export const Page: NextPage<PageProps> = () => {
 		<UserPageLayout selectedTab="snippets" userName={userName}>
 			<Content>
 				<Title>Create Snippet</Title>
-				<Form disabled={fetching}>
+				<Form
+					disabled={fetching}
+					onSubmit={handleSubmit(async (formData) => {
+						const snippet = await createCodeExample({
+							data: {
+								content: formData.content,
+								description: formData.description,
+								language: formData.language as CodeLanguage,
+								primarySkill: formData.primarySkill,
+								skills: formData.skills,
+								title: formData.title
+							}
+						})
+							.then((result) => result.data?.createCodeExample.record)
+							.catch(() => null);
+
+						if (!snippet) {
+							toast.error("Could not create snippet");
+
+							return;
+						}
+
+						toast.success("Code snippet! 🎉");
+
+						await router.push(
+							"/[userName]/snippets/[codeExampleTitle]",
+							`/${userName}/snippets/${snippet.urlSlug}`
+						);
+					})}
+				>
 					<FormGroup>
 						<FormLabel>Title</FormLabel>
 						<Input
