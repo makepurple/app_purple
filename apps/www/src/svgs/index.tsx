@@ -717,6 +717,26 @@ export const SearchIcon = React.memo(
 	))
 );
 
+export const SelectorIcon = React.memo(
+	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke="currentColor"
+			ref={ref}
+			{...props}
+		>
+			<path
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth={2}
+				d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+			/>
+		</svg>
+	))
+);
+
 export const SignOutIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg

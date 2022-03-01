@@ -1,11 +1,37 @@
 import { Combobox } from "@headlessui/react";
 import { Input, ListItem, Paper } from "@makepurple/components";
+import { PopoverModifiers } from "@makepurple/components/src/atoms/Popover/modifiers";
 import React, { CSSProperties, FC, Fragment, useMemo, useState } from "react";
+import { usePopper } from "react-popper";
 import tw from "twin.macro";
 import { CodeLanguage } from "../../graphql";
+import { SelectorIcon } from "../../svgs";
 
 const Root = tw.div`
-	relative
+	flex
+	flex-row
+	items-center
+`;
+
+const StyledInput = tw(Input)`
+	rounded-r-none
+`;
+
+const SelectorButton = tw.button`
+	flex-shrink-0
+	flex
+	items-center
+	justify-center
+	h-10
+	w-10
+	border
+	border-solid
+	border-gray-400
+	border-l-transparent
+	rounded-r-lg
+	cursor-pointer
+	bg-indigo-50
+	hover:bg-indigo-100
 `;
 
 const Languages = tw(Paper)`
@@ -37,6 +63,14 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 }) => {
 	const [query, setQuery] = useState<string>("");
 
+	const [refElem, refRef] = useState<HTMLDivElement | null>(null);
+	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
+
+	const popper = usePopper(refElem, popperElem, {
+		modifiers: [PopoverModifiers.SameWidth],
+		placement: "bottom-start"
+	});
+
 	const filtered = useMemo(
 		() =>
 			Object.values(CodeLanguage)
@@ -47,26 +81,36 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 
 	return (
 		<Combobox
-			as={Root}
-			className={className}
+			as={Fragment}
 			disabled={disabled}
 			onChange={(newLanguage) => {
 				onChange(newLanguage);
 			}}
-			style={style}
 			value={value}
 		>
-			<Combobox.Input
-				as={Input}
-				disabled={disabled}
-				displayValue={(language: CodeLanguage) => language}
-				onChange={(e) => {
-					setQuery(e.target.value);
-				}}
-				spellCheck={false}
-				value={query}
-			/>
-			<Combobox.Options as={Languages}>
+			<Root ref={refRef}>
+				<Combobox.Input
+					as={StyledInput}
+					className={className}
+					disabled={disabled}
+					displayValue={(language: CodeLanguage) => language}
+					onChange={(e) => {
+						setQuery(e.target.value);
+					}}
+					spellCheck={false}
+					style={style}
+					value={query}
+				/>
+				<Combobox.Button as={SelectorButton}>
+					<SelectorIcon height={24} width={24} />
+				</Combobox.Button>
+			</Root>
+			<Combobox.Options
+				as={Languages}
+				ref={popperRef}
+				{...popper.attributes.popper}
+				style={popper.styles.popper}
+			>
 				{filtered.map((language) => (
 					<Combobox.Option
 						as={Fragment}
