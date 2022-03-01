@@ -41,6 +41,7 @@ export const useComboBoxState = ObjectUtils.setStatic(
 				),
 			[debounce, isMounted, onInputValueChange]
 		);
+
 		const combobox = useCombobox({
 			id: "autocomplete",
 			...downshiftProps,

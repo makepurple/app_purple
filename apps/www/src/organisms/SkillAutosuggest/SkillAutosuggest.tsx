@@ -63,11 +63,14 @@ export const SkillAutosuggest: FC<SkillAutosuggestProps> = ({
 		id: "skills-autosuggest",
 		items: skillItems,
 		itemToString: (item) => item?.name ?? "",
-		onInputValueChange: async ({ inputValue }) => {
-			const suggestions = await getSkillAutosuggestItems(inputValue);
+		onInputValueChange: useCallback(
+			async ({ inputValue }) => {
+				const suggestions = await getSkillAutosuggestItems(inputValue);
 
-			setSkillItems(suggestions.slice());
-		},
+				setSkillItems(suggestions.slice());
+			},
+			[getSkillAutosuggestItems]
+		),
 		onSelectedItemChange: ({ selectedItem }) => {
 			if (!selectedItem) return;
 

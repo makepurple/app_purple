@@ -24,6 +24,7 @@ const CurrentOrganization = tw.div`
 	flex
 	items-start
 	overflow-hidden
+	gap-2
 `;
 
 const CurrentOrganizationAvatar = tw(Avatar)`
@@ -120,7 +121,7 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 		<Root className={className} style={style}>
 			{currentOrg && (
 				<CurrentOrganization tw="mb-2">
-					<CurrentOrganizationAvatar border={1} tw="mr-2">
+					<CurrentOrganizationAvatar border={1}>
 						<GitHubAvatarImage src={currentOrg.avatarUrl} height={48} width={48} />
 					</CurrentOrganizationAvatar>
 					<div tw="overflow-hidden">
