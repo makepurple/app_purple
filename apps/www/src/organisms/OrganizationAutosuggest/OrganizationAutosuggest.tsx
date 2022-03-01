@@ -32,8 +32,21 @@ const CurrentOrganizationAvatar = tw(Avatar)`
 	rounded-md
 `;
 
+const OrganizationDetails = tw.div`
+	flex-grow
+	overflow-hidden
+`;
+
+const OrganizationName = tw.span`
+	font-semibold
+	leading-none
+`;
+
 const Description = tw.p`
-	truncate
+	line-clamp-2
+	text-sm
+	leading-snug
+	text-gray-500
 `;
 
 export interface OrganizationAutosuggestProps {
@@ -124,12 +137,12 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 					<CurrentOrganizationAvatar border={1}>
 						<GitHubAvatarImage src={currentOrg.avatarUrl} height={48} width={48} />
 					</CurrentOrganizationAvatar>
-					<div tw="overflow-hidden">
-						<div>{currentOrg.name ?? currentOrg.login}</div>
+					<OrganizationDetails>
+						<OrganizationName>{currentOrg.name ?? currentOrg.login}</OrganizationName>
 						{currentOrg.description && (
 							<Description>{currentOrg.description}</Description>
 						)}
-					</div>
+					</OrganizationDetails>
 				</CurrentOrganization>
 			)}
 			<ComboBox {...combobox.getComboboxProps()}>

@@ -2663,6 +2663,13 @@ export type CreateChatMutationVariables = Exact<{
 
 export type CreateChatMutation = { readonly __typename: 'Mutation', readonly createChat: { readonly __typename: 'CreateChatPayload', readonly record: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: Json }> }, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly chats: { readonly __typename: 'ChatConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Chat', readonly id: string }> } } | null } } };
 
+export type CreateCodeExampleMutationVariables = Exact<{
+  data: CodeExampleCreateInput;
+}>;
+
+
+export type CreateCodeExampleMutation = { readonly __typename: 'Mutation', readonly createCodeExample: { readonly __typename: 'CreateCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } } };
+
 export type CreateExperienceFragmentFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
 export type CreateExperienceMutationVariables = Exact<{
@@ -4623,6 +4630,19 @@ export const CreateChatDocument = /*#__PURE__*/ gql`
 
 export function useCreateChatMutation() {
   return Urql.useMutation<CreateChatMutation, CreateChatMutationVariables>(CreateChatDocument);
+};
+export const CreateCodeExampleDocument = /*#__PURE__*/ gql`
+    mutation CreateCodeExample($data: CodeExampleCreateInput!) {
+  createCodeExample(data: $data) {
+    record {
+      ...CodeExampleCardCodeExample
+    }
+  }
+}
+    ${CodeExampleCardCodeExampleFragmentDoc}`;
+
+export function useCreateCodeExampleMutation() {
+  return Urql.useMutation<CreateCodeExampleMutation, CreateCodeExampleMutationVariables>(CreateCodeExampleDocument);
 };
 export const CreateExperienceDocument = /*#__PURE__*/ gql`
     mutation CreateExperience($data: ExperienceCreateInput!) {

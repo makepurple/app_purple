@@ -1,0 +1,7 @@
+mutation CreateCodeExample($data: CodeExampleCreateInput!) {
+	createCodeExample(data: $data) {
+		record {
+			...CodeExampleCardCodeExample
+		}
+	}
+}

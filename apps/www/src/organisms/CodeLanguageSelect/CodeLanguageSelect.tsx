@@ -1,9 +1,10 @@
 import { Combobox } from "@headlessui/react";
-import { Input, ListItem, Paper } from "@makepurple/components";
+import { ListItem, Paper } from "@makepurple/components";
 import { PopoverModifiers } from "@makepurple/components/src/atoms/Popover/modifiers";
+import { StyleUtils } from "@makepurple/utils";
 import React, { CSSProperties, FC, Fragment, useMemo, useState } from "react";
 import { usePopper } from "react-popper";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { CodeLanguage } from "../../graphql";
 import { SelectorIcon } from "../../svgs";
 
@@ -13,8 +14,14 @@ const Root = tw.div`
 	items-center
 `;
 
-const StyledInput = tw(Input)`
+const StyledInput = tw.input`
+	flex-grow
+	px-2
 	rounded-r-none
+	bg-indigo-500
+	text-white
+	font-medium
+	focus:ring-0
 `;
 
 const SelectorButton = tw.button`
@@ -24,26 +31,26 @@ const SelectorButton = tw.button`
 	justify-center
 	h-10
 	w-10
-	border
-	border-solid
-	border-gray-400
-	border-l-transparent
 	rounded-r-lg
 	cursor-pointer
-	bg-indigo-50
-	hover:bg-indigo-100
+	bg-indigo-500
+	text-white
+	hover:bg-indigo-600
 `;
 
-const Languages = tw(Paper)`
-	absolute
-	inset-x-0
-	bottom-0
-	translate-y-full
-	flex
-	flex-col
-	items-stretch
-	gap-0.5
-	p-0.5
+const Languages = styled(Paper)`
+	${tw`
+		absolute
+		inset-x-0
+		bottom-0
+		translate-y-full
+		flex
+		flex-col
+		items-stretch
+		gap-0.5
+		p-0.5
+	`}
+	z-index: ${StyleUtils.getZIndex("menu")};
 `;
 
 export interface CodeLanguageSelectProps {

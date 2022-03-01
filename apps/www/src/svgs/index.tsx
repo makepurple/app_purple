@@ -728,6 +728,7 @@ export const SelectorIcon = React.memo(
 			{...props}
 		>
 			<path
+				stroke="currentColor"
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				strokeWidth={2}

@@ -21,7 +21,6 @@ const Info = tw.div`
 	flex-row
 	items-center
 	h-8
-	pl-2
 	bg-indigo-500
 	text-white
 	font-semibold
@@ -59,6 +58,7 @@ export interface CodeBlockInputProps {
 	language?: Language;
 	name?: string;
 	onChange: (value: string) => void;
+	placeholder?: string;
 	style?: CSSProperties;
 	title?: ReactNode;
 	value: string;
@@ -71,6 +71,7 @@ export const CodeBlockInput = forwardRef<HTMLDivElement, CodeBlockInputProps>((p
 		language = "markdown",
 		name,
 		onChange,
+		placeholder,
 		style,
 		title,
 		value
@@ -115,6 +116,7 @@ export const CodeBlockInput = forwardRef<HTMLDivElement, CodeBlockInputProps>((p
 					)}
 					name={name}
 					onValueChange={onChange}
+					placeholder={placeholder}
 					padding={"0.5rem"}
 					value={value}
 				/>
