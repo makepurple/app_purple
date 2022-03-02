@@ -203,7 +203,7 @@ export const Page: NextPage<PageProps> = () => {
 							return;
 						}
 
-						toast.success("Code snippet! 🎉");
+						toast.success("Code snippet saved! 🎉");
 
 						await router.push(
 							"/[userName]/snippets/[codeExampleTitle]",
