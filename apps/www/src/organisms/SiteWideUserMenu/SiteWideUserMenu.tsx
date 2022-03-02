@@ -1,4 +1,5 @@
 import { Divider, ListItem, Menu } from "@makepurple/components";
+import { PopoverModifiers } from "@makepurple/components/src/atoms/Popover/modifiers";
 import { FormatUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
@@ -19,6 +20,7 @@ const StyledAvatar = tw(UserAvatar)`
 const List = tw(m.div)`
 	shadow-lg
 	w-56
+	m-0
 ` as any;
 
 const UserName = tw.span`
@@ -61,6 +63,8 @@ const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
 	}}
 `;
 
+const OffsetModifier = PopoverModifiers.Offset({ offset: 4 });
+
 export interface SiteWideUserMenuProps {
 	className?: string;
 	style?: CSSProperties;
@@ -86,6 +90,7 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
 
 	const { styles, attributes } = usePopper(refElem, popperElem, {
+		modifiers: [OffsetModifier],
 		placement: "bottom-end"
 	});
 
@@ -126,7 +131,7 @@ export const SiteWideUserMenu: FC<SiteWideUserMenuProps> = ({ className, style }
 								style={styles.popper}
 								transition={{
 									ease: "easeIn",
-									duration: 0.15
+									duration: 0.1
 								}}
 								{...attributes.popper}
 							>
