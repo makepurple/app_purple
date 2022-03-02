@@ -1,4 +1,4 @@
-import { Tooltip } from "@makepurple/components";
+import { Logo, Tooltip } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { AxisLeft, AxisTop } from "@visx/axis";
 import { Group } from "@visx/group";
@@ -24,6 +24,17 @@ const Root = tw.div`
 	aspect-w-13
 	flex
 	items-center
+`;
+
+const StyledParentSize = tw(ParentSize)`
+	flex
+	items-center
+	justify-center
+`;
+
+const StyledLogo = tw(Logo)`
+	h-14
+	w-14
 `;
 
 const Rect = tw.rect`
@@ -75,8 +86,10 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 
 	return (
 		<Root className={className} style={style}>
-			<ParentSize>
+			<StyledParentSize>
 				{({ width }) => {
+					if (!width) return <StyledLogo href={null} />;
+
 					const height = Math.floor((width * 25) / 165);
 					const binWidth = width / weeks.length;
 
@@ -202,7 +215,7 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 						</svg>
 					);
 				}}
-			</ParentSize>
+			</StyledParentSize>
 		</Root>
 	);
 });
