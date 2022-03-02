@@ -914,6 +914,7 @@ export type Mutation = {
   readonly unfollowUser: UnfollowUserPayload;
   readonly unvoteCodeExample: UnvoteCodeExamplePayload;
   readonly unvoteComment: UnvoteCommentPayload;
+  readonly updateCodeExample: UpdateCodeExamplePayload;
   readonly updateComment: UpdateCommentPayload;
   readonly updateDesiredSkills: UpdateDesiredSkillsPayload;
   readonly updateExperience: UpdateExperiencePayload;
@@ -1105,6 +1106,13 @@ export type MutationUnvoteCodeExampleArgs = {
 /** Root mutation type */
 export type MutationUnvoteCommentArgs = {
   where: CommentWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUpdateCodeExampleArgs = {
+  data: CodeExampleUpdateInput;
+  where: CodeExampleWhereUniqueInput;
 };
 
 
@@ -2817,6 +2825,14 @@ export type UnvoteCommentMutationVariables = Exact<{
 
 
 export type UnvoteCommentMutation = { readonly __typename: 'Mutation', readonly unvoteComment: { readonly __typename: 'UnvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
+
+export type UpdateCodeExampleMutationVariables = Exact<{
+  data: CodeExampleUpdateInput;
+  where: CodeExampleWhereUniqueInput;
+}>;
+
+
+export type UpdateCodeExampleMutation = { readonly __typename: 'Mutation', readonly updateCodeExample: { readonly __typename: 'UpdateCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } } };
 
 export type UpdateExperienceMutationVariables = Exact<{
   data: ExperienceUpdateInput;
@@ -5092,6 +5108,19 @@ export const UnvoteCommentDocument = /*#__PURE__*/ gql`
 
 export function useUnvoteCommentMutation() {
   return Urql.useMutation<UnvoteCommentMutation, UnvoteCommentMutationVariables>(UnvoteCommentDocument);
+};
+export const UpdateCodeExampleDocument = /*#__PURE__*/ gql`
+    mutation UpdateCodeExample($data: CodeExampleUpdateInput!, $where: CodeExampleWhereUniqueInput!) {
+  updateCodeExample(data: $data, where: $where) {
+    record {
+      ...CodeExampleCardCodeExample
+    }
+  }
+}
+    ${CodeExampleCardCodeExampleFragmentDoc}`;
+
+export function useUpdateCodeExampleMutation() {
+  return Urql.useMutation<UpdateCodeExampleMutation, UpdateCodeExampleMutationVariables>(UpdateCodeExampleDocument);
 };
 export const UpdateExperienceDocument = /*#__PURE__*/ gql`
     mutation UpdateExperience($data: ExperienceUpdateInput!, $where: ExperienceWhereUniqueInput!) {

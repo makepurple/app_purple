@@ -1,0 +1,10 @@
+mutation UpdateCodeExample(
+	$data: CodeExampleUpdateInput!
+	$where: CodeExampleWhereUniqueInput!
+) {
+	updateCodeExample(data: $data, where: $where) {
+		record {
+			...CodeExampleCardCodeExample
+		}
+	}
+}

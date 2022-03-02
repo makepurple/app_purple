@@ -29,6 +29,7 @@ export * from "./unfollowSkill";
 export * from "./unfollowUser";
 export * from "./unvoteCodeExample";
 export * from "./unvoteComment";
+export * from "./updateCodeExample";
 export * from "./updateComment";
 export * from "./updateDesiredSkills";
 export * from "./updateExperience";

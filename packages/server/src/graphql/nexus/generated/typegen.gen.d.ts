@@ -1341,6 +1341,7 @@ export interface NexusGenFieldTypes {
     unfollowUser: NexusGenRootTypes['UnfollowUserPayload']; // UnfollowUserPayload!
     unvoteCodeExample: NexusGenRootTypes['UnvoteCodeExamplePayload']; // UnvoteCodeExamplePayload!
     unvoteComment: NexusGenRootTypes['UnvoteCommentPayload']; // UnvoteCommentPayload!
+    updateCodeExample: NexusGenRootTypes['UpdateCodeExamplePayload']; // UpdateCodeExamplePayload!
     updateComment: NexusGenRootTypes['UpdateCommentPayload']; // UpdateCommentPayload!
     updateDesiredSkills: NexusGenRootTypes['UpdateDesiredSkillsPayload']; // UpdateDesiredSkillsPayload!
     updateExperience: NexusGenRootTypes['UpdateExperiencePayload']; // UpdateExperiencePayload!
@@ -2214,6 +2215,7 @@ export interface NexusGenFieldTypeNames {
     unfollowUser: 'UnfollowUserPayload'
     unvoteCodeExample: 'UnvoteCodeExamplePayload'
     unvoteComment: 'UnvoteCommentPayload'
+    updateCodeExample: 'UpdateCodeExamplePayload'
     updateComment: 'UpdateCommentPayload'
     updateDesiredSkills: 'UpdateDesiredSkillsPayload'
     updateExperience: 'UpdateExperiencePayload'
@@ -2920,6 +2922,10 @@ export interface NexusGenArgTypes {
     }
     unvoteComment: { // args
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
+    }
+    updateCodeExample: { // args
+      data: NexusGenInputs['CodeExampleUpdateInput']; // CodeExampleUpdateInput!
+      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
     }
     updateComment: { // args
       data: NexusGenInputs['CommentUpdateInput']; // CommentUpdateInput!
