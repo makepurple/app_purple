@@ -19,6 +19,11 @@ const MARGIN_TOP = 20;
 const MARGIN_LEFT = 35;
 const MARGIN_RIGHT = 2;
 
+const Root = tw.div`
+	aspect-h-2
+	aspect-w-13
+`;
+
 const Rect = tw.rect`
 	cursor-pointer
 `;
@@ -67,132 +72,136 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 	}, []);
 
 	return (
-		<ParentSize className={className} style={style}>
-			{({ width }) => {
-				const height = Math.floor((width * 25) / 165);
-				const binWidth = width / weeks.length;
+		<Root className={className} style={style}>
+			<ParentSize>
+				{({ width }) => {
+					const height = Math.floor((width * 25) / 165);
+					const binWidth = width / weeks.length;
 
-				xScale.range([0, width - MARGIN_LEFT - MARGIN_RIGHT]);
-				yScale.range([height - MARGIN_TOP, 0]);
+					xScale.range([0, width - MARGIN_LEFT - MARGIN_RIGHT]);
+					yScale.range([height - MARGIN_TOP, 0]);
 
-				return (
-					<svg height={Math.max(height, 0)} width={Math.max(width, 0)}>
-						<AxisTop
-							top={MARGIN_TOP}
-							left={MARGIN_LEFT}
-							scale={xScale}
-							tickFormat={(week) => {
-								const todayOfWeek = dayjs().day();
-								const weeksBefore = 52 - week.valueOf();
+					return (
+						<svg height={Math.max(height, 0)} width={Math.max(width, 0)}>
+							<AxisTop
+								top={MARGIN_TOP}
+								left={MARGIN_LEFT}
+								scale={xScale}
+								tickFormat={(week) => {
+									const todayOfWeek = dayjs().day();
+									const weeksBefore = 52 - week.valueOf();
 
-								if (weeksBefore <= 1) return "";
+									if (weeksBefore <= 1) return "";
 
-								const date = dayjs().subtract(52 - week.valueOf(), "week");
-								const dayOfMonth = parseInt(date.format("D")) - todayOfWeek;
+									const date = dayjs().subtract(52 - week.valueOf(), "week");
+									const dayOfMonth = parseInt(date.format("D")) - todayOfWeek;
 
-								return dayOfMonth >= 1 && dayOfMonth <= 7 ? date.format("MMM") : "";
-							}}
-							hideAxisLine
-							hideTicks
-							numTicks={52}
-							tickLabelProps={() => ({
-								fill: "#000",
-								fontSize: 11,
-								lineHeight: 1,
-								textAnchor: "start",
-								verticalAnchor: "end"
-							})}
-						/>
-						<AxisLeft
-							top={MARGIN_TOP}
-							left={MARGIN_LEFT}
-							scale={yScale}
-							tickFormat={(weekday) => {
-								switch (weekday.valueOf()) {
-									case 1.5:
-										return "Mon";
-									case 3.5:
-										return "Wed";
-									case 5.5:
-										return "Fri";
-									default:
-										return "";
-								}
-							}}
-							hideAxisLine
-							hideTicks
-							tickLabelProps={() => ({
-								fill: "#000",
-								fontSize: 11,
-								lineHeight: 1,
-								textAnchor: "end",
-								verticalAnchor: "middle"
-							})}
-						/>
-						<Group top={MARGIN_TOP} left={MARGIN_LEFT}>
-							<HeatmapRect
-								binHeight={binWidth}
-								binWidth={binWidth}
-								bins={(d) => d.contributionDays.slice()}
-								data={weeks}
-								gap={GAP}
-								xScale={(d) => xScale(d) ?? 0}
-								yScale={(d) => yScale(d) ?? 0}
-							>
-								{(
-									heatmap: RectCell<
-										typeof weeks[number],
-										typeof weeks[number]["contributionDays"][number]
-									>[][]
-								) =>
-									heatmap.map((bins) =>
-										bins.map((bin) => {
-											const datum = bin.bin;
-											const count = datum.contributionCount;
-											const level = datum.contributionLevel;
-											/**
-											 * !HACK
-											 * @description For some reason, GitHub contribution calendar is 1-day
-											 * offset from what is shown on GitHub's profile page. So we're adding 1
-											 * day to compensate.
-											 * @author David Lee
-											 * @date February 10, 2022
-											 */
-											const date = dayjs(datum.date)
-												.add(1, "day")
-												.format("MMM D, YYYY");
+									return dayOfMonth >= 1 && dayOfMonth <= 7
+										? date.format("MMM")
+										: "";
+								}}
+								hideAxisLine
+								hideTicks
+								numTicks={52}
+								tickLabelProps={() => ({
+									fill: "#000",
+									fontSize: 11,
+									lineHeight: 1,
+									textAnchor: "start",
+									verticalAnchor: "end"
+								})}
+							/>
+							<AxisLeft
+								top={MARGIN_TOP}
+								left={MARGIN_LEFT}
+								scale={yScale}
+								tickFormat={(weekday) => {
+									switch (weekday.valueOf()) {
+										case 1.5:
+											return "Mon";
+										case 3.5:
+											return "Wed";
+										case 5.5:
+											return "Fri";
+										default:
+											return "";
+									}
+								}}
+								hideAxisLine
+								hideTicks
+								tickLabelProps={() => ({
+									fill: "#000",
+									fontSize: 11,
+									lineHeight: 1,
+									textAnchor: "end",
+									verticalAnchor: "middle"
+								})}
+							/>
+							<Group top={MARGIN_TOP} left={MARGIN_LEFT}>
+								<HeatmapRect
+									binHeight={binWidth}
+									binWidth={binWidth}
+									bins={(d) => d.contributionDays.slice()}
+									data={weeks}
+									gap={GAP}
+									xScale={(d) => xScale(d) ?? 0}
+									yScale={(d) => yScale(d) ?? 0}
+								>
+									{(
+										heatmap: RectCell<
+											typeof weeks[number],
+											typeof weeks[number]["contributionDays"][number]
+										>[][]
+									) =>
+										heatmap.map((bins) =>
+											bins.map((bin) => {
+												const datum = bin.bin;
+												const count = datum.contributionCount;
+												const level = datum.contributionLevel;
+												/**
+												 * !HACK
+												 * @description For some reason, GitHub contribution calendar is 1-day
+												 * offset from what is shown on GitHub's profile page. So we're adding 1
+												 * day to compensate.
+												 * @author David Lee
+												 * @date February 10, 2022
+												 */
+												const date = dayjs(datum.date)
+													.add(1, "day")
+													.format("MMM D, YYYY");
 
-											return (
-												<Tooltip
-													key={`${bin.row}:${bin.column}`}
-													content={`${count.toLocaleString()} contributions on ${date}`}
-												>
-													<Rect
-														width={Math.max(bin.width, 0)}
-														height={Math.max(bin.height, 0)}
-														x={bin.x + GAP / 2}
-														y={bin.y - GAP}
-														stroke="#888"
-														strokeWidth={1}
-														strokeOpacity={0.5}
-														fill={!count ? "#aaa" : getColor(level)}
-														fillOpacity={!count ? 0.3 : 0.8}
-														rx={2}
-														onClick={() => {
-															alert(JSON.stringify(datum));
-														}}
-													/>
-												</Tooltip>
-											);
-										})
-									)
-								}
-							</HeatmapRect>
-						</Group>
-					</svg>
-				);
-			}}
-		</ParentSize>
+												return (
+													<Tooltip
+														key={`${bin.row}:${bin.column}`}
+														content={`${count.toLocaleString()} contributions on ${date}`}
+													>
+														<Rect
+															width={Math.max(bin.width, 0)}
+															height={Math.max(bin.height, 0)}
+															x={bin.x + GAP / 2}
+															y={bin.y - GAP}
+															stroke="#888"
+															strokeWidth={1}
+															strokeOpacity={0.5}
+															fill={!count ? "#aaa" : getColor(level)}
+															fillOpacity={!count ? 0.3 : 0.8}
+															rx={2}
+															onClick={() => {
+																alert(JSON.stringify(datum));
+															}}
+														/>
+													</Tooltip>
+												);
+											})
+										)
+									}
+								</HeatmapRect>
+							</Group>
+						</svg>
+					);
+				}}
+			</ParentSize>
+		</Root>
 	);
 });
 
