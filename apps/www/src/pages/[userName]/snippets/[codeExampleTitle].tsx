@@ -117,6 +117,9 @@ const PublishedAt = tw.div`
 const Actions = tw.div`
 	sticky
 	bottom-0
+	flex
+	items-center
+	justify-between
 	p-4
 	border-t
 	border-solid
@@ -127,13 +130,18 @@ const Actions = tw.div`
 `;
 
 const UpvoteButton = tw(Button)`
-	self-start
+	h-9
 	gap-1.5
 `;
 
 const UpvoteCount = tw.span`
 	text-base
 	sm:leading-5
+`;
+
+const EditButton = tw(Button)`
+	h-9
+	text-base
 `;
 
 const CommentsSection = tw(Paper)`
@@ -165,12 +173,17 @@ export const Page: NextPage<PageProps> = () => {
 
 	const viewer = sessionData?.user;
 
-	const authorName = router?.query.userName as string;
+	const userName = router?.query.userName as string;
 	const urlSlug = router?.query.codeExampleTitle as string;
+
+	const isMyPage = viewer?.name === userName;
 
 	const [{ data: postData }] = useGetCodeExampleQuery({
 		requestPolicy: "cache-first",
-		variables: { authorName, urlSlug }
+		variables: {
+			authorName: userName,
+			urlSlug
+		}
 	});
 
 	/**
@@ -192,7 +205,7 @@ export const Page: NextPage<PageProps> = () => {
 			variables: {
 				after: null,
 				first: BATCH_SIZE,
-				userName: authorName,
+				userName,
 				codeExampleTitle: urlSlug
 			}
 		}
@@ -240,7 +253,7 @@ export const Page: NextPage<PageProps> = () => {
 	const voting = upvoting || unvoting;
 
 	return (
-		<UserPageLayout selectedTab="snippets" userName={authorName}>
+		<UserPageLayout selectedTab="snippets" userName={userName}>
 			<Content>
 				<CodeExampleContent>
 					<TopContainer>
@@ -336,9 +349,20 @@ export const Page: NextPage<PageProps> = () => {
 						type="button"
 						variant="secondary"
 					>
-						<ThumbsUpIcon height={24} width={24} />
+						<ThumbsUpIcon height={20} width={20} />
 						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
 					</UpvoteButton>
+					{isMyPage && (
+						<NextLink
+							href="/[userName]/snippets/[codeExampleTitle]/edit"
+							as={`/${userName}/snippets/${urlSlug}/edit`}
+							passHref
+						>
+							<EditButton as="a" size="small">
+								Edit Snippet
+							</EditButton>
+						</NextLink>
+					)}
 				</Actions>
 			</Content>
 			<CommentsSection tw="mt-6">
