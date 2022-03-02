@@ -30,6 +30,10 @@ import {
 	useUpdateCodeExampleMutation
 } from "../../../../graphql";
 import { CodeLanguageSelect, SkillAutosuggest, UserPageLayout } from "../../../../organisms";
+import {
+	pageProps,
+	PageProps
+} from "../../../../page-props/[userName]/snippets/[codeExampleTitle]/edit";
 import { BookIcon, XIcon } from "../../../../svgs";
 
 const Content = tw(Paper)`
@@ -104,7 +108,9 @@ const FormActions = tw.div`
 	mt-10
 `;
 
-export const Page: NextPage = () => {
+export const getServerSideProps = pageProps;
+
+export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
