@@ -24,11 +24,11 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 		if (!codeExample) throw new NotFoundError("This code-example does not exist");
 
 		const dataInput = CodeExampleUpdateInput.validator({
-			content: args.data.content,
+			content: args.data.content ?? undefined,
 			description: args.data.description ?? undefined,
-			language: args.data.language,
-			skills: args.data.skills,
-			title: args.data.title
+			language: args.data.language ?? undefined,
+			skills: (args.data.skills ?? undefined) as any,
+			title: args.data.title ?? undefined
 		});
 
 		const urlSlug =
