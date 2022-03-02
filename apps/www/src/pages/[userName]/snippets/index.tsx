@@ -1,11 +1,17 @@
 import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
 import { useGetUserCodeExamplesQuery } from "../../../graphql";
-import { CodeExampleCard, LoadingCodeExampleCard, UserPageLayout } from "../../../organisms";
+import {
+	CodeExampleCard,
+	CodeExampleCreateCard,
+	LoadingCodeExampleCard,
+	UserPageLayout
+} from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/snippets";
 import { CodeIcon } from "../../../svgs";
 
@@ -22,6 +28,7 @@ export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
+	const { data: session } = useSession();
 
 	const userName = router?.query.userName as string;
 
@@ -38,25 +45,32 @@ export const Page: NextPage<PageProps> = () => {
 
 	const codeExamples = data?.user?.codeExamples.nodes ?? [];
 
+	const isMyPage = session?.user.name === userName;
+
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
 			<Content>
-				{!codeExamples.length
-					? !fetching && (
-							<NonIdealState
-								title="There's nothing here"
-								subTitle="We couldn't find any snippets"
-							>
-								<CodeIcon height={96} width={96} />
-							</NonIdealState>
-					  )
-					: codeExamples.map((codeExample, i) => (
+				{!codeExamples.length ? (
+					!fetching && (
+						<NonIdealState
+							title="There's nothing here"
+							subTitle="We couldn't find any snippets"
+						>
+							<CodeIcon height={96} width={96} />
+						</NonIdealState>
+					)
+				) : (
+					<>
+						{isMyPage && <CodeExampleCreateCard userName={userName} />}
+						{codeExamples.map((codeExample, i) => (
 							<CodeExampleCard
 								key={codeExample.id}
 								ref={getRef(i)}
 								codeExample={codeExample}
 							/>
-					  ))}
+						))}
+					</>
+				)}
 				{fetching &&
 					Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
 			</Content>

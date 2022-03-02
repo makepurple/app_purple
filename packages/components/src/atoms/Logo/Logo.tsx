@@ -2,6 +2,7 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import { keyframes } from "styled-components";
 import tw, { styled, theme } from "twin.macro";
+import { MaybeWrap } from "../MaybeWrap";
 
 const blinkKeyframes = keyframes`
     0% {
@@ -26,7 +27,7 @@ const Root = tw.a`
 	rounded-md
 	overflow-hidden
 	cursor-pointer
-	hover:bg-indigo-100
+	[&[href]]:hover:bg-indigo-100
 `;
 
 const Icon = tw.svg`
@@ -45,13 +46,37 @@ const Cursor = styled.path`
 export interface LogoProps {
 	"aria-label"?: string;
 	className?: string;
+	href?: Maybe<string>;
 	style?: CSSProperties;
 }
 
-export const Logo: FC<LogoProps> = ({ "aria-label": ariaLabel = "home", className, style }) => {
+export const Logo: FC<LogoProps> = ({
+	"aria-label": ariaLabel = "home",
+	href = "/",
+	className,
+	style
+}) => {
+	const Type = href ? "a" : "span";
+
 	return (
-		<NextLink href="/" passHref>
-			<Root className={className} style={style} aria-label={ariaLabel}>
+		<MaybeWrap
+			condition={!!href}
+			wrap={({ child }) => (
+				<>
+					{!!href && (
+						<NextLink href={href} passHref>
+							{child}
+						</NextLink>
+					)}
+				</>
+			)}
+		>
+			<Root
+				as={Type}
+				className={className}
+				style={style}
+				aria-label={href ? ariaLabel : undefined}
+			>
 				<Icon
 					width={200}
 					height={200}
@@ -75,6 +100,6 @@ export const Logo: FC<LogoProps> = ({ "aria-label": ariaLabel = "home", classNam
 					/>
 				</Icon>
 			</Root>
-		</NextLink>
+		</MaybeWrap>
 	);
 };

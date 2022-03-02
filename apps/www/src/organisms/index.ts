@@ -8,6 +8,7 @@ export * from "./ChatRoomInviteForm";
 export * from "./ChatRoomLeaveButton";
 export * from "./ChatRoomMessage";
 export * from "./CodeExampleCard";
+export * from "./CodeExampleCreateCard";
 export * from "./CodeLanguageSelect";
 export * from "./CommentCard";
 export * from "./CreateChatForm";
