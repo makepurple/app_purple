@@ -1,7 +1,8 @@
-import { NonIdealState } from "@makepurple/components";
+import { Button, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
@@ -22,6 +23,10 @@ const Content = tw.div`
 	grid-template-columns[repeat(auto-fit, minmax(20rem, 1fr))]
 	auto-rows-auto
 	gap-3
+`;
+
+const CreateNewButton = tw(Button)`
+	w-48
 `;
 
 export const getServerSideProps = pageProps;
@@ -56,7 +61,17 @@ export const Page: NextPage<PageProps> = () => {
 							title="There's nothing here"
 							subTitle="We couldn't find any snippets"
 						>
-							<CodeIcon height={96} width={96} />
+							{isMyPage ? (
+								<NextLink
+									href="/[userName]/snippets/new"
+									as={`/${userName}/snippets/new`}
+									passHref
+								>
+									<CreateNewButton as="a">Create a snippet</CreateNewButton>
+								</NextLink>
+							) : (
+								<CodeIcon height={96} width={96} />
+							)}
 						</NonIdealState>
 					)
 				) : (
