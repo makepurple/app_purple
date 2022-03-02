@@ -8,8 +8,8 @@ export const CodeExampleCreateInput = Schema({
 		.trim()
 		.error("Required")
 		.min(10, "Min 10 character limit")
-		.max(2_000, "Max 2,000 character limit"),
-	description: string.trim().max(140, "Max 140 character limit").strictOptional(),
+		.max(3_000, "Max 3,000 character limit"),
+	description: string.trim().max(250, "Max 250 character limit").strictOptional(),
 	language: Schema.enum(CodeLanguage, "Unsupported language"),
 	primarySkill: SkillWhereUniqueInput.strictOptional(),
 	skills: array.of(SkillWhereUniqueInput).min(1, "Required").max(5, "Maximum of 5 allowed"),
