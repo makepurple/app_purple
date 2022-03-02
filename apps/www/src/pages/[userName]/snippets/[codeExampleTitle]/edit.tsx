@@ -137,44 +137,44 @@ export const Page: NextPage<PageProps> = () => {
 		watch
 	} = useForm<Type<typeof CodeExampleUpdateInput>>({
 		defaultValues: {
-			content: codeExample?.content,
+			content: codeExample?.content ?? "",
 			description: codeExample?.description ?? "",
-			language: codeExample?.language,
+			language: codeExample?.language ?? "TypeScript",
 			primarySkill: {
 				name_owner: {
-					name: codeExample?.primarySkill.name,
-					owner: codeExample?.primarySkill.owner
+					name: codeExample?.primarySkill.name ?? "",
+					owner: codeExample?.primarySkill.owner ?? ""
 				}
 			},
-			skills: codeExample?.skills.nodes.map((skill) => ({
+			skills: (codeExample?.skills.nodes ?? []).map((skill) => ({
 				name_owner: {
 					name: skill.name,
 					owner: skill.owner
 				}
 			})),
-			title: codeExample?.title
+			title: codeExample?.title ?? ""
 		},
 		resolver: computedTypesResolver(CodeExampleUpdateInput)
 	});
 
 	useEffect(() => {
 		reset({
-			content: codeExample?.content,
+			content: codeExample?.content ?? "",
 			description: codeExample?.description ?? "",
-			language: codeExample?.language,
+			language: codeExample?.language ?? "TypeScript",
 			primarySkill: {
 				name_owner: {
-					name: codeExample?.primarySkill.name,
-					owner: codeExample?.primarySkill.owner
+					name: codeExample?.primarySkill.name ?? "",
+					owner: codeExample?.primarySkill.owner ?? ""
 				}
 			},
-			skills: codeExample?.skills.nodes.map((skill) => ({
+			skills: (codeExample?.skills.nodes ?? []).map((skill) => ({
 				name_owner: {
 					name: skill.name,
 					owner: skill.owner
 				}
 			})),
-			title: codeExample?.title
+			title: codeExample?.title ?? ""
 		});
 	}, [codeExample, reset]);
 
@@ -217,6 +217,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [repository, setRepository] =
 		useState<RepositorySearchResultGitHubRepositoryFragment | null>(null);
+
+	if (!codeExample) return null;
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
@@ -328,6 +330,7 @@ export const Page: NextPage<PageProps> = () => {
 						<Tags editable type="positive" tw="relative">
 							<></>
 							<SkillAutosuggest
+								defaultValue={`${codeExample.primarySkill.owner}/${codeExample.primarySkill.name}`}
 								onSelect={(newSkill) => {
 									const name = newSkill.name;
 									const owner = newSkill.owner.login;
