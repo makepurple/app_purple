@@ -28,6 +28,7 @@ const SkillsSuggest = tw(ComboBox.Options)`
 
 export interface SkillAutosuggestProps {
 	className?: string;
+	defaultValue?: string;
 	onSelect?: (skill: RepositorySearchResultGitHubRepositoryFragment) => void;
 	style?: CSSProperties;
 	"aria-label"?: string;
@@ -37,7 +38,7 @@ export const SkillAutosuggest = forwardRef<
 	UseComboBoxState<RepositorySearchResultGitHubRepositoryFragment>,
 	SkillAutosuggestProps
 >((props, ref) => {
-	const { className, onSelect, style, "aria-label": ariaLabel } = props;
+	const { className, defaultValue = "", onSelect, style, "aria-label": ariaLabel } = props;
 
 	const [skillItems, setSkillItems] = useState<RepositorySearchResultGitHubRepositoryFragment[]>(
 		[]
@@ -66,6 +67,8 @@ export const SkillAutosuggest = forwardRef<
 
 	const combobox = useComboBoxState<RepositorySearchResultGitHubRepositoryFragment>({
 		debounce: ms("0.3s"),
+		defaultInputValue: defaultValue,
+		defaultIsOpen: false,
 		id: "skills-autosuggest",
 		items: skillItems,
 		itemToString: (item) => item?.name ?? "",
