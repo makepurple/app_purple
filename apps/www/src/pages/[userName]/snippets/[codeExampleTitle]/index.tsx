@@ -25,15 +25,18 @@ import {
 	useGetCodeExampleQuery,
 	useUnvoteCodeExampleMutation,
 	useUpvoteCodeExampleMutation
-} from "../../../graphql";
+} from "../../../../graphql";
 import {
 	CommentCard,
 	CreateCommentForm,
 	LoadingCommentCard,
 	UserPageLayout
-} from "../../../organisms";
-import { pageProps, PageProps } from "../../../page-props/[userName]/snippets/[codeExampleTitle]";
-import { BookIcon, CommentIcon, ThumbsUpIcon } from "../../../svgs";
+} from "../../../../organisms";
+import {
+	pageProps,
+	PageProps
+} from "../../../../page-props/[userName]/snippets/[codeExampleTitle]";
+import { BookIcon, CommentIcon, ThumbsUpIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 8;
 
