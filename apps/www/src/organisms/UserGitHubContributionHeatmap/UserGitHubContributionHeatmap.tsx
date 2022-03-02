@@ -22,6 +22,8 @@ const MARGIN_RIGHT = 2;
 const Root = tw.div`
 	aspect-h-2
 	aspect-w-13
+	flex
+	items-center
 `;
 
 const Rect = tw.rect`
