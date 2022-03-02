@@ -1,4 +1,4 @@
-import { Button, NonIdealState } from "@makepurple/components";
+import { Avatar, Button, Logo, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
@@ -14,7 +14,6 @@ import {
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/snippets";
-import { CodeIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 
@@ -23,6 +22,33 @@ const Content = tw.div`
 	grid-template-columns[repeat(auto-fit, minmax(20rem, 1fr))]
 	auto-rows-auto
 	gap-3
+`;
+
+const NoSnippetsContent = tw.div`
+	flex
+	flex-col
+	items-center
+	gap-4
+`;
+
+const StyledAvatar = tw(Avatar)`
+	rounded-md
+`;
+
+const IconContainer = tw.div`
+	flex
+	w-14
+	h-14
+	items-center
+	justify-center
+	rounded-md
+	bg-white
+	z-index[1]
+`;
+
+const StyledLogo = tw(Logo)`
+	h-12
+	w-12
 `;
 
 const CreateNewButton = tw(Button)`
@@ -61,17 +87,22 @@ export const Page: NextPage<PageProps> = () => {
 							title="There's nothing here"
 							subTitle="We couldn't find any snippets"
 						>
-							{isMyPage ? (
-								<NextLink
-									href="/[userName]/snippets/new"
-									as={`/${userName}/snippets/new`}
-									passHref
-								>
-									<CreateNewButton as="a">Create a snippet</CreateNewButton>
-								</NextLink>
-							) : (
-								<CodeIcon height={96} width={96} />
-							)}
+							<NoSnippetsContent>
+								<StyledAvatar border={4}>
+									<IconContainer>
+										<StyledLogo href={null} />
+									</IconContainer>
+								</StyledAvatar>
+								{isMyPage && (
+									<NextLink
+										href="/[userName]/snippets/new"
+										as={`/${userName}/snippets/new`}
+										passHref
+									>
+										<CreateNewButton as="a">Create a snippet</CreateNewButton>
+									</NextLink>
+								)}
+							</NoSnippetsContent>
 						</NonIdealState>
 					)
 				) : (
