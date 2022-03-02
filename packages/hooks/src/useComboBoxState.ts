@@ -5,8 +5,8 @@ import {
 	UseComboboxReturnValue,
 	UseComboboxStateChange
 } from "downshift";
-import { useMemo, useState } from "react";
-import { useMountedState } from "react-use";
+import { useCallback, useMemo, useState } from "react";
+import { useMountedState, usePreviousDistinct } from "react-use";
 
 export type UseComboBoxProps<T> = UseComboboxProps<T> & {
 	debounce?: number;
@@ -45,11 +45,14 @@ export const useComboBoxState = ObjectUtils.setStatic(
 		const combobox = useCombobox({
 			id: "autocomplete",
 			...downshiftProps,
-			onInputValueChange: async (newChanges) => {
-				setIsReady(false);
+			onInputValueChange: useCallback(
+				async (newChanges) => {
+					setIsReady(false);
 
-				await debouncedValueChange(newChanges);
-			}
+					await debouncedValueChange(newChanges);
+				},
+				[debouncedValueChange]
+			)
 		});
 
 		const isPending = !!combobox.inputValue && isReady === false;
@@ -57,10 +60,19 @@ export const useComboBoxState = ObjectUtils.setStatic(
 		const isOpen = combobox.isOpen && !!combobox.inputValue;
 		const hasItems = !!props.items.length;
 
+		/**
+		 * !HACK
+		 * @description Require that the input actually did change (not just default value)
+		 * in order for isOpen and loading to be true
+		 * @author David Lee
+		 * @date March 2, 2022
+		 */
+		const previous = usePreviousDistinct(combobox.inputValue);
+
 		return {
 			...combobox,
-			isOpen: (isOpen && hasItems) || loading || isPending,
-			loading: loading || isPending
+			isOpen: (!!previous && isOpen && hasItems) || loading || isPending,
+			loading: !!previous && (loading || isPending)
 		};
 	},
 	{
