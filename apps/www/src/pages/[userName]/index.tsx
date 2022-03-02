@@ -1,4 +1,5 @@
 import { Anchor, Button, Divider, NonIdealState, Paper } from "@makepurple/components";
+import { FormatUtils } from "@makepurple/utils";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -70,12 +71,23 @@ const Section = tw.div`
 	items-stretch
 `;
 
-const SectionTitle = tw(Anchor)`
-	self-start
+const SectionTitle = tw.span`
+	flex
+	flex-row
+	items-center
+	justify-between
+`;
+
+const SectionTitleText = tw(Anchor)`
 	text-black
 	text-xl
 	leading-none
 	font-bold
+`;
+
+const SectionSeeAllButton = tw(Button)`
+	w-40
+	whitespace-nowrap
 `;
 
 const BottomContent = tw.div`
@@ -197,9 +209,18 @@ export const Page: NextPage<PageProps> = () => {
 					</ContributionContent>
 				</ContributionSection>
 				<Section>
-					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-						<SectionTitle tw="mb-2">Latest Post</SectionTitle>
-					</NextLink>
+					<SectionTitle tw="mb-2">
+						<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+							<SectionTitleText>Latest Post</SectionTitleText>
+						</NextLink>
+						{user.posts.totalCount > 1 && (
+							<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+								<SectionSeeAllButton as="a" size="small">
+									See {FormatUtils.toGitHubFixed(user.posts.totalCount - 1)} more
+								</SectionSeeAllButton>
+							</NextLink>
+						)}
+					</SectionTitle>
 					{!post ? (
 						<NonIdealState
 							title="There's nothing here"
@@ -208,31 +229,33 @@ export const Page: NextPage<PageProps> = () => {
 							<NoteIcon height={96} width={96} />
 						</NonIdealState>
 					) : (
-						<>
-							<PostCard post={post} />
-							{user.posts.totalCount > 1 && (
-								<NextLink
-									href="/[userName]/posts"
-									as={`/${userName}/posts`}
-									passHref
-								>
-									<Button as="a" size="small" tw="mt-4">
-										See {(user.posts.totalCount - 1).toLocaleString()} more
-									</Button>
-								</NextLink>
-							)}
-						</>
+						<PostCard post={post} />
 					)}
 				</Section>
 				<BottomContent>
 					<Section>
-						<NextLink
-							href="/[userName]/experiences"
-							as={`/${userName}/experiences`}
-							passHref
-						>
-							<SectionTitle tw="mb-2">Experiences</SectionTitle>
-						</NextLink>
+						<SectionTitle tw="mb-2">
+							<NextLink
+								href="/[userName]/experiences"
+								as={`/${userName}/experiences`}
+								passHref
+							>
+								<SectionTitleText>Experiences</SectionTitleText>
+							</NextLink>
+							{user.experiences.totalCount > 3 && (
+								<NextLink
+									href="/[userName]/experiences"
+									as={`/${userName}/experiences`}
+									passHref
+								>
+									<SectionSeeAllButton as="a" size="small">
+										See{" "}
+										{FormatUtils.toGitHubFixed(user.experiences.totalCount - 3)}{" "}
+										more
+									</SectionSeeAllButton>
+								</NextLink>
+							)}
+						</SectionTitle>
 						{!experiences.length ? (
 							<NonIdealState
 								title="There's nothing here"
@@ -241,38 +264,41 @@ export const Page: NextPage<PageProps> = () => {
 								<HexagonIcon height={96} width={96} />
 							</NonIdealState>
 						) : (
-							<>
-								<Experiences>
-									{experiences.map((experience, i) => (
-										<Fragment key={experience.id}>
-											{!!i && <Divider />}
-											<UserOverviewExperienceCard experience={experience} />
-										</Fragment>
-									))}
-								</Experiences>
-								{user.experiences.totalCount > 3 && (
-									<NextLink
-										href="/[userName]/experiences"
-										as={`/${userName}/experiences`}
-										passHref
-									>
-										<Button as="a" size="small" tw="mt-4">
-											See {(user.experiences.totalCount - 3).toLocaleString()}{" "}
-											more
-										</Button>
-									</NextLink>
-								)}
-							</>
+							<Experiences>
+								{experiences.map((experience, i) => (
+									<Fragment key={experience.id}>
+										{!!i && <Divider />}
+										<UserOverviewExperienceCard experience={experience} />
+									</Fragment>
+								))}
+							</Experiences>
 						)}
 					</Section>
 					<Section>
-						<NextLink
-							href="/[userName]/repositories"
-							as={`/${userName}/repositories`}
-							passHref
-						>
-							<SectionTitle tw="mb-2">Repositories</SectionTitle>
-						</NextLink>
+						<SectionTitle tw="mb-2">
+							<NextLink
+								href="/[userName]/repositories"
+								as={`/${userName}/repositories`}
+								passHref
+							>
+								<SectionTitleText>Repositories</SectionTitleText>
+							</NextLink>
+							{user.repositories.totalCount > 2 && (
+								<NextLink
+									href="/[userName]/repositories"
+									as={`/${userName}/repositories`}
+									passHref
+								>
+									<SectionSeeAllButton as="a" size="small">
+										See{" "}
+										{FormatUtils.toGitHubFixed(
+											user.repositories.totalCount - 2
+										)}{" "}
+										more
+									</SectionSeeAllButton>
+								</NextLink>
+							)}
+						</SectionTitle>
 						{!repositories.length ? (
 							<NonIdealState
 								title="There's nothing here"
@@ -281,29 +307,14 @@ export const Page: NextPage<PageProps> = () => {
 								<RepoIcon height={96} width={96} />
 							</NonIdealState>
 						) : (
-							<>
-								<Repositories>
-									{repositories.map((repository, i) => (
-										<Fragment key={repository.id}>
-											{!!i && <Divider />}
-											<UserOverviewRepositoryCard repository={repository} />
-										</Fragment>
-									))}
-								</Repositories>
-								{user.repositories.totalCount > 2 && (
-									<NextLink
-										href="/[userName]/repositories"
-										as={`/${userName}/repositories`}
-										passHref
-									>
-										<Button as="a" size="small" tw="mt-4">
-											See{" "}
-											{(user.repositories.totalCount - 2).toLocaleString()}{" "}
-											more
-										</Button>
-									</NextLink>
-								)}
-							</>
+							<Repositories>
+								{repositories.map((repository, i) => (
+									<Fragment key={repository.id}>
+										{!!i && <Divider />}
+										<UserOverviewRepositoryCard repository={repository} />
+									</Fragment>
+								))}
+							</Repositories>
 						)}
 					</Section>
 				</BottomContent>
