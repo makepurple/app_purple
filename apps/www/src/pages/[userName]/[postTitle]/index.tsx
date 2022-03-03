@@ -1,5 +1,6 @@
 import {
 	Avatar,
+	Button,
 	Divider,
 	DocumentEditor,
 	GitHubAvatarImage,
@@ -7,7 +8,7 @@ import {
 	Paper
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, FormatUtils } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
@@ -23,14 +24,22 @@ import {
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
-import { CommentIcon } from "../../../svgs";
+import { CommentIcon, ThumbsUpIcon } from "../../../svgs";
 
 const Content = tw(Paper)`
 	flex
 	flex-col
 	items-stretch
+`;
+
+const PostContent = tw.div`
+	flex
+	flex-col
+	items-stretch
 	p-4
+	gap-4
 	sm:p-6
+	sm:gap-6
 `;
 
 const Title = tw.h1`
@@ -55,10 +64,17 @@ const PublishedAt = tw.div`
 	text-gray-500
 `;
 
+const ThumbnailContainer = tw.div`
+	rounded-t-md
+	overflow-hidden
+	border-b
+	border-solid
+	border-gray-300
+`;
+
 const ThumbnailImage = tw.div`
 	aspect-w-16
 	aspect-h-9
-	rounded-md
 `;
 
 const Editor = tw(DocumentEditor)`
@@ -68,6 +84,31 @@ const Editor = tw(DocumentEditor)`
 
 const Editable = tw(DocumentEditor.Editable)`
 	p-0
+`;
+
+const Actions = tw.div`
+	sticky
+	bottom-0
+	flex
+	items-center
+	justify-between
+	p-4
+	border-t
+	border-solid
+	border-gray-300
+	rounded-b-lg
+	bg-white
+	sm:px-6
+`;
+
+const UpvoteButton = tw(Button)`
+	h-9
+	gap-1.5
+`;
+
+const UpvoteCount = tw.span`
+	text-base
+	sm:leading-5
 `;
 
 const CommentsSection = tw(Paper)`
@@ -167,32 +208,44 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="posts" userName={userName}>
 			<Content>
-				<Title tw="mb-6">{post.title}</Title>
-				{post.description && <Description tw="mb-6">{post.description}</Description>}
-				<ByLine tw="mb-8">
-					{post.author.image && (
-						<Avatar border={2} tw="mr-2">
-							<GitHubAvatarImage
-								alt={post.author.name}
-								src={post.author.image}
-								height={48}
-								width={48}
-							/>
-						</Avatar>
-					)}
-					<div>
-						<div>{post.author.name}</div>
-						<PublishedAt>{dayjs(post.publishedAt).format("MMM DD, YYYY")}</PublishedAt>
-					</div>
-				</ByLine>
 				{post.thumbnailUrl && (
-					<ThumbnailImage tw="mb-8">
-						<NextImage src={post.thumbnailUrl} layout="fill" objectFit="cover" />
-					</ThumbnailImage>
+					<ThumbnailContainer>
+						<ThumbnailImage>
+							<NextImage src={post.thumbnailUrl} layout="fill" objectFit="cover" />
+						</ThumbnailImage>
+					</ThumbnailContainer>
 				)}
-				<Editor readOnly value={content}>
-					<Editable />
-				</Editor>
+				<PostContent>
+					<Title>{post.title}</Title>
+					{post.description && <Description>{post.description}</Description>}
+					<ByLine>
+						{post.author.image && (
+							<Avatar border={2} tw="mr-2">
+								<GitHubAvatarImage
+									alt={post.author.name}
+									src={post.author.image}
+									height={48}
+									width={48}
+								/>
+							</Avatar>
+						)}
+						<div>
+							<div>{post.author.name}</div>
+							<PublishedAt>
+								{dayjs(post.publishedAt).format("MMM DD, YYYY")}
+							</PublishedAt>
+						</div>
+					</ByLine>
+					<Editor readOnly value={content}>
+						<Editable />
+					</Editor>
+				</PostContent>
+				<Actions>
+					<UpvoteButton size="small" type="button" variant="secondary">
+						<ThumbsUpIcon height={20} width={20} />
+						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
+					</UpvoteButton>
+				</Actions>
 			</Content>
 			<CommentsSection tw="mt-6">
 				{!!viewer && (

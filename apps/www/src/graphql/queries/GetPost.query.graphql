@@ -28,7 +28,9 @@ query GetPost($where: PostWhereUniqueInput!) {
 			}
 		}
 		title
+		upvotes
 		urlSlug
 		thumbnailUrl
+		viewerUpvote
 	}
 }

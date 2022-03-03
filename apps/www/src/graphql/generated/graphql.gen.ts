@@ -3027,7 +3027,7 @@ export type GetPostQueryVariables = Exact<{
 }>;
 
 
-export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null, readonly description?: string | null, readonly publishedAt?: Date | null, readonly title?: string | null, readonly urlSlug: string, readonly thumbnailUrl?: string | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
+export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null, readonly description?: string | null, readonly publishedAt?: Date | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly thumbnailUrl?: string | null, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
 
 export type GetPostCommentsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -5791,8 +5791,10 @@ export const GetPostDocument = /*#__PURE__*/ gql`
       }
     }
     title
+    upvotes
     urlSlug
     thumbnailUrl
+    viewerUpvote
   }
 }
     ${PageInfoFragmentFragmentDoc}`;
