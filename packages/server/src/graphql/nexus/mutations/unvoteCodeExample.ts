@@ -16,7 +16,7 @@ export const unvoteCodeExample = mutationField("unvoteCodeExample", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!codeExample) throw new NotFoundError("Code-exampe could not be found");
+		if (!codeExample) throw new NotFoundError("Code-example could not be found");
 
 		const { codeExample: record } = await prisma.codeExampleUpvoter.delete({
 			where: {
