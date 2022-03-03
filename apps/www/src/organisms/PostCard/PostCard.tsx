@@ -1,5 +1,6 @@
 import { Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
+import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -139,6 +140,9 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 	const { className, post, style } = props;
 
 	const router = useRouter();
+	const { data: session } = useSession();
+
+	const isMyPost = session?.user.name === post.authorName;
 
 	const [{ fetching: removing }, removePost] = useDeletePostMutation();
 	const [{ fetching: upvoting }, upvotePost] = useUpvotePostMutation();
@@ -206,29 +210,31 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
 						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
 					</UpvoteButton>
-					<DeleteButton
-						disabled={fetching}
-						onClick={async (e) => {
-							e.stopPropagation();
+					{isMyPost && (
+						<DeleteButton
+							disabled={fetching}
+							onClick={async (e) => {
+								e.stopPropagation();
 
-							const didSucceed = await removePost({ where: { id: post.id } })
-								.then((result) => !!result.data?.deletePost.record)
-								.catch(() => false);
+								const didSucceed = await removePost({ where: { id: post.id } })
+									.then((result) => !!result.data?.deletePost.record)
+									.catch(() => false);
 
-							if (!didSucceed) {
-								toast.error("Could not delete this post");
+								if (!didSucceed) {
+									toast.error("Could not delete this post");
 
-								return;
-							}
+									return;
+								}
 
-							toast.success("Post was successfully deleted");
-						}}
-						size="small"
-						type="button"
-						variant="alert"
-					>
-						Delete
-					</DeleteButton>
+								toast.success("Post was successfully deleted");
+							}}
+							size="small"
+							type="button"
+							variant="alert"
+						>
+							Delete
+						</DeleteButton>
+					)}
 				</Actions>
 			</Info>
 			{post.thumbnailUrl && (
