@@ -1,0 +1,14 @@
+mutation DeleteCodeExample($where: CodeExampleWhereUniqueInput!) {
+	deleteCodeExample(where: $where) {
+		viewer {
+			id
+			name
+		}
+		record {
+			authorName
+			id
+			title
+			urlSlug
+		}
+	}
+}

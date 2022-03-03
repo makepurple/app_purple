@@ -2699,6 +2699,13 @@ export type CreateRepositoryMutationVariables = Exact<{
 
 export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string }> } } | null } } };
 
+export type DeleteCodeExampleMutationVariables = Exact<{
+  where: CodeExampleWhereUniqueInput;
+}>;
+
+
+export type DeleteCodeExampleMutation = { readonly __typename: 'Mutation', readonly deleteCodeExample: { readonly __typename: 'DeleteCodeExamplePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'CodeExample', readonly authorName: string, readonly id: string, readonly title: string, readonly urlSlug: string } } };
+
 export type DeleteFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
@@ -4719,6 +4726,26 @@ export const CreateRepositoryDocument = /*#__PURE__*/ gql`
 
 export function useCreateRepositoryMutation() {
   return Urql.useMutation<CreateRepositoryMutation, CreateRepositoryMutationVariables>(CreateRepositoryDocument);
+};
+export const DeleteCodeExampleDocument = /*#__PURE__*/ gql`
+    mutation DeleteCodeExample($where: CodeExampleWhereUniqueInput!) {
+  deleteCodeExample(where: $where) {
+    viewer {
+      id
+      name
+    }
+    record {
+      authorName
+      id
+      title
+      urlSlug
+    }
+  }
+}
+    `;
+
+export function useDeleteCodeExampleMutation() {
+  return Urql.useMutation<DeleteCodeExampleMutation, DeleteCodeExampleMutationVariables>(DeleteCodeExampleDocument);
 };
 export const DeleteFriendshipDocument = /*#__PURE__*/ gql`
     mutation DeleteFriendship($where: UserWhereUniqueInput!) {

@@ -1,5 +1,6 @@
 import { Anchor, Avatar, Button, GitHubAvatarImage, Paper, Tags } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
@@ -8,19 +9,32 @@ import tw, { styled } from "twin.macro";
 import {
 	CodeExampleCardCodeExampleFragment,
 	CodeExampleWhereUniqueInput,
+	useDeleteCodeExampleMutation,
 	useUnvoteCodeExampleMutation,
 	useUpvoteCodeExampleMutation
 } from "../../graphql";
 import { BookIcon, ThumbsUpIcon } from "../../svgs";
 
-const Root = tw(Paper)`
-	flex
-	flex-row
-	items-start
-	gap-3
-	p-3
-	cursor-pointer
-	hover:bg-indigo-50
+const DeleteButton = tw(Button)`
+	opacity-0
+`;
+
+const Root = styled(Paper)`
+	${tw`
+		flex
+		flex-row
+		items-start
+		gap-3
+		p-3
+		cursor-pointer
+		hover:bg-indigo-50
+	`}
+
+	&:hover ${DeleteButton} {
+		${tw`
+			opacity-100
+		`}
+	}
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -66,6 +80,30 @@ const Description = tw.p`
 	line-clamp-2
 `;
 
+const Language = tw.span`
+	flex
+	flex-row
+	items-center
+	text-sm
+	leading-none
+	text-gray-500
+`;
+
+const LanguageColor = tw.span`
+	h-3
+	w-3
+	rounded-full
+`;
+
+const Actions = tw.div`
+	self-stretch
+	flex
+	flex-row
+	items-stretch
+	justify-between
+	h-8
+`;
+
 const UpvoteButton = styled(Button)<{ $upvoted: boolean }>`
 	${tw`
 		flex
@@ -82,21 +120,6 @@ const UpvoteCount = tw.span`
 	sm:leading-5
 `;
 
-const Language = tw.span`
-	flex
-	flex-row
-	items-center
-	text-sm
-	leading-none
-	text-gray-500
-`;
-
-const LanguageColor = tw.span`
-	h-3
-	w-3
-	rounded-full
-`;
-
 export interface CodeExampleCardProps {
 	className?: string;
 	codeExample: CodeExampleCardCodeExampleFragment;
@@ -107,14 +130,18 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 	const { className, codeExample, style } = props;
 
 	const router = useRouter();
+	const { data: session } = useSession();
 
+	const isMyUser = session?.user.name === codeExample.authorName;
+
+	const [{ fetching: removing }, remove] = useDeleteCodeExampleMutation();
 	const [{ fetching: upvoting }, upvote] = useUpvoteCodeExampleMutation();
 	const [{ fetching: unvoting }, unvote] = useUnvoteCodeExampleMutation();
 
 	const primarySkill = codeExample.primarySkill;
 	const skills = codeExample.skills.nodes;
 
-	const fetching = upvoting || unvoting;
+	const fetching = removing || upvoting || unvoting;
 
 	return (
 		<Root
@@ -199,38 +226,69 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 						</NextLink>
 					))}
 				</Tags>
-				<UpvoteButton
-					disabled={fetching}
-					onClick={async (e) => {
-						e.stopPropagation();
+				<Actions>
+					<UpvoteButton
+						disabled={fetching}
+						onClick={async (e) => {
+							e.stopPropagation();
 
-						const where: CodeExampleWhereUniqueInput = {
-							id: codeExample.id
-						};
+							const where: CodeExampleWhereUniqueInput = {
+								id: codeExample.id
+							};
 
-						const didSucceed = codeExample.viewerUpvote
-							? await unvote({ where })
-									.then((result) => !!result.data?.unvoteCodeExample.record)
-									.catch(() => false)
-							: await upvote({ where })
-									.then((result) => !!result.data?.upvoteCodeExample.record)
+							const didSucceed = codeExample.viewerUpvote
+								? await unvote({ where })
+										.then((result) => !!result.data?.unvoteCodeExample.record)
+										.catch(() => false)
+								: await upvote({ where })
+										.then((result) => !!result.data?.upvoteCodeExample.record)
+										.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not like this snippet");
+
+								return;
+							}
+
+							toast.success("You liked this snippet! 🎉");
+						}}
+						size="small"
+						variant="secondary"
+						$upvoted={!!codeExample.viewerUpvote}
+					>
+						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
+						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
+					</UpvoteButton>
+					{isMyUser && (
+						<DeleteButton
+							disabled={fetching}
+							onClick={async (e) => {
+								e.stopPropagation();
+
+								const where: CodeExampleWhereUniqueInput = {
+									id: codeExample.id
+								};
+
+								const didSucceed = await remove({ where })
+									.then((result) => !!result.data?.deleteCodeExample.record)
 									.catch(() => false);
 
-						if (!didSucceed) {
-							toast.error("Could not like this snippet");
+								if (!didSucceed) {
+									toast.error("Could not delete this snippet");
 
-							return;
-						}
+									return;
+								}
 
-						toast.success("You liked this snippet! 🎉");
-					}}
-					size="small"
-					variant="secondary"
-					$upvoted={!!codeExample.viewerUpvote}
-				>
-					<ThumbsUpIcon height={16} width={16} tw="mr-1" />
-					<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
-				</UpvoteButton>
+								toast.success("Snippet was successfully deleted");
+							}}
+							size="small"
+							type="button"
+							variant="alert"
+						>
+							Delete
+						</DeleteButton>
+					)}
+				</Actions>
 			</Content>
 		</Root>
 	);
