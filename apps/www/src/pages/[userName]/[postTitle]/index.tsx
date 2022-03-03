@@ -15,8 +15,15 @@ import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
+import { toast } from "react-hot-toast";
 import tw from "twin.macro";
-import { useGetPostCommentsQuery, useGetPostQuery, useViewPostMutation } from "../../../graphql";
+import {
+	useDeletePostMutation,
+	useGetPostCommentsQuery,
+	useGetPostQuery,
+	useUpvotePostMutation,
+	useViewPostMutation
+} from "../../../graphql";
 import {
 	CommentCard,
 	CreateCommentForm,
@@ -111,6 +118,20 @@ const UpvoteCount = tw.span`
 	sm:leading-5
 `;
 
+const OwnerActions = tw.div`
+	flex
+	flex-row
+	items-stretch
+	h-full
+	gap-3
+`;
+
+const DeleteButton = tw(Button)`
+	h-9
+	w-20
+	text-base
+`;
+
 const CommentsSection = tw(Paper)`
 	flex
 	flex-col
@@ -134,9 +155,12 @@ export const getServerSideProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
-	const { data: sessionData } = useSession();
+	const { data: session } = useSession();
 
-	const viewer = sessionData?.user;
+	const [{ fetching: removing }, removePost] = useDeletePostMutation();
+	const [{ fetching: upvoting }, upvotePost] = useUpvotePostMutation();
+
+	const mutating = removing || upvoting;
 
 	const userName = router?.query.userName as string;
 	const postTitle = router?.query.postTitle as string;
@@ -179,6 +203,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const post = postData?.post;
 	const comments = commentsData?.comments.nodes ?? [];
+
+	const isMyPost = session?.user.name === post?.authorName;
 
 	const content = useMemo(() => {
 		const validator = DocumentEditorValue.destruct();
@@ -241,14 +267,61 @@ export const Page: NextPage<PageProps> = () => {
 					</Editor>
 				</PostContent>
 				<Actions>
-					<UpvoteButton size="small" type="button" variant="secondary">
+					<UpvoteButton
+						disabled={mutating}
+						onClick={async (e) => {
+							e.stopPropagation();
+
+							const didSucceed = await upvotePost({ where: { id: post.id } })
+								.then((result) => !!result.data?.upvotePost.record)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not like this post");
+
+								return;
+							}
+
+							toast.success("You liked this post! 🎉");
+						}}
+						size="small"
+						type="button"
+						variant="secondary"
+					>
 						<ThumbsUpIcon height={20} width={20} />
 						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
 					</UpvoteButton>
+					{isMyPost && (
+						<OwnerActions>
+							<DeleteButton
+								disabled={mutating}
+								onClick={async (e) => {
+									e.stopPropagation();
+
+									const didSucceed = await removePost({ where: { id: post.id } })
+										.then((result) => !!result.data?.deletePost.record)
+										.catch(() => false);
+
+									if (!didSucceed) {
+										toast.error("Could not delete this post");
+
+										return;
+									}
+
+									toast.success("Post was successfully deleted");
+								}}
+								size="small"
+								type="button"
+								variant="alert"
+							>
+								Delete
+							</DeleteButton>
+						</OwnerActions>
+					)}
 				</Actions>
 			</Content>
 			<CommentsSection tw="mt-6">
-				{!!viewer && (
+				{!!session?.user && (
 					<>
 						<CommentFormContainer>
 							<CreateCommentForm postId={post.id} />
