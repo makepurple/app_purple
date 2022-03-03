@@ -2,6 +2,7 @@ import { cacheExchange } from "@urql/exchange-graphcache";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import { gql } from "urql";
 import type {
+	DeleteCodeExamplePayload,
 	DeleteFriendshipPayload,
 	LeaveChatPayload,
 	RejectFriendshipPayload,
@@ -53,6 +54,44 @@ export const createCache = () => {
 		},
 		updates: {
 			Mutation: {
+				deleteCodeExample: (result: DeleteCodeExamplePayload, _, cache) => {
+					const viewer = result.viewer;
+
+					if (!viewer) return;
+
+					const fragment = gql`
+						fragment _ on User {
+							id
+							codeExamples {
+								edges {
+									cursor
+									node {
+										id
+									}
+								}
+								nodes {
+									id
+								}
+							}
+						}
+					`;
+
+					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
+
+					if (!old) return;
+
+					const filteredEdges = (old as User).codeExamples.edges.filter(
+						(codeExample) => codeExample.node.id !== result.record.id
+					);
+
+					cache.writeFragment(fragment, {
+						id: `User:${result.viewer.id}`,
+						codeExamples: {
+							edges: filteredEdges,
+							nodes: filteredEdges.map((edge) => edge.node)
+						}
+					});
+				},
 				deleteFriendship: (result: DeleteFriendshipPayload, _, cache) => {
 					const viewer = result.viewer;
 
