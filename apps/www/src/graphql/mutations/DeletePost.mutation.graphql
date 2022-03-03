@@ -1,0 +1,14 @@
+mutation DeletePost($where: PostWhereUniqueInput!) {
+	deletePost(where: $where) {
+		viewer {
+			id
+			name
+		}
+		record {
+			id
+			authorName
+			title
+			urlSlug
+		}
+	}
+}

@@ -4,6 +4,7 @@ import { gql } from "urql";
 import type {
 	DeleteCodeExamplePayload,
 	DeleteFriendshipPayload,
+	DeletePostPayload,
 	LeaveChatPayload,
 	RejectFriendshipPayload,
 	User
@@ -125,6 +126,44 @@ export const createCache = () => {
 					cache.writeFragment(fragment, {
 						id: `User:${result.viewer.id}`,
 						friends: {
+							edges: filteredEdges,
+							nodes: filteredEdges.map((edge) => edge.node)
+						}
+					});
+				},
+				deletePost: (result: DeletePostPayload, _, cache) => {
+					const viewer = result.viewer;
+
+					if (!viewer) return;
+
+					const fragment = gql`
+						fragment _ on User {
+							id
+							posts {
+								edges {
+									cursor
+									node {
+										id
+									}
+								}
+								nodes {
+									id
+								}
+							}
+						}
+					`;
+
+					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
+
+					if (!old) return;
+
+					const filteredEdges = (old as User).posts.edges.filter(
+						(post) => post.node.id === result.record.id
+					);
+
+					cache.writeFragment(fragment, {
+						id: `User:${result.viewer.id}`,
+						posts: {
 							edges: filteredEdges,
 							nodes: filteredEdges.map((edge) => edge.node)
 						}

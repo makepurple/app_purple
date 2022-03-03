@@ -1,11 +1,10 @@
 fragment PostCardPost on Post {
-	__typename
 	id
 	author {
-		__typename
 		id
 		name
 	}
+	authorName
 	description
 	publishedAt
 	thumbnailUrl

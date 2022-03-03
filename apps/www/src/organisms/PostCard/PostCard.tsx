@@ -6,18 +6,30 @@ import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { PostCardPostFragment, useUpvotePostMutation } from "../../graphql";
+import { PostCardPostFragment, useDeletePostMutation, useUpvotePostMutation } from "../../graphql";
 
-const Root = tw(Paper)`
-	flex
-	flex-col-reverse
-	height[22rem]
-	p-3
-	cursor-pointer
-	hover:bg-indigo-50
-	sm:flex-row
-	sm:h-52
-	sm:p-4
+const DeleteButton = tw(Button)`
+	opacity-0
+`;
+
+const Root = styled(Paper)`
+	${tw`
+		flex
+		flex-col-reverse
+		height[22rem]
+		p-3
+		cursor-pointer
+		hover:bg-indigo-50
+		sm:flex-row
+		sm:h-52
+		sm:p-4
+	`}
+
+	&:hover ${DeleteButton} {
+		${tw`
+			opacity-100
+		`}
+	}
 `;
 
 const Info = tw.div`
@@ -80,11 +92,12 @@ const NotPublished = tw.span`
 	text-red-800
 `;
 
-const KarmaContainer = tw.div`
+const Actions = tw.div`
 	flex
 	flex-row
-	items-end
-	mt-1
+	items-stretch
+	justify-between
+	h-8
 `;
 
 const UpvoteButton = styled(Button)<{ $upvoted: boolean }>`
@@ -127,9 +140,12 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 
 	const router = useRouter();
 
-	const [{ fetching }, upvotePost] = useUpvotePostMutation();
+	const [{ fetching: removing }, removePost] = useDeletePostMutation();
+	const [{ fetching: upvoting }, upvotePost] = useUpvotePostMutation();
 
-	const postUrl: string = `/${post.author.name}/${post.urlSlug}`;
+	const fetching = removing || upvoting;
+
+	const postUrl: string = `/${post.authorName}/${post.urlSlug}`;
 
 	return (
 		<Root
@@ -164,7 +180,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						<NotPublished>Draft</NotPublished>
 					)}
 				</PostedDetails>
-				<KarmaContainer tw="mt-2">
+				<Actions tw="mt-2">
 					<UpvoteButton
 						disabled={fetching || !!post.viewerUpvote}
 						onClick={async (e) => {
@@ -190,7 +206,30 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
 						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
 					</UpvoteButton>
-				</KarmaContainer>
+					<DeleteButton
+						disabled={fetching}
+						onClick={async (e) => {
+							e.stopPropagation();
+
+							const didSucceed = await removePost({ where: { id: post.id } })
+								.then((result) => !!result.data?.deletePost.record)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not delete this post");
+
+								return;
+							}
+
+							toast.success("Post was successfully deleted");
+						}}
+						size="small"
+						type="button"
+						variant="alert"
+					>
+						Delete
+					</DeleteButton>
+				</Actions>
 			</Info>
 			{post.thumbnailUrl && (
 				<NextLink href={postUrl} passHref>
