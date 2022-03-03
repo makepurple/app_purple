@@ -21,6 +21,7 @@ import tw from "twin.macro";
 import {
 	CodeExampleWhereUniqueInput,
 	CodeLanguage,
+	useDeleteCodeExampleMutation,
 	useGetCodeExampleCommentsQuery,
 	useGetCodeExampleQuery,
 	useUnvoteCodeExampleMutation,
@@ -142,8 +143,23 @@ const UpvoteCount = tw.span`
 	sm:leading-5
 `;
 
+const OwnerActions = tw.div`
+	flex
+	flex-row
+	items-stretch
+	h-full
+	gap-3
+`;
+
 const EditButton = tw(Button)`
 	h-9
+	w-20
+	text-base
+`;
+
+const DeleteButton = tw(Button)`
+	h-9
+	w-20
 	text-base
 `;
 
@@ -171,6 +187,7 @@ export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 	const { data: sessionData } = useSession();
 
+	const [{ fetching: removing }, remove] = useDeleteCodeExampleMutation();
 	const [{ fetching: upvoting }, upvote] = useUpvoteCodeExampleMutation();
 	const [{ fetching: unvoting }, unvote] = useUnvoteCodeExampleMutation();
 
@@ -253,7 +270,7 @@ export const Page: NextPage<PageProps> = () => {
 	const primarySkill = codeExample.primarySkill;
 	const skills = codeExample.skills.nodes ?? [];
 
-	const voting = upvoting || unvoting;
+	const mutating = removing || upvoting || unvoting;
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
@@ -324,7 +341,7 @@ export const Page: NextPage<PageProps> = () => {
 				</CodeExampleContent>
 				<Actions>
 					<UpvoteButton
-						disabled={voting}
+						disabled={mutating}
 						onClick={async (e) => {
 							e.stopPropagation();
 
@@ -356,15 +373,55 @@ export const Page: NextPage<PageProps> = () => {
 						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
 					</UpvoteButton>
 					{isMyPage && (
-						<NextLink
-							href="/[userName]/snippets/[codeExampleTitle]/edit"
-							as={`/${userName}/snippets/${urlSlug}/edit`}
-							passHref
-						>
-							<EditButton as="a" size="small">
-								Edit Snippet
-							</EditButton>
-						</NextLink>
+						<OwnerActions>
+							<NextLink
+								href="/[userName]/snippets/[codeExampleTitle]/edit"
+								as={`/${userName}/snippets/${urlSlug}/edit`}
+								passHref
+							>
+								<EditButton as="a" size="small">
+									Edit
+								</EditButton>
+							</NextLink>
+							<DeleteButton
+								disabled={mutating}
+								onClick={async (e) => {
+									e.stopPropagation();
+
+									const confirmed = window.confirm(
+										"Are you sure you wish to delete this snippet?\nThis cannot be undone."
+									);
+
+									if (!confirmed) return;
+
+									const where: CodeExampleWhereUniqueInput = {
+										id: codeExample.id
+									};
+
+									const didSucceed = await remove({ where })
+										.then((result) => !!result.data?.deleteCodeExample.record)
+										.catch(() => false);
+
+									if (!didSucceed) {
+										toast.error("Could not delete this snippet");
+
+										return;
+									}
+
+									toast.success("Snippet was successfully deleted");
+
+									await router.push(
+										"/[userName]/snippets",
+										`/${userName}/snippets`
+									);
+								}}
+								size="small"
+								type="button"
+								variant="alert"
+							>
+								Delete
+							</DeleteButton>
+						</OwnerActions>
 					)}
 				</Actions>
 			</Content>
