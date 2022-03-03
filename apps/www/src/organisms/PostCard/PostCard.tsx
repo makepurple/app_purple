@@ -13,10 +13,11 @@ const Root = tw(Paper)`
 	flex-col-reverse
 	height[22rem]
 	p-3
+	cursor-pointer
+	hover:bg-indigo-50
 	sm:flex-row
 	sm:h-52
 	sm:p-4
-	cursor-pointer
 `;
 
 const Info = tw.div`
