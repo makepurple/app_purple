@@ -265,6 +265,12 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 							onClick={async (e) => {
 								e.stopPropagation();
 
+								const confirmed = window.confirm(
+									"Are you sure you wish to delete this snippet?\nThis cannot be undone."
+								);
+
+								if (!confirmed) return;
+
 								const where: CodeExampleWhereUniqueInput = {
 									id: codeExample.id
 								};
