@@ -65,12 +65,14 @@ export const CodeBlockTheme: PrismTheme = {
 		{
 			types: ["prolog", "constant"],
 			style: {
+				// #bd93f9
 				color: "rgb(189, 147, 249)"
 			}
 		},
 		{
 			types: ["builtin"],
 			style: {
+				// #36acaa
 				color: "rgb(54, 172, 170)",
 				fontWeight: "bold"
 			}
@@ -78,36 +80,42 @@ export const CodeBlockTheme: PrismTheme = {
 		{
 			types: ["inserted"],
 			style: {
+				// #50fa7b
 				color: "rgb(80, 250, 123)"
 			}
 		},
 		{
 			types: ["deleted"],
 			style: {
+				// #ff5555
 				color: "rgb(255, 85, 85)"
 			}
 		},
 		{
 			types: ["changed"],
 			style: {
+				// #ffb86c
 				color: "rgb(255, 184, 108)"
 			}
 		},
 		{
 			types: ["punctuation", "symbol"],
 			style: {
+				// #dddddd
 				color: "rgba(221, 221, 221)"
 			}
 		},
 		{
 			types: ["selector"],
 			style: {
+				// #ff79c6
 				color: "rgb(255, 121, 198)"
 			}
 		},
 		{
 			types: ["keyword"],
 			style: {
+				// #ff5aa7
 				color: "rgb(255, 90, 167)",
 				fontWeight: "bold"
 			}
@@ -115,6 +123,7 @@ export const CodeBlockTheme: PrismTheme = {
 		{
 			types: ["null", "nil"],
 			style: {
+				// #d9931e
 				color: "rgb(217, 147, 30)",
 				fontWeight: "bold"
 			}
@@ -122,6 +131,7 @@ export const CodeBlockTheme: PrismTheme = {
 		{
 			types: ["variable"],
 			style: {
+				// #bd93f9
 				color: "rgb(189, 147, 249)",
 				fontStyle: "italic"
 			}
@@ -129,30 +139,35 @@ export const CodeBlockTheme: PrismTheme = {
 		{
 			types: ["comment"],
 			style: {
+				// #888888
 				color: "rgb(136, 136, 136)"
 			}
 		},
 		{
 			types: ["attr-name"],
 			style: {
+				// #d9931e
 				color: "rgb(217, 147, 30)"
 			}
 		},
 		{
 			types: ["function", "maybe-class-name", "number", "tag"],
 			style: {
+				// #60a7fa
 				color: "rgb(96, 167, 250)"
 			}
 		},
 		{
 			types: ["function-variable"],
 			style: {
+				// #dddddd
 				color: "rgba(221, 221, 221)"
 			}
 		},
 		{
 			types: ["char", "string"],
 			style: {
+				// #2cb092
 				color: "rgb(44, 176, 146)"
 			}
 		}
