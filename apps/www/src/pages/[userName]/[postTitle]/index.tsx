@@ -298,6 +298,12 @@ export const Page: NextPage<PageProps> = () => {
 								onClick={async (e) => {
 									e.stopPropagation();
 
+									const confirmed = window.confirm(
+										"Are you sure you wish to delete this post?\nThis cannot be undone."
+									);
+
+									if (!confirmed) return;
+
 									const didSucceed = await removePost({ where: { id: post.id } })
 										.then((result) => !!result.data?.deletePost.record)
 										.catch(() => false);
