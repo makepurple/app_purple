@@ -7,6 +7,7 @@ import React, { Fragment, useMemo } from "react";
 import tw from "twin.macro";
 import { useGetUserOverviewQuery } from "../../graphql";
 import {
+	CodeExampleCard,
 	PostCard,
 	UserGitHubContributionHeatmap,
 	UserOverviewExperienceCard,
@@ -90,6 +91,13 @@ const SectionSeeAllButton = tw(Button)`
 	whitespace-nowrap
 `;
 
+const CodeExamples = tw.div`
+	grid
+	grid-template-columns[repeat(auto-fit, minmax(20rem, 1fr))]
+	auto-rows-fr
+	gap-4
+`;
+
 const BottomContent = tw.div`
 	grid
 	grid-template-columns[repeat(auto-fit, minmax(20rem, 1fr))]
@@ -137,6 +145,7 @@ export const Page: NextPage<PageProps> = () => {
 	const trophies = user.trophies;
 	const contributionCalendar = user.github.contributionCalendar;
 	const post = user.posts.nodes[0] ?? null;
+	const codeExamples = user.codeExamples.nodes ?? [];
 	const experiences = user.experiences.nodes ?? [];
 	const repositories = user.repositories.nodes ?? [];
 
@@ -230,6 +239,40 @@ export const Page: NextPage<PageProps> = () => {
 						</NonIdealState>
 					) : (
 						<PostCard post={post} />
+					)}
+				</Section>
+				<Section>
+					<SectionTitle tw="mb-2">
+						<NextLink href="/[userName]/snippets" as={`/${userName}/snippets`} passHref>
+							<SectionTitleText>Snippets</SectionTitleText>
+						</NextLink>
+						{user.codeExamples.totalCount > 2 && (
+							<NextLink
+								href="/[userName]/snippets"
+								as={`/${userName}/snippets`}
+								passHref
+							>
+								<SectionSeeAllButton as="a" size="small">
+									See{" "}
+									{FormatUtils.toGitHubFixed(user.codeExamples.totalCount - 2)}{" "}
+									more
+								</SectionSeeAllButton>
+							</NextLink>
+						)}
+					</SectionTitle>
+					{!codeExamples.length ? (
+						<NonIdealState
+							title="There's nothing here"
+							subTitle={`${user.name} hasn't published anything yet`}
+						>
+							<NoteIcon height={96} width={96} />
+						</NonIdealState>
+					) : (
+						<CodeExamples>
+							{codeExamples.map((codeExample) => (
+								<CodeExampleCard key={codeExample.id} codeExample={codeExample} />
+							))}
+						</CodeExamples>
 					)}
 				</Section>
 				<BottomContent>

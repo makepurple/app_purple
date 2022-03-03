@@ -5,6 +5,18 @@ query GetUserOverview($name: String!) {
 		}
 	) {
 		id
+		codeExamples(first: 2) {
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...CodeExampleCardCodeExample
+			}
+		}
 		createdAt
 		experiences(first: 3) {
 			totalCount

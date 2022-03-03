@@ -1,5 +1,6 @@
 import type { GetUserOverviewQuery, GetUserOverviewQueryVariables } from "../../generated";
 import {
+	CodeExample_fragment_mock,
 	Experience_fragment_mock,
 	Post_fragment_mock,
 	Repository_fragment_mock,
@@ -7,15 +8,21 @@ import {
 } from "../fragments";
 import { UserTrophies_fragment_mock } from "../fragments/UserTrophies.fragment.mock";
 
+const CODE_EXAMPLES_SIZE = 2;
 const EXPERIENCES_SIZE = 3;
+const REPOSITORIES_SIZE = 2;
+
+const codeExamples = Array.from({ length: CODE_EXAMPLES_SIZE }, (_, i) => ({
+	...CodeExample_fragment_mock,
+	__typename: "CodeExample" as const,
+	id: i.toString()
+}));
 
 const experiences = Array.from({ length: EXPERIENCES_SIZE }, (_, i) => ({
 	...Experience_fragment_mock,
 	__typename: "Experience" as const,
 	id: i.toString()
 }));
-
-const REPOSITORIES_SIZE = 2;
 
 const repositories = Array.from({ length: REPOSITORIES_SIZE }, (_, i) => ({
 	...Repository_fragment_mock,
@@ -29,6 +36,16 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 		...User_fragment_mock,
 		__typename: "User",
 		id: "0",
+		codeExamples: {
+			__typename: "CodeExampleConnection",
+			totalCount: CODE_EXAMPLES_SIZE + 5,
+			edges: codeExamples.map((codeExample) => ({
+				__typename: "CodeExampleEdge",
+				cursor: codeExample.id.toString(),
+				node: codeExample
+			})),
+			nodes: codeExamples.map((codeExample) => codeExample)
+		},
 		experiences: {
 			__typename: "ExperienceConnection",
 			totalCount: EXPERIENCES_SIZE + 5,
