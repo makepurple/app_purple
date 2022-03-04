@@ -728,6 +728,7 @@ type Mutation {
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
   unvoteCodeExample(where: CodeExampleWhereUniqueInput!): UnvoteCodeExamplePayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
+  unvotePost(where: PostWhereUniqueInput!): UnvotePostPayload!
   updateCodeExample(data: CodeExampleUpdateInput!, where: CodeExampleWhereUniqueInput!): UpdateCodeExamplePayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
