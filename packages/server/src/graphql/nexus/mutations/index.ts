@@ -13,6 +13,7 @@ export * from "./deleteComment";
 export * from "./deleteExperience";
 export * from "./deleteFriendship";
 export * from "./deletePost";
+export * from "./deleteRepository";
 export * from "./followSkill";
 export * from "./followUser";
 export * from "./inviteToChat";

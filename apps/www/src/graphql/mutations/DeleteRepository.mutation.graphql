@@ -1,0 +1,10 @@
+mutation DeleteRepository($where: RepositoryWhereUniqueInput!) {
+	deleteRepository(where: $where) {
+		viewer {
+			id
+		}
+		record {
+			id
+		}
+	}
+}

@@ -485,6 +485,13 @@ export type DeletePostPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type DeleteRepositoryPayload = MutationPayload & {
+  readonly __typename: 'DeleteRepositoryPayload';
+  readonly query: Query;
+  readonly record: Repository;
+  readonly viewer?: Maybe<User>;
+};
+
 export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
   readonly query: Query;
@@ -897,6 +904,7 @@ export type Mutation = {
   readonly deleteFriendship: DeleteFriendshipPayload;
   /** Users can delete their own posts. */
   readonly deletePost: DeletePostPayload;
+  readonly deleteRepository: DeleteRepositoryPayload;
   readonly followSkill: FollowUserPayload;
   readonly followUser: FollowUserPayload;
   readonly inviteToChat: InviteToChatPayload;
@@ -1013,6 +1021,12 @@ export type MutationDeleteFriendshipArgs = {
 /** Root mutation type */
 export type MutationDeletePostArgs = {
   where: PostWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationDeleteRepositoryArgs = {
+  where: RepositoryWhereUniqueInput;
 };
 
 
@@ -2726,6 +2740,13 @@ export type DeletePostMutationVariables = Exact<{
 
 
 export type DeletePostMutation = { readonly __typename: 'Mutation', readonly deletePost: { readonly __typename: 'DeletePostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } } };
+
+export type DeleteRepositoryMutationVariables = Exact<{
+  where: RepositoryWhereUniqueInput;
+}>;
+
+
+export type DeleteRepositoryMutation = { readonly __typename: 'Mutation', readonly deleteRepository: { readonly __typename: 'DeleteRepositoryPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record: { readonly __typename: 'Repository', readonly id: string } } };
 
 export type FollowSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
@@ -4820,6 +4841,22 @@ export const DeletePostDocument = /*#__PURE__*/ gql`
 
 export function useDeletePostMutation() {
   return Urql.useMutation<DeletePostMutation, DeletePostMutationVariables>(DeletePostDocument);
+};
+export const DeleteRepositoryDocument = /*#__PURE__*/ gql`
+    mutation DeleteRepository($where: RepositoryWhereUniqueInput!) {
+  deleteRepository(where: $where) {
+    viewer {
+      id
+    }
+    record {
+      id
+    }
+  }
+}
+    `;
+
+export function useDeleteRepositoryMutation() {
+  return Urql.useMutation<DeleteRepositoryMutation, DeleteRepositoryMutationVariables>(DeleteRepositoryDocument);
 };
 export const FollowSkillDocument = /*#__PURE__*/ gql`
     mutation FollowSkill($where: SkillWhereUniqueInput!) {

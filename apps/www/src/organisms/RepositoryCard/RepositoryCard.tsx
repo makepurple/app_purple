@@ -16,7 +16,11 @@ import React, { cloneElement, CSSProperties, forwardRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { RepositoryCardRepositoryFragment, useUpdateRepositoryMutation } from "../../graphql";
+import {
+	RepositoryCardRepositoryFragment,
+	useDeleteRepositoryMutation,
+	useUpdateRepositoryMutation
+} from "../../graphql";
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
 import { SkillAutosuggest } from "../SkillAutosuggest";
 
@@ -83,9 +87,21 @@ const LanguageColor = tw.div`
 	rounded-full
 `;
 
+const Actions = tw.div`
+	flex-shrink-0
+	flex
+	flex-col
+	items-stretch
+	gap-2
+`;
+
 const SaveButton = tw(FormButton)`
 	flex-shrink-0
 	w-20
+`;
+
+const DeleteButton = tw(FormButton)`
+	flex-shrink-0
 `;
 
 interface SuggestedSkill {
@@ -106,7 +122,10 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 	const primaryLanguage = repository.github.primaryLanguage;
 	const license = repository.github.licenseInfo;
 
+	const [{ fetching: removing }, removeRepository] = useDeleteRepositoryMutation();
 	const [{ fetching: updating }, updateRepository] = useUpdateRepositoryMutation();
+
+	const fetching: boolean = removing || updating;
 
 	const { control, handleSubmit, register } = useForm<{
 		skills: readonly SuggestedSkill[];
@@ -313,9 +332,36 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 				</Info>
 			</Details>
 			{editing && (
-				<SaveButton size="small" type="submit" tw="ml-2">
-					{updating ? <Spinner /> : "Save"}
-				</SaveButton>
+				<Actions tw="ml-2">
+					<SaveButton disabled={fetching} size="small" type="submit">
+						{fetching ? <Spinner /> : "Save"}
+					</SaveButton>
+					<DeleteButton
+						disabled={fetching}
+						onClick={async (e) => {
+							e.stopPropagation();
+
+							const didSucceed = await removeRepository({
+								where: { id: repository.id }
+							})
+								.then((result) => result.data?.deleteRepository.record)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not delete this repository");
+
+								return;
+							}
+
+							toast.success("Repository was successfully deleted");
+						}}
+						size="small"
+						type="button"
+						variant="alert"
+					>
+						{fetching ? <Spinner /> : "Delete"}
+					</DeleteButton>
+				</Actions>
 			)}
 		</>
 	);
