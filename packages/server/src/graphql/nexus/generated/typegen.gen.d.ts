@@ -407,7 +407,7 @@ export interface NexusGenEnums {
   GitHubUserContributionLevel: "FIRST_QUARTILE" | "FOURTH_QUARTILE" | "NONE" | "SECOND_QUARTILE" | "THIRD_QUARTILE"
   NotificationType: "ChatMessageReceived" | "CodeExampleCommented" | "FriendshipAccepted" | "PostCommented"
   SortOrder: "asc" | "desc"
-  UserActivityType: "CommentCodeExample" | "CommentPost" | "CreateCodeExample" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvotePost"
+  UserActivityType: "CommentCodeExample" | "CommentPost" | "CreateCodeExample" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvoteCodeExample" | "UpvotePost"
 }
 
 export interface NexusGenScalars {

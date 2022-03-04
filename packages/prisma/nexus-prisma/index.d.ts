@@ -14914,13 +14914,14 @@ export interface CodeExampleUpvoter {
   *   FriendAcceptUser
   *   Joined
   *   PublishPost
+  *   UpvoteCodeExample
   *   UpvotePost
   * }
   * ```
   *
   * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
   *
-  * Contains these members: CommentCodeExample, CommentPost, CreateCodeExample, FollowSkill, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvotePost
+  * Contains these members: CommentCodeExample, CommentPost, CreateCodeExample, FollowSkill, FollowUser, FriendAcceptUser, Joined, PublishPost, UpvoteCodeExample, UpvotePost
   *
   * @example
   *
@@ -14932,7 +14933,7 @@ export interface CodeExampleUpvoter {
 export interface UserActivityType {
   name: 'UserActivityType'
   description: undefined
-  members: ['CommentCodeExample', 'CommentPost', 'CreateCodeExample', 'FollowSkill', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvotePost']
+  members: ['CommentCodeExample', 'CommentPost', 'CreateCodeExample', 'FollowSkill', 'FollowUser', 'FriendAcceptUser', 'Joined', 'PublishPost', 'UpvoteCodeExample', 'UpvotePost']
 }
 
 /**
@@ -15050,21 +15051,21 @@ export interface ExperienceType {
   * ```prisma
   * /// Lorem ipsum dolor sit amet...
   * enum CodeLanguage {
-  *   JavaScript
-  *   TypeScript
-  *   HTML
-  *   SCSS
-  *   GraphQL
-  *   Python
   *   Go
+  *   GraphQL
+  *   HTML
+  *   JavaScript
+  *   Python
+  *   SCSS
   *   SQL
+  *   TypeScript
   *   YAML
   * }
   * ```
   *
   * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
   *
-  * Contains these members: JavaScript, TypeScript, HTML, SCSS, GraphQL, Python, Go, SQL, YAML
+  * Contains these members: Go, GraphQL, HTML, JavaScript, Python, SCSS, SQL, TypeScript, YAML
   *
   * @example
   *
@@ -15076,7 +15077,7 @@ export interface ExperienceType {
 export interface CodeLanguage {
   name: 'CodeLanguage'
   description: undefined
-  members: ['JavaScript', 'TypeScript', 'HTML', 'SCSS', 'GraphQL', 'Python', 'Go', 'SQL', 'YAML']
+  members: ['Go', 'GraphQL', 'HTML', 'JavaScript', 'Python', 'SCSS', 'SQL', 'TypeScript', 'YAML']
 }
 
 

@@ -109,6 +109,7 @@ enum UserActivityType {
   FriendAcceptUser
   Joined
   PublishPost
+  UpvoteCodeExample
   UpvotePost
 }
 
