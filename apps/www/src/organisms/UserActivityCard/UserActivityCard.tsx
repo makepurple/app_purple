@@ -8,6 +8,7 @@ import {
 	UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment,
 	UserActivityCardJoinedUserActivityJoinedFragment,
 	UserActivityCardPublishPostUserActivityPublishPostFragment,
+	UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragment,
 	UserActivityCardUpvotePostUserActivityUpvotePostFragment
 } from "../../graphql";
 import { UserActivityCardCommentPost } from "../UserActivityCardCommentPost";
@@ -30,6 +31,7 @@ export interface UserActivityCardProps {
 		| UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment
 		| UserActivityCardJoinedUserActivityJoinedFragment
 		| UserActivityCardPublishPostUserActivityPublishPostFragment
+		| UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragment
 		| UserActivityCardUpvotePostUserActivityUpvotePostFragment;
 }
 
@@ -95,6 +97,8 @@ export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps
 					userActivity={userActivity}
 				/>
 			);
+		case "UserActivityUpvoteCodeExample":
+			return <div ref={ref} />;
 		case "UserActivityUpvotePost":
 			return (
 				<UserActivityCardUpvotePost
