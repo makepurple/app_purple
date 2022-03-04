@@ -7,6 +7,7 @@ import {
 	UserActivityFriendAcceptUser_fragment_mock,
 	UserActivityJoined_fragment_mock,
 	UserActivityPublishPost_fragment_mock,
+	UserActivityUpvoteCodeExample_fragment_mock,
 	UserActivityUpvotePost_fragment_mock
 } from "../fragments";
 
@@ -22,6 +23,7 @@ const activities = Array.from({ length: DATA_SIZE }, (_, i) => {
 		UserActivityFriendAcceptUser_fragment_mock,
 		UserActivityJoined_fragment_mock,
 		UserActivityPublishPost_fragment_mock,
+		UserActivityUpvoteCodeExample_fragment_mock,
 		UserActivityUpvotePost_fragment_mock
 	]);
 

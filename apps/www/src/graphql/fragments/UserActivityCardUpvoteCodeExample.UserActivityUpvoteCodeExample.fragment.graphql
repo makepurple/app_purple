@@ -3,6 +3,7 @@ fragment UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExample on UserA
 	codeExample {
 		authorName
 		description
+		id
 		language
 		languageColor
 		primarySkill {

@@ -79,6 +79,7 @@ export * from "./UserActivityCardFriendAcceptUser";
 export * from "./UserActivityCardHeader";
 export * from "./UserActivityCardJoined";
 export * from "./UserActivityCardPublishPost";
+export * from "./UserActivityCardUpvoteCodeExample";
 export * from "./UserActivityCardUpvotePost";
 export * from "./UserAvatar";
 export * from "./UserFollowCard";

@@ -135,13 +135,13 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 	const isMyUser = session?.user.name === codeExample.authorName;
 
 	const [{ fetching: removing }, remove] = useDeleteCodeExampleMutation();
-	const [{ fetching: upvoting }, upvote] = useUpvoteCodeExampleMutation();
 	const [{ fetching: unvoting }, unvote] = useUnvoteCodeExampleMutation();
+	const [{ fetching: upvoting }, upvote] = useUpvoteCodeExampleMutation();
 
 	const primarySkill = codeExample.primarySkill;
 	const skills = codeExample.skills.nodes;
 
-	const fetching = removing || upvoting || unvoting;
+	const fetching = removing || unvoting || upvoting;
 
 	return (
 		<Root
