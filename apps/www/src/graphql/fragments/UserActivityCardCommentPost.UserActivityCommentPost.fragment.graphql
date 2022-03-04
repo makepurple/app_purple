@@ -19,6 +19,7 @@ fragment UserActivityCardCommentPostUserActivityCommentPost on UserActivityComme
 			thumbnailUrl
 			title
 			upvotes
+			urlSlug
 			viewerUpvote
 		}
 		postId

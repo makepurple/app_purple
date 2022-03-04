@@ -17,6 +17,7 @@ fragment UserActivityCardUpvotePostUserActivityUpvotePost on UserActivityUpvoteP
 		thumbnailUrl
 		title
 		upvotes
+		urlSlug
 		viewerUpvote
 	}
 	postId

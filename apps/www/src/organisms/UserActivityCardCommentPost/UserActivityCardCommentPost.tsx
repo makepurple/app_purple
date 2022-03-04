@@ -143,7 +143,7 @@ export const UserActivityCardCommentPost = forwardRef<
 				{!!post.thumbnailUrl && (
 					<NextLink
 						href="/[userName]/[postTitle]"
-						as={`/${post.authorName}/${post.title}`}
+						as={`/${post.authorName}/${post.urlSlug}`}
 						passHref
 					>
 						<ThumbnailContainer tw="mr-4">
@@ -160,7 +160,7 @@ export const UserActivityCardCommentPost = forwardRef<
 				<PostContent>
 					<NextLink
 						href="/[userName]/[postTitle]"
-						as={`/${post.authorName}/${post.title}`}
+						as={`/${post.authorName}/${post.urlSlug}`}
 						passHref
 					>
 						<Title>{post.title}</Title>
@@ -168,7 +168,7 @@ export const UserActivityCardCommentPost = forwardRef<
 					{post.description && (
 						<NextLink
 							href="/[userName]/[postTitle]"
-							as={`/${post.authorName}/${post.title}`}
+							as={`/${post.authorName}/${post.urlSlug}`}
 							passHref
 						>
 							<DescriptionContainer>
