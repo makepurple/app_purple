@@ -36,14 +36,19 @@ export const unvotePost = mutationField("unvotePost", {
 				}
 			});
 
-			return await transaction.postUpvoter.delete({
+			const { post: result } = await transaction.postUpvoter.delete({
 				where: {
 					userId_postId: {
 						userId: user.id,
 						postId: post.id
 					}
+				},
+				select: {
+					post: true
 				}
 			});
+
+			return result;
 		});
 
 		return { record };
