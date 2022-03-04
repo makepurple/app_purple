@@ -59,6 +59,14 @@ const config = {
 			permanent: true
 		}
 	],
+	rewrites: async () => ({
+		beforeFiles: [
+			{
+				source: "/blog",
+				destination: "/leedavidcs/posts"
+			}
+		]
+	}),
 	webpack5: true,
 	webpack: (config, { dev, isServer }) => {
 		if (!isServer) {
