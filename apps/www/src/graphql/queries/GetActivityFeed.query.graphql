@@ -38,6 +38,9 @@ query GetActivityFeed(
 			... on UserActivityPublishPost {
 				...UserActivityCardPublishPostUserActivityPublishPost
 			}
+			... on UserActivityUpvoteCodeExample {
+				...UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExample
+			}
 			... on UserActivityUpvotePost {
 				...UserActivityCardUpvotePostUserActivityUpvotePost
 			}

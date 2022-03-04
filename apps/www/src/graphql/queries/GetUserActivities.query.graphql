@@ -45,6 +45,9 @@ query GetUserActivities(
 				... on UserActivityPublishPost {
 					...UserActivityCardPublishPostUserActivityPublishPost
 				}
+				... on UserActivityUpvoteCodeExample {
+					...UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExample
+				}
 				... on UserActivityUpvotePost {
 					...UserActivityCardUpvotePostUserActivityUpvotePost
 				}
