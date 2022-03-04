@@ -28,13 +28,16 @@ const Content = tw(Paper)`
 
 const ThumbnailContainer = tw.a`
 	flex-shrink-0
-	w-64
+	w-32
+	sm:w-64
 `;
 
 const Thumbnail = tw.div`
 	relative
-	aspect-h-5
-	aspect-w-9
+	aspect-h-1
+	aspect-w-1
+	sm:aspect-h-5
+	sm:aspect-w-9
 	rounded-md
 	overflow-hidden
 `;
@@ -43,14 +46,16 @@ const PostContent = tw.div`
 	flex
 	flex-col
 	items-start
+	min-w-0
 `;
 
 const Title = tw(Anchor)`
+	w-full
 	text-xl
 	font-bold
 	leading-none
 	text-black
-	line-clamp-2
+	truncate
 `;
 
 const DescriptionContainer = tw.a`
@@ -68,21 +73,26 @@ const AuthorName = tw(Anchor)`
 	text-base
 	font-semibold
 	text-black
+	truncate
 `;
+
 const PostedDetails = tw.div`
 	flex
 	flex-row
 	items-center
+	w-full
+	truncate
 `;
 
 const Delimiter = tw.span`
-	mx-1
 	font-bold
+	mx-1
 `;
 
 const PublishedAt = tw.span`
 	text-base
 	text-gray-500
+	whitespace-nowrap
 `;
 
 const KarmaContainer = tw.div`
