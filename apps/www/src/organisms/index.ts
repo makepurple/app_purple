@@ -72,6 +72,7 @@ export * from "./TopLanguages";
 export * from "./UpdateExperienceForm";
 export * from "./UrqlProvider";
 export * from "./UserActivityCard";
+export * from "./UserActivityCardCommentCodeExample";
 export * from "./UserActivityCardCommentPost";
 export * from "./UserActivityCardCreateCodeExample";
 export * from "./UserActivityCardFollowSkill";
