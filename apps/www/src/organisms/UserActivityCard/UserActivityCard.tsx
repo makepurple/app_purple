@@ -11,12 +11,15 @@ import {
 	UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragment,
 	UserActivityCardUpvotePostUserActivityUpvotePostFragment
 } from "../../graphql";
+import { UserActivityCardCommentCodeExample } from "../UserActivityCardCommentCodeExample";
 import { UserActivityCardCommentPost } from "../UserActivityCardCommentPost";
+import { UserActivityCardCreateCodeExample } from "../UserActivityCardCreateCodeExample";
 import { UserActivityCardFollowSkill } from "../UserActivityCardFollowSkill";
 import { UserActivityCardFollowUser } from "../UserActivityCardFollowUser";
 import { UserActivityCardFriendAcceptUser } from "../UserActivityCardFriendAcceptUser";
 import { UserActivityCardJoined } from "../UserActivityCardJoined";
 import { UserActivityCardPublishPost } from "../UserActivityCardPublishPost";
+import { UserActivityCardUpvoteCodeExample } from "../UserActivityCardUpvoteCodeExample";
 import { UserActivityCardUpvotePost } from "../UserActivityCardUpvotePost";
 
 export interface UserActivityCardProps {
@@ -40,7 +43,14 @@ export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps
 
 	switch (userActivity.__typename) {
 		case "UserActivityCommentCodeExample":
-			return <div ref={ref} />;
+			return (
+				<UserActivityCardCommentCodeExample
+					ref={ref}
+					className={className}
+					style={style}
+					userActivity={userActivity}
+				/>
+			);
 		case "UserActivityCommentPost":
 			return (
 				<UserActivityCardCommentPost
@@ -51,7 +61,14 @@ export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps
 				/>
 			);
 		case "UserActivityCreateCodeExample":
-			return <div ref={ref} />;
+			return (
+				<UserActivityCardCreateCodeExample
+					ref={ref}
+					className={className}
+					style={style}
+					userActivity={userActivity}
+				/>
+			);
 		case "UserActivityFollowSkill":
 			return (
 				<UserActivityCardFollowSkill
@@ -98,7 +115,14 @@ export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps
 				/>
 			);
 		case "UserActivityUpvoteCodeExample":
-			return <div ref={ref} />;
+			return (
+				<UserActivityCardUpvoteCodeExample
+					ref={ref}
+					className={className}
+					style={style}
+					userActivity={userActivity}
+				/>
+			);
 		case "UserActivityUpvotePost":
 			return (
 				<UserActivityCardUpvotePost

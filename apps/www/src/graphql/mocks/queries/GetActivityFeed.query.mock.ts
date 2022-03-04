@@ -1,7 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { GetActivityFeedQuery } from "../../generated";
 import {
+	UserActivityCommentCodeExample_fragment_mock,
 	UserActivityCommentPost_fragment_mock,
+	UserActivityCreateCodeExample_fragment_mock,
 	UserActivityFollowSkill_fragment_mock,
 	UserActivityFollowUser_fragment_mock,
 	UserActivityFriendAcceptUser_fragment_mock,
@@ -17,7 +19,9 @@ const DATA_SIZE = 20;
 
 const activities = Array.from({ length: DATA_SIZE }, (_, i) => {
 	const activity = faker.random.arrayElement([
+		UserActivityCommentCodeExample_fragment_mock,
 		UserActivityCommentPost_fragment_mock,
+		UserActivityCreateCodeExample_fragment_mock,
 		UserActivityFollowSkill_fragment_mock,
 		UserActivityFollowUser_fragment_mock,
 		UserActivityFriendAcceptUser_fragment_mock,
