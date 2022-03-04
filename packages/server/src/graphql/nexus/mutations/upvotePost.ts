@@ -21,6 +21,11 @@ export const upvotePost = mutationField("upvotePost", {
 						type: UserActivityType.UpvotePost,
 						user: { id: { equals: user.id } }
 					}
+				},
+				skills: {
+					select: {
+						skillId: true
+					}
 				}
 			}
 		});
@@ -34,6 +39,11 @@ export const upvotePost = mutationField("upvotePost", {
 					? {
 							activities: {
 								create: {
+									skills: {
+										connect: post.skills.map((skill) => ({
+											id: skill.skillId
+										}))
+									},
 									type: UserActivityType.UpvotePost,
 									user: { connect: { id: user.id } }
 								}
