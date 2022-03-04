@@ -2,11 +2,41 @@ fragment UserActivityCardCreateCodeExampleUserActivityCreateCodeExample on UserA
 	id
 	codeExample {
 		authorName
-		content
-		createdAt
+		description
 		id
-		updatedAt
+		language
+		languageColor
+		primarySkill {
+			github {
+				id
+				name
+				owner {
+					id
+					avatarUrl
+					login
+				}
+			}
+			id
+			name
+			owner
+		}
+		skills(first: 5) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				id
+				name
+				owner
+			}
+		}
+		title
+		upvotes
+		urlSlug
+		viewerUpvote
 	}
-	codeExampleId
 	...UserActivityCardHeaderUserActivity
 }

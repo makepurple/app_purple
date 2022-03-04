@@ -73,6 +73,7 @@ export * from "./UpdateExperienceForm";
 export * from "./UrqlProvider";
 export * from "./UserActivityCard";
 export * from "./UserActivityCardCommentPost";
+export * from "./UserActivityCardCreateCodeExample";
 export * from "./UserActivityCardFollowSkill";
 export * from "./UserActivityCardFollowUser";
 export * from "./UserActivityCardFriendAcceptUser";
