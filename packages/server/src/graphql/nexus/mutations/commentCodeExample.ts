@@ -66,21 +66,22 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 						  },
 					// Only create a notification if the author doesn't already have one for this
 					// post
-					notifications: codeExample.notifications.length
-						? {
-								update: {
-									where: { id: codeExample.notifications[0].id },
-									data: {
-										updatedAt: new Date()
+					notifications:
+						codeExample.notifications.length && codeExample.authorName !== user.name
+							? {
+									update: {
+										where: { id: codeExample.notifications[0].id },
+										data: {
+											updatedAt: new Date()
+										}
 									}
-								}
-						  }
-						: {
-								create: {
-									type: NotificationType.CodeExampleCommented,
-									user: { connect: { name: codeExample.authorName } }
-								}
-						  }
+							  }
+							: {
+									create: {
+										type: NotificationType.CodeExampleCommented,
+										user: { connect: { name: codeExample.authorName } }
+									}
+							  }
 				}
 			});
 

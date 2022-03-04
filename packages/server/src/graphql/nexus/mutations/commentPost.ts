@@ -65,22 +65,23 @@ export const commentPost = mutationField("commentPost", {
 								}
 						  },
 					// Only create a notification if the author doesn't already have one for this
-					// post
-					notifications: post.notifications.length
-						? {
-								update: {
-									where: { id: post.notifications[0].id },
-									data: {
-										updatedAt: new Date()
+					// post, and the comment did not come from the author
+					notifications:
+						post.notifications.length && post.authorName !== user.name
+							? {
+									update: {
+										where: { id: post.notifications[0].id },
+										data: {
+											updatedAt: new Date()
+										}
 									}
-								}
-						  }
-						: {
-								create: {
-									type: NotificationType.PostCommented,
-									user: { connect: { name: post.authorName } }
-								}
-						  }
+							  }
+							: {
+									create: {
+										type: NotificationType.PostCommented,
+										user: { connect: { name: post.authorName } }
+									}
+							  }
 				}
 			});
 
