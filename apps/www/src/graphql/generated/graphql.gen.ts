@@ -2524,7 +2524,7 @@ export type CommentRepliesCommentConnectionFragment = { readonly __typename: 'Co
 
 export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null };
 
-export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string } } };
+export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
 export type NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } };
 
@@ -2705,6 +2705,13 @@ export type DeleteCodeExampleMutationVariables = Exact<{
 
 
 export type DeleteCodeExampleMutation = { readonly __typename: 'Mutation', readonly deleteCodeExample: { readonly __typename: 'DeleteCodeExamplePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'CodeExample', readonly authorName: string, readonly id: string, readonly title: string, readonly urlSlug: string } } };
+
+export type DeleteExperienceMutationVariables = Exact<{
+  where: ExperienceWhereUniqueInput;
+}>;
+
+
+export type DeleteExperienceMutation = { readonly __typename: 'Mutation', readonly deleteExperience: { readonly __typename: 'DeleteExperiencePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Experience', readonly id: string } } };
 
 export type DeleteFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -3462,6 +3469,10 @@ export const ExperienceCardExperienceFragmentDoc = /*#__PURE__*/ gql`
   positionName
   startDate
   type
+  user {
+    id
+    name
+  }
 }
     `;
 export const NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc = /*#__PURE__*/ gql`
@@ -4752,6 +4763,23 @@ export const DeleteCodeExampleDocument = /*#__PURE__*/ gql`
 
 export function useDeleteCodeExampleMutation() {
   return Urql.useMutation<DeleteCodeExampleMutation, DeleteCodeExampleMutationVariables>(DeleteCodeExampleDocument);
+};
+export const DeleteExperienceDocument = /*#__PURE__*/ gql`
+    mutation DeleteExperience($where: ExperienceWhereUniqueInput!) {
+  deleteExperience(where: $where) {
+    viewer {
+      id
+      name
+    }
+    record {
+      id
+    }
+  }
+}
+    `;
+
+export function useDeleteExperienceMutation() {
+  return Urql.useMutation<DeleteExperienceMutation, DeleteExperienceMutationVariables>(DeleteExperienceDocument);
 };
 export const DeleteFriendshipDocument = /*#__PURE__*/ gql`
     mutation DeleteFriendship($where: UserWhereUniqueInput!) {

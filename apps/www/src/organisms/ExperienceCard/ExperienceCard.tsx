@@ -1,10 +1,30 @@
-import { Avatar, Button, GitHubAvatarImage, PencilIcon } from "@makepurple/components";
+import { Avatar, Button, GitHubAvatarImage } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
+import { useSession } from "next-auth/react";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
+import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { ExperienceCardExperienceFragment, ExperienceType } from "../../graphql";
+import {
+	ExperienceCardExperienceFragment,
+	ExperienceType,
+	useDeleteExperienceMutation
+} from "../../graphql";
+import { CancelIcon, PencilIcon } from "../../svgs";
 
 const EditButton = tw(Button)`
+	flex-shrink-0
+	h-10
+	w-10
+	p-0
+	ml-2
+	opacity-100
+	transition
+	duration-150
+	ease-in
+	sm:opacity-0
+`;
+
+const DeleteButton = tw(Button)`
 	flex-shrink-0
 	h-10
 	w-10
@@ -30,10 +50,12 @@ const Root = styled.div`
 		`}
 	}
 
-	&:hover ${EditButton} {
-		${tw`
-			opacity-100
-		`}
+	&:hover {
+		& ${EditButton}, & ${DeleteButton} {
+			${tw`
+				opacity-100
+			`}
+		}
 	}
 `;
 
@@ -64,21 +86,18 @@ const PositionType = tw.span`
 `;
 
 const OrganizationName = tw.h4`
-	mt-1
 	text-base
 	leading-none
 	text-black
 `;
 
 const Timeframe = tw.div`
-	mt-1
 	text-sm
 	leading-none
 	text-gray-500
 `;
 
 const Location = tw.div`
-	mt-1
 	text-sm
 	leading-none
 	text-gray-500
@@ -92,6 +111,14 @@ const Highlights = tw.ul`
 	marker:text-blue-500
 `;
 
+const Actions = tw.div`
+	flex-shrink-0
+	flex
+	flex-col
+	items-stretch
+	gap-2
+`;
+
 export interface ExperienceCardProps {
 	className?: string;
 	experience: ExperienceCardExperienceFragment;
@@ -101,6 +128,12 @@ export interface ExperienceCardProps {
 
 export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((props, ref) => {
 	const { className, experience, onEdit, style } = props;
+
+	const { data: session } = useSession();
+
+	const isMyUser = session?.user.name === experience.user.name;
+
+	const [{ fetching: removing }, removeExperience] = useDeleteExperienceMutation();
 
 	const githubOrganization = experience.organization.github;
 
@@ -170,11 +203,11 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 						)}
 					</PositionName>
 				)}
-				<OrganizationName>
+				<OrganizationName tw="mt-2">
 					{githubOrganization.name ?? githubOrganization.login}
 				</OrganizationName>
-				{timeframe && <Timeframe>{timeframe}</Timeframe>}
-				{experience.location && <Location>{experience.location}</Location>}
+				{timeframe && <Timeframe tw="mt-2">{timeframe}</Timeframe>}
+				{experience.location && <Location tw="mt-2">{experience.location}</Location>}
 				{experience.highlights.length && (
 					<Highlights>
 						{experience.highlights.map((highlight, i) => (
@@ -183,15 +216,46 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 					</Highlights>
 				)}
 			</Info>
-			<EditButton
-				onClick={() => {
-					onEdit?.(experience);
-				}}
-				type="button"
-				variant="secondary"
-			>
-				<PencilIcon height={24} width={24} />
-			</EditButton>
+			<Actions>
+				<EditButton
+					disabled={removing}
+					onClick={(e) => {
+						e.stopPropagation();
+
+						onEdit?.(experience);
+					}}
+					type="button"
+					variant="secondary"
+				>
+					<PencilIcon height={24} width={24} />
+				</EditButton>
+				{isMyUser && (
+					<DeleteButton
+						disabled={removing}
+						onClick={async (e) => {
+							e.stopPropagation();
+
+							const didSucceed = await removeExperience({
+								where: { id: experience.id }
+							})
+								.then((result) => !!result.data?.deleteExperience.record)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not delete experience");
+
+								return;
+							}
+
+							toast.success("Experience was successfully deleted");
+						}}
+						type="button"
+						variant="alert"
+					>
+						<CancelIcon height={24} width={24} />
+					</DeleteButton>
+				)}
+			</Actions>
 		</Root>
 	);
 });

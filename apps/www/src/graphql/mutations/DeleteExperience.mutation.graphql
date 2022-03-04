@@ -1,0 +1,11 @@
+mutation DeleteExperience($where: ExperienceWhereUniqueInput!) {
+	deleteExperience(where: $where) {
+		viewer {
+			id
+			name
+		}
+		record {
+			id
+		}
+	}
+}
