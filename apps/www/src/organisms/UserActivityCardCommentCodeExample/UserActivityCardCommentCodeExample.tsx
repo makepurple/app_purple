@@ -152,6 +152,7 @@ export const UserActivityCardCommentCodeExample = forwardRef<
 						`/${codeExample.authorName}/snippets/${codeExample.urlSlug}`
 					);
 				}}
+				tw="mt-2"
 			>
 				<NextLink
 					href="/s/[skillOwner]/[skillName]"
