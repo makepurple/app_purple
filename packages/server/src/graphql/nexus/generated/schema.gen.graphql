@@ -1275,6 +1275,12 @@ type UnvoteCommentPayload implements MutationPayload {
   viewer: User
 }
 
+type UnvotePostPayload implements MutationPayload {
+  query: Query!
+  record: Post!
+  viewer: User
+}
+
 type UpdateCodeExamplePayload implements MutationPayload {
   query: Query!
   record: CodeExample!

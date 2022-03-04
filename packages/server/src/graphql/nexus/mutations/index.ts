@@ -30,6 +30,7 @@ export * from "./unfollowSkill";
 export * from "./unfollowUser";
 export * from "./unvoteCodeExample";
 export * from "./unvoteComment";
+export * from "./unvotePost";
 export * from "./updateCodeExample";
 export * from "./updateComment";
 export * from "./updateDesiredSkills";

@@ -94,6 +94,7 @@ export * from "./UnfollowSkillPayload";
 export * from "./UnfollowUserPayload";
 export * from "./UnvoteCodeExamplePayload";
 export * from "./UnvoteCommentPayload";
+export * from "./UnvotePostPayload";
 export * from "./UpdateCodeExamplePayload";
 export * from "./UpdateCommentPayload";
 export * from "./UpdateDesiredSkillsPayload";
