@@ -26,6 +26,10 @@ export const activityFeed = queryField("activityFeed", {
 								{
 									OR: [
 										{
+											type: UserActivityType.CommentCodeExample,
+											comment: {}
+										},
+										{
 											type: UserActivityType.CommentPost,
 											comment: {}
 										},
@@ -51,6 +55,10 @@ export const activityFeed = queryField("activityFeed", {
 										{
 											type: UserActivityType.PublishPost,
 											post: {}
+										},
+										{
+											type: UserActivityType.UpvoteCodeExample,
+											codeExample: {}
 										},
 										{
 											type: UserActivityType.UpvotePost,

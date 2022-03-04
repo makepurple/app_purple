@@ -79,6 +79,10 @@ export const User = objectType({
 											post: {}
 										},
 										{
+											type: UserActivityType.UpvoteCodeExample,
+											codeExample: {}
+										},
+										{
 											type: UserActivityType.UpvotePost,
 											post: {}
 										}
@@ -163,6 +167,10 @@ export const User = objectType({
 												{
 													type: UserActivityType.PublishPost,
 													post: {}
+												},
+												{
+													type: UserActivityType.UpvoteCodeExample,
+													codeExample: {}
 												},
 												{
 													type: UserActivityType.UpvotePost,

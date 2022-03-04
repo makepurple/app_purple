@@ -119,6 +119,7 @@ export * from "./UserActivityFollowUser";
 export * from "./UserActivityFriendAcceptUser";
 export * from "./UserActivityJoined";
 export * from "./UserActivityPublishPost";
+export * from "./UserActivityUpvoteCodeExample";
 export * from "./UserActivityUpvotePost";
 export * from "./UserConnection";
 export * from "./UserEdge";

@@ -1521,6 +1521,15 @@ enum UserActivityType {
   UpvotePost
 }
 
+type UserActivityUpvoteCodeExample implements UserActivity {
+  codeExample: CodeExample!
+  codeExampleId: String!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
 type UserActivityUpvotePost implements UserActivity {
   id: ID!
   post: Post!
