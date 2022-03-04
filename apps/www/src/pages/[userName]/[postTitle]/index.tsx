@@ -315,6 +315,8 @@ export const Page: NextPage<PageProps> = () => {
 									}
 
 									toast.success("Post was successfully deleted");
+
+									await router.push("/[userName]/posts", `/${userName}/posts`);
 								}}
 								size="small"
 								type="button"
