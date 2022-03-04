@@ -7,7 +7,13 @@ import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
-import { PostCardPostFragment, useDeletePostMutation, useUpvotePostMutation } from "../../graphql";
+import {
+	PostCardPostFragment,
+	PostWhereUniqueInput,
+	useDeletePostMutation,
+	useUnvotePostMutation,
+	useUpvotePostMutation
+} from "../../graphql";
 
 const DeleteButton = tw(Button)`
 	opacity-0
@@ -145,9 +151,10 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 	const isMyPost = session?.user.name === post.authorName;
 
 	const [{ fetching: removing }, removePost] = useDeletePostMutation();
+	const [{ fetching: unvoting }, unvotePost] = useUnvotePostMutation();
 	const [{ fetching: upvoting }, upvotePost] = useUpvotePostMutation();
 
-	const fetching = removing || upvoting;
+	const fetching = removing || unvoting || upvoting;
 
 	const postUrl: string = `/${post.authorName}/${post.urlSlug}`;
 
@@ -186,11 +193,21 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 				</PostedDetails>
 				<Actions tw="mt-2">
 					<UpvoteButton
-						disabled={fetching || !!post.viewerUpvote}
+						disabled={fetching}
 						onClick={async (e) => {
 							e.stopPropagation();
 
-							const didSucceed = await upvotePost({ where: { id: post.id } })
+							const where: PostWhereUniqueInput = {
+								id: post.id
+							};
+
+							if (post.viewerUpvote) {
+								await unvotePost({ where }).catch(() => false);
+
+								return;
+							}
+
+							const didSucceed = await upvotePost({ where })
 								.then((result) => !!result.data?.upvotePost.record)
 								.catch(() => false);
 

@@ -1,0 +1,20 @@
+mutation UnvotePost($where: PostWhereUniqueInput!) {
+	unvotePost(where: $where) {
+		record {
+			id
+			upvotes
+			upvoters(first: 6) {
+				edges {
+					cursor
+					node {
+						id
+					}
+				}
+				nodes {
+					id
+				}
+			}
+			viewerUpvote
+		}
+	}
+}

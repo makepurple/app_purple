@@ -236,13 +236,15 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 								id: codeExample.id
 							};
 
-							const didSucceed = codeExample.viewerUpvote
-								? await unvote({ where })
-										.then((result) => !!result.data?.unvoteCodeExample.record)
-										.catch(() => false)
-								: await upvote({ where })
-										.then((result) => !!result.data?.upvoteCodeExample.record)
-										.catch(() => false);
+							if (codeExample.viewerUpvote) {
+								await unvote({ where }).catch(() => false);
+
+								return;
+							}
+
+							const didSucceed = await upvote({ where })
+								.then((result) => !!result.data?.upvoteCodeExample.record)
+								.catch(() => false);
 
 							if (!didSucceed) {
 								toast.error("Could not like this snippet");

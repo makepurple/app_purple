@@ -712,6 +712,7 @@ type Mutation {
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
   unvoteCodeExample(where: CodeExampleWhereUniqueInput!): UnvoteCodeExamplePayload!
   unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
+  unvotePost(where: PostWhereUniqueInput!): UnvotePostPayload!
   updateCodeExample(data: CodeExampleUpdateInput!, where: CodeExampleWhereUniqueInput!): UpdateCodeExamplePayload!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
   updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
@@ -1241,6 +1242,12 @@ type UnvoteCommentPayload implements MutationPayload {
   viewer: User
 }
 
+type UnvotePostPayload implements MutationPayload {
+  query: Query!
+  record: Post!
+  viewer: User
+}
+
 type UpdateCodeExamplePayload implements MutationPayload {
   query: Query!
   record: CodeExample!
@@ -1483,7 +1490,17 @@ enum UserActivityType {
   FriendAcceptUser
   Joined
   PublishPost
+  UpvoteCodeExample
   UpvotePost
+}
+
+type UserActivityUpvoteCodeExample implements UserActivity {
+  codeExample: CodeExample!
+  codeExampleId: String!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
 }
 
 type UserActivityUpvotePost implements UserActivity {
