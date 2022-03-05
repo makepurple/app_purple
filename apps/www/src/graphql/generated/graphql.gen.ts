@@ -1242,6 +1242,18 @@ export type NotificationChatMessageReceived = Notification & {
   readonly userId: Scalars['String'];
 };
 
+export type NotificationCodeExampleCommented = Notification & {
+  readonly __typename: 'NotificationCodeExampleCommented';
+  readonly codeExample: CodeExample;
+  readonly codeExampleId: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly opened: Scalars['Boolean'];
+  readonly type: NotificationType;
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
 export type NotificationConnection = Connection & {
   readonly __typename: 'NotificationConnection';
   readonly edges: ReadonlyArray<NotificationEdge>;
@@ -2567,6 +2579,8 @@ export type ExperienceCardExperienceFragment = { readonly __typename: 'Experienc
 
 export type NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } };
 
+export type NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragment = { readonly __typename: 'NotificationCodeExampleCommented', readonly codeExampleId: string, readonly id: string, readonly opened: boolean, readonly updatedAt: Date, readonly codeExample: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } } } };
+
 export type NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment = { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } };
 
 export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } };
@@ -3084,7 +3098,7 @@ export type GetNotificationsQueryVariables = Exact<{
 }>;
 
 
-export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } }> } } | null };
+export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } | { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string, readonly codeExampleId: string, readonly opened: boolean, readonly updatedAt: Date, readonly codeExample: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } }> } } | null };
 
 export type GetPostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3547,6 +3561,34 @@ export const NotificationCardChatMessageReceivedNotificationChatMessageReceivedF
     }
   }
   chatId
+  opened
+  updatedAt
+}
+    `;
+export const NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardCodeExampleCommentedNotificationCodeExampleCommented on NotificationCodeExampleCommented {
+  codeExample {
+    id
+    authorName
+    primarySkill {
+      github {
+        id
+        name
+        owner {
+          id
+          avatarUrl
+          login
+        }
+      }
+      id
+      name
+      owner
+    }
+    title
+    urlSlug
+  }
+  codeExampleId
+  id
   opened
   updatedAt
 }
@@ -5981,6 +6023,9 @@ export const GetNotificationsDocument = /*#__PURE__*/ gql`
         ... on NotificationChatMessageReceived {
           ...NotificationCardChatMessageReceivedNotificationChatMessageReceived
         }
+        ... on NotificationCodeExampleCommented {
+          ...NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
+        }
         ... on NotificationFriendshipAccepted {
           ...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
         }
@@ -5993,6 +6038,7 @@ export const GetNotificationsDocument = /*#__PURE__*/ gql`
 }
     ${PageInfoFragmentFragmentDoc}
 ${NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc}
+${NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragmentDoc}
 ${NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragmentDoc}
 ${NotificationCardPostCommentedNotificationPostCommentedFragmentDoc}`;
 

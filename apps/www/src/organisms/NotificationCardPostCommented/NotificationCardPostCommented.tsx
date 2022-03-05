@@ -95,7 +95,7 @@ export const NotificationCardPostCommented = forwardRef<
 			>
 				<Details>
 					<Title>
-						You have new comments on: <b>&quot;{post.title}&quot;</b>
+						You have new comments on your post: <b>&quot;{post.title}&quot;</b>
 					</Title>
 				</Details>
 			</NextLink>

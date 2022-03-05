@@ -1,0 +1,26 @@
+fragment NotificationCardCodeExampleCommentedNotificationCodeExampleCommented on NotificationCodeExampleCommented {
+	codeExample {
+		id
+		authorName
+		primarySkill {
+			github {
+				id
+				name
+				owner {
+					id
+					avatarUrl
+					login
+				}
+			}
+			id
+			name
+			owner
+		}
+		title
+		urlSlug
+	}
+	codeExampleId
+	id
+	opened
+	updatedAt
+}

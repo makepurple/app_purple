@@ -1,10 +1,12 @@
 import React, { CSSProperties, forwardRef } from "react";
 import {
 	NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment,
+	NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragment,
 	NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment,
 	NotificationCardPostCommentedNotificationPostCommentedFragment
 } from "../../graphql";
 import { NotificationCardChatMessageReceived } from "../NotificationCardChatMessageReceived";
+import { NotificationCardCodeExampleCommented } from "../NotificationCardCodeExampleCommented";
 import { NotificationCardFriendshipAccepted } from "../NotificationCardFriendshipAccepted";
 import { NotificationCardPostCommented } from "../NotificationCardPostCommented";
 
@@ -12,6 +14,7 @@ export interface NotificationCardProps {
 	className?: string;
 	notification:
 		| NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment
+		| NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragment
 		| NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment
 		| NotificationCardPostCommentedNotificationPostCommentedFragment;
 	style?: CSSProperties;
@@ -24,6 +27,15 @@ export const NotificationCard = forwardRef<HTMLDivElement, NotificationCardProps
 		case "NotificationChatMessageReceived":
 			return (
 				<NotificationCardChatMessageReceived
+					ref={ref}
+					className={className}
+					notification={notification}
+					style={style}
+				/>
+			);
+		case "NotificationCodeExampleCommented":
+			return (
+				<NotificationCardCodeExampleCommented
 					ref={ref}
 					className={className}
 					notification={notification}

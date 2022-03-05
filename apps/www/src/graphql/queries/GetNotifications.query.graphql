@@ -20,6 +20,9 @@ query GetNotifications($after: String, $first: Int) {
 				... on NotificationChatMessageReceived {
 					...NotificationCardChatMessageReceivedNotificationChatMessageReceived
 				}
+				... on NotificationCodeExampleCommented {
+					...NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
+				}
 				... on NotificationFriendshipAccepted {
 					...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
 				}

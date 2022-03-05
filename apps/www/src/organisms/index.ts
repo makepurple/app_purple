@@ -41,6 +41,7 @@ export * from "./NotificationBellButton";
 export * from "./NotificationCard";
 export * from "./NotificationCardBase";
 export * from "./NotificationCardChatMessageReceived";
+export * from "./NotificationCardCodeExampleCommented";
 export * from "./NotificationCardFriendshipAccepted";
 export * from "./NotificationCardPostCommented";
 export * from "./OrganizationAutosuggest";

@@ -1,6 +1,7 @@
 import { NotificationCard, NotificationCardProps } from "@makepurple/www";
 import {
 	NotificationChatMessageReceived_fragment_mock,
+	NotificationCodeExampleCommented_fragment_mock,
 	NotificationFriendshipAccepted_fragment_mock,
 	NotificationPostCommented_fragment_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -26,6 +27,12 @@ export const ChatMessageReceived = Template.bind({});
 ChatMessageReceived.args = {
 	...Template.args,
 	notification: NotificationChatMessageReceived_fragment_mock
+};
+
+export const CodeExampleCommented = Template.bind({});
+CodeExampleCommented.args = {
+	...Template.args,
+	notification: NotificationCodeExampleCommented_fragment_mock
 };
 
 export const FriendshipAccepted = Template.bind({});

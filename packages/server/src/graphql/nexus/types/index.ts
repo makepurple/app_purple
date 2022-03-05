@@ -59,6 +59,7 @@ export * from "./Mutation";
 export * from "./MutationPayload";
 export * from "./Notification";
 export * from "./NotificationChatMessageReceived";
+export * from "./NotificationCodeExampleCommented";
 export * from "./NotificationConnection";
 export * from "./NotificationEdge";
 export * from "./NotificationFriendshipAccepted";

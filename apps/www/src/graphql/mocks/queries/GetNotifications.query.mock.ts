@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import { GetNotificationsQuery } from "../../generated";
 import {
 	NotificationChatMessageReceived_fragment_mock,
+	NotificationCodeExampleCommented_fragment_mock,
 	NotificationFriendshipAccepted_fragment_mock,
 	NotificationPostCommented_fragment_mock
 } from "../fragments";
@@ -14,6 +15,7 @@ const COUNT_UNOPENED = 5;
 const notifications = Array.from({ length: DATA_SIZE }, (_, i) => {
 	const notification = faker.random.arrayElement([
 		NotificationChatMessageReceived_fragment_mock,
+		NotificationCodeExampleCommented_fragment_mock,
 		NotificationFriendshipAccepted_fragment_mock,
 		NotificationPostCommented_fragment_mock
 	]);
@@ -44,7 +46,7 @@ export const GetNotifications_mock: GetNotificationsQuery = {
 				cursor: notification.id,
 				node: notification
 			})),
-			nodes: notifications
+			nodes: notifications as any
 		}
 	}
 };

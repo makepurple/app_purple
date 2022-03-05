@@ -9,6 +9,7 @@ export * from "./GitHubOrganization.fragment.mock";
 export * from "./GitHubRepository.fragment.mock";
 export * from "./GitHubUser.fragment.mock";
 export * from "./NotificationChatMessageReceived.fragment.mock";
+export * from "./NotificationCodeExampleCommented.fragment.mock";
 export * from "./NotificationFriendshipAccepted.fragment.mock";
 export * from "./NotificationPostCommented.fragment.mock";
 export * from "./Organization.fragment.mock";

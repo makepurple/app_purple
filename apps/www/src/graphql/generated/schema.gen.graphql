@@ -755,6 +755,17 @@ type NotificationChatMessageReceived implements Notification {
   userId: String!
 }
 
+type NotificationCodeExampleCommented implements Notification {
+  codeExample: CodeExample!
+  codeExampleId: String!
+  id: ID!
+  opened: Boolean!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
 type NotificationConnection implements Connection {
   edges: [NotificationEdge!]!
   nodes: [Notification!]!
