@@ -45,7 +45,7 @@ export interface AlertDialogProps {
 	onConfirm?: (event: MouseEvent<HTMLButtonElement>) => void;
 	style?: CSSProperties;
 	text: ReactNode;
-	title: string;
+	title?: string;
 }
 
 export const AlertDialog: FC<AlertDialogProps> = ({
@@ -55,17 +55,28 @@ export const AlertDialog: FC<AlertDialogProps> = ({
 	onConfirm,
 	style,
 	text,
-	title
+	title = "Are you absolutely sure?"
 }) => {
 	return (
 		<RadixAlertDialog.Root>
 			<RadixAlertDialog.Trigger asChild>{children}</RadixAlertDialog.Trigger>
 			<RadixAlertDialog.Portal>
 				<RadixAlertDialog.Overlay asChild>
-					<Backdrop open />
+					<Backdrop
+						onClick={(e) => {
+							e.stopPropagation();
+						}}
+						open
+					/>
 				</RadixAlertDialog.Overlay>
 				<RadixAlertDialog.Content asChild>
-					<Root className={className} style={style}>
+					<Root
+						className={className}
+						onClick={(e) => {
+							e.stopPropagation();
+						}}
+						style={style}
+					>
 						<Title>{title}</Title>
 						<Description tw="mt-3">{description}</Description>
 						<Actions tw="mt-4">
