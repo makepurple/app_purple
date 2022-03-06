@@ -1,4 +1,5 @@
 import {
+	AlertDialog,
 	Avatar,
 	Button,
 	Divider,
@@ -10,6 +11,7 @@ import {
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
@@ -309,18 +311,14 @@ export const Page: NextPage<PageProps> = () => {
 									Edit
 								</EditButton>
 							</NextLink>
-							<DeleteButton
-								disabled={mutating}
-								onClick={async (e) => {
-									e.stopPropagation();
-
-									const confirmed = window.confirm(
-										"Are you sure you wish to delete this post?\nThis cannot be undone."
-									);
-
-									if (!confirmed) return;
-
-									const didSucceed = await removePost({ where: { id: post.id } })
+							<AlertDialog
+								description={oneLine`
+									Are you sure you wish to delete this post? This cannot be undone.
+								`}
+								onConfirm={async () => {
+									const didSucceed = await removePost({
+										where: { id: post.id }
+									})
 										.then((result) => !!result.data?.deletePost.record)
 										.catch(() => false);
 
@@ -334,12 +332,20 @@ export const Page: NextPage<PageProps> = () => {
 
 									await router.push("/[userName]/posts", `/${userName}/posts`);
 								}}
-								size="small"
-								type="button"
-								variant="alert"
+								text="Yes, delete post"
 							>
-								Delete
-							</DeleteButton>
+								<DeleteButton
+									disabled={mutating}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									size="small"
+									type="button"
+									variant="alert"
+								>
+									Delete
+								</DeleteButton>
+							</AlertDialog>
 						</OwnerActions>
 					)}
 				</Actions>
