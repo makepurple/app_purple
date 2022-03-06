@@ -34,7 +34,7 @@ export const Button = styled.button<{
 		disabled:cursor-not-allowed
 		not-disabled:active:shadow-none
 		not-disabled:hover:shadow-md
-		not-disabled:hover:opacity-90
+		not-disabled:hover:opacity-80
 		disabled:after:absolute
 		disabled:after:inset-0
 		disabled:after:pointer-events-auto
@@ -48,7 +48,7 @@ export const Button = styled.button<{
 			case "alert":
 				return tw`bg-pink-600`;
 			case "error":
-				return tw`bg-red-600`;
+				return tw`bg-rose-600`;
 			case "input":
 				return css`
 					${tw`
@@ -68,6 +68,7 @@ export const Button = styled.button<{
 					bg-white
 					text-black
 					border-gray-300
+					not-disabled:hover:bg-indigo-50
 				`;
 			case "success":
 				return tw`bg-blue-500`;
@@ -80,7 +81,8 @@ export const Button = styled.button<{
 		switch (size) {
 			case "large":
 				return tw`
-					p-3.5
+					px-4
+					py-3.5
 					text-lg
 				`;
 			case "small":
@@ -93,7 +95,8 @@ export const Button = styled.button<{
 			case "medium":
 			default:
 				return tw`
-					p-2.5
+					px-2.5
+					py-2
 					text-lg
 				`;
 		}
