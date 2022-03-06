@@ -110,7 +110,7 @@ export const GdprCookieConsent: FC<GdprCookieConsentProps> = ({ className, style
 								}}
 								size="small"
 								type="button"
-								variant="alert"
+								variant="secondary"
 							>
 								No thanks
 							</Button>
