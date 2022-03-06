@@ -12,6 +12,7 @@ import {
 	Input,
 	MainContainer,
 	Paper,
+	Tags,
 	TextArea
 } from "@makepurple/components";
 import { PostUpdateInput } from "@makepurple/validators";
@@ -20,8 +21,8 @@ import { NextPage } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useEffect, useMemo, useRef } from "react";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useGetPostQuery, useUpdatePostMutation } from "../../../graphql";
@@ -29,7 +30,8 @@ import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
 	PostImageInput,
-	RemovePostThumbnailButton
+	RemovePostThumbnailButton,
+	SkillAutosuggest
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]/edit";
 
@@ -125,6 +127,15 @@ export const Page: NextPage<PageProps> = () => {
 
 	const post = data?.post;
 
+	const defaultSkills = useMemo(() => {
+		return (post?.skills.nodes ?? []).map((skill) => ({
+			name_owner: {
+				name: skill.name,
+				owner: skill.owner
+			}
+		}));
+	}, [post]);
+
 	const {
 		control,
 		formState: { errors },
@@ -137,6 +148,7 @@ export const Page: NextPage<PageProps> = () => {
 		defaultValues: {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
 			description: post?.description ?? "",
+			skills: defaultSkills,
 			content: [
 				{
 					type: "paragraph",
@@ -146,6 +158,8 @@ export const Page: NextPage<PageProps> = () => {
 		},
 		resolver: computedTypesResolver(PostUpdateInput)
 	});
+
+	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
 	const thumbnailUrl = watch("thumbnailUrl");
 
@@ -240,6 +254,43 @@ export const Page: NextPage<PageProps> = () => {
 							aria-label="description"
 						/>
 						<FormHelperText error={errors.description?.message} />
+					</FormGroup>
+					<FormGroup tw="mt-4">
+						<FormLabel>Skills</FormLabel>
+						<Tags editable type="positive" tw="relative">
+							{skills.fields.map((field, i) => {
+								const owner = (field as any).name_owner.owner;
+								const name = (field as any).name_owner.name;
+
+								return (
+									<Tags.Tag
+										key={field._id}
+										id={field._id}
+										onRemove={() => {
+											skills.remove(i);
+										}}
+										aria-label={`${owner}/${name}`}
+									>
+										<HiddenInput
+											{...register(`skills.${i}.name_owner.owner`)}
+										/>
+										<HiddenInput {...register(`skills.${i}.name_owner.name`)} />
+										<span>{name}</span>
+									</Tags.Tag>
+								);
+							})}
+							<SkillAutosuggest
+								onSelect={(newSkill) => {
+									skills.append({
+										name_owner: {
+											name: newSkill.name,
+											owner: newSkill.owner.login
+										}
+									});
+								}}
+							/>
+						</Tags>
+						<FormHelperText error={(errors.skills as any)?.message} />
 					</FormGroup>
 					<FormGroup tw="mt-4">
 						<FormLabel>Content</FormLabel>
