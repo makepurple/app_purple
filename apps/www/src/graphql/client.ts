@@ -22,7 +22,7 @@ const getApiUrl = (): string => {
 
 	// Infer the deploy URL if we're in production
 	// VERCEL_URL = Vercel, DEPLOY_URL = Netlify
-	const PROVIDER_URL = process.env.VERCEL_URL || process.env.DEPLOY_URL;
+	const PROVIDER_URL = process.env.API_URL || process.env.VERCEL_URL || process.env.DEPLOY_URL;
 
 	if (PROVIDER_URL) {
 		/**

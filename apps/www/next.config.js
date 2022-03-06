@@ -28,6 +28,7 @@ const config = {
 		PROJECT_DIRNAME:           __dirname,
 
 		BASE_URL:                  process.env.BASE_URL,
+		API_URL:                   process.env.API_URL,
 		NEXTAUTH_SECRET:           process.env.NEXTAUTH_SECRET,
 		NEXTAUTH_URL:              process.env.NEXTAUTH_URL,
 
