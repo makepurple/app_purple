@@ -1,4 +1,5 @@
 import {
+	AlertDialog,
 	Avatar,
 	Button,
 	CodeBlock,
@@ -10,6 +11,7 @@ import {
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
@@ -383,17 +385,11 @@ export const Page: NextPage<PageProps> = () => {
 									Edit
 								</EditButton>
 							</NextLink>
-							<DeleteButton
-								disabled={mutating}
-								onClick={async (e) => {
-									e.stopPropagation();
-
-									const confirmed = window.confirm(
-										"Are you sure you wish to delete this snippet?\nThis cannot be undone."
-									);
-
-									if (!confirmed) return;
-
+							<AlertDialog
+								description={oneLine`
+									Are you sure you wish to delete this snippet? This cannot be undone.
+								`}
+								onConfirm={async () => {
 									const where: CodeExampleWhereUniqueInput = {
 										id: codeExample.id
 									};
@@ -415,12 +411,20 @@ export const Page: NextPage<PageProps> = () => {
 										`/${userName}/snippets`
 									);
 								}}
-								size="small"
-								type="button"
-								variant="alert"
+								text="Yes, delete snippet"
 							>
-								Delete
-							</DeleteButton>
+								<DeleteButton
+									disabled={mutating}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									size="small"
+									type="button"
+									variant="alert"
+								>
+									Delete
+								</DeleteButton>
+							</AlertDialog>
 						</OwnerActions>
 					)}
 				</Actions>
