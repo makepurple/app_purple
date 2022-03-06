@@ -13,6 +13,7 @@ import { FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
 import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
@@ -20,8 +21,9 @@ import tw, { styled } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
 import { BellIcon, ChatIcon, PeopleIcon } from "../../svgs";
 import { SiteWideSearch } from "../SiteWideSearch";
-import { SiteWideSideDrawer } from "../SiteWideSideDrawer";
-import { SiteWideUserMenu } from "../SiteWideUserMenu";
+
+const SiteWideSideDrawer = dynamic(() => import("../SiteWideSideDrawer"), { ssr: false });
+const SiteWideUserMenu = dynamic(() => import("../SiteWideUserMenu"), { ssr: false });
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
