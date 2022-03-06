@@ -1,7 +1,7 @@
+import { useResizeObserver } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
 import composeRefs from "@seznam/compose-react-refs";
-import { forwardRef, useCallback, useContext, useEffect, useRef } from "react";
-import { useWindowSize } from "react-use";
+import React, { forwardRef, useCallback, useContext, useEffect, useRef, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { FormContext } from "../Form/context";
 import { FormGroupContext } from "../FormGroup/context";
@@ -45,7 +45,11 @@ const Root = styled.textarea<{ error?: boolean }>`
 export type TextAreaProps = Omit<InferComponentProps<typeof Root>, "ref">;
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
-	const { width } = useWindowSize();
+	const [width, setWidth] = useState<number>(0);
+
+	useResizeObserver(document.body, (e) => {
+		setWidth(e.contentRect.width);
+	});
 
 	const form = useContext(FormContext);
 	const group = useContext(FormGroupContext);

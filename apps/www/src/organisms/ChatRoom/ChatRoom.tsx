@@ -10,6 +10,7 @@ import {
 	Skeleton,
 	Spinner
 } from "@makepurple/components";
+import { useInterval } from "@makepurple/hooks";
 import { ChatMessageContent } from "@makepurple/validators";
 import Schema, { Type } from "computed-types";
 import { useElementScroll } from "framer-motion";
@@ -20,7 +21,6 @@ import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "
 import { flushSync } from "react-dom";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useInterval } from "react-use";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {

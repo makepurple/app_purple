@@ -7,12 +7,12 @@ import {
 	Spinner,
 	ThumbsUpIcon
 } from "@makepurple/components";
+import { useIntersectionObserver } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { CSSProperties, forwardRef, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import toast from "react-hot-toast";
-import { useIntersection } from "react-use";
 import tw, { styled } from "twin.macro";
 import {
 	CommentCardCommentFragment,
@@ -166,7 +166,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const rootRef = useRef<HTMLDivElement>(null);
 	const composedRef = composeRefs(ref, rootRef);
 
-	const intersection = useIntersection(rootRef, { threshold: 1 });
+	const intersection = useIntersectionObserver(rootRef, { threshold: [1] });
 	const isInView = (intersection?.intersectionRatio ?? 0) >= 1;
 
 	const [collapsed, setCollapsed] = useState<boolean>(false);

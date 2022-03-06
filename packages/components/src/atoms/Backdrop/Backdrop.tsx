@@ -1,9 +1,9 @@
+import { useLockBodyScroll } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
 import { StyleUtils, WindowUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
 import React, { forwardRef } from "react";
 import { createPortal } from "react-dom";
-import { useLockBodyScroll } from "react-use";
 import tw, { styled } from "twin.macro";
 
 const Root = styled(m.div)`

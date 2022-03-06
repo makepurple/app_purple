@@ -259,7 +259,6 @@ importers:
       react-hot-toast: ^2.2.0
       react-is: ^17.0.2
       react-popper: ^2.2.5
-      react-use: ^17.3.2
       styled-components: ^5.3.3
       tailwindcss: 2.2.19
       ts-node: ^10.7.0
@@ -318,7 +317,6 @@ importers:
       react-hook-form: 7.27.1_react@17.0.2
       react-hot-toast: 2.2.0_react-dom@17.0.2+react@17.0.2
       react-popper: 2.2.5_react@17.0.2
-      react-use: 17.3.2_react-dom@17.0.2+react@17.0.2
       styled-components: 5.3.3_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19_812b64524966b3ecd09b12d793c8b57f
       twin.macro: 2.8.2_ts-node@10.7.0
@@ -393,7 +391,6 @@ importers:
       react-is: ^17.0.2
       react-popper: ^2.2.5
       react-simple-code-editor: ^0.11.0
-      react-use: ^17.3.2
       slate: ^0.73.1
       slate-history: ^0.66.0
       slate-react: ^0.74.0
@@ -431,7 +428,6 @@ importers:
       react-hook-form: 7.27.1_react@17.0.2
       react-popper: 2.2.5_react@17.0.2
       react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      react-use: 17.3.2_react-dom@17.0.2+react@17.0.2
       slate: 0.73.1
       slate-history: 0.66.0_slate@0.73.1
       slate-react: 0.74.0_7f0474d2f1224a2fc7a4a9e23b38a268
@@ -502,11 +498,13 @@ importers:
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
+      '@react-hookz/web': ^13.0.0
       '@types/react': ^17.0.39
       '@types/react-dom': ^17.0.13
       downshift: ^6.1.7
       framer-motion: 6.2.8
       graphql: 15.7.2
+      js-cookie: ^3.0.1
       keycode-js: ^3.1.0
       react: ^17.0.2
       react-dom: ^17.0.2
@@ -516,10 +514,12 @@ importers:
     dependencies:
       '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
+      '@react-hookz/web': 13.0.0_5a0c155615ca300261ded0e44a22fbd0
       '@types/react': 17.0.39
       '@types/react-dom': 17.0.13
       downshift: 6.1.7_react@17.0.2
       framer-motion: 6.2.8_react-dom@17.0.2+react@17.0.2
+      js-cookie: 3.0.1
       keycode-js: 3.1.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -5191,6 +5191,26 @@ packages:
       '@react-hook/event': 1.2.6_react@17.0.2
       '@react-hook/throttle': 2.2.0_react@17.0.2
       react: 17.0.2
+    dev: false
+
+  /@react-hookz/deep-equal/1.0.1:
+    resolution: {integrity: sha512-6k/pU2jNlgYvKOy84vpCAZ8MGVwybvAdjzrh4UicCVOCPxz0LSBws1OE6O5TO4sPHaSw+yLfNzNK8RicGFc1Kw==}
+    dev: false
+
+  /@react-hookz/web/13.0.0_5a0c155615ca300261ded0e44a22fbd0:
+    resolution: {integrity: sha512-sAMTOiOnAvxpJtHea7Vk+2+KJdTC/o77wPII+glnH+astNUSSiduptLaMPeoIXXwqjfJT+IJ9JzWyZPrLpdyFw==}
+    peerDependencies:
+      js-cookie: ^3.0.1
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    peerDependenciesMeta:
+      js-cookie:
+        optional: true
+    dependencies:
+      '@react-hookz/deep-equal': 1.0.1
+      js-cookie: 3.0.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /@rushstack/eslint-patch/1.1.0:
@@ -15060,6 +15080,11 @@ packages:
 
   /js-cookie/2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
+
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /js-string-escape/1.0.1:
     resolution: {integrity: sha1-4mJbrbwNZ8dTPp7cEGjFh65BN+8=}

@@ -1,5 +1,5 @@
 import { Button, ComboBox, Input, Paper, Popover } from "@makepurple/components";
-import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
+import { useComboBoxState, useLockBodyScroll, useOnKeyDown } from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
 import ms from "ms";
 import NextLink from "next/link";
@@ -14,7 +14,6 @@ import React, {
 	useState
 } from "react";
 import { usePopper } from "react-popper";
-import { useLockBodyScroll } from "react-use";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {

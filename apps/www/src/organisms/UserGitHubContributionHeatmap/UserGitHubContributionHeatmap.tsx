@@ -1,4 +1,5 @@
 import { Logo, Tooltip } from "@makepurple/components";
+import { useRerender, useResizeObserver } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import { AxisLeft, AxisTop } from "@visx/axis";
 import { Group } from "@visx/group";
@@ -7,7 +8,6 @@ import { RectCell } from "@visx/heatmap/lib/heatmaps/HeatmapRect";
 import { ParentSize } from "@visx/responsive";
 import { scaleLinear } from "@visx/scale";
 import React, { CSSProperties, memo, useCallback, useMemo } from "react";
-import { useWindowSize } from "react-use";
 import tw from "twin.macro";
 import {
 	GitHubUserContributionLevel,
@@ -50,7 +50,11 @@ export interface UserGitHubContributionHeatmapProps {
 export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapProps>((props) => {
 	const { className, contributionCalendar, style } = props;
 
-	useWindowSize();
+	const rerender = useRerender();
+
+	useResizeObserver(document.body, () => {
+		rerender();
+	});
 
 	const weeks = useMemo(() => contributionCalendar.weeks.slice(), [contributionCalendar.weeks]);
 

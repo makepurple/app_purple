@@ -1,4 +1,5 @@
 import { FunctionUtils, ObjectUtils } from "@makepurple/utils";
+import { useIsMounted, usePreviousDistinct } from "@react-hookz/web";
 import {
 	useCombobox,
 	UseComboboxProps,
@@ -6,7 +7,6 @@ import {
 	UseComboboxStateChange
 } from "downshift";
 import { useCallback, useMemo, useState } from "react";
-import { useMountedState, usePreviousDistinct } from "react-use";
 
 export type UseComboBoxProps<T> = UseComboboxProps<T> & {
 	debounce?: number;
@@ -18,7 +18,7 @@ export const useComboBoxState = ObjectUtils.setStatic(
 	<T>(props: UseComboBoxProps<T>): UseComboBoxState<T> => {
 		const { debounce = 0, inputValue, onInputValueChange, ...downshiftProps } = props;
 
-		const isMounted = useMountedState();
+		const isMounted = useIsMounted();
 
 		const [loading, setLoading] = useState<boolean>(false);
 		const [isReady, setIsReady] = useState<boolean>(false);
