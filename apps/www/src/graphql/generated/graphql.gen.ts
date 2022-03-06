@@ -492,6 +492,13 @@ export type DeleteRepositoryPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type DeleteUserPayload = MutationPayload & {
+  readonly __typename: 'DeleteUserPayload';
+  readonly query: Query;
+  readonly record: User;
+  readonly viewer?: Maybe<User>;
+};
+
 export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
   readonly query: Query;
@@ -907,6 +914,7 @@ export type Mutation = {
   /** Users can delete their own posts. */
   readonly deletePost: DeletePostPayload;
   readonly deleteRepository: DeleteRepositoryPayload;
+  readonly deleteUser: DeleteUserPayload;
   readonly followSkill: FollowUserPayload;
   readonly followUser: FollowUserPayload;
   readonly inviteToChat: InviteToChatPayload;

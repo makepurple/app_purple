@@ -378,6 +378,12 @@ type DeleteRepositoryPayload implements MutationPayload {
   viewer: User
 }
 
+type DeleteUserPayload implements MutationPayload {
+  query: Query!
+  record: User!
+  viewer: User
+}
+
 type DownvoteCommentPayload implements MutationPayload {
   query: Query!
   record: Comment!
@@ -713,6 +719,7 @@ type Mutation {
   """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
   deleteRepository(where: RepositoryWhereUniqueInput!): DeleteRepositoryPayload!
+  deleteUser: DeleteUserPayload!
   followSkill(where: SkillWhereUniqueInput!): FollowUserPayload!
   followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!

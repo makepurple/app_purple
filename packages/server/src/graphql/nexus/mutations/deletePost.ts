@@ -33,7 +33,7 @@ export const deletePost = mutationField("deletePost", {
 		await Promise.all(
 			images.map(async (image) => {
 				return await cloudinary.deleteImageFile(image.id).catch((e) => {
-					// Try our best to delete as much as possible, but proceed
+					// Try our best to delete as much as possible, but proceed regardless
 					Logger.error(`Could not delete cloudinary image: ${image.id}`, e.message);
 				});
 			})

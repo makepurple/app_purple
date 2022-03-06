@@ -30,6 +30,7 @@ export * from "./DeleteExperiencePayload";
 export * from "./DeleteFriendshipPayload";
 export * from "./DeletePostPayload";
 export * from "./DeleteRepositoryPayload";
+export * from "./DeleteUserPayload";
 export * from "./DownvoteCommentPayload";
 export * from "./Experience";
 export * from "./ExperienceConnection";
