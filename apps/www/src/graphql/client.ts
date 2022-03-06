@@ -39,7 +39,7 @@ const getApiUrl = (): string => {
 	if (process.env.NODE_ENV === `development`) return `http://localhost:3001/api/graphql`;
 
 	// TODO: Replace with your production URL for the very final fallback
-	return "https://example.org";
+	throw new Error("GraphQL api could not be found!");
 };
 
 let ssr: SSRExchange;
