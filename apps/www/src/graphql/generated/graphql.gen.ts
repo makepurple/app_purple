@@ -587,6 +587,8 @@ export type Follow = {
   readonly following: Followable;
   readonly id: Scalars['ID'];
   readonly type: FollowType;
+  readonly user: User;
+  readonly userId: Scalars['String'];
 };
 
 export type FollowConnection = Connection & {

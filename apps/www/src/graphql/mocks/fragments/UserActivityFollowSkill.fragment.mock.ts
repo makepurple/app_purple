@@ -13,7 +13,12 @@ export const UserActivityFollowSkill_fragment_mock: UserActivityFollowSkill = {
 			...{ ...Skill_fragment_mock, id: "0" }
 		},
 		createdAt: dayjs(1318781876406).toDate(),
-		type: FollowType.Skill
+		type: FollowType.Skill,
+		user: {
+			...User_fragment_mock,
+			id: "1"
+		},
+		userId: "1"
 	},
 	followId: "0",
 	id: "0",

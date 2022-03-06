@@ -34,7 +34,10 @@ export const followSkill = mutationField("followSkill", {
 										user: { connect: { id: user.id } }
 									}
 								},
-								type: FollowType.Skill
+								type: FollowType.Skill,
+								user: {
+									connect: { id: user.id }
+								}
 							}
 						},
 						follower: { connect: { id: user.id } },
@@ -79,7 +82,7 @@ export const followSkill = mutationField("followSkill", {
 				update: {}
 			});
 
-			return await prisma.followSkill
+			return await transaction.followSkill
 				.create({
 					data: {
 						follow: {
@@ -90,7 +93,10 @@ export const followSkill = mutationField("followSkill", {
 										user: { connect: { id: user.id } }
 									}
 								},
-								type: FollowType.Skill
+								type: FollowType.Skill,
+								user: {
+									connect: { id: user.id }
+								}
 							}
 						},
 						follower: { connect: { id: user.id } },

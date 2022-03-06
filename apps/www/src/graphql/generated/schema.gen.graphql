@@ -456,6 +456,8 @@ type Follow {
   following: Followable!
   id: ID!
   type: FollowType!
+  user: User!
+  userId: String!
 }
 
 type FollowConnection implements Connection {

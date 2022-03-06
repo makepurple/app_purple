@@ -24,7 +24,8 @@ export const followUser = mutationField("followUser", {
 									user: { connect: { id: user.id } }
 								}
 							},
-							type: FollowType.User
+							type: FollowType.User,
+							user: { connect: { id: user.id } }
 						}
 					},
 					follower: { connect: { id: user.id } },

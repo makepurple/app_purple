@@ -569,6 +569,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     type: NexusGenEnums['FollowType']; // FollowType!
+    userId: string; // String!
   }
   FollowConnection: { // root type
     edges: NexusGenRootTypes['FollowEdge'][]; // [FollowEdge!]!
@@ -1206,6 +1207,8 @@ export interface NexusGenFieldTypes {
     following: NexusGenRootTypes['Followable']; // Followable!
     id: string; // ID!
     type: NexusGenEnums['FollowType']; // FollowType!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
   }
   FollowConnection: { // field return type
     edges: NexusGenRootTypes['FollowEdge'][]; // [FollowEdge!]!
@@ -2110,6 +2113,8 @@ export interface NexusGenFieldTypeNames {
     following: 'Followable'
     id: 'ID'
     type: 'FollowType'
+    user: 'User'
+    userId: 'String'
   }
   FollowConnection: { // field return type name
     edges: 'FollowEdge'
