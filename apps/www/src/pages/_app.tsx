@@ -65,11 +65,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				<meta key="theme-color" name="theme-color" content="#ffffff" />
 			</NextHead>
 			<GlobalStyles />
-			<ErrorBoundary
-				fallback={({ error }) => (
-					<NextError statusCode={500} title={error?.message ?? undefined} />
-				)}
-			>
+			<ErrorBoundary fallback={() => <NextError statusCode={500} />}>
 				{({ error, fallback }) => (
 					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>
 						<GdprCookieConsent>
