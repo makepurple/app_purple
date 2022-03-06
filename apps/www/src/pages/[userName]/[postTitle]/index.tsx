@@ -13,6 +13,7 @@ import { DocumentEditorValue } from "@makepurple/validators";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
 import { toast } from "react-hot-toast";
@@ -124,6 +125,12 @@ const OwnerActions = tw.div`
 	items-stretch
 	h-full
 	gap-3
+`;
+
+const EditButton = tw(Button)`
+	h-9
+	w-20
+	text-base
 `;
 
 const DeleteButton = tw(Button)`
@@ -293,6 +300,15 @@ export const Page: NextPage<PageProps> = () => {
 					</UpvoteButton>
 					{isMyPost && (
 						<OwnerActions>
+							<NextLink
+								href="/[userName]/[postTitle]/edit"
+								as={`/${userName}/${postTitle}/edit`}
+								passHref
+							>
+								<EditButton as="a" size="small">
+									Edit
+								</EditButton>
+							</NextLink>
 							<DeleteButton
 								disabled={mutating}
 								onClick={async (e) => {
