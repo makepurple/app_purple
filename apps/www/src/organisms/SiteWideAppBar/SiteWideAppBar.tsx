@@ -248,6 +248,10 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						backdropFilter: "blur(0px)"
 					}
 				}}
+				transition={{
+					duration: 0.15,
+					ease: "easeInOut"
+				}}
 				data-searching={searching}
 			>
 				<BrandContainer>
