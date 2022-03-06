@@ -18,7 +18,7 @@ const middleware: NextMiddleware = (req: NextRequest) => {
 	 * @author David Lee
 	 * @date March 5, 2022
 	 */
-	response.cookie("gdpr-consent", "true", {
+	response.cookie("gdpr-consented", "true", {
 		maxAge: GDPR_COOKIE_MAX_AGE_SECONDS
 	});
 
