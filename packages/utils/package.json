@@ -7,11 +7,11 @@
 	"sideEffects": false,
 	"dependencies": {
 		"@makepurple/typings": "workspace:*",
-		"dayjs": "^1.10.7",
-		"react-hook-form": "^7.27.0"
+		"dayjs": "^1.10.8",
+		"react-hook-form": "^7.27.1"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
-		"typescript": "^4.5.5"
+		"typescript": "^4.6.2"
 	}
 }
