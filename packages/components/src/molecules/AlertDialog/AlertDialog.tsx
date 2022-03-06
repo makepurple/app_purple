@@ -4,6 +4,10 @@ import React, { CSSProperties, FC, MouseEvent, ReactElement, ReactNode } from "r
 import tw, { styled } from "twin.macro";
 import { Backdrop, Button, Paper } from "../../atoms";
 
+const StyledBackdrop = styled(Backdrop)`
+	z-index: ${StyleUtils.getZIndex("dialog-backdrop")};
+`;
+
 const Root = styled(Paper)`
 	${tw`
 		fixed
@@ -63,7 +67,7 @@ export const AlertDialog: FC<AlertDialogProps> = ({
 			<RadixAlertDialog.Trigger asChild>{children}</RadixAlertDialog.Trigger>
 			<RadixAlertDialog.Portal>
 				<RadixAlertDialog.Overlay asChild>
-					<Backdrop
+					<StyledBackdrop
 						onClick={(e) => {
 							e.stopPropagation();
 						}}
