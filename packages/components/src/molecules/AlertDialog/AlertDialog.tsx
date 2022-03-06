@@ -14,6 +14,7 @@ const Root = styled(Paper)`
 		flex
 		flex-col
 		p-6
+		shadow-2xl
 	`}
 	z-index: ${StyleUtils.getZIndex("dialog")};
 `;
