@@ -1,5 +1,6 @@
-import { Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
+import { AlertDialog, Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
+import { stripIndents } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -228,17 +229,11 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
 					</UpvoteButton>
 					{isMyPost && (
-						<DeleteButton
-							disabled={fetching}
-							onClick={async (e) => {
-								e.stopPropagation();
-
-								const confirmed = window.confirm(
-									"Are you sure you wish to delete this post?\nThis cannot be undone."
-								);
-
-								if (!confirmed) return;
-
+						<AlertDialog
+							description={stripIndents`
+								Are you sure you wish to delete this post? This cannot be undone.
+							`}
+							onConfirm={async () => {
 								const didSucceed = await removePost({ where: { id: post.id } })
 									.then((result) => !!result.data?.deletePost.record)
 									.catch(() => false);
@@ -251,12 +246,20 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 
 								toast.success("Post was successfully deleted");
 							}}
-							size="small"
-							type="button"
-							variant="alert"
+							text="Yes, delete post"
 						>
-							Delete
-						</DeleteButton>
+							<DeleteButton
+								disabled={fetching}
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								size="small"
+								type="button"
+								variant="alert"
+							>
+								Delete
+							</DeleteButton>
+						</AlertDialog>
 					)}
 				</Actions>
 			</Info>
