@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from "@makepurple/components";
+import { AlertDialog, Button, ButtonProps } from "@makepurple/components";
+import { stripIndents } from "common-tags";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { toast } from "react-hot-toast";
@@ -9,19 +10,18 @@ export type ChatRoomLeaveButtonProps = ButtonProps & {
 };
 
 export const ChatRoomLeaveButton: FC<ChatRoomLeaveButtonProps> = (props) => {
-	const { chatId, disabled, onClick, type = "button", ...restProps } = props;
+	const { chatId, disabled, type = "button", ...restProps } = props;
 
 	const router = useRouter();
 
 	const [{ fetching }, leaveChat] = useLeaveChatMutation();
 
 	return (
-		<Button
-			{...restProps}
-			disabled={fetching || disabled}
-			onClick={async (e) => {
-				onClick?.(e);
-
+		<AlertDialog
+			description={stripIndents`
+				Are you sure you want to leave this chat? You can only rejoin if invited again.
+			`}
+			onConfirm={async () => {
 				const confirmed = confirm("Are you sure you want to leave this chat?");
 
 				if (!confirmed) return;
@@ -38,7 +38,9 @@ export const ChatRoomLeaveButton: FC<ChatRoomLeaveButtonProps> = (props) => {
 
 				await router.push("/messaging/[[...slug]]", "/messaging");
 			}}
-			type={type}
-		/>
+			text="Yes, leave chat"
+		>
+			<Button {...restProps} disabled={fetching || disabled} type={type} />
+		</AlertDialog>
 	);
 };
