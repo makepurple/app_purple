@@ -21,6 +21,10 @@ const Content = tw(Tags)`
 	border-gray-300
 `;
 
+const StyledFriendAutoSuggest = tw(FriendAutosuggest)`
+	w-48
+`;
+
 const Actions = tw.div`
 	flex-shrink-0
 	flex
@@ -105,13 +109,12 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 						<span>{field.name}</span>
 					</Tags.Tag>
 				))}
-				<FriendAutosuggest
+				<StyledFriendAutoSuggest
 					onSelect={(newInvitee) => {
 						users.append({ name: newInvitee.name });
 					}}
 					placeholder="Invite members by name"
 					aria-label="new invitee"
-					tw="w-36"
 				/>
 				<Actions tw="mt-2">
 					<Action size="small" type="submit">
