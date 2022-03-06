@@ -2126,6 +2126,58 @@ export interface User {
     resolve: NexusCore.FieldResolver<'User', 'followingUser'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.follows`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   follows  Follow
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.follows)
+    *   }
+    * })
+    */
+  follows: {
+    /**
+     * The name of this field.
+     */
+    name: 'follows'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Follow' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Follow'> | NexusCore.NexusNonNullDef<'Follow'>)
+    : 'Warning/Error: The type \'Follow\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Follow\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'follows'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.friendedBy`.
     *
     * ### ️⚠️ You have not writen documentation for model User
@@ -5384,6 +5436,110 @@ export interface Follow {
      * The resolver of this field
      */
     resolve: NexusCore.FieldResolver<'Follow', 'type'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.user`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Follow
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Follow
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Follow {
+    *   /// Lorem ipsum dolor sit amet.
+    *   user  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Follow } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Follow.$name
+    *   description: Follow.$description
+    *   definition(t) {
+    *     t.field(Follow.user)
+    *   }
+    * })
+    */
+  user: {
+    /**
+     * The name of this field.
+     */
+    name: 'user'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Follow', 'user'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Follow.userId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Follow
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Follow
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Follow {
+    *   /// Lorem ipsum dolor sit amet.
+    *   userId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Follow } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Follow.$name
+    *   description: Follow.$description
+    *   definition(t) {
+    *     t.field(Follow.userId)
+    *   }
+    * })
+    */
+  userId: {
+    /**
+     * The name of this field.
+     */
+    name: 'userId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Follow', 'userId'>
   }
 }
 

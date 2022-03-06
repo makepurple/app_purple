@@ -79,6 +79,7 @@ model User {
   followedBy                FollowUser[]           @relation("FollowingUser")
   followingSkill            FollowSkill[]
   followingUser             FollowUser[]           @relation("FollowerUser")
+  follows                   Follow[]
   friendedBy                Friendship[]           @relation("FriendingUser")
   friending                 Friendship[]           @relation("FrienderUser")
   id                        String                 @id @default(cuid())
@@ -182,6 +183,8 @@ model Follow {
   followingSkill FollowSkill?
   followingUser  FollowUser?
   type           FollowType
+  user           User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
 }
 
 // These are uni-directional follows. If matched 2-way, then the users are following each-other.
@@ -303,7 +306,7 @@ model Comment {
   codeExampleId String?
   content       Json?
   createdAt     DateTime         @default(now())
-  parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id])
+  parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   parentId      String?
   post          Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId        String?
