@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { Client, createClient, dedupExchange, errorExchange, ssrExchange } from "urql";
 import { createCache } from "./cache";
 
-export const URQL_STATE_PROP_NAME = "urqlState";
+export const URQL_STATE_PROP_NAME = "__URQL_STATE__";
 
 /**
  * Consistently determine the API URL for the current client even when in a
