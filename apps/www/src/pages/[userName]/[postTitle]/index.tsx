@@ -307,7 +307,7 @@ export const Page: NextPage<PageProps> = () => {
 								as={`/${userName}/${postTitle}/edit`}
 								passHref
 							>
-								<EditButton as="a" size="small">
+								<EditButton as="a" size="small" variant="secondary">
 									Edit
 								</EditButton>
 							</NextLink>
