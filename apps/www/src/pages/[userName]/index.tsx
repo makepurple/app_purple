@@ -16,7 +16,7 @@ import {
 	UserTrophy
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]";
-import { HexagonIcon, NoteIcon, RepoIcon } from "../../svgs";
+import { CodeIcon, HexagonIcon, NoteIcon, RepoIcon } from "../../svgs";
 
 const Contents = tw.div`
 	flex
@@ -244,7 +244,7 @@ export const Page: NextPage<PageProps> = () => {
 							title="There's nothing here"
 							subTitle={`${user.name} hasn't published anything yet`}
 						>
-							<NoteIcon height={96} width={96} />
+							<CodeIcon height={96} width={96} />
 						</NonIdealState>
 					) : (
 						<CodeExamples>
