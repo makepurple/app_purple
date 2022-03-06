@@ -8,7 +8,7 @@ import {
 	Tags
 } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
-import { stripIndents } from "common-tags";
+import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -272,7 +272,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 					</UpvoteButton>
 					{isMyUser && (
 						<AlertDialog
-							description={stripIndents`
+							description={oneLine`
 								This action cannot be undone. This will permanently delete this
 								snippet.
 							`}
