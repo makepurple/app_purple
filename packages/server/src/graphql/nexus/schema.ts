@@ -1,4 +1,5 @@
 import { oneLine } from "common-tags";
+import { lexicographicSortSchema } from "graphql";
 import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import path from "path";
 import { AuthorizationError } from "../../utils";
@@ -9,7 +10,7 @@ import * as types from "./types";
 
 const isGenerateScript: boolean = process.argv.includes("--nexus-exit");
 
-export const schema = makeSchema({
+const _schema = makeSchema({
 	shouldGenerateArtifacts: isGenerateScript,
 	shouldExitAfterGenerateArtifacts: isGenerateScript,
 	types: { ...inputTypes, ...mutations, ...queries, ...types },
@@ -52,3 +53,6 @@ export const schema = makeSchema({
 		alias: "ctx"
 	}
 });
+
+export const schema =
+	process.env.NODE_ENV !== "production" ? lexicographicSortSchema(_schema) : _schema;
