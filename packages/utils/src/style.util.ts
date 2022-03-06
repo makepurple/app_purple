@@ -10,6 +10,7 @@ export const ZIndicies = [
 	"extra",
 	"backdrop",
 	"page-drawer",
+	"dialog",
 	"app-bar",
 	"menu"
 ] as const;

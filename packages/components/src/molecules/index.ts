@@ -1,3 +1,4 @@
+export * from "./AlertDialog";
 export * from "./CodeBlock";
 export * from "./CodeBlockInput";
 export * from "./DocumentEditor";
