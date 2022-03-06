@@ -1,5 +1,14 @@
-import { Anchor, Avatar, Button, GitHubAvatarImage, Paper, Tags } from "@makepurple/components";
+import {
+	AlertDialog,
+	Anchor,
+	Avatar,
+	Button,
+	GitHubAvatarImage,
+	Paper,
+	Tags
+} from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
+import { stripIndents } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -262,16 +271,13 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
 					</UpvoteButton>
 					{isMyUser && (
-						<DeleteButton
-							disabled={fetching}
-							onClick={async (e) => {
+						<AlertDialog
+							description={stripIndents`
+								This action cannot be undone. This will permanently delete this
+								snippet.
+							`}
+							onConfirm={async (e) => {
 								e.stopPropagation();
-
-								const confirmed = window.confirm(
-									"Are you sure you wish to delete this snippet?\nThis cannot be undone."
-								);
-
-								if (!confirmed) return;
 
 								const where: CodeExampleWhereUniqueInput = {
 									id: codeExample.id
@@ -289,12 +295,20 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 
 								toast.success("Snippet was successfully deleted");
 							}}
-							size="small"
-							type="button"
-							variant="alert"
+							text="Yes, delete snippet"
 						>
-							Delete
-						</DeleteButton>
+							<DeleteButton
+								disabled={fetching}
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								size="small"
+								type="button"
+								variant="alert"
+							>
+								Delete
+							</DeleteButton>
+						</AlertDialog>
 					)}
 				</Actions>
 			</Content>
