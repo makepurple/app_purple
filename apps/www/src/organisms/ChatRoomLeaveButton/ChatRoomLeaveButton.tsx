@@ -22,10 +22,6 @@ export const ChatRoomLeaveButton: FC<ChatRoomLeaveButtonProps> = (props) => {
 				Are you sure you want to leave this chat? You can only rejoin if invited again.
 			`}
 			onConfirm={async () => {
-				const confirmed = confirm("Are you sure you want to leave this chat?");
-
-				if (!confirmed) return;
-
 				const didSucceed = await leaveChat({ chatId })
 					.then((result) => !!result.data?.leaveChat)
 					.catch(() => false);
