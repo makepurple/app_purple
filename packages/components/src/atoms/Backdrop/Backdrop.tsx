@@ -3,6 +3,7 @@ import { StyleUtils, WindowUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
 import React, { forwardRef } from "react";
 import { createPortal } from "react-dom";
+import { useLockBodyScroll } from "react-use";
 import tw, { styled } from "twin.macro";
 
 const Root = styled(m.div)`
@@ -21,6 +22,8 @@ export type BackdropProps = InferComponentProps<"div"> & {
 
 export const Backdrop = forwardRef<HTMLDivElement, BackdropProps>((props, ref) => {
 	const { open, ...divProps } = props;
+
+	useLockBodyScroll(open);
 
 	if (WindowUtils.isSsr()) return null;
 
