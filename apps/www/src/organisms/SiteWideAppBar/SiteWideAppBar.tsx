@@ -6,7 +6,8 @@ import {
 	Button,
 	HamburgerMenuButton,
 	Logo,
-	PageContainer
+	PageContainer,
+	withForwardRef
 } from "@makepurple/components";
 import { didClickIn, useOnClickOutside, useOnKeyDown } from "@makepurple/hooks";
 import { FormatUtils } from "@makepurple/utils";
@@ -20,10 +21,22 @@ import React, { CSSProperties, FC, useEffect, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
 import { BellIcon, ChatIcon, PeopleIcon } from "../../svgs";
-import { SiteWideSearch } from "../SiteWideSearch";
+import { LazySiteWideSearch } from "../SiteWideSearch";
+import { SiteWideUserMenu } from "../SiteWideUserMenu";
 
 const SiteWideSideDrawer = dynamic(() => import("../SiteWideSideDrawer"), { ssr: false });
-const SiteWideUserMenu = dynamic(() => import("../SiteWideUserMenu"), { ssr: false });
+
+const ForwardedRefSideDrawer = withForwardRef(SiteWideSideDrawer);
+
+const Search = tw.div`
+	ml-auto
+	sm:ml-0
+`;
+
+const SiteWideSearch = dynamic(() => import("../SiteWideSearch"), {
+	ssr: false,
+	loading: () => <Search as={LazySiteWideSearch} />
+});
 
 const SCROLL_THRESHOLD = 32;
 const SCROLL_PROGRESS_THRESHOLD = 0.95;
@@ -37,11 +50,6 @@ const BrandContainer = tw.div`
 const StyledBrand = tw(Brand)`
 	hidden
 	md:block
-`;
-
-const Search = tw(SiteWideSearch)`
-	ml-auto
-	sm:ml-0
 `;
 
 const Actions = tw.div`
@@ -109,7 +117,7 @@ const UserMenu = tw(SiteWideUserMenu)`
 	flex-shrink-0
 `;
 
-const SideDrawer = tw(SiteWideSideDrawer)`
+const SideDrawer = tw(ForwardedRefSideDrawer)`
 	pt-16
 `;
 
@@ -253,6 +261,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					<StyledBrand tw="ml-1" />
 				</BrandContainer>
 				<Search
+					as={SiteWideSearch}
 					onBlur={() => {
 						setSearching(false);
 					}}

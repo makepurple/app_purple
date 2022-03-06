@@ -1,4 +1,4 @@
-import { Button, ComboBox, Input, Paper, Popover } from "@makepurple/components";
+import { ComboBox, Popover } from "@makepurple/components";
 import { useComboBoxState, useLockBodyScroll, useOnKeyDown } from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
 import ms from "ms";
@@ -14,7 +14,6 @@ import React, {
 	useState
 } from "react";
 import { usePopper } from "react-popper";
-import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
 	RepositorySearchResultGitHubRepositoryFragment,
@@ -31,101 +30,15 @@ import { LoadingSearchResult } from "../LoadingSearchResult";
 import { OrganizationSearchResult } from "../OrganizationSearchResult";
 import { RepositorySearchResult } from "../RepositorySearchResult";
 import { UserSearchResult } from "../UserSearchResult";
-
-const InputContainer = tw(ComboBox)`
-	flex
-	flex-row
-	items-stretch
-	rounded-lg
-	border
-	border-transparent
-	sm:border-gray-300
-`;
-
-const SearchInputContainer = tw.div`
-	flex-basis[0]
-	flex-grow
-	w-auto
-	min-w-0
-	transition-all
-	duration-150
-	ease-in
-	focus-within:flex-grow[8]
-	focus-within:z-index[1]
-`;
-
-const SearchInput = tw(Input)`
-	border-transparent
-	h-11
-`;
-
-const OwnerSearch = tw(SearchInput)`
-	rounded-r-none
-	border-r-gray-300/80
-`;
-
-const SkillSearch = tw(SearchInput)`
-	rounded-none
-	border-l-gray-300/80
-`;
-
-const Results = tw(Paper)`
-	max-h-96
-	overflow-y-auto
-`;
-
-const SearchButton = tw(Button)`
-	flex-shrink-0
-	h-11
-	w-11
-	ml-auto
-	p-0
-	bg-white
-	bg-opacity-80
-	not-disabled:hover:-translate-y-0.5
-	sm:border-0
-	sm:border-l
-	sm:border-opacity-60
-	sm:rounded-l-none
-	sm:not-disabled:hover:translate-y-0
-`;
-
-const Root = styled.form`
-	&:not(:focus-within) {
-		& ${SearchInputContainer as any} {
-			${tw`
-				flex-grow-0
-				sm:flex-grow
-			`}
-		}
-
-		& ${OwnerSearch as any}, & ${SkillSearch as any} {
-			${tw`
-				opacity-0
-				sm:opacity-100
-			`}
-		}
-	}
-
-	&:focus-within {
-		& ${InputContainer as any} {
-			${tw`
-				border-gray-300
-			`}
-		}
-
-		${SearchButton as any} {
-			${tw`
-				bg-white
-				border-0
-				border-l
-				border-opacity-60
-				rounded-l-none
-				sm:bg-transparent
-			`}
-		}
-	}
-`;
+import {
+	InputContainer,
+	OwnerSearch,
+	Results,
+	Root,
+	SearchButton,
+	SearchInputContainer,
+	SkillSearch
+} from "./parts";
 
 export interface SiteWideSearchProps {
 	className?: string;
@@ -285,7 +198,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 				role="search"
 				style={style}
 			>
-				<InputContainer>
+				<ComboBox as={InputContainer}>
 					<SearchInputContainer {...ownerBox.getComboboxProps()}>
 						<OwnerSearch
 							{...ownerBox.getInputProps({
@@ -340,7 +253,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					>
 						<SearchIcon height={24} width={24} />
 					</SearchButton>
-				</InputContainer>
+				</ComboBox>
 				<ComboBox.Options
 					as={Results}
 					{...ownerBox.getMenuProps({
