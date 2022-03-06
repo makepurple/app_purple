@@ -91,6 +91,7 @@ export const Page: NextPage = () => {
 					await signIn("github", { callbackUrl: "/" });
 				}}
 				size="large"
+				type="button"
 				tw="mt-16"
 			>
 				<GitHubIcon height={24} width={24} tw="mr-3" />
