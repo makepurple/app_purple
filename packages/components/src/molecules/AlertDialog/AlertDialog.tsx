@@ -1,6 +1,6 @@
 import { StyleUtils } from "@makepurple/utils";
 import * as RadixAlertDialog from "@radix-ui/react-alert-dialog";
-import React, { CSSProperties, FC, MouseEvent, ReactElement, ReactNode } from "react";
+import React, { CSSProperties, FC, MouseEvent, ReactElement, ReactNode, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { Backdrop, Button, Paper } from "../../atoms";
 
@@ -17,8 +17,11 @@ const Root = styled(Paper)`
 		-translate-y-1/2
 		flex
 		flex-col
-		p-6
+		width[28rem]
+		max-width[calc(100% - 0.5rem)]
+		p-4
 		shadow-2xl
+		sm:p-6
 	`}
 	z-index: ${StyleUtils.getZIndex("dialog")};
 `;
@@ -33,7 +36,6 @@ const Title = tw(RadixAlertDialog.Title)`
 const Description = tw(RadixAlertDialog.Description)`
 	text-sm
 	text-gray-500
-	whitespace-pre
 `;
 
 const Actions = tw.div`
@@ -62,8 +64,15 @@ export const AlertDialog: FC<AlertDialogProps> = ({
 	text,
 	title = "Are you absolutely sure?"
 }) => {
+	const [open, setOpen] = useState<boolean>(false);
+
 	return (
-		<RadixAlertDialog.Root>
+		<RadixAlertDialog.Root
+			open={open}
+			onOpenChange={(newOpen) => {
+				setOpen(newOpen);
+			}}
+		>
 			<RadixAlertDialog.Trigger asChild>{children}</RadixAlertDialog.Trigger>
 			<RadixAlertDialog.Portal>
 				<RadixAlertDialog.Overlay asChild>
@@ -71,7 +80,7 @@ export const AlertDialog: FC<AlertDialogProps> = ({
 						onClick={(e) => {
 							e.stopPropagation();
 						}}
-						open
+						open={open}
 					/>
 				</RadixAlertDialog.Overlay>
 				<RadixAlertDialog.Content asChild>
