@@ -36,7 +36,7 @@ const PageTabs = tw(SkillPageTabs)`
 
 export interface SkillPageLayoutProps {
 	children?: ReactNode;
-	selectedTab?: "posts" | "explore" | "followers";
+	selectedTab?: "posts" | "explore" | "followers" | "snippets";
 	skillName: string;
 	skillOwner: string;
 }

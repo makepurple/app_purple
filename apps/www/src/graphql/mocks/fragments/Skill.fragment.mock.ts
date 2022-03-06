@@ -1,7 +1,9 @@
 import { Skill } from "../../generated";
 import { GitHubRepository_fragment_mock } from "./GitHubRepository.fragment.mock";
 
-export const Skill_fragment_mock: Skill = {
+export const Skill_fragment_mock: Omit<Skill, "github"> & {
+	github: typeof GitHubRepository_fragment_mock;
+} = {
 	__typename: "Skill",
 	id: "0",
 	codeExamples: {

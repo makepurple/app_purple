@@ -1,10 +1,10 @@
 import { NextLinkAs, NoteIcon, Paper, Tab } from "@makepurple/components";
 import React, { CSSProperties, FC, Fragment, useMemo } from "react";
-import { PeopleIcon, TelescopeIcon } from "../../svgs";
+import { CodeIcon, PeopleIcon, TelescopeIcon } from "../../svgs";
 
 export interface SkillPageTabsProps {
 	className?: string;
-	selectedTab?: "posts" | "followers" | "explore";
+	selectedTab?: "posts" | "followers" | "explore" | "snippets";
 	style?: CSSProperties;
 	skillName: string;
 	skillOwner: string;
@@ -25,6 +25,8 @@ export const SkillPageTabs: FC<SkillPageTabsProps> = ({
 				return 1;
 			case "followers":
 				return 2;
+			case "snippets":
+				return 3;
 			default:
 				return undefined;
 		}
@@ -83,6 +85,20 @@ export const SkillPageTabs: FC<SkillPageTabsProps> = ({
 						>
 							<PeopleIcon height={20} tw="mr-2" width={20} />
 							Followers
+						</NextLinkAs>
+					)}
+				</Tab>
+				<Tab as={Fragment}>
+					{(tabProps) => (
+						<NextLinkAs
+							as={Tab.Button}
+							forwardedAs="a"
+							href="/s/[skillOwner]/[skillName]"
+							linkAs={`/s/${skillOwner}/${skillName}?tab=snippets`}
+							{...tabProps}
+						>
+							<CodeIcon height={20} tw="mr-2" width={20} />
+							Snippets
 						</NextLinkAs>
 					)}
 				</Tab>

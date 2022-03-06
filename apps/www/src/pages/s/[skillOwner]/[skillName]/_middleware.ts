@@ -17,6 +17,8 @@ export const middleware = (req: NextRequest) => {
 				return NextResponse.rewrite(`/s-tab/explore/${skillOwner}/${skillName}`);
 			case "followers":
 				return NextResponse.rewrite(`/s-tab/followers/${skillOwner}/${skillName}`);
+			case "snippets":
+				return NextResponse.rewrite(`/s-tab/snippets/${skillOwner}/${skillName}`);
 			default:
 				return NextResponse.next();
 		}

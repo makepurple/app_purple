@@ -1,7 +1,10 @@
 import { dayjs } from "@makepurple/utils";
-import { GitHubRepository } from "../../generated";
+import { GitHubOrganization, GitHubRepository, GitHubUser } from "../../generated";
+import { GitHubOrganization_fragment_mock } from "./GitHubOrganization.fragment.mock";
 
-export const GitHubRepository_fragment_mock: GitHubRepository = {
+export const GitHubRepository_fragment_mock: Omit<GitHubRepository, "owner"> & {
+	owner: GitHubOrganization | GitHubUser;
+} = {
 	__typename: "GitHubRepository",
 	id: "0",
 	description:
@@ -17,15 +20,7 @@ export const GitHubRepository_fragment_mock: GitHubRepository = {
 		url: "http://choosealicense.com/licenses/mit/"
 	},
 	name: "react",
-	owner: {
-		...({ __typename: "GitHubOrganization" } as any),
-		avatarUrl: "https://avatars.githubusercontent.com/u/69631?v=4",
-		id: "MDEyOk9yZ2FuaXphdGlvbjY5NjMx",
-		login: "facebook",
-		twitterUsername: "MetaOpenSource",
-		url: "https://github.com/facebook",
-		websiteUrl: "https://opensource.fb.com"
-	},
+	owner: GitHubOrganization_fragment_mock,
 	primaryLanguage: {
 		__typename: "GitHubLanguage",
 		color: "#f1e05a",

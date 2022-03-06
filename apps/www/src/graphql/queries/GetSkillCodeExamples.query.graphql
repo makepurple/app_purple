@@ -1,0 +1,34 @@
+query GetSkillCodeExamples(
+	$after: String
+	$first: Int
+	$name: String!
+	$owner: String!
+) {
+	skill(
+		where: {
+			name_owner: {
+				name: $name
+				owner: $owner
+			}
+		}
+	) {
+		id
+		codeExamples(after: $after, first: $first) {
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...CodeExampleCardCodeExample
+			}
+		}
+		name
+		owner
+	}
+}

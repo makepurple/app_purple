@@ -3149,6 +3149,16 @@ export type GetSiteWideSideDrawerQueryVariables = Exact<{
 
 export type GetSiteWideSideDrawerQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'FollowEdge', readonly cursor: string, readonly node: { readonly __typename: 'Follow', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Follow', readonly id: string, readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string } | { readonly __typename: 'GitHubUser', readonly avatarUrl: string, readonly id: string } } } | { readonly __typename: 'User', readonly viewerFollowing: boolean, readonly id: string, readonly image?: string | null, readonly name: string } }> } } | null };
 
+export type GetSkillCodeExamplesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  name: Scalars['String'];
+  owner: Scalars['String'];
+}>;
+
+
+export type GetSkillCodeExamplesQuery = { readonly __typename: 'Query', readonly skill?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly codeExamples: { readonly __typename: 'CodeExampleConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'CodeExampleEdge', readonly cursor: string, readonly node: { readonly __typename: 'CodeExample', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } } | null };
+
 export type GetSkillFollowersQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -6221,6 +6231,35 @@ ${SiteWideSideDrawerFollowableFragmentDoc}`;
 
 export function useGetSiteWideSideDrawerQuery(options?: Omit<Urql.UseQueryArgs<GetSiteWideSideDrawerQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSiteWideSideDrawerQuery>({ query: GetSiteWideSideDrawerDocument, ...options });
+};
+export const GetSkillCodeExamplesDocument = /*#__PURE__*/ gql`
+    query GetSkillCodeExamples($after: String, $first: Int, $name: String!, $owner: String!) {
+  skill(where: {name_owner: {name: $name, owner: $owner}}) {
+    id
+    codeExamples(after: $after, first: $first) {
+      pageInfo {
+        ...PageInfoFragment
+      }
+      totalCount
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+      nodes {
+        ...CodeExampleCardCodeExample
+      }
+    }
+    name
+    owner
+  }
+}
+    ${PageInfoFragmentFragmentDoc}
+${CodeExampleCardCodeExampleFragmentDoc}`;
+
+export function useGetSkillCodeExamplesQuery(options: Omit<Urql.UseQueryArgs<GetSkillCodeExamplesQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetSkillCodeExamplesQuery>({ query: GetSkillCodeExamplesDocument, ...options });
 };
 export const GetSkillFollowersDocument = /*#__PURE__*/ gql`
     query GetSkillFollowers($after: String, $first: Int, $name: String!, $owner: String!) {
