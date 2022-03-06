@@ -80,8 +80,8 @@ const ThumbnailContainer = tw.div`
 `;
 
 const ThumbnailImage = tw.div`
-	aspect-w-16
-	aspect-h-9
+	aspect-w-5
+	aspect-h-2
 `;
 
 const Editor = tw(DocumentEditor)`
