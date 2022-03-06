@@ -1,6 +1,6 @@
 import { AlertDialog, Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
-import { stripIndents } from "common-tags";
+import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -230,7 +230,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 					</UpvoteButton>
 					{isMyPost && (
 						<AlertDialog
-							description={stripIndents`
+							description={oneLine`
 								Are you sure you wish to delete this post? This cannot be undone.
 							`}
 							onConfirm={async () => {

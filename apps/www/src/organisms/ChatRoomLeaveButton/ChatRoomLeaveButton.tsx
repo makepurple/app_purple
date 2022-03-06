@@ -1,5 +1,5 @@
 import { AlertDialog, Button, ButtonProps } from "@makepurple/components";
-import { stripIndents } from "common-tags";
+import { oneLine } from "common-tags";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { toast } from "react-hot-toast";
@@ -18,7 +18,7 @@ export const ChatRoomLeaveButton: FC<ChatRoomLeaveButtonProps> = (props) => {
 
 	return (
 		<AlertDialog
-			description={stripIndents`
+			description={oneLine`
 				Are you sure you want to leave this chat? You can only rejoin if invited again.
 			`}
 			onConfirm={async () => {
