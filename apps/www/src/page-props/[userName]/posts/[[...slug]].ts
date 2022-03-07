@@ -51,7 +51,14 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 		}
 	})();
 
-	await Promise.all([
+	const [user] = await Promise.all([
+		urqlClient
+			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
+				GetUserInfoSideBarDocument,
+				{ name: query.userName as string }
+			)
+			.toPromise()
+			.then((result) => result.data?.user),
 		urqlClient
 			.query<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, {
 				after: null,
@@ -65,14 +72,10 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.toPromise(),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-			.toPromise(),
-		urqlClient
-			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
-				GetUserInfoSideBarDocument,
-				{ name: userName }
-			)
 			.toPromise()
 	]);
+
+	if (!user) return { notFound: true };
 
 	return addUrqlState(ssr, {
 		props: {

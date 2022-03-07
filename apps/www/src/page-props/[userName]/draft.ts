@@ -16,7 +16,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	await Promise.all([
+	const [post] = await Promise.all([
 		urqlClient
 			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
 				where: {
@@ -27,7 +27,10 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				}
 			})
 			.toPromise()
+			.then((result) => result.data?.post)
 	]);
+
+	if (!post) return { notFound: true };
 
 	return addUrqlState(ssr, {
 		props: {

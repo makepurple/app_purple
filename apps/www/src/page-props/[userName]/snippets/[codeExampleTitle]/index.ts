@@ -25,13 +25,14 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const authorName = query.authorName as string;
 	const urlSlug = query.codeExampleTitle as string;
 
-	await Promise.all([
+	const [codeExample] = await Promise.all([
 		urqlClient
 			.query<GetCodeExampleQuery, GetCodeExampleQueryVariables>(GetCodeExampleDocument, {
 				authorName,
 				urlSlug
 			})
-			.toPromise(),
+			.toPromise()
+			.then((result) => result.data?.codeExample),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
 			.toPromise(),
@@ -42,6 +43,8 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			)
 			.toPromise()
 	]);
+
+	if (!codeExample) return { notFound: true };
 
 	return addUrqlState(ssr, {
 		props: {
