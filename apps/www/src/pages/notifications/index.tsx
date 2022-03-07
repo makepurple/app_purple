@@ -7,10 +7,10 @@ import {
 	useGetNotificationCountsQuery,
 	useGetNotificationsQuery,
 	useOpenNotificationsMutation
-} from "../graphql";
-import { LoadingNotificationCard, NotificationCard } from "../organisms";
-import { PageProps, pageProps } from "../page-props/notifications";
-import { SearchIcon } from "../svgs";
+} from "../../graphql";
+import { LoadingNotificationCard, NotificationCard } from "../../organisms";
+import { PageProps, pageProps } from "../../page-props/notifications";
+import { SearchIcon } from "../../svgs";
 
 const BATCH_SIZE = 20;
 

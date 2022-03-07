@@ -12,7 +12,7 @@ import { NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
 import React, { useMemo, useState } from "react";
 import tw from "twin.macro";
-import { useDeleteUserMutation } from "../graphql";
+import { useDeleteUserMutation } from "../../graphql";
 
 const DEFAULT_SUBJECT = oneLine`
 	HELP: Account deletion failed!

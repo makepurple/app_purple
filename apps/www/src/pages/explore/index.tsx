@@ -4,10 +4,10 @@ import { Masonry } from "masonic";
 import { NextPage } from "next";
 import React, { useMemo, useRef } from "react";
 import tw from "twin.macro";
-import { useSuggestFriendsQuery } from "../graphql";
-import { SuggestedFriendCard } from "../organisms";
-import { PageProps, pageProps } from "../page-props/explore";
-import { PersonIcon } from "../svgs";
+import { useSuggestFriendsQuery } from "../../graphql";
+import { SuggestedFriendCard } from "../../organisms";
+import { PageProps, pageProps } from "../../page-props/explore";
+import { PersonIcon } from "../../svgs";
 
 const BATCH_SIZE = 50;
 
