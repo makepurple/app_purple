@@ -12,7 +12,15 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC, ReactNode, Ref, useState } from "react";
 import tw from "twin.macro";
 import { useGetSiteWideSideDrawerQuery } from "../../graphql";
-import { BellIcon, BookIcon, ChatIcon, PeopleIcon, SignOutIcon, TelescopeIcon } from "../../svgs";
+import {
+	BellIcon,
+	BookIcon,
+	ChatIcon,
+	GearIcon,
+	PeopleIcon,
+	SignOutIcon,
+	TelescopeIcon
+} from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
 import { LoadingSiteWideSideDrawerFollowLink } from "./LoadingSiteWideSideDrawerFollowLink";
@@ -260,6 +268,12 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 									<ListItem as="a">
 										<BellIcon height={24} width={24} tw="mr-3" />
 										<span>Notifications</span>
+									</ListItem>
+								</NextLink>
+								<NextLink href="/account" passHref>
+									<ListItem as="a">
+										<GearIcon height={24} width={24} tw="mr-3" />
+										<span>Account</span>
 									</ListItem>
 								</NextLink>
 								<ListItem
