@@ -1,4 +1,4 @@
-import { GlobalStyles } from "@makepurple/components";
+import { GlobalStyles, Toaster } from "@makepurple/components";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { addons } from "@storybook/addons";
@@ -9,7 +9,6 @@ import "tippy.js/dist/tippy.css";
 import "twin.macro";
 import { RouterContext as ComponentsRouterContext } from "../../../packages/components/node_modules/next/dist/shared/lib/router-context";
 import { RouterContext as WwwRouterContext } from "../../www/node_modules/next/dist/shared/lib/router-context";
-import { Toaster } from "../../www/node_modules/react-hot-toast";
 
 /**
  * !HACK

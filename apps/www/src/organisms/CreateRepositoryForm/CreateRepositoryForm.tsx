@@ -4,12 +4,12 @@ import {
 	FormLabel,
 	Input,
 	NonIdealState,
-	RepoIcon
+	RepoIcon,
+	toast
 } from "@makepurple/components";
 import { useDebouncedCallback } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, Fragment, SyntheticEvent, useState } from "react";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useCreateRepositoryMutation, useSuggestRepositoriesQuery } from "../../graphql";
 import { CreateRepositoryFormOption } from "../CreateRepositoryFormOption";

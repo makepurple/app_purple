@@ -1,9 +1,8 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
-import { Form, FormButton, HiddenInput, Spinner, Tags } from "@makepurple/components";
+import { Form, FormButton, HiddenInput, Spinner, Tags, toast } from "@makepurple/components";
 import Schema, { array, string } from "computed-types";
 import React, { CSSProperties, FC, SyntheticEvent } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { ChatRoomInviteFormChatFragment, useInviteToChatMutation } from "../../graphql";
 import { FriendAutosuggest } from "../FriendAutosuggest";

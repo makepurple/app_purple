@@ -2,7 +2,8 @@ import {
 	ErrorBoundary,
 	GlobalStyles,
 	LazyMotion,
-	NextProgressBarProps
+	NextProgressBarProps,
+	Toaster
 } from "@makepurple/components";
 import ms from "ms";
 import type { NextComponentType } from "next";
@@ -12,7 +13,6 @@ import dynamic from "next/dynamic";
 import NextError from "next/error";
 import NextHead from "next/head";
 import React from "react";
-import { Toaster } from "react-hot-toast";
 import { GdprCookieConsent, GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
 
 const NextProgressBar = dynamic<NextProgressBarProps>(

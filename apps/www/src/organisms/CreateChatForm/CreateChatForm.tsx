@@ -5,14 +5,14 @@ import {
 	FormButton,
 	FormGroup,
 	HiddenInput,
-	Tags
+	Tags,
+	toast
 } from "@makepurple/components";
 import { ChatMessageContent } from "@makepurple/validators";
 import Schema, { array, string, Type } from "computed-types";
 import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import tw from "twin.macro";
 import { useCreateChatMutation } from "../../graphql";
 import { FriendAutosuggest } from "../FriendAutosuggest";

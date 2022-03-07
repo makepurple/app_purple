@@ -6,7 +6,8 @@ import {
 	DocumentEditor,
 	GitHubAvatarImage,
 	NonIdealState,
-	Paper
+	Paper,
+	toast
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
@@ -18,7 +19,6 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
-import { toast } from "react-hot-toast";
 import tw from "twin.macro";
 import {
 	useDeletePostMutation,

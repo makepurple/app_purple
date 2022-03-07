@@ -1,6 +1,5 @@
-import { FormButton, FormButtonProps } from "@makepurple/components";
+import { FormButton, FormButtonProps, toast } from "@makepurple/components";
 import React, { FC } from "react";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useRemovePostThumbnailMutation } from "../../graphql";
 

@@ -1,6 +1,5 @@
-import { Button, Spinner, VisuallyHidden } from "@makepurple/components";
+import { Button, Spinner, toast, VisuallyHidden } from "@makepurple/components";
 import React, { ChangeEvent, CSSProperties, forwardRef, ReactNode } from "react";
-import { toast } from "react-hot-toast";
 import { useUploadPostImageMutation } from "../../graphql";
 
 const ACCEPTED_IMAGE_TYPES = ["image/gif", "image/jpeg", "image/jpg", "image/png", "image/webp"];

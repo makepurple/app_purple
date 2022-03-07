@@ -1,8 +1,7 @@
-import { Avatar, Button, GitHubAvatarImage } from "@makepurple/components";
+import { Avatar, Button, GitHubAvatarImage, toast } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	ExperienceCardExperienceFragment,

@@ -1,7 +1,6 @@
-import { Form, FormButton, HiddenInput, Tags } from "@makepurple/components";
+import { Form, FormButton, HiddenInput, Tags, toast } from "@makepurple/components";
 import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useGetUserInfoSideBarQuery, useUpdateUserInfoMutation } from "../../graphql";
 import { SkillAutosuggest } from "../SkillAutosuggest";

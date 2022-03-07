@@ -1,3 +1,4 @@
+import { toast } from "@makepurple/components";
 import { WindowUtils } from "@makepurple/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
 import { devtoolsExchange } from "@urql/devtools";
@@ -6,7 +7,6 @@ import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
 import produce from "immer";
 import type { GetServerSidePropsContext } from "next";
-import toast from "react-hot-toast";
 import { Client, createClient, dedupExchange, errorExchange, ssrExchange } from "urql";
 import { createCache } from "./cache";
 

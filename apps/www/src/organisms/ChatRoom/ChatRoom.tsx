@@ -8,7 +8,8 @@ import {
 	FormButton,
 	GitHubAvatarImage,
 	Skeleton,
-	Spinner
+	Spinner,
+	toast
 } from "@makepurple/components";
 import { useInterval } from "@makepurple/hooks";
 import { ChatMessageContent } from "@makepurple/validators";
@@ -20,7 +21,6 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { Controller, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {

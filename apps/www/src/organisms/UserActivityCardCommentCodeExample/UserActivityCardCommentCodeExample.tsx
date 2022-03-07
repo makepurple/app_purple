@@ -1,9 +1,16 @@
-import { Anchor, Avatar, Button, GitHubAvatarImage, Paper, Tags } from "@makepurple/components";
+import {
+	Anchor,
+	Avatar,
+	Button,
+	GitHubAvatarImage,
+	Paper,
+	Tags,
+	toast
+} from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
-import { toast } from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	CodeExampleWhereUniqueInput,

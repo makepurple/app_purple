@@ -7,7 +7,8 @@ import {
 	FormGroup,
 	FormHelperText,
 	FormLabel,
-	Spinner
+	Spinner,
+	toast
 } from "@makepurple/components";
 import { CommentCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
@@ -15,7 +16,6 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useCommentCodeExampleMutation, useCommentPostMutation } from "../../graphql";
 

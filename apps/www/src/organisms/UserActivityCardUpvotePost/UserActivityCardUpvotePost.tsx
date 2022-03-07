@@ -1,9 +1,8 @@
-import { Anchor, Button, Paper } from "@makepurple/components";
+import { Anchor, Button, Paper, toast } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	UserActivityCardUpvotePostUserActivityUpvotePostFragment,

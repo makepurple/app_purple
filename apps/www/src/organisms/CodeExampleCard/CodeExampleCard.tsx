@@ -5,7 +5,8 @@ import {
 	Button,
 	GitHubAvatarImage,
 	Paper,
-	Tags
+	Tags,
+	toast
 } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
@@ -13,7 +14,6 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	CodeExampleCardCodeExampleFragment,

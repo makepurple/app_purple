@@ -5,14 +5,14 @@ import {
 	DocumentEditorValue,
 	GitHubAvatarImage,
 	Spinner,
-	ThumbsUpIcon
+	ThumbsUpIcon,
+	toast
 } from "@makepurple/components";
 import { useIntersectionObserver } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { CSSProperties, forwardRef, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	CommentCardCommentFragment,

@@ -1,4 +1,4 @@
-import { AlertDialog, Anchor, Button, Paper, ThumbsUpIcon } from "@makepurple/components";
+import { AlertDialog, Anchor, Button, Paper, ThumbsUpIcon, toast } from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
@@ -6,7 +6,6 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	PostCardPostFragment,

@@ -48,6 +48,7 @@ export * from "./Skeleton";
 export * from "./Spinner";
 export * from "./Tab";
 export * from "./TextArea";
+export * from "./Toaster";
 export * from "./Toolbar";
 export * from "./Tooltip";
 export * from "./VisuallyHidden";

@@ -1,8 +1,7 @@
-import { AlertDialog, Button, ButtonProps } from "@makepurple/components";
+import { AlertDialog, Button, ButtonProps, toast } from "@makepurple/components";
 import { oneLine } from "common-tags";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { toast } from "react-hot-toast";
 import { useLeaveChatMutation } from "../../graphql";
 
 export type ChatRoomLeaveButtonProps = ButtonProps & {

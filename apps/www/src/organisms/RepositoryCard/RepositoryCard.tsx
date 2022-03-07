@@ -8,13 +8,13 @@ import {
 	MaybeAnchor,
 	MaybeWrap,
 	Spinner,
-	Tags
+	Tags,
+	toast
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import NextLink from "next/link";
 import React, { cloneElement, CSSProperties, forwardRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw, { styled } from "twin.macro";
 import {
 	RepositoryCardRepositoryFragment,

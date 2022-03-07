@@ -12,7 +12,8 @@ import {
 	MainContainer,
 	Paper,
 	Tags,
-	TextArea
+	TextArea,
+	toast
 } from "@makepurple/components";
 import { PostDraftUpdateInput } from "@makepurple/validators";
 import type { Type } from "computed-types";
@@ -21,7 +22,6 @@ import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import { useGetPostQuery, usePublishPostMutation, useUpdatePostDraftMutation } from "../../graphql";
 import {

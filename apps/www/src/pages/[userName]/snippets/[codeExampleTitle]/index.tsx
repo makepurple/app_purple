@@ -7,7 +7,8 @@ import {
 	GitHubAvatarImage,
 	NonIdealState,
 	Paper,
-	Tags
+	Tags,
+	toast
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
@@ -18,7 +19,6 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
 import React, { useMemo } from "react";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import {
 	CodeExampleWhereUniqueInput,

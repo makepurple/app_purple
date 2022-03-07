@@ -12,7 +12,8 @@ import {
 	Input,
 	Paper,
 	Tags,
-	TextArea
+	TextArea,
+	toast
 } from "@makepurple/components";
 import { CodeExampleCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
@@ -21,7 +22,6 @@ import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
 import React, { useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import tw from "twin.macro";
 import {
 	CodeLanguage,

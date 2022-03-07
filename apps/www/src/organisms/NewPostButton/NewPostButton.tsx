@@ -1,9 +1,8 @@
-import { Button } from "@makepurple/components";
+import { Button, toast } from "@makepurple/components";
 import { UrlUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { CSSProperties, FC, ReactNode, useEffect, useMemo } from "react";
-import toast from "react-hot-toast";
 import { GetPostDraftQuery, useCreatePostMutation, useGetPostDraftQuery } from "../../graphql";
 
 export interface NewPostButtonRenderProps {
