@@ -1,15 +1,19 @@
 import { Divider, ListItem, Menu } from "@makepurple/components";
+import { useResizeObserver } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
 import { FormatUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { FC, Ref } from "react";
-import tw, { styled } from "twin.macro";
+import { stripUnit } from "polished";
+import React, { FC, Ref, useState } from "react";
+import tw, { styled, theme } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
 import { BookIcon, ChatIcon, PeopleIcon, SignOutIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
+
+const BREAKPOINT = parseInt(`${stripUnit(theme`screens.lg`)}`, 10);
 
 const List = tw(m.div)`
 	shadow-lg
@@ -23,7 +27,6 @@ const UserName = tw.span`
 
 const MobileLink = tw.a`
 	flex
-	lg:hidden
 `;
 
 const NewPostItem = tw(NewPostButton)`
@@ -66,6 +69,12 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 	const { innerRef, open, ...restProps } = props;
 
 	const { data: session, status } = useSession();
+
+	const [isBreakpoint, setIsBreakpoint] = useState<boolean>(false);
+
+	useResizeObserver(document.body, ({ contentRect }) => {
+		setIsBreakpoint(contentRect.width < BREAKPOINT);
+	});
 
 	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
 		pause: status !== "authenticated",
@@ -142,47 +151,52 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 							</ListItem>
 						)}
 					</Menu.Item>
-					<Menu.Item>
-						{(itemProps) => (
-							<NextLink
-								href="/[userName]/connections/requests"
-								as={`/${user.name}/connections/requests`}
-								passHref
-							>
-								<ListItem as={MobileLink} {...itemProps}>
-									<PeopleIcon height={24} width={24} tw="mr-2" />
-									<span>Invitations</span>
-									{!!invitationsCount && (
-										<AlertCount $variant="success" tw="ml-2">
-											{FormatUtils.toGitHubFixed(invitationsCount)}
-										</AlertCount>
-									)}
-								</ListItem>
-							</NextLink>
-						)}
-					</Menu.Item>
-					<Menu.Item>
-						{(itemProps) => (
-							<NextLink href="/messaging" passHref>
-								<ListItem as={MobileLink} {...itemProps}>
-									<ChatIcon height={24} width={24} tw="mr-2" />
-									<span>Messages</span>
-									{!!messageCount && (
-										<AlertCount $variant="alert" tw="ml-2">
-											{FormatUtils.toGitHubFixed(messageCount)}
-										</AlertCount>
-									)}
-								</ListItem>
-							</NextLink>
-						)}
-					</Menu.Item>
+					{isBreakpoint && (
+						<>
+							<Menu.Item>
+								{(itemProps) => (
+									<NextLink
+										href="/[userName]/connections/requests"
+										as={`/${user.name}/connections/requests`}
+										passHref
+									>
+										<ListItem as={MobileLink} {...itemProps}>
+											<PeopleIcon height={24} width={24} tw="mr-2" />
+											<span>Invitations</span>
+											{!!invitationsCount && (
+												<AlertCount $variant="success" tw="ml-2">
+													{FormatUtils.toGitHubFixed(invitationsCount)}
+												</AlertCount>
+											)}
+										</ListItem>
+									</NextLink>
+								)}
+							</Menu.Item>
+							<Menu.Item>
+								{(itemProps) => (
+									<NextLink href="/messaging" passHref>
+										<ListItem as={MobileLink} {...itemProps}>
+											<ChatIcon height={24} width={24} tw="mr-2" />
+											<span>Messages</span>
+											{!!messageCount && (
+												<AlertCount $variant="alert" tw="ml-2">
+													{FormatUtils.toGitHubFixed(messageCount)}
+												</AlertCount>
+											)}
+										</ListItem>
+									</NextLink>
+								)}
+							</Menu.Item>
+						</>
+					)}
+
 					<Divider tw="m-0.5" />
 					<Menu.Item>
 						{(itemProps) => (
 							<ListItem
 								as="button"
 								onClick={async () => {
-									await signOut({ callbackUrl: "/" });
+									await signOut({ redirect: false });
 								}}
 								type="button"
 								{...itemProps}
