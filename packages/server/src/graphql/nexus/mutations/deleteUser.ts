@@ -23,6 +23,13 @@ export const deleteUser = mutationField("deleteUser", {
 				)
 			);
 
+		const chatIds = await prisma.user
+			.findUnique({
+				where: { id: user.id }
+			})
+			.chats({ select: { chatId: true } })
+			.then((chats) => chats.map((chat) => chat.chatId));
+
 		await Promise.all(
 			imageIds.map(async (imageId) => {
 				return await cloudinary.deleteImageFile(imageId).catch((e) => {
@@ -32,8 +39,18 @@ export const deleteUser = mutationField("deleteUser", {
 			})
 		).catch(() => null);
 
-		const record = await prisma.user.delete({
-			where: { id: user.id }
+		const record = await prisma.$transaction(async (transaction) => {
+			// Delete all chats where the user was the last member
+			await transaction.chat.deleteMany({
+				where: {
+					id: { in: chatIds },
+					users: { none: {} }
+				}
+			});
+
+			return await prisma.user.delete({
+				where: { id: user.id }
+			});
 		});
 
 		return { record };
