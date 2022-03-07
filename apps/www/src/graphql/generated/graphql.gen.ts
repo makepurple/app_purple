@@ -3018,6 +3018,11 @@ export type ViewPostMutationVariables = Exact<{
 
 export type ViewPostMutation = { readonly __typename: 'Mutation', readonly viewPost: { readonly __typename: 'ViewPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly viewers: { readonly __typename: 'UserConnection', readonly totalCount: number } } } };
 
+export type DeleteUserMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DeleteUserMutation = { readonly __typename: 'Mutation', readonly deleteUser: { readonly __typename: 'DeleteUserPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly name: string } } };
+
 export type GetActivityFeedQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -5701,6 +5706,20 @@ export const ViewPostDocument = /*#__PURE__*/ gql`
 
 export function useViewPostMutation() {
   return Urql.useMutation<ViewPostMutation, ViewPostMutationVariables>(ViewPostDocument);
+};
+export const DeleteUserDocument = /*#__PURE__*/ gql`
+    mutation DeleteUser {
+  deleteUser {
+    record {
+      id
+      name
+    }
+  }
+}
+    `;
+
+export function useDeleteUserMutation() {
+  return Urql.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument);
 };
 export const GetActivityFeedDocument = /*#__PURE__*/ gql`
     query GetActivityFeed($after: String, $first: Int) {
