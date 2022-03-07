@@ -3,6 +3,7 @@ import { useContextMenu } from "@makepurple/hooks";
 import { WindowUtils } from "@makepurple/utils";
 import { CodeBlockType } from "@makepurple/validators";
 import composeRefs from "@seznam/compose-react-refs";
+import copyToClipboard from "copy-to-clipboard";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import React, { FC, Fragment, useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -11,8 +12,8 @@ import CodeEditor from "react-simple-code-editor";
 import { Descendant, Editor, Element, Node as SlateNode, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw from "twin.macro";
-import { ContextMenu, ContextMenuItem, ListItem } from "../../../atoms";
-import { CodeSquareIcon, XIcon } from "../../../svgs";
+import { ContextMenu, ContextMenuItem, ListItem, toast } from "../../../atoms";
+import { CodeSquareIcon, CopyIcon, XIcon } from "../../../svgs";
 import { CodeBlockTheme } from "../../CodeBlock";
 import { useInsertBlock } from "../hooks/useInsertBlock";
 import { useIsBlockActive } from "../hooks/useIsBlockActive";
@@ -37,20 +38,21 @@ const Info = tw.div`
 	bg-indigo-500
 	text-white
 	font-semibold
+	z-index[1]
 `;
 
 const LanguageName = tw.div`
 	flex-grow
 `;
 
-const CloseIcon = tw.button`
+const ActionButton = tw.button`
 	flex-shrink-0
 	flex
 	items-center
 	justify-center
 	h-8
 	w-8
-	rounded-tl-md
+	rounded-md
 	cursor-pointer
 	disabled:cursor-not-allowed
 `;
@@ -222,19 +224,28 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 		<Root {...attributes} contentEditable={false}>
 			<Info>
 				<LanguageName>{languageName}</LanguageName>
-				{!readOnly && (
-					<CloseIcon
-						disabled={readOnly}
-						onClick={(e) => {
-							e.preventDefault();
+				<ActionButton
+					onClick={(e) => {
+						e.preventDefault();
 
+						if (!readOnly) {
 							deleteSelf();
-						}}
-						type="button"
-					>
+
+							return;
+						}
+
+						copyToClipboard(code);
+
+						toast.success("Copied!");
+					}}
+					type="button"
+				>
+					{readOnly ? (
+						<CopyIcon height={24} width={24} />
+					) : (
 						<XIcon height={24} width={24} />
-					</CloseIcon>
-				)}
+					)}
+				</ActionButton>
 			</Info>
 			<EditorWrapper ref={composedRef} style={CodeBlockTheme.plain as any}>
 				<StyledCodeEditor
