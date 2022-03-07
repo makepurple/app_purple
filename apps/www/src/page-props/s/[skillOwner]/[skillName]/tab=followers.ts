@@ -27,7 +27,14 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	const [, , skill] = await Promise.all([
+	const [skill] = await Promise.all([
+		urqlClient
+			.query<GetSkillInfoSideBarQuery, GetSkillInfoSideBarQueryVariables>(
+				GetSkillInfoSideBarDocument,
+				{ name: skillName, owner: skillOwner }
+			)
+			.toPromise()
+			.then((result) => result.data?.github.repository),
 		urqlClient
 			.query<GetSkillFollowersQuery, GetSkillFollowersQueryVariables>(
 				GetSkillFollowersDocument,
@@ -41,25 +48,10 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.toPromise(),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-			.toPromise(),
-		urqlClient
-			.query<GetSkillInfoSideBarQuery, GetSkillInfoSideBarQueryVariables>(
-				GetSkillInfoSideBarDocument,
-				{ name: skillName, owner: skillOwner }
-			)
 			.toPromise()
-			.then((result) => result.data?.github.repository ?? null)
-			.catch(() => null)
 	]);
 
-	if (!skill) {
-		return {
-			redirect: {
-				destination: "/404",
-				permanent: true
-			}
-		};
-	}
+	if (!skill) return { notFound: true };
 
 	return addUrqlState(ssr, {
 		props: {
