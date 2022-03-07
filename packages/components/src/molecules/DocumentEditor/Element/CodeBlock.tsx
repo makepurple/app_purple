@@ -32,9 +32,9 @@ const Info = tw.div`
 	h-8
 	pl-2
 	rounded-t-md
-	border
+	border-2
 	border-solid
-	border-gray-500
+	border-indigo-500
 	bg-indigo-500
 	text-white
 	font-semibold

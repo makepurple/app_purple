@@ -9,11 +9,6 @@ const Root = tw.div`
 	flex
 	flex-col
 	items-stretch
-	border-2
-	border-solid
-	border-indigo-500
-	rounded-md
-	overflow-hidden
 `;
 
 const Info = tw.div`
@@ -21,6 +16,10 @@ const Info = tw.div`
 	flex-row
 	items-center
 	h-8
+	rounded-t-md
+	border-2
+	border-solid
+	border-indigo-500
 	bg-indigo-500
 	text-white
 	font-semibold
@@ -31,6 +30,10 @@ const LanguageName = tw.div`
 `;
 
 const EditorWrapper = tw.div`
+	border-2
+	border-solid
+	border-indigo-500
+	rounded-b-md
 	overflow-auto
 	text-sm
 	font-mono

@@ -1,31 +1,47 @@
+import copyToClipboard from "copy-to-clipboard";
 import Highlight, { defaultProps, Language, PrismTheme } from "prism-react-renderer";
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, useMemo } from "react";
 import tw, { styled } from "twin.macro";
+import { toast } from "../../atoms";
+import { CopyIcon } from "../../svgs";
 
 const Root = tw.div`
 	flex
 	flex-col
 	items-stretch
-	border-2
-	border-solid
-	border-indigo-500
-	rounded-md
-	overflow-hidden
 `;
 
 const Info = tw.div`
 	flex
 	flex-row
 	items-center
+	justify-between
 	h-8
 	pl-2
+	rounded-t-md
+	border-2
+	border-solid
+	border-indigo-500
 	bg-indigo-500
 	text-white
 	font-semibold
+	z-index[1]
 `;
 
 const LanguageName = tw.div`
-	flex-grow
+	truncate
+`;
+
+const ActionButton = tw.button`
+	flex-shrink-0
+	flex
+	items-center
+	justify-center
+	h-8
+	w-8
+	rounded-md
+	cursor-pointer
+	disabled:cursor-not-allowed
 `;
 
 const Editor = styled.pre`
@@ -34,6 +50,10 @@ const Editor = styled.pre`
 		overflow-auto
 		text-sm
 		font-mono
+		rounded-b-md
+		border-2
+		border-solid
+		border-indigo-500
 	`}
 	tab-size: 4;
 `;
@@ -190,19 +210,31 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 		language: _language = "markdown",
 		style,
 		title,
-		code = children,
+		code: _code = children,
 		...restProps
 	} = props;
 
 	const language = _language ?? "markdown";
 
+	const code = useMemo(() => _code.trim(), [_code]);
+
 	return (
 		<Root className={className} style={style}>
-			{!!title && (
-				<Info>
-					<LanguageName>{title}</LanguageName>
-				</Info>
-			)}
+			<Info>
+				<LanguageName>{title}</LanguageName>
+				{!!code && (
+					<ActionButton
+						onClick={() => {
+							copyToClipboard(code);
+
+							toast.success("Copied!");
+						}}
+						type="button"
+					>
+						<CopyIcon height={24} width={24} />
+					</ActionButton>
+				)}
+			</Info>
 			<Highlight
 				{...defaultProps}
 				code={code.trim()}
