@@ -9,7 +9,7 @@ import { stripUnit } from "polished";
 import React, { FC, Ref, useState } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
-import { BookIcon, ChatIcon, PeopleIcon, SignOutIcon } from "../../svgs";
+import { BookIcon, ChatIcon, GearIcon, PeopleIcon, SignOutIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
 
@@ -149,6 +149,16 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 									</>
 								)}
 							</ListItem>
+						)}
+					</Menu.Item>
+					<Menu.Item>
+						{(itemProps) => (
+							<NextLink href="/account" passHref>
+								<ListItem as={MobileLink} {...itemProps}>
+									<GearIcon height={24} width={24} tw="mr-2" />
+									<span>Account</span>
+								</ListItem>
+							</NextLink>
 						)}
 					</Menu.Item>
 					{isBreakpoint && (
