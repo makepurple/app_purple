@@ -19,21 +19,22 @@ import {
 import { PostUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
-import { useGetPostQuery, useUpdatePostMutation } from "../../../graphql";
+import { useGetPostQuery, useUpdatePostMutation } from "../../../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
 	PostImageInput,
 	RemovePostThumbnailButton,
 	SkillAutosuggest
-} from "../../../organisms";
-import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]/edit";
+} from "../../../../organisms";
+import { pageProps, PageProps } from "../../../../page-props/[userName]/[postTitle]/edit";
 
 const WPM_READ_SPEED = 275;
 
@@ -102,6 +103,8 @@ const SideBar = tw(PostGuidelines)`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
+	useSession({ required: true });
+
 	const router = useRouter();
 
 	const infoRef = useRef<DocumentEditorInfoRef>(null);
