@@ -18,6 +18,7 @@ import {
 import { CodeExampleUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
 import React, { useEffect, useMemo, useState } from "react";
@@ -111,6 +112,8 @@ const FormActions = tw.div`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
+	useSession({ required: true });
+
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
