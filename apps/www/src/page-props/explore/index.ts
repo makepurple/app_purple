@@ -23,6 +23,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	await Promise.all([
 		urqlClient
 			.query<SuggestFriendsQuery, SuggestFriendsQueryVariables>(SuggestFriendsDocument, {
+				after: null,
 				first: BATCH_SIZE,
 				where: {
 					desiredSkillsThreshold: 0,

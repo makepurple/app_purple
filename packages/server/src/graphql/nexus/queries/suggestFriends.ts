@@ -121,7 +121,7 @@ export const suggestFriends = queryField("suggestFriends", {
 				SELECT "Friendship"."id"
 				FROM "Friendship"
 				WHERE (
-					"Friendship"."rejected" = FALSE
+					"Friendship"."rejectedAt" IS NULL
 					AND (
 						(
 							"Friendship"."frienderId" = "User"."id"
@@ -135,7 +135,7 @@ export const suggestFriends = queryField("suggestFriends", {
 					)
 				)
 				OR (
-					"Friendship"."rejected" = TRUE
+					"Friendship"."rejectedAt" IS NOT NULL
 					AND "Friendship"."frienderId" = ${user.id}
 					AND "Friendship"."updatedAt" <= ${sixMonthsAgo}
 				)
