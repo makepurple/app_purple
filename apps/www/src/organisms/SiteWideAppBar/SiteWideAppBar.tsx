@@ -16,7 +16,6 @@ import { m, useViewportScroll } from "framer-motion";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
@@ -154,10 +153,6 @@ export interface SiteWideAppBarProps {
 }
 
 export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) => {
-	const router = useRouter();
-
-	const isAuthPage = router.pathname === "/login" || router.pathname === "signup";
-
 	const { data: session, status } = useSession();
 
 	const user = session?.user;
@@ -273,58 +268,56 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						setSearching(true);
 					}}
 				/>
-				{!isAuthPage && (
-					<Actions>
-						{status !== "authenticated" || !user ? (
-							<>
-								<NextLink href="/login" passHref>
-									<StyledLoginButton as="a">Login</StyledLoginButton>
-								</NextLink>
-								<NextLink href="/signup" passHref>
-									<SignUpButton as="a">Sign Up</SignUpButton>
-								</NextLink>
-							</>
-						) : (
-							<>
-								<NextLink
-									href="/[userName]/connections/requests"
-									as={`/${user.name}/connections/requests`}
-									passHref
-								>
-									<IconButton as="a" variant="secondary">
-										<PeopleIcon height={24} width={24} />
-										{!!invitationsCount && (
-											<AlertCount $variant="success">
-												{FormatUtils.toGitHubFixed(invitationsCount)}
-											</AlertCount>
-										)}
-									</IconButton>
-								</NextLink>
-								<NextLink href="/messaging" passHref>
-									<IconButton as="a" variant="secondary">
-										<ChatIcon height={24} width={24} />
-										{!!messageCount && (
-											<AlertCount $variant="alert">
-												{FormatUtils.toGitHubFixed(messageCount)}
-											</AlertCount>
-										)}
-									</IconButton>
-								</NextLink>
-								<NextLink href="/notifications" passHref>
-									<NotificationButton as="a" variant="secondary">
-										<BellIcon height={24} width={24} />
-										{!!notificationCount && (
-											<AlertCount $variant="alert">
-												{FormatUtils.toGitHubFixed(notificationCount)}
-											</AlertCount>
-										)}
-									</NotificationButton>
-								</NextLink>
-								<UserMenu />
-							</>
-						)}
-					</Actions>
-				)}
+				<Actions>
+					{status !== "authenticated" || !user ? (
+						<>
+							<NextLink href="/login" passHref>
+								<StyledLoginButton as="a">Login</StyledLoginButton>
+							</NextLink>
+							<NextLink href="/signup" passHref>
+								<SignUpButton as="a">Sign Up</SignUpButton>
+							</NextLink>
+						</>
+					) : (
+						<>
+							<NextLink
+								href="/[userName]/connections/requests"
+								as={`/${user.name}/connections/requests`}
+								passHref
+							>
+								<IconButton as="a" variant="secondary">
+									<PeopleIcon height={24} width={24} />
+									{!!invitationsCount && (
+										<AlertCount $variant="success">
+											{FormatUtils.toGitHubFixed(invitationsCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+							</NextLink>
+							<NextLink href="/messaging" passHref>
+								<IconButton as="a" variant="secondary">
+									<ChatIcon height={24} width={24} />
+									{!!messageCount && (
+										<AlertCount $variant="alert">
+											{FormatUtils.toGitHubFixed(messageCount)}
+										</AlertCount>
+									)}
+								</IconButton>
+							</NextLink>
+							<NextLink href="/notifications" passHref>
+								<NotificationButton as="a" variant="secondary">
+									<BellIcon height={24} width={24} />
+									{!!notificationCount && (
+										<AlertCount $variant="alert">
+											{FormatUtils.toGitHubFixed(notificationCount)}
+										</AlertCount>
+									)}
+								</NotificationButton>
+							</NextLink>
+							<UserMenu />
+						</>
+					)}
+				</Actions>
 			</Root>
 			<SideDrawer ref={drawerRef} open={menuOpen}>
 				<Dialog.Overlay as={Backdrop} open={menuOpen} />
