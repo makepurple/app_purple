@@ -27,5 +27,7 @@ const names: readonly [name: string, owner: string][] = [
 export const skills: readonly Prisma.SkillCreateInput[] = names.map(([name, owner], i) => ({
 	id: `Skill_${i}`,
 	name,
-	owner
+	organization: {
+		connect: { name: owner }
+	}
 }));

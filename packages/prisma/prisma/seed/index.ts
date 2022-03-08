@@ -24,14 +24,14 @@ const main = async () => {
 		});
 	}
 
+	log(chalk.magenta("organization"));
+	await prisma.$transaction(organizations.map((data) => prisma.organization.create({ data })));
+
 	log(chalk.magenta("skills"));
 	await prisma.$transaction(skills.map((data) => prisma.skill.create({ data })));
 
 	log(chalk.magenta("user"));
 	await prisma.$transaction(users.map((data) => prisma.user.create({ data })));
-
-	log(chalk.magenta("organization"));
-	await prisma.$transaction(organizations.map((data) => prisma.organization.create({ data })));
 
 	log(chalk.magenta("repository"));
 	await prisma.$transaction(repositories.map((data) => prisma.repository.create({ data })));
