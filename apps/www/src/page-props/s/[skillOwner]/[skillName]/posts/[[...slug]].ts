@@ -27,7 +27,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 
 	const skillName = query.skillName as string;
 	const skillOwner = query.skillOwner as string;
-	const slug = query.slug as (string | undefined)[];
+	const slug = (query.slug ?? []) as (string | undefined)[];
 
 	const [sort, criteria] = slug;
 

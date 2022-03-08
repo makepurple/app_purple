@@ -29,7 +29,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const urqlClient = createUrqlClient({ req, ssr });
 
 	const userName = query.userName as string;
-	const slug = query.slug as (string | undefined)[];
+	const slug = (query.slug ?? []) as (string | undefined)[];
 
 	const [sort, criteria] = slug;
 

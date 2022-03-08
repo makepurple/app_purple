@@ -6174,7 +6174,7 @@ export function useGetPostDraftQuery(options?: Omit<Urql.UseQueryArgs<GetPostDra
 };
 export const GetPostsDocument = /*#__PURE__*/ gql`
     query GetPosts($after: String, $first: Int, $orderBy: [PostOrderByInput!], $where: PostWhereInput!) {
-  posts(after: $after, first: $first, where: $where) {
+  posts(after: $after, first: $first, orderBy: $orderBy, where: $where) {
     __typename
     edges {
       __typename

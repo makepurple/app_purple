@@ -78,7 +78,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const skillName = router?.query.skillName as string;
 	const skillOwner = router?.query.skillOwner as string;
-	const slug = (router?.query.slug ?? []) as string[];
+	const slug = (router?.query.slug ?? []) as (string | undefined)[];
 
 	const [sort, criteria] = slug;
 

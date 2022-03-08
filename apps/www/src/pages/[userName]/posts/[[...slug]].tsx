@@ -68,7 +68,7 @@ export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
 	const userName = router?.query.userName as string;
-	const slug = (router?.query.slug ?? []) as string[];
+	const slug = (router?.query.slug ?? []) as (string | undefined)[];
 
 	const [sort, criteria] = slug;
 
