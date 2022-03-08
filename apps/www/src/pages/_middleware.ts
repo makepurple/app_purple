@@ -5,12 +5,16 @@ import { NextMiddleware, NextRequest, NextResponse } from "next/server";
 const GDPR_COOKIE_MAX_AGE_SECONDS = ms("1y") / 1_000;
 
 const middleware: NextMiddleware = (req: NextRequest) => {
+	const { pathname } = req.nextUrl;
+
+	if (pathname.includes("/api")) return NextResponse.next();
+
 	const country = req.geo?.country;
 	const acceptGdprConsent: boolean = !!country && !isEuMember(country);
 
-	const response = NextResponse.next();
+	if (!acceptGdprConsent) return NextResponse.next();
 
-	if (!acceptGdprConsent) return response;
+	const response = NextResponse.next();
 
 	/**
 	 * !HACK
