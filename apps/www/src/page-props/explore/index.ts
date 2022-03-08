@@ -4,34 +4,43 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	GetNotificationsDocument,
-	GetNotificationsQuery,
-	GetNotificationsQueryVariables
-} from "../graphql";
-import { NextUtils } from "../utils";
+	SuggestFriendsDocument,
+	SuggestFriendsQuery,
+	SuggestFriendsQueryVariables
+} from "../../graphql";
+import { NextUtils } from "../../utils";
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 50;
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const { req } = ctx;
+
+	const jitterSeed = new Date();
 
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
 	await Promise.all([
 		urqlClient
-			.query<GetNotificationsQuery, GetNotificationsQueryVariables>(
-				GetNotificationsDocument,
-				{
-					after: null,
-					first: BATCH_SIZE
+			.query<SuggestFriendsQuery, SuggestFriendsQueryVariables>(SuggestFriendsDocument, {
+				first: BATCH_SIZE,
+				where: {
+					desiredSkillsThreshold: 0,
+					skillsThreshold: 0,
+					jitter: 0.15,
+					jitterSeed,
+					weights: {
+						skillsOverlap: 1,
+						desiredSkillsOverlap: 1
+					}
 				}
-			)
+			})
 			.toPromise()
 	]);
 
 	return addUrqlState(ssr, {
 		props: {
+			jitterSeed: jitterSeed.getTime(),
 			session: await getSession(ctx)
 		}
 	});

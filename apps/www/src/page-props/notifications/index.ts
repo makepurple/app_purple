@@ -4,33 +4,31 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	GetPostDocument,
-	GetPostQuery,
-	GetPostQueryVariables
+	GetNotificationsDocument,
+	GetNotificationsQuery,
+	GetNotificationsQueryVariables
 } from "../../graphql";
 import { NextUtils } from "../../utils";
 
+const BATCH_SIZE = 20;
+
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { query, req } = ctx;
+	const { req } = ctx;
 
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	const [post] = await Promise.all([
+	await Promise.all([
 		urqlClient
-			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
-				where: {
-					authorName_urlSlug: {
-						authorName: query.userName as string,
-						urlSlug: "draft"
-					}
+			.query<GetNotificationsQuery, GetNotificationsQueryVariables>(
+				GetNotificationsDocument,
+				{
+					after: null,
+					first: BATCH_SIZE
 				}
-			})
+			)
 			.toPromise()
-			.then((result) => result.data?.post)
 	]);
-
-	if (!post) return { notFound: true };
 
 	return addUrqlState(ssr, {
 		props: {

@@ -4,43 +4,36 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	SuggestFriendsDocument,
-	SuggestFriendsQuery,
-	SuggestFriendsQueryVariables
-} from "../graphql";
-import { NextUtils } from "../utils";
-
-const BATCH_SIZE = 50;
+	GetPostDocument,
+	GetPostQuery,
+	GetPostQueryVariables
+} from "../../../graphql";
+import { NextUtils } from "../../../utils";
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { req } = ctx;
-
-	const jitterSeed = new Date();
+	const { query, req } = ctx;
 
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	await Promise.all([
+	const [post] = await Promise.all([
 		urqlClient
-			.query<SuggestFriendsQuery, SuggestFriendsQueryVariables>(SuggestFriendsDocument, {
-				first: BATCH_SIZE,
+			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
 				where: {
-					desiredSkillsThreshold: 0,
-					skillsThreshold: 0,
-					jitter: 0.15,
-					jitterSeed,
-					weights: {
-						skillsOverlap: 1,
-						desiredSkillsOverlap: 1
+					authorName_urlSlug: {
+						authorName: query.userName as string,
+						urlSlug: "draft"
 					}
 				}
 			})
 			.toPromise()
+			.then((result) => result.data?.post)
 	]);
+
+	if (!post) return { notFound: true };
 
 	return addUrqlState(ssr, {
 		props: {
-			jitterSeed: jitterSeed.getTime(),
 			session: await getSession(ctx)
 		}
 	});
