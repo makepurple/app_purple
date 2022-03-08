@@ -66,6 +66,7 @@ export const users: readonly Prisma.UserCreateInput[] = names.map(([name, image]
 
 	return {
 		id: `User_${i}`,
+		description: faker.datatype.boolean() ? faker.lorem.paragraph(1) : undefined,
 		email: `${name}@testmakepurple.com`,
 		image,
 		name,
