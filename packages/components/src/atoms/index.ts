@@ -34,6 +34,7 @@ export * from "./MainContainer";
 export * from "./MaybeAnchor";
 export * from "./MaybeWrap";
 export * from "./Menu";
+export * from "./NextLinkAnchor";
 export * from "./NextLinkAs";
 export * from "./NextProgressBar";
 export * from "./NoDataText";
