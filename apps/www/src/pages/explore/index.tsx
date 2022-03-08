@@ -2,6 +2,7 @@ import { MainContainer, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { Masonry } from "masonic";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import React, { useMemo, useRef } from "react";
 import tw from "twin.macro";
 import { useSuggestFriendsQuery } from "../../graphql";
@@ -19,6 +20,8 @@ const Root = tw(MainContainer)`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
+	useSession({ required: true });
+
 	const jitterSeedRef = useRef<Date>(new Date(jitterSeed));
 
 	/**

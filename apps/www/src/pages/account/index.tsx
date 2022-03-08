@@ -71,9 +71,7 @@ const ErrorText = tw(FormHelperText)`
 `;
 
 export const Page: NextPage = () => {
-	const { data: session } = useSession({
-		required: true
-	});
+	const { data: session } = useSession({ required: true });
 
 	const [{ fetching }, deleteUser] = useDeleteUserMutation();
 

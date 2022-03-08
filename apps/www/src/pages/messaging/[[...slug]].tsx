@@ -1,6 +1,7 @@
 import { Button, FadedEdge, MainContainer, Paper } from "@makepurple/components";
 import { useElementScroll } from "framer-motion";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
@@ -91,6 +92,8 @@ const AddButton = tw(Button)`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
+	useSession({ required: true });
+
 	const router = useRouter();
 
 	const chatRef = useRef<HTMLDivElement>(null);

@@ -1,6 +1,7 @@
 import { Divider, MainContainer, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import React, { Fragment, useEffect } from "react";
 import tw from "twin.macro";
 import {
@@ -47,6 +48,8 @@ const Notifications = tw.div`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
+	useSession({ required: true });
+
 	const [{ data: countData }] = useGetNotificationCountsQuery({ requestPolicy: "cache-first" });
 
 	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetNotificationsQuery, {
