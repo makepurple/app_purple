@@ -72,7 +72,7 @@
 		"urql": "^2.2.0"
 	},
 	"devDependencies": {
-		"@faker-js/faker": "6.0.0-alpha.7",
+		"@faker-js/faker": "6.0.0-beta.0",
 		"@graphql-codegen/cli": "^2.6.2",
 		"@graphql-codegen/schema-ast": "^2.4.1",
 		"@graphql-codegen/typescript": "^2.4.5",
@@ -99,7 +99,7 @@
 		"graphql": "15.7.2",
 		"next-compose-plugins": "^2.2.1",
 		"next-transpile-modules": "^9.0.0",
-		"postcss": "^8.4.7",
+		"postcss": "^8.4.8",
 		"prisma": "^3.10.0",
 		"react-is": "^17.0.2",
 		"ts-node": "^10.7.0",
