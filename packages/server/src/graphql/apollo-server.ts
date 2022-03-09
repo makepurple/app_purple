@@ -29,7 +29,16 @@ export const getApolloServer = (config: GetApolloServerConfig): ApolloServer => 
 		introspection: !isProd,
 		plugins: getPlugins(),
 		schema,
-		validationRules: getValidationRules({ maxDepth })
+		validationRules: getValidationRules({ maxDepth }),
+		formatError: (err) => {
+			if (process.env.NODE_ENV === "development") {
+				// eslint-disable-next-line no-console
+				console.error(err);
+				console.error(err.extensions.exception.stacktrace);
+			}
+
+			return err;
+		}
 	});
 
 	return server;
