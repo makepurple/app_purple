@@ -90,6 +90,7 @@ export const Page: NextPage<ErrorProps> = ({ statusCode, title: _title }) => {
 
 	useEffect(() => {
 		if (!isBrowser) return;
+		if (statusCode !== 401) return;
 
 		const timeout = setTimeout(async () => {
 			await router.push("/signup");
@@ -98,7 +99,7 @@ export const Page: NextPage<ErrorProps> = ({ statusCode, title: _title }) => {
 		return () => {
 			clearTimeout(timeout);
 		};
-	}, [isBrowser, router]);
+	}, [isBrowser, router, statusCode]);
 
 	useEffect(
 		() => () => {
