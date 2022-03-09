@@ -1,10 +1,9 @@
 import { Divider, ListItem, Menu, NextLinkAnchor } from "@makepurple/components";
 import { useResizeObserver } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
-import { FormatUtils } from "@makepurple/utils";
+import { FormatUtils, WindowUtils } from "@makepurple/utils";
 import { AnimatePresence, m } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
-import NextLink from "next/link";
 import { stripUnit } from "polished";
 import React, { FC, Ref, useState } from "react";
 import tw, { styled, theme } from "twin.macro";
@@ -72,9 +71,12 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 
 	const [isBreakpoint, setIsBreakpoint] = useState<boolean>(false);
 
-	useResizeObserver(document.body, ({ contentRect }) => {
-		setIsBreakpoint(contentRect.width < BREAKPOINT);
-	});
+	useResizeObserver(
+		WindowUtils.getElement(() => document.body),
+		({ contentRect }) => {
+			setIsBreakpoint(contentRect.width < BREAKPOINT);
+		}
+	);
 
 	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
 		pause: status !== "authenticated",

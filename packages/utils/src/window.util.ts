@@ -1,6 +1,10 @@
 import { UrlUtils } from "./url.util";
 
 export class WindowUtils {
+	public static getElement<T extends HTMLElement>(getter: () => T | null): HTMLElement | null {
+		return this.isBrowser() ? getter() : null;
+	}
+
 	public static isBrowser(): boolean {
 		return typeof window !== "undefined";
 	}

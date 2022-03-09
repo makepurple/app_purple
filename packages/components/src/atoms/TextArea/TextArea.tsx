@@ -1,5 +1,6 @@
 import { useResizeObserver } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
+import { WindowUtils } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { forwardRef, useCallback, useContext, useEffect, useRef, useState } from "react";
 import tw, { styled } from "twin.macro";
@@ -47,9 +48,12 @@ export type TextAreaProps = Omit<InferComponentProps<typeof Root>, "ref">;
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
 	const [width, setWidth] = useState<number>(0);
 
-	useResizeObserver(document.body, (e) => {
-		setWidth(e.contentRect.width);
-	});
+	useResizeObserver(
+		WindowUtils.getElement(() => document.body),
+		({ contentRect }) => {
+			setWidth(contentRect.width);
+		}
+	);
 
 	const form = useContext(FormContext);
 	const group = useContext(FormGroupContext);

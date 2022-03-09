@@ -1,6 +1,6 @@
 import { Logo, Tooltip } from "@makepurple/components";
 import { useRerender, useResizeObserver } from "@makepurple/hooks";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, WindowUtils } from "@makepurple/utils";
 import { AxisLeft, AxisTop } from "@visx/axis";
 import { Group } from "@visx/group";
 import { HeatmapRect } from "@visx/heatmap";
@@ -52,9 +52,12 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 
 	const rerender = useRerender();
 
-	useResizeObserver(document.body, () => {
-		rerender();
-	});
+	useResizeObserver(
+		WindowUtils.getElement(() => document.body),
+		() => {
+			rerender();
+		}
+	);
 
 	const weeks = useMemo(() => contributionCalendar.weeks.slice(), [contributionCalendar.weeks]);
 
