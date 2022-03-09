@@ -1,4 +1,4 @@
-import { Divider, ListItem, Menu } from "@makepurple/components";
+import { Divider, ListItem, Menu, NextLinkAnchor } from "@makepurple/components";
 import { useResizeObserver } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
 import { FormatUtils } from "@makepurple/utils";
@@ -25,7 +25,7 @@ const UserName = tw.span`
 	truncate
 `;
 
-const MobileLink = tw.a`
+const MobileLink = tw(NextLinkAnchor)`
 	flex
 `;
 
@@ -118,19 +118,22 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 				>
 					<Menu.Item>
 						{(itemProps) => (
-							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-								<ListItem as="a" {...itemProps}>
-									<UserAvatar
-										asLink={false}
-										border={1}
-										height={22}
-										width={22}
-										user={{ __typename: "User", ...user }}
-										tw="mr-2"
-									/>
-									<UserName>{user.name}</UserName>
-								</ListItem>
-							</NextLink>
+							<ListItem
+								as={NextLinkAnchor}
+								href="/[userName]"
+								hrefAs={`/${user.name}`}
+								{...itemProps}
+							>
+								<UserAvatar
+									asLink={false}
+									border={1}
+									height={22}
+									width={22}
+									user={{ __typename: "User", ...user }}
+									tw="mr-2"
+								/>
+								<UserName>{user.name}</UserName>
+							</ListItem>
 						)}
 					</Menu.Item>
 					<Divider tw="m-0.5" />
@@ -153,48 +156,43 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 					</Menu.Item>
 					<Menu.Item>
 						{(itemProps) => (
-							<NextLink href="/account" passHref>
-								<ListItem as={MobileLink} {...itemProps}>
-									<GearIcon height={24} width={24} tw="mr-2" />
-									<span>Account</span>
-								</ListItem>
-							</NextLink>
+							<ListItem as={MobileLink} href="/account" {...itemProps}>
+								<GearIcon height={24} width={24} tw="mr-2" />
+								<span>Account</span>
+							</ListItem>
 						)}
 					</Menu.Item>
 					{isBreakpoint && (
 						<>
 							<Menu.Item>
 								{(itemProps) => (
-									<NextLink
+									<ListItem
+										as={MobileLink}
 										href="/[userName]/connections/requests"
-										as={`/${user.name}/connections/requests`}
-										passHref
+										hrefAs={`/${user.name}/connections/requests`}
+										{...itemProps}
 									>
-										<ListItem as={MobileLink} {...itemProps}>
-											<PeopleIcon height={24} width={24} tw="mr-2" />
-											<span>Invitations</span>
-											{!!invitationsCount && (
-												<AlertCount $variant="success" tw="ml-2">
-													{FormatUtils.toGitHubFixed(invitationsCount)}
-												</AlertCount>
-											)}
-										</ListItem>
-									</NextLink>
+										<PeopleIcon height={24} width={24} tw="mr-2" />
+										<span>Invitations</span>
+										{!!invitationsCount && (
+											<AlertCount $variant="success" tw="ml-2">
+												{FormatUtils.toGitHubFixed(invitationsCount)}
+											</AlertCount>
+										)}
+									</ListItem>
 								)}
 							</Menu.Item>
 							<Menu.Item>
 								{(itemProps) => (
-									<NextLink href="/messaging" passHref>
-										<ListItem as={MobileLink} {...itemProps}>
-											<ChatIcon height={24} width={24} tw="mr-2" />
-											<span>Messages</span>
-											{!!messageCount && (
-												<AlertCount $variant="alert" tw="ml-2">
-													{FormatUtils.toGitHubFixed(messageCount)}
-												</AlertCount>
-											)}
-										</ListItem>
-									</NextLink>
+									<ListItem as={MobileLink} href="/messaging" {...itemProps}>
+										<ChatIcon height={24} width={24} tw="mr-2" />
+										<span>Messages</span>
+										{!!messageCount && (
+											<AlertCount $variant="alert" tw="ml-2">
+												{FormatUtils.toGitHubFixed(messageCount)}
+											</AlertCount>
+										)}
+									</ListItem>
 								)}
 							</Menu.Item>
 						</>
