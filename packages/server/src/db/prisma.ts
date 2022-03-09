@@ -18,12 +18,12 @@ if (process.env.NODE_ENV === "production") {
 	if (!global.cachedPrisma) {
 		const newPrisma = new PrismaClient({
 			log:
-				process.env.NODE_ENV === "development"
+				process.env.NODE_ENV === "development" && process.env.PRISMA_LOG === "true"
 					? [{ emit: "event", level: "query" }, "info", "warn", "error"]
 					: []
 		});
 
-		if (process.env.NODE_ENV === "development") {
+		if (process.env.NODE_ENV === "development" && process.env.PRISMA_LOG === "true") {
 			newPrisma.$on("query", (e) => {
 				/* eslint-disable no-console */
 				console.log(
