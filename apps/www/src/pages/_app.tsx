@@ -15,6 +15,8 @@ import NextHead from "next/head";
 import React from "react";
 import { GdprCookieConsent, GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
 
+import "tippy.js/dist/tippy.css";
+
 const NextProgressBar = dynamic<NextProgressBarProps>(
 	() => import("@makepurple/components").then((mod) => mod.NextProgressBar),
 	{ ssr: false }
