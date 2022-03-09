@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import withAuth from "next-auth/middleware";
 import { NextResponse } from "next/server";
 import { match } from "path-to-regexp";
-import { NextUtils } from "../../../utils";
+import { NextUtils } from "../../../utils/next.util";
 
 const middleware = withAuth(async (req) => {
 	const { pathname } = req.nextUrl;

@@ -255,7 +255,7 @@ model Post {
   // Estimated time in minutes to read this post
   readTime      Int?
   skills        SkillsOnPosts[]
-  title         String?
+  title         String          @default("Draft")
   thumbnailUrl  String?
   updatedAt     DateTime        @updatedAt
   upvoters      PostUpvoter[]
