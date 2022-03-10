@@ -477,7 +477,7 @@ export interface NexusGenObjects {
   Comment: { // root type
     authorId: string; // String!
     codeExampleId?: string | null; // String
-    content?: NexusGenScalars['Json'] | null; // Json
+    content: NexusGenScalars['Json']; // Json!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     parentId?: string | null; // String
@@ -1078,7 +1078,7 @@ export interface NexusGenFieldTypes {
     authorId: string; // String!
     codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     codeExampleId: string | null; // String
-    content: NexusGenScalars['Json'] | null; // Json
+    content: NexusGenScalars['Json']; // Json!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     downvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     id: string; // ID!
