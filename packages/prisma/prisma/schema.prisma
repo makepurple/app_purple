@@ -11,10 +11,6 @@ generator client {
   previewFeatures = ["interactiveTransactions"]
 }
 
-generator nexusPrisma {
-  provider = "nexus-prisma"
-}
-
 generator erd {
   provider = "prisma-erd-generator"
   theme    = "default"
@@ -304,7 +300,7 @@ model Comment {
   authorId      String
   codeExample   CodeExample?     @relation(fields: [codeExampleId], references: [id], onDelete: Cascade)
   codeExampleId String?
-  content       Json?
+  content       Json
   createdAt     DateTime         @default(now())
   parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   parentId      String?
