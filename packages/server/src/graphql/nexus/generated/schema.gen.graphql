@@ -22,7 +22,6 @@ type AddSkillMutationPayload implements MutationPayload {
 
 """
 The `BigInt` scalar type represents non-fractional signed whole numeric values.
-@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
 """
 scalar BigInt
 
@@ -338,9 +337,6 @@ input DateTimeNullableFilter {
   lt: DateTime
   lte: DateTime
 }
-
-"""An arbitrary-precision Decimal type"""
-scalar Decimal
 
 type DeleteCodeExamplePayload implements MutationPayload {
   query: Query!
@@ -682,7 +678,7 @@ type InviteToChatPayload implements MutationPayload {
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
-scalar Json @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+scalar Json
 
 type LeaveChatPayload implements MutationPayload {
   query: Query!
@@ -876,7 +872,7 @@ type Post {
   readTime: Int
   skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   thumbnailUrl: String
-  title: String
+  title: String!
   updatedAt: DateTime!
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!

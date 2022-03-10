@@ -1,10 +1,37 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { enumType } from "nexus";
 
 export const enumTypes = [
-	enumType(NexusPrisma.CodeLanguage),
-	enumType(NexusPrisma.ExperienceType),
-	enumType(NexusPrisma.FollowType),
+	enumType({
+		name: "CodeLanguage",
+		members: {
+			Go: "Go",
+			GraphQL: "GraphQL",
+			HTML: "HTML",
+			JavaScript: "JavaScript",
+			Python: "Python",
+			SCSS: "SCSS",
+			SQL: "SQL",
+			TypeScript: "TypeScript",
+			YAML: "YAML"
+		}
+	}),
+	enumType({
+		name: "ExperienceType",
+		members: {
+			FullTime: "FullTime",
+			PartTime: "PartTime",
+			Contract: "Contract",
+			Intern: "Intern",
+			OpenSource: "OpenSource"
+		}
+	}),
+	enumType({
+		name: "FollowType",
+		members: {
+			Skill: "Skill",
+			User: "User"
+		}
+	}),
 	enumType({
 		name: "GitHubUserContributionLevel",
 		members: {
@@ -15,7 +42,15 @@ export const enumTypes = [
 			FourthQuartile: "FOURTH_QUARTILE"
 		}
 	}),
-	enumType(NexusPrisma.NotificationType),
+	enumType({
+		name: "NotificationType",
+		members: {
+			ChatMessageReceived: "ChatMessageReceived",
+			CodeExampleCommented: "CodeExampleCommented",
+			FriendshipAccepted: "FriendshipAccepted",
+			PostCommented: "PostCommented"
+		}
+	}),
 	enumType({
 		name: "SortOrder",
 		members: {
@@ -23,5 +58,19 @@ export const enumTypes = [
 			Desc: "desc"
 		}
 	}),
-	enumType(NexusPrisma.UserActivityType)
+	enumType({
+		name: "UserActivityType",
+		members: {
+			CommentCodeExample: "CommentCodeExample",
+			CommentPost: "CommentPost",
+			CreateCodeExample: "CreateCodeExample",
+			FollowSkill: "FollowSkill",
+			FollowUser: "FollowUser",
+			FriendAcceptUser: "FriendAcceptUser",
+			Joined: "Joined",
+			PublishPost: "PublishPost",
+			UpvoteCodeExample: "UpvoteCodeExample",
+			UpvotePost: "UpvotePost"
+		}
+	})
 ];

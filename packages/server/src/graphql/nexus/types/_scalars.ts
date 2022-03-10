@@ -1,10 +1,46 @@
-import { NexusPrismaScalars } from "@makepurple/prisma/nexus";
-import { URLResolver } from "graphql-scalars";
+import {
+	BigIntResolver,
+	ByteResolver,
+	DateTimeResolver,
+	JSONObjectResolver,
+	URLResolver
+} from "graphql-scalars";
 import { GraphQLUpload } from "graphql-upload";
 import { scalarType } from "nexus";
 
 export const scalarTypes = [
-	NexusPrismaScalars,
+	scalarType({
+		name: BigIntResolver.name,
+		asNexusMethod: "bigInt",
+		description: BigIntResolver.description,
+		serialize: BigIntResolver.serialize,
+		parseValue: BigIntResolver.parseValue,
+		parseLiteral: BigIntResolver.parseLiteral
+	}),
+	scalarType({
+		name: "Bytes",
+		asNexusMethod: "bytes",
+		description: ByteResolver.description,
+		serialize: ByteResolver.serialize,
+		parseValue: ByteResolver.parseValue,
+		parseLiteral: ByteResolver.parseLiteral
+	}),
+	scalarType({
+		name: DateTimeResolver.name,
+		asNexusMethod: "dateTime",
+		description: DateTimeResolver.description,
+		serialize: DateTimeResolver.serialize,
+		parseValue: DateTimeResolver.parseValue,
+		parseLiteral: DateTimeResolver.parseLiteral
+	}),
+	scalarType({
+		name: "Json",
+		asNexusMethod: "json",
+		description: JSONObjectResolver.description,
+		serialize: JSONObjectResolver.serialize,
+		parseValue: JSONObjectResolver.parseValue,
+		parseLiteral: JSONObjectResolver.parseLiteral
+	}),
 	scalarType({
 		sourceType: "Promise<FileUpload>",
 		name: "Upload",

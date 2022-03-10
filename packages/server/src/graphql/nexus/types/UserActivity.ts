@@ -1,13 +1,21 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { interfaceType } from "nexus";
 
 export const UserActivity = interfaceType({
-	name: NexusPrisma.UserActivity.$name,
-	description: NexusPrisma.UserActivity.$description,
+	name: "UserActivity",
 	definition: (t) => {
-		t.field(NexusPrisma.UserActivity.id);
-		t.field(NexusPrisma.UserActivity.updatedAt);
-		t.field(NexusPrisma.UserActivity.user);
-		t.field(NexusPrisma.UserActivity.userId);
+		t.nonNull.id("id");
+		t.nonNull.dateTime("updatedAt");
+		t.nonNull.field("user", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.id
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("userId");
 	}
 });
