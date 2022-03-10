@@ -1,11 +1,9 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { CodeExample, Post, User } from "@prisma/client";
 import { arg, intArg, list, nonNull, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const Skill = objectType({
-	name: NexusPrisma.Skill.$name,
-	description: NexusPrisma.Skill.$description,
+	name: "Skill",
 	definition: (t) => {
 		t.implements("Followable");
 		t.implements("WithGitHubRepository");
@@ -144,7 +142,7 @@ export const Skill = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Skill.id);
+		t.nonNull.id("id");
 		t.nonNull.field("posts", {
 			type: "PostConnection",
 			args: {
