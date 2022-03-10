@@ -1,4 +1,3 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { dayjs } from "@makepurple/utils";
 import {
 	Chat,
@@ -21,8 +20,7 @@ import { GitHubUser } from "../../../services/octokit";
 import { PrismaUtils } from "../../../utils";
 
 export const User = objectType({
-	name: NexusPrisma.User.$name,
-	description: NexusPrisma.User.$description,
+	name: "User",
 	definition: (t) => {
 		t.implements("Followable");
 		t.nonNull.field("activities", {
@@ -371,8 +369,8 @@ export const User = objectType({
 				return result._count._all;
 			}
 		});
-		t.nonNull.field(NexusPrisma.User.createdAt);
-		t.field(NexusPrisma.User.description);
+		t.nonNull.dateTime("createdAt");
+		t.string("description");
 		t.nonNull.field("desiredSkills", {
 			type: "SkillConnection",
 			args: {
@@ -416,8 +414,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.field({
-			...NexusPrisma.User.email,
+		t.nonNull.string("email", {
 			authorize: (parent, args, { user }) => {
 				return user?.id === parent.id;
 			}
@@ -732,9 +729,9 @@ export const User = objectType({
 		t.nonNull.url("githubUrl", {
 			resolve: ({ name }) => `https://github.com/${name}`
 		});
-		t.field(NexusPrisma.User.id);
-		t.field(NexusPrisma.User.image);
-		t.field(NexusPrisma.User.name);
+		t.nonNull.id("id");
+		t.string("image");
+		t.nonNull.string("name");
 		t.nonNull.field("notifications", {
 			type: "NotificationConnection",
 			args: {
@@ -814,7 +811,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.User.notificationsLastOpenedAt);
+		t.nonNull.dateTime("notificationsLastOpenedAt");
 		t.nonNull.field("posts", {
 			type: "PostConnection",
 			args: {
