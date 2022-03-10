@@ -1,15 +1,23 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const Post = objectType({
-	name: NexusPrisma.Post.$name,
-	description: NexusPrisma.Post.$description,
+	name: "Post",
 	definition: (t) => {
-		t.field(NexusPrisma.Post.author);
-		t.field(NexusPrisma.Post.authorName);
+		t.nonNull.field("author", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						name: parent.authorName
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("authorName");
 		t.nonNull.field("comments", {
 			type: "CommentConnection",
 			args: {
@@ -51,9 +59,9 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Post.content);
-		t.field(NexusPrisma.Post.createdAt);
-		t.field(NexusPrisma.Post.description);
+		t.json("content");
+		t.nonNull.dateTime("createdAt");
+		t.string("description");
 		t.nonNull.field("downvoters", {
 			type: "UserConnection",
 			args: {
@@ -91,10 +99,15 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Post.id);
-		t.field(NexusPrisma.Post.images);
-		t.field(NexusPrisma.Post.publishedAt);
-		t.field(NexusPrisma.Post.readTime);
+		t.nonNull.id("id");
+		t.nonNull.list.nonNull.field("images", {
+			type: "PostImage",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.postImage.findMany({});
+			}
+		});
+		t.dateTime("publishedAt");
+		t.int("readTime");
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
 			args: {
@@ -132,9 +145,9 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Post.thumbnailUrl);
-		t.field(NexusPrisma.Post.title);
-		t.field(NexusPrisma.Post.updatedAt);
+		t.string("thumbnailUrl");
+		t.nonNull.string("title");
+		t.nonNull.dateTime("updatedAt");
 		t.nonNull.int("upvotes", {
 			resolve: async (parent, args, { prisma }) => {
 				const groups = await prisma.postUpvoter.groupBy({
@@ -194,7 +207,7 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Post.urlSlug);
+		t.nonNull.string("urlSlug");
 		t.nonNull.field("viewers", {
 			type: "UserConnection",
 			args: {
