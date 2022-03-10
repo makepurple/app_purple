@@ -1,11 +1,9 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
 
 export const Follow = objectType({
-	name: NexusPrisma.Follow.$name,
-	description: NexusPrisma.Follow.$description,
+	name: "Follow",
 	definition: (t) => {
-		t.field(NexusPrisma.Follow.id);
+		t.nonNull.id("id");
 		t.nonNull.field("follower", {
 			type: "User",
 			resolve: async (parent, args, { prisma }) => {
@@ -48,9 +46,19 @@ export const Follow = objectType({
 				throw new Error();
 			}
 		});
-		t.field(NexusPrisma.Follow.createdAt);
-		t.field(NexusPrisma.Follow.type);
-		t.field(NexusPrisma.Follow.user);
-		t.field(NexusPrisma.Follow.userId);
+		t.nonNull.dateTime("createdAt");
+		t.nonNull.field("type", { type: "FollowType" });
+		t.nonNull.field("user", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.userId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("userId");
 	}
 });
