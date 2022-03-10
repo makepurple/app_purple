@@ -1,16 +1,24 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const CodeExample = objectType({
-	name: NexusPrisma.CodeExample.$name,
-	description: NexusPrisma.CodeExample.$description,
+	name: "CodeExample",
 	definition: (t) => {
-		t.field(NexusPrisma.CodeExample.id);
-		t.field(NexusPrisma.CodeExample.author);
-		t.field(NexusPrisma.CodeExample.authorName);
+		t.nonNull.id("id");
+		t.nonNull.field("author", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						name: parent.authorName
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("authorName");
 		t.nonNull.field("comments", {
 			type: "CommentConnection",
 			args: {
@@ -52,10 +60,10 @@ export const CodeExample = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.CodeExample.content);
-		t.field(NexusPrisma.CodeExample.createdAt);
-		t.field(NexusPrisma.CodeExample.description);
-		t.field(NexusPrisma.CodeExample.language);
+		t.nonNull.json("content");
+		t.nonNull.dateTime("createdAt");
+		t.string("description");
+		t.nonNull.field("language", { type: "CodeLanguage" });
 		t.nonNull.string("languageColor", {
 			resolve: (parent) => {
 				/**
@@ -79,8 +87,18 @@ export const CodeExample = objectType({
 				);
 			}
 		});
-		t.field(NexusPrisma.CodeExample.primarySkill);
-		t.field(NexusPrisma.CodeExample.primarySkillId);
+		t.nonNull.field("primarySkill", {
+			type: "Skill",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.skill.findUnique({
+					where: {
+						id: parent.primarySkillId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("primarySkillId");
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
 			args: {
@@ -122,8 +140,8 @@ export const CodeExample = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.CodeExample.title);
-		t.field(NexusPrisma.CodeExample.updatedAt);
+		t.nonNull.string("title");
+		t.nonNull.dateTime("updatedAt");
 		t.nonNull.int("upvotes", {
 			resolve: async (parent, args, { prisma }) => {
 				const groups = await prisma.codeExampleUpvoter.groupBy({
@@ -183,7 +201,7 @@ export const CodeExample = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.CodeExample.urlSlug);
+		t.nonNull.string("urlSlug");
 		t.boolean("viewerUpvote", {
 			description: stripIndents`
 				How the viwer has voted on this code exmaple.
