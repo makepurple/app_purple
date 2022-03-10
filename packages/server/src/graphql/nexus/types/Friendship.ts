@@ -1,17 +1,36 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
 
 export const Friendship = objectType({
-	name: NexusPrisma.Friendship.$name,
-	description: NexusPrisma.Friendship.$description,
+	name: "Friendship",
 	definition: (t) => {
-		t.field(NexusPrisma.Friendship.friender);
-		t.field(NexusPrisma.Friendship.frienderId);
-		t.field(NexusPrisma.Friendship.friending);
-		t.field(NexusPrisma.Friendship.friendingId);
-		t.field(NexusPrisma.Friendship.id);
+		t.nonNull.field("friender", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.frienderId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("frienderId");
+		t.nonNull.field("friending", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.friendingId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("friendingId");
+		t.nonNull.string("frienderId");
+		t.nonNull.id("id");
 		t.nonNull.boolean("rejected", { resolve: (parent) => !!parent.rejectedAt });
-		t.field(NexusPrisma.Friendship.rejectedAt);
-		t.field(NexusPrisma.Friendship.updatedAt);
+		t.dateTime("rejectedAt");
+		t.nonNull.dateTime("updatedAt");
 	}
 });
