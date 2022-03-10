@@ -1,19 +1,38 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { Comment as _Comment, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const Comment = objectType({
-	name: NexusPrisma.Comment.$name,
-	description: NexusPrisma.Comment.$description,
+	name: "Comment",
 	definition: (t) => {
-		t.field(NexusPrisma.Comment.author);
-		t.field(NexusPrisma.Comment.authorId);
-		t.field(NexusPrisma.Comment.codeExample);
-		t.field(NexusPrisma.Comment.codeExampleId);
-		t.field(NexusPrisma.Comment.content);
-		t.field(NexusPrisma.Comment.createdAt);
+		t.nonNull.field("author", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.authorId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("authorId");
+		t.nonNull.field("codeExample", {
+			type: "CodeExample",
+			resolve: (parent, args, { prisma }) => {
+				if (!parent.codeExampleId) return null;
+
+				return prisma.codeExample.findUnique({
+					where: {
+						id: parent.codeExampleId
+					}
+				});
+			}
+		});
+		t.nonNull.string("codeExampleId");
+		t.nonNull.json("content");
+		t.nonNull.dateTime("createdAt");
 		t.nonNull.field("downvoters", {
 			type: "UserConnection",
 			args: {
@@ -51,11 +70,33 @@ export const Comment = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Comment.id);
-		t.field(NexusPrisma.Comment.parent);
-		t.field(NexusPrisma.Comment.parentId);
-		t.field(NexusPrisma.Comment.post);
-		t.field(NexusPrisma.Comment.postId);
+		t.nonNull.id("id");
+		t.field("parent", {
+			type: "Comment",
+			resolve: (parent, args, { prisma }) => {
+				if (!parent.parentId) return null;
+
+				return prisma.comment.findUnique({
+					where: {
+						id: parent.parentId
+					}
+				});
+			}
+		});
+		t.string("parentId");
+		t.field("post", {
+			type: "Post",
+			resolve: (parent, args, { prisma }) => {
+				if (!parent.postId) return null;
+
+				return prisma.post.findUnique({
+					where: {
+						id: parent.postId
+					}
+				});
+			}
+		});
+		t.string("postId");
 		t.nonNull.field("replies", {
 			type: "CommentConnection",
 			args: {
@@ -87,7 +128,7 @@ export const Comment = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Comment.updatedAt);
+		t.nonNull.dateTime("updatedAt");
 		t.nonNull.field("upvoters", {
 			type: "UserConnection",
 			args: {
