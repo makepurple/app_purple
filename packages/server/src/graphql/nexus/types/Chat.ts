@@ -1,13 +1,11 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { ChatMessage, User } from "@prisma/client";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const Chat = objectType({
-	name: NexusPrisma.Chat.$name,
-	description: NexusPrisma.Chat.$description,
+	name: "Chat",
 	definition: (t) => {
-		t.field(NexusPrisma.Chat.id);
+		t.nonNull.id("id");
 		t.nonNull.field("messages", {
 			type: "ChatMessageConnection",
 			args: {
@@ -80,7 +78,7 @@ export const Chat = objectType({
 				return connection;
 			}
 		});
-		t.field(NexusPrisma.Chat.updatedAt);
+		t.nonNull.dateTime("updatedAt");
 		t.nonNull.field("users", {
 			type: "UserConnection",
 			args: {
