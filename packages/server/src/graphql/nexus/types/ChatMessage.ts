@@ -1,16 +1,34 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
 
 export const ChatMessage = objectType({
-	name: NexusPrisma.ChatMessage.$name,
-	description: NexusPrisma.ChatMessage.$description,
+	name: "ChatMessage",
 	definition: (t) => {
-		t.field(NexusPrisma.ChatMessage.id);
-		t.field(NexusPrisma.ChatMessage.chat);
-		t.field(NexusPrisma.ChatMessage.chatId);
-		t.field(NexusPrisma.ChatMessage.content);
-		t.field(NexusPrisma.ChatMessage.createdAt);
-		t.field(NexusPrisma.ChatMessage.sender);
-		t.field(NexusPrisma.ChatMessage.senderId);
+		t.nonNull.id("id");
+		t.nonNull.field("chat", {
+			type: "Chat",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.chat.findUnique({
+					where: {
+						id: parent.chatId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("chatId");
+		t.nonNull.json("content");
+		t.nonNull.dateTime("createdAt");
+		t.nonNull.field("sender", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.senderId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("senderId");
 	}
 });
