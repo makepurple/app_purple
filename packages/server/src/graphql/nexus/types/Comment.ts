@@ -18,7 +18,7 @@ export const Comment = objectType({
 			}
 		});
 		t.nonNull.string("authorId");
-		t.nonNull.field("codeExample", {
+		t.field("codeExample", {
 			type: "CodeExample",
 			resolve: (parent, args, { prisma }) => {
 				if (!parent.codeExampleId) return null;
@@ -30,8 +30,8 @@ export const Comment = objectType({
 				});
 			}
 		});
-		t.nonNull.string("codeExampleId");
-		t.nonNull.json("content");
+		t.string("codeExampleId");
+		t.json("content");
 		t.nonNull.dateTime("createdAt");
 		t.nonNull.field("downvoters", {
 			type: "UserConnection",

@@ -547,6 +547,7 @@ export interface NexusGenObjects {
     positionName: string; // String!
     startDate: NexusGenScalars['DateTime']; // DateTime!
     type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
+    userId: string; // String!
   }
   ExperienceConnection: { // root type
     edges: NexusGenRootTypes['ExperienceEdge'][]; // [ExperienceEdge!]!
@@ -1187,6 +1188,7 @@ export interface NexusGenFieldTypes {
     startDate: NexusGenScalars['DateTime']; // DateTime!
     type: NexusGenEnums['ExperienceType'] | null; // ExperienceType
     user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
   }
   ExperienceConnection: { // field return type
     edges: NexusGenRootTypes['ExperienceEdge'][]; // [ExperienceEdge!]!
@@ -2099,6 +2101,7 @@ export interface NexusGenFieldTypeNames {
     startDate: 'DateTime'
     type: 'ExperienceType'
     user: 'User'
+    userId: 'String'
   }
   ExperienceConnection: { // field return type name
     edges: 'ExperienceEdge'

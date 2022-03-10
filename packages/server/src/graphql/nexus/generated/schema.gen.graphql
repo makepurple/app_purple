@@ -403,6 +403,7 @@ type Experience {
   startDate: DateTime!
   type: ExperienceType
   user: User!
+  userId: String!
 }
 
 """Relay-style connection for Experience types."""

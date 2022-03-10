@@ -60,7 +60,7 @@ export const CodeExample = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.json("content");
+		t.nonNull.string("content");
 		t.nonNull.dateTime("createdAt");
 		t.string("description");
 		t.nonNull.field("language", { type: "CodeLanguage" });
