@@ -1,12 +1,10 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
 
 export const Repository = objectType({
-	name: NexusPrisma.Repository.$name,
-	description: NexusPrisma.Repository.$description,
+	name: "Repository",
 	definition: (t) => {
 		t.implements("WithGitHubRepository");
-		t.field(NexusPrisma.Repository.id);
+		t.nonNull.id("id");
 		t.nonNull.list.nonNull.field("skills", {
 			type: "Skill",
 			resolve: async ({ id }, args, { prisma }) => {
@@ -16,6 +14,16 @@ export const Repository = objectType({
 					.then((skills) => skills.map((s) => s.skill));
 			}
 		});
-		t.field(NexusPrisma.Repository.user);
+		t.nonNull.field("user", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						name: parent.owner
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
 	}
 });
