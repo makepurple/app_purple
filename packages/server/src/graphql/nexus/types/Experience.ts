@@ -1,19 +1,38 @@
-import { NexusPrisma } from "@makepurple/prisma/nexus";
 import { objectType } from "nexus";
 
 export const Experience = objectType({
-	name: NexusPrisma.Experience.$name,
-	description: NexusPrisma.Experience.$description,
+	name: "Experience",
 	definition: (t) => {
-		t.field(NexusPrisma.Experience.endDate);
-		t.field(NexusPrisma.Experience.highlights);
-		t.field(NexusPrisma.Experience.id);
-		t.field(NexusPrisma.Experience.location);
-		t.field(NexusPrisma.Experience.organization);
-		t.field(NexusPrisma.Experience.organizationName);
-		t.field(NexusPrisma.Experience.positionName);
-		t.field(NexusPrisma.Experience.startDate);
-		t.field(NexusPrisma.Experience.type);
-		t.field(NexusPrisma.Experience.user);
+		t.dateTime("endDate");
+		t.nonNull.list.nonNull.string("highlights");
+		t.nonNull.id("id");
+		t.string("location");
+		t.nonNull.field("organization", {
+			type: "Organization",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.organization.findUnique({
+					where: {
+						name: parent.organizationName
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("organizationName");
+		t.nonNull.string("positionName");
+		t.nonNull.dateTime("startDate");
+		t.field("type", { type: "ExperienceType" });
+		t.nonNull.field("user", {
+			type: "User",
+			resolve: (parent, args, { prisma }) => {
+				return prisma.user.findUnique({
+					where: {
+						id: parent.userId
+					},
+					rejectOnNotFound: true
+				});
+			}
+		});
+		t.nonNull.string("userId");
 	}
 });
