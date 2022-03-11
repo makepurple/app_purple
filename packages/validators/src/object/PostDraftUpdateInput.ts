@@ -5,7 +5,7 @@ import { DocumentEditorValue } from "./DocumentEditorValue";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 const schema = Schema({
-	content: DocumentEditorValue.error("Content malformed").strictOptional(),
+	content: DocumentEditorValue.strictOptional(),
 	description: string.trim().max(140).strictOptional(),
 	skills: array.of(SkillWhereUniqueInput).min(1, "Required").strictOptional(),
 	thumbnailUrl: CloudinaryUrl.optional(),

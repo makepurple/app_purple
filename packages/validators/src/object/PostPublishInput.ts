@@ -5,7 +5,7 @@ import { DocumentEditorValue } from "./DocumentEditorValue";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 export const PostPublishInput = Schema({
-	content: DocumentEditorValue.error("Content malformed"),
+	content: DocumentEditorValue,
 	description: string.trim().max(140).strictOptional(),
 	skills: array.of(SkillWhereUniqueInput).min(1, "Required"),
 	thumbnailUrl: CloudinaryUrl.optional(),

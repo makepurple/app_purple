@@ -4,7 +4,7 @@ import { DocumentEditorValue } from "./DocumentEditorValue";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 export const PostUpdateInput = Schema({
-	content: DocumentEditorValue.error("Content malformed").strictOptional(),
+	content: DocumentEditorValue.strictOptional(),
 	description: string.trim().max(140, "Max 140 character limit").strictOptional(),
 	skills: array.of(SkillWhereUniqueInput).min(1, "Required").strictOptional(),
 	thumbnailUrl: CloudinaryUrl.optional()
