@@ -1,16 +1,8 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import { gql } from "urql";
-import type {
-	DeleteCodeExamplePayload,
-	DeleteExperiencePayload,
-	DeleteFriendshipPayload,
-	DeletePostPayload,
-	DeleteRepositoryPayload,
-	LeaveChatPayload,
-	RejectFriendshipPayload,
-	User
-} from "../generated";
+import { UrqlUtils } from "../../utils";
+import type { Mutation, User } from "../generated";
 
 export const createCache = () => {
 	return cacheExchange({
@@ -57,83 +49,63 @@ export const createCache = () => {
 		},
 		updates: {
 			Mutation: {
-				deleteCodeExample: (result: DeleteCodeExamplePayload, _, cache) => {
+				createPost: ({ createPost: result }: Mutation, _, cache) => {
 					const viewer = result.viewer;
 
 					if (!viewer) return;
 
-					const fragment = gql`
-						fragment _ on User {
-							id
-							codeExamples {
-								edges {
-									cursor
-									node {
-										id
+					const fields = cache.inspectFields({ __typename: "User", id: viewer.id });
+
+					fields
+						.filter((field) => field.fieldName === "posts")
+						.forEach((field) => {
+							const fragment = gql`
+								fragment _ on User {
+									id
+									${UrqlUtils.getFieldKey(field)} {
+										edges {
+											cursor
+											node {
+												id
+											}
+										}
+										nodes {
+											id
+										}
 									}
 								}
-								nodes {
-									id
+							`;
+
+							const old = cache.readFragment(fragment, { id: viewer.id });
+
+							if (!old) return;
+
+							const edges = [
+								{
+									__typename: "PostEdge",
+									cursor: result.cursor,
+									node: result.record
+								},
+								...(old as User).posts.edges
+							];
+
+							cache.writeFragment(fragment, {
+								id: viewer.id,
+								posts: {
+									__typename: "PostConnection",
+									edges,
+									nodes: edges.map((edge) => edge.node)
 								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).codeExamples.edges.filter(
-						(codeExample) => codeExample.node.id !== result.record.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
-						codeExamples: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+							});
+						});
 				},
-				deleteExperience: (result: DeleteExperiencePayload, _, cache) => {
-					const viewer = result.viewer;
-
-					if (!viewer) return;
-
-					const fragment = gql`
-						fragment _ on User {
-							id
-							experiences {
-								edges {
-									cursor
-									node {
-										id
-									}
-								}
-								node {
-									id
-								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).experiences.edges.filter(
-						(experience) => experience.node.id !== result.record.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
-						friends: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+				deleteCodeExample: ({ deleteCodeExample: result }: Mutation, _, cache) => {
+					cache.invalidate({ __typename: "CodeExample", id: result.record.id });
 				},
-				deleteFriendship: (result: DeleteFriendshipPayload, _, cache) => {
+				deleteExperience: ({ deleteExperience: result }: Mutation, _, cache) => {
+					cache.invalidate({ __typename: "Experience", id: result.record.id });
+				},
+				deleteFriendship: ({ deleteFriendship: result }: Mutation, _, cache) => {
 					const viewer = result.viewer;
 
 					if (!viewer) return;
@@ -143,7 +115,7 @@ export const createCache = () => {
 							id
 							friends {
 								edges {
-									cursor
+									cursorresult
 									node {
 										id
 									}
@@ -155,7 +127,7 @@ export const createCache = () => {
 						}
 					`;
 
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
+					const old = cache.readFragment(fragment, { id: viewer.id });
 
 					if (!old) return;
 
@@ -164,128 +136,23 @@ export const createCache = () => {
 					);
 
 					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
+						id: viewer.id,
 						friends: {
 							edges: filteredEdges,
 							nodes: filteredEdges.map((edge) => edge.node)
 						}
 					});
 				},
-				deletePost: (result: DeletePostPayload, _, cache) => {
-					const viewer = result.viewer;
-
-					if (!viewer) return;
-
-					const fragment = gql`
-						fragment _ on User {
-							id
-							posts {
-								edges {
-									cursor
-									node {
-										id
-									}
-								}
-								nodes {
-									id
-								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).posts.edges.filter(
-						(post) => post.node.id === result.record.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
-						posts: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+				deletePost: ({ deletePost: result }: Mutation, _, cache) => {
+					cache.invalidate({ __typename: "Post", id: result.record.id });
 				},
-				deleteRepository: (result: DeleteRepositoryPayload, _, cache) => {
-					const viewer = result.viewer;
-
-					if (!viewer) return;
-
-					const fragment = gql`
-						fragment _ on User {
-							id
-							repositories {
-								edges {
-									cursor
-									node {
-										id
-									}
-								}
-								nodes {
-									id
-								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).repositories.edges.filter(
-						(repository) => repository.node.id !== result.record.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
-						chats: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+				deleteRepository: ({ deleteRepository: result }: Mutation, _, cache) => {
+					cache.invalidate({ __typename: "Repository", id: result.record.id });
 				},
-				leaveChat: (result: LeaveChatPayload, _, cache) => {
-					const viewer = result.viewer;
-
-					if (!viewer) return;
-
-					const fragment = gql`
-						fragment _ on User {
-							id
-							chats {
-								edges {
-									cursor
-									node {
-										id
-									}
-								}
-								nodes {
-									id
-								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).chats.edges.filter(
-						(chat) => chat.node.id !== result.record.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
-						chats: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+				leaveChat: ({ leaveChat: result }: Mutation, _, cache) => {
+					cache.invalidate({ __typename: "Chat", id: result.record.id });
 				},
-				rejectFriendship: (result: RejectFriendshipPayload, _, cache) => {
+				rejectFriendship: ({ rejectFriendship: result }: Mutation, _, cache) => {
 					const viewer = result.viewer;
 
 					if (!viewer) return;
@@ -307,7 +174,7 @@ export const createCache = () => {
 						}
 					`;
 
-					const old = cache.readFragment(fragment, { id: `User:${result.viewer.id}` });
+					const old = cache.readFragment(fragment, { id: viewer.id });
 
 					if (!old) return;
 
@@ -316,7 +183,7 @@ export const createCache = () => {
 					);
 
 					cache.writeFragment(fragment, {
-						id: `User:${result.viewer.id}`,
+						id: viewer.id,
 						friendRequestsReceived: {
 							edges: filteredEdges,
 							nodes: filteredEdges.map((edge) => edge.node)

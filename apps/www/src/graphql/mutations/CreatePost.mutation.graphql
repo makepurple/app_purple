@@ -1,8 +1,12 @@
 mutation CreatePost {
 	createPost {
-		record {
+		viewer {
 			id
-			urlSlug
+			name
+		}
+		cursor
+		record {
+			...PostCardPost
 		}
 	}
 }

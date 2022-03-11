@@ -13,17 +13,12 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /**
-   * The `BigInt` scalar type represents non-fractional signed whole numeric values.
-   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
-   */
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
   BigInt: any;
   /** The `Byte` scalar type represents byte value as a Buffer */
   Bytes: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: Date;
-  /** An arbitrary-precision Decimal type */
-  Decimal: any;
   /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   Json: Json;
   /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
@@ -34,6 +29,7 @@ export type Scalars = {
 
 export type AcceptFriendshipPayload = MutationPayload & {
   readonly __typename: 'AcceptFriendshipPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Friendship;
   readonly viewer?: Maybe<User>;
@@ -41,6 +37,7 @@ export type AcceptFriendshipPayload = MutationPayload & {
 
 export type AddDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddDesiredSkillMutationPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Skill;
   readonly viewer?: Maybe<User>;
@@ -48,12 +45,13 @@ export type AddDesiredSkillMutationPayload = MutationPayload & {
 
 export type AddSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddSkillMutationPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Skill;
   readonly viewer?: Maybe<User>;
 };
 
-export type Chat = {
+export type Chat = Node & {
   readonly __typename: 'Chat';
   readonly id: Scalars['ID'];
   readonly messages: ChatMessageConnection;
@@ -93,7 +91,7 @@ export type ChatEdge = ConnectionEdge & {
   readonly node: Chat;
 };
 
-export type ChatMessage = {
+export type ChatMessage = Node & {
   readonly __typename: 'ChatMessage';
   readonly chat: Chat;
   readonly chatId: Scalars['String'];
@@ -136,7 +134,7 @@ export type ChatWhereUniqueInput = {
   readonly id?: InputMaybe<Scalars['String']>;
 };
 
-export type CodeExample = {
+export type CodeExample = Node & {
   readonly __typename: 'CodeExample';
   readonly author: User;
   readonly authorName: Scalars['String'];
@@ -272,13 +270,13 @@ export type CodeLanguageNullableFilter = {
   readonly notIn?: InputMaybe<ReadonlyArray<CodeLanguage>>;
 };
 
-export type Comment = {
+export type Comment = Node & {
   readonly __typename: 'Comment';
   readonly author: User;
   readonly authorId: Scalars['String'];
   readonly codeExample?: Maybe<CodeExample>;
   readonly codeExampleId?: Maybe<Scalars['String']>;
-  readonly content?: Maybe<Scalars['Json']>;
+  readonly content: Scalars['Json'];
   readonly createdAt: Scalars['DateTime'];
   readonly downvoters: UserConnection;
   readonly id: Scalars['ID'];
@@ -336,6 +334,7 @@ export type CommentCodeExampleInput = {
 
 export type CommentCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CommentCodeExamplePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -370,6 +369,7 @@ export type CommentPostInput = {
 
 export type CommentPostPayload = MutationPayload & {
   readonly __typename: 'CommentPostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -410,6 +410,7 @@ export type CreateChatInput = {
 
 export type CreateChatPayload = MutationPayload & {
   readonly __typename: 'CreateChatPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Chat;
   readonly viewer?: Maybe<User>;
@@ -417,6 +418,7 @@ export type CreateChatPayload = MutationPayload & {
 
 export type CreateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CreateCodeExamplePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: CodeExample;
   readonly viewer?: Maybe<User>;
@@ -424,6 +426,7 @@ export type CreateCodeExamplePayload = MutationPayload & {
 
 export type CreateExperiencePayload = MutationPayload & {
   readonly __typename: 'CreateExperiencePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Experience;
   readonly viewer?: Maybe<User>;
@@ -431,6 +434,7 @@ export type CreateExperiencePayload = MutationPayload & {
 
 export type CreatePostPayload = MutationPayload & {
   readonly __typename: 'CreatePostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -438,6 +442,7 @@ export type CreatePostPayload = MutationPayload & {
 
 export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Repository;
   readonly viewer?: Maybe<User>;
@@ -452,6 +457,7 @@ export type DateTimeNullableFilter = {
 
 export type DeleteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'DeleteCodeExamplePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: CodeExample;
   readonly viewer?: Maybe<User>;
@@ -459,6 +465,7 @@ export type DeleteCodeExamplePayload = MutationPayload & {
 
 export type DeleteCommentPayload = MutationPayload & {
   readonly __typename: 'DeleteCommentPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -466,6 +473,7 @@ export type DeleteCommentPayload = MutationPayload & {
 
 export type DeleteExperiencePayload = MutationPayload & {
   readonly __typename: 'DeleteExperiencePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Experience;
   readonly viewer?: Maybe<User>;
@@ -473,6 +481,7 @@ export type DeleteExperiencePayload = MutationPayload & {
 
 export type DeleteFriendshipPayload = MutationPayload & {
   readonly __typename: 'DeleteFriendshipPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Friendship;
   readonly viewer?: Maybe<User>;
@@ -480,6 +489,7 @@ export type DeleteFriendshipPayload = MutationPayload & {
 
 export type DeletePostPayload = MutationPayload & {
   readonly __typename: 'DeletePostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -487,6 +497,7 @@ export type DeletePostPayload = MutationPayload & {
 
 export type DeleteRepositoryPayload = MutationPayload & {
   readonly __typename: 'DeleteRepositoryPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Repository;
   readonly viewer?: Maybe<User>;
@@ -494,6 +505,7 @@ export type DeleteRepositoryPayload = MutationPayload & {
 
 export type DeleteUserPayload = MutationPayload & {
   readonly __typename: 'DeleteUserPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: User;
   readonly viewer?: Maybe<User>;
@@ -501,6 +513,7 @@ export type DeleteUserPayload = MutationPayload & {
 
 export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -512,7 +525,7 @@ export type EnumExperienceTypeNullableFilter = {
   readonly notIn?: InputMaybe<ReadonlyArray<ExperienceType>>;
 };
 
-export type Experience = {
+export type Experience = Node & {
   readonly __typename: 'Experience';
   readonly endDate?: Maybe<Scalars['DateTime']>;
   readonly highlights: ReadonlyArray<Scalars['String']>;
@@ -524,6 +537,7 @@ export type Experience = {
   readonly startDate: Scalars['DateTime'];
   readonly type?: Maybe<ExperienceType>;
   readonly user: User;
+  readonly userId: Scalars['String'];
 };
 
 /** Relay-style connection for Experience types. */
@@ -587,7 +601,7 @@ export type ExperienceWhereUniqueInput = {
   readonly id: Scalars['String'];
 };
 
-export type Follow = {
+export type Follow = Node & {
   readonly __typename: 'Follow';
   readonly createdAt: Scalars['DateTime'];
   readonly follower: User;
@@ -618,6 +632,7 @@ export type FollowOrderByInput = {
 
 export type FollowSkillPayload = MutationPayload & {
   readonly __typename: 'FollowSkillPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Follow;
   readonly viewer?: Maybe<User>;
@@ -630,6 +645,7 @@ export enum FollowType {
 
 export type FollowUserPayload = MutationPayload & {
   readonly __typename: 'FollowUserPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Follow;
   readonly viewer?: Maybe<User>;
@@ -649,7 +665,7 @@ export type Followable = {
   readonly viewerFollowing: Scalars['Boolean'];
 };
 
-export type Friendship = {
+export type Friendship = Node & {
   readonly __typename: 'Friendship';
   readonly friender: User;
   readonly frienderId: Scalars['String'];
@@ -880,6 +896,7 @@ export type InviteToChatInput = {
 
 export type InviteToChatPayload = MutationPayload & {
   readonly __typename: 'InviteToChatPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Chat;
   readonly viewer?: Maybe<User>;
@@ -887,6 +904,7 @@ export type InviteToChatPayload = MutationPayload & {
 
 export type LeaveChatPayload = MutationPayload & {
   readonly __typename: 'LeaveChatPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Chat;
   readonly viewer?: Maybe<User>;
@@ -1227,8 +1245,14 @@ export type MutationViewPostArgs = {
 };
 
 export type MutationPayload = {
+  readonly cursor: Scalars['String'];
   readonly query: Query;
+  readonly record: Node;
   readonly viewer?: Maybe<User>;
+};
+
+export type Node = {
+  readonly id: Scalars['ID'];
 };
 
 export type Notification = {
@@ -1240,7 +1264,7 @@ export type Notification = {
   readonly userId: Scalars['String'];
 };
 
-export type NotificationChatMessageReceived = Notification & {
+export type NotificationChatMessageReceived = Node & Notification & {
   readonly __typename: 'NotificationChatMessageReceived';
   readonly chat: Chat;
   readonly chatId: Scalars['String'];
@@ -1252,7 +1276,7 @@ export type NotificationChatMessageReceived = Notification & {
   readonly userId: Scalars['String'];
 };
 
-export type NotificationCodeExampleCommented = Notification & {
+export type NotificationCodeExampleCommented = Node & Notification & {
   readonly __typename: 'NotificationCodeExampleCommented';
   readonly codeExample: CodeExample;
   readonly codeExampleId: Scalars['String'];
@@ -1278,7 +1302,7 @@ export type NotificationEdge = ConnectionEdge & {
   readonly node: Notification;
 };
 
-export type NotificationFriendshipAccepted = Notification & {
+export type NotificationFriendshipAccepted = Node & Notification & {
   readonly __typename: 'NotificationFriendshipAccepted';
   readonly friendship: Friendship;
   readonly friendshipId: Scalars['String'];
@@ -1290,7 +1314,7 @@ export type NotificationFriendshipAccepted = Notification & {
   readonly userId: Scalars['String'];
 };
 
-export type NotificationPostCommented = Notification & {
+export type NotificationPostCommented = Node & Notification & {
   readonly __typename: 'NotificationPostCommented';
   readonly id: Scalars['ID'];
   readonly opened: Scalars['Boolean'];
@@ -1316,6 +1340,7 @@ export type NotificationsWhereInput = {
 
 export type OpenNotificationsPayload = MutationPayload & {
   readonly __typename: 'OpenNotificationsPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: User;
   readonly viewer?: Maybe<User>;
@@ -1325,7 +1350,7 @@ export type OrderByRelationAggregateInput = {
   readonly _count?: InputMaybe<SortOrder>;
 };
 
-export type Organization = {
+export type Organization = Node & {
   readonly __typename: 'Organization';
   readonly experiences: ReadonlyArray<Experience>;
   readonly github: GitHubOrganization;
@@ -1342,7 +1367,7 @@ export type PageInfo = {
   readonly startCursor?: Maybe<Scalars['String']>;
 };
 
-export type Post = {
+export type Post = Node & {
   readonly __typename: 'Post';
   readonly author: User;
   readonly authorName: Scalars['String'];
@@ -1357,7 +1382,7 @@ export type Post = {
   readonly readTime?: Maybe<Scalars['Int']>;
   readonly skills: SkillConnection;
   readonly thumbnailUrl?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
+  readonly title: Scalars['String'];
   readonly updatedAt: Scalars['DateTime'];
   readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];
@@ -1448,7 +1473,7 @@ export type PostEdge = ConnectionEdge & {
   readonly node: Post;
 };
 
-export type PostImage = {
+export type PostImage = Node & {
   readonly __typename: 'PostImage';
   readonly id: Scalars['ID'];
   readonly post: Post;
@@ -1493,6 +1518,7 @@ export type PostWhereUniqueInput = {
 
 export type PublishPostPayload = MutationPayload & {
   readonly __typename: 'PublishPostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -1710,6 +1736,7 @@ export type QueryUsersArgs = {
 
 export type RejectFriendshipPayload = MutationPayload & {
   readonly __typename: 'RejectFriendshipPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Friendship;
   readonly viewer?: Maybe<User>;
@@ -1717,6 +1744,7 @@ export type RejectFriendshipPayload = MutationPayload & {
 
 export type RemoveDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillMutationPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Skill;
   readonly viewer?: Maybe<User>;
@@ -1724,19 +1752,21 @@ export type RemoveDesiredSkillMutationPayload = MutationPayload & {
 
 export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record?: Maybe<Post>;
+  readonly record: Post;
   readonly viewer?: Maybe<User>;
 };
 
 export type RemoveSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillMutationPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Skill;
   readonly viewer?: Maybe<User>;
 };
 
-export type Repository = WithGitHubRepository & {
+export type Repository = Node & WithGitHubRepository & {
   readonly __typename: 'Repository';
   readonly github: GitHubRepository;
   readonly id: Scalars['ID'];
@@ -1788,6 +1818,7 @@ export type RepositoryWhereUniqueInput = {
 
 export type RequestFriendshipPayload = MutationPayload & {
   readonly __typename: 'RequestFriendshipPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Friendship;
   readonly viewer?: Maybe<User>;
@@ -1795,12 +1826,13 @@ export type RequestFriendshipPayload = MutationPayload & {
 
 export type SendChatMessagePayload = MutationPayload & {
   readonly __typename: 'SendChatMessagePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: ChatMessage;
   readonly viewer?: Maybe<User>;
 };
 
-export type Skill = Followable & WithGitHubRepository & {
+export type Skill = Followable & Node & WithGitHubRepository & {
   readonly __typename: 'Skill';
   readonly codeExamples: CodeExampleConnection;
   readonly desiringUsers: UserConnection;
@@ -2020,6 +2052,7 @@ export type TopLanguages = {
 
 export type UnfollowSkillPayload = MutationPayload & {
   readonly __typename: 'UnfollowSkillPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Follow;
   readonly viewer?: Maybe<User>;
@@ -2027,6 +2060,7 @@ export type UnfollowSkillPayload = MutationPayload & {
 
 export type UnfollowUserPayload = MutationPayload & {
   readonly __typename: 'UnfollowUserPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Follow;
   readonly viewer?: Maybe<User>;
@@ -2034,6 +2068,7 @@ export type UnfollowUserPayload = MutationPayload & {
 
 export type UnvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UnvoteCodeExamplePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: CodeExample;
   readonly viewer?: Maybe<User>;
@@ -2041,6 +2076,7 @@ export type UnvoteCodeExamplePayload = MutationPayload & {
 
 export type UnvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UnvoteCommentPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -2048,6 +2084,7 @@ export type UnvoteCommentPayload = MutationPayload & {
 
 export type UnvotePostPayload = MutationPayload & {
   readonly __typename: 'UnvotePostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -2055,6 +2092,7 @@ export type UnvotePostPayload = MutationPayload & {
 
 export type UpdateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpdateCodeExamplePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: CodeExample;
   readonly viewer?: Maybe<User>;
@@ -2062,6 +2100,7 @@ export type UpdateCodeExamplePayload = MutationPayload & {
 
 export type UpdateCommentPayload = MutationPayload & {
   readonly __typename: 'UpdateCommentPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -2073,6 +2112,7 @@ export type UpdateDesiredSkillsInput = {
 
 export type UpdateDesiredSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateDesiredSkillsPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: User;
   readonly viewer?: Maybe<User>;
@@ -2080,6 +2120,7 @@ export type UpdateDesiredSkillsPayload = MutationPayload & {
 
 export type UpdateExperiencePayload = MutationPayload & {
   readonly __typename: 'UpdateExperiencePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Experience;
   readonly viewer?: Maybe<User>;
@@ -2087,6 +2128,7 @@ export type UpdateExperiencePayload = MutationPayload & {
 
 export type UpdatePostDraftPayload = MutationPayload & {
   readonly __typename: 'UpdatePostDraftPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -2094,6 +2136,7 @@ export type UpdatePostDraftPayload = MutationPayload & {
 
 export type UpdatePostPayload = MutationPayload & {
   readonly __typename: 'UpdatePostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -2101,6 +2144,7 @@ export type UpdatePostPayload = MutationPayload & {
 
 export type UpdateRepositoryPayload = MutationPayload & {
   readonly __typename: 'UpdateRepositoryPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Repository;
   readonly viewer?: Maybe<User>;
@@ -2112,6 +2156,7 @@ export type UpdateSkillsInput = {
 
 export type UpdateSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateSkillsPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: User;
   readonly viewer?: Maybe<User>;
@@ -2119,6 +2164,7 @@ export type UpdateSkillsPayload = MutationPayload & {
 
 export type UpdateUserFromGitHubPayload = MutationPayload & {
   readonly __typename: 'UpdateUserFromGitHubPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: User;
   readonly viewer?: Maybe<User>;
@@ -2131,6 +2177,7 @@ export type UploadPostImageInput = {
 
 export type UploadPostImagePayload = MutationPayload & {
   readonly __typename: 'UploadPostImagePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: PostImage;
   readonly viewer?: Maybe<User>;
@@ -2142,6 +2189,7 @@ export type UpvoteCodeExampleInput = {
 
 export type UpvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpvoteCodeExamplePayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: CodeExample;
   readonly viewer?: Maybe<User>;
@@ -2153,6 +2201,7 @@ export type UpvoteCommentInput = {
 
 export type UpvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UpvoteCommentPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Comment;
   readonly viewer?: Maybe<User>;
@@ -2160,12 +2209,13 @@ export type UpvoteCommentPayload = MutationPayload & {
 
 export type UpvotePostPayload = MutationPayload & {
   readonly __typename: 'UpvotePostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
 };
 
-export type User = Followable & {
+export type User = Followable & Node & {
   readonly __typename: 'User';
   readonly activities: UserActivityConnection;
   readonly activityFeed: UserActivityConnection;
@@ -2382,7 +2432,7 @@ export type UserActivity = {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityCommentCodeExample = UserActivity & {
+export type UserActivityCommentCodeExample = Node & UserActivity & {
   readonly __typename: 'UserActivityCommentCodeExample';
   readonly comment: Comment;
   readonly commentId: Scalars['String'];
@@ -2392,7 +2442,7 @@ export type UserActivityCommentCodeExample = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityCommentPost = UserActivity & {
+export type UserActivityCommentPost = Node & UserActivity & {
   readonly __typename: 'UserActivityCommentPost';
   readonly comment: Comment;
   readonly commentId: Scalars['String'];
@@ -2410,7 +2460,7 @@ export type UserActivityConnection = Connection & {
   readonly totalCount: Scalars['Int'];
 };
 
-export type UserActivityCreateCodeExample = UserActivity & {
+export type UserActivityCreateCodeExample = Node & UserActivity & {
   readonly __typename: 'UserActivityCreateCodeExample';
   readonly codeExample: CodeExample;
   readonly codeExampleId: Scalars['String'];
@@ -2426,7 +2476,7 @@ export type UserActivityEdge = ConnectionEdge & {
   readonly node: UserActivity;
 };
 
-export type UserActivityFollowSkill = UserActivity & {
+export type UserActivityFollowSkill = Node & UserActivity & {
   readonly __typename: 'UserActivityFollowSkill';
   readonly follow: Follow;
   readonly followId: Scalars['String'];
@@ -2436,7 +2486,7 @@ export type UserActivityFollowSkill = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityFollowUser = UserActivity & {
+export type UserActivityFollowUser = Node & UserActivity & {
   readonly __typename: 'UserActivityFollowUser';
   readonly follow: Follow;
   readonly followId: Scalars['String'];
@@ -2446,7 +2496,7 @@ export type UserActivityFollowUser = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityFriendAcceptUser = UserActivity & {
+export type UserActivityFriendAcceptUser = Node & UserActivity & {
   readonly __typename: 'UserActivityFriendAcceptUser';
   readonly friendship: Friendship;
   readonly friendshipId: Scalars['String'];
@@ -2456,7 +2506,7 @@ export type UserActivityFriendAcceptUser = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityJoined = UserActivity & {
+export type UserActivityJoined = Node & UserActivity & {
   readonly __typename: 'UserActivityJoined';
   readonly id: Scalars['ID'];
   readonly updatedAt: Scalars['DateTime'];
@@ -2464,7 +2514,7 @@ export type UserActivityJoined = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityPublishPost = UserActivity & {
+export type UserActivityPublishPost = Node & UserActivity & {
   readonly __typename: 'UserActivityPublishPost';
   readonly id: Scalars['ID'];
   readonly post: Post;
@@ -2487,7 +2537,7 @@ export enum UserActivityType {
   UpvotePost = 'UpvotePost'
 }
 
-export type UserActivityUpvoteCodeExample = UserActivity & {
+export type UserActivityUpvoteCodeExample = Node & UserActivity & {
   readonly __typename: 'UserActivityUpvoteCodeExample';
   readonly codeExample: CodeExample;
   readonly codeExampleId: Scalars['String'];
@@ -2497,7 +2547,7 @@ export type UserActivityUpvoteCodeExample = UserActivity & {
   readonly userId: Scalars['String'];
 };
 
-export type UserActivityUpvotePost = UserActivity & {
+export type UserActivityUpvotePost = Node & UserActivity & {
   readonly __typename: 'UserActivityUpvotePost';
   readonly id: Scalars['ID'];
   readonly post: Post;
@@ -2558,6 +2608,7 @@ export type UserWhereUniqueInput = {
 
 export type ViewPostPayload = MutationPayload & {
   readonly __typename: 'ViewPostPayload';
+  readonly cursor: Scalars['String'];
   readonly query: Query;
   readonly record: Post;
   readonly viewer?: Maybe<User>;
@@ -2579,9 +2630,9 @@ export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMes
 
 export type CodeExampleCardCodeExampleFragment = { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
-export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
+export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
-export type CommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } };
+export type CommentRepliesCommentConnectionFragment = { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } };
 
 export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null };
 
@@ -2593,13 +2644,13 @@ export type NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
 
 export type NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment = { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } };
 
-export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } };
+export type NotificationCardPostCommentedNotificationPostCommentedFragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string } };
 
 export type OrganizationSearchResultGitHubOrganizationFragment = { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly description?: string | null, readonly id: string, readonly login: string, readonly name?: string | null };
 
 export type PageInfoFragmentFragment = { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null };
 
-export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
+export type PostCardPostFragment = { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
 export type RepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
@@ -2635,7 +2686,7 @@ type SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment = { readonly __
 
 export type SuggestSkillOwnersGitHubRepositoryOwnerFragment = SuggestSkillOwnersGitHubRepositoryOwner_GitHubOrganization_Fragment | SuggestSkillOwnersGitHubRepositoryOwner_GitHubUser_Fragment;
 
-export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
+export type SuggestedFriendCardUserFragment = { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
 export type TopLanguagesFragment = { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> };
 
@@ -2645,7 +2696,7 @@ export type UpdateUserInfoSkillFragment = { readonly __typename: 'Skill', readon
 
 export type UserActivityCardCommentCodeExampleUserActivityCommentCodeExampleFragment = { readonly __typename: 'UserActivityCommentCodeExample', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
-export type UserActivityCardCommentPostUserActivityCommentPostFragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
+export type UserActivityCardCommentPostUserActivityCommentPostFragment = { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
 export type UserActivityCardCreateCodeExampleUserActivityCreateCodeExampleFragment = { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
@@ -2679,11 +2730,11 @@ export type UserActivityCardHeaderUserActivityFragment = UserActivityCardHeaderU
 
 export type UserActivityCardJoinedUserActivityJoinedFragment = { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
-export type UserActivityCardPublishPostUserActivityPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
+export type UserActivityCardPublishPostUserActivityPublishPostFragment = { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
 export type UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragment = { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
-export type UserActivityCardUpvotePostUserActivityUpvotePostFragment = { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
+export type UserActivityCardUpvotePostUserActivityUpvotePostFragment = { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
 
 export type UserAvatarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null };
 
@@ -2722,14 +2773,14 @@ export type CommentCodeExampleMutationVariables = Exact<{
 }>;
 
 
-export type CommentCodeExampleMutation = { readonly __typename: 'Mutation', readonly commentCodeExample: { readonly __typename: 'CommentCodeExamplePayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly authorId: string, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } } };
+export type CommentCodeExampleMutation = { readonly __typename: 'Mutation', readonly commentCodeExample: { readonly __typename: 'CommentCodeExamplePayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly authorId: string, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } } };
 
 export type CommentPostMutationVariables = Exact<{
   data: CommentPostInput;
 }>;
 
 
-export type CommentPostMutation = { readonly __typename: 'Mutation', readonly commentPost: { readonly __typename: 'CommentPostPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly content?: Json | null, readonly authorId: string, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly post?: { readonly __typename: 'Post', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } } };
+export type CommentPostMutation = { readonly __typename: 'Mutation', readonly commentPost: { readonly __typename: 'CommentPostPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly content: Json, readonly authorId: string, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly post?: { readonly __typename: 'Post', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } } };
 
 export type CreateChatMutationVariables = Exact<{
   data: CreateChatInput;
@@ -2757,7 +2808,7 @@ export type CreateExperienceMutation = { readonly __typename: 'Mutation', readon
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly urlSlug: string } } };
+export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly cursor: string, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } } } };
 
 export type CreateRepositoryMutationVariables = Exact<{
   data: RepositoryCreateInput;
@@ -2792,7 +2843,7 @@ export type DeletePostMutationVariables = Exact<{
 }>;
 
 
-export type DeletePostMutation = { readonly __typename: 'Mutation', readonly deletePost: { readonly __typename: 'DeletePostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } } };
+export type DeletePostMutation = { readonly __typename: 'Mutation', readonly deletePost: { readonly __typename: 'DeletePostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string } } };
 
 export type DeleteRepositoryMutationVariables = Exact<{
   where: RepositoryWhereUniqueInput;
@@ -2848,7 +2899,7 @@ export type PublishPostMutationVariables = Exact<{
 }>;
 
 
-export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly urlSlug: string } } };
+export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly urlSlug: string } } };
 
 export type RejectFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -2869,7 +2920,7 @@ export type RemovePostThumbnailMutationVariables = Exact<{
 }>;
 
 
-export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null } | null } };
+export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null } } };
 
 export type RemoveSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
@@ -2919,7 +2970,7 @@ export type UnvoteCommentMutationVariables = Exact<{
 }>;
 
 
-export type UnvoteCommentMutation = { readonly __typename: 'Mutation', readonly unvoteComment: { readonly __typename: 'UnvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
+export type UnvoteCommentMutation = { readonly __typename: 'Mutation', readonly unvoteComment: { readonly __typename: 'UnvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
 
 export type UnvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -2958,7 +3009,7 @@ export type UpdatePostDraftMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly content?: Json | null, readonly description?: string | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null } } };
+export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly content?: Json | null, readonly description?: string | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string } } };
 
 export type UpdateRepositoryMutationVariables = Exact<{
   data: RepositoryUpdateInput;
@@ -3002,7 +3053,7 @@ export type UpvoteCommentMutationVariables = Exact<{
 }>;
 
 
-export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
+export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3029,7 +3080,7 @@ export type GetActivityFeedQueryVariables = Exact<{
 }>;
 
 
-export type GetActivityFeedQuery = { readonly __typename: 'Query', readonly activityFeed: { readonly __typename: 'UserActivityConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserActivityEdge', readonly cursor: string, readonly node: { readonly __typename: 'UserActivityCommentCodeExample', readonly id: string } | { readonly __typename: 'UserActivityCommentPost', readonly id: string } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string } | { readonly __typename: 'UserActivityFollowUser', readonly id: string } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string } | { readonly __typename: 'UserActivityJoined', readonly id: string } | { readonly __typename: 'UserActivityPublishPost', readonly id: string } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'UserActivityCommentCodeExample', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly friendshipId: string, readonly updatedAt: Date, readonly userId: string, readonly friendship: { readonly __typename: 'Friendship', readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }> } };
+export type GetActivityFeedQuery = { readonly __typename: 'Query', readonly activityFeed: { readonly __typename: 'UserActivityConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserActivityEdge', readonly cursor: string, readonly node: { readonly __typename: 'UserActivityCommentCodeExample', readonly id: string } | { readonly __typename: 'UserActivityCommentPost', readonly id: string } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string } | { readonly __typename: 'UserActivityFollowUser', readonly id: string } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string } | { readonly __typename: 'UserActivityJoined', readonly id: string } | { readonly __typename: 'UserActivityPublishPost', readonly id: string } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'UserActivityCommentCodeExample', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly friendshipId: string, readonly updatedAt: Date, readonly userId: string, readonly friendship: { readonly __typename: 'Friendship', readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }> } };
 
 export type GetChatQueryVariables = Exact<{
   where: ChatWhereUniqueInput;
@@ -3072,7 +3123,7 @@ export type GetCodeExampleCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetCodeExampleCommentsQuery = { readonly __typename: 'Query', readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
+export type GetCodeExampleCommentsQuery = { readonly __typename: 'Query', readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
 
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3081,7 +3132,7 @@ export type GetCommentRepliesQueryVariables = Exact<{
 }>;
 
 
-export type GetCommentRepliesQuery = { readonly __typename: 'Query', readonly comment?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
+export type GetCommentRepliesQuery = { readonly __typename: 'Query', readonly comment?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
 
 export type GetExperiencesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3113,14 +3164,14 @@ export type GetNotificationsQueryVariables = Exact<{
 }>;
 
 
-export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } | { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string, readonly codeExampleId: string, readonly opened: boolean, readonly updatedAt: Date, readonly codeExample: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title?: string | null, readonly urlSlug: string } }> } } | null };
+export type GetNotificationsQuery = { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'NotificationEdge', readonly cursor: string, readonly node: { readonly __typename: 'NotificationChatMessageReceived', readonly id: string } | { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string } | { readonly __typename: 'NotificationPostCommented', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } | { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string, readonly codeExampleId: string, readonly opened: boolean, readonly updatedAt: Date, readonly codeExample: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } } } } | { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } | { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string } }> } } | null };
 
 export type GetPostQueryVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null, readonly description?: string | null, readonly publishedAt?: Date | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly thumbnailUrl?: string | null, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
+export type GetPostQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content?: Json | null, readonly description?: string | null, readonly publishedAt?: Date | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly thumbnailUrl?: string | null, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly image?: string | null }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null };
 
 export type GetPostCommentsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3130,12 +3181,12 @@ export type GetPostCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostCommentsQuery = { readonly __typename: 'Query', readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content?: Json | null, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
+export type GetPostCommentsQuery = { readonly __typename: 'Query', readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: Json, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } }, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
 
 export type GetPostDraftQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostDraftQuery = { readonly __typename: 'Query', readonly postDraft?: { readonly __typename: 'Post', readonly id: string, readonly content?: Json | null, readonly description?: string | null, readonly title?: string | null, readonly thumbnailUrl?: string | null } | null };
+export type GetPostDraftQuery = { readonly __typename: 'Query', readonly postDraft?: { readonly __typename: 'Post', readonly id: string, readonly content?: Json | null, readonly description?: string | null, readonly title: string, readonly thumbnailUrl?: string | null } | null };
 
 export type GetPostsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3145,7 +3196,7 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
+export type GetPostsQuery = { readonly __typename: 'Query', readonly posts: { readonly __typename: 'PostConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } };
 
 export type GetRepositoriesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3234,7 +3285,7 @@ export type GetUserActivitiesQueryVariables = Exact<{
 }>;
 
 
-export type GetUserActivitiesQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly activities: { readonly __typename: 'UserActivityConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserActivityEdge', readonly cursor: string, readonly node: { readonly __typename: 'UserActivityCommentCodeExample', readonly id: string } | { readonly __typename: 'UserActivityCommentPost', readonly id: string } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string } | { readonly __typename: 'UserActivityFollowUser', readonly id: string } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string } | { readonly __typename: 'UserActivityJoined', readonly id: string } | { readonly __typename: 'UserActivityPublishPost', readonly id: string } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'UserActivityCommentCodeExample', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly friendshipId: string, readonly updatedAt: Date, readonly userId: string, readonly friendship: { readonly __typename: 'Friendship', readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }> } } | null };
+export type GetUserActivitiesQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly activities: { readonly __typename: 'UserActivityConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserActivityEdge', readonly cursor: string, readonly node: { readonly __typename: 'UserActivityCommentCodeExample', readonly id: string } | { readonly __typename: 'UserActivityCommentPost', readonly id: string } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string } | { readonly __typename: 'UserActivityFollowUser', readonly id: string } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string } | { readonly __typename: 'UserActivityJoined', readonly id: string } | { readonly __typename: 'UserActivityPublishPost', readonly id: string } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'UserActivityCommentCodeExample', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCommentPost', readonly id: string, readonly commentId: string, readonly updatedAt: Date, readonly userId: string, readonly comment: { readonly __typename: 'Comment', readonly id: string, readonly postId?: string | null, readonly post?: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityCreateCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowSkill', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | { readonly __typename: 'User', readonly viewerFollowing: boolean } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFollowUser', readonly id: string, readonly followId: string, readonly updatedAt: Date, readonly userId: string, readonly follow: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly viewerFollowing: boolean } | { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityFriendAcceptUser', readonly id: string, readonly friendshipId: string, readonly updatedAt: Date, readonly userId: string, readonly friendship: { readonly __typename: 'Friendship', readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly viewerFollowing: boolean, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityJoined', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityPublishPost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvoteCodeExample', readonly id: string, readonly updatedAt: Date, readonly userId: string, readonly codeExample: { readonly __typename: 'CodeExample', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | { readonly __typename: 'UserActivityUpvotePost', readonly id: string, readonly postId: string, readonly updatedAt: Date, readonly userId: string, readonly post: { readonly __typename: 'Post', readonly authorName: string, readonly description?: string | null, readonly id: string, readonly publishedAt?: Date | null, readonly readTime?: number | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }> } } | null };
 
 export type GetUserCodeExamplesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3297,7 +3348,7 @@ export type GetUserOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetUserOverviewQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly createdAt: Date, readonly githubUrl: string, readonly name: string, readonly codeExamples: { readonly __typename: 'CodeExampleConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CodeExampleEdge', readonly cursor: string, readonly node: { readonly __typename: 'CodeExample', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> }, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } }> }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly contributionCalendar: { readonly __typename: 'GitHubUserContributionCalendar', readonly totalContributions: number, readonly weeks: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarWeek', readonly contributionDays: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarDay', readonly contributionCount: number, readonly contributionLevel: GitHubUserContributionLevel, readonly date: Date, readonly weekday: number }> }> } }, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }> }, readonly trophies: { readonly __typename: 'UserTrophies', readonly id: string, readonly totalFollowers: number, readonly totalPostViews: number, readonly totalSkills: number, readonly totalUpvotes: number, readonly totalYearlyCommits: number, readonly totalYearlyPosts: number } } | null };
+export type GetUserOverviewQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly createdAt: Date, readonly githubUrl: string, readonly name: string, readonly codeExamples: { readonly __typename: 'CodeExampleConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CodeExampleEdge', readonly cursor: string, readonly node: { readonly __typename: 'CodeExample', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> }, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } }> }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly contributionCalendar: { readonly __typename: 'GitHubUserContributionCalendar', readonly totalContributions: number, readonly weeks: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarWeek', readonly contributionDays: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarDay', readonly contributionCount: number, readonly contributionLevel: GitHubUserContributionLevel, readonly date: Date, readonly weekday: number }> }> } }, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string } }> }, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }> }, readonly trophies: { readonly __typename: 'UserTrophies', readonly id: string, readonly totalFollowers: number, readonly totalPostViews: number, readonly totalSkills: number, readonly totalUpvotes: number, readonly totalYearlyCommits: number, readonly totalYearlyPosts: number } } | null };
 
 export type OkQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3311,7 +3362,7 @@ export type SuggestFriendsQueryVariables = Exact<{
 }>;
 
 
-export type SuggestFriendsQuery = { readonly __typename: 'Query', readonly suggestFriends: { readonly __typename: 'UserConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title?: string | null, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } };
+export type SuggestFriendsQuery = { readonly __typename: 'Query', readonly suggestFriends: { readonly __typename: 'UserConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly description?: string | null, readonly id: string, readonly image?: string | null, readonly name: string, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly posts: { readonly __typename: 'PostConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string }> }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> } };
 
 export type SuggestOrganizationsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
@@ -4942,13 +4993,17 @@ export function useCreateExperienceMutation() {
 export const CreatePostDocument = /*#__PURE__*/ gql`
     mutation CreatePost {
   createPost {
-    record {
+    viewer {
       id
-      urlSlug
+      name
+    }
+    cursor
+    record {
+      ...PostCardPost
     }
   }
 }
-    `;
+    ${PostCardPostFragmentDoc}`;
 
 export function useCreatePostMutation() {
   return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
