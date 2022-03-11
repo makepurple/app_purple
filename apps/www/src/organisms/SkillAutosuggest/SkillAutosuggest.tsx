@@ -95,6 +95,8 @@ export const SkillAutosuggest = forwardRef<
 	useImperativeHandle(ref, () => combobox);
 
 	const onEnterSkill = useOnKeyDown<HTMLInputElement>({ key: "ENTER" }, (e) => {
+		e.preventDefault();
+
 		const inputValue = e.currentTarget.value;
 
 		if (!inputValue) return;
