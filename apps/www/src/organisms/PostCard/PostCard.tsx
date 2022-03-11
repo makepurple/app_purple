@@ -234,7 +234,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 							`}
 							onConfirm={async () => {
 								const didSucceed = await removePost({ where: { id: post.id } })
-									.then((result) => !!result.data?.deletePost.record)
+									.then((result) => !!result.data?.deletePost)
 									.catch(() => false);
 
 								if (!didSucceed) {
