@@ -831,28 +831,33 @@ export const User = objectType({
 									skip,
 									take,
 									where: {
-										...PrismaUtils.nonNull(args.where),
-										...(args.where?.skills
-											? {
-													skills: {
-														every: {
-															skill: PrismaUtils.nonNull(
-																args.where?.skills?.every
-															)
-														},
-														none: {
-															skill: PrismaUtils.nonNull(
-																args.where?.skills?.none
-															)
-														},
-														some: {
-															skill: PrismaUtils.nonNull(
-																args.where?.skills?.some
-															)
-														}
-													}
-											  }
-											: {})
+										AND: [
+											{ urlSlug: { not: { equals: "draft" } } },
+											{
+												...PrismaUtils.nonNull(args.where),
+												...(args.where?.skills
+													? {
+															skills: {
+																every: {
+																	skill: PrismaUtils.nonNull(
+																		args.where?.skills?.every
+																	)
+																},
+																none: {
+																	skill: PrismaUtils.nonNull(
+																		args.where?.skills?.none
+																	)
+																},
+																some: {
+																	skill: PrismaUtils.nonNull(
+																		args.where?.skills?.some
+																	)
+																}
+															}
+													  }
+													: {})
+											}
+										]
 									},
 									orderBy: {
 										createdAt: Prisma.SortOrder.desc
