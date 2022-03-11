@@ -69,10 +69,12 @@ const TopContainer = tw.div`
 
 const TitleContainer = tw.div`
 	flex
-	flex-row
+	flex-col
 	items-center
 	justify-center
 	gap-3
+	max-w-full
+	sm:flex-row
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -93,12 +95,13 @@ const AvatarIconContainer = tw.div`
 `;
 
 const Title = tw.h1`
-	flex
-	justify-center
-	text-4xl
+	inline
+	max-w-full
+	text-3xl
 	text-center
 	font-bold
 	truncate
+	sm:text-4xl
 `;
 
 const Skills = tw(Tags)`
