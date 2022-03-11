@@ -41,7 +41,7 @@ export const Button = styled.button<{
 		disabled:after:cursor-not-allowed
 	`}
 
-	${({ bounce }) => bounce && tw`not-disabled:hover:-translate-y-0.5`}
+	${({ bounce = true }) => bounce && tw`not-disabled:hover:-translate-y-0.5`}
 
 	${({ hasInput, variant = "primary" }) => {
 		switch (variant) {
@@ -108,7 +108,6 @@ export const Button = styled.button<{
 `;
 
 Button.defaultProps = {
-	bounce: true,
 	role: "button",
 	type: "button"
 };
