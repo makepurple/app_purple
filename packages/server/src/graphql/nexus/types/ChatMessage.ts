@@ -3,7 +3,7 @@ import { objectType } from "nexus";
 export const ChatMessage = objectType({
 	name: "ChatMessage",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.field("chat", {
 			type: "Chat",
 			resolve: (parent, args, { prisma }) => {

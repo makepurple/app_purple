@@ -5,7 +5,7 @@ import { PrismaUtils } from "../../../utils";
 export const Chat = objectType({
 	name: "Chat",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.field("messages", {
 			type: "ChatMessageConnection",
 			args: {

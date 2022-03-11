@@ -729,7 +729,7 @@ export const User = objectType({
 		t.nonNull.url("githubUrl", {
 			resolve: ({ name }) => `https://github.com/${name}`
 		});
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.string("image");
 		t.nonNull.string("name");
 		t.nonNull.field("notifications", {

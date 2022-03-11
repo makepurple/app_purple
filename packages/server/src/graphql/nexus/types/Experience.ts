@@ -5,7 +5,7 @@ export const Experience = objectType({
 	definition: (t) => {
 		t.dateTime("endDate");
 		t.nonNull.list.nonNull.string("highlights");
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.string("location");
 		t.nonNull.field("organization", {
 			type: "Organization",

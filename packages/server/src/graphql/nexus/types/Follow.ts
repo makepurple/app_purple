@@ -3,7 +3,7 @@ import { objectType } from "nexus";
 export const Follow = objectType({
 	name: "Follow",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.field("follower", {
 			type: "User",
 			resolve: async (parent, args, { prisma }) => {

@@ -6,7 +6,7 @@ import { PrismaUtils } from "../../../utils";
 export const CodeExample = objectType({
 	name: "CodeExample",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.field("author", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {

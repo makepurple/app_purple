@@ -28,7 +28,7 @@ export const Friendship = objectType({
 		});
 		t.nonNull.string("friendingId");
 		t.nonNull.string("frienderId");
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.boolean("rejected", { resolve: (parent) => !!parent.rejectedAt });
 		t.dateTime("rejectedAt");
 		t.nonNull.dateTime("updatedAt");

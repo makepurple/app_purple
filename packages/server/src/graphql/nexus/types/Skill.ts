@@ -142,7 +142,7 @@ export const Skill = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.field("posts", {
 			type: "PostConnection",
 			args: {

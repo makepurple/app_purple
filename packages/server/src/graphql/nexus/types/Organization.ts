@@ -37,7 +37,7 @@ export const Organization = objectType({
 				return githubOrganization.organization;
 			}
 		});
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.string("name");
 	}
 });

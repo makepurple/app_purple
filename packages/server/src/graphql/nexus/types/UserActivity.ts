@@ -3,7 +3,7 @@ import { interfaceType } from "nexus";
 export const UserActivity = interfaceType({
 	name: "UserActivity",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.dateTime("updatedAt");
 		t.nonNull.field("user", {
 			type: "User",

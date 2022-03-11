@@ -4,7 +4,7 @@ export const Repository = objectType({
 	name: "Repository",
 	definition: (t) => {
 		t.implements("WithGitHubRepository");
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.list.nonNull.field("skills", {
 			type: "Skill",
 			resolve: async ({ id }, args, { prisma }) => {

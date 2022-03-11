@@ -70,7 +70,7 @@ export const Comment = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.field("parent", {
 			type: "Comment",
 			resolve: (parent, args, { prisma }) => {

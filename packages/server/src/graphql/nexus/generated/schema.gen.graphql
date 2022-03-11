@@ -28,7 +28,7 @@ scalar BigInt
 """The `Byte` scalar type represents byte value as a Buffer"""
 scalar Bytes
 
-type Chat {
+type Chat implements Node {
   id: ID!
   messages(after: String, before: String, first: Int, last: Int, offset: Int): ChatMessageConnection!
   updatedAt: DateTime!
@@ -47,7 +47,7 @@ type ChatEdge implements ConnectionEdge {
   node: Chat!
 }
 
-type ChatMessage {
+type ChatMessage implements Node {
   chat: Chat!
   chatId: String!
   content: Json!
@@ -87,7 +87,7 @@ input ChatWhereUniqueInput {
   id: String
 }
 
-type CodeExample {
+type CodeExample implements Node {
   author: User!
   authorName: String!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
@@ -192,7 +192,7 @@ input CodeLanguageNullableFilter {
   notIn: [CodeLanguage!]
 }
 
-type Comment {
+type Comment implements Node {
   author: User!
   authorId: String!
   codeExample: CodeExample
@@ -392,7 +392,7 @@ input EnumExperienceTypeNullableFilter {
   notIn: [ExperienceType!]
 }
 
-type Experience {
+type Experience implements Node {
   endDate: DateTime
   highlights: [String!]!
   id: ID!
@@ -465,7 +465,7 @@ input ExperienceWhereUniqueInput {
   id: String!
 }
 
-type Follow {
+type Follow implements Node {
   createdAt: DateTime!
   follower: User!
   following: Followable!
@@ -522,7 +522,7 @@ interface Followable {
   viewerFollowing: Boolean!
 }
 
-type Friendship {
+type Friendship implements Node {
   friender: User!
   frienderId: String!
   friending: User!
@@ -757,7 +757,11 @@ interface MutationPayload {
   viewer: User
 }
 
-interface Notification {
+interface Node {
+  id: ID!
+}
+
+interface Notification implements Node {
   id: ID!
   opened: Boolean!
   type: NotificationType!
@@ -766,7 +770,7 @@ interface Notification {
   userId: String!
 }
 
-type NotificationChatMessageReceived implements Notification {
+type NotificationChatMessageReceived implements Node & Notification {
   chat: Chat!
   chatId: String!
   id: ID!
@@ -777,7 +781,7 @@ type NotificationChatMessageReceived implements Notification {
   userId: String!
 }
 
-type NotificationCodeExampleCommented implements Notification {
+type NotificationCodeExampleCommented implements Node & Notification {
   codeExample: CodeExample!
   codeExampleId: String!
   id: ID!
@@ -800,7 +804,7 @@ type NotificationEdge implements ConnectionEdge {
   node: Notification!
 }
 
-type NotificationFriendshipAccepted implements Notification {
+type NotificationFriendshipAccepted implements Node & Notification {
   friendship: Friendship!
   friendshipId: String!
   id: ID!
@@ -811,7 +815,7 @@ type NotificationFriendshipAccepted implements Notification {
   userId: String!
 }
 
-type NotificationPostCommented implements Notification {
+type NotificationPostCommented implements Node & Notification {
   id: ID!
   opened: Boolean!
   post: Post!
@@ -844,7 +848,7 @@ input OrderByRelationAggregateInput {
   _count: SortOrder
 }
 
-type Organization {
+type Organization implements Node {
   experiences: [Experience!]!
   github: GitHubOrganization!
   id: ID!
@@ -859,7 +863,7 @@ type PageInfo {
   startCursor: String
 }
 
-type Post {
+type Post implements Node {
   author: User!
   authorName: String!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
@@ -917,7 +921,7 @@ type PostEdge implements ConnectionEdge {
   node: Post!
 }
 
-type PostImage {
+type PostImage implements Node {
   id: ID!
   post: Post!
   postId: String!
@@ -1028,7 +1032,7 @@ type RemoveSkillMutationPayload implements MutationPayload {
   viewer: User
 }
 
-type Repository implements WithGitHubRepository {
+type Repository implements Node & WithGitHubRepository {
   github: GitHubRepository!
   id: ID!
   name: String!
@@ -1087,7 +1091,7 @@ type SendChatMessagePayload implements MutationPayload {
   viewer: User
 }
 
-type Skill implements Followable & WithGitHubRepository {
+type Skill implements Followable & Node & WithGitHubRepository {
   codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -1401,7 +1405,7 @@ type UpvotePostPayload implements MutationPayload {
   viewer: User
 }
 
-type User implements Followable {
+type User implements Followable & Node {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
@@ -1443,14 +1447,14 @@ type User implements Followable {
   viewerIsFriend: Boolean!
 }
 
-interface UserActivity {
+interface UserActivity implements Node {
   id: ID!
   updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
-type UserActivityCommentCodeExample implements UserActivity {
+type UserActivityCommentCodeExample implements Node & UserActivity {
   comment: Comment!
   commentId: String!
   id: ID!
@@ -1459,7 +1463,7 @@ type UserActivityCommentCodeExample implements UserActivity {
   userId: String!
 }
 
-type UserActivityCommentPost implements UserActivity {
+type UserActivityCommentPost implements Node & UserActivity {
   comment: Comment!
   commentId: String!
   id: ID!
@@ -1475,7 +1479,7 @@ type UserActivityConnection implements Connection {
   totalCount: Int!
 }
 
-type UserActivityCreateCodeExample implements UserActivity {
+type UserActivityCreateCodeExample implements Node & UserActivity {
   codeExample: CodeExample!
   codeExampleId: String!
   id: ID!
@@ -1489,7 +1493,7 @@ type UserActivityEdge implements ConnectionEdge {
   node: UserActivity!
 }
 
-type UserActivityFollowSkill implements UserActivity {
+type UserActivityFollowSkill implements Node & UserActivity {
   follow: Follow!
   followId: String!
   id: ID!
@@ -1498,7 +1502,7 @@ type UserActivityFollowSkill implements UserActivity {
   userId: String!
 }
 
-type UserActivityFollowUser implements UserActivity {
+type UserActivityFollowUser implements Node & UserActivity {
   follow: Follow!
   followId: String!
   id: ID!
@@ -1507,7 +1511,7 @@ type UserActivityFollowUser implements UserActivity {
   userId: String!
 }
 
-type UserActivityFriendAcceptUser implements UserActivity {
+type UserActivityFriendAcceptUser implements Node & UserActivity {
   friendship: Friendship!
   friendshipId: String!
   id: ID!
@@ -1516,14 +1520,14 @@ type UserActivityFriendAcceptUser implements UserActivity {
   userId: String!
 }
 
-type UserActivityJoined implements UserActivity {
+type UserActivityJoined implements Node & UserActivity {
   id: ID!
   updatedAt: DateTime!
   user: User!
   userId: String!
 }
 
-type UserActivityPublishPost implements UserActivity {
+type UserActivityPublishPost implements Node & UserActivity {
   id: ID!
   post: Post!
   postId: String!
@@ -1545,7 +1549,7 @@ enum UserActivityType {
   UpvotePost
 }
 
-type UserActivityUpvoteCodeExample implements UserActivity {
+type UserActivityUpvoteCodeExample implements Node & UserActivity {
   codeExample: CodeExample!
   codeExampleId: String!
   id: ID!
@@ -1554,7 +1558,7 @@ type UserActivityUpvoteCodeExample implements UserActivity {
   userId: String!
 }
 
-type UserActivityUpvotePost implements UserActivity {
+type UserActivityUpvotePost implements Node & UserActivity {
   id: ID!
   post: Post!
   postId: String!

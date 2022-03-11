@@ -3,7 +3,7 @@ import { interfaceType } from "nexus";
 export const Notification = interfaceType({
 	name: "Notification",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.boolean("opened", {
 			resolve: async (parent, args, { prisma }) => {
 				const user = await prisma.user.findUnique({

@@ -3,7 +3,7 @@ import { objectType } from "nexus";
 export const PostImage = objectType({
 	name: "PostImage",
 	definition: (t) => {
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.field("post", {
 			type: "Post",
 			resolve: (parent, args, { prisma }) => {

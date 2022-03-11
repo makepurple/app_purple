@@ -99,7 +99,7 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.id("id");
+		t.implements("Node");
 		t.nonNull.list.nonNull.field("images", {
 			type: "PostImage",
 			resolve: (parent, args, { prisma }) => {

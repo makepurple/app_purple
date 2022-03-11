@@ -58,6 +58,7 @@ export * from "./InviteToChatPayload";
 export * from "./LeaveChatPayload";
 export * from "./Mutation";
 export * from "./MutationPayload";
+export * from "./Node";
 export * from "./Notification";
 export * from "./NotificationChatMessageReceived";
 export * from "./NotificationCodeExampleCommented";
