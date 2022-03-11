@@ -132,6 +132,7 @@ const Actions = tw.div`
 	border-gray-300
 	rounded-b-lg
 	bg-white
+	z-index[1]
 	sm:px-6
 `;
 
