@@ -29,8 +29,8 @@ const SelectorButton = tw.button`
 	flex
 	items-center
 	justify-center
-	h-10
-	w-10
+	h-8
+	w-8
 	rounded-r-lg
 	cursor-pointer
 	bg-indigo-500
