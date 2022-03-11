@@ -311,6 +311,17 @@ export const Page: NextPage<PageProps> = () => {
 							})}
 							<SkillAutosuggest
 								onSelect={(newSkill) => {
+									const exists = skills.fields.some((field) => {
+										const owner = (field as any).name_owner.owner;
+										const name = (field as any).name_owner.name;
+
+										return (
+											owner === newSkill.owner.login && name === newSkill.name
+										);
+									});
+
+									if (exists) return;
+
 									skills.append({
 										name_owner: {
 											name: newSkill.name,
