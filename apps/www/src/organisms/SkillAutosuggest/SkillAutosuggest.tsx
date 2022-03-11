@@ -24,6 +24,8 @@ const SkillsSuggest = tw(ComboBox.Options)`
 	inset-x-0
 	transform
 	translate-y-full
+	max-height[16rem]
+	overflow-y-auto
 `;
 
 export interface SkillAutosuggestProps {
