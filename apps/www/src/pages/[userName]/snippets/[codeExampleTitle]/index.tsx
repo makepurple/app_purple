@@ -398,7 +398,7 @@ export const Page: NextPage<PageProps> = () => {
 									};
 
 									const didSucceed = await remove({ where })
-										.then((result) => !!result.data?.deleteCodeExample.record)
+										.then((result) => !!result.data?.deleteCodeExample)
 										.catch(() => false);
 
 									if (!didSucceed) {

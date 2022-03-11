@@ -284,7 +284,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 								};
 
 								const didSucceed = await remove({ where })
-									.then((result) => !!result.data?.deleteCodeExample.record)
+									.then((result) => !!result.data?.deleteCodeExample)
 									.catch(() => false);
 
 								if (!didSucceed) {

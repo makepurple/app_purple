@@ -344,7 +344,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 							const didSucceed = await removeRepository({
 								where: { id: repository.id }
 							})
-								.then((result) => result.data?.deleteRepository.record)
+								.then((result) => result.data?.deleteRepository)
 								.catch(() => false);
 
 							if (!didSucceed) {

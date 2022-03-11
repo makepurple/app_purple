@@ -25,7 +25,7 @@ export const RemovePostThumbnailButton: FC<RemovePostThumbnailButtonProps> = (pr
 				onClick?.(e);
 
 				const didSucceed = await removePostThumbnail({ where: { id: postId } })
-					.then((result) => !!result.data?.removePostThumbnail.record)
+					.then((result) => !!result.data?.removePostThumbnail)
 					.catch(() => false);
 
 				didSucceed

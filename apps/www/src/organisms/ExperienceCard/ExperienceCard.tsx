@@ -237,7 +237,7 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 							const didSucceed = await removeExperience({
 								where: { id: experience.id }
 							})
-								.then((result) => !!result.data?.deleteExperience.record)
+								.then((result) => !!result.data?.deleteExperience)
 								.catch(() => false);
 
 							if (!didSucceed) {
