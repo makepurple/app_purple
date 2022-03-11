@@ -3,18 +3,21 @@
 
 
 type AcceptFriendshipPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Friendship!
   viewer: User
 }
 
 type AddDesiredSkillMutationPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Skill!
   viewer: User
 }
 
 type AddSkillMutationPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Skill!
   viewer: User
@@ -227,6 +230,7 @@ input CommentCodeExampleInput {
 }
 
 type CommentCodeExamplePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
@@ -258,6 +262,7 @@ input CommentPostInput {
 }
 
 type CommentPostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
@@ -297,30 +302,35 @@ input CreateChatInput {
 }
 
 type CreateChatPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Chat!
   viewer: User
 }
 
 type CreateCodeExamplePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: CodeExample!
   viewer: User
 }
 
 type CreateExperiencePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Experience!
   viewer: User
 }
 
 type CreatePostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
 }
 
 type CreateRepositoryPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Repository!
   viewer: User
@@ -339,48 +349,56 @@ input DateTimeNullableFilter {
 }
 
 type DeleteCodeExamplePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: CodeExample!
   viewer: User
 }
 
 type DeleteCommentPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
 }
 
 type DeleteExperiencePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Experience!
   viewer: User
 }
 
 type DeleteFriendshipPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Friendship!
   viewer: User
 }
 
 type DeletePostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
 }
 
 type DeleteRepositoryPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Repository!
   viewer: User
 }
 
 type DeleteUserPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: User!
   viewer: User
 }
 
 type DownvoteCommentPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
@@ -492,6 +510,7 @@ input FollowOrderByInput {
 }
 
 type FollowSkillPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Follow!
   viewer: User
@@ -503,6 +522,7 @@ enum FollowType {
 }
 
 type FollowUserPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Follow!
   viewer: User
@@ -671,6 +691,7 @@ input InviteToChatInput {
 }
 
 type InviteToChatPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Chat!
   viewer: User
@@ -682,6 +703,7 @@ The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](
 scalar Json
 
 type LeaveChatPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Chat!
   viewer: User
@@ -753,7 +775,9 @@ type Mutation {
 }
 
 interface MutationPayload {
+  cursor: String!
   query: Query!
+  record: Node!
   viewer: User
 }
 
@@ -839,6 +863,7 @@ input NotificationsWhereInput {
 }
 
 type OpenNotificationsPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: User!
   viewer: User
@@ -964,6 +989,7 @@ input PostWhereUniqueInput {
 }
 
 type PublishPostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
@@ -1009,24 +1035,28 @@ type Query {
 }
 
 type RejectFriendshipPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Friendship!
   viewer: User
 }
 
 type RemoveDesiredSkillMutationPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Skill!
   viewer: User
 }
 
 type RemovePostThumbnailPayload implements MutationPayload {
+  cursor: String!
   query: Query!
-  record: Post
+  record: Post!
   viewer: User
 }
 
 type RemoveSkillMutationPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Skill!
   viewer: User
@@ -1080,12 +1110,14 @@ input RepositoryWhereUniqueInput {
 }
 
 type RequestFriendshipPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Friendship!
   viewer: User
 }
 
 type SendChatMessagePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: ChatMessage!
   viewer: User
@@ -1274,42 +1306,49 @@ A field whose value conforms to the standard URL format as specified in RFC3986:
 scalar URL
 
 type UnfollowSkillPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Follow!
   viewer: User
 }
 
 type UnfollowUserPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Follow!
   viewer: User
 }
 
 type UnvoteCodeExamplePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: CodeExample!
   viewer: User
 }
 
 type UnvoteCommentPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
 }
 
 type UnvotePostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
 }
 
 type UpdateCodeExamplePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: CodeExample!
   viewer: User
 }
 
 type UpdateCommentPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
@@ -1320,30 +1359,35 @@ input UpdateDesiredSkillsInput {
 }
 
 type UpdateDesiredSkillsPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: User!
   viewer: User
 }
 
 type UpdateExperiencePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Experience!
   viewer: User
 }
 
 type UpdatePostDraftPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
 }
 
 type UpdatePostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
 }
 
 type UpdateRepositoryPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Repository!
   viewer: User
@@ -1354,12 +1398,14 @@ input UpdateSkillsInput {
 }
 
 type UpdateSkillsPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: User!
   viewer: User
 }
 
 type UpdateUserFromGitHubPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: User!
   viewer: User
@@ -1374,6 +1420,7 @@ input UploadPostImageInput {
 }
 
 type UploadPostImagePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: PostImage!
   viewer: User
@@ -1384,6 +1431,7 @@ input UpvoteCodeExampleInput {
 }
 
 type UpvoteCodeExamplePayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: CodeExample!
   viewer: User
@@ -1394,12 +1442,14 @@ input UpvoteCommentInput {
 }
 
 type UpvoteCommentPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Comment!
   viewer: User
 }
 
 type UpvotePostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
@@ -1614,6 +1664,7 @@ input UserWhereUniqueInput {
 }
 
 type ViewPostPayload implements MutationPayload {
+  cursor: String!
   query: Query!
   record: Post!
   viewer: User
