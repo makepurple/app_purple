@@ -1,7 +1,6 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import { gql } from "urql";
-import { UrqlUtils } from "../../utils";
 import type { Mutation, User } from "../generated";
 
 export const createCache = () => {
@@ -10,6 +9,7 @@ export const createCache = () => {
 			GitHubUserContributionCalendar: () => null,
 			GitHubUserContributionCalendarDay: () => null,
 			GitHubUserContributionCalendarWeek: () => null,
+			SuggestSkills: () => null,
 			TopLanguages: () => null,
 			TopLanguage: () => null
 		},
@@ -49,55 +49,8 @@ export const createCache = () => {
 		},
 		updates: {
 			Mutation: {
-				createPost: ({ createPost: result }: Mutation, _, cache) => {
-					const viewer = result.viewer;
-
-					if (!viewer) return;
-
-					const fields = cache.inspectFields({ __typename: "User", id: viewer.id });
-
-					fields
-						.filter((field) => field.fieldName === "posts")
-						.forEach((field) => {
-							const fragment = gql`
-								fragment _ on User {
-									id
-									${UrqlUtils.getFieldKey(field)} {
-										edges {
-											cursor
-											node {
-												id
-											}
-										}
-										nodes {
-											id
-										}
-									}
-								}
-							`;
-
-							const old = cache.readFragment(fragment, { id: viewer.id });
-
-							if (!old) return;
-
-							const edges = [
-								{
-									__typename: "PostEdge",
-									cursor: result.cursor,
-									node: result.record
-								},
-								...(old as User).posts.edges
-							];
-
-							cache.writeFragment(fragment, {
-								id: viewer.id,
-								posts: {
-									__typename: "PostConnection",
-									edges,
-									nodes: edges.map((edge) => edge.node)
-								}
-							});
-						});
+				createPost: (_, __, cache) => {
+					cache.invalidate("Query", "postDraft");
 				},
 				deleteCodeExample: ({ deleteCodeExample: result }: Mutation, _, cache) => {
 					cache.invalidate({ __typename: "CodeExample", id: result.record.id });
