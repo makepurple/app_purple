@@ -55,9 +55,10 @@ const PostContent = tw.div`
 const Title = tw.h1`
 	flex
 	justify-center
-	text-4xl
+	text-3xl
 	text-center
 	font-bold
+	sm:text-4xl
 `;
 
 const Description = tw.h2`

@@ -100,7 +100,6 @@ const Title = tw.h1`
 	text-3xl
 	text-center
 	font-bold
-	truncate
 	sm:text-4xl
 `;
 
