@@ -35,9 +35,9 @@ export const suggestSkillOwners = queryField("suggestSkillOwners", {
 		if (!searchData) return { nodes: [], totalCount: 0 };
 
 		const { totalCount } = searchData.search;
-		const nodes: any = (searchData.search.nodes ?? [])
-			.filter((node) => node?.__typename === "Organization" || node?.__typename === "User")
-			.map((node) => ({ ...node, __typename: `GitHub${node?.__typename}` }));
+		const nodes: any = (searchData.search.nodes ?? []).filter(
+			(node) => node?.__typename === "GitHubOrganization" || node?.__typename === "GitHubUser"
+		);
 
 		return { nodes, totalCount };
 	}

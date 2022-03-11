@@ -1,4 +1,4 @@
-import { ObjectUtils } from "@makepurple/utils";
+import { LangUtils, ObjectUtils } from "@makepurple/utils";
 import { createTokenAuth } from "@octokit/auth-token";
 import { Octokit } from "@octokit/core";
 import { throttling } from "@octokit/plugin-throttling";
@@ -17,6 +17,20 @@ connection?.on("error", (err) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	Logger.error(err.toString?.());
 });
+
+declare type DeepGitHubType<T> = T extends { __typename?: infer U }
+	? U extends string
+		? { [P in keyof Omit<T, "__typename">]: DeepGitHubType<T[P]> } & {
+				__typename: `GitHub${U}`;
+		  }
+		: never
+	: T extends Date
+	? Date
+	: T extends (infer U)[]
+	? DeepGitHubType<U>[]
+	: T extends readonly (infer U)[]
+	? readonly DeepGitHubType<U>[]
+	: T;
 
 export class OctokitClient {
 	public instance = new (Octokit.plugin(throttling))({
@@ -44,6 +58,34 @@ export class OctokitClient {
 		}
 	});
 
+	public static castTypenames<T>(input: T): DeepGitHubType<T> {
+		if (LangUtils.isNil(input)) return input as any;
+
+		if (Array.isArray(input)) {
+			return (input as readonly any[]).map((value) =>
+				OctokitClient.castTypenames(value)
+			) as DeepGitHubType<T>;
+		}
+
+		if (input instanceof Date) return input as DeepGitHubType<T>;
+
+		if (typeof input === "object") {
+			const keys = Object.keys(input) as (keyof T)[];
+
+			return keys.reduce((acc, key) => {
+				const value = input[key];
+
+				return {
+					...acc,
+					[key]:
+						key === "__typename" ? `GitHub${value}` : OctokitClient.castTypenames(value)
+				} as DeepGitHubType<T>;
+			}, {} as DeepGitHubType<T>);
+		}
+
+		return input as DeepGitHubType<T>;
+	}
+
 	public graphql(accessToken?: Maybe<string>) {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const _accessToken = accessToken ?? process.env.GITHUB_ACCESS_TOKEN!;
@@ -55,7 +97,7 @@ export class OctokitClient {
 			const query = oneLine(strings, ...exprs);
 			const auth = createTokenAuth(_accessToken)();
 
-			const op = async (variables?: TVariables): Promise<TResult> => {
+			const op = async (variables?: TVariables): Promise<DeepGitHubType<TResult>> => {
 				const { token } = await auth;
 
 				const response = await this.instance.graphql<TResult>(query, {
@@ -65,7 +107,7 @@ export class OctokitClient {
 					}
 				});
 
-				return response;
+				return OctokitClient.castTypenames(response);
 			};
 
 			return ObjectUtils.setStatic(op, {
@@ -78,7 +120,7 @@ export class OctokitClient {
 				 */
 				cast: <TCastResult = any, TCastVariables extends Record<string, unknown> = any>(
 					variables?: TCastVariables
-				): Promise<TCastResult> => op(variables as any) as any
+				): Promise<DeepGitHubType<TCastResult>> => op(variables as any) as any
 			});
 		};
 	}

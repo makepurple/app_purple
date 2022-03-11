@@ -114,26 +114,7 @@ export const GitHubRepositoryOwner = interfaceType({
 				return {
 					pageInfo: connection.pageInfo,
 					totalCount: connection.totalCount,
-					edges: (connection.edges ?? [])
-						.filter((edge) => !!edge?.node)
-						.map((edge) => {
-							// Should not reach here
-							if (!edge?.node) throw new Error();
-
-							return {
-								cursor: edge.cursor,
-								node: {
-									...edge.node,
-									owner: {
-										...edge.node.owner,
-										__typename:
-											edge.node.owner.__typename === "Organization"
-												? "GitHubOrganization"
-												: "GitHubUser"
-									}
-								}
-							};
-						})
+					edges: (connection.edges ?? []).filter((edge) => !!edge?.node) as any[]
 				};
 			}
 		});

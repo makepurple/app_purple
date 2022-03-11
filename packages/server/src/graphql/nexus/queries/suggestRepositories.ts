@@ -38,7 +38,7 @@ export const suggestRepositories = queryField("suggestRepositories", {
 		const { totalCount } = searchData.search;
 		const nodes = searchData.search.nodes ?? [];
 
-		const repositories: any = nodes.filter((node) => node?.__typename === "Repository");
+		const repositories: any = nodes.filter((node) => node?.__typename === "GitHubRepository");
 
 		return { nodes: repositories, totalCount };
 	}

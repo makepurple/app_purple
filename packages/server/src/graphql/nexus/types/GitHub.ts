@@ -33,7 +33,7 @@ export const GitHub = objectType({
 					owner: {
 						...repository.owner,
 						__typename:
-							repository.owner.__typename === "Organization"
+							repository.owner.__typename === "GitHubOrganization"
 								? "GitHubOrganization"
 								: "GitHubUser"
 					}
@@ -74,10 +74,9 @@ export const GitHub = objectType({
 				if (!repositoryOwner) return null;
 
 				switch (repositoryOwner.__typename) {
-					case "Organization":
-						return { ...repositoryOwner, __typename: "GitHubOrganization" };
-					case "User":
-						return { ...repositoryOwner, __typename: "GitHubUser" };
+					case "GitHubOrganization":
+					case "GitHubUser":
+						return repositoryOwner;
 					default:
 						return null;
 				}

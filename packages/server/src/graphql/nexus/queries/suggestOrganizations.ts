@@ -35,9 +35,9 @@ export const suggestOrganizations = queryField("suggestOrganizations", {
 
 		const { totalCount } = searchData.search;
 		const nodes = searchData.search.nodes ?? [];
-		const organizations: any = nodes
-			.filter((node) => node?.__typename === "Organization")
-			.map((node) => ({ ...node, __typename: "GitHubOrganization" as const }));
+		const organizations: any = nodes.filter(
+			(node) => node?.__typename === "GitHubOrganization"
+		);
 
 		return {
 			nodes: organizations,
