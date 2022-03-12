@@ -314,7 +314,7 @@ export const Post_fragment_mock: Post = {
 		}
 	],
 	createdAt: dayjs(1318781876406).toDate(),
-	description: faker.lorem.sentences(1),
+	description: faker.lorem.sentences(5),
 	downvoters: {
 		__typename: "UserConnection",
 		edges: [],

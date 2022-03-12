@@ -1,4 +1,12 @@
-import { AlertDialog, Anchor, Button, Paper, ThumbsUpIcon, toast } from "@makepurple/components";
+import {
+	AlertDialog,
+	Anchor,
+	Button,
+	Paper,
+	Tags,
+	ThumbsUpIcon,
+	toast
+} from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
@@ -23,12 +31,10 @@ const Root = styled(Paper)`
 	${tw`
 		flex
 		flex-col-reverse
-		height[22rem]
 		p-3
 		cursor-pointer
 		hover:bg-indigo-50
 		sm:flex-row
-		sm:h-52
 		sm:p-4
 	`}
 
@@ -55,9 +61,10 @@ const Title = tw.span`
 	mb-2
 	text-xl
 	font-bold
-	leading-none
+	leading-snug
 	text-black
 	line-clamp-2
+	sm:truncate
 `;
 
 const DescriptionContainer = tw.div`
@@ -68,7 +75,7 @@ const Description = tw.p`
 	text-base
 	text-gray-500
 	line-clamp-1
-	sm:line-clamp-3
+	sm:line-clamp-2
 `;
 
 const AuthorName = tw(Anchor)`
@@ -158,6 +165,8 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 
 	const postUrl: string = `/${post.authorName}/${post.urlSlug}`;
 
+	const skills = post.skills.nodes ?? [];
+
 	return (
 		<Root
 			ref={ref}
@@ -178,7 +187,18 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						)}
 					</MainAnchor>
 				</NextLink>
-				<PostedDetails>
+				<Tags type="positive" tw="mt-3">
+					{skills.map((skill) => (
+						<Tags.Tag
+							key={skill.id}
+							id={skill.id}
+							title={`${skill.owner}/${skill.name}`}
+						>
+							{skill.name}
+						</Tags.Tag>
+					))}
+				</Tags>
+				<PostedDetails tw="mt-3">
 					<NextLink href={`/${post.author.name}`} passHref>
 						<AuthorName onClick={(e) => e.stopPropagation()} title={post.author.name}>
 							{post.author.name}

@@ -3,22 +3,7 @@ mutation UpdatePostDraft($where: PostWhereUniqueInput!, $data: PostDraftUpdateIn
 		record {
 			id
 			content
-			description
-			readTime
-			skills(first: 6) {
-				totalCount
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					...SkillCardSkill
-				}
-			}
-			thumbnailUrl
-			title
+			...PostCardPost
 		}
 	}
 }
