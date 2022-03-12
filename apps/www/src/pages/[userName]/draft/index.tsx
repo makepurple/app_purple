@@ -159,7 +159,7 @@ export const Page: NextPage<PageProps> = () => {
 			title: post?.title ?? "",
 			description: post?.description ?? "",
 			skills: defaultSkills,
-			content: [
+			content: (post?.content as any) ?? [
 				{
 					type: "paragraph",
 					children: [{ text: "" }]

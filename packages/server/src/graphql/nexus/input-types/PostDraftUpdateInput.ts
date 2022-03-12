@@ -3,7 +3,7 @@ import { inputObjectType } from "nexus";
 export const PostDraftUpdateInput = inputObjectType({
 	name: "PostDraftUpdateInput",
 	definition: (t) => {
-		t.field("content", { type: "Json" });
+		t.list.nonNull.json("content");
 		t.string("description");
 		t.list.nonNull.field("skills", { type: "SkillWhereUniqueInput" });
 		t.string("title");

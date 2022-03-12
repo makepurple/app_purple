@@ -47,7 +47,7 @@ type ChatEdge implements ConnectionEdge {
 type ChatMessage implements Node {
   chat: Chat!
   chatId: String!
-  content: Json!
+  content: [Json!]!
   createdAt: DateTime!
   id: ID!
   sender: User!
@@ -62,7 +62,7 @@ type ChatMessageConnection implements Connection {
 }
 
 input ChatMessageCreateInput {
-  content: Json!
+  content: [Json!]!
 }
 
 type ChatMessageEdge implements ConnectionEdge {
@@ -192,7 +192,7 @@ type Comment implements Node {
   authorId: String!
   codeExample: CodeExample
   codeExampleId: String
-  content: Json!
+  content: [Json!]!
   createdAt: DateTime!
   downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: ID!
@@ -215,7 +215,7 @@ type Comment implements Node {
 
 input CommentCodeExampleInput {
   codeExample: CodeExampleWhereUniqueInput!
-  content: Json!
+  content: [Json!]!
   parent: CommentWhereUniqueInput
 }
 
@@ -246,7 +246,7 @@ input CommentOrderByInput {
 }
 
 input CommentPostInput {
-  content: Json!
+  content: [Json!]!
   parent: CommentWhereUniqueInput
   post: PostWhereUniqueInput!
 }
@@ -259,7 +259,7 @@ type CommentPostPayload implements MutationPayload {
 }
 
 input CommentUpdateInput {
-  content: Json
+  content: [Json!]
 }
 
 input CommentWhereInput {
@@ -876,7 +876,7 @@ type Post implements Node {
   author: User!
   authorName: String!
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
-  content: Json
+  content: [Json!]!
   createdAt: DateTime!
   description: String
   downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
@@ -915,7 +915,7 @@ type PostConnection implements Connection {
 }
 
 input PostDraftUpdateInput {
-  content: Json
+  content: [Json!]
   description: String
   skills: [SkillWhereUniqueInput!]
   thumbnailUrl: String
@@ -941,7 +941,7 @@ input PostOrderByInput {
 }
 
 input PostPublishInput {
-  content: Json!
+  content: [Json!]!
   description: String!
   readTime: Int
   skills: [SkillWhereUniqueInput!]!
@@ -950,7 +950,7 @@ input PostPublishInput {
 }
 
 input PostUpdateInput {
-  content: Json
+  content: [Json!]
   description: String
   readTime: Int
   skills: [SkillWhereUniqueInput!]

@@ -81,8 +81,7 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 								}
 							},
 							create: {
-								skillId: skill.id,
-								postId: post.id
+								skillId: skill.id
 							}
 						}))
 					},

@@ -16,7 +16,7 @@ export const ChatMessage = objectType({
 			}
 		});
 		t.nonNull.string("chatId");
-		t.nonNull.json("content");
+		t.nonNull.list.nonNull.json("content");
 		t.nonNull.dateTime("createdAt");
 		t.nonNull.field("sender", {
 			type: "User",

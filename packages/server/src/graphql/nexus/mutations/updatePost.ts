@@ -141,8 +141,7 @@ export const updatePost = mutationField("updatePost", {
 								}
 							},
 							create: {
-								skillId: skill.id,
-								postId: post.id
+								skillId: skill.id
 							}
 						}))
 					}

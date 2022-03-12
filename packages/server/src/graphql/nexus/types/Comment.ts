@@ -31,7 +31,7 @@ export const Comment = objectType({
 			}
 		});
 		t.string("codeExampleId");
-		t.nonNull.json("content");
+		t.nonNull.list.nonNull.json("content");
 		t.nonNull.dateTime("createdAt");
 		t.nonNull.field("downvoters", {
 			type: "UserConnection",

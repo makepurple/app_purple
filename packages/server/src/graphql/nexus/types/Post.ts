@@ -59,7 +59,7 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.json("content");
+		t.nonNull.list.nonNull.json("content");
 		t.nonNull.dateTime("createdAt");
 		t.string("description");
 		t.nonNull.field("downvoters", {

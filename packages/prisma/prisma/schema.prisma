@@ -220,7 +220,7 @@ model ChatMessage {
   id        String   @id @default(cuid())
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String
-  content   Json
+  content   Json[]
   sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId  String
   createdAt DateTime @default(now())
@@ -241,7 +241,7 @@ model Post {
   author        User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName    String
   comments      Comment[]
-  content       Json?
+  content       Json[]
   createdAt     DateTime        @default(now())
   description   String?
   id            String          @id @default(cuid())
@@ -300,7 +300,7 @@ model Comment {
   authorId      String
   codeExample   CodeExample?     @relation(fields: [codeExampleId], references: [id], onDelete: Cascade)
   codeExampleId String?
-  content       Json
+  content       Json[]
   createdAt     DateTime         @default(now())
   parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
   parentId      String?

@@ -68,7 +68,7 @@ declare global {
 
 export interface NexusGenInputs {
   ChatMessageCreateInput: { // input type
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
   }
   ChatMessageWhereInput: { // input type
     chatId: string; // String!
@@ -128,7 +128,7 @@ export interface NexusGenInputs {
   }
   CommentCodeExampleInput: { // input type
     codeExample: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     parent?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
   }
   CommentOrderByInput: { // input type
@@ -136,12 +136,12 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   CommentPostInput: { // input type
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     parent?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
     post: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
   }
   CommentUpdateInput: { // input type
-    content?: NexusGenScalars['Json'] | null; // Json
+    content?: NexusGenScalars['Json'][] | null; // [Json!]
   }
   CommentWhereInput: { // input type
     author?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
@@ -242,7 +242,7 @@ export interface NexusGenInputs {
     urlSlug: string; // String!
   }
   PostDraftUpdateInput: { // input type
-    content?: NexusGenScalars['Json'] | null; // Json
+    content?: NexusGenScalars['Json'][] | null; // [Json!]
     description?: string | null; // String
     skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
     thumbnailUrl?: string | null; // String
@@ -253,7 +253,7 @@ export interface NexusGenInputs {
     upvoters?: NexusGenInputs['OrderByRelationAggregateInput'] | null; // OrderByRelationAggregateInput
   }
   PostPublishInput: { // input type
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     description: string; // String!
     readTime?: number | null; // Int
     skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
@@ -261,7 +261,7 @@ export interface NexusGenInputs {
     title: string; // String!
   }
   PostUpdateInput: { // input type
-    content?: NexusGenScalars['Json'] | null; // Json
+    content?: NexusGenScalars['Json'][] | null; // [Json!]
     description?: string | null; // String
     readTime?: number | null; // Int
     skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
@@ -439,7 +439,7 @@ export interface NexusGenObjects {
   }
   ChatMessage: { // root type
     chatId: string; // String!
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     senderId: string; // String!
@@ -477,7 +477,7 @@ export interface NexusGenObjects {
   Comment: { // root type
     authorId: string; // String!
     codeExampleId?: string | null; // String
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     parentId?: string | null; // String
@@ -718,7 +718,7 @@ export interface NexusGenObjects {
   }
   Post: { // root type
     authorName: string; // String!
-    content?: NexusGenScalars['Json'] | null; // Json
+    content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
     id: string; // ID!
@@ -1031,7 +1031,7 @@ export interface NexusGenFieldTypes {
   ChatMessage: { // field return type
     chat: NexusGenRootTypes['Chat']; // Chat!
     chatId: string; // String!
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
     sender: NexusGenRootTypes['User']; // User!
@@ -1082,7 +1082,7 @@ export interface NexusGenFieldTypes {
     authorId: string; // String!
     codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     codeExampleId: string | null; // String
-    content: NexusGenScalars['Json']; // Json!
+    content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     downvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     id: string; // ID!
@@ -1483,7 +1483,7 @@ export interface NexusGenFieldTypes {
     author: NexusGenRootTypes['User']; // User!
     authorName: string; // String!
     comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
-    content: NexusGenScalars['Json'] | null; // Json
+    content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string | null; // String
     downvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
