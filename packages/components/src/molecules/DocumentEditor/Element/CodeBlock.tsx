@@ -15,7 +15,7 @@ import React, {
 	useRef,
 	useState
 } from "react";
-import { createPortal, flushSync } from "react-dom";
+import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import CodeEditor from "react-simple-code-editor";
 import { Descendant, Editor, Element, Node as SlateNode, Path, Transforms } from "slate";
