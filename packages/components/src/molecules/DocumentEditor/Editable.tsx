@@ -1,4 +1,5 @@
 import { InferComponentProps } from "@makepurple/typings";
+import composeRefs from "@seznam/compose-react-refs";
 import React, { forwardRef, useCallback, useContext } from "react";
 import { Editable, RenderElementProps, RenderLeafProps } from "slate-react";
 import tw, { css, styled } from "twin.macro";
@@ -42,6 +43,8 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 
 		const context = useContext(DocumentEditorContext);
 
+		const composedRef = composeRefs(ref, context.editableRef);
+
 		const renderElement = useCallback(
 			(elementProps: RenderElementProps) => <Element {...elementProps} />,
 			[]
@@ -51,7 +54,12 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 		const readOnly = _readOnly ?? context.readOnly;
 
 		return (
-			<EditableContainer ref={ref} className={className} style={style} $readOnly={readOnly}>
+			<EditableContainer
+				ref={composedRef}
+				className={className}
+				style={style}
+				$readOnly={readOnly}
+			>
 				<Editable
 					/**
 					 * !HACK

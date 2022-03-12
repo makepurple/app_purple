@@ -1,6 +1,6 @@
 import { useUncontrolledProp } from "@makepurple/hooks";
 import { FunctionUtils, ObjectUtils } from "@makepurple/utils";
-import React, { CSSProperties, forwardRef, ReactNode, useContext, useMemo } from "react";
+import React, { CSSProperties, forwardRef, ReactNode, useContext, useMemo, useRef } from "react";
 import { BaseEditor, createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { ReactEditor, Slate, withReact } from "slate-react";
@@ -87,6 +87,8 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 	const form = useContext(FormContext);
 	const group = useContext(FormGroupContext);
 
+	const editableRef = useRef<HTMLDivElement | null>(null);
+
 	const editor = useMemo(() => {
 		const composed = FunctionUtils.compose(
 			withReact,
@@ -121,7 +123,7 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 					onChange?.(newValue);
 				}}
 			>
-				<DocumentEditorContext.Provider value={{ readOnly }}>
+				<DocumentEditorContext.Provider value={{ editableRef, readOnly }}>
 					{children}
 				</DocumentEditorContext.Provider>
 			</Slate>

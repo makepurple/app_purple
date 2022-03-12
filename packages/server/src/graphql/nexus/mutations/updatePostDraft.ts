@@ -71,7 +71,6 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 				data: {
 					content: dataInput.content,
 					description: dataInput.description,
-					publishedAt: new Date(),
 					skills: {
 						connectOrCreate: skillsToConnect.map((skill) => ({
 							where: {

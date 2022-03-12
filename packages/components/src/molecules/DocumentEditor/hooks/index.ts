@@ -1,3 +1,4 @@
+export * from "./useGetNode";
 export * from "./useInsertBlock";
 export * from "./useInsertImage";
 export * from "./useIsBlockActive";

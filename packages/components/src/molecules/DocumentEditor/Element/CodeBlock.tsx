@@ -1,20 +1,31 @@
 import { Menu } from "@headlessui/react";
-import { useContextMenu } from "@makepurple/hooks";
+import { useContextMenu, useOnKeyDown } from "@makepurple/hooks";
 import { WindowUtils } from "@makepurple/utils";
 import { CodeBlockType } from "@makepurple/validators";
 import composeRefs from "@seznam/compose-react-refs";
 import copyToClipboard from "copy-to-clipboard";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import React, { FC, Fragment, useCallback, useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import React, {
+	FC,
+	Fragment,
+	KeyboardEvent,
+	useCallback,
+	useContext,
+	useMemo,
+	useRef,
+	useState
+} from "react";
+import { createPortal, flushSync } from "react-dom";
 import { usePopper } from "react-popper";
 import CodeEditor from "react-simple-code-editor";
-import { Descendant, Editor, Element, Node as SlateNode, Transforms } from "slate";
+import { Descendant, Editor, Element, Node as SlateNode, Path, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw from "twin.macro";
 import { ContextMenu, ContextMenuItem, ListItem, toast } from "../../../atoms";
 import { CodeSquareIcon, CopyIcon, XIcon } from "../../../svgs";
 import { CodeBlockTheme } from "../../CodeBlock";
+import { DocumentEditorContext } from "../context";
+import { useGetNode } from "../hooks/useGetNode";
 import { useInsertBlock } from "../hooks/useInsertBlock";
 import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { ToolbarButton } from "../Shared";
@@ -196,6 +207,8 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 
 	const readOnly = useReadOnly();
 	const editor = useSlateStatic();
+	const getNode = useGetNode();
+	const context = useContext(DocumentEditorContext);
 
 	const rootRef = useRef<HTMLDivElement>(null);
 	const { contextMenuProps } = useContextMenu(rootRef, { disabled: readOnly });
@@ -219,6 +232,50 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 
 		Transforms.removeNodes(editor, { at: path });
 	}, [editor, element]);
+
+	const onArrowDown = useOnKeyDown({ key: "DOWN" }, (e: KeyboardEvent<HTMLTextAreaElement>) => {
+		const textArea = e.target as HTMLTextAreaElement;
+		const isCursorEnd = textArea.selectionEnd === textArea.value.length;
+
+		if (!isCursorEnd) return;
+
+		const entry = getNode(element.type);
+
+		if (!entry) return;
+
+		const [, path] = entry;
+
+		const editable = context.editableRef.current;
+
+		const [nextNode] = Editor.next(editor) ?? [];
+
+		if (!nextNode) {
+			Transforms.deselect(editor);
+			Transforms.insertNodes(
+				editor,
+				{ type: "paragraph", children: [{ text: "" }] },
+				{ at: Path.next(path), select: true }
+			);
+		}
+
+		const [current] = Editor.node(editor, Path.next(path));
+
+		setTimeout(() => {
+			if (!editable || !current) return;
+
+			const range = document.createRange();
+			const selection = window.getSelection();
+
+			const domCurrent = ReactEditor.toDOMNode(editor, current);
+
+			range.setStart(domCurrent, 0);
+			range.setEnd(domCurrent, 0);
+
+			selection?.removeAllRanges();
+
+			selection?.addRange(range);
+		}, 0);
+	});
 
 	return (
 		<Root {...attributes} contentEditable={false}>
@@ -286,6 +343,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 							{ at: path }
 						);
 					}}
+					onKeyDown={onArrowDown as any}
 					onValueChange={(newValue) => {
 						setCode(newValue);
 					}}

@@ -1,7 +1,10 @@
-import { createContext } from "react";
+import { createContext, MutableRefObject } from "react";
 
 export interface DocumentEditorContextValue {
+	editableRef: MutableRefObject<HTMLDivElement | null>;
 	readOnly?: boolean;
 }
 
-export const DocumentEditorContext = createContext<DocumentEditorContextValue>({});
+export const DocumentEditorContext = createContext<DocumentEditorContextValue>({
+	editableRef: { current: null }
+});
