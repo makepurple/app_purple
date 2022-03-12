@@ -150,7 +150,6 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors },
 		handleSubmit,
 		register,
-		reset,
 		setValue,
 		watch
 	} = useForm<Type<typeof PostDraftUpdateInput>>({
@@ -159,12 +158,14 @@ export const Page: NextPage<PageProps> = () => {
 			title: post?.title ?? "",
 			description: post?.description ?? "",
 			skills: defaultSkills,
-			content: (post?.content as any) ?? [
-				{
-					type: "paragraph",
-					children: [{ text: "" }]
-				}
-			]
+			content: post?.content.length
+				? (post.content as any)
+				: [
+						{
+							type: "paragraph",
+							children: [{ text: "" }]
+						}
+				  ]
 		},
 		resolver: computedTypesResolver(PostDraftUpdateInput)
 	});
@@ -172,22 +173,6 @@ export const Page: NextPage<PageProps> = () => {
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
 	const thumbnailUrl = watch("thumbnailUrl");
-
-	useEffect(() => {
-		!!post &&
-			reset({
-				thumbnailUrl: post.thumbnailUrl ?? "",
-				title: post.title ?? "",
-				description: post.description ?? "",
-				skills: defaultSkills,
-				content: (post.content as any) ?? [
-					{
-						type: "paragraph",
-						children: [{ text: "" }]
-					}
-				]
-			});
-	}, [defaultSkills, post, reset]);
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
