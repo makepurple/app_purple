@@ -1,3 +1,5 @@
+import isPropValid from "@emotion/is-prop-valid";
+
 export const ZIndicies = [
 	"default",
 	/**
@@ -21,5 +23,15 @@ export type ZIndexType = typeof ZIndicies[number];
 export class StyleUtils {
 	public static getZIndex(type: ZIndexType): number {
 		return ZIndicies.indexOf(type);
+	}
+
+	public static filterHTMLProps<T extends Record<string, any>>(props: T) {
+		return Object.keys(props).reduce(
+			(acc, key) => ({
+				...acc,
+				[key]: isPropValid(key) ? props[key] : undefined
+			}),
+			{} as Record<string, any>
+		);
 	}
 }

@@ -1,4 +1,5 @@
 import { InferComponentProps } from "@makepurple/typings";
+import { StyleUtils } from "@makepurple/utils";
 import NextLink, { LinkProps } from "next/link";
 import React, { forwardRef } from "react";
 
@@ -10,7 +11,7 @@ export const NextLinkAnchor = forwardRef<HTMLAnchorElement, NextLinkAnchorProps>
 
 	return (
 		<NextLink href={href} as={hrefAs as string} passHref>
-			<a {...restProps} ref={ref} />
+			<a {...StyleUtils.filterHTMLProps(restProps)} ref={ref} />
 		</NextLink>
 	);
 });

@@ -6,6 +6,7 @@
 	"types": "src/index.ts",
 	"sideEffects": false,
 	"dependencies": {
+		"@emotion/is-prop-valid": "^1.1.2",
 		"@makepurple/typings": "workspace:*",
 		"dayjs": "^1.10.8",
 		"react-hook-form": "^7.27.1"

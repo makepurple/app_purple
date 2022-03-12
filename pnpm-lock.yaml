@@ -704,12 +704,14 @@ importers:
 
   packages/utils:
     specifiers:
+      '@emotion/is-prop-valid': ^1.1.2
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       dayjs: ^1.10.8
       react-hook-form: ^7.27.1
       typescript: ^4.6.2
     dependencies:
+      '@emotion/is-prop-valid': 1.1.2
       '@makepurple/typings': link:../typings
       dayjs: 1.10.8
       react-hook-form: 7.27.1
@@ -3187,6 +3189,12 @@ packages:
     requiresBuild: true
     dependencies:
       '@emotion/memoize': 0.7.4
+
+  /@emotion/is-prop-valid/1.1.2:
+    resolution: {integrity: sha512-3QnhqeL+WW88YjYbQL5gUIkthuMw7a0NGbZ7wfFVk2kg/CK5w8w5FFa0RzWjyY1+sujN0NWbtSHH6OJmWHtJpQ==}
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
 
   /@emotion/memoize/0.7.4:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
@@ -6891,7 +6899,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_3a253d56ab785e91fa0ddc7c52523d7b
+      tailwindcss: 2.2.19
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -6900,7 +6908,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19_3a253d56ab785e91fa0ddc7c52523d7b
+      tailwindcss: 2.2.19
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -6908,7 +6916,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_3a253d56ab785e91fa0ddc7c52523d7b
+      tailwindcss: 2.2.19
     dev: true
 
   /@timsuchanek/copy/1.4.5:
