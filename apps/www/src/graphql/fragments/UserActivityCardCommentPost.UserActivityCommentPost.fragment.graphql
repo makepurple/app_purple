@@ -8,7 +8,7 @@ fragment UserActivityCardCommentPostUserActivityCommentPost on UserActivityComme
 			id
 			publishedAt
 			readTime
-			skills(first: 5) {
+			skills(first: 8) {
 				totalCount
 				nodes {
 					id

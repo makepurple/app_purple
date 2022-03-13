@@ -4217,7 +4217,7 @@ export const UserActivityCardCommentPostUserActivityCommentPostFragmentDoc = /*#
       id
       publishedAt
       readTime
-      skills(first: 5) {
+      skills(first: 8) {
         totalCount
         nodes {
           id
@@ -4454,7 +4454,7 @@ export const UserActivityCardPublishPostUserActivityPublishPostFragmentDoc = /*#
     id
     publishedAt
     readTime
-    skills(first: 6) {
+    skills(first: 8) {
       totalCount
       nodes {
         id
@@ -4525,7 +4525,7 @@ export const UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc = /*#__
     id
     publishedAt
     readTime
-    skills(first: 6) {
+    skills(first: 8) {
       totalCount
       nodes {
         id

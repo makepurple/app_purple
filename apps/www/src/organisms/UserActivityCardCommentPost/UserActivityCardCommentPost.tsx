@@ -1,4 +1,4 @@
-import { Anchor, Button, Paper, toast } from "@makepurple/components";
+import { Anchor, Button, Paper, Tags, toast } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -134,6 +134,8 @@ export const UserActivityCardCommentPost = forwardRef<
 
 	const [{ fetching }, upvotePost] = useUpvotePostMutation();
 
+	const skills = post?.skills.nodes ?? [];
+
 	/**
 	 * !HACK
 	 * @description Should not reach here, but in-case it does, return a div so that we don't break
@@ -185,7 +187,21 @@ export const UserActivityCardCommentPost = forwardRef<
 							</DescriptionContainer>
 						</NextLink>
 					)}
-					<PostedDetails>
+					<Tags type="positive" tw="mt-3">
+						{skills.map((skill) => (
+							<NextLink
+								key={skill.id}
+								href="/s/[skillOwner]/[skillName]"
+								as={`/s/${skill.owner}/${skill.owner}`}
+								passHref
+							>
+								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+									{skill.name}
+								</Tags.Tag>
+							</NextLink>
+						))}
+					</Tags>
+					<PostedDetails tw="mt-3">
 						<NextLink href={`/${post.authorName}`} passHref>
 							<AuthorName
 								onClick={(e) => e.stopPropagation()}
