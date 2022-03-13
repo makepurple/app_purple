@@ -12,13 +12,13 @@ declare global {
 }
 
 // Workaround to prevent opening more Redis connections during "next dev"
-const redisClient: IORedis | null =
+export const RedisClient: IORedis | null =
 	process.env.AS_SCRIPT === "true"
 		? null
 		: global.cachedRedis ?? new _Redis({ host, port, password });
 
 if (process.env.NODE_ENV !== "production") {
-	global.cachedRedis = redisClient;
+	global.cachedRedis = RedisClient;
 }
 
 export type Redis = IORedis;
