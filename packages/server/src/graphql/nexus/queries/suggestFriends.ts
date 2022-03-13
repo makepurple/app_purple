@@ -48,6 +48,25 @@ export const suggestFriends = queryField("suggestFriends", {
 				})
 				.then((results) => results.map((result) => result.id)));
 
+		/**
+		 * @description The queried skills don't exist, because nobody knows them. Return an empty
+		 * connection
+		 * @author David Lee
+		 * @date March 13, 2022
+		 */
+		if (skillIds && !skillIds.length) {
+			return {
+				pageInfo: {
+					endCursor: null,
+					hasNextPage: false,
+					hasPreviousPage: false,
+					startCursor: null
+				},
+				totalCount: 0,
+				edges: []
+			};
+		}
+
 		const skillsThreshold = Prisma.raw(
 			MathUtils.clamp(where.skillsThreshold ?? 0, [0, 1]).toFixed(1)
 		);
