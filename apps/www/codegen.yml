@@ -18,6 +18,7 @@ generates:
           commentDescriptions: true
   src/graphql/generated/operations.gen.ts:
     config:
+      dedupeFragments: true
       documentNodeImport: "urql#TypedDocumentNode"
       gqlImport: urql#gql
       immutableTypes: true
