@@ -1,7 +1,6 @@
-import { Avatar } from "@makepurple/components";
+import { Avatar, GitHubAvatarImage } from "@makepurple/components";
 import { useOnKeyDown } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
-import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useMemo } from "react";
@@ -134,7 +133,7 @@ export const UserOverviewExperienceCard: FC<UserOverviewExperienceCardProps> = (
 					}}
 					tw="mr-3"
 				>
-					<NextImage src={organization.avatarUrl} height={36} width={36} />
+					<GitHubAvatarImage src={organization.avatarUrl} height={36} width={36} />
 				</StyledAvatar>
 			</NextLink>
 			<NextLink href="/s/[skillOwner]" as={`/s/${organization.name}`} passHref>
