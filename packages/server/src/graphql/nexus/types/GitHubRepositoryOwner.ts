@@ -92,8 +92,8 @@ export const GitHubRepositoryOwner = interfaceType({
 						owner: parent.login,
 						after: args.after,
 						before: args.before,
-						first: Math.min(args.first ?? MAX_REPOSITORIES, MAX_REPOSITORIES),
-						last: Math.min(args.last ?? MAX_REPOSITORIES, MAX_REPOSITORIES)
+						first: args.first ? Math.min(args.first, MAX_REPOSITORIES) : undefined,
+						last: args.last ? Math.min(args.last, MAX_REPOSITORIES) : undefined
 					})
 					.then((result) => result.repositoryOwner?.repositories)
 					.catch(() => null);
