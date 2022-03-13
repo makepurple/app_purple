@@ -96,7 +96,6 @@ export const publishPost = mutationField("publishPost", {
 					content: dataInput.content,
 					description: dataInput.description,
 					publishedAt: new Date(),
-					readTime: args.data?.readTime ?? undefined,
 					skills: {
 						connectOrCreate: skillsToConnect.map((skill) => ({
 							where: {

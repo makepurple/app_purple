@@ -5,7 +5,6 @@ export const PostUpdateInput = inputObjectType({
 	definition: (t) => {
 		t.list.nonNull.json("content");
 		t.string("description");
-		t.int("readTime");
 		t.list.nonNull.field("skills", { type: "SkillWhereUniqueInput" });
 		t.string("thumbnailUrl");
 	}

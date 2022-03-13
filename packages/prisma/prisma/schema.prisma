@@ -248,8 +248,6 @@ model Post {
   images        PostImage[]
   notifications Notification[]
   publishedAt   DateTime?
-  // Estimated time in minutes to read this post
-  readTime      Int?
   skills        SkillsOnPosts[]
   title         String          @default("Draft")
   thumbnailUrl  String?

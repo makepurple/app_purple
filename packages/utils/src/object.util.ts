@@ -14,6 +14,32 @@ export class ObjectUtils {
 		return get(obj, path);
 	}
 
+	/**
+	 * @description Get the total count of words in all strings in a Json type (deeply nested).
+	 * @author David Lee
+	 * @date March 12, 2022
+	 */
+	public static getWordCount<T extends Json>(obj: T): number {
+		if (!obj) return 0;
+
+		if (typeof obj === "number") return 0;
+		if (typeof obj === "boolean") return 0;
+		if (typeof obj === "string") return obj.trim().match(/\w+/g)?.length ?? 0;
+
+		if (Array.isArray(obj)) {
+			return obj.reduce<number>((sum, item) => sum + ObjectUtils.getWordCount(item), 0);
+		}
+
+		if (typeof obj === "object") {
+			return Object.values(obj).reduce<number>(
+				(sum, value) => sum + ObjectUtils.getWordCount(value),
+				0
+			);
+		}
+
+		return 0;
+	}
+
 	public static setStatic<T, S extends Record<string, unknown>>(base: T, staticProps: S): T & S {
 		const _base: T = base;
 

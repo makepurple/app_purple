@@ -24,4 +24,5 @@ declare type Json =
 	| boolean
 	| null
 	| Json[]
+	| readonly Json[]
 	| { [key: string]: Json };

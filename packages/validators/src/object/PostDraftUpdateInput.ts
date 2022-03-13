@@ -6,7 +6,7 @@ import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 const schema = Schema({
 	content: DocumentEditorValue.strictOptional(),
-	description: string.trim().max(140).strictOptional(),
+	description: string.trim().max(512, "Max 512 character limit").strictOptional(),
 	skills: array
 		.of(SkillWhereUniqueInput)
 		.min(1, "Required")

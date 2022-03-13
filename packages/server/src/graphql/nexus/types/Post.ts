@@ -1,7 +1,16 @@
+import { ObjectUtils } from "@makepurple/utils";
 import { Comment, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
+
+/**
+ * !HACK
+ * @description I pulled this number of out my ass. I like powers of 2.
+ * @author David Lee
+ * @date March 12, 2022
+ */
+const READING_WORDS_PER_MINUTE = 256;
 
 export const Post = objectType({
 	name: "Post",
@@ -107,7 +116,18 @@ export const Post = objectType({
 			}
 		});
 		t.dateTime("publishedAt");
-		t.int("readTime");
+		t.int("readTime", {
+			description: stripIndents`
+				Estimated time in minutes it will take to read this post. Minimum 1 minute.
+			`,
+			resolve: (parent) => {
+				const content: readonly Json[] = parent.content;
+				const wordCount = ObjectUtils.getWordCount(content);
+				const readingMinutes = Math.max(1, wordCount / READING_WORDS_PER_MINUTE);
+
+				return readingMinutes;
+			}
+		});
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
 			args: {

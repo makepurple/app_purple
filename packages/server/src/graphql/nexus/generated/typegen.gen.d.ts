@@ -255,7 +255,6 @@ export interface NexusGenInputs {
   PostPublishInput: { // input type
     content: NexusGenScalars['Json'][]; // [Json!]!
     description: string; // String!
-    readTime?: number | null; // Int
     skills: NexusGenInputs['SkillWhereUniqueInput'][]; // [SkillWhereUniqueInput!]!
     thumbnailUrl: string; // String!
     title: string; // String!
@@ -263,7 +262,6 @@ export interface NexusGenInputs {
   PostUpdateInput: { // input type
     content?: NexusGenScalars['Json'][] | null; // [Json!]
     description?: string | null; // String
-    readTime?: number | null; // Int
     skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
     thumbnailUrl?: string | null; // String
   }
@@ -723,7 +721,6 @@ export interface NexusGenObjects {
     description?: string | null; // String
     id: string; // ID!
     publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    readTime?: number | null; // Int
     thumbnailUrl?: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
