@@ -36,8 +36,6 @@ import {
 } from "../../../../organisms";
 import { pageProps, PageProps } from "../../../../page-props/[userName]/[postTitle]/edit";
 
-const WPM_READ_SPEED = 275;
-
 const Root = tw(MainContainer)`
 	flex
 	flex-col
@@ -219,14 +217,11 @@ export const Page: NextPage<PageProps> = () => {
 				<Form
 					disabled={saving}
 					onSubmit={handleSubmit(async (formData) => {
-						const readTime = (infoRef.current?.wordCount ?? 0) / WPM_READ_SPEED;
-
 						const didSucceed = await updatePost({
 							where: { id: post.id },
 							data: {
 								content: formData.content,
 								description: formData.description,
-								readTime: readTime || undefined,
 								thumbnailUrl: formData.thumbnailUrl
 							}
 						})

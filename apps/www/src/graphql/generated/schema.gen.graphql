@@ -883,6 +883,8 @@ type Post implements Node {
   id: ID!
   images: [PostImage!]!
   publishedAt: DateTime
+
+  # Estimated time in minutes it will take to read this post. Minimum 1 minute.
   readTime: Int
   skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   thumbnailUrl: String
@@ -943,7 +945,6 @@ input PostOrderByInput {
 input PostPublishInput {
   content: [Json!]!
   description: String!
-  readTime: Int
   skills: [SkillWhereUniqueInput!]!
   thumbnailUrl: String!
   title: String!
@@ -952,7 +953,6 @@ input PostPublishInput {
 input PostUpdateInput {
   content: [Json!]
   description: String
-  readTime: Int
   skills: [SkillWhereUniqueInput!]
   thumbnailUrl: String
 }

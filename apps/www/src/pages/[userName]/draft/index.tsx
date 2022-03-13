@@ -38,8 +38,6 @@ import {
 } from "../../../organisms";
 import { PageProps, pageProps } from "../../../page-props/[userName]/draft";
 
-const WPM_READ_SPEED = 275;
-
 const Root = tw(MainContainer)`
 	flex
 	flex-col
@@ -218,15 +216,12 @@ export const Page: NextPage<PageProps> = () => {
 				<Form
 					disabled={publishing || saving}
 					onSubmit={handleSubmit(async (formData) => {
-						const readTime = (infoRef.current?.wordCount ?? 0) / WPM_READ_SPEED;
-
 						const publishedPost = await publishPost({
 							where: { id: post.id },
 							data: {
 								/* eslint-disable @typescript-eslint/no-non-null-assertion */
 								content: formData.content!,
 								description: formData.description!,
-								readTime: readTime || undefined,
 								skills: formData.skills!,
 								thumbnailUrl: formData.thumbnailUrl!,
 								title: formData.title!
