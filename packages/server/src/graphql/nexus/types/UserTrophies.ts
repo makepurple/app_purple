@@ -121,7 +121,9 @@ export const UserTrophies = objectType({
 				return await prisma.post.count({
 					where: {
 						author: { id: parent.id },
-						publishedAt: from
+						publishedAt: {
+							gte: from
+						}
 					}
 				});
 			}
