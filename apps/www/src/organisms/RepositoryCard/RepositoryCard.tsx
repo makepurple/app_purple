@@ -13,7 +13,7 @@ import {
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import NextLink from "next/link";
-import React, { cloneElement, CSSProperties, forwardRef } from "react";
+import React, { cloneElement, CSSProperties, forwardRef, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import tw, { styled } from "twin.macro";
 import {
@@ -52,9 +52,17 @@ const Name = tw.h3`
 	font-semibold
 `;
 
+const DescriptionContainer = tw.a`
+	flex-grow
+`;
+
 const Description = tw.p`
 	text-base
 	line-clamp-2
+`;
+
+const Skills = tw(Tags)`
+	self-stretch
 `;
 
 const Info = tw.div`
@@ -127,7 +135,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 
 	const fetching: boolean = removing || updating;
 
-	const { control, handleSubmit, register } = useForm<{
+	const { control, handleSubmit, register, reset } = useForm<{
 		skills: readonly SuggestedSkill[];
 	}>({
 		defaultValues: {
@@ -140,6 +148,17 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 
 	const owner = repository.github.owner;
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
+
+	useEffect(() => {
+		if (editing) return;
+
+		reset({
+			skills: repository.skills.map((skill) => ({
+				name: skill.name,
+				owner: skill.owner
+			}))
+		});
+	}, [editing, repository, reset]);
 
 	const parent = editing ? (
 		<Root
@@ -207,7 +226,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 					<Name>{repository.name}</Name>
 				</Anchor>
 				{repository.github.description && (
-					<a
+					<DescriptionContainer
 						href={repository.github.url}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -215,58 +234,60 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 						tw="focus:ring-0"
 					>
 						<Description tw="mt-1">{repository.github.description}</Description>
-					</a>
+					</DescriptionContainer>
 				)}
-				<Tags
-					editable={editing}
-					onClick={(e) => {
-						e.stopPropagation();
-					}}
-					type="positive"
-					tw="relative mt-3"
-				>
-					{skills.fields.map((field, i) => (
-						<MaybeWrap
-							key={field._id}
-							condition={!editing}
-							wrap={({ child }) => (
-								<NextLink
-									href="/s/[skillOwner]/[skillName]"
-									as={`/s/${field.owner}/${field.name}`}
-									passHref
-								>
-									{child}
-								</NextLink>
-							)}
-						>
-							<Tags.Tag
-								id={field._id}
-								onClick={(e) => {
-									e.stopPropagation();
-								}}
-								onRemove={() => skills.remove(i)}
-								title={`${field.owner}/${field.name}`}
-							>
-								{editing && (
-									<>
-										<HiddenInput {...register(`skills.${i}.name`)} />
-										<HiddenInput {...register(`skills.${i}.owner`)} />
-									</>
-								)}
-								<span>{field.name}</span>
-							</Tags.Tag>
-						</MaybeWrap>
-					))}
-					<SkillAutosuggest
-						onSelect={(newSkill) => {
-							skills.append({
-								name: newSkill.name,
-								owner: newSkill.owner.login
-							});
+				{(editing || !!skills.fields.length) && (
+					<Skills
+						editable={editing}
+						onClick={(e) => {
+							e.stopPropagation();
 						}}
-						aria-label="new skill"
-					/>
-				</Tags>
+						type="positive"
+						tw="relative mt-3"
+					>
+						{skills.fields.map((field, i) => (
+							<MaybeWrap
+								key={field._id}
+								condition={!editing}
+								wrap={({ child }) => (
+									<NextLink
+										href="/s/[skillOwner]/[skillName]"
+										as={`/s/${field.owner}/${field.name}`}
+										passHref
+									>
+										{child}
+									</NextLink>
+								)}
+							>
+								<Tags.Tag
+									id={field._id}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									onRemove={() => skills.remove(i)}
+									title={`${field.owner}/${field.name}`}
+								>
+									{editing && (
+										<>
+											<HiddenInput {...register(`skills.${i}.name`)} />
+											<HiddenInput {...register(`skills.${i}.owner`)} />
+										</>
+									)}
+									<span>{field.name}</span>
+								</Tags.Tag>
+							</MaybeWrap>
+						))}
+						<SkillAutosuggest
+							onSelect={(newSkill) => {
+								skills.append({
+									name: newSkill.name,
+									owner: newSkill.owner.login
+								});
+							}}
+							aria-label="new skill"
+						/>
+					</Skills>
+				)}
 				<Info
 					onClick={(e) => {
 						e.stopPropagation();
