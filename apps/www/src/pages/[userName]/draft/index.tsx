@@ -11,6 +11,7 @@ import {
 	Input,
 	MainContainer,
 	Paper,
+	Spinner,
 	Tags,
 	TextArea,
 	toast
@@ -350,7 +351,10 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={(errors.content as any)?.message} />
 					</FormGroup>
 					<FormActions>
-						<FormButton type="submit">Publish</FormButton>
+						<FormButton type="submit">
+							<span>Publish</span>
+							{publishing && <Spinner tw="ml-2" />}
+						</FormButton>
 						<FormButton
 							onClick={handleSubmit(async (formData) => {
 								const didSucceed = await updatePostDraft({
@@ -373,7 +377,8 @@ export const Page: NextPage<PageProps> = () => {
 							type="button"
 							variant="secondary"
 						>
-							Save
+							<span>Save</span>
+							{saving && <Spinner tw="ml-2" />}
 						</FormButton>
 					</FormActions>
 				</Form>
