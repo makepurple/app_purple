@@ -1,4 +1,4 @@
-import { Form, FormButton, HiddenInput, Tags, toast } from "@makepurple/components";
+import { Form, FormButton, HiddenInput, Spinner, Tags, toast } from "@makepurple/components";
 import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
@@ -149,7 +149,10 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 				/>
 			</Tags>
 			<FormActions>
-				<FormButton type="submit">Save</FormButton>
+				<FormButton disabled={updatingSkills} type="submit">
+					<span>Save</span>
+					{updatingSkills && <Spinner tw="ml-2" />}
+				</FormButton>
 				<FormButton onClick={onClose} type="button" variant="secondary">
 					Cancel
 				</FormButton>
