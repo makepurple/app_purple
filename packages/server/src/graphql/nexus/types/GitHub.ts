@@ -82,5 +82,25 @@ export const GitHub = objectType({
 				}
 			}
 		});
+		t.field("viewer", {
+			type: "GitHubUser",
+			resolve: async (parent, args, { octokit: graphql, user }) => {
+				if (!user) return null;
+
+				const viewer = await graphql`
+					query GetGitHubViewer {
+						viewer {
+							...GitHubUser
+						}
+					}
+					${GitHubUser}
+				`
+					.cast<octokit.GetGitHubViewerQuery, octokit.GetGitHubViewerQueryVariables>({})
+					.then((result) => result.viewer)
+					.catch(() => null);
+
+				return viewer;
+			}
+		});
 	}
 });

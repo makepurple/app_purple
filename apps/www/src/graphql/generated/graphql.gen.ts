@@ -685,6 +685,7 @@ export type GitHub = {
   readonly __typename: 'GitHub';
   readonly repository?: Maybe<GitHubRepository>;
   readonly repositoryOwner?: Maybe<GitHubRepositoryOwner>;
+  readonly viewer?: Maybe<GitHubUser>;
 };
 
 

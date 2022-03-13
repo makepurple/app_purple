@@ -1260,6 +1260,7 @@ export interface NexusGenFieldTypes {
   GitHub: { // field return type
     repository: NexusGenRootTypes['GitHubRepository'] | null; // GitHubRepository
     repositoryOwner: NexusGenRootTypes['GitHubRepositoryOwner'] | null; // GitHubRepositoryOwner
+    viewer: NexusGenRootTypes['GitHubUser'] | null; // GitHubUser
   }
   GitHubLanguage: { // field return type
     color: string | null; // String
@@ -2227,6 +2228,7 @@ export interface NexusGenFieldTypeNames {
   GitHub: { // field return type name
     repository: 'GitHubRepository'
     repositoryOwner: 'GitHubRepositoryOwner'
+    viewer: 'GitHubUser'
   }
   GitHubLanguage: { // field return type name
     color: 'String'

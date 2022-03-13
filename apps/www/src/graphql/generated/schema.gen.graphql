@@ -548,6 +548,7 @@ input FriendshipWhereUniqueInput {
 type GitHub {
   repository(where: GitHubRepositoryWhereUniqueInput!): GitHubRepository
   repositoryOwner(where: GitHubRepositoryOwnerWhereUniqueInput!): GitHubRepositoryOwner
+  viewer: GitHubUser
 }
 
 type GitHubLanguage {
