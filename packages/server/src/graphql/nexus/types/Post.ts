@@ -116,7 +116,7 @@ export const Post = objectType({
 			}
 		});
 		t.dateTime("publishedAt");
-		t.int("readTime", {
+		t.nonNull.int("readTime", {
 			description: stripIndents`
 				Estimated time in minutes it will take to read this post. Minimum 1 minute.
 			`,

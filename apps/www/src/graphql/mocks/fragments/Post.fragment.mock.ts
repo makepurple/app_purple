@@ -331,6 +331,7 @@ export const Post_fragment_mock: Post = {
 	id: "0",
 	images: [],
 	publishedAt: faker.date.past(),
+	readTime: 5,
 	skills: {
 		__typename: "SkillConnection",
 		pageInfo: {

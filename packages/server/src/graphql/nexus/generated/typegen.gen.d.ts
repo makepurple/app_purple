@@ -1487,7 +1487,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     images: NexusGenRootTypes['PostImage'][]; // [PostImage!]!
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
-    readTime: number | null; // Int
+    readTime: number; // Int!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     thumbnailUrl: string | null; // String
     title: string; // String!

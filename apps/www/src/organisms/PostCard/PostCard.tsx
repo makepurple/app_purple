@@ -101,9 +101,9 @@ const PublishedAt = tw.span`
 	text-gray-500
 `;
 
-const NotPublished = tw.span`
+const ReadTime = tw.span`
 	text-base
-	text-red-800
+	text-gray-500
 `;
 
 const Actions = tw.div`
@@ -204,12 +204,16 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 							{post.author.name}
 						</AuthorName>
 					</NextLink>
-					<Delimiter>·</Delimiter>
-					{post.publishedAt ? (
-						<PublishedAt>{dayjs(post.publishedAt).format("MMM D, YYYY")}</PublishedAt>
-					) : (
-						<NotPublished>Draft</NotPublished>
+					{!!post.publishedAt && (
+						<>
+							<Delimiter>·</Delimiter>
+							<PublishedAt>
+								{dayjs(post.publishedAt).format("MMM D, YYYY")}
+							</PublishedAt>
+						</>
 					)}
+					<Delimiter>·</Delimiter>
+					<ReadTime>{post.readTime} min read</ReadTime>
 				</PostedDetails>
 				<Actions tw="mt-2">
 					<UpvoteButton
