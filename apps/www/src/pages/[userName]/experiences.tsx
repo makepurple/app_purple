@@ -1,6 +1,7 @@
 import { Button, Divider, HexagonIcon, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
@@ -59,8 +60,11 @@ export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
+	const { data: session } = useSession();
 
 	const userName = router?.query.userName as string;
+
+	const isMyPage = session?.user.name === userName;
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
 		query: GetExperiencesDocument,
@@ -96,28 +100,30 @@ export const Page: NextPage<PageProps> = () => {
 							? "Edit Experience"
 							: "Experiences"}
 					</span>
-					<AddButton
-						onClick={() => {
-							if (isCreate || editExperience) {
-								setIsCreate(false);
-								setEditExperience(null);
+					{isMyPage && (
+						<AddButton
+							onClick={() => {
+								if (isCreate || editExperience) {
+									setIsCreate(false);
+									setEditExperience(null);
 
-								return;
-							}
+									return;
+								}
 
-							setIsCreate(true);
-						}}
-						size="small"
-						type="button"
-						variant="secondary"
-						tw="flex-shrink-0"
-					>
-						<AddRemoveIcon
-							height={24}
-							width={24}
-							$canClose={isCreate || !!editExperience}
-						/>
-					</AddButton>
+								setIsCreate(true);
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+							tw="flex-shrink-0"
+						>
+							<AddRemoveIcon
+								height={24}
+								width={24}
+								$canClose={isCreate || !!editExperience}
+							/>
+						</AddButton>
+					)}
 				</Title>
 				{isCreate ? (
 					<CreateExperienceForm
