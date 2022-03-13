@@ -24,7 +24,7 @@ export type UseRelayCursorActions = {
 
 export type UseRelayCursorArgs<
 	TData = any,
-	TVariables = object,
+	TVariables = Record<string, unknown>,
 	TFieldName extends FieldPath<TData> = any
 > = UseQueryArgs<TVariables, TData> & {
 	direction?: "x" | "y";
