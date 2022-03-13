@@ -15,6 +15,7 @@ const Root = tw.input`
 	hover:border-transparent
 	focus:ring-0
 	focus-visible:outline-none
+	disabled:cursor-not-allowed
 `;
 
 export type TagEditableProps = InferComponentProps<typeof Root> & {
