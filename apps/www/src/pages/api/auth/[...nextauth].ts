@@ -103,7 +103,7 @@ const authHandler: NextApiHandler = (req, res) =>
 				},
 				authorization: {
 					params: {
-						scope: "public_repo read:user user:email user:follow"
+						scope: "public_repo read:org read:user user:email user:follow"
 					}
 				}
 			})
