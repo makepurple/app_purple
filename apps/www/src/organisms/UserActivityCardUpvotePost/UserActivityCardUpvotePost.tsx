@@ -150,6 +150,7 @@ export const UserActivityCardUpvotePost = forwardRef<
 						<ThumbnailContainer tw="mr-4">
 							<Thumbnail>
 								<NextImage
+									alt="thumbnail"
 									src={post.thumbnailUrl}
 									layout="fill"
 									objectFit="cover"

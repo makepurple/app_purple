@@ -249,7 +249,12 @@ export const Page: NextPage<PageProps> = () => {
 				{post.thumbnailUrl && (
 					<ThumbnailContainer>
 						<ThumbnailImage>
-							<NextImage src={post.thumbnailUrl} layout="fill" objectFit="cover" />
+							<NextImage
+								alt="thumbnail"
+								src={post.thumbnailUrl}
+								layout="fill"
+								objectFit="cover"
+							/>
 						</ThumbnailImage>
 					</ThumbnailContainer>
 				)}
