@@ -37,9 +37,7 @@ export const updatePost = mutationField("updatePost", {
 			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
 
 		const existingSkills = await prisma.skill.findMany({
-			where: {
-				OR: [{ id: { in: skillIds } }, ...skillNameOwners]
-			}
+			where: { OR: [{ id: { in: skillIds } }, ...skillNameOwners] }
 		});
 
 		const toCreateSkills = skillNameOwners.filter(
