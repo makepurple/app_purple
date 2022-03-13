@@ -207,7 +207,7 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 				</OrganizationName>
 				{timeframe && <Timeframe tw="mt-2">{timeframe}</Timeframe>}
 				{experience.location && <Location tw="mt-2">{experience.location}</Location>}
-				{experience.highlights.length && (
+				{!!experience.highlights.length && (
 					<Highlights>
 						{experience.highlights.map((highlight, i) => (
 							<li key={i}>{highlight}</li>
