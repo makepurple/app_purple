@@ -126,6 +126,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 
 	const [{ data, fetching }] = useGetSiteWideSideDrawerQuery({
 		pause: status !== "authenticated",
+		requestPolicy: "cache-first",
 		variables: {
 			after,
 			first: BATCH_SIZE
