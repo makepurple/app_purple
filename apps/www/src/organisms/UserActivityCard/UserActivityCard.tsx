@@ -1,16 +1,5 @@
 import React, { CSSProperties, forwardRef } from "react";
-import {
-	UserActivityCardCommentCodeExampleUserActivityCommentCodeExampleFragment,
-	UserActivityCardCommentPostUserActivityCommentPostFragment,
-	UserActivityCardCreateCodeExampleUserActivityCreateCodeExampleFragment,
-	UserActivityCardFollowSkillUserActivityFollowSkillFragment,
-	UserActivityCardFollowUserUserActivityFollowUserFragment,
-	UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment,
-	UserActivityCardJoinedUserActivityJoinedFragment,
-	UserActivityCardPublishPostUserActivityPublishPostFragment,
-	UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragment,
-	UserActivityCardUpvotePostUserActivityUpvotePostFragment
-} from "../../graphql";
+import { UserActivityCardUserActivityFragment } from "../../graphql";
 import { UserActivityCardCommentCodeExample } from "../UserActivityCardCommentCodeExample";
 import { UserActivityCardCommentPost } from "../UserActivityCardCommentPost";
 import { UserActivityCardCreateCodeExample } from "../UserActivityCardCreateCodeExample";
@@ -25,17 +14,7 @@ import { UserActivityCardUpvotePost } from "../UserActivityCardUpvotePost";
 export interface UserActivityCardProps {
 	className?: string;
 	style?: CSSProperties;
-	userActivity:
-		| UserActivityCardCommentCodeExampleUserActivityCommentCodeExampleFragment
-		| UserActivityCardCommentPostUserActivityCommentPostFragment
-		| UserActivityCardCreateCodeExampleUserActivityCreateCodeExampleFragment
-		| UserActivityCardFollowSkillUserActivityFollowSkillFragment
-		| UserActivityCardFollowUserUserActivityFollowUserFragment
-		| UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragment
-		| UserActivityCardJoinedUserActivityJoinedFragment
-		| UserActivityCardPublishPostUserActivityPublishPostFragment
-		| UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragment
-		| UserActivityCardUpvotePostUserActivityUpvotePostFragment;
+	userActivity: UserActivityCardUserActivityFragment;
 }
 
 export const UserActivityCard = forwardRef<HTMLDivElement, UserActivityCardProps>((props, ref) => {

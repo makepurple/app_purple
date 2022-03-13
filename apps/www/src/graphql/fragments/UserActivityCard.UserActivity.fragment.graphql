@@ -1,0 +1,34 @@
+fragment UserActivityCardUserActivity on UserActivity {
+	id
+	...UserActivityCardHeaderUserActivity
+	... on UserActivityCommentCodeExample {
+		...UserActivityCardCommentCodeExampleUserActivityCommentCodeExample
+	}
+	... on UserActivityCommentPost {
+		...UserActivityCardCommentPostUserActivityCommentPost
+	}
+	... on UserActivityCreateCodeExample {
+		...UserActivityCardCreateCodeExampleUserActivityCreateCodeExample
+	}
+	... on UserActivityFollowSkill {
+		...UserActivityCardFollowSkillUserActivityFollowSkill
+	}
+	... on UserActivityFollowUser {
+		...UserActivityCardFollowUserUserActivityFollowUser
+	}
+	... on UserActivityFriendAcceptUser {
+		...UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser
+	}
+	... on UserActivityJoined {
+		...UserActivityCardJoinedUserActivityJoined
+	}
+	... on UserActivityPublishPost {
+		...UserActivityCardPublishPostUserActivityPublishPost
+	}
+	... on UserActivityUpvoteCodeExample {
+		...UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExample
+	}
+	... on UserActivityUpvotePost {
+		...UserActivityCardUpvotePostUserActivityUpvotePost
+	}
+}
