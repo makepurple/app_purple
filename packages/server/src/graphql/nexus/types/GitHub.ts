@@ -1,6 +1,11 @@
 import { arg, nonNull, objectType } from "nexus";
 import { octokit } from "../../../services";
-import { GitHubOrganization, GitHubRepository, GitHubUser } from "../../../services/octokit";
+import {
+	GitHubOrganization,
+	GitHubRepository,
+	GitHubRepositoryOwner,
+	GitHubUser
+} from "../../../services/octokit";
 
 export const GitHub = objectType({
 	name: "GitHub",
@@ -59,6 +64,7 @@ export const GitHub = objectType({
 							}
 						}
 					}
+					${GitHubRepositoryOwner}
 					${GitHubOrganization}
 					${GitHubUser}
 				`
