@@ -215,20 +215,20 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 					</Highlights>
 				)}
 			</Info>
-			<Actions>
-				<EditButton
-					disabled={removing}
-					onClick={(e) => {
-						e.stopPropagation();
+			{isMyUser && (
+				<Actions>
+					<EditButton
+						disabled={removing}
+						onClick={(e) => {
+							e.stopPropagation();
 
-						onEdit?.(experience);
-					}}
-					type="button"
-					variant="secondary"
-				>
-					<PencilIcon height={24} width={24} />
-				</EditButton>
-				{isMyUser && (
+							onEdit?.(experience);
+						}}
+						type="button"
+						variant="secondary"
+					>
+						<PencilIcon height={24} width={24} />
+					</EditButton>
 					<DeleteButton
 						disabled={removing}
 						onClick={async (e) => {
@@ -253,8 +253,8 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 					>
 						<CancelIcon height={24} width={24} />
 					</DeleteButton>
-				)}
-			</Actions>
+				</Actions>
+			)}
 		</Root>
 	);
 });
