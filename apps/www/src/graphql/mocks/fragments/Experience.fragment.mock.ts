@@ -21,5 +21,6 @@ export const Experience_fragment_mock: Experience = {
 	positionName: "Senior Frontend Engineer",
 	startDate: dayjs(1318781876406).toDate(),
 	type: ExperienceType.FullTime,
-	user: User_fragment_mock
+	user: User_fragment_mock,
+	userId: User_fragment_mock.id
 };
