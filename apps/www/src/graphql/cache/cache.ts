@@ -6,6 +6,7 @@ import type { Mutation, User } from "../generated";
 export const createCache = () => {
 	return cacheExchange({
 		keys: {
+			GitHub: () => null,
 			GitHubUserContributionCalendar: () => null,
 			GitHubUserContributionCalendarDay: () => null,
 			GitHubUserContributionCalendarWeek: () => null,
