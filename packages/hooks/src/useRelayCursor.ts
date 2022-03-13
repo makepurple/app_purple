@@ -2,7 +2,7 @@ import { ObjectUtils } from "@makepurple/utils";
 import { RefCallback, useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldPath } from "react-hook-form";
 import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
-import { useQuery } from "urql";
+import { useClient, useQuery } from "urql";
 import { useRelativeScrollPosition } from "./useRelativeScrollPosition";
 
 export type PageInfo = {
@@ -16,10 +16,8 @@ export type UseQueryHook<TData, TVariables> = (
 ) => UseQueryResponse<TData, object>;
 
 export type UseRelayCursorGetRef = (i: number) => Maybe<RefCallback<HTMLElement>>;
-export type UseRelayCursorReset = () => void;
 export type UseRelayCursorActions = {
 	getRef: UseRelayCursorGetRef;
-	reset: UseRelayCursorReset;
 };
 
 export type UseRelayCursorArgs<
@@ -39,15 +37,11 @@ export const useRelayCursor = <
 >(
 	args: UseRelayCursorArgs<TData, TVariables, TFieldName>
 ): [state: UseQueryState<TData, any>, actions: UseRelayCursorActions] => {
-	const { direction = "y", field: fieldName, offset = 0, ...queryOptions } = args;
+	const { direction = "y", field: fieldName, offset = 0, ...options } = args;
 
-	const [cursor, setCursor] = useState<Maybe<string>>(null);
+	const [result] = useQuery({ ...options });
 
-	const variables = { ...args.variables, after: cursor } as TVariables;
-
-	const [result] = useQuery({ ...queryOptions, variables });
-
-	const { data, fetching } = result;
+	const { data, fetching: fetchingInitial } = result;
 
 	const field = ObjectUtils.get(data as TData, fieldName) as
 		| { nodes: unknown[]; pageInfo: PageInfo }
@@ -65,12 +59,33 @@ export const useRelayCursor = <
 	const nodes = field?.nodes ?? [];
 	const pageInfo = field?.pageInfo;
 
-	useEffect(() => {
-		if (!shouldLoadMore || !pageInfo?.hasNextPage || fetching) return;
-		if (!pageInfo?.endCursor) return;
+	const [fetchingMore, setFetchingMore] = useState<boolean>(false);
+	const urqlClient = useClient();
 
-		setCursor(pageInfo.endCursor);
-	}, [fetching, pageInfo?.endCursor, pageInfo?.hasNextPage, setCursor, shouldLoadMore]);
+	const fetching = fetchingInitial || fetchingMore;
+
+	useEffect(() => {
+		if (!shouldLoadMore || fetching) return;
+		if (!pageInfo?.hasNextPage || !pageInfo?.endCursor) return;
+
+		setFetchingMore(true);
+
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		urqlClient
+			.query(options.query, { ...options.variables, after: pageInfo.endCursor } as TVariables)
+			.toPromise()
+			.then(() => {
+				setFetchingMore(false);
+			});
+	}, [
+		fetching,
+		options.query,
+		options.variables,
+		pageInfo?.endCursor,
+		pageInfo?.hasNextPage,
+		shouldLoadMore,
+		urqlClient
+	]);
 
 	const getRef = useCallback(
 		(i: number): Maybe<RefCallback<HTMLElement>> => {
@@ -83,11 +98,8 @@ export const useRelayCursor = <
 		[nodes.length, offset]
 	);
 
-	const reset = useCallback(() => {
-		setCursor(null);
-	}, []);
+	const state = useMemo(() => ({ ...result, fetching }), [fetching, result]);
+	const actions = useMemo(() => ({ getRef }), [getRef]);
 
-	const actions = useMemo(() => ({ getRef, reset }), [getRef, reset]);
-
-	return [result, actions] as [UseQueryState<TData, any>, UseRelayCursorActions];
+	return [state, actions] as [UseQueryState<TData, any>, UseRelayCursorActions];
 };
