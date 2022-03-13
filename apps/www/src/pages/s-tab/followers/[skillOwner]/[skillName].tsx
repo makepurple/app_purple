@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetSkillFollowersQuery } from "../../../../graphql";
+import { GetSkillFollowersDocument } from "../../../../graphql";
 import { LoadingUserFollowCard, SkillPageLayout, UserFollowCard } from "../../../../organisms";
 import {
 	PageProps,
@@ -42,7 +42,8 @@ export const Page: NextPage<PageProps> = () => {
 	const skillName = router?.query.skillName as string;
 	const skillOwner = router?.query.skillOwner as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetSkillFollowersQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetSkillFollowersDocument,
 		field: "skill.followers",
 		requestPolicy: "cache-first",
 		variables: {

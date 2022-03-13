@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { useGetUserCodeExamplesQuery } from "../../../graphql";
+import { GetUserCodeExamplesDocument } from "../../../graphql";
 import {
 	CodeExampleCard,
 	CodeExampleCreateCard,
@@ -63,7 +63,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserCodeExamplesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetUserCodeExamplesDocument,
 		field: "user.codeExamples",
 		offset: 0,
 		requestPolicy: "cache-first",

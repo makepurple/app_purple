@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import NextLink from "next/link";
 import React from "react";
 import tw from "twin.macro";
-import { useGetActivityFeedQuery } from "../graphql";
+import { GetActivityFeedDocument } from "../graphql";
 import {
 	ActivityFeedFollowableSkills,
 	ActivityFeedInfo,
@@ -57,7 +57,8 @@ const ExploreButton = tw(Button)`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetActivityFeedQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetActivityFeedDocument,
 		field: "activityFeed",
 		requestPolicy: "cache-first",
 		variables: {

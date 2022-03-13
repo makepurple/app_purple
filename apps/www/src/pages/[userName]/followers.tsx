@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetUserFollowersQuery } from "../../graphql";
+import { GetUserFollowersDocument } from "../../graphql";
 import { LoadingUserFollowCard, UserFollowCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/followers";
 import { PersonIcon } from "../../svgs";
@@ -38,7 +38,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserFollowersQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetUserFollowersDocument,
 		field: "user.followers",
 		requestPolicy: "cache-first",
 		variables: {

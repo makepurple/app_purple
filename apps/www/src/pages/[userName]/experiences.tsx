@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw, { styled } from "twin.macro";
-import { CreateExperienceFragmentFragment, useGetExperiencesQuery } from "../../graphql";
+import { CreateExperienceFragmentFragment, GetExperiencesDocument } from "../../graphql";
 import { ExperienceCard, LoadingExperienceCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/experiences";
 import { PlusIcon } from "../../svgs";
@@ -62,7 +62,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetExperiencesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetExperiencesDocument,
 		field: "experiences",
 		requestPolicy: "cache-first",
 		variables: {

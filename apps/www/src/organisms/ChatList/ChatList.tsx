@@ -2,7 +2,7 @@ import { Divider, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import React, { CSSProperties, FC, Fragment } from "react";
 import tw from "twin.macro";
-import { useGetChatsQuery } from "../../graphql";
+import { GetChatsDocument } from "../../graphql";
 import { ChatIcon } from "../../svgs";
 import { ChatCard } from "../ChatCard";
 import { LoadingChatCard } from "../LoadingChatCard";
@@ -25,7 +25,8 @@ export interface ChatListProps {
 export const ChatList: FC<ChatListProps> = ({ className, query, selectedChatId, style }) => {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetChatsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetChatsDocument,
 		field: "viewer.chats",
 		requestPolicy: "cache-first",
 		variables: {

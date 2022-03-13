@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import tw, { styled } from "twin.macro";
-import { useGetRepositoriesQuery } from "../../graphql";
+import { GetRepositoriesDocument } from "../../graphql";
 import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/repositories";
 import { PencilIcon, PlusIcon, RepoIcon } from "../../svgs";
@@ -67,7 +67,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetRepositoriesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetRepositoriesDocument,
 		field: "repositories",
 		requestPolicy: "cache-first",
 		variables: {

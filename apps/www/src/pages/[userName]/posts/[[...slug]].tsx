@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw, { styled } from "twin.macro";
-import { PostOrderByInput, PostWhereInput, SortOrder, useGetPostsQuery } from "../../../graphql";
+import { GetPostsDocument, PostOrderByInput, PostWhereInput, SortOrder } from "../../../graphql";
 import { LoadingPostCard, PostCard, UserPageLayout } from "../../../organisms";
 import { PageProps, pageProps } from "../../../page-props/[userName]/posts/[[...slug]]";
 
@@ -90,7 +90,8 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	}, [criteria, sort]);
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetPostsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetPostsDocument,
 		field: "posts",
 		requestPolicy: "cache-first",
 		variables: {

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
 import {
-	useGetSkillOwnerExperiencersQuery,
+	GetSkillOwnerExperiencersDocument,
 	useGetSkillOwnerRepositoriesQuery
 } from "../../../graphql";
 import {
@@ -58,18 +58,16 @@ export const Page: NextPage<PageProps> = () => {
 		variables: { skillOwner }
 	});
 
-	const [{ data: experiencersData, fetching }, { getRef }] = useRelayCursor(
-		useGetSkillOwnerExperiencersQuery,
-		{
-			field: "github.repositoryOwner.experiencers",
-			requestPolicy: "cache-first",
-			variables: {
-				after: null,
-				first: BATCH_SIZE,
-				skillOwner
-			}
+	const [{ data: experiencersData, fetching }, { getRef }] = useRelayCursor({
+		query: GetSkillOwnerExperiencersDocument,
+		field: "github.repositoryOwner.experiencers",
+		requestPolicy: "cache-first",
+		variables: {
+			after: null,
+			first: BATCH_SIZE,
+			skillOwner
 		}
-	);
+	});
 
 	const repositories = repositoriesData?.github.repositoryOwner?.repositories.nodes ?? [];
 	const experiencers = experiencersData?.github.repositoryOwner?.experiencers.nodes ?? [];

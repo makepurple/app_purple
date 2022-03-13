@@ -14,7 +14,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import tw from "twin.macro";
-import { SortOrder, useGetSkillsQuery } from "../graphql";
+import { GetSkillsDocument, SortOrder } from "../graphql";
 import { LoadingSkillCard, SkillCard } from "../organisms";
 import { PageProps, pageProps } from "../page-props/skills";
 import { BookIcon, SearchIcon } from "../svgs";
@@ -75,7 +75,8 @@ export const Page: NextPage<PageProps> = () => {
 	const [searchName, setSearchName] = useState<string>((router?.query.name as string) ?? "");
 	const [searchOwner, setSearchOwner] = useState<string>((router?.query.owner as string) ?? "");
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetSkillsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetSkillsDocument,
 		field: "skills",
 		requestPolicy: "cache-first",
 		variables: {

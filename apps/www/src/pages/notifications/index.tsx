@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import React, { Fragment, useEffect } from "react";
 import tw from "twin.macro";
 import {
+	GetNotificationsDocument,
 	useGetNotificationCountsQuery,
-	useGetNotificationsQuery,
 	useOpenNotificationsMutation
 } from "../../graphql";
 import { LoadingNotificationCard, NotificationCard } from "../../organisms";
@@ -52,7 +52,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [{ data: countData }] = useGetNotificationCountsQuery({ requestPolicy: "cache-first" });
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetNotificationsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetNotificationsDocument,
 		field: "viewer.notifications",
 		requestPolicy: "cache-first",
 		variables: {

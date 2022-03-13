@@ -2,6 +2,7 @@ import { ObjectUtils } from "@makepurple/utils";
 import { RefCallback, useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldPath } from "react-hook-form";
 import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
+import { useQuery } from "urql";
 import { useRelativeScrollPosition } from "./useRelativeScrollPosition";
 
 export type PageInfo = {
@@ -9,10 +10,10 @@ export type PageInfo = {
 	hasNextPage: boolean;
 };
 
-export type UseQueryHook<TQuery, TVariables> = (
+export type UseQueryHook<TData, TVariables> = (
 	options?: Omit<UseQueryArgs<TVariables>, "query">
 	// eslint-disable-next-line @typescript-eslint/ban-types
-) => UseQueryResponse<TQuery, object>;
+) => UseQueryResponse<TData, object>;
 
 export type UseRelayCursorGetRef = (i: number) => Maybe<RefCallback<HTMLElement>>;
 export type UseRelayCursorReset = () => void;
@@ -21,32 +22,34 @@ export type UseRelayCursorActions = {
 	reset: UseRelayCursorReset;
 };
 
+export type UseRelayCursorArgs<
+	TData = any,
+	TVariables = object,
+	TFieldName extends FieldPath<TData> = any
+> = UseQueryArgs<TVariables, TData> & {
+	direction?: "x" | "y";
+	field: TFieldName;
+	offset?: number;
+};
+
 export const useRelayCursor = <
-	TQuery,
+	TData,
 	TVariables extends { after?: Maybe<string> },
-	TFieldName extends FieldPath<TQuery> = FieldPath<TQuery>
+	TFieldName extends FieldPath<TData> = FieldPath<TData>
 >(
-	useQueryHook: UseQueryHook<TQuery, TVariables>,
-	options: Omit<UseQueryArgs<TVariables>, "query"> & {
-		direction?: "x" | "y";
-		field: TFieldName;
-		offset?: number;
-	}
-): [state: UseQueryState<TQuery, any>, actions: UseRelayCursorActions] => {
-	const { direction = "y", field: fieldName, offset = 0, ...queryOptions } = options;
+	args: UseRelayCursorArgs<TData, TVariables, TFieldName>
+): [state: UseQueryState<TData, any>, actions: UseRelayCursorActions] => {
+	const { direction = "y", field: fieldName, offset = 0, ...queryOptions } = args;
 
 	const [cursor, setCursor] = useState<Maybe<string>>(null);
 
-	const variables = { ...options.variables, after: cursor } as TVariables;
+	const variables = { ...args.variables, after: cursor } as TVariables;
 
-	const [result] = useQueryHook({
-		...queryOptions,
-		variables
-	});
+	const [result] = useQuery({ ...queryOptions, variables });
 
 	const { data, fetching } = result;
 
-	const field = ObjectUtils.get(data as TQuery, fieldName) as
+	const field = ObjectUtils.get(data as TData, fieldName) as
 		| { nodes: unknown[]; pageInfo: PageInfo }
 		| undefined;
 
@@ -86,5 +89,5 @@ export const useRelayCursor = <
 
 	const actions = useMemo(() => ({ getRef, reset }), [getRef, reset]);
 
-	return [result, actions] as [UseQueryState<TQuery, any>, UseRelayCursorActions];
+	return [result, actions] as [UseQueryState<TData, any>, UseRelayCursorActions];
 };

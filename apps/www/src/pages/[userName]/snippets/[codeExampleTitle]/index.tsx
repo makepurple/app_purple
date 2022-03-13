@@ -23,8 +23,8 @@ import tw from "twin.macro";
 import {
 	CodeExampleWhereUniqueInput,
 	CodeLanguage,
+	GetCodeExampleCommentsDocument,
 	useDeleteCodeExampleMutation,
-	useGetCodeExampleCommentsQuery,
 	useGetCodeExampleQuery,
 	useUnvoteCodeExampleMutation,
 	useUpvoteCodeExampleMutation
@@ -220,21 +220,19 @@ export const Page: NextPage<PageProps> = () => {
 	 */
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data: commentsData, fetching: fetchingComments }, { getRef }] = useRelayCursor(
-		useGetCodeExampleCommentsQuery,
-		{
-			direction: "y",
-			field: "comments",
-			offset: 0,
-			requestPolicy: "cache-first",
-			variables: {
-				after: null,
-				first: BATCH_SIZE,
-				userName,
-				codeExampleTitle: urlSlug
-			}
+	const [{ data: commentsData, fetching: fetchingComments }, { getRef }] = useRelayCursor({
+		query: GetCodeExampleCommentsDocument,
+		direction: "y",
+		field: "comments",
+		offset: 0,
+		requestPolicy: "cache-first",
+		variables: {
+			after: null,
+			first: BATCH_SIZE,
+			userName,
+			codeExampleTitle: urlSlug
 		}
-	);
+	});
 
 	const codeExample = postData?.codeExample;
 	const comments = commentsData?.comments.nodes ?? [];

@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import React, { useMemo, useRef } from "react";
 import tw from "twin.macro";
-import { useSuggestFriendsQuery } from "../../graphql";
+import { SuggestFriendsDocument } from "../../graphql";
 import { SuggestedFriendCard } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/explore";
 import { PersonIcon } from "../../svgs";
@@ -30,7 +30,8 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 	 * @author David Lee
 	 * @date January 6, 2022
 	 */
-	const [{ data }, { getRef }] = useRelayCursor(useSuggestFriendsQuery, {
+	const [{ data }, { getRef }] = useRelayCursor({
+		query: SuggestFriendsDocument,
 		field: "suggestFriends",
 		requestPolicy: "cache-first",
 		variables: {

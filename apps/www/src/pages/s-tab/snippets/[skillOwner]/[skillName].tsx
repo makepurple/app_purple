@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { useGetSkillCodeExamplesQuery } from "../../../../graphql";
+import { GetSkillCodeExamplesDocument } from "../../../../graphql";
 import { CodeExampleCard, LoadingCodeExampleCard, SkillPageLayout } from "../../../../organisms";
 import {
 	PageProps,
@@ -63,7 +63,8 @@ export const Page: NextPage<PageProps> = () => {
 	const skillName = router?.query.skillName as string;
 	const skillOwner = router?.query.skillOwner as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetSkillCodeExamplesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetSkillCodeExamplesDocument,
 		field: "skill.codeExamples",
 		requestPolicy: "cache-first",
 		variables: {

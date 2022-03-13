@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetUserFollowingQuery } from "../../graphql";
+import { GetUserFollowingDocument } from "../../graphql";
 import {
 	LoadingUserFollowCard,
 	SkillFollowCard,
@@ -43,7 +43,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserFollowingQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetUserFollowingDocument,
 		field: "user.following",
 		requestPolicy: "cache-first",
 		variables: {

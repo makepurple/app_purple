@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetUserFriendRequestsQuery } from "../../../../graphql";
+import { GetUserFriendRequestsDocument } from "../../../../graphql";
 import {
 	LoadingUserFriendCard,
 	UserFriendRequestCard,
@@ -42,7 +42,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserFriendRequestsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetUserFriendRequestsDocument,
 		field: "viewer.friendRequestsReceived",
 		requestPolicy: "cache-first",
 		variables: {

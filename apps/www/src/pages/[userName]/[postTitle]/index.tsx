@@ -21,8 +21,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
 import tw from "twin.macro";
 import {
+	GetPostCommentsDocument,
 	useDeletePostMutation,
-	useGetPostCommentsQuery,
 	useGetPostQuery,
 	useUpvotePostMutation,
 	useViewPostMutation
@@ -199,7 +199,8 @@ export const Page: NextPage<PageProps> = () => {
 	 */
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data: commentsData, fetching }, { getRef }] = useRelayCursor(useGetPostCommentsQuery, {
+	const [{ data: commentsData, fetching }, { getRef }] = useRelayCursor({
+		query: GetPostCommentsDocument,
 		direction: "y",
 		field: "comments",
 		offset: 0,

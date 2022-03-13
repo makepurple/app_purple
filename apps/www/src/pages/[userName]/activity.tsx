@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { useGetUserActivitiesQuery } from "../../graphql";
+import { GetUserActivitiesDocument } from "../../graphql";
 import {
 	LoadingUserActivityCardPost,
 	LoadingUserActivityCardSkill,
@@ -32,7 +32,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserActivitiesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor({
+		query: GetUserActivitiesDocument,
 		field: "user.activities",
 		requestPolicy: "cache-first",
 		variables: {

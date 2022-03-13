@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useMemo, useRef } from "react";
 import tw from "twin.macro";
-import { useSuggestFriendsQuery } from "../../../../graphql";
+import { SuggestFriendsDocument } from "../../../../graphql";
 import { SkillPageLayout, SuggestedFriendCard } from "../../../../organisms";
 import {
 	PageProps,
@@ -29,7 +29,8 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 
 	const jitterSeedRef = useRef<Date>(new Date(jitterSeed));
 
-	const [{ data }, { getRef }] = useRelayCursor(useSuggestFriendsQuery, {
+	const [{ data }, { getRef }] = useRelayCursor({
+		query: SuggestFriendsDocument,
 		field: "suggestFriends",
 		requestPolicy: "cache-first",
 		variables: {
