@@ -9,9 +9,7 @@ export const UserActivity = interfaceType({
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
 				return prisma.user.findUnique({
-					where: {
-						id: parent.id
-					},
+					where: { id: parent.id },
 					rejectOnNotFound: true
 				});
 			}

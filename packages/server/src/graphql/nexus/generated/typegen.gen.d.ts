@@ -661,7 +661,6 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   NotificationChatMessageReceived: { // root type
-    chat: NexusGenRootTypes['Chat']; // Chat!
     chatId: string; // String!
     id: string; // ID!
     type: NexusGenEnums['NotificationType']; // NotificationType!
@@ -669,7 +668,6 @@ export interface NexusGenObjects {
     userId: string; // String!
   }
   NotificationCodeExampleCommented: { // root type
-    codeExample: NexusGenRootTypes['CodeExample']; // CodeExample!
     codeExampleId: string; // String!
     id: string; // ID!
     type: NexusGenEnums['NotificationType']; // NotificationType!
@@ -686,7 +684,6 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['Notification']; // Notification!
   }
   NotificationFriendshipAccepted: { // root type
-    friendship: NexusGenRootTypes['Friendship']; // Friendship!
     friendshipId: string; // String!
     id: string; // ID!
     type: NexusGenEnums['NotificationType']; // NotificationType!
@@ -695,7 +692,6 @@ export interface NexusGenObjects {
   }
   NotificationPostCommented: { // root type
     id: string; // ID!
-    post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
     type: NexusGenEnums['NotificationType']; // NotificationType!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -878,14 +874,12 @@ export interface NexusGenObjects {
     notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   UserActivityCommentCodeExample: { // root type
-    comment: NexusGenRootTypes['Comment']; // Comment!
     commentId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityCommentPost: { // root type
-    comment: NexusGenRootTypes['Comment']; // Comment!
     commentId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -897,7 +891,6 @@ export interface NexusGenObjects {
     totalCount: number; // Int!
   }
   UserActivityCreateCodeExample: { // root type
-    codeExample: NexusGenRootTypes['CodeExample']; // CodeExample!
     codeExampleId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -908,21 +901,18 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['UserActivity']; // UserActivity!
   }
   UserActivityFollowSkill: { // root type
-    follow: NexusGenRootTypes['Follow']; // Follow!
     followId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityFollowUser: { // root type
-    follow: NexusGenRootTypes['Follow']; // Follow!
     followId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityFriendAcceptUser: { // root type
-    friendship: NexusGenRootTypes['Friendship']; // Friendship!
     friendshipId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -935,13 +925,11 @@ export interface NexusGenObjects {
   }
   UserActivityPublishPost: { // root type
     id: string; // ID!
-    post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
   UserActivityUpvoteCodeExample: { // root type
-    codeExample: NexusGenRootTypes['CodeExample']; // CodeExample!
     codeExampleId: string; // String!
     id: string; // ID!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -949,7 +937,6 @@ export interface NexusGenObjects {
   }
   UserActivityUpvotePost: { // root type
     id: string; // ID!
-    post: NexusGenRootTypes['Post']; // Post!
     postId: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
