@@ -185,7 +185,13 @@ export const UserActivityCardPublishPost = forwardRef<
 								as={`/s/${skill.owner}/${skill.owner}`}
 								passHref
 							>
-								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+								<Tags.Tag
+									id={skill.id}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									title={`${skill.owner}/${skill.name}`}
+								>
 									{skill.name}
 								</Tags.Tag>
 							</NextLink>
