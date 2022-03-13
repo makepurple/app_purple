@@ -49,6 +49,19 @@ export const publishPost = mutationField("publishPost", {
 
 		const urlSlug = StringUtils.toUrlSlug(postTitle);
 
+		const withSimilarTitle = await prisma.post.findUnique({
+			where: {
+				authorName_urlSlug: {
+					authorName: user.name,
+					urlSlug
+				}
+			}
+		});
+
+		if (withSimilarTitle) {
+			throw new Error("Post title is in use");
+		}
+
 		const skillIds = (args.data.skills ?? [])
 			.filter((skill) => !!skill.id)
 			.map((skill) => skill.id) as string[];
