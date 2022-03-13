@@ -38,9 +38,8 @@ export class StringUtils {
 
 	public static toUrlSlug(name: string): string {
 		const urlSlug: string = name
-			.replace(/[^a-z0-9]/gim, "")
 			.split(/\s+/g)
-			.map((word) => word.toLowerCase())
+			.map((word) => word.replace(/[^a-z0-9]/gim, "").toLowerCase())
 			.join("-")
 			.trim();
 
