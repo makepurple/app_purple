@@ -2638,6 +2638,16 @@ export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __ty
 
 export type ExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
+type NotificationCardNotification_NotificationChatMessageReceived_Fragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } };
+
+type NotificationCardNotification_NotificationCodeExampleCommented_Fragment = { readonly __typename: 'NotificationCodeExampleCommented', readonly id: string, readonly codeExampleId: string, readonly opened: boolean, readonly updatedAt: Date, readonly codeExample: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } } } };
+
+type NotificationCardNotification_NotificationFriendshipAccepted_Fragment = { readonly __typename: 'NotificationFriendshipAccepted', readonly id: string, readonly opened: boolean, readonly friendshipId: string, readonly updatedAt: Date, readonly friendship: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } };
+
+type NotificationCardNotification_NotificationPostCommented_Fragment = { readonly __typename: 'NotificationPostCommented', readonly id: string, readonly opened: boolean, readonly postId: string, readonly updatedAt: Date, readonly post: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string } };
+
+export type NotificationCardNotificationFragment = NotificationCardNotification_NotificationChatMessageReceived_Fragment | NotificationCardNotification_NotificationCodeExampleCommented_Fragment | NotificationCardNotification_NotificationFriendshipAccepted_Fragment | NotificationCardNotification_NotificationPostCommented_Fragment;
+
 export type NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment = { readonly __typename: 'NotificationChatMessageReceived', readonly id: string, readonly chatId: string, readonly opened: boolean, readonly updatedAt: Date, readonly chat: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly totalCount: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } };
 
 export type NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragment = { readonly __typename: 'NotificationCodeExampleCommented', readonly codeExampleId: string, readonly id: string, readonly opened: boolean, readonly updatedAt: Date, readonly codeExample: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } } } };
@@ -3722,6 +3732,27 @@ export const NotificationCardPostCommentedNotificationPostCommentedFragmentDoc =
   updatedAt
 }
     `;
+export const NotificationCardNotificationFragmentDoc = /*#__PURE__*/ gql`
+    fragment NotificationCardNotification on Notification {
+  __typename
+  id
+  ... on NotificationChatMessageReceived {
+    ...NotificationCardChatMessageReceivedNotificationChatMessageReceived
+  }
+  ... on NotificationCodeExampleCommented {
+    ...NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
+  }
+  ... on NotificationFriendshipAccepted {
+    ...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
+  }
+  ... on NotificationPostCommented {
+    ...NotificationCardPostCommentedNotificationPostCommented
+  }
+}
+    ${NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc}
+${NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragmentDoc}
+${NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragmentDoc}
+${NotificationCardPostCommentedNotificationPostCommentedFragmentDoc}`;
 export const SkillCardSkillFragmentDoc = /*#__PURE__*/ gql`
     fragment SkillCardSkill on Skill {
   id
@@ -3948,6 +3979,7 @@ export const SkillInfoSideBarGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
   }
   name
   owner {
+    __typename
     avatarUrl
     id
     login
@@ -3985,6 +4017,7 @@ export const SkillInfoSideBarGitHubRepositoryFragmentDoc = /*#__PURE__*/ gql`
     `;
 export const SkillOwnerInfoSideBarGitHubRepositoryOwnerFragmentDoc = /*#__PURE__*/ gql`
     fragment SkillOwnerInfoSideBarGitHubRepositoryOwner on GitHubRepositoryOwner {
+  __typename
   avatarUrl
   id
   login
@@ -4253,6 +4286,7 @@ export const UserActivityCardFollowSkillUserActivityFollowSkillFragmentDoc = /*#
   id
   follow {
     following {
+      __typename
       viewerFollowing
       ... on Skill {
         id
@@ -4511,6 +4545,7 @@ export const UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc = /*#__
     ${UserActivityCardHeaderUserActivityFragmentDoc}`;
 export const UserActivityCardUserActivityFragmentDoc = /*#__PURE__*/ gql`
     fragment UserActivityCardUserActivity on UserActivity {
+  __typename
   ...UserActivityCardHeaderUserActivity
   ... on UserActivityCommentCodeExample {
     ...UserActivityCardCommentCodeExampleUserActivityCommentCodeExample
@@ -5870,52 +5905,12 @@ export const GetActivityFeedDocument = /*#__PURE__*/ gql`
       }
     }
     nodes {
-      ...UserActivityCardHeaderUserActivity
-      ... on UserActivityCommentCodeExample {
-        ...UserActivityCardCommentCodeExampleUserActivityCommentCodeExample
-      }
-      ... on UserActivityCommentPost {
-        ...UserActivityCardCommentPostUserActivityCommentPost
-      }
-      ... on UserActivityCreateCodeExample {
-        ...UserActivityCardCreateCodeExampleUserActivityCreateCodeExample
-      }
-      ... on UserActivityFollowSkill {
-        ...UserActivityCardFollowSkillUserActivityFollowSkill
-      }
-      ... on UserActivityFollowUser {
-        ...UserActivityCardFollowUserUserActivityFollowUser
-      }
-      ... on UserActivityFriendAcceptUser {
-        ...UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser
-      }
-      ... on UserActivityJoined {
-        ...UserActivityCardJoinedUserActivityJoined
-      }
-      ... on UserActivityPublishPost {
-        ...UserActivityCardPublishPostUserActivityPublishPost
-      }
-      ... on UserActivityUpvoteCodeExample {
-        ...UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExample
-      }
-      ... on UserActivityUpvotePost {
-        ...UserActivityCardUpvotePostUserActivityUpvotePost
-      }
+      ...UserActivityCardUserActivity
     }
   }
 }
     ${PageInfoFragmentFragmentDoc}
-${UserActivityCardHeaderUserActivityFragmentDoc}
-${UserActivityCardCommentCodeExampleUserActivityCommentCodeExampleFragmentDoc}
-${UserActivityCardCommentPostUserActivityCommentPostFragmentDoc}
-${UserActivityCardCreateCodeExampleUserActivityCreateCodeExampleFragmentDoc}
-${UserActivityCardFollowSkillUserActivityFollowSkillFragmentDoc}
-${UserActivityCardFollowUserUserActivityFollowUserFragmentDoc}
-${UserActivityCardFriendAcceptUserUserActivityFriendAcceptUserFragmentDoc}
-${UserActivityCardJoinedUserActivityJoinedFragmentDoc}
-${UserActivityCardPublishPostUserActivityPublishPostFragmentDoc}
-${UserActivityCardUpvoteCodeExampleUserActivityUpvoteCodeExampleFragmentDoc}
-${UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc}`;
+${UserActivityCardUserActivityFragmentDoc}`;
 
 export function useGetActivityFeedQuery(options?: Omit<Urql.UseQueryArgs<GetActivityFeedQueryVariables>, 'query'>) {
   return Urql.useQuery<GetActivityFeedQuery>({ query: GetActivityFeedDocument, ...options });
@@ -6193,29 +6188,13 @@ export const GetNotificationsDocument = /*#__PURE__*/ gql`
         }
       }
       nodes {
-        __typename
-        id
-        ... on NotificationChatMessageReceived {
-          ...NotificationCardChatMessageReceivedNotificationChatMessageReceived
-        }
-        ... on NotificationCodeExampleCommented {
-          ...NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
-        }
-        ... on NotificationFriendshipAccepted {
-          ...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
-        }
-        ... on NotificationPostCommented {
-          ...NotificationCardPostCommentedNotificationPostCommented
-        }
+        ...NotificationCardNotification
       }
     }
   }
 }
     ${PageInfoFragmentFragmentDoc}
-${NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragmentDoc}
-${NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragmentDoc}
-${NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragmentDoc}
-${NotificationCardPostCommentedNotificationPostCommentedFragmentDoc}`;
+${NotificationCardNotificationFragmentDoc}`;
 
 export function useGetNotificationsQuery(options?: Omit<Urql.UseQueryArgs<GetNotificationsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetNotificationsQuery>({ query: GetNotificationsDocument, ...options });
@@ -6672,6 +6651,7 @@ export const GetUserFollowingDocument = /*#__PURE__*/ gql`
       nodes {
         id
         following {
+          __typename
           viewerFollowing
           ... on Skill {
             ...SkillFollowCardSkill

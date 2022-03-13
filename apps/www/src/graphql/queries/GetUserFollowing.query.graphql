@@ -24,6 +24,7 @@ query GetUserFollowing(
 			nodes {
 				id
 				following {
+					__typename
 					viewerFollowing
 					... on Skill {
 						...SkillFollowCardSkill

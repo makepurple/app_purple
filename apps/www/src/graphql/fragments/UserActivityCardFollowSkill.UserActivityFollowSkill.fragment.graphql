@@ -2,6 +2,7 @@ fragment UserActivityCardFollowSkillUserActivityFollowSkill on UserActivityFollo
 	id
 	follow {
 		following {
+			__typename
 			viewerFollowing
 			... on Skill {
 				id

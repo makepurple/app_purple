@@ -15,20 +15,7 @@ query GetNotifications($after: String, $first: Int) {
 				}
 			}
 			nodes {
-				__typename
-				id
-				... on NotificationChatMessageReceived {
-					...NotificationCardChatMessageReceivedNotificationChatMessageReceived
-				}
-				... on NotificationCodeExampleCommented {
-					...NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
-				}
-				... on NotificationFriendshipAccepted {
-					...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
-				}
-				... on NotificationPostCommented {
-					...NotificationCardPostCommentedNotificationPostCommented
-				}
+				...NotificationCardNotification
 			}
 		}
 	}

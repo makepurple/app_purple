@@ -1,10 +1,5 @@
 import React, { CSSProperties, forwardRef } from "react";
-import {
-	NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment,
-	NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragment,
-	NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment,
-	NotificationCardPostCommentedNotificationPostCommentedFragment
-} from "../../graphql";
+import { NotificationCardNotificationFragment } from "../../graphql";
 import { NotificationCardChatMessageReceived } from "../NotificationCardChatMessageReceived";
 import { NotificationCardCodeExampleCommented } from "../NotificationCardCodeExampleCommented";
 import { NotificationCardFriendshipAccepted } from "../NotificationCardFriendshipAccepted";
@@ -12,11 +7,7 @@ import { NotificationCardPostCommented } from "../NotificationCardPostCommented"
 
 export interface NotificationCardProps {
 	className?: string;
-	notification:
-		| NotificationCardChatMessageReceivedNotificationChatMessageReceivedFragment
-		| NotificationCardCodeExampleCommentedNotificationCodeExampleCommentedFragment
-		| NotificationCardFriendshipAcceptedNotificationFriendshipAcceptedFragment
-		| NotificationCardPostCommentedNotificationPostCommentedFragment;
+	notification: NotificationCardNotificationFragment;
 	style?: CSSProperties;
 }
 

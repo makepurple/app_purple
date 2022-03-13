@@ -1,4 +1,5 @@
 fragment SkillOwnerInfoSideBarGitHubRepositoryOwner on GitHubRepositoryOwner {
+	__typename
 	avatarUrl
 	id
 	login

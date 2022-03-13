@@ -1,0 +1,16 @@
+fragment NotificationCardNotification on Notification {
+	__typename
+	id
+	... on NotificationChatMessageReceived {
+		...NotificationCardChatMessageReceivedNotificationChatMessageReceived
+	}
+	... on NotificationCodeExampleCommented {
+		...NotificationCardCodeExampleCommentedNotificationCodeExampleCommented
+	}
+	... on NotificationFriendshipAccepted {
+		...NotificationCardFriendshipAcceptedNotificationFriendshipAccepted
+	}
+	... on NotificationPostCommented {
+		...NotificationCardPostCommentedNotificationPostCommented
+	}
+}

@@ -1,4 +1,5 @@
 fragment UserActivityCardUserActivity on UserActivity {
+	__typename
 	...UserActivityCardHeaderUserActivity
 	... on UserActivityCommentCodeExample {
 		...UserActivityCardCommentCodeExampleUserActivityCommentCodeExample

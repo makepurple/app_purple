@@ -81,6 +81,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 					cookie: req?.headers.cookie ?? (WindowUtils.isBrowser() ? document.cookie : "")
 				}
 			},
+			maskTypename: false,
 			requestPolicy: "cache-and-network",
 			url: getApiUrl()
 		});

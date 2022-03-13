@@ -12,6 +12,7 @@ fragment SkillInfoSideBarGitHubRepository on GitHubRepository {
 	}
 	name
 	owner {
+		__typename
 		avatarUrl
 		id
 		login

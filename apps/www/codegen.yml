@@ -17,10 +17,6 @@ generates:
       - schema-ast:
           commentDescriptions: true
   src/graphql/generated/graphql.gen.ts:
-    plugins:
-    - typescript
-    - typescript-operations
-    - typescript-urql
     config:
       gqlImport: urql#gql
       immutableTypes: true
@@ -34,3 +30,10 @@ generates:
         ID: string
         Upload: File
         URL: string
+    plugins:
+    - typescript:
+        nonOptionalTypename: true
+    - typescript-operations:
+        nonOptionalTypename: true
+    - typescript-urql:
+        nonOptionalTypename: false
