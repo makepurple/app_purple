@@ -70,15 +70,11 @@ export const withLinks = (editor: Editor): Editor => {
 	 * @date January 1, 2022
 	 */
 	editor.insertBreak = (...args) => {
-		if (!editor.selection) {
-			return insertBreak(...args);
-		}
+		if (!editor.selection) return insertBreak(...args);
 
 		const [elementNode, elementPath] = Editor.parent(editor, editor.selection.focus.path);
 
-		if ((elementNode as Element).type !== "link") {
-			return insertBreak(...args);
-		}
+		if ((elementNode as Element).type !== "link") return insertBreak(...args);
 
 		const [, parentPath] = Editor.parent(editor, elementPath);
 		const nextPath = Path.next(parentPath);
