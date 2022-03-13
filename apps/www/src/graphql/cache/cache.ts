@@ -12,6 +12,9 @@ export const createCache = () => {
 			GitHubUserContributionCalendar: () => null,
 			GitHubUserContributionCalendarDay: () => null,
 			GitHubUserContributionCalendarWeek: () => null,
+			SuggestOrganizations: () => null,
+			SuggestRepositories: () => null,
+			SuggestSkillOwners: () => null,
 			SuggestSkills: () => null,
 			TopLanguages: () => null,
 			TopLanguage: () => null
