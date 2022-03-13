@@ -1492,7 +1492,7 @@ export type PostPublishInput = {
   readonly content: ReadonlyArray<Scalars['Json']>;
   readonly description: Scalars['String'];
   readonly skills: ReadonlyArray<SkillWhereUniqueInput>;
-  readonly thumbnailUrl: Scalars['String'];
+  readonly thumbnailUrl?: InputMaybe<Scalars['String']>;
   readonly title: Scalars['String'];
 };
 

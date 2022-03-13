@@ -967,7 +967,7 @@ input PostPublishInput {
   content: [Json!]!
   description: String!
   skills: [SkillWhereUniqueInput!]!
-  thumbnailUrl: String!
+  thumbnailUrl: String
   title: String!
 }
 
