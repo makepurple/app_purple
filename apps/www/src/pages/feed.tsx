@@ -57,7 +57,7 @@ const ExploreButton = tw(Button)`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetActivityFeedQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetActivityFeedQuery, {
 		field: "activityFeed",
 		requestPolicy: "cache-first",
 		variables: {
@@ -96,7 +96,7 @@ export const Page: NextPage<PageProps> = () => {
 					: activities.map((activity, i) => (
 							<UserActivityCard
 								key={activity.id}
-								ref={getLoadMoreRef(i)}
+								ref={getRef(i)}
 								userActivity={activity}
 							/>
 					  ))}

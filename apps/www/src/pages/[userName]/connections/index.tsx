@@ -38,7 +38,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetUserFriendsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserFriendsQuery, {
 		field: "user.friends",
 		requestPolicy: "cache-first",
 		variables: {
@@ -71,7 +71,7 @@ export const Page: NextPage<PageProps> = () => {
 						: friends.map((follower, i) => (
 								<Fragment key={follower.id}>
 									{!!i && <Divider />}
-									<UserFriendCard ref={getLoadMoreRef(i)} user={follower} />
+									<UserFriendCard ref={getRef(i)} user={follower} />
 								</Fragment>
 						  ))}
 					{fetching &&

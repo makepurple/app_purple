@@ -62,7 +62,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetExperiencesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetExperiencesQuery, {
 		field: "experiences",
 		requestPolicy: "cache-first",
 		variables: {
@@ -147,7 +147,7 @@ export const Page: NextPage<PageProps> = () => {
 									<Fragment key={experience.id}>
 										{!!i && <Divider tw="ml-22" />}
 										<ExperienceCard
-											ref={getLoadMoreRef(i)}
+											ref={getRef(i)}
 											experience={experience}
 											onEdit={() => setEditExperience(experience)}
 										/>

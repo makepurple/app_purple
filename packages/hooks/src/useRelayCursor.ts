@@ -1,5 +1,5 @@
 import { ObjectUtils } from "@makepurple/utils";
-import { RefCallback, useCallback, useEffect, useState } from "react";
+import { RefCallback, useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldPath } from "react-hook-form";
 import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
 import { useRelativeScrollPosition } from "./useRelativeScrollPosition";
@@ -14,6 +14,13 @@ export type UseQueryHook<TQuery, TVariables> = (
 	// eslint-disable-next-line @typescript-eslint/ban-types
 ) => UseQueryResponse<TQuery, object>;
 
+export type UseRelayCursorGetRef = (i: number) => Maybe<RefCallback<HTMLElement>>;
+export type UseRelayCursorReset = () => void;
+export type UseRelayCursorActions = {
+	getRef: UseRelayCursorGetRef;
+	reset: UseRelayCursorReset;
+};
+
 export const useRelayCursor = <
 	TQuery,
 	TVariables extends { after?: Maybe<string> },
@@ -25,7 +32,7 @@ export const useRelayCursor = <
 		field: TFieldName;
 		offset?: number;
 	}
-): [state: UseQueryState<TQuery, any>, getRef: (i: number) => Maybe<RefCallback<HTMLElement>>] => {
+): [state: UseQueryState<TQuery, any>, actions: UseRelayCursorActions] => {
 	const { direction = "y", field: fieldName, offset = 0, ...queryOptions } = options;
 
 	const [cursor, setCursor] = useState<Maybe<string>>(null);
@@ -73,5 +80,11 @@ export const useRelayCursor = <
 		[nodes.length, offset]
 	);
 
-	return [result, getRef] as [UseQueryState<TQuery, any>, typeof getRef];
+	const reset = useCallback(() => {
+		setCursor(null);
+	}, []);
+
+	const actions = useMemo(() => ({ getRef, reset }), [getRef, reset]);
+
+	return [result, actions] as [UseQueryState<TQuery, any>, UseRelayCursorActions];
 };

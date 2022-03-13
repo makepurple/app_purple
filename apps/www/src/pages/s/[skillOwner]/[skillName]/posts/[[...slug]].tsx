@@ -100,7 +100,7 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	}, [criteria, sort]);
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetPostsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetPostsQuery, {
 		field: "posts",
 		requestPolicy: "cache-first",
 		variables: {
@@ -216,7 +216,7 @@ export const Page: NextPage<PageProps> = () => {
 							</NonIdealState>
 					  )
 					: posts.map((post, i) => (
-							<PostCard key={post.id} ref={getLoadMoreRef(i)} post={post} />
+							<PostCard key={post.id} ref={getRef(i)} post={post} />
 					  ))}
 				{fetching && Array.from({ length: 3 }, (_, i) => <LoadingPostCard key={i} />)}
 			</Posts>

@@ -2835,7 +2835,7 @@ export type CreateExperienceMutationVariables = Exact<{
 }>;
 
 
-export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'CreateExperiencePayload', readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string }> } } | null }, readonly record: { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } } } };
+export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'CreateExperiencePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } } } };
 
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -5085,15 +5085,9 @@ export function useCreateCodeExampleMutation() {
 export const CreateExperienceDocument = /*#__PURE__*/ gql`
     mutation CreateExperience($data: ExperienceCreateInput!) {
   createExperience(data: $data) {
-    query {
-      viewer {
-        id
-        experiences(first: 100) {
-          nodes {
-            id
-          }
-        }
-      }
+    viewer {
+      id
+      name
     }
     record {
       ...CreateExperienceFragment

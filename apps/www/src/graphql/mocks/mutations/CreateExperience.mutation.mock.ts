@@ -5,22 +5,7 @@ export const CreateExperience_mock: CreateExperienceMutation = {
 	__typename: "Mutation",
 	createExperience: {
 		__typename: "CreateExperiencePayload",
-		query: {
-			__typename: "Query",
-			viewer: {
-				__typename: "User",
-				id: User_fragment_mock.id,
-				experiences: {
-					__typename: "ExperienceConnection",
-					nodes: [
-						{
-							__typename: "Experience",
-							id: Experience_fragment_mock.id
-						}
-					]
-				}
-			}
-		},
+		viewer: User_fragment_mock,
 		record: Experience_fragment_mock
 	}
 };

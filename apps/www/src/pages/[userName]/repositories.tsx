@@ -67,7 +67,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetRepositoriesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetRepositoriesQuery, {
 		field: "repositories",
 		requestPolicy: "cache-first",
 		variables: {
@@ -143,7 +143,7 @@ export const Page: NextPage<PageProps> = () => {
 									<Fragment key={repository.id}>
 										{!!i && <Divider tw="ml-22" />}
 										<RepositoryCard
-											ref={getLoadMoreRef(i)}
+											ref={getRef(i)}
 											editing={mode === "update"}
 											repository={repository}
 										/>

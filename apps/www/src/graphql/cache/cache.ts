@@ -56,6 +56,22 @@ export const createCache = () => {
 		schema: schema as IntrospectionData,
 		updates: {
 			Mutation: {
+				createExperience: ({ createExperience: result }: Mutation, _, cache) => {
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "experiences")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
 				createPost: (_, __, cache) => {
 					cache.invalidate("Query", "postDraft");
 				},

@@ -63,7 +63,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, getRef] = useRelayCursor(useGetUserCodeExamplesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserCodeExamplesQuery, {
 		field: "user.codeExamples",
 		offset: 0,
 		requestPolicy: "cache-first",

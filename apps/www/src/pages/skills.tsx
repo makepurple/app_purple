@@ -75,7 +75,7 @@ export const Page: NextPage<PageProps> = () => {
 	const [searchName, setSearchName] = useState<string>((router?.query.name as string) ?? "");
 	const [searchOwner, setSearchOwner] = useState<string>((router?.query.owner as string) ?? "");
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetSkillsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetSkillsQuery, {
 		field: "skills",
 		requestPolicy: "cache-first",
 		variables: {
@@ -150,7 +150,7 @@ export const Page: NextPage<PageProps> = () => {
 							{skills.map((skill, i) => (
 								<Fragment key={skill.id}>
 									{(!!i || !!exactMatch) && <Divider tw="ml-22" />}
-									<SkillCard ref={getLoadMoreRef(i)} skill={skill} />
+									<SkillCard ref={getRef(i)} skill={skill} />
 								</Fragment>
 							))}
 						</>

@@ -42,7 +42,7 @@ export const Page: NextPage<PageProps> = () => {
 	const skillName = router?.query.skillName as string;
 	const skillOwner = router?.query.skillOwner as string;
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetSkillFollowersQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetSkillFollowersQuery, {
 		field: "skill.followers",
 		requestPolicy: "cache-first",
 		variables: {
@@ -73,7 +73,7 @@ export const Page: NextPage<PageProps> = () => {
 						: followers.map((follower, i) => (
 								<Fragment key={follower.id}>
 									{!!i && <Divider />}
-									<UserFollowCard ref={getLoadMoreRef(i)} user={follower} />
+									<UserFollowCard ref={getRef(i)} user={follower} />
 								</Fragment>
 						  ))}
 					{fetching &&

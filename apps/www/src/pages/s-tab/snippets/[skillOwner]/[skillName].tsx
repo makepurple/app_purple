@@ -63,7 +63,7 @@ export const Page: NextPage<PageProps> = () => {
 	const skillName = router?.query.skillName as string;
 	const skillOwner = router?.query.skillOwner as string;
 
-	const [{ data, fetching }, getRef] = useRelayCursor(useGetSkillCodeExamplesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetSkillCodeExamplesQuery, {
 		field: "skill.codeExamples",
 		requestPolicy: "cache-first",
 		variables: {

@@ -52,7 +52,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [{ data: countData }] = useGetNotificationCountsQuery({ requestPolicy: "cache-first" });
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetNotificationsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetNotificationsQuery, {
 		field: "viewer.notifications",
 		requestPolicy: "cache-first",
 		variables: {
@@ -93,10 +93,7 @@ export const Page: NextPage<PageProps> = () => {
 						: notifications.map((notification, i) => (
 								<Fragment key={notification.id}>
 									{!!i && <Divider />}
-									<NotificationCard
-										ref={getLoadMoreRef(i)}
-										notification={notification}
-									/>
+									<NotificationCard ref={getRef(i)} notification={notification} />
 								</Fragment>
 						  ))}
 					{fetching &&

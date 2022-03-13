@@ -27,15 +27,9 @@ fragment CreateExperienceFragment on Experience {
 
 mutation CreateExperience($data: ExperienceCreateInput!) {
 	createExperience(data: $data) {
-		query {
-			viewer {
-				id
-				experiences(first: 100) {
-					nodes {
-						id
-					}
-				}
-			}
+		viewer {
+			id
+			name
 		}
 		record {
 			...CreateExperienceFragment

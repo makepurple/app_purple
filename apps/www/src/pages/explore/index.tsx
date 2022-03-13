@@ -30,7 +30,7 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 	 * @author David Lee
 	 * @date January 6, 2022
 	 */
-	const [{ data }, getLoadMoreRef] = useRelayCursor(useSuggestFriendsQuery, {
+	const [{ data }, { getRef }] = useRelayCursor(useSuggestFriendsQuery, {
 		field: "suggestFriends",
 		requestPolicy: "cache-first",
 		variables: {
@@ -72,10 +72,7 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 					overscanBy={5}
 					tabIndex={-1}
 					render={(friendProps) => (
-						<SuggestedFriendCard
-							ref={getLoadMoreRef(friendProps.index)}
-							{...friendProps}
-						/>
+						<SuggestedFriendCard ref={getRef(friendProps.index)} {...friendProps} />
 					)}
 				/>
 			)}

@@ -32,7 +32,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetUserActivitiesQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetUserActivitiesQuery, {
 		field: "user.activities",
 		requestPolicy: "cache-first",
 		variables: {
@@ -60,7 +60,7 @@ export const Page: NextPage<PageProps> = () => {
 					: activities.map((activity, i) => (
 							<UserActivityCard
 								key={activity.id}
-								ref={getLoadMoreRef(i)}
+								ref={getRef(i)}
 								userActivity={activity}
 							/>
 					  ))}

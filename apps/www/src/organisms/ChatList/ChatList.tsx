@@ -25,7 +25,7 @@ export interface ChatListProps {
 export const ChatList: FC<ChatListProps> = ({ className, query, selectedChatId, style }) => {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data, fetching }, getLoadMoreRef] = useRelayCursor(useGetChatsQuery, {
+	const [{ data, fetching }, { getRef }] = useRelayCursor(useGetChatsQuery, {
 		field: "viewer.chats",
 		requestPolicy: "cache-first",
 		variables: {
@@ -61,7 +61,7 @@ export const ChatList: FC<ChatListProps> = ({ className, query, selectedChatId, 
 						<Fragment key={chat.id}>
 							{!!i && <Divider />}
 							<ChatCard
-								ref={getLoadMoreRef(i)}
+								ref={getRef(i)}
 								chat={chat}
 								selected={selectedChatId === chat.id}
 							/>

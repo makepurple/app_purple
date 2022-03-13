@@ -220,7 +220,7 @@ export const Page: NextPage<PageProps> = () => {
 	 */
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const [{ data: commentsData, fetching: fetchingComments }, getRef] = useRelayCursor(
+	const [{ data: commentsData, fetching: fetchingComments }, { getRef }] = useRelayCursor(
 		useGetCodeExampleCommentsQuery,
 		{
 			direction: "y",

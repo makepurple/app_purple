@@ -58,7 +58,7 @@ export const Page: NextPage<PageProps> = () => {
 		variables: { skillOwner }
 	});
 
-	const [{ data: experiencersData, fetching }, getLoadMoreRef] = useRelayCursor(
+	const [{ data: experiencersData, fetching }, { getRef }] = useRelayCursor(
 		useGetSkillOwnerExperiencersQuery,
 		{
 			field: "github.repositoryOwner.experiencers",
@@ -110,7 +110,7 @@ export const Page: NextPage<PageProps> = () => {
 						: experiencers.map((follower, i) => (
 								<Fragment key={follower.id}>
 									{!!i && <Divider />}
-									<UserFollowCard ref={getLoadMoreRef(i)} user={follower} />
+									<UserFollowCard ref={getRef(i)} user={follower} />
 								</Fragment>
 						  ))}
 					{fetching &&
