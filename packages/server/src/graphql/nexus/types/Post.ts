@@ -123,7 +123,8 @@ export const Post = objectType({
 			resolve: (parent) => {
 				const content: readonly Json[] = parent.content;
 				const wordCount = ObjectUtils.getWordCount(content);
-				const readingMinutes = Math.max(1, wordCount / READING_WORDS_PER_MINUTE);
+				const estimatedMinutes = Math.floor(wordCount / READING_WORDS_PER_MINUTE);
+				const readingMinutes = Math.max(1, estimatedMinutes);
 
 				return readingMinutes;
 			}
