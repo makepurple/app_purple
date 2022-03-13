@@ -189,13 +189,22 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 				</NextLink>
 				<Tags type="positive" tw="mt-3">
 					{skills.map((skill) => (
-						<Tags.Tag
+						<NextLink
 							key={skill.id}
-							id={skill.id}
-							title={`${skill.owner}/${skill.name}`}
+							href="/s/[skillOwner]/[skillName]"
+							as={`/s/${skill.owner}/${skill.name}`}
+							passHref
 						>
-							{skill.name}
-						</Tags.Tag>
+							<Tags.Tag
+								id={skill.id}
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								title={`${skill.owner}/${skill.name}`}
+							>
+								{skill.name}
+							</Tags.Tag>
+						</NextLink>
 					))}
 				</Tags>
 				<PostedDetails tw="mt-3">
