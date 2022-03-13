@@ -7,6 +7,6 @@ export const PostPublishInput = inputObjectType({
 		t.nonNull.string("description");
 		t.nonNull.list.nonNull.field("skills", { type: "SkillWhereUniqueInput" });
 		t.nonNull.string("title");
-		t.nonNull.string("thumbnailUrl");
+		t.string("thumbnailUrl");
 	}
 });

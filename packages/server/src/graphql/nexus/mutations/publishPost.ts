@@ -37,7 +37,7 @@ export const publishPost = mutationField("publishPost", {
 			content: args.data.content,
 			description: args.data.description,
 			skills: args.data.skills as any,
-			thumbnailUrl: args.data.thumbnailUrl,
+			thumbnailUrl: args.data.thumbnailUrl ?? undefined,
 			title: args.data.title
 		});
 
