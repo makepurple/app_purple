@@ -74,24 +74,24 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<SkillOwnerPageLayout skillOwner={skillOwner}>
-			<Repositories>
-				{!repositories.length ? (
-					<NonIdealState
-						title="There's nothing here"
-						subTitle={`We couldn't find any repositories for ${skillOwner}`}
-					>
-						<RepoIcon height={96} width={96} />
-					</NonIdealState>
-				) : (
-					repositories.map((repository) => (
+			{!repositories.length ? (
+				<NonIdealState
+					title="There's nothing here"
+					subTitle={`We couldn't find any repositories for ${skillOwner}`}
+				>
+					<RepoIcon height={96} width={96} />
+				</NonIdealState>
+			) : (
+				<Repositories>
+					{repositories.map((repository) => (
 						<SkillOwnerRepositoryCard
 							key={repository.id}
 							repository={repository}
 							skillOwner={skillOwner}
 						/>
-					))
-				)}
-			</Repositories>
+					))}
+				</Repositories>
+			)}
 			<Experiencers tw="mt-4">
 				<Title tw="mb-4">Developers</Title>
 				<ExperiencersContent>
