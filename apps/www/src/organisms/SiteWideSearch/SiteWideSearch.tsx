@@ -81,21 +81,25 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			items: owners,
 			itemToString: (item) => item?.name ?? item?.login ?? "",
 			debounce: ms("0.3s"),
-			onInputValueChange: async ({ inputValue }) => {
-				ownerPopper.forceUpdate?.();
+			onInputValueChange: useCallback(
+				async ({ inputValue }) => {
+					ownerPopper.forceUpdate?.();
 
-				if (!inputValue) return;
+					if (!inputValue) return;
 
-				const nodes = await urqlClient
-					.query<SuggestSkillOwnersQuery, SuggestSkillOwnersQueryVariables>(
-						SuggestSkillOwnersDocument,
-						{ where: { name: inputValue } }
-					)
-					.toPromise()
-					.then((result) => result.data?.suggestSkillOwners.nodes ?? []);
+					const nodes = await urqlClient
+						.query<SuggestSkillOwnersQuery, SuggestSkillOwnersQueryVariables>(
+							SuggestSkillOwnersDocument,
+							{ where: { name: inputValue } }
+						)
+						.toPromise()
+						.then((result) => result.data?.suggestSkillOwners.nodes ?? []);
 
-				setOwners(nodes.slice());
-			},
+					setOwners(nodes.slice());
+				},
+				// eslint-disable-next-line react-hooks/exhaustive-deps
+				[ownerPopper.forceUpdate, urqlClient]
+			),
 			onSelectedItemChange: async ({ selectedItem }) => {
 				if (!selectedItem) return;
 
@@ -123,25 +127,32 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			items: skills,
 			itemToString: (item) => item?.name ?? "",
 			debounce: ms("0.3s"),
-			onInputValueChange: async ({ inputValue }) => {
-				skillPopper.forceUpdate?.();
+			onInputValueChange: useCallback(
+				async ({ inputValue }) => {
+					skillPopper.forceUpdate?.();
 
-				const skillName = inputValue?.toLowerCase();
+					const skillName = inputValue?.toLowerCase();
 
-				if (!skillName) return;
+					if (!skillName) return;
 
-				const nodes = await urqlClient
-					.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(SuggestSkillsDocument, {
-						where: {
-							name: skillName,
-							owner: matchedOwner?.login
-						}
-					})
-					.toPromise()
-					.then((result) => result.data?.suggestSkills.nodes ?? []);
+					const nodes = await urqlClient
+						.query<SuggestSkillsQuery, SuggestSkillsQueryVariables>(
+							SuggestSkillsDocument,
+							{
+								where: {
+									name: skillName,
+									owner: matchedOwner?.login
+								}
+							}
+						)
+						.toPromise()
+						.then((result) => result.data?.suggestSkills.nodes ?? []);
 
-				setSkills(nodes.slice());
-			},
+					setSkills(nodes.slice());
+				},
+				// eslint-disable-next-line react-hooks/exhaustive-deps
+				[matchedOwner, skillPopper.forceUpdate, urqlClient]
+			),
 			onSelectedItemChange: async ({ selectedItem }) => {
 				if (!selectedItem) return;
 
@@ -216,6 +227,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 								},
 								onKeyDown: onEnterOwner,
 								placeholder: "Organizations or users...",
+								spellCheck: false,
 								type: "search"
 							})}
 						/>
@@ -237,6 +249,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 								},
 								onKeyDown: onEnterSkill,
 								placeholder: "Repositories or skills...",
+								spellCheck: false,
 								type: "search"
 							})}
 						/>
