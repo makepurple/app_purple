@@ -62,10 +62,14 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 					onError: (error) => {
 						if (process.env.NODE_ENV === "development") {
 							// eslint-disable-next-line no-console
-							console.error(error.message);
+							console.error(error);
+
+							toast.error(error.message.replace("[GraphQL]", "Server error:"));
+
+							return;
 						}
 
-						toast.error(error.message.replace("[GraphQL]", "Server error:"));
+						toast.error(error.message.replace("[GraphQL]", ""));
 					}
 				}),
 				_ssr,
