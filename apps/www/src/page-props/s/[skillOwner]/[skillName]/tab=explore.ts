@@ -16,7 +16,7 @@ import {
 } from "../../../../graphql";
 import { NextUtils } from "../../../../utils";
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 50;
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const { query, req } = ctx;
@@ -66,7 +66,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 
 	return addUrqlState(ssr, {
 		props: {
-			jitterSeed,
+			jitterSeed: jitterSeed.getTime(),
 			session: await getSession(ctx)
 		}
 	});

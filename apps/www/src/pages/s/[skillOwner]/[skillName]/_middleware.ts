@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { match } from "path-to-regexp";
+import { NextUtils } from "../../../../utils";
 
 export const middleware = (req: NextRequest) => {
 	const url = req.nextUrl;
@@ -14,11 +15,17 @@ export const middleware = (req: NextRequest) => {
 
 		switch (tab) {
 			case "explore":
-				return NextResponse.rewrite(`/s-tab/explore/${skillOwner}/${skillName}`);
+				return NextResponse.rewrite(
+					NextUtils.getUrl(req, `/s-tab/explore/${skillOwner}/${skillName}`)
+				);
 			case "followers":
-				return NextResponse.rewrite(`/s-tab/followers/${skillOwner}/${skillName}`);
+				return NextResponse.rewrite(
+					NextUtils.getUrl(req, `/s-tab/followers/${skillOwner}/${skillName}`)
+				);
 			case "snippets":
-				return NextResponse.rewrite(`/s-tab/snippets/${skillOwner}/${skillName}`);
+				return NextResponse.rewrite(
+					NextUtils.getUrl(req, `/s-tab/snippets/${skillOwner}/${skillName}`)
+				);
 			default:
 				return NextResponse.next();
 		}
