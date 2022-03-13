@@ -87,17 +87,17 @@ export const updatePost = mutationField("updatePost", {
 			});
 
 			await transaction.organization.createMany({
-				data: skillNameOwners.map(({ owner }) => ({ name: owner })),
+				data: toCreateSkills.map(({ owner }) => ({ name: owner })),
 				skipDuplicates: true
 			});
 
 			await transaction.skill.createMany({
-				data: skillNameOwners.map(({ name, owner }) => ({ name, owner })),
+				data: toCreateSkills.map(({ name, owner }) => ({ name, owner })),
 				skipDuplicates: true
 			});
 
 			const newSkills = await transaction.skill.findMany({
-				where: { OR: skillNameOwners }
+				where: { OR: toCreateSkills }
 			});
 
 			const skillsToConnect = [...existingSkills, ...newSkills];

@@ -92,23 +92,19 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 		});
 
 		const record = await prisma.$transaction(async (transaction) => {
-			const newSkills = await PromiseUtils.map(
-				toCreateSkills,
-				{ concurrency: 2 },
-				async ({ name, owner }) => {
-					return await transaction.skill.create({
-						data: {
-							name,
-							organization: {
-								connectOrCreate: {
-									where: { name: owner },
-									create: { name: owner }
-								}
-							}
-						}
-					});
-				}
-			);
+			await transaction.organization.createMany({
+				data: toCreateSkills.map(({ owner }) => ({ name: owner })),
+				skipDuplicates: true
+			});
+
+			await transaction.skill.createMany({
+				data: toCreateSkills.map(({ name, owner }) => ({ name, owner })),
+				skipDuplicates: true
+			});
+
+			const newSkills = await transaction.skill.findMany({
+				where: { OR: toCreateSkills }
+			});
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
 
@@ -164,8 +160,7 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 								}
 							},
 							create: {
-								skillId: skill.id,
-								codeExampleId: codeExample.id
+								skillId: skill.id
 							}
 						}))
 					},
