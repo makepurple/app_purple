@@ -22,8 +22,8 @@ export const suggestOrganizations = queryField("suggestOrganizations", {
 					}
 					totalCount: userCount
 				}
-				${GitHubOrganization}
 			}
+			${GitHubOrganization}
 		`
 			.cast<octokit.SuggestOrganizationsQuery, octokit.SuggestOrganizationsQueryVariables>({
 				first: Math.min(args.first ?? 10, 10),
