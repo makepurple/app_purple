@@ -1,4 +1,4 @@
-import { Avatar, Button, GitHubAvatarImage, toast } from "@makepurple/components";
+import { Avatar, Button, GitHubAvatarImage, Spinner, toast } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
@@ -251,7 +251,7 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 						type="button"
 						variant="alert"
 					>
-						<CancelIcon height={24} width={24} />
+						{removing ? <Spinner /> : <CancelIcon height={24} width={24} />}
 					</DeleteButton>
 				</Actions>
 			)}
