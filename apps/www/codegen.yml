@@ -2,7 +2,25 @@ schema:
   - node_modules/@makepurple/server/src/graphql/nexus/generated/schema.gen.graphql
 documents: "./src/graphql/**/*.{fragment,mutation,query}.{ts,graphql}"
 generates:
+  src/graphql/generated/schema.gen.json:
+    plugins:
+      - introspection
+    config:
+      descriptions: false
+      directiveIsRepeatable: false
+      federation: false
+      minify: true
+      schemaDescription: false
+      specifiedByUrl: false
+  ./src/graphql/generated/schema.gen.graphql:
+    plugins:
+      - schema-ast:
+          commentDescriptions: true
   src/graphql/generated/graphql.gen.ts:
+    plugins:
+    - typescript
+    - typescript-operations
+    - typescript-urql
     config:
       gqlImport: urql#gql
       immutableTypes: true
@@ -16,11 +34,3 @@ generates:
         ID: string
         Upload: File
         URL: string
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-urql
-  ./src/graphql/generated/schema.gen.graphql:
-    plugins:
-      - schema-ast:
-          commentDescriptions: true

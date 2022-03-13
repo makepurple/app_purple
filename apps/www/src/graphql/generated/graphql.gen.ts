@@ -4511,7 +4511,6 @@ export const UserActivityCardUpvotePostUserActivityUpvotePostFragmentDoc = /*#__
     ${UserActivityCardHeaderUserActivityFragmentDoc}`;
 export const UserActivityCardUserActivityFragmentDoc = /*#__PURE__*/ gql`
     fragment UserActivityCardUserActivity on UserActivity {
-  id
   ...UserActivityCardHeaderUserActivity
   ... on UserActivityCommentCodeExample {
     ...UserActivityCardCommentCodeExampleUserActivityCommentCodeExample

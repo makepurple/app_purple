@@ -1,7 +1,9 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
+import { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import { gql } from "urql";
 import type { Mutation, User } from "../generated";
+import schema from "../generated/schema.gen.json";
 
 export const createCache = () => {
 	return cacheExchange({
@@ -48,6 +50,7 @@ export const createCache = () => {
 				skills: relayPagination()
 			}
 		},
+		schema: schema as IntrospectionData,
 		updates: {
 			Mutation: {
 				createPost: (_, __, cache) => {

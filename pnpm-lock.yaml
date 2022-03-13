@@ -179,6 +179,7 @@ importers:
     specifiers:
       '@faker-js/faker': 6.0.0-beta.0
       '@graphql-codegen/cli': ^2.6.2
+      '@graphql-codegen/introspection': ^2.1.1
       '@graphql-codegen/schema-ast': ^2.4.1
       '@graphql-codegen/typescript': ^2.4.7
       '@graphql-codegen/typescript-operations': ^2.3.4
@@ -324,6 +325,7 @@ importers:
     devDependencies:
       '@faker-js/faker': 6.0.0-beta.0
       '@graphql-codegen/cli': 2.6.2_93936f2b4c54a7e09e28b3e6b1875328
+      '@graphql-codegen/introspection': 2.1.1_graphql@15.7.2
       '@graphql-codegen/schema-ast': 2.4.1_graphql@15.7.2
       '@graphql-codegen/typescript': 2.4.7_encoding@0.1.13+graphql@15.7.2
       '@graphql-codegen/typescript-operations': 2.3.4_encoding@0.1.13+graphql@15.7.2
@@ -3447,12 +3449,22 @@ packages:
       tslib: 2.3.1
     dev: true
 
+  /@graphql-codegen/introspection/2.1.1_graphql@15.7.2:
+    resolution: {integrity: sha512-O9zsy0IoFYDo37pBVF4pSvRMDx/AKdgOxyko4R/O+0DHEw9Nya/pQ3dbn+LDLj2n6X+xOXUBUfFvqhODTqU28w==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    dependencies:
+      '@graphql-codegen/plugin-helpers': 2.4.2_graphql@15.7.2
+      graphql: 15.7.2
+      tslib: 2.3.1
+    dev: true
+
   /@graphql-codegen/plugin-helpers/2.3.2_graphql@15.7.2:
     resolution: {integrity: sha512-19qFA5XMAWaAY64sBljjDPYfHjE+QMk/+oalCyY13WjSlcLDvYPfmFlCNgFSsydArDELlHR8T1GMbA7C42M8TA==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      '@graphql-tools/utils': 8.5.5_graphql@15.7.2
+      '@graphql-tools/utils': 8.6.2_graphql@15.7.2
       change-case-all: 1.0.14
       common-tags: 1.8.2
       graphql: 15.7.2
