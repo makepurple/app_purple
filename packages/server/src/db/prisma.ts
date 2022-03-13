@@ -11,34 +11,34 @@ declare global {
 
 // Workaround to make Prisma Client work well during "next dev"
 // @see https://www.prisma.io/docs/support/help-articles/nextjs-prisma-client-dev-practices
-let prisma: PrismaClient;
-if (process.env.NODE_ENV === "production") {
-	prisma = new PrismaClient();
-} else {
-	if (!global.cachedPrisma) {
-		const newPrisma = new PrismaClient({
-			log:
-				process.env.NODE_ENV === "development" && process.env.PRISMA_LOG === "true"
-					? [{ emit: "event", level: "query" }, "info", "warn", "error"]
-					: []
+export const prisma: PrismaClient<
+	{ log: ("info" | "warn" | "error" | { emit: "event"; level: "query" })[] },
+	"query",
+	false
+> =
+	global.cachedPrisma ??
+	new PrismaClient({
+		log:
+			process.env.NODE_ENV !== "development" && process.env.PRISMA_LOG === "true"
+				? [{ emit: "event", level: "query" }, "info", "warn", "error"]
+				: []
+	});
+
+if (process.env.NODE_ENV !== "production") {
+	if (process.env.PRISMA_LOG === "true") {
+		prisma.$on("query", (e) => {
+			/* eslint-disable no-console */
+			console.log(
+				`${chalk.blue("prisma:query")}\n${codeBlock`
+					${e.query}
+				`}`
+			);
+			console.log(chalk.blue("prisma:params"), e.params);
+			/* eslint-enable no-console */
 		});
-
-		if (process.env.NODE_ENV === "development" && process.env.PRISMA_LOG === "true") {
-			newPrisma.$on("query", (e) => {
-				/* eslint-disable no-console */
-				console.log(
-					`${chalk.blue("prisma:query")}\n${codeBlock`
-						${e.query}
-					`}`
-				);
-				console.log(chalk.blue("prisma:params"), e.params);
-				/* eslint-enable no-console */
-			});
-		}
-
-		global.cachedPrisma = newPrisma;
 	}
-	prisma = global.cachedPrisma;
+
+	global.cachedPrisma = prisma;
 }
 
 export default prisma;
