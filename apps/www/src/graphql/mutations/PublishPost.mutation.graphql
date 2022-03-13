@@ -1,5 +1,9 @@
 mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {
 	publishPost(where: $where, data: $data) {
+		viewer {
+			id
+			name
+		}
 		record {
 			id
 			authorName

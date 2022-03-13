@@ -105,6 +105,12 @@ export const createCache = () => {
 				leaveChat: ({ leaveChat: result }: Mutation, _, cache) => {
 					cache.invalidate({ __typename: "Chat", id: result.record.id });
 				},
+				publishPost: ({ publishPost: result }: Mutation, _, cache) => {
+					!!result.viewer?.id &&
+						cache.invalidate({ __typename: "User", id: result.viewer.id });
+
+					cache.invalidate({ __typename: "Post", id: result.record.id });
+				},
 				rejectFriendship: ({ rejectFriendship: result }: Mutation, _, cache) => {
 					const viewer = result.viewer;
 

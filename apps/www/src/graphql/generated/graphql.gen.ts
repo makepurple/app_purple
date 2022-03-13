@@ -2899,7 +2899,7 @@ export type PublishPostMutationVariables = Exact<{
 }>;
 
 
-export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content: ReadonlyArray<Json>, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly urlSlug: string } } };
+export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content: ReadonlyArray<Json>, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly urlSlug: string } } };
 
 export type RejectFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -5251,6 +5251,10 @@ export function useOpenNotificationsMutation() {
 export const PublishPostDocument = /*#__PURE__*/ gql`
     mutation PublishPost($where: PostWhereUniqueInput!, $data: PostPublishInput!) {
   publishPost(where: $where, data: $data) {
+    viewer {
+      id
+      name
+    }
     record {
       id
       authorName
