@@ -1,6 +1,7 @@
 import { Button, Divider, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
@@ -64,8 +65,11 @@ export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
+	const { data: session } = useSession();
 
 	const userName = router?.query.userName as string;
+
+	const isMyPage = session?.user.name === userName;
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
 		query: GetRepositoriesDocument,
@@ -99,28 +103,32 @@ export const Page: NextPage<PageProps> = () => {
 							? "Edit Repositories"
 							: "Repositories"}
 					</span>
-					<EditButton
-						onClick={() => {
-							setMode((oldMode) => (oldMode !== "read" ? "read" : "update"));
-						}}
-						size="small"
-						type="button"
-						variant="secondary"
-						style={mode !== "read" ? { display: "none" } : {}}
-						tw="mr-4"
-					>
-						<PencilIcon height={24} width={24} />
-					</EditButton>
-					<AddButton
-						onClick={() => {
-							setMode((oldMode) => (oldMode !== "read" ? "read" : "create"));
-						}}
-						size="small"
-						type="button"
-						variant="secondary"
-					>
-						<AddRemoveIcon height={24} width={24} $canClose={mode !== "read"} />
-					</AddButton>
+					{isMyPage && (
+						<>
+							<EditButton
+								onClick={() => {
+									setMode((oldMode) => (oldMode !== "read" ? "read" : "update"));
+								}}
+								size="small"
+								type="button"
+								variant="secondary"
+								style={mode !== "read" ? { display: "none" } : {}}
+								tw="mr-4"
+							>
+								<PencilIcon height={24} width={24} />
+							</EditButton>
+							<AddButton
+								onClick={() => {
+									setMode((oldMode) => (oldMode !== "read" ? "read" : "create"));
+								}}
+								size="small"
+								type="button"
+								variant="secondary"
+							>
+								<AddRemoveIcon height={24} width={24} $canClose={mode !== "read"} />
+							</AddButton>
+						</>
+					)}
 				</Title>
 				{mode === "create" ? (
 					<CreateRepositoryForm
