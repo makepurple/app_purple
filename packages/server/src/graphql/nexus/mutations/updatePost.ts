@@ -3,7 +3,7 @@ import { PostUpdateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { Logger, NotFoundError, PrismaUtils } from "../../../utils";
 
 export const updatePost = mutationField("updatePost", {
 	type: nonNull("UpdatePostPayload"),
@@ -65,6 +65,8 @@ export const updatePost = mutationField("updatePost", {
 			return verified;
 		};
 
+		if (toCreateSkills.length) Logger.info("Verifying skills:", toCreateSkills);
+
 		const verified = await PromiseUtils.every(
 			toCreateSkills,
 			{ concurrency: 2 },
@@ -86,23 +88,19 @@ export const updatePost = mutationField("updatePost", {
 				data: { skills: { deleteMany: {} } }
 			});
 
-			const newSkills = await PromiseUtils.map(
-				toCreateSkills,
-				{ concurrency: 2 },
-				async ({ name, owner }) => {
-					return await transaction.skill.create({
-						data: {
-							name,
-							organization: {
-								connectOrCreate: {
-									where: { name: owner },
-									create: { name: owner }
-								}
-							}
-						}
-					});
-				}
-			);
+			await transaction.organization.createMany({
+				data: skillNameOwners.map(({ owner }) => ({ name: owner })),
+				skipDuplicates: true
+			});
+
+			await transaction.skill.createMany({
+				data: skillNameOwners.map(({ name, owner }) => ({ name, owner })),
+				skipDuplicates: true
+			});
+
+			const newSkills = await transaction.skill.findMany({
+				where: { OR: skillNameOwners }
+			});
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
 

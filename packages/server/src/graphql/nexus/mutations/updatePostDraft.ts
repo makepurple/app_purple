@@ -1,7 +1,8 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { PostDraftUpdateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { octokit } from "../../../services";
+import { Logger, NotFoundError, PrismaUtils } from "../../../utils";
 
 export const updatePostDraft = mutationField("updatePostDraft", {
 	type: nonNull("UpdatePostDraftPayload"),
@@ -20,7 +21,7 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 
 		return true;
 	},
-	resolve: async (parent, args, { prisma }) => {
+	resolve: async (parent, args, { octokit: graphql, prisma }) => {
 		const post = await prisma.post.findUnique({
 			where: PrismaUtils.nonNull(args.where)
 		});
@@ -43,9 +44,46 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 			.filter((skill) => !!skill.name_owner)
 			.map((skill) => skill.name_owner) as { name: string; owner: string }[];
 
-		const skillsById = await prisma.skill.findMany({
-			where: { id: { in: skillIds } }
+		const existingSkills = await prisma.skill.findMany({
+			where: { OR: [{ id: { in: skillIds } }, ...skillNameOwners] }
 		});
+
+		const toCreateSkills = skillNameOwners.filter(
+			({ name, owner }) =>
+				!existingSkills.some((skill) => skill.name === name && skill.owner === owner)
+		);
+
+		const verifySkill = async (name: string, owner: string): Promise<boolean> => {
+			const verified = await graphql`
+				query VerifySkill($name: String!, $owner: String!) {
+					repository(followRenames: false, name: $name, owner: $owner) {
+						id
+					}
+				}
+			`
+				.cast<octokit.VerifySkillQuery, octokit.VerifySkillQueryVariables>({
+					name,
+					owner
+				})
+				.then((result) => !!result.repository)
+				.catch(() => false);
+
+			return verified;
+		};
+
+		if (toCreateSkills.length) Logger.info("Verifying skills:", toCreateSkills);
+
+		const verified = await PromiseUtils.every(
+			toCreateSkills,
+			{ concurrency: 2 },
+			async (skill) => await verifySkill(skill.name, skill.owner)
+		);
+
+		if (!verified) {
+			Logger.error("Skill verification failed:", toCreateSkills);
+
+			throw new Error("All skills must be from GitHub");
+		}
 
 		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.post.update({
@@ -53,19 +91,21 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 				data: { skills: { deleteMany: {} } }
 			});
 
-			const skillsByNameOwner = await PromiseUtils.map(
-				skillNameOwners,
-				{ concurrency: 2 },
-				async ({ name, owner }) => {
-					return await transaction.skill.upsert({
-						where: { name_owner: { name, owner } },
-						create: { name, owner },
-						update: {}
-					});
-				}
-			);
+			await transaction.organization.createMany({
+				data: skillNameOwners.map(({ owner }) => ({ name: owner })),
+				skipDuplicates: true
+			});
 
-			const skillsToConnect = [...skillsById, ...skillsByNameOwner];
+			await transaction.skill.createMany({
+				data: skillNameOwners.map(({ name, owner }) => ({ name, owner })),
+				skipDuplicates: true
+			});
+
+			const newSkills = await transaction.skill.findMany({
+				where: { OR: skillNameOwners }
+			});
+
+			const skillsToConnect = [...existingSkills, ...newSkills];
 
 			return await transaction.post.update({
 				data: {
