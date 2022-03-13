@@ -30,6 +30,13 @@ export class UrlUtils {
 	}
 
 	public static isRelative(url: string): boolean {
+		/**
+		 * !HACK
+		 * @description We're using https://google.com arbitrarily to test if the relative path,
+		 * when appended to an absolute url, is still valid
+		 * @author David Lee
+		 * @date December 13, 2021
+		 */
 		return /^(\.\.\/|\.\/|\/)/.test(url) && this.isValid(`https://google.com${url}`);
 	}
 
@@ -39,6 +46,13 @@ export class UrlUtils {
 
 		if (!isValid && !isRelative) return false;
 
+		/**
+		 * !HACK
+		 * @description We're using https://google.com arbitrarily to test if the relative path,
+		 * when appended to an absolute url, is still valid
+		 * @author David Lee
+		 * @date December 13, 2021
+		 */
 		const urlString = isValid ? url : `https://google.com${url}`;
 		const extension = new URL(urlString).pathname.split(".").at(-1);
 
