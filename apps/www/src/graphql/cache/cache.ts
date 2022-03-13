@@ -54,6 +54,9 @@ export const createCache = () => {
 					cache.invalidate("Query", "postDraft");
 				},
 				deleteCodeExample: ({ deleteCodeExample: result }: Mutation, _, cache) => {
+					!!result.viewer?.id &&
+						cache.invalidate({ __typename: "User", id: result.viewer.id });
+
 					cache.invalidate({ __typename: "CodeExample", id: result.record.id });
 				},
 				deleteExperience: ({ deleteExperience: result }: Mutation, _, cache) => {
@@ -98,6 +101,9 @@ export const createCache = () => {
 					});
 				},
 				deletePost: ({ deletePost: result }: Mutation, _, cache) => {
+					!!result.viewer?.id &&
+						cache.invalidate({ __typename: "User", id: result.viewer.id });
+
 					cache.invalidate({ __typename: "Post", id: result.record.id });
 				},
 				deleteRepository: ({ deleteRepository: result }: Mutation, _, cache) => {
