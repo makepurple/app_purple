@@ -23,9 +23,9 @@ export const updateExperience = mutationField("updateExperience", {
 	},
 	resolve: async (root, args, { prisma }) => {
 		const dataInput = ExperienceUpdateInput.validator({
-			endDate: args.data.endDate,
-			highlights: args.data.highlights,
-			location: args.data.location,
+			endDate: args.data.endDate ?? undefined,
+			highlights: args.data.highlights ?? undefined,
+			location: args.data.location ?? undefined,
 			organizationName: args.data.organizationName ?? undefined,
 			positionName: args.data.positionName ?? undefined,
 			startDate: args.data.startDate ?? undefined,

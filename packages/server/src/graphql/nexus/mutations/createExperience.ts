@@ -40,11 +40,7 @@ export const createExperience = mutationField("createExperience", {
 				positionName: dataInput.positionName,
 				startDate: dataInput.startDate as Date,
 				type: dataInput.type,
-				user: {
-					connect: {
-						id: user.id
-					}
-				}
+				user: { connect: { id: user.id } }
 			}
 		});
 

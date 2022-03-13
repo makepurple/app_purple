@@ -3,18 +3,18 @@ import Schema, { array, boolean, DateType, number, string } from "computed-types
 
 export const ExperienceUpdateInput = Schema({
 	endDate: Schema.either(
-		DateType.optional(),
+		DateType,
 		Schema({
 			month: number.gte(0, "Invalid month").lte(12, "Invalid year"),
 			year: number.gte(0, "Invalid year")
-		}).optional(),
+		}),
 		boolean.equals(false)
-	).optional(),
+	).strictOptional(),
 	highlights: Schema.either(
 		array
 			.of(string.max(512, "Cannot be longer than 512 characters"))
 			.max(8, "Cannot have more than 8 highlights")
-			.optional(),
+			.strictOptional(),
 		array
 			.of(
 				Schema({
@@ -22,20 +22,20 @@ export const ExperienceUpdateInput = Schema({
 				})
 			)
 			.max(8, "Cannot have more than 8 highlights")
-			.optional()
+			.strictOptional()
 	),
-	location: string.max(255, "Cannot be longer than 255 characters").optional(),
-	organizationName: string.max(255, "Cannot be longer than 255 charaters").optional(),
+	location: string.max(256, "Cannot be longer than 256 characters").strictOptional(),
+	organizationName: string.max(256, "Cannot be longer than 256 charaters").strictOptional(),
 	positionName: string
 		.error("Required")
-		.max(255, "Cannot be longer than 255 characters")
-		.optional(),
+		.max(256, "Cannot be longer than 256 characters")
+		.strictOptional(),
 	startDate: Schema.either(
-		DateType.optional(),
+		DateType,
 		Schema({
 			month: number.gte(0, "Invalid month").lte(12, "Invalid year"),
 			year: number.gte(0, "Invalid year")
-		}).optional()
-	),
+		})
+	).strictOptional(),
 	type: Schema.enum(ExperienceType).optional()
 });
