@@ -44,6 +44,8 @@ const Content = tw.div`
 	justify-items-stretch
 	overflow-hidden
 	border-radius[inherit]
+	bg-blueGray-50
+	z-index[1]
 `;
 
 export type AvatarProps = InferComponentProps<"a"> & {
