@@ -9,7 +9,6 @@ const Root = styled.a<{ $border?: number }>`
 		inline-flex
 		flex-row
 		items-stretch
-		justify-items-stretch
 		rounded-full
 		border-solid
 		border-transparent
@@ -18,7 +17,7 @@ const Root = styled.a<{ $border?: number }>`
 
 	background-clip: padding-box;
 	-webkit-background-clip: padding-box;
-	border-width: ${({ $border }) => $border}px;
+	border-width: ${({ $border }) => $border ?? 0}px;
 
 	&:before {
 		${tw`
@@ -39,9 +38,9 @@ const Root = styled.a<{ $border?: number }>`
 `;
 
 const Content = tw.div`
+	flex-grow
 	flex
 	items-stretch
-	justify-items-stretch
 	overflow-hidden
 	border-radius[inherit]
 	bg-blueGray-50
