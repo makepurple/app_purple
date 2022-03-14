@@ -25,19 +25,38 @@ import tw from "twin.macro";
 import { ExperienceType, useCreateExperienceMutation } from "../../graphql";
 import { OrganizationAutosuggest } from "../OrganizationAutosuggest";
 
+const ExperienceSelectorContainer = tw(FormGroup)`
+	max-width[26rem]
+	w-full
+`;
+
+const DateFormGroup = tw(FormGroup)`
+	max-width[26rem]
+	w-full
+`;
+
 const DateSelectorContainer = tw.div`
 	grid
-	grid-template-columns[repeat(auto-fit, minmax(280px, 1fr))]
+	grid-template-columns[repeat(auto-fill, minmax(12rem, 1fr))]
 	gap-4
+`;
+
+const SelectButton = tw(FormButton)`
+	h-10
 `;
 
 const EndDateToggleContainer = tw.div`
 	flex
 `;
 
+const AddHighlightButton = tw(FormButton)`
+	max-width[10rem]
+	w-full
+`;
+
 const ActionsContainer = tw.div`
 	grid
-	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	grid-template-columns[repeat(auto-fill, minmax(12rem, 1fr))]
 	gap-4
 `;
 
@@ -149,7 +168,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 				<Input {...register("positionName")} placeholder="Title" aria-label="title" />
 				<FormHelperText error={errors.positionName?.message} />
 			</FormGroup>
-			<FormGroup tw="mt-4">
+			<ExperienceSelectorContainer tw="mt-4">
 				<FormLabel>Experience type</FormLabel>
 				<Controller
 					control={control}
@@ -159,7 +178,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 							{({ open }) => (
 								<>
 									<Select.Button
-										as={FormButton}
+										as={SelectButton}
 										bounce={false}
 										hasInput={!LangUtils.isNil(field.value)}
 										size="small"
@@ -197,7 +216,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 					)}
 				/>
 				<FormHelperText error={errors.type?.message} />
-			</FormGroup>
+			</ExperienceSelectorContainer>
 			<FormGroup tw="mt-4">
 				<FormLabel>Company name</FormLabel>
 				<Controller
@@ -218,96 +237,92 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 				<Input {...register("location")} placeholder="Location" aria-label="location" />
 				<FormHelperText error={errors.location?.message} />
 			</FormGroup>
-			<div tw="mt-4">
+			<DateFormGroup tw="mt-4">
 				<FormLabel>Start date</FormLabel>
 				<DateSelectorContainer>
-					<FormGroup>
-						<Controller
-							control={control}
-							name="startDate.month"
-							render={({ field }) => (
-								<Select onChange={field.onChange} value={field.value}>
-									{({ open }) => (
-										<>
-											<Select.Button
-												as={FormButton}
-												bounce={false}
-												hasInput={!LangUtils.isNil(field.value)}
-												size="small"
-												type="button"
-												variant="input"
-											>
-												<span tw="flex-grow">
-													{LangUtils.isNil(field.value)
-														? "Month"
-														: dayjs().month(field.value).format("MMMM")}
-												</span>
-												<ExpandIcon open={open} tw="ml-1" />
-											</Select.Button>
-											<Select.Options>
-												{Array.from({ length: 12 }, (_, i) => (
-													<Select.Option key={i} value={i}>
-														{(optionProps) => (
-															<ListItem {...optionProps}>
-																{dayjs().month(i).format("MMMM")}
-															</ListItem>
-														)}
-													</Select.Option>
-												))}
-											</Select.Options>
-										</>
-									)}
-								</Select>
-							)}
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Controller
-							control={control}
-							name="startDate.year"
-							render={({ field }) => (
-								<Select onChange={field.onChange} value={field.value}>
-									{({ open }) => (
-										<>
-											<Select.Button
-												as={FormButton}
-												bounce={false}
-												hasInput={!LangUtils.isNil(field.value)}
-												size="small"
-												type="button"
-												variant="input"
-											>
-												<span tw="flex-grow">{field.value ?? "Year"}</span>
-												<ExpandIcon open={open} tw="ml-1" />
-											</Select.Button>
-											<Select.Options>
-												{Array.from({ length: 100 }, (_, i) => (
-													<Select.Option
-														key={i}
-														value={new Date().getFullYear() - i}
-													>
-														{(optionProps) => (
-															<ListItem {...optionProps}>
-																{dayjs()
-																	.subtract(i, "year")
-																	.format("YYYY")}
-															</ListItem>
-														)}
-													</Select.Option>
-												))}
-											</Select.Options>
-										</>
-									)}
-								</Select>
-							)}
-						/>
-					</FormGroup>
+					<Controller
+						control={control}
+						name="startDate.month"
+						render={({ field }) => (
+							<Select onChange={field.onChange} value={field.value}>
+								{({ open }) => (
+									<>
+										<Select.Button
+											as={SelectButton}
+											bounce={false}
+											hasInput={!LangUtils.isNil(field.value)}
+											size="small"
+											type="button"
+											variant="input"
+										>
+											<span tw="flex-grow">
+												{LangUtils.isNil(field.value)
+													? "Month"
+													: dayjs().month(field.value).format("MMMM")}
+											</span>
+											<ExpandIcon open={open} tw="ml-1" />
+										</Select.Button>
+										<Select.Options>
+											{Array.from({ length: 12 }, (_, i) => (
+												<Select.Option key={i} value={i}>
+													{(optionProps) => (
+														<ListItem {...optionProps}>
+															{dayjs().month(i).format("MMMM")}
+														</ListItem>
+													)}
+												</Select.Option>
+											))}
+										</Select.Options>
+									</>
+								)}
+							</Select>
+						)}
+					/>
+					<Controller
+						control={control}
+						name="startDate.year"
+						render={({ field }) => (
+							<Select onChange={field.onChange} value={field.value}>
+								{({ open }) => (
+									<>
+										<Select.Button
+											as={SelectButton}
+											bounce={false}
+											hasInput={!LangUtils.isNil(field.value)}
+											size="small"
+											type="button"
+											variant="input"
+										>
+											<span tw="flex-grow">{field.value ?? "Year"}</span>
+											<ExpandIcon open={open} tw="ml-1" />
+										</Select.Button>
+										<Select.Options>
+											{Array.from({ length: 100 }, (_, i) => (
+												<Select.Option
+													key={i}
+													value={new Date().getFullYear() - i}
+												>
+													{(optionProps) => (
+														<ListItem {...optionProps}>
+															{dayjs()
+																.subtract(i, "year")
+																.format("YYYY")}
+														</ListItem>
+													)}
+												</Select.Option>
+											))}
+										</Select.Options>
+									</>
+								)}
+							</Select>
+						)}
+					/>
 				</DateSelectorContainer>
 				<FormHelperText
 					error={errors.startDate ? "Must provide a valid start date" : null}
 				/>
-			</div>
-			<div tw="my-4">
+			</DateFormGroup>
+			<DateFormGroup tw="my-4">
 				<FormLabel>End date</FormLabel>
 				<EndDateToggleContainer tw="mt-2">
 					<Checkbox
@@ -317,7 +332,10 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 
 							newChecked
 								? setValue("endDate", false)
-								: setValue("endDate", { month: today.month(), year: today.year() });
+								: setValue("endDate", {
+										month: today.month(),
+										year: today.year()
+								  });
 						}}
 						tw="mr-2"
 					/>
@@ -331,8 +349,8 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 						render={() => <HiddenInput checked={false} name="endDate" readOnly />}
 					/>
 				) : (
-					<DateSelectorContainer tw="mt-4">
-						<FormGroup>
+					<>
+						<DateSelectorContainer tw="mt-4">
 							<Controller
 								control={control}
 								name="endDate.month"
@@ -341,7 +359,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 										{({ open }) => (
 											<>
 												<Select.Button
-													as={FormButton}
+													as={SelectButton}
 													bounce={false}
 													hasInput={!LangUtils.isNil(field.value)}
 													size="small"
@@ -375,8 +393,6 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 									</Select>
 								)}
 							/>
-						</FormGroup>
-						<FormGroup>
 							<Controller
 								control={control}
 								name="endDate.year"
@@ -385,7 +401,7 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 										{({ open }) => (
 											<>
 												<Select.Button
-													as={FormButton}
+													as={SelectButton}
 													bounce={false}
 													hasInput={!LangUtils.isNil(field.value)}
 													size="small"
@@ -418,48 +434,48 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 									</Select>
 								)}
 							/>
-						</FormGroup>
+						</DateSelectorContainer>
 						<FormHelperText
 							error={errors.endDate ? "Must provide a valid end date" : null}
 						/>
-					</DateSelectorContainer>
+					</>
 				)}
-				<FormGroup tw="mt-4">
-					<FormLabel>Highlights</FormLabel>
-					{highlights.map((field, i) => (
-						<ControlGroup key={field.id} tw="not-first:mt-2">
-							<Input
-								{...register(`highlights.${i}.value`)}
-								placeholder="I built a thing that..."
-							/>
-							<FormButton
-								bounce={false}
-								onClick={() => {
-									remove(i);
-								}}
-								size="small"
-								type="button"
-								variant="alert"
-								tw="h-10 w-10"
-							>
-								<XIcon height={24} width={24} />
-							</FormButton>
-						</ControlGroup>
-					))}
-					<FormButton
-						disabled={highlights.length >= 5}
-						onClick={() => {
-							append("");
-						}}
-						size="small"
-						type="button"
-						tw="[:not(:nth-child(2))]:mt-4"
-					>
-						Add highlight
-					</FormButton>
-					<FormHelperText error={(errors.highlights as any)?.message} />
-				</FormGroup>
-			</div>
+			</DateFormGroup>
+			<FormGroup tw="mt-4">
+				<FormLabel>Highlights</FormLabel>
+				{highlights.map((field, i) => (
+					<ControlGroup key={field.id} tw="not-first:mt-2">
+						<Input
+							{...register(`highlights.${i}.value`)}
+							placeholder="I built a thing that..."
+						/>
+						<FormButton
+							bounce={false}
+							onClick={() => {
+								remove(i);
+							}}
+							size="small"
+							type="button"
+							variant="alert"
+							tw="h-10 w-10"
+						>
+							<XIcon height={24} width={24} />
+						</FormButton>
+					</ControlGroup>
+				))}
+				<AddHighlightButton
+					disabled={highlights.length >= 5}
+					onClick={() => {
+						append("");
+					}}
+					size="small"
+					type="button"
+					tw="[:not(:nth-child(2))]:mt-4"
+				>
+					Add highlight
+				</AddHighlightButton>
+				<FormHelperText error={(errors.highlights as any)?.message} />
+			</FormGroup>
 			<ActionsContainer tw="mt-8">
 				<FormButton type="submit">
 					<span>Save</span>
