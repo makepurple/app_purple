@@ -25,6 +25,7 @@ export const SearchInputContainer = tw.div`
 
 export const SearchInput = tw(Input)`
 	border-transparent
+	rounded-lg
 	h-11
 `;
 
