@@ -12,7 +12,7 @@ const Root = styled.input<{ error?: boolean }>`
 		px-2.5
 		border
 		border-solid
-		rounded-lg
+		rounded-sm
 		shadow-inner
 		bg-indigo-50
 		text-base

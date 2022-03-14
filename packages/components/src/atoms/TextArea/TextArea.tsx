@@ -14,7 +14,7 @@ const Root = styled.textarea<{ error?: boolean }>`
 		py-2
 		border
 		border-solid
-		rounded-lg
+		rounded-sm
 		overflow-y-auto
 		shadow-inner
 		text-base
