@@ -269,7 +269,12 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					}}
 				/>
 				<Actions>
-					{status !== "authenticated" || !user ? (
+					{status === "loading" ? (
+						<>
+							<StyledLoginButton disabled>Login</StyledLoginButton>
+							<SignUpButton disabled>Sign Up</SignUpButton>
+						</>
+					) : status !== "authenticated" || !user ? (
 						<>
 							<NextLink href="/login" passHref>
 								<StyledLoginButton as="a">Login</StyledLoginButton>
