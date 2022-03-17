@@ -55,7 +55,6 @@ const Root = styled(Paper)`
 const StyledAvatar = styled(Avatar)<{ $organization: boolean }>`
 	${tw`
 		flex-shrink-0
-		cursor-auto
 	`}
 
 	${({ $organization }) => $organization && tw`rounded-md`}

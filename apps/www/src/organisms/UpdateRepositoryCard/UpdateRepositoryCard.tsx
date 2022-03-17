@@ -176,6 +176,8 @@ export const UpdateRepositoryCard = forwardRef<HTMLFormElement, UpdateRepository
 					}
 
 					toast.success("Repository details were updated! 🎉");
+
+					onClose?.();
 				})}
 				style={style}
 			>
