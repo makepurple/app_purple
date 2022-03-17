@@ -1,4 +1,5 @@
 import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
+import type { octokit } from "../../../services";
 
 import type { ServerContext as ctx } from "./../../context"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
@@ -608,18 +609,7 @@ export interface NexusGenObjects {
     url: NexusGenScalars['URL']; // URL!
     websiteUrl?: string | null; // String
   }
-  GitHubRepository: { // root type
-    description?: string | null; // String
-    forkCount: number; // Int!
-    id: string; // String!
-    licenseInfo?: NexusGenRootTypes['GitHubLicense'] | null; // GitHubLicense
-    name: string; // String!
-    owner: NexusGenRootTypes['GitHubRepositoryOwner']; // GitHubRepositoryOwner!
-    primaryLanguage?: NexusGenRootTypes['GitHubLanguage'] | null; // GitHubLanguage
-    pushedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    stargazerCount: number; // Int!
-    url: NexusGenScalars['URL']; // URL!
-  }
+  GitHubRepository: octokit.GitHubRepositoryFragment;
   GitHubRepositoryConnection: { // root type
     edges: NexusGenRootTypes['GitHubRepositoryEdge'][]; // [GitHubRepositoryEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!

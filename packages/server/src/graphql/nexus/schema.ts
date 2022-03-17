@@ -1,4 +1,4 @@
-import { oneLine } from "common-tags";
+import { stripIndents } from "common-tags";
 import { lexicographicSortSchema } from "graphql";
 import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
 import path from "path";
@@ -37,8 +37,9 @@ const _schema = makeSchema({
 	],
 	sourceTypes: {
 		headers: [
-			oneLine`
+			stripIndents`
 				import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
+				import type { octokit } from "../../../services";
 			`
 		],
 		modules: [],

@@ -26,6 +26,12 @@ export const GitHubRepository = gql`
 		pushedAt
 		stargazerCount
 		url
+		_issueCount: issues(first: 0) {
+			totalCount
+		}
+		_pullRequestCount: pullRequests(first: 0) {
+			totalCount
+		}
 	}
 	${GitHubLanguage}
 	${GitHubLicense}
