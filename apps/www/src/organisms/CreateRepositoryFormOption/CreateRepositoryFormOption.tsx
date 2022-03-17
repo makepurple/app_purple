@@ -1,9 +1,12 @@
-import { Button } from "@makepurple/components";
+import { FormButton, Spinner, toast } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
-import { CreateRepositoryFormOptionGitHubRepositoryFragment } from "../../graphql";
-import { ForkIcon, IssueIcon, LicenseIcon, PlusIcon, PullRequestIcon, StarIcon } from "../../svgs";
+import {
+	CreateRepositoryFormOptionGitHubRepositoryFragment,
+	useCreateRepositoryMutation
+} from "../../graphql";
+import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
 
 const Root = tw.div`
 	flex
@@ -51,31 +54,26 @@ const LanguageColor = tw.div`
 	rounded-full
 `;
 
-const AddButton = tw(Button)`
+const AddButton = tw(FormButton)`
 	flex-shrink-0
-	flex
-	items-center
-	justify-center
-	h-10
-	w-10
-	p-0
+	w-20
 `;
 
 export interface CreateRepositoryFormOptionProps {
 	className?: string;
-	disabled?: boolean;
-	onAdd?: (repository: CreateRepositoryFormOptionGitHubRepositoryFragment) => void;
+	onAdd?: () => void;
 	repository: CreateRepositoryFormOptionGitHubRepositoryFragment;
 	style?: CSSProperties;
 }
 
 export const CreateRepositoryFormOption: FC<CreateRepositoryFormOptionProps> = ({
 	className,
-	disabled,
 	onAdd,
 	repository,
 	style
 }) => {
+	const [{ fetching: creating }, createRepository] = useCreateRepositoryMutation();
+
 	const primaryLanguage = repository.primaryLanguage;
 	const license = repository.licenseInfo;
 
@@ -126,16 +124,32 @@ export const CreateRepositoryFormOption: FC<CreateRepositoryFormOptionProps> = (
 				</Metrics>
 			</Details>
 			<AddButton
-				disabled={disabled}
-				onClick={() => {
-					onAdd?.(repository);
+				disabled={creating}
+				onClick={async () => {
+					const didSucceed = await createRepository({
+						data: {
+							name: repository.name
+						}
+					})
+						.then((result) => !!result.data?.createRepository.record)
+						.catch(() => false);
+
+					if (!didSucceed) {
+						toast.error("Could not add this repository");
+
+						return;
+					}
+
+					toast.success("Repository added! 🎉");
+
+					onAdd?.();
 				}}
 				size="small"
 				type="button"
-				variant="secondary"
 				tw="ml-2"
 			>
-				<PlusIcon height={24} width={24} />
+				<span>Add</span>
+				{creating && <Spinner tw="ml-2" />}
 			</AddButton>
 		</Root>
 	);

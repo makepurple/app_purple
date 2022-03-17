@@ -4,14 +4,13 @@ import {
 	FormLabel,
 	Input,
 	NonIdealState,
-	RepoIcon,
-	toast
+	RepoIcon
 } from "@makepurple/components";
-import { useDebouncedCallback } from "@makepurple/hooks";
+import { useDebouncedState } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, Fragment, SyntheticEvent, useState } from "react";
 import tw from "twin.macro";
-import { useCreateRepositoryMutation, useSuggestRepositoriesQuery } from "../../graphql";
+import { useSuggestRepositoriesQuery } from "../../graphql";
 import { CreateRepositoryFormOption } from "../CreateRepositoryFormOption";
 import { LoadingCreateRepositoryFormOption } from "../LoadingCreateRepositoryFormOption";
 
@@ -39,15 +38,8 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 	onClose,
 	style
 }) => {
-	const [query, setQuery] = useState<string>("");
-
-	const handleChangeQuery = useDebouncedCallback(
-		(newQuery: string) => {
-			setQuery(newQuery);
-		},
-		[],
-		ms("0.3s")
-	);
+	const [input, setInput] = useState<string>("");
+	const [query, setQuery] = useDebouncedState(input, ms("0.3s"));
 
 	const [{ data, fetching }] = useSuggestRepositoriesQuery({
 		variables: {
@@ -58,8 +50,6 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 		}
 	});
 
-	const [{ fetching: creating }, createRepository] = useCreateRepositoryMutation();
-
 	const repositories = data?.suggestRepositories.nodes ?? [];
 
 	return (
@@ -68,7 +58,10 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 				<FormLabel>Search your repositories</FormLabel>
 				<Input
 					onChange={(e) => {
-						handleChangeQuery(e.target.value);
+						const newInput = e.target.value;
+
+						setInput(newInput);
+						setQuery(newInput);
 					}}
 					placeholder="Search..."
 					type="search"
@@ -95,24 +88,7 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 						<Fragment key={repository.id}>
 							{!!i && <Divider />}
 							<CreateRepositoryFormOption
-								disabled={creating || !!repository.repository}
-								onAdd={async (newRepository) => {
-									const didSucceed = await createRepository({
-										data: {
-											name: newRepository.name
-										}
-									})
-										.then((result) => !!result.data?.createRepository.record)
-										.catch(() => false);
-
-									if (!didSucceed) {
-										toast.error("Could not add this repository");
-
-										return;
-									}
-
-									toast.success("Repository added! 🎉");
-
+								onAdd={() => {
 									onClose?.();
 								}}
 								repository={repository}
