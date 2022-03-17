@@ -72,6 +72,7 @@ export * from "./SkillPageTabs";
 export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";
 export * from "./UpdateExperienceForm";
+export * from "./UpdateRepositoryCard";
 export * from "./UrqlProvider";
 export * from "./UserActivityCard";
 export * from "./UserActivityCardCommentCodeExample";

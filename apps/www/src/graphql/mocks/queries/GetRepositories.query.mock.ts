@@ -8,7 +8,14 @@ const repositories = Array(DATA_SIZE)
 	.map((_, i) => ({
 		...Repository_fragment_mock,
 		__typename: "Repository" as const,
-		id: i.toString()
+		id: i.toString(),
+		github: {
+			...Repository_fragment_mock.github,
+			owner: {
+				...Repository_fragment_mock.github.owner,
+				login: "leedavidcs"
+			}
+		}
 	}));
 
 export const GetRepositories_mock: GetRepositoriesQuery = {

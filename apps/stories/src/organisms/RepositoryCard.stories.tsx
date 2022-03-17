@@ -15,7 +15,6 @@ const Template: Story<RepositoryCardProps> = (args) => {
 	return <RepositoryCard {...args} />;
 };
 Template.args = {
-	editing: false,
 	repository: Repository_fragment_mock as any
 };
 
@@ -44,6 +43,7 @@ AsUserOwned.args = {
 			...Repository_fragment_mock.github,
 			owner: {
 				...Repository_fragment_mock.github.owner,
+				login: "leedavidcs",
 				__typename: "GitHubUser"
 			}
 		}

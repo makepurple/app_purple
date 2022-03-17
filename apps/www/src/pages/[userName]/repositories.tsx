@@ -1,15 +1,15 @@
-import { Button, Divider, NonIdealState, Paper } from "@makepurple/components";
+import { Button, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import tw, { styled } from "twin.macro";
 import { GetRepositoriesDocument } from "../../graphql";
 import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/repositories";
-import { PencilIcon, PlusIcon, RepoIcon } from "../../svgs";
+import { PlusIcon, RepoIcon } from "../../svgs";
 
 const CreateRepositoryForm = dynamic(() => import("../../organisms/CreateRepositoryForm"), {
 	ssr: false
@@ -36,18 +36,11 @@ const Title = tw.h2`
 	leading-none
 `;
 
-const EditButton = tw(Button)`
-	flex-shrink-0
-	h-10
-	w-10
-	p-0
-`;
-
 const AddButton = tw(Button)`
 	flex-shrink-0
-	h-10
-	w-10
-	p-0
+	flex
+	items-center
+	gap-1
 `;
 
 const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
@@ -68,6 +61,7 @@ const Repositories = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -97,7 +91,7 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const [mode, setMode] = useState<"create" | "read" | "update">("read");
+	const [adding, setAdding] = useState<boolean>(false);
 
 	const repositories = data?.repositories.nodes ?? [];
 
@@ -106,54 +100,26 @@ export const Page: NextPage<PageProps> = () => {
 			<Content>
 				<ActionContainer>
 					<Title>
-						<span tw="flex-grow">
-							{mode === "create"
-								? "Add Repository"
-								: mode === "update"
-								? "Edit Repositories"
-								: null}
-						</span>
+						<span tw="flex-grow" />
 						{isMyPage && (
-							<>
-								<EditButton
-									onClick={() => {
-										setMode((oldMode) =>
-											oldMode !== "read" ? "read" : "update"
-										);
-									}}
-									size="small"
-									type="button"
-									variant="secondary"
-									style={mode !== "read" ? { display: "none" } : {}}
-									tw="mr-4"
-								>
-									<PencilIcon height={24} width={24} />
-								</EditButton>
-								<AddButton
-									onClick={() => {
-										setMode((oldMode) =>
-											oldMode !== "read" ? "read" : "create"
-										);
-									}}
-									size="small"
-									type="button"
-									variant="secondary"
-								>
-									<AddRemoveIcon
-										height={24}
-										width={24}
-										$canClose={mode !== "read"}
-									/>
-								</AddButton>
-							</>
+							<AddButton
+								onClick={() => {
+									setAdding((oldAdding) => !oldAdding);
+								}}
+								type="button"
+								variant={adding ? "secondary" : "primary"}
+							>
+								<span>{adding ? "Close" : "Add Repository"}</span>
+								<AddRemoveIcon height={24} width={24} $canClose={adding} />
+							</AddButton>
 						)}
 					</Title>
 				</ActionContainer>
-				{mode === "create" ? (
+				{adding ? (
 					<FormContainer>
 						<CreateRepositoryForm
 							onClose={() => {
-								setMode("read");
+								setAdding(false);
 							}}
 						/>
 					</FormContainer>
@@ -173,7 +139,6 @@ export const Page: NextPage<PageProps> = () => {
 									<RepositoryCard
 										key={repository.id}
 										ref={getRef(i)}
-										editing={mode === "update"}
 										repository={repository}
 									/>
 							  ))}
