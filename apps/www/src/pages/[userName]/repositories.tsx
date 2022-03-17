@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import tw, { styled } from "twin.macro";
-import { GetRepositoriesDocument } from "../../graphql";
+import { GetUserRepositoriesDocument } from "../../graphql";
 import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/repositories";
 import { PlusIcon, RepoIcon } from "../../svgs";
@@ -68,25 +68,19 @@ export const Page: NextPage<PageProps> = () => {
 	const isMyPage = session?.user.name === userName;
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
-		query: GetRepositoriesDocument,
-		field: "repositories",
+		query: GetUserRepositoriesDocument,
+		field: "user.repositories",
 		requestPolicy: "cache-first",
 		variables: {
 			after: null,
 			first: BATCH_SIZE,
-			where: {
-				user: {
-					name: {
-						equals: userName
-					}
-				}
-			}
+			name: userName
 		}
 	});
 
 	const [adding, setAdding] = useState<boolean>(false);
 
-	const repositories = data?.repositories.nodes ?? [];
+	const repositories = data?.user?.repositories.nodes ?? [];
 
 	return (
 		<UserPageLayout selectedTab="repositories" userName={userName}>

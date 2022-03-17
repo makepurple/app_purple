@@ -247,10 +247,6 @@ export function useGetPostsQuery(options: Omit<Urql.UseQueryArgs<Operations.GetP
   return Urql.useQuery<Operations.GetPostsQuery>({ query: Operations.GetPostsDocument, ...options });
 };
 
-export function useGetRepositoriesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetRepositoriesQueryVariables>, 'query'>) {
-  return Urql.useQuery<Operations.GetRepositoriesQuery>({ query: Operations.GetRepositoriesDocument, ...options });
-};
-
 export function useGetSiteWideSideDrawerQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetSiteWideSideDrawerQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetSiteWideSideDrawerQuery>({ query: Operations.GetSiteWideSideDrawerDocument, ...options });
 };
@@ -317,6 +313,10 @@ export function useGetUserInfoSideBarQuery(options: Omit<Urql.UseQueryArgs<Opera
 
 export function useGetUserOverviewQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserOverviewQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetUserOverviewQuery>({ query: Operations.GetUserOverviewDocument, ...options });
+};
+
+export function useGetUserRepositoriesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserRepositoriesQueryVariables>, 'query'>) {
+  return Urql.useQuery<Operations.GetUserRepositoriesQuery>({ query: Operations.GetUserRepositoriesDocument, ...options });
 };
 
 export function useOkQuery(options?: Omit<Urql.UseQueryArgs<Operations.OkQueryVariables>, 'query'>) {

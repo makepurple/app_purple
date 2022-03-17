@@ -76,8 +76,6 @@ export const createCache = () => {
 					cache.invalidate("Query", "postDraft");
 				},
 				createRepository: ({ createRepository: result }: Mutation, _, cache) => {
-					console.log(result);
-
 					const viewerId = result.viewer?.id;
 
 					if (!viewerId) return;

@@ -3,10 +3,10 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
-	GetRepositories_mock,
 	GetSiteWideSideDrawer_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
+	GetUserRepositories_mock,
 	SuggestRepositories_mock,
 	SuggestSkills_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -52,8 +52,8 @@ Standard.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
-			case "GetRepositories":
-				return { data: GetRepositories_mock };
+			case "GetUserRepositories":
+				return { data: GetUserRepositories_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserFriendRequestCount":
@@ -82,10 +82,10 @@ Loading.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
-			case "GetRepositories":
+			case "GetUserRepositories":
 				await PromiseUtils.wait(ms("5s"));
 
-				return { data: GetRepositories_mock };
+				return { data: GetUserRepositories_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
 			case "GetUserInfoSideBar":
@@ -114,7 +114,7 @@ NoResults.parameters = {
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
 				return { data: GetPostDraft_mock };
-			case "GetRepositories":
+			case "GetUserRepositories":
 				return {
 					data: {
 						__typename: "Query",

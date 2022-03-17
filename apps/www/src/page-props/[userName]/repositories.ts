@@ -7,12 +7,12 @@ import {
 	GetPostDraftDocument,
 	GetPostDraftQuery,
 	GetPostDraftQueryVariables,
-	GetRepositoriesDocument,
-	GetRepositoriesQuery,
-	GetRepositoriesQueryVariables,
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
-	GetUserInfoSideBarQueryVariables
+	GetUserInfoSideBarQueryVariables,
+	GetUserRepositoriesDocument,
+	GetUserRepositoriesQuery,
+	GetUserRepositoriesQueryVariables
 } from "../../graphql";
 import { NextUtils } from "../../utils";
 
@@ -33,17 +33,14 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.toPromise()
 			.then((result) => result.data?.user),
 		urqlClient
-			.query<GetRepositoriesQuery, GetRepositoriesQueryVariables>(GetRepositoriesDocument, {
-				after: null,
-				first: BATCH_SIZE,
-				where: {
-					user: {
-						name: {
-							equals: query.userName as string
-						}
-					}
+			.query<GetUserRepositoriesQuery, GetUserRepositoriesQueryVariables>(
+				GetUserRepositoriesDocument,
+				{
+					after: null,
+					first: BATCH_SIZE,
+					name: query.userName as string
 				}
-			})
+			)
 			.toPromise(),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
