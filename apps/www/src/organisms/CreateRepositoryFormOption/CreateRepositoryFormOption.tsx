@@ -124,7 +124,7 @@ export const CreateRepositoryFormOption: FC<CreateRepositoryFormOptionProps> = (
 				</Metrics>
 			</Details>
 			<AddButton
-				disabled={creating}
+				disabled={creating || !!repository.repository}
 				onClick={async () => {
 					const didSucceed = await createRepository({
 						data: {

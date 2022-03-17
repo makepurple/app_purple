@@ -24,16 +24,9 @@ const Content = tw.div`
 	gap-6
 `;
 
-const ActionContainer = tw(Paper)`
-	p-2
-`;
-
-const Title = tw.h2`
+const ActionContainer = tw.div`
 	flex
-	items-center
-	text-xl
-	font-bold
-	leading-none
+	justify-end
 `;
 
 const AddButton = tw(Button)`
@@ -99,21 +92,18 @@ export const Page: NextPage<PageProps> = () => {
 		<UserPageLayout selectedTab="repositories" userName={userName}>
 			<Content>
 				<ActionContainer>
-					<Title>
-						<span tw="flex-grow" />
-						{isMyPage && (
-							<AddButton
-								onClick={() => {
-									setAdding((oldAdding) => !oldAdding);
-								}}
-								type="button"
-								variant={adding ? "secondary" : "primary"}
-							>
-								<span>{adding ? "Close" : "Add Repository"}</span>
-								<AddRemoveIcon height={24} width={24} $canClose={adding} />
-							</AddButton>
-						)}
-					</Title>
+					{isMyPage && (
+						<AddButton
+							onClick={() => {
+								setAdding((oldAdding) => !oldAdding);
+							}}
+							type="button"
+							variant={adding ? "secondary" : "primary"}
+						>
+							<span>{adding ? "Close" : "Add Repository"}</span>
+							<AddRemoveIcon height={24} width={24} $canClose={adding} />
+						</AddButton>
+					)}
 				</ActionContainer>
 				{adding ? (
 					<FormContainer>

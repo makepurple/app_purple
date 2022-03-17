@@ -65,7 +65,7 @@ export const CreateRepositoryForm: FC<CreateRepositoryFormProps> = ({
 					}}
 					placeholder="Search..."
 					type="search"
-					value={query}
+					value={input}
 				/>
 			</FormGroup>
 			<RepositoryOptions tw="mt-6">
