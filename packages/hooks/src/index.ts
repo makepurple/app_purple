@@ -2,6 +2,7 @@ export * from "./useComboBoxState";
 export * from "./useContextMenu";
 export * from "./useCookieValue";
 export * from "./useDebouncedCallback";
+export * from "./useDebouncedState";
 export * from "./useHover";
 export * from "./useIntersectionObserver";
 export * from "./useInterval";
