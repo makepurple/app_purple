@@ -1,5 +1,5 @@
-import { GitHubRepository_fragment_mock } from "..";
 import { SuggestRepositoriesQuery } from "../../generated";
+import { GitHubRepository_fragment_mock } from "../fragments";
 
 const DATA_SIZE = 5;
 
