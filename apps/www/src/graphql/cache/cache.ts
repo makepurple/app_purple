@@ -92,10 +92,34 @@ export const createCache = () => {
 						});
 				},
 				deleteCodeExample: ({ deleteCodeExample: result }: Mutation, _, cache) => {
-					!!result.viewer?.id &&
-						cache.invalidate({ __typename: "User", id: result.viewer.id });
-
 					cache.invalidate({ __typename: "CodeExample", id: result.record.id });
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => {
+							switch (field.fieldName) {
+								case "activities":
+								case "codeExamples":
+								case "commentUpvotes":
+								case "comments":
+								case "notifications":
+								case "trophies":
+									return true;
+								default:
+									return false;
+							}
+						})
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				},
 				deleteExperience: ({ deleteExperience: result }: Mutation, _, cache) => {
 					cache.invalidate({ __typename: "Experience", id: result.record.id });
