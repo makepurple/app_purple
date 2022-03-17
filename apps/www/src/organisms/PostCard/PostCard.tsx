@@ -30,7 +30,8 @@ const DeleteButton = tw(Button)`
 const Root = styled(Paper)`
 	${tw`
 		flex
-		flex-col-reverse
+		flex-col
+		gap-4
 		p-3
 		cursor-pointer
 		hover:bg-indigo-50
@@ -135,10 +136,7 @@ const Thumbnail = tw.a`
 	flex-shrink-0
 	h-44
 	w-full
-	mb-3
 	sm:w-44
-	sm:ml-4
-	sm:mb-0
 	overflow-hidden
 	rounded-md
 `;
@@ -176,6 +174,18 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 			}}
 			style={style}
 		>
+			{post.thumbnailUrl && (
+				<NextLink href={postUrl} passHref>
+					<Thumbnail onClick={(e) => e.stopPropagation()}>
+						<NextImage
+							alt="thumbnail"
+							src={post.thumbnailUrl}
+							layout="fill"
+							objectFit="cover"
+						/>
+					</Thumbnail>
+				</NextLink>
+			)}
 			<Info>
 				<NextLink href={postUrl} passHref>
 					<MainAnchor>
@@ -295,18 +305,6 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 					)}
 				</Actions>
 			</Info>
-			{post.thumbnailUrl && (
-				<NextLink href={postUrl} passHref>
-					<Thumbnail onClick={(e) => e.stopPropagation()}>
-						<NextImage
-							alt="thumbnail"
-							src={post.thumbnailUrl}
-							layout="fill"
-							objectFit="cover"
-						/>
-					</Thumbnail>
-				</NextLink>
-			)}
 		</Root>
 	);
 });
