@@ -139,10 +139,36 @@ export const createCache = () => {
 					});
 				},
 				deletePost: ({ deletePost: result }: Mutation, _, cache) => {
-					!!result.viewer?.id &&
-						cache.invalidate({ __typename: "User", id: result.viewer.id });
-
 					cache.invalidate({ __typename: "Post", id: result.record.id });
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => {
+							switch (field.fieldName) {
+								case "activities":
+								case "commentUpvotes":
+								case "comments":
+								case "notifications":
+								case "posts":
+								case "postUpvotes":
+								case "postViews":
+								case "trophies":
+									return true;
+								default:
+									return false;
+							}
+						})
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				},
 				deleteRepository: ({ deleteRepository: result }: Mutation, _, cache) => {
 					cache.invalidate({ __typename: "Repository", id: result.record.id });
