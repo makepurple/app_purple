@@ -3,10 +3,13 @@ import {
 	Avatar,
 	Form,
 	FormButton,
+	FormGroup,
+	FormLabel,
 	GitHubAvatarImage,
 	HiddenInput,
 	MaybeAnchor,
 	MaybeWrap,
+	Paper,
 	Spinner,
 	Tags,
 	toast
@@ -24,14 +27,19 @@ import {
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
 import { SkillAutosuggest } from "../SkillAutosuggest";
 
-const Root = styled.div`
+const Root = styled(Paper)<{ $editing: boolean }>`
 	${tw`
 		flex
 		items-start
-		py-4
-		cursor-pointer
-		active:bg-indigo-50
+		p-4
 	`}
+
+	${({ $editing }) =>
+		!$editing &&
+		tw`
+			cursor-pointer
+			hover:bg-indigo-50
+		`}
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -43,7 +51,7 @@ const Details = tw.div`
 	flex-grow
 	flex
 	flex-col
-	items-start
+	items-stretch
 `;
 
 const Name = tw.h3`
@@ -59,10 +67,6 @@ const DescriptionContainer = tw.a`
 const Description = tw.p`
 	text-base
 	line-clamp-2
-`;
-
-const Skills = tw(Tags)`
-	self-stretch
 `;
 
 const Info = tw.div`
@@ -190,6 +194,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 
 				toast.success("Repository details were updated! 🎉");
 			})}
+			$editing
 		/>
 	) : (
 		<Root
@@ -197,6 +202,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 			onClick={() => {
 				window.open(repository.github.url, "_blank");
 			}}
+			$editing={false}
 		/>
 	);
 
@@ -222,11 +228,17 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 				</StyledAvatar>
 			)}
 			<Details>
-				<Anchor href={repository.github.url} target="_blank" rel="noopener noreferrer">
+				<Anchor
+					as={editing ? "span" : "a"}
+					href={repository.github.url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					<Name>{repository.name}</Name>
 				</Anchor>
 				{repository.github.description && (
 					<DescriptionContainer
+						as={editing ? "div" : "a"}
 						href={repository.github.url}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -237,56 +249,59 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 					</DescriptionContainer>
 				)}
 				{(editing || !!skills.fields.length) && (
-					<Skills
-						editable={editing}
-						onClick={(e) => {
-							e.stopPropagation();
-						}}
-						type="positive"
-						tw="relative mt-3"
-					>
-						{skills.fields.map((field, i) => (
-							<MaybeWrap
-								key={field._id}
-								condition={!editing}
-								wrap={({ child }) => (
-									<NextLink
-										href="/s/[skillOwner]/[skillName]"
-										as={`/s/${field.owner}/${field.name}`}
-										passHref
-									>
-										{child}
-									</NextLink>
-								)}
-							>
-								<Tags.Tag
-									id={field._id}
-									onClick={(e) => {
-										e.stopPropagation();
-									}}
-									onRemove={() => skills.remove(i)}
-									title={`${field.owner}/${field.name}`}
-								>
-									{editing && (
-										<>
-											<HiddenInput {...register(`skills.${i}.name`)} />
-											<HiddenInput {...register(`skills.${i}.owner`)} />
-										</>
-									)}
-									<span>{field.name}</span>
-								</Tags.Tag>
-							</MaybeWrap>
-						))}
-						<SkillAutosuggest
-							onSelect={(newSkill) => {
-								skills.append({
-									name: newSkill.name,
-									owner: newSkill.owner.login
-								});
+					<FormGroup tw="mt-3">
+						{editing && <FormLabel>Skills</FormLabel>}
+						<Tags
+							editable={editing}
+							onClick={(e) => {
+								e.stopPropagation();
 							}}
-							aria-label="new skill"
-						/>
-					</Skills>
+							type="positive"
+							tw="relative"
+						>
+							{skills.fields.map((field, i) => (
+								<MaybeWrap
+									key={field._id}
+									condition={!editing}
+									wrap={({ child }) => (
+										<NextLink
+											href="/s/[skillOwner]/[skillName]"
+											as={`/s/${field.owner}/${field.name}`}
+											passHref
+										>
+											{child}
+										</NextLink>
+									)}
+								>
+									<Tags.Tag
+										id={field._id}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+										onRemove={() => skills.remove(i)}
+										title={`${field.owner}/${field.name}`}
+									>
+										{editing && (
+											<>
+												<HiddenInput {...register(`skills.${i}.name`)} />
+												<HiddenInput {...register(`skills.${i}.owner`)} />
+											</>
+										)}
+										<span>{field.name}</span>
+									</Tags.Tag>
+								</MaybeWrap>
+							))}
+							<SkillAutosuggest
+								onSelect={(newSkill) => {
+									skills.append({
+										name: newSkill.name,
+										owner: newSkill.owner.login
+									});
+								}}
+								aria-label="new skill"
+							/>
+						</Tags>
+					</FormGroup>
 				)}
 				<Info
 					onClick={(e) => {
@@ -353,9 +368,9 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 				</Info>
 			</Details>
 			{editing && (
-				<Actions tw="ml-2">
+				<Actions tw="ml-4">
 					<SaveButton disabled={fetching} size="small" type="submit">
-						{fetching ? <Spinner /> : "Save"}
+						{updating ? <Spinner /> : "Save"}
 					</SaveButton>
 					<DeleteButton
 						disabled={fetching}
@@ -380,7 +395,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 						type="button"
 						variant="alert"
 					>
-						{fetching ? <Spinner /> : "Delete"}
+						{removing ? <Spinner /> : "Delete"}
 					</DeleteButton>
 				</Actions>
 			)}

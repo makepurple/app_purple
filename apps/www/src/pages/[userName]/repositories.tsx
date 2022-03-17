@@ -17,15 +17,20 @@ const CreateRepositoryForm = dynamic(() => import("../../organisms/CreateReposit
 
 const BATCH_SIZE = 20;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
+	gap-6
+`;
+
+const ActionContainer = tw(Paper)`
+	p-2
 `;
 
 const Title = tw.h2`
 	flex
+	items-center
 	text-xl
 	font-bold
 	leading-none
@@ -53,6 +58,10 @@ const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
 	`}
 
 	${({ $canClose }) => $canClose && tw`rotate-45`}
+`;
+
+const FormContainer = tw(Paper)`
+	p-4
 `;
 
 const Repositories = tw.div`
@@ -95,47 +104,59 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="repositories" userName={userName}>
 			<Content>
-				<Title tw="mb-4">
-					<span tw="flex-grow">
-						{mode === "create"
-							? "Add Repository"
-							: mode === "update"
-							? "Edit Repositories"
-							: "Repositories"}
-					</span>
-					{isMyPage && (
-						<>
-							<EditButton
-								onClick={() => {
-									setMode((oldMode) => (oldMode !== "read" ? "read" : "update"));
-								}}
-								size="small"
-								type="button"
-								variant="secondary"
-								style={mode !== "read" ? { display: "none" } : {}}
-								tw="mr-4"
-							>
-								<PencilIcon height={24} width={24} />
-							</EditButton>
-							<AddButton
-								onClick={() => {
-									setMode((oldMode) => (oldMode !== "read" ? "read" : "create"));
-								}}
-								size="small"
-								type="button"
-								variant="secondary"
-							>
-								<AddRemoveIcon height={24} width={24} $canClose={mode !== "read"} />
-							</AddButton>
-						</>
-					)}
-				</Title>
+				<ActionContainer>
+					<Title>
+						<span tw="flex-grow">
+							{mode === "create"
+								? "Add Repository"
+								: mode === "update"
+								? "Edit Repositories"
+								: null}
+						</span>
+						{isMyPage && (
+							<>
+								<EditButton
+									onClick={() => {
+										setMode((oldMode) =>
+											oldMode !== "read" ? "read" : "update"
+										);
+									}}
+									size="small"
+									type="button"
+									variant="secondary"
+									style={mode !== "read" ? { display: "none" } : {}}
+									tw="mr-4"
+								>
+									<PencilIcon height={24} width={24} />
+								</EditButton>
+								<AddButton
+									onClick={() => {
+										setMode((oldMode) =>
+											oldMode !== "read" ? "read" : "create"
+										);
+									}}
+									size="small"
+									type="button"
+									variant="secondary"
+								>
+									<AddRemoveIcon
+										height={24}
+										width={24}
+										$canClose={mode !== "read"}
+									/>
+								</AddButton>
+							</>
+						)}
+					</Title>
+				</ActionContainer>
 				{mode === "create" ? (
-					<CreateRepositoryForm
-						onClose={() => {
-							setMode("read");
-						}}
-					/>
+					<FormContainer>
+						<CreateRepositoryForm
+							onClose={() => {
+								setMode("read");
+							}}
+						/>
+					</FormContainer>
 				) : (
 					<Repositories>
 						{!repositories.length
@@ -149,22 +170,15 @@ export const Page: NextPage<PageProps> = () => {
 									</NonIdealState>
 							  )
 							: repositories.map((repository, i) => (
-									<Fragment key={repository.id}>
-										{!!i && <Divider tw="ml-22" />}
-										<RepositoryCard
-											ref={getRef(i)}
-											editing={mode === "update"}
-											repository={repository}
-										/>
-									</Fragment>
+									<RepositoryCard
+										key={repository.id}
+										ref={getRef(i)}
+										editing={mode === "update"}
+										repository={repository}
+									/>
 							  ))}
 						{fetching &&
-							Array.from({ length: 3 }, (_, i) => (
-								<Fragment key={i}>
-									{!!i && <Divider tw="ml-22" />}
-									<LoadingRepositoryCard />
-								</Fragment>
-							))}
+							Array.from({ length: 3 }, (_, i) => <LoadingRepositoryCard key={i} />)}
 					</Repositories>
 				)}
 			</Content>
