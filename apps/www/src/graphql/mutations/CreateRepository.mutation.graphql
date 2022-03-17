@@ -1,17 +1,11 @@
 mutation CreateRepository($data: RepositoryCreateInput!) {
 	createRepository(data: $data) {
+		viewer {
+			id
+			name
+		}
 		record {
 			...RepositoryCardRepository
-		}
-		query {
-			viewer {
-				id
-				repositories(first: 100) {
-					nodes {
-						id
-					}
-				}
-			}
 		}
 	}
 }

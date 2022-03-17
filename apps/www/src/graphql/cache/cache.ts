@@ -75,6 +75,24 @@ export const createCache = () => {
 				createPost: (_, __, cache) => {
 					cache.invalidate("Query", "postDraft");
 				},
+				createRepository: ({ createRepository: result }: Mutation, _, cache) => {
+					console.log(result);
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "repositories")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
 				deleteCodeExample: ({ deleteCodeExample: result }: Mutation, _, cache) => {
 					!!result.viewer?.id &&
 						cache.invalidate({ __typename: "User", id: result.viewer.id });
