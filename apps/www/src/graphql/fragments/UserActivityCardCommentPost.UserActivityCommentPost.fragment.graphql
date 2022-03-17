@@ -3,24 +3,7 @@ fragment UserActivityCardCommentPostUserActivityCommentPost on UserActivityComme
 	comment {
 		id
 		post {
-			authorName
-			description
-			id
-			publishedAt
-			readTime
-			skills(first: 8) {
-				totalCount
-				nodes {
-					id
-					name
-					owner
-				}
-			}
-			thumbnailUrl
-			title
-			upvotes
-			urlSlug
-			viewerUpvote
+			...PostCardPost
 		}
 		postId
 	}
