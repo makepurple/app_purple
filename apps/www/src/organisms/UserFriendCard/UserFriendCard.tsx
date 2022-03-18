@@ -1,4 +1,5 @@
 import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
@@ -58,6 +59,8 @@ export interface UserFriendCardProps {
 
 export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((props, ref) => {
 	const { className, style, user } = props;
+
+	const { status } = useSession();
 
 	const [{ fetching: requesting }, friendRequest] = useFriendRequestUserMutation();
 	const [{ fetching: unfriending }, unfriend] = useDeleteFriendshipMutation();
@@ -135,21 +138,23 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 					</Tags>
 				)}
 			</Details>
-			<Actions tw="ml-4">
-				<FollowButton
-					disabled={loading}
-					onClick={async () => {
-						user.viewerIsFriend
-							? await unfriend({ where: { id: user.id } }).catch(() => null)
-							: await friendRequest({ where: { id: user.id } }).catch(() => null);
-					}}
-					size="small"
-					type="button"
-					variant={user.viewerIsFriend ? "alert" : "secondary"}
-				>
-					{loading ? <Spinner /> : user.viewerIsFriend ? "Remove" : "Connect"}
-				</FollowButton>
-			</Actions>
+			{status === "authenticated" && (
+				<Actions tw="ml-4">
+					<FollowButton
+						disabled={loading}
+						onClick={async () => {
+							user.viewerIsFriend
+								? await unfriend({ where: { id: user.id } }).catch(() => null)
+								: await friendRequest({ where: { id: user.id } }).catch(() => null);
+						}}
+						size="small"
+						type="button"
+						variant={user.viewerIsFriend ? "alert" : "secondary"}
+					>
+						{loading ? <Spinner /> : user.viewerIsFriend ? "Remove" : "Connect"}
+					</FollowButton>
+				</Actions>
+			)}
 		</Root>
 	);
 });

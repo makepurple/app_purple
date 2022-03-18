@@ -1,4 +1,5 @@
 import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
@@ -55,6 +56,8 @@ export interface UserFriendRequestCardProps {
 export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendRequestCardProps>(
 	(props, ref) => {
 		const { className, style, user } = props;
+
+		const { status } = useSession();
 
 		const [{ fetching }, rejectRequest] = useRejectFriendshipMutation();
 
@@ -129,21 +132,23 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 						</Tags>
 					)}
 				</Details>
-				<Actions tw="ml-4">
-					<FollowButton
-						disabled={fetching}
-						onClick={async () => {
-							if (user.viewerIsFriend) return;
+				{status === "authenticated" && (
+					<Actions tw="ml-4">
+						<FollowButton
+							disabled={fetching}
+							onClick={async () => {
+								if (user.viewerIsFriend) return;
 
-							await rejectRequest({ where: { id: user.id } }).catch(() => null);
-						}}
-						size="small"
-						type="button"
-						variant="secondary"
-					>
-						{fetching ? <Spinner /> : "Ignore"}
-					</FollowButton>
-				</Actions>
+								await rejectRequest({ where: { id: user.id } }).catch(() => null);
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+						>
+							{fetching ? <Spinner /> : "Ignore"}
+						</FollowButton>
+					</Actions>
+				)}
 			</Root>
 		);
 	}
