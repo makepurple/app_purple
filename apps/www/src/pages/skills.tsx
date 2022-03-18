@@ -1,7 +1,6 @@
 import {
 	Brand,
 	Button,
-	Divider,
 	FormGroup,
 	FormLabel,
 	Input,
@@ -40,11 +39,15 @@ const SideBar = tw(Paper)`
 	lg:w-96
 `;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex-grow
 	flex
 	flex-col
 	items-stretch
+	gap-6
+`;
+
+const IntroContainer = tw(Paper)`
 	p-6
 `;
 
@@ -65,6 +68,7 @@ const Skills = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -128,13 +132,15 @@ export const Page: NextPage<PageProps> = () => {
 				</Button>
 			</SideBar>
 			<Content>
-				<Title>Skills</Title>
-				{hasSkills && (
-					<Description tw="mt-4">
-						Popular skills by developers and programmers on <Brand tw="text-base" />
-					</Description>
-				)}
-				<Skills tw="mt-6">
+				<IntroContainer>
+					<Title>Skills</Title>
+					{hasSkills && (
+						<Description tw="mt-4">
+							Popular skills by developers on <Brand tw="text-base" />.
+						</Description>
+					)}
+				</IntroContainer>
+				<Skills>
 					{!hasSkills ? (
 						!fetching && (
 							<NonIdealState
@@ -149,20 +155,11 @@ export const Page: NextPage<PageProps> = () => {
 						<>
 							{!!exactMatch && <SkillCard skill={exactMatch} />}
 							{skills.map((skill, i) => (
-								<Fragment key={skill.id}>
-									{(!!i || !!exactMatch) && <Divider tw="ml-22" />}
-									<SkillCard ref={getRef(i)} skill={skill} />
-								</Fragment>
+								<SkillCard key={skill.id} ref={getRef(i)} skill={skill} />
 							))}
 						</>
 					)}
-					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!skills.length) && <Divider tw="ml-22" />}
-								<LoadingSkillCard />
-							</Fragment>
-						))}
+					{fetching && Array.from({ length: 3 }, (_, i) => <LoadingSkillCard key={i} />)}
 				</Skills>
 			</Content>
 		</Root>

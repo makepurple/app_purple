@@ -1,4 +1,4 @@
-import { Anchor, Avatar, GitHubAvatarImage, MaybeAnchor } from "@makepurple/components";
+import { Anchor, Avatar, GitHubAvatarImage, MaybeAnchor, Paper } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -7,12 +7,12 @@ import tw from "twin.macro";
 import { SkillCardSkillFragment } from "../../graphql";
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
 
-const Root = tw.div`
+const Root = tw(Paper)`
 	flex
 	items-start
-	py-4
+	p-4
 	cursor-pointer
-	active:bg-indigo-50
+	hover:bg-indigo-50
 `;
 
 const StyledAvatar = tw(Avatar)`

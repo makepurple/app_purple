@@ -1,12 +1,12 @@
-import { Skeleton } from "@makepurple/components";
+import { Paper, Skeleton } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 
-const Root = tw.div`
+const Root = tw(Paper)`
 	flex
 	flex-row
 	items-start
-	py-4
+	p-4
 `;
 
 export interface LoadingSkillCardProps {
