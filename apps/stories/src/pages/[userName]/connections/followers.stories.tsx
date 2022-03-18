@@ -14,7 +14,7 @@ import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/[userName]/followers",
+	title: "pages/[userName]/connections/followers",
 	component: Page,
 	decorators: [
 		(Story) => (
