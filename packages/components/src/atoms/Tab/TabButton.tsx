@@ -5,13 +5,12 @@ import tw, { styled } from "twin.macro";
 
 export type TabButtonProps = InferComponentProps<typeof TabButton>;
 
-const Selection = styled(m.div)`
+export const TabSelection = styled(m.div)`
 	${tw`
 		hidden
 		absolute
 		inset-0
 		bg-indigo-500
-		rounded-md
 	`}
 `;
 
@@ -29,7 +28,7 @@ export const TabButton = styled.button.attrs<{ selected?: boolean }>(({ children
 	"aria-selected": selected,
 	children: (
 		<>
-			{selected && <Selection initial={false} layoutId="tabButton" />}
+			{selected && <TabSelection initial={false} layoutId="tabButton" />}
 			<Content>{children}</Content>
 		</>
 	)
@@ -41,8 +40,6 @@ export const TabButton = styled.button.attrs<{ selected?: boolean }>(({ children
 		items-center
 		justify-center
 		m-0.5
-		h-14
-		rounded-lg
 		text-lg
 		font-medium
 		leading-none
@@ -59,7 +56,7 @@ export const TabButton = styled.button.attrs<{ selected?: boolean }>(({ children
 	`}
 
 	&[aria-selected="true"] {
-		& ${Selection} {
+		& ${TabSelection} {
 			${tw`block`}
 		}
 
