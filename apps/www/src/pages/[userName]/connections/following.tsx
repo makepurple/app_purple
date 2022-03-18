@@ -4,15 +4,15 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
-import { GetUserFollowingDocument } from "../../graphql";
+import { GetUserFollowingDocument } from "../../../graphql";
 import {
 	LoadingUserFollowCard,
 	SkillFollowCard,
 	UserFollowCard,
 	UserPageLayout
-} from "../../organisms";
-import { pageProps, PageProps } from "../../page-props/[userName]/following";
-import { PersonIcon } from "../../svgs";
+} from "../../../organisms";
+import { pageProps, PageProps } from "../../../page-props/[userName]/connections/following";
+import { PersonIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 

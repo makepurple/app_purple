@@ -3,18 +3,18 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock,
-	GetUserFollowing_mock,
+	GetUserFollowers_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
-import { PageProps } from "@makepurple/www/src/page-props/[userName]/following";
-import { Page } from "@makepurple/www/src/pages/[userName]/following";
+import { PageProps } from "@makepurple/www/src/page-props/[userName]/connections/followers";
+import { Page } from "@makepurple/www/src/pages/[userName]/connections/followers";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
 export default {
-	title: "pages/[userName]/following",
+	title: "pages/[userName]/followers",
 	component: Page,
 	decorators: [
 		(Story) => (
@@ -50,8 +50,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFollowing":
-				return { data: GetUserFollowing_mock };
+			case "GetUserFollowers":
+				return { data: GetUserFollowers_mock };
 			case "GetUserFriendRequestCount":
 				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
