@@ -8,39 +8,37 @@ import {
 	ExperienceType,
 	useDeleteExperienceMutation
 } from "../../graphql";
-import { CancelIcon, PencilIcon } from "../../svgs";
 
 const EditButton = tw(Button)`
 	flex-shrink-0
-	h-10
-	w-10
-	p-0
-	ml-2
+	w-20
 	opacity-100
-	transition
+	transition-opacity
+	ease-in-out
 	duration-150
-	ease-in
+	sm:flex-col
 	sm:opacity-0
 `;
 
 const DeleteButton = tw(Button)`
 	flex-shrink-0
-	h-10
-	w-10
-	p-0
-	ml-2
-	opacity-100
-	transition
+	w-20
+		opacity-100
+	transition-opacity
+	ease-in-out
 	duration-150
-	ease-in
+	sm:flex-col
 	sm:opacity-0
 `;
 
 const Root = styled(Paper)`
 	${tw`
 		flex
+		flex-col
+		gap-4
 		items-start
 		p-4
+		sm:flex-row
 	`}
 
 	&:first-child ${EditButton} {
@@ -60,7 +58,6 @@ const Root = styled(Paper)`
 
 const StyledAvatar = tw(Avatar)`
 	flex-shrink-0
-	mr-6
 	rounded-md
 `;
 
@@ -113,9 +110,10 @@ const Highlights = tw.ul`
 const Actions = tw.div`
 	flex-shrink-0
 	flex
-	flex-col
+	flex-row
 	items-stretch
 	gap-2
+	sm:flex-col
 `;
 
 export interface ExperienceCardProps {
@@ -224,10 +222,11 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 
 							onEdit?.(experience);
 						}}
+						size="small"
 						type="button"
 						variant="secondary"
 					>
-						<PencilIcon height={24} width={24} />
+						Edit
 					</EditButton>
 					<DeleteButton
 						disabled={removing}
@@ -248,10 +247,11 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 
 							toast.success("Experience was successfully deleted");
 						}}
+						size="small"
 						type="button"
 						variant="alert"
 					>
-						{removing ? <Spinner /> : <CancelIcon height={24} width={24} />}
+						{removing ? <Spinner /> : "Delete"}
 					</DeleteButton>
 				</Actions>
 			)}
