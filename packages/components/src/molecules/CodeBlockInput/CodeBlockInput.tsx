@@ -43,16 +43,19 @@ const EditorWrapper = tw.div`
 const StyledCodeEditor = tw(CodeEditor)`
 	select-none
 	pointer-events-none
+	font-mono
 	[& textarea]:select-auto
 	[& textarea]:pointer-events-auto
 `;
 
 const Line = tw.span`
 	table-row
+	font-mono
 `;
 
 const LineContent = tw.span`
 	table-cell
+	font-mono
 `;
 
 export interface CodeBlockInputProps {

@@ -15,10 +15,10 @@ const Root = tw(Paper)`
 `;
 
 const Text = tw.span`
-	text-lg
-	leading-none
-	font-semibold
 	text-black
+	text-xl
+	font-bold
+	leading-none
 	text-center
 `;
 
