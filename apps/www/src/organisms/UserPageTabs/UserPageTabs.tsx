@@ -64,7 +64,7 @@ export const UserPageTabs: FC<UserPageTabsProps> = ({
 			 */
 			onChange={() => undefined}
 		>
-			<Tab.List forwardedAs={Paper} className={className} style={style}>
+			<Tab.List forwardedAs={Paper} className={className} id="user-tabs" style={style}>
 				<Tab as={Fragment}>
 					{(tabProps) => (
 						<NextLinkAs
