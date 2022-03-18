@@ -8,7 +8,7 @@ import { UserActivityCardHeader } from "../UserActivityCardHeader";
 const Root = tw.div`
 	flex
 	flex-col
-	items-start
+	items-stretch
 `;
 
 const Content = tw(Paper)`

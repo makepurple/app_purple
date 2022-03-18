@@ -5,40 +5,7 @@ fragment UserActivityCardFollowSkillUserActivityFollowSkill on UserActivityFollo
 			__typename
 			viewerFollowing
 			... on Skill {
-				id
-				name
-				owner
-				github {
-					__typename
-					id
-					description
-					forkCount
-					issueCount
-					licenseInfo {
-						__typename
-						id
-						name
-						nickname
-						spdxId
-						url
-					}
-					name
-					owner {
-						id
-						avatarUrl
-						login
-					}
-					primaryLanguage {
-						__typename
-						color
-						id
-						name
-					}
-					pullRequestCount
-					pushedAt
-					stargazerCount
-					url
-				}
+				...SkillFollowCardSkill
 			}
 		}
 	}

@@ -78,7 +78,7 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 					height={64}
 					width={64}
 					user={user}
-					tw="flex-shrink-0 mr-6"
+					tw="flex-shrink-0 mr-4"
 				/>
 			)}
 			<Details>

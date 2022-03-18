@@ -102,7 +102,7 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 	return (
 		<Root ref={ref} className={className} style={style}>
 			{owner.__typename === "GitHubOrganization" && owner.avatarUrl && (
-				<StyledAvatar border={4} tw="mr-6">
+				<StyledAvatar border={4} tw="mr-4">
 					<GitHubAvatarImage
 						alt={owner.login}
 						src={owner.avatarUrl}

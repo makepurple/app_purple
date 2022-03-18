@@ -2,47 +2,7 @@ fragment UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser on UserAct
 	id
 	friendship {
 		friending {
-			description
-			desiredSkills(first: 6) {
-				__typename
-				pageInfo {
-					...PageInfoFragment
-				}
-				totalCount
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					id
-					name
-					owner
-				}
-			}
-			id
-			image
-			name
-			skills(first: 6) {
-				__typename
-				pageInfo {
-					...PageInfoFragment
-				}
-				totalCount
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					id
-					name
-					owner
-				}
-			}
-			viewerFollowing
+			...UserFollowCardUser
 		}
 		friendingId
 	}

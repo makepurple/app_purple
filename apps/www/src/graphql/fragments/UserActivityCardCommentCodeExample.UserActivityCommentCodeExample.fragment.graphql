@@ -3,42 +3,7 @@ fragment UserActivityCardCommentCodeExampleUserActivityCommentCodeExample on Use
 	comment {
 		id
 		codeExample {
-			authorName
-			description
-			id
-			language
-			languageColor
-			primarySkill {
-				github {
-					id
-					name
-					owner {
-						id
-						avatarUrl
-						login
-					}
-				}
-				id
-				name
-				owner
-			}
-			skills(first: 5) {
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					id
-					name
-					owner
-				}
-			}
-			title
-			upvotes
-			urlSlug
-			viewerUpvote
+			...CodeExampleCardCodeExample
 		}
 		codeExampleId
 	}
