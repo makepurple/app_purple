@@ -91,7 +91,7 @@ export const useRelayCursor = <
 		(i: number): Maybe<RefCallback<HTMLElement>> => {
 			if (nodes.length < offset) return i === 0 ? loadMoreRef : null;
 
-			const isOffset = nodes.length - i === offset;
+			const isOffset = nodes.length - i === offset + 1;
 
 			return isOffset ? loadMoreRef : null;
 		},
