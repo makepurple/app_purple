@@ -8,7 +8,7 @@ export interface LoadingCodeExampleCardProps {
 
 export const LoadingCodeExampleCard: FC<LoadingCodeExampleCardProps> = ({ className, style }) => {
 	return (
-		<Paper className={className} style={style} tw="flex flex-row items-start gap-3 p-3">
+		<Paper className={className} style={style} tw="flex flex-row items-start gap-2 p-2">
 			<Skeleton tw="flex-shrink-0 h-12 w-12 rounded-md" />
 			<div tw="flex-grow self-stretch flex flex-col items-start gap-2">
 				<Skeleton tw="h-4.5 w-1/2" />

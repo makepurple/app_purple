@@ -7,7 +7,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
 import { GetSkillCodeExamplesDocument } from "../../../../graphql";
-import { CodeExampleCard, LoadingCodeExampleCard, SkillPageLayout } from "../../../../organisms";
+import {
+	CodeExampleMiniCard,
+	LoadingCodeExampleCard,
+	SkillPageLayout
+} from "../../../../organisms";
 import {
 	PageProps,
 	pageProps
@@ -107,7 +111,7 @@ export const Page: NextPage<PageProps> = () => {
 				) : (
 					<>
 						{codeExamples.map((codeExample, i) => (
-							<CodeExampleCard
+							<CodeExampleMiniCard
 								key={codeExample.id}
 								ref={getRef(i)}
 								codeExample={codeExample}

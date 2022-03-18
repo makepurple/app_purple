@@ -7,7 +7,7 @@ import React, { Fragment } from "react";
 import tw from "twin.macro";
 import { useGetUserOverviewQuery } from "../../graphql";
 import {
-	CodeExampleCard,
+	CodeExampleMiniCard,
 	PostCard,
 	UserGitHubContributionHeatmap,
 	UserOverviewExperienceCard,
@@ -249,7 +249,10 @@ export const Page: NextPage<PageProps> = () => {
 					) : (
 						<CodeExamples>
 							{codeExamples.map((codeExample) => (
-								<CodeExampleCard key={codeExample.id} codeExample={codeExample} />
+								<CodeExampleMiniCard
+									key={codeExample.id}
+									codeExample={codeExample}
+								/>
 							))}
 						</CodeExamples>
 					)}

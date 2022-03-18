@@ -8,8 +8,8 @@ import React from "react";
 import tw from "twin.macro";
 import { GetUserCodeExamplesDocument } from "../../../graphql";
 import {
-	CodeExampleCard,
 	CodeExampleCreateCard,
+	CodeExampleMiniCard,
 	LoadingCodeExampleCard,
 	UserPageLayout
 } from "../../../organisms";
@@ -110,7 +110,7 @@ export const Page: NextPage<PageProps> = () => {
 					<>
 						{isMyPage && <CodeExampleCreateCard userName={userName} />}
 						{codeExamples.map((codeExample, i) => (
-							<CodeExampleCard
+							<CodeExampleMiniCard
 								key={codeExample.id}
 								ref={getRef(i)}
 								codeExample={codeExample}
