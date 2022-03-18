@@ -1,7 +1,7 @@
 import type { Prisma } from "@prisma/client";
 
 const names: readonly [name: string, owner: string][] = [
-	["algolia-client-javascript", "algolia"],
+	["algoliasearch-client-javascript", "algolia"],
 	["apollo-client", "apollographql"],
 	["apollo-server", "apollographql"],
 	["blender", "blender"],
