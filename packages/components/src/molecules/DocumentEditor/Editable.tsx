@@ -1,3 +1,4 @@
+import { useOnKeyDown } from "@makepurple/hooks";
 import { InferComponentProps } from "@makepurple/typings";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { forwardRef, useCallback, useContext } from "react";
@@ -53,6 +54,8 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 
 		const readOnly = _readOnly ?? context.readOnly;
 
+		const onRightKey = useOnKeyDown({ key: "RIGHT" }, () => undefined);
+
 		return (
 			<EditableContainer
 				ref={composedRef}
@@ -73,7 +76,9 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 					 * @author David Lee
 					 * @date January 1, 2021
 					 */
-					onKeyDown={() => 1}
+					onKeyDown={(e) => {
+						if (onRightKey(e)) return 1;
+					}}
 					renderElement={renderElement}
 					renderLeaf={renderLeaf}
 					renderPlaceholder={Placeholder}

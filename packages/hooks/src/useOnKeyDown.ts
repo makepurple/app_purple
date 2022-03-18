@@ -47,7 +47,7 @@ export const useOnKeyDown = <T extends HTMLElement>(
 	const { global = false, key } = options;
 
 	const onKeyDown = useCallback(
-		(event: KeyboardEvent<T>): KeyboardEvent<T> => {
+		(event: KeyboardEvent<T>): boolean => {
 			const valueCode = Keycode[`VALUE_${key}`] ?? null;
 			const keyCode = Keycode[`KEY_${key}`] ?? null;
 			const codeCode = Keycode[`CODE_${key}`] ?? null;
@@ -56,9 +56,13 @@ export const useOnKeyDown = <T extends HTMLElement>(
 			const isKeyCode = !!keyCode && event.keyCode === keyCode;
 			const isCode = !!codeCode && event.code === codeCode;
 
-			if (isKey || isKeyCode || isCode) callback(event);
+			if (isKey || isKeyCode || isCode) {
+				callback(event);
 
-			return event;
+				return true;
+			}
+
+			return false;
 		},
 		[callback, key]
 	);
