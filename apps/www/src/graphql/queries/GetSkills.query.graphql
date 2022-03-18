@@ -16,8 +16,9 @@ query GetSkills(
 		...SkillCardSkill
 	}
 	skills(
-		after: $after,
-		first: $first,
+		after: $after
+		first: $first
+		orderBy: $orderBy
 		where: {
 			NOT: {
 				name: {

@@ -6,7 +6,6 @@ fragment SkillCardSkill on Skill {
 		forkCount
 		issueCount
 		licenseInfo {
-			__typename
 			id
 			name
 			nickname
@@ -15,12 +14,12 @@ fragment SkillCardSkill on Skill {
 		}
 		name
 		owner {
+			__typename
 			id
 			avatarUrl
 			login
 		}
 		primaryLanguage {
-			__typename
 			color
 			id
 			name
