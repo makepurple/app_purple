@@ -1,34 +1,33 @@
-import { Divider, NonIdealState, Paper } from "@makepurple/components";
+import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import tw from "twin.macro";
 import { GetUserFollowersDocument } from "../../../graphql";
-import { LoadingUserFollowCard, UserFollowCard, UserPageLayout } from "../../../organisms";
+import {
+	LoadingUserFollowCard,
+	UserConnectionPageTabs,
+	UserFollowCard,
+	UserPageLayout
+} from "../../../organisms";
 import { PageProps, pageProps } from "../../../page-props/[userName]/connections/followers";
 import { PersonIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
-`;
-
-const Title = tw.h2`
-	flex
-	text-xl
-	font-bold
-	leading-none
+	gap-6
 `;
 
 const Followers = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -57,7 +56,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="connections" userName={userName}>
 			<Content>
-				<Title tw="mb-4">Followers</Title>
+				<UserConnectionPageTabs selectedTab="followers" userName={userName} />
 				<Followers>
 					{!followers.length
 						? !fetching && (
@@ -71,17 +70,11 @@ export const Page: NextPage<PageProps> = () => {
 						  )
 						: followers.map((follower, i) => (
 								<Fragment key={follower.id}>
-									{!!i && <Divider />}
 									<UserFollowCard ref={getRef(i)} user={follower} />
 								</Fragment>
 						  ))}
 					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!followers.length) && <Divider />}
-								<LoadingUserFollowCard />
-							</Fragment>
-						))}
+						Array.from({ length: 3 }, (_, i) => <LoadingUserFollowCard key={i} />)}
 				</Followers>
 			</Content>
 		</UserPageLayout>

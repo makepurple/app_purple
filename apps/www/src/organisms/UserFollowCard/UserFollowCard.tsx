@@ -1,4 +1,4 @@
-import { Anchor, Button, Spinner, Tags } from "@makepurple/components";
+import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
@@ -11,10 +11,10 @@ import { UserAvatar } from "../UserAvatar";
 
 const MAX_SKILLS_SHOWN = 5;
 
-const Root = tw.div`
+const Root = tw(Paper)`
 	flex
 	items-start
-	py-4
+	p-4
 `;
 
 const StyledAvatar = tw(UserAvatar)`

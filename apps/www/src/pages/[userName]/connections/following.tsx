@@ -1,4 +1,4 @@
-import { Divider, NonIdealState, Paper } from "@makepurple/components";
+import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import { GetUserFollowingDocument } from "../../../graphql";
 import {
 	LoadingUserFollowCard,
 	SkillFollowCard,
+	UserConnectionPageTabs,
 	UserFollowCard,
 	UserPageLayout
 } from "../../../organisms";
@@ -16,24 +17,18 @@ import { PersonIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
-`;
-
-const Title = tw.h2`
-	flex
-	text-xl
-	font-bold
-	leading-none
+	gap-6
 `;
 
 const Following = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -62,7 +57,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="connections" userName={userName}>
 			<Content>
-				<Title tw="mb-4">Following</Title>
+				<UserConnectionPageTabs selectedTab="following" userName={userName} />
 				<Following>
 					{!follows.length
 						? !fetching && (
@@ -76,7 +71,6 @@ export const Page: NextPage<PageProps> = () => {
 						  )
 						: follows.map((follow, i) => (
 								<Fragment key={follow.id}>
-									{!!i && <Divider />}
 									{follow.following.__typename === "Skill" ? (
 										<SkillFollowCard ref={getRef(i)} skill={follow.following} />
 									) : follow.following.__typename === "User" ? (
@@ -87,12 +81,7 @@ export const Page: NextPage<PageProps> = () => {
 								</Fragment>
 						  ))}
 					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!follows.length) && <Divider />}
-								<LoadingUserFollowCard />
-							</Fragment>
-						))}
+						Array.from({ length: 3 }, (_, i) => <LoadingUserFollowCard key={i} />)}
 				</Following>
 			</Content>
 		</UserPageLayout>

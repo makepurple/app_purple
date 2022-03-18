@@ -4,6 +4,7 @@ import {
 	Button,
 	GitHubAvatarImage,
 	MaybeAnchor,
+	Paper,
 	Spinner
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
@@ -16,10 +17,10 @@ import {
 } from "../../graphql";
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
 
-const Root = tw.div`
+const Root = tw(Paper)`
 	flex
 	items-start
-	py-4
+	p-4
 `;
 
 const StyledAvatar = tw(Avatar)`

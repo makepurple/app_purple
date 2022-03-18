@@ -1,12 +1,13 @@
-import { Divider, NonIdealState, Paper } from "@makepurple/components";
+import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React from "react";
 import tw from "twin.macro";
 import { GetUserFriendRequestsDocument } from "../../../../graphql";
 import {
 	LoadingUserFriendCard,
+	UserConnectionPageTabs,
 	UserFriendRequestCard,
 	UserPageLayout
 } from "../../../../organisms";
@@ -15,24 +16,18 @@ import { PersonIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 20;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
-`;
-
-const Title = tw.h2`
-	flex
-	text-xl
-	font-bold
-	leading-none
+	gap-6
 `;
 
 const FriendRequests = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -58,7 +53,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="connections" userName={userName}>
 			<Content>
-				<Title tw="mb-6">Connection Requests</Title>
+				<UserConnectionPageTabs selectedTab="requests" userName={userName} />
 				<FriendRequests>
 					{!friendRequests.length
 						? !fetching && (
@@ -71,18 +66,14 @@ export const Page: NextPage<PageProps> = () => {
 								</NonIdealState>
 						  )
 						: friendRequests.map((requester, i) => (
-								<Fragment key={requester.id}>
-									{!!i && <Divider />}
-									<UserFriendRequestCard ref={getRef(i)} user={requester} />
-								</Fragment>
+								<UserFriendRequestCard
+									key={requester.id}
+									ref={getRef(i)}
+									user={requester}
+								/>
 						  ))}
 					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!friendRequests.length) && <Divider />}
-								<LoadingUserFriendCard />
-							</Fragment>
-						))}
+						Array.from({ length: 3 }, (_, i) => <LoadingUserFriendCard key={i} />)}
 				</FriendRequests>
 			</Content>
 		</UserPageLayout>
