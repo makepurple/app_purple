@@ -19,19 +19,27 @@ import { RepositoryCardRepositoryFragment, useDeleteRepositoryMutation } from ".
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
 import { UpdateRepositoryCard } from "../UpdateRepositoryCard";
 
-const Actions = tw.div`
+const EditButton = tw(Button)`
 	flex-shrink-0
-	flex
-	flex-row
-	items-stretch
-	gap-2
+	w-20
 	opacity-100
 	transition-opacity
 	ease-in-out
 	duration-150
 	sm:flex-col
 	sm:opacity-0
-` as any;
+`;
+
+const DeleteButton = tw(Button)`
+	flex-shrink-0
+	w-20
+		opacity-100
+	transition-opacity
+	ease-in-out
+	duration-150
+	sm:flex-col
+	sm:opacity-0
+`;
 
 const Root = styled(Paper)`
 	${tw`
@@ -45,10 +53,18 @@ const Root = styled(Paper)`
 		sm:flex-row
 	`}
 
-	&:hover ${Actions} {
+	&:first-child ${EditButton} {
 		${tw`
 			opacity-100
 		`}
+	}
+
+	&:hover {
+		& ${EditButton}, & ${DeleteButton} {
+			${tw`
+				opacity-100
+			`}
+		}
 	}
 `;
 
@@ -112,14 +128,13 @@ const LanguageColor = tw.div`
 	rounded-full
 `;
 
-const EditButton = tw(Button)`
+const Actions = tw.div`
 	flex-shrink-0
-	w-20
-`;
-
-const DeleteButton = tw(Button)`
-	flex-shrink-0
-	w-20
+	flex
+	flex-row
+	items-stretch
+	gap-2
+	sm:flex-col
 `;
 
 export interface RepositoryCardProps {
