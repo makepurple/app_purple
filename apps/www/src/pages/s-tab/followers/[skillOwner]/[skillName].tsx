@@ -1,8 +1,8 @@
-import { Divider, NonIdealState, Paper } from "@makepurple/components";
+import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React from "react";
 import tw from "twin.macro";
 import { GetSkillFollowersDocument } from "../../../../graphql";
 import { LoadingUserFollowCard, SkillPageLayout, UserFollowCard } from "../../../../organisms";
@@ -14,24 +14,18 @@ import { PersonIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 20;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
-`;
-
-const Title = tw.h2`
-	flex
-	text-xl
-	font-bold
-	leading-none
+	gap-6
 `;
 
 const Followers = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -59,7 +53,6 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<SkillPageLayout selectedTab="followers" skillName={skillName} skillOwner={skillOwner}>
 			<Content>
-				<Title tw="mb-4">Followers</Title>
 				<Followers>
 					{!followers.length
 						? !fetching && (
@@ -72,18 +65,10 @@ export const Page: NextPage<PageProps> = () => {
 								</NonIdealState>
 						  )
 						: followers.map((follower, i) => (
-								<Fragment key={follower.id}>
-									{!!i && <Divider />}
-									<UserFollowCard ref={getRef(i)} user={follower} />
-								</Fragment>
+								<UserFollowCard key={follower.id} ref={getRef(i)} user={follower} />
 						  ))}
 					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!followers.length) && <Divider />}
-								<LoadingUserFollowCard />
-							</Fragment>
-						))}
+						Array.from({ length: 3 }, (_, i) => <LoadingUserFollowCard key={i} />)}
 				</Followers>
 			</Content>
 		</SkillPageLayout>

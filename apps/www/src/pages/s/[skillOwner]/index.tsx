@@ -1,8 +1,8 @@
-import { Divider, NonIdealState, Paper } from "@makepurple/components";
+import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React from "react";
 import tw from "twin.macro";
 import {
 	GetSkillOwnerExperiencersDocument,
@@ -26,24 +26,11 @@ const Repositories = tw.div`
 	auto-rows-auto
 `;
 
-const Experiencers = tw(Paper)`
+const Experiencers = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
-`;
-
-const Title = tw.div`
-	flex
-	text-xl
-	font-bold
-	leading-none
-`;
-
-const ExperiencersContent = tw.div`
-	flex
-	flex-col
-	items-stretch
+	gap-6
 `;
 
 export const getServerSideProps = pageProps;
@@ -92,33 +79,21 @@ export const Page: NextPage<PageProps> = () => {
 					))}
 				</Repositories>
 			)}
-			<Experiencers tw="mt-4">
-				<Title tw="mb-4">Developers</Title>
-				<ExperiencersContent>
-					{!experiencers.length
-						? !fetching && (
-								<NonIdealState
-									title="There's nothing here"
-									subTitle="We couldn't find anyone with this experience"
-									tw="shadow-none"
-								>
-									<PersonIcon height={96} width={96} />
-								</NonIdealState>
-						  )
-						: experiencers.map((follower, i) => (
-								<Fragment key={follower.id}>
-									{!!i && <Divider />}
-									<UserFollowCard ref={getRef(i)} user={follower} />
-								</Fragment>
-						  ))}
-					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!experiencers.length) && <Divider />}
-								<LoadingUserFollowCard />
-							</Fragment>
-						))}
-				</ExperiencersContent>
+			<Experiencers tw="mt-6">
+				{!experiencers.length
+					? !fetching && (
+							<NonIdealState
+								title="There's nothing here"
+								subTitle="We couldn't find anyone with this experience"
+								tw="shadow-none"
+							>
+								<PersonIcon height={96} width={96} />
+							</NonIdealState>
+					  )
+					: experiencers.map((follower, i) => (
+							<UserFollowCard key={follower.id} ref={getRef(i)} user={follower} />
+					  ))}
+				{fetching && Array.from({ length: 3 }, (_, i) => <LoadingUserFollowCard key={i} />)}
 			</Experiencers>
 		</SkillOwnerPageLayout>
 	);
