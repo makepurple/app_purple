@@ -26,7 +26,9 @@ export const WithGitHubRepository = interfaceType({
 					.catch(() => null);
 
 				if (!githubRepository?.repository) {
-					throw new Error("Could not get skill's GitHub data");
+					throw new Error(
+						`Could not get skill's GitHub data: ${parent.owner}/${parent.name}`
+					);
 				}
 
 				/**
