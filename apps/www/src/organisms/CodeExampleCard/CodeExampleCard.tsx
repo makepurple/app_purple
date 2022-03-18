@@ -33,8 +33,8 @@ const Root = styled(Paper)`
 		flex
 		flex-row
 		items-start
-		gap-3
-		p-3
+		gap-4
+		p-4
 		cursor-pointer
 		hover:bg-indigo-50
 	`}
@@ -48,8 +48,6 @@ const Root = styled(Paper)`
 
 const StyledAvatar = tw(Avatar)`
 	flex-shrink-0
-	h-12
-	w-12
 	rounded-md
 `;
 
@@ -57,8 +55,8 @@ const AvatarIconContainer = tw.div`
 	flex
 	items-center
 	justify-center
-	h-11
-	w-11
+	h-16
+	w-16
 	bg-white
 	z-index[1]
 `;
@@ -74,7 +72,8 @@ const Content = tw.div`
 
 const Title = tw(Anchor)`
 	text-black
-	font-semibold
+	text-xl
+	font-bold
 	leading-none
 	truncate
 `;
@@ -84,7 +83,7 @@ const DescriptionContainer = tw.a`
 `;
 
 const Description = tw.p`
-	text-sm
+	text-base
 	text-gray-500
 	line-clamp-2
 `;
@@ -170,7 +169,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 				passHref
 			>
 				<StyledAvatar
-					border={2}
+					border={4}
 					onClick={(e) => {
 						e.stopPropagation();
 					}}
@@ -180,8 +179,8 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 						<GitHubAvatarImage
 							alt={primarySkill.name}
 							src={primarySkill.github.owner.avatarUrl}
-							height={48}
-							width={48}
+							height={64}
+							width={64}
 						/>
 					) : (
 						<AvatarIconContainer>
