@@ -1,11 +1,15 @@
 import { dayjs } from "@makepurple/utils";
+import { CodeExample_fragment_mock } from ".";
 import { Comment } from "../../generated";
+import { Post_fragment_mock } from "./Post.fragment.mock";
 import { User_fragment_mock } from "./User.fragment.mock";
 
 export const Comment_fragment_mock: Comment = {
 	__typename: "Comment" as const,
 	author: User_fragment_mock,
 	authorId: User_fragment_mock.id,
+	codeExample: CodeExample_fragment_mock,
+	codeExampleId: CodeExample_fragment_mock.id,
 	content: [
 		{
 			type: "paragraph",
@@ -33,8 +37,8 @@ export const Comment_fragment_mock: Comment = {
 	id: "0",
 	parent: null,
 	parentId: null,
-	post: null,
-	postId: null,
+	post: Post_fragment_mock,
+	postId: Post_fragment_mock.id,
 	replies: {
 		__typename: "CommentConnection" as const,
 		pageInfo: {
