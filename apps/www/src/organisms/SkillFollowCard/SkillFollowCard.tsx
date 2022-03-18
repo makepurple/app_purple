@@ -8,6 +8,7 @@ import {
 	Spinner
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
+import { useSession } from "next-auth/react";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -89,6 +90,8 @@ export interface SkillFollowCardProps {
 
 export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>((props, ref) => {
 	const { className, skill, style } = props;
+
+	const { status } = useSession();
 
 	const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 	const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
@@ -191,21 +194,23 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 					)}
 				</Info>
 			</Details>
-			<Actions tw="ml-4">
-				<FollowButton
-					disabled={loading}
-					onClick={async () => {
-						skill.viewerFollowing
-							? await unfollowSkill({ where: { id: skill.id } }).catch(() => null)
-							: await followSkill({ where: { id: skill.id } }).catch(() => null);
-					}}
-					size="small"
-					type="button"
-					variant="secondary"
-				>
-					{loading ? <Spinner /> : skill.viewerFollowing ? "Unfollow" : "Follow"}
-				</FollowButton>
-			</Actions>
+			{status === "authenticated" && (
+				<Actions tw="ml-4">
+					<FollowButton
+						disabled={loading}
+						onClick={async () => {
+							skill.viewerFollowing
+								? await unfollowSkill({ where: { id: skill.id } }).catch(() => null)
+								: await followSkill({ where: { id: skill.id } }).catch(() => null);
+						}}
+						size="small"
+						type="button"
+						variant="secondary"
+					>
+						{loading ? <Spinner /> : skill.viewerFollowing ? "Unfollow" : "Follow"}
+					</FollowButton>
+				</Actions>
+			)}
 		</Root>
 	);
 });

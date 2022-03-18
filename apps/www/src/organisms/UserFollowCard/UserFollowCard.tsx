@@ -1,4 +1,5 @@
 import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
@@ -58,6 +59,8 @@ export interface UserFollowCardProps {
 
 export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((props, ref) => {
 	const { className, style, user } = props;
+
+	const { status } = useSession();
 
 	const [{ fetching: following }, followUser] = useFollowUserMutation();
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
@@ -147,23 +150,25 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 					</Tags>
 				)}
 			</Details>
-			<Actions tw="ml-4">
-				<FollowButton
-					disabled={loading}
-					onClick={async (e) => {
-						e.stopPropagation();
+			{status === "authenticated" && (
+				<Actions tw="ml-4">
+					<FollowButton
+						disabled={loading}
+						onClick={async (e) => {
+							e.stopPropagation();
 
-						user.viewerFollowing
-							? await unfollowUser({ where: { id: user.id } }).catch(() => null)
-							: await followUser({ where: { id: user.id } }).catch(() => null);
-					}}
-					size="small"
-					type="button"
-					variant="secondary"
-				>
-					{loading ? <Spinner /> : user.viewerFollowing ? "Unfollow" : "Follow"}
-				</FollowButton>
-			</Actions>
+							user.viewerFollowing
+								? await unfollowUser({ where: { id: user.id } }).catch(() => null)
+								: await followUser({ where: { id: user.id } }).catch(() => null);
+						}}
+						size="small"
+						type="button"
+						variant="secondary"
+					>
+						{loading ? <Spinner /> : user.viewerFollowing ? "Unfollow" : "Follow"}
+					</FollowButton>
+				</Actions>
+			)}
 		</Root>
 	);
 });
