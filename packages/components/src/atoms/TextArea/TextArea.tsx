@@ -10,6 +10,7 @@ import { FormGroupContext } from "../FormGroup/context";
 const Root = styled.textarea<{ error?: boolean }>`
 	${tw`
 		w-full
+		min-height[5rem]
 		px-2.5
 		py-2
 		border
