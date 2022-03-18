@@ -1,4 +1,4 @@
-import { Avatar, Button, GitHubAvatarImage, Spinner, toast } from "@makepurple/components";
+import { Avatar, Button, GitHubAvatarImage, Paper, Spinner, toast } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
@@ -36,11 +36,11 @@ const DeleteButton = tw(Button)`
 	sm:opacity-0
 `;
 
-const Root = styled.div`
+const Root = styled(Paper)`
 	${tw`
 		flex
 		items-start
-		py-4
+		p-4
 	`}
 
 	&:first-child ${EditButton} {

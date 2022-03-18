@@ -1,10 +1,10 @@
-import { Button, Divider, HexagonIcon, NonIdealState, Paper } from "@makepurple/components";
+import { Button, HexagonIcon, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import tw, { styled } from "twin.macro";
 import { CreateExperienceFragmentFragment, GetExperiencesDocument } from "../../graphql";
 import { ExperienceCard, LoadingExperienceCard, UserPageLayout } from "../../organisms";
@@ -20,30 +20,34 @@ const UpdateExperienceForm = dynamic(() => import("../../organisms/UpdateExperie
 
 const BATCH_SIZE = 20;
 
-const Content = tw(Paper)`
+const Content = tw.div`
 	flex
 	flex-col
 	items-stretch
-	p-6
+	gap-6
 `;
 
-const Title = tw.h2`
+const ActionContainer = tw.div`
 	flex
-	text-xl
-	leading-none
-	font-bold
+	justify-end
 `;
 
 const AddButton = tw(Button)`
-	h-10
-	w-10
-	p-0
+	flex-shrink-0
+	flex
+	items-center
+	gap-1
+`;
+
+const FormContainer = tw(Paper)`
+	p-4
 `;
 
 const Experiences = tw.div`
 	flex
 	flex-col
 	items-stretch
+	gap-6
 `;
 
 const AddRemoveIcon = styled(PlusIcon)<{ $canClose: boolean }>`
@@ -92,14 +96,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="experiences" userName={userName}>
 			<Content>
-				<Title tw="mb-4">
-					<span tw="flex-grow">
-						{isCreate
-							? "Add Experience"
-							: editExperience
-							? "Edit Experience"
-							: "Experiences"}
-					</span>
+				<ActionContainer>
 					{isMyPage && (
 						<AddButton
 							onClick={() => {
@@ -112,11 +109,11 @@ export const Page: NextPage<PageProps> = () => {
 
 								setIsCreate(true);
 							}}
-							size="small"
 							type="button"
-							variant="secondary"
+							variant={isCreate || !!editExperience ? "secondary" : "primary"}
 							tw="flex-shrink-0"
 						>
+							<span>{isCreate || !!editExperience ? "Close" : "Add Experience"}</span>
 							<AddRemoveIcon
 								height={24}
 								width={24}
@@ -124,20 +121,24 @@ export const Page: NextPage<PageProps> = () => {
 							/>
 						</AddButton>
 					)}
-				</Title>
+				</ActionContainer>
 				{isCreate ? (
-					<CreateExperienceForm
-						onClose={() => {
-							setIsCreate(false);
-						}}
-					/>
+					<FormContainer>
+						<CreateExperienceForm
+							onClose={() => {
+								setIsCreate(false);
+							}}
+						/>
+					</FormContainer>
 				) : editExperience ? (
-					<UpdateExperienceForm
-						experience={editExperience}
-						onClose={() => {
-							setEditExperience(null);
-						}}
-					/>
+					<FormContainer>
+						<UpdateExperienceForm
+							experience={editExperience}
+							onClose={() => {
+								setEditExperience(null);
+							}}
+						/>
+					</FormContainer>
 				) : (
 					<Experiences>
 						{!experiences.length
@@ -151,22 +152,15 @@ export const Page: NextPage<PageProps> = () => {
 									</NonIdealState>
 							  )
 							: experiences.map((experience, i) => (
-									<Fragment key={experience.id}>
-										{!!i && <Divider tw="ml-22" />}
-										<ExperienceCard
-											ref={getRef(i)}
-											experience={experience}
-											onEdit={() => setEditExperience(experience)}
-										/>
-									</Fragment>
+									<ExperienceCard
+										key={experience.id}
+										ref={getRef(i)}
+										experience={experience}
+										onEdit={() => setEditExperience(experience)}
+									/>
 							  ))}
 						{fetching &&
-							Array.from({ length: 3 }, (_, i) => (
-								<Fragment key={i}>
-									{(!!i || !!experiences.length) && <Divider tw="ml-22" />}
-									<LoadingExperienceCard />
-								</Fragment>
-							))}
+							Array.from({ length: 3 }, (_, i) => <LoadingExperienceCard key={i} />)}
 					</Experiences>
 				)}
 			</Content>
