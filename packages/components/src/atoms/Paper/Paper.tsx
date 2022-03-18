@@ -6,5 +6,5 @@ export const Paper = tw.div`
 	border
 	border-solid
 	border-gray-200
-	shadow-lg
+	shadow-md
 `;
