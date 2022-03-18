@@ -19,7 +19,7 @@ import { LoadingSkillCard, SkillCard } from "../organisms";
 import { PageProps, pageProps } from "../page-props/skills";
 import { BookIcon, SearchIcon } from "../svgs";
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 10;
 
 const Root = tw(MainContainer)`
 	flex

@@ -11,7 +11,7 @@ import {
 } from "../graphql";
 import { NextUtils } from "../utils";
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 10;
 
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const { query, req } = ctx;
@@ -29,6 +29,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				orderBy: [
 					{ users: { _count: SortOrder.Desc } },
 					{ desiringUsers: { _count: SortOrder.Desc } },
+					{ owner: SortOrder.Desc },
 					{ name: SortOrder.Desc }
 				],
 				name,
