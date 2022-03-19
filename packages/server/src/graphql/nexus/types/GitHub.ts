@@ -33,16 +33,7 @@ export const GitHub = objectType({
 
 				if (!repository) return null;
 
-				return {
-					...repository,
-					owner: {
-						...repository.owner,
-						__typename:
-							repository.owner.__typename === "GitHubOrganization"
-								? "GitHubOrganization"
-								: "GitHubUser"
-					}
-				};
+				return repository as any;
 			}
 		});
 		t.field("repositoryOwner", {
