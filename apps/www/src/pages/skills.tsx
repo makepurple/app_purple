@@ -6,7 +6,8 @@ import {
 	Input,
 	MainContainer,
 	NonIdealState,
-	Paper
+	Paper,
+	Spinner
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
@@ -126,8 +127,12 @@ export const Page: NextPage<PageProps> = () => {
 						placeholder="Repository name"
 					/>
 				</FormGroup>
-				<Button type="button" tw="mt-8">
-					<SearchIcon height={24} width={24} tw="mr-1" />
+				<Button disabled={fetching} type="button" tw="mt-8">
+					{fetching ? (
+						<Spinner tw="mr-1" />
+					) : (
+						<SearchIcon height={24} width={24} tw="mr-1" />
+					)}
 					<span>Search</span>
 				</Button>
 			</SideBar>
