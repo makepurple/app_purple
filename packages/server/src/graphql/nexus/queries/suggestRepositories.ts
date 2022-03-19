@@ -29,7 +29,7 @@ export const suggestRepositories = queryField("suggestRepositories", {
 		`
 			.cast<octokit.SuggestRepositoriesQuery, octokit.SuggestRepositoriesQueryVariables>({
 				first: Math.min(args.first ?? 10, 10),
-				searchQuery: `${args.where.name} in:name user:${user.name}`
+				searchQuery: `"${args.where.name}" in:name user:${user.name}`
 			})
 			.catch(() => null);
 

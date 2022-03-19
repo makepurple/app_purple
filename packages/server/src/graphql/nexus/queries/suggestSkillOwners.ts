@@ -28,7 +28,7 @@ export const suggestSkillOwners = queryField("suggestSkillOwners", {
 		`
 			.cast<octokit.SuggestSkillOwnersQuery, octokit.SuggestSkillOwnersQueryVariables>({
 				first: Math.min(args.first ?? 10, 10),
-				searchQuery: `${args.where.name} in:login in:name`
+				searchQuery: `"${args.where.name}" in:login in:name repos:>=3`
 			})
 			.catch(() => null);
 

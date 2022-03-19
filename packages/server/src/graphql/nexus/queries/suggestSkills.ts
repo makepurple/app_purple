@@ -13,8 +13,10 @@ export const suggestSkills = queryField("suggestSkills", {
 	},
 	resolve: async (parent, args, { octokit: graphql }) => {
 		const searchQuery = [
-			args.where.owner ? `user:${args.where.owner}` : "",
-			`${args.where.name} in:name`
+			args.where.owner ? `user:"${args.where.owner}"` : "",
+			`"${args.where.name}" in:name`,
+			"stars:>=20",
+			"sort:stars-desc"
 		]
 			.filter((part) => !!part)
 			.join(" ");
