@@ -3,10 +3,10 @@ import { SiteWideLayout } from "@makepurple/www";
 import {
 	CreateExperience_mock,
 	CreatePost_mock,
-	GetExperiences_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock,
+	GetUserExperiences_mock,
 	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
 	SuggestOrganizations_mock
@@ -57,8 +57,8 @@ Standard.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetExperiences":
-				return { data: GetExperiences_mock };
+			case "GetUserExperiences":
+				return { data: GetUserExperiences_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
@@ -93,10 +93,10 @@ Loading.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetExperiences":
+			case "GetUserExperiences":
 				await PromiseUtils.wait(ms("5s"));
 
-				return { data: GetExperiences_mock };
+				return { data: GetUserExperiences_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
@@ -131,7 +131,7 @@ NoResults.parameters = {
 				await PromiseUtils.wait(ms("1s"));
 
 				return { data: CreatePost_mock };
-			case "GetExperiences":
+			case "GetUserExperiences":
 				return {
 					data: {
 						__typename: "Query",

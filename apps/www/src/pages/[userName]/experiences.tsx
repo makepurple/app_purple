@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import tw, { styled } from "twin.macro";
-import { CreateExperienceFragmentFragment, GetExperiencesDocument } from "../../graphql";
+import { CreateExperienceFragmentFragment, GetUserExperiencesDocument } from "../../graphql";
 import { ExperienceCard, LoadingExperienceCard, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/experiences";
 import { PlusIcon } from "../../svgs";
@@ -71,19 +71,13 @@ export const Page: NextPage<PageProps> = () => {
 	const isMyPage = session?.user.name === userName;
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
-		query: GetExperiencesDocument,
-		field: "experiences",
+		query: GetUserExperiencesDocument,
+		field: "user.experiences",
 		requestPolicy: "cache-first",
 		variables: {
 			after: null,
 			first: BATCH_SIZE,
-			where: {
-				user: {
-					name: {
-						equals: userName
-					}
-				}
-			}
+			name: userName
 		}
 	});
 
@@ -91,7 +85,7 @@ export const Page: NextPage<PageProps> = () => {
 	const [editExperience, setEditExperience] =
 		useState<Maybe<CreateExperienceFragmentFragment>>(null);
 
-	const experiences = data?.experiences.nodes ?? [];
+	const experiences = data?.user?.experiences.nodes ?? [];
 
 	return (
 		<UserPageLayout selectedTab="experiences" userName={userName}>

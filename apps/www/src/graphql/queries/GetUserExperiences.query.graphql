@@ -1,0 +1,29 @@
+query GetUserExperiences(
+	$after: String
+	$first: Int
+	$name: String!
+) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		experiences(after: $after, first: $first) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				id
+				...ExperienceCardExperience
+				...CreateExperienceFragment
+			}
+			pageInfo {
+				...PageInfoFragment
+			}
+		}
+	}
+}

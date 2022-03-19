@@ -211,10 +211,6 @@ export function useGetCommentRepliesQuery(options: Omit<Urql.UseQueryArgs<Operat
   return Urql.useQuery<Operations.GetCommentRepliesQuery>({ query: Operations.GetCommentRepliesDocument, ...options });
 };
 
-export function useGetExperiencesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetExperiencesQueryVariables>, 'query'>) {
-  return Urql.useQuery<Operations.GetExperiencesQuery>({ query: Operations.GetExperiencesDocument, ...options });
-};
-
 export function useGetFollowableSkillsQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetFollowableSkillsQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetFollowableSkillsQuery>({ query: Operations.GetFollowableSkillsDocument, ...options });
 };
@@ -285,6 +281,10 @@ export function useGetUserActivitiesQuery(options: Omit<Urql.UseQueryArgs<Operat
 
 export function useGetUserCodeExamplesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserCodeExamplesQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetUserCodeExamplesQuery>({ query: Operations.GetUserCodeExamplesDocument, ...options });
+};
+
+export function useGetUserExperiencesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserExperiencesQueryVariables>, 'query'>) {
+  return Urql.useQuery<Operations.GetUserExperiencesQuery>({ query: Operations.GetUserExperiencesDocument, ...options });
 };
 
 export function useGetUserFollowersQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserFollowersQueryVariables>, 'query'>) {
