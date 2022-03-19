@@ -4,12 +4,12 @@ import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	GetExperiencesDocument,
-	GetExperiencesQuery,
-	GetExperiencesQueryVariables,
 	GetPostDraftDocument,
 	GetPostDraftQuery,
 	GetPostDraftQueryVariables,
+	GetUserExperiencesDocument,
+	GetUserExperiencesQuery,
+	GetUserExperiencesQueryVariables,
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
 	GetUserInfoSideBarQueryVariables
@@ -33,22 +33,19 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.toPromise()
 			.then((result) => result.data?.user),
 		urqlClient
-			.query<GetExperiencesQuery, GetExperiencesQueryVariables>(GetExperiencesDocument, {
-				after: null,
-				first: BATCH_SIZE,
-				where: {
-					user: {
-						name: {
-							equals: query.userName as string
-						}
-					}
+			.query<GetUserExperiencesQuery, GetUserExperiencesQueryVariables>(
+				GetUserExperiencesDocument,
+				{
+					after: null,
+					first: BATCH_SIZE,
+					name: query.userName as string
 				}
-			})
+			)
 			.toPromise(),
 		urqlClient
 			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
 			.toPromise()
-	]);
+	]).catch(() => []);
 
 	if (!user) return { notFound: true };
 
