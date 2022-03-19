@@ -63,6 +63,7 @@ export const GitHubRepositoryOwner = interfaceType({
 								before: $before
 								first: $first
 								last: $last
+								orderBy: { field: STARGAZERS, direction: DESC }
 								ownerAffiliations: [OWNER]
 								privacy: PUBLIC
 								isFork: false
