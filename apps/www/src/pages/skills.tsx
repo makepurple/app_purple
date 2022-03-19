@@ -1,6 +1,7 @@
 import {
 	Brand,
-	Button,
+	Form,
+	FormButton,
 	FormGroup,
 	FormLabel,
 	Input,
@@ -11,8 +12,9 @@ import {
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { NextPage } from "next";
-import { useRouter } from "next/router";
-import React, { Fragment, useState } from "react";
+import { queryTypes, useQueryStates } from "next-usequerystate";
+import React from "react";
+import { useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { GetSkillsDocument, SortOrder } from "../graphql";
 import { LoadingSkillCard, SkillCard } from "../organisms";
@@ -75,10 +77,13 @@ const Skills = tw.div`
 export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
-	const router = useRouter();
-
-	const [searchName, setSearchName] = useState<string>((router?.query.name as string) ?? "");
-	const [searchOwner, setSearchOwner] = useState<string>((router?.query.owner as string) ?? "");
+	const [query, setQuery] = useQueryStates(
+		{
+			owner: queryTypes.string.withDefault(""),
+			name: queryTypes.string.withDefault("")
+		},
+		{ history: "push" }
+	);
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
 		query: GetSkillsDocument,
@@ -93,8 +98,8 @@ export const Page: NextPage<PageProps> = () => {
 				{ owner: SortOrder.Desc },
 				{ name: SortOrder.Desc }
 			],
-			name: searchName,
-			owner: searchOwner
+			name: query.name,
+			owner: query.owner
 		}
 	});
 
@@ -103,38 +108,52 @@ export const Page: NextPage<PageProps> = () => {
 
 	const hasSkills = !!exactMatch || !!skills.length;
 
+	const { handleSubmit, register } = useForm<{ owner: string; name: string }>({
+		defaultValues: {
+			name: query.name,
+			owner: query.owner
+		}
+	});
+
 	return (
 		<Root>
-			<SideBar tw="mb-6 lg:ml-4 xl:ml-6">
+			<SideBar
+				as={Form}
+				onSubmit={handleSubmit(async (formData) => {
+					await setQuery(
+						{
+							name: formData.name || null,
+							owner: formData.owner || null
+						},
+						{ shallow: true }
+					);
+				})}
+				role="search"
+				tw="mb-6 lg:ml-4 xl:ml-6"
+			>
 				<Title as="div" tw="mb-6">
 					Filter Skills
 				</Title>
 				<FormGroup>
 					<FormLabel>Repository owner</FormLabel>
 					<Input
-						onChange={(e) => {
-							setSearchOwner(e.target.value);
-						}}
+						{...register("owner")}
 						placeholder="Repository owner"
+						spellCheck={false}
 					/>
 				</FormGroup>
 				<FormGroup tw="mt-4">
 					<FormLabel>Repository name</FormLabel>
-					<Input
-						onChange={(e) => {
-							setSearchName(e.target.value);
-						}}
-						placeholder="Repository name"
-					/>
+					<Input {...register("name")} placeholder="Repository name" spellCheck={false} />
 				</FormGroup>
-				<Button disabled={fetching} type="button" tw="mt-8">
+				<FormButton disabled={fetching} type="submit" tw="mt-8">
 					{fetching ? (
 						<Spinner tw="mr-1" />
 					) : (
 						<SearchIcon height={24} width={24} tw="mr-1" />
 					)}
 					<span>Search</span>
-				</Button>
+				</FormButton>
 			</SideBar>
 			<Content>
 				<IntroContainer>

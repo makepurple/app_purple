@@ -250,6 +250,7 @@ importers:
       next-auth: ^4.3.0
       next-compose-plugins: ^2.2.1
       next-transpile-modules: ^9.0.0
+      next-usequerystate: ^1.7.2
       path-to-regexp: ^6.2.0
       polished: ^4.1.4
       postcss: ^8.4.12
@@ -312,6 +313,7 @@ importers:
       ms: 2.1.3
       next: 12.1.0_a2e1e28ac7d7744bd11a0f193315a179
       next-auth: 4.3.0_react-dom@17.0.2+react@17.0.2
+      next-usequerystate: 1.7.2_caa633a00319350dbda42996613fe26c
       path-to-regexp: 6.2.0
       polished: 4.1.4
       pusher-js: 7.0.6
@@ -16508,6 +16510,18 @@ packages:
       enhanced-resolve: 5.8.3
       escalade: 3.1.1
     dev: true
+
+  /next-usequerystate/1.7.2_caa633a00319350dbda42996613fe26c:
+    resolution: {integrity: sha512-5ChbGoG/TGYRuKtpI4fKf1wsePYrO75srXwLcuPR0Nnbm7Tspfbx0L6215PRmUb9ZJCRLoXy6J3CqJRZYCot3w==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 12.1.0_a2e1e28ac7d7744bd11a0f193315a179
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
 
   /next/12.1.0_3dc2736ef5d912872807a2ed565ced1a:
     resolution: {integrity: sha512-s885kWvnIlxsUFHq9UGyIyLiuD0G3BUC/xrH0CEnH5lHEWkwQcHOORgbDF0hbrW9vr/7am4ETfX4A7M6DjrE7Q==}
