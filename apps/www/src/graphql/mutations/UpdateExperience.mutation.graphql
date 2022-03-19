@@ -4,6 +4,7 @@ mutation UpdateExperience(
 ) {
 	updateExperience(data: $data, where: $where) {
 		record {
+			...ExperienceCardExperience
 			...CreateExperienceFragment
 		}
 	}
