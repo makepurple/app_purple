@@ -441,6 +441,7 @@ export const User = objectType({
 							})
 							.experiences({
 								...paginationArgs,
+								orderBy: PrismaUtils.nonNull(args.orderBy),
 								where: PrismaUtils.nonNull(args.where)
 							}),
 					() =>

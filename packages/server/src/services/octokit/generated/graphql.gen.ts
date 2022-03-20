@@ -13443,6 +13443,7 @@ export type ProjectNextFieldCommon = {
   dataType: ProjectNextFieldType;
   /** Identifies the primary key from the database. */
   databaseId?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
   /** The project field's name. */
   name: Scalars['String'];
   /** The project that contains this field. */
@@ -23511,6 +23512,13 @@ export type VerifySkillQueryVariables = Exact<{
 
 
 export type VerifySkillQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', id: string } | null };
+
+export type VerifyOrganizationQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type VerifyOrganizationQuery = { __typename?: 'Query', organization?: { __typename?: 'Organization', id: string } | null };
 
 export type GetRepositoryToCreateQueryVariables = Exact<{
   name: Scalars['String'];
