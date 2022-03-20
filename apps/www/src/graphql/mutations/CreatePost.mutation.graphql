@@ -4,7 +4,6 @@ mutation CreatePost {
 			id
 			name
 		}
-		cursor
 		record {
 			...PostCardPost
 		}

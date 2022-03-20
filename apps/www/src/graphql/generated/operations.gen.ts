@@ -27,7 +27,6 @@ export type Scalars = {
 
 export type AcceptFriendshipPayload = MutationPayload & {
   readonly __typename: 'AcceptFriendshipPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
@@ -36,7 +35,6 @@ export type AcceptFriendshipPayload = MutationPayload & {
 
 export type AddDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddDesiredSkillMutationPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
@@ -45,7 +43,6 @@ export type AddDesiredSkillMutationPayload = MutationPayload & {
 
 export type AddSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddSkillMutationPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
@@ -335,7 +332,6 @@ export type CommentCodeExampleInput = {
 
 export type CommentCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CommentCodeExamplePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -371,7 +367,6 @@ export type CommentPostInput = {
 
 export type CommentPostPayload = MutationPayload & {
   readonly __typename: 'CommentPostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -413,7 +408,6 @@ export type CreateChatInput = {
 
 export type CreateChatPayload = MutationPayload & {
   readonly __typename: 'CreateChatPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Chat>;
@@ -422,7 +416,6 @@ export type CreateChatPayload = MutationPayload & {
 
 export type CreateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CreateCodeExamplePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
@@ -431,7 +424,6 @@ export type CreateCodeExamplePayload = MutationPayload & {
 
 export type CreateExperiencePayload = MutationPayload & {
   readonly __typename: 'CreateExperiencePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
@@ -440,7 +432,6 @@ export type CreateExperiencePayload = MutationPayload & {
 
 export type CreatePostPayload = MutationPayload & {
   readonly __typename: 'CreatePostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -449,7 +440,6 @@ export type CreatePostPayload = MutationPayload & {
 
 export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
@@ -465,7 +455,6 @@ export type DateTimeNullableFilter = {
 
 export type DeleteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'DeleteCodeExamplePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
@@ -474,7 +463,6 @@ export type DeleteCodeExamplePayload = MutationPayload & {
 
 export type DeleteCommentPayload = MutationPayload & {
   readonly __typename: 'DeleteCommentPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -483,7 +471,6 @@ export type DeleteCommentPayload = MutationPayload & {
 
 export type DeleteExperiencePayload = MutationPayload & {
   readonly __typename: 'DeleteExperiencePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
@@ -492,7 +479,6 @@ export type DeleteExperiencePayload = MutationPayload & {
 
 export type DeleteFriendshipPayload = MutationPayload & {
   readonly __typename: 'DeleteFriendshipPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
@@ -501,7 +487,6 @@ export type DeleteFriendshipPayload = MutationPayload & {
 
 export type DeletePostPayload = MutationPayload & {
   readonly __typename: 'DeletePostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -510,7 +495,6 @@ export type DeletePostPayload = MutationPayload & {
 
 export type DeleteRepositoryPayload = MutationPayload & {
   readonly __typename: 'DeleteRepositoryPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
@@ -519,7 +503,6 @@ export type DeleteRepositoryPayload = MutationPayload & {
 
 export type DeleteUserPayload = MutationPayload & {
   readonly __typename: 'DeleteUserPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
@@ -528,7 +511,6 @@ export type DeleteUserPayload = MutationPayload & {
 
 export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -648,7 +630,6 @@ export type FollowOrderByInput = {
 
 export type FollowSkillPayload = MutationPayload & {
   readonly __typename: 'FollowSkillPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
@@ -662,7 +643,6 @@ export enum FollowType {
 
 export type FollowUserPayload = MutationPayload & {
   readonly __typename: 'FollowUserPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
@@ -921,7 +901,6 @@ export type InviteToChatInput = {
 
 export type InviteToChatPayload = MutationPayload & {
   readonly __typename: 'InviteToChatPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Chat>;
@@ -930,7 +909,6 @@ export type InviteToChatPayload = MutationPayload & {
 
 export type LeaveChatPayload = MutationPayload & {
   readonly __typename: 'LeaveChatPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Chat>;
@@ -1277,7 +1255,6 @@ export type MutationError = {
 };
 
 export type MutationPayload = {
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Node>;
@@ -1373,7 +1350,6 @@ export type NotificationsWhereInput = {
 
 export type OpenNotificationsPayload = MutationPayload & {
   readonly __typename: 'OpenNotificationsPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
@@ -1551,7 +1527,6 @@ export type PostWhereUniqueInput = {
 
 export type PublishPostPayload = MutationPayload & {
   readonly __typename: 'PublishPostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -1770,7 +1745,6 @@ export type QueryUsersArgs = {
 
 export type RejectFriendshipPayload = MutationPayload & {
   readonly __typename: 'RejectFriendshipPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
@@ -1779,7 +1753,6 @@ export type RejectFriendshipPayload = MutationPayload & {
 
 export type RemoveDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillMutationPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
@@ -1788,7 +1761,6 @@ export type RemoveDesiredSkillMutationPayload = MutationPayload & {
 
 export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -1797,7 +1769,6 @@ export type RemovePostThumbnailPayload = MutationPayload & {
 
 export type RemoveSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillMutationPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
@@ -1856,7 +1827,6 @@ export type RepositoryWhereUniqueInput = {
 
 export type RequestFriendshipPayload = MutationPayload & {
   readonly __typename: 'RequestFriendshipPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
@@ -1865,7 +1835,6 @@ export type RequestFriendshipPayload = MutationPayload & {
 
 export type SendChatMessagePayload = MutationPayload & {
   readonly __typename: 'SendChatMessagePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<ChatMessage>;
@@ -2092,7 +2061,6 @@ export type TopLanguages = {
 
 export type UnfollowSkillPayload = MutationPayload & {
   readonly __typename: 'UnfollowSkillPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
@@ -2101,7 +2069,6 @@ export type UnfollowSkillPayload = MutationPayload & {
 
 export type UnfollowUserPayload = MutationPayload & {
   readonly __typename: 'UnfollowUserPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
@@ -2110,7 +2077,6 @@ export type UnfollowUserPayload = MutationPayload & {
 
 export type UnvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UnvoteCodeExamplePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
@@ -2119,7 +2085,6 @@ export type UnvoteCodeExamplePayload = MutationPayload & {
 
 export type UnvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UnvoteCommentPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -2128,7 +2093,6 @@ export type UnvoteCommentPayload = MutationPayload & {
 
 export type UnvotePostPayload = MutationPayload & {
   readonly __typename: 'UnvotePostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -2137,7 +2101,6 @@ export type UnvotePostPayload = MutationPayload & {
 
 export type UpdateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpdateCodeExamplePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
@@ -2146,7 +2109,6 @@ export type UpdateCodeExamplePayload = MutationPayload & {
 
 export type UpdateCommentPayload = MutationPayload & {
   readonly __typename: 'UpdateCommentPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -2159,7 +2121,6 @@ export type UpdateDesiredSkillsInput = {
 
 export type UpdateDesiredSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateDesiredSkillsPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
@@ -2168,7 +2129,6 @@ export type UpdateDesiredSkillsPayload = MutationPayload & {
 
 export type UpdateExperiencePayload = MutationPayload & {
   readonly __typename: 'UpdateExperiencePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
@@ -2177,7 +2137,6 @@ export type UpdateExperiencePayload = MutationPayload & {
 
 export type UpdatePostDraftPayload = MutationPayload & {
   readonly __typename: 'UpdatePostDraftPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -2186,7 +2145,6 @@ export type UpdatePostDraftPayload = MutationPayload & {
 
 export type UpdatePostPayload = MutationPayload & {
   readonly __typename: 'UpdatePostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -2195,7 +2153,6 @@ export type UpdatePostPayload = MutationPayload & {
 
 export type UpdateRepositoryPayload = MutationPayload & {
   readonly __typename: 'UpdateRepositoryPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
@@ -2208,7 +2165,6 @@ export type UpdateSkillsInput = {
 
 export type UpdateSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateSkillsPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
@@ -2217,7 +2173,6 @@ export type UpdateSkillsPayload = MutationPayload & {
 
 export type UpdateUserFromGitHubPayload = MutationPayload & {
   readonly __typename: 'UpdateUserFromGitHubPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
@@ -2231,7 +2186,6 @@ export type UploadPostImageInput = {
 
 export type UploadPostImagePayload = MutationPayload & {
   readonly __typename: 'UploadPostImagePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<PostImage>;
@@ -2244,7 +2198,6 @@ export type UpvoteCodeExampleInput = {
 
 export type UpvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpvoteCodeExamplePayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
@@ -2257,7 +2210,6 @@ export type UpvoteCommentInput = {
 
 export type UpvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UpvoteCommentPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
@@ -2266,7 +2218,6 @@ export type UpvoteCommentPayload = MutationPayload & {
 
 export type UpvotePostPayload = MutationPayload & {
   readonly __typename: 'UpvotePostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -2666,7 +2617,6 @@ export type UserWhereUniqueInput = {
 
 export type ViewPostPayload = MutationPayload & {
   readonly __typename: 'ViewPostPayload';
-  readonly cursor: Scalars['String'];
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
@@ -2839,7 +2789,7 @@ export type UserGitHubContributionHeatmapGitHubUserContributionCalendarFragment 
 
 export type UserInfoSideBarUserFragment = { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFollowing: boolean, readonly viewerIsFriend: boolean, readonly image?: string | null, readonly desiredSkills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }, readonly followers: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly following: { readonly __typename: 'FollowConnection', readonly totalCount: number }, readonly friends: { readonly __typename: 'UserConnection', readonly totalCount: number }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly bio?: string | null, readonly company?: string | null, readonly name?: string | null, readonly twitterUsername?: string | null, readonly url: string, readonly websiteUrl?: string | null, readonly topLanguages: { readonly __typename: 'TopLanguages', readonly totalCount: number, readonly totalSize: number, readonly nodes: ReadonlyArray<{ readonly __typename: 'TopLanguage', readonly name: string, readonly color: string, readonly size: number }> } }, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
-export type UserOverviewExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } };
+export type UserOverviewExperienceCardExperienceFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly name?: string | null } } };
 
 export type UserOverviewRepositoryCardRepositoryFragment = { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> };
 
@@ -2899,7 +2849,7 @@ export type CreateExperienceMutation = { readonly __typename: 'Mutation', readon
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly cursor: string, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } } | null } };
+export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } } | null } };
 
 export type CreateRepositoryMutationVariables = Exact<{
   data: RepositoryCreateInput;
@@ -3430,7 +3380,7 @@ export type GetUserOverviewQueryVariables = Exact<{
 }>;
 
 
-export type GetUserOverviewQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly createdAt: Date, readonly githubUrl: string, readonly name: string, readonly codeExamples: { readonly __typename: 'CodeExampleConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CodeExampleEdge', readonly cursor: string, readonly node: { readonly __typename: 'CodeExample', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> }, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly name?: string | null } } }> }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly contributionCalendar: { readonly __typename: 'GitHubUserContributionCalendar', readonly totalContributions: number, readonly weeks: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarWeek', readonly contributionDays: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarDay', readonly contributionCount: number, readonly contributionLevel: GitHubUserContributionLevel, readonly date: Date, readonly weekday: number }> }> } }, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } }> }, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }> }, readonly trophies: { readonly __typename: 'UserTrophies', readonly id: string, readonly totalFollowers: number, readonly totalPostViews: number, readonly totalSkills: number, readonly totalUpvotes: number, readonly totalYearlyCommits: number, readonly totalYearlyPosts: number } } | null };
+export type GetUserOverviewQuery = { readonly __typename: 'Query', readonly user?: { readonly __typename: 'User', readonly id: string, readonly createdAt: Date, readonly githubUrl: string, readonly name: string, readonly codeExamples: { readonly __typename: 'CodeExampleConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CodeExampleEdge', readonly cursor: string, readonly node: { readonly __typename: 'CodeExample', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } }> }, readonly experiences: { readonly __typename: 'ExperienceConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'ExperienceEdge', readonly cursor: string, readonly node: { readonly __typename: 'Experience', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly name?: string | null } } }> }, readonly github: { readonly __typename: 'GitHubUser', readonly id: string, readonly contributionCalendar: { readonly __typename: 'GitHubUserContributionCalendar', readonly totalContributions: number, readonly weeks: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarWeek', readonly contributionDays: ReadonlyArray<{ readonly __typename: 'GitHubUserContributionCalendarDay', readonly contributionCount: number, readonly contributionLevel: GitHubUserContributionLevel, readonly date: Date, readonly weekday: number }> }> } }, readonly posts: { readonly __typename: 'PostConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'PostEdge', readonly cursor: string, readonly node: { readonly __typename: 'Post', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } }> }, readonly repositories: { readonly __typename: 'RepositoryConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'RepositoryEdge', readonly cursor: string, readonly node: { readonly __typename: 'Repository', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly name: string, readonly pushedAt?: Date | null, readonly url: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> }> }, readonly trophies: { readonly __typename: 'UserTrophies', readonly id: string, readonly totalFollowers: number, readonly totalPostViews: number, readonly totalSkills: number, readonly totalUpvotes: number, readonly totalYearlyCommits: number, readonly totalYearlyPosts: number } } | null };
 
 export type GetUserRepositoriesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3544,7 +3494,7 @@ export const UserGitHubContributionHeatmapGitHubUserContributionCalendarFragment
 export const TopLanguagesFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TopLanguages"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TopLanguages"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"size"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"totalSize"}}]}}]} as unknown as DocumentNode<TopLanguagesFragment, unknown>;
 export const UserAvatarUserFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserAvatarUser"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"image"}}]}}]} as unknown as DocumentNode<UserAvatarUserFragment, unknown>;
 export const UserInfoSideBarUserFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserInfoSideBarUser"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"desiredSkills"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfoFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"followers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"following"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"friends"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}},{"kind":"Field","name":{"kind":"Name","value":"github"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"topLanguages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"TopLanguages"}}]}},{"kind":"Field","name":{"kind":"Name","value":"twitterUsername"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"websiteUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"skills"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfoFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"viewerCanFriend"}},{"kind":"Field","name":{"kind":"Name","value":"viewerFollowing"}},{"kind":"Field","name":{"kind":"Name","value":"viewerIsFriend"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserAvatarUser"}}]}}]} as unknown as DocumentNode<UserInfoSideBarUserFragment, unknown>;
-export const UserOverviewExperienceCardExperienceFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserOverviewExperienceCardExperience"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Experience"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"github"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"positionName"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]} as unknown as DocumentNode<UserOverviewExperienceCardExperienceFragment, unknown>;
+export const UserOverviewExperienceCardExperienceFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserOverviewExperienceCardExperience"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Experience"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"github"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"positionName"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]} as unknown as DocumentNode<UserOverviewExperienceCardExperienceFragment, unknown>;
 export const UserOverviewRepositoryCardRepositoryFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserOverviewRepositoryCardRepository"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Repository"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"github"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"owner"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"login"}}]}},{"kind":"Field","name":{"kind":"Name","value":"primaryLanguage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pushedAt"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"skills"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}}]}}]}}]} as unknown as DocumentNode<UserOverviewRepositoryCardRepositoryFragment, unknown>;
 export const CreateExperienceFragmentFragmentDoc = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CreateExperienceFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Experience"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"endDate"}},{"kind":"Field","name":{"kind":"Name","value":"highlights"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"github"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organizationName"}},{"kind":"Field","name":{"kind":"Name","value":"positionName"}},{"kind":"Field","name":{"kind":"Name","value":"startDate"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<CreateExperienceFragmentFragment, unknown>;
 export const AddDesiredSkillDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddDesiredSkill"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SkillWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addDesiredSkill"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"skills"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageInfoFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"SkillFollowCardSkill"}},{"kind":"Field","name":{"kind":"Name","value":"viewerSkill"}}]}}]}}]}},...PageInfoFragmentFragmentDoc.definitions,...SkillFollowCardSkillFragmentDoc.definitions]} as unknown as DocumentNode<AddDesiredSkillMutation, AddDesiredSkillMutationVariables>;
@@ -3554,7 +3504,7 @@ export const CommentPostDocument = /*#__PURE__*/ {"kind":"Document","definitions
 export const CreateChatDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateChat"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateChatInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createChat"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"messages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"query"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"chats"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"20"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<CreateChatMutation, CreateChatMutationVariables>;
 export const CreateCodeExampleDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCodeExample"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CodeExampleCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createCodeExample"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CodeExampleCardCodeExample"}}]}}]}}]}},...CodeExampleCardCodeExampleFragmentDoc.definitions]} as unknown as DocumentNode<CreateCodeExampleMutation, CreateCodeExampleMutationVariables>;
 export const CreateExperienceDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateExperience"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ExperienceCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createExperience"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CreateExperienceFragment"}}]}}]}}]}},...CreateExperienceFragmentFragmentDoc.definitions]} as unknown as DocumentNode<CreateExperienceMutation, CreateExperienceMutationVariables>;
-export const CreatePostDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PostCardPost"}}]}}]}}]}},...PostCardPostFragmentDoc.definitions,...SkillCardSkillFragmentDoc.definitions]} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
+export const CreatePostDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PostCardPost"}}]}}]}}]}},...PostCardPostFragmentDoc.definitions,...SkillCardSkillFragmentDoc.definitions]} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
 export const CreateRepositoryDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateRepository"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RepositoryCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createRepository"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RepositoryCardRepository"}}]}}]}}]}},...RepositoryCardRepositoryFragmentDoc.definitions]} as unknown as DocumentNode<CreateRepositoryMutation, CreateRepositoryMutationVariables>;
 export const DeleteCodeExampleDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCodeExample"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CodeExampleWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteCodeExample"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"authorName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"urlSlug"}}]}}]}}]}}]} as unknown as DocumentNode<DeleteCodeExampleMutation, DeleteCodeExampleMutationVariables>;
 export const DeleteExperienceDocument = /*#__PURE__*/ {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteExperience"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ExperienceWhereUniqueInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteExperience"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<DeleteExperienceMutation, DeleteExperienceMutationVariables>;

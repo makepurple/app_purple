@@ -1,18 +1,8 @@
 import { interfaceType } from "nexus";
-import { PrismaUtils } from "../../../utils";
 
 export const MutationPayload = interfaceType({
 	name: "MutationPayload",
 	definition: (t) => {
-		t.nonNull.string("cursor", {
-			resolve: (parent) => {
-				return (
-					PrismaUtils.handleRelayCursor().encodeCursor?.(parent.record as any) ??
-					parent.record?.id ??
-					""
-				);
-			}
-		});
 		t.list.nonNull.field("errors", { type: "MutationError" });
 		t.nonNull.field("query", {
 			type: "Query",

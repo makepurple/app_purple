@@ -1022,21 +1022,18 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 
 export interface NexusGenFieldTypes {
   AcceptFriendshipPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddDesiredSkillMutationPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddSkillMutationPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Skill'] | null; // Skill
@@ -1127,7 +1124,6 @@ export interface NexusGenFieldTypes {
     viewerUpvote: boolean | null; // Boolean
   }
   CommentCodeExamplePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
@@ -1144,98 +1140,84 @@ export interface NexusGenFieldTypes {
     node: NexusGenRootTypes['Comment']; // Comment!
   }
   CommentPostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateChatPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Chat'] | null; // Chat
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateCodeExamplePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateExperiencePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience'] | null; // Experience
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreatePostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateRepositoryPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteCodeExamplePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteCommentPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteExperiencePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience'] | null; // Experience
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteFriendshipPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeletePostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteRepositoryPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteUserPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DownvoteCommentPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
@@ -1284,14 +1266,12 @@ export interface NexusGenFieldTypes {
     node: NexusGenRootTypes['Follow']; // Follow!
   }
   FollowSkillPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   FollowUserPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow'] | null; // Follow
@@ -1400,14 +1380,12 @@ export interface NexusGenFieldTypes {
     path: string[]; // [String!]!
   }
   InviteToChatPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Chat'] | null; // Chat
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   LeaveChatPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Chat'] | null; // Chat
@@ -1516,7 +1494,6 @@ export interface NexusGenFieldTypes {
     userId: string; // String!
   }
   OpenNotificationsPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
@@ -1573,7 +1550,6 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   PublishPostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
@@ -1607,28 +1583,24 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RejectFriendshipPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillMutationPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemovePostThumbnailPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveSkillMutationPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Skill'] | null; // Skill
@@ -1653,14 +1625,12 @@ export interface NexusGenFieldTypes {
     node: NexusGenRootTypes['Repository']; // Repository!
   }
   RequestFriendshipPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   SendChatMessagePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['ChatMessage'] | null; // ChatMessage
@@ -1717,126 +1687,108 @@ export interface NexusGenFieldTypes {
     totalSize: number; // Int!
   }
   UnfollowSkillPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnfollowUserPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCodeExamplePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCommentPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvotePostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateCodeExamplePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateCommentPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateDesiredSkillsPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateExperiencePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Experience'] | null; // Experience
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostDraftPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateRepositoryPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateSkillsPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateUserFromGitHubPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UploadPostImagePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['PostImage'] | null; // PostImage
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvoteCodeExamplePayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvoteCommentPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvotePostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
@@ -1987,7 +1939,6 @@ export interface NexusGenFieldTypes {
     totalYearlyPosts: number; // Int!
   }
   ViewPostPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
@@ -2016,7 +1967,6 @@ export interface NexusGenFieldTypes {
     path: string[]; // [String!]!
   }
   MutationPayload: { // field return type
-    cursor: string; // String!
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Node'] | null; // Node
@@ -2048,21 +1998,18 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   AcceptFriendshipPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Friendship'
     viewer: 'User'
   }
   AddDesiredSkillMutationPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Skill'
     viewer: 'User'
   }
   AddSkillMutationPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Skill'
@@ -2153,7 +2100,6 @@ export interface NexusGenFieldTypeNames {
     viewerUpvote: 'Boolean'
   }
   CommentCodeExamplePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
@@ -2170,98 +2116,84 @@ export interface NexusGenFieldTypeNames {
     node: 'Comment'
   }
   CommentPostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
     viewer: 'User'
   }
   CreateChatPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Chat'
     viewer: 'User'
   }
   CreateCodeExamplePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'CodeExample'
     viewer: 'User'
   }
   CreateExperiencePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Experience'
     viewer: 'User'
   }
   CreatePostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
   }
   CreateRepositoryPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Repository'
     viewer: 'User'
   }
   DeleteCodeExamplePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'CodeExample'
     viewer: 'User'
   }
   DeleteCommentPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
     viewer: 'User'
   }
   DeleteExperiencePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Experience'
     viewer: 'User'
   }
   DeleteFriendshipPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Friendship'
     viewer: 'User'
   }
   DeletePostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
   }
   DeleteRepositoryPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Repository'
     viewer: 'User'
   }
   DeleteUserPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'User'
     viewer: 'User'
   }
   DownvoteCommentPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
@@ -2310,14 +2242,12 @@ export interface NexusGenFieldTypeNames {
     node: 'Follow'
   }
   FollowSkillPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Follow'
     viewer: 'User'
   }
   FollowUserPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Follow'
@@ -2426,14 +2356,12 @@ export interface NexusGenFieldTypeNames {
     path: 'String'
   }
   InviteToChatPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Chat'
     viewer: 'User'
   }
   LeaveChatPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Chat'
@@ -2542,7 +2470,6 @@ export interface NexusGenFieldTypeNames {
     userId: 'String'
   }
   OpenNotificationsPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'User'
@@ -2599,7 +2526,6 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   PublishPostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
@@ -2633,28 +2559,24 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   RejectFriendshipPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Friendship'
     viewer: 'User'
   }
   RemoveDesiredSkillMutationPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Skill'
     viewer: 'User'
   }
   RemovePostThumbnailPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
   }
   RemoveSkillMutationPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Skill'
@@ -2679,14 +2601,12 @@ export interface NexusGenFieldTypeNames {
     node: 'Repository'
   }
   RequestFriendshipPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Friendship'
     viewer: 'User'
   }
   SendChatMessagePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'ChatMessage'
@@ -2743,126 +2663,108 @@ export interface NexusGenFieldTypeNames {
     totalSize: 'Int'
   }
   UnfollowSkillPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Follow'
     viewer: 'User'
   }
   UnfollowUserPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Follow'
     viewer: 'User'
   }
   UnvoteCodeExamplePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'CodeExample'
     viewer: 'User'
   }
   UnvoteCommentPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
     viewer: 'User'
   }
   UnvotePostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
   }
   UpdateCodeExamplePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'CodeExample'
     viewer: 'User'
   }
   UpdateCommentPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
     viewer: 'User'
   }
   UpdateDesiredSkillsPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'User'
     viewer: 'User'
   }
   UpdateExperiencePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Experience'
     viewer: 'User'
   }
   UpdatePostDraftPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
   }
   UpdatePostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
   }
   UpdateRepositoryPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Repository'
     viewer: 'User'
   }
   UpdateSkillsPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'User'
     viewer: 'User'
   }
   UpdateUserFromGitHubPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'User'
     viewer: 'User'
   }
   UploadPostImagePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'PostImage'
     viewer: 'User'
   }
   UpvoteCodeExamplePayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'CodeExample'
     viewer: 'User'
   }
   UpvoteCommentPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Comment'
     viewer: 'User'
   }
   UpvotePostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
@@ -3013,7 +2915,6 @@ export interface NexusGenFieldTypeNames {
     totalYearlyPosts: 'Int'
   }
   ViewPostPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Post'
@@ -3042,7 +2943,6 @@ export interface NexusGenFieldTypeNames {
     path: 'String'
   }
   MutationPayload: { // field return type name
-    cursor: 'String'
     errors: 'MutationError'
     query: 'Query'
     record: 'Node'
