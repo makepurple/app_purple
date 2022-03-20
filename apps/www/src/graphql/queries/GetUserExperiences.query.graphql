@@ -9,7 +9,13 @@ query GetUserExperiences(
 		}
 	) {
 		id
-		experiences(after: $after, first: $first) {
+		experiences(
+			after: $after
+			first: $first
+			orderBy: {
+				startDate: Desc
+			}
+		) {
 			edges {
 				cursor
 				node {
