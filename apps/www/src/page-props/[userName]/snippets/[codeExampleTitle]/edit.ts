@@ -22,7 +22,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	const authorName = query.authorName as string;
+	const authorName = query.userName as string;
 	const urlSlug = query.codeExampleTitle as string;
 
 	const [codeExample] = await NextUtils.concurrent([
