@@ -92,6 +92,12 @@ export const createCodeExample = mutationField("createCodeExample", {
 
 			const skillsToConnect = [...existingSkills, ...newSkills];
 
+			/**
+			 * @description Use the specified primary skill, but otherwise use
+			 * the most popular of the listed skill.
+			 * @author David Lee
+			 * @date March 20, 2022
+			 */
 			const primarySkill = args.data.primarySkill
 				? await transaction.skill.findUnique({
 						where: PrismaUtils.nonNull(args.data.primarySkill),
