@@ -1,5 +1,9 @@
 mutation CreateCodeExample($data: CodeExampleCreateInput!) {
 	createCodeExample(data: $data) {
+		viewer {
+			id
+			name
+		}
 		record {
 			...CodeExampleCardCodeExample
 		}

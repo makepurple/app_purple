@@ -1,5 +1,9 @@
 mutation DeleteUser {
 	deleteUser {
+		viewer {
+			id
+			name
+		}
 		record {
 			id
 			name

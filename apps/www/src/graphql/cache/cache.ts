@@ -55,6 +55,24 @@ export const createCache = () => {
 		schema: schema as IntrospectionData,
 		updates: {
 			Mutation: {
+				createCodeExample: ({ createCodeExample: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => ["activities", "codeExamples"].includes(field.fieldName))
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
 				createExperience: ({ createExperience: result }: Mutation, _, cache) => {
 					const viewerId = result.viewer?.id;
 
@@ -101,19 +119,16 @@ export const createCache = () => {
 
 					cache
 						.inspectFields({ __typename: "User", id: viewerId })
-						.filter((field) => {
-							switch (field.fieldName) {
-								case "activities":
-								case "codeExamples":
-								case "commentUpvotes":
-								case "comments":
-								case "notifications":
-								case "trophies":
-									return true;
-								default:
-									return false;
-							}
-						})
+						.filter((field) =>
+							[
+								"activities",
+								"codeExamples",
+								"commentUpvotes",
+								"comments",
+								"notifications",
+								"trophies"
+							].includes(field.fieldName)
+						)
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },
@@ -144,21 +159,18 @@ export const createCache = () => {
 
 					cache
 						.inspectFields({ __typename: "User", id: viewerId })
-						.filter((field) => {
-							switch (field.fieldName) {
-								case "activities":
-								case "commentUpvotes":
-								case "comments":
-								case "notifications":
-								case "posts":
-								case "postUpvotes":
-								case "postViews":
-								case "trophies":
-									return true;
-								default:
-									return false;
-							}
-						})
+						.filter((field) =>
+							[
+								"activities",
+								"commentUpvotes",
+								"comments",
+								"notifications",
+								"posts",
+								"postUpvotes",
+								"postViews",
+								"trophies"
+							].includes(field.fieldName)
+						)
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },

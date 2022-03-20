@@ -59,6 +59,10 @@ export function useDeleteRepositoryMutation() {
   return Urql.useMutation<Operations.DeleteRepositoryMutation, Operations.DeleteRepositoryMutationVariables>(Operations.DeleteRepositoryDocument);
 };
 
+export function useDeleteUserMutation() {
+  return Urql.useMutation<Operations.DeleteUserMutation, Operations.DeleteUserMutationVariables>(Operations.DeleteUserDocument);
+};
+
 export function useFollowSkillMutation() {
   return Urql.useMutation<Operations.FollowSkillMutation, Operations.FollowSkillMutationVariables>(Operations.FollowSkillDocument);
 };
@@ -177,10 +181,6 @@ export function useUpvotePostMutation() {
 
 export function useViewPostMutation() {
   return Urql.useMutation<Operations.ViewPostMutation, Operations.ViewPostMutationVariables>(Operations.ViewPostDocument);
-};
-
-export function useDeleteUserMutation() {
-  return Urql.useMutation<Operations.DeleteUserMutation, Operations.DeleteUserMutationVariables>(Operations.DeleteUserDocument);
 };
 
 export function useGetActivityFeedQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetActivityFeedQueryVariables>, 'query'>) {
