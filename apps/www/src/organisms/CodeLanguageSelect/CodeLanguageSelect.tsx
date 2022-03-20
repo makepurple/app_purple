@@ -1,6 +1,7 @@
 import { Combobox } from "@headlessui/react";
-import { ListItem, Paper } from "@makepurple/components";
+import { Input, ListItem, Paper } from "@makepurple/components";
 import { PopoverModifiers } from "@makepurple/components/src/atoms/Popover/modifiers";
+import { useFocus } from "@makepurple/hooks";
 import { StyleUtils } from "@makepurple/utils";
 import React, { CSSProperties, FC, Fragment, useMemo, useState } from "react";
 import { usePopper } from "react-popper";
@@ -14,13 +15,13 @@ const Root = tw.div`
 	items-center
 `;
 
-const StyledInput = tw.input`
+const StyledInput = tw(Input)`
 	flex-grow
+	self-stretch
+	h-auto
 	px-2
 	rounded-r-none
-	bg-indigo-500
-	text-white
-	font-medium
+	rounded-tl-md
 	focus:ring-0
 `;
 
@@ -48,6 +49,8 @@ const Languages = styled(Paper)`
 		flex-col
 		items-stretch
 		gap-0.5
+		max-h-56
+		overflow-y-auto
 		p-0.5
 	`}
 	z-index: ${StyleUtils.getZIndex("menu")};
@@ -78,11 +81,13 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 		placement: "bottom-start"
 	});
 
+	const [focused, { handlers }] = useFocus();
+
 	const filtered = useMemo(
 		() =>
 			Object.values(CodeLanguage)
 				.sort((a, b) => a.localeCompare(b))
-				.filter((language) => language.startsWith(query)),
+				.filter((language) => language.toLowerCase().startsWith(query.toLowerCase())),
 		[query]
 	);
 
@@ -95,44 +100,54 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 			}}
 			value={value}
 		>
-			<Root ref={refRef}>
-				<Combobox.Input
-					as={StyledInput}
-					className={className}
-					disabled={disabled}
-					displayValue={(language: CodeLanguage) => language}
-					onChange={(e) => {
-						setQuery(e.target.value);
-					}}
-					spellCheck={false}
-					style={style}
-					value={query}
-				/>
-				<Combobox.Button as={SelectorButton}>
-					<SelectorIcon height={24} width={24} />
-				</Combobox.Button>
-			</Root>
-			<Combobox.Options
-				as={Languages}
-				ref={popperRef}
-				{...popper.attributes.popper}
-				style={popper.styles.popper}
-			>
-				{filtered.map((language) => (
-					<Combobox.Option
-						as={Fragment}
-						forwardedAs="div"
-						key={language}
-						value={language}
-					>
-						{(optionProps) => (
-							<ListItem as="div" {...optionProps}>
-								{language}
-							</ListItem>
-						)}
-					</Combobox.Option>
-				))}
-			</Combobox.Options>
+			{({ open }) => (
+				<>
+					<Root ref={refRef}>
+						<Combobox.Input
+							as={StyledInput}
+							className={className}
+							autoComplete="off"
+							disabled={disabled}
+							displayValue={(language: CodeLanguage) => language}
+							onChange={(e) => {
+								setQuery(e.target.value);
+							}}
+							{...handlers}
+							placeholder="Language"
+							spellCheck={false}
+							style={style}
+							value={query}
+						/>
+						<Combobox.Button as={SelectorButton}>
+							<SelectorIcon height={24} width={24} />
+						</Combobox.Button>
+					</Root>
+					{(open || focused) && !!filtered.length && (
+						<Combobox.Options
+							as={Languages}
+							ref={popperRef}
+							{...popper.attributes.popper}
+							static
+							style={popper.styles.popper}
+						>
+							{filtered.map((language) => (
+								<Combobox.Option
+									as={Fragment}
+									forwardedAs="div"
+									key={language}
+									value={language}
+								>
+									{(optionProps) => (
+										<ListItem as="div" {...optionProps}>
+											{language}
+										</ListItem>
+									)}
+								</Combobox.Option>
+							))}
+						</Combobox.Options>
+					)}
+				</>
+			)}
 		</Combobox>
 	);
 };

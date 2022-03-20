@@ -127,7 +127,7 @@ export const Page: NextPage<PageProps> = () => {
 		defaultValues: {
 			content: "",
 			description: "",
-			language: "TypeScript",
+			language: "" as any,
 			primarySkill: {
 				name_owner: {
 					name: "",
@@ -381,6 +381,7 @@ export const Page: NextPage<PageProps> = () => {
 								/>
 							)}
 						/>
+						<FormHelperText error={errors.language?.message} />
 						<FormHelperText error={errors.content?.message} />
 					</FormGroup>
 					<FormActions>
