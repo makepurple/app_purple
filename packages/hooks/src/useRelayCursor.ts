@@ -1,9 +1,10 @@
 import { ObjectUtils } from "@makepurple/utils";
+import { IUseIntersectionObserverOptions } from "@react-hookz/web";
 import { RefCallback, useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldPath } from "react-hook-form";
 import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
 import { useClient, useQuery } from "urql";
-import { useRelativeScrollPosition } from "./useRelativeScrollPosition";
+import { useIntersectionObserver } from "./useIntersectionObserver";
 
 export type PageInfo = {
 	endCursor?: Maybe<string>;
@@ -25,10 +26,9 @@ export type UseRelayCursorArgs<
 	TVariables = Record<string, unknown>,
 	TFieldName extends FieldPath<TData> = any
 > = UseQueryArgs<TVariables, TData> & {
-	direction?: "x" | "y";
 	field: TFieldName;
 	offset?: number;
-};
+} & IUseIntersectionObserverOptions;
 
 export const useRelayCursor = <
 	TData,
@@ -37,7 +37,7 @@ export const useRelayCursor = <
 >(
 	args: UseRelayCursorArgs<TData, TVariables, TFieldName>
 ): [state: UseQueryState<TData, any>, actions: UseRelayCursorActions] => {
-	const { direction = "y", field: fieldName, offset = 0, ...options } = args;
+	const { field: fieldName, offset = 0, root, rootMargin, threshold, ...options } = args;
 
 	const [result] = useQuery({ ...options });
 
@@ -49,12 +49,9 @@ export const useRelayCursor = <
 
 	const [loadMoreElem, loadMoreRef] = useState<HTMLElement | null>(null);
 
-	const { isBelow, isRight } = useRelativeScrollPosition(
-		{ current: loadMoreElem },
-		{ origin: direction === "y" ? { x: 0, y: 0.5 } : { x: 0.5, y: 0 } }
-	);
+	const intersection = useIntersectionObserver(loadMoreElem, { root, rootMargin, threshold });
 
-	const shouldLoadMore: boolean = direction === "y" ? isBelow : isRight;
+	const shouldLoadMore: boolean = intersection?.isIntersecting ?? false;
 
 	const nodes = field?.nodes ?? [];
 	const pageInfo = field?.pageInfo;

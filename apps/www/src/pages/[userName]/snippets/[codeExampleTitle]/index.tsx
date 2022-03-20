@@ -222,7 +222,6 @@ export const Page: NextPage<PageProps> = () => {
 	// @ts-ignore
 	const [{ data: commentsData, fetching: fetchingComments }, { getRef }] = useRelayCursor({
 		query: GetCodeExampleCommentsDocument,
-		direction: "y",
 		field: "comments",
 		offset: 0,
 		requestPolicy: "cache-first",
