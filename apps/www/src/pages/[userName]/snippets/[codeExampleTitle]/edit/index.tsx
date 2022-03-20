@@ -341,13 +341,13 @@ export const Page: NextPage<PageProps> = () => {
 									setValue("primarySkill.name_owner", { name, owner });
 									setRepository(newSkill);
 
-									const shouldAdd = !skills.fields.some((field) => {
+									const isDuplicate = skills.fields.some((field) => {
 										const skill = (field as any).name_owner;
 
 										return skill.owner === owner && skill.name === name;
 									});
 
-									shouldAdd && skills.prepend({ name_owner: { name, owner } });
+									!isDuplicate && skills.prepend({ name_owner: { name, owner } });
 								}}
 							/>
 						</Tags>
@@ -389,12 +389,16 @@ export const Page: NextPage<PageProps> = () => {
 							})}
 							<SkillAutosuggest
 								onSelect={(newSkill) => {
-									skills.append({
-										name_owner: {
-											name: newSkill.name,
-											owner: newSkill.owner.login
-										}
+									const name = newSkill.name;
+									const owner = newSkill.owner.login;
+
+									const isDuplicate = skills.fields.some((field) => {
+										const skill = (field as any).name_owner;
+
+										return skill.owner === owner && skill.name === name;
 									});
+
+									!isDuplicate && skills.append({ name_owner: { name, owner } });
 								}}
 							/>
 						</Tags>
