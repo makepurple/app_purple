@@ -4,6 +4,6 @@ export const DeletePostPayload = objectType({
 	name: "DeletePostPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Post" });
+		t.field("record", { type: "Post" });
 	}
 });

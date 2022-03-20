@@ -4,6 +4,6 @@ export const DeleteCodeExamplePayload = objectType({
 	name: "DeleteCodeExamplePayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "CodeExample" });
+		t.field("record", { type: "CodeExample" });
 	}
 });

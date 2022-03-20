@@ -4,6 +4,6 @@ export const RemoveSkillMutationPayload = objectType({
 	name: "RemoveSkillMutationPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Skill" });
+		t.field("record", { type: "Skill" });
 	}
 });

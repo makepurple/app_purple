@@ -4,6 +4,6 @@ export const CreateExperiencePayload = objectType({
 	name: "CreateExperiencePayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Experience" });
+		t.field("record", { type: "Experience" });
 	}
 });

@@ -4,6 +4,6 @@ export const UpdateCommentPayload = objectType({
 	name: "UpdateCommentPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Comment" });
+		t.field("record", { type: "Comment" });
 	}
 });

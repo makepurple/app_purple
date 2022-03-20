@@ -1,8 +1,7 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
-import { gql } from "urql";
-import type { Mutation, User } from "../generated";
+import type { Mutation } from "../generated";
 import schema from "../generated/schema.gen.json";
 
 export const createCache = () => {
@@ -92,6 +91,8 @@ export const createCache = () => {
 						});
 				},
 				deleteCodeExample: ({ deleteCodeExample: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
 					cache.invalidate({ __typename: "CodeExample", id: result.record.id });
 
 					const viewerId = result.viewer?.id;
@@ -122,47 +123,19 @@ export const createCache = () => {
 						});
 				},
 				deleteExperience: ({ deleteExperience: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
 					cache.invalidate({ __typename: "Experience", id: result.record.id });
 				},
-				deleteFriendship: ({ deleteFriendship: result }: Mutation, _, cache) => {
-					const viewer = result.viewer;
+				deleteFriendship: ({ deleteFriendship: result }: Mutation) => {
+					if (!result.record) return;
 
-					if (!viewer) return;
-
-					const fragment = gql`
-						fragment _ on User {
-							id
-							friends {
-								edges {
-									cursorresult
-									node {
-										id
-									}
-								}
-								nodes {
-									id
-								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: viewer.id });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).friends.edges.filter(
-						(friend) => friend.node.id !== result.record.friending.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: viewer.id,
-						friends: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+					// eslint-disable-next-line no-console
+					console.log("Fix later");
 				},
 				deletePost: ({ deletePost: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
 					cache.invalidate({ __typename: "Post", id: result.record.id });
 
 					const viewerId = result.viewer?.id;
@@ -195,54 +168,28 @@ export const createCache = () => {
 						});
 				},
 				deleteRepository: ({ deleteRepository: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
 					cache.invalidate({ __typename: "Repository", id: result.record.id });
 				},
 				leaveChat: ({ leaveChat: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
 					cache.invalidate({ __typename: "Chat", id: result.record.id });
 				},
 				publishPost: ({ publishPost: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
 					!!result.viewer?.id &&
 						cache.invalidate({ __typename: "User", id: result.viewer.id });
 
 					cache.invalidate({ __typename: "Post", id: result.record.id });
 				},
-				rejectFriendship: ({ rejectFriendship: result }: Mutation, _, cache) => {
-					const viewer = result.viewer;
+				rejectFriendship: ({ rejectFriendship: result }: Mutation) => {
+					if (!result.record) return;
 
-					if (!viewer) return;
-
-					const fragment = gql`
-						fragment _ on User {
-							id
-							friendRequestsReceived {
-								edges {
-									cursor
-									node {
-										id
-									}
-								}
-								nodes {
-									id
-								}
-							}
-						}
-					`;
-
-					const old = cache.readFragment(fragment, { id: viewer.id });
-
-					if (!old) return;
-
-					const filteredEdges = (old as User).friendRequestsReceived.edges.filter(
-						(friendRequest) => friendRequest.node.id !== result.record.friender.id
-					);
-
-					cache.writeFragment(fragment, {
-						id: viewer.id,
-						friendRequestsReceived: {
-							edges: filteredEdges,
-							nodes: filteredEdges.map((edge) => edge.node)
-						}
-					});
+					// eslint-disable-next-line no-console
+					console.log("Fix later");
 				}
 			}
 		}

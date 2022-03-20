@@ -4,6 +4,6 @@ export const CreateChatPayload = objectType({
 	name: "CreateChatPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Chat" });
+		t.field("record", { type: "Chat" });
 	}
 });

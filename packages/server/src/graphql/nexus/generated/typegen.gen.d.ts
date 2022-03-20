@@ -415,13 +415,13 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   AcceptFriendshipPayload: { // root type
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
   }
   AddDesiredSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   AddSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   Chat: { // root type
     id: string; // ID!
@@ -484,7 +484,7 @@ export interface NexusGenObjects {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   CommentCodeExamplePayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   CommentConnection: { // root type
     edges: NexusGenRootTypes['CommentEdge'][]; // [CommentEdge!]!
@@ -496,46 +496,46 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['Comment']; // Comment!
   }
   CommentPostPayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   CreateChatPayload: { // root type
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record?: NexusGenRootTypes['Chat'] | null; // Chat
   }
   CreateCodeExamplePayload: { // root type
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record?: NexusGenRootTypes['CodeExample'] | null; // CodeExample
   }
   CreateExperiencePayload: { // root type
-    record: NexusGenRootTypes['Experience']; // Experience!
+    record?: NexusGenRootTypes['Experience'] | null; // Experience
   }
   CreatePostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   CreateRepositoryPayload: { // root type
-    record: NexusGenRootTypes['Repository']; // Repository!
+    record?: NexusGenRootTypes['Repository'] | null; // Repository
   }
   DeleteCodeExamplePayload: { // root type
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record?: NexusGenRootTypes['CodeExample'] | null; // CodeExample
   }
   DeleteCommentPayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   DeleteExperiencePayload: { // root type
-    record: NexusGenRootTypes['Experience']; // Experience!
+    record?: NexusGenRootTypes['Experience'] | null; // Experience
   }
   DeleteFriendshipPayload: { // root type
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
   }
   DeletePostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   DeleteRepositoryPayload: { // root type
-    record: NexusGenRootTypes['Repository']; // Repository!
+    record?: NexusGenRootTypes['Repository'] | null; // Repository
   }
   DeleteUserPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   DownvoteCommentPayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   Experience: { // root type
     endDate?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -573,10 +573,10 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['Follow']; // Follow!
   }
   FollowSkillPayload: { // root type
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record?: NexusGenRootTypes['Follow'] | null; // Follow
   }
   FollowUserPayload: { // root type
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record?: NexusGenRootTypes['Follow'] | null; // Follow
   }
   Friendship: { // root type
     frienderId: string; // String!
@@ -644,10 +644,10 @@ export interface NexusGenObjects {
     firstDay: NexusGenScalars['DateTime']; // DateTime!
   }
   InviteToChatPayload: { // root type
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record?: NexusGenRootTypes['Chat'] | null; // Chat
   }
   LeaveChatPayload: { // root type
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record?: NexusGenRootTypes['Chat'] | null; // Chat
   }
   Mutation: {};
   NotificationChatMessageReceived: { // root type
@@ -688,7 +688,7 @@ export interface NexusGenObjects {
     userId: string; // String!
   }
   OpenNotificationsPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   Organization: { // root type
     id: string; // ID!
@@ -727,20 +727,20 @@ export interface NexusGenObjects {
     url: string; // String!
   }
   PublishPostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   Query: {};
   RejectFriendshipPayload: { // root type
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
   }
   RemoveDesiredSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   RemovePostThumbnailPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   RemoveSkillMutationPayload: { // root type
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   Repository: { // root type
     id: string; // ID!
@@ -757,10 +757,10 @@ export interface NexusGenObjects {
     node: NexusGenRootTypes['Repository']; // Repository!
   }
   RequestFriendshipPayload: { // root type
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
   }
   SendChatMessagePayload: { // root type
-    record: NexusGenRootTypes['ChatMessage']; // ChatMessage!
+    record?: NexusGenRootTypes['ChatMessage'] | null; // ChatMessage
   }
   Skill: { // root type
     id: string; // ID!
@@ -801,58 +801,58 @@ export interface NexusGenObjects {
     nodes: NexusGenRootTypes['TopLanguage'][]; // [TopLanguage!]!
   }
   UnfollowSkillPayload: { // root type
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record?: NexusGenRootTypes['Follow'] | null; // Follow
   }
   UnfollowUserPayload: { // root type
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record?: NexusGenRootTypes['Follow'] | null; // Follow
   }
   UnvoteCodeExamplePayload: { // root type
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record?: NexusGenRootTypes['CodeExample'] | null; // CodeExample
   }
   UnvoteCommentPayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   UnvotePostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdateCodeExamplePayload: { // root type
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record?: NexusGenRootTypes['CodeExample'] | null; // CodeExample
   }
   UpdateCommentPayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   UpdateDesiredSkillsPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   UpdateExperiencePayload: { // root type
-    record: NexusGenRootTypes['Experience']; // Experience!
+    record?: NexusGenRootTypes['Experience'] | null; // Experience
   }
   UpdatePostDraftPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdatePostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdateRepositoryPayload: { // root type
-    record: NexusGenRootTypes['Repository']; // Repository!
+    record?: NexusGenRootTypes['Repository'] | null; // Repository
   }
   UpdateSkillsPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   UpdateUserFromGitHubPayload: { // root type
-    record: NexusGenRootTypes['User']; // User!
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   UploadPostImagePayload: { // root type
-    record: NexusGenRootTypes['PostImage']; // PostImage!
+    record?: NexusGenRootTypes['PostImage'] | null; // PostImage
   }
   UpvoteCodeExamplePayload: { // root type
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record?: NexusGenRootTypes['CodeExample'] | null; // CodeExample
   }
   UpvoteCommentPayload: { // root type
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   UpvotePostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -944,7 +944,7 @@ export interface NexusGenObjects {
     id: string; // ID!
   }
   ViewPostPayload: { // root type
-    record: NexusGenRootTypes['Post']; // Post!
+    record?: NexusGenRootTypes['Post'] | null; // Post
   }
 }
 
@@ -971,19 +971,19 @@ export interface NexusGenFieldTypes {
   AcceptFriendshipPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddDesiredSkillMutationPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddSkillMutationPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Chat: { // field return type
@@ -1073,7 +1073,7 @@ export interface NexusGenFieldTypes {
   CommentCodeExamplePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CommentConnection: { // field return type
@@ -1089,85 +1089,85 @@ export interface NexusGenFieldTypes {
   CommentPostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateChatPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record: NexusGenRootTypes['Chat'] | null; // Chat
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateCodeExamplePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateExperiencePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Experience']; // Experience!
+    record: NexusGenRootTypes['Experience'] | null; // Experience
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreatePostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateRepositoryPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Repository']; // Repository!
+    record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteCodeExamplePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteCommentPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteExperiencePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Experience']; // Experience!
+    record: NexusGenRootTypes['Experience'] | null; // Experience
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteFriendshipPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeletePostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteRepositoryPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Repository']; // Repository!
+    record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeleteUserPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DownvoteCommentPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Experience: { // field return type
@@ -1215,13 +1215,13 @@ export interface NexusGenFieldTypes {
   FollowSkillPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   FollowUserPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Friendship: { // field return type
@@ -1325,13 +1325,13 @@ export interface NexusGenFieldTypes {
   InviteToChatPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record: NexusGenRootTypes['Chat'] | null; // Chat
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   LeaveChatPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Chat']; // Chat!
+    record: NexusGenRootTypes['Chat'] | null; // Chat
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
@@ -1439,7 +1439,7 @@ export interface NexusGenFieldTypes {
   OpenNotificationsPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Organization: { // field return type
@@ -1495,7 +1495,7 @@ export interface NexusGenFieldTypes {
   PublishPostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
@@ -1528,25 +1528,25 @@ export interface NexusGenFieldTypes {
   RejectFriendshipPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillMutationPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemovePostThumbnailPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveSkillMutationPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Skill']; // Skill!
+    record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Repository: { // field return type
@@ -1570,13 +1570,13 @@ export interface NexusGenFieldTypes {
   RequestFriendshipPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship']; // Friendship!
+    record: NexusGenRootTypes['Friendship'] | null; // Friendship
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   SendChatMessagePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['ChatMessage']; // ChatMessage!
+    record: NexusGenRootTypes['ChatMessage'] | null; // ChatMessage
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Skill: { // field return type
@@ -1632,109 +1632,109 @@ export interface NexusGenFieldTypes {
   UnfollowSkillPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnfollowUserPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow']; // Follow!
+    record: NexusGenRootTypes['Follow'] | null; // Follow
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCodeExamplePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCommentPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvotePostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateCodeExamplePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateCommentPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateDesiredSkillsPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateExperiencePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Experience']; // Experience!
+    record: NexusGenRootTypes['Experience'] | null; // Experience
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostDraftPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateRepositoryPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Repository']; // Repository!
+    record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateSkillsPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateUserFromGitHubPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['User']; // User!
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UploadPostImagePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['PostImage']; // PostImage!
+    record: NexusGenRootTypes['PostImage'] | null; // PostImage
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvoteCodeExamplePayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['CodeExample']; // CodeExample!
+    record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvoteCommentPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Comment']; // Comment!
+    record: NexusGenRootTypes['Comment'] | null; // Comment
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpvotePostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -1884,7 +1884,7 @@ export interface NexusGenFieldTypes {
   ViewPostPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Post']; // Post!
+    record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Connection: { // field return type
@@ -1908,7 +1908,7 @@ export interface NexusGenFieldTypes {
   MutationPayload: { // field return type
     cursor: string; // String!
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Node']; // Node!
+    record: NexusGenRootTypes['Node'] | null; // Node
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Node: { // field return type

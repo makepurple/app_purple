@@ -17,7 +17,7 @@ export const MutationPayload = interfaceType({
 			type: "Query",
 			resolve: () => ({})
 		});
-		t.nonNull.field("record", {
+		t.field("record", {
 			type: "Node",
 			resolve: (parent) => {
 				return parent.record as any;

@@ -4,6 +4,6 @@ export const UnfollowUserPayload = objectType({
 	name: "UnfollowUserPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Follow" });
+		t.field("record", { type: "Follow" });
 	}
 });

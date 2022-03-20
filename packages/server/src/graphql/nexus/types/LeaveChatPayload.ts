@@ -4,6 +4,6 @@ export const LeaveChatPayload = objectType({
 	name: "LeaveChatPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Chat" });
+		t.field("record", { type: "Chat" });
 	}
 });

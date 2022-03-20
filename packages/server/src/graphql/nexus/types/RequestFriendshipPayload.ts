@@ -4,6 +4,6 @@ export const RequestFriendshipPayload = objectType({
 	name: "RequestFriendshipPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.nonNull.field("record", { type: "Friendship" });
+		t.field("record", { type: "Friendship" });
 	}
 });

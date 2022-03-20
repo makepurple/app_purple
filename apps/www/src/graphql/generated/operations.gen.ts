@@ -29,7 +29,7 @@ export type AcceptFriendshipPayload = MutationPayload & {
   readonly __typename: 'AcceptFriendshipPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Friendship;
+  readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -37,7 +37,7 @@ export type AddDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddDesiredSkillMutationPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Skill;
+  readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -45,7 +45,7 @@ export type AddSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddSkillMutationPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Skill;
+  readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -334,7 +334,7 @@ export type CommentCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CommentCodeExamplePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -369,7 +369,7 @@ export type CommentPostPayload = MutationPayload & {
   readonly __typename: 'CommentPostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -410,7 +410,7 @@ export type CreateChatPayload = MutationPayload & {
   readonly __typename: 'CreateChatPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Chat;
+  readonly record?: Maybe<Chat>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -418,7 +418,7 @@ export type CreateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CreateCodeExamplePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: CodeExample;
+  readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -426,7 +426,7 @@ export type CreateExperiencePayload = MutationPayload & {
   readonly __typename: 'CreateExperiencePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Experience;
+  readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -434,7 +434,7 @@ export type CreatePostPayload = MutationPayload & {
   readonly __typename: 'CreatePostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -442,7 +442,7 @@ export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Repository;
+  readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -457,7 +457,7 @@ export type DeleteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'DeleteCodeExamplePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: CodeExample;
+  readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -465,7 +465,7 @@ export type DeleteCommentPayload = MutationPayload & {
   readonly __typename: 'DeleteCommentPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -473,7 +473,7 @@ export type DeleteExperiencePayload = MutationPayload & {
   readonly __typename: 'DeleteExperiencePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Experience;
+  readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -481,7 +481,7 @@ export type DeleteFriendshipPayload = MutationPayload & {
   readonly __typename: 'DeleteFriendshipPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Friendship;
+  readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -489,7 +489,7 @@ export type DeletePostPayload = MutationPayload & {
   readonly __typename: 'DeletePostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -497,7 +497,7 @@ export type DeleteRepositoryPayload = MutationPayload & {
   readonly __typename: 'DeleteRepositoryPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Repository;
+  readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -505,7 +505,7 @@ export type DeleteUserPayload = MutationPayload & {
   readonly __typename: 'DeleteUserPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: User;
+  readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -513,7 +513,7 @@ export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -632,7 +632,7 @@ export type FollowSkillPayload = MutationPayload & {
   readonly __typename: 'FollowSkillPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Follow;
+  readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -645,7 +645,7 @@ export type FollowUserPayload = MutationPayload & {
   readonly __typename: 'FollowUserPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Follow;
+  readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -897,7 +897,7 @@ export type InviteToChatPayload = MutationPayload & {
   readonly __typename: 'InviteToChatPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Chat;
+  readonly record?: Maybe<Chat>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -905,7 +905,7 @@ export type LeaveChatPayload = MutationPayload & {
   readonly __typename: 'LeaveChatPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Chat;
+  readonly record?: Maybe<Chat>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1246,7 +1246,7 @@ export type MutationViewPostArgs = {
 export type MutationPayload = {
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Node;
+  readonly record?: Maybe<Node>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1341,7 +1341,7 @@ export type OpenNotificationsPayload = MutationPayload & {
   readonly __typename: 'OpenNotificationsPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: User;
+  readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1518,7 +1518,7 @@ export type PublishPostPayload = MutationPayload & {
   readonly __typename: 'PublishPostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1736,7 +1736,7 @@ export type RejectFriendshipPayload = MutationPayload & {
   readonly __typename: 'RejectFriendshipPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Friendship;
+  readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1744,7 +1744,7 @@ export type RemoveDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillMutationPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Skill;
+  readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1752,7 +1752,7 @@ export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1760,7 +1760,7 @@ export type RemoveSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillMutationPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Skill;
+  readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1818,7 +1818,7 @@ export type RequestFriendshipPayload = MutationPayload & {
   readonly __typename: 'RequestFriendshipPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Friendship;
+  readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -1826,7 +1826,7 @@ export type SendChatMessagePayload = MutationPayload & {
   readonly __typename: 'SendChatMessagePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: ChatMessage;
+  readonly record?: Maybe<ChatMessage>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2052,7 +2052,7 @@ export type UnfollowSkillPayload = MutationPayload & {
   readonly __typename: 'UnfollowSkillPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Follow;
+  readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2060,7 +2060,7 @@ export type UnfollowUserPayload = MutationPayload & {
   readonly __typename: 'UnfollowUserPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Follow;
+  readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2068,7 +2068,7 @@ export type UnvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UnvoteCodeExamplePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: CodeExample;
+  readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2076,7 +2076,7 @@ export type UnvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UnvoteCommentPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2084,7 +2084,7 @@ export type UnvotePostPayload = MutationPayload & {
   readonly __typename: 'UnvotePostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2092,7 +2092,7 @@ export type UpdateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpdateCodeExamplePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: CodeExample;
+  readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2100,7 +2100,7 @@ export type UpdateCommentPayload = MutationPayload & {
   readonly __typename: 'UpdateCommentPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2112,7 +2112,7 @@ export type UpdateDesiredSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateDesiredSkillsPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: User;
+  readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2120,7 +2120,7 @@ export type UpdateExperiencePayload = MutationPayload & {
   readonly __typename: 'UpdateExperiencePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Experience;
+  readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2128,7 +2128,7 @@ export type UpdatePostDraftPayload = MutationPayload & {
   readonly __typename: 'UpdatePostDraftPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2136,7 +2136,7 @@ export type UpdatePostPayload = MutationPayload & {
   readonly __typename: 'UpdatePostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2144,7 +2144,7 @@ export type UpdateRepositoryPayload = MutationPayload & {
   readonly __typename: 'UpdateRepositoryPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Repository;
+  readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2156,7 +2156,7 @@ export type UpdateSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateSkillsPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: User;
+  readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2164,7 +2164,7 @@ export type UpdateUserFromGitHubPayload = MutationPayload & {
   readonly __typename: 'UpdateUserFromGitHubPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: User;
+  readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2177,7 +2177,7 @@ export type UploadPostImagePayload = MutationPayload & {
   readonly __typename: 'UploadPostImagePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: PostImage;
+  readonly record?: Maybe<PostImage>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2189,7 +2189,7 @@ export type UpvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpvoteCodeExamplePayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: CodeExample;
+  readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2201,7 +2201,7 @@ export type UpvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UpvoteCommentPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Comment;
+  readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2209,7 +2209,7 @@ export type UpvotePostPayload = MutationPayload & {
   readonly __typename: 'UpvotePostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2608,7 +2608,7 @@ export type ViewPostPayload = MutationPayload & {
   readonly __typename: 'ViewPostPayload';
   readonly cursor: Scalars['String'];
   readonly query: Query;
-  readonly record: Post;
+  readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
 };
 
@@ -2789,42 +2789,42 @@ export type AddDesiredSkillMutationVariables = Exact<{
 }>;
 
 
-export type AddDesiredSkillMutation = { readonly __typename: 'Mutation', readonly addDesiredSkill: { readonly __typename: 'AddDesiredSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly viewerSkill: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } } };
+export type AddDesiredSkillMutation = { readonly __typename: 'Mutation', readonly addDesiredSkill: { readonly __typename: 'AddDesiredSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record?: { readonly __typename: 'Skill', readonly viewerSkill: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | null } };
 
 export type AddSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
 
 
-export type AddSkillMutation = { readonly __typename: 'Mutation', readonly addSkill: { readonly __typename: 'AddSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly viewerSkill: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } } };
+export type AddSkillMutation = { readonly __typename: 'Mutation', readonly addSkill: { readonly __typename: 'AddSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record?: { readonly __typename: 'Skill', readonly viewerSkill: boolean, readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | null } };
 
 export type CommentCodeExampleMutationVariables = Exact<{
   data: CommentCodeExampleInput;
 }>;
 
 
-export type CommentCodeExampleMutation = { readonly __typename: 'Mutation', readonly commentCodeExample: { readonly __typename: 'CommentCodeExamplePayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly authorId: string, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } } };
+export type CommentCodeExampleMutation = { readonly __typename: 'Mutation', readonly commentCodeExample: { readonly __typename: 'CommentCodeExamplePayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly authorId: string, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } | null } };
 
 export type CommentPostMutationVariables = Exact<{
   data: CommentPostInput;
 }>;
 
 
-export type CommentPostMutation = { readonly __typename: 'Mutation', readonly commentPost: { readonly __typename: 'CommentPostPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly content: ReadonlyArray<Json>, readonly authorId: string, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly post?: { readonly __typename: 'Post', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } } };
+export type CommentPostMutation = { readonly __typename: 'Mutation', readonly commentPost: { readonly __typename: 'CommentPostPayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly content: ReadonlyArray<Json>, readonly authorId: string, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly parent?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null, readonly post?: { readonly __typename: 'Post', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null } | null } };
 
 export type CreateChatMutationVariables = Exact<{
   data: CreateChatInput;
 }>;
 
 
-export type CreateChatMutation = { readonly __typename: 'Mutation', readonly createChat: { readonly __typename: 'CreateChatPayload', readonly record: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: ReadonlyArray<Json> }> }, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } }, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly chats: { readonly __typename: 'ChatConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Chat', readonly id: string }> } } | null } } };
+export type CreateChatMutation = { readonly __typename: 'Mutation', readonly createChat: { readonly __typename: 'CreateChatPayload', readonly record?: { readonly __typename: 'Chat', readonly id: string, readonly messages: { readonly __typename: 'ChatMessageConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'ChatMessage', readonly id: string, readonly content: ReadonlyArray<Json> }> }, readonly users: { readonly __typename: 'UserConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } | null, readonly query: { readonly __typename: 'Query', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly chats: { readonly __typename: 'ChatConnection', readonly nodes: ReadonlyArray<{ readonly __typename: 'Chat', readonly id: string }> } } | null } } };
 
 export type CreateCodeExampleMutationVariables = Exact<{
   data: CodeExampleCreateInput;
 }>;
 
 
-export type CreateCodeExampleMutation = { readonly __typename: 'Mutation', readonly createCodeExample: { readonly __typename: 'CreateCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } } };
+export type CreateCodeExampleMutation = { readonly __typename: 'Mutation', readonly createCodeExample: { readonly __typename: 'CreateCodeExamplePayload', readonly record?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null } };
 
 export type CreateExperienceFragmentFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 
@@ -2833,75 +2833,75 @@ export type CreateExperienceMutationVariables = Exact<{
 }>;
 
 
-export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'CreateExperiencePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } } } };
+export type CreateExperienceMutation = { readonly __typename: 'Mutation', readonly createExperience: { readonly __typename: 'CreateExperiencePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } } | null } };
 
 export type CreatePostMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly cursor: string, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } } } };
+export type CreatePostMutation = { readonly __typename: 'Mutation', readonly createPost: { readonly __typename: 'CreatePostPayload', readonly cursor: string, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } } | null } };
 
 export type CreateRepositoryMutationVariables = Exact<{
   data: RepositoryCreateInput;
 }>;
 
 
-export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } };
+export type CreateRepositoryMutation = { readonly __typename: 'Mutation', readonly createRepository: { readonly __typename: 'CreateRepositoryPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Repository', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null }, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } | null } };
 
 export type DeleteCodeExampleMutationVariables = Exact<{
   where: CodeExampleWhereUniqueInput;
 }>;
 
 
-export type DeleteCodeExampleMutation = { readonly __typename: 'Mutation', readonly deleteCodeExample: { readonly __typename: 'DeleteCodeExamplePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'CodeExample', readonly authorName: string, readonly id: string, readonly title: string, readonly urlSlug: string } } };
+export type DeleteCodeExampleMutation = { readonly __typename: 'Mutation', readonly deleteCodeExample: { readonly __typename: 'DeleteCodeExamplePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'CodeExample', readonly authorName: string, readonly id: string, readonly title: string, readonly urlSlug: string } | null } };
 
 export type DeleteExperienceMutationVariables = Exact<{
   where: ExperienceWhereUniqueInput;
 }>;
 
 
-export type DeleteExperienceMutation = { readonly __typename: 'Mutation', readonly deleteExperience: { readonly __typename: 'DeleteExperiencePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Experience', readonly id: string } } };
+export type DeleteExperienceMutation = { readonly __typename: 'Mutation', readonly deleteExperience: { readonly __typename: 'DeleteExperiencePayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Experience', readonly id: string } | null } };
 
 export type DeleteFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type DeleteFriendshipMutation = { readonly __typename: 'Mutation', readonly deleteFriendship: { readonly __typename: 'DeleteFriendshipPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly id: string } } } };
+export type DeleteFriendshipMutation = { readonly __typename: 'Mutation', readonly deleteFriendship: { readonly __typename: 'DeleteFriendshipPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record?: { readonly __typename: 'Friendship', readonly id: string, readonly friendingId: string, readonly friending: { readonly __typename: 'User', readonly id: string } } | null } };
 
 export type DeletePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type DeletePostMutation = { readonly __typename: 'Mutation', readonly deletePost: { readonly __typename: 'DeletePostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string } } };
+export type DeletePostMutation = { readonly __typename: 'Mutation', readonly deletePost: { readonly __typename: 'DeletePostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly title: string, readonly urlSlug: string } | null } };
 
 export type DeleteRepositoryMutationVariables = Exact<{
   where: RepositoryWhereUniqueInput;
 }>;
 
 
-export type DeleteRepositoryMutation = { readonly __typename: 'Mutation', readonly deleteRepository: { readonly __typename: 'DeleteRepositoryPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record: { readonly __typename: 'Repository', readonly id: string } } };
+export type DeleteRepositoryMutation = { readonly __typename: 'Mutation', readonly deleteRepository: { readonly __typename: 'DeleteRepositoryPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record?: { readonly __typename: 'Repository', readonly id: string } | null } };
 
 export type FollowSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
 
 
-export type FollowSkillMutation = { readonly __typename: 'Mutation', readonly followSkill: { readonly __typename: 'FollowUserPayload', readonly record: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | { readonly __typename: 'User' } } } };
+export type FollowSkillMutation = { readonly __typename: 'Mutation', readonly followSkill: { readonly __typename: 'FollowUserPayload', readonly record?: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | { readonly __typename: 'User' } } | null } };
 
 export type FollowUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FollowUserMutation = { readonly __typename: 'Mutation', readonly followUser: { readonly __typename: 'FollowUserPayload', readonly record: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill' } | { readonly __typename: 'User', readonly id: string, readonly viewerFollowing: boolean } } } };
+export type FollowUserMutation = { readonly __typename: 'Mutation', readonly followUser: { readonly __typename: 'FollowUserPayload', readonly record?: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill' } | { readonly __typename: 'User', readonly id: string, readonly viewerFollowing: boolean } } | null } };
 
 export type FriendRequestUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type FriendRequestUserMutation = { readonly __typename: 'Mutation', readonly requestFriendship: { readonly __typename: 'RequestFriendshipPayload', readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly viewerFriended: boolean } } } };
+export type FriendRequestUserMutation = { readonly __typename: 'Mutation', readonly requestFriendship: { readonly __typename: 'RequestFriendshipPayload', readonly record?: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly viewerFriended: boolean } } | null } };
 
 export type InviteToChatMutationVariables = Exact<{
   data: InviteToChatInput;
@@ -2909,19 +2909,19 @@ export type InviteToChatMutationVariables = Exact<{
 }>;
 
 
-export type InviteToChatMutation = { readonly __typename: 'Mutation', readonly inviteToChat: { readonly __typename: 'InviteToChatPayload', readonly record: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } } };
+export type InviteToChatMutation = { readonly __typename: 'Mutation', readonly inviteToChat: { readonly __typename: 'InviteToChatPayload', readonly record?: { readonly __typename: 'Chat', readonly id: string, readonly users: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }> } } | null } };
 
 export type LeaveChatMutationVariables = Exact<{
   chatId: Scalars['String'];
 }>;
 
 
-export type LeaveChatMutation = { readonly __typename: 'Mutation', readonly leaveChat: { readonly __typename: 'LeaveChatPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record: { readonly __typename: 'Chat', readonly id: string } } };
+export type LeaveChatMutation = { readonly __typename: 'Mutation', readonly leaveChat: { readonly __typename: 'LeaveChatPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record?: { readonly __typename: 'Chat', readonly id: string } | null } };
 
 export type OpenNotificationsMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OpenNotificationsMutation = { readonly __typename: 'Mutation', readonly openNotifications: { readonly __typename: 'OpenNotificationsPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } } };
+export type OpenNotificationsMutation = { readonly __typename: 'Mutation', readonly openNotifications: { readonly __typename: 'OpenNotificationsPayload', readonly record?: { readonly __typename: 'User', readonly id: string, readonly notifications: { readonly __typename: 'NotificationConnection', readonly totalCount: number } } | null } };
 
 export type PublishPostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -2929,35 +2929,35 @@ export type PublishPostMutationVariables = Exact<{
 }>;
 
 
-export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content: ReadonlyArray<Json>, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly urlSlug: string } } };
+export type PublishPostMutation = { readonly __typename: 'Mutation', readonly publishPost: { readonly __typename: 'PublishPostPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null, readonly record?: { readonly __typename: 'Post', readonly id: string, readonly authorName: string, readonly content: ReadonlyArray<Json>, readonly description?: string | null, readonly publishedAt?: Date | null, readonly thumbnailUrl?: string | null, readonly title: string, readonly urlSlug: string } | null } };
 
 export type RejectFriendshipMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type RejectFriendshipMutation = { readonly __typename: 'Mutation', readonly rejectFriendship: { readonly __typename: 'RejectFriendshipPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string } } } };
+export type RejectFriendshipMutation = { readonly __typename: 'Mutation', readonly rejectFriendship: { readonly __typename: 'RejectFriendshipPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string } | null, readonly record?: { readonly __typename: 'Friendship', readonly id: string, readonly frienderId: string, readonly friender: { readonly __typename: 'User', readonly id: string } } | null } };
 
 export type RemoveBothSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
 
 
-export type RemoveBothSkillMutation = { readonly __typename: 'Mutation', readonly removeDesiredSkill: { readonly __typename: 'RemoveDesiredSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } }, readonly removeSkill: { readonly __typename: 'RemoveSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } } };
+export type RemoveBothSkillMutation = { readonly __typename: 'Mutation', readonly removeDesiredSkill: { readonly __typename: 'RemoveDesiredSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | null }, readonly removeSkill: { readonly __typename: 'RemoveSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | null } };
 
 export type RemovePostThumbnailMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null } } };
+export type RemovePostThumbnailMutation = { readonly __typename: 'Mutation', readonly removePostThumbnail: { readonly __typename: 'RemovePostThumbnailPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly thumbnailUrl?: string | null } | null } };
 
 export type RemoveSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
 
 
-export type RemoveSkillMutation = { readonly __typename: 'Mutation', readonly removeSkill: { readonly __typename: 'RemoveSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } } };
+export type RemoveSkillMutation = { readonly __typename: 'Mutation', readonly removeSkill: { readonly __typename: 'RemoveSkillMutationPayload', readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string }> } } | null, readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly viewerFollowing: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } } | null } };
 
 export type SendChatMessageMutationVariables = Exact<{
   data: ChatMessageCreateInput;
@@ -2965,49 +2965,49 @@ export type SendChatMessageMutationVariables = Exact<{
 }>;
 
 
-export type SendChatMessageMutation = { readonly __typename: 'Mutation', readonly sendChatMessage: { readonly __typename: 'SendChatMessagePayload', readonly record: { readonly __typename: 'ChatMessage', readonly id: string, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
+export type SendChatMessageMutation = { readonly __typename: 'Mutation', readonly sendChatMessage: { readonly __typename: 'SendChatMessagePayload', readonly record?: { readonly __typename: 'ChatMessage', readonly id: string, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly sender: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | null } };
 
 export type UnfollowSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
 
 
-export type UnfollowSkillMutation = { readonly __typename: 'Mutation', readonly unfollowSkill: { readonly __typename: 'UnfollowSkillPayload', readonly record: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | { readonly __typename: 'User' } } } };
+export type UnfollowSkillMutation = { readonly __typename: 'Mutation', readonly unfollowSkill: { readonly __typename: 'UnfollowSkillPayload', readonly record?: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill', readonly id: string, readonly viewerFollowing: boolean } | { readonly __typename: 'User' } } | null } };
 
 export type UnfollowUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type UnfollowUserMutation = { readonly __typename: 'Mutation', readonly unfollowUser: { readonly __typename: 'UnfollowUserPayload', readonly record: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill' } | { readonly __typename: 'User', readonly id: string, readonly viewerFollowing: boolean } } } };
+export type UnfollowUserMutation = { readonly __typename: 'Mutation', readonly unfollowUser: { readonly __typename: 'UnfollowUserPayload', readonly record?: { readonly __typename: 'Follow', readonly following: { readonly __typename: 'Skill' } | { readonly __typename: 'User', readonly id: string, readonly viewerFollowing: boolean } } | null } };
 
 export type UnfriendUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type UnfriendUserMutation = { readonly __typename: 'Mutation', readonly deleteFriendship: { readonly __typename: 'DeleteFriendshipPayload', readonly record: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFriended: boolean, readonly viewerIsFriend: boolean }, readonly friending: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFriended: boolean, readonly viewerIsFriend: boolean } } } };
+export type UnfriendUserMutation = { readonly __typename: 'Mutation', readonly deleteFriendship: { readonly __typename: 'DeleteFriendshipPayload', readonly record?: { readonly __typename: 'Friendship', readonly id: string, readonly friender: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFriended: boolean, readonly viewerIsFriend: boolean }, readonly friending: { readonly __typename: 'User', readonly id: string, readonly name: string, readonly viewerCanFriend: boolean, readonly viewerFriended: boolean, readonly viewerIsFriend: boolean } } | null } };
 
 export type UnvoteCodeExampleMutationVariables = Exact<{
   where: CodeExampleWhereUniqueInput;
 }>;
 
 
-export type UnvoteCodeExampleMutation = { readonly __typename: 'Mutation', readonly unvoteCodeExample: { readonly __typename: 'UnvoteCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+export type UnvoteCodeExampleMutation = { readonly __typename: 'Mutation', readonly unvoteCodeExample: { readonly __typename: 'UnvoteCodeExamplePayload', readonly record?: { readonly __typename: 'CodeExample', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } | null } };
 
 export type UnvoteCommentMutationVariables = Exact<{
   where: CommentWhereUniqueInput;
 }>;
 
 
-export type UnvoteCommentMutation = { readonly __typename: 'Mutation', readonly unvoteComment: { readonly __typename: 'UnvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
+export type UnvoteCommentMutation = { readonly __typename: 'Mutation', readonly unvoteComment: { readonly __typename: 'UnvoteCommentPayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | null } };
 
 export type UnvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type UnvotePostMutation = { readonly __typename: 'Mutation', readonly unvotePost: { readonly __typename: 'UnvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+export type UnvotePostMutation = { readonly __typename: 'Mutation', readonly unvotePost: { readonly __typename: 'UnvotePostPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } | null } };
 
 export type UpdateCodeExampleMutationVariables = Exact<{
   data: CodeExampleUpdateInput;
@@ -3015,7 +3015,7 @@ export type UpdateCodeExampleMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCodeExampleMutation = { readonly __typename: 'Mutation', readonly updateCodeExample: { readonly __typename: 'UpdateCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } } };
+export type UpdateCodeExampleMutation = { readonly __typename: 'Mutation', readonly updateCodeExample: { readonly __typename: 'UpdateCodeExamplePayload', readonly record?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null } };
 
 export type UpdateExperienceMutationVariables = Exact<{
   data: ExperienceUpdateInput;
@@ -3023,7 +3023,7 @@ export type UpdateExperienceMutationVariables = Exact<{
 }>;
 
 
-export type UpdateExperienceMutation = { readonly __typename: 'Mutation', readonly updateExperience: { readonly __typename: 'UpdateExperiencePayload', readonly record: { readonly __typename: 'Experience', readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organizationName: string, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string, readonly description?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } } } };
+export type UpdateExperienceMutation = { readonly __typename: 'Mutation', readonly updateExperience: { readonly __typename: 'UpdateExperiencePayload', readonly record?: { readonly __typename: 'Experience', readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly id: string, readonly location?: string | null, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organizationName: string, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly avatarUrl: string, readonly id: string, readonly login: string, readonly name?: string | null, readonly url: string, readonly description?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } } | null } };
 
 export type UpdatePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3031,7 +3031,7 @@ export type UpdatePostMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly updatePost: { readonly __typename: 'UpdatePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly content: ReadonlyArray<Json>, readonly description?: string | null, readonly readTime: number, readonly thumbnailUrl?: string | null } } };
+export type UpdatePostMutation = { readonly __typename: 'Mutation', readonly updatePost: { readonly __typename: 'UpdatePostPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly content: ReadonlyArray<Json>, readonly description?: string | null, readonly readTime: number, readonly thumbnailUrl?: string | null } | null } };
 
 export type UpdatePostDraftMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3039,7 +3039,7 @@ export type UpdatePostDraftMutationVariables = Exact<{
 }>;
 
 
-export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly content: ReadonlyArray<Json>, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } } } };
+export type UpdatePostDraftMutation = { readonly __typename: 'Mutation', readonly updatePostDraft: { readonly __typename: 'UpdatePostDraftPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly content: ReadonlyArray<Json>, readonly authorName: string, readonly description?: string | null, readonly publishedAt?: Date | null, readonly readTime: number, readonly thumbnailUrl?: string | null, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly name: string }, readonly skills: { readonly __typename: 'SkillConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly url: string, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string }, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null } }> } } | null } };
 
 export type UpdateRepositoryMutationVariables = Exact<{
   data: RepositoryUpdateInput;
@@ -3047,12 +3047,12 @@ export type UpdateRepositoryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateRepositoryMutation = { readonly __typename: 'Mutation', readonly updateRepository: { readonly __typename: 'UpdateRepositoryPayload', readonly record: { readonly __typename: 'Repository', readonly id: string, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } };
+export type UpdateRepositoryMutation = { readonly __typename: 'Mutation', readonly updateRepository: { readonly __typename: 'UpdateRepositoryPayload', readonly record?: { readonly __typename: 'Repository', readonly id: string, readonly skills: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } | null } };
 
 export type UpdateUserFromGitHubMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UpdateUserFromGitHubMutation = { readonly __typename: 'Mutation', readonly updateUserFromGitHub: { readonly __typename: 'UpdateUserFromGitHubPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly description?: string | null, readonly image?: string | null, readonly name: string } } };
+export type UpdateUserFromGitHubMutation = { readonly __typename: 'Mutation', readonly updateUserFromGitHub: { readonly __typename: 'UpdateUserFromGitHubPayload', readonly record?: { readonly __typename: 'User', readonly id: string, readonly description?: string | null, readonly image?: string | null, readonly name: string } | null } };
 
 export type UpdateUserInfoMutationVariables = Exact<{
   skills: ReadonlyArray<SkillWhereUniqueInput> | SkillWhereUniqueInput;
@@ -3060,7 +3060,7 @@ export type UpdateUserInfoMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserInfoMutation = { readonly __typename: 'Mutation', readonly updateSkills: { readonly __typename: 'UpdateSkillsPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } }, readonly updateDesiredSkills: { readonly __typename: 'UpdateDesiredSkillsPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } } };
+export type UpdateUserInfoMutation = { readonly __typename: 'Mutation', readonly updateSkills: { readonly __typename: 'UpdateSkillsPayload', readonly record?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null }, readonly updateDesiredSkills: { readonly __typename: 'UpdateDesiredSkillsPayload', readonly record?: { readonly __typename: 'User', readonly id: string, readonly skills: { readonly __typename: 'SkillConnection', readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null }, readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null } };
 
 export type UploadPostImageMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3068,14 +3068,14 @@ export type UploadPostImageMutationVariables = Exact<{
 }>;
 
 
-export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly uploadPostImage: { readonly __typename: 'UploadPostImagePayload', readonly record: { readonly __typename: 'PostImage', readonly id: string, readonly url: string } } };
+export type UploadPostImageMutation = { readonly __typename: 'Mutation', readonly uploadPostImage: { readonly __typename: 'UploadPostImagePayload', readonly record?: { readonly __typename: 'PostImage', readonly id: string, readonly url: string } | null } };
 
 export type UpvoteCodeExampleMutationVariables = Exact<{
   where: CodeExampleWhereUniqueInput;
 }>;
 
 
-export type UpvoteCodeExampleMutation = { readonly __typename: 'Mutation', readonly upvoteCodeExample: { readonly __typename: 'UpvoteCodeExamplePayload', readonly record: { readonly __typename: 'CodeExample', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+export type UpvoteCodeExampleMutation = { readonly __typename: 'Mutation', readonly upvoteCodeExample: { readonly __typename: 'UpvoteCodeExamplePayload', readonly record?: { readonly __typename: 'CodeExample', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } | null } };
 
 export type UpvoteCommentMutationVariables = Exact<{
   data: UpvoteCommentInput;
@@ -3083,26 +3083,26 @@ export type UpvoteCommentMutationVariables = Exact<{
 }>;
 
 
-export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } } };
+export type UpvoteCommentMutation = { readonly __typename: 'Mutation', readonly upvoteComment: { readonly __typename: 'UpvoteCommentPayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } } | null } };
 
 export type UpvotePostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } } };
+export type UpvotePostMutation = { readonly __typename: 'Mutation', readonly upvotePost: { readonly __typename: 'UpvotePostPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly upvoters: { readonly __typename: 'UserConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'UserEdge', readonly cursor: string, readonly node: { readonly __typename: 'User', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'User', readonly id: string }> } } | null } };
 
 export type ViewPostMutationVariables = Exact<{
   where: PostWhereUniqueInput;
 }>;
 
 
-export type ViewPostMutation = { readonly __typename: 'Mutation', readonly viewPost: { readonly __typename: 'ViewPostPayload', readonly record: { readonly __typename: 'Post', readonly id: string, readonly viewers: { readonly __typename: 'UserConnection', readonly totalCount: number } } } };
+export type ViewPostMutation = { readonly __typename: 'Mutation', readonly viewPost: { readonly __typename: 'ViewPostPayload', readonly record?: { readonly __typename: 'Post', readonly id: string, readonly viewers: { readonly __typename: 'UserConnection', readonly totalCount: number } } | null } };
 
 export type DeleteUserMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DeleteUserMutation = { readonly __typename: 'Mutation', readonly deleteUser: { readonly __typename: 'DeleteUserPayload', readonly record: { readonly __typename: 'User', readonly id: string, readonly name: string } } };
+export type DeleteUserMutation = { readonly __typename: 'Mutation', readonly deleteUser: { readonly __typename: 'DeleteUserPayload', readonly record?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type GetActivityFeedQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
