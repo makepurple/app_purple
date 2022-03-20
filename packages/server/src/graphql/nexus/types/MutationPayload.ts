@@ -13,6 +13,7 @@ export const MutationPayload = interfaceType({
 				);
 			}
 		});
+		t.list.nonNull.field("errors", { type: "MutationError" });
 		t.nonNull.field("query", {
 			type: "Query",
 			resolve: () => ({})

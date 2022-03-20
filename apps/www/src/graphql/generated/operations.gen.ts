@@ -28,6 +28,7 @@ export type Scalars = {
 export type AcceptFriendshipPayload = MutationPayload & {
   readonly __typename: 'AcceptFriendshipPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
@@ -36,6 +37,7 @@ export type AcceptFriendshipPayload = MutationPayload & {
 export type AddDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddDesiredSkillMutationPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
@@ -44,6 +46,7 @@ export type AddDesiredSkillMutationPayload = MutationPayload & {
 export type AddSkillMutationPayload = MutationPayload & {
   readonly __typename: 'AddSkillMutationPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
@@ -333,6 +336,7 @@ export type CommentCodeExampleInput = {
 export type CommentCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CommentCodeExamplePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -368,6 +372,7 @@ export type CommentPostInput = {
 export type CommentPostPayload = MutationPayload & {
   readonly __typename: 'CommentPostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -409,6 +414,7 @@ export type CreateChatInput = {
 export type CreateChatPayload = MutationPayload & {
   readonly __typename: 'CreateChatPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Chat>;
   readonly viewer?: Maybe<User>;
@@ -417,6 +423,7 @@ export type CreateChatPayload = MutationPayload & {
 export type CreateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CreateCodeExamplePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
@@ -425,6 +432,7 @@ export type CreateCodeExamplePayload = MutationPayload & {
 export type CreateExperiencePayload = MutationPayload & {
   readonly __typename: 'CreateExperiencePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
@@ -433,6 +441,7 @@ export type CreateExperiencePayload = MutationPayload & {
 export type CreatePostPayload = MutationPayload & {
   readonly __typename: 'CreatePostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -441,6 +450,7 @@ export type CreatePostPayload = MutationPayload & {
 export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
@@ -456,6 +466,7 @@ export type DateTimeNullableFilter = {
 export type DeleteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'DeleteCodeExamplePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
@@ -464,6 +475,7 @@ export type DeleteCodeExamplePayload = MutationPayload & {
 export type DeleteCommentPayload = MutationPayload & {
   readonly __typename: 'DeleteCommentPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -472,6 +484,7 @@ export type DeleteCommentPayload = MutationPayload & {
 export type DeleteExperiencePayload = MutationPayload & {
   readonly __typename: 'DeleteExperiencePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
@@ -480,6 +493,7 @@ export type DeleteExperiencePayload = MutationPayload & {
 export type DeleteFriendshipPayload = MutationPayload & {
   readonly __typename: 'DeleteFriendshipPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
@@ -488,6 +502,7 @@ export type DeleteFriendshipPayload = MutationPayload & {
 export type DeletePostPayload = MutationPayload & {
   readonly __typename: 'DeletePostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -496,6 +511,7 @@ export type DeletePostPayload = MutationPayload & {
 export type DeleteRepositoryPayload = MutationPayload & {
   readonly __typename: 'DeleteRepositoryPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
@@ -504,6 +520,7 @@ export type DeleteRepositoryPayload = MutationPayload & {
 export type DeleteUserPayload = MutationPayload & {
   readonly __typename: 'DeleteUserPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -512,6 +529,7 @@ export type DeleteUserPayload = MutationPayload & {
 export type DownvoteCommentPayload = MutationPayload & {
   readonly __typename: 'DownvoteCommentPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -631,6 +649,7 @@ export type FollowOrderByInput = {
 export type FollowSkillPayload = MutationPayload & {
   readonly __typename: 'FollowSkillPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
@@ -644,6 +663,7 @@ export enum FollowType {
 export type FollowUserPayload = MutationPayload & {
   readonly __typename: 'FollowUserPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
@@ -889,6 +909,12 @@ export type GitHubUserTotalCommitsWhereInput = {
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
 };
 
+export type InvalidSkillError = MutationError & {
+  readonly __typename: 'InvalidSkillError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type InviteToChatInput = {
   readonly users: UserWhereInput;
 };
@@ -896,6 +922,7 @@ export type InviteToChatInput = {
 export type InviteToChatPayload = MutationPayload & {
   readonly __typename: 'InviteToChatPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Chat>;
   readonly viewer?: Maybe<User>;
@@ -904,6 +931,7 @@ export type InviteToChatPayload = MutationPayload & {
 export type LeaveChatPayload = MutationPayload & {
   readonly __typename: 'LeaveChatPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Chat>;
   readonly viewer?: Maybe<User>;
@@ -1243,8 +1271,14 @@ export type MutationViewPostArgs = {
   where: PostWhereUniqueInput;
 };
 
+export type MutationError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type MutationPayload = {
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Node>;
   readonly viewer?: Maybe<User>;
@@ -1340,6 +1374,7 @@ export type NotificationsWhereInput = {
 export type OpenNotificationsPayload = MutationPayload & {
   readonly __typename: 'OpenNotificationsPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -1517,6 +1552,7 @@ export type PostWhereUniqueInput = {
 export type PublishPostPayload = MutationPayload & {
   readonly __typename: 'PublishPostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -1735,6 +1771,7 @@ export type QueryUsersArgs = {
 export type RejectFriendshipPayload = MutationPayload & {
   readonly __typename: 'RejectFriendshipPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
@@ -1743,6 +1780,7 @@ export type RejectFriendshipPayload = MutationPayload & {
 export type RemoveDesiredSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillMutationPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
@@ -1751,6 +1789,7 @@ export type RemoveDesiredSkillMutationPayload = MutationPayload & {
 export type RemovePostThumbnailPayload = MutationPayload & {
   readonly __typename: 'RemovePostThumbnailPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -1759,6 +1798,7 @@ export type RemovePostThumbnailPayload = MutationPayload & {
 export type RemoveSkillMutationPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillMutationPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
@@ -1817,6 +1857,7 @@ export type RepositoryWhereUniqueInput = {
 export type RequestFriendshipPayload = MutationPayload & {
   readonly __typename: 'RequestFriendshipPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Friendship>;
   readonly viewer?: Maybe<User>;
@@ -1825,6 +1866,7 @@ export type RequestFriendshipPayload = MutationPayload & {
 export type SendChatMessagePayload = MutationPayload & {
   readonly __typename: 'SendChatMessagePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<ChatMessage>;
   readonly viewer?: Maybe<User>;
@@ -2051,6 +2093,7 @@ export type TopLanguages = {
 export type UnfollowSkillPayload = MutationPayload & {
   readonly __typename: 'UnfollowSkillPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
@@ -2059,6 +2102,7 @@ export type UnfollowSkillPayload = MutationPayload & {
 export type UnfollowUserPayload = MutationPayload & {
   readonly __typename: 'UnfollowUserPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Follow>;
   readonly viewer?: Maybe<User>;
@@ -2067,6 +2111,7 @@ export type UnfollowUserPayload = MutationPayload & {
 export type UnvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UnvoteCodeExamplePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
@@ -2075,6 +2120,7 @@ export type UnvoteCodeExamplePayload = MutationPayload & {
 export type UnvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UnvoteCommentPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -2083,6 +2129,7 @@ export type UnvoteCommentPayload = MutationPayload & {
 export type UnvotePostPayload = MutationPayload & {
   readonly __typename: 'UnvotePostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -2091,6 +2138,7 @@ export type UnvotePostPayload = MutationPayload & {
 export type UpdateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpdateCodeExamplePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
@@ -2099,6 +2147,7 @@ export type UpdateCodeExamplePayload = MutationPayload & {
 export type UpdateCommentPayload = MutationPayload & {
   readonly __typename: 'UpdateCommentPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -2111,6 +2160,7 @@ export type UpdateDesiredSkillsInput = {
 export type UpdateDesiredSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateDesiredSkillsPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -2119,6 +2169,7 @@ export type UpdateDesiredSkillsPayload = MutationPayload & {
 export type UpdateExperiencePayload = MutationPayload & {
   readonly __typename: 'UpdateExperiencePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
@@ -2127,6 +2178,7 @@ export type UpdateExperiencePayload = MutationPayload & {
 export type UpdatePostDraftPayload = MutationPayload & {
   readonly __typename: 'UpdatePostDraftPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -2135,6 +2187,7 @@ export type UpdatePostDraftPayload = MutationPayload & {
 export type UpdatePostPayload = MutationPayload & {
   readonly __typename: 'UpdatePostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -2143,6 +2196,7 @@ export type UpdatePostPayload = MutationPayload & {
 export type UpdateRepositoryPayload = MutationPayload & {
   readonly __typename: 'UpdateRepositoryPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
@@ -2155,6 +2209,7 @@ export type UpdateSkillsInput = {
 export type UpdateSkillsPayload = MutationPayload & {
   readonly __typename: 'UpdateSkillsPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -2163,6 +2218,7 @@ export type UpdateSkillsPayload = MutationPayload & {
 export type UpdateUserFromGitHubPayload = MutationPayload & {
   readonly __typename: 'UpdateUserFromGitHubPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
@@ -2176,6 +2232,7 @@ export type UploadPostImageInput = {
 export type UploadPostImagePayload = MutationPayload & {
   readonly __typename: 'UploadPostImagePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<PostImage>;
   readonly viewer?: Maybe<User>;
@@ -2188,6 +2245,7 @@ export type UpvoteCodeExampleInput = {
 export type UpvoteCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpvoteCodeExamplePayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
@@ -2200,6 +2258,7 @@ export type UpvoteCommentInput = {
 export type UpvoteCommentPayload = MutationPayload & {
   readonly __typename: 'UpvoteCommentPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Comment>;
   readonly viewer?: Maybe<User>;
@@ -2208,6 +2267,7 @@ export type UpvoteCommentPayload = MutationPayload & {
 export type UpvotePostPayload = MutationPayload & {
   readonly __typename: 'UpvotePostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -2607,6 +2667,7 @@ export type UserWhereUniqueInput = {
 export type ViewPostPayload = MutationPayload & {
   readonly __typename: 'ViewPostPayload';
   readonly cursor: Scalars['String'];
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
