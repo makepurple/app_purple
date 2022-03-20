@@ -1,7 +1,6 @@
 import { Combobox } from "@headlessui/react";
 import { Input, ListItem, Paper } from "@makepurple/components";
 import { PopoverModifiers } from "@makepurple/components/src/atoms/Popover/modifiers";
-import { useFocus } from "@makepurple/hooks";
 import { StyleUtils } from "@makepurple/utils";
 import React, { CSSProperties, FC, Fragment, useMemo, useState } from "react";
 import { usePopper } from "react-popper";
@@ -81,8 +80,6 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 		placement: "bottom-start"
 	});
 
-	const [focused, { handlers }] = useFocus();
-
 	const filtered = useMemo(
 		() =>
 			Object.values(CodeLanguage)
@@ -96,6 +93,7 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 			as={Fragment}
 			disabled={disabled}
 			onChange={(newLanguage) => {
+				setQuery(newLanguage);
 				onChange(newLanguage);
 			}}
 			value={value}
@@ -112,7 +110,6 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 							onChange={(e) => {
 								setQuery(e.target.value);
 							}}
-							{...handlers}
 							placeholder="Language"
 							spellCheck={false}
 							style={style}
@@ -122,7 +119,7 @@ export const CodeLanguageSelect: FC<CodeLanguageSelectProps> = ({
 							<SelectorIcon height={24} width={24} />
 						</Combobox.Button>
 					</Root>
-					{(open || focused) && !!filtered.length && (
+					{open && !!filtered.length && (
 						<Combobox.Options
 							as={Languages}
 							ref={popperRef}
