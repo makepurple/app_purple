@@ -33,6 +33,7 @@ const NoSnippetsContent = tw.div`
 
 const StyledAvatar = tw(Avatar)`
 	rounded-md
+	cursor-auto
 `;
 
 const IconContainer = tw.div`
@@ -49,6 +50,7 @@ const IconContainer = tw.div`
 const StyledLogo = tw(Logo)`
 	h-12
 	w-12
+	cursor-auto
 `;
 
 const CreateNewButton = tw(Button)`
