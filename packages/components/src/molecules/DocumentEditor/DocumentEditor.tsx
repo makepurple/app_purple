@@ -16,7 +16,7 @@ import { CustomText } from "./Leaf";
 import { withKeyCommands } from "./plugins";
 import { DocumentEditorToolbar } from "./Toolbar";
 
-const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean; $readOnly?: boolean }>`
+const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean }>`
 	${tw`
 		outline-none
 		ring-indigo-500
@@ -31,12 +31,9 @@ const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean; $readOnly?: b
 		[& > *]:first:border-top-right-radius[inherit]
 		[& > *]:last:border-bottom-left-radius[inherit]
 		[& > *]:last:border-bottom-right-radius[inherit]
+		[&[data-readonly="true"]]:focus-within:ring-0
+		[&[data-readonly="true"]]:background-color[inherit]
 	`}
-	${({ $readOnly }) =>
-		$readOnly &&
-		css`
-			background-color: inherit;
-		`}
 	${({ $disabled }) =>
 		$disabled &&
 		css`
@@ -112,8 +109,8 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 			style={style}
 			error={error}
 			$disabled={disabled}
-			$readOnly={readOnly}
 			aria-disabled={disabled}
+			data-readonly={readOnly}
 		>
 			<Slate
 				editor={editor}

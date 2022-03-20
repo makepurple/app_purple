@@ -17,9 +17,6 @@ const Info = tw.div`
 	items-center
 	h-8
 	rounded-t-md
-	border-2
-	border-solid
-	border-indigo-500
 	bg-indigo-500
 	text-white
 	font-semibold
@@ -30,9 +27,6 @@ const LanguageName = tw.div`
 `;
 
 const EditorWrapper = tw.div`
-	border-2
-	border-solid
-	border-indigo-500
 	rounded-b-md
 	overflow-auto
 	text-sm

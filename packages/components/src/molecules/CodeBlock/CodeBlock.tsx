@@ -19,9 +19,6 @@ const Info = tw.div`
 	h-8
 	pl-2
 	rounded-t-md
-	border-2
-	border-solid
-	border-indigo-500
 	bg-indigo-500
 	text-white
 	font-semibold
@@ -51,9 +48,6 @@ const Editor = styled.pre`
 		text-sm
 		font-mono
 		rounded-b-md
-		border-2
-		border-solid
-		border-indigo-500
 	`}
 	tab-size: 4;
 `;
