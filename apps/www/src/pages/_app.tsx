@@ -79,7 +79,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 										{error ? fallback : <Component {...pageProps} />}
 									</SiteWideLayout>
 								</LazyMotion>
-								<Toaster position="top-center" />
+								<Toaster position="bottom-left" />
 							</UrqlProvider>
 						</GdprCookieConsent>
 					</SessionProvider>
