@@ -22,13 +22,7 @@ query GetCodeExample(
 		language
 		primarySkill {
 			github {
-				id
-				name
-				owner {
-					id
-					avatarUrl
-					login
-				}
+				...RepositorySearchResultGitHubRepository
 			}
 			id
 			name

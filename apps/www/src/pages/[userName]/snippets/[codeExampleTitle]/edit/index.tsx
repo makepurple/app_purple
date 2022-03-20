@@ -4,6 +4,7 @@ import {
 	Button,
 	CodeBlockInput,
 	Form,
+	FormButton,
 	FormGroup,
 	FormHelperText,
 	FormLabel,
@@ -11,6 +12,7 @@ import {
 	HiddenInput,
 	Input,
 	Paper,
+	Spinner,
 	Tags,
 	TextArea,
 	toast
@@ -19,6 +21,7 @@ import { CodeExampleUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
 import React, { useEffect, useMemo, useState } from "react";
@@ -95,7 +98,7 @@ const RepositoryDescription = tw.p`
 	text-gray-500
 `;
 
-const RepositoryRemove = tw(Button)`
+const RepositoryRemove = tw(FormButton)`
 	flex-shrink-0
 	h-8
 	w-8
@@ -167,8 +170,8 @@ export const Page: NextPage<PageProps> = () => {
 			language: codeExample?.language ?? "TypeScript",
 			primarySkill: {
 				name_owner: {
-					name: codeExample?.primarySkill.name ?? "",
-					owner: codeExample?.primarySkill.owner ?? ""
+					name: "",
+					owner: ""
 				}
 			},
 			skills: (codeExample?.skills.nodes ?? []).map((skill) => ({
@@ -218,8 +221,10 @@ export const Page: NextPage<PageProps> = () => {
 	const errorPrimaryLanguage =
 		isSubmitted && !isValid && (!primarySkill.name || !primarySkill.owner);
 
+	const defaultPrimarySkill = codeExample?.primarySkill.github ?? null;
+
 	const [repository, setRepository] =
-		useState<RepositorySearchResultGitHubRepositoryFragment | null>(null);
+		useState<RepositorySearchResultGitHubRepositoryFragment | null>(defaultPrimarySkill);
 
 	if (!codeExample) return null;
 
@@ -230,13 +235,25 @@ export const Page: NextPage<PageProps> = () => {
 				<Form
 					disabled={fetching}
 					onSubmit={handleSubmit(async (formData) => {
+						const newPrimarySkill =
+							primarySkill.name && primarySkill.owner
+								? formData.primarySkill
+								: undefined;
+
 						const snippet = await updateCodeExample({
 							data: {
 								content: formData.content,
 								description: formData.description,
 								language: formData.language as CodeLanguage,
-								primarySkill: formData.primarySkill,
-								skills: formData.skills,
+								primarySkill: newPrimarySkill,
+								skills: formData.skills?.filter((skill) => {
+									const name = (skill as any).name_owner.name;
+									const owner = (skill as any).name_owner.owner;
+
+									if (!name && !owner) return false;
+
+									return true;
+								}),
 								title: formData.title
 							},
 							where: {
@@ -286,26 +303,32 @@ export const Page: NextPage<PageProps> = () => {
 						<FormLabel>Primary Skill</FormLabel>
 						{!!repository && (
 							<CurrentRepository tw="mb-2">
-								<StyledAvatar
-									border={2}
-									onClick={(e) => {
-										e.stopPropagation();
-									}}
-									title={`${primarySkill.owner}/${primarySkill.name}`}
+								<NextLink
+									href="/s/[skillOwner]/[skillName]"
+									as={`/s/${repository.owner.login}/${repository.name}`}
+									passHref
 								>
-									{repository.owner.__typename === "GitHubOrganization" ? (
-										<GitHubAvatarImage
-											alt={repository.name}
-											src={repository.owner.avatarUrl}
-											height={48}
-											width={48}
-										/>
-									) : (
-										<AvatarIconContainer>
-											<BookIcon height={24} width={24} />
-										</AvatarIconContainer>
-									)}
-								</StyledAvatar>
+									<StyledAvatar
+										border={2}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+										title={`${repository.owner.login}/${repository.name}`}
+									>
+										{repository.owner.__typename === "GitHubOrganization" ? (
+											<GitHubAvatarImage
+												alt={repository.name}
+												src={repository.owner.avatarUrl}
+												height={48}
+												width={48}
+											/>
+										) : (
+											<AvatarIconContainer>
+												<BookIcon height={24} width={24} />
+											</AvatarIconContainer>
+										)}
+									</StyledAvatar>
+								</NextLink>
 								<RepositoryDetails>
 									<RepositoryName>{repository.name}</RepositoryName>
 									{!!repository.description && (
@@ -438,9 +461,10 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={errors.content?.message} />
 					</FormGroup>
 					<FormActions>
-						<Button type="submit" variant="primary">
-							Save
-						</Button>
+						<FormButton type="submit" variant="primary">
+							<span>Save</span>
+							{fetching && <Spinner tw="ml-2" />}
+						</FormButton>
 					</FormActions>
 				</Form>
 			</Content>
