@@ -6,6 +6,7 @@ fragment UserOverviewExperienceCardExperience on Experience {
 		github {
 			id
 			avatarUrl
+			login
 			name
 		}
 		name

@@ -125,7 +125,7 @@ export const UserOverviewExperienceCard: FC<UserOverviewExperienceCardProps> = (
 			tabIndex={0}
 			data-href={`/s/${organization.name}`}
 		>
-			<NextLink href="/s/[skillOwner]" as={`/s/${organization.name}`} passHref>
+			<NextLink href="/s/[skillOwner]" as={`/s/${organization.login}`} passHref>
 				<StyledAvatar
 					border={3}
 					onClick={(e) => {
@@ -136,7 +136,7 @@ export const UserOverviewExperienceCard: FC<UserOverviewExperienceCardProps> = (
 					<GitHubAvatarImage src={organization.avatarUrl} height={36} width={36} />
 				</StyledAvatar>
 			</NextLink>
-			<NextLink href="/s/[skillOwner]" as={`/s/${organization.name}`} passHref>
+			<NextLink href="/s/[skillOwner]" as={`/s/${organization.login}`} passHref>
 				<Contents>
 					{experience.positionName && (
 						<PositionName>
