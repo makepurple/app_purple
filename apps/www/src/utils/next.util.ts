@@ -22,6 +22,16 @@ export class NextUtils {
 		return fn as GetStaticProps<NonNullable<WithInitialUrqlState & P>>;
 	};
 
+	public static concurrent = <T extends readonly unknown[] | []>(
+		values: T
+	): Promise<{ -readonly [P in keyof T]: Awaited<T[P]> } | undefined[]> => {
+		return Promise.all(values).catch((e) => {
+			if (process.env.NODE_ENV === "development") throw e;
+
+			return values.map(() => undefined);
+		});
+	};
+
 	public static getUrl(req: NextRequest, pathName?: string): NextURL {
 		const url = req.nextUrl.clone();
 

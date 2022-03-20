@@ -51,7 +51,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 		}
 	})();
 
-	const [user] = await Promise.all([
+	const [user] = await NextUtils.concurrent([
 		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
 				GetUserInfoSideBarDocument,

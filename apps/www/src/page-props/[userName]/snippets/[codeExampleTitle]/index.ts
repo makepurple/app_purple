@@ -25,7 +25,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const authorName = query.authorName as string;
 	const urlSlug = query.codeExampleTitle as string;
 
-	const [codeExample] = await Promise.all([
+	const [codeExample] = await NextUtils.concurrent([
 		urqlClient
 			.query<GetCodeExampleQuery, GetCodeExampleQueryVariables>(GetCodeExampleDocument, {
 				authorName,

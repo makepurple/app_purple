@@ -27,7 +27,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	const [skill] = await Promise.all([
+	const [skill] = await NextUtils.concurrent([
 		urqlClient
 			.query<GetSkillInfoSideBarQuery, GetSkillInfoSideBarQueryVariables>(
 				GetSkillInfoSideBarDocument,

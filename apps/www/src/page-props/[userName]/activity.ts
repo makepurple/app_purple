@@ -24,7 +24,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
-	const [user] = await Promise.all([
+	const [user] = await NextUtils.concurrent([
 		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
 				GetUserInfoSideBarDocument,
