@@ -21,7 +21,7 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import {
@@ -114,13 +114,16 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ fetching }, createCodeExample] = useCreateCodeExampleMutation();
+	const [{ data, fetching }, createCodeExample] = useCreateCodeExampleMutation();
+
+	const createErrors = data?.createCodeExample.errors;
 
 	const {
 		control,
 		formState: { errors, isSubmitted, isValid },
 		handleSubmit,
 		register,
+		setError,
 		setValue,
 		watch
 	} = useForm<Type<typeof CodeExampleCreateInput>>({
@@ -179,6 +182,22 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [repository, setRepository] =
 		useState<RepositorySearchResultGitHubRepositoryFragment | null>(null);
+
+	useEffect(() => {
+		if (!createErrors?.length) return;
+
+		createErrors.forEach((error) => {
+			switch (error.__typename) {
+				case "CodeExampleTitleTakenError":
+					setError("title", {
+						message: error.message
+					});
+
+					break;
+				default:
+			}
+		});
+	}, [createErrors, setError]);
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>

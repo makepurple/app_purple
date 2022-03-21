@@ -1,11 +1,15 @@
 mutation CreateCodeExample($data: CodeExampleCreateInput!) {
 	createCodeExample(data: $data) {
-		viewer {
-			id
-			name
+		errors {
+			__typename
+			message
 		}
 		record {
 			...CodeExampleCardCodeExample
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }
