@@ -65,11 +65,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 							console.error(error);
 
 							toast.error(error.message.replace("[GraphQL]", "Server error:"));
-
-							return;
 						}
-
-						toast.error(error.message.replace("[GraphQL]", ""));
 					}
 				}),
 				_ssr,
