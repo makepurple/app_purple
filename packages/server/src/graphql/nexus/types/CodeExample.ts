@@ -41,7 +41,12 @@ export const CodeExample = objectType({
 							})
 							.comments({
 								...paginationArgs,
-								where: PrismaUtils.nonNull(args.where),
+								where: {
+									...PrismaUtils.nonNull(args.where),
+									parent: {
+										is: null
+									}
+								},
 								orderBy: PrismaUtils.nonNull(args.orderBy)
 							}),
 					() =>
