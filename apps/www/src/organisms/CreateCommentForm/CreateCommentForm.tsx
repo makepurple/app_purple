@@ -53,6 +53,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 		control,
 		formState: { errors, isSubmitted, isValid },
 		handleSubmit,
+		reset,
 		trigger
 	} = useForm<Type<typeof CommentCreateInput>>({
 		defaultValues: {
@@ -109,6 +110,15 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 				}
 
 				toast.success("Comment posted! 🎉");
+
+				reset({
+					content: [
+						{
+							type: "paragraph",
+							children: [{ text: "" }]
+						}
+					]
+				});
 			})}
 			style={style}
 		>
