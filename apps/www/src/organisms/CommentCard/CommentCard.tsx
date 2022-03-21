@@ -11,7 +11,6 @@ import {
 import { dayjs } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { CSSProperties, forwardRef, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
