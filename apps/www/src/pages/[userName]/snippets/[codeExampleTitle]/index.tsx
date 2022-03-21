@@ -64,7 +64,7 @@ const TopContainer = tw.div`
 	flex-col
 	items-center
 	justify-center
-	gap-2
+	gap-6
 `;
 
 const TitleContainer = tw.div`
