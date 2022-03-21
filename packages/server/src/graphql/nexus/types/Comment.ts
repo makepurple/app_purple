@@ -120,7 +120,15 @@ export const Comment = objectType({
 							where: PrismaUtils.nonNull(args.where),
 							orderBy: PrismaUtils.nonNull(args.orderBy)
 						}),
-					() => prisma.comment.count(),
+					() =>
+						prisma.comment
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: { select: { replies: true } }
+								}
+							})
+							.then((result) => result?._count.replies ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
