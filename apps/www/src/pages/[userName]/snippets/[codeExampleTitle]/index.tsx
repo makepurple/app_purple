@@ -230,7 +230,7 @@ export const Page: NextPage<PageProps> = () => {
 			after: null,
 			first: BATCH_SIZE,
 			orderBy: {
-				updatedAt: SortOrder.Asc
+				updatedAt: SortOrder.Desc
 			},
 			userName,
 			codeExampleTitle: urlSlug

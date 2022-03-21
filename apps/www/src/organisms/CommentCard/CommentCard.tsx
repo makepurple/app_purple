@@ -177,7 +177,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 			after: null,
 			first: 8,
 			orderBy: {
-				updatedAt: SortOrder.Asc
+				updatedAt: SortOrder.Desc
 			},
 			where: {
 				id: comment.id
@@ -339,7 +339,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 										after: pageInfo.endCursor,
 										first: 8,
 										orderBy: {
-											updatedAt: SortOrder.Asc
+											updatedAt: SortOrder.Desc
 										},
 										where: {
 											id: comment.id

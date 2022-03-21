@@ -209,7 +209,7 @@ export const Page: NextPage<PageProps> = () => {
 			after: null,
 			first: 8,
 			orderBy: {
-				updatedAt: SortOrder.Asc
+				updatedAt: SortOrder.Desc
 			},
 			userName,
 			postTitle
