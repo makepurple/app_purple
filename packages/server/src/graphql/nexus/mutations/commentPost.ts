@@ -22,9 +22,9 @@ export const commentPost = mutationField("commentPost", {
 			const comment = await transaction.comment.create({
 				data: {
 					content: dataInput.content,
-					parent: {
-						connect: PrismaUtils.nonNull(args.data.parent)
-					},
+					parent: PrismaUtils.nonEmpty({
+						connect: PrismaUtils.nonEmpty(PrismaUtils.nonNull(args.data.parent))
+					}),
 					post: {
 						connect: PrismaUtils.nonNull(args.data.post)
 					},

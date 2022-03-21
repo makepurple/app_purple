@@ -19,6 +19,16 @@ type DeepNonNullArgs<T> = T extends null
 	: T;
 
 export class PrismaUtils {
+	public static nonEmpty = <T extends Maybe<Record<string, any>>>(input: T): T | undefined => {
+		if (!input) return input;
+
+		const isEmpty = !Object.keys(input).some((key) => !LangUtils.isNil(input[key]));
+
+		if (isEmpty) return undefined;
+
+		return input;
+	};
+
 	/**
 	 * !HACK
 	 * @description This casts all null properties on a nexus input to undefined (recursively)
