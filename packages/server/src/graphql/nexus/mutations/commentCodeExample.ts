@@ -1,5 +1,5 @@
 import { CommentCreateInput } from "@makepurple/validators";
-import { NotificationType, UserActivityType } from "@prisma/client";
+import { NotificationType, Prisma, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -21,9 +21,9 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 		const record = await prisma.$transaction(async (transaction) => {
 			const comment = await transaction.comment.create({
 				data: {
-					codeExample: {
-						connect: PrismaUtils.nonNull(args.data.codeExample)
-					},
+					codeExample: PrismaUtils.nonEmpty({
+						connect: PrismaUtils.nonEmpty(PrismaUtils.nonNull(args.data.codeExample))
+					}),
 					content: dataInput.content,
 					parent: {
 						connect: PrismaUtils.nonNull(args.data.parent)
