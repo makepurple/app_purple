@@ -823,6 +823,42 @@ export const User = objectType({
 				where: arg({ type: "PostWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
+				const where: Prisma.PostWhereInput = {
+					AND: [
+						{ urlSlug: { not: { equals: "draft" } } },
+						{
+							...PrismaUtils.nonNull(args.where),
+							...(args.where?.skills
+								? {
+										skills: {
+											every: args.where.skills.every
+												? {
+														skill: PrismaUtils.nonNull(
+															args.where?.skills?.every
+														)
+												  }
+												: undefined,
+											none: args.where.skills.none
+												? {
+														skill: PrismaUtils.nonNull(
+															args.where?.skills?.none
+														)
+												  }
+												: undefined,
+											some: args.where.skills.some
+												? {
+														skill: PrismaUtils.nonNull(
+															args.where?.skills?.some
+														)
+												  }
+												: undefined
+										}
+								  }
+								: {})
+						}
+					]
+				};
+
 				const connection = await PrismaUtils.findManyCursorConnection<Post, { id: string }>(
 					async ({ cursor, skip, take }) =>
 						take === 0
@@ -831,35 +867,7 @@ export const User = objectType({
 									cursor,
 									skip,
 									take,
-									where: {
-										AND: [
-											{ urlSlug: { not: { equals: "draft" } } },
-											{
-												...PrismaUtils.nonNull(args.where),
-												...(args.where?.skills
-													? {
-															skills: {
-																every: {
-																	skill: PrismaUtils.nonNull(
-																		args.where?.skills?.every
-																	)
-																},
-																none: {
-																	skill: PrismaUtils.nonNull(
-																		args.where?.skills?.none
-																	)
-																},
-																some: {
-																	skill: PrismaUtils.nonNull(
-																		args.where?.skills?.some
-																	)
-																}
-															}
-													  }
-													: {})
-											}
-										]
-									},
+									where,
 									orderBy: {
 										createdAt: Prisma.SortOrder.desc
 									}

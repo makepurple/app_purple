@@ -30,21 +30,27 @@ export const posts = queryField("posts", {
 								...(args.where?.skills
 									? {
 											skills: {
-												every: {
-													skill: PrismaUtils.nonNull(
-														args.where?.skills?.every
-													)
-												},
-												none: {
-													skill: PrismaUtils.nonNull(
-														args.where?.skills?.none
-													)
-												},
-												some: {
-													skill: PrismaUtils.nonNull(
-														args.where?.skills?.some
-													)
-												}
+												every: args.where.skills.every
+													? {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.every
+															)
+													  }
+													: undefined,
+												none: args.where.skills.none
+													? {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.none
+															)
+													  }
+													: undefined,
+												some: args.where.skills.some
+													? {
+															skill: PrismaUtils.nonNull(
+																args.where?.skills?.some
+															)
+													  }
+													: undefined
 											}
 									  }
 									: {})
