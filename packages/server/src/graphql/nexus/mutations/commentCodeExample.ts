@@ -1,7 +1,7 @@
 import { CommentCreateInput } from "@makepurple/validators";
 import { NotificationType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../../utils";
+import { NotFoundError, PrismaUtils } from "../../../utils";
 
 export const commentCodeExample = mutationField("commentCodeExample", {
 	type: nonNull("CommentCodeExamplePayload"),
@@ -18,6 +18,24 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 			content: args.data.content ?? undefined
 		});
 
+		const codeExample = await prisma.codeExample.findUnique({
+			where: PrismaUtils.nonNull(args.data.codeExample),
+			include: {
+				comments: {
+					where: { author: { id: { equals: user.id } } }
+				},
+				notifications: {
+					where: {
+						type: NotificationType.CodeExampleCommented
+					}
+				}
+			}
+		});
+
+		if (!codeExample) throw new NotFoundError("This code-example could not be found");
+
+		const didPreviouslyComment = !!codeExample.comments.length;
+
 		const record = await prisma.$transaction(async (transaction) => {
 			const comment = await transaction.comment.create({
 				data: {
@@ -32,34 +50,20 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 				}
 			});
 
-			const codeExample = await transaction.comment
-				.findUnique({
-					where: { id: comment.id }
-				})
-				.codeExample({
-					include: {
-						comments: {
-							where: { author: { id: { equals: user.id } } }
-						},
-						notifications: {
-							where: {
-								type: NotificationType.CodeExampleCommented
-							}
-						}
-					}
-				});
-
-			if (!codeExample) return comment;
-
 			await transaction.codeExample.update({
 				where: { id: codeExample.id },
 				data: {
 					// Only create a user-activity if the user hasn't previously commented on the
 					// code-example
-					activities: codeExample.comments.length
-						? {}
+					activities: didPreviouslyComment
+						? undefined
 						: {
 								create: {
+									comment: {
+										connect: {
+											id: comment.id
+										}
+									},
 									type: UserActivityType.CommentCodeExample,
 									user: { connect: { id: user.id } }
 								}

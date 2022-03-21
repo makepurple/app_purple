@@ -2,6 +2,7 @@ import { CommentCreateInput } from "@makepurple/validators";
 import { NotificationType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../..";
+import { NotFoundError } from "../../../utils";
 
 export const commentPost = mutationField("commentPost", {
 	type: nonNull("CommentPostPayload"),
@@ -18,6 +19,24 @@ export const commentPost = mutationField("commentPost", {
 			content: args.data.content ?? undefined
 		});
 
+		const post = await prisma.post.findUnique({
+			where: PrismaUtils.nonNull(args.data.post),
+			include: {
+				comments: {
+					where: { author: { id: { equals: user.id } } }
+				},
+				notifications: {
+					where: {
+						type: NotificationType.PostCommented
+					}
+				}
+			}
+		});
+
+		if (!post) throw new NotFoundError("This post could not be found");
+
+		const didPreviouslyComment = !!post.comments.length;
+
 		const record = await prisma.$transaction(async (transaction) => {
 			const comment = await transaction.comment.create({
 				data: {
@@ -32,34 +51,20 @@ export const commentPost = mutationField("commentPost", {
 				}
 			});
 
-			const post = await transaction.comment
-				.findUnique({
-					where: { id: comment.id }
-				})
-				.post({
-					include: {
-						comments: {
-							where: { author: { id: { equals: user.id } } }
-						},
-						notifications: {
-							where: {
-								type: NotificationType.PostCommented
-							}
-						}
-					}
-				});
-
-			if (!post) return comment;
-
 			await transaction.post.update({
 				where: { id: post.id },
 				data: {
 					// Only create a user-activity if the user hasn't previously commented on the
 					// post
-					activities: post.comments.length
-						? {}
+					activities: didPreviouslyComment
+						? undefined
 						: {
 								create: {
+									comment: {
+										connect: {
+											id: comment.id
+										}
+									},
 									type: UserActivityType.CommentPost,
 									user: { connect: { id: user.id } }
 								}
