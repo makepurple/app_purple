@@ -65,6 +65,17 @@ export const createCache = () => {
 					const parentId = result.record.parentId;
 					const codeExampleId = result.record.codeExampleId;
 
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+
 					if (parentId) {
 						cache
 							.inspectFields({ __typename: "Comment", id: parentId })
@@ -98,6 +109,17 @@ export const createCache = () => {
 
 					const parentId = result.record.parentId;
 					const postId = result.record.postId;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 
 					if (parentId) {
 						cache
