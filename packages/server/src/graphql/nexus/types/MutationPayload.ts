@@ -8,12 +8,7 @@ export const MutationPayload = interfaceType({
 			type: "Query",
 			resolve: () => ({})
 		});
-		t.field("record", {
-			type: "Node",
-			resolve: (parent) => {
-				return parent.record as any;
-			}
-		});
+		t.field("record", { type: "Node" });
 		t.field("viewer", {
 			type: "User",
 			resolve: async (parent, args, { prisma, user }) => {
