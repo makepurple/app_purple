@@ -1,4 +1,4 @@
-import { PromiseUtils, StringUtils } from "@makepurple/utils";
+import { PromiseUtils } from "@makepurple/utils";
 import { CodeExampleUpdateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
@@ -27,14 +27,8 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			content: args.data.content ?? undefined,
 			description: args.data.description ?? undefined,
 			language: args.data.language ?? undefined,
-			skills: (args.data.skills ?? undefined) as any,
-			title: args.data.title ?? undefined
+			skills: (args.data.skills ?? undefined) as any
 		});
-
-		const urlSlug =
-			typeof dataInput.title === "string"
-				? StringUtils.toUrlSlug(dataInput.title)
-				: undefined;
 
 		const originalSkills = args.data.skills ?? [];
 		const skills = args.data.primarySkill
@@ -163,9 +157,7 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 								skillId: skill.id
 							}
 						}))
-					},
-					title: dataInput.title,
-					urlSlug
+					}
 				},
 				where: PrismaUtils.nonNull(args.where)
 			});

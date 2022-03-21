@@ -27,6 +27,26 @@ export const createCodeExample = mutationField("createCodeExample", {
 
 		const urlSlug = StringUtils.toUrlSlug(dataInput.title);
 
+		const existingCodeExample = await prisma.codeExample.findUnique({
+			where: {
+				authorName_urlSlug: {
+					authorName: user.name,
+					urlSlug
+				}
+			}
+		});
+
+		if (existingCodeExample) {
+			return {
+				errors: [
+					{
+						__typename: "CodeExampleTitleTakenError",
+						message: `Title \`${args.data.title}\` is already in use`
+					}
+				]
+			};
+		}
+
 		const originalSkills = args.data.skills ?? [];
 		const skills = args.data.primarySkill
 			? [...originalSkills, args.data.primarySkill]

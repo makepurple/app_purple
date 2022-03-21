@@ -8,6 +8,5 @@ export const CodeExampleUpdateInput = inputObjectType({
 		t.field("language", { type: "CodeLanguage" });
 		t.field("primarySkill", { type: "SkillWhereUniqueInput" });
 		t.list.nonNull.field("skills", { type: "SkillWhereUniqueInput" });
-		t.string("title");
 	}
 });

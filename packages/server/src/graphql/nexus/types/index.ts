@@ -12,6 +12,7 @@ export * from "./ChatMessageEdge";
 export * from "./CodeExample";
 export * from "./CodeExampleConnection";
 export * from "./CodeExampleEdge";
+export * from "./CodeExampleTitleTakenError";
 export * from "./Comment";
 export * from "./CommentCodeExamplePayload";
 export * from "./CommentConnection";

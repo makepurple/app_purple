@@ -1,7 +1,6 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	Avatar,
-	Button,
 	CodeBlockInput,
 	Form,
 	FormButton,
@@ -157,8 +156,7 @@ export const Page: NextPage<PageProps> = () => {
 					name: skill.name,
 					owner: skill.owner
 				}
-			})),
-			title: codeExample?.title ?? ""
+			}))
 		},
 		resolver: computedTypesResolver(CodeExampleUpdateInput)
 	});
@@ -179,8 +177,7 @@ export const Page: NextPage<PageProps> = () => {
 					name: skill.name,
 					owner: skill.owner
 				}
-			})),
-			title: codeExample?.title ?? ""
+			}))
 		});
 	}, [codeExample, reset]);
 
@@ -253,8 +250,7 @@ export const Page: NextPage<PageProps> = () => {
 									if (!name && !owner) return false;
 
 									return true;
-								}),
-								title: formData.title
+								})
 							},
 							where: {
 								authorName_urlSlug: {
@@ -283,12 +279,12 @@ export const Page: NextPage<PageProps> = () => {
 					<FormGroup>
 						<FormLabel>Title</FormLabel>
 						<Input
-							{...register("title")}
+							disabled
 							placeholder="Title"
 							type="text"
 							aria-label="title"
+							value={codeExample.title}
 						/>
-						<FormHelperText error={errors.title?.message} />
 					</FormGroup>
 					<FormGroup tw="mt-4">
 						<FormLabel>Description</FormLabel>
