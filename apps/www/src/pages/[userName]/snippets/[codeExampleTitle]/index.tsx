@@ -222,7 +222,7 @@ export const Page: NextPage<PageProps> = () => {
 	// @ts-ignore
 	const [{ data: commentsData, fetching: fetchingComments }, { getRef }] = useRelayCursor({
 		query: GetCodeExampleCommentsDocument,
-		field: "comments",
+		field: "codeExample.comments",
 		offset: 0,
 		requestPolicy: "cache-first",
 		variables: {
@@ -234,7 +234,7 @@ export const Page: NextPage<PageProps> = () => {
 	});
 
 	const codeExample = postData?.codeExample;
-	const comments = commentsData?.comments.nodes ?? [];
+	const comments = commentsData?.codeExample?.comments.nodes ?? [];
 
 	const language = useMemo((): Maybe<Language> => {
 		switch (codeExample?.language) {
@@ -450,12 +450,7 @@ export const Page: NextPage<PageProps> = () => {
 								</NonIdealState>
 						  )
 						: comments.map((comment, i) => (
-								<CommentCard
-									key={comment.id}
-									ref={getRef(i)}
-									comment={comment}
-									replies={comment.replies}
-								/>
+								<CommentCard key={comment.id} ref={getRef(i)} comment={comment} />
 						  ))}
 					{fetchingComments &&
 						Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}

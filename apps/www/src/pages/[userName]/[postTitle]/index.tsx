@@ -201,7 +201,7 @@ export const Page: NextPage<PageProps> = () => {
 	// @ts-ignore
 	const [{ data: commentsData, fetching }, { getRef }] = useRelayCursor({
 		query: GetPostCommentsDocument,
-		field: "comments",
+		field: "post.comments",
 		offset: 0,
 		requestPolicy: "cache-first",
 		variables: {
@@ -213,7 +213,7 @@ export const Page: NextPage<PageProps> = () => {
 	});
 
 	const post = postData?.post;
-	const comments = commentsData?.comments.nodes ?? [];
+	const comments = commentsData?.post?.comments.nodes ?? [];
 
 	const isMyPost = session?.user.name === post?.authorName;
 
@@ -378,12 +378,7 @@ export const Page: NextPage<PageProps> = () => {
 								</NonIdealState>
 						  )
 						: comments.map((comment, i) => (
-								<CommentCard
-									key={comment.id}
-									ref={getRef(i)}
-									comment={comment}
-									replies={comment.replies}
-								/>
+								<CommentCard key={comment.id} ref={getRef(i)} comment={comment} />
 						  ))}
 					{fetching &&
 						Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}

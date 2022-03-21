@@ -8,15 +8,15 @@ import {
 	ThumbsUpIcon,
 	toast
 } from "@makepurple/components";
-import { useIntersectionObserver } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
 import React, { CSSProperties, forwardRef, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import tw, { styled } from "twin.macro";
+import { useClient } from "urql";
 import {
 	CommentCardCommentFragment,
-	CommentRepliesCommentConnectionFragment,
+	GetCommentRepliesDocument,
 	useGetCommentRepliesQuery,
 	useUnvoteCommentMutation,
 	useUpvoteCommentMutation
@@ -156,38 +156,31 @@ const LoadMoreButton = tw(Button)`
 export interface CommentCardProps {
 	className?: string;
 	comment: CommentCardCommentFragment;
-	replies?: CommentRepliesCommentConnectionFragment;
 	style?: CSSProperties;
 }
 
 export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, ref) => {
-	const { className, comment, replies, style } = props;
+	const { className, comment, style } = props;
 
 	const rootRef = useRef<HTMLDivElement>(null);
 	const composedRef = composeRefs(ref, rootRef);
 
-	const intersection = useIntersectionObserver(rootRef, { threshold: [1] });
-	const isInView = (intersection?.intersectionRatio ?? 0) >= 1;
-
 	const [collapsed, setCollapsed] = useState<boolean>(false);
+	const [fetching, setFetching] = useState<boolean>(false);
 
-	const [cursor, setCursor] = useState<string | null>(null);
+	const urqlClient = useClient();
 
-	const [{ data, fetching }, getReplies] = useGetCommentRepliesQuery({
-		pause: !isInView || !!replies,
-		variables: {
-			after: cursor,
-			first: 8,
-			where: {
-				id: comment.id
-			}
-		}
+	const [{ data }] = useGetCommentRepliesQuery({
+		pause: true,
+		requestPolicy: "cache-first"
 	});
 
-	const commentReplies: readonly (CommentCardCommentFragment & {
-		replies?: CommentRepliesCommentConnectionFragment;
-	})[] = replies?.nodes ?? data?.comment?.replies.nodes ?? [];
-	const pageInfo = replies?.pageInfo ?? data?.comment?.replies.pageInfo;
+	const repliesCount = comment.replies.totalCount;
+
+	const replies = data?.comment?.replies.nodes ?? [];
+	const pageInfo = data?.comment?.replies.pageInfo;
+
+	const hasNextPage = pageInfo ? pageInfo.hasNextPage : !!repliesCount;
 
 	const [{ fetching: unvoting }, unvoteComment] = useUnvoteCommentMutation();
 	const [{ fetching: upvoting }, upvoteComment] = useUpvoteCommentMutation();
@@ -303,28 +296,37 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 						</div>
 					)}
 					<Replies tw="mt-2">
-						{commentReplies.map((reply) => (
-							<CommentCard key={reply.id} comment={reply} replies={reply.replies} />
+						{replies.map((reply) => (
+							<CommentCard key={reply.id} comment={reply} />
 						))}
 						{fetching &&
 							Array.from({ length: 3 }, (_, i) => <LoadingCommentCard key={i} />)}
 					</Replies>
-					{pageInfo?.hasNextPage && (
+					{hasNextPage && (
 						<LoadMoreButton
 							disabled={fetching}
-							onClick={() => {
-								flushSync(() => {
-									pageInfo.endCursor && setCursor(pageInfo.endCursor);
-								});
+							onClick={async () => {
+								setFetching(true);
 
-								getReplies();
+								await urqlClient
+									.query(GetCommentRepliesDocument, {
+										after: pageInfo?.endCursor ?? null,
+										first: 8,
+										where: {
+											id: comment.id
+										}
+									})
+									.toPromise();
+
+								setFetching(false);
 							}}
 							size="small"
 							type="button"
 							variant="secondary"
 							tw="mt-1"
 						>
-							Load more
+							<span>Load more</span>
+							{fetching && <Spinner tw="ml-2" />}
 						</LoadMoreButton>
 					)}
 				</Content>

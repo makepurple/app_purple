@@ -11,6 +11,9 @@ fragment CommentCardComment on Comment {
 	content
 	createdAt
 	postId
+	replies(first: 0) {
+		totalCount
+	}
 	updatedAt
 	upvotes
 	viewerUpvote

@@ -16,7 +16,13 @@ const Template: Story<CommentCardProps> = (args) => {
 	return <CommentCard {...args} />;
 };
 Template.args = {
-	comment: Comment_fragment_mock
+	comment: {
+		...Comment_fragment_mock,
+		replies: {
+			__typename: "CommentConnection",
+			totalCount: 8
+		}
+	}
 };
 
 export const Standard = Template.bind({});

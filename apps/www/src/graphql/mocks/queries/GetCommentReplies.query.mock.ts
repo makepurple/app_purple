@@ -5,30 +5,7 @@ const DATA_SIZE = 8;
 
 const replies = Array.from({ length: DATA_SIZE }, (_, i) => ({
 	...Comment_fragment_mock,
-	id: i.toString(),
-	replies: {
-		__typename: "CommentConnection" as const,
-		pageInfo: {
-			__typename: "PageInfo" as const,
-			endCursor: `${DATA_SIZE - 1}`,
-			hasNextPage: true,
-			hasPreviousPage: false,
-			startCursor: null
-		},
-		totalCount: DATA_SIZE,
-		edges: Array.from({ length: DATA_SIZE }, (_j, j) => ({
-			__typename: "CommentEdge" as const,
-			cursor: `${i}_${j}`,
-			node: {
-				...Comment_fragment_mock,
-				id: `${i}_${j}`
-			}
-		})),
-		nodes: Array.from({ length: DATA_SIZE }, (_j, j) => ({
-			...Comment_fragment_mock,
-			id: `${i}_${j}`
-		}))
-	}
+	id: i.toString()
 }));
 
 export const GetCommentReplies_mock: GetCommentRepliesQuery = {

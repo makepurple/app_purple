@@ -6,17 +6,19 @@ query GetCommentReplies(
 	comment(where: $where) {
 		id
 		replies(after: $after, first: $first) {
-			__typename
-			...CommentRepliesCommentConnection
-			nodes {
-				__typename
-				id
-				...CommentCardComment
-				replies(first: $first) {
-					__typename
-					...CommentRepliesCommentConnection
+			edges {
+				cursor
+				node {
+					id
 				}
 			}
+			nodes {
+				...CommentCardComment
+			}
+			pageInfo {
+				...PageInfoFragment
+			}
+			totalCount
 		}
 	}
 }

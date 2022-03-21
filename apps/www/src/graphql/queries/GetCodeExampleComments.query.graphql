@@ -4,33 +4,27 @@ query GetCodeExampleComments(
 	$codeExampleTitle: String!
 	$userName: String!
 ) {
-	comments(
-		after: $after
-		first: $first
+	codeExample(
 		where: {
-			codeExample: {
-				authorName: {
-					equals: $userName
-				}
-				urlSlug: {
-					equals: $codeExampleTitle
-				}
+			authorName_urlSlug: {
+				authorName: $userName
+				urlSlug: $codeExampleTitle
 			}
 		}
 	) {
-		...CommentRepliesCommentConnection
-		nodes {
-			id
-			...CommentCardComment
-			replies(first: $first) {
-				...CommentRepliesCommentConnection
-				nodes {
+		id
+		comments(after: $after, first: $first) {
+			edges {
+				cursor
+				node {
 					id
-					...CommentCardComment
-					replies(first: $first) {
-						...CommentRepliesCommentConnection
-					}
 				}
+			}
+			nodes {
+				...CommentCardComment
+			}
+			pageInfo {
+				...PageInfoFragment
 			}
 		}
 	}
