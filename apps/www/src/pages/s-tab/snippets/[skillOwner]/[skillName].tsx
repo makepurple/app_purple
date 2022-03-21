@@ -15,13 +15,13 @@ import {
 import {
 	PageProps,
 	pageProps
-} from "../../../../page-props/s/[skillOwner]/[skillName]/tab=followers";
+} from "../../../../page-props/s/[skillOwner]/[skillName]/tab=snippets";
 
 const BATCH_SIZE = 20;
 
 const Content = tw.div`
 	grid
-	grid-template-columns[repeat(auto-fit, minmax(20rem, 1fr))]
+	grid-template-columns[repeat(auto-fill, minmax(20rem, 1fr))]
 	auto-rows-auto
 	gap-3
 `;
