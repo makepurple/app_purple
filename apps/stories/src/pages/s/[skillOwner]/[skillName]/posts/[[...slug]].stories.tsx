@@ -9,7 +9,7 @@ import {
 	GetUserFriendRequestCount_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/s/[skillOwner]/[skillName]/posts/[[...slug]]";
-import { Page } from "@makepurple/www/src/pages/s/[skillOwner]/[skillName]";
+import { Page } from "@makepurple/www/src/pages/s/[skillOwner]/[skillName]/posts/[[...slug]]";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import ms from "ms";

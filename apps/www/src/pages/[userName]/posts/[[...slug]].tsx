@@ -36,7 +36,7 @@ const OrderBys = tw.div`
 	gap-2
 `;
 
-const OrderByOption = styled(Button)<{ $selected: boolean }>`
+const OrderByOption = styled(Button)`
 	${tw`
 		flex-shrink-0
 		h-12
@@ -45,13 +45,6 @@ const OrderByOption = styled(Button)<{ $selected: boolean }>`
 		p-0
 		cursor-pointer
 	`}
-
-	${({ $selected }) =>
-		$selected &&
-		tw`
-			bg-indigo-500
-			text-white
-		`}
 `;
 
 const OrderByCriteria = styled.div`
@@ -114,8 +107,7 @@ export const Page: NextPage<PageProps> = () => {
 					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
 						<OrderByOption
 							as="a"
-							variant="secondary"
-							$selected={!sort || sort === "latest"}
+							variant={!sort || sort === "latest" ? "primary" : "secondary"}
 						>
 							Latest
 						</OrderByOption>
@@ -125,7 +117,7 @@ export const Page: NextPage<PageProps> = () => {
 						as={`/${userName}/posts/top`}
 						passHref
 					>
-						<OrderByOption as="a" variant="secondary" $selected={sort === "top"}>
+						<OrderByOption as="a" variant={sort === "top" ? "primary" : "secondary"}>
 							Top
 						</OrderByOption>
 					</NextLink>
@@ -139,8 +131,7 @@ export const Page: NextPage<PageProps> = () => {
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={!criteria || criteria === "week"}
+								variant={!criteria || criteria === "week" ? "primary" : "secondary"}
 							>
 								Week
 							</OrderByOption>
@@ -152,8 +143,7 @@ export const Page: NextPage<PageProps> = () => {
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={criteria === "month"}
+								variant={criteria === "month" ? "primary" : "secondary"}
 							>
 								Month
 							</OrderByOption>
@@ -165,8 +155,7 @@ export const Page: NextPage<PageProps> = () => {
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={criteria === "year"}
+								variant={criteria === "year" ? "primary" : "secondary"}
 							>
 								Year
 							</OrderByOption>
@@ -178,8 +167,7 @@ export const Page: NextPage<PageProps> = () => {
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={criteria === "all"}
+								variant={criteria === "all" ? "primary" : "secondary"}
 							>
 								All Time
 							</OrderByOption>

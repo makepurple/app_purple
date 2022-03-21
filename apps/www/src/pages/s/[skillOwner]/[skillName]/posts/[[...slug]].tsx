@@ -45,7 +45,7 @@ const OrderBys = tw.div`
 	gap-2
 `;
 
-const OrderByOption = styled(Button)<{ $selected: boolean }>`
+const OrderByOption = styled(Button)`
 	${tw`
 		flex-shrink-0
 		h-12
@@ -54,13 +54,6 @@ const OrderByOption = styled(Button)<{ $selected: boolean }>`
 		p-0
 		cursor-pointer
 	`}
-
-	${({ $selected }) =>
-		$selected &&
-		tw`
-			bg-indigo-500
-			text-white
-		`}
 `;
 
 const OrderByCriteria = styled.div`
@@ -127,24 +120,25 @@ export const Page: NextPage<PageProps> = () => {
 			<OrderBy>
 				<OrderBys>
 					<NextLink
-						href="/s/[skillOwner]/[skillOwner]/posts/[[...slug]]"
-						as={`/s/${skillOwner}/${skillName}/posts`}
+						href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
+						as={`/s/${skillOwner}/${skillName}`}
 						passHref
+						shallow
 					>
 						<OrderByOption
 							as="a"
-							variant="secondary"
-							$selected={!sort || sort === "latest"}
+							variant={!sort || sort === "latest" ? "primary" : "secondary"}
 						>
 							Latest
 						</OrderByOption>
 					</NextLink>
 					<NextLink
-						href="/s/[skillOwner]/[skillOwner]/posts/[[...slug]]"
-						as={`/s/${skillOwner}/${skillName}/posts/top`}
+						href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
+						as={`/s/${skillOwner}/${skillName}/top`}
 						passHref
+						shallow
 					>
-						<OrderByOption as="a" variant="secondary" $selected={sort === "top"}>
+						<OrderByOption as="a" variant={sort === "top" ? "primary" : "secondary"}>
 							Top
 						</OrderByOption>
 					</NextLink>
@@ -152,53 +146,53 @@ export const Page: NextPage<PageProps> = () => {
 				{sort === "top" && (
 					<OrderByCriteria>
 						<NextLink
-							href="/s/[skillOwner]/[skillOwner]/posts/[[...slug]]"
-							as={`/s/${skillOwner}/${skillName}/posts/top`}
+							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
+							as={`/s/${skillOwner}/${skillName}/top`}
 							passHref
+							shallow
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={!criteria || criteria === "week"}
+								variant={!criteria || criteria === "week" ? "primary" : "secondary"}
 							>
 								Week
 							</OrderByOption>
 						</NextLink>
 						<NextLink
-							href="/s/[skillOwner]/[skillOwner]/posts/[[...slug]]"
-							as={`/s/${skillOwner}/${skillName}/posts/top/month`}
+							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
+							as={`/s/${skillOwner}/${skillName}/top/month`}
 							passHref
+							shallow
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={criteria === "month"}
+								variant={criteria === "month" ? "primary" : "secondary"}
 							>
 								Month
 							</OrderByOption>
 						</NextLink>
 						<NextLink
-							href="/s/[skillOwner]/[skillOwner]/posts/[[...slug]]"
-							as={`/s/${skillOwner}/${skillName}/posts/top/year`}
+							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
+							as={`/s/${skillOwner}/${skillName}/top/year`}
 							passHref
+							shallow
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={criteria === "year"}
+								variant={criteria === "year" ? "primary" : "secondary"}
 							>
 								Year
 							</OrderByOption>
 						</NextLink>
 						<NextLink
-							href="/s/[skillOwner]/[skillOwner]/posts/[[...slug]]"
-							as={`/s/${skillOwner}/${skillName}/posts/top/all`}
+							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
+							as={`/s/${skillOwner}/${skillName}/top/all`}
 							passHref
+							shallow
 						>
 							<OrderByOption
 								as="a"
-								variant="secondary"
-								$selected={criteria === "all"}
+								variant={criteria === "all" ? "primary" : "secondary"}
 							>
 								All Time
 							</OrderByOption>
