@@ -22,6 +22,7 @@ import React, { useEffect, useMemo } from "react";
 import tw from "twin.macro";
 import {
 	GetPostCommentsDocument,
+	SortOrder,
 	useDeletePostMutation,
 	useGetPostQuery,
 	useUpvotePostMutation,
@@ -207,6 +208,9 @@ export const Page: NextPage<PageProps> = () => {
 		variables: {
 			after: null,
 			first: 8,
+			orderBy: {
+				updatedAt: SortOrder.Asc
+			},
 			userName,
 			postTitle
 		}

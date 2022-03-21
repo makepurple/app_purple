@@ -1,11 +1,12 @@
 query GetCommentReplies(
 	$after: String
 	$first: Int
+	$orderBy: CommentOrderByInput
 	$where: CommentWhereUniqueInput!
 ) {
 	comment(where: $where) {
 		id
-		replies(after: $after, first: $first) {
+		replies(after: $after, first: $first, orderBy: $orderBy) {
 			edges {
 				cursor
 				node {

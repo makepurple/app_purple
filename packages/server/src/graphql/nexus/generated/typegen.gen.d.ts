@@ -107,7 +107,6 @@ export interface NexusGenInputs {
     language?: NexusGenEnums['CodeLanguage'] | null; // CodeLanguage
     primarySkill?: NexusGenInputs['SkillWhereUniqueInput'] | null; // SkillWhereUniqueInput
     skills?: NexusGenInputs['SkillWhereUniqueInput'][] | null; // [SkillWhereUniqueInput!]
-    title?: string | null; // String
   }
   CodeExampleWhereInput: { // input type
     authorName?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter

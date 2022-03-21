@@ -24,6 +24,7 @@ import {
 	CodeExampleWhereUniqueInput,
 	CodeLanguage,
 	GetCodeExampleCommentsDocument,
+	SortOrder,
 	useDeleteCodeExampleMutation,
 	useGetCodeExampleQuery,
 	useUnvoteCodeExampleMutation,
@@ -228,6 +229,9 @@ export const Page: NextPage<PageProps> = () => {
 		variables: {
 			after: null,
 			first: BATCH_SIZE,
+			orderBy: {
+				updatedAt: SortOrder.Asc
+			},
 			userName,
 			codeExampleTitle: urlSlug
 		}

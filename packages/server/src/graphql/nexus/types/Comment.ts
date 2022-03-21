@@ -104,8 +104,8 @@ export const Comment = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
-				where: arg({ type: "CommentWhereInput" }),
-				orderBy: arg({ type: "CommentOrderByInput" })
+				orderBy: arg({ type: "CommentOrderByInput" }),
+				where: arg({ type: "CommentWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const comment = prisma.comment.findUnique({ where: { id: parent.id } });

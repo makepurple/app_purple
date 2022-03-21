@@ -156,7 +156,6 @@ input CodeExampleUpdateInput {
   language: CodeLanguage
   primarySkill: SkillWhereUniqueInput
   skills: [SkillWhereUniqueInput!]
-  title: String
 }
 
 input CodeExampleWhereInput {

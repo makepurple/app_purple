@@ -16,6 +16,7 @@ import { useClient } from "urql";
 import {
 	CommentCardCommentFragment,
 	GetCommentRepliesDocument,
+	SortOrder,
 	useGetCommentRepliesQuery,
 	useUnvoteCommentMutation,
 	useUpvoteCommentMutation
@@ -175,6 +176,9 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 		variables: {
 			after: null,
 			first: 8,
+			orderBy: {
+				updatedAt: SortOrder.Asc
+			},
 			where: {
 				id: comment.id
 			}
@@ -334,6 +338,9 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 									.query(GetCommentRepliesDocument, {
 										after: pageInfo.endCursor,
 										first: 8,
+										orderBy: {
+											updatedAt: SortOrder.Asc
+										},
 										where: {
 											id: comment.id
 										}

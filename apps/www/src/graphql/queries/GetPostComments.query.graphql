@@ -1,6 +1,7 @@
 query GetPostComments(
 	$after: String
 	$first: Int
+	$orderBy: CommentOrderByInput
 	$postTitle: String!
 	$userName: String!
 ) {
@@ -13,7 +14,7 @@ query GetPostComments(
 		}
 	) {
 		id
-		comments(after: $after, first: $first) {
+		comments(after: $after, first: $first, orderBy: $orderBy) {
 			edges {
 				cursor
 				node {
