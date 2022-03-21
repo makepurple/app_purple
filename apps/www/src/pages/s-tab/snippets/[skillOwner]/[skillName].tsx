@@ -22,7 +22,7 @@ const BATCH_SIZE = 20;
 const Content = tw.div`
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(20rem, 1fr))]
-	auto-rows-auto
+	auto-rows-fr
 	gap-3
 `;
 
