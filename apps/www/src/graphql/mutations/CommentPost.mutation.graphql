@@ -2,28 +2,13 @@ mutation CommentPost($data: CommentPostInput!) {
 	commentPost(data: $data) {
 		record {
 			id
-			content
-			author {
-				id
-				name
-			}
 			authorId
-			parent {
-				id
-				replies {
-					...CommentRepliesCommentConnection
-				}
-			}
-			post {
-				id
-				comments {
-					...CommentRepliesCommentConnection
-				}
-			}
+			parentId
 			postId
-			updatedAt
-			upvotes
-			viewerUpvote
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }
