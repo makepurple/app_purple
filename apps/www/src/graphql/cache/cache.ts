@@ -55,6 +55,74 @@ export const createCache = () => {
 		schema: schema as IntrospectionData,
 		updates: {
 			Mutation: {
+				commentCodeExample: ({ commentCodeExample: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					const parentId = result.record.parentId;
+					const codeExampleId = result.record.codeExampleId;
+
+					if (parentId) {
+						cache
+							.inspectFields({ __typename: "Comment", id: parentId })
+							.filter((field) => field.fieldName === "replies")
+							.forEach((field) => {
+								cache.invalidate(
+									{ __typename: "Comment", id: parentId },
+									field.fieldName,
+									field.arguments
+								);
+							});
+					} else if (codeExampleId) {
+						cache
+							.inspectFields({ __typename: "CodeExample", id: codeExampleId })
+							.filter((field) => field.fieldName === "comments")
+							.forEach((field) => {
+								cache.invalidate(
+									{ __typename: "CodeExample", id: codeExampleId },
+									field.fieldName,
+									field.arguments
+								);
+							});
+					}
+				},
+				commentPost: ({ commentPost: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					const parentId = result.record.parentId;
+					const postId = result.record.postId;
+
+					if (parentId) {
+						cache
+							.inspectFields({ __typename: "Comment", id: parentId })
+							.filter((field) => field.fieldName === "replies")
+							.forEach((field) => {
+								cache.invalidate(
+									{ __typename: "Comment", id: parentId },
+									field.fieldName,
+									field.arguments
+								);
+							});
+					} else if (postId) {
+						cache
+							.inspectFields({ __typename: "Post", id: postId })
+							.filter((field) => field.fieldName === "comments")
+							.forEach((field) => {
+								cache.invalidate(
+									{ __typename: "Post", id: postId },
+									field.fieldName,
+									field.arguments
+								);
+							});
+					}
+				},
 				createCodeExample: ({ createCodeExample: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 
