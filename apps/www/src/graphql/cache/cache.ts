@@ -282,10 +282,22 @@ export const createCache = () => {
 				publishPost: ({ publishPost: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 
-					!!result.viewer?.id &&
-						cache.invalidate({ __typename: "User", id: result.viewer.id });
+					const viewerId = result.viewer?.id;
 
-					cache.invalidate({ __typename: "Post", id: result.record.id });
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) =>
+							["activities", "posts", "trophies"].includes(field.fieldName)
+						)
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				},
 				rejectFriendship: ({ rejectFriendship: result }: Mutation) => {
 					if (!result.record) return;
