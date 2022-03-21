@@ -1,5 +1,5 @@
 import { CommentCreateInput } from "@makepurple/validators";
-import { NotificationType, Prisma, UserActivityType } from "@prisma/client";
+import { NotificationType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
