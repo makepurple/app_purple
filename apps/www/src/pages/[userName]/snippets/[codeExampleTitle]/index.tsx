@@ -314,9 +314,6 @@ export const Page: NextPage<PageProps> = () => {
 							))}
 						</Skills>
 					</TopContainer>
-					{!!codeExample.description && (
-						<Description>{codeExample.description}</Description>
-					)}
 					<ByLine>
 						{codeExample.author.image && (
 							<Avatar border={2}>
@@ -335,6 +332,9 @@ export const Page: NextPage<PageProps> = () => {
 							</PublishedAt>
 						</div>
 					</ByLine>
+					{!!codeExample.description && (
+						<Description>{codeExample.description}</Description>
+					)}
 					<CodeBlock
 						code={codeExample.content}
 						language={language}
