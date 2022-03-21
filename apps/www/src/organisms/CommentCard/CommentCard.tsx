@@ -165,13 +165,20 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const composedRef = composeRefs(ref, rootRef);
 
 	const [collapsed, setCollapsed] = useState<boolean>(false);
-	const [fetching, setFetching] = useState<boolean>(false);
+	const [fetchingMore, setFetchingMore] = useState<boolean>(false);
 
 	const urqlClient = useClient();
 
-	const [{ data }] = useGetCommentRepliesQuery({
+	const [{ data, fetching }, getReplies] = useGetCommentRepliesQuery({
 		pause: true,
-		requestPolicy: "cache-first"
+		requestPolicy: "cache-first",
+		variables: {
+			after: null,
+			first: 8,
+			where: {
+				id: comment.id
+			}
+		}
 	});
 
 	const repliesCount = comment.replies.totalCount;
@@ -179,10 +186,13 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const replies = data?.comment?.replies.nodes ?? [];
 	const pageInfo = data?.comment?.replies.pageInfo;
 
+	const shouldLoadFirst = !!repliesCount && !pageInfo;
 	const hasNextPage = pageInfo ? pageInfo.hasNextPage : !!repliesCount;
 
 	const [{ fetching: unvoting }, unvoteComment] = useUnvoteCommentMutation();
 	const [{ fetching: upvoting }, upvoteComment] = useUpvoteCommentMutation();
+
+	const loading = fetching || fetchingMore;
 
 	const [showReplyForm, setShowReplyForm] = useState<boolean>(false);
 
@@ -290,6 +300,11 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 								onCancel={() => {
 									setShowReplyForm(false);
 								}}
+								onSuccess={() => {
+									getReplies();
+
+									setShowReplyForm(false);
+								}}
 								postId={comment.postId}
 							/>
 						</div>
@@ -305,11 +320,19 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 						<LoadMoreButton
 							disabled={fetching}
 							onClick={async () => {
-								setFetching(true);
+								if (shouldLoadFirst) {
+									getReplies();
+
+									return;
+								}
+
+								if (!pageInfo?.endCursor) return;
+
+								setFetchingMore(true);
 
 								await urqlClient
 									.query(GetCommentRepliesDocument, {
-										after: pageInfo?.endCursor ?? null,
+										after: pageInfo.endCursor,
 										first: 8,
 										where: {
 											id: comment.id
@@ -317,7 +340,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 									})
 									.toPromise();
 
-								setFetching(false);
+								setFetchingMore(false);
 							}}
 							size="small"
 							type="button"
@@ -325,7 +348,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 							tw="mt-1"
 						>
 							<span>Load more</span>
-							{fetching && <Spinner tw="ml-2" />}
+							{loading && <Spinner tw="ml-2" />}
 						</LoadMoreButton>
 					)}
 				</Content>

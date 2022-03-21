@@ -30,6 +30,7 @@ export interface CreateCommentFormProps {
 	codeExampleId?: Maybe<string>;
 	commentId?: string;
 	onCancel?: (event?: SyntheticEvent) => void;
+	onSuccess?: () => void;
 	postId?: Maybe<string>;
 	style?: CSSProperties;
 }
@@ -39,6 +40,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 	codeExampleId,
 	commentId,
 	onCancel,
+	onSuccess,
 	postId,
 	style
 }) => {
@@ -119,6 +121,8 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 						}
 					]
 				});
+
+				onSuccess?.();
 			})}
 			style={style}
 		>
