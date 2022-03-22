@@ -8,5 +8,9 @@ mutation FollowSkill($where: SkillWhereUniqueInput!) {
 				}
 			}
 		}
+		viewer {
+			id
+			name
+		}
 	}
 }

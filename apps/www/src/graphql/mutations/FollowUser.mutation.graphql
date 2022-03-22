@@ -8,5 +8,9 @@ mutation FollowUser($where: UserWhereUniqueInput!) {
 				}
 			}
 		}
+		viewer {
+			id
+			name
+		}
 	}
 }
