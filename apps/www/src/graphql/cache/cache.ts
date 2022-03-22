@@ -305,6 +305,42 @@ export const createCache = () => {
 					// eslint-disable-next-line no-console
 					console.log("Fix later");
 				},
+				unfollowSkill: ({ unfollowSkill: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
+				unfollowUser: ({ unfollowUser: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
 				unvoteCodeExample: ({ unvoteCodeExample: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 
