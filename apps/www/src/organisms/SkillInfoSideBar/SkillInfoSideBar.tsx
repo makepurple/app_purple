@@ -170,7 +170,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 }) => {
 	const { data: session, status } = useSession();
 
-	const [{ data }] = useGetSkillInfoSideBarQuery({
+	const [{ data, fetching }, reexecuteQuery] = useGetSkillInfoSideBarQuery({
 		variables: {
 			name: skillName,
 			owner: skillOwner
@@ -260,6 +260,8 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 							}
 
 							toast.success("Skill successfully removed from your profile");
+
+							reexecuteQuery({ requestPolicy: "network-only" });
 						}}
 						size="small"
 						type="button"
@@ -278,7 +280,21 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 									owner: skillOwner
 								};
 
-								await addSkill({ where: { name_owner: nameOwner } });
+								const didSucceed = await addSkill({
+									where: { name_owner: nameOwner }
+								})
+									.then((result) => !!result.data?.addSkill)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error("Could not add skill to profile");
+
+									return;
+								}
+
+								toast.success("Skill was added to your profile! 🎉");
+
+								reexecuteQuery({ requestPolicy: "network-only" });
 							}}
 							size="small"
 							type="button"
@@ -295,7 +311,21 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 									owner: skillOwner
 								};
 
-								await addDesired({ where: { name_owner: nameOwner } });
+								const didSucceed = await addDesired({
+									where: { name_owner: nameOwner }
+								})
+									.then((result) => !!result.data?.addDesiredSkill)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error("Could not add skill to profile");
+
+									return;
+								}
+
+								toast.success("Skill was added to your profile! 🎉");
+
+								reexecuteQuery({ requestPolicy: "network-only" });
 							}}
 							size="small"
 							type="button"

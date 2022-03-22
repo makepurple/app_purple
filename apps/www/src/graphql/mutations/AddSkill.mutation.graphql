@@ -1,26 +1,13 @@
 mutation AddSkill($where: SkillWhereUniqueInput!) {
 	addSkill(where: $where) {
+		record {
+			id
+			viewerDesiredSkill
+			viewerSkill
+		}
 		viewer {
 			id
-			skills(first: 100) {
-				pageInfo {
-					...PageInfoFragment
-				}
-				totalCount
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					id
-				}
-			}
-		}
-		record {
-			...SkillFollowCardSkill
-			viewerSkill
+			name
 		}
 	}
 }
