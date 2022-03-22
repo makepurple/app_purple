@@ -140,7 +140,8 @@ export const updatePost = mutationField("updatePost", {
 								skillId: skill.id
 							}
 						}))
-					}
+					},
+					thumbnailUrl: dataInput.thumbnailUrl
 				},
 				where: PrismaUtils.nonNull(args.where)
 			});
