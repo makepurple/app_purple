@@ -207,6 +207,7 @@ export const Page: NextPage<PageProps> = () => {
 							data: {
 								content: formData.content,
 								description: formData.description,
+								skills: formData.skills,
 								thumbnailUrl: formData.thumbnailUrl
 							}
 						})
