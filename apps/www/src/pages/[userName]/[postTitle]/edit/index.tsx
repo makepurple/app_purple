@@ -194,7 +194,13 @@ export const Page: NextPage<PageProps> = () => {
 								objectFit="cover"
 							/>
 						</ThumbnailPreview>
-						<RemovePostThumbnailButton disabled={updating} postId={post.id}>
+						<RemovePostThumbnailButton
+							disabled={updating}
+							onCompleted={() => {
+								setValue("thumbnailUrl", "");
+							}}
+							postId={post.id}
+						>
 							Remove image
 						</RemovePostThumbnailButton>
 					</ThumbnailPreviewContainer>

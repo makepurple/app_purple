@@ -8,11 +8,12 @@ const Root = tw(FormButton)`
 `;
 
 export type RemovePostThumbnailButtonProps = FormButtonProps & {
+	onCompleted?: () => void;
 	postId: string;
 };
 
 export const RemovePostThumbnailButton: FC<RemovePostThumbnailButtonProps> = (props) => {
-	const { children = "Remove", disabled, onClick, postId, ...buttonProps } = props;
+	const { children = "Remove", disabled, onClick, onCompleted, postId, ...buttonProps } = props;
 
 	const [{ fetching }, removePostThumbnail] = useRemovePostThumbnailMutation();
 
@@ -28,9 +29,15 @@ export const RemovePostThumbnailButton: FC<RemovePostThumbnailButtonProps> = (pr
 					.then((result) => !!result.data?.removePostThumbnail)
 					.catch(() => false);
 
-				didSucceed
-					? toast.success("Cover image has been removed")
-					: toast.error("Cover image could not be removed");
+				if (!didSucceed) {
+					toast.error("Cover image could not be removed");
+
+					return;
+				}
+
+				toast.success("Cover image has been removed");
+
+				onCompleted?.();
 			}}
 		>
 			{children}
