@@ -36,14 +36,7 @@ export const PostImageInput = forwardRef<HTMLInputElement, PostImageInputProps>(
 			style={style}
 			title={title}
 		>
-			{fetching ? (
-				<>
-					<Spinner tw="mr-2" />
-					<span>Uploading</span>
-				</>
-			) : (
-				children
-			)}
+			{fetching ? <Spinner /> : children}
 			<VisuallyHidden
 				as="input"
 				disabled={fetching}
