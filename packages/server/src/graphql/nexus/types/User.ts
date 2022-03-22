@@ -746,13 +746,12 @@ export const User = objectType({
 				return parent.id === user?.id;
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const lastOpenedAt: Date | undefined = args.where?.opened
-					? await prisma.user
-							.findUnique({
-								where: { id: parent.id }
-							})
-							.then((user) => user?.notificationsLastOpenedAt)
-					: undefined;
+				const lastOpenedAt: Date | undefined =
+					args.where?.opened === false
+						? await prisma.user
+								.findUnique({ where: { id: parent.id } })
+								.then((user) => user?.notificationsLastOpenedAt)
+						: undefined;
 
 				const connection = await PrismaUtils.findManyCursorConnection<any, { id: string }>(
 					async ({ cursor, skip, take }) =>
