@@ -262,10 +262,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 									return;
 								}
 
-								const record = await upvoteComment({
-									data: { upvote: true },
-									where: { id: comment.id }
-								})
+								const record = await upvoteComment({ where: { id: comment.id } })
 									.then((result) => result.data?.upvoteComment.record)
 									.catch(() => null);
 
