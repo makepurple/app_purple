@@ -1,9 +1,13 @@
 mutation UnvoteComment($where: CommentWhereUniqueInput!) {
 	unvoteComment(where: $where) {
 		record {
-			__typename
 			id
-			...CommentCardComment
+			upvotes
+			viewerUpvote
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }

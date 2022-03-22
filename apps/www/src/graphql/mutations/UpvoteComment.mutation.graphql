@@ -1,12 +1,13 @@
-mutation UpvoteComment(
-	$data: UpvoteCommentInput!
-	$where: CommentWhereUniqueInput!
-) {
-	upvoteComment(data: $data, where: $where) {
+mutation UpvoteComment($where: CommentWhereUniqueInput!) {
+	upvoteComment(where: $where) {
 		record {
-			__typename
 			id
-			...CommentCardComment
+			upvotes
+			viewerUpvote
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }

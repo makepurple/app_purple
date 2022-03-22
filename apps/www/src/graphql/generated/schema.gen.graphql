@@ -762,7 +762,7 @@ type Mutation {
   updateUserFromGitHub: UpdateUserFromGitHubPayload!
   uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
   upvoteCodeExample(data: UpvoteCodeExampleInput, where: CodeExampleWhereUniqueInput!): UpvoteCodeExamplePayload!
-  upvoteComment(data: UpvoteCommentInput!, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
+  upvoteComment(data: UpvoteCommentInput, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
   upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
   viewPost(where: PostWhereUniqueInput!): ViewPostPayload!
   viewer: User

@@ -3,18 +3,11 @@ mutation UpvotePost($where: PostWhereUniqueInput!) {
 		record {
 			id
 			upvotes
-			upvoters(first: 6) {
-				edges {
-					cursor
-					node {
-						id
-					}
-				}
-				nodes {
-					id
-				}
-			}
 			viewerUpvote
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }

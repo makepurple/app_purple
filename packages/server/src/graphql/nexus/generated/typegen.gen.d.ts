@@ -3225,7 +3225,7 @@ export interface NexusGenArgTypes {
       where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
     }
     upvoteComment: { // args
-      data: NexusGenInputs['UpvoteCommentInput']; // UpvoteCommentInput!
+      data?: NexusGenInputs['UpvoteCommentInput'] | null; // UpvoteCommentInput
       where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
     }
     upvotePost: { // args

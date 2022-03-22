@@ -58,7 +58,10 @@ export const upvotePost = mutationField("upvotePost", {
 								userId: user.id
 							}
 						},
-						create: { userId: user.id }
+						create: {
+							upvote: true,
+							userId: user.id
+						}
 					}
 				}
 			}
