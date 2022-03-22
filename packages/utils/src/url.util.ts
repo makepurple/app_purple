@@ -54,7 +54,9 @@ export class UrlUtils {
 		 * @date December 13, 2021
 		 */
 		const urlString = isValid ? url : `https://google.com${url}`;
-		const extension = new URL(urlString).pathname.split(".").at(-1);
+		const pathname = new URL(urlString).pathname.toString();
+
+		const extension = pathname.split(".").slice(-1)[0];
 
 		if (!extension) return false;
 
