@@ -1,5 +1,5 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
-import { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
+import type { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
 import type { Mutation } from "../generated";
 import schema from "../generated/schema.gen.json";
@@ -304,6 +304,78 @@ export const createCache = () => {
 
 					// eslint-disable-next-line no-console
 					console.log("Fix later");
+				},
+				unvoteCodeExample: ({ unvoteCodeExample: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
+				unvotePost: ({ unvotePost: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
+				upvoteCodeExample: ({ upvoteCodeExample: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
+				upvotePost: ({ upvotePost: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				}
 			}
 		}
