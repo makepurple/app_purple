@@ -7,6 +7,7 @@ import {
 	GitHubAvatarImage,
 	NonIdealState,
 	Paper,
+	Tags,
 	toast
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
@@ -60,6 +61,11 @@ const Title = tw.h1`
 	text-center
 	font-bold
 	sm:text-4xl
+`;
+
+const Skills = tw(Tags)`
+	self-center
+	max-width[24rem]
 `;
 
 const Description = tw.h2`
@@ -217,6 +223,7 @@ export const Page: NextPage<PageProps> = () => {
 	});
 
 	const post = postData?.post;
+	const skills = post?.skills.nodes ?? [];
 	const comments = commentsData?.post?.comments.nodes ?? [];
 
 	const isMyPost = session?.user.name === post?.authorName;
@@ -263,6 +270,13 @@ export const Page: NextPage<PageProps> = () => {
 				)}
 				<PostContent>
 					<Title>{post.title}</Title>
+					<Skills type="positive">
+						{skills.map((skill) => (
+							<Tags.Tag key={skill.id} id={skill.id}>
+								{skill.name}
+							</Tags.Tag>
+						))}
+					</Skills>
 					{post.description && <Description>{post.description}</Description>}
 					<ByLine>
 						{post.author.image && (
