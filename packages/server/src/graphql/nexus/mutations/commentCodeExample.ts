@@ -71,7 +71,9 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 					// Only create a notification if the author doesn't already have one for this
 					// post
 					notifications:
-						codeExample.notifications.length && codeExample.authorName !== user.name
+						codeExample.authorName === user.name
+							? undefined
+							: codeExample.notifications.length
 							? {
 									update: {
 										where: { id: codeExample.notifications[0].id },
