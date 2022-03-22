@@ -170,7 +170,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 }) => {
 	const { data: session, status } = useSession();
 
-	const [{ data, fetching }, reexecuteQuery] = useGetSkillInfoSideBarQuery({
+	const [{ data }, reexecuteQuery] = useGetSkillInfoSideBarQuery({
 		variables: {
 			name: skillName,
 			owner: skillOwner
