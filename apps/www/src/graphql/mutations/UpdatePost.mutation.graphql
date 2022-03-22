@@ -3,9 +3,7 @@ mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
 		record {
 			id
 			content
-			description
-			readTime
-			thumbnailUrl
+			...PostCardPost
 		}
 	}
 }

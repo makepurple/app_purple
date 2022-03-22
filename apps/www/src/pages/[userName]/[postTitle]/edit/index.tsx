@@ -23,7 +23,7 @@ import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { useGetPostQuery, useUpdatePostMutation } from "../../../../graphql";
@@ -142,7 +142,6 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors },
 		handleSubmit,
 		register,
-		reset,
 		setValue,
 		watch
 	} = useForm<Type<typeof PostUpdateInput>>({
@@ -150,7 +149,7 @@ export const Page: NextPage<PageProps> = () => {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
 			description: post?.description ?? "",
 			skills: defaultSkills,
-			content: [
+			content: (post?.content as any) ?? [
 				{
 					type: "paragraph",
 					children: [{ text: "" }]
@@ -163,20 +162,6 @@ export const Page: NextPage<PageProps> = () => {
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
 	const thumbnailUrl = watch("thumbnailUrl");
-
-	useEffect(() => {
-		!!post &&
-			reset({
-				thumbnailUrl: post.thumbnailUrl ?? "",
-				description: post.description ?? "",
-				content: (post.content as any) ?? [
-					{
-						type: "paragraph",
-						children: [{ text: "" }]
-					}
-				]
-			});
-	}, [post, reset]);
 
 	/**
 	 * TODO
