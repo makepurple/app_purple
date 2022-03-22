@@ -8,5 +8,9 @@ mutation UnfollowUser($where: UserWhereUniqueInput!) {
 				}
 			}
 		}
+		viewer {
+			id
+			name
+		}
 	}
 }
