@@ -1,0 +1,13 @@
+mutation RemoveDesiredSkill($where: SkillWhereUniqueInput!) {
+	removeDesiredSkill(where: $where) {
+		viewer {
+			id
+			name
+		}
+		record {
+			id
+			viewerDesiredSkill
+			viewerSkill
+		}
+	}
+}

@@ -5,7 +5,8 @@ import {
 	GitHubAvatarImage,
 	MaybeAnchor,
 	Paper,
-	Spinner
+	Spinner,
+	toast
 } from "@makepurple/components";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
@@ -13,11 +14,13 @@ import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import {
+	SkillWhereUniqueInput,
 	useAddDesiredSkillMutation,
 	useAddSkillMutation,
 	useFollowSkillMutation,
 	useGetSkillInfoSideBarQuery,
-	useRemoveBothSkillMutation,
+	useRemoveDesiredSkillMutation,
+	useRemoveSkillMutation,
 	useUnfollowSkillMutation
 } from "../../graphql";
 import {
@@ -177,10 +180,14 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 	const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
-	const [{ fetching: adding }, add] = useAddSkillMutation();
+	const [{ fetching: addingSkill }, addSkill] = useAddSkillMutation();
 	const [{ fetching: addingDesired }, addDesired] = useAddDesiredSkillMutation();
 
-	const [{ fetching: removing }, remove] = useRemoveBothSkillMutation();
+	const [{ fetching: removingSkill }, removeSkill] = useRemoveSkillMutation();
+	const [{ fetching: removingDesired }, removeDesired] = useRemoveDesiredSkillMutation();
+
+	const adding = addingSkill || addingDesired;
+	const removing = removingSkill || removingDesired;
 
 	const repository = data?.github.repository;
 	const skill = repository?.skill;
@@ -197,7 +204,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 
 	const shouldRemoveSkill = skill?.viewerDesiredSkill || skill?.viewerSkill;
 
-	const loading: boolean = following || unfollowing || adding || addingDesired || removing;
+	const loading: boolean = following || unfollowing || adding || removing;
 
 	return (
 		<Root className={className} style={style}>
@@ -225,38 +232,63 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 			<SkillActions tw="mt-3">
 				{shouldRemoveSkill ? (
 					<Button
+						disabled={removing}
 						onClick={async () => {
 							const nameOwner = {
 								name: skillName,
 								owner: skillOwner
 							};
 
-							await remove({ where: { name_owner: nameOwner } });
+							const where: SkillWhereUniqueInput = { name_owner: nameOwner };
+
+							const didRemove = skill.viewerSkill
+								? await removeSkill({ where })
+										.then((result) => !!result.data?.removeSkill)
+										.catch(() => false)
+								: false;
+
+							const didRemoveDesired = skill.viewerDesiredSkill
+								? await removeDesired({ where })
+										.then((result) => !!result.data?.removeDesiredSkill)
+										.catch(() => false)
+								: false;
+
+							if (!didRemove && !didRemoveDesired) {
+								toast.error("Could not remove this skill from your profile");
+
+								return;
+							}
+
+							toast.success("Skill successfully removed from your profile");
 						}}
 						size="small"
 						type="button"
 						variant="alert"
 					>
-						Remove Skill
+						<span>Remove Skill</span>
+						{removing && <Spinner tw="ml-2" />}
 					</Button>
 				) : (
 					<>
 						<Button
+							disabled={adding}
 							onClick={async () => {
 								const nameOwner = {
 									name: skillName,
 									owner: skillOwner
 								};
 
-								await add({ where: { name_owner: nameOwner } });
+								await addSkill({ where: { name_owner: nameOwner } });
 							}}
 							size="small"
 							type="button"
 							variant="success"
 						>
-							I know this!
+							<span>I know this!</span>
+							{addingSkill && <Spinner tw="ml-2" />}
 						</Button>
 						<Button
+							disabled={adding}
 							onClick={async () => {
 								const nameOwner = {
 									name: skillName,
@@ -269,7 +301,8 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 							type="button"
 							variant="secondary"
 						>
-							I&apos;m learning
+							<span>I&apos;m learning</span>
+							{addingDesired && <Spinner tw="ml-2" />}
 						</Button>
 					</>
 				)}

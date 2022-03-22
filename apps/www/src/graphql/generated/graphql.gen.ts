@@ -95,8 +95,8 @@ export function useRejectFriendshipMutation() {
   return Urql.useMutation<Operations.RejectFriendshipMutation, Operations.RejectFriendshipMutationVariables>(Operations.RejectFriendshipDocument);
 };
 
-export function useRemoveBothSkillMutation() {
-  return Urql.useMutation<Operations.RemoveBothSkillMutation, Operations.RemoveBothSkillMutationVariables>(Operations.RemoveBothSkillDocument);
+export function useRemoveDesiredSkillMutation() {
+  return Urql.useMutation<Operations.RemoveDesiredSkillMutation, Operations.RemoveDesiredSkillMutationVariables>(Operations.RemoveDesiredSkillDocument);
 };
 
 export function useRemovePostThumbnailMutation() {
