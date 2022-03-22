@@ -76,7 +76,7 @@ export const addDesiredSkill = mutationField("addDesiredSkill", {
 				update: {}
 			});
 
-			return await prisma.desiredSkillsOnUsers
+			return await transaction.desiredSkillsOnUsers
 				.upsert({
 					where: {
 						skillId_userId: {
