@@ -35,7 +35,7 @@ export const upvotePost = mutationField("upvotePost", {
 		const record = await prisma.post.update({
 			where: PrismaUtils.nonNull(args.where),
 			data: {
-				...(post.activities.length
+				...(!post.activities.length
 					? {
 							activities: {
 								create: {
