@@ -63,7 +63,7 @@ const Title = tw.h1`
 `;
 
 const Description = tw.h2`
-	text-lg
+	text-base
 	text-gray-500
 `;
 
