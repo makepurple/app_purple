@@ -42,9 +42,6 @@ export const followSkill = mutationField("followSkill", {
 						},
 						follower: { connect: { id: user.id } },
 						following: { connect: { id: existingId } }
-					},
-					include: {
-						follow: true
 					}
 				})
 				.following();
@@ -101,9 +98,6 @@ export const followSkill = mutationField("followSkill", {
 						},
 						follower: { connect: { id: user.id } },
 						following: { connect: { id: newSkill.id } }
-					},
-					include: {
-						follow: true
 					}
 				})
 				.following();
