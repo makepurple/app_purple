@@ -445,11 +445,34 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 						<Button
 							disabled={loading}
 							onClick={async () => {
-								const nameOwner = { name: skillName, owner: skillOwner };
+								const where: SkillWhereUniqueInput = {
+									name_owner: {
+										name: repository.name,
+										owner: skillOwner
+									}
+								};
 
-								viewerFollowing
-									? await unfollowSkill({ where: { name_owner: nameOwner } })
-									: await followSkill({ where: { name_owner: nameOwner } });
+								if (viewerFollowing) {
+									await unfollowSkill({ where });
+
+									return;
+								}
+
+								const didSucceed = await followSkill({ where })
+									.then((result) => !!result.data?.followSkill)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error("Could not follow this skill");
+
+									reexecuteQuery({ requestPolicy: "network-only" });
+
+									return;
+								}
+
+								toast.success("You followed this skill! 🎉");
+
+								reexecuteQuery({ requestPolicy: "network-only" });
 							}}
 							type="button"
 							variant="secondary"
