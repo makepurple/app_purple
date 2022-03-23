@@ -5,6 +5,7 @@ import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
 	SkillOwnerRepositoryCardGitHubRepositoryFragment,
+	SkillWhereUniqueInput,
 	useFollowSkillMutation,
 	useUnfollowSkillMutation
 } from "../../graphql";
@@ -155,12 +156,14 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 					<Button
 						disabled={loading}
 						onClick={async () => {
-							const nameOwner = {
-								name: repository.name,
-								owner: skillOwner
+							const where: SkillWhereUniqueInput = {
+								name_owner: {
+									name: repository.name,
+									owner: skillOwner
+								}
 							};
 
-							const didSucceed = await add({ where: { name_owner: nameOwner } })
+							const didSucceed = await add({ where })
 								.then((result) => !!result)
 								.catch(() => false);
 
@@ -193,14 +196,30 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 					<Button
 						disabled={loading}
 						onClick={async () => {
-							const nameOwner = {
-								name: repository.name,
-								owner: skillOwner
+							const where: SkillWhereUniqueInput = {
+								name_owner: {
+									name: repository.name,
+									owner: skillOwner
+								}
 							};
 
-							viewerFollowing
-								? await unfollowSkill({ where: { name_owner: nameOwner } })
-								: await followSkill({ where: { name_owner: nameOwner } });
+							if (viewerFollowing) {
+								await unfollowSkill({ where });
+
+								return;
+							}
+
+							const didSucceed = await followSkill({ where })
+								.then((result) => !!result.data?.followSkill)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not follow this skill");
+
+								return;
+							}
+
+							toast.success("You followed this skill! 🎉");
 						}}
 						size="small"
 						type="button"
