@@ -124,6 +124,12 @@ export const Page: NextPage<PageProps> = () => {
 						<span tw="flex-grow">Messaging</span>
 						<AddButton
 							onClick={async () => {
+								/**
+								 * TODO
+								 * @description Add functionality to add new chat rooms later
+								 * @author David Lee
+								 * @date March 23, 2022
+								 */
 								await router.push("/messaging/[[...slug]]", `/messaging`);
 							}}
 							size="small"
