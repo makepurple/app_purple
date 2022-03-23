@@ -2,6 +2,7 @@ import { Button, FadedEdge, MainContainer, Paper } from "@makepurple/components"
 import { useElementScroll } from "framer-motion";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
@@ -123,17 +124,17 @@ export const Page: NextPage<PageProps> = () => {
 					<Title>
 						<span tw="flex-grow">Messaging</span>
 						{!!chatId && (
-							<AddButton
-								onClick={async () => {
-									await router.push("/messaging/[[...slug]]", `/messaging`);
-								}}
-								size="small"
-								type="button"
-								variant="secondary"
-								tw="flex-shrink-0"
-							>
-								<PlusIcon height={24} width={24} />
-							</AddButton>
+							<NextLink href="/messaging/[[...slug]]" as="/messaging" passHref>
+								<AddButton
+									as="a"
+									size="small"
+									type="button"
+									variant="secondary"
+									tw="flex-shrink-0"
+								>
+									<PlusIcon height={24} width={24} />
+								</AddButton>
+							</NextLink>
 						)}
 					</Title>
 				</SideBarTopContainer>
