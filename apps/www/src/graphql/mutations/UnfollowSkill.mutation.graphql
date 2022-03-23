@@ -4,6 +4,12 @@ mutation UnfollowSkill($where: SkillWhereUniqueInput!) {
 			following {
 				... on Skill {
 					id
+					github {
+						id
+						skill {
+							id
+						}
+					}
 					viewerFollowing
 				}
 			}
