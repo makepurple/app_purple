@@ -9,6 +9,8 @@ import {
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -22,6 +24,8 @@ const Root = tw(Paper)`
 	flex
 	items-start
 	p-4
+	cursor-pointer
+	hover:bg-indigo-50
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -31,6 +35,9 @@ const StyledAvatar = tw(Avatar)`
 
 const Details = tw.div`
 	flex-grow
+	flex
+	flex-col
+	items-start
 `;
 
 const Name = tw.h3`
@@ -91,6 +98,7 @@ export interface SkillFollowCardProps {
 export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>((props, ref) => {
 	const { className, skill, style } = props;
 
+	const router = useRouter();
 	const { status } = useSession();
 
 	const [{ fetching: following }, followSkill] = useFollowSkillMutation();
@@ -103,32 +111,53 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 	const loading: boolean = following || unfollowing;
 
 	return (
-		<Root ref={ref} className={className} style={style}>
-			{owner.__typename === "GitHubOrganization" && owner.avatarUrl && (
-				<StyledAvatar border={4} tw="mr-4">
-					<GitHubAvatarImage
-						alt={owner.login}
-						src={owner.avatarUrl}
-						height={64}
-						width={64}
-						title={owner.login}
-					/>
-				</StyledAvatar>
+		<Root
+			ref={ref}
+			className={className}
+			onClick={async () => {
+				await router.push("/s/[skillOwner]/[skillName]", `/s/${owner.login}/${skill.name}`);
+			}}
+			style={style}
+		>
+			{owner.avatarUrl && (
+				<NextLink href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
+					<StyledAvatar
+						border={4}
+						onClick={(e) => {
+							e.stopPropagation();
+						}}
+						tw="mr-4"
+					>
+						<GitHubAvatarImage
+							alt={owner.login}
+							src={owner.avatarUrl}
+							height={64}
+							width={64}
+							title={owner.login}
+						/>
+					</StyledAvatar>
+				</NextLink>
 			)}
 			<Details>
-				<Anchor href={skill.github.url} target="_blank" rel="noopener noreferrer">
-					<Name>{skill.name}</Name>
-				</Anchor>
+				<NextLink
+					href="/s/[skillOwner]/[skillName]"
+					as={`/s/${owner.login}/${skill.name}`}
+					passHref
+				>
+					<Anchor>
+						<Name>{skill.name}</Name>
+					</Anchor>
+				</NextLink>
 				{skill.github.description && (
-					<a
-						href={skill.github.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						tabIndex={-1}
-						tw="focus:ring-0"
+					<NextLink
+						href="/s/[skillOwner]/[skillName]"
+						as={`/s/${owner.login}/${skill.name}`}
+						passHref
 					>
-						<Description tw="mt-1">{skill.github.description}</Description>
-					</a>
+						<a tabIndex={-1} tw="focus:ring-0">
+							<Description tw="mt-1">{skill.github.description}</Description>
+						</a>
+					</NextLink>
 				)}
 				<Info
 					onClick={(e) => {
@@ -198,7 +227,9 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 				<Actions tw="ml-4">
 					<FollowButton
 						disabled={loading}
-						onClick={async () => {
+						onClick={async (e) => {
+							e.stopPropagation();
+
 							skill.viewerFollowing
 								? await unfollowSkill({ where: { id: skill.id } }).catch(() => null)
 								: await followSkill({ where: { id: skill.id } }).catch(() => null);
