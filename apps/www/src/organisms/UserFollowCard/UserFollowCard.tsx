@@ -60,7 +60,9 @@ export interface UserFollowCardProps {
 export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((props, ref) => {
 	const { className, style, user } = props;
 
-	const { status } = useSession();
+	const { data: session, status } = useSession();
+
+	const isMyCard = user.name === session?.user.name;
 
 	const [{ fetching: following }, followUser] = useFollowUserMutation();
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
@@ -150,7 +152,7 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 					</Tags>
 				)}
 			</Details>
-			{status === "authenticated" && (
+			{status === "authenticated" && !isMyCard && (
 				<Actions tw="ml-4">
 					<FollowButton
 						disabled={loading}
