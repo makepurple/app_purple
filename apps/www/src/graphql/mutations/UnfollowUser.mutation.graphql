@@ -2,6 +2,9 @@ mutation UnfollowUser($where: UserWhereUniqueInput!) {
 	unfollowUser(where: $where) {
 		record {
 			id
+			followers(first: 0) {
+				totalCount
+			}
 			viewerFollowing
 		}
 		viewer {

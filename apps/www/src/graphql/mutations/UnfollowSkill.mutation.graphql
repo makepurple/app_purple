@@ -2,6 +2,9 @@ mutation UnfollowSkill($where: SkillWhereUniqueInput!) {
 	unfollowSkill(where: $where) {
 		record {
 			id
+			followers(first: 0) {
+				totalCount
+			}
 			github {
 				id
 				skill {
