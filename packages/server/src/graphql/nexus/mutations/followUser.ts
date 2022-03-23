@@ -1,7 +1,7 @@
 import { FollowType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { PrismaUtils } from "../../../utils";
+import { NotFoundError, PrismaUtils } from "../../../utils";
 
 export const followUser = mutationField("followUser", {
 	type: nonNull("FollowUserPayload"),
@@ -13,6 +13,13 @@ export const followUser = mutationField("followUser", {
 	},
 	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
 		if (!user) throw new Error();
+
+		const toFollow = await prisma.user.findUnique({
+			where: PrismaUtils.nonNull(args.where)
+		});
+
+		if (!toFollow) throw new NotFoundError("This user could not be found");
+		if (toFollow.name === user.name) throw new Error("Cannot follow yourself!");
 
 		const record = await prisma.followUser
 			.create({

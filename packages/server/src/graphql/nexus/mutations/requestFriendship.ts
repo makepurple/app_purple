@@ -14,11 +14,11 @@ export const requestFriendship = mutationField("requestFriendship", {
 		if (!user) throw new Error();
 
 		const toFriend = await prisma.user.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			select: { id: true }
+			where: PrismaUtils.nonNull(args.where)
 		});
 
 		if (!toFriend) throw new NotFoundError("User could not be found");
+		if (toFriend.name === user.name) throw new Error("Cannot friend yourself!");
 
 		const existing = await prisma.friendship.findUnique({
 			where: {
