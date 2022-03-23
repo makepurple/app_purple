@@ -3,7 +3,6 @@ fragment SkillFollowCardSkill on Skill {
 	name
 	owner
 	github {
-		__typename
 		id
 		description
 		forkCount
@@ -18,12 +17,12 @@ fragment SkillFollowCardSkill on Skill {
 		}
 		name
 		owner {
+			__typename
 			id
 			avatarUrl
 			login
 		}
 		primaryLanguage {
-			__typename
 			color
 			id
 			name
