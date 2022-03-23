@@ -5,7 +5,8 @@ import {
 	GitHubAvatarImage,
 	MaybeAnchor,
 	Paper,
-	Spinner
+	Spinner,
+	toast
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
@@ -15,6 +16,7 @@ import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
 	SkillFollowCardSkillFragment,
+	SkillWhereUniqueInput,
 	useFollowSkillMutation,
 	useUnfollowSkillMutation
 } from "../../graphql";
@@ -235,9 +237,27 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 						onClick={async (e) => {
 							e.stopPropagation();
 
-							skill.viewerFollowing
-								? await unfollowSkill({ where: { id: skill.id } }).catch(() => null)
-								: await followSkill({ where: { id: skill.id } }).catch(() => null);
+							const where: SkillWhereUniqueInput = {
+								id: skill.id
+							};
+
+							if (skill.viewerFollowing) {
+								await unfollowSkill({ where });
+
+								return;
+							}
+
+							const didSucceed = await followSkill({ where })
+								.then((result) => !!result.data?.followSkill)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error("Could not follow this skill");
+
+								return;
+							}
+
+							toast.success("You followed this skill! 🎉");
 						}}
 						size="small"
 						type="button"
