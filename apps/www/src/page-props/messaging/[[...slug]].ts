@@ -18,8 +18,7 @@ const BATCH_SIZE = 20;
 export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const { query, req } = ctx;
 
-	const { slug } = query as { slug: string[] };
-
+	const slug = (query.slug as string[] | undefined) ?? [];
 	const chatId = slug[0] ?? "";
 
 	const ssr = ssrExchange({ isClient: false });

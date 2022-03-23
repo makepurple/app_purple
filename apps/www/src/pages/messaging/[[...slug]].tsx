@@ -99,7 +99,8 @@ export const Page: NextPage<PageProps> = () => {
 	const chatRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useElementScroll(chatRef);
 
-	const chatId: string | undefined = (router?.query.slug as readonly string[])[0];
+	const slug = (router?.query.slug as string[] | undefined) ?? [];
+	const chatId: string | undefined = slug[0];
 
 	const [topFade, setTopFade] = useState<boolean>(false);
 	const [bottomFade, setBottomFade] = useState<boolean>(false);
