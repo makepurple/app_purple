@@ -33,17 +33,17 @@ export const unfollowUser = mutationField("unfollowUser", {
 		if (!follow) throw new Error();
 
 		const record = await prisma.$transaction(async (transaction) => {
-			const deleted = await transaction.follow.delete({
-				where: {
-					id: follow.id
-				}
-			});
+			const deleted = await transaction.follow
+				.delete({
+					where: {
+						id: follow.id
+					}
+				})
+				.followingUser({
+					include: { following: true }
+				});
 
-			await transaction.userActivity.deleteMany({
-				where: { follow: { id: { equals: deleted.id } } }
-			});
-
-			return deleted;
+			return deleted?.following;
 		});
 
 		const githubId = await graphql`

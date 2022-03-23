@@ -14,33 +14,30 @@ export const followUser = mutationField("followUser", {
 	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
 		if (!user) throw new Error();
 
-		const result = await prisma.followUser.create({
-			data: {
-				follow: {
-					create: {
-						activities: {
-							create: {
-								type: UserActivityType.FollowUser,
-								user: { connect: { id: user.id } }
-							}
-						},
-						type: FollowType.User,
-						user: { connect: { id: user.id } }
+		const record = await prisma.followUser
+			.create({
+				data: {
+					follow: {
+						create: {
+							activities: {
+								create: {
+									type: UserActivityType.FollowUser,
+									user: { connect: { id: user.id } }
+								}
+							},
+							type: FollowType.User,
+							user: { connect: { id: user.id } }
+						}
+					},
+					follower: { connect: { id: user.id } },
+					following: {
+						connect: PrismaUtils.nonNull(args.where)
 					}
-				},
-				follower: { connect: { id: user.id } },
-				following: {
-					connect: PrismaUtils.nonNull(args.where)
 				}
-			},
-			include: {
-				follow: true,
-				following: true
-			}
-		});
+			})
+			.following();
 
-		const record = result.follow;
-		const following = result.following;
+		if (!record) throw new Error();
 
 		const githubId = await graphql`
 			query GetGitHubUserToFollow($login: String!) {
@@ -50,7 +47,7 @@ export const followUser = mutationField("followUser", {
 			}
 		`
 			.cast<octokit.GetGitHubUserToFollowQuery, octokit.GetGitHubUserToFollowQueryVariables>({
-				login: following.name
+				login: record.name
 			})
 			.then((res) => res.user?.id ?? null)
 			.catch(() => null);

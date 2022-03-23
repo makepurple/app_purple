@@ -32,17 +32,15 @@ export const unfollowSkill = mutationField("unfollowSkill", {
 		if (!follow) throw new Error();
 
 		const record = await prisma.$transaction(async (transaction) => {
-			const deleted = await transaction.follow.delete({
-				where: {
-					id: follow.id
-				}
-			});
+			const deleted = await transaction.follow
+				.delete({
+					where: { id: follow.id }
+				})
+				.followingSkill({
+					include: { following: true }
+				});
 
-			await transaction.userActivity.deleteMany({
-				where: { follow: { id: { equals: deleted.id } } }
-			});
-
-			return deleted;
+			return deleted?.following;
 		});
 
 		return { record };

@@ -594,11 +594,11 @@ export interface NexusGenObjects {
   }
   FollowSkillPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Follow'] | null; // Follow
+    record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   FollowUserPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Follow'] | null; // Follow
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   Friendship: { // root type
     frienderId: string; // String!
@@ -837,11 +837,11 @@ export interface NexusGenObjects {
   }
   UnfollowSkillPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Follow'] | null; // Follow
+    record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   UnfollowUserPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Follow'] | null; // Follow
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCodeExamplePayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -1274,13 +1274,13 @@ export interface NexusGenFieldTypes {
   FollowSkillPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow'] | null; // Follow
+    record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   FollowUserPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow'] | null; // Follow
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Friendship: { // field return type
@@ -1415,7 +1415,7 @@ export interface NexusGenFieldTypes {
     deletePost: NexusGenRootTypes['DeletePostPayload']; // DeletePostPayload!
     deleteRepository: NexusGenRootTypes['DeleteRepositoryPayload']; // DeleteRepositoryPayload!
     deleteUser: NexusGenRootTypes['DeleteUserPayload']; // DeleteUserPayload!
-    followSkill: NexusGenRootTypes['FollowUserPayload']; // FollowUserPayload!
+    followSkill: NexusGenRootTypes['FollowSkillPayload']; // FollowSkillPayload!
     followUser: NexusGenRootTypes['FollowUserPayload']; // FollowUserPayload!
     inviteToChat: NexusGenRootTypes['InviteToChatPayload']; // InviteToChatPayload!
     leaveChat: NexusGenRootTypes['LeaveChatPayload']; // LeaveChatPayload!
@@ -1695,13 +1695,13 @@ export interface NexusGenFieldTypes {
   UnfollowSkillPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow'] | null; // Follow
+    record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnfollowUserPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Follow'] | null; // Follow
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UnvoteCodeExamplePayload: { // field return type
@@ -2254,13 +2254,13 @@ export interface NexusGenFieldTypeNames {
   FollowSkillPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Follow'
+    record: 'Skill'
     viewer: 'User'
   }
   FollowUserPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Follow'
+    record: 'User'
     viewer: 'User'
   }
   Friendship: { // field return type name
@@ -2395,7 +2395,7 @@ export interface NexusGenFieldTypeNames {
     deletePost: 'DeletePostPayload'
     deleteRepository: 'DeleteRepositoryPayload'
     deleteUser: 'DeleteUserPayload'
-    followSkill: 'FollowUserPayload'
+    followSkill: 'FollowSkillPayload'
     followUser: 'FollowUserPayload'
     inviteToChat: 'InviteToChatPayload'
     leaveChat: 'LeaveChatPayload'
@@ -2675,13 +2675,13 @@ export interface NexusGenFieldTypeNames {
   UnfollowSkillPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Follow'
+    record: 'Skill'
     viewer: 'User'
   }
   UnfollowUserPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Follow'
+    record: 'User'
     viewer: 'User'
   }
   UnvoteCodeExamplePayload: { // field return type name

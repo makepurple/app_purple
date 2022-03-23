@@ -1,18 +1,14 @@
 mutation FollowSkill($where: SkillWhereUniqueInput!) {
 	followSkill(where: $where) {
 		record {
-			following {
-				... on Skill {
+			id
+			github {
+				id
+				skill {
 					id
-					github {
-						id
-						skill {
-							id
-						}
-					}
-					viewerFollowing
 				}
 			}
+			viewerFollowing
 		}
 		viewer {
 			id

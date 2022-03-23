@@ -4,7 +4,7 @@ import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
 
 export const followSkill = mutationField("followSkill", {
-	type: nonNull("FollowUserPayload"),
+	type: nonNull("FollowSkillPayload"),
 	args: {
 		where: nonNull(arg({ type: "SkillWhereUniqueInput" }))
 	},
@@ -47,7 +47,7 @@ export const followSkill = mutationField("followSkill", {
 						follow: true
 					}
 				})
-				.then((result) => result.follow);
+				.following();
 
 			return { record };
 		}
@@ -106,7 +106,7 @@ export const followSkill = mutationField("followSkill", {
 						follow: true
 					}
 				})
-				.then((result) => result.follow);
+				.following();
 		});
 
 		return { record };

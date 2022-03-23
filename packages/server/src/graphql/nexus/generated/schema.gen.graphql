@@ -516,7 +516,7 @@ input FollowOrderByInput {
 type FollowSkillPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Follow
+  record: Skill
   viewer: User
 }
 
@@ -528,7 +528,7 @@ enum FollowType {
 type FollowUserPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Follow
+  record: User
   viewer: User
 }
 
@@ -749,7 +749,7 @@ type Mutation {
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
   deleteRepository(where: RepositoryWhereUniqueInput!): DeleteRepositoryPayload!
   deleteUser: DeleteUserPayload!
-  followSkill(where: SkillWhereUniqueInput!): FollowUserPayload!
+  followSkill(where: SkillWhereUniqueInput!): FollowSkillPayload!
   followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
   leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
@@ -1325,14 +1325,14 @@ scalar URL
 type UnfollowSkillPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Follow
+  record: Skill
   viewer: User
 }
 
 type UnfollowUserPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Follow
+  record: User
   viewer: User
 }
 

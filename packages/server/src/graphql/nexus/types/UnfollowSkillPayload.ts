@@ -4,6 +4,6 @@ export const UnfollowSkillPayload = objectType({
 	name: "UnfollowSkillPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.field("record", { type: "Follow" });
+		t.field("record", { type: "Skill" });
 	}
 });

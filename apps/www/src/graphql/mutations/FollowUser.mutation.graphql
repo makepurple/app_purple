@@ -1,12 +1,8 @@
 mutation FollowUser($where: UserWhereUniqueInput!) {
 	followUser(where: $where) {
 		record {
-			following {
-				... on User {
-					id
-					viewerFollowing
-				}
-			}
+			id
+			viewerFollowing
 		}
 		viewer {
 			id
