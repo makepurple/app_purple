@@ -40,7 +40,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const skillOwner = router?.query.skillOwner as string;
 
-	const [{ data: repositoriesData }] = useGetSkillOwnerRepositoriesQuery({
+	const [{ data: repositoriesData }, reexecuteQuery] = useGetSkillOwnerRepositoriesQuery({
 		requestPolicy: "cache-first",
 		variables: { skillOwner }
 	});
@@ -73,6 +73,9 @@ export const Page: NextPage<PageProps> = () => {
 					{repositories.map((repository) => (
 						<SkillOwnerRepositoryCard
 							key={repository.id}
+							onNewSkill={() => {
+								reexecuteQuery({ requestPolicy: "network-only" });
+							}}
 							repository={repository}
 							skillOwner={skillOwner}
 						/>

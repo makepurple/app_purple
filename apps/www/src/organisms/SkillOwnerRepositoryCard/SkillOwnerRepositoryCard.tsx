@@ -1,4 +1,4 @@
-import { Anchor, Button, MaybeAnchor, Paper, Spinner } from "@makepurple/components";
+import { Anchor, Button, MaybeAnchor, Paper, Spinner, toast } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
@@ -78,6 +78,7 @@ const Actions = tw.div`
 
 export interface SkillOwnerRepositoryCardProps {
 	className?: string;
+	onNewSkill?: () => void;
 	repository: SkillOwnerRepositoryCardGitHubRepositoryFragment;
 	skillOwner: string;
 	style?: CSSProperties;
@@ -85,14 +86,15 @@ export interface SkillOwnerRepositoryCardProps {
 
 export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRepositoryCardProps>(
 	(props, ref) => {
-		const { className, repository, skillOwner, style } = props;
+		const { className, onNewSkill, repository, skillOwner, style } = props;
 
 		const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 		const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
+		const skill = repository.skill;
 		const primaryLanguage = repository.primaryLanguage;
-		const viewerFollowing = repository.skill?.viewerFollowing ?? false;
-		const viewerSkill = repository.skill?.viewerSkill ?? false;
+		const viewerFollowing = skill?.viewerFollowing ?? false;
+		const viewerSkill = skill?.viewerSkill ?? false;
 
 		const [{ fetching: adding }, add] = useAddSkill(viewerSkill);
 
@@ -150,12 +152,6 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 					</StyledMaybeAnchor>
 				</Info>
 				<Actions tw="mt-3">
-					{/**
-					 * TODO
-					 * @description Add this functionality
-					 * @author David Lee
-					 * @date February 14, 2022
-					 */}
 					<Button
 						disabled={loading}
 						onClick={async () => {
@@ -164,13 +160,35 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 								owner: skillOwner
 							};
 
-							await add({ where: { name_owner: nameOwner } });
+							const didSucceed = await add({ where: { name_owner: nameOwner } })
+								.then((result) => !!result)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								viewerSkill
+									? toast.error("Could not remove this skill from your profile")
+									: toast.error("Could not add skill to profile");
+
+								return;
+							}
+
+							viewerSkill
+								? toast.success("Skill successfully removed from your profile")
+								: toast.success("Skill was added to your profile! 🎉");
+
+							if (skill) return;
+
+							onNewSkill?.();
 						}}
 						size="small"
 						type="button"
 						variant={viewerSkill ? "alert" : "success"}
 					>
-						{viewerSkill ? "Remove" : "I know this!"}
+						{adding ? (
+							<Spinner />
+						) : (
+							<span>{viewerSkill ? "Remove" : "I know this!"}</span>
+						)}
 					</Button>
 					<Button
 						disabled={loading}
@@ -188,8 +206,11 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 						type="button"
 						variant="secondary"
 					>
-						{viewerFollowing ? "Unfollow" : "Follow"}
-						{loading && <Spinner tw="text-gray-500 ml-2" />}
+						{following || unfollowing ? (
+							<Spinner tw="text-gray-500" />
+						) : (
+							<span>{viewerFollowing ? "Unfollow" : "Follow"}</span>
+						)}
 					</Button>
 				</Actions>
 			</Root>
