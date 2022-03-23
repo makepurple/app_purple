@@ -242,7 +242,17 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 							};
 
 							if (skill.viewerFollowing) {
-								await unfollowSkill({ where });
+								const didSucceed = await unfollowSkill({ where })
+									.then((result) => !!result.data?.unfollowSkill)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error("Could not unfollow this skill");
+
+									return;
+								}
+
+								toast.success("You unfollowed this skill");
 
 								return;
 							}
