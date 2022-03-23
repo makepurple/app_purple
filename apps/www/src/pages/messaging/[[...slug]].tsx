@@ -122,23 +122,19 @@ export const Page: NextPage<PageProps> = () => {
 				<SideBarTopContainer>
 					<Title>
 						<span tw="flex-grow">Messaging</span>
-						<AddButton
-							onClick={async () => {
-								/**
-								 * TODO
-								 * @description Add functionality to add new chat rooms later
-								 * @author David Lee
-								 * @date March 23, 2022
-								 */
-								await router.push("/messaging/[[...slug]]", `/messaging`);
-							}}
-							size="small"
-							type="button"
-							variant="secondary"
-							tw="flex-shrink-0"
-						>
-							<PlusIcon height={24} width={24} />
-						</AddButton>
+						{!!chatId && (
+							<AddButton
+								onClick={async () => {
+									await router.push("/messaging/[[...slug]]", `/messaging`);
+								}}
+								size="small"
+								type="button"
+								variant="secondary"
+								tw="flex-shrink-0"
+							>
+								<PlusIcon height={24} width={24} />
+							</AddButton>
+						)}
 					</Title>
 				</SideBarTopContainer>
 				<ChatsContainer>
