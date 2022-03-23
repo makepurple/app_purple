@@ -1,5 +1,5 @@
 import { SkillInfoSideBar, SkillInfoSideBarProps } from "@makepurple/www";
-import { GetSkillInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
+import { GetPostDraft_mock, GetSkillInfoSideBar_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -24,6 +24,8 @@ Template.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
 			case "GetSkillInfoSideBar":
 				return { data: GetSkillInfoSideBar_mock };
 			default:
