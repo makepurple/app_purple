@@ -274,8 +274,8 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					<ConnectionsContents>
 						<FollowContainer>
 							<NextLink
-								href="/[userName]/followers"
-								as={`/${user.name}/followers`}
+								href="/[userName]/connections/followers"
+								as={`/${user.name}/connections/followers`}
 								passHref
 							>
 								<FollowAnchor tw="flex items-center">
@@ -289,8 +289,8 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</NextLink>
 							<Delimiter tw="mx-2" />
 							<NextLink
-								href="/[userName]/following"
-								as={`/${user.name}/following`}
+								href="/[userName]/connections/following"
+								as={`/${user.name}/connections/following`}
 								passHref
 							>
 								<FollowAnchor>
