@@ -1,6 +1,7 @@
 import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -16,6 +17,8 @@ const Root = tw(Paper)`
 	flex
 	items-start
 	p-4
+	cursor-pointer
+	hover:bg-indigo-50
 `;
 
 const StyledAvatar = tw(UserAvatar)`
@@ -34,6 +37,11 @@ const UserName = tw(Anchor)`
 	text-lg
 	leading-none
 	font-semibold
+`;
+
+const BioContainer = tw.a`
+	flex-grow
+	focus:ring-0
 `;
 
 const Bio = tw.p`
@@ -60,6 +68,7 @@ export interface UserFollowCardProps {
 export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((props, ref) => {
 	const { className, style, user } = props;
 
+	const router = useRouter();
 	const { data: session, status } = useSession();
 
 	const isMyCard = user.name === session?.user.name;
@@ -76,7 +85,14 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 	const loading: boolean = following || unfollowing;
 
 	return (
-		<Root ref={ref} className={className} style={style}>
+		<Root
+			ref={ref}
+			className={className}
+			onClick={async () => {
+				await router.push("/[userName]", `/${user.name}`);
+			}}
+			style={style}
+		>
 			{user.image && (
 				<StyledAvatar
 					border={3}
@@ -87,10 +103,16 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 				/>
 			)}
 			<Details>
-				<NextLink href="/[userName/" as={`/${user.name}`} passHref>
+				<NextLink href="/[userName]" as={`/${user.name}`} passHref>
 					<UserName>{user.name}</UserName>
 				</NextLink>
-				{user.description && <Bio tw="mt-1">{user.description}</Bio>}
+				{user.description && (
+					<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+						<BioContainer tabIndex={-1}>
+							<Bio tw="mt-1">{user.description}</Bio>
+						</BioContainer>
+					</NextLink>
+				)}
 				{!!skills.length && (
 					<Tags type="positive" tw="mt-2">
 						{skills.map((skill) => (
