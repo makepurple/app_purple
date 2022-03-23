@@ -1,6 +1,7 @@
 fragment UserActivityCardFollowUserUserActivityFollowUser on UserActivityFollowUser {
 	id
 	follow {
+		id
 		following {
 			viewerFollowing
 			... on User {

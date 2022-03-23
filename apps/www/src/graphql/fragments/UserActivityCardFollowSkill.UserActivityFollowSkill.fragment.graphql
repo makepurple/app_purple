@@ -1,6 +1,7 @@
 fragment UserActivityCardFollowSkillUserActivityFollowSkill on UserActivityFollowSkill {
 	id
 	follow {
+		id
 		following {
 			__typename
 			viewerFollowing

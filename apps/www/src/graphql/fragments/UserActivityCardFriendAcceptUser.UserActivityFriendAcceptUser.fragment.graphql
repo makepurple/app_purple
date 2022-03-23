@@ -1,6 +1,7 @@
 fragment UserActivityCardFriendAcceptUserUserActivityFriendAcceptUser on UserActivityFriendAcceptUser {
 	id
 	friendship {
+		id
 		friending {
 			...UserFollowCardUser
 		}
