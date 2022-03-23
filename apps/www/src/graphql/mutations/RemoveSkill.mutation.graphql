@@ -1,13 +1,19 @@
 mutation RemoveSkill($where: SkillWhereUniqueInput!) {
 	removeSkill(where: $where) {
+		record {
+			id
+			github {
+				id
+				skill {
+					id
+				}
+			}
+			viewerDesiredSkill
+			viewerSkill
+		}
 		viewer {
 			id
 			name
-		}
-		record {
-			id
-			viewerDesiredSkill
-			viewerSkill
 		}
 	}
 }

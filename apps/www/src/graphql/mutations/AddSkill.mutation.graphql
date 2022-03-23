@@ -2,6 +2,12 @@ mutation AddSkill($where: SkillWhereUniqueInput!) {
 	addSkill(where: $where) {
 		record {
 			id
+			github {
+				id
+				skill {
+					id
+				}
+			}
 			viewerDesiredSkill
 			viewerSkill
 		}
