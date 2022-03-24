@@ -605,7 +605,7 @@ importers:
       '@types/react-dom': ^17.0.14
       '@types/request-ip': ^0.0.37
       apollo-server-core: ^3.6.5
-      apollo-server-micro: 3.6.4
+      apollo-server-micro: 3.6.5
       bottleneck: ^2.19.5
       chalk: ^4.1.2
       cloudinary: ^1.28.1
@@ -651,7 +651,7 @@ importers:
       '@types/react-dom': 17.0.14
       '@types/request-ip': 0.0.37
       apollo-server-core: 3.6.5_graphql@15.7.2
-      apollo-server-micro: 3.6.4_graphql@15.7.2+micro@9.3.4
+      apollo-server-micro: 3.6.5_graphql@15.7.2+micro@9.3.4
       bottleneck: 2.19.5
       chalk: 4.1.2
       cloudinary: 1.28.1
@@ -8620,8 +8620,8 @@ packages:
       graphql: 15.7.2
     dev: false
 
-  /apollo-server-micro/3.6.4_graphql@15.7.2+micro@9.3.4:
-    resolution: {integrity: sha512-wYMOIxtwevM6CxbOMpTDccc3ae/ChJp1XTb0TpBYJDKrEr4P+VFth0tbo4ZwBTjsYGdsxZ2nAyuMpUgMio/xHA==}
+  /apollo-server-micro/3.6.5_graphql@15.7.2+micro@9.3.4:
+    resolution: {integrity: sha512-bj2+Q/zDMRaYj3BUde8JcU6ni8G8nHPGEoh5H0TDeQK5X7aK/g8p/esqCQDyPKZzkPqy6VYPCvqSv+wtea658A==}
     peerDependencies:
       micro: ^9.3.4
     dependencies:
