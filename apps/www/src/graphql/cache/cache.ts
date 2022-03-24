@@ -485,6 +485,42 @@ export const createCache = () => {
 							);
 						});
 				},
+				updateDesiredSkills: ({ updateDesiredSkills: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "skills")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
+				updateSkills: ({ updateSkills: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "skills")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
 				upvoteCodeExample: ({ upvoteCodeExample: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 

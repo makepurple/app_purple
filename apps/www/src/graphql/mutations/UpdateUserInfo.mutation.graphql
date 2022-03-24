@@ -4,44 +4,20 @@ mutation UpdateUserInfo(
 ) {
 	updateSkills(data: { skills: $skills }) {
 		record {
-			__typename
 			id
-			skills(first: 1) {
-				pageInfo {
-					...PageInfoFragment
-				}
-				edges {
-					cursor
-					node {
-						__typename
-						id
-					}
-				}
-				nodes {
-					...UpdateUserInfoSkill
-				}
-			}
+		}
+		viewer {
+			id
+			name
 		}
 	}
 	updateDesiredSkills(data: { skills: $desiredSkills }) {
 		record {
-			__typename
 			id
-			skills(first: 1) {
-				pageInfo {
-					...PageInfoFragment
-				}
-				edges {
-					cursor
-					node {
-						__typename
-						id
-					}
-				}
-				nodes {
-					...UpdateUserInfoSkill
-				}
-			}
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }
