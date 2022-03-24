@@ -510,6 +510,7 @@ type FollowEdge implements ConnectionEdge {
 }
 
 input FollowOrderByInput {
+  createdAt: SortOrder
   type: SortOrder
 }
 
@@ -1484,7 +1485,7 @@ type User implements Followable & Node {
   desiredSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   email: String!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: ExperienceOrderByInput, where: ExperienceWhereInput): ExperienceConnection!
-  followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  followers(after: String, before: String, first: Int, last: Int, orderBy: FollowOrderByInput, where: UserWhereInput): UserConnection!
   following(after: String, before: String, first: Int, last: Int, orderBy: FollowOrderByInput, where: FollowWhereInput): FollowConnection!
   friendRequestsReceived(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   friendRequestsSent(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!

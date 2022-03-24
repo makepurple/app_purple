@@ -10,7 +10,13 @@ query GetUserFollowing(
 	) {
 		id
 		name
-		following(after: $after, first: $first) {
+		following(
+			after: $after
+			first: $first
+			orderBy: {
+				createdAt: Desc
+			}
+		) {
 			pageInfo {
 				...PageInfoFragment
 			}

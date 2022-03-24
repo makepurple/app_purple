@@ -204,6 +204,7 @@ export interface NexusGenInputs {
     id: string; // String!
   }
   FollowOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     type?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   FollowWhereInput: { // input type
@@ -3484,6 +3485,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
+      orderBy?: NexusGenInputs['FollowOrderByInput'] | null; // FollowOrderByInput
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
     following: { // args
