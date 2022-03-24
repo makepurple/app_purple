@@ -35,6 +35,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 	const { status } = useSession();
 
 	const [{ data }] = useGetPostDraftQuery({
+		pause: status !== "authenticated",
 		requestPolicy: "cache-first"
 	});
 

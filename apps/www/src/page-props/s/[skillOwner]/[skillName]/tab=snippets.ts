@@ -27,6 +27,8 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
+	const session = await getSession(ctx);
+
 	const [skill] = await NextUtils.concurrent([
 		urqlClient
 			.query<GetSkillInfoSideBarQuery, GetSkillInfoSideBarQueryVariables>(
@@ -46,17 +48,16 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				}
 			)
 			.toPromise(),
-		urqlClient
-			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-			.toPromise()
+		!!session &&
+			urqlClient
+				.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
+				.toPromise()
 	]);
 
 	if (!skill) return { notFound: true };
 
 	return addUrqlState(ssr, {
-		props: {
-			session: await getSession(ctx)
-		}
+		props: { session }
 	});
 });
 

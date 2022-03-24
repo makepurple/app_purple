@@ -25,6 +25,8 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ req, ssr });
 
+	const session = await getSession(ctx);
+
 	const [post] = await NextUtils.concurrent([
 		urqlClient
 			.query<GetPostQuery, GetPostQueryVariables>(GetPostDocument, {
@@ -38,22 +40,21 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.toPromise()
 			.then((result) => result.data?.post ?? null),
 		urqlClient
-			.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-			.toPromise(),
-		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
 				GetUserInfoSideBarDocument,
 				{ name: query.userName as string }
 			)
-			.toPromise()
+			.toPromise(),
+		!!session &&
+			urqlClient
+				.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
+				.toPromise()
 	]);
 
 	if (!post) return { notFound: true };
 
 	return addUrqlState(ssr, {
-		props: {
-			session: await getSession(ctx)
-		}
+		props: { session }
 	});
 });
 
