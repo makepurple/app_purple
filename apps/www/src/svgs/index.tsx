@@ -1004,4 +1004,3 @@ export const XIcon = React.memo(
 		</svg>
 	))
 );
-

@@ -1,6 +1,5 @@
 import { Paper, Skeleton } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
-import tw from "twin.macro";
 
 export interface LoadingUserActivityCardPostProps {
 	className?: string;

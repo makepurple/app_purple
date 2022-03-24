@@ -13,7 +13,7 @@ import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, FC, forwardRef } from "react";
+import React, { CSSProperties, forwardRef } from "react";
 import tw, { styled } from "twin.macro";
 import {
 	CodeExampleCardCodeExampleFragment,

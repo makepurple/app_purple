@@ -2,6 +2,7 @@
   "name": "app_purple",
   "sideEffects": false,
   "scripts": {
+    "lint": "eslint ./{apps,packages}/**/*.{ts,tsx}",
     "prisma:format": "prisma format",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",

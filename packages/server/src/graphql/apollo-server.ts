@@ -32,9 +32,10 @@ export const getApolloServer = (config: GetApolloServerConfig): ApolloServer => 
 		validationRules: getValidationRules({ maxDepth }),
 		formatError: (err) => {
 			if (process.env.NODE_ENV === "development") {
-				// eslint-disable-next-line no-console
+				/* eslint-disable no-console */
 				console.error(err);
 				console.error(err.extensions.exception.stacktrace);
+				/* eslint-enable no-console */
 			}
 
 			return err;

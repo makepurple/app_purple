@@ -1,6 +1,9 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { CreateExperienceForm, CreateExperienceFormProps } from "@makepurple/www";
-import { CreateExperience_mock, SuggestOrganizations_mock } from "@makepurple/www/src/graphql/mocks";
+import {
+	CreateExperience_mock,
+	SuggestOrganizations_mock
+} from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
 import { getOperationName } from "@urql/core";
 import ms from "ms";
