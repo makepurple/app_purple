@@ -76,7 +76,7 @@ export const unfollowUser = mutationField("unfollowUser", {
 				.cast<
 					octokit.UnfollowGitHubUserMutation,
 					octokit.UnfollowGitHubUserMutationVariables
-				>()
+				>({ githubId })
 				/**
 				 * !HACK
 				 * @description Try to unfollow the user on GitHub, and don't mind the error if not
