@@ -8,6 +8,7 @@ import {
 	Paper,
 	Spinner,
 	Tags,
+	toast,
 	TwitterIcon
 } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
@@ -20,6 +21,7 @@ import {
 	useFollowUserMutation,
 	useFriendRequestUserMutation,
 	useGetUserInfoSideBarQuery,
+	UserWhereUniqueInput,
 	useUnfollowUserMutation,
 	useUnfriendUserMutation
 } from "../../graphql";
@@ -255,9 +257,37 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 								<Button
 									disabled={loadingFollow}
 									onClick={async () => {
-										user.viewerFollowing
-											? await unfollowUser({ where: { name: user.name } })
-											: await followUser({ where: { name: user.name } });
+										const where: UserWhereUniqueInput = {
+											name: user.name
+										};
+
+										if (user.viewerFollowing) {
+											const didSucceed = await unfollowUser({ where })
+												.then((result) => !!result.data?.unfollowUser)
+												.catch(() => false);
+
+											if (!didSucceed) {
+												toast.error(`Could not unfollow ${user.name}`);
+
+												return;
+											}
+
+											toast.success(`You unfollowed ${user.name}`);
+
+											return;
+										}
+
+										const didSucceed = await followUser({ where })
+											.then((result) => !!result.data?.followUser)
+											.catch(() => false);
+
+										if (!didSucceed) {
+											toast.error(`Could not follow ${user.name}`);
+
+											return;
+										}
+
+										toast.success(`You followed ${user.name}! 🎉`);
 									}}
 									type="button"
 									variant="secondary"
