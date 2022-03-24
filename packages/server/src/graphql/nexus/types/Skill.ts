@@ -247,11 +247,8 @@ export const Skill = objectType({
 			}
 		});
 		t.nonNull.boolean("viewerDesiredSkill", {
-			authorize: (parent, args, { user }) => {
-				return !!user;
-			},
 			resolve: async (parent, args, { prisma, user }) => {
-				if (!user) throw new Error();
+				if (!user) return false;
 
 				return await prisma.desiredSkillsOnUsers
 					.findUnique({
@@ -283,11 +280,8 @@ export const Skill = objectType({
 			}
 		});
 		t.nonNull.boolean("viewerSkill", {
-			authorize: (parent, args, { user }) => {
-				return !!user;
-			},
 			resolve: async (parent, args, { prisma, user }) => {
-				if (!user) throw new Error();
+				if (!user) return false;
 
 				return await prisma.skillsOnUsers
 					.findUnique({
