@@ -471,6 +471,7 @@ export const User = objectType({
 				before: stringArg(),
 				first: intArg(),
 				last: intArg(),
+				orderBy: arg({ type: "FollowOrderByInput" }),
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
@@ -486,6 +487,9 @@ export const User = objectType({
 								where: {
 									following: { id: { equals: parent.id } },
 									follower: PrismaUtils.nonNull(args.where)
+								},
+								orderBy: {
+									follow: PrismaUtils.nonNull(args.orderBy)
 								},
 								include: { follower: true }
 							})
@@ -543,12 +547,24 @@ export const User = objectType({
 					{ id: string }
 				>(
 					(paginationArgs) =>
-						prisma.follow.findMany({
-							...paginationArgs,
-							orderBy: PrismaUtils.nonNull(args.orderBy),
-							where
-						}),
-					() => prisma.follow.count({ where }),
+						prisma.user
+							.findUnique({
+								where: { id: parent.id }
+							})
+							.follows({
+								...paginationArgs,
+								orderBy: PrismaUtils.nonNull(args.orderBy),
+								where
+							}),
+					() =>
+						prisma.user
+							.findUnique({
+								where: { id: parent.id },
+								select: {
+									_count: { select: { follows: true } }
+								}
+							})
+							.then((result) => result?._count.follows ?? 0),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
