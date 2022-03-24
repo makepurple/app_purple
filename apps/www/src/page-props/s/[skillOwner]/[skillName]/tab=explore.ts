@@ -39,26 +39,27 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			)
 			.toPromise()
 			.then((result) => result.data?.github.repository),
-		urqlClient
-			.query<SuggestFriendsQuery, SuggestFriendsQueryVariables>(SuggestFriendsDocument, {
-				after: null,
-				first: BATCH_SIZE,
-				where: {
-					desiredSkillsThreshold: 0,
-					skillsThreshold: 0,
-					jitter: 0.15,
-					jitterSeed,
-					skills: {
-						name: { equals: skillName },
-						owner: { equals: skillOwner }
-					},
-					weights: {
-						skillsOverlap: 1,
-						desiredSkillsOverlap: 1
+		!!session &&
+			urqlClient
+				.query<SuggestFriendsQuery, SuggestFriendsQueryVariables>(SuggestFriendsDocument, {
+					after: null,
+					first: BATCH_SIZE,
+					where: {
+						desiredSkillsThreshold: 0,
+						skillsThreshold: 0,
+						jitter: 0.15,
+						jitterSeed,
+						skills: {
+							name: { equals: skillName },
+							owner: { equals: skillOwner }
+						},
+						weights: {
+							skillsOverlap: 1,
+							desiredSkillsOverlap: 1
+						}
 					}
-				}
-			})
-			.toPromise(),
+				})
+				.toPromise(),
 		!!session &&
 			urqlClient
 				.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)

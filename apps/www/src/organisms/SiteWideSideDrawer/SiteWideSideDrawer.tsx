@@ -1,12 +1,4 @@
-import {
-	Brand,
-	Button,
-	GitHubIcon,
-	ListItem,
-	NonIdealState,
-	Paper,
-	SideDrawer
-} from "@makepurple/components";
+import { Brand, Button, ListItem, NonIdealState, Paper, SideDrawer } from "@makepurple/components";
 import { signOut, useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, ReactNode, Ref, useState } from "react";
@@ -17,6 +9,7 @@ import {
 	BookIcon,
 	ChatIcon,
 	GearIcon,
+	GitHubIcon,
 	PeopleIcon,
 	SignOutIcon,
 	TelescopeIcon
