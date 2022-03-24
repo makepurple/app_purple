@@ -160,7 +160,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const { scrollY, scrollYProgress } = useViewportScroll();
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
-	const [menuOpen, setMenuOpen] = useState<boolean>(false);
+	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
 	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
 		pause: status !== "authenticated",
@@ -188,7 +188,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		};
 	}, [scrollY, scrollYProgress]);
 
-	const animate = menuOpen ? "open" : isThreshold ? "scrolled" : "default";
+	const animate = drawerOpen ? "open" : isThreshold ? "scrolled" : "default";
 
 	const [elem, ref] = useState<HTMLDivElement | null>(null);
 	const [drawerElem, drawerRef] = useState<HTMLDivElement | null>(null);
@@ -196,11 +196,11 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	useOnClickOutside({ current: drawerElem }, (e) => {
 		if (didClickIn(elem, e)) return;
 
-		setMenuOpen(false);
+		setDrawerOpen(false);
 	});
 
 	useOnKeyDown({ global: true, key: "ESCAPE" }, () => {
-		setMenuOpen(false);
+		setDrawerOpen(false);
 	});
 
 	const [searching, setSearching] = useState<boolean>(false);
@@ -252,9 +252,9 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 				<BrandContainer>
 					<HamburgerMenuButton
 						onClick={() => {
-							setMenuOpen((oldMenuOpen) => !oldMenuOpen);
+							setDrawerOpen((oldMenuOpen) => !oldMenuOpen);
 						}}
-						open={menuOpen}
+						open={drawerOpen}
 					/>
 					<Logo tw="ml-3" />
 					<StyledBrand tw="ml-1" />
@@ -324,8 +324,14 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					)}
 				</Actions>
 			</Root>
-			<SideDrawer ref={drawerRef} open={menuOpen}>
-				<Dialog.Overlay as={Backdrop} open={menuOpen} />
+			<SideDrawer
+				ref={drawerRef}
+				onClose={() => {
+					setDrawerOpen(false);
+				}}
+				open={drawerOpen}
+			>
+				<Dialog.Overlay as={Backdrop} open={drawerOpen} />
 			</SideDrawer>
 		</>
 	);

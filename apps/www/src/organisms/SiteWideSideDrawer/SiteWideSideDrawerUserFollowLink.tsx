@@ -1,6 +1,6 @@
 import { ListItem } from "@makepurple/components";
 import NextLink from "next/link";
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, MouseEvent } from "react";
 import tw from "twin.macro";
 import { SiteWideSideDrawerUserFollowLinkUserFragment } from "../../graphql";
 import { UserAvatar } from "../UserAvatar";
@@ -17,18 +17,28 @@ const Name = tw.span`
 
 export interface SiteWideSideDrawerUserFollowLinkProps {
 	className?: string;
+	onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
 	style?: CSSProperties;
 	user: SiteWideSideDrawerUserFollowLinkUserFragment;
 }
 
 export const SiteWideSideDrawerUserFollowLink: FC<SiteWideSideDrawerUserFollowLinkProps> = ({
 	className,
+	onClick,
 	style,
 	user
 }) => {
 	return (
 		<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-			<ListItem as={Root} className={className} style={style} title={user.name}>
+			<ListItem
+				as={Root}
+				className={className}
+				onClick={(e) => {
+					onClick?.(e);
+				}}
+				style={style}
+				title={user.name}
+			>
 				<UserAvatar
 					asLink={false}
 					border={2}

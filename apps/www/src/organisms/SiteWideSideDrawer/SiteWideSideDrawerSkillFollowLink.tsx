@@ -1,6 +1,6 @@
 import { Avatar, GitHubAvatarImage, ListItem } from "@makepurple/components";
 import NextLink from "next/link";
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, MouseEvent } from "react";
 import tw from "twin.macro";
 import { SiteWideSideDrawerSkillFollowLinkSkillFragment } from "../../graphql";
 import { BookIcon } from "../../svgs";
@@ -31,12 +31,14 @@ const Name = tw.span`
 
 export interface SiteWideSideDrawerSkillFollowLinkProps {
 	className?: string;
+	onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
 	skill: SiteWideSideDrawerSkillFollowLinkSkillFragment;
 	style?: CSSProperties;
 }
 
 export const SiteWideSideDrawerSkillFollowLink: FC<SiteWideSideDrawerSkillFollowLinkProps> = ({
 	className,
+	onClick,
 	skill,
 	style
 }) => {
@@ -51,6 +53,9 @@ export const SiteWideSideDrawerSkillFollowLink: FC<SiteWideSideDrawerSkillFollow
 			<ListItem
 				as={Root}
 				className={className}
+				onClick={(e) => {
+					onClick?.(e);
+				}}
 				style={style}
 				title={`${skill.owner}/${skill.name}`}
 			>

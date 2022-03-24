@@ -2,7 +2,7 @@ import { Button, toast } from "@makepurple/components";
 import { UrlUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { CSSProperties, FC, ReactNode, useEffect, useMemo } from "react";
+import React, { CSSProperties, FC, MouseEvent, ReactNode, useEffect, useMemo } from "react";
 import { GetPostDraftQuery, useCreatePostMutation, useGetPostDraftQuery } from "../../graphql";
 
 export interface NewPostButtonRenderProps {
@@ -13,6 +13,7 @@ export interface NewPostButtonProps {
 	bounce?: boolean;
 	children?: ReactNode | FC<NewPostButtonRenderProps>;
 	className?: string;
+	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 	skillName?: string;
 	skillOwner?: string;
 	style?: CSSProperties;
@@ -23,6 +24,7 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 	bounce,
 	children: Children = "New Post",
 	className,
+	onClick,
 	skillName,
 	skillOwner,
 	style,
@@ -66,7 +68,9 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 			className={className}
 			bounce={bounce}
 			disabled={creatingPost}
-			onClick={async () => {
+			onClick={async (e) => {
+				onClick?.(e);
+
 				if (draft) {
 					await router.push("/[userName]/draft", draftUrl);
 

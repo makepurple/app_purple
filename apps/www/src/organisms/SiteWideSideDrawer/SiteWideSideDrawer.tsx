@@ -111,12 +111,13 @@ export type SiteWideSideDrawerProps = {
 	children?: ReactNode;
 	className?: string;
 	innerRef?: Ref<HTMLDivElement>;
+	onClose?: () => void;
 	open: boolean;
 	style?: CSSProperties;
 };
 
 export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
-	const { children, className, innerRef, open, style } = props;
+	const { children, className, innerRef, onClose, open, style } = props;
 
 	const { data: session, status } = useSession();
 
@@ -153,12 +154,24 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 							mutually grow.
 						</AuthInfo>
 						<NextLink href="/signup" passHref>
-							<Button as="a" tw="mt-4">
+							<Button
+								as="a"
+								onClick={() => {
+									onClose?.();
+								}}
+								tw="mt-4"
+							>
 								Sign Up
 							</Button>
 						</NextLink>
 						<NextLink href="/login" passHref>
-							<StyledLoginButton as="a" tw="mt-2">
+							<StyledLoginButton
+								as="a"
+								onClick={() => {
+									onClose?.();
+								}}
+								tw="mt-2"
+							>
 								<GitHubIcon height={24} width={24} tw="mr-2" />
 								<span>Login</span>
 							</StyledLoginButton>
@@ -168,7 +181,12 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 				{status === "authenticated" && !!user && (
 					<>
 						<NextLink href="/explore" passHref>
-							<Button as="a">
+							<Button
+								as="a"
+								onClick={() => {
+									onClose?.();
+								}}
+							>
 								<TelescopeIcon height={24} width={24} tw="mr-3" />
 								<span>Explore</span>
 							</Button>
@@ -186,6 +204,9 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 														<NextLink href="/explore" passHref>
 															<ExploreButton
 																as="a"
+																onClick={() => {
+																	onClose?.();
+																}}
 																size="small"
 																tw="mt-4"
 															>
@@ -201,6 +222,9 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 											<SiteWideSideDrawerFollowLink
 												key={follow.id}
 												followable={follow.following}
+												onClick={() => {
+													onClose?.();
+												}}
 											/>
 									  ))}
 								{fetching &&
@@ -229,7 +253,12 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 							<SectionTitle>Other</SectionTitle>
 							<SectionContent tw="mt-1">
 								<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-									<ListItem as="a">
+									<ListItem
+										as="a"
+										onClick={() => {
+											onClose?.();
+										}}
+									>
 										<UserAvatar
 											asLink={false}
 											border={1}
@@ -241,7 +270,14 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 										<ListItemText>{user.name}</ListItemText>
 									</ListItem>
 								</NextLink>
-								<ListItem as={NewPostItem} bounce={false} userName={user.name}>
+								<ListItem
+									as={NewPostItem}
+									onClick={() => {
+										onClose?.();
+									}}
+									bounce={false}
+									userName={user.name}
+								>
 									{({ draft }) => (
 										<>
 											<BookIcon height={24} width={24} tw="mr-3" />
@@ -254,25 +290,45 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 									as={`/${user.name}/connections/requests`}
 									passHref
 								>
-									<ListItem as="a">
+									<ListItem
+										as="a"
+										onClick={() => {
+											onClose?.();
+										}}
+									>
 										<PeopleIcon height={24} width={24} tw="mr-3" />
 										<span>Invitations</span>
 									</ListItem>
 								</NextLink>
 								<NextLink href="/messaging" passHref>
-									<ListItem as="a">
+									<ListItem
+										as="a"
+										onClick={() => {
+											onClose?.();
+										}}
+									>
 										<ChatIcon height={24} width={24} tw="mr-3" />
 										<span>Messages</span>
 									</ListItem>
 								</NextLink>
 								<NextLink href="/notifications" passHref>
-									<ListItem as="a">
+									<ListItem
+										as="a"
+										onClick={() => {
+											onClose?.();
+										}}
+									>
 										<BellIcon height={24} width={24} tw="mr-3" />
 										<span>Notifications</span>
 									</ListItem>
 								</NextLink>
 								<NextLink href="/account" passHref>
-									<ListItem as="a">
+									<ListItem
+										as="a"
+										onClick={() => {
+											onClose?.();
+										}}
+									>
 										<GearIcon height={24} width={24} tw="mr-3" />
 										<span>Account</span>
 									</ListItem>
@@ -281,6 +337,8 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 									as="button"
 									onClick={async () => {
 										await signOut({ redirect: false });
+
+										onClose?.();
 									}}
 									type="button"
 								>
