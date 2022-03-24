@@ -65,7 +65,7 @@ export const Button = styled.button<{
 				return tw`bg-indigo-500`;
 			case "secondary":
 				return tw`
-					bg-white
+					bg-white/80
 					text-black
 					border-gray-300
 					not-disabled:hover:bg-indigo-50

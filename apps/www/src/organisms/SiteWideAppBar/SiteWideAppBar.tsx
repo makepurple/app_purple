@@ -60,9 +60,6 @@ const Actions = tw.div`
 
 const StyledLoginButton = tw(Button)`
 	w-32
-	bg-transparent
-	text-black
-	hover:shadow-md
 `;
 
 const SignUpButton = tw(Button)`
@@ -277,7 +274,9 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 					) : status !== "authenticated" || !user ? (
 						<>
 							<NextLink href="/login" passHref>
-								<StyledLoginButton as="a">Login</StyledLoginButton>
+								<StyledLoginButton as="a" variant="secondary">
+									Login
+								</StyledLoginButton>
 							</NextLink>
 							<NextLink href="/signup" passHref>
 								<SignUpButton as="a">Sign Up</SignUpButton>
