@@ -1,4 +1,4 @@
-import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
+import { Anchor, Button, Paper, Spinner, Tags, toast } from "@makepurple/components";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import tw from "twin.macro";
 import {
 	useFollowUserMutation,
 	UserFollowCardUserFragment,
+	UserWhereUniqueInput,
 	useUnfollowUserMutation
 } from "../../graphql";
 import { UserAvatar } from "../UserAvatar";
@@ -181,9 +182,37 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 						onClick={async (e) => {
 							e.stopPropagation();
 
-							user.viewerFollowing
-								? await unfollowUser({ where: { id: user.id } }).catch(() => null)
-								: await followUser({ where: { id: user.id } }).catch(() => null);
+							const where: UserWhereUniqueInput = {
+								name: user.name
+							};
+
+							if (user.viewerFollowing) {
+								const didSucceed = await unfollowUser({ where })
+									.then((result) => !!result.data?.unfollowUser)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error(`Could not unfollow ${user.name}`);
+
+									return;
+								}
+
+								toast.success(`You unfollowed ${user.name}`);
+
+								return;
+							}
+
+							const didSucceed = await followUser({ where })
+								.then((result) => !!result.data?.followUser)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error(`Could not follow ${user.name}`);
+
+								return;
+							}
+
+							toast.success(`You followed ${user.name}! 🎉`);
 						}}
 						size="small"
 						type="button"
