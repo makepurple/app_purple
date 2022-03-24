@@ -5,13 +5,13 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo, useRef } from "react";
 import tw from "twin.macro";
-import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../../../../graphql";
-import { SkillPageLayout, SuggestedFriendCard } from "../../../../organisms";
+import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../../../../../graphql";
+import { SkillPageLayout, SuggestedFriendCard } from "../../../../../organisms";
 import {
 	PageProps,
 	pageProps
-} from "../../../../page-props/s/[skillOwner]/[skillName]/tab=explore";
-import { PersonIcon } from "../../../../svgs";
+} from "../../../../../page-props/s/[skillOwner]/[skillName]/tab=explore";
+import { PersonIcon } from "../../../../../svgs";
 
 const BATCH_SIZE = 50;
 
