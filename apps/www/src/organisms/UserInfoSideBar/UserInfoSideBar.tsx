@@ -15,6 +15,7 @@ import { FormatUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useState } from "react";
 import tw from "twin.macro";
 import {
@@ -149,6 +150,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	const [{ fetching: friendRequesting }, friendRequestUser] = useFriendRequestUserMutation();
 	const [{ fetching: unfriending }, unfriendUser] = useUnfriendUserMutation();
 
+	const router = useRouter();
 	const { data: session, status } = useSession();
 
 	const [formOpen, setFormOpen] = useState<boolean>(false);
@@ -203,101 +205,108 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						<OpenbaseIcon height={24} width={24} />
 					</SocialLink>
 				</SocialLinks>
-				{status === "authenticated" && (
-					<>
-						{isMyUser && !formOpen && (
-							<Actions tw="mt-4">
-								<NewPostButton>
-									{({ draft }) => (draft ? "Edit Draft" : "New Post")}
-								</NewPostButton>
-								<Button
-									onClick={() => {
-										setFormOpen(true);
-									}}
-									type="button"
-									variant="secondary"
-								>
-									Edit Profile
-								</Button>
-							</Actions>
-						)}
-						{!isMyUser && (
-							<Actions tw="mt-4">
-								<Button
-									disabled={
-										loadingFriend ||
-										(!user.viewerIsFriend && !user.viewerCanFriend)
+				{isMyUser && !formOpen && (
+					<Actions tw="mt-4">
+						<NewPostButton>
+							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+						</NewPostButton>
+						<Button
+							onClick={() => {
+								setFormOpen(true);
+							}}
+							type="button"
+							variant="secondary"
+						>
+							Edit Profile
+						</Button>
+					</Actions>
+				)}
+				{!isMyUser && (
+					<Actions tw="mt-4">
+						<Button
+							disabled={
+								loadingFriend || (!user.viewerIsFriend && !user.viewerCanFriend)
+							}
+							onClick={async () => {
+								if (status !== "authenticated") {
+									await router.push("/signup");
+
+									return;
+								}
+
+								user.viewerIsFriend
+									? await unfriendUser({ where: { name: user.name } })
+									: await friendRequestUser({
+											where: { name: user.name }
+									  });
+							}}
+							type="button"
+							variant={user.viewerIsFriend ? "alert" : "primary"}
+						>
+							<span>
+								{user.viewerIsFriend ? (
+									<>
+										<CancelIcon
+											height={24}
+											width={24}
+											tw="flex-shrink-0 mr-1"
+										/>
+										Connection
+									</>
+								) : (
+									"Connect"
+								)}
+							</span>
+							{loadingFriend && <Spinner tw="ml-2" />}
+						</Button>
+						<Button
+							disabled={loadingFollow}
+							onClick={async () => {
+								if (status !== "authenticated") {
+									await router.push("/signup");
+
+									return;
+								}
+
+								const where: UserWhereUniqueInput = {
+									name: user.name
+								};
+
+								if (user.viewerFollowing) {
+									const didSucceed = await unfollowUser({ where })
+										.then((result) => !!result.data?.unfollowUser)
+										.catch(() => false);
+
+									if (!didSucceed) {
+										toast.error(`Could not unfollow ${user.name}`);
+
+										return;
 									}
-									onClick={async () => {
-										user.viewerIsFriend
-											? await unfriendUser({ where: { name: user.name } })
-											: await friendRequestUser({
-													where: { name: user.name }
-											  });
-									}}
-									type="button"
-									variant={user.viewerIsFriend ? "alert" : "primary"}
-								>
-									<span>
-										{user.viewerIsFriend ? (
-											<>
-												<CancelIcon
-													height={24}
-													width={24}
-													tw="flex-shrink-0 mr-1"
-												/>
-												Connection
-											</>
-										) : (
-											"Connect"
-										)}
-									</span>
-									{loadingFriend && <Spinner tw="ml-2" />}
-								</Button>
-								<Button
-									disabled={loadingFollow}
-									onClick={async () => {
-										const where: UserWhereUniqueInput = {
-											name: user.name
-										};
 
-										if (user.viewerFollowing) {
-											const didSucceed = await unfollowUser({ where })
-												.then((result) => !!result.data?.unfollowUser)
-												.catch(() => false);
+									toast.success(`You unfollowed ${user.name}`);
 
-											if (!didSucceed) {
-												toast.error(`Could not unfollow ${user.name}`);
+									return;
+								}
 
-												return;
-											}
+								const didSucceed = await followUser({ where })
+									.then((result) => !!result.data?.followUser)
+									.catch(() => false);
 
-											toast.success(`You unfollowed ${user.name}`);
+								if (!didSucceed) {
+									toast.error(`Could not follow ${user.name}`);
 
-											return;
-										}
+									return;
+								}
 
-										const didSucceed = await followUser({ where })
-											.then((result) => !!result.data?.followUser)
-											.catch(() => false);
-
-										if (!didSucceed) {
-											toast.error(`Could not follow ${user.name}`);
-
-											return;
-										}
-
-										toast.success(`You followed ${user.name}! 🎉`);
-									}}
-									type="button"
-									variant="secondary"
-								>
-									<span>{user.viewerFollowing ? "Unfollow" : "Follow"}</span>
-									{loadingFollow && <Spinner tw="ml-2" />}
-								</Button>
-							</Actions>
-						)}
-					</>
+								toast.success(`You followed ${user.name}! 🎉`);
+							}}
+							type="button"
+							variant="secondary"
+						>
+							<span>{user.viewerFollowing ? "Unfollow" : "Follow"}</span>
+							{loadingFollow && <Spinner tw="ml-2" />}
+						</Button>
+					</Actions>
 				)}
 				<ConnectionsContainer tw="mt-4">
 					<PeopleIcon height={24} width={24} tw="mr-2" />
