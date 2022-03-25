@@ -18,6 +18,7 @@ const Root = tw(Paper)`
 	p-4
 	rounded-none
 	shadow-2xl
+	z-50
 `;
 
 const Info = tw.div`
