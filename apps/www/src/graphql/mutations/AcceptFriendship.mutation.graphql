@@ -1,0 +1,13 @@
+mutation AcceptFriendship($where: UserWhereUniqueInput!) {
+	rejectFriendship(where: $where) {
+		record {
+			id
+			viewerCanFriend
+			viewerFriended
+		}
+		viewer {
+			id
+			name
+		}
+	}
+}

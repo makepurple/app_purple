@@ -3,6 +3,10 @@ import * as Urql from 'urql';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 
+export function useAcceptFriendshipMutation() {
+  return Urql.useMutation<Operations.AcceptFriendshipMutation, Operations.AcceptFriendshipMutationVariables>(Operations.AcceptFriendshipDocument);
+};
+
 export function useAddDesiredSkillMutation() {
   return Urql.useMutation<Operations.AddDesiredSkillMutation, Operations.AddDesiredSkillMutationVariables>(Operations.AddDesiredSkillDocument);
 };
