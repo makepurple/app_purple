@@ -18,17 +18,19 @@ export const rejectFriendship = mutationField("rejectFriendship", {
 
 		if (!requester) throw new NotFoundError("This user does not exist");
 
-		const record = await prisma.friendship.update({
-			where: {
-				frienderId_friendingId: {
-					frienderId: requester.id,
-					friendingId: user.id
+		const record = await prisma.friendship
+			.update({
+				where: {
+					frienderId_friendingId: {
+						frienderId: requester.id,
+						friendingId: user.id
+					}
+				},
+				data: {
+					rejectedAt: new Date()
 				}
-			},
-			data: {
-				rejectedAt: new Date()
-			}
-		});
+			})
+			.friending();
 
 		return { record };
 	}

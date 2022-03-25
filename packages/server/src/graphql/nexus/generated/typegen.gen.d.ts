@@ -416,7 +416,7 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   AcceptFriendshipPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   AddDesiredSkillMutationPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -762,7 +762,7 @@ export interface NexusGenObjects {
   Query: {};
   RejectFriendshipPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillMutationPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -792,7 +792,7 @@ export interface NexusGenObjects {
   }
   RequestFriendshipPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   SendChatMessagePayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -1027,7 +1027,7 @@ export interface NexusGenFieldTypes {
   AcceptFriendshipPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   AddDesiredSkillMutationPayload: { // field return type
@@ -1592,7 +1592,7 @@ export interface NexusGenFieldTypes {
   RejectFriendshipPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillMutationPayload: { // field return type
@@ -1634,7 +1634,7 @@ export interface NexusGenFieldTypes {
   RequestFriendshipPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   SendChatMessagePayload: { // field return type
@@ -2007,7 +2007,7 @@ export interface NexusGenFieldTypeNames {
   AcceptFriendshipPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Friendship'
+    record: 'User'
     viewer: 'User'
   }
   AddDesiredSkillMutationPayload: { // field return type name
@@ -2572,7 +2572,7 @@ export interface NexusGenFieldTypeNames {
   RejectFriendshipPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Friendship'
+    record: 'User'
     viewer: 'User'
   }
   RemoveDesiredSkillMutationPayload: { // field return type name
@@ -2614,7 +2614,7 @@ export interface NexusGenFieldTypeNames {
   RequestFriendshipPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Friendship'
+    record: 'User'
     viewer: 'User'
   }
   SendChatMessagePayload: { // field return type name

@@ -48,33 +48,38 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 					frienderId: user.id,
 					friendingId: pendingFriendship.frienderId
 				}
+			},
+			include: {
+				friending: true
 			}
 		});
 
 		if (!existing) {
-			const record = await prisma.friendship.create({
-				data: {
-					activities: {
-						create: {
-							type: UserActivityType.FriendAcceptUser,
-							user: { connect: { id: user.id } }
-						}
-					},
-					notifications: {
-						create: {
-							type: NotificationType.FriendshipAccepted,
-							user: { connect: { id: pendingFriendship.frienderId } }
-						}
-					},
-					friender: { connect: { id: user.id } },
-					friending: { connect: { id: pendingFriendship.frienderId } }
-				}
-			});
+			const record = await prisma.friendship
+				.create({
+					data: {
+						activities: {
+							create: {
+								type: UserActivityType.FriendAcceptUser,
+								user: { connect: { id: user.id } }
+							}
+						},
+						notifications: {
+							create: {
+								type: NotificationType.FriendshipAccepted,
+								user: { connect: { id: pendingFriendship.frienderId } }
+							}
+						},
+						friender: { connect: { id: user.id } },
+						friending: { connect: { id: pendingFriendship.frienderId } }
+					}
+				})
+				.friending();
 
 			return { record };
 		}
 
-		if (!existing.rejectedAt) return { record: existing };
+		if (!existing.rejectedAt) return { record: existing.friending };
 
 		const activity = await prisma.userActivity.findFirst({
 			where: {
@@ -92,42 +97,44 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 			}
 		});
 
-		const record = await prisma.friendship.update({
-			where: { id: existing.id },
-			data: {
-				activities: activity
-					? {
-							update: {
-								where: { id: activity.id },
-								data: { updatedAt: new Date() }
-							}
-					  }
-					: {
-							create: {
-								type: UserActivityType.FriendAcceptUser,
-								user: { connect: { id: user.id } }
-							}
-					  },
-				notifications: notification
-					? {
-							update: {
-								where: { id: notification.id },
-								data: { updatedAt: new Date() }
-							}
-					  }
-					: {
-							create: {
-								type: NotificationType.FriendshipAccepted,
-								user: { connect: { id: existing.friendingId } }
-							}
-					  },
-				friender: { connect: { id: user.id } },
-				friending: { connect: { id: pendingFriendship.frienderId } },
-				rejectedAt: {
-					set: null
+		const record = await prisma.friendship
+			.update({
+				where: { id: existing.id },
+				data: {
+					activities: activity
+						? {
+								update: {
+									where: { id: activity.id },
+									data: { updatedAt: new Date() }
+								}
+						  }
+						: {
+								create: {
+									type: UserActivityType.FriendAcceptUser,
+									user: { connect: { id: user.id } }
+								}
+						  },
+					notifications: notification
+						? {
+								update: {
+									where: { id: notification.id },
+									data: { updatedAt: new Date() }
+								}
+						  }
+						: {
+								create: {
+									type: NotificationType.FriendshipAccepted,
+									user: { connect: { id: existing.friendingId } }
+								}
+						  },
+					friender: { connect: { id: user.id } },
+					friending: { connect: { id: pendingFriendship.frienderId } },
+					rejectedAt: {
+						set: null
+					}
 				}
-			}
-		});
+			})
+			.friending();
 
 		return { record };
 	}

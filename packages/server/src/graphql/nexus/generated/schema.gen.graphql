@@ -5,7 +5,7 @@
 type AcceptFriendshipPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Friendship
+  record: User
   viewer: User
 }
 
@@ -1055,7 +1055,7 @@ type Query {
 type RejectFriendshipPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Friendship
+  record: User
   viewer: User
 }
 
@@ -1130,7 +1130,7 @@ input RepositoryWhereUniqueInput {
 type RequestFriendshipPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Friendship
+  record: User
   viewer: User
 }
 

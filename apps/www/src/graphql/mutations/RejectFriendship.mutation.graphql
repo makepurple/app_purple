@@ -1,14 +1,13 @@
 mutation RejectFriendship($where: UserWhereUniqueInput!) {
 	rejectFriendship(where: $where) {
-		viewer {
-			id
-		}
 		record {
 			id
-			friender {
-				id
-			}
-			frienderId
+			viewerCanFriend
+			viewerFriended
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }

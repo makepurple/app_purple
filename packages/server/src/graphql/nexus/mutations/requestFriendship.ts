@@ -26,29 +26,34 @@ export const requestFriendship = mutationField("requestFriendship", {
 					frienderId: user.id,
 					friendingId: toFriend.id
 				}
+			},
+			include: {
+				friending: true
 			}
 		});
 
 		if (existing?.rejectedAt && existing.rejectedAt > dayjs().subtract(6, "months").toDate()) {
-			return { record: existing };
+			return { record: existing.friending };
 		}
 
 		const record = await prisma.$transaction(async (transaction) => {
-			return await transaction.friendship.upsert({
-				where: {
-					frienderId_friendingId: {
-						frienderId: user.id,
-						friendingId: toFriend.id
+			return await transaction.friendship
+				.upsert({
+					where: {
+						frienderId_friendingId: {
+							frienderId: user.id,
+							friendingId: toFriend.id
+						}
+					},
+					create: {
+						friender: { connect: { id: user.id } },
+						friending: { connect: PrismaUtils.nonNull(args.where) }
+					},
+					update: {
+						rejectedAt: { set: null }
 					}
-				},
-				create: {
-					friender: { connect: { id: user.id } },
-					friending: { connect: PrismaUtils.nonNull(args.where) }
-				},
-				update: {
-					rejectedAt: { set: null }
-				}
-			});
+				})
+				.friending();
 		});
 
 		return { record };

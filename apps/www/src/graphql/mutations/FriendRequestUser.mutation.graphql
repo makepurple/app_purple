@@ -2,10 +2,12 @@ mutation FriendRequestUser($where: UserWhereUniqueInput!) {
 	requestFriendship(where: $where) {
 		record {
 			id
-			friender {
-				id
-				viewerFriended
-			}
+			viewerCanFriend
+			viewerFriended
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }
