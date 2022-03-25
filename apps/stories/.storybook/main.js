@@ -12,6 +12,14 @@ module.exports = {
 		"@storybook/addon-links",
 		"addon-screen-reader",
 		"storybook-addon-next-router",
+		{
+			name: "@storybook/addon-postcss",
+			options: {
+				postcssLoaderOptions: {
+					implementation: require("postcss")
+				}
+			}
+		}
 	],
 	babel: () => ({
 		presets: ["next/babel"],
