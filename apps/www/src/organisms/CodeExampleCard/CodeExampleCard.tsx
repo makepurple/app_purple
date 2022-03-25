@@ -138,7 +138,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 	const { className, codeExample, style } = props;
 
 	const router = useRouter();
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 
 	const isMyUser = session?.user.name === codeExample.authorName;
 
@@ -239,6 +239,12 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 						disabled={fetching}
 						onClick={async (e) => {
 							e.stopPropagation();
+
+							if (status !== "authenticated") {
+								await router.push("/signup");
+
+								return;
+							}
 
 							const where: CodeExampleWhereUniqueInput = {
 								id: codeExample.id

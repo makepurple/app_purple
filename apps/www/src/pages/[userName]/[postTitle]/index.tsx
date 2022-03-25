@@ -173,7 +173,7 @@ export const getServerSideProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
 
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 
 	const [{ fetching: removing }, removePost] = useDeletePostMutation();
 	const [{ fetching: upvoting }, upvotePost] = useUpvotePostMutation();
@@ -237,11 +237,12 @@ export const Page: NextPage<PageProps> = () => {
 	}, [post?.content]);
 
 	useEffect(() => {
+		if (status !== "authenticated") return;
 		if (!post?.id) return;
 
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		viewPost({ where: { id: post.id } }).catch(() => null);
-	}, [post?.id, viewPost]);
+	}, [post?.id, status, viewPost]);
 
 	/**
 	 * TODO
@@ -305,6 +306,12 @@ export const Page: NextPage<PageProps> = () => {
 						disabled={mutating}
 						onClick={async (e) => {
 							e.stopPropagation();
+
+							if (status !== "authenticated") {
+								await router.push("/signup");
+
+								return;
+							}
 
 							const didSucceed = await upvotePost({ where: { id: post.id } })
 								.then((result) => !!result.data?.upvotePost.record)

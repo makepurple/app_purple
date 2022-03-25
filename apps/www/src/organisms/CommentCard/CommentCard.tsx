@@ -10,6 +10,8 @@ import {
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef, useRef, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
@@ -169,6 +171,8 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const [fetchingMore, setFetchingMore] = useState<boolean>(false);
 
 	const urqlClient = useClient();
+	const router = useRouter();
+	const { status } = useSession();
 
 	const [{ data, fetching }, getReplies] = useGetCommentRepliesQuery({
 		pause: true,
@@ -254,6 +258,12 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 							onClick={async (e) => {
 								e.preventDefault();
 
+								if (status !== "authenticated") {
+									await router.push("/signup");
+
+									return;
+								}
+
 								if (comment.viewerUpvote) {
 									await unvoteComment({
 										where: { id: comment.id }
@@ -282,16 +292,18 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 							)}
 							<span>{comment.upvotes.toLocaleString()}</span>
 						</UpvoteButton>
-						<ActionButton
-							onClick={() => {
-								setShowReplyForm((oldShowReplyForm) => !oldShowReplyForm);
-							}}
-							size="small"
-							variant="secondary"
-						>
-							<CommentIcon height={16} width={16} tw="mr-1" />
-							<span>Reply</span>
-						</ActionButton>
+						{status === "authenticated" && (
+							<ActionButton
+								onClick={() => {
+									setShowReplyForm((oldShowReplyForm) => !oldShowReplyForm);
+								}}
+								size="small"
+								variant="secondary"
+							>
+								<CommentIcon height={16} width={16} tw="mr-1" />
+								<span>Reply</span>
+							</ActionButton>
+						)}
 					</Actions>
 					{showReplyForm && (
 						<div tw="py-4">
