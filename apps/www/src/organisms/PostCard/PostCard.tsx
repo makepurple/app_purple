@@ -151,7 +151,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 	const { className, post, style } = props;
 
 	const router = useRouter();
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 
 	const isMyPost = session?.user.name === post.authorName;
 
@@ -239,6 +239,12 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						disabled={fetching}
 						onClick={async (e) => {
 							e.stopPropagation();
+
+							if (status !== "authenticated") {
+								await router.push("/signup");
+
+								return;
+							}
 
 							const where: PostWhereUniqueInput = {
 								id: post.id
