@@ -17,7 +17,6 @@ export interface NewPostButtonProps {
 	skillName?: string;
 	skillOwner?: string;
 	style?: CSSProperties;
-	userName: string;
 }
 
 export const NewPostButton: FC<NewPostButtonProps> = ({
@@ -27,12 +26,12 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 	onClick,
 	skillName,
 	skillOwner,
-	style,
-	userName
+	style
 }) => {
 	const router = useRouter();
+	const { data: session, status } = useSession();
 
-	const { status } = useSession();
+	const userName = session?.user.name;
 
 	const [{ data }] = useGetPostDraftQuery({
 		pause: status !== "authenticated",
@@ -62,8 +61,6 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 		router?.prefetch("/[userName]/draft", draftUrl);
 	}, [draftUrl, router]);
 
-	if (status !== "authenticated") return null;
-
 	return (
 		<Button
 			className={className}
@@ -71,6 +68,12 @@ export const NewPostButton: FC<NewPostButtonProps> = ({
 			disabled={creatingPost}
 			onClick={async (e) => {
 				onClick?.(e);
+
+				if (status !== "authenticated") {
+					await router.push("/signup");
+
+					return;
+				}
 
 				if (draft) {
 					await router.push("/[userName]/draft", draftUrl);

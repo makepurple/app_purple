@@ -11,6 +11,7 @@ import {
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import {
@@ -168,6 +169,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	skillOwner,
 	style
 }) => {
+	const router = useRouter();
 	const { data: session, status } = useSession();
 
 	const [{ data }, reexecuteQuery] = useGetSkillInfoSideBarQuery({
@@ -275,6 +277,12 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 						<Button
 							disabled={adding}
 							onClick={async () => {
+								if (status !== "authenticated") {
+									await router.push("/signup");
+
+									return;
+								}
+
 								const nameOwner = {
 									name: skillName,
 									owner: skillOwner
@@ -306,6 +314,12 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 						<Button
 							disabled={adding}
 							onClick={async () => {
+								if (status !== "authenticated") {
+									await router.push("/signup");
+
+									return;
+								}
+
 								const nameOwner = {
 									name: skillName,
 									owner: skillOwner
@@ -432,67 +446,65 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					</SocialLink>
 				)}
 			</SocialLinks>
-			{status === "authenticated" && session && (
-				<>
-					<Actions tw="mt-4">
-						<NewPostButton
-							skillName={skillName}
-							skillOwner={skillOwner}
-							userName={session.user.name}
-						>
-							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
-						</NewPostButton>
-						<Button
-							disabled={loading}
-							onClick={async () => {
-								const where: SkillWhereUniqueInput = {
-									name_owner: {
-										name: repository.name,
-										owner: skillOwner
-									}
-								};
+			<Actions tw="mt-4">
+				<NewPostButton skillName={skillName} skillOwner={skillOwner}>
+					{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+				</NewPostButton>
+				<Button
+					disabled={loading}
+					onClick={async () => {
+						if (status !== "authenticated") {
+							await router.push("/signup");
 
-								if (viewerFollowing) {
-									const didSucceed = await unfollowSkill({ where })
-										.then((result) => !!result.data?.unfollowSkill)
-										.catch(() => false);
+							return;
+						}
 
-									if (!didSucceed) {
-										toast.error("Could not unfollow this skill");
+						const where: SkillWhereUniqueInput = {
+							name_owner: {
+								name: repository.name,
+								owner: skillOwner
+							}
+						};
 
-										return;
-									}
+						if (viewerFollowing) {
+							const didSucceed = await unfollowSkill({ where })
+								.then((result) => !!result.data?.unfollowSkill)
+								.catch(() => false);
 
-									toast.success("You unfollowed this skill");
+							if (!didSucceed) {
+								toast.error("Could not unfollow this skill");
 
-									return;
-								}
+								return;
+							}
 
-								const didSucceed = await followSkill({ where })
-									.then((result) => !!result.data?.followSkill)
-									.catch(() => false);
+							toast.success("You unfollowed this skill");
 
-								if (!didSucceed) {
-									toast.error("Could not follow this skill");
+							return;
+						}
 
-									reexecuteQuery({ requestPolicy: "network-only" });
+						const didSucceed = await followSkill({ where })
+							.then((result) => !!result.data?.followSkill)
+							.catch(() => false);
 
-									return;
-								}
+						if (!didSucceed) {
+							toast.error("Could not follow this skill");
 
-								toast.success("You followed this skill! 🎉");
+							reexecuteQuery({ requestPolicy: "network-only" });
 
-								reexecuteQuery({ requestPolicy: "network-only" });
-							}}
-							type="button"
-							variant="secondary"
-						>
-							{viewerFollowing ? "Unfollow" : "Follow"}
-							{loading && <Spinner tw="ml-2" />}
-						</Button>
-					</Actions>
-				</>
-			)}
+							return;
+						}
+
+						toast.success("You followed this skill! 🎉");
+
+						reexecuteQuery({ requestPolicy: "network-only" });
+					}}
+					type="button"
+					variant="secondary"
+				>
+					{viewerFollowing ? "Unfollow" : "Follow"}
+					{loading && <Spinner tw="ml-2" />}
+				</Button>
+			</Actions>
 			<ConnectionsContainer tw="mt-4">
 				<PeopleIcon height={24} width={24} tw="mr-2" />
 				<ConnectionsContents>

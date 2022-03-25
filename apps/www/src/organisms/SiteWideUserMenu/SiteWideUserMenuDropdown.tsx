@@ -141,12 +141,7 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 					<Divider tw="m-0.5" />
 					<Menu.Item>
 						{(itemProps) => (
-							<ListItem
-								as={NewPostItem}
-								bounce={false}
-								userName={user.name}
-								{...itemProps}
-							>
+							<ListItem as={NewPostItem} bounce={false} {...itemProps}>
 								{({ draft }) => (
 									<>
 										<BookIcon height={24} width={24} tw="mr-2" />

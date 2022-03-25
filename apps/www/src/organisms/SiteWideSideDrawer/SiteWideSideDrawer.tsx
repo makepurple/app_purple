@@ -269,7 +269,6 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 										onClose?.();
 									}}
 									bounce={false}
-									userName={user.name}
 								>
 									{({ draft }) => (
 										<>

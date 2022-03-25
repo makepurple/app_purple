@@ -1,6 +1,8 @@
 import { Anchor, Button, MaybeAnchor, Paper, Spinner, toast } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -89,6 +91,9 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 	(props, ref) => {
 		const { className, onNewSkill, repository, skillOwner, style } = props;
 
+		const router = useRouter();
+		const { status } = useSession();
+
 		const [{ fetching: following }, followSkill] = useFollowSkillMutation();
 		const [{ fetching: unfollowing }, unfollowSkill] = useUnfollowSkillMutation();
 
@@ -156,6 +161,12 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 					<Button
 						disabled={loading}
 						onClick={async () => {
+							if (status !== "authenticated") {
+								await router.push("/signup");
+
+								return;
+							}
+
 							const where: SkillWhereUniqueInput = {
 								name_owner: {
 									name: repository.name,
@@ -196,6 +207,12 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 					<Button
 						disabled={loading}
 						onClick={async () => {
+							if (status !== "authenticated") {
+								await router.push("/signup");
+
+								return;
+							}
+
 							const where: SkillWhereUniqueInput = {
 								name_owner: {
 									name: repository.name,
