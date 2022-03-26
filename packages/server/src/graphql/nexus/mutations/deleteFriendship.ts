@@ -18,19 +18,21 @@ export const deleteFriendship = mutationField("deleteFriendship", {
 		});
 
 		const record = await prisma.$transaction(async (transaction) => {
-			const deleted = await transaction.friendship.delete({
-				where: {
-					frienderId_friendingId: {
-						frienderId: user.id,
-						friendingId: friend.id
+			const deleted = await transaction.friendship
+				.delete({
+					where: {
+						frienderId_friendingId: {
+							frienderId: user.id,
+							friendingId: friend.id
+						}
 					}
-				}
-			});
+				})
+				.friending();
 
 			await transaction.friendship.update({
 				where: {
 					frienderId_friendingId: {
-						frienderId: deleted.friendingId,
+						frienderId: friend.id,
 						friendingId: user.id
 					}
 				},

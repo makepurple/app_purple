@@ -364,7 +364,7 @@ type DeleteExperiencePayload implements MutationPayload {
 type DeleteFriendshipPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
-  record: Friendship
+  record: User
   viewer: User
 }
 

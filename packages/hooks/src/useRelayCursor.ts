@@ -22,7 +22,7 @@ export type UseRelayCursorActions = {
 };
 
 export type UseRelayCursorArgs<
-	TData = any,
+	TData extends object = any,
 	TVariables = Record<string, unknown>,
 	TFieldName extends FieldPath<TData> = any
 > = UseQueryArgs<TVariables, TData> & {
@@ -31,7 +31,7 @@ export type UseRelayCursorArgs<
 } & IUseIntersectionObserverOptions;
 
 export const useRelayCursor = <
-	TData,
+	TData extends object,
 	TVariables extends { after?: Maybe<string> },
 	TFieldName extends FieldPath<TData> = FieldPath<TData>
 >(

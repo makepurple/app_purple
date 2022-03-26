@@ -4,6 +4,6 @@ export const DeleteFriendshipPayload = objectType({
 	name: "DeleteFriendshipPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
-		t.field("record", { type: "Friendship" });
+		t.field("record", { type: "User" });
 	}
 });

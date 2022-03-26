@@ -540,7 +540,7 @@ export interface NexusGenObjects {
   }
   DeleteFriendshipPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
-    record?: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record?: NexusGenRootTypes['User'] | null; // User
   }
   DeletePostPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -1203,7 +1203,7 @@ export interface NexusGenFieldTypes {
   DeleteFriendshipPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     query: NexusGenRootTypes['Query']; // Query!
-    record: NexusGenRootTypes['Friendship'] | null; // Friendship
+    record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   DeletePostPayload: { // field return type
@@ -2183,7 +2183,7 @@ export interface NexusGenFieldTypeNames {
   DeleteFriendshipPayload: { // field return type name
     errors: 'MutationError'
     query: 'Query'
-    record: 'Friendship'
+    record: 'User'
     viewer: 'User'
   }
   DeletePostPayload: { // field return type name

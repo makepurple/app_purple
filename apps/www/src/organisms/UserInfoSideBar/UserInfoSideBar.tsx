@@ -19,12 +19,12 @@ import { useRouter } from "next/router";
 import React, { CSSProperties, FC, useState } from "react";
 import tw from "twin.macro";
 import {
+	useDeleteFriendshipMutation,
 	useFollowUserMutation,
 	useFriendRequestUserMutation,
 	useGetUserInfoSideBarQuery,
 	UserWhereUniqueInput,
-	useUnfollowUserMutation,
-	useUnfriendUserMutation
+	useUnfollowUserMutation
 } from "../../graphql";
 import { CancelIcon, PeopleIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
@@ -148,7 +148,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
 
 	const [{ fetching: friendRequesting }, friendRequestUser] = useFriendRequestUserMutation();
-	const [{ fetching: unfriending }, unfriendUser] = useUnfriendUserMutation();
+	const [{ fetching: unfriending }, unfriendUser] = useDeleteFriendshipMutation();
 
 	const router = useRouter();
 	const { data: session, status } = useSession();

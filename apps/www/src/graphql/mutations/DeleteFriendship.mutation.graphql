@@ -1,14 +1,14 @@
 mutation DeleteFriendship($where: UserWhereUniqueInput!) {
 	deleteFriendship(where: $where) {
-		viewer {
-			id
-		}
 		record {
 			id
-			friending {
-				id
-			}
-			friendingId
+			viewerCanFriend
+			viewerFriended
+			viewerIsFriend
+		}
+		viewer {
+			id
+			name
 		}
 	}
 }

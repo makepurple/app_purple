@@ -123,10 +123,6 @@ export function useUnfollowUserMutation() {
   return Urql.useMutation<Operations.UnfollowUserMutation, Operations.UnfollowUserMutationVariables>(Operations.UnfollowUserDocument);
 };
 
-export function useUnfriendUserMutation() {
-  return Urql.useMutation<Operations.UnfriendUserMutation, Operations.UnfriendUserMutationVariables>(Operations.UnfriendUserDocument);
-};
-
 export function useUnvoteCodeExampleMutation() {
   return Urql.useMutation<Operations.UnvoteCodeExampleMutation, Operations.UnvoteCodeExampleMutationVariables>(Operations.UnvoteCodeExampleDocument);
 };

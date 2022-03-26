@@ -4,6 +4,7 @@ mutation AcceptFriendship($where: UserWhereUniqueInput!) {
 			id
 			viewerCanFriend
 			viewerFriended
+			viewerIsFriend
 		}
 		viewer {
 			id
