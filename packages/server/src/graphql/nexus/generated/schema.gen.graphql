@@ -722,10 +722,7 @@ type LeaveChatPayload implements MutationPayload {
 
 """Root mutation type"""
 type Mutation {
-  acceptFriendship(
-    """Find friendship from requester -> viewer"""
-    where: FriendshipWhereUniqueInput!
-  ): AcceptFriendshipPayload!
+  acceptFriendship(where: UserWhereUniqueInput!): AcceptFriendshipPayload!
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
   addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
   commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!

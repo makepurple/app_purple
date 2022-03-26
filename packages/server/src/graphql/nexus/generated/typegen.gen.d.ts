@@ -3092,7 +3092,7 @@ export interface NexusGenArgTypes {
   }
   Mutation: {
     acceptFriendship: { // args
-      where: NexusGenInputs['FriendshipWhereUniqueInput']; // FriendshipWhereUniqueInput!
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
     addDesiredSkill: { // args
       where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!

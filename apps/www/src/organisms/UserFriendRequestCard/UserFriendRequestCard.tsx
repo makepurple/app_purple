@@ -3,7 +3,11 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
-import { useRejectFriendshipMutation, UserFriendRequestCardUserFragment } from "../../graphql";
+import {
+	useAcceptFriendshipMutation,
+	useRejectFriendshipMutation,
+	UserFriendRequestCardUserFragment
+} from "../../graphql";
 import { UserAvatar } from "../UserAvatar";
 
 const MAX_SKILLS_SHOWN = 5;
@@ -40,9 +44,12 @@ const Bio = tw.p`
 
 const Actions = tw.div`
 	flex-shrink-0
+	flex
+	flex-col
+	gap-2
 `;
 
-const FollowButton = tw(Button)`
+const Action = tw(Button)`
 	flex-shrink-0
 	w-20	
 `;
@@ -59,7 +66,10 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 
 		const { status } = useSession();
 
-		const [{ fetching }, rejectRequest] = useRejectFriendshipMutation();
+		const [{ fetching: accepting }, acceptRequest] = useAcceptFriendshipMutation();
+		const [{ fetching: rejecting }, rejectRequest] = useRejectFriendshipMutation();
+
+		const fetching = accepting || rejecting;
 
 		const skills = user.skills.nodes.slice(0, MAX_SKILLS_SHOWN);
 		const desiredSkills = user.desiredSkills.nodes.slice(0, MAX_SKILLS_SHOWN);
@@ -134,7 +144,21 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 				</Details>
 				{status === "authenticated" && (
 					<Actions tw="ml-4">
-						<FollowButton
+						<Action
+							disabled={fetching || !user.viewerCanFriend}
+							onClick={async () => {
+								if (!user.viewerCanFriend || user.viewerIsFriend) return;
+
+								const didSucceed = await acceptRequest({ where: { id: user.id } })
+									.then((result) => !!result.data?.acceptFriendship)
+									.catch(() => false);
+							}}
+							size="small"
+							type="button"
+						>
+							{accepting ? <Spinner /> : "Accept"}
+						</Action>
+						<Action
 							disabled={fetching}
 							onClick={async () => {
 								if (user.viewerIsFriend) return;
@@ -145,8 +169,8 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 							type="button"
 							variant="secondary"
 						>
-							{fetching ? <Spinner /> : "Ignore"}
-						</FollowButton>
+							{rejecting ? <Spinner /> : "Ignore"}
+						</Action>
 					</Actions>
 				)}
 			</Root>

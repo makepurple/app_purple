@@ -39,5 +39,6 @@ fragment UserFriendRequestCardUser on User {
 			owner
 		}
 	}
+	viewerCanFriend
 	viewerIsFriend
 }

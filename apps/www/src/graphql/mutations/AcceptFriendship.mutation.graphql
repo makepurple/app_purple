@@ -1,5 +1,5 @@
 mutation AcceptFriendship($where: UserWhereUniqueInput!) {
-	rejectFriendship(where: $where) {
+	acceptFriendship(where: $where) {
 		record {
 			id
 			viewerCanFriend

@@ -17,7 +17,7 @@ query GetUserFriendRequests(
 				}
 			}
 			nodes {
-				...UserFriendCardUser
+				...UserFriendRequestCardUser
 			}
 		}
 	}
