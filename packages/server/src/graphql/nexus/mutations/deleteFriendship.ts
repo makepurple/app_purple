@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const deleteFriendship = mutationField("deleteFriendship", {
 	type: nonNull("DeleteFriendshipPayload"),
@@ -13,10 +13,9 @@ export const deleteFriendship = mutationField("deleteFriendship", {
 		if (!user) throw new Error();
 
 		const friend = await prisma.user.findUnique({
-			where: PrismaUtils.nonNull(args.where)
+			where: PrismaUtils.nonNull(args.where),
+			rejectOnNotFound: true
 		});
-
-		if (!friend) throw new NotFoundError("This user does not exist");
 
 		const record = await prisma.$transaction(async (transaction) => {
 			const deleted = await transaction.friendship.delete({
@@ -26,10 +25,6 @@ export const deleteFriendship = mutationField("deleteFriendship", {
 						friendingId: friend.id
 					}
 				}
-			});
-
-			await transaction.userActivity.deleteMany({
-				where: { friendship: { id: { equals: deleted.id } } }
 			});
 
 			await transaction.friendship.update({
