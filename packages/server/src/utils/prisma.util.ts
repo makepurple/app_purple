@@ -51,7 +51,7 @@ export class PrismaUtils {
 		}
 
 		if (typeof input === "object") {
-			const keys = Object.keys(input) as (keyof T)[];
+			const keys = Object.keys(input as any) as (keyof T)[];
 
 			return keys.reduce((acc, key) => {
 				const value = input[key];

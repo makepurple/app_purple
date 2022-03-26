@@ -585,13 +585,21 @@ export const User = objectType({
 				return user?.id === parent.id;
 			},
 			resolve: async (parent, args, { prisma }) => {
+				const friendedByIds = await prisma.user
+					.findUnique({ where: { id: parent.id } })
+					.friendedBy({
+						where: PrismaUtils.nonNull(args.where),
+						select: { id: true }
+					})
+					.then((items) => items.map((item) => item.id));
+
 				const where: Prisma.FriendshipWhereInput = {
-					friender: PrismaUtils.nonNull(args.where),
+					friender: { id: { in: friendedByIds } },
 					friending: {
 						id: { equals: parent.id },
 						friending: {
 							none: {
-								friending: { id: { equals: parent.id } }
+								friending: { id: { in: friendedByIds } }
 							}
 						}
 					},
@@ -603,18 +611,16 @@ export const User = objectType({
 					{ id: string }
 				>(
 					async ({ cursor, skip, take }) =>
-						take === 0
-							? await Promise.resolve([])
-							: await prisma.user
-									.findUnique({ where: { id: parent.id } })
-									.friendedBy({
-										cursor,
-										skip,
-										take,
-										where,
-										include: { friender: true }
-									})
-									.then((items) => items.map((item) => item.friender)),
+						await prisma.user
+							.findUnique({ where: { id: parent.id } })
+							.friendedBy({
+								cursor,
+								skip,
+								take,
+								where,
+								include: { friender: true }
+							})
+							.then((items) => items.map((item) => item.friender)),
 					() => prisma.friendship.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
