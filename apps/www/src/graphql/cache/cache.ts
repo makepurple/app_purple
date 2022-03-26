@@ -55,6 +55,24 @@ export const createCache = () => {
 		schema: schema as IntrospectionData,
 		updates: {
 			Mutation: {
+				acceptFriendship: ({ acceptFriendship: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "friendRequestsReceived")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+				},
 				addDesiredSkill: ({ addDesiredSkill: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 
@@ -268,12 +286,6 @@ export const createCache = () => {
 
 					cache.invalidate({ __typename: "Experience", id: result.record.id });
 				},
-				deleteFriendship: ({ deleteFriendship: result }: Mutation) => {
-					if (!result.record) return;
-
-					// eslint-disable-next-line no-console
-					console.log("Fix later");
-				},
 				deletePost: ({ deletePost: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 
@@ -371,11 +383,23 @@ export const createCache = () => {
 							);
 						});
 				},
-				rejectFriendship: ({ rejectFriendship: result }: Mutation) => {
+				rejectFriendship: ({ rejectFriendship: result }: Mutation, _, cache) => {
 					if (!result.record) return;
 
-					// eslint-disable-next-line no-console
-					console.log("Fix later");
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "friendRequestsReceived")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				},
 				removeDesiredSkill: ({ removeDesiredSkill: result }: Mutation, _, cache) => {
 					if (!result.record) return;
