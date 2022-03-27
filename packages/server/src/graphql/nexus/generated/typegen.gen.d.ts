@@ -157,7 +157,7 @@ export interface NexusGenInputs {
     id?: string | null; // String
   }
   CreateChatInput: { // input type
-    message?: NexusGenScalars['Json'] | null; // Json
+    message: NexusGenScalars['Json'][]; // [Json!]!
     users: NexusGenInputs['UserWhereInput']; // UserWhereInput!
   }
   DateTimeNullableFilter: { // input type

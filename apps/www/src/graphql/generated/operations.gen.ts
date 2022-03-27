@@ -410,7 +410,7 @@ export type ConnectionEdge = {
 };
 
 export type CreateChatInput = {
-  readonly message?: InputMaybe<Scalars['Json']>;
+  readonly message: ReadonlyArray<Scalars['Json']>;
   readonly users: UserWhereInput;
 };
 

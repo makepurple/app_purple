@@ -294,7 +294,7 @@ interface ConnectionEdge {
 }
 
 input CreateChatInput {
-  message: Json
+  message: [Json!]!
   users: UserWhereInput!
 }
 
