@@ -68,8 +68,10 @@ export const Page: NextPage<PageProps> = () => {
 	const unopenedCount = countData?.viewer?.notifications.totalCount ?? 0;
 
 	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		updateCounts();
+		return () => {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			updateCounts();
+		};
 	}, [updateCounts]);
 
 	return (
