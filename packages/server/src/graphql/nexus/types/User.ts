@@ -821,11 +821,7 @@ export const User = objectType({
 					args.where?.opened === false ? parent.notificationsLastOpenedAt : undefined;
 
 				const where: Prisma.NotificationWhereInput = {
-					type: {
-						not: {
-							equals: NotificationType.ChatMessageReceived
-						}
-					},
+					type: { not: { equals: NotificationType.ChatMessageReceived } },
 					updatedAt: { gt: lastOpenedAt },
 					OR: [
 						{

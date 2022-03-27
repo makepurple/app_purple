@@ -28,6 +28,8 @@ scalar Bytes
 type Chat implements Node {
   id: ID!
   messages(after: String, before: String, first: Int, last: Int, offset: Int): ChatMessageConnection!
+  newMessagesCount: Int!
+  opened: Boolean!
   updatedAt: DateTime!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
 }
@@ -736,6 +738,7 @@ type Mutation {
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
   leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
   ok: Boolean!
+  openMessages: OpenMessagesPayload!
   openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(where: UserWhereUniqueInput!): RejectFriendshipPayload!
@@ -854,9 +857,15 @@ enum NotificationType {
   PostCommented
 }
 
-input NotificationsWhereInput {
+input NotificationWhereInput {
   opened: Boolean
-  type: [NotificationType!]
+}
+
+type OpenMessagesPayload implements MutationPayload {
+  errors: [MutationError!]
+  query: Query!
+  record: User
+  viewer: User
 }
 
 type OpenNotificationsPayload implements MutationPayload {
@@ -1455,8 +1464,11 @@ type User implements Followable & Node {
   githubUrl: URL!
   id: ID!
   image: String
+  messagesLastOpenedAt: DateTime!
   name: String!
-  notifications(after: String, before: String, first: Int, last: Int, where: NotificationsWhereInput): NotificationConnection!
+  newMessagesCount: Int!
+  newNotificationsCount: Int!
+  notifications(after: String, before: String, first: Int, last: Int, where: NotificationWhereInput): NotificationConnection!
   notificationsLastOpenedAt: DateTime!
   postUpvotes: Int!
   postViews: Int!
