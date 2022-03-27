@@ -19,3 +19,4 @@ export * from "./useResizeObserver";
 export * from "./useToggle";
 export * from "./useUncontrolledProp";
 export * from "./useWhyDidYouUpdate";
+export * from "./useWindowFocus";

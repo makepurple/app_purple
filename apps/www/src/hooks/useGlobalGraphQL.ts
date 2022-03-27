@@ -1,3 +1,4 @@
+import { useWindowFocus } from "@makepurple/hooks";
 import ms from "ms";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -5,8 +6,9 @@ import { useGetNotificationCountsQuery, useUpdateUserFromGitHubMutation } from "
 
 const usePollNotificationCounts = () => {
 	const { status } = useSession();
+	const focused = useWindowFocus();
 
-	const [{ fetching }, getCounts] = useGetNotificationCountsQuery({
+	const [{ fetching }, reexecuteQuery] = useGetNotificationCountsQuery({
 		pause: status !== "authenticated",
 		requestPolicy: "cache-first"
 	});
@@ -14,17 +16,16 @@ const usePollNotificationCounts = () => {
 	useEffect(() => {
 		if (status !== "authenticated") return;
 		if (fetching) return;
+		if (!focused) return;
 
 		const timerId = setTimeout(() => {
-			getCounts({
-				requestPolicy: "cache-and-network"
-			});
+			reexecuteQuery({ requestPolicy: "network-only" });
 		}, ms("30s"));
 
 		return () => {
 			clearTimeout(timerId);
 		};
-	}, [fetching, getCounts, status]);
+	}, [fetching, focused, reexecuteQuery, status]);
 };
 
 const useRefreshUserGitHubData = () => {
