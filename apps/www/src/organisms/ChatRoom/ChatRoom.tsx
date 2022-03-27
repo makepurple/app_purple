@@ -319,6 +319,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 		if (!chat) return;
 		if (!messageIdsQ.length) return;
 
+		setMessageIdsQ([]);
+
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		urqlClient
 			.query<GetChatMessagesQuery, GetChatMessagesQueryVariables>(GetChatMessagesDocument, {
@@ -333,7 +335,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 
 				setMessages((oldMessages) => [...newMessages, ...oldMessages]);
 			});
-	}, ms("0.2s"));
+	}, ms("0.5s"));
 
 	const [inviting, setInviting] = useState<boolean>(false);
 
