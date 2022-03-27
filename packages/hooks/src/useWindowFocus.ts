@@ -1,4 +1,4 @@
-import { WindowUtils } from "packages/utils/src";
+import { WindowUtils } from "@makepurple/utils";
 import { useEffect, useState } from "react";
 
 const hasFocus = (): boolean => {
