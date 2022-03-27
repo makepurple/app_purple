@@ -5,6 +5,7 @@ import {
 	FormButton,
 	FormGroup,
 	HiddenInput,
+	Spinner,
 	Tags,
 	toast
 } from "@makepurple/components";
@@ -142,6 +143,8 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 					return;
 				}
 
+				toast.success("Chat room created! 🎉");
+
 				await router.push("/messaging/[chatId]", `/messaging/${newChat.id}`);
 			})}
 			style={style}
@@ -204,7 +207,8 @@ export const CreateChatForm: FC<CreateChatFormProps> = ({ className, style }) =>
 										type="submit"
 										tw="flex-grow"
 									>
-										Send
+										<span>Send</span>
+										{fetching && <Spinner tw="ml-2" />}
 									</FormButton>
 								</SendButtonContainer>
 							</DocumentEditor.Toolbar>
