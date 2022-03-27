@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../../utils";
+import { Logger, PrismaUtils } from "../../../utils";
 
 export const openChat = mutationField("openChat", {
 	type: nonNull("OpenChatPayload"),
@@ -13,9 +13,10 @@ export const openChat = mutationField("openChat", {
 		if (!user) throw new Error();
 
 		const chat = await prisma.chat.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+			where: PrismaUtils.nonNull(args.where)
 		});
+
+		if (!chat) return { record: null };
 
 		const record = await prisma.chatsOnUsers
 			.update({
@@ -27,7 +28,12 @@ export const openChat = mutationField("openChat", {
 				},
 				data: { lastOpenedAt: new Date() }
 			})
-			.chat();
+			.chat()
+			.catch((e) => {
+				Logger.error(e.message);
+
+				return null;
+			});
 
 		return { record };
 	}
