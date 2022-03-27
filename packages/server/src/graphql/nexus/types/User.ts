@@ -691,23 +691,17 @@ export const User = objectType({
 				where: arg({ type: "UserWhereInput" })
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const frienderIds: string[] = await prisma.user
-					.findMany({
-						where: PrismaUtils.nonNull(args.where),
-						select: { id: true }
-					})
-					.then((items) => items.map((item) => item.id));
-
 				const where: Prisma.FriendshipWhereInput = {
-					friender: { id: { in: frienderIds } },
+					friender: { id: { equals: parent.id } },
 					friending: {
-						id: { equals: parent.id },
+						...PrismaUtils.nonNull(args.where),
 						friending: {
 							some: {
-								friending: { id: { in: frienderIds } }
+								friending: { id: { equals: parent.id } }
 							}
 						}
-					}
+					},
+					rejectedAt: { equals: null }
 				};
 
 				const connection = await PrismaUtils.findManyCursorConnection<
@@ -720,9 +714,9 @@ export const User = objectType({
 							.friending({
 								...paginationArgs,
 								where,
-								include: { friender: true }
+								include: { friending: true }
 							})
-							.then((items) => items.map((item) => item.friender)),
+							.then((items) => items.map((item) => item.friending)),
 					() => prisma.friendship.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
