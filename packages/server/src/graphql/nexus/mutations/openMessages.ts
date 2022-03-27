@@ -16,7 +16,7 @@ export const openMessages = mutationField("openMessages", {
 		 * @description Attempt to delete all notifications for this user that
 		 * are over 1 month old. Ignore error if it occurs
 		 * @author David Lee
-		 * @date MArch 26, 2022
+		 * @date March 26, 2022
 		 */
 		await prisma.notification
 			.deleteMany({
