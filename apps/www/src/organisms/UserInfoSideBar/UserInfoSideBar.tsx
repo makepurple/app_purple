@@ -269,21 +269,25 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							type="button"
 							variant={user.viewerIsFriend ? "alert" : "primary"}
 						>
-							<span>
-								{user.viewerIsFriend ? (
-									<>
+							{user.viewerIsFriend ? (
+								<>
+									{loadingFriend ? (
+										<Spinner tw="flex-shrink-0 mr-1" />
+									) : (
 										<CancelIcon
 											height={24}
 											width={24}
 											tw="flex-shrink-0 mr-1"
 										/>
-										Connection
-									</>
-								) : (
-									"Connect"
-								)}
-							</span>
-							{loadingFriend && <Spinner tw="ml-2" />}
+									)}
+									<span>Connection</span>
+								</>
+							) : (
+								<>
+									<span>Connect</span>
+									{loadingFriend && <Spinner tw="ml-2" />}
+								</>
+							)}
 						</Button>
 						<Button
 							disabled={loadingFollow}
