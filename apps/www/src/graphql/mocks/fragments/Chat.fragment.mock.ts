@@ -32,6 +32,7 @@ const users = Array.from({ length: USERS_SIZE }, (_, i) => ({
 export const Chat_fragment_mock: Chat = {
 	__typename: "Chat",
 	id: "0",
+	lastOpenedAt: dayjs(1318781876406).toDate(),
 	messages: {
 		__typename: "ChatMessageConnection",
 		pageInfo: {
