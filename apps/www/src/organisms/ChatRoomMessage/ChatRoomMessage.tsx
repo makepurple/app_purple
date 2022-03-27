@@ -16,7 +16,7 @@ const Root = styled.div`
 		flex
 		flex-col
 		items-stretch
-		gap-2
+		gap-1
 	`}
 `;
 
@@ -25,7 +25,7 @@ const MessageInfo = styled.div<{ $isViewer: boolean }>`
 		flex
 		flex-row
 		items-center
-		gap-4
+		gap-2
 	`}
 
 	${({ $isViewer }) => $isViewer && tw`flex-row-reverse`}
@@ -34,22 +34,23 @@ const MessageInfo = styled.div<{ $isViewer: boolean }>`
 const SenderInfo = tw.div`
 	flex
 	flex-col
-	gap-1
 	overflow-hidden
 `;
 
-const SenderName = tw.div`
-	text-lg
-	leading-none
-	text-black
-	font-semibold
-	truncate
+const SenderName = styled.div<{ $isViewer: boolean }>`
+	${tw`
+		text-lg
+		text-black
+		font-semibold
+		truncate
+	`}
+
+	${({ $isViewer }) => $isViewer && tw`text-right`}
 `;
 
 const SentAt = styled.div<{ $isViewer: boolean }>`
 	${tw`
 		text-sm
-		leading-none
 		text-gray-500
 	`}
 
@@ -59,13 +60,18 @@ const SentAt = styled.div<{ $isViewer: boolean }>`
 const Content = tw.div`
 	flex
 	flex-row
-	gap-4
+	gap-2
 `;
 
 const Message = tw(DocumentEditor)`
 	flex-grow
 	border-gray-200
 	shadow-lg
+`;
+
+const MessageContent = tw(DocumentEditor.Editable)`
+	flex-grow-0
+	p-3
 `;
 
 const Spacer = tw.div`
@@ -105,7 +111,7 @@ export const ChatRoomMessage = memo(
 						</NextLink>
 					)}
 					<SenderInfo>
-						<SenderName>{sender.name}</SenderName>
+						<SenderName $isViewer={isViewer}>{sender.name}</SenderName>
 						<SentAt $isViewer={isViewer}>
 							{dayjs(chatMessage.createdAt).fromNow()}
 						</SentAt>
@@ -114,7 +120,7 @@ export const ChatRoomMessage = memo(
 				<Content>
 					<Spacer />
 					<Message readOnly value={content as DocumentEditorValue}>
-						<DocumentEditor.Editable />
+						<MessageContent />
 					</Message>
 					<Spacer />
 				</Content>
