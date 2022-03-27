@@ -19,7 +19,7 @@ const usePollNotificationCounts = () => {
 			getCounts({
 				requestPolicy: "cache-and-network"
 			});
-		}, ms("20s"));
+		}, ms("30s"));
 
 		return () => {
 			clearTimeout(timerId);
