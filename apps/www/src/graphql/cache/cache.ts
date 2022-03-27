@@ -65,7 +65,9 @@ export const createCache = (): Exchange => {
 
 					cache
 						.inspectFields({ __typename: "User", id: viewerId })
-						.filter((field) => field.fieldName === "friendRequestsReceived")
+						.filter((field) =>
+							["activities", "friendRequestsReceived"].includes(field.fieldName)
+						)
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },
@@ -286,6 +288,24 @@ export const createCache = (): Exchange => {
 					if (!result.record) return;
 
 					cache.invalidate({ __typename: "Experience", id: result.record.id });
+				},
+				deleteFriendship: ({ deleteFriendship: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "activities")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				},
 				deletePost: ({ deletePost: result }: Mutation, _, cache) => {
 					if (!result.record) return;
