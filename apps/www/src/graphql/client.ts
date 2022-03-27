@@ -1,14 +1,19 @@
-import { toast } from "@makepurple/components";
 import { WindowUtils } from "@makepurple/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
-import { devtoolsExchange } from "@urql/devtools";
-import { multipartFetchExchange } from "@urql/exchange-multipart-fetch";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
 import produce from "immer";
 import type { GetServerSidePropsContext } from "next";
-import { Client, createClient, dedupExchange, errorExchange, ssrExchange } from "urql";
+import type { Client } from "urql";
+import { createClient, dedupExchange, ssrExchange } from "urql";
 import { createCache } from "./cache";
+import {
+	devtoolsExchange,
+	errorExchange,
+	multipartFetchExchange,
+	refocusExchange,
+	requestPolicyExchange
+} from "./exchanges";
 
 export const URQL_STATE_PROP_NAME = "__URQL_STATE__";
 
@@ -47,29 +52,20 @@ export interface CreateUrqlClientParams {
 	ssr?: SSRExchange;
 }
 
-export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
-	const { ssr: _ssr = ssrExchange({ isClient: WindowUtils.isSsr() }), req } = params;
+export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client => {
+	const { ssr: _ssr = ssrExchange({ isClient: !params.req }), req } = params;
 
 	if (WindowUtils.isSsr() || !urqlClient) {
 		urqlClient = createClient({
 			exchanges: [
-				...(process.env.NODE_ENV === "development" && !process.env.STORYBOOK
-					? [devtoolsExchange]
-					: []),
+				devtoolsExchange(),
 				dedupExchange,
+				requestPolicyExchange(),
+				refocusExchange(),
 				createCache(),
-				errorExchange({
-					onError: (error) => {
-						if (process.env.NODE_ENV === "development") {
-							// eslint-disable-next-line no-console
-							console.error(error);
-
-							toast.error(error.message.replace("[GraphQL]", "Server error:"));
-						}
-					}
-				}),
+				errorExchange(),
 				_ssr,
-				multipartFetchExchange
+				multipartFetchExchange()
 			],
 			fetchOptions: {
 				credentials: "include",
@@ -78,7 +74,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams): Client => {
 				}
 			},
 			maskTypename: false,
-			requestPolicy: "cache-and-network",
+			requestPolicy: "cache-first",
 			url: getApiUrl()
 		});
 

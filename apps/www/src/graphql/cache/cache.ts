@@ -1,10 +1,11 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import type { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
 import { relayPagination } from "@urql/exchange-graphcache/extras";
+import type { Exchange } from "urql";
 import type { Mutation } from "../generated";
 import schema from "../generated/schema.gen.json";
 
-export const createCache = () => {
+export const createCache = (): Exchange => {
 	return cacheExchange({
 		keys: {
 			GitHub: () => null,
@@ -362,6 +363,11 @@ export const createCache = () => {
 					if (!result.record) return;
 
 					cache.invalidate({ __typename: "Chat", id: result.record.id });
+				},
+				openNotifications: ({ openNotifications: result }: Mutation, _, cache) => {
+					if (!result.record) return;
+
+					const viewerId = result.viewer?.id;
 				},
 				publishPost: ({ publishPost: result }: Mutation, _, cache) => {
 					if (!result.record) return;

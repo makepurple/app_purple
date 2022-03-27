@@ -39,6 +39,8 @@
 		"@urql/core": "^2.4.3",
 		"@urql/exchange-graphcache": "^4.3.6",
 		"@urql/exchange-multipart-fetch": "^0.1.14",
+		"@urql/exchange-refocus": "^0.2.5",
+		"@urql/exchange-request-policy": "^0.1.5",
 		"@visx/axis": "^2.6.0",
 		"@visx/group": "^2.1.0",
 		"@visx/heatmap": "^2.1.2",
