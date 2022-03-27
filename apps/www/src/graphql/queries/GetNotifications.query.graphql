@@ -1,6 +1,7 @@
 query GetNotifications($after: String, $first: Int) {
 	viewer {
 		id
+		name
 		notifications(
 			after: $after
 			first: $first
