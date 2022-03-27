@@ -368,6 +368,19 @@ export const createCache = (): Exchange => {
 					if (!result.record) return;
 
 					const viewerId = result.viewer?.id;
+
+					if (!viewerId) return;
+
+					cache
+						.inspectFields({ __typename: "User", id: viewerId })
+						.filter((field) => field.fieldName === "notifications")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
 				},
 				publishPost: ({ publishPost: result }: Mutation, _, cache) => {
 					if (!result.record) return;
