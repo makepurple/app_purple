@@ -234,11 +234,37 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 									return;
 								}
 
-								user.viewerIsFriend
-									? await unfriendUser({ where: { name: user.name } })
-									: await friendRequestUser({
-											where: { name: user.name }
-									  });
+								if (user.viewerIsFriend) {
+									const didSucceed = await unfriendUser({
+										where: { name: user.name }
+									})
+										.then((result) => !!result.data?.deleteFriendship)
+										.catch(() => false);
+
+									if (!didSucceed) {
+										toast.error(`Could not unfriend ${user.name}`);
+
+										return;
+									}
+
+									toast.success(`Unfriended ${user.name}`);
+
+									return;
+								}
+
+								const didSucceed = await friendRequestUser({
+									where: { name: user.name }
+								})
+									.then((result) => !!result.data?.requestFriendship)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error(`Could not sent a request to ${user.name}`);
+
+									return;
+								}
+
+								toast.success(`Request to ${user.name} was sent`);
 							}}
 							type="button"
 							variant={user.viewerIsFriend ? "alert" : "primary"}
