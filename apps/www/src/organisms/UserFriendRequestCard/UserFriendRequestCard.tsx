@@ -75,7 +75,9 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 		const { className, style, user } = props;
 
 		const router = useRouter();
-		const { status } = useSession({ required: true });
+		const { data: session, status } = useSession({ required: true });
+
+		const isMyCard = user.name === session?.user.name;
 
 		const [{ fetching: accepting }, acceptRequest] = useAcceptFriendshipMutation();
 		const [{ fetching: rejecting }, rejectRequest] = useRejectFriendshipMutation();
@@ -176,7 +178,7 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 						</Tags>
 					)}
 				</Details>
-				{status === "authenticated" && (
+				{status === "authenticated" && !isMyCard && (
 					<Actions tw="ml-4">
 						<Action
 							disabled={fetching || !user.viewerCanFriend}
