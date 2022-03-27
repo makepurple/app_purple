@@ -163,6 +163,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	if (!user) return null;
 
 	const displayName: string = user.github.name ?? user.name;
+	const hasTopLanguages = !!user.github.topLanguages.nodes.length;
 
 	const loadingFollow = following || unfollowing;
 	const loadingFriend = friendRequesting || unfriending;
@@ -400,7 +401,13 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				<>
 					<TopLanguagesContainer>
 						<SubTitle>Most Used Languages</SubTitle>
-						<TopLanguages topLanguages={user.github.topLanguages} tw="mt-4" />
+						{hasTopLanguages ? (
+							<TopLanguages topLanguages={user.github.topLanguages} tw="mt-4" />
+						) : (
+							<NoDataText tw="mt-4">
+								We couldn&apos;t find any languages for {user.name}
+							</NoDataText>
+						)}
 					</TopLanguagesContainer>
 					<Divider />
 					<SkillsContainer>
