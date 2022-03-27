@@ -4,7 +4,8 @@ import {
 	NotificationChatMessageReceived_fragment_mock,
 	NotificationCodeExampleCommented_fragment_mock,
 	NotificationFriendshipAccepted_fragment_mock,
-	NotificationPostCommented_fragment_mock
+	NotificationPostCommented_fragment_mock,
+	User_fragment_mock
 } from "../fragments";
 
 faker.seed(1);
@@ -30,8 +31,7 @@ const notifications = Array.from({ length: DATA_SIZE }, (_, i) => {
 export const GetNotifications_mock: GetNotificationsQuery = {
 	__typename: "Query",
 	viewer: {
-		__typename: "User",
-		id: "0",
+		...User_fragment_mock,
 		notifications: {
 			__typename: "NotificationConnection",
 			pageInfo: {

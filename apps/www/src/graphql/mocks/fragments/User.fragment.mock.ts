@@ -199,7 +199,10 @@ export const User_fragment_mock: User = {
 	githubUrl: "https://github.com/leedavidcs",
 	id: "0",
 	image: "https://avatars.githubusercontent.com/u/15151154?v=4",
+	messagesLastOpenedAt: dayjs(1318781876406).toDate(),
 	name: "leedavidcs",
+	newMessagesCount: 5,
+	newNotificationsCount: 12,
 	notifications: {
 		__typename: "NotificationConnection",
 		pageInfo: {

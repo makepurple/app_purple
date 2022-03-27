@@ -49,6 +49,8 @@ export const Chat_fragment_mock: Chat = {
 		})),
 		nodes: messages
 	},
+	newMessagesCount: 5,
+	opened: false,
 	updatedAt: dayjs(1318781876406).toDate(),
 	users: {
 		__typename: "UserConnection",

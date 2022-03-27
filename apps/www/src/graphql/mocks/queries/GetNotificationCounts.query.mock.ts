@@ -5,13 +5,7 @@ export const GetNotificationCounts_mock: GetNotificationCountsQuery = {
 	__typename: "Query",
 	viewer: {
 		...User_fragment_mock,
-		messages: {
-			__typename: "NotificationConnection",
-			totalCount: 12
-		},
-		notifications: {
-			__typename: "NotificationConnection",
-			totalCount: 123
-		}
+		newMessagesCount: 12,
+		newNotificationsCount: 123
 	}
 };
