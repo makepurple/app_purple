@@ -5,6 +5,10 @@ mutation FollowUser($where: UserWhereUniqueInput!) {
 			followers(first: 0) {
 				totalCount
 			}
+			trophies {
+				id
+				totalFollowers
+			}
 			viewerFollowing
 		}
 		viewer {
