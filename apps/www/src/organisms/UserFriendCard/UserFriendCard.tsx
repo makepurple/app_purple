@@ -180,10 +180,10 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 					{user.viewerIsFriend ? (
 						<AlertDialog
 							description={oneLine`
-						Are you sure you want to remove ${user.name} as a connection?
-						You can send another connection request to ${user.name}, but
-						${user.name} will be unable to for 6 months.
-					`}
+								Are you sure you want to remove ${user.name} as a connection?
+								You can send another connection request to ${user.name}, but
+								${user.name} will be unable to for 6 months.
+							`}
 							onConfirm={async () => {
 								const didSucceed = await unfriend({ where: { name: user.name } })
 									.then((result) => !!result.data?.deleteFriendship)

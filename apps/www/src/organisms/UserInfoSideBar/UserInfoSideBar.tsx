@@ -1,4 +1,5 @@
 import {
+	AlertDialog,
 	Anchor,
 	Button,
 	Divider,
@@ -12,6 +13,7 @@ import {
 	TwitterIcon
 } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
+import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
@@ -223,18 +225,14 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				)}
 				{!isMyUser && (
 					<Actions tw="mt-4">
-						<Button
-							disabled={
-								loadingFriend || (!user.viewerIsFriend && !user.viewerCanFriend)
-							}
-							onClick={async () => {
-								if (status !== "authenticated") {
-									await router.push("/signup");
-
-									return;
-								}
-
-								if (user.viewerIsFriend) {
+						{user.viewerIsFriend ? (
+							<AlertDialog
+								description={oneLine`
+									Are you sure you want to remove ${user.name} as a connection?
+									You can send another connection request to ${user.name}, but
+									${user.name} will be unable to for 6 months.
+								`}
+								onConfirm={async () => {
 									const didSucceed = await unfriendUser({
 										where: { name: user.name }
 									})
@@ -248,29 +246,17 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 									}
 
 									toast.success(`Unfriended ${user.name}`);
-
-									return;
-								}
-
-								const didSucceed = await friendRequestUser({
-									where: { name: user.name }
-								})
-									.then((result) => !!result.data?.requestFriendship)
-									.catch(() => false);
-
-								if (!didSucceed) {
-									toast.error(`Could not send a request to ${user.name}`);
-
-									return;
-								}
-
-								toast.success(`Request to ${user.name} was sent`);
-							}}
-							type="button"
-							variant={user.viewerIsFriend ? "alert" : "primary"}
-						>
-							{user.viewerIsFriend ? (
-								<>
+								}}
+								text="Yes, remove connection"
+							>
+								<Button
+									disabled={loadingFriend}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									type="button"
+									variant="alert"
+								>
 									{loadingFriend ? (
 										<Spinner tw="flex-shrink-0 mr-1" />
 									) : (
@@ -281,14 +267,38 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 										/>
 									)}
 									<span>Connection</span>
-								</>
-							) : (
-								<>
-									<span>Connect</span>
-									{loadingFriend && <Spinner tw="ml-2" />}
-								</>
-							)}
-						</Button>
+								</Button>
+							</AlertDialog>
+						) : (
+							<Button
+								disabled={loadingFriend || !user.viewerCanFriend}
+								onClick={async () => {
+									if (status !== "authenticated") {
+										await router.push("/signup");
+
+										return;
+									}
+
+									const didSucceed = await friendRequestUser({
+										where: { name: user.name }
+									})
+										.then((result) => !!result.data?.requestFriendship)
+										.catch(() => false);
+
+									if (!didSucceed) {
+										toast.error(`Could not send a request to ${user.name}`);
+
+										return;
+									}
+
+									toast.success(`Request to ${user.name} was sent`);
+								}}
+								type="button"
+							>
+								<span>Connect</span>
+								{loadingFriend && <Spinner tw="ml-2" />}
+							</Button>
+						)}
 						<Button
 							disabled={loadingFollow}
 							onClick={async () => {
