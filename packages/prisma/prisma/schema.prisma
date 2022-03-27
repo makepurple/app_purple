@@ -81,9 +81,12 @@ model User {
   id                        String                 @id @default(cuid())
   // Avatar image, pulled from GitHub
   image                     String?
+  // When the user last opened their messages
+  messagesLastOpenedAt      DateTime               @default(now())
   // The GitHub name of the user
   name                      String                 @unique
   notifications             Notification[]         @relation()
+  // When the user last opened their notifications
   notificationsLastOpenedAt DateTime               @default(now())
   posts                     Post[]                 @relation("PostAuthor")
   repositories              Repository[]
