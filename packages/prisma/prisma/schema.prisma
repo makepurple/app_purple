@@ -182,7 +182,7 @@ model Follow {
   followingSkill FollowSkill?
   followingUser  FollowUser?
   type           FollowType
-  user           User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String
 }
 
@@ -230,11 +230,12 @@ model ChatMessage {
 }
 
 model ChatsOnUsers {
-  id     String @id @default(cuid())
-  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  id           String   @id @default(cuid())
+  chat         Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  lastOpenedAt DateTime @default(now())
 
   @@unique([chatId, userId])
 }
