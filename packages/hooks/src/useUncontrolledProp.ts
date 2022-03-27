@@ -5,9 +5,7 @@ export const useUncontrolledProp = <T extends unknown>(prop: T | undefined, defa
 
 	const setProp = useCallback(
 		(newValue: T | ((newValue: T) => T)) => {
-			if (prop !== undefined) {
-				return;
-			}
+			if (prop !== undefined) return;
 
 			setControlled(newValue);
 		},

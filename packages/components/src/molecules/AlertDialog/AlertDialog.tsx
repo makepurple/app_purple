@@ -1,6 +1,7 @@
+import { useUncontrolledProp } from "@makepurple/hooks";
 import { StyleUtils } from "@makepurple/utils";
 import * as RadixAlertDialog from "@radix-ui/react-alert-dialog";
-import React, { CSSProperties, FC, MouseEvent, ReactElement, ReactNode, useState } from "react";
+import React, { CSSProperties, FC, MouseEvent, ReactElement, ReactNode } from "react";
 import tw, { styled } from "twin.macro";
 import { Backdrop, Button, Paper } from "../../atoms";
 
@@ -46,10 +47,12 @@ const Actions = tw.div`
 `;
 
 export interface AlertDialogProps {
-	children: ReactElement;
+	children?: ReactElement;
 	className?: string;
 	description: string;
+	onClose?: () => void;
 	onConfirm?: (event: MouseEvent<HTMLButtonElement>) => void;
+	open?: boolean;
 	style?: CSSProperties;
 	text: ReactNode;
 	title?: string;
@@ -59,21 +62,25 @@ export const AlertDialog: FC<AlertDialogProps> = ({
 	children,
 	className,
 	description,
+	onClose,
 	onConfirm,
+	open: _open,
 	style,
 	text,
 	title = "Are you absolutely sure?"
 }) => {
-	const [open, setOpen] = useState<boolean>(false);
+	const [open, setOpen] = useUncontrolledProp<boolean>(_open, false);
 
 	return (
 		<RadixAlertDialog.Root
 			open={open}
 			onOpenChange={(newOpen) => {
 				setOpen(newOpen);
+
+				!newOpen && onClose?.();
 			}}
 		>
-			<RadixAlertDialog.Trigger asChild>{children}</RadixAlertDialog.Trigger>
+			{!!children && <RadixAlertDialog.Trigger asChild>{children}</RadixAlertDialog.Trigger>}
 			<RadixAlertDialog.Portal>
 				<RadixAlertDialog.Overlay asChild>
 					<StyledBackdrop
