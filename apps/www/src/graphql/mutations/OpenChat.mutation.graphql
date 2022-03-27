@@ -1,0 +1,14 @@
+mutation OpenChat {
+	openChat {
+		record {
+			id
+			lastOpenedAt
+			newMessagesCount
+			opened
+		}
+		viewer {
+			id
+			name
+		}
+	}
+}

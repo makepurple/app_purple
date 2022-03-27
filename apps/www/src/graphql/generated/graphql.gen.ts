@@ -87,6 +87,10 @@ export function useLeaveChatMutation() {
   return Urql.useMutation<Operations.LeaveChatMutation, Operations.LeaveChatMutationVariables>(Operations.LeaveChatDocument);
 };
 
+export function useOpenChatMutation() {
+  return Urql.useMutation<Operations.OpenChatMutation, Operations.OpenChatMutationVariables>(Operations.OpenChatDocument);
+};
+
 export function useOpenMessagesMutation() {
   return Urql.useMutation<Operations.OpenMessagesMutation, Operations.OpenMessagesMutationVariables>(Operations.OpenMessagesDocument);
 };
