@@ -52,6 +52,7 @@ export type AddSkillMutationPayload = MutationPayload & {
 export type Chat = Node & {
   readonly __typename: 'Chat';
   readonly id: Scalars['ID'];
+  readonly lastOpenedAt: Scalars['DateTime'];
   readonly messages: ChatMessageConnection;
   readonly newMessagesCount: Scalars['Int'];
   readonly opened: Scalars['Boolean'];

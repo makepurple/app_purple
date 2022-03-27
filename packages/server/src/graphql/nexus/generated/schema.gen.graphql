@@ -33,6 +33,7 @@ scalar Bytes
 
 type Chat implements Node {
   id: ID!
+  lastOpenedAt: DateTime!
   messages(after: String, before: String, first: Int, last: Int, offset: Int): ChatMessageConnection!
   newMessagesCount: Int!
   opened: Boolean!

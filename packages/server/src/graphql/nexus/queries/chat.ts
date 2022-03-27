@@ -19,9 +19,7 @@ export const chat = queryField("chat", {
 				}
 			});
 
-		if (!users.length) return false;
-
-		return true;
+		return !!users.length;
 	},
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
