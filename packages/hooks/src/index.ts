@@ -3,6 +3,7 @@ export * from "./useContextMenu";
 export * from "./useCookieValue";
 export * from "./useDebouncedCallback";
 export * from "./useDebouncedState";
+export * from "./useDocumentTitle";
 export * from "./useFocus";
 export * from "./useHover";
 export * from "./useIntersectionObserver";
