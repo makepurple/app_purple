@@ -33,10 +33,13 @@ const UserNameContainer = tw.span`
 	w-full
 	text-2xl
 	sm:text-5xl
+	sm:leading-snug
+	sm:font-bold
 	truncate
 `;
 
 const UserName = tw(Anchor)`
+	text-black
 	truncate
 `;
 
@@ -55,7 +58,7 @@ export const UserActivityCardJoined = forwardRef<HTMLDivElement, UserActivityCar
 		return (
 			<Root className={className} ref={ref} style={style}>
 				<UserActivityCardHeader userActivity={userActivity}>
-					joins <Brand tw="text-base" />
+					joined <Brand tw="text-base" />
 				</UserActivityCardHeader>
 				<Content tw="mt-2">
 					{!!user.image && (
@@ -73,6 +76,7 @@ export const UserActivityCardJoined = forwardRef<HTMLDivElement, UserActivityCar
 							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
 								<UserName>{user.name}</UserName>
 							</NextLink>
+							!
 						</UserNameContainer>
 					</Greetings>
 				</Content>
