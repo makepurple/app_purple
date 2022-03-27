@@ -16,15 +16,9 @@ mutation CreateChat($data: CreateChatInput!) {
 				}
 			}
 		}
-		query {
-			viewer {
-				id
-				chats(first: 20) {
-					nodes {
-						id
-					}
-				}
-			}
+		viewer {
+			id
+			name
 		}
 	}
 }
