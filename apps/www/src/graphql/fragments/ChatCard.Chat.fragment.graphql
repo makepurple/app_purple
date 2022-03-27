@@ -11,7 +11,8 @@ fragment ChatCardChat on Chat {
 			}
 		}
 	}
-	users(first: 6) {
+	newMessagesCount
+	users(first: 4) {
 		totalCount
 		nodes {
 			id

@@ -7,7 +7,7 @@ import {
 	GitHubAvatarImage
 } from "@makepurple/components";
 import { useIsClamped } from "@makepurple/hooks";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, FormatUtils } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -15,7 +15,9 @@ import React, { CSSProperties, forwardRef, useMemo, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { ChatCardChatFragment } from "../../graphql";
 
-const Root = styled.div<{ $selected: boolean }>`
+const MAX_SHOW_PARTICIPANTS = 3;
+
+const Root = styled.div<{ $selected: boolean; $unread: boolean }>`
 	${tw`
 		flex
 		flex-col
@@ -27,12 +29,21 @@ const Root = styled.div<{ $selected: boolean }>`
 	`}
 
 	${({ $selected }) => $selected && tw`bg-indigo-100!`}
+
+	${({ $unread }) =>
+		$unread &&
+		tw`
+			border-l-4
+			border-solid
+			border-indigo-500
+		`}
 `;
 
 const Participants = tw.div`
 	flex
 	flex-row
 	items-center
+	gap-3
 	pt-4
 	px-4
 `;
@@ -44,10 +55,9 @@ const ParticipantAvatars = tw(AvatarGroup)`
 const Title = tw.a`
 	flex-grow
 	flex
-	flex-wrap
-	gap-x-2
-	gap-y-1
-	items-center
+	flex-col
+	gap-1
+	items-start
 	overflow-hidden
 	text-lg
 `;
@@ -71,6 +81,22 @@ const LastMessageAt = tw.div`
 	leading-none
 	text-gray-500
 	whitespace-nowrap
+`;
+
+const UnreadMessagesCount = tw.div`
+	flex
+	items-center
+	justify-center
+	min-h-[1.625rem]
+	min-w-[1.625rem]
+	px-2
+	py-1.5
+	rounded-full
+	bg-blue-500
+	text-sm
+	leading-none
+	font-medium
+	text-white
 `;
 
 const MessageContainer = tw.div`
@@ -118,7 +144,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 			chat.users.nodes
 				.filter((user) => user.name !== session?.user.name)
 				.sort((a, b) => a.name.localeCompare(b.name))
-				.slice(0, 5),
+				.slice(0, MAX_SHOW_PARTICIPANTS),
 		[chat, session]
 	);
 
@@ -152,8 +178,14 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 			}}
 			style={style}
 			$selected={!!selected}
+			$unread={!!chat.newMessagesCount}
 		>
 			<Participants>
+				{!!chat.newMessagesCount && (
+					<UnreadMessagesCount>
+						{FormatUtils.toGitHubFixed(chat.newMessagesCount)}
+					</UnreadMessagesCount>
+				)}
 				<ParticipantAvatars>
 					{participants.map(
 						(participant) =>
@@ -177,14 +209,12 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 					)}
 				</ParticipantAvatars>
 				<NextLink href="/messaging/[[...slug]]" as={`/messaging/${chat.id}`} passHref>
-					<Title tw="ml-4">
+					<Title>
 						<ParticipantName>{firstParticipant.name}</ParticipantName>
 						{!!countOthers && <Others>+{countOthers.toLocaleString()} others</Others>}
 					</Title>
 				</NextLink>
-				<LastMessageAt tw="ml-2">
-					{dayjs(lastMessage.createdAt).format("MMM D")}
-				</LastMessageAt>
+				<LastMessageAt>{dayjs(lastMessage.createdAt).format("MMM D")}</LastMessageAt>
 			</Participants>
 			{!!lastMessage && (
 				<MessageContainer ref={messageRef} tw="mt-3">
