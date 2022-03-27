@@ -30,11 +30,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			.query(GetChatsDocument, {
 				first: BATCH_SIZE,
 				where: {
-					user: {
-						name: {
-							contains: ""
-						}
-					}
+					user: { name: { contains: "" } }
 				}
 			})
 			.toPromise()
