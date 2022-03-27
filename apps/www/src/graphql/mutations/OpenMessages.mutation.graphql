@@ -1,0 +1,12 @@
+mutation OpenMessages {
+	openMessages {
+		record {
+			id
+			newMessagesCount
+		}
+		viewer {
+			id
+			name
+		}
+	}
+}
