@@ -15,7 +15,7 @@ export const chat = queryField("chat", {
 			})
 			.users({
 				where: {
-					id: { equals: user.id }
+					user: { id: { equals: user.id } }
 				}
 			});
 
@@ -24,15 +24,8 @@ export const chat = queryField("chat", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const chats = await prisma.user
-			.findUnique({
-				where: { id: user.id }
-			})
-			.chats({
-				where: PrismaUtils.nonNull(args.where),
-				include: { chat: true }
-			});
-
-		return chats[0]?.chat;
+		return await prisma.chat.findUnique({
+			where: PrismaUtils.nonNull(args.where)
+		});
 	}
 });
