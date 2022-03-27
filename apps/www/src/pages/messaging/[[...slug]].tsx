@@ -6,6 +6,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
+import { useOpenMessagesMutation } from "../../graphql";
 import { ChatList, ChatRoom, CreateChatForm } from "../../organisms";
 import { pageProps, PageProps } from "../../page-props/messaging/[[...slug]]";
 import { PlusIcon } from "../../svgs";
@@ -105,6 +106,15 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [topFade, setTopFade] = useState<boolean>(false);
 	const [bottomFade, setBottomFade] = useState<boolean>(false);
+
+	const [, updateCounts] = useOpenMessagesMutation();
+
+	useEffect(() => {
+		return () => {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			updateCounts();
+		};
+	}, [updateCounts]);
 
 	useEffect(() => {
 		const unsubscribe = scrollYProgress.onChange((yProgress) => {
