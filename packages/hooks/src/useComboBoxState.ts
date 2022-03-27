@@ -1,5 +1,5 @@
 import { FunctionUtils, ObjectUtils } from "@makepurple/utils";
-import { useIsMounted, usePreviousDistinct } from "@react-hookz/web";
+import { useIsMounted } from "@react-hookz/web";
 import {
 	useCombobox,
 	UseComboboxProps,
@@ -55,24 +55,16 @@ export const useComboBoxState = ObjectUtils.setStatic(
 			)
 		});
 
-		const isPending = !!combobox.inputValue && isReady === false;
+		const hasInput = !!combobox.inputValue;
+		const isPending = hasInput && isReady === false;
 
-		const isOpen = combobox.isOpen && !!combobox.inputValue;
+		const isOpen = combobox.isOpen && hasInput;
 		const hasItems = !!props.items.length;
-
-		/**
-		 * !HACK
-		 * @description Require that the input actually did change (not just default value)
-		 * in order for isOpen and loading to be true
-		 * @author David Lee
-		 * @date March 2, 2022
-		 */
-		const previous = usePreviousDistinct(combobox.inputValue);
 
 		return {
 			...combobox,
-			isOpen: (!!previous && isOpen && hasItems) || loading || isPending,
-			loading: !!previous && (loading || isPending)
+			isOpen: (isOpen && hasItems) || loading || isPending,
+			loading: hasInput && (loading || isPending)
 		};
 	},
 	{

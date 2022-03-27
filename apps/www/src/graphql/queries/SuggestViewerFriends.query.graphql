@@ -21,6 +21,10 @@ query SuggestViewerFriends($name: String!) {
 			nodes {
 				id
 				name
+				github {
+					id
+					...UserSearchResultGitHubUser
+				}
 			}
 		}
 	}
