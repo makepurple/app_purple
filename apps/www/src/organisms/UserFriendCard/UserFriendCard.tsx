@@ -8,8 +8,7 @@ import tw from "twin.macro";
 import {
 	useDeleteFriendshipMutation,
 	useFriendRequestUserMutation,
-	UserFriendCardUserFragment,
-	UserWhereUniqueInput
+	UserFriendCardUserFragment
 } from "../../graphql";
 import { UserAvatar } from "../UserAvatar";
 
@@ -58,9 +57,9 @@ const Actions = tw.div`
 	flex-shrink-0
 `;
 
-const ConnectButton = tw(Button)`
+const Action = tw(Button)`
 	flex-shrink-0
-	w-20	
+	w-20
 `;
 
 export interface UserFriendCardProps {
@@ -73,7 +72,9 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 	const { className, style, user } = props;
 
 	const router = useRouter();
-	const { status } = useSession();
+	const { data: session, status } = useSession();
+
+	const isMyCard = user.name === session?.user.name;
 
 	const [{ fetching: requesting }, friendRequest] = useFriendRequestUserMutation();
 	const [{ fetching: unfriending }, unfriend] = useDeleteFriendshipMutation();
@@ -174,21 +175,17 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 					</Tags>
 				)}
 			</Details>
-			{status === "authenticated" && (
+			{status === "authenticated" && !isMyCard && (
 				<Actions tw="ml-4">
-					<AlertDialog
-						description={oneLine`
-							Are you sure you want to remove ${user.name} as a connection?
-							You can send another connection request to ${user.name}, but
-							${user.name} will be unable to for 6 months.
-						`}
-						onConfirm={async () => {
-							const where: UserWhereUniqueInput = {
-								name: user.name
-							};
-
-							if (user.viewerIsFriend) {
-								const didSucceed = await unfriend({ where })
+					{user.viewerIsFriend ? (
+						<AlertDialog
+							description={oneLine`
+						Are you sure you want to remove ${user.name} as a connection?
+						You can send another connection request to ${user.name}, but
+						${user.name} will be unable to for 6 months.
+					`}
+							onConfirm={async () => {
+								const didSucceed = await unfriend({ where: { name: user.name } })
 									.then((result) => !!result.data?.deleteFriendship)
 									.catch(() => false);
 
@@ -199,36 +196,48 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 								}
 
 								toast.success(`You are no-longer connected with ${user.name}`);
-
-								return;
-							}
-
-							const didSucceed = await friendRequest({ where })
-								.then((result) => !!result.data?.requestFriendship)
-								.catch(() => false);
-
-							if (!didSucceed) {
-								toast.error(`Could not send a request to ${user.name}`);
-
-								return;
-							}
-
-							toast.success(`Request to ${user.name} was sent`);
-						}}
-						text="Yes, remove connection"
-					>
-						<ConnectButton
+							}}
+							text="Yes, remove connection"
+						>
+							<Action
+								disabled={loading}
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+								size="small"
+								type="button"
+								variant="alert"
+							>
+								{unfriending ? <Spinner /> : "Remove"}
+							</Action>
+						</AlertDialog>
+					) : (
+						<Action
 							disabled={loading}
-							onClick={(e) => {
+							onClick={async (e) => {
 								e.stopPropagation();
+
+								const didSucceed = await friendRequest({
+									where: { name: user.name }
+								})
+									.then((result) => !!result.data?.requestFriendship)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error(`Could not send a request to ${user.name}`);
+
+									return;
+								}
+
+								toast.success(`Request to ${user.name} was sent`);
 							}}
 							size="small"
 							type="button"
-							variant={user.viewerIsFriend ? "alert" : "secondary"}
+							variant="secondary"
 						>
-							{loading ? <Spinner /> : user.viewerIsFriend ? "Remove" : "Connect"}
-						</ConnectButton>
-					</AlertDialog>
+							{requesting ? <Spinner /> : "Connect"}
+						</Action>
+					)}
 				</Actions>
 			)}
 		</Root>
