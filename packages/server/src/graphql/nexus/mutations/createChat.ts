@@ -23,12 +23,10 @@ export const createChat = mutationField("createChat", {
 				where: {
 					friender: { id: { equals: user.id } },
 					friending: {
+						...PrismaUtils.nonNull(args.data.users),
 						friending: {
 							some: {
-								AND: [
-									{ friending: { id: { equals: user.id } } },
-									PrismaUtils.nonNull(args.data.users)
-								]
+								friending: { id: { equals: user.id } }
 							}
 						}
 					},
