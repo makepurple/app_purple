@@ -259,7 +259,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 									.catch(() => false);
 
 								if (!didSucceed) {
-									toast.error(`Could not sent a request to ${user.name}`);
+									toast.error(`Could not send a request to ${user.name}`);
 
 									return;
 								}
