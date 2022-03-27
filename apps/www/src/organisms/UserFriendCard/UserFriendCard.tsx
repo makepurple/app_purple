@@ -1,4 +1,5 @@
-import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
+import { AlertDialog, Anchor, Button, Paper, Spinner, Tags, toast } from "@makepurple/components";
+import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -7,7 +8,8 @@ import tw from "twin.macro";
 import {
 	useDeleteFriendshipMutation,
 	useFriendRequestUserMutation,
-	UserFriendCardUserFragment
+	UserFriendCardUserFragment,
+	UserWhereUniqueInput
 } from "../../graphql";
 import { UserAvatar } from "../UserAvatar";
 
@@ -56,7 +58,7 @@ const Actions = tw.div`
 	flex-shrink-0
 `;
 
-const FollowButton = tw(Button)`
+const ConnectButton = tw(Button)`
 	flex-shrink-0
 	w-20	
 `;
@@ -174,21 +176,59 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 			</Details>
 			{status === "authenticated" && (
 				<Actions tw="ml-4">
-					<FollowButton
-						disabled={loading}
-						onClick={async (e) => {
-							e.stopPropagation();
+					<AlertDialog
+						description={oneLine`
+							Are you sure you want to remove ${user.name} as a connection?
+							You can send another connection request to ${user.name}, but
+							${user.name} will be unable to for 6 months.
+						`}
+						onConfirm={async () => {
+							const where: UserWhereUniqueInput = {
+								name: user.name
+							};
 
-							user.viewerIsFriend
-								? await unfriend({ where: { id: user.id } }).catch(() => null)
-								: await friendRequest({ where: { id: user.id } }).catch(() => null);
+							if (user.viewerIsFriend) {
+								const didSucceed = await unfriend({ where })
+									.then((result) => !!result.data?.deleteFriendship)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error(`Could not ${user.name} as a connection`);
+
+									return;
+								}
+
+								toast.success(`You are no-longer connected with ${user.name}`);
+
+								return;
+							}
+
+							const didSucceed = await friendRequest({ where })
+								.then((result) => !!result.data?.requestFriendship)
+								.catch(() => false);
+
+							if (!didSucceed) {
+								toast.error(`Could not send a request to ${user.name}`);
+
+								return;
+							}
+
+							toast.success(`Request to ${user.name} was sent`);
 						}}
-						size="small"
-						type="button"
-						variant={user.viewerIsFriend ? "alert" : "secondary"}
+						text="Yes, remove connection"
 					>
-						{loading ? <Spinner /> : user.viewerIsFriend ? "Remove" : "Connect"}
-					</FollowButton>
+						<ConnectButton
+							disabled={loading}
+							onClick={(e) => {
+								e.stopPropagation();
+							}}
+							size="small"
+							type="button"
+							variant={user.viewerIsFriend ? "alert" : "secondary"}
+						>
+							{loading ? <Spinner /> : user.viewerIsFriend ? "Remove" : "Connect"}
+						</ConnectButton>
+					</AlertDialog>
 				</Actions>
 			)}
 		</Root>
