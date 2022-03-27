@@ -588,10 +588,15 @@ export const User = objectType({
 				const friendedByIds = await prisma.user
 					.findUnique({ where: { id: parent.id } })
 					.friendedBy({
-						where: PrismaUtils.nonNull(args.where),
-						select: { id: true }
+						where: {
+							...PrismaUtils.nonNull(args.where),
+							rejectedAt: { equals: null }
+						},
+						select: {
+							frienderId: true
+						}
 					})
-					.then((items) => items.map((item) => item.id));
+					.then((items) => items.map((item) => item.frienderId));
 
 				const where: Prisma.FriendshipWhereInput = {
 					friender: { id: { in: friendedByIds } },
@@ -603,7 +608,7 @@ export const User = objectType({
 							}
 						}
 					},
-					rejectedAt: { not: { equals: null } }
+					rejectedAt: { equals: null }
 				};
 
 				const connection = await PrismaUtils.findManyCursorConnection<
