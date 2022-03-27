@@ -231,7 +231,7 @@ export interface NexusGenInputs {
   InviteToChatInput: { // input type
     users: NexusGenInputs['UserWhereInput']; // UserWhereInput!
   }
-  NotificationsWhereInput: { // input type
+  NotificationWhereInput: { // input type
     opened?: boolean | null; // Boolean
     type?: NexusGenEnums['NotificationType'][] | null; // [NotificationType!]
   }
@@ -914,6 +914,7 @@ export interface NexusGenObjects {
     email: string; // String!
     id: string; // ID!
     image?: string | null; // String
+    messagesLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     name: string; // String!
     notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -1822,7 +1823,10 @@ export interface NexusGenFieldTypes {
     githubUrl: NexusGenScalars['URL']; // URL!
     id: string; // ID!
     image: string | null; // String
+    messagesLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     name: string; // String!
+    newMessagesCount: number; // Int!
+    newNotificationsCount: number; // Int!
     notifications: NexusGenRootTypes['NotificationConnection']; // NotificationConnection!
     notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     postUpvotes: number; // Int!
@@ -2802,7 +2806,10 @@ export interface NexusGenFieldTypeNames {
     githubUrl: 'URL'
     id: 'ID'
     image: 'String'
+    messagesLastOpenedAt: 'DateTime'
     name: 'String'
+    newMessagesCount: 'Int'
+    newNotificationsCount: 'Int'
     notifications: 'NotificationConnection'
     notificationsLastOpenedAt: 'DateTime'
     postUpvotes: 'Int'
@@ -3522,7 +3529,7 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-      where?: NexusGenInputs['NotificationsWhereInput'] | null; // NotificationsWhereInput
+      where?: NexusGenInputs['NotificationWhereInput'] | null; // NotificationWhereInput
     }
     posts: { // args
       after?: string | null; // String

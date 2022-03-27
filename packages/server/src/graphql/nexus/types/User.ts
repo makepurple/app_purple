@@ -759,7 +759,51 @@ export const User = objectType({
 		});
 		t.implements("Node");
 		t.string("image");
+		t.nonNull.dateTime("messagesLastOpenedAt");
 		t.nonNull.string("name");
+		t.nonNull.int("newMessagesCount", {
+			authorize: (parent, args, { user }) => {
+				return parent.id === user?.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.notification.count({
+					where: {
+						chat: {},
+						type: { equals: NotificationType.ChatMessageReceived },
+						updatedAt: { gt: parent.messagesLastOpenedAt },
+						user: { id: { equals: parent.id } }
+					}
+				});
+			}
+		});
+		t.nonNull.int("newNotificationsCount", {
+			authorize: (parent, args, { user }) => {
+				return parent.id === user?.id;
+			},
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.notification.count({
+					where: {
+						type: { not: { equals: NotificationType.ChatMessageReceived } },
+						updatedAt: { gt: parent.notificationsLastOpenedAt },
+						user: { id: { equals: parent.id } },
+						OR: [
+							{
+								type: NotificationType.CodeExampleCommented,
+								codeExample: {}
+							},
+							{
+								type: NotificationType.FriendshipAccepted,
+								friendship: {}
+							},
+							{
+								type: NotificationType.PostCommented,
+								post: {}
+							}
+						]
+					}
+				});
+			}
+		});
 		t.nonNull.field("notifications", {
 			type: "NotificationConnection",
 			args: {
@@ -767,18 +811,14 @@ export const User = objectType({
 				last: intArg(),
 				after: stringArg(),
 				before: stringArg(),
-				where: arg({ type: "NotificationsWhereInput" })
+				where: arg({ type: "NotificationWhereInput" })
 			},
 			authorize: (parent, args, { user }) => {
 				return parent.id === user?.id;
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const lastOpenedAt: Date | undefined =
-					args.where?.opened === false
-						? await prisma.user
-								.findUnique({ where: { id: parent.id } })
-								.then((user) => user?.notificationsLastOpenedAt)
-						: undefined;
+					args.where?.opened === false ? parent.notificationsLastOpenedAt : undefined;
 
 				const connection = await PrismaUtils.findManyCursorConnection<any, { id: string }>(
 					async ({ cursor, skip, take }) =>

@@ -31,7 +31,7 @@ export * from "./GitHubRepositoryOwnerWhereUniqueInput";
 export * from "./GitHubRepositoryWhereUniqueInput";
 export * from "./GitHubUserTotalCommitsWhereInput";
 export * from "./InviteToChatInput";
-export * from "./NotificationsWhereInput";
+export * from "./NotificationWhereInput";
 export * from "./OrderByRelationAggregateInput";
 export * from "./PostAuthorNameUrlSlugCompoundUniqueInput";
 export * from "./PostDraftUpdateInput";

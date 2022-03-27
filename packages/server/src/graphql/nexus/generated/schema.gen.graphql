@@ -870,7 +870,7 @@ enum NotificationType {
   PostCommented
 }
 
-input NotificationsWhereInput {
+input NotificationWhereInput {
   opened: Boolean
   type: [NotificationType!]
 }
@@ -1491,8 +1491,11 @@ type User implements Followable & Node {
   githubUrl: URL!
   id: ID!
   image: String
+  messagesLastOpenedAt: DateTime!
   name: String!
-  notifications(after: String, before: String, first: Int, last: Int, where: NotificationsWhereInput): NotificationConnection!
+  newMessagesCount: Int!
+  newNotificationsCount: Int!
+  notifications(after: String, before: String, first: Int, last: Int, where: NotificationWhereInput): NotificationConnection!
   notificationsLastOpenedAt: DateTime!
   postUpvotes: Int!
   postViews: Int!
