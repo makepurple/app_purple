@@ -36,7 +36,7 @@ const useRefreshUserGitHubData = () => {
 	/**
 	 * !HACK
 	 * @description We want to keep the user's data as fresh from github as we can. So we're
-	 * updating it here globally.
+	 * updating it here globally. Ignore any errors, since it's not critical to functionality
 	 * @author David Lee
 	 * @date January 5, 2022
 	 */
