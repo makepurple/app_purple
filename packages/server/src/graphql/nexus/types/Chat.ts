@@ -6,6 +6,39 @@ export const Chat = objectType({
 	name: "Chat",
 	definition: (t) => {
 		t.implements("Node");
+		t.nonNull.dateTime("lastOpenedAt", {
+			authorize: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const chat = await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.chat();
+
+				return !!chat;
+			},
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) throw new Error();
+
+				return await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						},
+						rejectOnNotFound: true
+					})
+					.then((result) => result.lastOpenedAt);
+			}
+		});
 		t.nonNull.field("messages", {
 			type: "ChatMessageConnection",
 			args: {
@@ -29,9 +62,7 @@ export const Chat = objectType({
 					})
 					.chat();
 
-				if (chat?.id !== parent.id) return false;
-
-				return true;
+				return !!chat;
 			},
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) throw new Error();
@@ -79,18 +110,36 @@ export const Chat = objectType({
 			}
 		});
 		t.nonNull.int("newMessagesCount", {
-			authorize: (parent, args, { user }) => {
-				return !!user;
+			authorize: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const chat = await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.chat();
+
+				return !!chat;
 			},
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) throw new Error();
 
-				const lastOpenedAt = await prisma.user
+				const lastOpenedAt = await prisma.chatsOnUsers
 					.findUnique({
-						where: { id: user.id },
-						select: { messagesLastOpenedAt: true }
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						},
+						rejectOnNotFound: true
 					})
-					.then((result) => result?.messagesLastOpenedAt);
+					.then((result) => result.lastOpenedAt);
 
 				return await prisma.chatMessage.count({
 					where: {
@@ -101,23 +150,58 @@ export const Chat = objectType({
 			}
 		});
 		t.nonNull.boolean("opened", {
-			authorize: (parent, args, { user }) => {
-				return !!user;
+			authorize: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const chat = await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.chat();
+
+				return !!chat;
 			},
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) throw new Error();
 
-				const lastOpenedAt = await prisma.user
+				const lastOpenedAt = await prisma.chatsOnUsers
 					.findUnique({
-						where: { id: user.id },
-						select: { messagesLastOpenedAt: true }
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						},
+						rejectOnNotFound: true
 					})
-					.then((result) => result?.messagesLastOpenedAt);
+					.then((result) => result.lastOpenedAt);
 
 				return !!lastOpenedAt && lastOpenedAt >= parent.updatedAt;
 			}
 		});
-		t.nonNull.dateTime("updatedAt");
+		t.nonNull.dateTime("updatedAt", {
+			authorize: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const chat = await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.chat();
+
+				return !!chat;
+			}
+		});
 		t.nonNull.field("users", {
 			type: "UserConnection",
 			args: {
@@ -126,6 +210,22 @@ export const Chat = objectType({
 				first: intArg(),
 				last: intArg(),
 				where: arg({ type: "UserWhereInput" })
+			},
+			authorize: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const chat = await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.chat();
+
+				return !!chat;
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
