@@ -11,5 +11,9 @@ mutation OpenNotifications {
 				totalCount
 			}
 		}
+		viewer {
+			id
+			name
+		}
 	}
 }
