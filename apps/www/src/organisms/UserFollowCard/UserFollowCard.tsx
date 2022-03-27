@@ -27,6 +27,7 @@ const StyledAvatar = tw(UserAvatar)`
 `;
 
 const Details = tw.div`
+	self-stretch
 	flex-grow
 	flex
 	flex-col
@@ -41,6 +42,7 @@ const UserName = tw(Anchor)`
 `;
 
 const BioContainer = tw.a`
+	self-stretch
 	flex-grow
 	focus:ring-0
 `;
@@ -107,13 +109,11 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 				<NextLink href="/[userName]" as={`/${user.name}`} passHref>
 					<UserName>{user.name}</UserName>
 				</NextLink>
-				{user.description && (
-					<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-						<BioContainer tabIndex={-1}>
-							<Bio tw="mt-1">{user.description}</Bio>
-						</BioContainer>
-					</NextLink>
-				)}
+				<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+					<BioContainer tabIndex={-1}>
+						{user.description && <Bio tw="mt-1">{user.description}</Bio>}
+					</BioContainer>
+				</NextLink>
 				{!!skills.length && (
 					<Tags type="positive" tw="mt-2">
 						{skills.map((skill) => (

@@ -1,6 +1,7 @@
 import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -16,6 +17,8 @@ const Root = tw(Paper)`
 	flex
 	items-start
 	p-4
+	cursor-pointer
+	hover:bg-indigo-50
 `;
 
 const StyledAvatar = tw(UserAvatar)`
@@ -23,6 +26,7 @@ const StyledAvatar = tw(UserAvatar)`
 `;
 
 const Details = tw.div`
+	self-stretch
 	flex-grow
 	flex
 	flex-col
@@ -34,6 +38,12 @@ const UserName = tw(Anchor)`
 	text-lg
 	leading-none
 	font-semibold
+`;
+
+const BioContainer = tw.a`
+	self-stretch
+	flex-grow
+	focus:ring-0
 `;
 
 const Bio = tw.p`
@@ -60,6 +70,7 @@ export interface UserFriendCardProps {
 export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((props, ref) => {
 	const { className, style, user } = props;
 
+	const router = useRouter();
 	const { status } = useSession();
 
 	const [{ fetching: requesting }, friendRequest] = useFriendRequestUserMutation();
@@ -74,7 +85,14 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 	const loading: boolean = requesting || unfriending;
 
 	return (
-		<Root ref={ref} className={className} style={style}>
+		<Root
+			ref={ref}
+			className={className}
+			onClick={async () => {
+				await router.push("/[userName]", `/${user.name}`);
+			}}
+			style={style}
+		>
 			{user.image && (
 				<StyledAvatar
 					border={3}
@@ -88,7 +106,11 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 				<NextLink href="/[userName" as={`/${user.name}`} passHref>
 					<UserName>{user.name}</UserName>
 				</NextLink>
-				{user.description && <Bio tw="mt-1">{user.description}</Bio>}
+				<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+					<BioContainer tabIndex={-1}>
+						{user.description && <Bio tw="mt-1">{user.description}</Bio>}
+					</BioContainer>
+				</NextLink>
 				{!!skills.length && (
 					<Tags type="positive" tw="mt-2">
 						{skills.map((skill) => (
@@ -98,7 +120,13 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 								as={`/s/${skill.owner}/${skill.name}`}
 								passHref
 							>
-								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+								<Tags.Tag
+									id={skill.id}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									title={`${skill.owner}/${skill.name}`}
+								>
 									{skill.name}
 								</Tags.Tag>
 							</NextLink>
@@ -122,7 +150,13 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 								as={`/s/${skill.owner}/${skill.name}`}
 								passHref
 							>
-								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+								<Tags.Tag
+									id={skill.id}
+									onClick={(e) => {
+										e.stopPropagation();
+									}}
+									title={`${skill.owner}/${skill.name}`}
+								>
 									{skill.name}
 								</Tags.Tag>
 							</NextLink>
@@ -142,7 +176,9 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 				<Actions tw="ml-4">
 					<FollowButton
 						disabled={loading}
-						onClick={async () => {
+						onClick={async (e) => {
+							e.stopPropagation();
+
 							user.viewerIsFriend
 								? await unfriend({ where: { id: user.id } }).catch(() => null)
 								: await friendRequest({ where: { id: user.id } }).catch(() => null);

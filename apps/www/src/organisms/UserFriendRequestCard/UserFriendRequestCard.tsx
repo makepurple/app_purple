@@ -1,6 +1,7 @@
-import { Anchor, Button, Paper, Spinner, Tags } from "@makepurple/components";
+import { Anchor, Button, Paper, Spinner, Tags, toast } from "@makepurple/components";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
 import tw from "twin.macro";
 import {
@@ -16,6 +17,8 @@ const Root = tw(Paper)`
 	flex
 	items-start
 	p-4
+	cursor-pointer
+	hover:bg-indigo-50
 `;
 
 const StyledAvatar = tw(UserAvatar)`
@@ -23,6 +26,7 @@ const StyledAvatar = tw(UserAvatar)`
 `;
 
 const Details = tw.div`
+	self-stretch
 	flex-grow
 	flex
 	flex-col
@@ -34,6 +38,12 @@ const UserName = tw(Anchor)`
 	text-lg
 	leading-none
 	font-semibold
+`;
+
+const BioContainer = tw.a`
+	self-stretch
+	flex-grow
+	focus:ring-0
 `;
 
 const Bio = tw.p`
@@ -64,7 +74,8 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 	(props, ref) => {
 		const { className, style, user } = props;
 
-		const { status } = useSession();
+		const router = useRouter();
+		const { status } = useSession({ required: true });
 
 		const [{ fetching: accepting }, acceptRequest] = useAcceptFriendshipMutation();
 		const [{ fetching: rejecting }, rejectRequest] = useRejectFriendshipMutation();
@@ -78,7 +89,14 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 		const desiredSkillsExtra = user.desiredSkills.totalCount - MAX_SKILLS_SHOWN;
 
 		return (
-			<Root ref={ref} className={className} style={style}>
+			<Root
+				ref={ref}
+				className={className}
+				onClick={async () => {
+					await router.push("/[userName]", `/${user.name}`);
+				}}
+				style={style}
+			>
 				{user.image && (
 					<StyledAvatar
 						border={3}
@@ -92,7 +110,11 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 					<NextLink href="/[userName" as={`/${user.name}`} passHref>
 						<UserName>{user.name}</UserName>
 					</NextLink>
-					{user.description && <Bio tw="mt-1">{user.description}</Bio>}
+					<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+						<BioContainer tabIndex={-1}>
+							{user.description && <Bio tw="mt-1">{user.description}</Bio>}
+						</BioContainer>
+					</NextLink>
 					{!!skills.length && (
 						<Tags type="positive" tw="mt-2">
 							{skills.map((skill) => (
@@ -102,7 +124,13 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 									as={`/s/${skill.owner}/${skill.name}`}
 									passHref
 								>
-									<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+									<Tags.Tag
+										id={skill.id}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+										title={`${skill.owner}/${skill.name}`}
+									>
 										{skill.name}
 									</Tags.Tag>
 								</NextLink>
@@ -126,7 +154,13 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 									as={`/s/${skill.owner}/${skill.name}`}
 									passHref
 								>
-									<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+									<Tags.Tag
+										id={skill.id}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+										title={`${skill.owner}/${skill.name}`}
+									>
 										{skill.name}
 									</Tags.Tag>
 								</NextLink>
@@ -146,12 +180,22 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 					<Actions tw="ml-4">
 						<Action
 							disabled={fetching || !user.viewerCanFriend}
-							onClick={async () => {
+							onClick={async (e) => {
+								e.stopPropagation();
+
 								if (!user.viewerCanFriend || user.viewerIsFriend) return;
 
 								const didSucceed = await acceptRequest({ where: { id: user.id } })
 									.then((result) => !!result.data?.acceptFriendship)
 									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error(`Could not connect with ${user.name}`);
+
+									return;
+								}
+
+								toast.success(`You're now connected with ${user.name}! 🎉`);
 							}}
 							size="small"
 							type="button"
@@ -160,10 +204,22 @@ export const UserFriendRequestCard = forwardRef<HTMLDivElement, UserFriendReques
 						</Action>
 						<Action
 							disabled={fetching}
-							onClick={async () => {
+							onClick={async (e) => {
+								e.stopPropagation();
+
 								if (user.viewerIsFriend) return;
 
-								await rejectRequest({ where: { id: user.id } }).catch(() => null);
+								const didSucceed = await rejectRequest({ where: { id: user.id } })
+									.then((result) => !!result.data?.rejectFriendship)
+									.catch(() => false);
+
+								if (!didSucceed) {
+									toast.error(`Could not ignore ${user.name}'s request`);
+
+									return;
+								}
+
+								toast.success(`${user.name}'s request has been ignored`);
 							}}
 							size="small"
 							type="button"
