@@ -328,7 +328,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 								<ListItem
 									as="button"
 									onClick={async () => {
-										await signOut({ redirect: false });
+										await signOut();
 
 										onClose?.();
 									}}

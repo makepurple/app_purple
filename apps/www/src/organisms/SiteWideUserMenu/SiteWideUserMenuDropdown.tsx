@@ -201,7 +201,7 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 							<ListItem
 								as="button"
 								onClick={async () => {
-									await signOut({ redirect: false });
+									await signOut();
 								}}
 								type="button"
 								{...itemProps}
