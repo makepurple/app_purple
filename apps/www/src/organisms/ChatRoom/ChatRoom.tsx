@@ -74,6 +74,7 @@ const Title = tw.a`
 `;
 
 const NobodyHere = tw.span`
+	flex-grow
 	font-medium
 	text-gray-500
 `;
@@ -96,7 +97,7 @@ const Messages = tw.div`
 	flex-grow
 	flex
 	flex-col-reverse
-	gap-6
+	gap-4
 	items-stretch
 	overflow-y-scroll
 	px-3
@@ -159,7 +160,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const urqlClient = useClient();
 
 	const [{ data, fetching }] = useGetChatQuery({
-		requestPolicy: "network-only",
+		requestPolicy: "cache-and-network",
 		variables: {
 			messageLimit: CHAT_MESSAGE_BATCH_SIZE,
 			messageOffset: 0,
@@ -340,10 +341,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	}, ms("0.5s"));
 
 	useEffect(() => {
-		return () => {
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			updateCounts({ where: { id: chatId } });
-		};
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		updateCounts({ where: { id: chatId } });
 	}, [chatId, updateCounts]);
 
 	const [inviting, setInviting] = useState<boolean>(false);
@@ -360,36 +359,42 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 						</ParticipantAvatars>
 						<Skeleton tw="h-6 w-24 ml-4" />
 					</>
-				) : firstParticipant ? (
+				) : (
 					<>
-						<ParticipantAvatars>
-							{participants.map(
-								(participant) =>
-									!!participant.image && (
-										<NextLink
-											key={participant.id}
-											href="/[userName]"
-											as={`/${participant.name}`}
-											passHref
-										>
-											<Avatar border={2}>
-												<GitHubAvatarImage
-													alt={participant.name}
-													src={participant.image}
-													height={40}
-													width={40}
-												/>
-											</Avatar>
-										</NextLink>
-									)
-							)}
-						</ParticipantAvatars>
-						<Title tw="ml-4">
-							<ParticipantName>{firstParticipant.name}</ParticipantName>
-							{!!countOthers && (
-								<Others>+{countOthers.toLocaleString()} others</Others>
-							)}
-						</Title>
+						{firstParticipant ? (
+							<>
+								<ParticipantAvatars>
+									{participants.map(
+										(participant) =>
+											!!participant.image && (
+												<NextLink
+													key={participant.id}
+													href="/[userName]"
+													as={`/${participant.name}`}
+													passHref
+												>
+													<Avatar border={2}>
+														<GitHubAvatarImage
+															alt={participant.name}
+															src={participant.image}
+															height={40}
+															width={40}
+														/>
+													</Avatar>
+												</NextLink>
+											)
+									)}
+								</ParticipantAvatars>
+								<Title tw="ml-4">
+									<ParticipantName>{firstParticipant.name}</ParticipantName>
+									{!!countOthers && (
+										<Others>+{countOthers.toLocaleString()} others</Others>
+									)}
+								</Title>
+							</>
+						) : (
+							<NobodyHere tw="ml-3">There&apos;s nobody here...</NobodyHere>
+						)}
 						{!!chat && (
 							<Actions tw="ml-4">
 								<InviteButton
@@ -411,8 +416,6 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 							</Actions>
 						)}
 					</>
-				) : (
-					<NobodyHere tw="ml-3">There&apos;s nobody here...</NobodyHere>
 				)}
 			</Participants>
 			{!!chat && inviting && (
