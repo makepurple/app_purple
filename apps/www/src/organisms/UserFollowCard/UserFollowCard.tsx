@@ -175,12 +175,18 @@ export const UserFollowCard = forwardRef<HTMLDivElement, UserFollowCardProps>((p
 					</Tags>
 				)}
 			</Details>
-			{status === "authenticated" && !isMyCard && (
+			{!isMyCard && (
 				<Actions tw="ml-4">
 					<FollowButton
 						disabled={loading}
 						onClick={async (e) => {
 							e.stopPropagation();
+
+							if (status !== "authenticated") {
+								await router.push("/signup");
+
+								return;
+							}
 
 							const where: UserWhereUniqueInput = {
 								name: user.name
