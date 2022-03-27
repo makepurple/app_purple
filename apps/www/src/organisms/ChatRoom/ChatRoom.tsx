@@ -363,6 +363,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 										>
 											<Avatar border={2}>
 												<GitHubAvatarImage
+													alt={participant.name}
 													src={participant.image}
 													height={40}
 													width={40}

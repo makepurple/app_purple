@@ -166,6 +166,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 								>
 									<Avatar border={2}>
 										<GitHubAvatarImage
+											alt={participant.name}
 											src={participant.image}
 											height={40}
 											width={40}

@@ -131,6 +131,7 @@ export const Page: NextPage<PageProps> = () => {
 									type="button"
 									variant="secondary"
 									tw="flex-shrink-0"
+									aria-label="new chat"
 								>
 									<PlusIcon height={24} width={24} />
 								</AddButton>

@@ -92,7 +92,12 @@ export const ChatRoomMessage = memo(
 					{sender.image && (
 						<NextLink href="/[userName]" as={`/${sender.name}`} passHref>
 							<Avatar border={2} tw="flex-shrink-0">
-								<GitHubAvatarImage src={sender.image} height={48} width={48} />
+								<GitHubAvatarImage
+									alt={sender.name}
+									src={sender.image}
+									height={48}
+									width={48}
+								/>
 							</Avatar>
 						</NextLink>
 					)}

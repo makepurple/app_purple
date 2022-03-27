@@ -290,6 +290,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 						toast.success("Copied!");
 					}}
 					type="button"
+					aria-label="copy"
 				>
 					{readOnly ? (
 						<CopyIcon height={24} width={24} />
@@ -342,8 +343,10 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 						setCode(newValue);
 					}}
 					padding={"0.5rem"}
+					placeholder="// Write some code here!"
 					readOnly={readOnly}
 					value={code}
+					aria-label="code block editor"
 					aria-readonly={readOnly}
 				/>
 				<ContextMenu contentEditable={false} {...contextMenuProps}>
