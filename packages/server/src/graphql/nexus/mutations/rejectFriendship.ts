@@ -1,3 +1,4 @@
+import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { NotFoundError, PrismaUtils } from "../../../utils";
 
@@ -27,6 +28,11 @@ export const rejectFriendship = mutationField("rejectFriendship", {
 					}
 				},
 				data: {
+					activities: {
+						deleteMany: {
+							type: UserActivityType.FriendAcceptUser
+						}
+					},
 					rejectedAt: new Date()
 				}
 			})

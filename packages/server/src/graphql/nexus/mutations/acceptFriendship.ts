@@ -49,6 +49,12 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 			await transaction.friendship.update({
 				where: { id: pendingFriendship.id },
 				data: {
+					activities: {
+						create: {
+							type: UserActivityType.FriendAcceptUser,
+							user: { connect: { id: pendingFriendship.frienderId } }
+						}
+					},
 					rejectedAt: { set: null }
 				}
 			});
