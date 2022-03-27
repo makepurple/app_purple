@@ -300,7 +300,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	useEffect(() => {
 		if (!chat) return;
 
-		const channelName = `chat:${chat.id}`;
+		const channelName = `chat@${chat.id}`;
 		const channel = pusher.subscribe(channelName);
 
 		channel.bind("chat-message-event", (eventData: { sender: string; message: string }) => {

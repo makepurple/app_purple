@@ -95,7 +95,7 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 
 		if (!record) throw new Error();
 
-		await pusher.trigger(`chat:${chat.id}`, "chat-message-event", {
+		await pusher.trigger(`chat@${chat.id}`, "chat-message-event", {
 			sender: user.id,
 			message: record.id
 		});
