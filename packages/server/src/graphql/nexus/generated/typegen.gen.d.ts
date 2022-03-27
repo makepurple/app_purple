@@ -3197,6 +3197,9 @@ export interface NexusGenArgTypes {
     leaveChat: { // args
       where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
     }
+    openChat: { // args
+      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
+    }
     publishPost: { // args
       data: NexusGenInputs['PostPublishInput']; // PostPublishInput!
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!

@@ -739,7 +739,7 @@ type Mutation {
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
   leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
   ok: Boolean!
-  openChat: OpenChatPayload!
+  openChat(where: ChatWhereUniqueInput!): OpenChatPayload!
   openMessages: OpenMessagesPayload!
   openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!

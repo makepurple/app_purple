@@ -32,6 +32,7 @@ import {
 	GetChatQuery,
 	GetChatQueryVariables,
 	useGetChatQuery,
+	useOpenChatMutation,
 	useSendChatMessageMutation
 } from "../../graphql";
 import { usePusher } from "../../hooks";
@@ -251,6 +252,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const fetchingHistorical: boolean = fetching || loadMore || loading;
 
 	const [{ fetching: sendingMessage }, sendMessage] = useSendChatMessageMutation();
+	const [, updateCounts] = useOpenChatMutation();
 
 	const {
 		control,
@@ -336,6 +338,13 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 				setMessages((oldMessages) => [...newMessages, ...oldMessages]);
 			});
 	}, ms("0.5s"));
+
+	useEffect(() => {
+		return () => {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			updateCounts({ where: { id: chatId } });
+		};
+	}, [chatId, updateCounts]);
 
 	const [inviting, setInviting] = useState<boolean>(false);
 
