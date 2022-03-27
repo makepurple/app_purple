@@ -1,4 +1,3 @@
-import { Chat } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -18,49 +17,50 @@ export const createChat = mutationField("createChat", {
 		 * @author David Lee
 		 * @date January 17, 2022
 		 */
-		const invitees = await prisma.user.findMany({
-			where: {
-				...PrismaUtils.nonNull(args.data.users),
-				friending: { some: { friender: { id: { equals: user.id } } } }
-			}
-		});
+		const invitees = await prisma.user
+			.findUnique({ where: { id: user.id } })
+			.friending({
+				where: {
+					friender: { id: { equals: user.id } },
+					friending: {
+						friending: {
+							some: {
+								AND: [
+									{ friending: { id: { equals: user.id } } },
+									PrismaUtils.nonNull(args.data.users)
+								]
+							}
+						}
+					},
+					rejectedAt: { equals: null }
+				},
+				include: { friending: true }
+			})
+			.then((items) => items.map((item) => item.friending));
 
 		const inviteeIds = invitees.map((invitee) => invitee.id);
 
-		let chat: Chat | null;
-
-		chat = await prisma.chat.findFirst({
-			where: {
-				users: {
-					every: {
-						id: { in: [user.id, ...inviteeIds] }
-					},
-					none: {
-						id: { notIn: [user.id, ...inviteeIds] }
+		const record = await prisma.$transaction(async (transaction) => {
+			const chat =
+				(await transaction.chat.findFirst({
+					where: {
+						users: {
+							every: { id: { in: [user.id, ...inviteeIds] } },
+							none: { id: { notIn: [user.id, ...inviteeIds] } }
+						}
 					}
-				}
-			}
-		});
-
-		if (!chat) {
-			chat = await prisma.chat.create({
-				data: {
-					users: {
-						create: [
-							{
-								user: { connect: { id: user.id } }
-							},
-							...inviteeIds.map((inviteeId) => ({
-								user: { connect: { id: inviteeId } }
-							}))
-						]
+				})) ??
+				(await transaction.chat.create({
+					data: {
+						users: {
+							createMany: {
+								data: [user.id, ...inviteeIds].map((userId) => ({ userId }))
+							}
+						}
 					}
-				}
-			});
-		}
+				}));
 
-		if (args.data.message) {
-			chat = await prisma.chat.update({
+			return await transaction.chat.update({
 				where: {
 					id: chat.id
 				},
@@ -73,8 +73,8 @@ export const createChat = mutationField("createChat", {
 					}
 				}
 			});
-		}
+		});
 
-		return { record: chat };
+		return { record };
 	}
 });
