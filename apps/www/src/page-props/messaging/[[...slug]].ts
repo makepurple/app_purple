@@ -1,16 +1,7 @@
 import { InferGetServerSidePropsType } from "next";
 import { getSession } from "next-auth/react";
 import { ssrExchange } from "urql";
-import {
-	addUrqlState,
-	createUrqlClient,
-	GetChatDocument,
-	GetChatQuery,
-	GetChatQueryVariables,
-	GetChatsDocument,
-	GetChatsQuery,
-	GetChatsQueryVariables
-} from "../../graphql";
+import { addUrqlState, createUrqlClient, GetChatDocument, GetChatsDocument } from "../../graphql";
 import { NextUtils } from "../../utils";
 
 const BATCH_SIZE = 20;
@@ -27,7 +18,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 	await NextUtils.concurrent([
 		!!chatId &&
 			urqlClient
-				.query<GetChatQuery, GetChatQueryVariables>(GetChatDocument, {
+				.query(GetChatDocument, {
 					messageLimit: BATCH_SIZE,
 					messageOffset: 0,
 					where: {
@@ -36,7 +27,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				})
 				.toPromise(),
 		urqlClient
-			.query<GetChatsQuery, GetChatsQueryVariables>(GetChatsDocument, {
+			.query(GetChatsDocument, {
 				first: BATCH_SIZE,
 				where: {
 					user: {
