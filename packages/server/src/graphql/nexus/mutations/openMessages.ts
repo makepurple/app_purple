@@ -3,8 +3,8 @@ import { NotificationType } from "@prisma/client";
 import { mutationField, nonNull } from "nexus";
 import { Logger } from "../../../utils";
 
-export const openNotifications = mutationField("openNotifications", {
-	type: nonNull("OpenNotificationsPayload"),
+export const openMessages = mutationField("openMessages", {
+	type: nonNull("OpenMessagesPayload"),
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
@@ -21,7 +21,7 @@ export const openNotifications = mutationField("openNotifications", {
 		await prisma.notification
 			.deleteMany({
 				where: {
-					type: { not: { equals: NotificationType.ChatMessageReceived } },
+					type: { equals: NotificationType.ChatMessageReceived },
 					user: { id: { equals: user.id } },
 					updatedAt: {
 						lt: dayjs().subtract(1, "month").toDate()
@@ -36,7 +36,7 @@ export const openNotifications = mutationField("openNotifications", {
 
 		const record = await prisma.user.update({
 			where: { id: user.id },
-			data: { notificationsLastOpenedAt: new Date() }
+			data: { messagesLastOpenedAt: new Date() }
 		});
 
 		return { record };

@@ -817,8 +817,31 @@ export const User = objectType({
 				return parent.id === user?.id;
 			},
 			resolve: async (parent, args, { prisma }) => {
-				const lastOpenedAt: Date | undefined =
+				const lastOpenedAt =
 					args.where?.opened === false ? parent.notificationsLastOpenedAt : undefined;
+
+				const where: Prisma.NotificationWhereInput = {
+					type: {
+						not: {
+							equals: NotificationType.ChatMessageReceived
+						}
+					},
+					updatedAt: { gt: lastOpenedAt },
+					OR: [
+						{
+							type: NotificationType.CodeExampleCommented,
+							codeExample: {}
+						},
+						{
+							type: NotificationType.FriendshipAccepted,
+							friendship: {}
+						},
+						{
+							type: NotificationType.PostCommented,
+							post: {}
+						}
+					]
+				};
 
 				const connection = await PrismaUtils.findManyCursorConnection<any, { id: string }>(
 					async ({ cursor, skip, take }) =>
@@ -831,30 +854,7 @@ export const User = objectType({
 										cursor,
 										skip,
 										take,
-										where: {
-											...(args.where?.type
-												? { type: { in: args.where.type } }
-												: {}),
-											updatedAt: { gt: lastOpenedAt },
-											OR: [
-												{
-													type: NotificationType.ChatMessageReceived,
-													chat: {}
-												},
-												{
-													type: NotificationType.CodeExampleCommented,
-													codeExample: {}
-												},
-												{
-													type: NotificationType.FriendshipAccepted,
-													friendship: {}
-												},
-												{
-													type: NotificationType.PostCommented,
-													post: {}
-												}
-											]
-										},
+										where,
 										orderBy: [{ updatedAt: "desc" }]
 									})
 									.then((items) => {
@@ -863,14 +863,7 @@ export const User = objectType({
 											...item
 										}));
 									}),
-					() =>
-						prisma.notification.count({
-							where: {
-								...(args.where?.type ? { type: { in: args.where.type } } : {}),
-								user: { id: { equals: parent.id } },
-								updatedAt: { gt: lastOpenedAt }
-							}
-						}),
+					() => prisma.notification.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);

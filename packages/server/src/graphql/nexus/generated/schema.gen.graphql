@@ -752,6 +752,7 @@ type Mutation {
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
   leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
   ok: Boolean!
+  openMessages: OpenMessagesPayload!
   openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(where: UserWhereUniqueInput!): RejectFriendshipPayload!
@@ -872,7 +873,13 @@ enum NotificationType {
 
 input NotificationWhereInput {
   opened: Boolean
-  type: [NotificationType!]
+}
+
+type OpenMessagesPayload implements MutationPayload {
+  errors: [MutationError!]
+  query: Query!
+  record: User
+  viewer: User
 }
 
 type OpenNotificationsPayload implements MutationPayload {
