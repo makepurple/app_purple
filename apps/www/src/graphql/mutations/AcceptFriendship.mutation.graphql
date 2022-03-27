@@ -8,6 +8,9 @@ mutation AcceptFriendship($where: UserWhereUniqueInput!) {
 		}
 		viewer {
 			id
+			friends(first: 0) {
+				totalCount
+			}
 			name
 		}
 	}

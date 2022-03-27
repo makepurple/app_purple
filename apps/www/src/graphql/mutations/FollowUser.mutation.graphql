@@ -13,6 +13,9 @@ mutation FollowUser($where: UserWhereUniqueInput!) {
 		}
 		viewer {
 			id
+			following(first: 0) {
+				totalCount
+			}
 			name
 		}
 	}
