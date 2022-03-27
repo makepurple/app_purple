@@ -65,7 +65,7 @@ export const Page: NextPage<PageProps> = () => {
 	const [, updateCounts] = useOpenNotificationsMutation();
 
 	const notifications = data?.viewer?.notifications.nodes ?? [];
-	const unopenedCount = countData?.viewer?.notifications.totalCount ?? 0;
+	const unopenedCount = countData?.viewer?.newNotificationsCount ?? 0;
 
 	useEffect(() => {
 		return () => {

@@ -89,7 +89,7 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 		requestPolicy: "cache-only"
 	});
 
-	const messageCount = notificationsData?.viewer?.messages.totalCount ?? 0;
+	const messageCount = notificationsData?.viewer?.newMessagesCount ?? 0;
 
 	const user = session?.user;
 

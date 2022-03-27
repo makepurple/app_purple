@@ -170,8 +170,8 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		requestPolicy: "cache-only"
 	});
 
-	const messageCount = notificationsData?.viewer?.messages.totalCount ?? 0;
-	const notificationCount = notificationsData?.viewer?.notifications.totalCount ?? 0;
+	const messageCount = notificationsData?.viewer?.newMessagesCount ?? 0;
+	const notificationCount = notificationsData?.viewer?.newNotificationsCount ?? 0;
 
 	useEffect(() => {
 		const unsubscribeScrollY = scrollY.onChange((y) => {

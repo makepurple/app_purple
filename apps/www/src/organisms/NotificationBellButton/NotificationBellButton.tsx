@@ -50,7 +50,7 @@ export const NotificationBellButton: FC<NotificationBellButtonProps> = ({ classN
 		requestPolicy: "cache-first"
 	});
 
-	const count = data?.viewer?.notifications.totalCount ?? 0;
+	const count = data?.viewer?.newNotificationsCount ?? 0;
 
 	if (status !== "authenticated") return null;
 
