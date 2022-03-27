@@ -153,7 +153,7 @@ export const Page: NextPage<PageProps> = () => {
 					{topFade && <FadedEdge side="top" />}
 					{bottomFade && <FadedEdge side="bottom" />}
 					<Chats ref={chatRef}>
-						<ChatList />
+						<ChatList selectedChatId={chatId} />
 					</Chats>
 				</ChatsContainer>
 			</SideBar>
