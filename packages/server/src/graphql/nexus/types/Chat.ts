@@ -78,6 +78,45 @@ export const Chat = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("newMessagesCount", {
+			authorize: (parent, args, { user }) => {
+				return !!user;
+			},
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) throw new Error();
+
+				const lastOpenedAt = await prisma.user
+					.findUnique({
+						where: { id: user.id },
+						select: { messagesLastOpenedAt: true }
+					})
+					.then((result) => result?.messagesLastOpenedAt);
+
+				return await prisma.chatMessage.count({
+					where: {
+						chat: { id: { equals: parent.id } },
+						createdAt: { gt: lastOpenedAt }
+					}
+				});
+			}
+		});
+		t.nonNull.boolean("opened", {
+			authorize: (parent, args, { user }) => {
+				return !!user;
+			},
+			resolve: async (parent, args, { prisma, user }) => {
+				if (!user) throw new Error();
+
+				const lastOpenedAt = await prisma.user
+					.findUnique({
+						where: { id: user.id },
+						select: { messagesLastOpenedAt: true }
+					})
+					.then((result) => result?.messagesLastOpenedAt);
+
+				return !!lastOpenedAt && lastOpenedAt >= parent.updatedAt;
+			}
+		});
 		t.nonNull.dateTime("updatedAt");
 		t.nonNull.field("users", {
 			type: "UserConnection",

@@ -6,11 +6,12 @@ export const Notification = interfaceType({
 		t.implements("Node");
 		t.nonNull.boolean("opened", {
 			resolve: async (parent, args, { prisma }) => {
-				const user = await prisma.user.findUnique({
-					where: { id: parent.userId }
-				});
-
-				const lastOpenedAt = user?.notificationsLastOpenedAt;
+				const lastOpenedAt = await prisma.user
+					.findUnique({
+						where: { id: parent.userId },
+						select: { notificationsLastOpenedAt: true }
+					})
+					.then((result) => result?.notificationsLastOpenedAt);
 
 				return !!lastOpenedAt && lastOpenedAt >= parent.updatedAt;
 			}

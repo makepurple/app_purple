@@ -1049,6 +1049,8 @@ export interface NexusGenFieldTypes {
   Chat: { // field return type
     id: string; // ID!
     messages: NexusGenRootTypes['ChatMessageConnection']; // ChatMessageConnection!
+    newMessagesCount: number; // Int!
+    opened: boolean; // Boolean!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
   }
@@ -2039,6 +2041,8 @@ export interface NexusGenFieldTypeNames {
   Chat: { // field return type name
     id: 'ID'
     messages: 'ChatMessageConnection'
+    newMessagesCount: 'Int'
+    opened: 'Boolean'
     updatedAt: 'DateTime'
     users: 'UserConnection'
   }
