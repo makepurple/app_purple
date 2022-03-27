@@ -46,10 +46,14 @@ const SenderName = tw.div`
 	truncate
 `;
 
-const SentAt = tw.div`
-	text-sm
-	leading-none
-	text-gray-500
+const SentAt = styled.div<{ $isViewer: boolean }>`
+	${tw`
+		text-sm
+		leading-none
+		text-gray-500
+	`}
+
+	${({ $isViewer }) => $isViewer && tw`text-right`}
 `;
 
 const Content = tw.div`
@@ -82,13 +86,12 @@ export const ChatRoomMessage = memo(
 
 		const { data: session } = useSession();
 
-		const viewer = session?.user;
-
 		const { content, sender } = chatMessage;
+		const isViewer = session?.user?.name === sender.name;
 
 		return (
 			<Root ref={ref} className={className} style={style}>
-				<MessageInfo $isViewer={viewer?.name === sender.name}>
+				<MessageInfo $isViewer={isViewer}>
 					{sender.image && (
 						<NextLink href="/[userName]" as={`/${sender.name}`} passHref>
 							<Avatar border={2} tw="flex-shrink-0">
@@ -103,7 +106,9 @@ export const ChatRoomMessage = memo(
 					)}
 					<SenderInfo>
 						<SenderName>{sender.name}</SenderName>
-						<SentAt>{dayjs(chatMessage.createdAt).fromNow()}</SentAt>
+						<SentAt $isViewer={isViewer}>
+							{dayjs(chatMessage.createdAt).fromNow()}
+						</SentAt>
 					</SenderInfo>
 				</MessageInfo>
 				<Content>
