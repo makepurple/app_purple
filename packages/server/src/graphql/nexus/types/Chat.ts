@@ -6,6 +6,27 @@ export const Chat = objectType({
 	name: "Chat",
 	definition: (t) => {
 		t.implements("Node");
+		t.nonNull.string("channelName", {
+			authorize: async (parent, args, { prisma, user }) => {
+				if (!user) return false;
+
+				const chat = await prisma.chatsOnUsers
+					.findUnique({
+						where: {
+							chatId_userId: {
+								chatId: parent.id,
+								userId: user.id
+							}
+						}
+					})
+					.chat();
+
+				return !!chat;
+			},
+			resolve: (parent) => {
+				return `chat@${parent.id}`;
+			}
+		});
 		t.nonNull.dateTime("lastOpenedAt", {
 			authorize: async (parent, args, { prisma, user }) => {
 				if (!user) return false;

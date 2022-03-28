@@ -1051,6 +1051,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Chat: { // field return type
+    channelName: string; // String!
     id: string; // ID!
     lastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     messages: NexusGenRootTypes['ChatMessageConnection']; // ChatMessageConnection!
@@ -2051,6 +2052,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Chat: { // field return type name
+    channelName: 'String'
     id: 'ID'
     lastOpenedAt: 'DateTime'
     messages: 'ChatMessageConnection'

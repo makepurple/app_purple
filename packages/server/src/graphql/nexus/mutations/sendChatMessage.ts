@@ -43,6 +43,14 @@ export const sendChatMessage = mutationField("sendChatMessage", {
 						include: {
 							users: {
 								where: {
+									/**
+									 * @description Get users that aren't the viewer, and haven't
+									 * ever received a notification for this chat. We will create
+									 * notifications for these users, and update the notifications
+									 * for the other users.
+									 * @author David Lee
+									 * @date March 27, 2022
+									 */
 									user: {
 										id: { not: { equals: user.id } },
 										notifications: {

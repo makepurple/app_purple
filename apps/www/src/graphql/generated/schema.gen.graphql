@@ -26,6 +26,7 @@ scalar BigInt
 scalar Bytes
 
 type Chat implements Node {
+  channelName: String!
   id: ID!
   lastOpenedAt: DateTime!
   messages(after: String, before: String, first: Int, last: Int, offset: Int): ChatMessageConnection!

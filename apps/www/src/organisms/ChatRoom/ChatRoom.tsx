@@ -173,6 +173,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const [messages, setMessages] = useState<readonly ChatRoomMessageChatMessageFragment[]>([]);
 
 	const chat = data?.chat;
+	const channelName = chat?.channelName;
 	const users = useMemo(() => chat?.users.nodes ?? [], [chat]);
 
 	const participants = useMemo(
@@ -298,9 +299,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const [messageIdsQ, setMessageIdsQ] = useState<readonly string[]>([]);
 
 	useEffect(() => {
-		if (!chat) return;
+		if (!channelName) return;
 
-		const channelName = `chat@${chat.id}`;
 		const channel = pusher.subscribe(channelName);
 
 		channel.bind("chat-message-event", (eventData: { sender: string; message: string }) => {
@@ -310,7 +310,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 		return () => {
 			pusher.unsubscribe(channelName);
 		};
-	}, [chat, pusher]);
+	}, [channelName, pusher]);
 
 	/**
 	 * !HACK

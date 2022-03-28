@@ -5,6 +5,7 @@ query GetChat(
 ) {
 	chat(where: $where) {
 		id
+		channelName
 		messages(
 			first: $messageLimit
 			offset: $messageOffset
