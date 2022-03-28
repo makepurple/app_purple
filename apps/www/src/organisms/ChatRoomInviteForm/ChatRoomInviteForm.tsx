@@ -110,7 +110,7 @@ export const ChatRoomInviteForm: FC<ChatRoomInviteFormProps> = ({
 				))}
 				<StyledFriendAutoSuggest
 					onSelect={(newInvitee) => {
-						users.append({ name: newInvitee.name });
+						users.append({ name: newInvitee.login });
 					}}
 					placeholder="Invite members by name"
 					aria-label="new invitee"
