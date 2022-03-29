@@ -1840,8 +1840,11 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
     followers: NexusGenRootTypes['UserConnection']; // UserConnection!
+    followersCount: number; // Int!
     following: NexusGenRootTypes['FollowConnection']; // FollowConnection!
+    followingCount: number; // Int!
     friendRequestsReceived: NexusGenRootTypes['UserConnection']; // UserConnection!
+    friendRequestsReceivedCount: number; // Int!
     friendRequestsSent: NexusGenRootTypes['UserConnection']; // UserConnection!
     friends: NexusGenRootTypes['UserConnection']; // UserConnection!
     friendsCount: number; // Int!
@@ -2842,8 +2845,11 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     experiences: 'ExperienceConnection'
     followers: 'UserConnection'
+    followersCount: 'Int'
     following: 'FollowConnection'
+    followingCount: 'Int'
     friendRequestsReceived: 'UserConnection'
+    friendRequestsReceivedCount: 'Int'
     friendRequestsSent: 'UserConnection'
     friends: 'UserConnection'
     friendsCount: 'Int'
