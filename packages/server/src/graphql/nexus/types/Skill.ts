@@ -142,6 +142,18 @@ export const Skill = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("followersCount", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.skill
+					.findUnique({
+						where: { id: parent.id },
+						select: {
+							_count: { select: { followedBy: true } }
+						}
+					})
+					.then((result) => result?._count.followedBy ?? 0);
+			}
+		});
 		t.implements("Node");
 		t.nonNull.field("posts", {
 			type: "PostConnection",

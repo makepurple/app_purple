@@ -1,8 +1,0 @@
-query GetUserFriendRequestCount {
-	viewer {
-		id
-		friendRequestsReceived(first: 0) {
-			totalCount
-		}
-	}
-}

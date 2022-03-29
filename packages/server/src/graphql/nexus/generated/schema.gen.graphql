@@ -1161,6 +1161,7 @@ type Skill implements Followable & Node & WithGitHubRepository {
   codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
   desiringUsers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   followers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  followersCount: Int!
   github: GitHubRepository!
   id: ID!
   name: String!

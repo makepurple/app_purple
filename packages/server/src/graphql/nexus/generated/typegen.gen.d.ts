@@ -1673,6 +1673,7 @@ export interface NexusGenFieldTypes {
     codeExamples: NexusGenRootTypes['CodeExampleConnection']; // CodeExampleConnection!
     desiringUsers: NexusGenRootTypes['UserConnection']; // UserConnection!
     followers: NexusGenRootTypes['UserConnection']; // UserConnection!
+    followersCount: number; // Int!
     github: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
     id: string; // ID!
     name: string; // String!
@@ -2678,6 +2679,7 @@ export interface NexusGenFieldTypeNames {
     codeExamples: 'CodeExampleConnection'
     desiringUsers: 'UserConnection'
     followers: 'UserConnection'
+    followersCount: 'Int'
     github: 'GitHubRepository'
     id: 'ID'
     name: 'String'

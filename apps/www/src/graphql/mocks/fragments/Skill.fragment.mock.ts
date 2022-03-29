@@ -45,6 +45,7 @@ export const Skill_fragment_mock: Omit<Skill, "github"> & {
 		edges: [],
 		nodes: []
 	},
+	followersCount: 0,
 	github: GitHubRepository_fragment_mock,
 	posts: {
 		__typename: "PostConnection",

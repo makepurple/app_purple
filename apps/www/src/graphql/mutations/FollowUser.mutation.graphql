@@ -2,9 +2,7 @@ mutation FollowUser($where: UserWhereUniqueInput!) {
 	followUser(where: $where) {
 		record {
 			id
-			followers(first: 0) {
-				totalCount
-			}
+			followersCount
 			trophies {
 				id
 				totalFollowers
@@ -13,9 +11,7 @@ mutation FollowUser($where: UserWhereUniqueInput!) {
 		}
 		viewer {
 			id
-			following(first: 0) {
-				totalCount
-			}
+			followingCount
 			name
 		}
 	}

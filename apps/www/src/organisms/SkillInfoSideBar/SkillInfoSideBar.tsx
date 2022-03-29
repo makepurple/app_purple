@@ -170,7 +170,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	style
 }) => {
 	const router = useRouter();
-	const { data: session, status } = useSession();
+	const { status } = useSession();
 
 	const [{ data }, reexecuteQuery] = useGetSkillInfoSideBarQuery({
 		variables: {
@@ -202,7 +202,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 	const license = repository.licenseInfo;
 
 	const viewerFollowing = skill?.viewerFollowing ?? false;
-	const followerCount = skill?.followers.totalCount ?? 0;
+	const followerCount = skill?.followersCount ?? 0;
 
 	const shouldRemoveSkill = skill?.viewerDesiredSkill || skill?.viewerSkill;
 

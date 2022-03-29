@@ -35,9 +35,7 @@ fragment SkillInfoSideBarGitHubRepository on GitHubRepository {
 	pushedAt
 	skill {
 		id
-		followers(first: 0) {
-			totalCount
-		}
+		followersCount
 		name
 		owner
 		viewerDesiredSkill

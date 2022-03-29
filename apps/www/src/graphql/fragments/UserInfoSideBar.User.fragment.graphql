@@ -15,15 +15,9 @@ fragment UserInfoSideBarUser on User {
 			owner
 		}
 	}
-	followers(first: 0) {
-		totalCount
-	}
-	following(first: 0) {
-		totalCount
-	}
-	friends(first: 0) {
-		totalCount
-	}
+	followersCount
+	followingCount
+	friendsCount
 	github {
 		id
 		bio

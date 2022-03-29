@@ -361,7 +361,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 								<FollowAnchor tw="flex items-center">
 									<span tw="whitespace-pre">
 										<FollowCount>
-											{FormatUtils.toGitHubFixed(user.followers.totalCount)}
+											{FormatUtils.toGitHubFixed(user.followersCount)}
 										</FollowCount>{" "}
 										Followers
 									</span>
@@ -375,7 +375,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							>
 								<FollowAnchor>
 									<FollowCount>
-										{FormatUtils.toGitHubFixed(user.following.totalCount)}
+										{FormatUtils.toGitHubFixed(user.followingCount)}
 									</FollowCount>{" "}
 									Following
 								</FollowAnchor>
@@ -388,7 +388,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						>
 							<FollowAnchor>
 								<FollowCount>
-									{FormatUtils.toGitHubFixed(user.friends.totalCount)}
+									{FormatUtils.toGitHubFixed(user.friendsCount)}
 								</FollowCount>{" "}
 								Connections
 							</FollowAnchor>

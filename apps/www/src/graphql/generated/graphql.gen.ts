@@ -303,10 +303,6 @@ export function useGetUserFollowingQuery(options: Omit<Urql.UseQueryArgs<Operati
   return Urql.useQuery<Operations.GetUserFollowingQuery>({ query: Operations.GetUserFollowingDocument, ...options });
 };
 
-export function useGetUserFriendRequestCountQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetUserFriendRequestCountQueryVariables>, 'query'>) {
-  return Urql.useQuery<Operations.GetUserFriendRequestCountQuery>({ query: Operations.GetUserFriendRequestCountDocument, ...options });
-};
-
 export function useGetUserFriendRequestsQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetUserFriendRequestsQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetUserFriendRequestsQuery>({ query: Operations.GetUserFriendRequestsDocument, ...options });
 };
