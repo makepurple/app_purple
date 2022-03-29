@@ -1,10 +1,5 @@
-import {
-	ErrorBoundary,
-	GlobalStyles,
-	LazyMotion,
-	NextProgressBarProps,
-	Toaster
-} from "@makepurple/components";
+import { ErrorBoundary, GlobalStyles, LazyMotion, Toaster } from "@makepurple/components";
+import type { NextProgressBarProps } from "@makepurple/components";
 import ms from "ms";
 import type { NextComponentType } from "next";
 import { SessionProvider } from "next-auth/react";
