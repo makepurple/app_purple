@@ -954,6 +954,7 @@ type Post implements Node {
   """
   viewerUpvote: Boolean
   viewers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  viewersCount: Int!
 }
 
 input PostAuthorNameUrlSlugCompoundUniqueInput {

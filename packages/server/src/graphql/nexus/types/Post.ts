@@ -266,11 +266,7 @@ export const Post = objectType({
 							.findUnique({
 								where: { id: parent.id },
 								include: {
-									_count: {
-										select: {
-											viewers: true
-										}
-									}
+									_count: { select: { viewers: true } }
 								}
 							})
 							.then((result) => result?._count.viewers ?? 0),
@@ -279,6 +275,18 @@ export const Post = objectType({
 				);
 
 				return connection;
+			}
+		});
+		t.nonNull.int("viewersCount", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.post
+					.findUnique({
+						where: { id: parent.id },
+						include: {
+							_count: { select: { viewers: true } }
+						}
+					})
+					.then((result) => result?._count.viewers ?? 0);
 			}
 		});
 		t.boolean("viewerUpvote", {

@@ -1441,6 +1441,7 @@ export type Post = Node & {
    */
   readonly viewerUpvote?: Maybe<Scalars['Boolean']>;
   readonly viewers: UserConnection;
+  readonly viewersCount: Scalars['Int'];
 };
 
 

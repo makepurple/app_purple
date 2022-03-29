@@ -1566,6 +1566,7 @@ export interface NexusGenFieldTypes {
     urlSlug: string; // String!
     viewerUpvote: boolean | null; // Boolean
     viewers: NexusGenRootTypes['UserConnection']; // UserConnection!
+    viewersCount: number; // Int!
   }
   PostConnection: { // field return type
     edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
@@ -2573,6 +2574,7 @@ export interface NexusGenFieldTypeNames {
     urlSlug: 'String'
     viewerUpvote: 'Boolean'
     viewers: 'UserConnection'
+    viewersCount: 'Int'
   }
   PostConnection: { // field return type name
     edges: 'PostEdge'
