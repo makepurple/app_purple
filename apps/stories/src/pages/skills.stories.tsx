@@ -3,8 +3,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock,
-	GetSkills_mock,
-	GetUserFriendRequestCount_mock
+	GetSkills_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/skills";
 import { Page } from "@makepurple/www/src/pages/skills";
@@ -51,8 +50,6 @@ Standard.parameters = {
 				return { data: GetSiteWideSideDrawer_mock };
 			case "GetSkills":
 				return { data: GetSkills_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

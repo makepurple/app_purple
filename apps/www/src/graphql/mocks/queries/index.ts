@@ -25,7 +25,6 @@ export * from "./GetUserCodeExamples.query.mock";
 export * from "./GetUserExperiences.query.mock";
 export * from "./GetUserFollowers.query.mock";
 export * from "./GetUserFollowing.query.mock";
-export * from "./GetUserFriendRequestCount.query.mock";
 export * from "./GetUserFriendRequests.query.mock";
 export * from "./GetUserFriends.query.mock";
 export * from "./GetUserInfoSideBar.query.mock";

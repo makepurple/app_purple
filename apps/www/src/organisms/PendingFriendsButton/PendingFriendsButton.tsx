@@ -50,7 +50,7 @@ export const PendingFriendsButton: FC<PendingFriendsButtonProps> = ({ className,
 		requestPolicy: "cache-first"
 	});
 
-	const count = data?.viewer?.friendRequestsReceived.totalCount ?? 0;
+	const count = data?.viewer?.friendRequestsReceivedCount ?? 0;
 
 	if (status !== "authenticated") return null;
 

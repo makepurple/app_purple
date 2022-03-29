@@ -5,8 +5,7 @@ import {
 	GetSiteWideSideDrawer_mock,
 	GetSkillOwnerExperiencers_mock,
 	GetSkillOwnerInfoSideBar_mock,
-	GetSkillOwnerRepositories_mock,
-	GetUserFriendRequestCount_mock
+	GetSkillOwnerRepositories_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/s/[skillOwner]";
 import { Page } from "@makepurple/www/src/pages/s/[skillOwner]";
@@ -62,8 +61,6 @@ Standard.parameters = {
 				return { data: GetSkillOwnerInfoSideBar_mock };
 			case "GetSkillOwnerRepositories":
 				return { data: GetSkillOwnerRepositories_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

@@ -7,7 +7,7 @@ import { signOut, useSession } from "next-auth/react";
 import { stripUnit } from "polished";
 import React, { FC, Ref, useState } from "react";
 import tw, { styled, theme } from "twin.macro";
-import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
+import { useGetNotificationCountsQuery } from "../../graphql";
 import { BookIcon, ChatIcon, GearIcon, PeopleIcon, SignOutIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
@@ -78,17 +78,11 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 		}
 	);
 
-	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
-		pause: status !== "authenticated",
-		requestPolicy: "cache-first"
-	});
-
-	const invitationsCount = invitationsData?.viewer?.friendRequestsReceived.totalCount ?? 0;
-
 	const [{ data: notificationsData }] = useGetNotificationCountsQuery({
 		requestPolicy: "cache-only"
 	});
 
+	const invitationsCount = notificationsData?.viewer?.friendRequestsReceivedCount ?? 0;
 	const messageCount = notificationsData?.viewer?.newMessagesCount ?? 0;
 
 	const user = session?.user;

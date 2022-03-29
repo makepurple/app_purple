@@ -4,8 +4,7 @@ import {
 	GetFollowableSkills_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
-	GetSiteWideSideDrawer_mock,
-	GetUserFriendRequestCount_mock
+	GetSiteWideSideDrawer_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/feed";
 import { Page } from "@makepurple/www/src/pages/feed";
@@ -54,8 +53,6 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}
@@ -98,8 +95,6 @@ NoActivities.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

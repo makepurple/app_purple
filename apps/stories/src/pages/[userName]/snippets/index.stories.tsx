@@ -5,7 +5,6 @@ import {
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock,
 	GetUserCodeExamples_mock,
-	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
 import { PageProps } from "@makepurple/www/src/page-props/[userName]/snippets";
@@ -54,8 +53,6 @@ Standard.parameters = {
 				return { data: GetUserCodeExamples_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:
@@ -80,8 +77,6 @@ Loading.parameters = {
 				return { data: GetUserCodeExamples_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:
@@ -125,8 +120,6 @@ NoResults.parameters = {
 				};
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			default:

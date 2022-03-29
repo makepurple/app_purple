@@ -3,7 +3,6 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock,
-	GetUserFriendRequestCount_mock,
 	GetUserInfoSideBar_mock,
 	GetUserOverview_mock,
 	SuggestSkillOwners_mock,
@@ -53,8 +52,6 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -81,8 +78,6 @@ NoTrophies.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -125,8 +120,6 @@ NoPosts.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -166,8 +159,6 @@ NoExperiences.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -207,8 +198,6 @@ NoRepositories.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -248,8 +237,6 @@ NoExperiencesRepositories.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":

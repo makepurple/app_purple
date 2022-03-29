@@ -1,9 +1,5 @@
 import { SiteWideUserMenu, SiteWideUserMenuProps } from "@makepurple/www";
-import {
-	GetNotificationCounts_mock,
-	GetPostDraft_mock,
-	GetUserFriendRequestCount_mock
-} from "@makepurple/www/src/graphql/mocks";
+import { GetNotificationCounts_mock, GetPostDraft_mock } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -29,8 +25,6 @@ Template.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			default:
 				return {};
 		}

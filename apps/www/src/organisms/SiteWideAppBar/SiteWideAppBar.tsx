@@ -18,7 +18,7 @@ import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import React, { CSSProperties, FC, useEffect, useState } from "react";
 import tw, { styled } from "twin.macro";
-import { useGetNotificationCountsQuery, useGetUserFriendRequestCountQuery } from "../../graphql";
+import { useGetNotificationCountsQuery } from "../../graphql";
 import { BellIcon, ChatIcon, PeopleIcon } from "../../svgs";
 import { LazySiteWideSearch } from "../SiteWideSearch";
 import { SiteWideUserMenu } from "../SiteWideUserMenu";
@@ -159,17 +159,11 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
-	const [{ data: invitationsData }] = useGetUserFriendRequestCountQuery({
-		pause: status !== "authenticated",
-		requestPolicy: "cache-first"
-	});
-
-	const invitationsCount = invitationsData?.viewer?.friendRequestsReceived.totalCount ?? 0;
-
 	const [{ data: notificationsData }] = useGetNotificationCountsQuery({
 		requestPolicy: "cache-only"
 	});
 
+	const invitationsCount = notificationsData?.viewer?.friendRequestsReceivedCount ?? 0;
 	const messageCount = notificationsData?.viewer?.newMessagesCount ?? 0;
 	const notificationCount = notificationsData?.viewer?.newNotificationsCount ?? 0;
 

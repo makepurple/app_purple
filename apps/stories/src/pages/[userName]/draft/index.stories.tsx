@@ -5,7 +5,6 @@ import {
 	GetPostDraft_mock,
 	GetPost_mock,
 	GetSiteWideSideDrawer_mock,
-	GetUserFriendRequestCount_mock,
 	RemovePostThumbnail_mock,
 	SuggestSkills_mock,
 	UploadPostImage_mock
@@ -56,8 +55,6 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
-			case "GetUserFriendRequestCount":
-				return { data: GetUserFriendRequestCount_mock };
 			case "RemovePostThumbnail":
 				await PromiseUtils.wait(ms("1s"));
 
