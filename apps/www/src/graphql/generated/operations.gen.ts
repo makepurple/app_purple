@@ -2271,10 +2271,14 @@ export type User = Followable & Node & {
   readonly email: Scalars['String'];
   readonly experiences: ExperienceConnection;
   readonly followers: UserConnection;
+  readonly followersCount: Scalars['Int'];
   readonly following: FollowConnection;
+  readonly followingCount: Scalars['Int'];
   readonly friendRequestsReceived: UserConnection;
+  readonly friendRequestsReceivedCount: Scalars['Int'];
   readonly friendRequestsSent: UserConnection;
   readonly friends: UserConnection;
+  readonly friendsCount: Scalars['Int'];
   readonly github: GitHubUser;
   readonly githubUrl: Scalars['URL'];
   readonly id: Scalars['ID'];
