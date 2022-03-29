@@ -143,6 +143,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	followersCount: 0,
 	following: {
 		__typename: "FollowConnection",
 		pageInfo: {
@@ -156,6 +157,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	followingCount: 0,
 	friendRequestsReceived: {
 		__typename: "UserConnection",
 		pageInfo: {
@@ -169,6 +171,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	friendRequestsReceivedCount: 0,
 	friendRequestsSent: {
 		__typename: "UserConnection",
 		pageInfo: {
@@ -195,6 +198,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	friendsCount: 0,
 	github: GitHubUser_fragment_mock,
 	githubUrl: "https://github.com/leedavidcs",
 	id: "0",
