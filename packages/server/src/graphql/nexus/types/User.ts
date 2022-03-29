@@ -681,6 +681,23 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("friendsCount", {
+			resolve: async (parent, args, { prisma }) => {
+				const where: Prisma.FriendshipWhereInput = {
+					friender: { id: { equals: parent.id } },
+					friending: {
+						friending: {
+							some: {
+								friending: { id: { equals: parent.id } }
+							}
+						}
+					},
+					rejectedAt: { equals: null }
+				};
+
+				return await prisma.friendship.count({ where });
+			}
+		});
 		t.nonNull.field("friends", {
 			type: "UserConnection",
 			args: {

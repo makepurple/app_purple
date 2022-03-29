@@ -1844,6 +1844,7 @@ export interface NexusGenFieldTypes {
     friendRequestsReceived: NexusGenRootTypes['UserConnection']; // UserConnection!
     friendRequestsSent: NexusGenRootTypes['UserConnection']; // UserConnection!
     friends: NexusGenRootTypes['UserConnection']; // UserConnection!
+    friendsCount: number; // Int!
     github: NexusGenRootTypes['GitHubUser']; // GitHubUser!
     githubUrl: NexusGenScalars['URL']; // URL!
     id: string; // ID!
@@ -2845,6 +2846,7 @@ export interface NexusGenFieldTypeNames {
     friendRequestsReceived: 'UserConnection'
     friendRequestsSent: 'UserConnection'
     friends: 'UserConnection'
+    friendsCount: 'Int'
     github: 'GitHubUser'
     githubUrl: 'URL'
     id: 'ID'
