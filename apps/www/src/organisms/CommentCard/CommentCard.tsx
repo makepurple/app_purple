@@ -189,7 +189,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 		}
 	});
 
-	const repliesCount = comment.replies.totalCount;
+	const repliesCount = comment.repliesCount;
 
 	const replies = data?.comment?.replies.nodes ?? [];
 	const pageInfo = data?.comment?.replies.pageInfo;

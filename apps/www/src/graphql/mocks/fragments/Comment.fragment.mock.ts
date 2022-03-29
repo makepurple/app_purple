@@ -51,6 +51,7 @@ export const Comment_fragment_mock: Comment = {
 		edges: [],
 		nodes: []
 	},
+	repliesCount: 0,
 	updatedAt: dayjs(1318781876406).toDate(),
 	upvoters: {
 		__typename: "UserConnection" as const,
