@@ -292,6 +292,7 @@ export type Comment = Node & {
   readonly post?: Maybe<Post>;
   readonly postId?: Maybe<Scalars['String']>;
   readonly replies: CommentConnection;
+  readonly repliesCount: Scalars['Int'];
   readonly updatedAt: Scalars['DateTime'];
   readonly upvoters: UserConnection;
   readonly upvotes: Scalars['Int'];

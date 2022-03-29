@@ -209,6 +209,7 @@ type Comment implements Node {
   post: Post
   postId: String
   replies(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
+  repliesCount: Int!
   updatedAt: DateTime!
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!

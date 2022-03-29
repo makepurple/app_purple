@@ -1137,6 +1137,7 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Post'] | null; // Post
     postId: string | null; // String
     replies: NexusGenRootTypes['CommentConnection']; // CommentConnection!
+    repliesCount: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     upvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     upvotes: number; // Int!
@@ -2143,6 +2144,7 @@ export interface NexusGenFieldTypeNames {
     post: 'Post'
     postId: 'String'
     replies: 'CommentConnection'
+    repliesCount: 'Int'
     updatedAt: 'DateTime'
     upvoters: 'UserConnection'
     upvotes: 'Int'

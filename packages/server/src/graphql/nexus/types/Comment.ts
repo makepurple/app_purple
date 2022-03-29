@@ -136,6 +136,18 @@ export const Comment = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("repliesCount", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.comment
+					.findUnique({
+						where: { id: parent.id },
+						select: {
+							_count: { select: { replies: true } }
+						}
+					})
+					.then((result) => result?._count.replies ?? 0);
+			}
+		});
 		t.nonNull.dateTime("updatedAt");
 		t.nonNull.field("upvoters", {
 			type: "UserConnection",
