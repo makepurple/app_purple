@@ -63,14 +63,5 @@ query GetUserOverview($name: String!) {
 				...UserOverviewRepositoryCardRepository
 			}
 		}
-		trophies {
-			id
-			totalFollowers
-			totalPostViews
-			totalSkills
-			totalUpvotes
-			totalYearlyCommits
-			totalYearlyPosts
-		}
 	}
 }

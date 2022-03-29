@@ -6,9 +6,9 @@ import {
 	GetUserInfoSideBar_mock
 } from "@makepurple/www/src/graphql/mocks";
 import type { Meta, Story } from "@storybook/react";
-import { getOperationName } from "@urql/core";
 import ms from "ms";
 import React from "react";
+import { getOperationName, Operation } from "urql";
 
 export default {
 	title: "organisms/UserInfoSideBar",
@@ -25,7 +25,7 @@ export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
 	...Template.parameters,
-	urql: async (op: any) => {
+	urql: async (op: Operation) => {
 		switch (getOperationName(op.query)) {
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
@@ -45,7 +45,7 @@ export const ViewerIsFriend = Template.bind({});
 ViewerIsFriend.args = { ...Template.args };
 ViewerIsFriend.parameters = {
 	...Template.parameters,
-	urql: async (op: any) => {
+	urql: async (op: Operation) => {
 		switch (getOperationName(op.query)) {
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
@@ -74,7 +74,7 @@ export const ViewerCantFriend = Template.bind({});
 ViewerCantFriend.args = { ...Template.args };
 ViewerCantFriend.parameters = {
 	...Template.parameters,
-	urql: async (op: any) => {
+	urql: async (op: Operation) => {
 		switch (getOperationName(op.query)) {
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));
@@ -103,7 +103,7 @@ export const ViewerFollowing = Template.bind({});
 ViewerFollowing.args = { ...Template.args };
 ViewerFollowing.parameters = {
 	...Template.parameters,
-	urql: async (op: any) => {
+	urql: async (op: Operation) => {
 		switch (getOperationName(op.query)) {
 			case "CreatePost":
 				await PromiseUtils.wait(ms("1s"));

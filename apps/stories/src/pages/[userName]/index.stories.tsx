@@ -5,6 +5,7 @@ import {
 	GetSiteWideSideDrawer_mock,
 	GetUserInfoSideBar_mock,
 	GetUserOverview_mock,
+	GetUserTrophies_mock,
 	SuggestSkillOwners_mock,
 	SuggestSkills_mock
 } from "@makepurple/www/src/graphql/mocks";
@@ -56,6 +57,8 @@ Standard.parameters = {
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
 				return { data: GetUserOverview_mock };
+			case "GetUserTrophies":
+				return { data: GetUserTrophies_mock };
 			case "SuggestSkillOwners":
 				return { data: SuggestSkillOwners_mock };
 			case "SuggestSkills":
@@ -98,6 +101,8 @@ NoTrophies.parameters = {
 						}
 					}
 				};
+			case "GetUserTrophies":
+				return { data: GetUserTrophies_mock };
 			case "SuggestSkillOwners":
 				return { data: SuggestSkillOwners_mock };
 			case "SuggestSkills":
@@ -137,6 +142,8 @@ NoPosts.parameters = {
 						}
 					}
 				};
+			case "GetUserTrophies":
+				return { data: GetUserTrophies_mock };
 			case "SuggestSkillOwners":
 				return { data: SuggestSkillOwners_mock };
 			case "SuggestSkills":
@@ -176,6 +183,8 @@ NoExperiences.parameters = {
 						}
 					}
 				};
+			case "GetUserTrophies":
+				return { data: GetUserTrophies_mock };
 			case "SuggestSkillOwners":
 				return { data: SuggestSkillOwners_mock };
 			case "SuggestSkills":
@@ -215,6 +224,8 @@ NoRepositories.parameters = {
 						}
 					}
 				};
+			case "GetUserTrophies":
+				return { data: GetUserTrophies_mock };
 			case "SuggestSkillOwners":
 				return { data: SuggestSkillOwners_mock };
 			case "SuggestSkills":
@@ -260,6 +271,8 @@ NoExperiencesRepositories.parameters = {
 						}
 					}
 				};
+			case "GetUserTrophies":
+				return { data: GetUserTrophies_mock };
 			case "SuggestSkillOwners":
 				return { data: SuggestSkillOwners_mock };
 			case "SuggestSkills":

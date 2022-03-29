@@ -30,3 +30,4 @@ export * from "./UserActivityJoined.fragment.mock";
 export * from "./UserActivityPublishPost.fragment.mock";
 export * from "./UserActivityUpvoteCodeExample.fragment.mock";
 export * from "./UserActivityUpvotePost.fragment.mock";
+export * from "./UserTrophies.fragment.mock";

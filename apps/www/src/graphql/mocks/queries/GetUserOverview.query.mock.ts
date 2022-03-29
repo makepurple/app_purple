@@ -6,7 +6,6 @@ import {
 	Repository_fragment_mock,
 	User_fragment_mock
 } from "../fragments";
-import { UserTrophies_fragment_mock } from "../fragments/UserTrophies.fragment.mock";
 
 const CODE_EXAMPLES_SIZE = 2;
 const EXPERIENCES_SIZE = 3;
@@ -77,15 +76,6 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 				node: repository
 			})),
 			nodes: repositories.map((repository) => repository) as any
-		},
-		trophies: {
-			...UserTrophies_fragment_mock,
-			totalFollowers: 5,
-			totalPostViews: 1_700,
-			totalSkills: 42,
-			totalUpvotes: 2_100,
-			totalYearlyCommits: 1_200,
-			totalYearlyPosts: 21
 		}
 	} as any
 };

@@ -13,7 +13,7 @@ import {
 	UserOverviewExperienceCard,
 	UserOverviewRepositoryCard,
 	UserPageLayout,
-	UserTrophy
+	UserTrophies
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]";
 import { CodeIcon, HexagonIcon, NoteIcon, RepoIcon } from "../../svgs";
@@ -23,21 +23,6 @@ const Contents = tw.div`
 	flex-col
 	items-stretch
 	gap-6
-`;
-
-const Trophies = tw(Paper)`
-	grid
-	grid-template-columns[repeat(auto-fit, minmax(6rem, 1fr))]
-	auto-rows-auto
-	gap-2
-	p-3
-`;
-
-const TrophyContainer = tw.a`
-	flex
-	items-stretch
-	cursor-pointer
-	[& > *]:flex-grow
 `;
 
 const ContributionSection = tw(Paper)`
@@ -134,7 +119,6 @@ export const Page: NextPage<PageProps> = () => {
 
 	if (!user) return null;
 
-	const trophies = user.trophies;
 	const contributionCalendar = user.github.contributionCalendar;
 	const post = user.posts.nodes[0] ?? null;
 	const codeExamples = user.codeExamples.nodes ?? [];
@@ -146,44 +130,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
 			<Contents>
-				<Trophies>
-					<TrophyContainer
-						href={user.githubUrl}
-						target="_blank"
-						rel="noreferrer noopener"
-					>
-						<UserTrophy type="yearly-commits" value={trophies.totalYearlyCommits} />
-					</TrophyContainer>
-					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-						<TrophyContainer>
-							<UserTrophy type="yearly-posts" value={trophies.totalYearlyPosts} />
-						</TrophyContainer>
-					</NextLink>
-					<NextLink href="/[userName]/followers" as={`/${userName}/followers`} passHref>
-						<TrophyContainer>
-							<UserTrophy type="followers" value={trophies.totalFollowers} />
-						</TrophyContainer>
-					</NextLink>
-					<NextLink href="/[userName]/activity" as={`/${userName}/activity`} passHref>
-						<TrophyContainer>
-							<UserTrophy type="upvotes" value={trophies.totalUpvotes} />
-						</TrophyContainer>
-					</NextLink>
-					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-						<TrophyContainer>
-							<UserTrophy type="post-views" value={trophies.totalPostViews} />
-						</TrophyContainer>
-					</NextLink>
-					<NextLink
-						href="/[userName]/experiences"
-						as={`/${userName}/experiences`}
-						passHref
-					>
-						<TrophyContainer>
-							<UserTrophy type="skills" value={trophies.totalSkills} />
-						</TrophyContainer>
-					</NextLink>
-				</Trophies>
+				<UserTrophies userName={userName} />
 				<ContributionSection>
 					<ContributionTitle>
 						<Anchor href={user.githubUrl} target="_blank" rel="noreferrer noopener">

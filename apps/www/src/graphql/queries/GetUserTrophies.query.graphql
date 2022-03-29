@@ -1,0 +1,20 @@
+query GetUserTrophies($name: String!) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		githubUrl
+		id
+		name
+		trophies {
+			id
+			totalFollowers
+			totalPostViews
+			totalSkills
+			totalUpvotes
+			totalYearlyCommits
+			totalYearlyPosts
+		}
+	}
+}

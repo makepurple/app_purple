@@ -323,6 +323,10 @@ export function useGetUserRepositoriesQuery(options: Omit<Urql.UseQueryArgs<Oper
   return Urql.useQuery<Operations.GetUserRepositoriesQuery>({ query: Operations.GetUserRepositoriesDocument, ...options });
 };
 
+export function useGetUserTrophiesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserTrophiesQueryVariables>, 'query'>) {
+  return Urql.useQuery<Operations.GetUserTrophiesQuery>({ query: Operations.GetUserTrophiesDocument, ...options });
+};
+
 export function useOkQuery(options?: Omit<Urql.UseQueryArgs<Operations.OkQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.OkQuery>({ query: Operations.OkDocument, ...options });
 };
