@@ -464,18 +464,6 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.int("followersCount", {
-			resolve: async (parent, args, { prisma }) => {
-				return await prisma.user
-					.findUnique({
-						where: { id: parent.id },
-						select: {
-							_count: { select: { followedBy: true } }
-						}
-					})
-					.then((result) => result?._count.followedBy ?? 0);
-			}
-		});
 		t.nonNull.field("followers", {
 			type: "UserConnection",
 			args: {
@@ -522,16 +510,16 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.int("followingCount", {
+		t.nonNull.int("followersCount", {
 			resolve: async (parent, args, { prisma }) => {
 				return await prisma.user
 					.findUnique({
 						where: { id: parent.id },
 						select: {
-							_count: { select: { follows: true } }
+							_count: { select: { followedBy: true } }
 						}
 					})
-					.then((result) => result?._count.follows ?? 0);
+					.then((result) => result?._count.followedBy ?? 0);
 			}
 		});
 		t.nonNull.field("following", {
@@ -596,34 +584,16 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.int("friendRequestsReceivedCount", {
+		t.nonNull.int("followingCount", {
 			resolve: async (parent, args, { prisma }) => {
-				const friendedByIds = await prisma.user
-					.findUnique({ where: { id: parent.id } })
-					.friendedBy({
-						where: {
-							rejectedAt: { equals: null }
-						},
+				return await prisma.user
+					.findUnique({
+						where: { id: parent.id },
 						select: {
-							frienderId: true
+							_count: { select: { follows: true } }
 						}
 					})
-					.then((items) => items.map((item) => item.frienderId));
-
-				const where: Prisma.FriendshipWhereInput = {
-					friender: { id: { in: friendedByIds } },
-					friending: {
-						id: { equals: parent.id },
-						friending: {
-							none: {
-								friending: { id: { in: friendedByIds } }
-							}
-						}
-					},
-					rejectedAt: { equals: null }
-				};
-
-				return await prisma.friendship.count({ where });
+					.then((result) => result?._count.follows ?? 0);
 			}
 		});
 		t.nonNull.field("friendRequestsReceived", {
@@ -688,6 +658,36 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("friendRequestsReceivedCount", {
+			resolve: async (parent, args, { prisma }) => {
+				const friendedByIds = await prisma.user
+					.findUnique({ where: { id: parent.id } })
+					.friendedBy({
+						where: {
+							rejectedAt: { equals: null }
+						},
+						select: {
+							frienderId: true
+						}
+					})
+					.then((items) => items.map((item) => item.frienderId));
+
+				const where: Prisma.FriendshipWhereInput = {
+					friender: { id: { in: friendedByIds } },
+					friending: {
+						id: { equals: parent.id },
+						friending: {
+							none: {
+								friending: { id: { in: friendedByIds } }
+							}
+						}
+					},
+					rejectedAt: { equals: null }
+				};
+
+				return await prisma.friendship.count({ where });
+			}
+		});
 		t.nonNull.field("friendRequestsSent", {
 			type: "UserConnection",
 			args: {
@@ -735,23 +735,6 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.int("friendsCount", {
-			resolve: async (parent, args, { prisma }) => {
-				const where: Prisma.FriendshipWhereInput = {
-					friender: { id: { equals: parent.id } },
-					friending: {
-						friending: {
-							some: {
-								friending: { id: { equals: parent.id } }
-							}
-						}
-					},
-					rejectedAt: { equals: null }
-				};
-
-				return await prisma.friendship.count({ where });
-			}
-		});
 		t.nonNull.field("friends", {
 			type: "UserConnection",
 			args: {
@@ -794,6 +777,23 @@ export const User = objectType({
 				);
 
 				return connection;
+			}
+		});
+		t.nonNull.int("friendsCount", {
+			resolve: async (parent, args, { prisma }) => {
+				const where: Prisma.FriendshipWhereInput = {
+					friender: { id: { equals: parent.id } },
+					friending: {
+						friending: {
+							some: {
+								friending: { id: { equals: parent.id } }
+							}
+						}
+					},
+					rejectedAt: { equals: null }
+				};
+
+				return await prisma.friendship.count({ where });
 			}
 		});
 		t.nonNull.field("github", {
