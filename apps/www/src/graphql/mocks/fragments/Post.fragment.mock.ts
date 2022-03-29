@@ -380,5 +380,6 @@ export const Post_fragment_mock: Post = {
 			startCursor: null
 		}
 	},
+	viewersCount: 0,
 	viewerUpvote: false
 };
