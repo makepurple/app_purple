@@ -144,7 +144,11 @@ export const createCache = (): Exchange => {
 									field.arguments
 								);
 							});
-					} else if (codeExampleId) {
+
+						return;
+					}
+
+					if (codeExampleId) {
 						cache
 							.inspectFields({ __typename: "CodeExample", id: codeExampleId })
 							.filter((field) => field.fieldName === "comments")
@@ -189,7 +193,11 @@ export const createCache = (): Exchange => {
 									field.arguments
 								);
 							});
-					} else if (postId) {
+
+						return;
+					}
+
+					if (postId) {
 						cache
 							.inspectFields({ __typename: "Post", id: postId })
 							.filter((field) => field.fieldName === "comments")
