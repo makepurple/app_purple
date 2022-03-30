@@ -25,15 +25,12 @@ import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
 	ChatRoomMessageChatMessageFragment,
-	GetChatDocument,
 	GetChatHistoricalMessagesDocument,
 	GetChatHistoricalMessagesQuery,
 	GetChatHistoricalMessagesQueryVariables,
 	GetChatMessagesDocument,
 	GetChatMessagesQuery,
 	GetChatMessagesQueryVariables,
-	GetChatQuery,
-	GetChatQueryVariables,
 	useGetChatHistoricalMessagesQuery,
 	useGetChatQuery,
 	useOpenChatMutation,
