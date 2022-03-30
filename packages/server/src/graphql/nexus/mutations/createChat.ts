@@ -43,8 +43,8 @@ export const createChat = mutationField("createChat", {
 				(await transaction.chat.findFirst({
 					where: {
 						users: {
-							every: { id: { in: [user.id, ...inviteeIds] } },
-							none: { id: { notIn: [user.id, ...inviteeIds] } }
+							every: { userId: { in: [user.id, ...inviteeIds] } },
+							none: { userId: { notIn: [user.id, ...inviteeIds] } }
 						}
 					}
 				})) ??
