@@ -60,6 +60,15 @@ export const UserTrophies = objectType({
 					}
 				});
 
+				const codeExampleUpvoters = await prisma.codeExampleUpvoter.aggregate({
+					_count: { _all: true },
+					where: {
+						codeExample: {
+							author: { id: { equals: parent.id } }
+						}
+					}
+				});
+
 				const commentUpvoters = await prisma.commentUpvoter.aggregate({
 					_count: { _all: true },
 					where: {
@@ -70,9 +79,10 @@ export const UserTrophies = objectType({
 				});
 
 				const postUpvotes = postUpvoters._count._all;
+				const codeExampleUpvotes = codeExampleUpvoters._count._all;
 				const commentUpvotes = commentUpvoters._count._all;
 
-				return postUpvotes + commentUpvotes;
+				return postUpvotes + codeExampleUpvotes + commentUpvotes;
 			}
 		});
 		t.nonNull.int("totalYearlyCommits", {
