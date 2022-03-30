@@ -364,6 +364,11 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		updateCounts({ where: { id: chatId } });
+
+		return () => {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			updateCounts({ where: { id: chatId } });
+		};
 	}, [chatId, updateCounts]);
 
 	const [inviting, setInviting] = useState<boolean>(false);

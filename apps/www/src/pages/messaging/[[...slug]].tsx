@@ -110,6 +110,9 @@ export const Page: NextPage<PageProps> = () => {
 	const [, updateCounts] = useOpenMessagesMutation();
 
 	useEffect(() => {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		updateCounts();
+
 		return () => {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			updateCounts();

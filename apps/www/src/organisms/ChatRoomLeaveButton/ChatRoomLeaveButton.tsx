@@ -21,17 +21,15 @@ export const ChatRoomLeaveButton: FC<ChatRoomLeaveButtonProps> = (props) => {
 				Are you sure you want to leave this chat? You can only rejoin if invited again.
 			`}
 			onConfirm={async () => {
+				await router.push("/messaging/[[...slug]]", "/messaging");
+
 				const didSucceed = await leaveChat({ chatId })
 					.then((result) => !!result.data?.leaveChat)
 					.catch(() => false);
 
 				if (!didSucceed) {
 					toast.error("Error while attempting to leave the chat");
-
-					return;
 				}
-
-				await router.push("/messaging/[[...slug]]", "/messaging");
 			}}
 			text="Yes, leave chat"
 		>
