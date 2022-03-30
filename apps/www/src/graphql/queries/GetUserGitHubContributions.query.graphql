@@ -1,0 +1,18 @@
+query GetUserGitHubContributions($name: String!) {
+	user(
+		where: {
+			name: $name
+		}
+	) {
+		id
+		github {
+			id
+			contributionCalendar {
+				totalContributions
+				...UserGitHubContributionHeatmapGitHubUserContributionCalendar
+			}
+		}
+		githubUrl
+		name
+	}
+}

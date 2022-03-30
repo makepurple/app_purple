@@ -7,12 +7,18 @@ import {
 	GetPostDraftDocument,
 	GetPostDraftQuery,
 	GetPostDraftQueryVariables,
+	GetUserGitHubContributionsDocument,
+	GetUserGitHubContributionsQuery,
+	GetUserGitHubContributionsQueryVariables,
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
 	GetUserInfoSideBarQueryVariables,
 	GetUserOverviewDocument,
 	GetUserOverviewQuery,
-	GetUserOverviewQueryVariables
+	GetUserOverviewQueryVariables,
+	GetUserTrophiesDocument,
+	GetUserTrophiesQuery,
+	GetUserTrophiesQueryVariables
 } from "../../graphql";
 import { NextUtils } from "../../utils";
 
@@ -34,6 +40,17 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 			)
 			.toPromise()
 			.then((result) => result.data?.user),
+		urqlClient
+			.query<GetUserGitHubContributionsQuery, GetUserGitHubContributionsQueryVariables>(
+				GetUserGitHubContributionsDocument,
+				{ name: userName }
+			)
+			.toPromise(),
+		urqlClient
+			.query<GetUserTrophiesQuery, GetUserTrophiesQueryVariables>(GetUserTrophiesDocument, {
+				name: userName
+			})
+			.toPromise(),
 		urqlClient
 			.query<GetUserOverviewQuery, GetUserOverviewQueryVariables>(GetUserOverviewDocument, {
 				name: userName

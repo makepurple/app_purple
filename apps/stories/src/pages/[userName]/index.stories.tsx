@@ -3,6 +3,7 @@ import {
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock,
+	GetUserGitHubContributions_mock,
 	GetUserInfoSideBar_mock,
 	GetUserOverview_mock,
 	GetUserTrophies_mock,
@@ -53,6 +54,8 @@ Standard.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserGitHubContributions":
+				return { data: GetUserGitHubContributions_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -81,6 +84,8 @@ NoTrophies.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserGitHubContributions":
+				return { data: GetUserGitHubContributions_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -125,6 +130,8 @@ NoPosts.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserGitHubContributions":
+				return { data: GetUserGitHubContributions_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -166,6 +173,8 @@ NoExperiences.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserGitHubContributions":
+				return { data: GetUserGitHubContributions_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -207,6 +216,8 @@ NoRepositories.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserGitHubContributions":
+				return { data: GetUserGitHubContributions_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":
@@ -248,6 +259,8 @@ NoExperiencesRepositories.parameters = {
 				return { data: GetPostDraft_mock };
 			case "GetSiteWideSideDrawer":
 				return { data: GetSiteWideSideDrawer_mock };
+			case "GetUserGitHubContributions":
+				return { data: GetUserGitHubContributions_mock };
 			case "GetUserInfoSideBar":
 				return { data: GetUserInfoSideBar_mock };
 			case "GetUserOverview":

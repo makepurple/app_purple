@@ -311,6 +311,10 @@ export function useGetUserFriendsQuery(options: Omit<Urql.UseQueryArgs<Operation
   return Urql.useQuery<Operations.GetUserFriendsQuery>({ query: Operations.GetUserFriendsDocument, ...options });
 };
 
+export function useGetUserGitHubContributionsQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserGitHubContributionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Operations.GetUserGitHubContributionsQuery>({ query: Operations.GetUserGitHubContributionsDocument, ...options });
+};
+
 export function useGetUserInfoSideBarQuery(options: Omit<Urql.UseQueryArgs<Operations.GetUserInfoSideBarQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetUserInfoSideBarQuery>({ query: Operations.GetUserInfoSideBarDocument, ...options });
 };

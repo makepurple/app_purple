@@ -41,9 +41,9 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 			edges: codeExamples.map((codeExample) => ({
 				__typename: "CodeExampleEdge",
 				cursor: codeExample.id.toString(),
-				node: codeExample
+				node: codeExample as any
 			})),
-			nodes: codeExamples.map((codeExample) => codeExample)
+			nodes: codeExamples.map((codeExample) => codeExample as any)
 		},
 		experiences: {
 			__typename: "ExperienceConnection",
@@ -65,7 +65,7 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 					node: Post_fragment_mock
 				}
 			],
-			nodes: [Post_fragment_mock]
+			nodes: [Post_fragment_mock as any]
 		},
 		repositories: {
 			__typename: "RepositoryConnection",
@@ -77,7 +77,7 @@ export const GetUserOverview_mock: GetUserOverviewQuery = {
 			})),
 			nodes: repositories.map((repository) => repository) as any
 		}
-	} as any
+	}
 };
 
 export const GetUserOverview_variables_mock: GetUserOverviewQueryVariables = {

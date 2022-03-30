@@ -9,7 +9,7 @@ import { useGetUserOverviewQuery } from "../../graphql";
 import {
 	CodeExampleMiniCard,
 	PostCard,
-	UserGitHubContributionHeatmap,
+	UserGitHubContributions,
 	UserOverviewExperienceCard,
 	UserOverviewRepositoryCard,
 	UserPageLayout,
@@ -23,32 +23,6 @@ const Contents = tw.div`
 	flex-col
 	items-stretch
 	gap-6
-`;
-
-const ContributionSection = tw(Paper)`
-	hidden
-	flex-col
-	items-stretch
-	xl:flex
-`;
-
-const ContributionTitle = tw.div`
-	flex
-	justify-start
-	items-center
-	h-8
-	px-3
-	border-b
-	border-solid
-	border-gray-300
-	text-base
-	leading-none
-	font-semibold
-	[& > *]:text-black
-`;
-
-const ContributionContent = tw.div`
-	p-2
 `;
 
 const Section = tw.div`
@@ -119,30 +93,16 @@ export const Page: NextPage<PageProps> = () => {
 
 	if (!user) return null;
 
-	const contributionCalendar = user.github.contributionCalendar;
 	const post = user.posts.nodes[0] ?? null;
 	const codeExamples = user.codeExamples.nodes ?? [];
 	const experiences = user.experiences.nodes ?? [];
 	const repositories = user.repositories.nodes ?? [];
 
-	const githubContributions = contributionCalendar.totalContributions.toLocaleString();
-
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
 			<Contents>
 				<UserTrophies userName={userName} />
-				<ContributionSection>
-					<ContributionTitle>
-						<Anchor href={user.githubUrl} target="_blank" rel="noreferrer noopener">
-							{githubContributions} contributions in the last year
-						</Anchor>
-					</ContributionTitle>
-					<ContributionContent>
-						<UserGitHubContributionHeatmap
-							contributionCalendar={contributionCalendar}
-						/>
-					</ContributionContent>
-				</ContributionSection>
+				<UserGitHubContributions userName={userName} />
 				<Section>
 					<SectionTitle tw="mb-2">
 						<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>

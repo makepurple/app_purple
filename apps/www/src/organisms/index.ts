@@ -92,6 +92,7 @@ export * from "./UserConnectionPageTabs";
 export * from "./UserFollowCard";
 export * from "./UserFriendCard";
 export * from "./UserFriendRequestCard";
+export * from "./UserGitHubContributions";
 export * from "./UserGitHubContributionHeatmap";
 export * from "./UserInfoSideBar";
 export * from "./UserInfoSideBarForm";
