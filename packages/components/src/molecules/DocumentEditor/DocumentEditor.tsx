@@ -1,4 +1,3 @@
-import { useUncontrolledProp } from "@makepurple/hooks";
 import { FunctionUtils, ObjectUtils } from "@makepurple/utils";
 import React, { CSSProperties, forwardRef, ReactNode, useContext, useMemo, useRef } from "react";
 import { BaseEditor, createEditor, Descendant } from "slate";
@@ -73,13 +72,11 @@ export interface DocumentEditorProps {
 	onChange?: (value: DocumentEditorValue) => void;
 	readOnly?: boolean;
 	style?: CSSProperties;
-	value?: DocumentEditorValue;
+	value: DocumentEditorValue;
 }
 
 const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, ref) => {
-	const { children, className, onChange, readOnly, style, value: _value } = props;
-
-	const [value, setValue] = useUncontrolledProp<DocumentEditorValue>(_value, []);
+	const { children, className, onChange, readOnly, style, value } = props;
 
 	const form = useContext(FormContext);
 	const group = useContext(FormGroupContext);
@@ -102,6 +99,15 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 	const disabled = props.disabled ?? form.disabled;
 	const error = props.error ?? group.error;
 
+	/**
+	 * !HACK
+	 * @description Here's a required (but undocumented fix for uncontrolled state)
+	 * @see (@link: https://github.com/ianstormtaylor/slate/issues/4646#issuecomment-963464397)
+	 * @author David Lee
+	 * @date March 29, 2022
+	 */
+	editor.children = value;
+
 	return (
 		<Root
 			ref={ref}
@@ -116,7 +122,6 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 				editor={editor}
 				value={value}
 				onChange={(newValue) => {
-					setValue(newValue);
 					onChange?.(newValue);
 				}}
 			>
