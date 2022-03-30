@@ -57,14 +57,17 @@ const SentAt = styled.div<{ $isViewer: boolean }>`
 	${({ $isViewer }) => $isViewer && tw`text-right`}
 `;
 
-const Content = tw.div`
-	flex
-	flex-row
-	gap-2
+const Content = styled.div<{ $isViewer: boolean }>`
+	${tw`
+		flex
+		flex-row
+		gap-2
+	`}
+
+	${({ $isViewer }) => $isViewer && tw`justify-end`}
 `;
 
 const Message = tw(DocumentEditor)`
-	flex-grow
 	border-gray-200
 	shadow-lg
 `;
@@ -117,7 +120,7 @@ export const ChatRoomMessage = memo(
 						</SentAt>
 					</SenderInfo>
 				</MessageInfo>
-				<Content>
+				<Content $isViewer={isViewer}>
 					<Spacer />
 					<Message readOnly value={content as DocumentEditorValue}>
 						<MessageContent />
