@@ -165,7 +165,8 @@ export const Chat = objectType({
 				return await prisma.chatMessage.count({
 					where: {
 						chat: { id: { equals: parent.id } },
-						createdAt: { gt: lastOpenedAt }
+						createdAt: { gt: lastOpenedAt },
+						sender: { id: { not: { equals: user.id } } }
 					}
 				});
 			}
