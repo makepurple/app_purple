@@ -388,10 +388,10 @@ export const createCache = (): Exchange => {
 						});
 				},
 				followUser: ({ followUser: result }: Mutation, _, cache) => {
-					if (!result.record) return;
-
+					const recordId = result.record?.id;
 					const viewerId = result.viewer?.id;
 
+					if (!recordId) return;
 					if (!viewerId) return;
 
 					cache
@@ -400,6 +400,17 @@ export const createCache = (): Exchange => {
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+
+					cache
+						.inspectFields({ __typename: "User", id: recordId })
+						.filter((field) => field.fieldName === "trophies")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: recordId },
 								field.fieldName,
 								field.arguments
 							);
@@ -541,10 +552,10 @@ export const createCache = (): Exchange => {
 						});
 				},
 				unfollowUser: ({ unfollowUser: result }: Mutation, _, cache) => {
-					if (!result.record) return;
-
+					const recordId = result.record?.id;
 					const viewerId = result.viewer?.id;
 
+					if (!recordId) return;
 					if (!viewerId) return;
 
 					cache
@@ -553,6 +564,17 @@ export const createCache = (): Exchange => {
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },
+								field.fieldName,
+								field.arguments
+							);
+						});
+
+					cache
+						.inspectFields({ __typename: "User", id: recordId })
+						.filter((field) => field.fieldName === "trophies")
+						.forEach((field) => {
+							cache.invalidate(
+								{ __typename: "User", id: recordId },
 								field.fieldName,
 								field.arguments
 							);
