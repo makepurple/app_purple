@@ -199,6 +199,10 @@ export function useGetChatQuery(options: Omit<Urql.UseQueryArgs<Operations.GetCh
   return Urql.useQuery<Operations.GetChatQuery>({ query: Operations.GetChatDocument, ...options });
 };
 
+export function useGetChatHistoricalMessagesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetChatHistoricalMessagesQueryVariables>, 'query'>) {
+  return Urql.useQuery<Operations.GetChatHistoricalMessagesQuery>({ query: Operations.GetChatHistoricalMessagesDocument, ...options });
+};
+
 export function useGetChatMessagesQuery(options: Omit<Urql.UseQueryArgs<Operations.GetChatMessagesQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetChatMessagesQuery>({ query: Operations.GetChatMessagesDocument, ...options });
 };

@@ -26,11 +26,15 @@ import { useClient } from "urql";
 import {
 	ChatRoomMessageChatMessageFragment,
 	GetChatDocument,
+	GetChatHistoricalMessagesDocument,
+	GetChatHistoricalMessagesQuery,
+	GetChatHistoricalMessagesQueryVariables,
 	GetChatMessagesDocument,
 	GetChatMessagesQuery,
 	GetChatMessagesQueryVariables,
 	GetChatQuery,
 	GetChatQueryVariables,
+	useGetChatHistoricalMessagesQuery,
 	useGetChatQuery,
 	useOpenChatMutation,
 	useSendChatMessageMutation
@@ -159,11 +163,20 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 
 	const urqlClient = useClient();
 
-	const [{ data, fetching }] = useGetChatQuery({
+	const [{ data }] = useGetChatQuery({
 		requestPolicy: "cache-and-network",
 		variables: {
-			messageLimit: CHAT_MESSAGE_BATCH_SIZE,
-			messageOffset: 0,
+			where: {
+				id: chatId
+			}
+		}
+	});
+
+	const [{ data: messagesData, fetching }] = useGetChatHistoricalMessagesQuery({
+		requestPolicy: "cache-and-network",
+		variables: {
+			limit: CHAT_MESSAGE_BATCH_SIZE,
+			offset: 0,
 			where: {
 				id: chatId
 			}
@@ -193,13 +206,19 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 	const countOthers = Math.max((chat?.users.totalCount ?? 0) - 2, 0);
 	const firstParticipant = participants[0];
 
+	const [haltLoadMore, setHaltLoadMore] = useState<boolean>(false);
+
 	useEffect(() => {
-		const messageNodes = chat?.messages.nodes ?? [];
-		const startCursor = chat?.messages.edges[0].cursor;
+		const messageNodes = messagesData?.chat?.messages.nodes ?? [];
+		const startCursor = messagesData?.chat?.messages.edges[0].cursor;
 
 		setCursor((oldCursor) => oldCursor ?? startCursor ?? null);
 		setMessages((oldMessages) => (oldMessages.length ? oldMessages : messageNodes));
-	}, [chat?.messages]);
+
+		if (!messagesData?.chat?.messages.pageInfo.hasNextPage) {
+			setHaltLoadMore(true);
+		}
+	}, [messagesData?.chat]);
 
 	const [loadMore, setLoadMore] = useState<boolean>(false);
 	const [requestStack, setRequestStack] = useState<readonly true[]>([]);
@@ -223,6 +242,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 		if (!cursor) return;
 		if (!hasInitialMessages) return;
 		if (loading || !loadMore) return;
+		if (haltLoadMore) return;
 
 		setLoadMore(false);
 		setRequestStack((oldStack) => [...oldStack, true]);
@@ -231,13 +251,16 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		urqlClient
-			.query<GetChatQuery, GetChatQueryVariables>(GetChatDocument, {
-				messageLimit: CHAT_MESSAGE_BATCH_SIZE,
-				messageOffset: newOffset,
-				where: {
-					id: chatId
+			.query<GetChatHistoricalMessagesQuery, GetChatHistoricalMessagesQueryVariables>(
+				GetChatHistoricalMessagesDocument,
+				{
+					limit: CHAT_MESSAGE_BATCH_SIZE,
+					offset: newOffset,
+					where: {
+						id: chatId
+					}
 				}
-			})
+			)
 			.toPromise()
 			.then((result) => {
 				const newMessages = result.data?.chat?.messages.nodes ?? [];
@@ -246,12 +269,13 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 					setMessages((oldMessages) => [...oldMessages, ...newMessages]);
 				});
 
+				setHaltLoadMore(!result.data?.chat?.messages.pageInfo.hasNextPage);
 				setOffset(newOffset);
 				setRequestStack((oldStack) => oldStack.slice(1));
 			});
-	}, [chatId, cursor, hasInitialMessages, offset, urqlClient, loadMore, loading]);
+	}, [chatId, cursor, haltLoadMore, hasInitialMessages, offset, urqlClient, loadMore, loading]);
 
-	const fetchingHistorical: boolean = fetching || loadMore || loading;
+	const fetchingHistorical: boolean = !haltLoadMore && (fetching || loadMore || loading);
 
 	const [{ fetching: sendingMessage }, sendMessage] = useSendChatMessageMutation();
 	const [, updateCounts] = useOpenChatMutation();

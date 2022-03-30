@@ -1,0 +1,27 @@
+query GetChatHistoricalMessages(
+	$where: ChatWhereUniqueInput!
+	$limit: Int
+	$offset: Int
+) {
+	chat(where: $where) {
+		id
+		messages(
+			first: $limit
+			offset: $offset
+		) {
+			pageInfo {
+				endCursor
+				hasNextPage
+			}
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				...ChatRoomMessageChatMessage
+			}
+		}
+	}
+}

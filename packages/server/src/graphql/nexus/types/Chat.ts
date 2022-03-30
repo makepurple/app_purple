@@ -105,7 +105,7 @@ export const Chat = objectType({
 							.chat()
 							.messages({
 								cursor,
-								skip,
+								skip: (args.offset ?? 0) + (skip ?? 0),
 								take,
 								orderBy: { createdAt: "desc" }
 							}),
