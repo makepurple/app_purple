@@ -71,12 +71,15 @@ export const Page: NextPage = () => {
 			<Content>
 				<p>Last Updated: March 31, 2022</p>
 				<p>
-					This Privacy Policy applies to https://makepurple.com (&quot;MakePurple&quot;,
-					&quot;we&quot;, &quot;us&quot;, &quot;our&quot;), and describes how and why we
-					collect, store, use and/or share your personal information when you use our
-					application/services (&quot;Application&quot;, &quot;Service&quot;). If you use
-					our Service, you agree to these policies. If you have any questions or concerns,
-					please contact us at{" "}
+					This Privacy Policy applies to{" "}
+					<NextLink href="/" passHref>
+						<Anchor>https://makepurple.com</Anchor>
+					</NextLink>{" "}
+					(&quot;MakePurple&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;), and
+					describes how and why we collect, store, use and/or share your personal
+					information when you use our application/services (&quot;Application&quot;,
+					&quot;Service&quot;). If you use our Service, you agree to these policies. If
+					you have any questions or concerns, please contact us at{" "}
 					<Anchor
 						href="mailto:david@makepurple.com"
 						rel="nofollow noopener"
