@@ -20,6 +20,7 @@ const config = {
 		locales: ["en-US"],
 		defaultLocale: "en-US"
 	},
+	reactStrictMode: true,
 	images: {
 		domains: ["res.cloudinary.com"]
 	},
