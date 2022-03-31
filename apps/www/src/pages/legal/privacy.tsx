@@ -69,7 +69,7 @@ export const Page: NextPage = () => {
 		<Root size="small">
 			<Header>Privacy Policy of MakePurple.com</Header>
 			<Content>
-				<p>Last Updated: March 30, 2022</p>
+				<p>Last Updated: March 31, 2022</p>
 				<p>
 					This Privacy Policy applies to https://makepurple.com (&quot;MakePurple&quot;,
 					&quot;we&quot;, &quot;us&quot;, &quot;our&quot;), and describes how and why we
