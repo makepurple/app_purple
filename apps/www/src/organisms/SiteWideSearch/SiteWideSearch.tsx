@@ -256,9 +256,9 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					</SearchInputContainer>
 					<SearchButton
 						onClick={() => {
-							!ownerBox.inputValue || !!skillBox.inputValue
-								? skillInput?.focus()
-								: ownerInput?.focus();
+							!!ownerBox.inputValue || !skillBox.inputValue
+								? ownerInput?.focus()
+								: skillInput?.focus();
 						}}
 						type="button"
 						variant="secondary"
