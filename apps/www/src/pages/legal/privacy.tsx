@@ -344,7 +344,9 @@ export const Page: NextPage = () => {
 					discretion. If there are any changes to this privacy notice, we may notify you
 					either by prominently posting a notice of such changes or by directly sending
 					you a notification. We encourage you to review this Privacy Policy frequently to
-					be informed of how we are protecting your information.
+					be informed of how we are protecting your information. If you do not agree with
+					the revised Privacy Policy, your solle and exclusive remedy will be to
+					discontinue your use of the Site and our Services.
 				</p>
 			</Content>
 		</Root>
