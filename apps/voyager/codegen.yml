@@ -1,0 +1,13 @@
+schema:
+  - node_modules/@makepurple/server/src/graphql/nexus/generated/schema.gen.graphql
+generates:
+  src/graphql/generated/schema.gen.json:
+    plugins:
+      - introspection
+    config:
+      descriptions: false
+      directiveIsRepeatable: false
+      federation: false
+      minify: true
+      schemaDescription: false
+      specifiedByUrl: false

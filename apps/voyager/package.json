@@ -1,0 +1,32 @@
+{
+	"name": "@makepurple/voyager",
+	"version": "0.0.0",
+	"private": true,
+	"main": "src/index.ts",
+	"types": "src/index.ts",
+	"sideEffects": false,
+	"scripts": {
+		"analyze": "cross-env BUNDLE_ANALYZE=true pnpm run build",
+		"dev": "dotenv -- next -p 3002",
+		"build": "dotenv -- next build",
+		"start": "next start",
+		"lint": "next lint",
+		"generate:codegen": "graphql-codegen"
+	},
+	"dependencies": {
+		"@makepurple/server": "workspace:*",
+		"@makepurple/typings": "workspace:*",
+		"@types/react": "^17.0.43",
+		"@types/react-dom": "^17.0.14",
+		"graphql-voyager": "^1.0.0-rc.31",
+		"next": "^12.1.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^2.6.2",
+		"@graphql-codegen/introspection": "^2.1.1",
+		"@makepurple/tsconfig": "workspace:*",
+		"dotenv-cli": "^5.1.0"
+	}
+}
