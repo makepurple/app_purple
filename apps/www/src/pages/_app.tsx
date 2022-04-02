@@ -69,18 +69,18 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				{({ error, fallback }) => (
 					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>
 						<UrqlProvider pageProps={pageProps}>
+							<NextProgressBar />
+							<Toaster position="bottom-left" />
 							{isBanPage ? (
 								<Component {...pageProps} />
 							) : (
 								<GdprCookieConsent>
 									<GlobalGraphQL />
-									<NextProgressBar />
 									<LazyMotion>
 										<SiteWideLayout>
 											{error ? fallback : <Component {...pageProps} />}
 										</SiteWideLayout>
 									</LazyMotion>
-									<Toaster position="bottom-left" />
 								</GdprCookieConsent>
 							)}
 						</UrqlProvider>
