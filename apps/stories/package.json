@@ -10,7 +10,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"@faker-js/faker": "6.0.0",
+		"@faker-js/faker": "6.1.1",
 		"@headlessui/react": "^1.5.0",
 		"@makepurple/components": "workspace:*",
 		"@makepurple/hooks": "workspace:*",
@@ -78,7 +78,7 @@
 		"react-test-renderer": "^17.0.2",
 		"storybook-addon-next-router": "^3.1.1",
 		"typescript": "^4.6.3",
-		"webpack": "^5.70.0"
+		"webpack": "^5.71.0"
 	},
 	"babelMacros": {
 		"twin": {
