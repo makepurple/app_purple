@@ -11,7 +11,7 @@ import { GdprCookieConsent, GlobalGraphQL, SiteWideLayout, UrqlProvider } from "
 
 import "tippy.js/dist/tippy.css";
 
-const ErrorPage = dynamic(() => import("./500"), { ssr: false });
+const ErrorPage = dynamic(() => import("./500"));
 
 const NextProgressBar = dynamic<NextProgressBarProps>(
 	() => import("@makepurple/components").then((mod) => mod.NextProgressBar),
