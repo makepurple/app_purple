@@ -7,7 +7,9 @@
 	"sideEffects": false,
 	"scripts": {
 		"dev": "start-storybook -p 6006",
-		"test": "jest"
+		"build": "build-storybook",
+		"test": "jest",
+		"upload": "chromatic --build-script build --exit-zero-on-changes * --exit-once-uploaded *"
 	},
 	"dependencies": {
 		"@faker-js/faker": "6.1.1",
@@ -64,6 +66,7 @@
 		"babel-plugin-dynamic-import-node": "^2.3.3",
 		"babel-plugin-macros": "^3.1.0",
 		"babel-plugin-twin": "^1.0.2",
+		"chromatic": "^6.5.3",
 		"csstype": "^3.0.11",
 		"customize-cra": "^1.0.0",
 		"graphql": "15.7.2",

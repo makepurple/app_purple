@@ -83,6 +83,7 @@ importers:
       babel-plugin-dynamic-import-node: ^2.3.3
       babel-plugin-macros: ^3.1.0
       babel-plugin-twin: ^1.0.2
+      chromatic: ^6.5.3
       common-tags: ^1.8.2
       csstype: ^3.0.11
       customize-cra: ^1.0.0
@@ -165,6 +166,7 @@ importers:
       babel-plugin-dynamic-import-node: 2.3.3
       babel-plugin-macros: 3.1.0
       babel-plugin-twin: 1.0.2
+      chromatic: 6.5.3
       csstype: 3.0.11
       customize-cra: 1.0.0
       graphql: 15.7.2
@@ -7485,7 +7487,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -7494,7 +7496,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -7502,7 +7504,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -10388,6 +10390,11 @@ packages:
   /chownr/2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+
+  /chromatic/6.5.3:
+    resolution: {integrity: sha512-6Wy2lsNaojY5wTvobE3WV5VrQ5oP7B8kal6zWGrxu9g7Qbenb2cTcQ5SYgQY7tzT0Ed0zeHVyQm4TMmKz+XfXA==}
+    hasBin: true
+    dev: true
 
   /chrome-trace-event/1.0.3:
     resolution: {integrity: sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==}
