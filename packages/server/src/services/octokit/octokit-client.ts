@@ -58,7 +58,7 @@ export class OctokitClient {
 		}
 	});
 
-	public static castTypenames<T>(input: T): DeepGitHubType<T> {
+	public static castTypenames<T extends Record<string, any>>(input: T): DeepGitHubType<T> {
 		if (LangUtils.isNil(input)) return input as any;
 
 		if (Array.isArray(input)) {
@@ -90,7 +90,10 @@ export class OctokitClient {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const _accessToken = accessToken ?? process.env.GITHUB_ACCESS_TOKEN!;
 
-		return <TResult = any, TVariables extends Record<string, unknown> = any>(
+		return <
+			TResult extends Record<string, any> = any,
+			TVariables extends Record<string, unknown> = any
+		>(
 			strings: TemplateStringsArray,
 			...exprs: any[]
 		) => {
