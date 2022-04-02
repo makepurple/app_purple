@@ -72,7 +72,18 @@ const config = {
 	webpack5: true,
 	webpack: (config, { dev, isServer }) => {
 		if (!isServer) {
+			/**
+			 * !HACK
+			 * @description This is so that ioredis can be used in edge functions. This is pretty
+			 * unsafe, and may break stuff if these modules don't exist in an environment they're
+			 * required to be used in. If any node.js stuff breaks, investigate this config here.
+			 * @author David Lee
+			 * @date April 2, 2022
+			 */
+			config.resolve.fallback.dns = false;
 			config.resolve.fallback.fs = false;
+			config.resolve.fallback.net = false;
+			config.resolve.fallback.tls = false;
 		}
 
 		if (isServer) {
