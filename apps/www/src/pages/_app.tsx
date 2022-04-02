@@ -5,12 +5,13 @@ import type { NextComponentType } from "next";
 import { SessionProvider } from "next-auth/react";
 import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import NextError from "next/error";
 import NextHead from "next/head";
 import React from "react";
 import { GdprCookieConsent, GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
 
 import "tippy.js/dist/tippy.css";
+
+const ErrorPage = dynamic(() => import("./500"), { ssr: false });
 
 const NextProgressBar = dynamic<NextProgressBarProps>(
 	() => import("@makepurple/components").then((mod) => mod.NextProgressBar),
@@ -23,6 +24,8 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 	Component,
 	pageProps
 }) => {
+	const isBanPage: boolean = !!(Component as any).banPage;
+
 	return (
 		<>
 			<NextHead>
@@ -62,21 +65,25 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				<meta key="theme-color" name="theme-color" content="#ffffff" />
 			</NextHead>
 			<GlobalStyles />
-			<ErrorBoundary fallback={() => <NextError statusCode={500} />}>
+			<ErrorBoundary fallback={() => <ErrorPage />}>
 				{({ error, fallback }) => (
 					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>
-						<GdprCookieConsent>
-							<UrqlProvider pageProps={pageProps}>
-								<GlobalGraphQL />
-								<NextProgressBar />
-								<LazyMotion>
-									<SiteWideLayout>
-										{error ? fallback : <Component {...pageProps} />}
-									</SiteWideLayout>
-								</LazyMotion>
-								<Toaster position="bottom-left" />
-							</UrqlProvider>
-						</GdprCookieConsent>
+						<UrqlProvider pageProps={pageProps}>
+							{isBanPage ? (
+								<Component {...pageProps} />
+							) : (
+								<GdprCookieConsent>
+									<GlobalGraphQL />
+									<NextProgressBar />
+									<LazyMotion>
+										<SiteWideLayout>
+											{error ? fallback : <Component {...pageProps} />}
+										</SiteWideLayout>
+									</LazyMotion>
+									<Toaster position="bottom-left" />
+								</GdprCookieConsent>
+							)}
+						</UrqlProvider>
 					</SessionProvider>
 				)}
 			</ErrorBoundary>
