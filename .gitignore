@@ -19,7 +19,7 @@ node_modules
 
 # production
 /build
-/storybook-static
+storybook-static
 
 # misc
 .DS_Store
@@ -31,6 +31,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log
+build-storybook.log
 
 # misc
 .turbo
