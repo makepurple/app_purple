@@ -298,13 +298,13 @@ model PostImage {
 model Comment {
   id            String           @id @default(cuid())
   activities    UserActivity[]
-  author        User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId      String
+  author        User?            @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId      String?
   codeExample   CodeExample?     @relation(fields: [codeExampleId], references: [id], onDelete: Cascade)
   codeExampleId String?
   content       Json[]
   createdAt     DateTime         @default(now())
-  parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId      String?
   post          Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId        String?
