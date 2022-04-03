@@ -16,18 +16,37 @@ const Template: Story<CommentCardProps> = (args) => {
 	return <CommentCard {...args} />;
 };
 Template.args = {
-	comment: {
-		...Comment_fragment_mock,
-		replies: {
-			__typename: "CommentConnection",
-			totalCount: 8
-		}
-	}
+	comment: Comment_fragment_mock
 };
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = {
+	...Template.parameters,
+	urql: async (op: Operation) => {
+		switch (getOperationName(op.query)) {
+			case "GetCommentReplies":
+				await PromiseUtils.wait(ms("0.5s"));
+
+				action("GetCommentReplies")(op.variables);
+
+				return { data: GetCommentReplies_mock };
+			default:
+				return {};
+		}
+	}
+};
+
+export const Deleted = Template.bind({});
+Deleted.args = {
+	comment: {
+		...Comment_fragment_mock,
+		authorId: null,
+		author: null,
+		content: null
+	}
+};
+Deleted.parameters = {
 	...Template.parameters,
 	urql: async (op: Operation) => {
 		switch (getOperationName(op.query)) {

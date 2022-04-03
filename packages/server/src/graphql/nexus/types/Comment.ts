@@ -6,9 +6,11 @@ import { PrismaUtils } from "../../../utils";
 export const Comment = objectType({
 	name: "Comment",
 	definition: (t) => {
-		t.nonNull.field("author", {
+		t.field("author", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
+				if (!parent.authorId) return null;
+
 				return prisma.user.findUnique({
 					where: {
 						id: parent.authorId
@@ -17,7 +19,7 @@ export const Comment = objectType({
 				});
 			}
 		});
-		t.nonNull.string("authorId");
+		t.string("authorId");
 		t.field("codeExample", {
 			type: "CodeExample",
 			resolve: (parent, args, { prisma }) => {

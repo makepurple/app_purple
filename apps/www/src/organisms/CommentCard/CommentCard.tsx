@@ -26,6 +26,7 @@ import {
 import { CommentIcon, UnfoldIcon } from "../../svgs";
 import { CreateCommentForm } from "../CreateCommentForm";
 import { LoadingCommentCard } from "../LoadingCommentCard";
+import { UserAvatar } from "../UserAvatar";
 
 const Root = tw.div`
 	flex
@@ -61,6 +62,13 @@ const UserName = tw.div`
 	text-base
 	leading-none
 	font-semibold
+`;
+
+const DeletedUserName = tw.div`
+	text-base
+	leading-none
+	font-medium
+	text-gray-500
 `;
 
 const Delimiter = tw.div`
@@ -112,6 +120,8 @@ const Editable = tw(DocumentEditor.Editable)`
 `;
 
 const DeletedComment = tw.div`
+	inline-flex
+	px-1
 	border
 	border-solid
 	border-gray-200
@@ -189,6 +199,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 		}
 	});
 
+	const author = comment.author;
 	const repliesCount = comment.repliesCount;
 
 	const replies = data?.comment?.replies.nodes ?? [];
@@ -220,18 +231,24 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 						<UnfoldIcon height={16} width={16} />
 					</ExpandButton>
 				)}
-				{comment.author.image && (
+				{author?.image ? (
 					<Avatar border={2} tw="mr-2">
 						<GitHubAvatarImage
-							alt={comment.author.name}
-							src={comment.author.image}
+							alt={author.name}
+							src={author.image}
 							height={36}
 							width={36}
 						/>
 					</Avatar>
+				) : (
+					<UserAvatar border={2} height={36} width={36} tw="mr-2" />
 				)}
 				<CommenterInfoContent>
-					<UserName>{comment.author.name}</UserName>
+					{author ? (
+						<UserName>{author.name}</UserName>
+					) : (
+						<DeletedUserName>[Deleted]</DeletedUserName>
+					)}
 					<Delimiter />
 					<CreatedAt>{dayjs(comment.createdAt).fromNow()}</CreatedAt>
 				</CommenterInfoContent>
@@ -255,6 +272,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 					)}
 					<Actions tw="mt-2">
 						<UpvoteButton
+							disabled={unvoting || upvoting || !author}
 							onClick={async (e) => {
 								e.preventDefault();
 
@@ -294,6 +312,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 						</UpvoteButton>
 						{status === "authenticated" && (
 							<ActionButton
+								disabled={!author}
 								onClick={() => {
 									setShowReplyForm((oldShowReplyForm) => !oldShowReplyForm);
 								}}

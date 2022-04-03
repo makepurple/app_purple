@@ -279,8 +279,8 @@ export type CodeLanguageNullableFilter = {
 
 export type Comment = Node & {
   readonly __typename: 'Comment';
-  readonly author: User;
-  readonly authorId: Scalars['String'];
+  readonly author?: Maybe<User>;
+  readonly authorId?: Maybe<Scalars['String']>;
   readonly codeExample?: Maybe<CodeExample>;
   readonly codeExampleId?: Maybe<Scalars['String']>;
   readonly content: ReadonlyArray<Scalars['Json']>;
@@ -2683,7 +2683,7 @@ export type ChatRoomMessageChatMessageFragment = { readonly __typename: 'ChatMes
 
 export type CodeExampleCardCodeExampleFragment = { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } };
 
-export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } };
+export type CommentCardCommentFragment = { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author?: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } | null };
 
 export type CreateRepositoryFormOptionGitHubRepositoryFragment = { readonly __typename: 'GitHubRepository', readonly id: string, readonly description?: string | null, readonly forkCount: number, readonly issueCount: number, readonly name: string, readonly pullRequestCount: number, readonly pushedAt?: Date | null, readonly stargazerCount: number, readonly licenseInfo?: { readonly __typename: 'GitHubLicense', readonly id: string, readonly name: string, readonly nickname?: string | null, readonly spdxId?: string | null, readonly url?: string | null } | null, readonly primaryLanguage?: { readonly __typename: 'GitHubLanguage', readonly color?: string | null, readonly id: string, readonly name: string } | null, readonly repository?: { readonly __typename: 'Repository', readonly id: string } | null };
 
@@ -2863,14 +2863,14 @@ export type CommentCodeExampleMutationVariables = Exact<{
 }>;
 
 
-export type CommentCodeExampleMutation = { readonly __typename: 'Mutation', readonly commentCodeExample: { readonly __typename: 'CommentCodeExamplePayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly authorId: string, readonly parentId?: string | null } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type CommentCodeExampleMutation = { readonly __typename: 'Mutation', readonly commentCodeExample: { readonly __typename: 'CommentCodeExamplePayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly authorId?: string | null, readonly parentId?: string | null } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type CommentPostMutationVariables = Exact<{
   data: CommentPostInput;
 }>;
 
 
-export type CommentPostMutation = { readonly __typename: 'Mutation', readonly commentPost: { readonly __typename: 'CommentPostPayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly authorId: string, readonly parentId?: string | null, readonly postId?: string | null } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type CommentPostMutation = { readonly __typename: 'Mutation', readonly commentPost: { readonly __typename: 'CommentPostPayload', readonly record?: { readonly __typename: 'Comment', readonly id: string, readonly authorId?: string | null, readonly parentId?: string | null, readonly postId?: string | null } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type CreateChatMutationVariables = Exact<{
   data: CreateChatInput;
@@ -3225,7 +3225,7 @@ export type GetCodeExampleCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetCodeExampleCommentsQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
+export type GetCodeExampleCommentsQuery = { readonly __typename: 'Query', readonly codeExample?: { readonly __typename: 'CodeExample', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author?: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } | null }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
 
 export type GetCommentRepliesQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
@@ -3235,7 +3235,7 @@ export type GetCommentRepliesQueryVariables = Exact<{
 }>;
 
 
-export type GetCommentRepliesQuery = { readonly __typename: 'Query', readonly comment?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
+export type GetCommentRepliesQuery = { readonly __typename: 'Query', readonly comment?: { readonly __typename: 'Comment', readonly id: string, readonly replies: { readonly __typename: 'CommentConnection', readonly totalCount: number, readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author?: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } | null }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
 
 export type GetFollowableSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3276,7 +3276,7 @@ export type GetPostCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostCommentsQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
+export type GetPostCommentsQuery = { readonly __typename: 'Query', readonly post?: { readonly __typename: 'Post', readonly id: string, readonly comments: { readonly __typename: 'CommentConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'CommentEdge', readonly cursor: string, readonly node: { readonly __typename: 'Comment', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Comment', readonly id: string, readonly codeExampleId?: string | null, readonly content: ReadonlyArray<Json>, readonly createdAt: Date, readonly postId?: string | null, readonly repliesCount: number, readonly updatedAt: Date, readonly upvotes: number, readonly viewerUpvote?: boolean | null, readonly author?: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string } | null }>, readonly pageInfo: { readonly __typename: 'PageInfo', readonly endCursor?: string | null, readonly hasNextPage: boolean, readonly hasPreviousPage: boolean, readonly startCursor?: string | null } } } | null };
 
 export type GetPostDraftQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -204,8 +204,8 @@ input CodeLanguageNullableFilter {
 }
 
 type Comment implements Node {
-  author: User!
-  authorId: String!
+  author: User
+  authorId: String
   codeExample: CodeExample
   codeExampleId: String
   content: [Json!]!

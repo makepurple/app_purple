@@ -479,7 +479,7 @@ export interface NexusGenObjects {
     message: string; // String!
   }
   Comment: { // root type
-    authorId: string; // String!
+    authorId?: string | null; // String
     codeExampleId?: string | null; // String
     content: NexusGenScalars['Json'][]; // [Json!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -1124,8 +1124,8 @@ export interface NexusGenFieldTypes {
     path: string[]; // [String!]!
   }
   Comment: { // field return type
-    author: NexusGenRootTypes['User']; // User!
-    authorId: string; // String!
+    author: NexusGenRootTypes['User'] | null; // User
+    authorId: string | null; // String
     codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     codeExampleId: string | null; // String
     content: NexusGenScalars['Json'][]; // [Json!]!
