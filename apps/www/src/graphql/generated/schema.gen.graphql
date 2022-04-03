@@ -200,7 +200,7 @@ type Comment implements Node {
   authorId: String
   codeExample: CodeExample
   codeExampleId: String
-  content: [Json!]!
+  content: [Json!]
   createdAt: DateTime!
   downvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: ID!

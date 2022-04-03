@@ -5,6 +5,10 @@ import { PrismaUtils } from "../../../utils";
 
 export const Comment = objectType({
 	name: "Comment",
+	sourceType: {
+		module: "@prisma/client",
+		export: "Comment"
+	},
 	definition: (t) => {
 		t.field("author", {
 			type: "User",
@@ -33,7 +37,7 @@ export const Comment = objectType({
 			}
 		});
 		t.string("codeExampleId");
-		t.nonNull.list.nonNull.json("content");
+		t.list.nonNull.json("content");
 		t.nonNull.dateTime("createdAt");
 		t.nonNull.field("downvoters", {
 			type: "UserConnection",

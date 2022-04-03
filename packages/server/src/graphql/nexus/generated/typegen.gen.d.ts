@@ -2,6 +2,7 @@ import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import type { octokit } from "../../../services";
 
 import type { ServerContext as ctx } from "./../../context"
+import type { Comment } from "@prisma/client"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
 import type { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
 import type { core } from "nexus"
@@ -478,16 +479,7 @@ export interface NexusGenObjects {
   CodeExampleTitleTakenError: { // root type
     message: string; // String!
   }
-  Comment: { // root type
-    authorId?: string | null; // String
-    codeExampleId?: string | null; // String
-    content: NexusGenScalars['Json'][]; // [Json!]!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // ID!
-    parentId?: string | null; // String
-    postId?: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-  }
+  Comment: Comment;
   CommentCodeExamplePayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     record?: NexusGenRootTypes['Comment'] | null; // Comment
@@ -1128,7 +1120,7 @@ export interface NexusGenFieldTypes {
     authorId: string | null; // String
     codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     codeExampleId: string | null; // String
-    content: NexusGenScalars['Json'][]; // [Json!]!
+    content: NexusGenScalars['Json'][] | null; // [Json!]
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     downvoters: NexusGenRootTypes['UserConnection']; // UserConnection!
     id: string; // ID!

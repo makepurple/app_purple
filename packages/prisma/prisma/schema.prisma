@@ -302,7 +302,7 @@ model Comment {
   authorId      String?
   codeExample   CodeExample?     @relation(fields: [codeExampleId], references: [id], onDelete: Cascade)
   codeExampleId String?
-  content       Json[]
+  content       Json?
   createdAt     DateTime         @default(now())
   parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId      String?
