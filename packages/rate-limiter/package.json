@@ -6,10 +6,9 @@
 	"types": "src/index.ts",
 	"sideEffects": false,
 	"dependencies": {
-		"@makepurple/typings": "workspace:*",
-		"browser-process-hrtime": "^1.0.0"
+		"@makepurple/typings": "workspace:*"
 	},
-	"peerDependencies": {
-		"ioredis": "^5"
+	"devDependencies": {
+		"ioredis": "^5.0.3"
 	}
 }
