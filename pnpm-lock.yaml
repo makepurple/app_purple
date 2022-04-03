@@ -624,11 +624,15 @@ importers:
 
   packages/rate-limiter:
     specifiers:
+      '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
+      '@upstash/redis': ^1.1.0-alpha.0
       ioredis: ^5.0.3
     dependencies:
       '@makepurple/typings': link:../typings
     devDependencies:
+      '@makepurple/tsconfig': link:../tsconfig
+      '@upstash/redis': 1.1.0-alpha.0
       ioredis: 5.0.3
 
   packages/server:
@@ -8348,6 +8352,15 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.17.0
       eslint-visitor-keys: 3.3.0
+    dev: true
+
+  /@upstash/redis/1.1.0-alpha.0:
+    resolution: {integrity: sha512-6JLfTKHfmw7I6aAYNWjC5oowpAANFgf+8bUY4aiq6k6V1tFk4oH9oWhpmxRafGQp7sizrfdlmQRyOyvcknMLdA==}
+    engines: {node: '>=10'}
+    dependencies:
+      isomorphic-fetch: 3.0.0
+    transitivePeerDependencies:
+      - encoding
     dev: true
 
   /@urql/core/2.4.3_graphql@15.7.2:
