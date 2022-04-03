@@ -35,6 +35,7 @@ declare type DeepGitHubType<T> = T extends { __typename?: infer U }
 export class OctokitClient {
 	public instance = new (Octokit.plugin(throttling))({
 		throttle: {
+			connection: connection ?? undefined,
 			onRateLimit: (retryAfter: number, options: RequestOptions, octokit: Octokit) => {
 				octokit.log.warn(
 					`Request quota exhausted for request ${options.request} ${options.url}`
