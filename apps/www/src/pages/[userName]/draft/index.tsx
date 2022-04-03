@@ -324,7 +324,8 @@ export const Page: NextPage<PageProps> = () => {
 									onChange={(newContent) => {
 										onChange(newContent);
 									}}
-									value={value}
+									// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+									value={value!}
 								>
 									<DocumentEditor.Info ref={infoRef} />
 									<DocumentEditor.Toolbar>
