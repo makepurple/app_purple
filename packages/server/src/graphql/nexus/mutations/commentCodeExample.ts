@@ -39,13 +39,13 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 		const record = await prisma.$transaction(async (transaction) => {
 			const comment = await transaction.comment.create({
 				data: {
-					codeExample: PrismaUtils.nonEmpty({
-						connect: PrismaUtils.nonEmpty(PrismaUtils.nonNull(args.data.codeExample))
-					}),
-					content: dataInput.content,
-					parent: {
-						connect: PrismaUtils.nonNull(args.data.parent)
+					codeExample: {
+						connect: PrismaUtils.nonNull(args.data.codeExample)
 					},
+					content: dataInput.content,
+					parent: PrismaUtils.nonEmpty({
+						connect: PrismaUtils.nonEmpty(PrismaUtils.nonNull(args.data.parent))
+					}),
 					author: { connect: { id: user.id } }
 				}
 			});
