@@ -4,6 +4,7 @@ import {
 	AvatarGroup,
 	Button,
 	DocumentEditor,
+	DocumentEditorControlsRef,
 	Form,
 	FormButton,
 	GitHubAvatarImage,
@@ -373,6 +374,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 
 	const [inviting, setInviting] = useState<boolean>(false);
 
+	const editor = useRef<DocumentEditorControlsRef>(null);
+
 	return (
 		<Root className={className} style={style}>
 			<Participants>
@@ -482,6 +485,8 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 					reset({
 						message: [{ type: "paragraph", children: [{ text: "" }] }]
 					});
+
+					editor.current?.reset();
 				})}
 			>
 				<Controller
@@ -494,6 +499,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 							}}
 							value={field.value}
 						>
+							<DocumentEditor.Controls />
 							<DocumentEditor.Editable
 								name={field.name}
 								placeholder="White a message"
