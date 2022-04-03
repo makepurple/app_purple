@@ -1,34 +1,23 @@
 import { Menu } from "@headlessui/react";
-import { useContextMenu, useOnKeyDown } from "@makepurple/hooks";
 import { WindowUtils } from "@makepurple/utils";
 import { CodeBlockType } from "@makepurple/validators";
-import composeRefs from "@seznam/compose-react-refs";
 import copyToClipboard from "copy-to-clipboard";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import React, {
-	FC,
-	Fragment,
-	KeyboardEvent,
-	useCallback,
-	useContext,
-	useMemo,
-	useRef,
-	useState
-} from "react";
+import React, { FC, Fragment, useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
-import CodeEditor from "react-simple-code-editor";
-import { Descendant, Editor, Element, Node as SlateNode, Path, Transforms } from "slate";
+import { Descendant, Text as SlateText, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw from "twin.macro";
-import { ContextMenu, ContextMenuItem, ListItem, toast } from "../../../atoms";
-import { CodeSquareIcon, CopyIcon, XIcon } from "../../../svgs";
-import { CodeBlockTheme } from "../../CodeBlock";
-import { DocumentEditorContext } from "../context";
-import { useGetNode } from "../hooks/useGetNode";
-import { useInsertBlock } from "../hooks/useInsertBlock";
-import { useIsBlockActive } from "../hooks/useIsBlockActive";
-import { ToolbarButton } from "../Shared";
+import { ListItem, toast } from "../../../../atoms";
+import { CodeSquareIcon, CopyIcon, XIcon } from "../../../../svgs";
+import { CodeBlockTheme } from "../../../CodeBlock";
+import { useInsertBlock } from "../../hooks/useInsertBlock";
+import { useIsBlockActive } from "../../hooks/useIsBlockActive";
+import { useToggleBlock } from "../../hooks/useToggleBlock";
+import { ToolbarButton } from "../../Shared";
+
+export type { NormalizedToken } from "./normalizeTokens";
+export { normalizeTokens } from "./normalizeTokens";
 
 const Root = tw.div`
 	flex
@@ -65,7 +54,8 @@ const ActionButton = tw.button`
 	disabled:cursor-not-allowed
 `;
 
-const EditorWrapper = tw.div`
+const Pre = tw.pre`
+	p-2
 	rounded-b-md
 	overflow-auto
 	text-sm
@@ -73,36 +63,11 @@ const EditorWrapper = tw.div`
 	tab-size[4]
 `;
 
-const StyledCodeEditor = tw(CodeEditor)`
-	select-none
-	pointer-events-none
-	[& textarea]:select-auto
-	[& textarea]:pointer-events-auto
-`;
-
-const Line = tw.span`
-	table-row
-`;
-
-const LineContent = tw.span`
-	table-cell
-`;
-
 export type CodeBlockSlateType = CodeBlockType;
 
 export type CodeBlockElement = {
 	type: CodeBlockSlateType;
 	children: Descendant[];
-};
-
-export const withCodeBlock = (editor: Editor): Editor => {
-	const { isVoid } = editor;
-
-	editor.isVoid = (element: Element): boolean => {
-		return element.type.startsWith("language-") ? true : isVoid(element);
-	};
-
-	return editor;
 };
 
 type CodeBlockLanguageOption = [name: string, slateType: CodeBlockSlateType];
@@ -133,6 +98,7 @@ const LanguageItems = tw.div`
 
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 	const insertBlock = useInsertBlock();
+	const toggleBlock = useToggleBlock();
 
 	const [reference, referenceRef] = useState<HTMLButtonElement | null>(null);
 	const [popper, popperRef] = useState<HTMLDivElement | null>(null);
@@ -178,10 +144,16 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 									<ListItem
 										{...itemProps}
 										onClick={() => {
-											insertBlock({
-												type: slateType,
-												children: [{ text: "" }]
-											});
+											if (!isCodeBlockActive) {
+												insertBlock({
+													type: slateType,
+													children: [{ text: "" }]
+												});
+
+												return;
+											}
+
+											toggleBlock(slateType);
 										}}
 										selected={isActive(slateType)}
 									>
@@ -202,20 +174,6 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 
 	const readOnly = useReadOnly();
 	const editor = useSlateStatic();
-	const getNode = useGetNode();
-	const context = useContext(DocumentEditorContext);
-
-	const rootRef = useRef<HTMLDivElement>(null);
-	const { contextMenuProps } = useContextMenu(rootRef, { disabled: readOnly });
-
-	const composedRef = composeRefs(rootRef, attributes.ref);
-
-	const [code, setCode] = useState<string>(SlateNode.string(element));
-
-	const language = useMemo(
-		() => element.type.split("-").slice(-1)[0] as Language,
-		[element.type]
-	);
 
 	const [languageName] = useMemo(
 		() => supportedLanguages.find(([, type]) => type === element.type) ?? supportedLanguages[0],
@@ -228,53 +186,9 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 		Transforms.removeNodes(editor, { at: path });
 	}, [editor, element]);
 
-	const onArrowDown = useOnKeyDown({ key: "DOWN" }, (e: KeyboardEvent<HTMLTextAreaElement>) => {
-		const textArea = e.target as HTMLTextAreaElement;
-		const isCursorEnd = textArea.selectionEnd === textArea.value.length;
-
-		if (!isCursorEnd) return;
-
-		const entry = getNode(element.type);
-
-		if (!entry) return;
-
-		const [, path] = entry;
-
-		const editable = context.editableRef.current;
-
-		const [nextNode] = Editor.next(editor) ?? [];
-
-		if (!nextNode) {
-			Transforms.deselect(editor);
-			Transforms.insertNodes(
-				editor,
-				{ type: "paragraph", children: [{ text: "" }] },
-				{ at: Path.next(path), select: true }
-			);
-		}
-
-		const [current] = Editor.node(editor, Path.next(path));
-
-		setTimeout(() => {
-			if (!editable || !current) return;
-
-			const range = document.createRange();
-			const selection = window.getSelection();
-
-			const domCurrent = ReactEditor.toDOMNode(editor, current);
-
-			range.setStart(domCurrent, 0);
-			range.setEnd(domCurrent, 0);
-
-			selection?.removeAllRanges();
-
-			selection?.addRange(range);
-		}, 0);
-	});
-
 	return (
-		<Root {...attributes} contentEditable={false}>
-			<Info>
+		<Root {...attributes}>
+			<Info contentEditable={false}>
 				<LanguageName>{languageName}</LanguageName>
 				<ActionButton
 					onClick={(e) => {
@@ -286,7 +200,12 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 							return;
 						}
 
-						copyToClipboard(code);
+						const node = element.children[0];
+
+						if (!node) return;
+						if (!SlateText.isText(node)) return;
+
+						copyToClipboard(node.text);
 
 						toast.success("Copied!");
 					}}
@@ -300,7 +219,10 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 					)}
 				</ActionButton>
 			</Info>
-			<EditorWrapper ref={composedRef} style={CodeBlockTheme.plain as any}>
+			<Pre spellCheck={false} style={CodeBlockTheme.plain}>
+				{children}
+			</Pre>
+			{/* <EditorWrapper ref={composedRef} style={CodeBlockTheme.plain as any}>
 				<StyledCodeEditor
 					disabled={readOnly}
 					highlight={(value) => (
@@ -350,19 +272,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 					aria-label="code block editor"
 					aria-readonly={readOnly}
 				/>
-				<ContextMenu contentEditable={false} {...contextMenuProps}>
-					<ContextMenuItem
-						onMouseDown={(e) => {
-							e.preventDefault();
-
-							deleteSelf();
-						}}
-					>
-						Delete
-					</ContextMenuItem>
-				</ContextMenu>
-			</EditorWrapper>
-			{children}
+			</EditorWrapper> */}
 		</Root>
 	);
 };

@@ -11,7 +11,7 @@ import { DocumentEditorContext } from "./context";
 import { DocumentEditorControls } from "./DocumentEditorControls";
 import { DocumentEditorInfo } from "./DocumentEditorInfo";
 import { DocumentEditorEditable } from "./Editable";
-import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
+import { CustomElement, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
 import { withKeyCommands } from "./plugins";
 import { DocumentEditorToolbar } from "./Toolbar";
@@ -88,7 +88,6 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 		const composed = FunctionUtils.compose(
 			withReact,
 			withHistory,
-			withCodeBlock,
 			withLinks,
 			withImages,
 			withKeyCommands
