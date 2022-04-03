@@ -289,7 +289,8 @@ export const Page: NextPage<PageProps> = () => {
 							name="content"
 							render={({ field: { name, onChange, value } }) => (
 								<StyledDocumentEditor
-									value={value}
+									// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+									value={value!}
 									onChange={(newContent) => onChange(newContent)}
 								>
 									<DocumentEditor.Info ref={infoRef} />
