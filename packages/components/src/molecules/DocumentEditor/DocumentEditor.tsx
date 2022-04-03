@@ -8,6 +8,7 @@ import { Paper } from "../../atoms";
 import { FormContext } from "../../atoms/Form/context";
 import { FormGroupContext } from "../../atoms/FormGroup/context";
 import { DocumentEditorContext } from "./context";
+import { DocumentEditorControls } from "./DocumentEditorControls";
 import { DocumentEditorInfo } from "./DocumentEditorInfo";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withCodeBlock, withImages, withLinks } from "./Element";
@@ -99,15 +100,6 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 	const disabled = props.disabled ?? form.disabled;
 	const error = props.error ?? group.error;
 
-	/**
-	 * !HACK
-	 * @description Here's a required (but undocumented fix for uncontrolled state)
-	 * @see (@link: https://github.com/ianstormtaylor/slate/issues/4646#issuecomment-963464397)
-	 * @author David Lee
-	 * @date March 29, 2022
-	 */
-	editor.children = value;
-
 	return (
 		<Root
 			ref={ref}
@@ -136,6 +128,7 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 _DocumentEditor.displayName = "DocumentEditor";
 
 export const DocumentEditor = ObjectUtils.setStatic(_DocumentEditor, {
+	Controls: DocumentEditorControls,
 	Editable: DocumentEditorEditable,
 	Info: DocumentEditorInfo,
 	Toolbar: DocumentEditorToolbar

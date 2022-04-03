@@ -2,6 +2,7 @@ import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	Anchor,
 	DocumentEditor,
+	DocumentEditorControlsRef,
 	Form,
 	FormButton,
 	FormGroup,
@@ -14,7 +15,7 @@ import { CommentCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { useCommentCodeExampleMutation, useCommentPostMutation } from "../../graphql";
@@ -70,6 +71,8 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 		resolver: computedTypesResolver(CommentCreateInput)
 	});
 
+	const editor = useRef<DocumentEditorControlsRef>(null);
+
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		trigger();
@@ -122,6 +125,8 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 					]
 				});
 
+				editor.current?.reset();
+
 				onSuccess?.();
 			})}
 			style={style}
@@ -141,6 +146,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 							onChange={(newContent) => field.onChange(newContent)}
 							value={field.value}
 						>
+							<DocumentEditor.Controls ref={editor} />
 							<DocumentEditor.Editable
 								name={field.name}
 								placeholder="What are your thoughts?"

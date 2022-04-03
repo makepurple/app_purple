@@ -70,6 +70,7 @@ const HeaderItems = tw.div`
 	rounded-lg
 	bg-white
 	shadow-2xl
+	z-10
 `;
 
 export const HeadingToolbarButton: FC<Record<string, never>> = () => {

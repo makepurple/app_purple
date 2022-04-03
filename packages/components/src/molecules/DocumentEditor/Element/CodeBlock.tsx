@@ -128,6 +128,7 @@ const LanguageItems = tw.div`
 	rounded-lg
 	bg-white
 	shadow-2xl
+	z-10
 `;
 
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
