@@ -106,6 +106,7 @@ export class RateLimiter {
 
 	/**
 	 * !HACK
+	 * @deprecated
 	 * @description Upstash's REST API doesn't yet support transactions, which can lead to potential
 	 * race-conditions with rate-limiting. Use at your own risk! Prefer using ioredis until
 	 * transactions are supported by upstash. Use at your own risk!
