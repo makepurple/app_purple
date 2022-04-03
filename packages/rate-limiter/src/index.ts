@@ -52,8 +52,6 @@ export class RateLimiter {
 
 		const durationSecs = this.durationMs / 1_000;
 
-		console.log(res);
-
 		const count = parseInt(res[1][1]);
 		const oldest = parseInt(res[3][1]);
 		const oldestInRange = parseInt(res[4][1]);

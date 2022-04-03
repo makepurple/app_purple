@@ -227,7 +227,6 @@ importers:
       '@makepurple/components': workspace:*
       '@makepurple/hooks': workspace:*
       '@makepurple/prisma': workspace:*
-      '@makepurple/rate-limiter': workspace:*
       '@makepurple/server': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
@@ -314,7 +313,6 @@ importers:
       '@makepurple/components': link:../../packages/components
       '@makepurple/hooks': link:../../packages/hooks
       '@makepurple/prisma': link:../../packages/prisma
-      '@makepurple/rate-limiter': link:../../packages/rate-limiter
       '@makepurple/server': link:../../packages/server
       '@makepurple/typings': link:../../packages/typings
       '@makepurple/utils': link:../../packages/utils
