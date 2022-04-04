@@ -1,5 +1,5 @@
 import { ObjectUtils } from "@makepurple/utils";
-import { Comment, Skill, User } from "@prisma/client";
+import type { Comment, Prisma, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -14,6 +14,10 @@ const READING_WORDS_PER_MINUTE = 256;
 
 export const Post = objectType({
 	name: "Post",
+	sourceType: {
+		module: "@prisma/client",
+		export: "Post"
+	},
 	definition: (t) => {
 		t.nonNull.field("author", {
 			type: "User",
@@ -73,7 +77,19 @@ export const Post = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.list.nonNull.json("content");
+		t.nonNull.list.nonNull.json("content", {
+			resolve: (parent) => {
+				/**
+				 * !HACK
+				 * @description The underlying type in the DB is a Json, but we're expecting a
+				 * json array. Casting to json[] in the resolver, which may break if the
+				 * field ever returns a different data shape
+				 * @author David Lee
+				 * @date April 3, 2022
+				 */
+				return parent.content as Prisma.JsonArray[];
+			}
+		});
 		t.nonNull.dateTime("createdAt");
 		t.string("description");
 		t.nonNull.field("downvoters", {
@@ -126,7 +142,7 @@ export const Post = objectType({
 				Estimated time in minutes it will take to read this post. Minimum 1 minute.
 			`,
 			resolve: (parent) => {
-				const content: readonly Json[] = parent.content;
+				const content = parent.content as readonly Json[];
 				const wordCount = ObjectUtils.getWordCount(content);
 				const estimatedMinutes = Math.floor(wordCount / READING_WORDS_PER_MINUTE);
 				const readingMinutes = Math.max(1, estimatedMinutes);

@@ -2,7 +2,7 @@ import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
 import type { octokit } from "../../../services";
 
 import type { ServerContext as ctx } from "./../../context"
-import type { Comment } from "@prisma/client"
+import type { ChatMessage, Comment, Experience, Post } from "@prisma/client"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
 import type { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
 import type { core } from "nexus"
@@ -439,13 +439,7 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['Chat']; // Chat!
   }
-  ChatMessage: { // root type
-    chatId: string; // String!
-    content: NexusGenScalars['Json'][]; // [Json!]!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    id: string; // ID!
-    senderId: string; // String!
-  }
+  ChatMessage: ChatMessage;
   ChatMessageConnection: { // root type
     edges: NexusGenRootTypes['ChatMessageEdge'][]; // [ChatMessageEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
@@ -549,17 +543,7 @@ export interface NexusGenObjects {
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
-  Experience: { // root type
-    endDate?: NexusGenScalars['DateTime'] | null; // DateTime
-    highlights: string[]; // [String!]!
-    id: string; // ID!
-    location?: string | null; // String
-    organizationName: string; // String!
-    positionName: string; // String!
-    startDate: NexusGenScalars['DateTime']; // DateTime!
-    type?: NexusGenEnums['ExperienceType'] | null; // ExperienceType
-    userId: string; // String!
-  }
+  Experience: Experience;
   ExperienceConnection: { // root type
     edges: NexusGenRootTypes['ExperienceEdge'][]; // [ExperienceEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
@@ -728,18 +712,7 @@ export interface NexusGenObjects {
     hasPreviousPage: boolean; // Boolean!
     startCursor?: string | null; // String
   }
-  Post: { // root type
-    authorName: string; // String!
-    content: NexusGenScalars['Json'][]; // [Json!]!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    description?: string | null; // String
-    id: string; // ID!
-    publishedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    thumbnailUrl?: string | null; // String
-    title: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    urlSlug: string; // String!
-  }
+  Post: Post;
   PostConnection: { // root type
     edges: NexusGenRootTypes['PostEdge'][]; // [PostEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!

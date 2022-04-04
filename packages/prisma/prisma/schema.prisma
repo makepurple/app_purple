@@ -223,7 +223,7 @@ model ChatMessage {
   id        String   @id @default(cuid())
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String
-  content   Json[]
+  content   Json
   sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId  String
   createdAt DateTime @default(now())
@@ -245,7 +245,7 @@ model Post {
   author        User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName    String
   comments      Comment[]
-  content       Json[]
+  content       Json
   createdAt     DateTime        @default(now())
   description   String?
   id            String          @id @default(cuid())
@@ -421,7 +421,7 @@ model Experience {
   id               String          @id @default(cuid())
   // When this experience was ended. Null is assumed as present.
   endDate          DateTime?
-  highlights       String[]
+  highlights       Json
   location         String?
   organization     Organization    @relation(fields: [organizationName], references: [name], onDelete: Cascade)
   organizationName String
