@@ -103,7 +103,7 @@ importers:
       react-dom: ^17.0.2
       react-is: ^17.0.2
       react-test-renderer: ^17.0.2
-      slate: ^0.76.0
+      slate: ^0.76.1
       storybook-addon-next-router: ^3.1.1
       styled-components: ^5.3.5
       tailwindcss: 2.2.19
@@ -138,7 +138,7 @@ importers:
       next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      slate: 0.76.0
+      slate: 0.76.1
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
       tippy.js: 6.3.7
@@ -291,13 +291,13 @@ importers:
       next-transpile-modules: ^9.0.0
       next-usequerystate: ^1.7.2
       path-to-regexp: ^6.2.0
-      polished: ^4.1.4
+      polished: ^4.2.1
       postcss: ^8.4.12
       prisma: ^3.11.1
       pusher-js: ^7.0.6
       react: ^17.0.2
       react-dom: ^17.0.2
-      react-hook-form: ^7.28.1
+      react-hook-form: ^7.29.0
       react-is: ^17.0.2
       react-popper: ^2.2.5
       styled-components: ^5.3.5
@@ -309,7 +309,7 @@ importers:
       webpack-filter-warnings-plugin: ^1.2.1
     dependencies:
       '@headlessui/react': 1.5.0_react-dom@17.0.2+react@17.0.2
-      '@hookform/resolvers': 2.8.8_react-hook-form@7.28.1
+      '@hookform/resolvers': 2.8.8_react-hook-form@7.29.0
       '@makepurple/components': link:../../packages/components
       '@makepurple/hooks': link:../../packages/hooks
       '@makepurple/prisma': link:../../packages/prisma
@@ -356,11 +356,11 @@ importers:
       next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
       next-usequerystate: 1.7.2_8c3675119e28db7583641618775c51dc
       path-to-regexp: 6.2.0
-      polished: 4.1.4
+      polished: 4.2.1
       pusher-js: 7.0.6
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-hook-form: 7.28.1_react@17.0.2
+      react-hook-form: 7.29.0_react@17.0.2
       react-popper: 2.2.5_react@17.0.2
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19_bdaceb00f796c0c549cd3844d4c4fef2
@@ -412,7 +412,7 @@ importers:
       '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
       '@makepurple/validators': workspace:*
-      '@popperjs/core': ^2.11.4
+      '@popperjs/core': ^2.11.5
       '@radix-ui/react-alert-dialog': ^0.1.7
       '@seznam/compose-react-refs': ^1.0.6
       '@tailwindcss/aspect-ratio': 0.3.0
@@ -432,20 +432,20 @@ importers:
       ms: ^2.1.3
       next: ^12.1.1
       nextjs-progressbar: ^0.0.14
-      polished: ^4.1.4
+      polished: ^4.2.1
       prism-react-renderer: ^1.3.1
       prismjs: ^1.27.0
       react: ^17.0.2
       react-dom: ^17.0.2
       react-dropzone: ^12.0.4
-      react-hook-form: ^7.28.1
+      react-hook-form: ^7.29.0
       react-hot-toast: ^2.2.0
       react-is: ^17.0.2
       react-popper: ^2.2.5
       react-simple-code-editor: ^0.11.0
-      slate: ^0.76.0
+      slate: ^0.76.1
       slate-history: ^0.66.0
-      slate-react: ^0.76.0
+      slate-react: ^0.76.1
       styled-components: ^5.3.5
       tailwindcss: 2.2.19
       twin.macro: ^2.8.2
@@ -457,7 +457,7 @@ importers:
       '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
       '@makepurple/validators': link:../validators
-      '@popperjs/core': 2.11.4
+      '@popperjs/core': 2.11.5
       '@radix-ui/react-alert-dialog': 0.1.7_b5d7bf22a7b46dd4876f0e926ab0c987
       '@seznam/compose-react-refs': 1.0.6
       '@tailwindcss/aspect-ratio': 0.3.0_tailwindcss@2.2.19
@@ -475,19 +475,19 @@ importers:
       ms: 2.1.3
       next: 12.1.1_react-dom@17.0.2+react@17.0.2
       nextjs-progressbar: 0.0.14_next@12.1.1+react@17.0.2
-      polished: 4.1.4
+      polished: 4.2.1
       prism-react-renderer: 1.3.1_react@17.0.2
       prismjs: 1.27.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-dropzone: 12.0.4_react@17.0.2
-      react-hook-form: 7.28.1_react@17.0.2
+      react-hook-form: 7.29.0_react@17.0.2
       react-hot-toast: 2.2.0_react-dom@17.0.2+react@17.0.2
-      react-popper: 2.2.5_2e9dd80dbd4df675244d857293d4c5b0
+      react-popper: 2.2.5_bdf4b8b1046519a8ec8ac2b64ac98053
       react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
-      slate: 0.76.0
-      slate-history: 0.66.0_slate@0.76.0
-      slate-react: 0.76.0_b61dcf584d92663b3a85daf0a94b849c
+      slate: 0.76.1
+      slate-history: 0.66.0_slate@0.76.1
+      slate-react: 0.76.1_ab37bc0fde14c54b6be47f3683813610
       styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
       tailwindcss: 2.2.19
       twin.macro: 2.8.2
@@ -555,7 +555,7 @@ importers:
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
-      '@react-hookz/web': ^13.1.0
+      '@react-hookz/web': ^13.2.0
       '@types/react': ^17.0.43
       '@types/react-dom': ^17.0.14
       downshift: ^6.1.7
@@ -565,13 +565,13 @@ importers:
       keycode-js: ^3.1.0
       react: ^17.0.2
       react-dom: ^17.0.2
-      react-hook-form: ^7.28.1
+      react-hook-form: ^7.29.0
       react-use: ^17.3.2
       urql: ^2.2.0
     dependencies:
       '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
-      '@react-hookz/web': 13.1.0_5a0c155615ca300261ded0e44a22fbd0
+      '@react-hookz/web': 13.2.0_5a0c155615ca300261ded0e44a22fbd0
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
       downshift: 6.1.7_react@17.0.2
@@ -580,7 +580,7 @@ importers:
       keycode-js: 3.1.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-hook-form: 7.28.1_react@17.0.2
+      react-hook-form: 7.29.0_react@17.0.2
       react-use: 17.3.2_react-dom@17.0.2+react@17.0.2
       urql: 2.2.0_graphql@15.7.2+react@17.0.2
     devDependencies:
@@ -589,7 +589,7 @@ importers:
 
   packages/prisma:
     specifiers:
-      '@faker-js/faker': ^6.1.1
+      '@faker-js/faker': ^6.1.2
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@prisma/client': ^3.11.1
@@ -613,7 +613,7 @@ importers:
       chalk: 4.1.2
       nexus: 1.1.0_graphql@15.7.2
     devDependencies:
-      '@faker-js/faker': 6.1.1
+      '@faker-js/faker': 6.1.2
       '@makepurple/tsconfig': link:../tsconfig
       '@types/fs-extra': 9.0.13
       dotenv-cli: 5.1.0
@@ -692,7 +692,7 @@ importers:
       seedrandom: ^3.0.5
       ts-node: ^10.7.0
       typescript: ^4.6.3
-      winston: ^3.6.0
+      winston: ^3.7.2
     dependencies:
       '@devoxa/prisma-relay-cursor-connection': 2.1.0_@prisma+client@3.11.1
       '@graphql-tools/batch-execute': 8.4.1_graphql@15.7.2
@@ -735,7 +735,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       request-ip: 2.1.3
       seedrandom: 3.0.5
-      winston: 3.6.0
+      winston: 3.7.2
     devDependencies:
       '@graphql-codegen/cli': 2.6.2_50dbbce7419ab720b01d03d0e2a001aa
       '@graphql-codegen/typescript': 2.4.8_graphql@15.7.2
@@ -778,13 +778,13 @@ importers:
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       dayjs: ^1.11.0
-      react-hook-form: ^7.28.1
+      react-hook-form: ^7.29.0
       typescript: ^4.6.3
     dependencies:
       '@emotion/is-prop-valid': 1.1.2
       '@makepurple/typings': link:../typings
       dayjs: 1.11.0
-      react-hook-form: 7.28.1
+      react-hook-form: 7.29.0
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
       typescript: 4.6.3
@@ -3324,6 +3324,11 @@ packages:
     resolution: {integrity: sha512-8yq1LJVGn4GY06riLddIU1LbJm15yjt46hjfkpWNpH/mqdciPOBVzicKOJxzQNrGgVHVBxcdm7sgwjI/Y19MYw==}
     engines: {node: '>=14.0.0', npm: '>=7.0.0'}
 
+  /@faker-js/faker/6.1.2:
+    resolution: {integrity: sha512-QSvmexHCxeRUk1/yKmoEDaWB5Hohjvtim5g2JJwy8S/l0L4b3y/GxSpE6vN4SBoVGGahEQW21uqyRr7EofI35A==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: true
+
   /@gar/promisify/1.1.2:
     resolution: {integrity: sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==}
 
@@ -4451,12 +4456,12 @@ packages:
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /@hookform/resolvers/2.8.8_react-hook-form@7.28.1:
+  /@hookform/resolvers/2.8.8_react-hook-form@7.29.0:
     resolution: {integrity: sha512-meAEDur1IJBfKyTo9yPYAuzjIfrxA7m9Ov+1nxaW/YupsqMeseWifoUjWK03+hz/RJizsVQAaUjVxFEkyu0GWg==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.28.1_react@17.0.2
+      react-hook-form: 7.29.0_react@17.0.2
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
@@ -5192,8 +5197,8 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@popperjs/core/2.11.4:
-    resolution: {integrity: sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg==}
+  /@popperjs/core/2.11.5:
+    resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
 
   /@prisma/client/3.11.1_prisma@3.11.1:
     resolution: {integrity: sha512-B3C7zQG4HbjJzUr2Zg9UVkBJutbqq9/uqkl1S138+keZCubJrwizx3RuIvGwI+s+pm3qbsyNqXiZgL3Ir0fSng==}
@@ -5678,8 +5683,8 @@ packages:
     resolution: {integrity: sha512-6k/pU2jNlgYvKOy84vpCAZ8MGVwybvAdjzrh4UicCVOCPxz0LSBws1OE6O5TO4sPHaSw+yLfNzNK8RicGFc1Kw==}
     dev: false
 
-  /@react-hookz/web/13.1.0_5a0c155615ca300261ded0e44a22fbd0:
-    resolution: {integrity: sha512-U7/KB0OI6umgABmzAWqWyeQ3v+BPeYGkEbjEyH/4DBdJfCskVfv5y9GZ0aFlo8uFGzeNlGYE1acFzXliVdy/qQ==}
+  /@react-hookz/web/13.2.0_5a0c155615ca300261ded0e44a22fbd0:
+    resolution: {integrity: sha512-F5xJ6hukXxpIrs4moBGGpX++GBNv0/a/vTcNBcN5uNR7U8gb6KiqlPFM0IF62MENszNkxTcBy0QBXWGWViDrcQ==}
     peerDependencies:
       js-cookie: ^3.0.1
       react: ^16.8 || ^17 || ^18
@@ -5793,7 +5798,7 @@ packages:
       fast-deep-equal: 3.1.3
       global: 4.4.0
       lodash: 4.17.21
-      polished: 4.1.4
+      polished: 4.2.1
       prop-types: 15.7.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -6568,7 +6573,7 @@ packages:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
     dependencies:
-      '@popperjs/core': 2.11.4
+      '@popperjs/core': 2.11.5
       '@storybook/client-logger': 6.4.19
       '@storybook/csf': 0.0.2--canary.87bc651.0
       '@storybook/theming': 6.4.19_react-dom@17.0.2+react@17.0.2
@@ -6583,7 +6588,7 @@ packages:
       markdown-to-jsx: 7.1.6_react@17.0.2
       memoizerific: 1.11.3
       overlayscrollbars: 1.13.1
-      polished: 4.1.4
+      polished: 4.2.1
       prop-types: 15.8.1
       react: 17.0.2
       react-colorful: 5.5.1_react-dom@17.0.2+react@17.0.2
@@ -6603,7 +6608,7 @@ packages:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
     dependencies:
-      '@popperjs/core': 2.11.4
+      '@popperjs/core': 2.11.5
       '@storybook/client-logger': 6.4.9
       '@storybook/csf': 0.0.2--canary.87bc651.0
       '@storybook/theming': 6.4.9_react-dom@17.0.2+react@17.0.2
@@ -6618,7 +6623,7 @@ packages:
       markdown-to-jsx: 7.1.5_react@17.0.2
       memoizerific: 1.11.3
       overlayscrollbars: 1.13.1
-      polished: 4.1.4
+      polished: 4.2.1
       prop-types: 15.7.2
       react: 17.0.2
       react-colorful: 5.5.1_react-dom@17.0.2+react@17.0.2
@@ -7246,7 +7251,7 @@ packages:
       emotion-theming: 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
       global: 4.4.0
       memoizerific: 1.11.3
-      polished: 4.1.4
+      polished: 4.2.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resolve-from: 5.0.0
@@ -7267,7 +7272,7 @@ packages:
       emotion-theming: 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
       global: 4.4.0
       memoizerific: 1.11.3
-      polished: 4.1.4
+      polished: 4.2.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resolve-from: 5.0.0
@@ -7290,7 +7295,7 @@ packages:
       emotion-theming: 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
       global: 4.4.0
       memoizerific: 1.11.3
-      polished: 4.1.4
+      polished: 4.2.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resolve-from: 5.0.0
@@ -7323,7 +7328,7 @@ packages:
       lodash: 4.17.21
       markdown-to-jsx: 7.1.6_react@17.0.2
       memoizerific: 1.11.3
-      polished: 4.1.4
+      polished: 4.2.1
       qs: 6.10.3
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -7494,7 +7499,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
+      tailwindcss: 2.2.19
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -7503,7 +7508,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
+      tailwindcss: 2.2.19
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -7511,7 +7516,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
+      tailwindcss: 2.2.19
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -18531,11 +18536,11 @@ packages:
     transitivePeerDependencies:
       - typescript
 
-  /polished/4.1.4:
-    resolution: {integrity: sha512-Nq5Mbza+Auo7N3sQb1QMFaQiDO+4UexWuSGR7Cjb4Sw11SZIJcrrFtiZ+L0jT9MBsUsxDboHVASbCLbE1rnECg==}
+  /polished/4.2.1:
+    resolution: {integrity: sha512-vRkUnHBwVX7kIeCzCghcLCWoDenV+sV7lkItnmTc7bb6Uzbe8ogU1FxqEW8+dXCxUX8YW8vusQ0HTk2yES7bfQ==}
     engines: {node: '>=10'}
     dependencies:
-      '@babel/runtime': 7.17.2
+      '@babel/runtime': 7.17.8
 
   /popmotion/11.0.3:
     resolution: {integrity: sha512-Y55FLdj3UxkR7Vl3s7Qr4e9m0onSnP8W7d/xQLsoJM40vs6UKHFdygs6SWryasTZYqugMjm3BepCF4CWXDiHgA==}
@@ -19324,18 +19329,18 @@ packages:
       react-fast-compare: 3.2.0
       shallowequal: 1.1.0
 
-  /react-hook-form/7.28.1:
-    resolution: {integrity: sha512-mgwxvXuvt3FMY/mdnWbPc++Zf1U5xYzkhOaL05mtFMLvXc9MvUhMUlKtUVuO12sOrgT3nPXBgVFawtiJ4ONrgg==}
+  /react-hook-form/7.29.0:
+    resolution: {integrity: sha512-NcJqWRF6el5HMW30fqZRt27s+lorvlCCDbTpAyHoodQeYWXgQCvZJJQLC1kRMKdrJknVH0NIg3At6TUzlZJFOQ==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
-      react: ^16.8.0 || ^17
+      react: ^16.8.0 || ^17 || ^18
     dev: false
 
-  /react-hook-form/7.28.1_react@17.0.2:
-    resolution: {integrity: sha512-mgwxvXuvt3FMY/mdnWbPc++Zf1U5xYzkhOaL05mtFMLvXc9MvUhMUlKtUVuO12sOrgT3nPXBgVFawtiJ4ONrgg==}
+  /react-hook-form/7.29.0_react@17.0.2:
+    resolution: {integrity: sha512-NcJqWRF6el5HMW30fqZRt27s+lorvlCCDbTpAyHoodQeYWXgQCvZJJQLC1kRMKdrJknVH0NIg3At6TUzlZJFOQ==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
-      react: ^16.8.0 || ^17
+      react: ^16.8.0 || ^17 || ^18
     dependencies:
       react: 17.0.2
     dev: false
@@ -19381,18 +19386,18 @@ packages:
       react-dom: ^16.6.0 || ^17.0.0
     dependencies:
       '@babel/runtime': 7.17.8
-      '@popperjs/core': 2.11.4
+      '@popperjs/core': 2.11.5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-popper: 2.2.5_2e9dd80dbd4df675244d857293d4c5b0
+      react-popper: 2.2.5_bdf4b8b1046519a8ec8ac2b64ac98053
 
-  /react-popper/2.2.5_2e9dd80dbd4df675244d857293d4c5b0:
+  /react-popper/2.2.5_bdf4b8b1046519a8ec8ac2b64ac98053:
     resolution: {integrity: sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==}
     peerDependencies:
       '@popperjs/core': ^2.0.0
       react: ^16.8.0 || ^17
     dependencies:
-      '@popperjs/core': 2.11.4
+      '@popperjs/core': 2.11.5
       react: 17.0.2
       react-fast-compare: 3.2.0
       warning: 4.0.3
@@ -20578,17 +20583,17 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  /slate-history/0.66.0_slate@0.76.0:
+  /slate-history/0.66.0_slate@0.76.1:
     resolution: {integrity: sha512-6MWpxGQZiMvSINlCbMW43E2YBSVMCMCIwQfBzGssjWw4kb0qfvj0pIdblWNRQZD0hR6WHP+dHHgGSeVdMWzfng==}
     peerDependencies:
       slate: '>=0.65.3'
     dependencies:
       is-plain-object: 5.0.0
-      slate: 0.76.0
+      slate: 0.76.1
     dev: false
 
-  /slate-react/0.76.0_b61dcf584d92663b3a85daf0a94b849c:
-    resolution: {integrity: sha512-qa3kZkedU2w2XYzAfMIAwC+WYJY/zY99/jf6KOgt7qQjtvZixe7OgQ0PBjT+Dl6EPFcYhkExRXPfob1qeKAnAw==}
+  /slate-react/0.76.1_ab37bc0fde14c54b6be47f3683813610:
+    resolution: {integrity: sha512-deIhlGp8jUd5eZ8fodJ+Os3Eznk2bGJ4T6FPxzX04gFDCFVgXaYLfy9pObkQHW5XGnHwV3rniAyAtHBxNzrm9Q==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -20603,12 +20608,12 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       scroll-into-view-if-needed: 2.2.29
-      slate: 0.76.0
+      slate: 0.76.1
       tiny-invariant: 1.0.6
     dev: false
 
-  /slate/0.76.0:
-    resolution: {integrity: sha512-cAf+I+gYjwOXglRDYPTdHESAHxOiOFwd3Nq7ObAG7/eJGfibeFZD3RpUWRIgzwXLvGcLOc9AtkBaurzPgK3gHQ==}
+  /slate/0.76.1:
+    resolution: {integrity: sha512-ALsAInU8vUEL65IGWttc1xOzq7KmNtn4XIDxylJnbGXWziKZxxRpL4nL8QHZX553Q1EPmi0w+kWOG+hnLFfcgw==}
     dependencies:
       immer: 9.0.12
       is-plain-object: 5.0.0
@@ -21718,7 +21723,7 @@ packages:
   /tippy.js/6.3.7:
     resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
     dependencies:
-      '@popperjs/core': 2.11.4
+      '@popperjs/core': 2.11.5
     dev: false
 
   /title-case/3.0.3:
@@ -22997,8 +23002,8 @@ packages:
       triple-beam: 1.3.0
     dev: false
 
-  /winston/3.6.0:
-    resolution: {integrity: sha512-9j8T75p+bcN6D00sF/zjFVmPp+t8KMPB1MzbbzYjeN9VWxdsYnTB40TkbNUEXAmILEfChMvAMgidlX64OG3p6w==}
+  /winston/3.7.2:
+    resolution: {integrity: sha512-QziIqtojHBoyzUOdQvQiar1DH0Xp9nF1A1y7NVy2DGEsz82SBDtOalS0ulTRGVT14xPX3WRWkCsdcJKqNflKng==}
     engines: {node: '>= 12.0.0'}
     dependencies:
       '@dabh/diagnostics': 2.0.3
