@@ -645,6 +645,8 @@ importers:
       '@graphql-codegen/cli': ^2.6.2
       '@graphql-codegen/typescript': ^2.4.8
       '@graphql-codegen/typescript-operations': ^2.3.5
+      '@graphql-tools/batch-execute': ^8.4.1
+      '@graphql-tools/utils': ^8.6.5
       '@makepurple/prisma': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
@@ -693,6 +695,8 @@ importers:
       winston: ^3.6.0
     dependencies:
       '@devoxa/prisma-relay-cursor-connection': 2.1.0_@prisma+client@3.11.1
+      '@graphql-tools/batch-execute': 8.4.1_graphql@15.7.2
+      '@graphql-tools/utils': 8.6.5_graphql@15.7.2
       '@makepurple/prisma': link:../prisma
       '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
@@ -3540,7 +3544,7 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      '@graphql-tools/utils': 8.6.2_graphql@15.7.2
+      '@graphql-tools/utils': 8.6.5_graphql@15.7.2
       change-case-all: 1.0.14
       common-tags: 1.8.2
       graphql: 15.7.2
@@ -3582,7 +3586,7 @@ packages:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 2.3.2_graphql@15.7.2
-      '@graphql-tools/utils': 8.5.5_graphql@15.7.2
+      '@graphql-tools/utils': 8.6.5_graphql@15.7.2
       graphql: 15.7.2
       tslib: 2.3.1
     dev: true
@@ -4351,15 +4355,6 @@ packages:
       - bufferutil
       - encoding
       - utf-8-validate
-    dev: true
-
-  /@graphql-tools/utils/8.5.5_graphql@15.7.2:
-    resolution: {integrity: sha512-y7zRXWIUI73X+9/rf/0KzrNFMlpRKFfzLiwdbIeWwgLs+NV9vfUOoVkX8luXX6LwQxhSypHATMiwZGM2ro/wJA==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-    dependencies:
-      graphql: 15.7.2
-      tslib: 2.3.1
     dev: true
 
   /@graphql-tools/utils/8.6.2:

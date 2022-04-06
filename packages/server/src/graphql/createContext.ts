@@ -22,7 +22,7 @@ export const createContext = async (params: CreateContextParams): Promise<Server
 		cloudinary: cloudinary.client,
 		ip: isbot(req.headers["user-agent"]) ? null : getClientIp(req),
 		jwt,
-		octokit: octokit.client.graphql(jwt?.accessToken),
+		octokit: await octokit.client.graphql(jwt?.accessToken),
 		prisma,
 		pusher: pusher.client,
 		redis,

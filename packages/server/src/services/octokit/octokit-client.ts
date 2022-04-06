@@ -1,3 +1,5 @@
+import { createBatchingExecutor } from "@graphql-tools/batch-execute";
+import type { ExecutionRequest, ExecutionResult, Executor } from "@graphql-tools/utils";
 import { LangUtils, ObjectUtils } from "@makepurple/utils";
 import { createTokenAuth } from "@octokit/auth-token";
 import { Octokit } from "@octokit/core";
@@ -5,6 +7,7 @@ import { throttling } from "@octokit/plugin-throttling";
 import type { RequestOptions } from "@octokit/types";
 import Bottleneck from "bottleneck";
 import { oneLine } from "common-tags";
+import { parse, print } from "graphql";
 import { redis } from "../../redis";
 import { Logger } from "../../utils";
 
@@ -87,9 +90,28 @@ export class OctokitClient {
 		return input as DeepGitHubType<T>;
 	}
 
-	public graphql(accessToken?: Maybe<string>) {
+	public async graphql(accessToken?: Maybe<string>) {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const _accessToken = accessToken ?? process.env.GITHUB_ACCESS_TOKEN!;
+		const { token } = await createTokenAuth(_accessToken)();
+
+		const executor: Executor<any, any> = async (
+			request: ExecutionRequest<any, any>
+		): Promise<ExecutionResult<any>> => {
+			const { document, variables } = request;
+			const query = print(document);
+
+			const data = await this.instance.graphql<Record<string, any>>(query, {
+				...variables,
+				headers: {
+					Authorization: `token ${token}`
+				}
+			});
+
+			return { data };
+		};
+
+		const batchExecutor = createBatchingExecutor(executor);
 
 		return <
 			TResult extends Record<string, any> = any,
@@ -98,20 +120,15 @@ export class OctokitClient {
 			strings: TemplateStringsArray,
 			...exprs: any[]
 		) => {
-			const query = oneLine(strings, ...exprs);
-			const auth = createTokenAuth(_accessToken)();
+			const query = parse(oneLine(strings, ...exprs));
 
 			const op = async (variables?: TVariables): Promise<DeepGitHubType<TResult>> => {
-				const { token } = await auth;
+				const { data } = (await batchExecutor<TResult>({
+					document: query,
+					variables
+				})) as ExecutionResult<TResult>;
 
-				const response = await this.instance.graphql<TResult>(query, {
-					...variables,
-					headers: {
-						Authorization: `token ${token}`
-					}
-				});
-
-				return OctokitClient.castTypenames(response);
+				return OctokitClient.castTypenames(data as TResult);
 			};
 
 			return ObjectUtils.setStatic(op, {

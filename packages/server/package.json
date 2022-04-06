@@ -16,6 +16,8 @@
 	},
 	"dependencies": {
 		"@devoxa/prisma-relay-cursor-connection": "^2.1.0",
+		"@graphql-tools/batch-execute": "^8.4.1",
+		"@graphql-tools/utils": "^8.6.5",
 		"@makepurple/prisma": "workspace:*",
 		"@makepurple/typings": "workspace:*",
 		"@makepurple/utils": "workspace:*",
