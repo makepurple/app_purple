@@ -245,7 +245,7 @@ model Post {
   author        User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
   authorName    String
   comments      Comment[]
-  content       Json
+  content       Json?
   createdAt     DateTime        @default(now())
   description   String?
   id            String          @id @default(cuid())
