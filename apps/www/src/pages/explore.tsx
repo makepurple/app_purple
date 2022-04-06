@@ -3,12 +3,12 @@ import { useRelayCursor } from "@makepurple/hooks";
 import { Masonry, RenderComponentProps } from "masonic";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo } from "react";
 import tw from "twin.macro";
-import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../../graphql";
-import { SuggestedFriendCard } from "../../organisms";
-import { PageProps, pageProps } from "../../page-props/explore";
-import { PersonIcon } from "../../svgs";
+import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../graphql";
+import { SuggestedFriendCard } from "../organisms";
+import { PageProps, pageProps } from "../page-props/explore";
+import { PersonIcon } from "../svgs";
 
 const BATCH_SIZE = 50;
 
@@ -19,17 +19,9 @@ const Root = tw(MainContainer)`
 
 export const getServerSideProps = pageProps;
 
-export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
-	useSession({ required: true });
+export const Page: NextPage<PageProps> = ({ seed }) => {
+	useSession();
 
-	const jitterSeedRef = useRef<Date>(new Date(jitterSeed));
-
-	/**
-	 * TODO
-	 * @description Allow users to configure this in settings
-	 * @author David Lee
-	 * @date January 6, 2022
-	 */
 	const [{ data }, { getRef }] = useRelayCursor({
 		query: SuggestFriendsDocument,
 		field: "suggestFriends",
@@ -37,16 +29,7 @@ export const Page: NextPage<PageProps> = ({ jitterSeed }) => {
 		variables: {
 			after: null,
 			first: BATCH_SIZE,
-			where: {
-				desiredSkillsThreshold: 0,
-				skillsThreshold: 0,
-				jitter: 0.15,
-				jitterSeed: jitterSeedRef.current,
-				weights: {
-					skillsOverlap: 1,
-					desiredSkillsOverlap: 1
-				}
-			}
+			where: { seed }
 		}
 	});
 
