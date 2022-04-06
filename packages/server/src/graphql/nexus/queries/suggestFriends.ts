@@ -30,11 +30,39 @@ export const suggestFriends = queryField("suggestFriends", {
 		first: intArg(),
 		where: nonNull(arg({ type: "SuggestFriendsWhereInput" }))
 	},
-	authorize: (parent, args, { user }) => {
-		return !!user;
-	},
 	resolve: async (parent, args, { prisma, user }) => {
-		if (!user) throw new Error();
+		const orderBy = PrismaUtils.getRandomOrderBy<any>({
+			direction: Prisma.SortOrder.desc,
+			options: ["posts._count", "codeExamples._count", "skills._count"],
+			seed: args.where.seed
+		});
+
+		if (!user) {
+			const where: Prisma.UserWhereInput = {
+				desiredSkills: {
+					some: PrismaUtils.nonNull(args.where.desiredSkills)
+				},
+				skills: {
+					some: PrismaUtils.nonNull(args.where.skills)
+				}
+			};
+
+			const connection = PrismaUtils.findManyCursorConnection<User, { id: string }>(
+				({ cursor, skip, take }) =>
+					prisma.user.findMany({
+						cursor,
+						skip,
+						take,
+						where,
+						orderBy
+					}),
+				() => prisma.user.count({ where }),
+				{ ...PrismaUtils.handleRelayConnectionArgs(args) },
+				{ ...PrismaUtils.handleRelayCursor() }
+			);
+
+			return connection;
+		}
 
 		const viewer = await prisma.user.findUnique({
 			where: { id: user.id },
@@ -80,12 +108,6 @@ export const suggestFriends = queryField("suggestFriends", {
 				{ skills: { some: { skillId: { in: viewerSkillIds } } } }
 			]
 		};
-
-		const orderBy = PrismaUtils.getRandomOrderBy<any>({
-			direction: Prisma.SortOrder.desc,
-			options: ["posts._count", "codeExamples._count", "skills._count"],
-			seed: args.where.seed
-		});
 
 		const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
 			({ cursor, skip, take }) =>
