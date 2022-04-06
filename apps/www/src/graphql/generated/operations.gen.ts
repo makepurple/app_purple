@@ -1998,39 +1998,19 @@ export type StringNullableFilter = {
   readonly startsWith?: InputMaybe<Scalars['String']>;
 };
 
-export type SuggestFriendsWeightsInput = {
-  readonly desiredSkillsOverlap?: InputMaybe<Scalars['Float']>;
-  readonly skillsOverlap?: InputMaybe<Scalars['Float']>;
-};
-
 export type SuggestFriendsWhereInput = {
   /**
-   * The min % overlap of suggested users' skills to the viewer's desired-skills.
-   *
-   * This is clamped to [0, 1], and is 0 by default.
+   * Filters suggested users by their known skills to the viewer's
+   * skills.
    */
-  readonly desiredSkillsThreshold?: InputMaybe<Scalars['Float']>;
+  readonly desiredSkills?: InputMaybe<SkillWhereInput>;
+  /** Seed for pagination for PRNG-returned data */
+  readonly seed?: InputMaybe<Scalars['String']>;
   /**
-   * Each suggested user's scoring metric (for ordering), can be randomly reduced by a % which is the jitter. The larger the jitter, the more random the results can be.
-   *
-   * This is clamped to [0, 1], and is 0.15 by default.
+   * Filters suggested users by their known skills to the viewer's
+   * desired skills.
    */
-  readonly jitter?: InputMaybe<Scalars['Float']>;
-  /**
-   * Seeds the jitter, so that pagination will be deterministic on the same seed.
-   *
-   * If not provided, the results will be non-deterministically random.
-   */
-  readonly jitterSeed?: InputMaybe<Scalars['DateTime']>;
-  /** Filters suggested users by their known skills. */
   readonly skills?: InputMaybe<SkillWhereInput>;
-  /**
-   * The min % overlap of suggested users' skills to the viewer's skills.
-   *
-   * This is clamped to [0, 1], and is 0 by default.
-   */
-  readonly skillsThreshold?: InputMaybe<Scalars['Float']>;
-  readonly weights?: InputMaybe<SuggestFriendsWeightsInput>;
 };
 
 export type SuggestOrganizations = {
