@@ -19,8 +19,6 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 		!!chatId &&
 			urqlClient
 				.query(GetChatDocument, {
-					messageLimit: BATCH_SIZE,
-					messageOffset: 0,
 					where: {
 						id: chatId
 					}
