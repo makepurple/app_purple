@@ -4,7 +4,9 @@ import {
 	findManyCursorConnection,
 	Options
 } from "@devoxa/prisma-relay-cursor-connection";
-import { LangUtils } from "@makepurple/utils";
+import { LangUtils, ObjectUtils } from "@makepurple/utils";
+import { Prisma } from "@prisma/client";
+import seedrandom from "seedrandom";
 
 type DeepNonNullArgs<T> = T extends null
 	? undefined
@@ -17,6 +19,12 @@ type DeepNonNullArgs<T> = T extends null
 	: T extends readonly (infer U)[]
 	? readonly DeepNonNullArgs<U>[]
 	: T;
+
+export interface GetRandomOrderByParams<T extends string | number | symbol> {
+	direction?: Prisma.SortOrder;
+	options: readonly T[];
+	seed?: Maybe<number | string>;
+}
 
 export class PrismaUtils {
 	public static nonEmpty = <T extends Maybe<Record<string, any>>>(input: T): T | undefined => {
@@ -119,5 +127,24 @@ export class PrismaUtils {
 			encodeCursor: (cursor) => Buffer.from(JSON.stringify(cursor)).toString("base64"),
 			decodeCursor: (cursor) => JSON.parse(Buffer.from(cursor, "base64").toString("ascii"))
 		};
+	};
+
+	public static getRandomOrderBy = <TObject extends Record<string, any>>(
+		params: GetRandomOrderByParams<keyof TObject>
+	): Partial<Record<keyof TObject, Prisma.SortOrder>> => {
+		const { direction, options, seed } = params;
+
+		const prng = seedrandom(seed ? `${seed}` : undefined);
+
+		const randomPick = <T>(values: readonly T[]): T => {
+			const index = Math.floor(prng() * values.length);
+
+			return values[index];
+		};
+
+		const sortField = randomPick(options);
+		const sortOrder = direction ?? randomPick([Prisma.SortOrder.asc, Prisma.SortOrder.desc]);
+
+		return ObjectUtils.set({}, sortField as any, sortOrder) as any;
 	};
 }
