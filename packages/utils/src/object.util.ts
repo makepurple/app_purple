@@ -1,5 +1,5 @@
 import type { FieldPath, FieldPathValue, FieldValues, UnpackNestedValue } from "react-hook-form";
-import { get } from "react-hook-form";
+import { get, set } from "react-hook-form";
 
 export class ObjectUtils {
 	public static get<
@@ -38,6 +38,16 @@ export class ObjectUtils {
 		}
 
 		return 0;
+	}
+
+	public static set<TFieldValues extends FieldValues = FieldValues>(
+		obj: Maybe<TFieldValues>,
+		path: string,
+		value: any
+	) {
+		if (!obj) return undefined;
+
+		return set({ ...obj }, path, value);
 	}
 
 	public static setStatic<T, S extends Record<string, unknown>>(base: T, staticProps: S): T & S {
