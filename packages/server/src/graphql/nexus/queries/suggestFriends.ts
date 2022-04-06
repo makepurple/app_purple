@@ -1,4 +1,4 @@
-import { dayjs, LangUtils, MathUtils } from "@makepurple/utils";
+import { dayjs } from "@makepurple/utils";
 import { Prisma, User } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -36,224 +36,67 @@ export const suggestFriends = queryField("suggestFriends", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const where = PrismaUtils.nonNull(args.where);
+		const viewer = await prisma.user.findUnique({
+			where: { id: user.id },
+			select: {
+				_count: { select: { skills: true } },
+				desiredSkills: { select: { skillId: true } },
+				skills: { select: { skillId: true } }
+			},
+			rejectOnNotFound: true
+		});
 
-		const skillIds =
-			where.skills &&
-			(await prisma.skill
-				.findMany({
-					take: 50,
-					where: where.skills,
-					select: { id: true }
-				})
-				.then((results) => results.map((result) => result.id)));
+		const viewerDesiredSkillIds = viewer.desiredSkills.map((skill) => skill.skillId);
+		const viewerSkillIds = viewer.skills.map((skill) => skill.skillId);
 
-		/**
-		 * @description The queried skills don't exist, because nobody knows them. Return an empty
-		 * connection
-		 * @author David Lee
-		 * @date March 13, 2022
-		 */
-		if (skillIds && !skillIds.length) {
-			return {
-				pageInfo: {
-					endCursor: null,
-					hasNextPage: false,
-					hasPreviousPage: false,
-					startCursor: null
-				},
-				totalCount: 0,
-				edges: []
-			};
-		}
-
-		const skillsThreshold = Prisma.raw(
-			MathUtils.clamp(where.skillsThreshold ?? 0, [0, 1]).toFixed(1)
-		);
-		const desiredSkillsThreshold = Prisma.raw(
-			MathUtils.clamp(where.desiredSkillsThreshold ?? 0, [0, 1]).toFixed(1)
-		);
-
-		const whereJitterSeed: number = where.jitterSeed?.getTime() ?? 0;
-
-		const jitterSeed = MathUtils.clamp((whereJitterSeed % 100) / 100, [0, 1]).toFixed(1);
-		const jitter = Math.ceil(MathUtils.clamp(where.jitter ?? 0.15, [0, 1]) * 100);
-
-		const sixMonthsAgo = dayjs(new Date()).subtract(6, "months").toDate();
-
-		const getSuggestedFriends = () => {
-			// Maybe set random seed if jitterSeed is provided
-			const setSeed = LangUtils.isNil(where.jitterSeed)
-				? Prisma.raw(`''`)
-				: Prisma.raw(`CAST(SETSEED(${jitterSeed}) AS TEXT)`);
-
-			// Every value can randomly be reduced by up to jitter %
-			const jitterFactor = Prisma.raw(`(RANDOM() * ${100 - jitter + 1} + ${jitter})`);
-
-			// Get total count of viewer's skills
-			const skillTotal = Prisma.sql`(
-				SELECT COUNT(*) AS "total"
-				FROM "SkillsOnUsers" AS "suTotal"
-				WHERE "suTotal"."userId" = ${user.id}
-			)`;
-
-			// Get total count of viewer's desired skills
-			const desiredSkillTotal = Prisma.sql`(
-				SELECT COUNT(*) AS "total"
-				FROM "DesiredSkillsOnUsers" AS "dsuTotal"
-				WHERE "dsuTotal"."userId" = ${user.id}
-			)`;
-
-			// Filter suggestions by users' skills
-			const skills = skillIds?.length
-				? Prisma.sql`(
-					SELECT "SkillsOnUsers"."userId"
-					FROM "SkillsOnUsers"
-					WHERE "SkillsOnUsers"."skillId" IN (${Prisma.join(skillIds)})
-				)`
-				: Prisma.empty;
-
-			// Aggregate users by # of skills shared with the viewer
-			const skillOverlap = Prisma.sql`(
-				SELECT "su0"."userId", COUNT("su0"."skillId")
-				FROM "SkillsOnUsers" AS "su0"
-				INNER JOIN "SkillsOnUsers" AS "su1"
-				ON "su0"."skillId" = "su1"."skillId"
-				WHERE "su1"."userId" = ${user.id}
-				GROUP BY "su0"."userId"
-			)`;
-
-			// Aggregate users by # of skills desired by the viewer
-			const desiredSkillOverlap = Prisma.sql`(
-				SELECT "dsu0"."userId", COUNT("dsu0"."skillId")
-				FROM "SkillsOnUsers" AS "dsu0"
-				INNER JOIN "DesiredSkillsOnUsers" AS "dsu1"
-				ON "dsu0"."skillId" = "dsu1"."skillId"
-				WHERE "dsu1"."userId" = ${user.id}
-				GROUP BY "dsu0"."userId"
-			)`;
-
-			// Users that have friended the viewer
-			// or have been friend requested by the viewer in the last 6 months
-			// or have rejected a friend request of the viewer
-			const nonFriended = Prisma.sql`(
-				SELECT "Friendship"."id"
-				FROM "Friendship"
-				WHERE (
-					"Friendship"."rejectedAt" IS NULL
-					AND (
-						(
-							"Friendship"."frienderId" = "User"."id"
-							AND "Friendship"."friendingId" = ${user.id}
-						)
-						OR (
-							"Friendship"."frienderId" = ${user.id}
-							AND "Friendship"."friendingId" = "User"."id"
-							AND "Friendship"."updatedAt" <= ${sixMonthsAgo}
-						)
-					)
-				)
-				OR (
-					"Friendship"."rejectedAt" IS NOT NULL
-					AND "Friendship"."frienderId" = ${user.id}
-					AND "Friendship"."updatedAt" <= ${sixMonthsAgo}
-				)
-				
-			)`;
-
-			return Prisma.sql`
-				(
-					SELECT
-						DISTINCT "User"."id" as "userId",
-						${setSeed} AS "hidden_seed",
-						0.0 AS "hidden_order",
-						"User".*
-					FROM "User"
-					WHERE "User"."id" = ${user.id}
-				)
-				UNION ALL
-				(
-					SELECT
-						DISTINCT "User"."id" as "userId",
-						'' as "hidden_seed",
-						${jitterFactor} * (
-							(
-								${parseFloat(MathUtils.clamp(where.weights?.skillsOverlap ?? 1, [0, 1]).toFixed(1))}
-								* CAST(COALESCE("skillOverlap"."count", 0) AS DECIMAL)
-								/ GREATEST("skillTotal"."total", 1)
-							)
-							+ (
-								${parseFloat(MathUtils.clamp(where.weights?.desiredSkillsOverlap ?? 1, [0, 1]).toFixed(1))}
-								* CAST(COALESCE("desiredSkillOverlap"."count", 0) AS DECIMAL)
-								/ GREATEST("desiredSkillTotal"."total", 1)
-							)
-						) as "hidden_order",
-						"User".*
-					FROM
-						${skillTotal} AS "skillTotal",
-						${desiredSkillTotal} AS "desiredSkillTotal",
-						"User"
-						${
-							skillIds?.length
-								? Prisma.sql`
-									INNER JOIN ${skills} as "su0"
-									ON ("User"."id") = ("su0"."userId")
-								`
-								: Prisma.empty
+		const where: Prisma.UserWhereInput = {
+			id: { not: { equals: user.id } },
+			friendedBy: {
+				none: {
+					friender: { id: { equals: user.id } }
+				}
+			},
+			friending: {
+				none: {
+					friending: { id: { equals: user.id } },
+					OR: [
+						{ rejectedAt: { equals: null } },
+						{
+							rejectedAt: {
+								lte: dayjs().subtract(6, "month").toDate()
+							}
 						}
-						LEFT JOIN ${skillOverlap} AS "skillOverlap"
-						ON ("User"."id") = ("skillOverlap"."userId")
-						LEFT JOIN ${desiredSkillOverlap} AS "desiredSkillOverlap"
-						ON ("User"."id") = ("desiredSkillOverlap"."userId")
-					WHERE (
-						NOT EXISTS ${nonFriended}
-						AND COALESCE("skillOverlap"."count", 0) >= (${skillsThreshold} * "skillTotal"."total")
-						AND COALESCE("desiredSkillOverlap"."count", 0) >= (${desiredSkillsThreshold} * "desiredSkillTotal"."total")
-					)
-				)
-				OFFSET 1
-			`;
+					]
+				}
+			},
+			desiredSkills: {
+				some: PrismaUtils.nonNull(args.where.desiredSkills)
+			},
+			skills: {
+				some: PrismaUtils.nonNull(args.where.skills)
+			},
+			AND: [
+				{ skills: { some: { skillId: { in: viewerDesiredSkillIds } } } },
+				{ skills: { some: { skillId: { in: viewerSkillIds } } } }
+			]
 		};
 
-		const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
-			async ({ cursor, skip = 0, take = 20 }) => {
-				// Pagination cursor, if one exists
-				const cursorOrder = cursor?.id
-					? Prisma.sql`
-						SELECT "SuggestedFriends"."hidden_order" AS "User_hidden_order"
-						FROM "SuggestedFriends"
-						WHERE "SuggestedFriends"."id" = ${cursor.id}
-					`
-					: Prisma.sql`SELECT 0 as "User_hidden_order"`;
+		const orderBy = PrismaUtils.getRandomOrderBy<any>({
+			direction: Prisma.SortOrder.desc,
+			options: ["posts._count", "codeExamples._count", "skills._count"],
+			seed: args.where.seed
+		});
 
-				return await prisma.$queryRaw<User[]>(
-					Prisma.sql`
-						WITH "SuggestedFriends" AS (${getSuggestedFriends()})
-						SELECT "SuggestedFriends".*
-						FROM "SuggestedFriends", (${cursorOrder}) as "orderCmp"
-						WHERE
-							"SuggestedFriends"."id" != ${user.id} AND
-							${
-								// Paginate after the cursor, if one exists
-								cursor?.id
-									? Prisma.sql`"SuggestedFriends"."hidden_order" >= "orderCmp"."User_hidden_order"`
-									: Prisma.sql`1 = 1`
-							}
-						ORDER BY "SuggestedFriends"."hidden_order"
-						LIMIT ${take}
-						OFFSET ${skip};
-				`
-				);
-			},
-			() =>
-				prisma
-					.$queryRaw<{ count: number }>(
-						Prisma.sql`
-							SELECT COUNT(*) as "count"
-							FROM (${getSuggestedFriends()}) as "SuggestedFriends";
-						`
-					)
-					.then((result) => result.count),
+		const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
+			({ cursor, skip, take }) =>
+				prisma.user.findMany({
+					cursor,
+					skip,
+					take,
+					where,
+					orderBy
+				}),
+			() => prisma.user.count({ where }),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 			{ ...PrismaUtils.handleRelayCursor() }
 		);

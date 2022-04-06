@@ -51,7 +51,6 @@ export * from "./SkillOrderByInput";
 export * from "./SkillWhereInput";
 export * from "./SkillWhereUniqueInput";
 export * from "./StringNullableFilter";
-export * from "./SuggestFriendsWeightsInput";
 export * from "./SuggestFriendsWhereInput";
 export * from "./SuggestOrganizationsWhereInput";
 export * from "./SuggestRepositoriesWhereInput";

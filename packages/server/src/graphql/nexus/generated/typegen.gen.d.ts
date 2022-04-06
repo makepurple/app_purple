@@ -330,17 +330,10 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
-  SuggestFriendsWeightsInput: { // input type
-    desiredSkillsOverlap: number | null; // Float
-    skillsOverlap: number | null; // Float
-  }
   SuggestFriendsWhereInput: { // input type
-    desiredSkillsThreshold?: number | null; // Float
-    jitter: number | null; // Float
-    jitterSeed?: NexusGenScalars['DateTime'] | null; // DateTime
+    desiredSkills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
+    seed?: string | null; // String
     skills?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
-    skillsThreshold?: number | null; // Float
-    weights: NexusGenInputs['SuggestFriendsWeightsInput'] | null; // SuggestFriendsWeightsInput
   }
   SuggestOrganizationsWhereInput: { // input type
     name: string; // String!
