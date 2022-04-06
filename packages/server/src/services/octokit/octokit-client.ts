@@ -62,34 +62,6 @@ export class OctokitClient {
 		}
 	});
 
-	public static castTypenames<T extends Record<string, any>>(input: T): DeepGitHubType<T> {
-		if (LangUtils.isNil(input)) return input as any;
-
-		if (Array.isArray(input)) {
-			return (input as readonly any[]).map((value) =>
-				OctokitClient.castTypenames(value)
-			) as DeepGitHubType<T>;
-		}
-
-		if (input instanceof Date) return input as DeepGitHubType<T>;
-
-		if (typeof input === "object") {
-			const keys = Object.keys(input) as (keyof T)[];
-
-			return keys.reduce((acc, key) => {
-				const value = input[key];
-
-				return {
-					...acc,
-					[key]:
-						key === "__typename" ? `GitHub${value}` : OctokitClient.castTypenames(value)
-				} as DeepGitHubType<T>;
-			}, {} as DeepGitHubType<T>);
-		}
-
-		return input as DeepGitHubType<T>;
-	}
-
 	public async graphql(accessToken?: Maybe<string>) {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const _accessToken = accessToken ?? process.env.GITHUB_ACCESS_TOKEN!;
@@ -144,5 +116,33 @@ export class OctokitClient {
 				): Promise<DeepGitHubType<TCastResult>> => op(variables as any) as any
 			});
 		};
+	}
+
+	private static castTypenames<T extends Record<string, any>>(input: T): DeepGitHubType<T> {
+		if (LangUtils.isNil(input)) return input as any;
+
+		if (Array.isArray(input)) {
+			return (input as readonly any[]).map((value) =>
+				OctokitClient.castTypenames(value)
+			) as DeepGitHubType<T>;
+		}
+
+		if (input instanceof Date) return input as DeepGitHubType<T>;
+
+		if (typeof input === "object") {
+			const keys = Object.keys(input) as (keyof T)[];
+
+			return keys.reduce((acc, key) => {
+				const value = input[key];
+
+				return {
+					...acc,
+					[key]:
+						key === "__typename" ? `GitHub${value}` : OctokitClient.castTypenames(value)
+				} as DeepGitHubType<T>;
+			}, {} as DeepGitHubType<T>);
+		}
+
+		return input as DeepGitHubType<T>;
 	}
 }
