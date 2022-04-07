@@ -41,6 +41,8 @@ model Account {
   userId             String
 
   @@unique([provider, providerAccountId])
+
+  @@index([userId])
 }
 
 model Session {
@@ -49,6 +51,8 @@ model Session {
   sessionToken String   @unique @db.VarChar(768)
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
+
+  @@index([userId])
 }
 
 model VerificationToken {
@@ -131,6 +135,13 @@ model UserActivity {
   updatedAt     DateTime         @updatedAt @db.DateTime(6)
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
+
+  @@index([codeExampleId])
+  @@index([commentId])
+  @@index([followId])
+  @@index([friendshipId])
+  @@index([postId])
+  @@index([userId])
 }
 
 enum NotificationType {
@@ -154,6 +165,12 @@ model Notification {
   updatedAt     DateTime         @updatedAt @db.DateTime(6)
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
+
+  @@index([chatId])
+  @@index([codeExampleId])
+  @@index([friendshipId])
+  @@index([postId])
+  @@index([userId])
 }
 
 // These are uni-directional match requests. If matched 2-way, then it is a confirmed match.
@@ -169,6 +186,9 @@ model Friendship {
   updatedAt     DateTime       @updatedAt @db.DateTime(6)
 
   @@unique([frienderId, friendingId])
+
+  @@index([frienderId])
+  @@index([friendingId])
 }
 
 enum FollowType {
@@ -185,6 +205,8 @@ model Follow {
   type           FollowType
   user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String
+
+  @@index([userId])
 }
 
 // These are uni-directional follows. If matched 2-way, then the users are following each-other.
@@ -198,6 +220,10 @@ model FollowUser {
   followingId String
 
   @@unique([followerId, followingId])
+
+  @@index([followId])
+  @@index([followerId])
+  @@index([followingId])
 }
 
 model FollowSkill {
@@ -228,6 +254,8 @@ model ChatMessage {
   sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId  String
   createdAt DateTime @default(now()) @db.DateTime(6)
+
+  @@index([senderId])
 }
 
 model ChatsOnUsers {
@@ -239,6 +267,9 @@ model ChatsOnUsers {
   lastOpenedAt DateTime @default(now()) @db.DateTime(6)
 
   @@unique([chatId, userId])
+
+  @@index([chatId])
+  @@index([userId])
 }
 
 model Post {
@@ -263,6 +294,8 @@ model Post {
 
   @@unique([authorName, title])
   @@unique([authorName, urlSlug])
+
+  @@index([authorName])
 }
 
 model PostViewer {
@@ -274,6 +307,8 @@ model PostViewer {
   userId String?
 
   @@unique([ip, postId])
+
+  @@index([userId])
 }
 
 model PostUpvoter {
@@ -286,6 +321,9 @@ model PostUpvoter {
   userId String
 
   @@unique([userId, postId])
+
+  @@index([postId])
+  @@index([userId])
 }
 
 model PostImage {
@@ -294,6 +332,8 @@ model PostImage {
   postId    String
   url       String   @unique @db.VarChar(512)
   createdAt DateTime @default(now()) @db.DateTime(6)
+
+  @@index([postId])
 }
 
 model Comment {
@@ -312,6 +352,11 @@ model Comment {
   replies       Comment[]        @relation("CommentReplies")
   updatedAt     DateTime         @updatedAt @db.DateTime(6)
   upvoters      CommentUpvoter[]
+
+  @@index([authorId])
+  @@index([codeExampleId])
+  @@index([parentId])
+  @@index([postId])
 }
 
 model CommentUpvoter {
@@ -324,6 +369,9 @@ model CommentUpvoter {
   userId    String
 
   @@unique([commentId, userId])
+
+  @@index([commentId])
+  @@index([userId])
 }
 
 model Skill {
@@ -341,6 +389,8 @@ model Skill {
   users               SkillsOnUsers[]
 
   @@unique([name, owner])
+
+  @@index([owner])
 }
 
 model SkillsOnCodeExamples {
@@ -351,6 +401,8 @@ model SkillsOnCodeExamples {
   skillId       String
 
   @@unique([skillId, codeExampleId])
+
+  @@index([skillId])
 }
 
 model SkillsOnPosts {
@@ -361,6 +413,9 @@ model SkillsOnPosts {
   skillId String
 
   @@unique([skillId, postId])
+
+  @@index([postId])
+  @@index([skillId])
 }
 
 model SkillsOnUsers {
@@ -371,6 +426,9 @@ model SkillsOnUsers {
   userId  String
 
   @@unique([skillId, userId])
+
+  @@index([skillId])
+  @@index([userId])
 }
 
 model DesiredSkillsOnUsers {
@@ -381,6 +439,9 @@ model DesiredSkillsOnUsers {
   userId  String
 
   @@unique([skillId, userId])
+
+  @@index([skillId])
+  @@index([userId])
 }
 
 model Repository {
@@ -391,6 +452,8 @@ model Repository {
   owner  String                 @db.VarChar(128)
 
   @@unique([name, owner])
+
+  @@index([owner])
 }
 
 model SkillsOnRepositories {
@@ -401,6 +464,9 @@ model SkillsOnRepositories {
   repositoryId String
 
   @@unique([skillId, repositoryId])
+
+  @@index([skillId])
+  @@index([repositoryId])
 }
 
 model Organization {
@@ -431,6 +497,9 @@ model Experience {
   type             ExperienceType?
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
+
+  @@index([organizationName])
+  @@index([userId])
 }
 
 enum CodeLanguage {
@@ -466,6 +535,9 @@ model CodeExample {
 
   @@unique([authorName, title])
   @@unique([authorName, urlSlug])
+
+  @@index([authorName])
+  @@index([primarySkillId])
 }
 
 model CodeExampleUpvoter {
@@ -478,4 +550,7 @@ model CodeExampleUpvoter {
   userId        String
 
   @@unique([codeExampleId, userId])
+
+  @@index([codeExampleId])
+  @@index([userId])
 }
