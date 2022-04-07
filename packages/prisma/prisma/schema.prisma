@@ -2,13 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions"]
+  previewFeatures = ["interactiveTransactions", "referentialIntegrity"]
 }
 
 generator erd {
@@ -23,19 +24,19 @@ generator docs {
 }
 
 model Account {
-  access_token       String?
+  access_token       String? @db.VarChar(512)
   expires_at         Int?
   id                 String  @id @default(cuid())
-  id_token           String?
-  provider           String
-  providerAccountId  String
-  oauth_token        String?
-  oauth_token_secret String?
-  refresh_token      String?
-  scope              String?
-  session_state      String?
-  token_type         String?
-  type               String
+  id_token           String? @db.VarChar(512)
+  provider           String  @db.VarChar(256)
+  providerAccountId  String  @db.VarChar(256)
+  oauth_token        String? @db.VarChar(512)
+  oauth_token_secret String? @db.VarChar(512)
+  refresh_token      String? @db.VarChar(512)
+  scope              String? @db.VarChar(256)
+  session_state      String? @db.VarChar(512)
+  token_type         String? @db.VarChar(256)
+  type               String  @db.VarChar(256)
   user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             String
 
@@ -43,17 +44,17 @@ model Account {
 }
 
 model Session {
-  expires      DateTime
+  expires      DateTime @db.DateTime(6)
   id           String   @id @default(cuid())
-  sessionToken String   @unique
+  sessionToken String   @unique @db.VarChar(768)
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
 }
 
 model VerificationToken {
-  expires    DateTime
-  identifier String
-  token      String   @unique
+  expires    DateTime @db.DateTime(6)
+  identifier String   @db.VarChar(512)
+  token      String   @unique @db.VarChar(256)
 
   @@unique([identifier, token])
 }
@@ -66,11 +67,11 @@ model User {
   codeExamples              CodeExample[]
   comments                  Comment[]
   // When this account was registered
-  createdAt                 DateTime               @default(now())
-  description               String?
+  createdAt                 DateTime               @default(now()) @db.DateTime(6)
+  description               String?                @db.VarChar(512)
   desiredSkills             DesiredSkillsOnUsers[]
-  email                     String                 @unique
-  emailVerified             DateTime?
+  email                     String                 @unique @db.VarChar(256)
+  emailVerified             DateTime?              @db.DateTime(6)
   experiences               Experience[]
   followedBy                FollowUser[]           @relation("FollowingUser")
   followingSkill            FollowSkill[]
@@ -80,20 +81,20 @@ model User {
   friending                 Friendship[]           @relation("FrienderUser")
   id                        String                 @id @default(cuid())
   // Avatar image, pulled from GitHub
-  image                     String?
+  image                     String?                @db.VarChar(512)
   // When the user last opened their messages
-  messagesLastOpenedAt      DateTime               @default(now())
+  messagesLastOpenedAt      DateTime               @default(now()) @db.DateTime(6)
   // The GitHub name of the user
-  name                      String                 @unique
+  name                      String                 @unique @db.VarChar(128)
   notifications             Notification[]         @relation()
   // When the user last opened their notifications
-  notificationsLastOpenedAt DateTime               @default(now())
+  notificationsLastOpenedAt DateTime               @default(now()) @db.DateTime(6)
   posts                     Post[]                 @relation("PostAuthor")
   repositories              Repository[]
   // Self written summary or description
   sessions                  Session[]
   skills                    SkillsOnUsers[]
-  updatedAt                 DateTime               @updatedAt
+  updatedAt                 DateTime               @updatedAt @db.DateTime(6)
   upvotedCodeExamples       CodeExampleUpvoter[]
   upvotedComments           CommentUpvoter[]
   upvotedPosts              PostUpvoter[]
@@ -127,7 +128,7 @@ model UserActivity {
   postId        String?
   skills        Skill[]
   type          UserActivityType
-  updatedAt     DateTime         @updatedAt
+  updatedAt     DateTime         @updatedAt @db.DateTime(6)
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
 }
@@ -150,7 +151,7 @@ model Notification {
   post          Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId        String?
   type          NotificationType
-  updatedAt     DateTime         @updatedAt
+  updatedAt     DateTime         @updatedAt @db.DateTime(6)
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
 }
@@ -164,8 +165,8 @@ model Friendship {
   friending     User           @relation("FriendingUser", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId   String
   notifications Notification[]
-  rejectedAt    DateTime?
-  updatedAt     DateTime       @updatedAt
+  rejectedAt    DateTime?      @db.DateTime(6)
+  updatedAt     DateTime       @updatedAt @db.DateTime(6)
 
   @@unique([frienderId, friendingId])
 }
@@ -178,7 +179,7 @@ enum FollowType {
 model Follow {
   id             String         @id @default(cuid())
   activities     UserActivity[]
-  createdAt      DateTime       @default(now())
+  createdAt      DateTime       @default(now()) @db.DateTime(6)
   followingSkill FollowSkill?
   followingUser  FollowUser?
   type           FollowType
@@ -216,7 +217,7 @@ model Chat {
   messages      ChatMessage[]
   notifications Notification[]
   users         ChatsOnUsers[]
-  updatedAt     DateTime       @updatedAt
+  updatedAt     DateTime       @updatedAt @db.DateTime(6)
 }
 
 model ChatMessage {
@@ -226,7 +227,7 @@ model ChatMessage {
   content   Json
   sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId  String
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.DateTime(6)
 }
 
 model ChatsOnUsers {
@@ -235,7 +236,7 @@ model ChatsOnUsers {
   chatId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
-  lastOpenedAt DateTime @default(now())
+  lastOpenedAt DateTime @default(now()) @db.DateTime(6)
 
   @@unique([chatId, userId])
 }
@@ -243,21 +244,21 @@ model ChatsOnUsers {
 model Post {
   activities    UserActivity[]
   author        User            @relation(name: "PostAuthor", fields: [authorName], references: [name], onDelete: Cascade)
-  authorName    String
+  authorName    String          @db.VarChar(128)
   comments      Comment[]
   content       Json?
-  createdAt     DateTime        @default(now())
-  description   String?
+  createdAt     DateTime        @default(now()) @db.DateTime(6)
+  description   String?         @db.VarChar(512)
   id            String          @id @default(cuid())
   images        PostImage[]
   notifications Notification[]
-  publishedAt   DateTime?
+  publishedAt   DateTime?       @db.DateTime(6)
   skills        SkillsOnPosts[]
-  title         String          @default("Draft")
-  thumbnailUrl  String?
-  updatedAt     DateTime        @updatedAt
+  title         String          @default("Draft") @db.VarChar(128)
+  thumbnailUrl  String?         @db.VarChar(512)
+  updatedAt     DateTime        @updatedAt @db.DateTime(6)
   upvoters      PostUpvoter[]
-  urlSlug       String          @default("draft")
+  urlSlug       String          @default("draft") @db.VarChar(128)
   viewers       PostViewer[]
 
   @@unique([authorName, title])
@@ -266,7 +267,7 @@ model Post {
 
 model PostViewer {
   id     String  @id @default(cuid())
-  ip     String
+  ip     String  @db.VarChar(128)
   post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -291,8 +292,8 @@ model PostImage {
   id        String   @id
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
-  url       String   @unique
-  createdAt DateTime @default(now())
+  url       String   @unique @db.VarChar(512)
+  createdAt DateTime @default(now()) @db.DateTime(6)
 }
 
 model Comment {
@@ -303,13 +304,13 @@ model Comment {
   codeExample   CodeExample?     @relation(fields: [codeExampleId], references: [id], onDelete: Cascade)
   codeExampleId String?
   content       Json?
-  createdAt     DateTime         @default(now())
+  createdAt     DateTime         @default(now()) @db.DateTime(6)
   parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId      String?
   post          Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId        String?
   replies       Comment[]        @relation("CommentReplies")
-  updatedAt     DateTime         @updatedAt
+  updatedAt     DateTime         @updatedAt @db.DateTime(6)
   upvoters      CommentUpvoter[]
 }
 
@@ -331,8 +332,8 @@ model Skill {
   desiringUsers       DesiredSkillsOnUsers[]
   followedBy          FollowSkill[]
   id                  String                 @id @default(cuid())
-  name                String
-  owner               String
+  name                String                 @db.VarChar(128)
+  owner               String                 @db.VarChar(128)
   organization        Organization           @relation(fields: [owner], references: [name], onDelete: Cascade)
   posts               SkillsOnPosts[]
   primaryCodeExamples CodeExample[]
@@ -384,10 +385,10 @@ model DesiredSkillsOnUsers {
 
 model Repository {
   id     String                 @id @default(cuid())
-  name   String
+  name   String                 @db.VarChar(128)
   skills SkillsOnRepositories[]
   user   User                   @relation(fields: [owner], references: [name], onDelete: Cascade)
-  owner  String
+  owner  String                 @db.VarChar(128)
 
   @@unique([name, owner])
 }
@@ -404,7 +405,7 @@ model SkillsOnRepositories {
 
 model Organization {
   id          String       @id @default(cuid())
-  name        String       @unique
+  name        String       @unique @db.VarChar(128)
   experiences Experience[]
   skills      Skill[]
 }
@@ -420,13 +421,13 @@ enum ExperienceType {
 model Experience {
   id               String          @id @default(cuid())
   // When this experience was ended. Null is assumed as present.
-  endDate          DateTime?
+  endDate          DateTime?       @db.DateTime(3)
   highlights       Json
-  location         String?
+  location         String?         @db.VarChar(256)
   organization     Organization    @relation(fields: [organizationName], references: [name], onDelete: Cascade)
-  organizationName String
-  positionName     String
-  startDate        DateTime
+  organizationName String          @db.VarChar(256)
+  positionName     String          @db.VarChar(256)
+  startDate        DateTime        @db.DateTime(3)
   type             ExperienceType?
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
@@ -448,20 +449,20 @@ model CodeExample {
   id             String                 @id @default(cuid())
   activities     UserActivity[]
   author         User                   @relation(fields: [authorName], references: [name], onDelete: Cascade)
-  authorName     String
+  authorName     String                 @db.VarChar(128)
   comments       Comment[]
-  content        String
-  createdAt      DateTime               @default(now())
-  description    String?
+  content        String                 @db.VarChar(4096)
+  createdAt      DateTime               @default(now()) @db.DateTime(6)
+  description    String?                @db.VarChar(512)
   language       CodeLanguage
   notifications  Notification[]
   primarySkill   Skill                  @relation(fields: [primarySkillId], references: [id], onDelete: Cascade)
   primarySkillId String
   skills         SkillsOnCodeExamples[]
-  title          String
-  updatedAt      DateTime               @updatedAt
+  title          String                 @db.VarChar(128)
+  updatedAt      DateTime               @updatedAt @db.DateTime(6)
   upvoters       CodeExampleUpvoter[]
-  urlSlug        String
+  urlSlug        String                 @db.VarChar(128)
 
   @@unique([authorName, title])
   @@unique([authorName, urlSlug])

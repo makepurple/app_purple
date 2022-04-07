@@ -17,6 +17,7 @@
 		"prisma:docs": "prisma-docs-generator serve --port 4002",
 		"prisma:format": "prisma format",
 		"prisma:migrate": "prisma migrate dev",
+		"prisma:push": "prisma db push",
 		"prisma:reset": "pnpm prisma:save-user && prisma migrate reset",
 		"prisma:seed": "pnpm prisma:save-user && prisma db seed",
 		"prisma:studio": "prisma studio"

@@ -29,7 +29,7 @@ export const viewPost = mutationField("viewPost", {
 				create: {
 					ip,
 					post: { connect: { id: post.id } },
-					user: { connect: { id: user?.id } }
+					user: user?.id ? { connect: { id: user?.id } } : undefined
 				},
 				update: {}
 			})

@@ -1,17 +1,15 @@
 version: "3"
 services:
-  # Postgres
-  postgres:
-    image: postgres:latest
+  mysql:
+    image: mysql:latest
     ports:
-      # Accessible from the host at port :35432
-      - "35432:5432"
+      # Accessible from the host at port :8080
+      - "3306:3306"
     environment:
-      POSTGRES_USER: postgres 
-      POSTGRES_PASSWORD: postgres 
-      POSTGRES_DB: app_purple_db
-    # Make sure log colors show up correctly
-    tty: true
+      MYSQL_ROOT_PASSWORD: mysql_root
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+      MYSQL_DATABASE: app_purple_db
   redis:
     image: redis:alpine
     ports:
