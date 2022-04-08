@@ -222,57 +222,6 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 			<Pre spellCheck={false} style={CodeBlockTheme.plain}>
 				{children}
 			</Pre>
-			{/* <EditorWrapper ref={composedRef} style={CodeBlockTheme.plain as any}>
-				<StyledCodeEditor
-					disabled={readOnly}
-					highlight={(value) => (
-						<Highlight
-							{...defaultProps}
-							code={value}
-							language={language}
-							theme={CodeBlockTheme}
-						>
-							{({ tokens, getLineProps, getTokenProps }) =>
-								tokens.map((line, i) => (
-									<Line key={i} {...getLineProps({ line, key: i })}>
-										<LineContent>
-											{line.map((token, key) => (
-												<span
-													key={key}
-													{...getTokenProps({ token, key })}
-												/>
-											))}
-										</LineContent>
-									</Line>
-								))
-							}
-						</Highlight>
-					)}
-					name="code-block"
-					onBlur={() => {
-						if (code === SlateNode.string(element)) return;
-
-						const path = ReactEditor.findPath(editor, element);
-
-						Transforms.removeNodes(editor, { at: path });
-						Transforms.insertNodes(
-							editor,
-							{ ...element, children: [{ text: code }] },
-							{ at: path }
-						);
-					}}
-					onKeyDown={onArrowDown as any}
-					onValueChange={(newValue) => {
-						setCode(newValue);
-					}}
-					padding={"0.5rem"}
-					placeholder="// Write some code here!"
-					readOnly={readOnly}
-					value={code}
-					aria-label="code block editor"
-					aria-readonly={readOnly}
-				/>
-			</EditorWrapper> */}
 		</Root>
 	);
 };
