@@ -10,7 +10,7 @@
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
-		"@upstash/redis": "^1.1.0-alpha.0",
+		"@upstash/redis": "^1.1.0",
 		"ioredis": "^5.0.3"
 	}
 }

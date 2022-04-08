@@ -6,13 +6,13 @@
 	"types": "src/index.ts",
 	"dependencies": {
 		"@makepurple/prisma": "workspace:*",
-		"@prisma/client": "^3.11.1",
+		"@prisma/client": "^3.12.0",
 		"computed-types": "^1.11.2"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
 		"@makepurple/utils": "workspace:*",
-		"prisma": "^3.11.1",
+		"prisma": "^3.12.0",
 		"typescript": "^4.6.3"
 	}
 }
