@@ -96,7 +96,7 @@ importers:
       jest-styled-components: ^7.0.8
       ms: ^2.1.3
       mutationobserver-shim: ^0.3.7
-      next: ^12.1.1
+      next: ^12.1.4
       next-auth: ^4.3.1
       postcss: ^8.4.12
       react: ^17.0.2
@@ -134,7 +134,7 @@ importers:
       common-tags: 1.8.2
       framer-motion: 6.2.8_react-dom@17.0.2+react@17.0.2
       ms: 2.1.3
-      next: 12.1.1_2f8437099e13a7806b00c8661a090057
+      next: 12.1.4_2f8437099e13a7806b00c8661a090057
       next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -179,7 +179,7 @@ importers:
       postcss: 8.4.12
       react-is: 17.0.2
       react-test-renderer: 17.0.2_react@17.0.2
-      storybook-addon-next-router: 3.1.1_9c0ff333163aa01ec338fd11eb3ec844
+      storybook-addon-next-router: 3.1.1_0899880fbe136f6e2de78496b80e17f3
       typescript: 4.6.3
       webpack: 5.72.0
 
@@ -194,7 +194,7 @@ importers:
       '@types/react-dom': ^17.0.14
       dotenv-cli: ^5.1.0
       graphql-voyager: ^1.0.0-rc.31
-      next: ^12.1.1
+      next: ^12.1.4
       react: ^17.0.2
       react-dom: ^17.0.2
     dependencies:
@@ -203,7 +203,7 @@ importers:
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
       graphql-voyager: 1.0.0-rc.31_react-dom@17.0.2+react@17.0.2
-      next: 12.1.1_react-dom@17.0.2+react@17.0.2
+      next: 12.1.4_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     devDependencies:
@@ -232,7 +232,7 @@ importers:
       '@makepurple/utils': workspace:*
       '@makepurple/validators': workspace:*
       '@next-auth/prisma-adapter': 1.0.3
-      '@next/bundle-analyzer': ^12.1.1
+      '@next/bundle-analyzer': ^12.1.4
       '@prisma/client': ^3.12.0
       '@seznam/compose-react-refs': ^1.0.6
       '@svgr/core': ^6.2.1
@@ -284,7 +284,7 @@ importers:
       masonic: ^3.6.4
       micro-cors: ^0.1.1
       ms: ^2.1.3
-      next: ^12.1.1
+      next: ^12.1.4
       next-auth: ^4.3.1
       next-compose-plugins: ^2.2.1
       next-transpile-modules: ^9.0.0
@@ -350,9 +350,9 @@ importers:
       masonic: 3.6.4_react@17.0.2
       micro-cors: 0.1.1
       ms: 2.1.3
-      next: 12.1.1_a2e1e28ac7d7744bd11a0f193315a179
+      next: 12.1.4_a2e1e28ac7d7744bd11a0f193315a179
       next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
-      next-usequerystate: 1.7.2_8c3675119e28db7583641618775c51dc
+      next-usequerystate: 1.7.2_f3299b186fe279e9e6c95022815bb28f
       path-to-regexp: 6.2.0
       polished: 4.2.2
       pusher-js: 7.0.6
@@ -374,7 +374,7 @@ importers:
       '@graphql-codegen/typescript-operations': 2.3.5_encoding@0.1.13+graphql@15.7.2
       '@graphql-codegen/typescript-urql': 3.5.7_dcf9a7ad045c75d0f9a5b8b431455312
       '@makepurple/tsconfig': link:../../packages/tsconfig
-      '@next/bundle-analyzer': 12.1.1
+      '@next/bundle-analyzer': 12.1.4
       '@svgr/core': 6.2.1
       '@svgr/plugin-prettier': 6.1.2_@svgr+core@6.2.1
       '@svgr/plugin-svgo': 6.2.0_@svgr+core@6.2.1
@@ -428,7 +428,7 @@ importers:
       copy-to-clipboard: ^3.3.1
       framer-motion: 6.2.8
       ms: ^2.1.3
-      next: ^12.1.1
+      next: ^12.1.4
       nextjs-progressbar: ^0.0.14
       polished: ^4.2.2
       prism-react-renderer: ^1.3.1
@@ -471,8 +471,8 @@ importers:
       copy-to-clipboard: 3.3.1
       framer-motion: 6.2.8_react-dom@17.0.2+react@17.0.2
       ms: 2.1.3
-      next: 12.1.1_react-dom@17.0.2+react@17.0.2
-      nextjs-progressbar: 0.0.14_next@12.1.1+react@17.0.2
+      next: 12.1.4_react-dom@17.0.2+react@17.0.2
+      nextjs-progressbar: 0.0.14_next@12.1.4+react@17.0.2
       polished: 4.2.2
       prism-react-renderer: 1.3.1_react@17.0.2
       prismjs: 1.27.0
@@ -678,7 +678,7 @@ importers:
       ioredis: ^5.0.3
       isbot: ^3.4.5
       micro: ^9.3.4
-      next: ^12.1.1
+      next: ^12.1.4
       next-auth: ^4.3.1
       nexus: ^1.1.0
       prisma: ^3.12.0
@@ -723,7 +723,7 @@ importers:
       ioredis: 5.0.3
       isbot: 3.4.5
       micro: 9.3.4
-      next: 12.1.1_react-dom@17.0.2+react@17.0.2
+      next: 12.1.4_react-dom@17.0.2+react@17.0.2
       next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
       nexus: 1.1.0_graphql@15.7.2
       pusher: 5.0.1
@@ -3190,7 +3190,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       '@emotion/cache': 10.0.29
       '@emotion/css': 10.0.27
       '@emotion/serialize': 0.11.16
@@ -3240,7 +3240,7 @@ packages:
       '@emotion/core': ^10.0.28
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       '@emotion/core': 10.3.1_react@17.0.2
       '@emotion/is-prop-valid': 0.8.8
       '@emotion/serialize': 0.11.16
@@ -4966,8 +4966,8 @@ packages:
       next-auth: 4.3.1_react-dom@17.0.2+react@17.0.2
     dev: false
 
-  /@next/bundle-analyzer/12.1.1:
-    resolution: {integrity: sha512-Mxi08C15vLCY3eAR7KEatWkNuQ7H706K/o9tw99qWz0GHl3+taVPad3kOX1xVHdE8GuaMHnbekiug4mYdV+3hQ==}
+  /@next/bundle-analyzer/12.1.4:
+    resolution: {integrity: sha512-Xw3gxBTOAS5bcayUl2hDYeCbAFIR+7poiGW4Wi/KGcsjgVRetKBS6akZ1AZsz36CUOdCxajKO45B6CeAaKtcqA==}
     dependencies:
       webpack-bundle-analyzer: 4.3.0
     transitivePeerDependencies:
@@ -4975,8 +4975,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@next/env/12.1.1:
-    resolution: {integrity: sha512-VmTRkfo/IXOQCATndjW3OjKb8zmAuB07eDdzO9XvuXZP87SyvnCYw3jrhUuFhOe/FVsKiloafa5LJfToUpvjUQ==}
+  /@next/env/12.1.4:
+    resolution: {integrity: sha512-7gQwotJDKnfMxxXd8xJ2vsX5AzyDxO3zou0+QOXX8/unypA6icw5+wf6A62yKZ6qQ4UZHHxS68pb6UV+wNneXg==}
     dev: false
 
   /@next/eslint-plugin-next/12.1.1:
@@ -4985,8 +4985,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /@next/swc-android-arm-eabi/12.1.1:
-    resolution: {integrity: sha512-phV9H6d1eK1oVC7nmKKcCXvgOWT4K7aLC/beyO6yvbFC4XtBLE21vPwVl7B4ybz5xjSa6TXoR3TMR6vkW6Mv+A==}
+  /@next/swc-android-arm-eabi/12.1.4:
+    resolution: {integrity: sha512-FJg/6a3s2YrUaqZ+/DJZzeZqfxbbWrynQMT1C5wlIEq9aDLXCFpPM/PiOyJh0ahxc0XPmi6uo38Poq+GJTuKWw==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [android]
@@ -4994,8 +4994,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-android-arm64/12.1.1:
-    resolution: {integrity: sha512-X5qEz0YeeYT0Gz2wXPAEtRKEuAsLUIEgC/DDfS98t/5Idjv0S4aqIX+TQdzoXP5bwQkIr+mSg+MBIdLtbtnCsA==}
+  /@next/swc-android-arm64/12.1.4:
+    resolution: {integrity: sha512-LXraazvQQFBgxIg3Htny6G5V5he9EK7oS4jWtMdTGIikmD/OGByOv8ZjLuVLZLtVm3UIvaAiGtlQSLecxJoJDw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [android]
@@ -5003,8 +5003,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-arm64/12.1.1:
-    resolution: {integrity: sha512-bKKSNaTdnO3XPnfaR4NSpPcbs80fdbtOYC2lgtqLzA0bOMioupixMP5GrA/gfJHwh7GRH+A+sbgKQWsqSsYAqQ==}
+  /@next/swc-darwin-arm64/12.1.4:
+    resolution: {integrity: sha512-SSST/dBymecllZxcqTCcSTCu5o1NKk9I+xcvhn/O9nH6GWjgvGgGkNqLbCarCa0jJ1ukvlBA138FagyrmZ/4rQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -5012,8 +5012,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-darwin-x64/12.1.1:
-    resolution: {integrity: sha512-2VOsA6WLDuDBA6935djohWGGeUIKeQhXwDwu1CKx1b8+6YMMIvFr/y2dpPWoct+5/IjFz84a2MnbABwpoNB9YA==}
+  /@next/swc-darwin-x64/12.1.4:
+    resolution: {integrity: sha512-p1lwdX0TVjaoDXQVuAkjtxVBbCL/urgxiMCBwuPDO7TikpXtSRivi+mIzBj5q7ypgICFmIAOW3TyupXeoPRAnA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -5021,8 +5021,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm-gnueabihf/12.1.1:
-    resolution: {integrity: sha512-1urXtWwqjqbbpJBWeJYz5ATgelKacVNdKIdhfahbsmW+DZGoK5TYovgieyHFYUCyHdTuKeLTVR62ahIRUBv1YA==}
+  /@next/swc-linux-arm-gnueabihf/12.1.4:
+    resolution: {integrity: sha512-67PZlgkCn3TDxacdVft0xqDCL7Io1/C4xbAs0+oSQ0xzp6OzN2RNpuKjHJrJgKd0DsE1XZ9sCP27Qv0591yfyg==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -5030,8 +5030,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-gnu/12.1.1:
-    resolution: {integrity: sha512-CDD9yFuknDvTOzzDnvfmb58USI5Vu6FUyzw96udKj7KA/n1YrNQ4K8X7KsDCRZoqfRWYceAyj1EpwHkfdiB7bg==}
+  /@next/swc-linux-arm64-gnu/12.1.4:
+    resolution: {integrity: sha512-OnOWixhhw7aU22TQdQLYrgpgFq0oA1wGgnjAiHJ+St7MLj82KTDyM9UcymAMbGYy6nG/TFOOHdTmRMtCRNOw0g==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -5039,8 +5039,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-arm64-musl/12.1.1:
-    resolution: {integrity: sha512-nxyjgmbOpZm7gGPj9EV5Cqosoujt+ih/8SO2XG+BetgfAk0+c15793DHVAljNuc8GF9wpzqQnjMMUZ211VmQsg==}
+  /@next/swc-linux-arm64-musl/12.1.4:
+    resolution: {integrity: sha512-UoRMzPZnsAavdWtVylYxH8DNC7Uy0i6RrvNwT4PyQVdfANBn2omsUkcH5lgS2O7oaz0nAYLk1vqyZDO7+tJotA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -5048,8 +5048,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-gnu/12.1.1:
-    resolution: {integrity: sha512-L8Cu8kH3Vn2dnRpvcvGGA1TlmDP2WXJ+qDwvjb/ikDXLdRdmFvJwHh45JUGiW2FHed3lGseOgNsuYiDvnT8Cdw==}
+  /@next/swc-linux-x64-gnu/12.1.4:
+    resolution: {integrity: sha512-nM+MA/frxlTLUKLJKorctdI20/ugfHRjVEEkcLp/58LGG7slNaP1E5d5dRA1yX6ISjPcQAkywas5VlGCg+uTvA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -5057,8 +5057,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-linux-x64-musl/12.1.1:
-    resolution: {integrity: sha512-4RAb7L69MoRSggBqUfF3OrtBCUN2zPDi7asfL7bfxEhH10LGzyfil8dT0GVjPOPFz/SyLx3ORd6avGij2IlJUA==}
+  /@next/swc-linux-x64-musl/12.1.4:
+    resolution: {integrity: sha512-GoRHxkuW4u4yKw734B9SzxJwVdyEJosaZ62P7ifOwcujTxhgBt3y76V2nNUrsSuopcKI2ZTDjaa+2wd5zyeXbA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -5066,8 +5066,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-arm64-msvc/12.1.1:
-    resolution: {integrity: sha512-zvkuNIgOxkAU3RbzWRGCcFasDxWJdhONt2YeRGe39dJERHhEFA1u4HgaZw/SFE/kfrNRUZbXjJNAg3OU/EpPZw==}
+  /@next/swc-win32-arm64-msvc/12.1.4:
+    resolution: {integrity: sha512-6TQkQze0ievXwHJcVUrIULwCYVe3ccX6T0JgZ1SiMeXpHxISN7VJF/O8uSCw1JvXZYZ6ud0CJ7nfC5HXivgfPg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -5075,8 +5075,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-ia32-msvc/12.1.1:
-    resolution: {integrity: sha512-GsNDtZ//uKWNVjiwv3YKQYsDXuRWTz8jTmxopf5Ws3dK+zA77hn4o46LBQg0JPCNqTUO6eIOlUBjqSL6ejxmSQ==}
+  /@next/swc-win32-ia32-msvc/12.1.4:
+    resolution: {integrity: sha512-CsbX/IXuZ5VSmWCpSetG2HD6VO5FTsO39WNp2IR2Ut/uom9XtLDJAZqjQEnbUTLGHuwDKFjrIO3LkhtROXLE/g==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
@@ -5084,8 +5084,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/swc-win32-x64-msvc/12.1.1:
-    resolution: {integrity: sha512-nH5osn/uK9wsjT8Jh1YxMtRrkN5hoCNLQjsEdvfUfb+loQXeYiBd3n/0DUJkf6Scjfv6/htfUTPP3AEa7AbBxQ==}
+  /@next/swc-win32-x64-msvc/12.1.4:
+    resolution: {integrity: sha512-JtYuWzKXKLDMgE/xTcFtCm1MiCIRaAc5XYZfYX3n/ZWSI1SJS/GMm+Su0SAHJgRFavJh6U/p998YwO/iGTIgqQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -6367,20 +6367,20 @@ packages:
       react-dom: 17.0.2_react@17.0.2
       regenerator-runtime: 0.13.9
 
-  /@storybook/addons/6.4.20_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-NbsLjDSkE9v2fOr0M7r2hpdYnlYs789ALkXemdTz2y0NUYSPdRfzVVQNXWrgmXivWQRL0aJ3bOjCOc668PPYjg==}
+  /@storybook/addons/6.4.21_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-TFLv4FyqP5SBOHEqE6tiW+2++HngkyQ2KRbHICC7khQgRqDkrwvrdKZwzF29igseglhSmftpZrBLXyWbA7q1vg==}
     requiresBuild: true
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
     dependencies:
-      '@storybook/api': 6.4.20_react-dom@17.0.2+react@17.0.2
-      '@storybook/channels': 6.4.20
-      '@storybook/client-logger': 6.4.20
-      '@storybook/core-events': 6.4.20
+      '@storybook/api': 6.4.21_react-dom@17.0.2+react@17.0.2
+      '@storybook/channels': 6.4.21
+      '@storybook/client-logger': 6.4.21
+      '@storybook/core-events': 6.4.21
       '@storybook/csf': 0.0.2--canary.87bc651.0
-      '@storybook/router': 6.4.20_react-dom@17.0.2+react@17.0.2
-      '@storybook/theming': 6.4.20_react-dom@17.0.2+react@17.0.2
+      '@storybook/router': 6.4.21_react-dom@17.0.2+react@17.0.2
+      '@storybook/theming': 6.4.21_react-dom@17.0.2+react@17.0.2
       '@types/webpack-env': 1.16.3
       core-js: 3.19.3
       global: 4.4.0
@@ -6416,20 +6416,20 @@ packages:
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
 
-  /@storybook/api/6.4.20_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-YatZjb8HlJFE9umDzd7aqabn5oXvAculX76pTZWMxm53GROMZVeICGOYtSasJZYlkv9fLx/Gy/ksrKQnA719ig==}
+  /@storybook/api/6.4.21_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-AULsLd7ew11IRCpzffyLFGl5cwt9BLMok33DcIlCyvXsiqLm4/OsbgM4sj6QqWVuxcFlWMQJHoRJyeFlULFvZA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
     dependencies:
-      '@storybook/channels': 6.4.20
-      '@storybook/client-logger': 6.4.20
-      '@storybook/core-events': 6.4.20
+      '@storybook/channels': 6.4.21
+      '@storybook/client-logger': 6.4.21
+      '@storybook/core-events': 6.4.21
       '@storybook/csf': 0.0.2--canary.87bc651.0
-      '@storybook/router': 6.4.20_react-dom@17.0.2+react@17.0.2
+      '@storybook/router': 6.4.21_react-dom@17.0.2+react@17.0.2
       '@storybook/semver': 7.3.2
-      '@storybook/theming': 6.4.20_react-dom@17.0.2+react@17.0.2
-      core-js: 3.21.1
+      '@storybook/theming': 6.4.21_react-dom@17.0.2+react@17.0.2
+      core-js: 3.19.3
       fast-deep-equal: 3.1.3
       global: 4.4.0
       lodash: 4.17.21
@@ -6544,7 +6544,7 @@ packages:
       '@storybook/channels': 6.4.19
       '@storybook/client-logger': 6.4.19
       '@storybook/core-events': 6.4.19
-      core-js: 3.21.1
+      core-js: 3.19.3
       global: 4.4.0
       qs: 6.10.3
       telejson: 5.3.3
@@ -6554,7 +6554,7 @@ packages:
     dependencies:
       '@storybook/channels': 6.4.19
       '@storybook/client-logger': 6.4.19
-      core-js: 3.21.1
+      core-js: 3.19.3
       global: 4.4.0
       telejson: 5.3.3
 
@@ -6565,10 +6565,10 @@ packages:
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
 
-  /@storybook/channels/6.4.20:
-    resolution: {integrity: sha512-BXvI2/bQIvtQ0LPJCEQwrYm0iMkXD0Pu4WuUGfRCbyqhyw6/VnxOP0x92mvFbtBvjHhyNwk9kZloHyI5zJ3STg==}
+  /@storybook/channels/6.4.21:
+    resolution: {integrity: sha512-qgy8z3Hp04Q4p+E/8V9MamYYJLW8z1uv1Z+rvosNkg+eAApPg+Qe08BSj59OAUwPLrr2vpBW7WZ/BYSieW1tUg==}
     dependencies:
-      core-js: 3.21.1
+      core-js: 3.19.3
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
     dev: true
@@ -6589,7 +6589,7 @@ packages:
       '@storybook/store': 6.4.19_react-dom@17.0.2+react@17.0.2
       '@types/qs': 6.9.7
       '@types/webpack-env': 1.16.3
-      core-js: 3.21.1
+      core-js: 3.19.3
       fast-deep-equal: 3.1.3
       global: 4.4.0
       lodash: 4.17.21
@@ -6598,7 +6598,7 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       regenerator-runtime: 0.13.9
-      store2: 2.13.1
+      store2: 2.13.2
       synchronous-promise: 2.0.15
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
@@ -6609,10 +6609,10 @@ packages:
       core-js: 3.21.1
       global: 4.4.0
 
-  /@storybook/client-logger/6.4.20:
-    resolution: {integrity: sha512-vbEivQvLQm05tuqSAb4s9RCc82YF1HcAvRneOYUGI7T/wSoijZzauIstKtb3LHEBBYpsELf4hJ3GuE5xZW3wXg==}
+  /@storybook/client-logger/6.4.21:
+    resolution: {integrity: sha512-XkVCQ5swyYDVh5U+87DGRBdC5utJBpVW7kU5P14TQKMnSc/yHbMcXWaA89K8WKDa/WGkGbc0bKi4WrUwHFg2FA==}
     dependencies:
-      core-js: 3.21.1
+      core-js: 3.19.3
       global: 4.4.0
     dev: true
     optional: true
@@ -6680,7 +6680,7 @@ packages:
       markdown-to-jsx: 7.1.5_react@17.0.2
       memoizerific: 1.11.3
       overlayscrollbars: 1.13.1
-      polished: 4.2.1
+      polished: 4.2.2
       prop-types: 15.7.2
       react: 17.0.2
       react-colorful: 5.5.1_react-dom@17.0.2+react@17.0.2
@@ -6718,7 +6718,7 @@ packages:
       '@storybook/ui': 6.4.19_b5d7bf22a7b46dd4876f0e926ab0c987
       airbnb-js-shims: 2.2.1
       ansi-to-html: 0.6.15
-      core-js: 3.21.1
+      core-js: 3.19.3
       global: 4.4.0
       lodash: 4.17.21
       qs: 6.10.3
@@ -6756,7 +6756,7 @@ packages:
       '@storybook/ui': 6.4.19_b5d7bf22a7b46dd4876f0e926ab0c987
       airbnb-js-shims: 2.2.1
       ansi-to-html: 0.6.15
-      core-js: 3.21.1
+      core-js: 3.19.3
       global: 4.4.0
       lodash: 4.17.21
       qs: 6.10.3
@@ -6811,7 +6811,7 @@ packages:
       babel-plugin-macros: 3.1.0
       babel-plugin-polyfill-corejs3: 0.1.7_@babel+core@7.17.9
       chalk: 4.1.2
-      core-js: 3.21.1
+      core-js: 3.19.3
       express: 4.17.2
       file-system-cache: 1.0.5
       find-up: 5.0.0
@@ -6846,10 +6846,10 @@ packages:
     dependencies:
       core-js: 3.21.1
 
-  /@storybook/core-events/6.4.20:
-    resolution: {integrity: sha512-POizjsPSA4SeBRKaIMpH/M2Mtw3ZPp1hCdIXTxK+S2M1j2rt3ZvNnG2y4IJM+dYjkL1Qwl3WJusa7qcDCS2+dA==}
+  /@storybook/core-events/6.4.21:
+    resolution: {integrity: sha512-K6b9M1zYvW/Kfb1cnH6JDfmFvTYDMx/ot9zdl9O5SPH9glUwzOXSk8qKu6GmZTiW2YnC2nKbjaN20mfMsCBPGw==}
     dependencies:
-      core-js: 3.21.1
+      core-js: 3.19.3
     dev: true
     optional: true
 
@@ -6890,7 +6890,7 @@ packages:
       cli-table3: 0.6.1
       commander: 6.2.1
       compression: 1.7.4
-      core-js: 3.21.1
+      core-js: 3.19.3
       cpy: 8.1.2
       detect-port: 1.3.0
       express: 4.17.2
@@ -7043,7 +7043,7 @@ packages:
       babel-loader: 8.2.4_598a497cebab8e15ee8f9e5632178e63
       case-sensitive-paths-webpack-plugin: 2.4.0
       chalk: 4.1.2
-      core-js: 3.21.1
+      core-js: 3.19.3
       css-loader: 3.6.0_webpack@4.46.0
       express: 4.17.2
       file-loader: 6.2.0_webpack@4.46.0
@@ -7219,14 +7219,14 @@ packages:
       react-router-dom: 6.2.1_react-dom@17.0.2+react@17.0.2
       ts-dedent: 2.2.0
 
-  /@storybook/router/6.4.20_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-lwTBtuq9gNywkVs1rye50dPF6pJEGHhZ+2MOTMtASjuM8KIL/wI3OYwRDnDf/98FcinFAeBcEPrEHmV5sAW73w==}
+  /@storybook/router/6.4.21_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-otn3xYc017SNebeA95xLQ7P6elfyu9541QteXbLR5gFvrT+MB/8zMRZrVuD7n1xwpBgazlonzAdODC736Be9jQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
     dependencies:
-      '@storybook/client-logger': 6.4.20
-      core-js: 3.21.1
+      '@storybook/client-logger': 6.4.21
+      core-js: 3.19.3
       fast-deep-equal: 3.1.3
       global: 4.4.0
       history: 5.0.0
@@ -7246,7 +7246,7 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      core-js: 3.21.1
+      core-js: 3.19.3
       find-up: 4.1.0
 
   /@storybook/source-loader/6.4.19_react-dom@17.0.2+react@17.0.2:
@@ -7279,7 +7279,7 @@ packages:
       '@storybook/client-logger': 6.4.19
       '@storybook/core-events': 6.4.19
       '@storybook/csf': 0.0.2--canary.87bc651.0
-      core-js: 3.21.1
+      core-js: 3.19.3
       fast-deep-equal: 3.1.3
       global: 4.4.0
       lodash: 4.17.21
@@ -7314,8 +7314,8 @@ packages:
       resolve-from: 5.0.0
       ts-dedent: 2.2.0
 
-  /@storybook/theming/6.4.20_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-sVGpRYyJHbdme8ozd9AT70VZ24ug6eypAKT7P+cfzImlYJABjmcfaJ+V4rlavoJF1sGnmauJmGoOf40b1U5JZQ==}
+  /@storybook/theming/6.4.21_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-7pLNwmqbyqCeHXzjsacI69IdJcAZr6zoZA84iGqx+Na32OI8wtIpFczbwuYpVPN2jzgRYp23CgIv1Gz27yk/zw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
       react-dom: ^16.8.0 || ^17.0.0
@@ -7323,13 +7323,13 @@ packages:
       '@emotion/core': 10.3.1_react@17.0.2
       '@emotion/is-prop-valid': 0.8.8
       '@emotion/styled': 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
-      '@storybook/client-logger': 6.4.20
-      core-js: 3.21.1
+      '@storybook/client-logger': 6.4.21
+      core-js: 3.19.3
       deep-object-diff: 1.1.7
       emotion-theming: 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
       global: 4.4.0
       memoizerific: 1.11.3
-      polished: 4.2.1
+      polished: 4.2.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resolve-from: 5.0.0
@@ -7352,7 +7352,7 @@ packages:
       emotion-theming: 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
       global: 4.4.0
       memoizerific: 1.11.3
-      polished: 4.2.1
+      polished: 4.2.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       resolve-from: 5.0.0
@@ -7376,7 +7376,7 @@ packages:
       '@storybook/semver': 7.3.2
       '@storybook/theming': 6.4.19_react-dom@17.0.2+react@17.0.2
       copy-to-clipboard: 3.3.1
-      core-js: 3.21.1
+      core-js: 3.19.3
       core-js-pure: 3.21.0
       downshift: 6.1.7_react@17.0.2
       emotion-theming: 10.3.0_316248eb6686a2fd4fbadcfd00de37f3
@@ -7385,7 +7385,7 @@ packages:
       lodash: 4.17.21
       markdown-to-jsx: 7.1.6_react@17.0.2
       memoizerific: 1.11.3
-      polished: 4.2.1
+      polished: 4.2.2
       qs: 6.10.3
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -8512,7 +8512,7 @@ packages:
   /@urql/storybook-addon/1.0.8_b5d59dce9ab498541226e25e71131ebd:
     resolution: {integrity: sha512-NvZ1D8GND0LT4mWkl9rKoq80Z212UgNxb1jum93H2pF7BsgZY9wi/kme2Sla/qh9DyXKppkI76hnpA7bcZtbHA==}
     optionalDependencies:
-      '@storybook/addons': 6.4.20_react-dom@17.0.2+react@17.0.2
+      '@storybook/addons': 6.4.21_react-dom@17.0.2+react@17.0.2
       '@urql/devtools': 2.0.3_@urql+core@2.4.4+graphql@15.7.2
     transitivePeerDependencies:
       - '@urql/core'
@@ -12374,7 +12374,7 @@ packages:
       '@emotion/core': ^10.0.27
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       '@emotion/core': 10.3.1_react@17.0.2
       '@emotion/weak-memoize': 0.2.5
       hoist-non-react-statics: 3.3.2
@@ -14237,7 +14237,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.15.3
+      uglify-js: 3.15.4
 
   /hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}
@@ -14425,12 +14425,12 @@ packages:
   /history/5.0.0:
     resolution: {integrity: sha512-3NyRMKIiFSJmIPdq7FxkNMJkQ7ZEtVblOQ38VtKaA0zZMW1Eo6Q6W8oDKEflr1kNNTItSnk4JMCO1deeSgbLLg==}
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
 
   /history/5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
 
   /hmac-drbg/1.0.1:
     resolution: {integrity: sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=}
@@ -16393,9 +16393,9 @@ packages:
     resolution: {integrity: sha512-prXSYk799h3GY3iOWnC6ZigYzMPjxN2svgjJ9shk7oMadSNX3wXy0B6F32PMJv7qtMnrIbUxoEHzbutvxR2LBQ==}
     engines: {node: '>=6.0.0', npm: '>=6.0.0', yarn: '>=1.0.0'}
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       app-root-dir: 1.0.2
-      core-js: 3.21.1
+      core-js: 3.19.3
       dotenv: 8.6.0
       dotenv-expand: 5.1.0
 
@@ -17647,20 +17647,20 @@ packages:
       escalade: 3.1.1
     dev: true
 
-  /next-usequerystate/1.7.2_8c3675119e28db7583641618775c51dc:
+  /next-usequerystate/1.7.2_f3299b186fe279e9e6c95022815bb28f:
     resolution: {integrity: sha512-5ChbGoG/TGYRuKtpI4fKf1wsePYrO75srXwLcuPR0Nnbm7Tspfbx0L6215PRmUb9ZJCRLoXy6J3CqJRZYCot3w==}
     peerDependencies:
       next: '*'
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.1.1_a2e1e28ac7d7744bd11a0f193315a179
+      next: 12.1.4_a2e1e28ac7d7744bd11a0f193315a179
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     dev: false
 
-  /next/12.1.1_2f8437099e13a7806b00c8661a090057:
-    resolution: {integrity: sha512-IOfEIAgroMtsoYz6HXpDS+b5WB9WZ+MH266COXGlcpIiYSgUyJf9xV6vF+zY2RPvBJFT4fUW0EVdVnoOmTloDw==}
+  /next/12.1.4_2f8437099e13a7806b00c8661a090057:
+    resolution: {integrity: sha512-DA4g97BM4Z0nKtDvCTm58RxdvoQyYzeg0AeVbh0N4Y/D8ELrNu47lQeEgRGF8hV4eQ+Sal90zxrJQQG/mPQ8CQ==}
     engines: {node: '>=12.22.0'}
     hasBin: true
     peerDependencies:
@@ -17677,33 +17677,32 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 12.1.1
+      '@next/env': 12.1.4
       caniuse-lite: 1.0.30001320
       postcss: 8.4.5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       styled-jsx: 5.0.1_6d59a3697b3509d94bd4dc4758a33b47
-      use-subscription: 1.5.1_react@17.0.2
     optionalDependencies:
-      '@next/swc-android-arm-eabi': 12.1.1
-      '@next/swc-android-arm64': 12.1.1
-      '@next/swc-darwin-arm64': 12.1.1
-      '@next/swc-darwin-x64': 12.1.1
-      '@next/swc-linux-arm-gnueabihf': 12.1.1
-      '@next/swc-linux-arm64-gnu': 12.1.1
-      '@next/swc-linux-arm64-musl': 12.1.1
-      '@next/swc-linux-x64-gnu': 12.1.1
-      '@next/swc-linux-x64-musl': 12.1.1
-      '@next/swc-win32-arm64-msvc': 12.1.1
-      '@next/swc-win32-ia32-msvc': 12.1.1
-      '@next/swc-win32-x64-msvc': 12.1.1
+      '@next/swc-android-arm-eabi': 12.1.4
+      '@next/swc-android-arm64': 12.1.4
+      '@next/swc-darwin-arm64': 12.1.4
+      '@next/swc-darwin-x64': 12.1.4
+      '@next/swc-linux-arm-gnueabihf': 12.1.4
+      '@next/swc-linux-arm64-gnu': 12.1.4
+      '@next/swc-linux-arm64-musl': 12.1.4
+      '@next/swc-linux-x64-gnu': 12.1.4
+      '@next/swc-linux-x64-musl': 12.1.4
+      '@next/swc-win32-arm64-msvc': 12.1.4
+      '@next/swc-win32-ia32-msvc': 12.1.4
+      '@next/swc-win32-x64-msvc': 12.1.4
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
     dev: false
 
-  /next/12.1.1_a2e1e28ac7d7744bd11a0f193315a179:
-    resolution: {integrity: sha512-IOfEIAgroMtsoYz6HXpDS+b5WB9WZ+MH266COXGlcpIiYSgUyJf9xV6vF+zY2RPvBJFT4fUW0EVdVnoOmTloDw==}
+  /next/12.1.4_a2e1e28ac7d7744bd11a0f193315a179:
+    resolution: {integrity: sha512-DA4g97BM4Z0nKtDvCTm58RxdvoQyYzeg0AeVbh0N4Y/D8ELrNu47lQeEgRGF8hV4eQ+Sal90zxrJQQG/mPQ8CQ==}
     engines: {node: '>=12.22.0'}
     hasBin: true
     peerDependencies:
@@ -17720,33 +17719,32 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 12.1.1
+      '@next/env': 12.1.4
       caniuse-lite: 1.0.30001320
       postcss: 8.4.5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       styled-jsx: 5.0.1_c664aef02df96c052705d9c97b34e019
-      use-subscription: 1.5.1_react@17.0.2
     optionalDependencies:
-      '@next/swc-android-arm-eabi': 12.1.1
-      '@next/swc-android-arm64': 12.1.1
-      '@next/swc-darwin-arm64': 12.1.1
-      '@next/swc-darwin-x64': 12.1.1
-      '@next/swc-linux-arm-gnueabihf': 12.1.1
-      '@next/swc-linux-arm64-gnu': 12.1.1
-      '@next/swc-linux-arm64-musl': 12.1.1
-      '@next/swc-linux-x64-gnu': 12.1.1
-      '@next/swc-linux-x64-musl': 12.1.1
-      '@next/swc-win32-arm64-msvc': 12.1.1
-      '@next/swc-win32-ia32-msvc': 12.1.1
-      '@next/swc-win32-x64-msvc': 12.1.1
+      '@next/swc-android-arm-eabi': 12.1.4
+      '@next/swc-android-arm64': 12.1.4
+      '@next/swc-darwin-arm64': 12.1.4
+      '@next/swc-darwin-x64': 12.1.4
+      '@next/swc-linux-arm-gnueabihf': 12.1.4
+      '@next/swc-linux-arm64-gnu': 12.1.4
+      '@next/swc-linux-arm64-musl': 12.1.4
+      '@next/swc-linux-x64-gnu': 12.1.4
+      '@next/swc-linux-x64-musl': 12.1.4
+      '@next/swc-win32-arm64-msvc': 12.1.4
+      '@next/swc-win32-ia32-msvc': 12.1.4
+      '@next/swc-win32-x64-msvc': 12.1.4
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
     dev: false
 
-  /next/12.1.1_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-IOfEIAgroMtsoYz6HXpDS+b5WB9WZ+MH266COXGlcpIiYSgUyJf9xV6vF+zY2RPvBJFT4fUW0EVdVnoOmTloDw==}
+  /next/12.1.4_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-DA4g97BM4Z0nKtDvCTm58RxdvoQyYzeg0AeVbh0N4Y/D8ELrNu47lQeEgRGF8hV4eQ+Sal90zxrJQQG/mPQ8CQ==}
     engines: {node: '>=12.22.0'}
     hasBin: true
     peerDependencies:
@@ -17763,38 +17761,37 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 12.1.1
+      '@next/env': 12.1.4
       caniuse-lite: 1.0.30001320
       postcss: 8.4.5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       styled-jsx: 5.0.1_react@17.0.2
-      use-subscription: 1.5.1_react@17.0.2
     optionalDependencies:
-      '@next/swc-android-arm-eabi': 12.1.1
-      '@next/swc-android-arm64': 12.1.1
-      '@next/swc-darwin-arm64': 12.1.1
-      '@next/swc-darwin-x64': 12.1.1
-      '@next/swc-linux-arm-gnueabihf': 12.1.1
-      '@next/swc-linux-arm64-gnu': 12.1.1
-      '@next/swc-linux-arm64-musl': 12.1.1
-      '@next/swc-linux-x64-gnu': 12.1.1
-      '@next/swc-linux-x64-musl': 12.1.1
-      '@next/swc-win32-arm64-msvc': 12.1.1
-      '@next/swc-win32-ia32-msvc': 12.1.1
-      '@next/swc-win32-x64-msvc': 12.1.1
+      '@next/swc-android-arm-eabi': 12.1.4
+      '@next/swc-android-arm64': 12.1.4
+      '@next/swc-darwin-arm64': 12.1.4
+      '@next/swc-darwin-x64': 12.1.4
+      '@next/swc-linux-arm-gnueabihf': 12.1.4
+      '@next/swc-linux-arm64-gnu': 12.1.4
+      '@next/swc-linux-arm64-musl': 12.1.4
+      '@next/swc-linux-x64-gnu': 12.1.4
+      '@next/swc-linux-x64-musl': 12.1.4
+      '@next/swc-win32-arm64-msvc': 12.1.4
+      '@next/swc-win32-ia32-msvc': 12.1.4
+      '@next/swc-win32-x64-msvc': 12.1.4
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
     dev: false
 
-  /nextjs-progressbar/0.0.14_next@12.1.1+react@17.0.2:
+  /nextjs-progressbar/0.0.14_next@12.1.4+react@17.0.2:
     resolution: {integrity: sha512-AXYXHDN6M52AwFnGqH/vlwyo0gbC9zM7QS/4ryOTI0RUqfze5FJl8uSrxKJMzK6hGFdDeQXcZoWsLGXeCVtTwg==}
     peerDependencies:
       next: '>= 6.0.0'
       react: '>= 16.0.0'
     dependencies:
-      next: 12.1.1_react-dom@17.0.2+react@17.0.2
+      next: 12.1.4_react-dom@17.0.2+react@17.0.2
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 17.0.2
@@ -18595,14 +18592,13 @@ packages:
     resolution: {integrity: sha512-vRkUnHBwVX7kIeCzCghcLCWoDenV+sV7lkItnmTc7bb6Uzbe8ogU1FxqEW8+dXCxUX8YW8vusQ0HTk2yES7bfQ==}
     engines: {node: '>=10'}
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
 
   /polished/4.2.2:
     resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
     engines: {node: '>=10'}
     dependencies:
       '@babel/runtime': 7.17.9
-    dev: false
 
   /popmotion/11.0.3:
     resolution: {integrity: sha512-Y55FLdj3UxkR7Vl3s7Qr4e9m0onSnP8W7d/xQLsoJM40vs6UKHFdygs6SWryasTZYqugMjm3BepCF4CWXDiHgA==}
@@ -19305,7 +19301,7 @@ packages:
     dependencies:
       '@babel/core': 7.17.9
       '@babel/generator': 7.17.9
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       ast-types: 0.14.2
       commander: 2.20.3
       doctrine: 3.0.0
@@ -19383,7 +19379,7 @@ packages:
       react: ^16.6.0 || ^17.0.0
       react-dom: ^16.6.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       invariant: 2.2.4
       prop-types: 15.8.1
       react: 17.0.2
@@ -19426,7 +19422,7 @@ packages:
     peerDependencies:
       react: ^16.8.4 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       is-dom: 1.1.0
       prop-types: 15.7.2
       react: 17.0.2
@@ -19447,7 +19443,7 @@ packages:
       react: ^16.6.0 || ^17.0.0
       react-dom: ^16.6.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       '@popperjs/core': 2.11.5
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -19619,7 +19615,7 @@ packages:
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       highlight.js: 10.7.3
       lowlight: 1.20.0
       prismjs: 1.26.0
@@ -19644,7 +19640,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       react: 17.0.2
       use-composed-ref: 1.2.1_react@17.0.2
       use-latest: 1.2.0_03a98942b76c57740a9573edba2d1cc1
@@ -19888,7 +19884,7 @@ packages:
   /regenerator-transform/0.14.5:
     resolution: {integrity: sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw==}
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
 
   /regex-not/1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
@@ -20944,7 +20940,7 @@ packages:
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
 
-  /storybook-addon-next-router/3.1.1_9c0ff333163aa01ec338fd11eb3ec844:
+  /storybook-addon-next-router/3.1.1_0899880fbe136f6e2de78496b80e17f3:
     resolution: {integrity: sha512-Z14dED37vNXkN7+VY80HhF9itGReWoBAlKREHEk2By/dW7zSSqcSyXYV4bDMXIMAFYHMaA1svcBC1idVG8FhAw==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -20957,7 +20953,7 @@ packages:
     dependencies:
       '@storybook/addon-actions': 6.4.19_b5d7bf22a7b46dd4876f0e926ab0c987
       '@storybook/addons': 6.4.19_react-dom@17.0.2+react@17.0.2
-      next: 12.1.1_2f8437099e13a7806b00c8661a090057
+      next: 12.1.4_2f8437099e13a7806b00c8661a090057
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       tslib: 2.3.1
@@ -22326,8 +22322,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /uglify-js/3.15.3:
-    resolution: {integrity: sha512-6iCVm2omGJbsu3JWac+p6kUiOpg3wFO2f8lIXjfEb8RrmLjzog1wTPMmwKB7swfzzqxj9YM+sGUM++u1qN4qJg==}
+  /uglify-js/3.15.4:
+    resolution: {integrity: sha512-vMOPGDuvXecPs34V74qDKk4iJ/SN4vL3Ow/23ixafENYvtrNvtbcgUeugTcUGRGsOF/5fU8/NYSL5Hyb3l1OJA==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     requiresBuild: true
@@ -22622,15 +22618,6 @@ packages:
       detect-node-es: 1.1.0
       react: 17.0.2
       tslib: 1.14.1
-    dev: false
-
-  /use-subscription/1.5.1_react@17.0.2:
-    resolution: {integrity: sha512-Xv2a1P/yReAjAbhylMfFplFKj9GssgTwN7RlcTxBujFQcloStWNDQdc4g4NRWH9xS4i/FDk04vQBptAXoF3VcA==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0
-    dependencies:
-      object-assign: 4.1.1
-      react: 17.0.2
     dev: false
 
   /use/3.1.1:

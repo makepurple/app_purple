@@ -5,7 +5,6 @@ import produce from "immer";
 import type { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
-import { theme } from "twin.macro";
 
 /**
  * TODO
@@ -110,10 +109,6 @@ const authHandler: NextApiHandler = (req, res) =>
 		],
 		session: {
 			strategy: "jwt"
-		},
-		theme: {
-			colorScheme: "auto",
-			brandColor: theme`colors.indigo.500`
 		}
 	});
 
