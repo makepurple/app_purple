@@ -47,6 +47,15 @@
 			"outputs": [
 				".next/**"
 			]
+		},
+		"@makepurple/fake-api#build": {
+			"dependsOn": [
+				"^build",
+				"@makepurple/prisma#build"
+			],
+			"outputs": [
+				".next/**"
+			]
 		}
 	}
 }
