@@ -28,7 +28,6 @@
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "downlevelIteration": true,
-    "baseUrl": ".",
     "plugins": [
       {
         "name": "typescript-styled-plugin",
