@@ -4,8 +4,6 @@
 	"exclude": ["node_modules"],
 	"compilerOptions": {
 		"downlevelIteration": true,
-		"moduleResolution": "node",
-		"rootDir": "src",
-		"outDir": "dist"
+		"moduleResolution": "node"
 	}
 }
