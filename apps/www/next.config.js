@@ -13,7 +13,6 @@ const withTranspileModules = transpileModules([
 
 const config = {
 	experimental: {
-		esmExternals: false,
 		externalDir: true
 	},
 	i18n: {
