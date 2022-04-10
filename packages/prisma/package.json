@@ -11,8 +11,9 @@
 		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed"
 	},
 	"scripts": {
-		"prisma:save-user": "dotenv -- ts-node ./prisma/seed/saveMyUser -T",
+		"build": "pnpm generate:prisma",
 		"generate:prisma": "prisma generate",
+		"prisma:save-user": "dotenv -- ts-node ./prisma/seed/saveMyUser -T",
 		"prisma:deploy": "prisma migrate deploy",
 		"prisma:docs": "prisma-docs-generator serve --port 4002",
 		"prisma:format": "prisma format",

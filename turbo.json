@@ -16,6 +16,15 @@
 		},
 		"dev": {
 			"cache": false
+		},
+		"@makepurple/prisma#build": {
+			"cache": false
+		},
+		"@makepurple/www#build": {
+			"dependsOn": [
+				"^build",
+				"@makepurple/prisma#build"
+			]
 		}
 	}
 }
