@@ -1,7 +1,6 @@
 const bundleAnalyzer = require("@next/bundle-analyzer");
 const withPlugins = require("next-compose-plugins");
 const transpileModules = require("next-transpile-modules");
-const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE === "true" });
 const withTranspileModules = transpileModules([
@@ -23,11 +22,7 @@ const config = {
 	images: {
 		domains: ["res.cloudinary.com"]
 	},
-	pageExtensions: ["ts", "tsx", "md", "mdx"],
 	env: {
-		PROJECT_DIRNAME:           __dirname,
-
-		BASE_URL:                  process.env.BASE_URL,
 		API_URL:                   process.env.API_URL,
 		NEXTAUTH_SECRET:           process.env.NEXTAUTH_SECRET,
 		NEXTAUTH_URL:              process.env.NEXTAUTH_URL,
