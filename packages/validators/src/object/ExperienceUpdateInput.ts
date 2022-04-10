@@ -1,5 +1,5 @@
-import { ExperienceType } from "@prisma/client";
 import Schema, { array, boolean, DateType, number, string } from "computed-types";
+import { ExperienceType } from "../string";
 
 export const ExperienceUpdateInput = Schema({
 	endDate: Schema.either(
@@ -37,5 +37,5 @@ export const ExperienceUpdateInput = Schema({
 			year: number.gte(0, "Invalid year")
 		})
 	).strictOptional(),
-	type: Schema.enum(ExperienceType).optional()
+	type: ExperienceType.optional()
 });

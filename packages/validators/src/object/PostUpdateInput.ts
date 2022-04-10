@@ -1,5 +1,5 @@
 import Schema, { array, string } from "computed-types";
-import { CloudinaryUrl } from "../string/CloudinaryUrl";
+import { CloudinaryUrl } from "../string";
 import { DocumentEditorValue } from "./DocumentEditorValue";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 

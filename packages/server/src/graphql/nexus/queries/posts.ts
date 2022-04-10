@@ -1,4 +1,4 @@
-import { Post } from "@makepurple/prisma";
+import { Post } from "@prisma/client";
 import { oneLine } from "common-tags";
 import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";

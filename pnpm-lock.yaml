@@ -647,7 +647,6 @@ importers:
       '@graphql-codegen/typescript-operations': ^2.3.5
       '@graphql-tools/batch-execute': ^8.4.2
       '@graphql-tools/utils': ^8.6.6
-      '@makepurple/prisma': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
@@ -697,7 +696,6 @@ importers:
       '@devoxa/prisma-relay-cursor-connection': 2.1.0_@prisma+client@3.12.0
       '@graphql-tools/batch-execute': 8.4.2_graphql@15.7.2
       '@graphql-tools/utils': 8.6.6_graphql@15.7.2
-      '@makepurple/prisma': link:../prisma
       '@makepurple/typings': link:../typings
       '@makepurple/utils': link:../utils
       '@makepurple/validators': link:../validators
@@ -791,21 +789,15 @@ importers:
 
   packages/validators:
     specifiers:
-      '@makepurple/prisma': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/utils': workspace:*
-      '@prisma/client': ^3.12.0
       computed-types: ^1.11.2
-      prisma: ^3.12.0
       typescript: ^4.6.3
     dependencies:
-      '@makepurple/prisma': link:../prisma
-      '@prisma/client': 3.12.0_prisma@3.12.0
       computed-types: 1.11.2
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
       '@makepurple/utils': link:../utils
-      prisma: 3.12.0
       typescript: 4.6.3
 
 packages:

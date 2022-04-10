@@ -1,4 +1,4 @@
-import { PrismaClient } from "@makepurple/prisma";
+import { PrismaClient } from "@prisma/client";
 import chalk from "chalk";
 import { codeBlock } from "common-tags";
 
