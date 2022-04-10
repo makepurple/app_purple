@@ -3,9 +3,6 @@
   "sideEffects": false,
   "scripts": {
     "lint": "eslint ./{apps,packages}/**/*.{ts,tsx}",
-    "prisma:format": "prisma format",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio",
     "services": "docker-compose up -d",
     "services:stop": "docker-compose down",
     "turbo": "turbo"
