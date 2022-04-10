@@ -24,6 +24,9 @@
 			"dependsOn": [
 				"^build",
 				"@makepurple/prisma#build"
+			],
+			"outputs": [
+				".next/**"
 			]
 		}
 	}

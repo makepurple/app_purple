@@ -54,13 +54,6 @@ const config = {
 		CLOUDINARY_API_SECRET:     process.env.CLOUDINARY_API_SECRET,
 		CLOUDINARY_API_VARIABLE:   process.env.CLOUDINARY_API_VARIABLE,
 	},
-	redirects: async () => [
-		{
-			source: "/r",
-			destination: "/repositories",
-			permanent: true
-		}
-	],
 	rewrites: async () => ({
 		beforeFiles: [
 			{
@@ -71,45 +64,6 @@ const config = {
 	}),
 	webpack5: true,
 	webpack: (config, { dev, isServer }) => {
-		if (!isServer) {
-			// /**
-			//  * !HACK
-			//  * @description This is so that ioredis can be used in edge functions. This is pretty
-			//  * unsafe, and may break stuff if these modules don't exist in an environment they're
-			//  * required to be used in. If any node.js stuff breaks, investigate this config here.
-			//  * @author David Lee
-			//  * @date April 2, 2022
-			//  */
-			// config.resolve.fallback.dns = false;
-			// config.resolve.fallback.net = false;
-			// config.resolve.fallback.tls = false;
-			config.resolve.fallback.fs = false;
-		}
-
-		if (isServer) {
-			config.externals.push('_http_common');
-
-			/**
-			 * !HACK
-			 * @description We don't care about the bundle-size on the server, and this error is
-			 * way too verbose. So we're squelching this error on the server (this particular
-			 * error shouldn't affect functionality, which is why we're doing this).
-			 * @author David Lee
-			 * @date December 27, 2021
-			 */
-			config.plugins.push(
-				new FilterWarningsPlugin({
-					exclude: /Critical dependency: the request of a dependency is an expression/
-				})
-			);
-
-			config.plugins.push(
-				new FilterWarningsPlugin({
-					exclude: /Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/
-				})
-			);
-		}
-
 		return config;
 	}
 };
