@@ -20,7 +20,6 @@
 		"@hookform/resolvers": "^2.8.8",
 		"@makepurple/components": "workspace:*",
 		"@makepurple/hooks": "workspace:*",
-		"@makepurple/server": "workspace:*",
 		"@makepurple/typings": "workspace:*",
 		"@makepurple/utils": "workspace:*",
 		"@makepurple/validators": "workspace:*",
