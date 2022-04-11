@@ -7,7 +7,7 @@ import { redis } from "../redis";
 import * as cloudinary from "../services/cloudinary";
 import * as octokit from "../services/octokit";
 import * as pusher from "../services/pusher";
-import { ServerContext } from "./context";
+import type { ServerContext } from "./context";
 
 export interface CreateContextParams {
 	req: NextApiRequest;
