@@ -1,4 +1,3 @@
-import { createContext } from "@makepurple/server";
 import { ApolloServer } from "apollo-server-micro";
 import { GraphQLBoolean, GraphQLObjectType, GraphQLSchema } from "graphql";
 import { processRequest } from "graphql-upload";
@@ -20,7 +19,6 @@ const schema = new GraphQLSchema({
 });
 
 const server = new ApolloServer({
-	context: createContext,
 	schema
 });
 
