@@ -1,8 +1,7 @@
+import { ApolloServerPluginLandingPageDisabled } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-micro";
 import type { GraphQLSchema } from "graphql";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPlugins } from "./plugins";
-import { getValidationRules } from "./validation-rules";
 
 const isProd: boolean = process.env.NODE_ENV === "production";
 
@@ -16,30 +15,17 @@ type ContextFunction = (params: ContextFunctionParams) => MaybePromise<Record<st
 export interface GetApolloServerConfig {
 	schema: GraphQLSchema;
 	context?: Record<string, any> | ContextFunction;
-	maxDepth?: number;
 }
 
 export const getApolloServer = (config: GetApolloServerConfig): ApolloServer => {
-	const { schema, context = {}, maxDepth = Infinity } = config;
+	const { schema, context = {} } = config;
 
 	const server = new ApolloServer({
 		context,
-		dataSources: () => ({}),
 		debug: !isProd,
 		introspection: !isProd,
-		plugins: getPlugins(),
-		schema,
-		validationRules: getValidationRules({ maxDepth }),
-		formatError: (err) => {
-			if (process.env.NODE_ENV === "development") {
-				/* eslint-disable no-console */
-				console.error(err);
-				console.error(err.extensions.exception.stacktrace);
-				/* eslint-enable no-console */
-			}
-
-			return err;
-		}
+		plugins: [ApolloServerPluginLandingPageDisabled()],
+		schema
 	});
 
 	return server;

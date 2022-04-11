@@ -11,8 +11,7 @@ export const config = {
 
 const server = getApolloServer({
 	schema,
-	context: makeContext,
-	maxDepth: 10
+	context: makeContext
 });
 
 const startServer = server.start();
