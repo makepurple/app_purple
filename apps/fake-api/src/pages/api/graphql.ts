@@ -1,4 +1,4 @@
-import { createContext2 } from "@makepurple/server";
+import { createContext2 } from "@makepurple/server/graphql/createContext2";
 import { ApolloServer } from "apollo-server-micro";
 import { GraphQLBoolean, GraphQLObjectType, GraphQLSchema } from "graphql";
 import { processRequest } from "graphql-upload";

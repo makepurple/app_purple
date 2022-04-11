@@ -11,6 +11,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@makepurple/server": ["../../packages/server/src/index"],
+			"@makepurple/server/graphql/*": ["../../packages/server/src/graphql/*"],
 			"@makepurple/server/prisma": ["../../packages/server/prisma"]
 		}
 	}
