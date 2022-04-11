@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import * as octokit from "../services/octokit";
+import * as pusher from "../services/pusher";
 
 export interface CreateContextParams {
 	req: NextApiRequest;
@@ -16,6 +17,7 @@ export const createContext2 = async (params: CreateContextParams): Promise<any> 
 	return {
 		jwt,
 		octokit: await octokit.client.graphql(jwt?.accessToken),
+		pusher: pusher.client,
 		req,
 		res,
 		user: jwt && {
