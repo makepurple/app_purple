@@ -14,6 +14,9 @@
 		"@makepurple/typings": "workspace:*",
 		"@types/react": "^17.0.43",
 		"@types/react-dom": "^17.0.14",
+		"apollo-server-micro": "3.6.7",
+		"graphql": "15.7.2",
+		"micro": "^9.3.4",
 		"next": "^12.1.4",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
