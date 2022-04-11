@@ -4,7 +4,9 @@ import { getToken } from "next-auth/jwt";
 import { getClientIp } from "request-ip";
 import { prisma } from "../db";
 import { redis } from "../redis";
-import { cloudinary, octokit, pusher } from "../services";
+import * as cloudinary from "../services/cloudinary";
+import * as octokit from "../services/octokit";
+import * as pusher from "../services/pusher";
 import { ServerContext } from "./context";
 
 export interface CreateContextParams {
