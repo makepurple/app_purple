@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import { cloudinary, octokit } from "../services";
 
 export interface CreateContextParams {
 	req: NextApiRequest;
@@ -14,9 +13,7 @@ export const createContext2 = async (params: CreateContextParams): Promise<any> 
 	const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! });
 
 	return {
-		cloudinary: cloudinary.client,
 		jwt,
-		octokit: await octokit.client.graphql(jwt?.accessToken),
 		req,
 		res,
 		user: jwt && {
