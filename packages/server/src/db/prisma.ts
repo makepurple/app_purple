@@ -1,6 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import chalk from "chalk";
-import { codeBlock } from "common-tags";
 
 // Make global.cachedPrisma work with TypeScript
 declare global {
@@ -25,19 +23,6 @@ export const prisma: PrismaClient<
 	});
 
 if (process.env.NODE_ENV !== "production") {
-	if (process.env.PRISMA_LOG === "true") {
-		prisma.$on("query", (e) => {
-			/* eslint-disable no-console */
-			console.log(
-				`${chalk.blue("prisma:query")}\n${codeBlock`
-					${e.query}
-				`}`
-			);
-			console.log(chalk.blue("prisma:params"), e.params);
-			/* eslint-enable no-console */
-		});
-	}
-
 	global.cachedPrisma = prisma;
 }
 
