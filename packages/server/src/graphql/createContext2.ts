@@ -11,7 +11,7 @@ export interface CreateContextParams {
 	res: NextApiResponse;
 }
 
-export const getContext = async (params: CreateContextParams): Promise<ServerContext> => {
+export const createContext2 = async (params: CreateContextParams): Promise<ServerContext> => {
 	const { req, res } = params;
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
