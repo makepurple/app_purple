@@ -6,7 +6,10 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 const cors = Cors();
 
 export const config = {
-	api: { bodyParser: false }
+	api: {
+		bodyParser: false,
+		externalResolver: true
+	}
 };
 
 const server = getApolloServer({

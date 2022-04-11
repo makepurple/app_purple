@@ -27,7 +27,10 @@ const server = new ApolloServer({
 const startServer = server.start();
 
 export const config = {
-	api: { bodyParser: false }
+	api: {
+		bodyParser: false,
+		externalResolver: true
+	}
 };
 
 export default cors(async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
