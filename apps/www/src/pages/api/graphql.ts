@@ -1,4 +1,4 @@
-import { createContext, getApolloServer, schema } from "@makepurple/server";
+import { getApolloServer, makeContext, schema } from "@makepurple/server";
 import { processRequest } from "graphql-upload";
 import Cors from "micro-cors";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
@@ -11,7 +11,7 @@ export const config = {
 
 const server = getApolloServer({
 	schema,
-	context: createContext,
+	context: makeContext,
 	maxDepth: 10
 });
 
