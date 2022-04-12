@@ -1,5 +1,6 @@
 import type { FieldPath, FieldPathValue, FieldValues, UnpackNestedValue } from "react-hook-form";
-import { get, set } from "react-hook-form";
+import get from "react-hook-form/dist/utils/get";
+import set from "react-hook-form/dist/utils/set";
 
 export class ObjectUtils {
 	public static get<
