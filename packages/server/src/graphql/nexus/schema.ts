@@ -1,8 +1,7 @@
 import { stripIndents } from "common-tags";
 import { lexicographicSortSchema } from "graphql";
-import { fieldAuthorizePlugin, makeSchema, queryComplexityPlugin } from "nexus";
+import { fieldAuthorizePlugin, makeSchema } from "nexus";
 import path from "path";
-import { AuthorizationError } from "../../utils";
 import * as inputTypes from "./input-types";
 import * as mutations from "./mutations";
 import * as queries from "./queries";
@@ -29,12 +28,7 @@ const _schema = makeSchema({
 		input: false,
 		output: false
 	},
-	plugins: [
-		fieldAuthorizePlugin({
-			formatError: () => new AuthorizationError("Not authorized")
-		}),
-		queryComplexityPlugin()
-	],
+	plugins: [fieldAuthorizePlugin()],
 	sourceTypes: {
 		headers: [
 			stripIndents`
