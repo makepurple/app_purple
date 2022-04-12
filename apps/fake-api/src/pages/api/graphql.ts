@@ -1,5 +1,5 @@
 import { createServer } from "@graphql-yoga/node";
-import { makeContext } from "@makepurple/server/graphql/makeContext";
+import { makeContext } from "@makepurple/server/graphql/otherContext";
 import { GraphQLBoolean, GraphQLObjectType, GraphQLSchema } from "graphql";
 
 const schema = new GraphQLSchema({
