@@ -50,6 +50,7 @@
 			]
 		},
 		"@makepurple/fake-api#build": {
+			"cache": false,
 			"dependsOn": [
 				"^build",
 				"@makepurple/prisma#build"
