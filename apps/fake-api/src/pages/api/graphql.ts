@@ -1,4 +1,5 @@
 import { createServer } from "@graphql-yoga/node";
+import { makeContext } from "@makepurple/server/graphql/otherContext";
 import { GraphQLBoolean, GraphQLObjectType, GraphQLSchema } from "graphql";
 
 const schema = new GraphQLSchema({
@@ -14,6 +15,7 @@ const schema = new GraphQLSchema({
 });
 
 const server = createServer({
+	context: makeContext,
 	schema,
 	cors: false,
 	endpoint: "/api/graphql"
