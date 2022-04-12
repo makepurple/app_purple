@@ -1,5 +1,7 @@
+import isbot from "isbot";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
+import { getClientIp } from "request-ip";
 import { prisma } from "../db";
 import { CloudinaryClient } from "../services/cloudinary";
 import * as octokit from "../services/octokit";
@@ -16,6 +18,7 @@ export const makeContext = async (params: {
 
 	return {
 		cloudinary: new CloudinaryClient(),
+		ip: isbot(req.headers["user-agent"]) ? null : getClientIp(req),
 		jwt,
 		octokit: await octokit.client.graphql(jwt?.accessToken),
 		prisma,
