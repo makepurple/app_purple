@@ -271,6 +271,7 @@ importers:
       '@hookform/resolvers': ^2.8.8
       '@makepurple/components': workspace:*
       '@makepurple/hooks': workspace:*
+      '@makepurple/server': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@makepurple/utils': workspace:*
@@ -355,6 +356,7 @@ importers:
       '@hookform/resolvers': 2.8.8_react-hook-form@7.29.0
       '@makepurple/components': link:../../packages/components
       '@makepurple/hooks': link:../../packages/hooks
+      '@makepurple/server': link:../../packages/server
       '@makepurple/typings': link:../../packages/typings
       '@makepurple/utils': link:../../packages/utils
       '@makepurple/validators': link:../../packages/validators
