@@ -11,6 +11,6 @@
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
 		"@upstash/redis": "^1.1.0",
-		"ioredis": "^5.0.3"
+		"ioredis": "^5.0.4"
 	}
 }

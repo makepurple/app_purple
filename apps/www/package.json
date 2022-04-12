@@ -54,7 +54,7 @@
 		"graphql-tag": "^2.12.6",
 		"graphql-upload": "^13.0.0",
 		"immer": "^9.0.12",
-		"ioredis": "^5.0.3",
+		"ioredis": "^5.0.4",
 		"is-eu-member": "^1.0.6",
 		"masonic": "^3.6.4",
 		"micro-cors": "^0.1.1",
