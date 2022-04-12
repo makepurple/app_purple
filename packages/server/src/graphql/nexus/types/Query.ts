@@ -9,7 +9,7 @@ export const Query = queryType({
 			resolve: (root, args, { prisma, user }) => {
 				if (!user?.id) return null;
 
-				return await prisma.user.findUnique({ where: { id: user?.id } });
+				return prisma.user.findUnique({ where: { id: user?.id } });
 			}
 		});
 	}
