@@ -1,4 +1,3 @@
-import { LangUtils } from "@makepurple/utils";
 import { queryType } from "nexus";
 
 export const Query = queryType({
@@ -8,9 +7,9 @@ export const Query = queryType({
 		t.field("viewer", {
 			type: "User",
 			resolve: (root, args, { prisma, user }) => {
-				return LangUtils.isNil(user?.id)
-					? null
-					: prisma.user.findUnique({ where: { id: user?.id } });
+				if (!user?.id) return null;
+
+				return await prisma.user.findUnique({ where: { id: user?.id } });
 			}
 		});
 	}
