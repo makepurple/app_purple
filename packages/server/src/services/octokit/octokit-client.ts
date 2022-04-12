@@ -5,21 +5,8 @@ import { createTokenAuth } from "@octokit/auth-token";
 import { Octokit } from "@octokit/core";
 import { throttling } from "@octokit/plugin-throttling";
 import type { RequestOptions } from "@octokit/types";
-import Bottleneck from "bottleneck";
 import { oneLine } from "common-tags";
 import { parse, print } from "graphql";
-import { redis } from "../../redis";
-import { Logger } from "../../utils";
-
-const connection =
-	process.env.AS_SCRIPT === "true"
-		? null
-		: new Bottleneck.IORedisConnection({ client: redis.instance });
-
-connection?.on("error", (err) => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-	Logger.error(err.toString?.());
-});
 
 declare type DeepGitHubType<T> = T extends { __typename?: infer U }
 	? U extends string
@@ -38,7 +25,6 @@ declare type DeepGitHubType<T> = T extends { __typename?: infer U }
 export class OctokitClient {
 	public instance = new (Octokit.plugin(throttling))({
 		throttle: {
-			connection: connection ?? undefined,
 			onRateLimit: (retryAfter: number, options: RequestOptions, octokit: Octokit) => {
 				octokit.log.warn(
 					`Request quota exhausted for request ${options.request} ${options.url}`
@@ -57,8 +43,7 @@ export class OctokitClient {
 					`Abuse limit exceeded for request ${options.request} ${options.url}`
 				);
 			},
-			id: "makepurple",
-			Bottleneck: process.env.AS_SCRIPT === "true" ? undefined : Bottleneck
+			id: "makepurple"
 		}
 	});
 
