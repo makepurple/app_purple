@@ -1,6 +1,6 @@
+export * from "./_dayjs";
 export * from "./array.util";
 export * from "./color.util";
-export * from "./dayjs";
 export * from "./format.util";
 export * from "./function.util";
 export * from "./lang.util";
