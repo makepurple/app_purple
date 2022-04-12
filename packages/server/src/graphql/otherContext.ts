@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "../db";
 
 export const makeContext = async (params: {
 	req: NextApiRequest;
@@ -7,6 +8,7 @@ export const makeContext = async (params: {
 	const { req, res } = params;
 
 	return await Promise.resolve({
+		prisma,
 		req,
 		res
 	});
