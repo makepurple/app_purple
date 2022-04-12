@@ -18,6 +18,7 @@
 		"@devoxa/prisma-relay-cursor-connection": "^2.1.0",
 		"@graphql-tools/batch-execute": "^8.4.2",
 		"@graphql-tools/utils": "^8.6.6",
+		"@makepurple/server": "workspace:*",
 		"@makepurple/typings": "workspace:*",
 		"@makepurple/utils": "workspace:*",
 		"@makepurple/validators": "workspace:*",
