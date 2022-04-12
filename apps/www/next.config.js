@@ -3,12 +3,7 @@ const withPlugins = require("next-compose-plugins");
 const transpileModules = require("next-transpile-modules");
 
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE === "true" });
-const withTranspileModules = transpileModules([
-	"@makepurple/components",
-	"@makepurple/hooks",
-	"@makepurple/utils",
-	"@makepurple/validators"
-]);
+const withTranspileModules = transpileModules([]);
 
 const config = {
 	experimental: {

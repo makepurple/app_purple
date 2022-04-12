@@ -6,9 +6,6 @@ export const viewPost = mutationField("viewPost", {
 	args: {
 		where: nonNull(arg({ type: "PostWhereUniqueInput" }))
 	},
-	authorize: (parent, args, { ip }) => {
-		return !!ip;
-	},
 	resolve: async (parent, args, { ip, prisma, user }) => {
 		if (!ip) throw new Error();
 
