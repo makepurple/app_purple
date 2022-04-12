@@ -45,6 +45,7 @@ importers:
   apps/fake-api:
     specifiers:
       '@graphql-yoga/node': ^2.1.0
+      '@makepurple/server': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
       '@types/react': ^17.0.43
@@ -65,6 +66,7 @@ importers:
       typescript: ^4.6.3
     dependencies:
       '@graphql-yoga/node': 2.1.0_graphql@15.7.2
+      '@makepurple/server': link:../../packages/server
       '@makepurple/typings': link:../../packages/typings
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
