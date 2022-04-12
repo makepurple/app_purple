@@ -4,7 +4,6 @@ import type { octokit } from "../../../services";
 import type { ServerContext as ctx } from "./../../context"
 import type { ChatMessage, Comment, Experience, Post } from "@prisma/client"
 import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
-import type { QueryComplexity } from "nexus/dist/plugins/queryComplexityPlugin"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -1370,57 +1369,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
-    acceptFriendship: NexusGenRootTypes['AcceptFriendshipPayload']; // AcceptFriendshipPayload!
-    addDesiredSkill: NexusGenRootTypes['AddDesiredSkillMutationPayload']; // AddDesiredSkillMutationPayload!
-    addSkill: NexusGenRootTypes['AddSkillMutationPayload']; // AddSkillMutationPayload!
-    commentCodeExample: NexusGenRootTypes['CommentCodeExamplePayload']; // CommentCodeExamplePayload!
-    commentPost: NexusGenRootTypes['CommentPostPayload']; // CommentPostPayload!
-    createChat: NexusGenRootTypes['CreateChatPayload']; // CreateChatPayload!
-    createCodeExample: NexusGenRootTypes['CreateCodeExamplePayload']; // CreateCodeExamplePayload!
-    createExperience: NexusGenRootTypes['CreateExperiencePayload']; // CreateExperiencePayload!
-    createPost: NexusGenRootTypes['CreatePostPayload']; // CreatePostPayload!
-    createRepository: NexusGenRootTypes['CreateRepositoryPayload']; // CreateRepositoryPayload!
-    deleteCodeExample: NexusGenRootTypes['DeleteCodeExamplePayload']; // DeleteCodeExamplePayload!
-    deleteComment: NexusGenRootTypes['DeleteCommentPayload']; // DeleteCommentPayload!
-    deleteExperience: NexusGenRootTypes['DeleteExperiencePayload']; // DeleteExperiencePayload!
-    deleteFriendship: NexusGenRootTypes['DeleteFriendshipPayload']; // DeleteFriendshipPayload!
-    deletePost: NexusGenRootTypes['DeletePostPayload']; // DeletePostPayload!
-    deleteRepository: NexusGenRootTypes['DeleteRepositoryPayload']; // DeleteRepositoryPayload!
-    deleteUser: NexusGenRootTypes['DeleteUserPayload']; // DeleteUserPayload!
-    followSkill: NexusGenRootTypes['FollowSkillPayload']; // FollowSkillPayload!
-    followUser: NexusGenRootTypes['FollowUserPayload']; // FollowUserPayload!
-    inviteToChat: NexusGenRootTypes['InviteToChatPayload']; // InviteToChatPayload!
-    leaveChat: NexusGenRootTypes['LeaveChatPayload']; // LeaveChatPayload!
     ok: boolean; // Boolean!
-    openChat: NexusGenRootTypes['OpenChatPayload']; // OpenChatPayload!
-    openMessages: NexusGenRootTypes['OpenMessagesPayload']; // OpenMessagesPayload!
-    openNotifications: NexusGenRootTypes['OpenNotificationsPayload']; // OpenNotificationsPayload!
-    publishPost: NexusGenRootTypes['PublishPostPayload']; // PublishPostPayload!
-    rejectFriendship: NexusGenRootTypes['RejectFriendshipPayload']; // RejectFriendshipPayload!
-    removeDesiredSkill: NexusGenRootTypes['RemoveDesiredSkillMutationPayload']; // RemoveDesiredSkillMutationPayload!
-    removePostThumbnail: NexusGenRootTypes['RemovePostThumbnailPayload']; // RemovePostThumbnailPayload!
-    removeSkill: NexusGenRootTypes['RemoveSkillMutationPayload']; // RemoveSkillMutationPayload!
-    requestFriendship: NexusGenRootTypes['RequestFriendshipPayload']; // RequestFriendshipPayload!
-    sendChatMessage: NexusGenRootTypes['SendChatMessagePayload']; // SendChatMessagePayload!
-    unfollowSkill: NexusGenRootTypes['UnfollowSkillPayload']; // UnfollowSkillPayload!
-    unfollowUser: NexusGenRootTypes['UnfollowUserPayload']; // UnfollowUserPayload!
-    unvoteCodeExample: NexusGenRootTypes['UnvoteCodeExamplePayload']; // UnvoteCodeExamplePayload!
-    unvoteComment: NexusGenRootTypes['UnvoteCommentPayload']; // UnvoteCommentPayload!
-    unvotePost: NexusGenRootTypes['UnvotePostPayload']; // UnvotePostPayload!
-    updateCodeExample: NexusGenRootTypes['UpdateCodeExamplePayload']; // UpdateCodeExamplePayload!
-    updateComment: NexusGenRootTypes['UpdateCommentPayload']; // UpdateCommentPayload!
-    updateDesiredSkills: NexusGenRootTypes['UpdateDesiredSkillsPayload']; // UpdateDesiredSkillsPayload!
-    updateExperience: NexusGenRootTypes['UpdateExperiencePayload']; // UpdateExperiencePayload!
-    updatePost: NexusGenRootTypes['UpdatePostPayload']; // UpdatePostPayload!
-    updatePostDraft: NexusGenRootTypes['UpdatePostDraftPayload']; // UpdatePostDraftPayload!
-    updateRepository: NexusGenRootTypes['UpdateRepositoryPayload']; // UpdateRepositoryPayload!
-    updateSkills: NexusGenRootTypes['UpdateSkillsPayload']; // UpdateSkillsPayload!
-    updateUserFromGitHub: NexusGenRootTypes['UpdateUserFromGitHubPayload']; // UpdateUserFromGitHubPayload!
-    uploadPostImage: NexusGenRootTypes['UploadPostImagePayload']; // UploadPostImagePayload!
-    upvoteCodeExample: NexusGenRootTypes['UpvoteCodeExamplePayload']; // UpvoteCodeExamplePayload!
-    upvoteComment: NexusGenRootTypes['UpvoteCommentPayload']; // UpvoteCommentPayload!
-    upvotePost: NexusGenRootTypes['UpvotePostPayload']; // UpvotePostPayload!
-    viewPost: NexusGenRootTypes['ViewPostPayload']; // ViewPostPayload!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   NotificationChatMessageReceived: { // field return type
@@ -1549,30 +1498,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
-    chat: NexusGenRootTypes['Chat'] | null; // Chat
-    chatMessages: NexusGenRootTypes['ChatMessage'][]; // [ChatMessage!]!
-    codeExample: NexusGenRootTypes['CodeExample'] | null; // CodeExample
-    codeExamples: NexusGenRootTypes['CodeExampleConnection']; // CodeExampleConnection!
-    comment: NexusGenRootTypes['Comment'] | null; // Comment
-    comments: NexusGenRootTypes['CommentConnection']; // CommentConnection!
-    experiences: NexusGenRootTypes['ExperienceConnection']; // ExperienceConnection!
-    followableSkills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
-    github: NexusGenRootTypes['GitHub']; // GitHub!
     ok: boolean; // Boolean!
-    post: NexusGenRootTypes['Post'] | null; // Post
-    postDraft: NexusGenRootTypes['Post'] | null; // Post
-    posts: NexusGenRootTypes['PostConnection']; // PostConnection!
-    repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
-    skill: NexusGenRootTypes['Skill'] | null; // Skill
-    skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
-    suggestFriends: NexusGenRootTypes['UserConnection']; // UserConnection!
-    suggestOrganizations: NexusGenRootTypes['SuggestOrganizations']; // SuggestOrganizations!
-    suggestRepositories: NexusGenRootTypes['SuggestRepositories']; // SuggestRepositories!
-    suggestSkillOwners: NexusGenRootTypes['SuggestSkillOwners']; // SuggestSkillOwners!
-    suggestSkills: NexusGenRootTypes['SuggestSkills']; // SuggestSkills!
-    user: NexusGenRootTypes['User'] | null; // User
-    users: NexusGenRootTypes['UserConnection']; // UserConnection!
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RejectFriendshipPayload: { // field return type
@@ -2378,57 +2304,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Mutation: { // field return type name
-    acceptFriendship: 'AcceptFriendshipPayload'
-    addDesiredSkill: 'AddDesiredSkillMutationPayload'
-    addSkill: 'AddSkillMutationPayload'
-    commentCodeExample: 'CommentCodeExamplePayload'
-    commentPost: 'CommentPostPayload'
-    createChat: 'CreateChatPayload'
-    createCodeExample: 'CreateCodeExamplePayload'
-    createExperience: 'CreateExperiencePayload'
-    createPost: 'CreatePostPayload'
-    createRepository: 'CreateRepositoryPayload'
-    deleteCodeExample: 'DeleteCodeExamplePayload'
-    deleteComment: 'DeleteCommentPayload'
-    deleteExperience: 'DeleteExperiencePayload'
-    deleteFriendship: 'DeleteFriendshipPayload'
-    deletePost: 'DeletePostPayload'
-    deleteRepository: 'DeleteRepositoryPayload'
-    deleteUser: 'DeleteUserPayload'
-    followSkill: 'FollowSkillPayload'
-    followUser: 'FollowUserPayload'
-    inviteToChat: 'InviteToChatPayload'
-    leaveChat: 'LeaveChatPayload'
     ok: 'Boolean'
-    openChat: 'OpenChatPayload'
-    openMessages: 'OpenMessagesPayload'
-    openNotifications: 'OpenNotificationsPayload'
-    publishPost: 'PublishPostPayload'
-    rejectFriendship: 'RejectFriendshipPayload'
-    removeDesiredSkill: 'RemoveDesiredSkillMutationPayload'
-    removePostThumbnail: 'RemovePostThumbnailPayload'
-    removeSkill: 'RemoveSkillMutationPayload'
-    requestFriendship: 'RequestFriendshipPayload'
-    sendChatMessage: 'SendChatMessagePayload'
-    unfollowSkill: 'UnfollowSkillPayload'
-    unfollowUser: 'UnfollowUserPayload'
-    unvoteCodeExample: 'UnvoteCodeExamplePayload'
-    unvoteComment: 'UnvoteCommentPayload'
-    unvotePost: 'UnvotePostPayload'
-    updateCodeExample: 'UpdateCodeExamplePayload'
-    updateComment: 'UpdateCommentPayload'
-    updateDesiredSkills: 'UpdateDesiredSkillsPayload'
-    updateExperience: 'UpdateExperiencePayload'
-    updatePost: 'UpdatePostPayload'
-    updatePostDraft: 'UpdatePostDraftPayload'
-    updateRepository: 'UpdateRepositoryPayload'
-    updateSkills: 'UpdateSkillsPayload'
-    updateUserFromGitHub: 'UpdateUserFromGitHubPayload'
-    uploadPostImage: 'UploadPostImagePayload'
-    upvoteCodeExample: 'UpvoteCodeExamplePayload'
-    upvoteComment: 'UpvoteCommentPayload'
-    upvotePost: 'UpvotePostPayload'
-    viewPost: 'ViewPostPayload'
     viewer: 'User'
   }
   NotificationChatMessageReceived: { // field return type name
@@ -2557,30 +2433,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   Query: { // field return type name
-    activityFeed: 'UserActivityConnection'
-    chat: 'Chat'
-    chatMessages: 'ChatMessage'
-    codeExample: 'CodeExample'
-    codeExamples: 'CodeExampleConnection'
-    comment: 'Comment'
-    comments: 'CommentConnection'
-    experiences: 'ExperienceConnection'
-    followableSkills: 'SkillConnection'
-    github: 'GitHub'
     ok: 'Boolean'
-    post: 'Post'
-    postDraft: 'Post'
-    posts: 'PostConnection'
-    repositories: 'RepositoryConnection'
-    skill: 'Skill'
-    skills: 'SkillConnection'
-    suggestFriends: 'UserConnection'
-    suggestOrganizations: 'SuggestOrganizations'
-    suggestRepositories: 'SuggestRepositories'
-    suggestSkillOwners: 'SuggestSkillOwners'
-    suggestSkills: 'SuggestSkills'
-    user: 'User'
-    users: 'UserConnection'
     viewer: 'User'
   }
   RejectFriendshipPayload: { // field return type name
@@ -3112,155 +2965,6 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['GitHubUserTotalCommitsWhereInput'] | null; // GitHubUserTotalCommitsWhereInput
     }
   }
-  Mutation: {
-    acceptFriendship: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    addDesiredSkill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    addSkill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    commentCodeExample: { // args
-      data: NexusGenInputs['CommentCodeExampleInput']; // CommentCodeExampleInput!
-    }
-    commentPost: { // args
-      data: NexusGenInputs['CommentPostInput']; // CommentPostInput!
-    }
-    createChat: { // args
-      data: NexusGenInputs['CreateChatInput']; // CreateChatInput!
-    }
-    createCodeExample: { // args
-      data: NexusGenInputs['CodeExampleCreateInput']; // CodeExampleCreateInput!
-    }
-    createExperience: { // args
-      data: NexusGenInputs['ExperienceCreateInput']; // ExperienceCreateInput!
-    }
-    createRepository: { // args
-      data: NexusGenInputs['RepositoryCreateInput']; // RepositoryCreateInput!
-    }
-    deleteCodeExample: { // args
-      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
-    }
-    deleteComment: { // args
-      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
-    }
-    deleteExperience: { // args
-      where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
-    }
-    deleteFriendship: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    deletePost: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    deleteRepository: { // args
-      where: NexusGenInputs['RepositoryWhereUniqueInput']; // RepositoryWhereUniqueInput!
-    }
-    followSkill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    followUser: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    inviteToChat: { // args
-      data: NexusGenInputs['InviteToChatInput']; // InviteToChatInput!
-      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
-    }
-    leaveChat: { // args
-      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
-    }
-    openChat: { // args
-      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
-    }
-    publishPost: { // args
-      data: NexusGenInputs['PostPublishInput']; // PostPublishInput!
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    rejectFriendship: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    removeDesiredSkill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    removePostThumbnail: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    removeSkill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    requestFriendship: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    sendChatMessage: { // args
-      data: NexusGenInputs['ChatMessageCreateInput']; // ChatMessageCreateInput!
-      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
-    }
-    unfollowSkill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    unfollowUser: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    unvoteCodeExample: { // args
-      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
-    }
-    unvoteComment: { // args
-      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
-    }
-    unvotePost: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    updateCodeExample: { // args
-      data: NexusGenInputs['CodeExampleUpdateInput']; // CodeExampleUpdateInput!
-      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
-    }
-    updateComment: { // args
-      data: NexusGenInputs['CommentUpdateInput']; // CommentUpdateInput!
-      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
-    }
-    updateDesiredSkills: { // args
-      data: NexusGenInputs['UpdateDesiredSkillsInput']; // UpdateDesiredSkillsInput!
-    }
-    updateExperience: { // args
-      data: NexusGenInputs['ExperienceUpdateInput']; // ExperienceUpdateInput!
-      where: NexusGenInputs['ExperienceWhereUniqueInput']; // ExperienceWhereUniqueInput!
-    }
-    updatePost: { // args
-      data: NexusGenInputs['PostUpdateInput']; // PostUpdateInput!
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    updatePostDraft: { // args
-      data: NexusGenInputs['PostDraftUpdateInput']; // PostDraftUpdateInput!
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    updateRepository: { // args
-      data: NexusGenInputs['RepositoryUpdateInput']; // RepositoryUpdateInput!
-      where: NexusGenInputs['RepositoryWhereUniqueInput']; // RepositoryWhereUniqueInput!
-    }
-    updateSkills: { // args
-      data: NexusGenInputs['UpdateSkillsInput']; // UpdateSkillsInput!
-    }
-    uploadPostImage: { // args
-      data: NexusGenInputs['UploadPostImageInput']; // UploadPostImageInput!
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    upvoteCodeExample: { // args
-      data?: NexusGenInputs['UpvoteCodeExampleInput'] | null; // UpvoteCodeExampleInput
-      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
-    }
-    upvoteComment: { // args
-      data?: NexusGenInputs['UpvoteCommentInput'] | null; // UpvoteCommentInput
-      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
-    }
-    upvotePost: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    viewPost: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-  }
   Post: {
     comments: { // args
       after?: string | null; // String
@@ -3296,120 +3000,6 @@ export interface NexusGenArgTypes {
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
-      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-    }
-  }
-  Query: {
-    activityFeed: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      where?: NexusGenInputs['UserActivityWhereInput'] | null; // UserActivityWhereInput
-    }
-    chat: { // args
-      where: NexusGenInputs['ChatWhereUniqueInput']; // ChatWhereUniqueInput!
-    }
-    chatMessages: { // args
-      where: NexusGenInputs['ChatMessageWhereInput']; // ChatMessageWhereInput!
-    }
-    codeExample: { // args
-      where: NexusGenInputs['CodeExampleWhereUniqueInput']; // CodeExampleWhereUniqueInput!
-    }
-    codeExamples: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['CodeExampleOrderByInput'][] | null; // [CodeExampleOrderByInput!]
-      where: NexusGenInputs['CodeExampleWhereInput']; // CodeExampleWhereInput!
-    }
-    comment: { // args
-      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
-    }
-    comments: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['CommentOrderByInput'] | null; // CommentOrderByInput
-      where?: NexusGenInputs['CommentWhereInput'] | null; // CommentWhereInput
-    }
-    experiences: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['ExperienceOrderByInput'][] | null; // [ExperienceOrderByInput!]
-      where?: NexusGenInputs['ExperienceWhereInput'] | null; // ExperienceWhereInput
-    }
-    followableSkills: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
-      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
-    }
-    post: { // args
-      where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-    }
-    posts: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['PostOrderByInput'][] | null; // [PostOrderByInput!]
-      where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
-    }
-    repositories: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      where?: NexusGenInputs['RepositoryWhereInput'] | null; // RepositoryWhereInput
-    }
-    skill: { // args
-      where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
-    }
-    skills: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['SkillOrderByInput'][] | null; // [SkillOrderByInput!]
-      where?: NexusGenInputs['SkillWhereInput'] | null; // SkillWhereInput
-    }
-    suggestFriends: { // args
-      after?: string | null; // String
-      first?: number | null; // Int
-      where: NexusGenInputs['SuggestFriendsWhereInput']; // SuggestFriendsWhereInput!
-    }
-    suggestOrganizations: { // args
-      first?: number | null; // Int
-      where: NexusGenInputs['SuggestOrganizationsWhereInput']; // SuggestOrganizationsWhereInput!
-    }
-    suggestRepositories: { // args
-      first?: number | null; // Int
-      where: NexusGenInputs['SuggestRepositoriesWhereInput']; // SuggestRepositoriesWhereInput!
-    }
-    suggestSkillOwners: { // args
-      first?: number | null; // Int
-      where: NexusGenInputs['SuggestSkillOwnersWhereInput']; // SuggestSkillOwnersWhereInput!
-    }
-    suggestSkills: { // args
-      first?: number | null; // Int
-      where: NexusGenInputs['SuggestSkillsWhereInput']; // SuggestSkillsWhereInput!
-    }
-    user: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    users: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['UserOrderByInput'][] | null; // [UserOrderByInput!]
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
@@ -3796,12 +3386,6 @@ declare global {
      * resolver from executing.
      */
     authorize?: FieldAuthorizeResolver<TypeName, FieldName>
-    /**
-     * The complexity for an individual field. Return a number
-     * or a function that returns a number to specify the
-     * complexity for this field.
-     */
-    complexity?: QueryComplexity<TypeName, FieldName>
   }
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
   }
