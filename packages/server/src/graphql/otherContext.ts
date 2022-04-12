@@ -3,6 +3,7 @@ import { getToken } from "next-auth/jwt";
 import { prisma } from "../db";
 import { redis } from "../redis";
 import { CloudinaryClient } from "../services/cloudinary";
+import * as octokit from "../services/octokit";
 import * as pusher from "../services/pusher";
 
 export const makeContext = async (params: {
@@ -17,6 +18,7 @@ export const makeContext = async (params: {
 	return {
 		cloudinary: new CloudinaryClient(),
 		jwt,
+		octokit: await octokit.client.graphql(jwt?.accessToken),
 		prisma,
 		pusher: pusher.client,
 		redis,
