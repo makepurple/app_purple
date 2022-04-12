@@ -2,7 +2,7 @@ import { ObjectUtils } from "@makepurple/utils";
 import type { Comment, Prisma, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
-import { PrismaUtils } from "../../../utils/prisma.util";
+import { PrismaUtils } from "../../../utils";
 
 /**
  * !HACK
