@@ -5,16 +5,16 @@
 		"types.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"../../packages/server/src/graphql/nexus/generated/typegen.gen.d.ts"
+		"../../../packages/server/src/graphql/nexus/generated/typegen.gen.d.ts"
 	],
 	"compilerOptions": {
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"paths": {
-			"@makepurple/server": ["../../packages/server/src/index"],
-			"@makepurple/server/graphql/*": ["../../packages/server/src/graphql/*"],
-			"@makepurple/server/prisma": ["../../packages/server/prisma"],
-			"@makepurple/utils": ["../../packages/utils/src/index"],
-			"@makepurple/validators": ["../../packages/validators/src/index"]
+			"@makepurple/server": ["../../../packages/server/src/index"],
+			"@makepurple/server/graphql/*": ["../../../packages/server/src/graphql/*"],
+			"@makepurple/server/prisma": ["../../../packages/server/prisma"],
+			"@makepurple/utils": ["../../../packages/utils/src/index"],
+			"@makepurple/validators": ["../../../packages/validators/src/index"]
 		}
 	}
 }
