@@ -2,14 +2,15 @@ import { stripIndents } from "common-tags";
 import { lexicographicSortSchema } from "graphql";
 import { fieldAuthorizePlugin, makeSchema } from "nexus";
 import path from "path";
-import * as types from "./types";
+import * as inputTypes from "./input-types";
+import { Query } from "./types/Query";
 
 const isGenerateScript: boolean = process.argv.includes("--nexus-exit");
 
 const _schema = makeSchema({
 	shouldGenerateArtifacts: isGenerateScript,
 	shouldExitAfterGenerateArtifacts: isGenerateScript,
-	types: { ...types },
+	types: { ...inputTypes, Query },
 	outputs: {
 		schema: path.resolve(__dirname, "./generated/schema.gen.graphql"),
 		typegen: path.resolve(__dirname, "./generated/typegen.gen.d.ts")
