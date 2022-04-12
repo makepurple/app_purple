@@ -837,10 +837,10 @@ importers:
       computed-types: ^1.11.2
       typescript: ^4.6.3
     dependencies:
+      '@makepurple/utils': link:../utils
       computed-types: 1.11.2
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
-      '@makepurple/utils': link:../utils
       typescript: 4.6.3
 
 packages:
