@@ -1,6 +1,14 @@
+import { LangUtils } from "lang.util";
 import type { FieldPath, FieldPathValue, FieldValues, UnpackNestedValue } from "react-hook-form";
-import get from "react-hook-form/dist/utils/get";
-import set from "react-hook-form/dist/utils/set";
+
+const compact = <TValue>(value: TValue[]) => (Array.isArray(value) ? value.filter(Boolean) : []);
+const isDateObject = (value: unknown): value is Date => value instanceof Date;
+const isKey = (value: string) => /^\w*$/.test(value);
+const isObjectType = (value: unknown) => typeof value === "object";
+const isObject = <T extends object>(value: unknown): value is T =>
+	!LangUtils.isNil(value) && !Array.isArray(value) && isObjectType(value) && !isDateObject(value);
+const stringToPath = (input: string): string[] =>
+	compact(input.replace(/["|']|\]/g, "").split(/\.|\[/));
 
 export class ObjectUtils {
 	public static get<
@@ -8,11 +16,23 @@ export class ObjectUtils {
 		TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 	>(
 		obj: Maybe<TFieldValues>,
-		path: TName
+		path: TName,
+		defaultValue?: unknown
 	): UnpackNestedValue<FieldPathValue<TFieldValues, TName>> | undefined {
-		if (!obj) return undefined;
+		if (!path || !isObject(obj)) {
+			return defaultValue as any;
+		}
 
-		return get(obj, path);
+		const result = compact(path.split(/[,[\].]+?/)).reduce(
+			(state, key) => (LangUtils.isNil(state) ? state : state[key]),
+			obj
+		);
+
+		return result === "undefined" || result === obj
+			? obj[path] === "undefined"
+				? defaultValue
+				: obj[path]
+			: result;
 	}
 
 	/**
@@ -42,13 +62,35 @@ export class ObjectUtils {
 	}
 
 	public static set<TFieldValues extends FieldValues = FieldValues>(
-		obj: Maybe<TFieldValues>,
+		obj: TFieldValues,
 		path: string,
 		value: any
 	) {
-		if (!obj) return undefined;
+		let index = -1;
+		const tempPath = isKey(path) ? [path] : stringToPath(path);
+		const length = tempPath.length;
+		const lastIndex = length - 1;
 
-		return set({ ...obj }, path, value);
+		while (++index < length) {
+			const key = tempPath[index] as any;
+			let newValue = value;
+
+			if (index !== lastIndex) {
+				const objValue = obj[key];
+				newValue =
+					isObject(objValue) || Array.isArray(objValue)
+						? objValue
+						: !isNaN(+tempPath[index + 1])
+						? []
+						: {};
+			}
+
+			if (!obj) return null;
+
+			obj[key as keyof TFieldValues] = newValue;
+			obj = obj[key];
+		}
+		return obj;
 	}
 
 	public static setStatic<T, S extends Record<string, unknown>>(base: T, staticProps: S): T & S {
