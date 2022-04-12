@@ -1,12 +1,14 @@
 {
 	"extends": "@makepurple/tsconfig/base.json",
-	"exclude": ["node_modules"],
-	"include": ["src"],
+	"include": [
+		"types.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+	],
 	"compilerOptions": {
-		"moduleResolution": "node",
-		"rootDir": "src",
-		"outDir": "dist",
-		"declaration": false,
-		"declarationMap": false
+		"baseUrl": "./src",
+		"paths": {
+			"@makepurple/utils": ["../../../packages/utils/src/index"]
+		}
 	}
 }

@@ -6,9 +6,10 @@
 		"**/*.tsx",
 	],
 	"compilerOptions": {
-		"baseUrl": ".",
+		"baseUrl": "./src",
 		"paths": {
-			"@makepurple/utils": ["../../packages/utils/src/index"]
+			"@makepurple/utils": ["../../../packages/utils/src/index"],
+			"@makepurple/validators": ["../../../packages/validators/src/index"],
 		}
 	}
 }
