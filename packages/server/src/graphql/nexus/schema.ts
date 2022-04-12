@@ -5,13 +5,14 @@ import path from "path";
 import * as inputTypes from "./input-types";
 import { Organization } from "./types/Organization";
 import { Query } from "./types/Query";
+import { UserTrophies } from "./types/UserTrophies";
 
 const isGenerateScript: boolean = process.argv.includes("--nexus-exit");
 
 const _schema = makeSchema({
 	shouldGenerateArtifacts: isGenerateScript,
 	shouldExitAfterGenerateArtifacts: isGenerateScript,
-	types: { ...inputTypes, Organization, Query },
+	types: { ...inputTypes, Organization, Query, UserTrophies },
 	outputs: {
 		schema: path.resolve(__dirname, "./generated/schema.gen.graphql"),
 		typegen: path.resolve(__dirname, "./generated/typegen.gen.d.ts")
