@@ -15,10 +15,11 @@ export const makeContext = async (params: {
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! });
 
+	console.log(!!octokit);
+
 	return {
 		cloudinary: new CloudinaryClient(),
 		jwt,
-		octokit: await octokit.client.graphql(jwt?.accessToken),
 		prisma,
 		pusher: pusher.client,
 		redis,
