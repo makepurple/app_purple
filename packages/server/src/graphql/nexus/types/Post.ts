@@ -1,3 +1,4 @@
+import { ObjectUtils } from "@makepurple/utils";
 import type { Comment, Prisma, Skill, User } from "@prisma/client";
 import { stripIndents } from "common-tags";
 import { arg, intArg, objectType, stringArg } from "nexus";
@@ -140,15 +141,13 @@ export const Post = objectType({
 			description: stripIndents`
 				Estimated time in minutes it will take to read this post. Minimum 1 minute.
 			`,
-			resolve: () => {
-				// const content = parent.content as readonly Json[];
-				// const wordCount = ObjectUtils.getWordCount(content);
-				// const estimatedMinutes = Math.floor(wordCount / READING_WORDS_PER_MINUTE);
-				// const readingMinutes = Math.max(1, estimatedMinutes);
+			resolve: (parent) => {
+				const content = parent.content as readonly Json[];
+				const wordCount = ObjectUtils.getWordCount(content);
+				const estimatedMinutes = Math.floor(wordCount / READING_WORDS_PER_MINUTE);
+				const readingMinutes = Math.max(1, estimatedMinutes);
 
-				// return readingMinutes;
-
-				return 0;
+				return readingMinutes;
 			}
 		});
 		t.nonNull.field("skills", {
