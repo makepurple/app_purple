@@ -5,12 +5,14 @@ import { getClientIp } from "request-ip";
 import { prisma } from "../db";
 import { redis } from "../redis";
 import { CloudinaryClient } from "../services/cloudinary";
+import * as octokit from "../services/octokit";
 import * as pusher from "../services/pusher";
+import type { ServerContext } from "./context";
 
 export const makeContext = async (params: {
 	req: NextApiRequest;
 	res: NextApiResponse;
-}): Promise<any> => {
+}): Promise<ServerContext> => {
 	const { req, res } = params;
 
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -20,6 +22,7 @@ export const makeContext = async (params: {
 		cloudinary: new CloudinaryClient(),
 		ip: isbot(req.headers["user-agent"]) ? null : getClientIp(req),
 		jwt,
+		octokit: await octokit.client.graphql(jwt?.accessToken),
 		prisma,
 		pusher: pusher.client,
 		redis,
