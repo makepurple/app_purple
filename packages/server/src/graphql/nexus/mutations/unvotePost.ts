@@ -1,6 +1,6 @@
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const unvotePost = mutationField("unvotePost", {
 	type: nonNull("UnvotePostPayload"),
@@ -25,7 +25,7 @@ export const unvotePost = mutationField("unvotePost", {
 			}
 		});
 
-		if (!post) throw new NotFoundError("Post could not be found");
+		if (!post) throw new Error("Post could not be found");
 
 		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.userActivity.deleteMany({

@@ -1,7 +1,7 @@
 import { CommentCreateInput } from "@makepurple/validators";
 import { NotificationType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const commentCodeExample = mutationField("commentCodeExample", {
 	type: nonNull("CommentCodeExamplePayload"),
@@ -32,7 +32,7 @@ export const commentCodeExample = mutationField("commentCodeExample", {
 			}
 		});
 
-		if (!codeExample) throw new NotFoundError("This code-example could not be found");
+		if (!codeExample) throw new Error("This code-example could not be found");
 
 		const didPreviouslyComment = !!codeExample.comments.length;
 

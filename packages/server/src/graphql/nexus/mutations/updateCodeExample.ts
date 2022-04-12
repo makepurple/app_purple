@@ -3,7 +3,7 @@ import { CodeExampleUpdateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const updateCodeExample = mutationField("updateCodeExample", {
 	type: nonNull("UpdateCodeExamplePayload"),
@@ -21,7 +21,7 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!codeExample) throw new NotFoundError("This code-example does not exist");
+		if (!codeExample) throw new Error("This code-example does not exist");
 
 		const dataInput = CodeExampleUpdateInput.validator({
 			content: args.data.content ?? undefined,

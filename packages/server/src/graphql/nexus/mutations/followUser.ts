@@ -1,7 +1,7 @@
 import { FollowType, UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const followUser = mutationField("followUser", {
 	type: nonNull("FollowUserPayload"),
@@ -18,7 +18,7 @@ export const followUser = mutationField("followUser", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!toFollow) throw new NotFoundError("This user could not be found");
+		if (!toFollow) throw new Error("This user could not be found");
 		if (toFollow.name === user.name) throw new Error("Cannot follow yourself!");
 
 		const record = await prisma.followUser

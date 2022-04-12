@@ -1,6 +1,6 @@
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const rejectFriendship = mutationField("rejectFriendship", {
 	type: nonNull("RejectFriendshipPayload"),
@@ -17,7 +17,7 @@ export const rejectFriendship = mutationField("rejectFriendship", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!requester) throw new NotFoundError("This user does not exist");
+		if (!requester) throw new Error("This user does not exist");
 
 		const record = await prisma.friendship
 			.update({

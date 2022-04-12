@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const removeSkill = mutationField("removeSkill", {
 	type: nonNull("RemoveSkillMutationPayload"),
@@ -16,7 +16,7 @@ export const removeSkill = mutationField("removeSkill", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!skill) throw new NotFoundError("This skill could not be found");
+		if (!skill) throw new Error("This skill could not be found");
 
 		const record = await prisma.skillsOnUsers
 			.delete({

@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const unfollowSkill = mutationField("unfollowSkill", {
 	type: nonNull("UnfollowSkillPayload"),
@@ -16,7 +16,7 @@ export const unfollowSkill = mutationField("unfollowSkill", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!following) throw new NotFoundError("This skill does not exist");
+		if (!following) throw new Error("This skill does not exist");
 
 		const follow = await prisma.followSkill
 			.findUnique({

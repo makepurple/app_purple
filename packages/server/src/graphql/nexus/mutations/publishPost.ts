@@ -3,7 +3,7 @@ import { PostPublishInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { Logger, NotFoundError, PrismaUtils } from "../../../utils";
+import { Logger, PrismaUtils } from "../../../utils";
 
 export const publishPost = mutationField("publishPost", {
 	type: nonNull("PublishPostPayload"),
@@ -29,7 +29,7 @@ export const publishPost = mutationField("publishPost", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!post) throw new NotFoundError("This post does not exist.");
+		if (!post) throw new Error("This post does not exist.");
 
 		if (post.publishedAt) return { record: post };
 

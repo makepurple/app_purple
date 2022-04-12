@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const unvoteComment = mutationField("unvoteComment", {
 	type: nonNull("UnvoteCommentPayload"),
@@ -16,7 +16,7 @@ export const unvoteComment = mutationField("unvoteComment", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!comment) throw new NotFoundError("Comment could not be found");
+		if (!comment) throw new Error("Comment could not be found");
 
 		const { comment: record } = await prisma.commentUpvoter.delete({
 			where: {

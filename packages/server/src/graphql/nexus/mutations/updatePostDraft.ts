@@ -2,7 +2,7 @@ import { PromiseUtils } from "@makepurple/utils";
 import { PostDraftUpdateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { Logger, NotFoundError, PrismaUtils } from "../../../utils";
+import { Logger, PrismaUtils } from "../../../utils";
 
 export const updatePostDraft = mutationField("updatePostDraft", {
 	type: nonNull("UpdatePostDraftPayload"),
@@ -26,7 +26,7 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!post) throw new NotFoundError("This post does not exist.");
+		if (!post) throw new Error("This post does not exist.");
 
 		const dataInput = PostDraftUpdateInput.validator({
 			content: args.data.content ?? undefined,

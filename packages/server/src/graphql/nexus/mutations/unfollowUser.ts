@@ -1,6 +1,6 @@
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const unfollowUser = mutationField("unfollowUser", {
 	type: nonNull("UnfollowUserPayload"),
@@ -17,7 +17,7 @@ export const unfollowUser = mutationField("unfollowUser", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!following) throw new NotFoundError("This user does not exist.");
+		if (!following) throw new Error("This user does not exist.");
 
 		const follow = await prisma.followUser
 			.findUnique({

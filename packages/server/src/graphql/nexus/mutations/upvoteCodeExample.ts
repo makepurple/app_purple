@@ -1,6 +1,6 @@
 import { UserActivityType } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const upvoteCodeExample = mutationField("upvoteCodeExample", {
 	type: nonNull("UpvoteCodeExamplePayload"),
@@ -31,7 +31,7 @@ export const upvoteCodeExample = mutationField("upvoteCodeExample", {
 			}
 		});
 
-		if (!codeExample) throw new NotFoundError("Code-example could not be found");
+		if (!codeExample) throw new Error("Code-example could not be found");
 
 		const record = await prisma.codeExample.update({
 			where: PrismaUtils.nonNull(args.where),

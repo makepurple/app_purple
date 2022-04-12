@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { NotFoundError, PrismaUtils } from "../../../utils";
+import { PrismaUtils } from "../../../utils";
 
 export const viewPost = mutationField("viewPost", {
 	type: nonNull("ViewPostPayload"),
@@ -13,7 +13,7 @@ export const viewPost = mutationField("viewPost", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!post) throw new NotFoundError("This post could not be found");
+		if (!post) throw new Error("This post could not be found");
 
 		const record = await prisma.postViewer
 			.upsert({
