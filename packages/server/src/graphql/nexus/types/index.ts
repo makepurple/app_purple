@@ -58,7 +58,7 @@
 // export * from "./InvalidSkillError";
 // export * from "./InviteToChatPayload";
 // export * from "./LeaveChatPayload";
-export * from "./Mutation";
+// export * from "./Mutation";
 // export * from "./MutationError";
 // export * from "./MutationPayload";
 // export * from "./Node";
@@ -72,7 +72,7 @@ export * from "./Mutation";
 // export * from "./OpenChatPayload";
 // export * from "./OpenMessagesPayload";
 // export * from "./OpenNotificationsPayload";
-export * from "./Organization";
+// export * from "./Organization";
 // export * from "./PageInfo";
 export * from "./Post";
 // export * from "./PostConnection";
