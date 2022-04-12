@@ -1,6 +1,6 @@
 import { oneLine } from "common-tags";
 import { objectType } from "nexus";
-import { PrismaUtils } from "../../..";
+import { PrismaUtils } from "../../../utils";
 
 export const CommentConnection = objectType({
 	name: "CommentConnection",

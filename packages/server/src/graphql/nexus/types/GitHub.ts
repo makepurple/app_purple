@@ -1,5 +1,5 @@
 import { arg, nonNull, objectType } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 import {
 	GitHubOrganization,
 	GitHubRepository,

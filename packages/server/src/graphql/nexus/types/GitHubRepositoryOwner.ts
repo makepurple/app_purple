@@ -1,6 +1,6 @@
 import type { Prisma, User } from "@prisma/client";
 import { arg, intArg, interfaceType, stringArg } from "nexus";
-import { octokit } from "../../../services";
+import type { octokit } from "../../../services";
 import { GitHubRepository } from "../../../services/octokit";
 import { PrismaUtils } from "../../../utils";
 
