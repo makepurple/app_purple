@@ -5,7 +5,10 @@
 		"types.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"../../../packages/server/src/graphql/nexus/generated/typegen.gen.d.ts"
+		"**/*.js",
+		"**/*.jsx",
+		"**/*.mjs",
+		"**/*.json"
 	],
 	"compilerOptions": {
 		"baseUrl": "./src",
