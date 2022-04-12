@@ -12,7 +12,6 @@
 	},
 	"dependencies": {
 		"@graphql-yoga/node": "^2.1.0",
-		"@makepurple/server": "workspace:*",
 		"@makepurple/typings": "workspace:*",
 		"@types/react": "^17.0.43",
 		"@types/react-dom": "^17.0.14",
