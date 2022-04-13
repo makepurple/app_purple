@@ -727,7 +727,65 @@ type LeaveChatPayload implements MutationPayload {
 
 """Root mutation type"""
 type Mutation {
+  acceptFriendship(where: UserWhereUniqueInput!): AcceptFriendshipPayload!
+  addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
+  addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
+  commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!
+  commentPost(data: CommentPostInput!): CommentPostPayload!
+  createChat(data: CreateChatInput!): CreateChatPayload!
+  createCodeExample(data: CodeExampleCreateInput!): CreateCodeExamplePayload!
+  createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
+
+  """
+  Creates a new draft if the user doesn't have a draft pending to be published already
+  """
+  createPost: CreatePostPayload!
+  createRepository(data: RepositoryCreateInput!): CreateRepositoryPayload!
+  deleteCodeExample(where: CodeExampleWhereUniqueInput!): DeleteCodeExamplePayload!
+  deleteComment(where: CommentWhereUniqueInput!): DeleteCommentPayload!
+
+  """Users can delete their own experiences."""
+  deleteExperience(where: ExperienceWhereUniqueInput!): DeleteExperiencePayload!
+  deleteFriendship(where: UserWhereUniqueInput!): DeleteFriendshipPayload!
+
+  """Users can delete their own posts."""
+  deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
+  deleteRepository(where: RepositoryWhereUniqueInput!): DeleteRepositoryPayload!
+  deleteUser: DeleteUserPayload!
+  followSkill(where: SkillWhereUniqueInput!): FollowSkillPayload!
+  followUser(where: UserWhereUniqueInput!): FollowUserPayload!
+  inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!
+  leaveChat(where: ChatWhereUniqueInput!): LeaveChatPayload!
   ok: Boolean!
+  openChat(where: ChatWhereUniqueInput!): OpenChatPayload!
+  openMessages: OpenMessagesPayload!
+  openNotifications: OpenNotificationsPayload!
+  publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
+  rejectFriendship(where: UserWhereUniqueInput!): RejectFriendshipPayload!
+  removeDesiredSkill(where: SkillWhereUniqueInput!): RemoveDesiredSkillMutationPayload!
+  removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
+  removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
+  requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
+  sendChatMessage(data: ChatMessageCreateInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
+  unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
+  unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
+  unvoteCodeExample(where: CodeExampleWhereUniqueInput!): UnvoteCodeExamplePayload!
+  unvoteComment(where: CommentWhereUniqueInput!): UnvoteCommentPayload!
+  unvotePost(where: PostWhereUniqueInput!): UnvotePostPayload!
+  updateCodeExample(data: CodeExampleUpdateInput!, where: CodeExampleWhereUniqueInput!): UpdateCodeExamplePayload!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): UpdateCommentPayload!
+  updateDesiredSkills(data: UpdateDesiredSkillsInput!): UpdateDesiredSkillsPayload!
+  updateExperience(data: ExperienceUpdateInput!, where: ExperienceWhereUniqueInput!): UpdateExperiencePayload!
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): UpdatePostPayload!
+  updatePostDraft(data: PostDraftUpdateInput!, where: PostWhereUniqueInput!): UpdatePostDraftPayload!
+  updateRepository(data: RepositoryUpdateInput!, where: RepositoryWhereUniqueInput!): UpdateRepositoryPayload!
+  updateSkills(data: UpdateSkillsInput!): UpdateSkillsPayload!
+  updateUserFromGitHub: UpdateUserFromGitHubPayload!
+  uploadPostImage(data: UploadPostImageInput!, where: PostWhereUniqueInput!): UploadPostImagePayload!
+  upvoteCodeExample(data: UpvoteCodeExampleInput, where: CodeExampleWhereUniqueInput!): UpvoteCodeExamplePayload!
+  upvoteComment(data: UpvoteCommentInput, where: CommentWhereUniqueInput!): UpvoteCommentPayload!
+  upvotePost(where: PostWhereUniqueInput!): UpvotePostPayload!
+  viewPost(where: PostWhereUniqueInput!): ViewPostPayload!
   viewer: User
 }
 
@@ -975,7 +1033,40 @@ type PublishPostPayload implements MutationPayload {
 
 """Root query type"""
 type Query {
+  activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
+  chat(where: ChatWhereUniqueInput!): Chat
+
+  """This is to update a subscribed chat with new messages when received."""
+  chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
+  codeExample(where: CodeExampleWhereUniqueInput!): CodeExample
+  codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput!): CodeExampleConnection!
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
+  experiences(after: String, before: String, first: Int, last: Int, orderBy: [ExperienceOrderByInput!], where: ExperienceWhereInput): ExperienceConnection!
+
+  """Relay-style connection on Skill types."""
+  followableSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
+  github: GitHub!
   ok: Boolean!
+
+  """A user-created post."""
+  post(where: PostWhereUniqueInput!): Post
+  postDraft: Post
+
+  """Relay-style connection on Post types."""
+  posts(after: String, before: String, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): PostConnection!
+  repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
+  skill(where: SkillWhereUniqueInput!): Skill
+
+  """Relay-style connection on Skill types."""
+  skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
+  suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
+  suggestOrganizations(first: Int, where: SuggestOrganizationsWhereInput!): SuggestOrganizations!
+  suggestRepositories(first: Int, where: SuggestRepositoriesWhereInput!): SuggestRepositories!
+  suggestSkillOwners(first: Int, where: SuggestSkillOwnersWhereInput!): SuggestSkillOwners!
+  suggestSkills(first: Int, where: SuggestSkillsWhereInput!): SuggestSkills!
+  user(where: UserWhereUniqueInput!): User
+  users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
 }
 
