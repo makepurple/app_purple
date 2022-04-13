@@ -6,6 +6,7 @@ import {
 } from "@makepurple/www/src/graphql/mocks";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
+import { SessionProvider } from "next-auth/react";
 import React from "react";
 import { getOperationName, Operation } from "urql";
 
@@ -41,6 +42,33 @@ Template.parameters = {
 	}
 };
 
-export const Standard: any = Template.bind({});
+export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
 Standard.parameters = { ...Template.parameters };
+
+export const UnAuthenticated: Story<SiteWideAppBarProps> = (args) => (
+	<SessionProvider session={null}>
+		<SiteWideAppBar {...args} />
+		<div style={{ height: "200vh" }} />
+	</SessionProvider>
+);
+UnAuthenticated.args = {};
+UnAuthenticated.parameters = {
+	layout: "fullscreen",
+	urql: (op: Operation) => {
+		const operationName = getOperationName(op.query);
+
+		operationName && action(operationName)(op.variables);
+
+		switch (operationName) {
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
+			default:
+				return {};
+		}
+	}
+};

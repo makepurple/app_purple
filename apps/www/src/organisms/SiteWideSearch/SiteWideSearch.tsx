@@ -42,6 +42,7 @@ import {
 
 export interface SiteWideSearchProps {
 	className?: string;
+	disabled?: boolean;
 	offset?: number;
 	onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
 	onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
@@ -50,7 +51,7 @@ export interface SiteWideSearchProps {
 
 export const SiteWideSearch = memo<SiteWideSearchProps>(
 	forwardRef<HTMLFormElement, SiteWideSearchProps>((props, ref) => {
-		const { className, offset, onBlur, onFocus: _onFocus, style } = props;
+		const { className, disabled, offset, onBlur, onFocus: _onFocus, style } = props;
 
 		const router = useRouter();
 
@@ -255,6 +256,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						/>
 					</SearchInputContainer>
 					<SearchButton
+						disabled={disabled}
 						onClick={() => {
 							!!ownerBox.inputValue || !skillBox.inputValue
 								? ownerInput?.focus()

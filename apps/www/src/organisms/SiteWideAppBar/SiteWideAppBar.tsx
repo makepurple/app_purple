@@ -52,14 +52,17 @@ const StyledBrand = tw(Brand)`
 `;
 
 const Actions = tw.div`
+	hidden
 	flex-shrink-0
-	flex
 	justify-end
 	gap-4
+	sm:flex
 `;
 
 const StyledLoginButton = tw(Button)`
+	hidden
 	w-32
+	lg:flex
 `;
 
 const SignUpButton = tw(Button)`
@@ -252,6 +255,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 				</BrandContainer>
 				<Search
 					as={SiteWideSearch}
+					disabled={drawerOpen}
 					onBlur={() => {
 						setSearching(false);
 					}}
