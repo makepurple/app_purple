@@ -105,6 +105,7 @@ importers:
       react-test-renderer: ^17.0.2
       slate: ^0.76.1
       storybook-addon-next-router: ^3.1.1
+      storybook-tailwind-dark-mode: ^1.0.11
       styled-components: ^5.3.5
       tailwindcss: 2.2.19
       tippy.js: ^6.3.7
@@ -180,6 +181,7 @@ importers:
       react-is: 17.0.2
       react-test-renderer: 17.0.2_react@17.0.2
       storybook-addon-next-router: 3.1.1_ebd4e1617e03ec37fa71eb8b31deda21
+      storybook-tailwind-dark-mode: 1.0.11_7a9e0bae2e834b7e9c41a41cf419a74b
       typescript: 4.6.3
       webpack: 5.72.0
 
@@ -4693,7 +4695,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       callsites: 3.1.0
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
       source-map: 0.6.1
     dev: true
 
@@ -4712,7 +4714,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@jest/test-result': 27.5.1
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
       jest-haste-map: 27.5.1
       jest-runtime: 27.5.1
     transitivePeerDependencies:
@@ -7560,7 +7562,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -7569,7 +7571,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -7577,7 +7579,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_081650f2f4dba35b17265937ab2a2ec0
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -15691,7 +15693,7 @@ packages:
       '@jest/types': 26.6.2
       '@types/stack-utils': 2.0.1
       chalk: 4.1.2
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
       micromatch: 4.0.4
       pretty-format: 26.6.2
       slash: 3.0.0
@@ -15776,7 +15778,7 @@ packages:
     dependencies:
       '@jest/types': 26.6.2
       chalk: 4.1.2
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
       jest-pnp-resolver: 1.2.2_jest-resolve@26.6.2
       jest-util: 26.6.2
       read-pkg-up: 7.0.1
@@ -15867,7 +15869,7 @@ packages:
     engines: {node: '>= 10.14.2'}
     dependencies:
       '@types/node': 17.0.23
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
     dev: true
 
   /jest-serializer/27.5.1:
@@ -15875,7 +15877,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@types/node': 17.0.23
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
     dev: true
 
   /jest-snapshot/26.6.2:
@@ -16191,7 +16193,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
 
   /jsonify/0.0.0:
     resolution: {integrity: sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=}
@@ -19778,7 +19780,7 @@ packages:
     resolution: {integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==}
     engines: {node: '>=0.10'}
     dependencies:
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
       micromatch: 3.1.10
       readable-stream: 2.3.7
     optional: true
@@ -20947,6 +20949,28 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       tslib: 2.3.1
+    dev: true
+
+  /storybook-tailwind-dark-mode/1.0.11_7a9e0bae2e834b7e9c41a41cf419a74b:
+    resolution: {integrity: sha512-Y0FP/aOxgdkSbzTQ9xoo346c1BKvp9WtxDVKg3P6S40wypOwK0dBxQEGehrLVB5gDuGiQru81UfitywI6clrcw==}
+    peerDependencies:
+      '@storybook/addons': ^6.2.9
+      '@storybook/api': ^6.2.9
+      '@storybook/components': ^6.2.9
+      '@storybook/core-events': ^6.2.9
+      '@storybook/theming': ^6.2.9
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      '@storybook/addons': 6.4.19_react-dom@17.0.2+react@17.0.2
+      '@storybook/theming': 6.4.19_react-dom@17.0.2+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: true
 
   /stream-browserify/2.0.2:
