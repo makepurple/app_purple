@@ -30,7 +30,7 @@ const ForwardedRefSideDrawer = withForwardRef(SiteWideSideDrawer);
 const Search = tw.div`
 	ml-auto
 	sm:ml-0
-`;
+` as any;
 
 const SiteWideSearch = dynamic(() => import("../SiteWideSearch"), {
 	ssr: false,
