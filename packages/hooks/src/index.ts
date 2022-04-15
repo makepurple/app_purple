@@ -20,6 +20,7 @@ export * from "./useRelayCursor";
 export * from "./useResizeObserver";
 export * from "./useToggle";
 export * from "./useUncontrolledProp";
+export * from "./useUpdateEffect";
 export * from "./useWhyDidYouUpdate";
 export * from "./useWillMount";
 export * from "./useWindowFocus";

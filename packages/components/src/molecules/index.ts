@@ -8,3 +8,4 @@ export * from "./NonIdealState";
 export * from "./ProportionBar";
 export * from "./Tags";
 export * from "./Trophy";
+export * from "./Typist";
