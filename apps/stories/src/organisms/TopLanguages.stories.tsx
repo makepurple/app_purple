@@ -16,5 +16,5 @@ Template.args = {
 	topLanguages: GetUserInfoSideBar_mock.user!.github.topLanguages
 };
 
-export const Standard: any = Template.bind({});
+export const Standard = Template.bind({});
 Standard.args = { ...Template.args };

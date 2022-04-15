@@ -72,6 +72,7 @@ export * from "./SkillPageLayout";
 export * from "./SkillPageTabs";
 export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";
+export * from "./TypistLogo";
 export * from "./UpdateExperienceForm";
 export * from "./UpdateRepositoryCard";
 export * from "./UrqlProvider";

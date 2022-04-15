@@ -4,7 +4,7 @@ import { keyframes } from "styled-components";
 import tw, { styled, theme } from "twin.macro";
 import { MaybeWrap } from "../MaybeWrap";
 
-const blinkKeyframes = keyframes`
+const blink = keyframes`
     0% {
         opacity: 1
     }
@@ -36,7 +36,7 @@ const Icon = tw.svg`
 `;
 
 const Cursor = styled.path`
-	animation: ${blinkKeyframes} 1.2s linear infinite;
+	animation: ${blink} 1.2s linear infinite;
 
 	${tw`
 		motion-reduce:animate-none
