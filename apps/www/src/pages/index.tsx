@@ -1,4 +1,4 @@
-import { Anchor, Button, GitHubIcon, MainContainer } from "@makepurple/components";
+import { MainContainer } from "@makepurple/components";
 import { NextPage } from "next";
 import React from "react";
 import tw from "twin.macro";
@@ -13,7 +13,7 @@ const Root = tw(MainContainer)`
 `;
 
 export const Page: NextPage = () => {
-	return <div>Home page works~!</div>;
+	return <Root>Home page works~!</Root>;
 };
 
 export default Page;
