@@ -56,8 +56,8 @@ const Root = tw.div`
 const Wing = tw.svg`
 	h-[5rem]
 	w-[2.15rem]
-	md:h-[9.125rem]
-	md:w-[3.9375rem]
+	md:h-[8.075rem]
+	md:w-[3.48rem]
 `;
 
 const LeftWing = styled(Wing)<{ $animate: boolean }>`
@@ -86,7 +86,7 @@ const StyledTypist = tw(Typist)`
 	font-size[3.75rem]
 	font-bold
 	whitespace-nowrap
-	md:font-size[6.5rem]
+	md:font-size[5.75rem]
 `;
 
 const StyledCursor = tw(Typist.Cursor)`
