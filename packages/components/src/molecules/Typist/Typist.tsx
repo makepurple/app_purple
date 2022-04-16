@@ -1,4 +1,4 @@
-import { useUpdateEffect } from "@makepurple/hooks";
+import { useUpdateEffect, useWindowFocus } from "@makepurple/hooks";
 import { ObjectUtils } from "@makepurple/utils";
 import ms from "ms";
 import React, { CSSProperties, FC, ReactNode, useEffect, useState } from "react";
@@ -36,12 +36,26 @@ const _Typist: FC<TypistProps> = ({
 	deleteSpeed = typingSpeed,
 	repeatDelay = typingDelay
 }) => {
+	const focused = useWindowFocus();
+
 	const [mode, setMode] = useState<"typing" | "deleting" | "paused">("typing");
 	const [index, setIndex] = useState<number>(0);
 	const [displayedSentence, setDisplayedSentence] = useState<string>("");
 
 	const sentence: string = sentences[index] ?? "";
 	const isCompleted: boolean = sentence === displayedSentence;
+
+	useEffect(() => {
+		if (!focused) {
+			setIndex(0);
+			setMode("paused");
+			setDisplayedSentence("");
+
+			return;
+		}
+
+		setMode("typing");
+	}, [focused]);
 
 	useEffect(() => {
 		if (!sentence) return;

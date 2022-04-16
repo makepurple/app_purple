@@ -12,6 +12,11 @@ const Root = tw.div`
 	md:font-size[5.75rem]
 `;
 
+const Line = tw.span`
+	flex
+	items-center
+`;
+
 export interface HomePageHeroProps {
 	className?: string;
 	style?: CSSProperties;
@@ -20,9 +25,11 @@ export interface HomePageHeroProps {
 export const HomePageHero: FC<HomePageHeroProps> = ({ className, style }) => {
 	return (
 		<Root className={className} style={style}>
-			<span>GitHub-Powered</span>
-			<span>Discovery for</span>
-			<TypistLogo sentences={["next.js", "urql", "prisma"]} />
+			<Line>Discover</Line>
+			<Line>Developers</Line>
+			<Line>
+				for <TypistLogo sentences={["next.js", "urql", "prisma"]} />
+			</Line>
 		</Root>
 	);
 };

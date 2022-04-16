@@ -49,7 +49,7 @@ const flapRight = keyframes`
 `;
 
 const Root = tw.div`
-	flex
+	inline-flex
 	items-center
 `;
 
