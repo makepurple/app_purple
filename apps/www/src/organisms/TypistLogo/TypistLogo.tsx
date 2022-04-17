@@ -85,7 +85,7 @@ const RightWing = styled(Wing)<{ $animate: boolean }>`
 const StyledTypist = tw(Typist)`
 	font-bold
 	whitespace-nowrap
-	font-size[3.375]
+	font-size[3.125]
 	md:font-size[5.75rem]
 `;
 

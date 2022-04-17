@@ -16,7 +16,7 @@ const TagLine = tw.h1`
 	items-center
 	leading-none
 	font-bold
-	font-size[3.375rem]
+	font-size[3.125rem]
 	md:font-size[5.75rem]
 `;
 
