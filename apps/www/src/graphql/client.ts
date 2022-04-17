@@ -2,7 +2,6 @@ import { WindowUtils } from "@makepurple/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
-import produce from "immer";
 import type { GetServerSidePropsContext } from "next";
 import type { Client } from "urql";
 import { createClient, dedupExchange, ssrExchange } from "urql";
@@ -21,13 +20,23 @@ export const URQL_STATE_PROP_NAME = "__URQL_STATE__";
  * Consistently determine the API URL for the current client even when in a
  * deploy preview or similar
  */
-const getApiUrl = (): string => {
+const getApiUrl = (isStatic?: boolean): string => {
 	// In the browser we just use a relative URL and everything works perfectly
 	if (process.browser) return "/api/graphql";
 
-	// Infer the deploy URL if we're in production
-	// VERCEL_URL = Vercel, DEPLOY_URL = Netlify
-	const PROVIDER_URL = process.env.API_URL || process.env.VERCEL_URL || process.env.DEPLOY_URL;
+	/**
+	 * @description
+	 * Infer the deploy URL if we're in production
+	 * VERCEL_URL = Vercel, DEPLOY_URL = Netlify
+	 *
+	 * If this is run for a static page (isStatic = true), use the hosted api, because the local
+	 * api won't be available during build-time
+	 * @author David Lee
+	 * @date April 17, 2022
+	 */
+	const PROVIDER_URL = isStatic
+		? process.env.API_URL_STATIC_BUILD
+		: process.env.API_URL || process.env.VERCEL_URL || process.env.DEPLOY_URL;
 
 	if (PROVIDER_URL) {
 		/**
@@ -48,12 +57,13 @@ let ssr: SSRExchange;
 let urqlClient: Client | null = null;
 
 export interface CreateUrqlClientParams {
+	isStatic?: boolean;
 	req?: GetServerSidePropsContext["req"];
 	ssr?: SSRExchange;
 }
 
 export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client => {
-	const { ssr: _ssr = ssrExchange({ isClient: !params.req }), req } = params;
+	const { isStatic, ssr: _ssr = ssrExchange({ isClient: !params.req }), req } = params;
 
 	if (WindowUtils.isSsr() || !urqlClient) {
 		urqlClient = createClient({
@@ -75,7 +85,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client =>
 			},
 			maskTypename: false,
 			requestPolicy: "cache-first",
-			url: getApiUrl()
+			url: getApiUrl(isStatic)
 		});
 
 		// Serialize the urqlClient to null on the client-side.
@@ -119,12 +129,10 @@ export const addUrqlState = <T extends { props: Record<string, any> }>(
 	ssrCache: SSRExchange,
 	pageProps: T
 ) => {
-	return produce(pageProps, (newPageProps) => {
-		newPageProps.props = {
-			...newPageProps.props,
+	return {
+		props: {
+			...pageProps.props,
 			[URQL_STATE_PROP_NAME]: ssrCache.extractData()
-		};
-
-		return newPageProps;
-	}) as T & { props: T["props"] & { [URQL_STATE_PROP_NAME]: SSRData } };
+		}
+	} as T & { props: T["props"] & { [URQL_STATE_PROP_NAME]: SSRData } };
 };
