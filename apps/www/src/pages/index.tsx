@@ -10,17 +10,24 @@ const Root = tw.div`
 	flex-col
 	items-center
 	w-full
-	-mt-16
 	text-center
+`;
+
+const HeroContainer = tw.div`
+	relative
+	flex
+	flex-col
+	items-center
+	justify-center
+	w-full
+	min-h-screen
+	py-24
 `;
 
 const GradientBackground = styled.div`
 	${tw`
 		absolute
 		inset-0
-		max-w-full
-		w-screen
-		min-h-screen
 		opacity-[14%]
 	`}
 	background: ${oneLine`
@@ -35,23 +42,19 @@ const GradientBackground = styled.div`
 const GridBackground = tw.div`
 	absolute
 	inset-0
-	max-w-full
-	w-screen
-	min-h-screen
 	background-image[linear-gradient(#6366f1 1.3px, transparent 1.3px), linear-gradient(to right, #6366f1 1.3px, #f8fafc 1.3px)]
 	bg-[#f8fafc]
 	opacity-10
 	background-size[1.5rem 1.5rem]
 `;
 
-const HeroContainer = tw.div`
-	flex
-	flex-col
-	items-center
-	justify-center
-	w-full
-	min-h-screen
+const RadialBackground = tw.div`
+	absolute
+	inset-0
 	background-image[radial-gradient(circle, #f8fafc 35%, #6366f100 75%)]
+`;
+
+const Hero = tw(HomePageHero)`
 	z-[1]
 `;
 
@@ -60,13 +63,16 @@ export const getStaticProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root>
-			<GradientBackground />
-			<GridBackground />
 			<HeroContainer>
-				<HomePageHero />
+				<GradientBackground />
+				<GridBackground />
+				<RadialBackground />
+				<Hero />
 			</HeroContainer>
 		</Root>
 	);
 };
+
+(Page as any).padding = false;
 
 export default Page;
