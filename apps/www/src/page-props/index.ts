@@ -7,10 +7,9 @@ import {
 	GetActivityFeedDocument,
 	GetActivityFeedQuery,
 	GetActivityFeedQueryVariables,
-	GetSkillsDocument,
-	GetSkillsQuery,
-	GetSkillsQueryVariables,
-	SortOrder
+	GetHomePageSkillsDocument,
+	GetHomePageSkillsQuery,
+	GetHomePageSkillsQueryVariables
 } from "../graphql";
 import { NextUtils } from "../utils";
 
@@ -28,18 +27,10 @@ export const pageProps = NextUtils.castStaticProps(async () => {
 			})
 			.toPromise(),
 		urqlClient
-			.query<GetSkillsQuery, GetSkillsQueryVariables>(GetSkillsDocument, {
-				after: null,
-				first: BATCH_SIZE,
-				orderBy: [
-					{ users: { _count: SortOrder.Desc } },
-					{ desiringUsers: { _count: SortOrder.Desc } },
-					{ owner: SortOrder.Desc },
-					{ name: SortOrder.Desc }
-				],
-				name: "",
-				owner: ""
-			})
+			.query<GetHomePageSkillsQuery, GetHomePageSkillsQueryVariables>(
+				GetHomePageSkillsDocument,
+				{}
+			)
 			.toPromise()
 	]);
 

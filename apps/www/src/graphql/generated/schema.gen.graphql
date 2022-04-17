@@ -19,10 +19,12 @@ type AddSkillMutationPayload implements MutationPayload {
   viewer: User
 }
 
-# The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
 scalar BigInt
 
-# The `Byte` scalar type represents byte value as a Buffer
+"""The `Byte` scalar type represents byte value as a Buffer"""
 scalar Bytes
 
 type Chat implements Node {
@@ -107,11 +109,13 @@ type CodeExample implements Node {
   upvotes: Int!
   urlSlug: String!
 
-  # How the viwer has voted on this code exmaple.
-  #
-  # true: upvoted
-  # false: downvoted
-  # null: didn't vote
+  """
+  How the viwer has voted on this code exmaple.
+  
+  true: upvoted
+  false: downvoted
+  null: didn't vote
+  """
   viewerUpvote: Boolean
 }
 
@@ -214,11 +218,13 @@ type Comment implements Node {
   upvoters(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   upvotes: Int!
 
-  # How the viewer has voted on this comment.
-  #
-  # true: upvoted
-  # false: downvoted
-  # null: didn't vote
+  """
+  How the viewer has voted on this comment.
+  
+  true: upvoted
+  false: downvoted
+  null: didn't vote
+  """
   viewerUpvote: Boolean
 }
 
@@ -235,7 +241,7 @@ type CommentCodeExamplePayload implements MutationPayload {
   viewer: User
 }
 
-# Relay-style connection for Comment types.
+"""Relay-style connection for Comment types."""
 type CommentConnection implements Connection {
   edges: [CommentEdge!]!
   nodes: [Comment!]!
@@ -243,7 +249,7 @@ type CommentConnection implements Connection {
   totalCount: Int!
 }
 
-# Relay-style edge for Comment types.
+"""Relay-style edge for Comment types."""
 type CommentEdge implements ConnectionEdge {
   cursor: String!
   node: Comment!
@@ -335,7 +341,9 @@ type CreateRepositoryPayload implements MutationPayload {
   viewer: User
 }
 
-# A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
 scalar DateTime
 
 input DateTimeNullableFilter {
@@ -421,7 +429,7 @@ type Experience implements Node {
   userId: String!
 }
 
-# Relay-style connection for Experience types.
+"""Relay-style connection for Experience types."""
 type ExperienceConnection implements Connection {
   edges: [ExperienceEdge!]!
   nodes: [Experience!]!
@@ -439,7 +447,7 @@ input ExperienceCreateInput {
   type: ExperienceType
 }
 
-# Relay-style edge for Experience types.
+"""Relay-style edge for Experience types."""
 type ExperienceEdge implements ConnectionEdge {
   cursor: String!
   node: Experience!
@@ -637,7 +645,7 @@ input GitHubRepositoryWhereUniqueInput {
   owner: String!
 }
 
-# Data for a user from that user's connected GitHub account.
+"""Data for a user from that user's connected GitHub account."""
 type GitHubUser implements GitHubRepositoryOwner {
   avatarUrl: URL!
   bio: String
@@ -701,7 +709,9 @@ type InviteToChatPayload implements MutationPayload {
   viewer: User
 }
 
-# The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
 scalar Json
 
 type LeaveChatPayload implements MutationPayload {
@@ -711,7 +721,7 @@ type LeaveChatPayload implements MutationPayload {
   viewer: User
 }
 
-# Root mutation type
+"""Root mutation type"""
 type Mutation {
   acceptFriendship(where: UserWhereUniqueInput!): AcceptFriendshipPayload!
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
@@ -722,17 +732,19 @@ type Mutation {
   createCodeExample(data: CodeExampleCreateInput!): CreateCodeExamplePayload!
   createExperience(data: ExperienceCreateInput!): CreateExperiencePayload!
 
-  # Creates a new draft if the user doesn't have a draft pending to be published already
+  """
+  Creates a new draft if the user doesn't have a draft pending to be published already
+  """
   createPost: CreatePostPayload!
   createRepository(data: RepositoryCreateInput!): CreateRepositoryPayload!
   deleteCodeExample(where: CodeExampleWhereUniqueInput!): DeleteCodeExamplePayload!
   deleteComment(where: CommentWhereUniqueInput!): DeleteCommentPayload!
 
-  # Users can delete their own experiences.
+  """Users can delete their own experiences."""
   deleteExperience(where: ExperienceWhereUniqueInput!): DeleteExperiencePayload!
   deleteFriendship(where: UserWhereUniqueInput!): DeleteFriendshipPayload!
 
-  # Users can delete their own posts.
+  """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
   deleteRepository(where: RepositoryWhereUniqueInput!): DeleteRepositoryPayload!
   deleteUser: DeleteUserPayload!
@@ -897,7 +909,7 @@ type Organization implements Node {
   name: String!
 }
 
-# Page info for relay-style pagination connections.
+"""Page info for relay-style pagination connections."""
 type PageInfo {
   endCursor: String
   hasNextPage: Boolean!
@@ -917,7 +929,9 @@ type Post implements Node {
   images: [PostImage!]!
   publishedAt: DateTime
 
-  # Estimated time in minutes it will take to read this post. Minimum 1 minute.
+  """
+  Estimated time in minutes it will take to read this post. Minimum 1 minute.
+  """
   readTime: Int!
   skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
   thumbnailUrl: String
@@ -927,11 +941,13 @@ type Post implements Node {
   upvotes: Int!
   urlSlug: String!
 
-  # How the viewer has voted on this post.
-  #
-  # true: upvoted
-  # false: downvoted
-  # null: didn't vote
+  """
+  How the viewer has voted on this post.
+  
+  true: upvoted
+  false: downvoted
+  null: didn't vote
+  """
   viewerUpvote: Boolean
   viewers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   viewersCount: Int!
@@ -942,7 +958,7 @@ input PostAuthorNameUrlSlugCompoundUniqueInput {
   urlSlug: String!
 }
 
-# Relay-style connection for Post types.
+"""Relay-style connection for Post types."""
 type PostConnection implements Connection {
   edges: [PostEdge!]!
   nodes: [Post!]!
@@ -958,7 +974,7 @@ input PostDraftUpdateInput {
   title: String
 }
 
-# Relay-style edge for Post types.
+"""Relay-style edge for Post types."""
 type PostEdge implements ConnectionEdge {
   cursor: String!
   node: Post!
@@ -1011,12 +1027,12 @@ type PublishPostPayload implements MutationPayload {
   viewer: User
 }
 
-# Root query type
+"""Root query type"""
 type Query {
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   chat(where: ChatWhereUniqueInput!): Chat
 
-  # This is to update a subscribed chat with new messages when received.
+  """This is to update a subscribed chat with new messages when received."""
   chatMessages(where: ChatMessageWhereInput!): [ChatMessage!]!
   codeExample(where: CodeExampleWhereUniqueInput!): CodeExample
   codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput!): CodeExampleConnection!
@@ -1024,21 +1040,21 @@ type Query {
   comments(after: String, before: String, first: Int, last: Int, orderBy: CommentOrderByInput, where: CommentWhereInput): CommentConnection!
   experiences(after: String, before: String, first: Int, last: Int, orderBy: [ExperienceOrderByInput!], where: ExperienceWhereInput): ExperienceConnection!
 
-  # Relay-style connection on Skill types.
+  """Relay-style connection on Skill types."""
   followableSkills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   github: GitHub!
   ok: Boolean!
 
-  # A user-created post.
+  """A user-created post."""
   post(where: PostWhereUniqueInput!): Post
   postDraft: Post
 
-  # Relay-style connection on Post types.
+  """Relay-style connection on Post types."""
   posts(after: String, before: String, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): PostConnection!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skill(where: SkillWhereUniqueInput!): Skill
 
-  # Relay-style connection on Skill types.
+  """Relay-style connection on Skill types."""
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   suggestFriends(after: String, first: Int, where: SuggestFriendsWhereInput!): UserConnection!
   suggestOrganizations(first: Int, where: SuggestOrganizationsWhereInput!): SuggestOrganizations!
@@ -1087,7 +1103,7 @@ type Repository implements Node & WithGitHubRepository {
   user: User!
 }
 
-# Relay-style connection for Repository types.
+"""Relay-style connection for Repository types."""
 type RepositoryConnection implements Connection {
   edges: [RepositoryEdge!]!
   nodes: [Repository!]!
@@ -1099,7 +1115,7 @@ input RepositoryCreateInput {
   name: String!
 }
 
-# Relay-style edge for Repository type
+"""Relay-style edge for Repository type"""
 type RepositoryEdge implements ConnectionEdge {
   cursor: String!
   node: Repository!
@@ -1213,15 +1229,19 @@ input StringNullableFilter {
 }
 
 input SuggestFriendsWhereInput {
-  # Filters suggested users by their known skills to the viewer's
-  # skills.
+  """
+  Filters suggested users by their known skills to the viewer's
+  skills.
+  """
   desiredSkills: SkillWhereInput
 
-  # Seed for pagination for PRNG-returned data
+  """Seed for pagination for PRNG-returned data"""
   seed: String
 
-  # Filters suggested users by their known skills to the viewer's
-  # desired skills.
+  """
+  Filters suggested users by their known skills to the viewer's
+  desired skills.
+  """
   skills: SkillWhereInput
 }
 
@@ -1262,30 +1282,38 @@ input SuggestSkillsWhereInput {
   owner: String
 }
 
-# One of the most used languages by a user
+"""One of the most used languages by a user"""
 type TopLanguage {
-  # The color of the language, defined by GitHub
+  """The color of the language, defined by GitHub"""
   color: String!
 
-  # The name of the language.
+  """The name of the language."""
   name: String!
 
-  # The sum of number of bytes written across all owned repositories in this language.
+  """
+  The sum of number of bytes written across all owned repositories in this language.
+  """
   size: Int!
 }
 
-# The most used languages by a user, determined by number of bytes written to repositories owned by the user on GitHub.
+"""
+The most used languages by a user, determined by number of bytes written to repositories owned by the user on GitHub.
+"""
 type TopLanguages {
   nodes: [TopLanguage!]!
 
-  # The total number of languages across all owned repositories.
+  """The total number of languages across all owned repositories."""
   totalCount: Int!
 
-  # The total number of bytes written across all owned repositories across all languages.
+  """
+  The total number of bytes written across all owned repositories across all languages.
+  """
   totalSize: Int!
 }
 
-# A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+"""
+A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+"""
 scalar URL
 
 type UnfollowSkillPayload implements MutationPayload {
@@ -1394,11 +1422,11 @@ type UpdateUserFromGitHubPayload implements MutationPayload {
   viewer: User
 }
 
-# The `Upload` scalar type represents a file upload.
+"""The `Upload` scalar type represents a file upload."""
 scalar Upload
 
 input UploadPostImageInput {
-  # The file of the image to be uploaded
+  """The file of the image to be uploaded"""
   image: Upload!
 }
 
@@ -1476,10 +1504,10 @@ type User implements Followable & Node {
   skills(after: String, before: String, first: Int, last: Int, orderBy: [SkillOrderByInput!], where: SkillWhereInput): SkillConnection!
   trophies: UserTrophies!
 
-  # Code examples this user has upvoted
+  """Code examples this user has upvoted"""
   upvotedCodeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
 
-  # Posts this user has upvoted
+  """Posts this user has upvoted"""
   upvotedPosts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   viewerCanFriend: Boolean!
   viewerFollowing: Boolean!
@@ -1612,7 +1640,7 @@ input UserActivityWhereInput {
   user: UserWhereInput
 }
 
-# Relay-style connection for User types.
+"""Relay-style connection for User types."""
 type UserConnection implements Connection {
   edges: [UserEdge!]!
   nodes: [User!]!
@@ -1620,7 +1648,7 @@ type UserConnection implements Connection {
   totalCount: Int!
 }
 
-# Relay-style edge for User types.
+"""Relay-style edge for User types."""
 type UserEdge implements ConnectionEdge {
   cursor: String!
   node: User!
@@ -1632,7 +1660,7 @@ input UserOrderByInput {
 }
 
 type UserTrophies {
-  # The id of the user who these trophies belong to
+  """The id of the user who these trophies belong to"""
   id: ID!
   totalFollowers: Int!
   totalPostViews: Int!

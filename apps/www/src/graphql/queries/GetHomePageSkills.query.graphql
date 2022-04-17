@@ -1,0 +1,94 @@
+query GetHomePageSkills {
+	github {
+		react: repository(
+			where: { name: "react", owner: "facebook" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		nextjs: repository(
+			where: { name: "next.js", owner: "vercel" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		vue: repository(
+			where: { name: "vue", owner: "vuejs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		svelte: repository(
+			where: { name: "svelte", owner: "sveltejs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		remix: repository(
+			where: { name: "remix", owner: "remix-run" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		urql: repository(
+			where: { name: "urql", owner: "FormidableLabs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		prisma: repository(
+			where: { name: "prisma", owner: "prisma" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		nexus: repository(
+			where: { name: "nexus", owner: "graphql-nexus" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		motion: repository(
+			where: { name: "motion", owner: "framer" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		apolloServer: repository(
+			where: { name: "apollo-server", owner: "apollographql" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		postgres: repository(
+			where: { name: "postgres", owner: "postgres" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		tailwindcss: repository(
+			where: { name: "tailwindcss", owner: "tailwindlabs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		styledComponents: repository(
+			where: { name: "styled-components", owner: "styled-components" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		TypeScript: repository(
+			where: { name: "TypeScript", owner: "microsoft" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		expo: repository(
+			where: { name: "expo", owner: "expo" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		supabase: repository(
+			where: { name: "supabase", owner: "supabase" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		redux: repository(
+			where: { name: "redux", owner: "reduxjs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		pnpm: repository(
+			where: { name: "pnpm", owner: "pnpm" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+	}
+}

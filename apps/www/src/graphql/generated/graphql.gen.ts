@@ -227,6 +227,10 @@ export function useGetFollowableSkillsQuery(options?: Omit<Urql.UseQueryArgs<Ope
   return Urql.useQuery<Operations.GetFollowableSkillsQuery>({ query: Operations.GetFollowableSkillsDocument, ...options });
 };
 
+export function useGetHomePageSkillsQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetHomePageSkillsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Operations.GetHomePageSkillsQuery>({ query: Operations.GetHomePageSkillsDocument, ...options });
+};
+
 export function useGetMyUserQuery(options?: Omit<Urql.UseQueryArgs<Operations.GetMyUserQueryVariables>, 'query'>) {
   return Urql.useQuery<Operations.GetMyUserQuery>({ query: Operations.GetMyUserDocument, ...options });
 };

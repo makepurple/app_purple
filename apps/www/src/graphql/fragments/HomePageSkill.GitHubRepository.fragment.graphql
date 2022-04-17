@@ -1,0 +1,10 @@
+fragment HomePageSkillGitHubRepository on GitHubRepository {
+	id
+	name
+	owner {
+		__typename
+		avatarUrl
+		id
+		login
+	}
+}
