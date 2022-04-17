@@ -25,6 +25,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 	pageProps
 }) => {
 	const isBanPage: boolean = !!(Component as any).banPage;
+	const padding: boolean = (Component as any).padding;
 
 	return (
 		<>
@@ -77,7 +78,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 								<GdprCookieConsent>
 									<GlobalGraphQL />
 									<LazyMotion>
-										<SiteWideLayout>
+										<SiteWideLayout padding={padding}>
 											{error ? fallback : <Component {...pageProps} />}
 										</SiteWideLayout>
 									</LazyMotion>
