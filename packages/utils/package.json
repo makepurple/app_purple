@@ -8,8 +8,8 @@
 	"dependencies": {
 		"@emotion/is-prop-valid": "^1.1.2",
 		"@makepurple/typings": "workspace:*",
-		"dayjs": "^1.11.0",
-		"react-hook-form": "^7.29.0"
+		"dayjs": "^1.11.1",
+		"react-hook-form": "^7.30.0"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
