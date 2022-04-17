@@ -1,4 +1,8 @@
 export class ArrayUtils {
+	public static dropFalsey<T>(array: readonly Maybe<T>[]): readonly T[] {
+		return array.filter((item) => !!item) as readonly T[];
+	}
+
 	public static dropRightWhile<T>(
 		array: readonly T[],
 		predicate: (value: T, index: number) => boolean
