@@ -6,13 +6,6 @@ import type { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
-/**
- * TODO
- * @description Find best way to update user's github information including their image and
- * description on prisma
- * @author David Lee
- * @date January 4, 2022
- */
 const authHandler: NextApiHandler = (req, res) =>
 	NextAuth(req, res, {
 		adapter: PrismaAdapter(prisma),
@@ -85,7 +78,8 @@ const authHandler: NextApiHandler = (req, res) =>
 		},
 		pages: {
 			signIn: "/login",
-			signOut: "/signup"
+			signOut: "/signup",
+			newUser: "/new-user"
 		},
 		providers: [
 			GitHubProvider({

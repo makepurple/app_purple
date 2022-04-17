@@ -83,12 +83,12 @@ export const Page: NextPage = () => {
 			<Greeting tw="mt-3">Join our community!</Greeting>
 			<Description tw="mt-6">
 				Find skilled developers.{"\n"}
-				Join GitHub-powered communities in discussing technologies, projects, best-practices
-				and much more!
+				Join other developers in discussing technologies, projects, best-practices and much
+				more!
 			</Description>
 			<SignUpButton
 				onClick={async () => {
-					await signIn("github", { callbackUrl: "/" });
+					await signIn("github");
 				}}
 				size="large"
 				type="button"
