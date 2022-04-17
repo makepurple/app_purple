@@ -77,6 +77,10 @@ const SlideTrack = styled.div<SlideTrackProps>`
 	width: ${({ $itemSize, $length }) => `calc(${$itemSize}px * ${$length * 2})`};
 	animation: ${(props) => scroll(props)} ${({ $speed }) => $speed}ms linear infinite;
 
+	&:hover {
+		animation-play-state: paused;
+	}
+
 	& > * {
 		width: ${({ $itemSize }) => $itemSize}px;
 	}
