@@ -51,6 +51,8 @@ const HeroContainer = tw.div`
 	justify-center
 	w-full
 	min-h-screen
+	background-image[radial-gradient(circle, #f8fafc 35%, #6366f100 75%)]
+	z-[1]
 `;
 
 export const getStaticProps = pageProps;
