@@ -92,7 +92,6 @@ export const Root = styled.form`
 				border-opacity-60
 				rounded-l-none
 				not-disabled:hover:translate-y-0
-				sm:bg-transparent
 			`}
 		}
 	}
