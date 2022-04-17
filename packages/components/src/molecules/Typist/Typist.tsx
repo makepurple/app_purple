@@ -4,9 +4,11 @@ import ms from "ms";
 import React, { CSSProperties, FC, ReactNode, useEffect, useState } from "react";
 import { TypistCursor } from "./TypistCursor";
 
+export type TypistMode = "typing" | "deleting" | "paused" | "halted";
+
 export interface TypistState {
 	completed: boolean;
-	mode: "typing" | "deleting" | "paused";
+	mode: TypistMode;
 }
 
 export interface TypistProps {
@@ -38,7 +40,7 @@ const _Typist: FC<TypistProps> = ({
 }) => {
 	const focused = useWindowFocus();
 
-	const [mode, setMode] = useState<"typing" | "deleting" | "paused">("typing");
+	const [mode, setMode] = useState<TypistMode>("typing");
 	const [index, setIndex] = useState<number>(0);
 	const [displayedSentence, setDisplayedSentence] = useState<string>("");
 
@@ -48,7 +50,7 @@ const _Typist: FC<TypistProps> = ({
 	useEffect(() => {
 		if (!focused) {
 			setIndex(0);
-			setMode("paused");
+			setMode("halted");
 			setDisplayedSentence("");
 
 			return;
