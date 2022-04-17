@@ -340,6 +340,7 @@ importers:
       downshift: 6.1.7_react@17.0.2
       fast-deep-equal: 3.1.3
       framer-motion: 6.3.0_react-dom@17.0.2+react@17.0.2
+      graphql: 16.3.0
       graphql-tag: 2.12.6_graphql@16.3.0
       graphql-upload: 13.0.0_graphql@16.3.0
       immer: 9.0.12
@@ -387,7 +388,6 @@ importers:
       encoding: 0.1.13
       fs-extra: 10.1.0
       glob: 8.0.1
-      graphql: 16.3.0
       next-compose-plugins: 2.2.1
       next-transpile-modules: 9.0.0
       prisma: 3.12.0
@@ -7579,7 +7579,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_ts-node@10.7.0
     dev: false
 
   /@tailwindcss/forms/0.3.4_tailwindcss@2.2.19:
@@ -7588,7 +7588,7 @@ packages:
       tailwindcss: '>=2.0.0'
     dependencies:
       mini-svg-data-uri: 1.4.3
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_ts-node@10.7.0
     dev: true
 
   /@tailwindcss/line-clamp/0.2.2_tailwindcss@2.2.19:
@@ -7596,7 +7596,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 2.2.19
+      tailwindcss: 2.2.19_ts-node@10.7.0
     dev: true
 
   /@timsuchanek/copy/1.4.5:
@@ -8462,16 +8462,6 @@ packages:
     transitivePeerDependencies:
       - encoding
     dev: true
-
-  /@urql/core/2.4.3_graphql@16.3.0:
-    resolution: {integrity: sha512-FpapxUKF0nLdzRLoB1QsudDjeLXJhBwzkzl8bSOJ6Cnj7LRRKJ+dYdqHfqGykswB/ILrkZks2Isp4a4BhqyUow==}
-    peerDependencies:
-      graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-    dependencies:
-      '@graphql-typed-document-node/core': 3.1.1_graphql@16.3.0
-      graphql: 16.3.0
-      wonka: 4.0.15
-    dev: false
 
   /@urql/core/2.4.4_graphql@16.3.0:
     resolution: {integrity: sha512-TD+OS7jG1Ts6QkpU0TZ85i/vu40r71GF0QQFDhnWFtgkHcNwnpkIwWBMa72AR3j2imBTPpk61e/xb39uM/t37A==}
@@ -9795,7 +9785,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.5
+      styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
@@ -22629,7 +22619,7 @@ packages:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
       react: '>= 16.8.0'
     dependencies:
-      '@urql/core': 2.4.3_graphql@16.3.0
+      '@urql/core': 2.4.4_graphql@16.3.0
       graphql: 16.3.0
       react: 17.0.2
       wonka: 4.0.15
