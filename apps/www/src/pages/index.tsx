@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import React from "react";
 import tw, { styled, theme } from "twin.macro";
 import { HomePageHero } from "../organisms";
+import { pageProps, PageProps } from "../page-props";
 
 const Root = tw.div`
 	flex
@@ -52,17 +53,15 @@ const HeroContainer = tw.div`
 	min-h-screen
 `;
 
-const Hero = tw(HomePageHero)`
+export const getStaticProps = pageProps;
 
-`;
-
-export const Page: NextPage = () => {
+export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root>
 			<GradientBackground />
 			<GridBackground />
 			<HeroContainer>
-				<Hero />
+				<HomePageHero />
 			</HeroContainer>
 		</Root>
 	);

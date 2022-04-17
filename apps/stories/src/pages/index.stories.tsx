@@ -4,6 +4,7 @@ import {
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock
 } from "@makepurple/www/src/graphql/mocks";
+import type { PageProps } from "@makepurple/www/src/page-props";
 import { Page } from "@makepurple/www/src/pages";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -22,7 +23,7 @@ export default {
 	]
 } as Meta;
 
-const Template: Story = (args) => {
+const Template: Story<PageProps> = (args) => {
 	return <Page {...args} />;
 };
 Template.args = {};
