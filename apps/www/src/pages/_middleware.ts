@@ -10,7 +10,6 @@ const middleware: NextMiddleware = (req: NextRequest) => {
 
 	if (pathname.startsWith("/api")) return NextResponse.next();
 	if (pathname.startsWith("/banned")) return NextResponse.next();
-	if (pathname.startsWith("/rate-limited")) return NextResponse.next();
 
 	const country = req.geo?.country;
 	const acceptGdprConsent = !!country && !isEuMember(country);
