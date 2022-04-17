@@ -16,7 +16,7 @@ export default {
 	component: Page,
 	decorators: [
 		(Story) => (
-			<SiteWideLayout>
+			<SiteWideLayout padding={false}>
 				<Story />
 			</SiteWideLayout>
 		)

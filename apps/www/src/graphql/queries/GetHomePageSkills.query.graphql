@@ -90,5 +90,15 @@ query GetHomePageSkills {
 		) {
 			...HomePageSkillGitHubRepository
 		}
+		reactThreeFiber: repository(
+			where: { name: "react-three-fiber", owner: "pmndrs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		storybook: repository(
+			where: { name: "storybook", owner: "storybookjs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
 	}
 }

@@ -5,6 +5,7 @@ export * from "./GetCodeExample.query.mock";
 export * from "./GetCodeExampleComments.query.mock";
 export * from "./GetCommentReplies.query.mock";
 export * from "./GetFollowableSkills.query.mock";
+export * from "./GetHomePageSkills.query.mock";
 export * from "./GetMyUser.query.mock";
 export * from "./GetNotificationCounts.query.mock";
 export * from "./GetNotifications.query.mock";
