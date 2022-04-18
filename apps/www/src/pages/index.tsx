@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import tw from "twin.macro";
-import { HomePageHero } from "../organisms";
+import { HomePageHero, HomePageSkillsSection } from "../organisms";
 import { pageProps, PageProps } from "../page-props";
 
 const Root = tw.div`
@@ -18,6 +18,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root>
 			<HomePageHero />
+			<HomePageSkillsSection />
 		</Root>
 	);
 };

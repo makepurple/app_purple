@@ -1,4 +1,4 @@
-import { Button } from "@makepurple/components";
+import { Button, PageContainer } from "@makepurple/components";
 import { oneLine } from "common-tags";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
@@ -14,6 +14,9 @@ const Root = tw.div`
 	w-full
 	min-h-screen
 	py-24
+	border-b
+	border-solid
+	border-gray-300/80
 `;
 
 const GradientBackground = styled.div`
@@ -68,7 +71,7 @@ const Line = tw.span`
 	items-center
 `;
 
-const Info = tw.h2`
+const Info = tw(PageContainer)`
 	max-width[24rem]
 	text-lg
 	font-semibold
@@ -101,7 +104,9 @@ export const HomePageHero: FC<HomePageHeroProps> = ({ className, style }) => {
 						for <TypistLogo sentences={["next.js", "urql", "prisma"]} />
 					</Line>
 				</TagLine>
-				<Info tw="mt-5 md:mt-10">Developer profiles powered-by GitHub discoverability</Info>
+				<Info as="h2" tw="mt-5 md:mt-10">
+					Developer profiles powered-by GitHub discoverability
+				</Info>
 				<NextLink href="/signup" passHref>
 					<SignUpButton as="a" size="large" type="button" tw="mt-5 md:mt-10">
 						<span>Get Started</span>

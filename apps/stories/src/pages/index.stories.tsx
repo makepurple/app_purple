@@ -1,5 +1,6 @@
 import { SiteWideLayout } from "@makepurple/www";
 import {
+	GetHomePageSkills_mock,
 	GetNotificationCounts_mock,
 	GetPostDraft_mock,
 	GetSiteWideSideDrawer_mock
@@ -35,6 +36,8 @@ Template.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
+			case "GetHomePageSkills":
+				return { data: GetHomePageSkills_mock };
 			case "GetNotificationCounts":
 				return { data: GetNotificationCounts_mock };
 			case "GetPostDraft":
