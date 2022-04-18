@@ -5,17 +5,15 @@ import tw, { css, styled } from "twin.macro";
 
 interface SlideTrackProps {
 	$direction: "left" | "right";
-	$itemSize: number;
-	$length: number;
 	$speed: number;
 }
 
-const scroll = ({ $direction, $itemSize, $length }: SlideTrackProps) => {
+const scroll = ({ $direction }: SlideTrackProps) => {
 	const start = css`
-		transform: translateX(0);
+		transform: translate3d(0, 0, 0);
 	`;
 	const end = css`
-		transform: translateX(calc(-${$itemSize}px * ${$length}));
+		transform: translate3d(-50%, 0, 0);
 	`;
 
 	return keyframes`
@@ -29,7 +27,7 @@ const scroll = ({ $direction, $itemSize, $length }: SlideTrackProps) => {
 	`;
 };
 
-const Root = styled.div<{ $itemSize: number }>`
+const Root = styled.div`
 	${tw`
 		relative
 		overflow-hidden
@@ -39,10 +37,11 @@ const Root = styled.div<{ $itemSize: number }>`
 		${tw`
 			absolute
 			inset-y-0
+			pointer-events-none
 			z-[1]
 		`}
 		content: "";
-		width: ${({ $itemSize }) => 0.8 * $itemSize}px;
+		width: 10rem;
 	}
 
 	&::before {
@@ -74,7 +73,7 @@ const SlideTrack = styled.div<SlideTrackProps>`
 		items-center
 		h-full
 	`}
-	width: ${({ $itemSize, $length }) => `calc(${$itemSize}px * ${$length * 2})`};
+	width: max-content;
 	animation: ${(props) => scroll(props)} ${({ $speed }) => $speed}ms linear infinite;
 
 	&:hover {
@@ -82,7 +81,9 @@ const SlideTrack = styled.div<SlideTrackProps>`
 	}
 
 	& > * {
-		width: ${({ $itemSize }) => $itemSize}px;
+		${tw`
+			flex-shrink-0
+		`}
 	}
 `;
 
@@ -90,7 +91,6 @@ export interface InfiniteAutoplayCarouselProps {
 	children: ReactElement[];
 	className?: string;
 	direction?: "left" | "right";
-	itemSize: number;
 	speed?: number;
 	style?: CSSProperties;
 }
@@ -99,18 +99,12 @@ export const InfiniteAutoplayCarousel: FC<InfiniteAutoplayCarouselProps> = ({
 	children,
 	className,
 	direction = "left",
-	itemSize,
-	speed = ms("45s"),
+	speed = ms("30s"),
 	style
 }) => {
 	return (
-		<Root className={className} style={style} $itemSize={itemSize}>
-			<SlideTrack
-				$direction={direction}
-				$itemSize={itemSize}
-				$length={children.length}
-				$speed={speed}
-			>
+		<Root className={className} style={style}>
+			<SlideTrack $direction={direction} $speed={speed}>
 				{children}
 				{children}
 			</SlideTrack>

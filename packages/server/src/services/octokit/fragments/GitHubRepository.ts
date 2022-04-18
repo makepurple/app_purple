@@ -1,7 +1,9 @@
 import { gql } from "../gql";
 import { GitHubLanguage } from "./GitHubLanguage";
 import { GitHubLicense } from "./GitHubLicense";
+import { GitHubOrganization } from "./GitHubOrganizaztion";
 import { GitHubRepositoryOwner } from "./GitHubRepositoryOwner";
+import { GitHubUser } from "./GitHubUser";
 
 export const GitHubRepository = gql`
 	fragment GitHubRepository on Repository {
@@ -19,6 +21,12 @@ export const GitHubRepository = gql`
 			__typename
 			id
 			...GitHubRepositoryOwner
+			... on Organization {
+				...GitHubOrganization
+			}
+			... on User {
+				...GitHubUser
+			}
 		}
 		primaryLanguage {
 			...GitHubLanguage
@@ -35,5 +43,7 @@ export const GitHubRepository = gql`
 	}
 	${GitHubLanguage}
 	${GitHubLicense}
+	${GitHubOrganization}
 	${GitHubRepositoryOwner}
+	${GitHubUser}
 `;

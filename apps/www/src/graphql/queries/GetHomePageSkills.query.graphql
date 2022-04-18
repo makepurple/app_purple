@@ -100,5 +100,35 @@ query GetHomePageSkills {
 		) {
 			...HomePageSkillGitHubRepository
 		}
+		d3: repository(
+			where: { name: "d3", owner: "d3" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		lerna: repository(
+			where: { name: "lerna", owner: "lerna" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		vitess: repository(
+			where: { name: "vitess", owner: "vitessio" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		gatsby: repository(
+			where: { name: "gatsby", owner: "gatsbyjs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		kubernetes: repository(
+			where: { name: "kubernetes", owner: "kubernetes" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
+		nest: repository(
+			where: { name: "nest", owner: "nestjs" }
+		) {
+			...HomePageSkillGitHubRepository
+		}
 	}
 }

@@ -12,7 +12,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/69631?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjY5NjMx",
-				login: "facebook"
+				login: "facebook",
+				name: "Meta"
 			}
 		},
 		nextjs: {
@@ -23,7 +24,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/14985020?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjE0OTg1MDIw",
-				login: "vercel"
+				login: "vercel",
+				name: "Vercel"
 			}
 		},
 		vue: {
@@ -34,7 +36,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/6128107?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjYxMjgxMDc=",
-				login: "vuejs"
+				login: "vuejs",
+				name: "vuejs"
 			}
 		},
 		svelte: {
@@ -45,7 +48,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/23617963?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjIzNjE3OTYz",
-				login: "sveltejs"
+				login: "sveltejs",
+				name: "Svelte"
 			}
 		},
 		remix: {
@@ -56,7 +60,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/64235328?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjY0MjM1MzI4",
-				login: "remix-run"
+				login: "remix-run",
+				name: "Remix"
 			}
 		},
 		urql: {
@@ -67,7 +72,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/5078602?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjUwNzg2MDI=",
-				login: "FormidableLabs"
+				login: "FormidableLabs",
+				name: "Formidable"
 			}
 		},
 		prisma: {
@@ -78,7 +84,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/17219288?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjE3MjE5Mjg4",
-				login: "prisma"
+				login: "prisma",
+				name: "Prisma"
 			}
 		},
 		nexus: {
@@ -89,7 +96,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/45704111?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjQ1NzA0MTEx",
-				login: "graphql-nexus"
+				login: "graphql-nexus",
+				name: "GraphQL Nexus"
 			}
 		},
 		motion: {
@@ -100,7 +108,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/42876?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjQyODc2",
-				login: "framer"
+				login: "framer",
+				name: "Framer"
 			}
 		},
 		apolloServer: {
@@ -111,7 +120,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/17189275?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjE3MTg5Mjc1",
-				login: "apollographql"
+				login: "apollographql",
+				name: "Apollo GraphQL"
 			}
 		},
 		postgres: {
@@ -122,7 +132,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/177543?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjE3NzU0Mw==",
-				login: "postgres"
+				login: "postgres",
+				name: "PostgreSQL"
 			}
 		},
 		tailwindcss: {
@@ -133,7 +144,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/67109815?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjY3MTA5ODE1",
-				login: "tailwindlabs"
+				login: "tailwindlabs",
+				name: "Tailwind Labs"
 			}
 		},
 		styledComponents: {
@@ -144,7 +156,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/20658825?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjIwNjU4ODI1",
-				login: "styled-components"
+				login: "styled-components",
+				name: "styled-components"
 			}
 		},
 		TypeScript: {
@@ -155,7 +168,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/6154722?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjYxNTQ3MjI=",
-				login: "microsoft"
+				login: "microsoft",
+				name: "Microsoft"
 			}
 		},
 		expo: {
@@ -166,7 +180,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/12504344?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjEyNTA0MzQ0",
-				login: "expo"
+				login: "expo",
+				name: "Expo"
 			}
 		},
 		supabase: {
@@ -177,7 +192,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/54469796?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjU0NDY5Nzk2",
-				login: "supabase"
+				login: "supabase",
+				name: "Supabase"
 			}
 		},
 		redux: {
@@ -188,7 +204,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/13142323?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjEzMTQyMzIz",
-				login: "reduxjs"
+				login: "reduxjs",
+				name: "Redux"
 			}
 		},
 		pnpm: {
@@ -199,7 +216,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/21320719?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjIxMzIwNzE5",
-				login: "pnpm"
+				login: "pnpm",
+				name: "pnpm"
 			}
 		},
 		reactThreeFiber: {
@@ -210,7 +228,8 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/45790596?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjQ1NzkwNTk2",
-				login: "pmndrs"
+				login: "pmndrs",
+				name: "Poimandres"
 			}
 		},
 		storybook: {
@@ -221,7 +240,80 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				__typename: "GitHubOrganization",
 				avatarUrl: "https://avatars.githubusercontent.com/u/22632046?v=4",
 				id: "MDEyOk9yZ2FuaXphdGlvbjIyNjMyMDQ2",
-				login: "storybookjs"
+				login: "storybookjs",
+				name: "Storybook"
+			}
+		},
+		d3: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnk5NDMxNDk=",
+			name: "d3",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/1562726?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjE1NjI3MjY=",
+				login: "d3",
+				name: "D3"
+			}
+		},
+		lerna: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnk0NzM5NDc3Ng==",
+			name: "lerna",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/19333396?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjE5MzMzMzk2",
+				login: "lerna",
+				name: "Lerna"
+			}
+		},
+		vitess: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnkxMTAwODIwNw==",
+			name: "vitess",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/33043890?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjMzMDQzODkw",
+				login: "vitessio",
+				name: "Vitess"
+			}
+		},
+		gatsby: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnkzNjA0MDg5NA==",
+			name: "gatsby",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/12551863?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjEyNTUxODYz",
+				login: "gatsbyjs",
+				name: "Gatsby"
+			}
+		},
+		kubernetes: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnkyMDU4MDQ5OA==",
+			name: "kubernetes",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/13629408?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjEzNjI5NDA4",
+				login: "kubernetes",
+				name: "Kubernetes"
+			}
+		},
+		nest: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnk4MDk0NTQyOA==",
+			name: "nest",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/28507035?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjI4NTA3MDM1",
+				login: "nestjs",
+				name: "nestjs"
 			}
 		}
 	}

@@ -6,5 +6,11 @@ fragment HomePageSkillGitHubRepository on GitHubRepository {
 		avatarUrl
 		id
 		login
+		... on GitHubOrganization {
+			name
+		}
+		... on GitHubUser {
+			name
+		}
 	}
 }
