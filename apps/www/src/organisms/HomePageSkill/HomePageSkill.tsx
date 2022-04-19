@@ -56,7 +56,7 @@ export const HomePageSkill: FC<HomePageSkillProps> = ({ className, repository, s
 		>
 			<Root className={className} style={style}>
 				<StyledAvatar border={4}>
-					<GitHubAvatarImage src={owner.avatarUrl} height={48} width={48} />
+					<GitHubAvatarImage src={owner.avatarUrl} height={56} width={56} />
 				</StyledAvatar>
 				<Info tw="ml-3">
 					<SkillName>{repository.name}</SkillName>

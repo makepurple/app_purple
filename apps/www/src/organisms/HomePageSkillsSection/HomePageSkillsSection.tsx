@@ -8,10 +8,10 @@ const Root = tw.div`
 	flex
 	flex-col
 	items-center
-	pt-24
-	pb-28
 	w-screen
 	max-w-full
+	pt-24
+	pb-28
 `;
 
 const Title = styled(PageContainer)`

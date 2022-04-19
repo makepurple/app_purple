@@ -23,6 +23,7 @@ export * from "./FriendAutosuggest";
 export * from "./GdprCookieConsent";
 export * from "./GlobalGraphQL";
 export * from "./HomePageHero";
+export * from "./HomePageProfileSection";
 export * from "./HomePageSkill";
 export * from "./HomePageSkillsCarousel";
 export * from "./HomePageSkillsSection";
