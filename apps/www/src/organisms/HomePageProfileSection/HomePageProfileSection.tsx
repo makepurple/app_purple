@@ -122,6 +122,7 @@ const UgcItems = tw(PageContainer)`
 	gap-6
 	max-w-full
 	max-height[40rem]
+	text-left
 `;
 
 const StyledPostCard = tw(PostCard)`
@@ -151,7 +152,6 @@ const Post2Card = tw(StyledPostCard)`
 const StyledCodeBlock = tw(CodeBlock)`
 	w-full
 	shadow-lg
-	text-left
 	z-[1]
 `;
 
