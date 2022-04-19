@@ -121,7 +121,6 @@ const UgcItems = tw(PageContainer)`
 	items-center
 	gap-6
 	max-w-full
-	max-height[40rem]
 	text-left
 `;
 
