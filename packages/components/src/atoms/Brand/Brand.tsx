@@ -1,5 +1,6 @@
 import { config } from "@makepurple/config";
 import { InferComponentProps } from "@makepurple/typings";
+import { StyleUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import NextLink from "next/link";
 import React, { forwardRef } from "react";
@@ -35,7 +36,7 @@ export const Brand = forwardRef<HTMLAnchorElement, BrandProps>((props, ref) => {
 
 	if (!asLink || !href) {
 		return (
-			<Root as="div" {...(restProps as any)} ref={ref as any}>
+			<Root as="div" {...StyleUtils.filterHTMLProps(restProps)} ref={ref as any}>
 				{config.brand}
 			</Root>
 		);
@@ -43,7 +44,7 @@ export const Brand = forwardRef<HTMLAnchorElement, BrandProps>((props, ref) => {
 
 	return (
 		<NextLink href={href} passHref>
-			<Root {...restProps} ref={ref}>
+			<Root {...StyleUtils.filterHTMLProps(restProps)} ref={ref}>
 				{config.brand}
 			</Root>
 		</NextLink>
