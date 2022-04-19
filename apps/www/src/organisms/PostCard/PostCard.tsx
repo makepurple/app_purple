@@ -88,6 +88,7 @@ const AuthorName = tw(Anchor)`
 const PostedDetails = tw.div`
 	flex
 	flex-row
+	flex-wrap
 	items-center
 	
 `;
@@ -100,11 +101,13 @@ const Delimiter = tw.span`
 const PublishedAt = tw.span`
 	text-base
 	text-gray-500
+	whitespace-nowrap
 `;
 
 const ReadTime = tw.span`
 	text-base
 	text-gray-500
+	whitespace-nowrap
 `;
 
 const Actions = tw.div`
