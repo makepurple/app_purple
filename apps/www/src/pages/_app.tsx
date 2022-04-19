@@ -7,12 +7,13 @@ import type { AppContext, AppInitialProps, AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import NextHead from "next/head";
 import React from "react";
-import { GdprCookieConsent, GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
+import { GlobalGraphQL, SiteWideLayout, UrqlProvider } from "../organisms";
 
 import "tippy.js/dist/tippy.css";
 
 const ErrorPage = dynamic(() => import("./500"));
 
+const GdprCookieConsent = dynamic(() => import("../organisms/GdprCookieConsent"), { ssr: false });
 const NextProgressBar = dynamic<NextProgressBarProps>(
 	() => import("@makepurple/components").then((mod) => mod.NextProgressBar),
 	{ ssr: false }
