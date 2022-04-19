@@ -9,7 +9,7 @@ import { HomePageSkill } from "../HomePageSkill";
 const Root = tw.div`
 	flex
 	flex-col
-	gap-4
+	gap-6
 `;
 
 const Skill = tw(HomePageSkill)`

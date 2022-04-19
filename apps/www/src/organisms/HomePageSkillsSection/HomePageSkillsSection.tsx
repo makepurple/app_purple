@@ -8,7 +8,8 @@ const Root = tw.div`
 	flex
 	flex-col
 	items-center
-	py-24
+	pt-24
+	pb-28
 	w-screen
 	max-w-full
 `;
