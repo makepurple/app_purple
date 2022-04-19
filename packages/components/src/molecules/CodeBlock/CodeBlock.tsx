@@ -224,6 +224,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
 							toast.success("Copied!");
 						}}
 						type="button"
+						aria-label="copy code"
 					>
 						<CopyIcon height={24} width={24} />
 					</ActionButton>

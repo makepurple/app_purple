@@ -72,12 +72,17 @@ const Line = tw.span`
 `;
 
 const Info = tw(PageContainer)`
-	max-width[24rem]
+	inline-block
+	max-width[26rem]
 	text-lg
 	font-semibold
 	text-gray-500
 	text-center
 	md:text-2xl
+`;
+
+const PoweredBy = tw.span`
+	whitespace-nowrap
 `;
 
 const SignUpButton = tw(Button)`
@@ -105,7 +110,7 @@ export const HomePageHero: FC<HomePageHeroProps> = ({ className, style }) => {
 					</Line>
 				</TagLine>
 				<Info as="h2" tw="mt-5 md:mt-10">
-					Developer profiles powered-by GitHub discoverability
+					Developer profiles <PoweredBy>powered-by</PoweredBy> GitHub discoverability
 				</Info>
 				<NextLink href="/signup" passHref>
 					<SignUpButton as="a" size="large" type="button" tw="mt-5 md:mt-10">
