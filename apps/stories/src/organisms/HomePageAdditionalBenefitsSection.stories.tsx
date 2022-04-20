@@ -14,6 +14,10 @@ const Template: Story<HomePageAdditionalBenefitsSectionProps> = (args) => {
 	return <HomePageAdditionalBenefitsSection {...args} />;
 };
 Template.args = {};
+Template.parameters = {
+	layout: "fullscreen"
+};
 
 export const Standard = Template.bind({});
 Standard.args = { ...Template.args };
+Standard.parameters = { ...Template.parameters };
