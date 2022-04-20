@@ -188,8 +188,8 @@ export const HomePageAdditionalBenefitsSection = memo<HomePageAdditionalBenefits
 					<BenefitCard>
 						<Title>And more to come...</Title>
 						<Info>
-							MakePurple only touches the surface of developer discoverability. More
-							features to come, as more becomes learned.
+							We&apos;ll continue to improve MakePurple over time with new features as
+							we learn about developer discoverability. Stay tuned!
 						</Info>
 					</BenefitCard>
 				</Benefits>
