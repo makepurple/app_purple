@@ -3,8 +3,6 @@ import { dayjs } from "@makepurple/utils";
 import { codeBlock, oneLine } from "common-tags";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled, theme } from "twin.macro";
-import post1Thumbnail from "../../../public/static/jpegs/demo-post-thumbnail.jpg";
-import post2Thumbnail from "../../../public/static/pngs/demo-post-2-thumbnail.png";
 import { PostCard } from "../PostCard";
 
 const post1Skills = ["next.js", "prisma", "nexus", "urql", "TypeScript", "pnpm", "turborepo"].map(
@@ -201,7 +199,7 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 							})),
 							nodes: post1Skills
 						},
-						thumbnailUrl: post1Thumbnail as any,
+						thumbnailUrl: "/static/jpegs/demo-post-thumbnail.jpg",
 						title: "How MakePurple Works",
 						upvotes: 12,
 						urlSlug: "posts"
@@ -233,7 +231,7 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 							})),
 							nodes: post2Skills
 						},
-						thumbnailUrl: post2Thumbnail as any,
+						thumbnailUrl: "/static/pngs/demo-post-2-thumbnail.png",
 						title: "Consumer-First GraphQL API Design",
 						upvotes: 27,
 						urlSlug: "posts"
