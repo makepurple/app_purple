@@ -27,7 +27,34 @@ export class ArrayUtils {
 		return start === -1 ? [] : array.slice(start);
 	}
 
+	public static move<T>(array: readonly T[], from: number, to: number): readonly T[] {
+		const newArray: T[] = [...array];
+
+		const startIndex = to < 0 ? newArray.length + to : to;
+
+		if (startIndex >= 0 && startIndex < newArray.length) {
+			const item: T = newArray.splice(from, 1)[0];
+
+			newArray.splice(startIndex, 0, item);
+		}
+
+		return newArray;
+	}
+
 	public static shuffle<T>(array: readonly T[]): readonly T[] {
 		return array.slice().sort(() => Math.random() - 0.5);
+	}
+
+	public static swap<T>(array: readonly T[], from: number, to: number): readonly T[] {
+		const outOfBounds = from >= array.length || to >= array.length;
+
+		if (outOfBounds) throw new Error("Array index out of bounds");
+
+		const newArray: T[] = [...array];
+
+		newArray[to] = array[from];
+		newArray[from] = array[to];
+
+		return newArray;
 	}
 }
