@@ -53,6 +53,7 @@ const Root = tw.div`
 	items-center
 	w-screen
 	max-w-full
+	overflow-x-hidden
 	pt-24
 	pb-28
 	bg-indigo-500/10

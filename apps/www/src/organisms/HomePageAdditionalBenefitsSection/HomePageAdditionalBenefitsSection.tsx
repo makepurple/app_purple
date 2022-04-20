@@ -11,6 +11,7 @@ const Root = tw.div`
 	justify-center
 	w-screen
 	max-w-full
+	overflow-x-hidden
 	pt-24
 	pb-28
 `;
@@ -189,7 +190,7 @@ export const HomePageAdditionalBenefitsSection = memo<HomePageAdditionalBenefits
 						<Title>And more to come...</Title>
 						<Info>
 							We&apos;ll continue to improve MakePurple over time with new features as
-							we learn about developer discoverability. Stay tuned!
+							we learn more about developer discoverability. Stay tuned!
 						</Info>
 					</BenefitCard>
 				</Benefits>
