@@ -200,7 +200,7 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 							})),
 							nodes: post1Skills
 						},
-						thumbnailUrl: "/static/jpegs/demo-post-thumbnail.jpg",
+						thumbnailUrl: "/static/pngs/demo-post-thumbnail.png",
 						title: "How MakePurple Works",
 						upvotes: 12,
 						urlSlug: "posts"
