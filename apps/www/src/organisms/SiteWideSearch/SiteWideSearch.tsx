@@ -215,6 +215,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						<OwnerSearch
 							{...ownerBox.getInputProps({
 								ref: ownerInputRef,
+								disabled,
 								onBlur,
 								onChange: () => {
 									skillBox.closeMenu();
@@ -237,6 +238,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						<SkillSearch
 							{...skillBox.getInputProps({
 								ref: skillInputRef,
+								disabled,
 								onBlur,
 								onChange: () => {
 									ownerBox.closeMenu();
