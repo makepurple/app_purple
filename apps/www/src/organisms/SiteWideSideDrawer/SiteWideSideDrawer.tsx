@@ -143,7 +143,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 				{status === "unauthenticated" && (
 					<AuthContainer>
 						<AuthInfo>
-							<AuthBrand /> is a community where developers collaborate, share and
+							<AuthBrand /> is a community where developers can discover, share and
 							mutually grow.
 						</AuthInfo>
 						<NextLink href="/signup" passHref>
