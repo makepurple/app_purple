@@ -22,6 +22,7 @@ export * from "./ExperienceCard";
 export * from "./FriendAutosuggest";
 export * from "./GdprCookieConsent";
 export * from "./GlobalGraphQL";
+export * from "./HomePage3dSkill";
 export * from "./HomePageAdditionalBenefitsSection";
 export * from "./HomePageHero";
 export * from "./HomePageProfileSection";
