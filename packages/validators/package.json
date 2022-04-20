@@ -6,7 +6,8 @@
 	"types": "src/index.ts",
 	"dependencies": {
 		"@makepurple/utils": "workspace:*",
-		"computed-types": "^1.11.2"
+		"computed-types": "^1.11.2",
+		"slate": "^0.77.0"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",

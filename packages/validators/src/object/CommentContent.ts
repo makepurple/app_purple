@@ -1,6 +1,9 @@
 import { ArrayUtils } from "@makepurple/utils";
 import Schema, { array, boolean, string, Type } from "computed-types";
+import { Node as SlateNode } from "slate";
 import { CodeBlockType } from "./DocumentEditorValue";
+
+const MAX_CONTENT_LENGTH = 4_096;
 
 const CustomText = Schema({
 	bold: boolean.strictOptional(),
@@ -83,6 +86,13 @@ const schema = array
 		const trimEnd = ArrayUtils.dropRightWhile(trimStart, (element) => isAllWhitespace(element));
 
 		return trimEnd.slice();
+	})
+	.test((value) => {
+		const totalLength = value.reduce((len, node) => len + SlateNode.string(node).length, 0);
+
+		if (totalLength >= MAX_CONTENT_LENGTH) throw new Error("Content is too long!");
+
+		return value;
 	})
 	.test((value) => {
 		if (!value.length) throw new Error("Content cannot be blank");
