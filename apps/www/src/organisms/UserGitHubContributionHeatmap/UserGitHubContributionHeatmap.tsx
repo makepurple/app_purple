@@ -37,10 +37,6 @@ const StyledLogo = tw(Logo)`
 	w-14
 `;
 
-const Rect = tw.rect`
-	cursor-pointer
-`;
-
 export interface UserGitHubContributionHeatmapProps {
 	className?: string;
 	contributionCalendar: UserGitHubContributionHeatmapGitHubUserContributionCalendarFragment;
@@ -197,7 +193,7 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 														key={`${bin.row}:${bin.column}`}
 														content={`${count.toLocaleString()} contributions on ${date}`}
 													>
-														<Rect
+														<rect
 															width={Math.max(bin.width, 0)}
 															height={Math.max(bin.height, 0)}
 															x={bin.x + GAP / 2}
@@ -208,9 +204,6 @@ export const UserGitHubContributionHeatmap = memo<UserGitHubContributionHeatmapP
 															fill={!count ? "#aaa" : getColor(level)}
 															fillOpacity={!count ? 0.3 : 0.8}
 															rx={2}
-															onClick={() => {
-																alert(JSON.stringify(datum));
-															}}
 														/>
 													</Tooltip>
 												);
