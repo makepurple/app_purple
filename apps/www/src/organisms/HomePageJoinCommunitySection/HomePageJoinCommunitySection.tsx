@@ -1,8 +1,9 @@
 import { Button, PageContainer, Paper } from "@makepurple/components";
+import { useIntersectionObserver } from "@makepurple/hooks";
 import { oneLine } from "common-tags";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, useRef } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { LogoCurrentColor } from "../../svgs";
 
@@ -86,9 +87,16 @@ export const HomePageJoinCommunitySection: FC<HomePageJoinCommunitySectionProps>
 	className,
 	style
 }) => {
+	const rootRef = useRef<HTMLDivElement>(null);
+	const intersection = useIntersectionObserver(rootRef, {
+		threshold: [0, 0]
+	});
+
+	const isIntersecting = intersection?.isIntersecting;
+
 	return (
-		<Root className={className} style={style}>
-			<Globe />
+		<Root ref={rootRef} className={className} style={style}>
+			{isIntersecting && <Globe />}
 			<Content>
 				<LogoCurrentColor height={64} width={64} />
 				<Title tw="mt-4">Join the MakePurple Community</Title>
