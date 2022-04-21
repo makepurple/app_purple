@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import {
 	HomePageAdditionalBenefitsSection,
 	HomePageHero,
+	HomePageJoinCommunitySection,
 	HomePageProfileSection,
 	HomePageSkillsSection
 } from "../organisms";
@@ -26,6 +27,7 @@ export const Page: NextPage<PageProps> = () => {
 			<HomePageSkillsSection />
 			<HomePageProfileSection />
 			<HomePageAdditionalBenefitsSection />
+			<HomePageJoinCommunitySection />
 		</Root>
 	);
 };

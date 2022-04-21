@@ -20,7 +20,8 @@ const Root = styled.a`
 			-80deg,
 			${theme`colors.pink.600`},
 			${theme`colors.violet.600`},
-			${theme`colors.blue.500`})
+			${theme`colors.blue.500`}
+		)
 	`};
 	background-clip: text;
 	-webkit-background-clip: text;

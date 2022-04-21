@@ -14,6 +14,9 @@ const Root = tw.div`
 	overflow-x-hidden
 	pt-24
 	pb-28
+	border-b
+	border-solid
+	border-gray-300/80
 `;
 
 const Benefits = tw(PageContainer)`

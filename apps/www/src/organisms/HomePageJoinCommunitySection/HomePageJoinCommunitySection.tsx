@@ -1,25 +1,26 @@
-import { PageContainer, Paper } from "@makepurple/components";
+import { Button, PageContainer, Paper } from "@makepurple/components";
 import { oneLine } from "common-tags";
 import dynamic from "next/dynamic";
+import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { LogoCurrentColor } from "../../svgs";
 
 const HomePageGlobe = dynamic(() => import("../HomePageGlobe"), { ssr: false });
 
-const Root = tw(PageContainer)`
-	relative
-	flex
-	items-center
-	justify-center
-	min-height[496px]
-	w-screen
-	max-w-full
-	overflow-hidden
-	py-24
-	border
-	border-solid
-	border-red-500
+const Root = styled(PageContainer)`
+	${tw`
+		relative
+		flex
+		items-center
+		justify-center
+		min-height[496px]
+		w-screen
+		max-w-full
+		overflow-hidden
+		py-24
+	`}
+	background: linear-gradient(to bottom, #fff 35%, #4f46e530 65%)
 `;
 
 const Globe = tw(HomePageGlobe)`
@@ -56,23 +57,24 @@ const Content = styled(Paper)`
 		xl:py-12
 	`}
 	background: ${oneLine`
-	linear-gradient(
-		-42deg,
-		${theme`colors.pink.600`},
-		${theme`colors.violet.600`},
-		${theme`colors.blue.500`})
+		linear-gradient(
+			-42deg,
+			${theme`colors.pink.600`},
+			${theme`colors.violet.600`},
+			${theme`colors.blue.500`}
+		)
 	`};
 `;
-
-const Logo = tw(LogoCurrentColor)``;
 
 const Title = tw.h2`
 	text-4xl
 	font-bold
 `;
 
-const Info = tw.div`
-
+const SignUpButton = tw(Button)`
+	w-full
+	max-width[16rem]
+	bg-white
 `;
 
 export interface HomePageJoinCommunitySectionProps {
@@ -90,6 +92,11 @@ export const HomePageJoinCommunitySection: FC<HomePageJoinCommunitySectionProps>
 			<Content>
 				<LogoCurrentColor height={64} width={64} />
 				<Title tw="mt-4">Join the MakePurple Community</Title>
+				<NextLink href="/signup" passHref>
+					<SignUpButton as="a" size="large" variant="secondary" tw="mt-8">
+						Get Started
+					</SignUpButton>
+				</NextLink>
 			</Content>
 		</Root>
 	);
