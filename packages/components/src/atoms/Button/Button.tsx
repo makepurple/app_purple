@@ -84,6 +84,7 @@ export const Button = styled.button<{
 					px-4
 					py-3.5
 					text-lg
+					font-bold
 				`;
 			case "small":
 				return tw`
