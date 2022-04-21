@@ -24,6 +24,7 @@ export * from "./GdprCookieConsent";
 export * from "./GlobalGraphQL";
 export * from "./HomePage3dSkill";
 export * from "./HomePageAdditionalBenefitsSection";
+export * from "./HomePageGlobe";
 export * from "./HomePageHero";
 export * from "./HomePageProfileSection";
 export * from "./HomePageSkill";
