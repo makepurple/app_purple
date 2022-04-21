@@ -26,6 +26,7 @@ export * from "./HomePage3dSkill";
 export * from "./HomePageAdditionalBenefitsSection";
 export * from "./HomePageGlobe";
 export * from "./HomePageHero";
+export * from "./HomePageJoinCommunitySection";
 export * from "./HomePageProfileSection";
 export * from "./HomePageSkill";
 export * from "./HomePageSkillsCarousel";
