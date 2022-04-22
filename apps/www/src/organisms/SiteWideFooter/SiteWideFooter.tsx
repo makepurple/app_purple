@@ -124,6 +124,7 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 								alt="Powered by GraphCDN, the GraphQL CDN"
 								loader={({ src }) => src}
 								layout="fill"
+								unoptimized
 							/>
 						</PoweredByGraphCdn>
 					</BrandContainer>
