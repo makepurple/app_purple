@@ -68,8 +68,9 @@ const Content = styled(Paper)`
 `;
 
 const Title = tw.h2`
-	text-4xl
+	text-2xl
 	font-bold
+	md:text-4xl
 `;
 
 const SignUpButton = tw(Button)`
