@@ -1,6 +1,6 @@
 import NextHead from "next/head";
 import React, { FC } from "react";
-import { useGetNotificationCountsQuery } from "src/graphql";
+import { useGetNotificationCountsQuery } from "../../graphql";
 
 export interface SeoTitleProps {
 	title: string;
