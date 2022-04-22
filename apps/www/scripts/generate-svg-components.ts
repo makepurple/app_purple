@@ -64,7 +64,7 @@ const generateComponents = () => {
 			);
 		}
 
-		fs.appendFileSync(`${componentPath}/index.tsx`, `${componentCode}\n`);
+		fs.appendFileSync(`${componentPath}/index.tsx`, `${componentCode}`);
 	});
 };
 

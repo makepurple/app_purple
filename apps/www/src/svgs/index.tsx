@@ -23,7 +23,6 @@ export const BellIcon = React.memo(
 		</svg>
 	))
 );
-
 export const BoldIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -42,7 +41,6 @@ export const BoldIcon = React.memo(
 		</svg>
 	))
 );
-
 export const BookIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -61,7 +59,6 @@ export const BookIcon = React.memo(
 		</svg>
 	))
 );
-
 export const BookmarkIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -80,7 +77,6 @@ export const BookmarkIcon = React.memo(
 		</svg>
 	))
 );
-
 export const CancelIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -102,7 +98,6 @@ export const CancelIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ChatIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -122,7 +117,6 @@ export const ChatIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ChevronDownIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -141,7 +135,6 @@ export const ChevronDownIcon = React.memo(
 		</svg>
 	))
 );
-
 export const CodeIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -160,7 +153,6 @@ export const CodeIcon = React.memo(
 		</svg>
 	))
 );
-
 export const CodeSquareIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -183,7 +175,6 @@ export const CodeSquareIcon = React.memo(
 		</svg>
 	))
 );
-
 export const CommentIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -202,7 +193,6 @@ export const CommentIcon = React.memo(
 		</svg>
 	))
 );
-
 export const CopyIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -225,7 +215,26 @@ export const CopyIcon = React.memo(
 		</svg>
 	))
 );
-
+export const DiscordIcon = React.memo(
+	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+		<svg
+			role="img"
+			height={24}
+			width={24}
+			viewBox="0 0 24 24"
+			xmlns="http://www.w3.org/2000/svg"
+			ref={ref}
+			{...props}
+		>
+			<path
+				stroke="currentColor"
+				fill="currentColor"
+				strokeWidth={0}
+				d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+			/>
+		</svg>
+	))
+);
 export const ForkIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -250,7 +259,6 @@ export const ForkIcon = React.memo(
 		</svg>
 	))
 );
-
 export const GearIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -275,7 +283,6 @@ export const GearIcon = React.memo(
 		</svg>
 	))
 );
-
 export const GitHubIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -295,7 +302,6 @@ export const GitHubIcon = React.memo(
 		</svg>
 	))
 );
-
 export const HeadingIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -314,7 +320,6 @@ export const HeadingIcon = React.memo(
 		</svg>
 	))
 );
-
 export const HeartIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -332,7 +337,6 @@ export const HeartIcon = React.memo(
 		</svg>
 	))
 );
-
 export const HexagonIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -355,7 +359,6 @@ export const HexagonIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ImageIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -374,7 +377,6 @@ export const ImageIcon = React.memo(
 		</svg>
 	))
 );
-
 export const IssueIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -393,7 +395,6 @@ export const IssueIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ItalicIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -412,7 +413,6 @@ export const ItalicIcon = React.memo(
 		</svg>
 	))
 );
-
 export const LicenseIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -431,7 +431,6 @@ export const LicenseIcon = React.memo(
 		</svg>
 	))
 );
-
 export const LinkedinIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -451,7 +450,6 @@ export const LinkedinIcon = React.memo(
 		</svg>
 	))
 );
-
 export const LinkIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -473,7 +471,6 @@ export const LinkIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ListOrderedIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -491,7 +488,6 @@ export const ListOrderedIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ListUnorderedIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -510,7 +506,6 @@ export const ListUnorderedIcon = React.memo(
 		</svg>
 	))
 );
-
 export const LocationIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -530,7 +525,6 @@ export const LocationIcon = React.memo(
 		</svg>
 	))
 );
-
 export const LogoCurrentColor = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -559,7 +553,6 @@ export const LogoCurrentColor = React.memo(
 		</svg>
 	))
 );
-
 export const LogoLeftWing = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -578,7 +571,6 @@ export const LogoLeftWing = React.memo(
 		</svg>
 	))
 );
-
 export const LogoRightWing = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -599,7 +591,6 @@ export const LogoRightWing = React.memo(
 		</svg>
 	))
 );
-
 export const NoteIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -623,7 +614,6 @@ export const NoteIcon = React.memo(
 		</svg>
 	))
 );
-
 export const OpenbaseIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -647,7 +637,6 @@ export const OpenbaseIcon = React.memo(
 		</svg>
 	))
 );
-
 export const PencilIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -666,7 +655,6 @@ export const PencilIcon = React.memo(
 		</svg>
 	))
 );
-
 export const PeopleIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -689,7 +677,6 @@ export const PeopleIcon = React.memo(
 		</svg>
 	))
 );
-
 export const PersonIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -708,7 +695,6 @@ export const PersonIcon = React.memo(
 		</svg>
 	))
 );
-
 export const PlusIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -727,7 +713,6 @@ export const PlusIcon = React.memo(
 		</svg>
 	))
 );
-
 export const PullRequestIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -751,7 +736,6 @@ export const PullRequestIcon = React.memo(
 		</svg>
 	))
 );
-
 export const PulseIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -773,7 +757,6 @@ export const PulseIcon = React.memo(
 		</svg>
 	))
 );
-
 export const QuoteIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -792,7 +775,6 @@ export const QuoteIcon = React.memo(
 		</svg>
 	))
 );
-
 export const RepoIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -815,7 +797,6 @@ export const RepoIcon = React.memo(
 		</svg>
 	))
 );
-
 export const SearchIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -834,7 +815,6 @@ export const SearchIcon = React.memo(
 		</svg>
 	))
 );
-
 export const SelectorIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -855,7 +835,6 @@ export const SelectorIcon = React.memo(
 		</svg>
 	))
 );
-
 export const SignOutIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -874,7 +853,6 @@ export const SignOutIcon = React.memo(
 		</svg>
 	))
 );
-
 export const SpinnerIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg viewBox="0 0 24 24" width={24} height={24} ref={ref} {...props}>
@@ -890,7 +868,6 @@ export const SpinnerIcon = React.memo(
 		</svg>
 	))
 );
-
 export const StarIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -909,7 +886,6 @@ export const StarIcon = React.memo(
 		</svg>
 	))
 );
-
 export const TelescopeIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -932,7 +908,6 @@ export const TelescopeIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ThumbsDownIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -951,7 +926,6 @@ export const ThumbsDownIcon = React.memo(
 		</svg>
 	))
 );
-
 export const ThumbsUpIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -970,7 +944,6 @@ export const ThumbsUpIcon = React.memo(
 		</svg>
 	))
 );
-
 export const TrophyIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -986,7 +959,6 @@ export const TrophyIcon = React.memo(
 		</svg>
 	))
 );
-
 export const TwitterIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -1006,7 +978,6 @@ export const TwitterIcon = React.memo(
 		</svg>
 	))
 );
-
 export const UnderlineIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -1025,7 +996,6 @@ export const UnderlineIcon = React.memo(
 		</svg>
 	))
 );
-
 export const UnfoldIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -1054,7 +1024,6 @@ export const UnfoldIcon = React.memo(
 		</svg>
 	))
 );
-
 export const XIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
@@ -1073,4 +1042,3 @@ export const XIcon = React.memo(
 		</svg>
 	))
 );
-

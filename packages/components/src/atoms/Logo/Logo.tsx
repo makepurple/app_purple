@@ -24,10 +24,6 @@ const Root = tw.a`
 	justify-center
 	h-11
 	w-11
-	rounded-md
-	overflow-hidden
-	cursor-pointer
-	[&[href]]:hover:bg-indigo-100
 `;
 
 const Icon = tw.svg`
