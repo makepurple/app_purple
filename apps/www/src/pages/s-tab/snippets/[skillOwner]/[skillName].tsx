@@ -83,45 +83,43 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<SkillPageLayout selectedTab="snippets" skillName={skillName} skillOwner={skillOwner}>
-			<Content>
-				{!codeExamples.length ? (
-					!fetching && (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="We couldn't find any snippets"
-						>
-							<NoSnippetsContent>
-								<StyledAvatar border={4}>
-									<IconContainer>
-										<StyledLogo href={null} />
-									</IconContainer>
-								</StyledAvatar>
-								{!!session?.user && (
-									<NextLink
-										href="/[userName]/snippets/new"
-										as={`/${session.user.name}/snippets/new`}
-										passHref
-									>
-										<CreateNewButton as="a">Create a snippet</CreateNewButton>
-									</NextLink>
-								)}
-							</NoSnippetsContent>
-						</NonIdealState>
-					)
-				) : (
-					<>
-						{codeExamples.map((codeExample, i) => (
-							<CodeExampleMiniCard
-								key={codeExample.id}
-								ref={getRef(i)}
-								codeExample={codeExample}
-							/>
-						))}
-					</>
-				)}
-				{fetching &&
-					Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
-			</Content>
+			{!codeExamples.length ? (
+				!fetching && (
+					<NonIdealState
+						title="There's nothing here"
+						subTitle="We couldn't find any snippets"
+					>
+						<NoSnippetsContent>
+							<StyledAvatar border={4}>
+								<IconContainer>
+									<StyledLogo href={null} />
+								</IconContainer>
+							</StyledAvatar>
+							{!!session?.user && (
+								<NextLink
+									href="/[userName]/snippets/new"
+									as={`/${session.user.name}/snippets/new`}
+									passHref
+								>
+									<CreateNewButton as="a">Create a snippet</CreateNewButton>
+								</NextLink>
+							)}
+						</NoSnippetsContent>
+					</NonIdealState>
+				)
+			) : (
+				<Content>
+					{codeExamples.map((codeExample, i) => (
+						<CodeExampleMiniCard
+							key={codeExample.id}
+							ref={getRef(i)}
+							codeExample={codeExample}
+						/>
+					))}
+					{fetching &&
+						Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
+				</Content>
+			)}
 		</SkillPageLayout>
 	);
 };
