@@ -1,5 +1,6 @@
 import { ObjectUtils } from "@makepurple/utils";
 import NextHead from "next/head";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { SeoDescription, SeoDescriptionProps } from "./SeoDescription";
 import { SeoImage, SeoImageProps } from "./SeoImage";
@@ -15,13 +16,16 @@ export interface MetaProps
 		SeoTitleProps {}
 
 const _Seo: FC<MetaProps> = ({
-	canonical,
+	canonical: _canonical,
 	description,
 	imageSrc,
 	ogType = "website",
 	robots,
 	title
 }) => {
+	const router = useRouter();
+	const canonical = _canonical ?? router.asPath;
+
 	return (
 		<>
 			<SeoTitle title={title} />

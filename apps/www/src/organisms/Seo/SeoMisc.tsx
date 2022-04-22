@@ -12,7 +12,7 @@ export interface SeoMiscProps {
 }
 
 export const SeoMisc: FC<SeoMiscProps> = ({
-	canonical: _canonical,
+	canonical: _canonical = "",
 	ogType,
 	robots: { index = false, follow = false } = {}
 }) => {
@@ -20,7 +20,7 @@ export const SeoMisc: FC<SeoMiscProps> = ({
 
 	const locale = router?.locale;
 
-	const canonical = `https://makepurple.com${_canonical}`;
+	const canonical = `https://makepurple.com${_canonical.replace(/\/+$/g, "")}`;
 
 	const robots: readonly string[] = useMemo(
 		() =>
