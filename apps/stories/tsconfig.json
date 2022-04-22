@@ -1,13 +1,22 @@
 {
-	"extends": "@makepurple/tsconfig/react-library.json",
-	"include": ["src", "types.d.ts"],
-	"exclude": ["node_modules"],
+	"extends": "@makepurple/tsconfig/nextjs.json",
+	"include": [
+		"next-env.d.ts",
+		"types.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"../../packages/server/src/graphql/nexus/generated/typegen.gen.d.ts"
+	],
 	"compilerOptions": {
-		"downlevelIteration": true,
-		"lib": ["dom"],
-		"moduleResolution": "node",
-		"rootDir": "src",
-		"outDir": "dist",
-		"jsx": "react"
+		"baseUrl": ".",
+		"paths": {
+			"@makepurple/www": ["../../apps/www/src/index"],
+			"@makepurple/www/*": ["../../apps/www/*"],
+			"@makepurple/server": ["../../packages/server/src/index"],
+			"@makepurple/server/graphql/*": ["../../packages/server/src/graphql/*"],
+			"@makepurple/server/prisma": ["../../packages/server/prisma"],
+			"@makepurple/utils": ["../../packages/utils/src/index"],
+			"@makepurple/validators": ["../../packages/validators/src/index"]
+		}
 	}
 }
