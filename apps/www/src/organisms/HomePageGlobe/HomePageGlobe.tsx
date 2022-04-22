@@ -1,11 +1,17 @@
+import { withForwardRef } from "@makepurple/components";
 import { ParentSize } from "@visx/responsive";
 import ms from "ms";
+import dynamic from "next/dynamic";
 import React, { CSSProperties, FC, useEffect, useRef, useState } from "react";
-import Globe, { GlobeMethods } from "react-globe.gl";
 import { MeshLambertMaterial } from "three";
 import { feature } from "topojson-client";
 import tw from "twin.macro";
+import type { GlobeMethods } from "./Globe";
 import landData from "./land-data.json";
+
+const GlobeTmp = dynamic(() => import("./Globe"), { ssr: false });
+
+const Globe = withForwardRef(GlobeTmp);
 
 const DEFAULT_ALTITUDE = 0.02;
 const HOVER_ALTITUDE = 0.085;
