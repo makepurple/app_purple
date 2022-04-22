@@ -3,6 +3,8 @@ import { Prisma, User } from "@prisma/client";
 import { arg, intArg, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
+const SUGGEST_BY_SKILL_THRESHOLD = 50;
+
 /** 
 
 Simple Recommender Criteria
@@ -77,6 +79,17 @@ export const suggestFriends = queryField("suggestFriends", {
 		const viewerDesiredSkillIds = viewer.desiredSkills.map((skill) => skill.skillId);
 		const viewerSkillIds = viewer.skills.map((skill) => skill.skillId);
 
+		const userCount = await prisma.user.count({
+			where: {
+				AND: [
+					{ skills: { some: { skillId: { in: viewerDesiredSkillIds } } } },
+					{ skills: { some: { skillId: { in: viewerSkillIds } } } }
+				]
+			}
+		});
+
+		const suggestBySkill = userCount >= SUGGEST_BY_SKILL_THRESHOLD;
+
 		const where: Prisma.UserWhereInput = {
 			id: { not: { equals: user.id } },
 			friendedBy: {
@@ -103,10 +116,14 @@ export const suggestFriends = queryField("suggestFriends", {
 			skills: {
 				some: PrismaUtils.nonNull(args.where.skills)
 			},
-			AND: [
-				{ skills: { some: { skillId: { in: viewerDesiredSkillIds } } } },
-				{ skills: { some: { skillId: { in: viewerSkillIds } } } }
-			]
+			...(suggestBySkill
+				? {
+						AND: [
+							{ skills: { some: { skillId: { in: viewerDesiredSkillIds } } } },
+							{ skills: { some: { skillId: { in: viewerSkillIds } } } }
+						]
+				  }
+				: {})
 		};
 
 		const connection = await PrismaUtils.findManyCursorConnection<User, { id: string }>(
