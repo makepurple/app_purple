@@ -26,14 +26,6 @@ export const activityFeed = queryField("activityFeed", {
 								{
 									OR: [
 										{
-											type: UserActivityType.CommentCodeExample,
-											comment: {}
-										},
-										{
-											type: UserActivityType.CommentPost,
-											comment: {}
-										},
-										{
 											type: UserActivityType.CreateCodeExample,
 											codeExample: {}
 										},
@@ -46,22 +38,7 @@ export const activityFeed = queryField("activityFeed", {
 											follow: {}
 										},
 										{
-											type: UserActivityType.FriendAcceptUser,
-											follow: {}
-										},
-										{
-											type: UserActivityType.Joined
-										},
-										{
 											type: UserActivityType.PublishPost,
-											post: {}
-										},
-										{
-											type: UserActivityType.UpvoteCodeExample,
-											codeExample: {}
-										},
-										{
-											type: UserActivityType.UpvotePost,
 											post: {}
 										}
 									]
