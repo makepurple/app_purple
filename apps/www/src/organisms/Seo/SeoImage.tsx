@@ -1,11 +1,11 @@
 import NextHead from "next/head";
 import React, { FC } from "react";
 
-export interface HeadMetaImageProps {
+export interface SeoImageProps {
 	imageSrc?: string | null;
 }
 
-export const HeadMetaImage: FC<HeadMetaImageProps> = ({
+export const SeoImage: FC<SeoImageProps> = ({
 	imageSrc = "https://makepurple.io/static/pngs/meta-image.png"
 }) => {
 	if (!imageSrc) return null;

@@ -2,7 +2,7 @@ import NextHead from "next/head";
 import { useRouter } from "next/router";
 import React, { FC, useMemo } from "react";
 
-export interface HeadMetaMiscProps {
+export interface SeoMiscProps {
 	canonical?: string;
 	ogType?: string;
 	robots?: {
@@ -11,7 +11,7 @@ export interface HeadMetaMiscProps {
 	};
 }
 
-export const HeadMetaMisc: FC<HeadMetaMiscProps> = ({
+export const SeoMisc: FC<SeoMiscProps> = ({
 	canonical: _canonical,
 	ogType,
 	robots: { index = false, follow = false } = {}
@@ -20,10 +20,13 @@ export const HeadMetaMisc: FC<HeadMetaMiscProps> = ({
 
 	const locale = router?.locale;
 
-	const canonical = `https://makepurple.io${_canonical}`;
+	const canonical = `https://makepurple.com${_canonical}`;
 
 	const robots: readonly string[] = useMemo(
-		() => [index ? "index" : "noindex", follow ? "follow" : "nofollow"],
+		() =>
+			process.env.SEO === "true"
+				? [index ? "index" : "noindex", follow ? "follow" : "nofollow"]
+				: ["noindex", "nofollow"],
 		[index, follow]
 	);
 

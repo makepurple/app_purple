@@ -24,7 +24,6 @@ export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
 export * from "./GradientHeader";
 export * from "./HamburgerMenuButton";
-export * from "./HeadMeta";
 export * from "./HiddenInput";
 export * from "./InfiniteAutoplayCarousel";
 export * from "./Input";

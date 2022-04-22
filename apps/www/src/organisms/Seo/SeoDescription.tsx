@@ -1,11 +1,11 @@
 import NextHead from "next/head";
 import React, { FC } from "react";
 
-export interface HeadMetaDescriptionProps {
+export interface SeoDescriptionProps {
 	description: string;
 }
 
-export const HeadMetaDescription: FC<HeadMetaDescriptionProps> = ({ description }) => {
+export const SeoDescription: FC<SeoDescriptionProps> = ({ description }) => {
 	return (
 		<NextHead>
 			<meta key="description" content={description} name="description" />

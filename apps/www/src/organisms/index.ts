@@ -64,6 +64,7 @@ export * from "./PostImageInput";
 export * from "./RemovePostThumbnailButton";
 export * from "./RepositoryCard";
 export * from "./RepositorySearchResult";
+export * from "./Seo";
 export * from "./SiteWideAppBar";
 export * from "./SiteWideFooter";
 export * from "./SiteWideLayout";
