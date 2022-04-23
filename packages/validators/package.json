@@ -7,7 +7,7 @@
 	"dependencies": {
 		"@makepurple/utils": "workspace:*",
 		"computed-types": "^1.11.2",
-		"slate": "^0.77.0"
+		"slate": "^0.77.2"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
