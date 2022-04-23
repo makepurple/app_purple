@@ -10,7 +10,7 @@ const Root = styled.a`
 	${tw`
 		text-2xl
 		leading-none
-		font-semibold
+		font-bold
 		text-black
 		cursor-pointer
 		hover:no-underline
