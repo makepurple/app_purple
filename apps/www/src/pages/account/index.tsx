@@ -13,6 +13,7 @@ import { signOut, useSession } from "next-auth/react";
 import React, { useMemo, useState } from "react";
 import tw from "twin.macro";
 import { useDeleteUserMutation } from "../../graphql";
+import { Seo } from "../../organisms";
 
 const DEFAULT_SUBJECT = oneLine`
 	HELP: Account deletion failed!
@@ -86,6 +87,7 @@ export const Page: NextPage = () => {
 
 	return (
 		<Root>
+			<Seo title="Account Settings" />
 			<Title>Danger zone</Title>
 			<Header tw="mt-6">Delete account</Header>
 			<Description tw="mt-3">

@@ -9,7 +9,7 @@ import {
 	useGetNotificationCountsQuery,
 	useOpenNotificationsMutation
 } from "../../graphql";
-import { LoadingNotificationCard, NotificationCard } from "../../organisms";
+import { LoadingNotificationCard, NotificationCard, Seo } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/notifications";
 import { SearchIcon } from "../../svgs";
 
@@ -76,6 +76,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root size="small">
+			<Seo title="Notifications" />
 			<Content>
 				<Title>
 					{unopenedCount

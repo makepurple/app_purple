@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import tw from "twin.macro";
 import { useOpenMessagesMutation } from "../../graphql";
-import { ChatList, ChatRoom, CreateChatForm } from "../../organisms";
+import { ChatList, ChatRoom, CreateChatForm, Seo } from "../../organisms";
 import { pageProps, PageProps } from "../../page-props/messaging/[[...slug]]";
 import { PlusIcon } from "../../svgs";
 
@@ -132,6 +132,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root>
+			<Seo title="Messages" />
 			<SideBar tw="mb-6 lg:ml-4 xl:ml-6">
 				<SideBarTopContainer>
 					<Title>
