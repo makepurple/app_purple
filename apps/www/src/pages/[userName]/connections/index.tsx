@@ -7,6 +7,7 @@ import tw from "twin.macro";
 import { GetUserFriendsDocument } from "../../../graphql";
 import {
 	LoadingUserFriendCard,
+	Seo,
 	UserConnectionPageTabs,
 	UserFriendCard,
 	UserPageLayout
@@ -55,6 +56,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<UserPageLayout selectedTab="connections" userName={userName}>
+			<Seo title={`${userName}'s Connections`} />
 			<Content>
 				<UserConnectionPageTabs selectedTab="connections" userName={userName} />
 				<Friends>

@@ -1,13 +1,14 @@
 import { Button, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { GetUserRepositoriesDocument } from "../../graphql";
-import { LoadingRepositoryCard, RepositoryCard, UserPageLayout } from "../../organisms";
+import { LoadingRepositoryCard, RepositoryCard, Seo, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/repositories";
 import { PlusIcon, RepoIcon } from "../../svgs";
 
@@ -16,6 +17,7 @@ const CreateRepositoryForm = dynamic(() => import("../../organisms/CreateReposit
 });
 
 const BATCH_SIZE = 20;
+const MIN_SEO_SIZE = 8;
 
 const Content = tw.div`
 	flex
@@ -80,10 +82,34 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [adding, setAdding] = useState<boolean>(false);
 
-	const repositories = data?.user?.repositories.nodes ?? [];
+	const repositories = useMemo(
+		() => data?.user?.repositories.nodes ?? [],
+		[data?.user?.repositories.nodes]
+	);
+
+	const metaDescription = useMemo(() => {
+		const repositoryNames = repositories
+			.slice(0, MIN_SEO_SIZE)
+			.map((repository) => repository.name);
+
+		return oneLineCommaListsAnd`
+			${userName}'s projects and repositories, including ${repositoryNames}
+		`;
+	}, [repositories, userName]);
+
+	const shouldIndex = repositories.length > MIN_SEO_SIZE;
 
 	return (
 		<UserPageLayout selectedTab="repositories" userName={userName}>
+			<Seo
+				title={`${userName}'s Repositories`}
+				canonical={`/${userName}/repositories`}
+				description={metaDescription}
+				robots={{
+					follow: shouldIndex,
+					index: shouldIndex
+				}}
+			/>
 			<Content>
 				<ActionContainer>
 					{isMyPage && (

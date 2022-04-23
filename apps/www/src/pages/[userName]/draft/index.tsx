@@ -35,6 +35,7 @@ import {
 	PostGuidelines,
 	PostImageInput,
 	RemovePostThumbnailButton,
+	Seo,
 	SkillAutosuggest
 } from "../../../organisms";
 import { PageProps, pageProps } from "../../../page-props/[userName]/draft";
@@ -188,6 +189,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root>
+			<Seo title="Post Draft" />
 			<Content>
 				{!thumbnailUrl ? (
 					<AddCoverImageButton

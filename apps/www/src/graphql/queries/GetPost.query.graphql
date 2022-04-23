@@ -11,6 +11,7 @@ query GetPost($where: PostWhereUniqueInput!) {
 		content
 		description
 		publishedAt
+		readTime
 		skills(first: 50) {
 			pageInfo {
 				...PageInfoFragment

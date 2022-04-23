@@ -32,6 +32,7 @@ import {
 	PostGuidelines,
 	PostImageInput,
 	RemovePostThumbnailButton,
+	Seo,
 	SkillAutosuggest
 } from "../../../../organisms";
 import { pageProps, PageProps } from "../../../../page-props/[userName]/[postTitle]/edit";
@@ -173,6 +174,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root>
+			<Seo title={`Editing: ${post.title}`} />
 			<Content>
 				{!thumbnailUrl ? (
 					<AddCoverImageButton

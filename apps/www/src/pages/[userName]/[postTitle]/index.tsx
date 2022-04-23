@@ -13,7 +13,7 @@ import {
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
-import { oneLine } from "common-tags";
+import { oneLine, oneLineCommaListsAnd, oneLineTrim } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
@@ -33,10 +33,14 @@ import {
 	CommentCard,
 	CreateCommentForm,
 	LoadingCommentCard,
+	Seo,
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
 import { CommentIcon, ThumbsUpIcon } from "../../../svgs";
+
+const MIN_SEO_READ_TIME = 3;
+const SEO_SKILL_COUNT = 5;
 
 const Content = tw(Paper)`
 	flex
@@ -223,7 +227,7 @@ export const Page: NextPage<PageProps> = () => {
 	});
 
 	const post = postData?.post;
-	const skills = post?.skills.nodes ?? [];
+	const skills = useMemo(() => post?.skills.nodes ?? [], [post?.skills.nodes]);
 	const comments = commentsData?.post?.comments.nodes ?? [];
 
 	const isMyPost = session?.user.name === post?.authorName;
@@ -244,6 +248,20 @@ export const Page: NextPage<PageProps> = () => {
 		viewPost({ where: { id: post.id } }).catch(() => null);
 	}, [post?.id, status, viewPost]);
 
+	const metaDescription = useMemo(() => {
+		const skillNames = skills.slice(0, SEO_SKILL_COUNT).map((skill) => skill.name);
+
+		if (!post?.description) {
+			return oneLineCommaListsAnd`
+				${userName}'s post on ${skillNames}.
+			`;
+		}
+
+		return oneLineCommaListsAnd`
+			${post.description} | ${userName}'s post on ${skillNames}
+		`;
+	}, [post?.description, skills, userName]);
+
 	/**
 	 * TODO
 	 * @description Handle null case gracefully in the future
@@ -254,8 +272,19 @@ export const Page: NextPage<PageProps> = () => {
 	if (!post.publishedAt) return null;
 	if (!content) return null;
 
+	const shouldIndex = post.readTime >= MIN_SEO_READ_TIME && !!post.description && !!skills.length;
+
 	return (
 		<UserPageLayout selectedTab="posts" userName={userName}>
+			<Seo
+				title={post.title}
+				canonical={`/${userName}/${post.urlSlug}`}
+				description={metaDescription}
+				robots={{
+					follow: shouldIndex,
+					index: shouldIndex
+				}}
+			/>
 			<Content>
 				{post.thumbnailUrl && (
 					<ThumbnailContainer>
