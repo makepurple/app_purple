@@ -1,9 +1,11 @@
 import { Anchor, Button, GitHubIcon, MainContainer } from "@makepurple/components";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import { signIn } from "next-auth/react";
 import NextLink from "next/link";
 import React from "react";
 import tw from "twin.macro";
+import { Seo } from "../../organisms";
 
 const Root = tw(MainContainer)`
 	flex
@@ -79,6 +81,14 @@ const DisclaimerLink = tw(Anchor)`
 export const Page: NextPage = () => {
 	return (
 		<Root>
+			<Seo
+				title="Signup"
+				description={oneLine`
+					Signup to MakePurple, the developer discovery community, with
+					your GitHub account.
+				`}
+				robots={{ follow: true, index: true }}
+			/>
 			<Header>MakePurple Signup</Header>
 			<Greeting tw="mt-3">Join our community!</Greeting>
 			<Description tw="mt-6">
