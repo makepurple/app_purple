@@ -8,6 +8,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useMemo } from "react";
 import tw from "twin.macro";
+import { Seo } from "../organisms";
 
 const LOGIN_REDIRECT_DELAY = ms("5s");
 
@@ -108,8 +109,22 @@ export const Page: NextPage<ErrorProps> = ({ statusCode, title: _title }) => {
 		[reset]
 	);
 
+	const metaTitle = useMemo(() => {
+		switch (statusCode) {
+			case 401:
+				return "This page is unauthorized";
+			case 403:
+				return "This page is forbidden";
+			case 404:
+				return "This page doesn't exist";
+			default:
+				return "Uh oh! Something went wrong...";
+		}
+	}, [statusCode]);
+
 	return (
 		<Root>
+			<Seo title={`${metaTitle} | MakePurple`} />
 			<StyledAvatar border={10}>
 				<AvatarIconContainer>
 					<StatusCode>{statusCode}</StatusCode>
