@@ -124,7 +124,7 @@ export const Page: NextPage<ErrorProps> = ({ statusCode, title: _title }) => {
 
 	return (
 		<Root>
-			<Seo title={`${metaTitle} | MakePurple`} />
+			<Seo title={metaTitle} />
 			<StyledAvatar border={10}>
 				<AvatarIconContainer>
 					<StatusCode>{statusCode}</StatusCode>

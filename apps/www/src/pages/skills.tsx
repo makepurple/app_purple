@@ -119,11 +119,12 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root>
 			<Seo
-				title="Popular Skills | MakePurple"
+				title="Popular Skills"
 				description={oneLineCommaListsAnd`
 					The most popular skills known by developers, including:
 					${skills.map((skill) => skill.name)}.
 				`}
+				robots={{ follow: true, index: true }}
 			/>
 			<SideBar
 				as={Form}

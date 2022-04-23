@@ -3,13 +3,16 @@ import React, { FC } from "react";
 import { useGetNotificationCountsQuery } from "../../graphql";
 
 export interface SeoTitleProps {
+	postfix?: boolean;
 	title: string;
 }
 
-export const SeoTitle: FC<SeoTitleProps> = ({ title }) => {
+export const SeoTitle: FC<SeoTitleProps> = ({ postfix = true, title: _title }) => {
 	const [{ data }] = useGetNotificationCountsQuery({
 		requestPolicy: "cache-first"
 	});
+
+	const title = postfix ? `${_title} U+002d MakePurple` : _title;
 
 	const notificationCount = data?.viewer?.newNotificationsCount;
 

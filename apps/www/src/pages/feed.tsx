@@ -79,6 +79,7 @@ export const Page: NextPage<PageProps> = () => {
 					The latest activities of developers, including new posts and code-examples for
 					Next.js, Urql, Prisma, React, TailwindCSS and more!
 				`}
+				postfix={false}
 				robots={{ follow: true, index: true }}
 			/>
 			<SideBar>

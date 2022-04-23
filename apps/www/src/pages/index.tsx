@@ -31,6 +31,7 @@ export const Page: NextPage<PageProps> = () => {
 					Developer profiles powered-by GitHub discoverability for Next.js, Urql, Prisma,
 					React, TailwindCSS and more!
 				`}
+				postfix={false}
 				robots={{ follow: true, index: true }}
 			/>
 			<HomePageHero />

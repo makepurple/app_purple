@@ -51,7 +51,7 @@ export const Page: NextPage<PageProps> = ({ seed }) => {
 	return (
 		<Root>
 			<Seo
-				title="Discover Developers | MakePurple"
+				title="Discover Developers"
 				description={oneLine`
 					Explore posts and discover developers for Next.js, Urql, Prisma,
 					React, TailwindCSS and more!

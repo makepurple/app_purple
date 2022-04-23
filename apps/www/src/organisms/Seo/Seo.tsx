@@ -20,6 +20,7 @@ const _Seo: FC<MetaProps> = ({
 	description,
 	imageSrc,
 	ogType = "website",
+	postfix,
 	robots,
 	title
 }) => {
@@ -28,7 +29,7 @@ const _Seo: FC<MetaProps> = ({
 
 	return (
 		<>
-			<SeoTitle title={title} />
+			<SeoTitle postfix={postfix} title={title} />
 			{description && <SeoDescription description={description} />}
 			<SeoImage imageSrc={imageSrc} />
 			<SeoMisc canonical={canonical} ogType={ogType} robots={robots} />
