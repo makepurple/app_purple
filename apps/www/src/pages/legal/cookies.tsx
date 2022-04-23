@@ -2,6 +2,7 @@ import { MainContainer } from "@makepurple/components";
 import { NextPage } from "next";
 import React from "react";
 import tw from "twin.macro";
+import { Seo } from "../../organisms";
 
 const Root = tw(MainContainer)`
 	flex
@@ -30,6 +31,7 @@ const Content = tw.div`
 export const Page: NextPage = () => {
 	return (
 		<Root size="small">
+			<Seo title="Cookie Policy" />
 			<Header>Cookie Policy of MakePurple.com</Header>
 			<Content>
 				<p>Last Updated: March 31, 2022</p>

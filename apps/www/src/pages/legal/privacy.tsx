@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import NextLink from "next/link";
 import React from "react";
 import tw from "twin.macro";
+import { Seo } from "../../organisms";
 
 const Root = tw(MainContainer)`
 	flex
@@ -67,6 +68,7 @@ const Header4 = tw.h4`
 export const Page: NextPage = () => {
 	return (
 		<Root size="small">
+			<Seo title="Privacy Policy" />
 			<Header>Privacy Policy of MakePurple.com</Header>
 			<Content>
 				<p>Last Updated: March 31, 2022</p>
