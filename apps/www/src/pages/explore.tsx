@@ -1,12 +1,13 @@
 import { MainContainer, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLine } from "common-tags";
 import { Masonry, RenderComponentProps } from "masonic";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useMemo } from "react";
 import tw from "twin.macro";
 import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../graphql";
-import { SuggestedFriendCard } from "../organisms";
+import { Seo, SuggestedFriendCard } from "../organisms";
 import { PageProps, pageProps } from "../page-props/explore";
 import { PersonIcon } from "../svgs";
 
@@ -49,6 +50,14 @@ export const Page: NextPage<PageProps> = ({ seed }) => {
 
 	return (
 		<Root>
+			<Seo
+				title="Discover Developers | MakePurple"
+				description={oneLine`
+					Explore posts and discover developers for Next.js, Urql, Prisma,
+					React, TailwindCSS and more!
+				`}
+				robots={{ follow: true, index: true }}
+			/>
 			{!suggestedFriends.length ? (
 				<NonIdealState
 					title="There's nobody here"

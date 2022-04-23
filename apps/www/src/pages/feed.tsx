@@ -1,5 +1,6 @@
 import { Button, MainContainer, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import React from "react";
@@ -11,6 +12,7 @@ import {
 	LoadingUserActivityCardPost,
 	LoadingUserActivityCardSkill,
 	LoadingUserActivityCardUser,
+	Seo,
 	UserActivityCard
 } from "../organisms";
 import { PageProps, pageProps } from "../page-props/feed";
@@ -71,6 +73,14 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root>
+			<Seo
+				title="MakePurple"
+				description={oneLine`
+					The latest activities of developers, including new posts and code-examples for
+					Next.js, Urql, Prisma, React, TailwindCSS and more!
+				`}
+				robots={{ follow: true, index: true }}
+			/>
 			<SideBar>
 				<ActivityFeedInfo />
 				<ActivityFeedFollowableSkills />

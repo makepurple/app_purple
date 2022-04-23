@@ -11,13 +11,14 @@ import {
 	Spinner
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLine, oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import React from "react";
 import { useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { GetSkillsDocument, SortOrder } from "../graphql";
-import { LoadingSkillCard, SkillCard } from "../organisms";
+import { LoadingSkillCard, Seo, SkillCard } from "../organisms";
 import { PageProps, pageProps } from "../page-props/skills";
 import { BookIcon, SearchIcon } from "../svgs";
 
@@ -117,6 +118,13 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<Root>
+			<Seo
+				title="Popular Skills | MakePurple"
+				description={oneLineCommaListsAnd`
+					The most popular skills known by developers, including:
+					${skills.map((skill) => skill.name)}.
+				`}
+			/>
 			<SideBar
 				as={Form}
 				onSubmit={handleSubmit(async (formData) => {
