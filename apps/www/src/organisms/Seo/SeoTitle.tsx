@@ -12,7 +12,7 @@ export const SeoTitle: FC<SeoTitleProps> = ({ postfix = true, title: _title }) =
 		requestPolicy: "cache-first"
 	});
 
-	const title = postfix ? `${_title} U+002d MakePurple` : _title;
+	const title = postfix ? `${_title} – MakePurple` : _title;
 
 	const notificationCount = data?.viewer?.newNotificationsCount;
 
