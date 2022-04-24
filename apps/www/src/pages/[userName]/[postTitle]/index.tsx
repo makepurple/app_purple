@@ -281,7 +281,7 @@ export const Page: NextPage<PageProps> = () => {
 				canonical={`/${userName}/${post.urlSlug}`}
 				description={metaDescription}
 				robots={{
-					follow: shouldIndex,
+					follow: true,
 					index: shouldIndex
 				}}
 			/>

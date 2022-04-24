@@ -14,8 +14,10 @@ export interface SeoMiscProps {
 export const SeoMisc: FC<SeoMiscProps> = ({
 	canonical: _canonical = "",
 	ogType,
-	robots: { index = false, follow = false } = {}
+	robots: _robots = {}
 }) => {
+	const { index, follow } = { index: false, follow: false, ..._robots };
+
 	const router = useRouter();
 
 	const locale = router?.locale;
