@@ -12,5 +12,8 @@ export const GitHubUser = gql`
 		twitterUsername
 		url
 		websiteUrl
+		_followerCount: followers(first: 0) {
+			totalCount
+		}
 	}
 `;

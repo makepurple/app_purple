@@ -5,6 +5,7 @@ import type { octokit } from "../../../services";
 
 export const GitHubUser = objectType({
 	name: "GitHubUser",
+	sourceType: "octokit.GitHubUserFragment",
 	description: oneLine`
 		Data for a user from that user's connected GitHub account.
 	`,
@@ -12,6 +13,11 @@ export const GitHubUser = objectType({
 		t.implements("GitHubRepositoryOwner");
 		t.string("bio");
 		t.string("company");
+		t.nonNull.int("followerCount", {
+			resolve: (parent) => {
+				return parent._followerCount.totalCount;
+			}
+		});
 		t.nonNull.string("login");
 		t.string("name");
 		t.nonNull.field("contributionCalendar", {

@@ -589,16 +589,7 @@ export interface NexusGenObjects {
     spdxId?: string | null; // String
     url?: NexusGenScalars['URL'] | null; // URL
   }
-  GitHubOrganization: { // root type
-    avatarUrl: NexusGenScalars['URL']; // URL!
-    description?: string | null; // String
-    id: string; // String!
-    login: string; // String!
-    name?: string | null; // String
-    twitterUsername?: string | null; // String
-    url: NexusGenScalars['URL']; // URL!
-    websiteUrl?: string | null; // String
-  }
+  GitHubOrganization: octokit.GitHubOrganizationFragment;
   GitHubRepository: octokit.GitHubRepositoryFragment;
   GitHubRepositoryConnection: { // root type
     edges: NexusGenRootTypes['GitHubRepositoryEdge'][]; // [GitHubRepositoryEdge!]!
@@ -609,17 +600,7 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
   }
-  GitHubUser: { // root type
-    avatarUrl: NexusGenScalars['URL']; // URL!
-    bio?: string | null; // String
-    company?: string | null; // String
-    id: string; // String!
-    login: string; // String!
-    name?: string | null; // String
-    twitterUsername?: string | null; // String
-    url: NexusGenScalars['URL']; // URL!
-    websiteUrl?: string | null; // String
-  }
+  GitHubUser: octokit.GitHubUserFragment;
   GitHubUserContributionCalendar: { // root type
     totalContributions: number; // Int!
     weeks: NexusGenRootTypes['GitHubUserContributionCalendarWeek'][]; // [GitHubUserContributionCalendarWeek!]!
@@ -1288,6 +1269,7 @@ export interface NexusGenFieldTypes {
     experiencers: NexusGenRootTypes['UserConnection']; // UserConnection!
     id: string; // String!
     login: string; // String!
+    memberCount: number; // Int!
     name: string | null; // String
     organization: NexusGenRootTypes['Organization']; // Organization!
     repositories: NexusGenRootTypes['GitHubRepositoryConnection']; // GitHubRepositoryConnection!
@@ -1327,6 +1309,7 @@ export interface NexusGenFieldTypes {
     company: string | null; // String
     contributionCalendar: NexusGenRootTypes['GitHubUserContributionCalendar']; // GitHubUserContributionCalendar!
     experiencers: NexusGenRootTypes['UserConnection']; // UserConnection!
+    followerCount: number; // Int!
     id: string; // String!
     login: string; // String!
     name: string | null; // String
@@ -2296,6 +2279,7 @@ export interface NexusGenFieldTypeNames {
     experiencers: 'UserConnection'
     id: 'String'
     login: 'String'
+    memberCount: 'Int'
     name: 'String'
     organization: 'Organization'
     repositories: 'GitHubRepositoryConnection'
@@ -2335,6 +2319,7 @@ export interface NexusGenFieldTypeNames {
     company: 'String'
     contributionCalendar: 'GitHubUserContributionCalendar'
     experiencers: 'UserConnection'
+    followerCount: 'Int'
     id: 'String'
     login: 'String'
     name: 'String'

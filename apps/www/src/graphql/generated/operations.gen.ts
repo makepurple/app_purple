@@ -731,6 +731,7 @@ export type GitHubOrganization = GitHubRepositoryOwner & {
   readonly experiencers: UserConnection;
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
+  readonly memberCount: Scalars['Int'];
   readonly name?: Maybe<Scalars['String']>;
   readonly organization: Organization;
   readonly repositories: GitHubRepositoryConnection;
@@ -831,6 +832,7 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly company?: Maybe<Scalars['String']>;
   readonly contributionCalendar: GitHubUserContributionCalendar;
   readonly experiencers: UserConnection;
+  readonly followerCount: Scalars['Int'];
   readonly id: Scalars['String'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;

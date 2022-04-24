@@ -590,6 +590,7 @@ type GitHubOrganization implements GitHubRepositoryOwner {
   experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   id: String!
   login: String!
+  memberCount: Int!
   name: String
   organization: Organization!
   repositories(after: String, before: String, first: Int, last: Int): GitHubRepositoryConnection!
@@ -652,6 +653,7 @@ type GitHubUser implements GitHubRepositoryOwner {
   company: String
   contributionCalendar: GitHubUserContributionCalendar!
   experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  followerCount: Int!
   id: String!
   login: String!
   name: String

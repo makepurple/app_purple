@@ -2,9 +2,15 @@ import { nonNull, objectType } from "nexus";
 
 export const GitHubOrganization = objectType({
 	name: "GitHubOrganization",
+	sourceType: "octokit.GitHubOrganizationFragment",
 	definition: (t) => {
 		t.implements("GitHubRepositoryOwner");
 		t.string("description");
+		t.nonNull.int("memberCount", {
+			resolve: (parent) => {
+				return parent._memberCount.totalCount;
+			}
+		});
 		t.string("name");
 		t.field("organization", {
 			type: nonNull("Organization"),

@@ -11,5 +11,8 @@ export const GitHubOrganization = gql`
 		twitterUsername
 		url
 		websiteUrl
+		_memberCount: membersWithRole(first: 0) {
+			totalCount
+		}
 	}
 `;
