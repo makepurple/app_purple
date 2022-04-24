@@ -32,7 +32,12 @@ import {
 	useGetCodeExampleQuery,
 	useUpdateCodeExampleMutation
 } from "../../../../../graphql";
-import { CodeLanguageSelect, SkillAutosuggest, UserPageLayout } from "../../../../../organisms";
+import {
+	CodeLanguageSelect,
+	Seo,
+	SkillAutosuggest,
+	UserPageLayout
+} from "../../../../../organisms";
 import {
 	pageProps,
 	PageProps
@@ -227,6 +232,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
+			<Seo title={`Editing ${codeExample.title}`} />
 			<Content>
 				<Title>Edit Snippet</Title>
 				<Form

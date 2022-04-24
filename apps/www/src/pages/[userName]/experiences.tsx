@@ -1,13 +1,14 @@
 import { Button, HexagonIcon, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { CreateExperienceFragmentFragment, GetUserExperiencesDocument } from "../../graphql";
-import { ExperienceCard, LoadingExperienceCard, UserPageLayout } from "../../organisms";
+import { ExperienceCard, LoadingExperienceCard, Seo, UserPageLayout } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]/experiences";
 import { PlusIcon } from "../../svgs";
 
@@ -19,6 +20,7 @@ const UpdateExperienceForm = dynamic(() => import("../../organisms/UpdateExperie
 });
 
 const BATCH_SIZE = 20;
+const MIN_SEO_SIZE = 5;
 
 const Content = tw.div`
 	flex
@@ -85,10 +87,33 @@ export const Page: NextPage<PageProps> = () => {
 	const [editExperience, setEditExperience] =
 		useState<Maybe<CreateExperienceFragmentFragment>>(null);
 
-	const experiences = data?.user?.experiences.nodes ?? [];
+	const experiences = useMemo(
+		() => data?.user?.experiences.nodes ?? [],
+		[data?.user?.experiences.nodes]
+	);
+
+	const metaDescription = useMemo(() => {
+		const experienceNames = experiences
+			.slice(0, MIN_SEO_SIZE)
+			.map((experience) => experience.organizationName);
+
+		return oneLineCommaListsAnd`
+			${userName}'s professional experiences and jobs, including ${experienceNames}
+		`;
+	}, [experiences, userName]);
+
+	const shouldIndex = experiences.length >= MIN_SEO_SIZE;
 
 	return (
 		<UserPageLayout selectedTab="experiences" userName={userName}>
+			<Seo
+				title={`${userName}'s Experiences`}
+				description={metaDescription}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<Content>
 				<ActionContainer>
 					{isMyPage && (

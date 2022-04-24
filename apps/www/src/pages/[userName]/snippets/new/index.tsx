@@ -29,7 +29,7 @@ import {
 	RepositorySearchResultGitHubRepositoryFragment,
 	useCreateCodeExampleMutation
 } from "../../../../graphql";
-import { CodeLanguageSelect, SkillAutosuggest, UserPageLayout } from "../../../../organisms";
+import { CodeLanguageSelect, Seo, SkillAutosuggest, UserPageLayout } from "../../../../organisms";
 import { pageProps, PageProps } from "../../../../page-props/[userName]/snippets/new";
 import { BookIcon, XIcon } from "../../../../svgs";
 
@@ -201,6 +201,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
+			<Seo title="New Code-Snippet" />
 			<Content>
 				<Title>Create Snippet</Title>
 				<Form

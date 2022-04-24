@@ -12,7 +12,7 @@ import {
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
-import { oneLine } from "common-tags";
+import { oneLine, oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
@@ -34,6 +34,7 @@ import {
 	CommentCard,
 	CreateCommentForm,
 	LoadingCommentCard,
+	Seo,
 	UserPageLayout
 } from "../../../../organisms";
 import {
@@ -43,6 +44,7 @@ import {
 import { BookIcon, CommentIcon, ThumbsUpIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 8;
+const MIN_SEO_CODE_LENGTH = 1_000;
 
 const Content = tw(Paper)`
 	flex
@@ -265,6 +267,22 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	}, [codeExample?.language]);
 
+	const skills = useMemo(() => codeExample?.skills.nodes ?? [], [codeExample?.skills.nodes]);
+
+	const metaDescription = useMemo(() => {
+		const skillNames = skills.map((skill) => skill.name);
+
+		if (!codeExample?.description) {
+			return oneLineCommaListsAnd`
+				${codeExample?.title} by ${userName} on ${skillNames}
+			`;
+		}
+
+		return oneLineCommaListsAnd`
+			${codeExample.description} | ${userName}'s code-example on ${skillNames}
+		`;
+	}, [codeExample?.description, codeExample?.title, skills, userName]);
+
 	/**
 	 * TODO
 	 * @description Return 404 error page eventually
@@ -274,12 +292,18 @@ export const Page: NextPage<PageProps> = () => {
 	if (!codeExample) return null;
 
 	const primarySkill = codeExample.primarySkill;
-	const skills = codeExample.skills.nodes ?? [];
 
 	const mutating = removing || upvoting || unvoting;
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
+			<Seo
+				title={codeExample.title}
+				description={metaDescription}
+				robots={{
+					follow: true
+				}}
+			/>
 			<Content>
 				<CodeExampleContent>
 					<TopContainer>

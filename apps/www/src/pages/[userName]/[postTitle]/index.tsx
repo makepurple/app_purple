@@ -13,7 +13,7 @@ import {
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
-import { oneLine, oneLineCommaListsAnd, oneLineTrim } from "common-tags";
+import { oneLine, oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextImage from "next/image";
@@ -253,14 +253,14 @@ export const Page: NextPage<PageProps> = () => {
 
 		if (!post?.description) {
 			return oneLineCommaListsAnd`
-				${userName}'s post on ${skillNames}.
+				${post?.title} by ${userName} on ${skillNames}
 			`;
 		}
 
 		return oneLineCommaListsAnd`
 			${post.description} | ${userName}'s post on ${skillNames}
 		`;
-	}, [post?.description, skills, userName]);
+	}, [post?.description, post?.title, skills, userName]);
 
 	/**
 	 * TODO

@@ -1,5 +1,6 @@
 import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
@@ -9,6 +10,7 @@ import {
 	LoadingUserActivityCardPost,
 	LoadingUserActivityCardSkill,
 	LoadingUserActivityCardUser,
+	Seo,
 	UserActivityCard,
 	UserPageLayout
 } from "../../organisms";
@@ -16,6 +18,7 @@ import { PageProps, pageProps } from "../../page-props/[userName]/activity";
 import { PulseIcon } from "../../svgs";
 
 const BATCH_SIZE = 20;
+const MIN_SEO_SIZE = 20;
 
 const Activities = tw.div`
 	flex
@@ -46,8 +49,21 @@ export const Page: NextPage<PageProps> = () => {
 	const user = data?.user;
 	const activities = user?.activities.nodes ?? [];
 
+	const shouldIndex = activities.length >= MIN_SEO_SIZE;
+
 	return (
 		<UserPageLayout selectedTab="activity" userName={userName}>
+			<Seo
+				title={`${userName}'s Activities`}
+				description={oneLine`
+					${userName}'s latest activities on MakePurple, including posts,
+					code-examples and developers
+				`}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<Activities>
 				{!activities.length
 					? !fetching && (
