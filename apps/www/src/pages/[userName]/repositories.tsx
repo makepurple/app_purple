@@ -106,7 +106,7 @@ export const Page: NextPage<PageProps> = () => {
 				canonical={`/${userName}/repositories`}
 				description={metaDescription}
 				robots={{
-					follow: shouldIndex,
+					follow: true,
 					index: shouldIndex
 				}}
 			/>

@@ -1,16 +1,19 @@
 import { Button, NonIdealState, NoteIcon, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import tw, { styled } from "twin.macro";
 import { GetPostsDocument, PostOrderByInput, PostWhereInput, SortOrder } from "../../../graphql";
-import { LoadingPostCard, PostCard, UserPageLayout } from "../../../organisms";
+import { LoadingPostCard, PostCard, Seo, UserPageLayout } from "../../../organisms";
 import { PageProps, pageProps } from "../../../page-props/[userName]/posts/[[...slug]]";
 
 const BATCH_SIZE = 20;
+const MIN_SEO_READ_TIME = 10;
+const MIN_SEO_SIZE = 3;
 
 const Posts = tw.div`
 	flex
@@ -98,10 +101,28 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const posts = data?.posts.nodes ?? [];
+	const posts = useMemo(() => data?.posts.nodes ?? [], [data?.posts.nodes]);
+	const seoReadTime = useMemo(() => posts.reduce((sum, post) => sum + post.readTime, 0), [posts]);
+	const shouldIndex = posts.length >= MIN_SEO_SIZE && seoReadTime >= MIN_SEO_READ_TIME;
+
+	const metaDescription = useMemo(() => {
+		const postTitles = posts.slice(0, MIN_SEO_SIZE).map((post) => post.title);
+
+		return oneLineCommaListsAnd`
+			${userName}'s posts, including ${postTitles}
+		`;
+	}, [posts, userName]);
 
 	return (
 		<UserPageLayout selectedTab="posts" userName={userName}>
+			<Seo
+				title={`${userName}'s Posts`}
+				description={metaDescription}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<OrderBy>
 				<OrderBys>
 					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>

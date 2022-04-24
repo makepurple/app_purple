@@ -57,7 +57,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	return (
 		<UserPageLayout selectedTab="connections" userName={userName}>
-			<Seo title={`Topics followed by ${userName}`} />
+			<Seo title={`Topics followed by ${userName}`} robots={{ follow: true, index: false }} />
 			<Content>
 				<UserConnectionPageTabs selectedTab="following" userName={userName} />
 				<Following>
