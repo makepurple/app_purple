@@ -1,4 +1,8 @@
 export class ArrayUtils {
+	public static distinct<T>(array: readonly T[]): readonly T[] {
+		return Array.from(array.reduce((set, item) => set.add(item), new Set<T>()));
+	}
+
 	public static dropFalsey<T>(array: readonly Maybe<T>[]): readonly T[] {
 		return array.filter((item) => !!item) as readonly T[];
 	}

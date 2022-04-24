@@ -1,21 +1,26 @@
 import { Avatar, Button, Logo, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { ArrayUtils } from "@makepurple/utils";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import tw from "twin.macro";
 import { GetUserCodeExamplesDocument } from "../../../graphql";
 import {
 	CodeExampleCreateCard,
 	CodeExampleMiniCard,
 	LoadingCodeExampleCard,
+	Seo,
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/snippets";
 
 const BATCH_SIZE = 20;
+const MIN_SEO_SIZE = 5;
+const MIN_SEO_SKILL_SIZE = 5;
 
 const Content = tw.div`
 	grid
@@ -64,6 +69,7 @@ export const Page: NextPage<PageProps> = () => {
 	const { data: session } = useSession();
 
 	const userName = router?.query.userName as string;
+	const isMyPage = session?.user.name === userName;
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
 		query: GetUserCodeExamplesDocument,
@@ -77,12 +83,40 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const codeExamples = data?.user?.codeExamples.nodes ?? [];
+	const codeExamples = useMemo(
+		() => data?.user?.codeExamples.nodes ?? [],
+		[data?.user?.codeExamples.nodes]
+	);
 
-	const isMyPage = session?.user.name === userName;
+	const shouldIndex = codeExamples.length >= MIN_SEO_SIZE;
+
+	const metaDescription = useMemo(() => {
+		const seoCodeExamples = codeExamples.slice(0, MIN_SEO_SIZE);
+
+		const codeExampleTitles = seoCodeExamples.map((codeExample) => codeExample.title);
+
+		const skillNames = codeExamples.reduce(
+			(acc, codeExample) => [...acc, ...codeExample.skills.nodes.map((skill) => skill.name)],
+			[] as readonly string[]
+		);
+
+		const skills = ArrayUtils.distinct(skillNames).slice(0, MIN_SEO_SKILL_SIZE);
+
+		return oneLineCommaListsAnd`
+			${userName}'s code snippets, including ${codeExampleTitles} for ${skills}
+		`;
+	}, [codeExamples, userName]);
 
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
+			<Seo
+				title={`${userName}'s Code Snippets`}
+				description={metaDescription}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<Content>
 				{!codeExamples.length ? (
 					!fetching && (

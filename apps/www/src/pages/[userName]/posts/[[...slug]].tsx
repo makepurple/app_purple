@@ -105,18 +105,25 @@ export const Page: NextPage<PageProps> = () => {
 	const seoReadTime = useMemo(() => posts.reduce((sum, post) => sum + post.readTime, 0), [posts]);
 	const shouldIndex = posts.length >= MIN_SEO_SIZE && seoReadTime >= MIN_SEO_READ_TIME;
 
+	const metaTitle = useMemo(
+		() => (sort === "top" ? `${userName}'s Top Posts` : `${userName}'s Latest Posts`),
+		[sort, userName]
+	);
+
 	const metaDescription = useMemo(() => {
 		const postTitles = posts.slice(0, MIN_SEO_SIZE).map((post) => post.title);
 
+		const metaSort = sort === "top" ? "top" : "latest";
+
 		return oneLineCommaListsAnd`
-			${userName}'s posts, including ${postTitles}
+			${userName}'s ${metaSort} posts, including ${postTitles}
 		`;
-	}, [posts, userName]);
+	}, [posts, sort, userName]);
 
 	return (
 		<UserPageLayout selectedTab="posts" userName={userName}>
 			<Seo
-				title={`${userName}'s Posts`}
+				title={metaTitle}
 				description={metaDescription}
 				robots={{
 					follow: true,

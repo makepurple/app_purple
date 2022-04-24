@@ -1,14 +1,16 @@
 import { Anchor, Button, Divider, NonIdealState, Paper } from "@makepurple/components";
 import { FormatUtils } from "@makepurple/utils";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import tw from "twin.macro";
-import { useGetUserOverviewQuery } from "../../graphql";
+import { useGetUserInfoSideBarQuery, useGetUserOverviewQuery } from "../../graphql";
 import {
 	CodeExampleMiniCard,
 	PostCard,
+	Seo,
 	UserGitHubContributions,
 	UserOverviewExperienceCard,
 	UserOverviewRepositoryCard,
@@ -17,6 +19,11 @@ import {
 } from "../../organisms";
 import { PageProps, pageProps } from "../../page-props/[userName]";
 import { CodeIcon, HexagonIcon, NoteIcon, RepoIcon } from "../../svgs";
+
+const SEO_MIN_EXPERIENCES = 1;
+const SEO_MIN_CODE_EXAMPLES = 2;
+const SEO_MIN_REPOSITORIES = 2;
+const SEO_MIN_SKILLS = 6;
 
 const Contents = tw.div`
 	flex
@@ -89,7 +96,24 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
+	const [{ data: skillsData }] = useGetUserInfoSideBarQuery({
+		requestPolicy: "cache-first",
+		variables: {
+			name: userName
+		}
+	});
+
 	const user = data?.user;
+
+	const skills = useMemo(
+		() => skillsData?.user?.skills.nodes ?? [],
+		[skillsData?.user?.skills.nodes]
+	);
+
+	const skillNames = useMemo(
+		() => skills.map((skill) => skill.name).slice(0, SEO_MIN_SKILLS),
+		[skills]
+	);
 
 	if (!user) return null;
 
@@ -98,8 +122,26 @@ export const Page: NextPage<PageProps> = () => {
 	const experiences = user.experiences.nodes ?? [];
 	const repositories = user.repositories.nodes ?? [];
 
+	const shouldIndex =
+		!!post &&
+		codeExamples.length >= SEO_MIN_CODE_EXAMPLES &&
+		experiences.length >= SEO_MIN_EXPERIENCES &&
+		repositories.length >= SEO_MIN_REPOSITORIES &&
+		skills.length >= SEO_MIN_SKILLS;
+
 	return (
 		<UserPageLayout selectedTab="overview" userName={userName}>
+			<Seo
+				title={userName}
+				description={oneLineCommaListsAnd`
+					${userName}'s developer profile, featuring posts, code-examples, experiences,
+					and repositories for ${skillNames}
+				`}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<Contents>
 				<UserTrophies userName={userName} />
 				<UserGitHubContributions userName={userName} />
