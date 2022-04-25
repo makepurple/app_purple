@@ -1,4 +1,5 @@
 import { Menu } from "@headlessui/react";
+import { useNoSsr } from "@makepurple/hooks";
 import { WindowUtils } from "@makepurple/utils";
 import copyToClipboard from "copy-to-clipboard";
 import React, { FC, Fragment, useCallback, useState } from "react";
@@ -64,6 +65,8 @@ export type ShareButtonProps = ButtonProps & {
 };
 
 export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonProps }) => {
+	const noSsr = useNoSsr();
+
 	const [refElem, refRef] = useState<HTMLButtonElement | null>(null);
 	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
 
@@ -95,7 +98,7 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 		navigator.canShare(share);
 
 	if (canNativeShare) {
-		return (
+		return noSsr(
 			<Button
 				{...buttonProps}
 				onClick={async () => {
@@ -107,7 +110,7 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 		);
 	}
 
-	return (
+	return noSsr(
 		<Menu as={Fragment}>
 			<Menu.Button as={Button} {...buttonProps} ref={refRef} />
 			{WindowUtils.isBrowser() &&
