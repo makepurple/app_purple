@@ -2928,6 +2928,7 @@ export const GitHubUser_fragment_mock: GitHubUser = {
 		edges: [],
 		nodes: []
 	},
+	followerCount: 0,
 	login: "leedavidcs",
 	name: "David Lee",
 	repositories: {

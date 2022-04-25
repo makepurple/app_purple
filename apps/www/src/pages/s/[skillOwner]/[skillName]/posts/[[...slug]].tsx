@@ -13,13 +13,13 @@ import {
 	PostWhereInput,
 	SortOrder
 } from "../../../../../graphql";
+import { useIndexSkill } from "../../../../../hooks";
 import { LoadingPostCard, PostCard, Seo, SkillPageLayout } from "../../../../../organisms";
 import {
 	PageProps,
 	pageProps
 } from "../../../../../page-props/s/[skillOwner]/[skillName]/posts/[[...slug]]";
 import { NoteIcon } from "../../../../../svgs";
-import { useIndexSkill } from "../../../../hooks";
 
 const BATCH_SIZE = 20;
 const MIN_SEO_READ_TIME = 10;

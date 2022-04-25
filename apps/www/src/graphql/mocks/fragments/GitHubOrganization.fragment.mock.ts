@@ -23,6 +23,7 @@ export const GitHubOrganization_fragment_mock: GitHubOrganization = {
 	},
 	id: "0",
 	login: "facebook",
+	memberCount: 0,
 	name: "Meta",
 	organization: null as any,
 	repositories: {
