@@ -39,6 +39,7 @@
 		"react-hook-form": "^7.30.0",
 		"react-hot-toast": "^2.2.0",
 		"react-popper": "^2.2.5",
+		"react-share": "^4.4.0",
 		"react-simple-code-editor": "^0.11.0",
 		"slate": "^0.77.2",
 		"slate-history": "^0.66.0",

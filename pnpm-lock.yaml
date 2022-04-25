@@ -444,6 +444,7 @@ importers:
       react-hot-toast: ^2.2.0
       react-is: ^17.0.2
       react-popper: ^2.2.5
+      react-share: ^4.4.0
       react-simple-code-editor: ^0.11.0
       slate: ^0.77.2
       slate-history: ^0.66.0
@@ -486,6 +487,7 @@ importers:
       react-hook-form: 7.30.0_react@17.0.2
       react-hot-toast: 2.2.0_react-dom@17.0.2+react@17.0.2
       react-popper: 2.2.5_bdf4b8b1046519a8ec8ac2b64ac98053
+      react-share: 4.4.0_react@17.0.2
       react-simple-code-editor: 0.11.0_react-dom@17.0.2+react@17.0.2
       slate: 0.77.2
       slate-history: 0.66.0_slate@0.77.2
@@ -9819,7 +9821,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.5
+      styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
@@ -16314,11 +16316,17 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
 
   /jsonify/0.0.0:
     resolution: {integrity: sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=}
     dev: true
+
+  /jsonp/0.2.1:
+    resolution: {integrity: sha1-pltPoPEL2nGaBUQep7lMVfPhW64=}
+    dependencies:
+      debug: 2.6.9
+    dev: false
 
   /jsonwebtoken/8.5.1:
     resolution: {integrity: sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==}
@@ -19685,6 +19693,17 @@ packages:
       react: 17.0.2
       react-is: 17.0.2
     dev: true
+
+  /react-share/4.4.0_react@17.0.2:
+    resolution: {integrity: sha512-POe8Ge/JT9Ew9iyW7CiYsCCWCb8uMJWqFl9S7W0fJ/oH5gBJNzukH0bL5vSr17KKG5h15d3GfKaoviI22BKeYA==}
+    engines: {node: '>=6.9.0', npm: '>=5.0.0'}
+    peerDependencies:
+      react: ^16.3.0 || ^17
+    dependencies:
+      classnames: 2.3.1
+      jsonp: 0.2.1
+      react: 17.0.2
+    dev: false
 
   /react-simple-code-editor/0.11.0_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-xGfX7wAzspl113ocfKQAR8lWPhavGWHL3xSzNLeseDRHysT+jzRBi/ExdUqevSMos+7ZtdfeuBOXtgk9HTwsrw==}
