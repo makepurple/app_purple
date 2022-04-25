@@ -22,6 +22,7 @@ const config = {
 		API_URL_STATIC_BUILD:      process.env.API_URL_STATIC_BUILD,
 		NEXTAUTH_SECRET:           process.env.NEXTAUTH_SECRET,
 		NEXTAUTH_URL:              process.env.NEXTAUTH_URL,
+		SEO:                       process.env.SEO,
 
 		REDIS_HOST:                process.env.REDIS_HOST,
 		REDIS_PORT:                process.env.REDIS_PORT,

@@ -14,7 +14,7 @@ export interface SeoMiscProps {
 export const SeoMisc: FC<SeoMiscProps> = ({
 	canonical: _canonical = "",
 	ogType,
-	robots: _robots = {}
+	robots: _robots
 }) => {
 	const { index, follow } = { index: false, follow: false, ..._robots };
 
