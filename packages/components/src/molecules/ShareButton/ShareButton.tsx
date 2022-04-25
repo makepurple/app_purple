@@ -94,94 +94,88 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 		typeof navigator.share === "function" &&
 		navigator.canShare(share);
 
+	if (canNativeShare) {
+		return (
+			<Button
+				{...buttonProps}
+				onClick={async () => {
+					await navigator.share(share).catch((e) => {
+						alert(e.message);
+					});
+				}}
+			/>
+		);
+	}
+
 	return (
 		<Menu as={Fragment}>
-			{({ open }) => (
-				<>
-					<Menu.Button
-						as={Button}
-						{...buttonProps}
-						ref={refRef}
-						onClick={async () => {
-							if (!canNativeShare) return;
+			<Menu.Button as={Button} {...buttonProps} ref={refRef} />
+			{WindowUtils.isBrowser() &&
+				createPortal(
+					<Menu.Items
+						as={ShareItems}
+						ref={popperRef}
+						style={styles.popper}
+						{...attributes.popper}
+					>
+						<Menu.Item>
+							{(itemProps) => (
+								<TwitterShareButton
+									hashtags={tags?.slice()}
+									title={share.title}
+									url={getShareUrl("twitter")}
+								>
+									<ShareItem {...itemProps}>
+										<TwitterIcon size={32} borderRadius={8} />
+										<span>Twitter</span>
+									</ShareItem>
+								</TwitterShareButton>
+							)}
+						</Menu.Item>
+						<Menu.Item>
+							{(itemProps) => (
+								<LinkedinShareButton
+									source="MakePurple"
+									title={share.title}
+									url={getShareUrl("linkedin")}
+								>
+									<ShareItem {...itemProps}>
+										<LinkedinIcon size={32} borderRadius={8} />
+										<span>LinkedIn</span>
+									</ShareItem>
+								</LinkedinShareButton>
+							)}
+						</Menu.Item>
+						<Menu.Item>
+							{(itemProps) => (
+								<RedditShareButton title={share.title} url={getShareUrl("reddit")}>
+									<ShareItem {...itemProps}>
+										<RedditIcon size={32} borderRadius={8} />
+										<span>Reddit</span>
+									</ShareItem>
+								</RedditShareButton>
+							)}
+						</Menu.Item>
+						<Menu.Item>
+							{(itemProps) => (
+								<ShareItem
+									{...itemProps}
+									onClick={() => {
+										copyToClipboard(getShareUrl("copy"));
 
-							await navigator.share(share);
-						}}
-					/>
-					{WindowUtils.isBrowser() &&
-						open &&
-						!canNativeShare &&
-						createPortal(
-							<Menu.Items
-								as={ShareItems}
-								ref={popperRef}
-								static
-								style={styles.popper}
-								{...attributes.popper}
-							>
-								<Menu.Item>
-									{(itemProps) => (
-										<TwitterShareButton
-											hashtags={tags?.slice()}
-											title={share.title}
-											url={getShareUrl("twitter")}
-										>
-											<ShareItem {...itemProps}>
-												<TwitterIcon size={32} borderRadius={8} />
-												<span>Twitter</span>
-											</ShareItem>
-										</TwitterShareButton>
-									)}
-								</Menu.Item>
-								<Menu.Item>
-									{(itemProps) => (
-										<LinkedinShareButton
-											source="MakePurple"
-											title={share.title}
-											url={getShareUrl("linkedin")}
-										>
-											<ShareItem {...itemProps}>
-												<LinkedinIcon size={32} borderRadius={8} />
-												<span>LinkedIn</span>
-											</ShareItem>
-										</LinkedinShareButton>
-									)}
-								</Menu.Item>
-								<Menu.Item>
-									{(itemProps) => (
-										<RedditShareButton
-											title={share.title}
-											url={getShareUrl("reddit")}
-										>
-											<ShareItem {...itemProps}>
-												<RedditIcon size={32} borderRadius={8} />
-												<span>Reddit</span>
-											</ShareItem>
-										</RedditShareButton>
-									)}
-								</Menu.Item>
-								<Menu.Item>
-									{(itemProps) => (
-										<ShareItem
-											{...itemProps}
-											onClick={() => {
-												copyToClipboard(getShareUrl("copy"));
-
-												toast.success("Copied!");
-											}}
-										>
-											<CopyIconContainer>
-												<CopyIcon height={24} width={24} />
-											</CopyIconContainer>
-											<span>Copy Url</span>
-										</ShareItem>
-									)}
-								</Menu.Item>
-							</Menu.Items>,
-							document.body
-						)}
-				</>
-			)}
+										toast.success("Copied!");
+									}}
+								>
+									<CopyIconContainer>
+										<CopyIcon height={24} width={24} />
+									</CopyIconContainer>
+									<span>Copy Url</span>
+								</ShareItem>
+							)}
+						</Menu.Item>
+					</Menu.Items>,
+					document.body
+				)}
 		</Menu>
 	);
 };
