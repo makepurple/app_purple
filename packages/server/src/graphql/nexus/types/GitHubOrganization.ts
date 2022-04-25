@@ -2,7 +2,7 @@ import { nonNull, objectType } from "nexus";
 
 export const GitHubOrganization = objectType({
 	name: "GitHubOrganization",
-	sourceType: "octokit.GitHubOrganizationFragment",
+	sourceType: "octokit.DeepGitHubType<octokit.GitHubOrganizationFragment>",
 	definition: (t) => {
 		t.implements("GitHubRepositoryOwner");
 		t.string("description");

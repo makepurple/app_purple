@@ -2,7 +2,7 @@ import { objectType } from "nexus";
 
 export const GitHubRepository = objectType({
 	name: "GitHubRepository",
-	sourceType: "octokit.GitHubRepositoryFragment",
+	sourceType: "octokit.DeepGitHubType<octokit.GitHubRepositoryFragment>",
 	definition: (t) => {
 		t.nonNull.string("id");
 		t.string("description");

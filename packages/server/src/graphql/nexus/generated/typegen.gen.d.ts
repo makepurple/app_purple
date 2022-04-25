@@ -589,8 +589,8 @@ export interface NexusGenObjects {
     spdxId?: string | null; // String
     url?: NexusGenScalars['URL'] | null; // URL
   }
-  GitHubOrganization: octokit.GitHubOrganizationFragment;
-  GitHubRepository: octokit.GitHubRepositoryFragment;
+  GitHubOrganization: octokit.DeepGitHubType<octokit.GitHubOrganizationFragment>;
+  GitHubRepository: octokit.DeepGitHubType<octokit.GitHubRepositoryFragment>;
   GitHubRepositoryConnection: { // root type
     edges: NexusGenRootTypes['GitHubRepositoryEdge'][]; // [GitHubRepositoryEdge!]!
     pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
@@ -600,7 +600,7 @@ export interface NexusGenObjects {
     cursor: string; // String!
     node: NexusGenRootTypes['GitHubRepository']; // GitHubRepository!
   }
-  GitHubUser: octokit.GitHubUserFragment;
+  GitHubUser: octokit.DeepGitHubType<octokit.GitHubUserFragment>;
   GitHubUserContributionCalendar: { // root type
     totalContributions: number; // Int!
     weeks: NexusGenRootTypes['GitHubUserContributionCalendarWeek'][]; // [GitHubUserContributionCalendarWeek!]!

@@ -5,7 +5,7 @@ import type { octokit } from "../../../services";
 
 export const GitHubUser = objectType({
 	name: "GitHubUser",
-	sourceType: "octokit.GitHubUserFragment",
+	sourceType: "octokit.DeepGitHubType<octokit.GitHubUserFragment>",
 	description: oneLine`
 		Data for a user from that user's connected GitHub account.
 	`,

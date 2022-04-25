@@ -3,7 +3,7 @@ import { OctokitClient } from "./octokit-client";
 export * from "./fragments";
 export * from "./generated";
 
-export type { OctokitClient } from "./octokit-client";
+export type { DeepGitHubType, OctokitClient } from "./octokit-client";
 
 // Make global.cachedOctokit work with TypeScript
 declare global {

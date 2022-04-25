@@ -8,7 +8,7 @@ import type { RequestOptions } from "@octokit/types";
 import { oneLine } from "common-tags";
 import { parse, print } from "graphql";
 
-declare type DeepGitHubType<T> = T extends { __typename?: infer U }
+export declare type DeepGitHubType<T> = T extends { __typename?: infer U }
 	? U extends string
 		? { [P in keyof Omit<T, "__typename">]: DeepGitHubType<T[P]> } & {
 				__typename: `GitHub${U}`;
