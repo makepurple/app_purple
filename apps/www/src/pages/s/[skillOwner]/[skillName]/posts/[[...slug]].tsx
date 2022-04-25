@@ -6,7 +6,6 @@ import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
-import { useIndexSkill } from "src/hooks";
 import tw, { styled } from "twin.macro";
 import {
 	GetPostsDocument,
@@ -20,6 +19,7 @@ import {
 	pageProps
 } from "../../../../../page-props/s/[skillOwner]/[skillName]/posts/[[...slug]]";
 import { NoteIcon } from "../../../../../svgs";
+import { useIndexSkill } from "../../../../hooks";
 
 const BATCH_SIZE = 20;
 const MIN_SEO_READ_TIME = 10;

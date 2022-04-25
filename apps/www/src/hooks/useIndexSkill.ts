@@ -1,4 +1,4 @@
-import { useGetSkillInfoSideBarQuery } from "src/graphql";
+import { useGetSkillInfoSideBarQuery } from "../graphql";
 
 const MIN_SEO_STAR_COUNT = 10_000;
 

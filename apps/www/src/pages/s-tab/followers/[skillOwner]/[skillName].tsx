@@ -1,11 +1,13 @@
 import { NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
 import { GetSkillFollowersDocument } from "../../../../graphql";
-import { LoadingUserFollowCard, SkillPageLayout, UserFollowCard } from "../../../../organisms";
+import { useIndexSkill } from "../../../../hooks";
+import { LoadingUserFollowCard, Seo, SkillPageLayout, UserFollowCard } from "../../../../organisms";
 import {
 	PageProps,
 	pageProps
@@ -13,6 +15,7 @@ import {
 import { PersonIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 20;
+const MIN_SEO_SIZE = 20;
 
 const Content = tw.div`
 	flex
@@ -50,8 +53,22 @@ export const Page: NextPage<PageProps> = () => {
 
 	const followers = data?.skill?.followers.nodes ?? [];
 
+	const canIndex = useIndexSkill(skillOwner, skillName);
+
+	const shouldIndex = canIndex || followers.length >= MIN_SEO_SIZE;
+
 	return (
 		<SkillPageLayout selectedTab="followers" skillName={skillName} skillOwner={skillOwner}>
+			<Seo
+				title={`${skillName}'s Followers`}
+				description={oneLine`
+					Developers following ${skillOwner}'s ${skillName}
+				`}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<Content>
 				<Followers>
 					{!followers.length

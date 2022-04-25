@@ -1,15 +1,19 @@
 import { Avatar, Button, Logo, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { ArrayUtils } from "@makepurple/utils";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import tw from "twin.macro";
 import { GetSkillCodeExamplesDocument } from "../../../../graphql";
+import { useIndexSkill } from "../../../../hooks";
 import {
 	CodeExampleMiniCard,
 	LoadingCodeExampleCard,
+	Seo,
 	SkillPageLayout
 } from "../../../../organisms";
 import {
@@ -18,6 +22,8 @@ import {
 } from "../../../../page-props/s/[skillOwner]/[skillName]/tab=snippets";
 
 const BATCH_SIZE = 20;
+const SEO_MIN_SIZE = 5;
+const SEO_MIN_SKILL_SIZE = 5;
 
 const Content = tw.div`
 	grid
@@ -79,10 +85,42 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const codeExamples = data?.skill?.codeExamples.nodes ?? [];
+	const codeExamples = useMemo(
+		() => data?.skill?.codeExamples.nodes ?? [],
+		[data?.skill?.codeExamples.nodes]
+	);
+
+	const canIndex = useIndexSkill(skillOwner, skillName);
+
+	const shouldIndex = canIndex || codeExamples.length >= SEO_MIN_SIZE;
+
+	const metaDescription = useMemo(() => {
+		const seoCodeExamples = codeExamples.slice(0, SEO_MIN_SIZE);
+
+		const codeExampleTitles = seoCodeExamples.map((codeExample) => codeExample.title);
+
+		const skillNames = seoCodeExamples.reduce(
+			(acc, codeExample) => [...acc, ...codeExample.skills.nodes.map((skill) => skill.name)],
+			[] as readonly string[]
+		);
+
+		const skills = ArrayUtils.distinct(skillNames).slice(0, SEO_MIN_SKILL_SIZE);
+
+		return oneLineCommaListsAnd`
+			${skillName}'s code snippets, including ${codeExampleTitles} for ${skills}
+		`;
+	}, [codeExamples, skillName]);
 
 	return (
 		<SkillPageLayout selectedTab="snippets" skillName={skillName} skillOwner={skillOwner}>
+			<Seo
+				title={`${skillName}'s Snippets`}
+				description={metaDescription}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			{!codeExamples.length ? (
 				!fetching && (
 					<NonIdealState

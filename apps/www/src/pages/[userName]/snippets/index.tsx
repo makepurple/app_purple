@@ -19,8 +19,8 @@ import {
 import { pageProps, PageProps } from "../../../page-props/[userName]/snippets";
 
 const BATCH_SIZE = 20;
-const MIN_SEO_SIZE = 5;
-const MIN_SEO_SKILL_SIZE = 5;
+const SEO_MIN_SIZE = 5;
+const SEO_MIN_SKILL_SIZE = 5;
 
 const Content = tw.div`
 	grid
@@ -88,19 +88,19 @@ export const Page: NextPage<PageProps> = () => {
 		[data?.user?.codeExamples.nodes]
 	);
 
-	const shouldIndex = codeExamples.length >= MIN_SEO_SIZE;
+	const shouldIndex = codeExamples.length >= SEO_MIN_SIZE;
 
 	const metaDescription = useMemo(() => {
-		const seoCodeExamples = codeExamples.slice(0, MIN_SEO_SIZE);
+		const seoCodeExamples = codeExamples.slice(0, SEO_MIN_SIZE);
 
 		const codeExampleTitles = seoCodeExamples.map((codeExample) => codeExample.title);
 
-		const skillNames = codeExamples.reduce(
+		const skillNames = seoCodeExamples.reduce(
 			(acc, codeExample) => [...acc, ...codeExample.skills.nodes.map((skill) => skill.name)],
 			[] as readonly string[]
 		);
 
-		const skills = ArrayUtils.distinct(skillNames).slice(0, MIN_SEO_SKILL_SIZE);
+		const skills = ArrayUtils.distinct(skillNames).slice(0, SEO_MIN_SKILL_SIZE);
 
 		return oneLineCommaListsAnd`
 			${userName}'s code snippets, including ${codeExampleTitles} for ${skills}
@@ -110,7 +110,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
 			<Seo
-				title={`${userName}'s Code Snippets`}
+				title={`${userName}'s Snippets`}
 				description={metaDescription}
 				robots={{
 					follow: true,

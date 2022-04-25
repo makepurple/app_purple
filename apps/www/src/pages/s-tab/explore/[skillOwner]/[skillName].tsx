@@ -6,9 +6,9 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo } from "react";
-import { useIndexSkill } from "src/hooks";
 import tw from "twin.macro";
 import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../../../../graphql";
+import { useIndexSkill } from "../../../../hooks";
 import { Seo, SkillPageLayout, SuggestedFriendCard } from "../../../../organisms";
 import {
 	PageProps,
@@ -76,7 +76,7 @@ export const Page: NextPage<PageProps> = ({ seed }) => {
 			<Seo
 				title={`Discover Developers for ${skillName}`}
 				description={oneLine`
-					Explore posts and discover developers for ${skillName}!
+					Explore posts and discover developers for ${skillOwner}'s ${skillName}!
 				`}
 				robots={{
 					follow: true,
