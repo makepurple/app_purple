@@ -88,7 +88,11 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 		[share.url, utm]
 	);
 
-	const canNativeShare = typeof navigator !== "undefined" && !!navigator.share;
+	const canNativeShare =
+		WindowUtils.isBrowser() &&
+		typeof navigator !== "undefined" &&
+		typeof navigator.share === "function" &&
+		navigator.canShare(share);
 
 	return (
 		<Menu as={Fragment}>
