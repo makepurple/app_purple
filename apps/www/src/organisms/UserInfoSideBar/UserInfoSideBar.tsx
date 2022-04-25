@@ -7,6 +7,7 @@ import {
 	NoDataText,
 	OpenbaseIcon,
 	Paper,
+	ShareButton,
 	Spinner,
 	Tags,
 	toast,
@@ -28,7 +29,7 @@ import {
 	UserWhereUniqueInput,
 	useUnfollowUserMutation
 } from "../../graphql";
-import { CancelIcon, PeopleIcon } from "../../svgs";
+import { CancelIcon, PeopleIcon, ShareIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { TopLanguages } from "../TopLanguages";
 import { UserAvatar } from "../UserAvatar";
@@ -83,6 +84,7 @@ const Bio = tw.p`
 
 const SocialLinks = tw.div`
 	inline-flex
+	items-center
 	gap-4
 	text-indigo-800
 `;
@@ -207,6 +209,24 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					>
 						<OpenbaseIcon height={24} width={24} />
 					</SocialLink>
+					<ShareButton
+						share={{
+							url: `https://makepurple.com/${userName}`,
+							title: `${userName} on MakePurple`,
+							text: oneLine`
+								Check out ${isMyUser ? "my" : `${userName}'s`} page on MakePurple!
+							`
+						}}
+						size="small"
+						tags={["makepurple"]}
+						utm={{
+							content: "user_profile"
+						}}
+						variant="secondary"
+					>
+						<ShareIcon height={16} width={16} />
+						<span tw="ml-1">Share</span>
+					</ShareButton>
 				</SocialLinks>
 				{isMyUser && !formOpen && (
 					<Actions tw="mt-4">
