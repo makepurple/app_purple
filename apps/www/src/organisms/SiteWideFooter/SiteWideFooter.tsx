@@ -14,8 +14,9 @@ const Content = tw(MainContainer)`
 	flex
 	flex-col
 	items-stretch
-	gap-8
+	gap-3
 	px-6
+	md:gap-8
 `;
 
 const Top = tw.div`
@@ -27,8 +28,17 @@ const Top = tw.div`
 	md:items-center
 `;
 
-const BrandContainer = tw.div`
+const LeftContainer = tw.div`
 	flex-grow
+	flex
+	flex-col
+	items-start
+	gap-3
+	md:flex-row
+	md:items-center
+`;
+
+const BrandContainer = tw.div`
 	flex
 	items-center
 	gap-1
@@ -36,8 +46,10 @@ const BrandContainer = tw.div`
 
 const PoweredByGraphCdn = tw.a`
 	relative
-	width[156px]
-	height[60px]
+	width[130px]
+	height[50px]
+	md:width[156px]
+	md:height[60px]
 `;
 
 const LinksContainer = tw.nav`
@@ -110,14 +122,15 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 		<Root as={Footer} className={className} style={style}>
 			<Content>
 				<Top>
-					<BrandContainer>
-						<Logo />
-						<Brand />
+					<LeftContainer>
+						<BrandContainer>
+							<Logo />
+							<Brand />
+						</BrandContainer>
 						<PoweredByGraphCdn
 							href="https://graphcdn.io/?ref=powered-by"
 							rel="noopener"
 							target="_blank"
-							tw="ml-3"
 						>
 							<NextImage
 								src="https://graphcdn.io/badge.svg"
@@ -127,7 +140,7 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 								unoptimized
 							/>
 						</PoweredByGraphCdn>
-					</BrandContainer>
+					</LeftContainer>
 					<LinksContainer>
 						<NextLink href="/blog" passHref>
 							<SiteLink>Blog</SiteLink>
