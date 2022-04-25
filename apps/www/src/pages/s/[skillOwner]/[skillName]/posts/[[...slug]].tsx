@@ -6,6 +6,7 @@ import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
+import { useIndexSkill } from "src/hooks";
 import tw, { styled } from "twin.macro";
 import {
 	GetPostsDocument,
@@ -118,7 +119,12 @@ export const Page: NextPage<PageProps> = () => {
 
 	const posts = useMemo(() => data?.posts.nodes ?? [], [data?.posts.nodes]);
 	const seoReadTime = useMemo(() => posts.reduce((sum, post) => sum + post.readTime, 0), [posts]);
-	const shouldIndex = posts.length >= MIN_SEO_SIZE && seoReadTime >= MIN_SEO_READ_TIME;
+
+	const canIndex = useIndexSkill(skillOwner, skillName);
+	const shouldIndex = useMemo(
+		() => canIndex || (posts.length >= MIN_SEO_SIZE && seoReadTime >= MIN_SEO_READ_TIME),
+		[canIndex, posts, seoReadTime]
+	);
 
 	const metaTitle = useMemo(
 		() => (sort === "top" ? `${skillName}'s Top Posts` : `${skillName}'s Latest Posts`),

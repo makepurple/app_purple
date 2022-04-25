@@ -1,13 +1,15 @@
 import { MainContainer, NonIdealState } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
+import { oneLine } from "common-tags";
 import { Masonry, RenderComponentProps } from "masonic";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo } from "react";
+import { useIndexSkill } from "src/hooks";
 import tw from "twin.macro";
 import { SuggestedFriendCardUserFragment, SuggestFriendsDocument } from "../../../../graphql";
-import { SkillPageLayout, SuggestedFriendCard } from "../../../../organisms";
+import { Seo, SkillPageLayout, SuggestedFriendCard } from "../../../../organisms";
 import {
 	PageProps,
 	pageProps
@@ -15,6 +17,7 @@ import {
 import { PersonIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 50;
+const MIN_SEO_SIZE = 30;
 
 const Root = tw(MainContainer)`
 	w-full
@@ -61,8 +64,25 @@ export const Page: NextPage<PageProps> = ({ seed }) => {
 		[getRef]
 	);
 
+	const canIndex = useIndexSkill(skillOwner, skillName);
+
+	const shouldIndex = useMemo(
+		() => canIndex || suggestedFriends.length >= MIN_SEO_SIZE,
+		[canIndex, suggestedFriends.length]
+	);
+
 	return (
 		<SkillPageLayout selectedTab="explore" skillName={skillName} skillOwner={skillOwner}>
+			<Seo
+				title={`Discover Developers for ${skillName}`}
+				description={oneLine`
+					Explore posts and discover developers for ${skillName}!
+				`}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<Root>
 				{!suggestedFriends.length ? (
 					<NonIdealState
