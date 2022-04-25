@@ -6,12 +6,14 @@ fragment SkillOwnerInfoSideBarGitHubRepositoryOwner on GitHubRepositoryOwner {
 	url
 	... on GitHubOrganization {
 		description
+		memberCount
 		name
 		twitterUsername
 		websiteUrl
 	}
 	... on GitHubUser {
 		bio
+		followerCount
 		name
 		twitterUsername
 		websiteUrl

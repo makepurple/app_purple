@@ -1,6 +1,7 @@
 import { Button, NonIdealState, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
 import { dayjs } from "@makepurple/utils";
+import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +13,7 @@ import {
 	PostWhereInput,
 	SortOrder
 } from "../../../../../graphql";
-import { LoadingPostCard, PostCard, SkillPageLayout } from "../../../../../organisms";
+import { LoadingPostCard, PostCard, Seo, SkillPageLayout } from "../../../../../organisms";
 import {
 	PageProps,
 	pageProps
@@ -20,6 +21,8 @@ import {
 import { NoteIcon } from "../../../../../svgs";
 
 const BATCH_SIZE = 20;
+const MIN_SEO_READ_TIME = 10;
+const MIN_SEO_SIZE = 3;
 
 const Posts = tw.div`
 	flex
@@ -113,10 +116,35 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const posts = data?.posts.nodes ?? [];
+	const posts = useMemo(() => data?.posts.nodes ?? [], [data?.posts.nodes]);
+	const seoReadTime = useMemo(() => posts.reduce((sum, post) => sum + post.readTime, 0), [posts]);
+	const shouldIndex = posts.length >= MIN_SEO_SIZE && seoReadTime >= MIN_SEO_READ_TIME;
+
+	const metaTitle = useMemo(
+		() => (sort === "top" ? `${skillName}'s Top Posts` : `${skillName}'s Latest Posts`),
+		[skillName, sort]
+	);
+
+	const metaDescription = useMemo(() => {
+		const postTitles = posts.slice(0, MIN_SEO_SIZE).map((post) => post.title);
+
+		const metaSort = sort === "top" ? "top" : "latest";
+
+		return oneLineCommaListsAnd`
+			${skillName}'s ${metaSort} posts, including ${postTitles}
+		`;
+	}, [posts, sort, skillName]);
 
 	return (
 		<SkillPageLayout selectedTab="posts" skillName={skillName} skillOwner={skillOwner}>
+			<Seo
+				title={metaTitle}
+				description={metaDescription}
+				robots={{
+					follow: true,
+					index: shouldIndex
+				}}
+			/>
 			<OrderBy>
 				<OrderBys>
 					<NextLink
