@@ -6,6 +6,7 @@ export * from "./ImageInput";
 export * from "./Legend";
 export * from "./NonIdealState";
 export * from "./ProportionBar";
+export * from "./ShareButton";
 export * from "./Tags";
 export * from "./Trophy";
 export * from "./Typist";

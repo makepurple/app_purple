@@ -26,14 +26,14 @@ export const ListItem = styled.li<{
 		cursor-pointer
 		disabled:cursor-not-allowed
 		hover:text-white
-		hover:bg-indigo-500
+		hover:bg-indigo-500/80
 	`}
 
 	${({ active }) =>
 		active &&
 		tw`
 			text-white
-			bg-indigo-400
+			bg-indigo-500/80
 		`}
 
 	${({ disabled }) =>

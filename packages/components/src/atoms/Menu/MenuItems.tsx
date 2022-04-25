@@ -11,7 +11,6 @@ export const MenuItems = styled(Menu.Items)`
 		inline-flex
 		flex-col
 		items-stretch
-		mt-1
 		p-0.5
 		rounded-lg
 		bg-white
