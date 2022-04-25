@@ -60,6 +60,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<SkillPageLayout selectedTab="followers" skillName={skillName} skillOwner={skillOwner}>
 			<Seo
+				canonical={`/s/${skillOwner}/${skillName}?tab=followers`}
 				title={`${skillName}'s Followers`}
 				description={oneLine`
 					Developers following ${skillOwner}'s ${skillName}

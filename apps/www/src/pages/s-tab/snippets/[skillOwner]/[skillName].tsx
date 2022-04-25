@@ -114,6 +114,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<SkillPageLayout selectedTab="snippets" skillName={skillName} skillOwner={skillOwner}>
 			<Seo
+				canonical={`/s/${skillOwner}/${skillName}?tab=snippets`}
 				title={`${skillName}'s Snippets`}
 				description={metaDescription}
 				robots={{

@@ -144,6 +144,7 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<SkillPageLayout selectedTab="posts" skillName={skillName} skillOwner={skillOwner}>
 			<Seo
+				canonical={slug ? router.asPath : `/s/${skillOwner}/${skillName}`}
 				title={metaTitle}
 				description={metaDescription}
 				robots={{

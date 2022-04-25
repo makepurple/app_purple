@@ -74,6 +74,7 @@ export const Page: NextPage<PageProps> = ({ seed }) => {
 	return (
 		<SkillPageLayout selectedTab="explore" skillName={skillName} skillOwner={skillOwner}>
 			<Seo
+				canonical={`/s/${skillOwner}/${skillName}?tab=explore`}
 				title={`Discover Developers for ${skillName}`}
 				description={oneLine`
 					Explore posts and discover developers for ${skillOwner}'s ${skillName}!
