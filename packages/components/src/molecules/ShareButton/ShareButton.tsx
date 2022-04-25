@@ -102,9 +102,7 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 			<Button
 				{...buttonProps}
 				onClick={async () => {
-					await navigator.share(share).catch((e) => {
-						alert(e.message);
-					});
+					await navigator.share(share);
 				}}
 			/>
 		);
