@@ -1,8 +1,9 @@
-import { Anchor, Avatar, GitHubAvatarImage, Paper } from "@makepurple/components";
+import { Anchor, Avatar, GitHubAvatarImage, Paper, ShareButton } from "@makepurple/components";
+import { oneLine } from "common-tags";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import { useGetSkillOwnerInfoSideBarQuery } from "../../graphql";
-import { GitHubIcon, LinkIcon, TwitterIcon } from "../../svgs";
+import { GitHubIcon, LinkIcon, ShareIcon, TwitterIcon } from "../../svgs";
 
 const Root = tw(Paper)`
 	p-4
@@ -34,6 +35,7 @@ const Description = tw.p`
 
 const SocialLinks = tw.div`
 	inline-flex
+	items-center
 	gap-4
 	text-indigo-800
 `;
@@ -108,6 +110,24 @@ export const SkillOwnerInfoSideBar: FC<SkillOwnerInfoSideBarProps> = ({
 						<LinkIcon height={24} width={24} />
 					</SocialLink>
 				)}
+				<ShareButton
+					share={{
+						url: `https://makepurple.com/s/${skillOwner}`,
+						title: `Check out ${skillOwner} on MakePurple!`,
+						text: oneLine`
+							Check out ${skillOwner}'s page on MakePurple!
+						`
+					}}
+					size="small"
+					tags={["makepurple", skillOwner]}
+					utm={{
+						content: "skill_owner"
+					}}
+					variant="secondary"
+				>
+					<ShareIcon height={16} width={16} />
+					<span tw="ml-1">Share</span>
+				</ShareButton>
 			</SocialLinks>
 		</Root>
 	);

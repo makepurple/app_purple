@@ -5,10 +5,12 @@ import {
 	GitHubAvatarImage,
 	MaybeAnchor,
 	Paper,
+	ShareButton,
 	Spinner,
 	toast
 } from "@makepurple/components";
-import { dayjs, FormatUtils } from "@makepurple/utils";
+import { ArrayUtils, dayjs, FormatUtils } from "@makepurple/utils";
+import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -32,6 +34,7 @@ import {
 	LinkIcon,
 	PeopleIcon,
 	PullRequestIcon,
+	ShareIcon,
 	StarIcon,
 	TwitterIcon
 } from "../../svgs";
@@ -118,6 +121,7 @@ const LanguageColor = tw.div`
 
 const SocialLinks = tw.div`
 	inline-flex
+	items-center
 	gap-4
 	text-indigo-800
 `;
@@ -445,6 +449,25 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 						<LinkIcon height={24} width={24} />
 					</SocialLink>
 				)}
+				<ShareButton
+					share={{
+						url: `https://makepurple.com/s/${skillOwner}/${skillName}`,
+						title: `Check out ${skillOwner}/${skillName} on MakePurple!`,
+						text: oneLine`
+							Check out ${skillOwner}/${skillName}'s page on MakePurple,
+							featuring posts, developers, code-examples and more!
+						`
+					}}
+					size="small"
+					tags={ArrayUtils.distinct(["makepurple", skillOwner, skillName])}
+					utm={{
+						content: "skill"
+					}}
+					variant="secondary"
+				>
+					<ShareIcon height={16} width={16} />
+					<span tw="ml-1">Share</span>
+				</ShareButton>
 			</SocialLinks>
 			<Actions tw="mt-4">
 				<NewPostButton skillName={skillName} skillOwner={skillOwner}>

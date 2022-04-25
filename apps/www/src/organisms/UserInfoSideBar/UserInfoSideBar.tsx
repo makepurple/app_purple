@@ -212,9 +212,11 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					<ShareButton
 						share={{
 							url: `https://makepurple.com/${userName}`,
-							title: `${userName} on MakePurple`,
+							title: `Check out ${userName} on MakePurple!`,
 							text: oneLine`
-								Check out ${isMyUser ? "my" : `${userName}'s`} page on MakePurple!
+								Check out ${isMyUser ? "my" : `${userName}'s`} page on
+								MakePurple, featuring posts, experiences, repositories,
+								code-examples and more!
 							`
 						}}
 						size="small"

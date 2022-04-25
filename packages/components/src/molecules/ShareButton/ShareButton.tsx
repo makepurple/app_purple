@@ -123,7 +123,7 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 							{(itemProps) => (
 								<TwitterShareButton
 									hashtags={tags?.slice()}
-									title={share.title}
+									title={share.text}
 									url={getShareUrl("twitter")}
 								>
 									<ShareItem {...itemProps}>
@@ -137,7 +137,7 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 							{(itemProps) => (
 								<LinkedinShareButton
 									source="MakePurple"
-									title={share.title}
+									title={share.text}
 									url={getShareUrl("linkedin")}
 								>
 									<ShareItem {...itemProps}>
@@ -149,7 +149,7 @@ export const ShareButton: FC<ShareButtonProps> = ({ share, tags, utm, ...buttonP
 						</Menu.Item>
 						<Menu.Item>
 							{(itemProps) => (
-								<RedditShareButton title={share.title} url={getShareUrl("reddit")}>
+								<RedditShareButton title={share.text} url={getShareUrl("reddit")}>
 									<ShareItem {...itemProps}>
 										<RedditIcon size={32} borderRadius={8} />
 										<span>Reddit</span>
