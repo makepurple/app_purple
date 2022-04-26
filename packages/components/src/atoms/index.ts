@@ -22,6 +22,7 @@ export * from "./FormHelperText";
 export * from "./FormLabel";
 export * from "./FrostedGlass";
 export * from "./GitHubAvatarImage";
+export * from "./GoogleAnalytics";
 export * from "./GradientHeader";
 export * from "./HamburgerMenuButton";
 export * from "./HiddenInput";

@@ -1,4 +1,10 @@
-import { ErrorBoundary, GlobalStyles, LazyMotion, Toaster } from "@makepurple/components";
+import {
+	ErrorBoundary,
+	GlobalStyles,
+	GoogleAnalytics,
+	LazyMotion,
+	Toaster
+} from "@makepurple/components";
 import type { NextProgressBarProps } from "@makepurple/components";
 import ms from "ms";
 import type { NextComponentType } from "next";
@@ -67,6 +73,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 				<meta key="theme-color" name="theme-color" content="#ffffff" />
 			</NextHead>
 			<GlobalStyles />
+			<GoogleAnalytics measurementId={process.env.GOOGLE_ANALYTICS_ID} />
 			<ErrorBoundary fallback={() => <ErrorPage />}>
 				{({ error, fallback }) => (
 					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>

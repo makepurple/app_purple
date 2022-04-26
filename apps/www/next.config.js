@@ -23,6 +23,7 @@ const config = {
 		NEXTAUTH_SECRET:           process.env.NEXTAUTH_SECRET,
 		NEXTAUTH_URL:              process.env.NEXTAUTH_URL,
 		SEO:                       process.env.SEO,
+		GOOGLE_ANALYTICS_ID:       process.env.GOOGLE_ANALYTICS_ID,
 
 		REDIS_HOST:                process.env.REDIS_HOST,
 		REDIS_PORT:                process.env.REDIS_PORT,
