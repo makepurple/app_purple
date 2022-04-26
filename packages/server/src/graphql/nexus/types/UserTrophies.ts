@@ -102,8 +102,9 @@ export const UserTrophies = objectType({
 						user(login: $login) {
 							id
 							contributionsCollection(from: $from) {
-								restrictedContributionsCount
-								totalCommitContributions
+								contributionCalendar {
+									totalContributions
+								}
 							}
 						}
 					}
@@ -118,10 +119,7 @@ export const UserTrophies = objectType({
 
 				if (!contributions) return 0;
 
-				return (
-					contributions.restrictedContributionsCount +
-					contributions.totalCommitContributions
-				);
+				return contributions.contributionCalendar.totalContributions;
 			}
 		});
 		t.nonNull.int("totalYearlyPosts", {

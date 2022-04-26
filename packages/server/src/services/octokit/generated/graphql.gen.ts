@@ -23862,7 +23862,7 @@ export type GetUserTrophyCommitCountsQueryVariables = Exact<{
 }>;
 
 
-export type GetUserTrophyCommitCountsQuery = { __typename?: 'Query', user?: { __typename?: 'User', id: string, contributionsCollection: { __typename?: 'ContributionsCollection', restrictedContributionsCount: number, totalCommitContributions: number } } | null };
+export type GetUserTrophyCommitCountsQuery = { __typename?: 'Query', user?: { __typename?: 'User', id: string, contributionsCollection: { __typename?: 'ContributionsCollection', contributionCalendar: { __typename?: 'ContributionCalendar', totalContributions: number } } } | null };
 
 export type GetGitHubRepositoryForSkillQueryVariables = Exact<{
   name: Scalars['String'];
