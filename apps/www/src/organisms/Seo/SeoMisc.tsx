@@ -20,7 +20,7 @@ export const SeoMisc: FC<SeoMiscProps> = ({
 
 	const router = useRouter();
 
-	const locale = router?.locale;
+	const locale = router?.locale ?? "en-US";
 
 	const canonical = `https://makepurple.com${_canonical.replace(/\/+$/g, "")}`;
 
