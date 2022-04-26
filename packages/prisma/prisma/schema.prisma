@@ -63,6 +63,12 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+enum UserRole {
+  Admin
+  Moderator
+  Member
+}
+
 model User {
   accounts                  Account[]
   activities                UserActivity[]
@@ -95,6 +101,7 @@ model User {
   notificationsLastOpenedAt DateTime               @default(now()) @db.DateTime(6)
   posts                     Post[]                 @relation("PostAuthor")
   repositories              Repository[]
+  role                      UserRole               @default(Member)
   // Self written summary or description
   sessions                  Session[]
   skills                    SkillsOnUsers[]
