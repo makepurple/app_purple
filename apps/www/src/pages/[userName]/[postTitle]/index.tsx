@@ -7,6 +7,7 @@ import {
 	GitHubAvatarImage,
 	NonIdealState,
 	Paper,
+	ShareButton,
 	Tags,
 	toast
 } from "@makepurple/components";
@@ -37,7 +38,7 @@ import {
 	UserPageLayout
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
-import { CommentIcon, ThumbsUpIcon } from "../../../svgs";
+import { CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../svgs";
 
 const MIN_SEO_READ_TIME = 3;
 const SEO_SKILL_COUNT = 5;
@@ -122,6 +123,14 @@ const Actions = tw.div`
 	bg-white
 	z-index[1]
 	sm:px-6
+`;
+
+const AnybodyActions = tw.div`
+	flex
+	flex-row
+	items-stretch
+	h-full
+	gap-3
 `;
 
 const UpvoteButton = tw(Button)`
@@ -331,36 +340,57 @@ export const Page: NextPage<PageProps> = () => {
 					</Editor>
 				</PostContent>
 				<Actions>
-					<UpvoteButton
-						disabled={mutating}
-						onClick={async (e) => {
-							e.stopPropagation();
+					<AnybodyActions>
+						<UpvoteButton
+							disabled={mutating}
+							onClick={async (e) => {
+								e.stopPropagation();
 
-							if (status !== "authenticated") {
-								await router.push("/signup");
+								if (status !== "authenticated") {
+									await router.push("/signup");
 
-								return;
-							}
+									return;
+								}
 
-							const didSucceed = await upvotePost({ where: { id: post.id } })
-								.then((result) => !!result.data?.upvotePost.record)
-								.catch(() => false);
+								const didSucceed = await upvotePost({ where: { id: post.id } })
+									.then((result) => !!result.data?.upvotePost.record)
+									.catch(() => false);
 
-							if (!didSucceed) {
-								toast.error("Could not like this post");
+								if (!didSucceed) {
+									toast.error("Could not like this post");
 
-								return;
-							}
+									return;
+								}
 
-							toast.success("You liked this post! 🎉");
-						}}
-						size="small"
-						type="button"
-						variant="secondary"
-					>
-						<ThumbsUpIcon height={20} width={20} />
-						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
-					</UpvoteButton>
+								toast.success("You liked this post! 🎉");
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+						>
+							<ThumbsUpIcon height={20} width={20} />
+							<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
+						</UpvoteButton>
+						<ShareButton
+							share={{
+								url: `https://makepurple.com/${userName}/${post.urlSlug}`,
+								title: post.title,
+								text: oneLine`
+									Check out ${isMyPost ? "my" : `${userName}'s`} post on
+									MakePurple! "${post.title}"
+								`
+							}}
+							size="small"
+							tags={["makepurple", ...skills.map((skill) => skill.name)]}
+							utm={{
+								content: "user_post"
+							}}
+							variant="secondary"
+						>
+							<ShareIcon height={16} width={16} />
+							<span tw="ml-1">Share</span>
+						</ShareButton>
+					</AnybodyActions>
 					{isMyPost && (
 						<OwnerActions>
 							<NextLink
