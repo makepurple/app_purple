@@ -239,6 +239,8 @@ export const Page: NextPage<PageProps> = () => {
 	const skills = useMemo(() => post?.skills.nodes ?? [], [post?.skills.nodes]);
 	const comments = commentsData?.post?.comments.nodes ?? [];
 
+	const shareTags = useMemo(() => ["makepurple", ...skills.map((skill) => skill.name)], [skills]);
+
 	const isMyPost = session?.user.name === post?.authorName;
 
 	const content = useMemo(() => {
@@ -381,7 +383,7 @@ export const Page: NextPage<PageProps> = () => {
 								`
 							}}
 							size="small"
-							tags={["makepurple", ...skills.map((skill) => skill.name)]}
+							tags={shareTags}
 							utm={{
 								content: "user_post"
 							}}

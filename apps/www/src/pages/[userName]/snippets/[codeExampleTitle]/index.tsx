@@ -7,11 +7,12 @@ import {
 	GitHubAvatarImage,
 	NonIdealState,
 	Paper,
+	ShareButton,
 	Tags,
 	toast
 } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
-import { dayjs, FormatUtils } from "@makepurple/utils";
+import { ArrayUtils, dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine, oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
@@ -41,10 +42,10 @@ import {
 	pageProps,
 	PageProps
 } from "../../../../page-props/[userName]/snippets/[codeExampleTitle]";
-import { BookIcon, CommentIcon, ThumbsUpIcon } from "../../../../svgs";
+import { BookIcon, CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../../svgs";
 
 const BATCH_SIZE = 8;
-const MIN_SEO_CODE_LENGTH = 1_000;
+const SEO_MIN_CODE_LENGTH = 1_000;
 
 const Content = tw(Paper)`
 	flex
@@ -139,6 +140,14 @@ const Actions = tw.div`
 	bg-white
 	z-index[1]
 	sm:px-6
+`;
+
+const AnybodyActions = tw.div`
+	flex
+	flex-row
+	items-stretch
+	h-full
+	gap-3
 `;
 
 const UpvoteButton = tw(Button)`
@@ -269,6 +278,14 @@ export const Page: NextPage<PageProps> = () => {
 
 	const skills = useMemo(() => codeExample?.skills.nodes ?? [], [codeExample?.skills.nodes]);
 
+	const shareTags = useMemo(() => {
+		return ArrayUtils.dropFalsey([
+			"makepurple",
+			codeExample?.primarySkill?.name,
+			...skills.map((skill) => skill.name)
+		]);
+	}, [codeExample?.primarySkill?.name, skills]);
+
 	const metaDescription = useMemo(() => {
 		const skillNames = skills.map((skill) => skill.name);
 
@@ -295,13 +312,16 @@ export const Page: NextPage<PageProps> = () => {
 
 	const mutating = removing || upvoting || unvoting;
 
+	const shouldIndex = codeExample.content.length >= SEO_MIN_CODE_LENGTH;
+
 	return (
 		<UserPageLayout selectedTab="snippets" userName={userName}>
 			<Seo
 				title={codeExample.title}
 				description={metaDescription}
 				robots={{
-					follow: true
+					follow: true,
+					index: shouldIndex
 				}}
 			/>
 			<Content>
@@ -370,38 +390,65 @@ export const Page: NextPage<PageProps> = () => {
 					/>
 				</CodeExampleContent>
 				<Actions>
-					<UpvoteButton
-						disabled={mutating}
-						onClick={async (e) => {
-							e.stopPropagation();
+					<AnybodyActions>
+						<UpvoteButton
+							disabled={mutating}
+							onClick={async (e) => {
+								e.stopPropagation();
 
-							const where: CodeExampleWhereUniqueInput = {
-								id: codeExample.id
-							};
+								const where: CodeExampleWhereUniqueInput = {
+									id: codeExample.id
+								};
 
-							const didSucceed = codeExample.viewerUpvote
-								? await unvote({ where })
-										.then((result) => !!result.data?.unvoteCodeExample.record)
-										.catch(() => false)
-								: await upvote({ where })
-										.then((result) => !!result.data?.upvoteCodeExample.record)
-										.catch(() => false);
+								const didSucceed = codeExample.viewerUpvote
+									? await unvote({ where })
+											.then(
+												(result) => !!result.data?.unvoteCodeExample.record
+											)
+											.catch(() => false)
+									: await upvote({ where })
+											.then(
+												(result) => !!result.data?.upvoteCodeExample.record
+											)
+											.catch(() => false);
 
-							if (!didSucceed) {
-								toast.error("Could not like this snippet");
+								if (!didSucceed) {
+									toast.error("Could not like this snippet");
 
-								return;
-							}
+									return;
+								}
 
-							toast.success("You liked this snippet! 🎉");
-						}}
-						size="small"
-						type="button"
-						variant="secondary"
-					>
-						<ThumbsUpIcon height={20} width={20} />
-						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
-					</UpvoteButton>
+								toast.success("You liked this snippet! 🎉");
+							}}
+							size="small"
+							type="button"
+							variant="secondary"
+						>
+							<ThumbsUpIcon height={20} width={20} />
+							<UpvoteCount>
+								{FormatUtils.toGitHubFixed(codeExample.upvotes)}
+							</UpvoteCount>
+						</UpvoteButton>
+						<ShareButton
+							share={{
+								url: `https://makepurple.com/${userName}/snippets/${codeExample.urlSlug}`,
+								title: codeExample.title,
+								text: oneLine`
+									Check out ${isMyPage ? "my" : `${userName}'s`} code-snippet on
+									MakePurple! "${codeExample.title}"
+								`
+							}}
+							size="small"
+							tags={shareTags}
+							utm={{
+								content: "user_snippet"
+							}}
+							variant="secondary"
+						>
+							<ShareIcon height={16} width={16} />
+							<span tw="ml-1">Share</span>
+						</ShareButton>
+					</AnybodyActions>
 					{isMyPage && (
 						<OwnerActions>
 							<NextLink
