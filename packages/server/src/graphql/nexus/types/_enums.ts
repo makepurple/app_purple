@@ -3,7 +3,8 @@ import {
 	ExperienceType,
 	FollowType,
 	NotificationType,
-	UserActivityType
+	UserActivityType,
+	UserRole
 } from "@prisma/client";
 import { enumType } from "nexus";
 
@@ -44,5 +45,9 @@ export const enumTypes = [
 	enumType({
 		name: "UserActivityType",
 		members: UserActivityType
+	}),
+	enumType({
+		name: "UserRole",
+		members: UserRole
 	})
 ];

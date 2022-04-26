@@ -389,6 +389,7 @@ export interface NexusGenEnums {
   NotificationType: "ChatMessageReceived" | "CodeExampleCommented" | "FriendshipAccepted" | "PostCommented"
   SortOrder: "asc" | "desc"
   UserActivityType: "CommentCodeExample" | "CommentPost" | "CreateCodeExample" | "FollowSkill" | "FollowUser" | "FriendAcceptUser" | "Joined" | "PublishPost" | "UpvoteCodeExample" | "UpvotePost"
+  UserRole: "Admin" | "Member" | "Moderator"
 }
 
 export interface NexusGenScalars {
@@ -862,6 +863,7 @@ export interface NexusGenObjects {
     messagesLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
     name: string; // String!
     notificationsLastOpenedAt: NexusGenScalars['DateTime']; // DateTime!
+    role: NexusGenEnums['UserRole']; // UserRole!
   }
   UserActivityCommentCodeExample: { // root type
     commentId: string; // String!
@@ -1805,6 +1807,7 @@ export interface NexusGenFieldTypes {
     postViews: number; // Int!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
+    role: NexusGenEnums['UserRole']; // UserRole!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
     trophies: NexusGenRootTypes['UserTrophies']; // UserTrophies!
     upvotedCodeExamples: NexusGenRootTypes['CodeExampleConnection']; // CodeExampleConnection!
@@ -2815,6 +2818,7 @@ export interface NexusGenFieldTypeNames {
     postViews: 'Int'
     posts: 'PostConnection'
     repositories: 'RepositoryConnection'
+    role: 'UserRole'
     skills: 'SkillConnection'
     trophies: 'UserTrophies'
     upvotedCodeExamples: 'CodeExampleConnection'

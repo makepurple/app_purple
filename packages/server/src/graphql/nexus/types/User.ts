@@ -1079,6 +1079,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.field("role", { type: "UserRole" });
 		t.nonNull.field("skills", {
 			type: "SkillConnection",
 			args: {
