@@ -5,9 +5,10 @@ import { useGetUserGitHubContributionsQuery } from "../../graphql";
 import { UserGitHubContributionHeatmap } from "../UserGitHubContributionHeatmap";
 
 const Root = tw(Paper)`
-	flex
+	hidden
 	flex-col
 	items-stretch
+	md:flex
 `;
 
 const Title = tw.div`
