@@ -11,6 +11,7 @@ declare module "next-auth" {
 			email: string;
 			image: string | null | undefined;
 			accessToken?: string | null | undefined;
+			role: "Member" | "Moderator" | "Admin";
 		}
 		accessToken: string;
 		expires: string;
@@ -53,5 +54,6 @@ declare module "next-auth/jwt" {
 		picture?: Maybe<string>;
 		sub: string;
 		accessToken: string;
+		role: "Member" | "Moderator" | "Admin";
 	}
 }

@@ -21,13 +21,21 @@ const authHandler: NextApiHandler = (req, res) =>
 
 				return !dbUser.banned;
 			},
-			jwt: ({ account, token }) => {
+			jwt: async ({ account, token }) => {
+				const dbUser = await prisma.user.findUnique({
+					where: {
+						name: token.name
+					},
+					rejectOnNotFound: true
+				});
+
 				const accessToken = account?.access_token;
 
 				if (!accessToken) return token;
 
 				return produce(token, (newToken) => {
-					token.accessToken = accessToken;
+					newToken.accessToken = accessToken;
+					newToken.role = dbUser.role;
 
 					return newToken;
 				});
@@ -39,6 +47,7 @@ const authHandler: NextApiHandler = (req, res) =>
 					newSession.user = produce(session.user, (newUser) => {
 						newUser.accessToken = token.accessToken;
 						newUser.id = token.sub;
+						newUser.role = token.role;
 
 						return newUser;
 					});
