@@ -1,8 +1,12 @@
 import { useWindowFocus } from "@makepurple/hooks";
 import ms from "ms";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { useGetNotificationCountsQuery, useUpdateUserFromGitHubMutation } from "../graphql";
+import {
+	useGetMyUserQuery,
+	useGetNotificationCountsQuery,
+	useUpdateUserFromGitHubMutation
+} from "../graphql";
 
 const usePollNotificationCounts = () => {
 	const { status } = useSession();
@@ -61,7 +65,26 @@ const useRefreshUserGitHubData = () => {
 	}, [status, updateUser]);
 };
 
+const useGetUserBanStatus = () => {
+	const { status } = useSession();
+
+	const [{ data }] = useGetMyUserQuery({
+		pause: status !== "authenticated",
+		requestPolicy: "cache-first"
+	});
+
+	const user = data?.viewer;
+
+	useEffect(() => {
+		if (!user?.banned) return;
+
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		signOut({ callbackUrl: "/", redirect: true });
+	}, [user]);
+};
+
 export const useGlobalGraphQL = () => {
 	usePollNotificationCounts();
 	useRefreshUserGitHubData();
+	useGetUserBanStatus();
 };
