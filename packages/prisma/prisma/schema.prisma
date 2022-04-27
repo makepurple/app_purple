@@ -41,7 +41,6 @@ model Account {
   userId             String
 
   @@unique([provider, providerAccountId])
-
   @@index([userId])
 }
 
@@ -72,6 +71,7 @@ enum UserRole {
 model User {
   accounts                  Account[]
   activities                UserActivity[]
+  banned                    Boolean                @default(false)
   chats                     ChatsOnUsers[]
   chatMessages              ChatMessage[]
   codeExamples              CodeExample[]
@@ -193,7 +193,6 @@ model Friendship {
   updatedAt     DateTime       @updatedAt @db.DateTime(6)
 
   @@unique([frienderId, friendingId])
-
   @@index([frienderId])
   @@index([friendingId])
 }
@@ -227,7 +226,6 @@ model FollowUser {
   followingId String
 
   @@unique([followerId, followingId])
-
   @@index([followId])
   @@index([followerId])
   @@index([followingId])
@@ -274,7 +272,6 @@ model ChatsOnUsers {
   lastOpenedAt DateTime @default(now()) @db.DateTime(6)
 
   @@unique([chatId, userId])
-
   @@index([chatId])
   @@index([userId])
 }
@@ -301,7 +298,6 @@ model Post {
 
   @@unique([authorName, title])
   @@unique([authorName, urlSlug])
-
   @@index([authorName])
 }
 
@@ -314,7 +310,6 @@ model PostViewer {
   userId String?
 
   @@unique([ip, postId])
-
   @@index([userId])
 }
 
@@ -328,7 +323,6 @@ model PostUpvoter {
   userId String
 
   @@unique([userId, postId])
-
   @@index([postId])
   @@index([userId])
 }
@@ -376,7 +370,6 @@ model CommentUpvoter {
   userId    String
 
   @@unique([commentId, userId])
-
   @@index([commentId])
   @@index([userId])
 }
@@ -396,7 +389,6 @@ model Skill {
   users               SkillsOnUsers[]
 
   @@unique([name, owner])
-
   @@index([owner])
 }
 
@@ -408,7 +400,6 @@ model SkillsOnCodeExamples {
   skillId       String
 
   @@unique([skillId, codeExampleId])
-
   @@index([skillId])
 }
 
@@ -420,7 +411,6 @@ model SkillsOnPosts {
   skillId String
 
   @@unique([skillId, postId])
-
   @@index([postId])
   @@index([skillId])
 }
@@ -433,7 +423,6 @@ model SkillsOnUsers {
   userId  String
 
   @@unique([skillId, userId])
-
   @@index([skillId])
   @@index([userId])
 }
@@ -446,7 +435,6 @@ model DesiredSkillsOnUsers {
   userId  String
 
   @@unique([skillId, userId])
-
   @@index([skillId])
   @@index([userId])
 }
@@ -459,7 +447,6 @@ model Repository {
   owner  String                 @db.VarChar(128)
 
   @@unique([name, owner])
-
   @@index([owner])
 }
 
@@ -471,7 +458,6 @@ model SkillsOnRepositories {
   repositoryId String
 
   @@unique([skillId, repositoryId])
-
   @@index([skillId])
   @@index([repositoryId])
 }
@@ -542,7 +528,6 @@ model CodeExample {
 
   @@unique([authorName, title])
   @@unique([authorName, urlSlug])
-
   @@index([authorName])
   @@index([primarySkillId])
 }
@@ -557,7 +542,6 @@ model CodeExampleUpvoter {
   userId        String
 
   @@unique([codeExampleId, userId])
-
   @@index([codeExampleId])
   @@index([userId])
 }
