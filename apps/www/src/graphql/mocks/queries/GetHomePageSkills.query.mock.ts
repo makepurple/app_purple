@@ -315,6 +315,30 @@ export const GetHomePageSkills_mock: GetHomePageSkillsQuery = {
 				login: "nestjs",
 				name: "nestjs"
 			}
+		},
+		trpc: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnkyODA1NTcwNTQ=",
+			name: "trpc",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/78011399?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjc4MDExMzk5",
+				login: "trpc",
+				name: "tRPC"
+			}
+		},
+		stitches: {
+			__typename: "GitHubRepository",
+			id: "MDEwOlJlcG9zaXRvcnkyNTU1MzU5MDc=",
+			name: "stitches",
+			owner: {
+				__typename: "GitHubOrganization",
+				avatarUrl: "https://avatars.githubusercontent.com/u/28682402?v=4",
+				id: "MDEyOk9yZ2FuaXphdGlvbjI4NjgyNDAy",
+				login: "modulz",
+				name: "Modulz"
+			}
 		}
 	}
 };
