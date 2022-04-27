@@ -10,6 +10,17 @@ const authHandler: NextApiHandler = (req, res) =>
 	NextAuth(req, res, {
 		adapter: PrismaAdapter(prisma),
 		callbacks: {
+			signIn: async ({ user }) => {
+				const dbUser = await prisma.user.findUnique({
+					where: {
+						name: user.name
+					}
+				});
+
+				if (!dbUser) return false;
+
+				return !dbUser.banned;
+			},
 			jwt: ({ account, token }) => {
 				const accessToken = account?.access_token;
 
