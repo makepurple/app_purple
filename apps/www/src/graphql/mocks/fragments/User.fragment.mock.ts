@@ -1,5 +1,5 @@
 import { dayjs } from "@makepurple/utils";
-import type { User } from "../../generated";
+import { User, UserRole } from "../../generated";
 import { GitHubUser_fragment_mock } from "./GitHubUser.fragment.mock";
 import { Skill_fragment_mock } from "./Skill.fragment.mock";
 import { UserTrophies_fragment_mock } from "./UserTrophies.fragment.mock";
@@ -57,6 +57,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	banned: false,
 	chats: {
 		__typename: "ChatConnection",
 		pageInfo: {
@@ -249,6 +250,7 @@ export const User_fragment_mock: User = {
 		edges: [],
 		nodes: []
 	},
+	role: UserRole.Member,
 	skills: {
 		__typename: "SkillConnection",
 		pageInfo: {
