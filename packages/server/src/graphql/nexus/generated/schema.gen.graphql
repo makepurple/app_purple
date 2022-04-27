@@ -1475,6 +1475,7 @@ type UpvotePostPayload implements MutationPayload {
 type User implements Followable & Node {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
+  banned: Boolean!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
   codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!
   commentUpvotes: Int!

@@ -855,6 +855,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   User: { // root type
+    banned: boolean; // Boolean!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description?: string | null; // String
     email: string; // String!
@@ -1775,6 +1776,7 @@ export interface NexusGenFieldTypes {
   User: { // field return type
     activities: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
     activityFeed: NexusGenRootTypes['UserActivityConnection']; // UserActivityConnection!
+    banned: boolean; // Boolean!
     chats: NexusGenRootTypes['ChatConnection']; // ChatConnection!
     codeExamples: NexusGenRootTypes['CodeExampleConnection']; // CodeExampleConnection!
     commentUpvotes: number; // Int!
@@ -2786,6 +2788,7 @@ export interface NexusGenFieldTypeNames {
   User: { // field return type name
     activities: 'UserActivityConnection'
     activityFeed: 'UserActivityConnection'
+    banned: 'Boolean'
     chats: 'ChatConnection'
     codeExamples: 'CodeExampleConnection'
     commentUpvotes: 'Int'

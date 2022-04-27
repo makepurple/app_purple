@@ -233,6 +233,7 @@ export const User = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.boolean("banned");
 		t.nonNull.field("chats", {
 			type: "ChatConnection",
 			args: {

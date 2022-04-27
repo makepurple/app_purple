@@ -2246,6 +2246,7 @@ export type User = Followable & Node & {
   readonly __typename: 'User';
   readonly activities: UserActivityConnection;
   readonly activityFeed: UserActivityConnection;
+  readonly banned: Scalars['Boolean'];
   readonly chats: ChatConnection;
   readonly codeExamples: CodeExampleConnection;
   readonly commentUpvotes: Scalars['Int'];
