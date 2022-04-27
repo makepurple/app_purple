@@ -1,10 +1,30 @@
-import { mutationField, nonNull } from "nexus";
-import { Logger } from "../../../utils";
+import { arg, mutationField, nonNull } from "nexus";
+import { Logger, PermissionUtils, PrismaUtils } from "../../../utils";
 
 export const deleteUser = mutationField("deleteUser", {
 	type: nonNull("DeleteUserPayload"),
-	authorize: (parent, args, { user }) => {
-		return !!user;
+	args: {
+		where: nonNull(arg({ type: "UserWhereUniqueInput" }))
+	},
+	authorize: async (parent, args, { prisma, user }) => {
+		if (!user) return false;
+
+		const viewer = await prisma.user.findUnique({
+			where: { id: user.id },
+			rejectOnNotFound: true
+		});
+
+		const toDelete = await prisma.user.findUnique({
+			where: PrismaUtils.nonNull(args.where),
+			rejectOnNotFound: true
+		});
+
+		if (toDelete.id === user.id) return true;
+		if (PermissionUtils.getRoleLevel(viewer) > PermissionUtils.getRoleLevel(toDelete)) {
+			return true;
+		}
+
+		return false;
 	},
 	resolve: async (parent, args, { cloudinary, prisma, user }) => {
 		if (!user) throw new Error();

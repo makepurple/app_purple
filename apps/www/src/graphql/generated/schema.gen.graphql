@@ -749,7 +749,7 @@ type Mutation {
   """Users can delete their own posts."""
   deletePost(where: PostWhereUniqueInput!): DeletePostPayload!
   deleteRepository(where: RepositoryWhereUniqueInput!): DeleteRepositoryPayload!
-  deleteUser: DeleteUserPayload!
+  deleteUser(where: UserWhereUniqueInput!): DeleteUserPayload!
   followSkill(where: SkillWhereUniqueInput!): FollowSkillPayload!
   followUser(where: UserWhereUniqueInput!): FollowUserPayload!
   inviteToChat(data: InviteToChatInput!, where: ChatWhereUniqueInput!): InviteToChatPayload!

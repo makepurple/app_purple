@@ -3149,6 +3149,9 @@ export interface NexusGenArgTypes {
     deleteRepository: { // args
       where: NexusGenInputs['RepositoryWhereUniqueInput']; // RepositoryWhereUniqueInput!
     }
+    deleteUser: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
     followSkill: { // args
       where: NexusGenInputs['SkillWhereUniqueInput']; // SkillWhereUniqueInput!
     }

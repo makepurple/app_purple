@@ -112,7 +112,9 @@ export const Page: NextPage = () => {
 					content.
 				`}
 				onConfirm={async () => {
-					const didSucceed = await deleteUser()
+					const didSucceed = await deleteUser({
+						name: session.user.name
+					})
 						.then((result) => !!result.data?.deleteUser)
 						.catch(() => false);
 

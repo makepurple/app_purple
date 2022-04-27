@@ -1,5 +1,9 @@
-mutation DeleteUser {
-	deleteUser {
+mutation DeleteUser($name: String!) {
+	deleteUser(
+		where: {
+			name: $name
+		}
+	) {
 		viewer {
 			id
 			name
