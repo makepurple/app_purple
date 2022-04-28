@@ -1,7 +1,15 @@
-import { User, UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
 
 export class PermissionUtils {
-	public static getRoleLevel(user: User): number {
-		return [UserRole.Member, UserRole.Moderator, UserRole.Admin].indexOf(user.role);
+	public static getRoleLevel(role: UserRole): number {
+		return [UserRole.Member, UserRole.Moderator, UserRole.Admin].indexOf(role);
+	}
+
+	public static isGreaterRole(role: UserRole, minValidRole: UserRole): boolean {
+		return this.getRoleLevel(role) > this.getRoleLevel(minValidRole);
+	}
+
+	public static isValidRole(role: UserRole, minValidRole: UserRole): boolean {
+		return this.getRoleLevel(role) >= this.getRoleLevel(minValidRole);
 	}
 }

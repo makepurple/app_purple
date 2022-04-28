@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient, UserRole } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { JWT } from "next-auth/jwt";
 import type { CloudinaryClient } from "../services/cloudinary";
@@ -9,6 +9,7 @@ export interface ServerContextUser {
 	id: string;
 	email: string;
 	name: string;
+	role: UserRole;
 }
 
 export interface ServerContext {
