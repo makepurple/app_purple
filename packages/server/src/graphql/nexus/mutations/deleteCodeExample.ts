@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../../utils";
+import { PermissionUtils, PrismaUtils } from "../../../utils";
 
 export const deleteCodeExample = mutationField("deleteCodeExample", {
 	type: nonNull("DeleteCodeExamplePayload"),
@@ -9,13 +9,17 @@ export const deleteCodeExample = mutationField("deleteCodeExample", {
 	authorize: async (parent, args, { prisma, user }) => {
 		if (!user) return false;
 
-		const codeExample = await prisma.codeExample.findUnique({
-			where: PrismaUtils.nonNull(args.where)
-		});
+		const author = await prisma.codeExample
+			.findUnique({
+				where: PrismaUtils.nonNull(args.where)
+			})
+			.author();
 
-		if (user.name !== codeExample?.authorName) return false;
+		if (!author) return false;
+		if (user.id === author.id) return true;
+		if (PermissionUtils.isGreaterRole(user.role, author.role)) return true;
 
-		return true;
+		return false;
 	},
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();

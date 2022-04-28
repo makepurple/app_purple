@@ -1,5 +1,5 @@
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../../utils";
+import { PermissionUtils, PrismaUtils } from "../../../utils";
 
 export const deleteRepository = mutationField("deleteRepository", {
 	type: nonNull("DeleteRepositoryPayload"),
@@ -15,9 +15,11 @@ export const deleteRepository = mutationField("deleteRepository", {
 			})
 			.user();
 
-		if (user.id !== owner?.id) return false;
+		if (!owner) return false;
+		if (user.id === owner.id) return true;
+		if (PermissionUtils.isGreaterRole(user.role, owner.role)) return true;
 
-		return true;
+		return false;
 	},
 	resolve: async (parent, args, { prisma }) => {
 		const record = await prisma.repository.delete({

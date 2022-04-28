@@ -1,6 +1,6 @@
 import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
-import { Logger, PrismaUtils } from "../../../utils";
+import { Logger, PermissionUtils, PrismaUtils } from "../../../utils";
 
 export const deletePost = mutationField("deletePost", {
 	type: nonNull("DeletePostPayload"),
@@ -19,9 +19,11 @@ export const deletePost = mutationField("deletePost", {
 			})
 			.author();
 
-		if (user.id !== author?.id) return false;
+		if (!author) return false;
+		if (user.id === author.id) return true;
+		if (PermissionUtils.isGreaterRole(user.role, author.role)) return true;
 
-		return true;
+		return false;
 	},
 	resolve: async (parent, args, { cloudinary, prisma }) => {
 		const images = await prisma.post

@@ -1,6 +1,6 @@
 import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../../utils";
+import { PermissionUtils, PrismaUtils } from "../../../utils";
 
 export const deleteExperience = mutationField("deleteExperience", {
 	type: nonNull("DeleteExperiencePayload"),
@@ -19,9 +19,11 @@ export const deleteExperience = mutationField("deleteExperience", {
 			})
 			.user();
 
-		if (user.id !== owner?.id) return false;
+		if (!owner) return false;
+		if (user.id === owner.id) return true;
+		if (PermissionUtils.isGreaterRole(user.role, owner.role)) return true;
 
-		return true;
+		return false;
 	},
 	resolve: async (parent, args, { prisma }) => {
 		const record = await prisma.experience.delete({

@@ -10,10 +10,10 @@ export const deleteUser = mutationField("deleteUser", {
 		if (!user) return false;
 
 		const toDelete = await prisma.user.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+			where: PrismaUtils.nonNull(args.where)
 		});
 
+		if (!toDelete) return false;
 		if (toDelete.id === user.id) return true;
 		if (PermissionUtils.isGreaterRole(user.role, toDelete.role)) return true;
 

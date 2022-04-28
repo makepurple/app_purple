@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { arg, mutationField, nonNull } from "nexus";
-import { PrismaUtils } from "../../..";
+import { PermissionUtils, PrismaUtils } from "../../../utils";
 
 export const deleteComment = mutationField("deleteComment", {
 	type: nonNull("DeleteCommentPayload"),
@@ -12,11 +12,13 @@ export const deleteComment = mutationField("deleteComment", {
 
 		const author = await prisma.comment
 			.findUnique({ where: PrismaUtils.nonNull(args.where) })
-			.author({ select: { id: true } });
+			.author();
 
-		if (user.id !== author?.id) return false;
+		if (!author) return false;
+		if (user.id === author.id) return true;
+		if (PermissionUtils.isGreaterRole(user.role, author.role)) return true;
 
-		return true;
+		return false;
 	},
 	resolve: async (parent, args, { prisma }) => {
 		const record = await prisma.comment.update({
