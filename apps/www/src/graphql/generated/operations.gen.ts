@@ -991,6 +991,7 @@ export type Mutation = {
   readonly removeSkill: RemoveSkillMutationPayload;
   readonly requestFriendship: RequestFriendshipPayload;
   readonly sendChatMessage: SendChatMessagePayload;
+  readonly unbanUser: UnbanUserPayload;
   readonly unfollowSkill: UnfollowSkillPayload;
   readonly unfollowUser: UnfollowUserPayload;
   readonly unvoteCodeExample: UnvoteCodeExamplePayload;
@@ -1189,6 +1190,12 @@ export type MutationRequestFriendshipArgs = {
 export type MutationSendChatMessageArgs = {
   data: ChatMessageCreateInput;
   where: ChatWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationUnbanUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 
@@ -2113,6 +2120,14 @@ export type TopLanguages = {
   readonly totalCount: Scalars['Int'];
   /** The total number of bytes written across all owned repositories across all languages. */
   readonly totalSize: Scalars['Int'];
+};
+
+export type UnbanUserPayload = MutationPayload & {
+  readonly __typename: 'UnbanUserPayload';
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly query: Query;
+  readonly record?: Maybe<User>;
+  readonly viewer?: Maybe<User>;
 };
 
 export type UnfollowSkillPayload = MutationPayload & {

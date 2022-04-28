@@ -788,6 +788,7 @@ type Mutation {
   removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
   sendChatMessage(data: ChatMessageCreateInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
+  unbanUser(where: UserWhereUniqueInput!): UnbanUserPayload!
   unfollowSkill(where: SkillWhereUniqueInput!): UnfollowSkillPayload!
   unfollowUser(where: UserWhereUniqueInput!): UnfollowUserPayload!
   unvoteCodeExample(where: CodeExampleWhereUniqueInput!): UnvoteCodeExamplePayload!
@@ -1340,6 +1341,13 @@ type TopLanguages {
 A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
 """
 scalar URL
+
+type UnbanUserPayload implements MutationPayload {
+  errors: [MutationError!]
+  query: Query!
+  record: User
+  viewer: User
+}
 
 type UnfollowSkillPayload implements MutationPayload {
   errors: [MutationError!]
