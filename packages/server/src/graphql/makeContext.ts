@@ -29,7 +29,8 @@ export const makeContext = async (params: {
 		user: jwt && {
 			id: jwt.sub,
 			name: jwt.name,
-			email: jwt.email
+			email: jwt.email,
+			role: jwt.role
 		}
 	};
 };
