@@ -58,6 +58,7 @@ export const User_fragment_mock: User = {
 		nodes: []
 	},
 	banned: false,
+	banReason: null,
 	chats: {
 		__typename: "ChatConnection",
 		pageInfo: {
