@@ -4,6 +4,7 @@ export * from "./AcceptFriendshipPayload";
 export * from "./AddDesiredSkillMutationPayload";
 export * from "./AddSkillMutationPayload";
 export * from "./BanReason";
+export * from "./BanUserPayload";
 export * from "./Chat";
 export * from "./ChatConnection";
 export * from "./ChatEdge";

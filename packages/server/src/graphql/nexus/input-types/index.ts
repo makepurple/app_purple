@@ -1,3 +1,4 @@
+export * from "./BanUserInput";
 export * from "./ChatMessageCreateInput";
 export * from "./ChatMessageWhereInput";
 export * from "./ChatWhereInput";

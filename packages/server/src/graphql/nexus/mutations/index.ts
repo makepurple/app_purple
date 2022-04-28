@@ -1,6 +1,7 @@
 export * from "./acceptFriendship";
 export * from "./addDesiredSkill";
 export * from "./addSkill";
+export * from "./banUser";
 export * from "./commentCodeExample";
 export * from "./commentPost";
 export * from "./createChat";

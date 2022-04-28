@@ -34,6 +34,17 @@ type BanReason implements Node {
   userId: String!
 }
 
+input BanUserInput {
+  reason: String!
+}
+
+type BanUserPayload implements MutationPayload {
+  errors: [MutationError!]
+  query: Query!
+  record: User
+  viewer: User
+}
+
 """
 The `BigInt` scalar type represents non-fractional signed whole numeric values.
 """
@@ -743,6 +754,7 @@ type Mutation {
   acceptFriendship(where: UserWhereUniqueInput!): AcceptFriendshipPayload!
   addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
   addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
+  banUser(data: BanUserInput!, where: UserWhereUniqueInput!): BanUserPayload!
   commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!
   commentPost(data: CommentPostInput!): CommentPostPayload!
   createChat(data: CreateChatInput!): CreateChatPayload!
