@@ -61,6 +61,18 @@ export type BanReason = Node & {
   readonly userId: Scalars['String'];
 };
 
+export type BanUserInput = {
+  readonly reason: Scalars['String'];
+};
+
+export type BanUserPayload = MutationPayload & {
+  readonly __typename: 'BanUserPayload';
+  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly query: Query;
+  readonly record?: Maybe<User>;
+  readonly viewer?: Maybe<User>;
+};
+
 export type Chat = Node & {
   readonly __typename: 'Chat';
   readonly channelName: Scalars['String'];
@@ -946,6 +958,7 @@ export type Mutation = {
   readonly acceptFriendship: AcceptFriendshipPayload;
   readonly addDesiredSkill: AddDesiredSkillMutationPayload;
   readonly addSkill: AddSkillMutationPayload;
+  readonly banUser: BanUserPayload;
   readonly commentCodeExample: CommentCodeExamplePayload;
   readonly commentPost: CommentPostPayload;
   readonly createChat: CreateChatPayload;
@@ -1016,6 +1029,13 @@ export type MutationAddDesiredSkillArgs = {
 /** Root mutation type */
 export type MutationAddSkillArgs = {
   where: SkillWhereUniqueInput;
+};
+
+
+/** Root mutation type */
+export type MutationBanUserArgs = {
+  data: BanUserInput;
+  where: UserWhereUniqueInput;
 };
 
 
