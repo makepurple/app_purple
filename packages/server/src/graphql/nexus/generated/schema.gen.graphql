@@ -23,6 +23,17 @@ type AddSkillMutationPayload implements MutationPayload {
   viewer: User
 }
 
+type BanReason implements Node {
+  bannedBy: User
+  bannedById: String
+  createdAt: DateTime!
+  id: ID!
+  reason: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
 """
 The `BigInt` scalar type represents non-fractional signed whole numeric values.
 """
@@ -1475,6 +1486,7 @@ type UpvotePostPayload implements MutationPayload {
 type User implements Followable & Node {
   activities(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
   activityFeed(after: String, before: String, first: Int, last: Int, where: UserActivityWhereInput): UserActivityConnection!
+  banReason: BanReason
   banned: Boolean!
   chats(after: String, before: String, first: Int, last: Int, where: ChatWhereInput): ChatConnection!
   codeExamples(after: String, before: String, first: Int, last: Int, orderBy: [CodeExampleOrderByInput!], where: CodeExampleWhereInput): CodeExampleConnection!

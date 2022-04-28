@@ -3,6 +3,7 @@ export * from "./_scalars";
 export * from "./AcceptFriendshipPayload";
 export * from "./AddDesiredSkillMutationPayload";
 export * from "./AddSkillMutationPayload";
+export * from "./BanReason";
 export * from "./Chat";
 export * from "./ChatConnection";
 export * from "./ChatEdge";

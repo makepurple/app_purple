@@ -71,7 +71,8 @@ enum UserRole {
 model User {
   accounts                  Account[]
   activities                UserActivity[]
-  banned                    Boolean                @default(false)
+  bannedUsers               BanReason[]            @relation("BannedByUser")
+  banReason                 BanReason?
   chats                     ChatsOnUsers[]
   chatMessages              ChatMessage[]
   codeExamples              CodeExample[]
@@ -110,6 +111,20 @@ model User {
   upvotedComments           CommentUpvoter[]
   upvotedPosts              PostUpvoter[]
   viewedPosts               PostViewer[]
+}
+
+model BanReason {
+  bannedBy   User?    @relation(fields: [bannedById], references: [id], onDelete: SetNull, name: "BannedByUser")
+  bannedById String?
+  createdAt  DateTime @default(now()) @db.DateTime(6)
+  id         String   @id @default(cuid())
+  reason     String   @db.VarChar(256)
+  updatedAt  DateTime @updatedAt @db.DateTime(6)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String   @unique
+
+  @@index([bannedById])
+  @@index([userId])
 }
 
 enum UserActivityType {

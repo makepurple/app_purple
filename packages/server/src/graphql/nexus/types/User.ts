@@ -233,7 +233,23 @@ export const User = objectType({
 				return connection;
 			}
 		});
-		t.nonNull.boolean("banned");
+		t.nonNull.boolean("banned", {
+			resolve: async (parent, args, { prisma }) => {
+				const banReason = await prisma.banReason.findUnique({
+					where: { userId: parent.id }
+				});
+
+				return !!banReason;
+			}
+		});
+		t.field("banReason", {
+			type: "BanReason",
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.banReason.findUnique({
+					where: { userId: parent.id }
+				});
+			}
+		});
 		t.nonNull.field("chats", {
 			type: "ChatConnection",
 			args: {
