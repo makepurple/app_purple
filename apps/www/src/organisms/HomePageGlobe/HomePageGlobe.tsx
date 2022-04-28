@@ -34,22 +34,20 @@ export interface HomePageGlobeProps {
 }
 
 export const HomePageGlobe: FC<HomePageGlobeProps> = ({ className, style }) => {
-	const globeRef = useRef<GlobeMethods>();
+	const [globe, globeRef] = useState<GlobeMethods | null>(null);
 
 	const [altitude, setAltitude] = useState<number>(0.02);
 	const [landPolygons, setLandPolygons] = useState<any[]>([]);
 	const globeMaterial = useRef(new MeshLambertMaterial({ color: "#e2e8f0" }));
 
 	useEffect(() => {
-		const globe = globeRef.current;
-
 		if (!globe) return;
 
 		(globe.controls() as any).autoRotate = true;
 		(globe.controls() as any).autoRotateSpeed = 0.85;
 		(globe.controls() as any).enableZoom = false;
 		globe.pointOfView({ altitude: 2 });
-	}, []);
+	}, [globe]);
 
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
