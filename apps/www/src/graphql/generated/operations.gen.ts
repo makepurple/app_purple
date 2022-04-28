@@ -49,6 +49,18 @@ export type AddSkillMutationPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type BanReason = Node & {
+  readonly __typename: 'BanReason';
+  readonly bannedBy?: Maybe<User>;
+  readonly bannedById?: Maybe<Scalars['String']>;
+  readonly createdAt: Scalars['DateTime'];
+  readonly id: Scalars['ID'];
+  readonly reason: Scalars['String'];
+  readonly updatedAt: Scalars['DateTime'];
+  readonly user: User;
+  readonly userId: Scalars['String'];
+};
+
 export type Chat = Node & {
   readonly __typename: 'Chat';
   readonly channelName: Scalars['String'];
@@ -2252,6 +2264,7 @@ export type User = Followable & Node & {
   readonly __typename: 'User';
   readonly activities: UserActivityConnection;
   readonly activityFeed: UserActivityConnection;
+  readonly banReason?: Maybe<BanReason>;
   readonly banned: Scalars['Boolean'];
   readonly chats: ChatConnection;
   readonly codeExamples: CodeExampleConnection;
