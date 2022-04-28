@@ -100,6 +100,7 @@ export * from "./SuggestSkillOwners";
 export * from "./SuggestSkills";
 export * from "./TopLanguage";
 export * from "./TopLanguages";
+export * from "./UnbanUserPayload";
 export * from "./UnfollowSkillPayload";
 export * from "./UnfollowUserPayload";
 export * from "./UnvoteCodeExamplePayload";
