@@ -14,12 +14,15 @@ const authHandler: NextApiHandler = (req, res) =>
 				const dbUser = await prisma.user.findUnique({
 					where: {
 						name: user.name
+					},
+					select: {
+						banReason: { select: { id: true } }
 					}
 				});
 
 				if (!dbUser) return false;
 
-				return !dbUser.banned;
+				return !dbUser.banReason;
 			},
 			jwt: async ({ account, token }) => {
 				const dbUser = await prisma.user.findUnique({
