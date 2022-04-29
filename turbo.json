@@ -49,14 +49,13 @@
 				".next/**"
 			]
 		},
-		"@makepurple/fake-api#build": {
+		"@makepurple/stories#build": {
 			"cache": false,
 			"dependsOn": [
-				"^build",
 				"@makepurple/prisma#build"
 			],
 			"outputs": [
-				".next/**"
+				".storybook-static/**"
 			]
 		}
 	}
