@@ -1,0 +1,11 @@
+mutation UnbanUser($name: String!) {
+	unbanUser(
+		where: {
+			name: $name
+		}
+	) {
+		record {
+			...BanUserFormUser
+		}
+	}
+}

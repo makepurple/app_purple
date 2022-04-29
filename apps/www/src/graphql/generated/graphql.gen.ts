@@ -127,6 +127,10 @@ export function useSendChatMessageMutation() {
   return Urql.useMutation<Operations.SendChatMessageMutation, Operations.SendChatMessageMutationVariables>(Operations.SendChatMessageDocument);
 };
 
+export function useUnbanUserMutation() {
+  return Urql.useMutation<Operations.UnbanUserMutation, Operations.UnbanUserMutationVariables>(Operations.UnbanUserDocument);
+};
+
 export function useUnfollowSkillMutation() {
   return Urql.useMutation<Operations.UnfollowSkillMutation, Operations.UnfollowSkillMutationVariables>(Operations.UnfollowSkillDocument);
 };

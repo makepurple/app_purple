@@ -35,6 +35,7 @@ import { PermissionUtils } from "../../utils";
 import { BanUserForm } from "../BanUserForm";
 import { NewPostButton } from "../NewPostButton";
 import { TopLanguages } from "../TopLanguages";
+import { UnbanUserButton } from "../UnbanUserButton";
 import { UserAvatar } from "../UserAvatar";
 
 const UserInfoSideBarForm = dynamic(() => import("../UserInfoSideBarForm"), { ssr: false });
@@ -290,17 +291,26 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 								<ShareIcon height={16} width={16} />
 								<span tw="ml-1">Share</span>
 							</ShareButton>
-							{canBan && (
-								<BanButton
-									onClick={() => {
-										setMode("banning");
-									}}
-									size="small"
-									variant="secondary"
-								>
-									Ban User
-								</BanButton>
-							)}
+							{canBan &&
+								(user.banned ? (
+									<UnbanUserButton
+										size="small"
+										userName={userName}
+										variant="secondary"
+									>
+										Unban
+									</UnbanUserButton>
+								) : (
+									<BanButton
+										onClick={() => {
+											setMode("banning");
+										}}
+										size="small"
+										variant="secondary"
+									>
+										Ban User
+									</BanButton>
+								))}
 						</SocialLinks>
 						{isMyUser && mode !== "editing" && (
 							<Actions tw="mt-4">

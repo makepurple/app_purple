@@ -1,3 +1,8 @@
+import {
+	GetNotificationCounts_mock,
+	GetPostDraft_mock,
+	GetSiteWideSideDrawer_mock
+} from "@makepurple/www/src/graphql/mocks";
 import { Page } from "@makepurple/www/src/pages/banned";
 import { action } from "@storybook/addon-actions";
 import type { Meta, Story } from "@storybook/react";
@@ -21,6 +26,12 @@ Template.parameters = {
 		operationName && action(operationName)(op.variables);
 
 		switch (operationName) {
+			case "GetNotificationCounts":
+				return { data: GetNotificationCounts_mock };
+			case "GetPostDraft":
+				return { data: GetPostDraft_mock };
+			case "GetSiteWideSideDrawer":
+				return { data: GetSiteWideSideDrawer_mock };
 			default:
 				return {};
 		}
