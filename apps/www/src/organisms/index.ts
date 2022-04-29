@@ -1,6 +1,7 @@
 export * from "./ActivityFeedFollowableSkillCard";
 export * from "./ActivityFeedFollowableSkills";
 export * from "./ActivityFeedInfo";
+export * from "./BanUserForm";
 export * from "./ChatCard";
 export * from "./ChatList";
 export * from "./ChatRoom";

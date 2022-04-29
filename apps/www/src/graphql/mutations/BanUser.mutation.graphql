@@ -1,0 +1,17 @@
+mutation BanUser(
+	$name: String!
+	$reason: String!
+) {
+	banUser(
+		data: {
+			reason: $reason
+		}
+		where: {
+			name: $name
+		}
+	) {
+		record {
+			...BanUserFormUser
+		}
+	}
+}

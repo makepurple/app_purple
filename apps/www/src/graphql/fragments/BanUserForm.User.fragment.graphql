@@ -1,0 +1,14 @@
+fragment BanUserFormUser on User {
+	banned
+	banReason {
+		bannedBy {
+			id
+			name
+		}
+		bannedById
+		id
+		reason
+	}
+	id
+	name
+}

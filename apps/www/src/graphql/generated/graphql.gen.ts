@@ -15,6 +15,10 @@ export function useAddSkillMutation() {
   return Urql.useMutation<Operations.AddSkillMutation, Operations.AddSkillMutationVariables>(Operations.AddSkillDocument);
 };
 
+export function useBanUserMutation() {
+  return Urql.useMutation<Operations.BanUserMutation, Operations.BanUserMutationVariables>(Operations.BanUserDocument);
+};
+
 export function useCommentCodeExampleMutation() {
   return Urql.useMutation<Operations.CommentCodeExampleMutation, Operations.CommentCodeExampleMutationVariables>(Operations.CommentCodeExampleDocument);
 };
