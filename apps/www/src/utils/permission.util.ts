@@ -1,4 +1,4 @@
-import { UserRole } from "../graphql";
+import { UserRole } from "../graphql/generated";
 
 export class PermissionUtils {
 	public static getRoleLevel(role: UserRole): number {
