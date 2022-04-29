@@ -6,6 +6,7 @@ fragment BanUserFormUser on User {
 			name
 		}
 		bannedById
+		createdAt
 		id
 		reason
 	}

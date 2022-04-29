@@ -24,7 +24,7 @@ const Root = tw(Form)`
 
 const Actions = tw.div`
 	grid
-	grid-template-columns[repeat(auto-fit, minmax(9rem, 1fr))]
+	grid-template-columns[repeat(auto-fill, minmax(9rem, 1fr))]
 	gap-4
 `;
 
@@ -77,7 +77,7 @@ export const BanUserForm: FC<BanUserFormProps> = ({ className, onClose, style, u
 			style={style}
 		>
 			<FormGroup>
-				<FormLabel>Reason</FormLabel>
+				<FormLabel>Ban Reason</FormLabel>
 				<TextArea
 					placeholder={`${user.name} was banned because...`}
 					{...register("reason")}

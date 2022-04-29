@@ -9,7 +9,8 @@ const SessionContext = createContext({
 			accessToken: "",
 			email: "storybook@test-makepurple.com",
 			name: "leedavidcs",
-			image: "https://avatars.githubusercontent.com/u/15151154"
+			image: "https://avatars.githubusercontent.com/u/15151154",
+			role: "Member"
 		}	
 	}
 });

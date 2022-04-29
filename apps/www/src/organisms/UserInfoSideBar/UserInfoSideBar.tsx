@@ -13,23 +13,26 @@ import {
 	toast,
 	TwitterIcon
 } from "@makepurple/components";
-import { FormatUtils } from "@makepurple/utils";
+import { dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, FC, useState } from "react";
+import React, { CSSProperties, FC, useMemo, useState } from "react";
 import tw from "twin.macro";
 import {
 	useDeleteFriendshipMutation,
 	useFollowUserMutation,
 	useFriendRequestUserMutation,
 	useGetUserInfoSideBarQuery,
+	UserRole,
 	UserWhereUniqueInput,
 	useUnfollowUserMutation
 } from "../../graphql";
 import { CancelIcon, PeopleIcon, ShareIcon } from "../../svgs";
+import { PermissionUtils } from "../../utils";
+import { BanUserForm } from "../BanUserForm";
 import { NewPostButton } from "../NewPostButton";
 import { TopLanguages } from "../TopLanguages";
 import { UserAvatar } from "../UserAvatar";
@@ -82,15 +85,46 @@ const Bio = tw.p`
 	line-clamp-4
 `;
 
+const BanInfo = tw.div`
+	flex
+	flex-col
+	gap-2
+	p-2
+	border
+	border-solid
+	border-gray-300
+	rounded-md
+	text-red-700
+	bg-indigo-50
+`;
+
+const BannedBy = tw.span`
+	font-semibold
+	leading-none
+`;
+
+const BanReason = tw.p`
+	text-sm
+`;
+
+const BanDate = tw.span`
+	text-sm
+`;
+
 const SocialLinks = tw.div`
 	inline-flex
 	items-center
+	flex-wrap
 	gap-4
 	text-indigo-800
 `;
 
 const SocialLink = tw.a`
 	inline-flex
+`;
+
+const BanButton = tw(Button)`
+	whitespace-nowrap
 `;
 
 const Actions = tw.div`
@@ -157,10 +191,16 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 	const router = useRouter();
 	const { data: session, status } = useSession();
 
-	const [formOpen, setFormOpen] = useState<boolean>(false);
+	const [mode, setMode] = useState<"banning" | "editing" | "viewing">("viewing");
 
 	const user = data?.user;
 	const isMyUser = user?.name === session?.user.name;
+
+	const canBan = useMemo(() => {
+		if (!session?.user || !user) return false;
+
+		return PermissionUtils.isGreaterRole(session.user.role as UserRole, user.role);
+	}, [session?.user, user]);
 
 	if (!user) return null;
 
@@ -179,72 +219,106 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					{!!user.github.name && <SecondaryName tw="mt-1">{user.name}</SecondaryName>}
 				</UserName>
 				{user.github.bio && <Bio tw="mt-3">{user.github.bio}</Bio>}
-				<SocialLinks tw="mt-4">
-					<SocialLink
-						href={user.github.url}
-						target="_blank"
-						rel="nofollow noopener noreferer"
-						aria-label="github"
-						title="GitHub"
-					>
-						<GitHubIcon height={24} width={24} />
-					</SocialLink>
-					{!!user.github.twitterUsername && (
-						<SocialLink
-							href={`https://twitter.com/${user.github.twitterUsername}`}
-							target="_blank"
-							rel="nofollow noopener noreferer"
-							aria-label="twitter"
-							title="Twitter"
-						>
-							<TwitterIcon height={24} width={24} />
-						</SocialLink>
-					)}
-					<SocialLink
-						href={`https://openbase.com/user/${user.name}`}
-						target="_blank"
-						rel="nofollow noopener noreferer"
-						aria-label="openbase"
-						title="Openbase"
-					>
-						<OpenbaseIcon height={24} width={24} />
-					</SocialLink>
-					<ShareButton
-						share={{
-							url: `https://makepurple.com/${userName}`,
-							title: `Check out ${userName} on MakePurple!`,
-							text: oneLine`
+				{mode === "banning" ? (
+					<BanUserForm
+						onClose={() => {
+							setMode("viewing");
+						}}
+						user={user}
+						tw="mt-3"
+					/>
+				) : (
+					<>
+						{canBan && user.banReason && (
+							<BanInfo tw="mt-3">
+								<BannedBy>
+									Banned by: {user.banReason.bannedBy?.name ?? "Unknown"}
+								</BannedBy>
+								<BanDate>
+									on: {dayjs(user.banReason.createdAt).format("MMM DD, YYYY")}
+								</BanDate>
+								<BanReason>{user.banReason.reason}</BanReason>
+							</BanInfo>
+						)}
+						<SocialLinks tw="mt-4">
+							<SocialLink
+								href={user.github.url}
+								target="_blank"
+								rel="nofollow noopener noreferer"
+								aria-label="github"
+								title="GitHub"
+							>
+								<GitHubIcon height={24} width={24} />
+							</SocialLink>
+							{!!user.github.twitterUsername && (
+								<SocialLink
+									href={`https://twitter.com/${user.github.twitterUsername}`}
+									target="_blank"
+									rel="nofollow noopener noreferer"
+									aria-label="twitter"
+									title="Twitter"
+								>
+									<TwitterIcon height={24} width={24} />
+								</SocialLink>
+							)}
+							<SocialLink
+								href={`https://openbase.com/user/${user.name}`}
+								target="_blank"
+								rel="nofollow noopener noreferer"
+								aria-label="openbase"
+								title="Openbase"
+							>
+								<OpenbaseIcon height={24} width={24} />
+							</SocialLink>
+							<ShareButton
+								share={{
+									url: `https://makepurple.com/${userName}`,
+									title: `Check out ${userName} on MakePurple!`,
+									text: oneLine`
 								Check out ${isMyUser ? "my" : `${userName}'s`} page on
 								MakePurple, featuring posts, experiences, repositories,
 								code-examples and more!
 							`
-						}}
-						size="small"
-						tags={["makepurple"]}
-						utm={{
-							content: "user_profile"
-						}}
-						variant="secondary"
-					>
-						<ShareIcon height={16} width={16} />
-						<span tw="ml-1">Share</span>
-					</ShareButton>
-				</SocialLinks>
-				{isMyUser && !formOpen && (
-					<Actions tw="mt-4">
-						<NewPostButton>
-							{({ draft }) => (draft ? "Edit Draft" : "New Post")}
-						</NewPostButton>
-						<Button
-							onClick={() => {
-								setFormOpen(true);
-							}}
-							type="button"
-							variant="secondary"
-						>
-							Edit Profile
-						</Button>
-					</Actions>
+								}}
+								size="small"
+								tags={["makepurple"]}
+								utm={{
+									content: "user_profile"
+								}}
+								variant="secondary"
+							>
+								<ShareIcon height={16} width={16} />
+								<span tw="ml-1">Share</span>
+							</ShareButton>
+							{canBan && (
+								<BanButton
+									onClick={() => {
+										setMode("banning");
+									}}
+									size="small"
+									variant="secondary"
+								>
+									Ban User
+								</BanButton>
+							)}
+						</SocialLinks>
+						{isMyUser && mode !== "editing" && (
+							<Actions tw="mt-4">
+								<NewPostButton>
+									{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+								</NewPostButton>
+								<Button
+									onClick={() => {
+										setMode("editing");
+									}}
+									type="button"
+									variant="secondary"
+								>
+									Edit Profile
+								</Button>
+							</Actions>
+						)}
+					</>
 				)}
 				{!isMyUser && (
 					<Actions tw="mt-4">
@@ -419,7 +493,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				</ConnectionsContainer>
 			</MainInfoContainer>
 			<Divider />
-			{!formOpen ? (
+			{mode !== "editing" ? (
 				<>
 					<TopLanguagesContainer>
 						<SubTitle>Most Used Languages</SubTitle>
@@ -485,7 +559,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 				<FormContainer>
 					<UserInfoSideBarForm
 						onClose={() => {
-							setFormOpen(false);
+							setMode("viewing");
 						}}
 						userName={userName}
 					/>
