@@ -1,0 +1,8 @@
+mutation DeleteComment($where: CommentWhereUniqueInput!) {
+	deleteComment(where: $where) {
+		record {
+			id
+			content
+		}
+	}
+}

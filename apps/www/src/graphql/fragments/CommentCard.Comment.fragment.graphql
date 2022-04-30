@@ -6,6 +6,7 @@ fragment CommentCardComment on Comment {
 		id
 		image
 		name
+		role
 	}
 	codeExampleId
 	content

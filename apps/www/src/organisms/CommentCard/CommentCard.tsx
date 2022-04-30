@@ -1,4 +1,5 @@
 import {
+	AlertDialog,
 	Avatar,
 	Button,
 	DocumentEditor,
@@ -10,20 +11,24 @@ import {
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
 import composeRefs from "@seznam/compose-react-refs";
+import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { CSSProperties, forwardRef, useRef, useState } from "react";
+import React, { CSSProperties, forwardRef, useMemo, useRef, useState } from "react";
 import tw, { styled } from "twin.macro";
 import { useClient } from "urql";
 import {
 	CommentCardCommentFragment,
 	GetCommentRepliesDocument,
 	SortOrder,
+	useDeleteCommentMutation,
 	useGetCommentRepliesQuery,
+	UserRole,
 	useUnvoteCommentMutation,
 	useUpvoteCommentMutation
 } from "../../graphql";
 import { CommentIcon, UnfoldIcon } from "../../svgs";
+import { PermissionUtils } from "../../utils";
 import { CreateCommentForm } from "../CreateCommentForm";
 import { LoadingCommentCard } from "../LoadingCommentCard";
 import { UserAvatar } from "../UserAvatar";
@@ -182,7 +187,9 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 
 	const urqlClient = useClient();
 	const router = useRouter();
-	const { status } = useSession();
+	const { data: session, status } = useSession();
+
+	const isMyComment = !!comment.author && session?.user.name === comment.author.name;
 
 	const [{ data, fetching }, getReplies] = useGetCommentRepliesQuery({
 		pause: true,
@@ -208,6 +215,15 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const shouldLoadFirst = !!repliesCount && !pageInfo;
 	const hasNextPage = pageInfo ? pageInfo.hasNextPage : !!repliesCount;
 
+	const canDelete = useMemo(() => {
+		if (isMyComment) return true;
+		if (!comment.author) return false;
+		if (!session?.user) return false;
+
+		return PermissionUtils.isGreaterRole(session.user.role as UserRole, comment.author.role);
+	}, [comment.author, isMyComment, session?.user]);
+
+	const [{ fetching: deleting }, deleteComment] = useDeleteCommentMutation();
 	const [{ fetching: unvoting }, unvoteComment] = useUnvoteCommentMutation();
 	const [{ fetching: upvoting }, upvoteComment] = useUpvoteCommentMutation();
 
@@ -322,6 +338,40 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 								<CommentIcon height={16} width={16} tw="mr-1" />
 								<span>Reply</span>
 							</ActionButton>
+						)}
+						{canDelete && (
+							<AlertDialog
+								description={oneLine`
+									Are you sure you wish to delete this comment? This cannot be
+									undone.
+								`}
+								onConfirm={async () => {
+									const didSucceed = await deleteComment({
+										where: {
+											id: comment.id
+										}
+									})
+										.then((result) => !!result.data?.deleteComment.record)
+										.catch(() => false);
+
+									if (!didSucceed) {
+										toast.error("Could not delete this comment");
+
+										return;
+									}
+
+									toast.success("Comment was deleted");
+								}}
+								text="Yes, delete comment"
+							>
+								<ActionButton
+									disabled={deleting || !author}
+									size="small"
+									variant="alert"
+								>
+									Delete
+								</ActionButton>
+							</AlertDialog>
 						)}
 					</Actions>
 					{showReplyForm && (

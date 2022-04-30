@@ -51,6 +51,10 @@ export function useDeleteCodeExampleMutation() {
   return Urql.useMutation<Operations.DeleteCodeExampleMutation, Operations.DeleteCodeExampleMutationVariables>(Operations.DeleteCodeExampleDocument);
 };
 
+export function useDeleteCommentMutation() {
+  return Urql.useMutation<Operations.DeleteCommentMutation, Operations.DeleteCommentMutationVariables>(Operations.DeleteCommentDocument);
+};
+
 export function useDeleteExperienceMutation() {
   return Urql.useMutation<Operations.DeleteExperienceMutation, Operations.DeleteExperienceMutationVariables>(Operations.DeleteExperienceDocument);
 };
