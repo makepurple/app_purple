@@ -3,6 +3,7 @@ fragment PostCardPost on Post {
 	author {
 		id
 		name
+		role
 	}
 	authorName
 	description

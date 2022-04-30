@@ -13,15 +13,17 @@ import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, forwardRef } from "react";
+import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw, { styled } from "twin.macro";
 import {
 	PostCardPostFragment,
 	PostWhereUniqueInput,
 	useDeletePostMutation,
+	UserRole,
 	useUnvotePostMutation,
 	useUpvotePostMutation
 } from "../../graphql";
+import { PermissionUtils } from "../../utils";
 
 const DeleteButton = tw(Button)`
 	opacity-0
@@ -158,6 +160,13 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 
 	const isMyPost = session?.user.name === post.authorName;
 
+	const canDelete = useMemo(() => {
+		if (isMyPost) return true;
+		if (!session?.user) return false;
+
+		return PermissionUtils.isGreaterRole(session.user.role as UserRole, post.author.role);
+	}, [isMyPost, post.author.role, session?.user]);
+
 	const [{ fetching: removing }, removePost] = useDeletePostMutation();
 	const [{ fetching: unvoting }, unvotePost] = useUnvotePostMutation();
 	const [{ fetching: upvoting }, upvotePost] = useUpvotePostMutation();
@@ -279,7 +288,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
 						<UpvoteCount>{FormatUtils.toGitHubFixed(post.upvotes)}</UpvoteCount>
 					</UpvoteButton>
-					{isMyPost && (
+					{canDelete && (
 						<AlertDialog
 							description={oneLine`
 								Are you sure you wish to delete this post? This cannot be undone.
