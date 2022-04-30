@@ -218,7 +218,6 @@ export const CopyIcon = React.memo(
 export const DiscordIcon = React.memo(
 	React.forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
 		<svg
-			role="img"
 			height={24}
 			width={24}
 			viewBox="0 0 24 24"
