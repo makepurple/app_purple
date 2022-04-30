@@ -28,6 +28,7 @@ import {
 	SortOrder,
 	useDeleteCodeExampleMutation,
 	useGetCodeExampleQuery,
+	UserRole,
 	useUnvoteCodeExampleMutation,
 	useUpvoteCodeExampleMutation
 } from "../../../../graphql";
@@ -43,6 +44,7 @@ import {
 	PageProps
 } from "../../../../page-props/[userName]/snippets/[codeExampleTitle]";
 import { BookIcon, CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../../svgs";
+import { PermissionUtils } from "../../../../utils";
 
 const BATCH_SIZE = 8;
 const SEO_MIN_CODE_LENGTH = 1_000;
@@ -202,13 +204,13 @@ export const getServerSideProps = pageProps;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
-	const { data: sessionData } = useSession();
+	const { data: session } = useSession();
 
 	const [{ fetching: removing }, remove] = useDeleteCodeExampleMutation();
 	const [{ fetching: upvoting }, upvote] = useUpvoteCodeExampleMutation();
 	const [{ fetching: unvoting }, unvote] = useUnvoteCodeExampleMutation();
 
-	const viewer = sessionData?.user;
+	const viewer = session?.user;
 
 	const userName = router?.query.userName as string;
 	const urlSlug = router?.query.codeExampleTitle as string;
@@ -250,6 +252,14 @@ export const Page: NextPage<PageProps> = () => {
 
 	const codeExample = postData?.codeExample;
 	const comments = commentsData?.codeExample?.comments.nodes ?? [];
+
+	const canDelete = useMemo(() => {
+		if (isMyPage) return true;
+		if (!viewer) return false;
+		if (!codeExample) return false;
+
+		return PermissionUtils.isGreaterRole(viewer.role as UserRole, codeExample.author.role);
+	}, [codeExample, isMyPage, viewer]);
 
 	const language = useMemo((): Maybe<Language> => {
 		switch (codeExample?.language) {
@@ -460,46 +470,48 @@ export const Page: NextPage<PageProps> = () => {
 									Edit
 								</EditButton>
 							</NextLink>
-							<AlertDialog
-								description={oneLine`
+							{canDelete && (
+								<AlertDialog
+									description={oneLine`
 									Are you sure you wish to delete this snippet? This cannot be undone.
 								`}
-								onConfirm={async () => {
-									const where: CodeExampleWhereUniqueInput = {
-										id: codeExample.id
-									};
+									onConfirm={async () => {
+										const where: CodeExampleWhereUniqueInput = {
+											id: codeExample.id
+										};
 
-									const didSucceed = await remove({ where })
-										.then((result) => !!result.data?.deleteCodeExample)
-										.catch(() => false);
+										const didSucceed = await remove({ where })
+											.then((result) => !!result.data?.deleteCodeExample)
+											.catch(() => false);
 
-									if (!didSucceed) {
-										toast.error("Could not delete this snippet");
+										if (!didSucceed) {
+											toast.error("Could not delete this snippet");
 
-										return;
-									}
+											return;
+										}
 
-									toast.success("Snippet was successfully deleted");
+										toast.success("Snippet was successfully deleted");
 
-									await router.push(
-										"/[userName]/snippets",
-										`/${userName}/snippets`
-									);
-								}}
-								text="Yes, delete snippet"
-							>
-								<DeleteButton
-									disabled={mutating}
-									onClick={(e) => {
-										e.stopPropagation();
+										await router.push(
+											"/[userName]/snippets",
+											`/${userName}/snippets`
+										);
 									}}
-									size="small"
-									type="button"
-									variant="alert"
+									text="Yes, delete snippet"
 								>
-									Delete
-								</DeleteButton>
-							</AlertDialog>
+									<DeleteButton
+										disabled={mutating}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+										size="small"
+										type="button"
+										variant="alert"
+									>
+										Delete
+									</DeleteButton>
+								</AlertDialog>
+							)}
 						</OwnerActions>
 					)}
 				</Actions>

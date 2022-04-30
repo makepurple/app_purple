@@ -15,6 +15,7 @@ query GetCodeExample(
 			id
 			image
 			name
+			role
 		}
 		authorName
 		content
