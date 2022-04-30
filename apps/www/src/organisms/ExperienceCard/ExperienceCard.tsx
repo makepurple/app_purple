@@ -6,8 +6,10 @@ import tw, { styled } from "twin.macro";
 import {
 	ExperienceCardExperienceFragment,
 	ExperienceType,
-	useDeleteExperienceMutation
+	useDeleteExperienceMutation,
+	UserRole
 } from "../../graphql";
+import { PermissionUtils } from "../../utils";
 
 const EditButton = tw(Button)`
 	flex-shrink-0
@@ -130,6 +132,13 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 
 	const isMyUser = session?.user.name === experience.user.name;
 
+	const canDelete = useMemo(() => {
+		if (isMyUser) return true;
+		if (!session?.user) return false;
+
+		return PermissionUtils.isGreaterRole(session.user.role as UserRole, experience.user.role);
+	}, [experience, isMyUser, session?.user]);
+
 	const [{ fetching: removing }, removeExperience] = useDeleteExperienceMutation();
 
 	const githubOrganization = experience.organization.github;
@@ -228,31 +237,33 @@ export const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>((p
 					>
 						Edit
 					</EditButton>
-					<DeleteButton
-						disabled={removing}
-						onClick={async (e) => {
-							e.stopPropagation();
+					{canDelete && (
+						<DeleteButton
+							disabled={removing}
+							onClick={async (e) => {
+								e.stopPropagation();
 
-							const didSucceed = await removeExperience({
-								where: { id: experience.id }
-							})
-								.then((result) => !!result.data?.deleteExperience)
-								.catch(() => false);
+								const didSucceed = await removeExperience({
+									where: { id: experience.id }
+								})
+									.then((result) => !!result.data?.deleteExperience)
+									.catch(() => false);
 
-							if (!didSucceed) {
-								toast.error("Could not delete experience");
+								if (!didSucceed) {
+									toast.error("Could not delete experience");
 
-								return;
-							}
+									return;
+								}
 
-							toast.success("Experience was successfully deleted");
-						}}
-						size="small"
-						type="button"
-						variant="alert"
-					>
-						{removing ? <Spinner /> : "Delete"}
-					</DeleteButton>
+								toast.success("Experience was successfully deleted");
+							}}
+							size="small"
+							type="button"
+							variant="alert"
+						>
+							{removing ? <Spinner /> : "Delete"}
+						</DeleteButton>
+					)}
 				</Actions>
 			)}
 		</Root>

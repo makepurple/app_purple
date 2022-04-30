@@ -22,5 +22,6 @@ fragment ExperienceCardExperience on Experience {
 	user {
 		id
 		name
+		role
 	}
 }
