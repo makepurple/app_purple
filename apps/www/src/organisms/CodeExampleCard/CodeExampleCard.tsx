@@ -13,16 +13,18 @@ import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, forwardRef } from "react";
+import React, { CSSProperties, forwardRef, useMemo } from "react";
 import tw, { styled } from "twin.macro";
 import {
 	CodeExampleCardCodeExampleFragment,
 	CodeExampleWhereUniqueInput,
 	useDeleteCodeExampleMutation,
+	UserRole,
 	useUnvoteCodeExampleMutation,
 	useUpvoteCodeExampleMutation
 } from "../../graphql";
 import { BookIcon, ThumbsUpIcon } from "../../svgs";
+import { PermissionUtils } from "../../utils";
 
 const DeleteButton = tw(Button)`
 	opacity-0
@@ -141,6 +143,16 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 	const { data: session, status } = useSession();
 
 	const isMyUser = session?.user.name === codeExample.authorName;
+
+	const canDelete = useMemo(() => {
+		if (isMyUser) return true;
+		if (!session?.user) return false;
+
+		return PermissionUtils.isGreaterRole(
+			session.user.role as UserRole,
+			codeExample.author.role
+		);
+	}, [codeExample, isMyUser, session?.user]);
 
 	const [{ fetching: removing }, remove] = useDeleteCodeExampleMutation();
 	const [{ fetching: unvoting }, unvote] = useUnvoteCodeExampleMutation();
@@ -275,7 +287,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 						<ThumbsUpIcon height={16} width={16} tw="mr-1" />
 						<UpvoteCount>{FormatUtils.toGitHubFixed(codeExample.upvotes)}</UpvoteCount>
 					</UpvoteButton>
-					{isMyUser && (
+					{canDelete && (
 						<AlertDialog
 							description={oneLine`
 								This action cannot be undone. This will permanently delete this

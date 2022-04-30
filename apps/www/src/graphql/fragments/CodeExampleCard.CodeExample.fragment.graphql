@@ -4,6 +4,7 @@ fragment CodeExampleCardCodeExample on CodeExample {
 		id
 		image
 		name
+		role
 	}
 	authorName
 	description
