@@ -27,6 +27,7 @@ import {
 	SortOrder,
 	useDeletePostMutation,
 	useGetPostQuery,
+	UserRole,
 	useUpvotePostMutation,
 	useViewPostMutation
 } from "../../../graphql";
@@ -39,6 +40,7 @@ import {
 } from "../../../organisms";
 import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
 import { CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../svgs";
+import { PermissionUtils } from "../../../utils";
 
 const MIN_SEO_READ_TIME = 3;
 const SEO_SKILL_COUNT = 5;
@@ -243,6 +245,14 @@ export const Page: NextPage<PageProps> = () => {
 
 	const isMyPost = session?.user.name === post?.authorName;
 
+	const canDelete = useMemo(() => {
+		if (isMyPost) return true;
+		if (!session?.user) return false;
+		if (!post) return false;
+
+		return PermissionUtils.isGreaterRole(session.user.role as UserRole, post?.author.role);
+	}, [isMyPost, post, session?.user]);
+
 	const content = useMemo(() => {
 		const validator = DocumentEditorValue.destruct();
 
@@ -404,41 +414,46 @@ export const Page: NextPage<PageProps> = () => {
 									Edit
 								</EditButton>
 							</NextLink>
-							<AlertDialog
-								description={oneLine`
+							{canDelete && (
+								<AlertDialog
+									description={oneLine`
 									Are you sure you wish to delete this post? This cannot be undone.
 								`}
-								onConfirm={async () => {
-									const didSucceed = await removePost({
-										where: { id: post.id }
-									})
-										.then((result) => !!result.data?.deletePost)
-										.catch(() => false);
+									onConfirm={async () => {
+										const didSucceed = await removePost({
+											where: { id: post.id }
+										})
+											.then((result) => !!result.data?.deletePost)
+											.catch(() => false);
 
-									if (!didSucceed) {
-										toast.error("Could not delete this post");
+										if (!didSucceed) {
+											toast.error("Could not delete this post");
 
-										return;
-									}
+											return;
+										}
 
-									toast.success("Post was successfully deleted");
+										toast.success("Post was successfully deleted");
 
-									await router.push("/[userName]/posts", `/${userName}/posts`);
-								}}
-								text="Yes, delete post"
-							>
-								<DeleteButton
-									disabled={mutating}
-									onClick={(e) => {
-										e.stopPropagation();
+										await router.push(
+											"/[userName]/posts",
+											`/${userName}/posts`
+										);
 									}}
-									size="small"
-									type="button"
-									variant="alert"
+									text="Yes, delete post"
 								>
-									Delete
-								</DeleteButton>
-							</AlertDialog>
+									<DeleteButton
+										disabled={mutating}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+										size="small"
+										type="button"
+										variant="alert"
+									>
+										Delete
+									</DeleteButton>
+								</AlertDialog>
+							)}
 						</OwnerActions>
 					)}
 				</Actions>

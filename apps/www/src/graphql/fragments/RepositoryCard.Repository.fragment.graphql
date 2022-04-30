@@ -39,4 +39,8 @@ fragment RepositoryCardRepository on Repository {
 		name
 		owner
 	}
+	user {
+		id
+		role
+	}
 }

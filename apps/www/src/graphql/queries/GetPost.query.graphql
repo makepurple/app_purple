@@ -6,6 +6,7 @@ query GetPost($where: PostWhereUniqueInput!) {
 			id
 			name
 			image
+			role
 		}
 		authorName
 		content

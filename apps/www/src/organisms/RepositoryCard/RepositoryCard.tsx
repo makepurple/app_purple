@@ -13,10 +13,15 @@ import {
 import { dayjs } from "@makepurple/utils";
 import { useSession } from "next-auth/react";
 import NextLink from "next/link";
-import React, { CSSProperties, forwardRef, useState } from "react";
+import React, { CSSProperties, forwardRef, useMemo, useState } from "react";
 import tw, { styled } from "twin.macro";
-import { RepositoryCardRepositoryFragment, useDeleteRepositoryMutation } from "../../graphql";
+import {
+	RepositoryCardRepositoryFragment,
+	useDeleteRepositoryMutation,
+	UserRole
+} from "../../graphql";
 import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../../svgs";
+import { PermissionUtils } from "../../utils";
 import { UpdateRepositoryCard } from "../UpdateRepositoryCard";
 
 const EditButton = tw(Button)`
@@ -156,6 +161,13 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 	const owner = repository.github.owner;
 
 	const isMyRepository = session?.user.name === owner.login;
+
+	const canDelete = useMemo(() => {
+		if (isMyRepository) return true;
+		if (!session?.user) return false;
+
+		return PermissionUtils.isGreaterRole(session.user.role as UserRole, repository.user.role);
+	}, [isMyRepository, repository.user.role, session?.user]);
 
 	const [{ fetching: removing }, removeRepository] = useDeleteRepositoryMutation();
 
@@ -322,31 +334,33 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 						>
 							Edit
 						</EditButton>
-						<DeleteButton
-							disabled={removing}
-							onClick={async (e) => {
-								e.stopPropagation();
+						{canDelete && (
+							<DeleteButton
+								disabled={removing}
+								onClick={async (e) => {
+									e.stopPropagation();
 
-								const didSucceed = await removeRepository({
-									where: { id: repository.id }
-								})
-									.then((result) => result.data?.deleteRepository)
-									.catch(() => false);
+									const didSucceed = await removeRepository({
+										where: { id: repository.id }
+									})
+										.then((result) => result.data?.deleteRepository)
+										.catch(() => false);
 
-								if (!didSucceed) {
-									toast.error("Could not delete this repository");
+									if (!didSucceed) {
+										toast.error("Could not delete this repository");
 
-									return;
-								}
+										return;
+									}
 
-								toast.success("Repository was successfully deleted");
-							}}
-							size="small"
-							type="button"
-							variant="alert"
-						>
-							{removing ? <Spinner /> : "Delete"}
-						</DeleteButton>
+									toast.success("Repository was successfully deleted");
+								}}
+								size="small"
+								type="button"
+								variant="alert"
+							>
+								{removing ? <Spinner /> : "Delete"}
+							</DeleteButton>
+						)}
 					</Actions>
 				)}
 			</>
