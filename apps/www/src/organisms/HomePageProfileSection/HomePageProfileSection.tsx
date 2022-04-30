@@ -3,6 +3,7 @@ import { dayjs } from "@makepurple/utils";
 import { codeBlock, oneLine } from "common-tags";
 import React, { CSSProperties, FC } from "react";
 import tw, { styled, theme } from "twin.macro";
+import { UserRole } from "../../graphql";
 import { PostCard } from "../PostCard";
 
 const post1Skills = ["next.js", "prisma", "nexus", "urql", "TypeScript", "pnpm", "turborepo"].map(
@@ -180,7 +181,8 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 						author: {
 							__typename: "User",
 							id: "0",
-							name: "leedavidcs"
+							name: "leedavidcs",
+							role: UserRole.Admin
 						},
 						authorName: "leedavidcs",
 						description: oneLine`
@@ -212,7 +214,8 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 						author: {
 							__typename: "User",
 							id: "0",
-							name: "leedavidcs"
+							name: "leedavidcs",
+							role: UserRole.Admin
 						},
 						authorName: "leedavidcs",
 						description: oneLine`
