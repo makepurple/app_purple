@@ -53,7 +53,7 @@ export const HomePageSkillsCarousel = memo<HomePageSkillsCarouselProps>(({ class
 					<Skill key={repository.id} repository={repository} />
 				))}
 			</InfiniteAutoplayCarousel>
-			<InfiniteAutoplayCarousel speed={ms("65s")}>
+			<InfiniteAutoplayCarousel speed={ms("55s")}>
 				{second.map((repository) => (
 					<Skill key={repository.id} repository={repository} />
 				))}

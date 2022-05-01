@@ -354,8 +354,13 @@ type CreateExperiencePayload implements MutationPayload {
   viewer: User
 }
 
+interface CreatePostError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type CreatePostPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [CreatePostError!]
   query: Query!
   record: Post
   viewer: User
@@ -995,6 +1000,11 @@ type PostConnection implements Connection {
   nodes: [Post!]!
   pageInfo: PageInfo!
   totalCount: Int!
+}
+
+type PostDraftLimitError implements CreatePostError & MutationError {
+  message: String!
+  path: [String!]!
 }
 
 input PostDraftUpdateInput {

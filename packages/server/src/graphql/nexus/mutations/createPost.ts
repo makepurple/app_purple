@@ -17,7 +17,16 @@ export const createPost = mutationField("createPost", {
 		});
 
 		if (draft) {
-			throw new Error("You can only have 1 unfinished draft post at a time!");
+			return {
+				errors: [
+					{
+						__typename: "PostDraftLimitError",
+						message: oneLine`
+							You can only have 1 unfinished draft post at a time!
+						`
+					}
+				]
+			};
 		}
 
 		const record = await prisma.post.create({

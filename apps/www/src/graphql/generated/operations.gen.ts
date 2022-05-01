@@ -469,9 +469,14 @@ export type CreateExperiencePayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type CreatePostError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type CreatePostPayload = MutationPayload & {
   readonly __typename: 'CreatePostPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<CreatePostError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;
@@ -1554,6 +1559,12 @@ export type PostConnection = Connection & {
   readonly nodes: ReadonlyArray<Post>;
   readonly pageInfo: PageInfo;
   readonly totalCount: Scalars['Int'];
+};
+
+export type PostDraftLimitError = CreatePostError & MutationError & {
+  readonly __typename: 'PostDraftLimitError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
 };
 
 export type PostDraftUpdateInput = {
