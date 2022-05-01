@@ -1140,7 +1140,7 @@ interface RemoveDesiredSkillError implements MutationError {
 }
 
 type RemoveDesiredSkillPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [RemoveDesiredSkillError!]
   query: Query!
   record: Skill
   viewer: User

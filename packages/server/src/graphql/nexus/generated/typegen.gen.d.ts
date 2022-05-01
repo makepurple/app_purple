@@ -732,7 +732,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillPayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['RemoveDesiredSkillError'][] | null; // [RemoveDesiredSkillError!]
     record?: NexusGenRootTypes['Skill'] | null; // Skill
   }
   RemovePostThumbnailPayload: { // root type
@@ -1632,7 +1632,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   RemoveDesiredSkillPayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['RemoveDesiredSkillError'][] | null; // [RemoveDesiredSkillError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Skill'] | null; // Skill
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -2721,7 +2721,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   RemoveDesiredSkillPayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'RemoveDesiredSkillError'
     query: 'Query'
     record: 'Skill'
     viewer: 'User'

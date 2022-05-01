@@ -1877,7 +1877,7 @@ export type RemoveDesiredSkillError = {
 
 export type RemoveDesiredSkillPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<RemoveDesiredSkillError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
