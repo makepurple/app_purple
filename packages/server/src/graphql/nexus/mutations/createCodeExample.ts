@@ -93,7 +93,16 @@ export const createCodeExample = mutationField("createCodeExample", {
 			async (skill) => await verifySkill(skill.name, skill.owner)
 		);
 
-		if (!verified) throw new Error("All skills must be from GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidSkillError",
+						message: `All skills must be from GitHub`
+					}
+				]
+			};
+		}
 
 		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.organization.createMany({

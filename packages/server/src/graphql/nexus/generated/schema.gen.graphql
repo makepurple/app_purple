@@ -726,7 +726,7 @@ input GitHubUserTotalCommitsWhereInput {
   createdAt: DateTimeNullableFilter
 }
 
-type InvalidSkillError implements MutationError {
+type InvalidSkillError implements CreateCodeExampleError & MutationError {
   message: String!
   path: [String!]!
 }
