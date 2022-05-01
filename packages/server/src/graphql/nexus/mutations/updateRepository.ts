@@ -1,4 +1,5 @@
 import { PromiseUtils } from "@makepurple/utils";
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { Logger, PrismaUtils } from "../../../utils";
@@ -27,7 +28,18 @@ export const updateRepository = mutationField("updateRepository", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!repository) throw new Error("Repository could not be found");
+		if (!repository) {
+			return {
+				errors: [
+					{
+						__typename: "RepositoryNotFoundError",
+						message: oneLine`
+							Repository could not be found
+						`
+					}
+				]
+			};
+		}
 
 		const skillIds = (args.data.skills ?? [])
 			.filter((skill) => !!skill.id)
@@ -72,7 +84,18 @@ export const updateRepository = mutationField("updateRepository", {
 			async (skill) => await verifySkill(skill.name, skill.owner)
 		);
 
-		if (!verified) throw new Error("All skills must be from GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidSkillError",
+						message: oneLine`
+							All skills must be from GitHub
+						`
+					}
+				]
+			};
+		}
 
 		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.repository.update({

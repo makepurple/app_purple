@@ -516,7 +516,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   CreateRepositoryPayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['CreateRepositoryError'][] | null; // [CreateRepositoryError!]
     record?: NexusGenRootTypes['Repository'] | null; // Repository
   }
   DeleteCodeExamplePayload: { // root type
@@ -734,6 +734,9 @@ export interface NexusGenObjects {
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     record?: NexusGenRootTypes['User'] | null; // User
   }
+  RemoteRepositoryNotExistsError: { // root type
+    message: string; // String!
+  }
   RemoveDesiredSkillPayload: { // root type
     errors?: NexusGenRootTypes['RemoveDesiredSkillError'][] | null; // [RemoveDesiredSkillError!]
     record?: NexusGenRootTypes['Skill'] | null; // Skill
@@ -759,6 +762,9 @@ export interface NexusGenObjects {
   RepositoryEdge: { // root type
     cursor: string; // String!
     node: NexusGenRootTypes['Repository']; // Repository!
+  }
+  RepositoryNotFoundError: { // root type
+    message: string; // String!
   }
   RequestFriendshipPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -861,7 +867,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdateRepositoryPayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['UpdateRepositoryError'][] | null; // [UpdateRepositoryError!]
     record?: NexusGenRootTypes['Repository'] | null; // Repository
   }
   UpdateSkillsPayload: { // root type
@@ -993,9 +999,10 @@ export interface NexusGenInterfaces {
   CreateCodeExampleError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'SimilarTitleError', 'required'>;
   CreateExperienceError: core.Discriminate<'InvalidOrganizationError', 'required'>;
   CreatePostError: core.Discriminate<'PostDraftLimitError', 'required'>;
+  CreateRepositoryError: core.Discriminate<'RemoteRepositoryNotExistsError', 'required'>;
   Followable: core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
-  MutationError: core.Discriminate<'CodeExampleNotFoundError', 'required'> | core.Discriminate<'InvalidOrganizationError', 'required'> | core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostDraftLimitError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'> | core.Discriminate<'SimilarTitleError', 'required'> | core.Discriminate<'SkillNotFoundError', 'required'>;
+  MutationError: core.Discriminate<'CodeExampleNotFoundError', 'required'> | core.Discriminate<'InvalidOrganizationError', 'required'> | core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostDraftLimitError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'> | core.Discriminate<'RemoteRepositoryNotExistsError', 'required'> | core.Discriminate<'RepositoryNotFoundError', 'required'> | core.Discriminate<'SimilarTitleError', 'required'> | core.Discriminate<'SkillNotFoundError', 'required'>;
   MutationPayload: core.Discriminate<'AcceptFriendshipPayload', 'required'> | core.Discriminate<'AddDesiredSkillPayload', 'required'> | core.Discriminate<'AddSkillPayload', 'required'> | core.Discriminate<'BanUserPayload', 'required'> | core.Discriminate<'CommentCodeExamplePayload', 'required'> | core.Discriminate<'CommentPostPayload', 'required'> | core.Discriminate<'CreateChatPayload', 'required'> | core.Discriminate<'CreateCodeExamplePayload', 'required'> | core.Discriminate<'CreateExperiencePayload', 'required'> | core.Discriminate<'CreatePostPayload', 'required'> | core.Discriminate<'CreateRepositoryPayload', 'required'> | core.Discriminate<'DeleteCodeExamplePayload', 'required'> | core.Discriminate<'DeleteCommentPayload', 'required'> | core.Discriminate<'DeleteExperiencePayload', 'required'> | core.Discriminate<'DeleteFriendshipPayload', 'required'> | core.Discriminate<'DeletePostPayload', 'required'> | core.Discriminate<'DeleteRepositoryPayload', 'required'> | core.Discriminate<'DeleteUserPayload', 'required'> | core.Discriminate<'DownvoteCommentPayload', 'required'> | core.Discriminate<'FollowSkillPayload', 'required'> | core.Discriminate<'FollowUserPayload', 'required'> | core.Discriminate<'InviteToChatPayload', 'required'> | core.Discriminate<'LeaveChatPayload', 'required'> | core.Discriminate<'OpenChatPayload', 'required'> | core.Discriminate<'OpenMessagesPayload', 'required'> | core.Discriminate<'OpenNotificationsPayload', 'required'> | core.Discriminate<'PublishPostPayload', 'required'> | core.Discriminate<'RejectFriendshipPayload', 'required'> | core.Discriminate<'RemoveDesiredSkillPayload', 'required'> | core.Discriminate<'RemovePostThumbnailPayload', 'required'> | core.Discriminate<'RemoveSkillPayload', 'required'> | core.Discriminate<'RequestFriendshipPayload', 'required'> | core.Discriminate<'SendChatMessagePayload', 'required'> | core.Discriminate<'UnbanUserPayload', 'required'> | core.Discriminate<'UnfollowSkillPayload', 'required'> | core.Discriminate<'UnfollowUserPayload', 'required'> | core.Discriminate<'UnvoteCodeExamplePayload', 'required'> | core.Discriminate<'UnvoteCommentPayload', 'required'> | core.Discriminate<'UnvotePostPayload', 'required'> | core.Discriminate<'UpdateCodeExamplePayload', 'required'> | core.Discriminate<'UpdateCommentPayload', 'required'> | core.Discriminate<'UpdateDesiredSkillsPayload', 'required'> | core.Discriminate<'UpdateExperiencePayload', 'required'> | core.Discriminate<'UpdatePostDraftPayload', 'required'> | core.Discriminate<'UpdatePostPayload', 'required'> | core.Discriminate<'UpdateRepositoryPayload', 'required'> | core.Discriminate<'UpdateSkillsPayload', 'required'> | core.Discriminate<'UpdateUserFromGitHubPayload', 'required'> | core.Discriminate<'UploadPostImagePayload', 'required'> | core.Discriminate<'UpvoteCodeExamplePayload', 'required'> | core.Discriminate<'UpvoteCommentPayload', 'required'> | core.Discriminate<'UpvotePostPayload', 'required'> | core.Discriminate<'ViewPostPayload', 'required'>;
   Node: core.Discriminate<'BanReason', 'required'> | core.Discriminate<'Chat', 'required'> | core.Discriminate<'ChatMessage', 'required'> | core.Discriminate<'CodeExample', 'required'> | core.Discriminate<'Comment', 'required'> | core.Discriminate<'Experience', 'required'> | core.Discriminate<'Follow', 'required'> | core.Discriminate<'Friendship', 'required'> | core.Discriminate<'NotificationChatMessageReceived', 'required'> | core.Discriminate<'NotificationCodeExampleCommented', 'required'> | core.Discriminate<'NotificationFriendshipAccepted', 'required'> | core.Discriminate<'NotificationPostCommented', 'required'> | core.Discriminate<'Organization', 'required'> | core.Discriminate<'Post', 'required'> | core.Discriminate<'PostImage', 'required'> | core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'> | core.Discriminate<'UserActivityCommentCodeExample', 'required'> | core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityCreateCodeExample', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvoteCodeExample', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   Notification: core.Discriminate<'NotificationChatMessageReceived', 'required'> | core.Discriminate<'NotificationCodeExampleCommented', 'required'> | core.Discriminate<'NotificationFriendshipAccepted', 'required'> | core.Discriminate<'NotificationPostCommented', 'required'>;
@@ -1007,6 +1014,7 @@ export interface NexusGenInterfaces {
   UpdateExperienceError: core.Discriminate<'InvalidOrganizationError', 'required'>;
   UpdatePostDraftError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
   UpdatePostError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
+  UpdateRepositoryError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'RepositoryNotFoundError', 'required'>;
   UpdateSkillsError: core.Discriminate<'InvalidSkillError', 'required'>;
   UserActivity: core.Discriminate<'UserActivityCommentCodeExample', 'required'> | core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityCreateCodeExample', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvoteCodeExample', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   WithGitHubRepository: core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'>;
@@ -1194,7 +1202,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateRepositoryPayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['CreateRepositoryError'][] | null; // [CreateRepositoryError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -1643,6 +1651,10 @@ export interface NexusGenFieldTypes {
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
   }
+  RemoteRepositoryNotExistsError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
   RemoveDesiredSkillPayload: { // field return type
     errors: NexusGenRootTypes['RemoveDesiredSkillError'][] | null; // [RemoveDesiredSkillError!]
     query: NexusGenRootTypes['Query']; // Query!
@@ -1678,6 +1690,10 @@ export interface NexusGenFieldTypes {
   RepositoryEdge: { // field return type
     cursor: string; // String!
     node: NexusGenRootTypes['Repository']; // Repository!
+  }
+  RepositoryNotFoundError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
   }
   RequestFriendshipPayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -1823,7 +1839,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateRepositoryPayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['UpdateRepositoryError'][] | null; // [UpdateRepositoryError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Repository'] | null; // Repository
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -2051,6 +2067,10 @@ export interface NexusGenFieldTypes {
     message: string; // String!
     path: string[]; // [String!]!
   }
+  CreateRepositoryError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
   Followable: { // field return type
     viewerFollowing: boolean; // Boolean!
   }
@@ -2112,6 +2132,10 @@ export interface NexusGenFieldTypes {
     path: string[]; // [String!]!
   }
   UpdatePostError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
+  UpdateRepositoryError: { // field return type
     message: string; // String!
     path: string[]; // [String!]!
   }
@@ -2307,7 +2331,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   CreateRepositoryPayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'CreateRepositoryError'
     query: 'Query'
     record: 'Repository'
     viewer: 'User'
@@ -2756,6 +2780,10 @@ export interface NexusGenFieldTypeNames {
     record: 'User'
     viewer: 'User'
   }
+  RemoteRepositoryNotExistsError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
   RemoveDesiredSkillPayload: { // field return type name
     errors: 'RemoveDesiredSkillError'
     query: 'Query'
@@ -2791,6 +2819,10 @@ export interface NexusGenFieldTypeNames {
   RepositoryEdge: { // field return type name
     cursor: 'String'
     node: 'Repository'
+  }
+  RepositoryNotFoundError: { // field return type name
+    message: 'String'
+    path: 'String'
   }
   RequestFriendshipPayload: { // field return type name
     errors: 'MutationError'
@@ -2936,7 +2968,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   UpdateRepositoryPayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'UpdateRepositoryError'
     query: 'Query'
     record: 'Repository'
     viewer: 'User'
@@ -3164,6 +3196,10 @@ export interface NexusGenFieldTypeNames {
     message: 'String'
     path: 'String'
   }
+  CreateRepositoryError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
   Followable: { // field return type name
     viewerFollowing: 'Boolean'
   }
@@ -3225,6 +3261,10 @@ export interface NexusGenFieldTypeNames {
     path: 'String'
   }
   UpdatePostError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
+  UpdateRepositoryError: { // field return type name
     message: 'String'
     path: 'String'
   }
@@ -3862,9 +3902,10 @@ export interface NexusGenAbstractTypeMembers {
   CreateCodeExampleError: "InvalidSkillError" | "SimilarTitleError"
   CreateExperienceError: "InvalidOrganizationError"
   CreatePostError: "PostDraftLimitError"
+  CreateRepositoryError: "RemoteRepositoryNotExistsError"
   Followable: "Skill" | "User"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
-  MutationError: "CodeExampleNotFoundError" | "InvalidOrganizationError" | "InvalidSkillError" | "PostDraftLimitError" | "PostNotFoundError" | "SimilarTitleError" | "SkillNotFoundError"
+  MutationError: "CodeExampleNotFoundError" | "InvalidOrganizationError" | "InvalidSkillError" | "PostDraftLimitError" | "PostNotFoundError" | "RemoteRepositoryNotExistsError" | "RepositoryNotFoundError" | "SimilarTitleError" | "SkillNotFoundError"
   MutationPayload: "AcceptFriendshipPayload" | "AddDesiredSkillPayload" | "AddSkillPayload" | "BanUserPayload" | "CommentCodeExamplePayload" | "CommentPostPayload" | "CreateChatPayload" | "CreateCodeExamplePayload" | "CreateExperiencePayload" | "CreatePostPayload" | "CreateRepositoryPayload" | "DeleteCodeExamplePayload" | "DeleteCommentPayload" | "DeleteExperiencePayload" | "DeleteFriendshipPayload" | "DeletePostPayload" | "DeleteRepositoryPayload" | "DeleteUserPayload" | "DownvoteCommentPayload" | "FollowSkillPayload" | "FollowUserPayload" | "InviteToChatPayload" | "LeaveChatPayload" | "OpenChatPayload" | "OpenMessagesPayload" | "OpenNotificationsPayload" | "PublishPostPayload" | "RejectFriendshipPayload" | "RemoveDesiredSkillPayload" | "RemovePostThumbnailPayload" | "RemoveSkillPayload" | "RequestFriendshipPayload" | "SendChatMessagePayload" | "UnbanUserPayload" | "UnfollowSkillPayload" | "UnfollowUserPayload" | "UnvoteCodeExamplePayload" | "UnvoteCommentPayload" | "UnvotePostPayload" | "UpdateCodeExamplePayload" | "UpdateCommentPayload" | "UpdateDesiredSkillsPayload" | "UpdateExperiencePayload" | "UpdatePostDraftPayload" | "UpdatePostPayload" | "UpdateRepositoryPayload" | "UpdateSkillsPayload" | "UpdateUserFromGitHubPayload" | "UploadPostImagePayload" | "UpvoteCodeExamplePayload" | "UpvoteCommentPayload" | "UpvotePostPayload" | "ViewPostPayload"
   Node: "BanReason" | "Chat" | "ChatMessage" | "CodeExample" | "Comment" | "Experience" | "Follow" | "Friendship" | "NotificationChatMessageReceived" | "NotificationCodeExampleCommented" | "NotificationFriendshipAccepted" | "NotificationPostCommented" | "Organization" | "Post" | "PostImage" | "Repository" | "Skill" | "User" | "UserActivityCommentCodeExample" | "UserActivityCommentPost" | "UserActivityCreateCodeExample" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvoteCodeExample" | "UserActivityUpvotePost"
   Notification: "NotificationChatMessageReceived" | "NotificationCodeExampleCommented" | "NotificationFriendshipAccepted" | "NotificationPostCommented"
@@ -3876,6 +3917,7 @@ export interface NexusGenAbstractTypeMembers {
   UpdateExperienceError: "InvalidOrganizationError"
   UpdatePostDraftError: "InvalidSkillError" | "PostNotFoundError"
   UpdatePostError: "InvalidSkillError" | "PostNotFoundError"
+  UpdateRepositoryError: "InvalidSkillError" | "RepositoryNotFoundError"
   UpdateSkillsError: "InvalidSkillError"
   UserActivity: "UserActivityCommentCodeExample" | "UserActivityCommentPost" | "UserActivityCreateCodeExample" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvoteCodeExample" | "UserActivityUpvotePost"
   WithGitHubRepository: "Repository" | "Skill"
@@ -3929,7 +3971,7 @@ export interface NexusGenTypeInterfaces {
   GitHubRepositoryEdge: "ConnectionEdge"
   GitHubUser: "GitHubRepositoryOwner"
   InvalidOrganizationError: "CreateExperienceError" | "MutationError" | "UpdateExperienceError"
-  InvalidSkillError: "AddDesiredSkillError" | "AddSkillError" | "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdateCodeExampleError" | "UpdateDesiredSkillsError" | "UpdatePostDraftError" | "UpdatePostError" | "UpdateSkillsError"
+  InvalidSkillError: "AddDesiredSkillError" | "AddSkillError" | "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdateCodeExampleError" | "UpdateDesiredSkillsError" | "UpdatePostDraftError" | "UpdatePostError" | "UpdateRepositoryError" | "UpdateSkillsError"
   InviteToChatPayload: "MutationPayload"
   LeaveChatPayload: "MutationPayload"
   NotificationChatMessageReceived: "Node" | "Notification"
@@ -3950,12 +3992,14 @@ export interface NexusGenTypeInterfaces {
   PostNotFoundError: "MutationError" | "PublishPostError" | "UpdatePostDraftError" | "UpdatePostError"
   PublishPostPayload: "MutationPayload"
   RejectFriendshipPayload: "MutationPayload"
+  RemoteRepositoryNotExistsError: "CreateRepositoryError" | "MutationError"
   RemoveDesiredSkillPayload: "MutationPayload"
   RemovePostThumbnailPayload: "MutationPayload"
   RemoveSkillPayload: "MutationPayload"
   Repository: "Node" | "WithGitHubRepository"
   RepositoryConnection: "Connection"
   RepositoryEdge: "ConnectionEdge"
+  RepositoryNotFoundError: "MutationError" | "UpdateRepositoryError"
   RequestFriendshipPayload: "MutationPayload"
   SendChatMessagePayload: "MutationPayload"
   SimilarTitleError: "CreateCodeExampleError" | "MutationError" | "PublishPostError"
@@ -4003,6 +4047,7 @@ export interface NexusGenTypeInterfaces {
   CreateCodeExampleError: "MutationError"
   CreateExperienceError: "MutationError"
   CreatePostError: "MutationError"
+  CreateRepositoryError: "MutationError"
   Notification: "Node"
   PublishPostError: "MutationError"
   RemoveDesiredSkillError: "MutationError"
@@ -4012,6 +4057,7 @@ export interface NexusGenTypeInterfaces {
   UpdateExperienceError: "MutationError"
   UpdatePostDraftError: "MutationError"
   UpdatePostError: "MutationError"
+  UpdateRepositoryError: "MutationError"
   UpdateSkillsError: "MutationError"
   UserActivity: "Node"
 }

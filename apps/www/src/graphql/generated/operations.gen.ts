@@ -497,9 +497,14 @@ export type CreatePostPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type CreateRepositoryError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type CreateRepositoryPayload = MutationPayload & {
   readonly __typename: 'CreateRepositoryPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<CreateRepositoryError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;
@@ -957,7 +962,7 @@ export type InvalidOrganizationError = CreateExperienceError & MutationError & U
   readonly path: ReadonlyArray<Scalars['String']>;
 };
 
-export type InvalidSkillError = AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdateDesiredSkillsError & UpdatePostDraftError & UpdatePostError & UpdateSkillsError & {
+export type InvalidSkillError = AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdateDesiredSkillsError & UpdatePostDraftError & UpdatePostError & UpdateRepositoryError & UpdateSkillsError & {
   readonly __typename: 'InvalidSkillError';
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -1881,6 +1886,12 @@ export type RejectFriendshipPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type RemoteRepositoryNotExistsError = CreateRepositoryError & MutationError & {
+  readonly __typename: 'RemoteRepositoryNotExistsError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type RemoveDesiredSkillError = {
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -1948,6 +1959,12 @@ export type RepositoryEdge = ConnectionEdge & {
 export type RepositoryNameOwnerCompoundUniqueInput = {
   readonly name: Scalars['String'];
   readonly owner: Scalars['String'];
+};
+
+export type RepositoryNotFoundError = MutationError & UpdateRepositoryError & {
+  readonly __typename: 'RepositoryNotFoundError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
 };
 
 export type RepositoryUpdateInput = {
@@ -2317,9 +2334,14 @@ export type UpdatePostPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type UpdateRepositoryError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type UpdateRepositoryPayload = MutationPayload & {
   readonly __typename: 'UpdateRepositoryPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<UpdateRepositoryError>>;
   readonly query: Query;
   readonly record?: Maybe<Repository>;
   readonly viewer?: Maybe<User>;

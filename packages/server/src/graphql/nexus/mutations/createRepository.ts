@@ -25,7 +25,16 @@ export const createRepository = mutationField("createRepository", {
 			})
 			.catch(() => null);
 
-		if (!githubRepository?.repository) throw new Error("This repository does not exist");
+		if (!githubRepository?.repository) {
+			return {
+				errors: [
+					{
+						__typename: "RemoteRepositoryNotExistsError",
+						message: "This repository does not exist"
+					}
+				]
+			};
+		}
 
 		const record = await prisma.repository.create({
 			data: {

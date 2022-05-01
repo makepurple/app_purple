@@ -381,8 +381,13 @@ type CreatePostPayload implements MutationPayload {
   viewer: User
 }
 
+interface CreateRepositoryError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type CreateRepositoryPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [CreateRepositoryError!]
   query: Query!
   record: Repository
   viewer: User
@@ -747,7 +752,7 @@ type InvalidOrganizationError implements CreateExperienceError & MutationError &
   path: [String!]!
 }
 
-type InvalidSkillError implements AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdateDesiredSkillsError & UpdatePostDraftError & UpdatePostError & UpdateSkillsError {
+type InvalidSkillError implements AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdateDesiredSkillsError & UpdatePostDraftError & UpdatePostError & UpdateRepositoryError & UpdateSkillsError {
   message: String!
   path: [String!]!
 }
@@ -1144,6 +1149,11 @@ type RejectFriendshipPayload implements MutationPayload {
   viewer: User
 }
 
+type RemoteRepositoryNotExistsError implements CreateRepositoryError & MutationError {
+  message: String!
+  path: [String!]!
+}
+
 interface RemoveDesiredSkillError implements MutationError {
   message: String!
   path: [String!]!
@@ -1205,6 +1215,11 @@ type RepositoryEdge implements ConnectionEdge {
 input RepositoryNameOwnerCompoundUniqueInput {
   name: String!
   owner: String!
+}
+
+type RepositoryNotFoundError implements MutationError & UpdateRepositoryError {
+  message: String!
+  path: [String!]!
 }
 
 input RepositoryUpdateInput {
@@ -1520,8 +1535,13 @@ type UpdatePostPayload implements MutationPayload {
   viewer: User
 }
 
+interface UpdateRepositoryError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type UpdateRepositoryPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [UpdateRepositoryError!]
   query: Query!
   record: Repository
   viewer: User

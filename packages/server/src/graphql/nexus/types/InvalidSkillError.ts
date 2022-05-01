@@ -11,6 +11,7 @@ export const InvalidSkillError = objectType({
 		t.implements("UpdateDesiredSkillsError");
 		t.implements("UpdatePostDraftError");
 		t.implements("UpdatePostError");
+		t.implements("UpdateRepositoryError");
 		t.implements("UpdateSkillsError");
 	}
 });
