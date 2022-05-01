@@ -471,9 +471,14 @@ export type CreateCodeExamplePayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type CreateExperienceError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type CreateExperiencePayload = MutationPayload & {
   readonly __typename: 'CreateExperiencePayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<CreateExperienceError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;
@@ -944,6 +949,12 @@ export enum GitHubUserContributionLevel {
 
 export type GitHubUserTotalCommitsWhereInput = {
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
+};
+
+export type InvalidOrganizationError = CreateExperienceError & MutationError & UpdateExperienceError & {
+  readonly __typename: 'InvalidOrganizationError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
 };
 
 export type InvalidSkillError = AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdateDesiredSkillsError & UpdatePostDraftError & UpdatePostError & UpdateSkillsError & {
@@ -2267,9 +2278,14 @@ export type UpdateDesiredSkillsPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type UpdateExperienceError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type UpdateExperiencePayload = MutationPayload & {
   readonly __typename: 'UpdateExperiencePayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<UpdateExperienceError>>;
   readonly query: Query;
   readonly record?: Maybe<Experience>;
   readonly viewer?: Maybe<User>;

@@ -361,8 +361,13 @@ type CreateCodeExamplePayload implements MutationPayload {
   viewer: User
 }
 
+interface CreateExperienceError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type CreateExperiencePayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [CreateExperienceError!]
   query: Query!
   record: Experience
   viewer: User
@@ -739,6 +744,11 @@ enum GitHubUserContributionLevel {
 
 input GitHubUserTotalCommitsWhereInput {
   createdAt: DateTimeNullableFilter
+}
+
+type InvalidOrganizationError implements CreateExperienceError & MutationError & UpdateExperienceError {
+  message: String!
+  path: [String!]!
 }
 
 type InvalidSkillError implements AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdateDesiredSkillsError & UpdatePostDraftError & UpdatePostError & UpdateSkillsError {
@@ -1478,8 +1488,13 @@ type UpdateDesiredSkillsPayload implements MutationPayload {
   viewer: User
 }
 
+interface UpdateExperienceError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type UpdateExperiencePayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [UpdateExperienceError!]
   query: Query!
   record: Experience
   viewer: User

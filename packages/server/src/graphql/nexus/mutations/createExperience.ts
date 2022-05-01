@@ -1,4 +1,5 @@
 import { ExperienceCreateInput } from "@makepurple/validators";
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 
@@ -36,7 +37,18 @@ export const createExperience = mutationField("createExperience", {
 			.then((result) => !!result.organization)
 			.catch(() => false);
 
-		if (!verified) throw new Error("This organization does not exist on GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidOrganizationError",
+						message: oneLine`
+							This organization does not exist on GitHub
+						`
+					}
+				]
+			};
+		}
 
 		const record = await prisma.experience.create({
 			data: {
