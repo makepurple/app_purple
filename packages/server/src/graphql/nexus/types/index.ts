@@ -82,6 +82,7 @@ export * from "./PostConnection";
 export * from "./PostDraftLimitError";
 export * from "./PostEdge";
 export * from "./PostImage";
+export * from "./PostNotFoundError";
 export * from "./PublishPostError";
 export * from "./PublishPostPayload";
 export * from "./Query";

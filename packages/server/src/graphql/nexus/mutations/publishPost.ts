@@ -30,7 +30,18 @@ export const publishPost = mutationField("publishPost", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!post) throw new Error("This post does not exist.");
+		if (!post) {
+			return {
+				errors: [
+					{
+						__typename: "PostNotFoundError",
+						message: oneLine`
+							This post does not exist
+						`
+					}
+				]
+			};
+		}
 
 		if (post.publishedAt) return { record: post };
 

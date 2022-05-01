@@ -1027,6 +1027,11 @@ type PostImage implements Node {
   url: String!
 }
 
+type PostNotFoundError implements MutationError & PublishPostError {
+  message: String!
+  path: [String!]!
+}
+
 input PostOrderByInput {
   publishedAt: SortOrder
   upvoters: OrderByRelationAggregateInput

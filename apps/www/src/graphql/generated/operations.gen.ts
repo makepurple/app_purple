@@ -1584,6 +1584,12 @@ export type PostImage = Node & {
   readonly url: Scalars['String'];
 };
 
+export type PostNotFoundError = MutationError & PublishPostError & {
+  readonly __typename: 'PostNotFoundError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type PostOrderByInput = {
   readonly publishedAt?: InputMaybe<SortOrder>;
   readonly upvoters?: InputMaybe<OrderByRelationAggregateInput>;
