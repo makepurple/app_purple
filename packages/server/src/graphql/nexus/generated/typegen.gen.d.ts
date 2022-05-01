@@ -999,7 +999,9 @@ export interface NexusGenInterfaces {
   RemoveDesiredSkillError: core.Discriminate<'SkillNotFoundError', 'required'>;
   RemoveSkillError: core.Discriminate<'SkillNotFoundError', 'required'>;
   UpdateCodeExampleError: core.Discriminate<'CodeExampleNotFoundError', 'required'> | core.Discriminate<'InvalidSkillError', 'required'>;
+  UpdatePostDraftError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
   UpdatePostError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
+  UpdateSkillsError: core.Discriminate<'InvalidSkillError', 'required'>;
   UserActivity: core.Discriminate<'UserActivityCommentCodeExample', 'required'> | core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityCreateCodeExample', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvoteCodeExample', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   WithGitHubRepository: core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'>;
 }
@@ -2083,7 +2085,15 @@ export interface NexusGenFieldTypes {
     message: string; // String!
     path: string[]; // [String!]!
   }
+  UpdatePostDraftError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
   UpdatePostError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
+  UpdateSkillsError: { // field return type
     message: string; // String!
     path: string[]; // [String!]!
   }
@@ -3172,7 +3182,15 @@ export interface NexusGenFieldTypeNames {
     message: 'String'
     path: 'String'
   }
+  UpdatePostDraftError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
   UpdatePostError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
+  UpdateSkillsError: { // field return type name
     message: 'String'
     path: 'String'
   }
@@ -3815,7 +3833,9 @@ export interface NexusGenAbstractTypeMembers {
   RemoveDesiredSkillError: "SkillNotFoundError"
   RemoveSkillError: "SkillNotFoundError"
   UpdateCodeExampleError: "CodeExampleNotFoundError" | "InvalidSkillError"
+  UpdatePostDraftError: "InvalidSkillError" | "PostNotFoundError"
   UpdatePostError: "InvalidSkillError" | "PostNotFoundError"
+  UpdateSkillsError: "InvalidSkillError"
   UserActivity: "UserActivityCommentCodeExample" | "UserActivityCommentPost" | "UserActivityCreateCodeExample" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvoteCodeExample" | "UserActivityUpvotePost"
   WithGitHubRepository: "Repository" | "Skill"
 }
@@ -3867,7 +3887,7 @@ export interface NexusGenTypeInterfaces {
   GitHubRepositoryConnection: "Connection"
   GitHubRepositoryEdge: "ConnectionEdge"
   GitHubUser: "GitHubRepositoryOwner"
-  InvalidSkillError: "AddDesiredSkillError" | "AddSkillError" | "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdateCodeExampleError" | "UpdatePostError"
+  InvalidSkillError: "AddDesiredSkillError" | "AddSkillError" | "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdateCodeExampleError" | "UpdatePostDraftError" | "UpdatePostError" | "UpdateSkillsError"
   InviteToChatPayload: "MutationPayload"
   LeaveChatPayload: "MutationPayload"
   NotificationChatMessageReceived: "Node" | "Notification"
@@ -3885,7 +3905,7 @@ export interface NexusGenTypeInterfaces {
   PostDraftLimitError: "CreatePostError" | "MutationError"
   PostEdge: "ConnectionEdge"
   PostImage: "Node"
-  PostNotFoundError: "MutationError" | "PublishPostError" | "UpdatePostError"
+  PostNotFoundError: "MutationError" | "PublishPostError" | "UpdatePostDraftError" | "UpdatePostError"
   PublishPostPayload: "MutationPayload"
   RejectFriendshipPayload: "MutationPayload"
   RemoveDesiredSkillPayload: "MutationPayload"
@@ -3945,7 +3965,9 @@ export interface NexusGenTypeInterfaces {
   RemoveDesiredSkillError: "MutationError"
   RemoveSkillError: "MutationError"
   UpdateCodeExampleError: "MutationError"
+  UpdatePostDraftError: "MutationError"
   UpdatePostError: "MutationError"
+  UpdateSkillsError: "MutationError"
   UserActivity: "Node"
 }
 
