@@ -34,7 +34,7 @@ export const updateRepository = mutationField("updateRepository", {
 					{
 						__typename: "RepositoryNotFoundError",
 						message: oneLine`
-							Repository could not be found
+							This repository could not be found
 						`
 					}
 				]
