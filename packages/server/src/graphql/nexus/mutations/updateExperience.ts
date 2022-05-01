@@ -1,5 +1,6 @@
 import { ExperienceUpdateInput } from "@makepurple/validators";
 import { arg, mutationField, nonNull } from "nexus";
+import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
 
 export const updateExperience = mutationField("updateExperience", {
@@ -21,7 +22,7 @@ export const updateExperience = mutationField("updateExperience", {
 
 		return true;
 	},
-	resolve: async (root, args, { prisma }) => {
+	resolve: async (root, args, { octokit: graphql, prisma }) => {
 		const dataInput = ExperienceUpdateInput.validator({
 			endDate: args.data.endDate ?? undefined,
 			highlights: args.data.highlights ?? undefined,
@@ -31,6 +32,23 @@ export const updateExperience = mutationField("updateExperience", {
 			startDate: args.data.startDate ?? undefined,
 			type: args.data.type
 		});
+
+		if (dataInput.organizationName) {
+			const verified = await graphql`
+				query VerifyOrganization($name: String!) {
+					organization(login: $name) {
+						id
+					}
+				}
+			`
+				.cast<octokit.VerifyOrganizationQuery, octokit.VerifyOrganizationQueryVariables>({
+					name: dataInput.organizationName
+				})
+				.then((result) => !!result.organization)
+				.catch(() => false);
+
+			if (!verified) throw new Error("This organization does not exist on GitHub");
+		}
 
 		const record = await prisma.experience.update({
 			data: {
