@@ -1,6 +1,7 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { CodeExampleUpdateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
@@ -21,7 +22,18 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!codeExample) throw new Error("This code-example does not exist");
+		if (!codeExample) {
+			return {
+				errors: [
+					{
+						__typename: "CodeExampleNotFoundError",
+						message: oneLine`
+							This snippet does not exist
+						`
+					}
+				]
+			};
+		}
 
 		const dataInput = CodeExampleUpdateInput.validator({
 			content: args.data.content ?? undefined,
@@ -76,7 +88,18 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			async (skill) => await verifySkill(skill.name, skill.owner)
 		);
 
-		if (!verified) throw new Error("All skills must be from GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidSkillError",
+						message: oneLine`
+							All skills must be from GitHub
+						`
+					}
+				]
+			};
+		}
 
 		const activity = await prisma.userActivity.findFirst({
 			where: {

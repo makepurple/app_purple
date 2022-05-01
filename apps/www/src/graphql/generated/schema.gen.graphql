@@ -167,6 +167,11 @@ type CodeExampleEdge implements ConnectionEdge {
   node: CodeExample!
 }
 
+type CodeExampleNotFoundError implements MutationError & UpdateCodeExampleError {
+  message: String!
+  path: [String!]!
+}
+
 input CodeExampleOrderByInput {
   authorName: SortOrder
   createdAt: SortOrder
@@ -722,7 +727,7 @@ input GitHubUserTotalCommitsWhereInput {
   createdAt: DateTimeNullableFilter
 }
 
-type InvalidSkillError implements CreateCodeExampleError & MutationError & PublishPostError & UpdatePostError {
+type InvalidSkillError implements CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdatePostError {
   message: String!
   path: [String!]!
 }
@@ -1409,8 +1414,13 @@ type UnvotePostPayload implements MutationPayload {
   viewer: User
 }
 
+interface UpdateCodeExampleError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type UpdateCodeExamplePayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [UpdateCodeExampleError!]
   query: Query!
   record: CodeExample
   viewer: User

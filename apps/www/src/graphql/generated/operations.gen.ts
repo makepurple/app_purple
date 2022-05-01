@@ -246,6 +246,12 @@ export type CodeExampleEdge = ConnectionEdge & {
   readonly node: CodeExample;
 };
 
+export type CodeExampleNotFoundError = MutationError & UpdateCodeExampleError & {
+  readonly __typename: 'CodeExampleNotFoundError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type CodeExampleOrderByInput = {
   readonly authorName?: InputMaybe<SortOrder>;
   readonly createdAt?: InputMaybe<SortOrder>;
@@ -930,7 +936,7 @@ export type GitHubUserTotalCommitsWhereInput = {
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
 };
 
-export type InvalidSkillError = CreateCodeExampleError & MutationError & PublishPostError & UpdatePostError & {
+export type InvalidSkillError = CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdatePostError & {
   readonly __typename: 'InvalidSkillError';
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -2197,9 +2203,14 @@ export type UnvotePostPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type UpdateCodeExampleError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type UpdateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'UpdateCodeExamplePayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<UpdateCodeExampleError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
