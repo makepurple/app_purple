@@ -27,10 +27,11 @@ import {
 	useUnvoteCommentMutation,
 	useUpvoteCommentMutation
 } from "../../graphql";
-import { CommentIcon, UnfoldIcon } from "../../svgs";
+import { CommentIcon, PencilIcon, UnfoldIcon } from "../../svgs";
 import { PermissionUtils } from "../../utils";
 import { CreateCommentForm } from "../CreateCommentForm";
 import { LoadingCommentCard } from "../LoadingCommentCard";
+import { UpdateCommentForm } from "../UpdateCommentForm";
 import { UserAvatar } from "../UserAvatar";
 
 const Root = tw.div`
@@ -183,6 +184,7 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 	const composedRef = composeRefs(ref, rootRef);
 
 	const [collapsed, setCollapsed] = useState<boolean>(false);
+	const [editing, setEditing] = useState<boolean>(false);
 	const [fetchingMore, setFetchingMore] = useState<boolean>(false);
 
 	const urqlClient = useClient();
@@ -279,101 +281,134 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 					<Threadline />
 				</CollapseBar>
 				<Content>
-					{comment.content ? (
-						<Editor readOnly value={comment.content as DocumentEditorValue}>
-							<Editable />
-						</Editor>
-					) : (
-						<DeletedComment>[removed]</DeletedComment>
-					)}
-					<Actions tw="mt-2">
-						<UpvoteButton
-							disabled={unvoting || upvoting || !author}
-							onClick={async (e) => {
-								e.preventDefault();
-
-								if (status !== "authenticated") {
-									await router.push("/signup");
-
-									return;
-								}
-
-								if (comment.viewerUpvote) {
-									await unvoteComment({
-										where: { id: comment.id }
-									}).catch(() => null);
-
-									return;
-								}
-
-								const record = await upvoteComment({ where: { id: comment.id } })
-									.then((result) => result.data?.upvoteComment.record)
-									.catch(() => null);
-
-								if (!record?.viewerUpvote) return;
-
-								toast.success("You liked this post! 🎉");
+					{editing ? (
+						<UpdateCommentForm
+							comment={comment}
+							onCancel={() => {
+								setEditing(false);
 							}}
-							size="small"
-							type="button"
-							variant="secondary"
-							$upvoted={!!comment.viewerUpvote}
-						>
-							{unvoting || upvoting ? (
-								<Spinner height={16} width={16} tw="mr-1" />
+							onSuccess={() => {
+								setEditing(false);
+							}}
+						/>
+					) : (
+						<>
+							{comment.content ? (
+								<Editor readOnly value={comment.content as DocumentEditorValue}>
+									<Editable />
+								</Editor>
 							) : (
-								<ThumbsUpIcon height={16} width={16} tw="mr-1" />
+								<DeletedComment>[removed]</DeletedComment>
 							)}
-							<span>{comment.upvotes.toLocaleString()}</span>
-						</UpvoteButton>
-						{status === "authenticated" && (
-							<ActionButton
-								disabled={!author}
-								onClick={() => {
-									setShowReplyForm((oldShowReplyForm) => !oldShowReplyForm);
-								}}
-								size="small"
-								variant="secondary"
-							>
-								<CommentIcon height={16} width={16} tw="mr-1" />
-								<span>Reply</span>
-							</ActionButton>
-						)}
-						{canDelete && (
-							<AlertDialog
-								description={oneLine`
+							<Actions tw="mt-2">
+								<UpvoteButton
+									disabled={unvoting || upvoting || !author}
+									onClick={async (e) => {
+										e.preventDefault();
+
+										if (status !== "authenticated") {
+											await router.push("/signup");
+
+											return;
+										}
+
+										if (comment.viewerUpvote) {
+											await unvoteComment({
+												where: { id: comment.id }
+											}).catch(() => null);
+
+											return;
+										}
+
+										const record = await upvoteComment({
+											where: { id: comment.id }
+										})
+											.then((result) => result.data?.upvoteComment.record)
+											.catch(() => null);
+
+										if (!record?.viewerUpvote) return;
+
+										toast.success("You liked this post! 🎉");
+									}}
+									size="small"
+									type="button"
+									variant="secondary"
+									$upvoted={!!comment.viewerUpvote}
+								>
+									{unvoting || upvoting ? (
+										<Spinner height={16} width={16} tw="mr-1" />
+									) : (
+										<ThumbsUpIcon height={16} width={16} tw="mr-1" />
+									)}
+									<span>{comment.upvotes.toLocaleString()}</span>
+								</UpvoteButton>
+								{status === "authenticated" && (
+									<ActionButton
+										disabled={!author}
+										onClick={() => {
+											setShowReplyForm(
+												(oldShowReplyForm) => !oldShowReplyForm
+											);
+										}}
+										size="small"
+										variant="secondary"
+									>
+										<CommentIcon height={16} width={16} tw="mr-1" />
+										<span>Reply</span>
+									</ActionButton>
+								)}
+								{isMyComment && (
+									<ActionButton
+										disabled={!author}
+										onClick={() => {
+											setEditing(true);
+										}}
+										size="small"
+										variant="secondary"
+									>
+										<PencilIcon height={16} width={16} tw="mr-1" />
+										<span>Edit</span>
+									</ActionButton>
+								)}
+								{canDelete && (
+									<AlertDialog
+										description={oneLine`
 									Are you sure you wish to delete this comment? This cannot be
 									undone.
 								`}
-								onConfirm={async () => {
-									const didSucceed = await deleteComment({
-										where: {
-											id: comment.id
-										}
-									})
-										.then((result) => !!result.data?.deleteComment.record)
-										.catch(() => false);
+										onConfirm={async () => {
+											const didSucceed = await deleteComment({
+												where: {
+													id: comment.id
+												}
+											})
+												.then(
+													(result) => !!result.data?.deleteComment.record
+												)
+												.catch(() => false);
 
-									if (!didSucceed) {
-										toast.error("Could not delete this comment");
+											if (!didSucceed) {
+												toast.error("Could not delete this comment");
 
-										return;
-									}
+												return;
+											}
 
-									toast.success("Comment was deleted");
-								}}
-								text="Yes, delete comment"
-							>
-								<ActionButton
-									disabled={deleting || !author}
-									size="small"
-									variant="alert"
-								>
-									Delete
-								</ActionButton>
-							</AlertDialog>
-						)}
-					</Actions>
+											toast.success("Comment was deleted");
+										}}
+										text="Yes, delete comment"
+									>
+										<ActionButton
+											disabled={deleting || !author}
+											size="small"
+											variant="alert"
+										>
+											Delete
+										</ActionButton>
+									</AlertDialog>
+								)}
+							</Actions>
+						</>
+					)}
 					{showReplyForm && (
 						<div tw="py-4">
 							<CreateCommentForm

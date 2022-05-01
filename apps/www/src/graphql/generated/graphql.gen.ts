@@ -159,6 +159,10 @@ export function useUpdateCodeExampleMutation() {
   return Urql.useMutation<Operations.UpdateCodeExampleMutation, Operations.UpdateCodeExampleMutationVariables>(Operations.UpdateCodeExampleDocument);
 };
 
+export function useUpdateCommentMutation() {
+  return Urql.useMutation<Operations.UpdateCommentMutation, Operations.UpdateCommentMutationVariables>(Operations.UpdateCommentDocument);
+};
+
 export function useUpdateExperienceMutation() {
   return Urql.useMutation<Operations.UpdateExperienceMutation, Operations.UpdateExperienceMutationVariables>(Operations.UpdateExperienceDocument);
 };

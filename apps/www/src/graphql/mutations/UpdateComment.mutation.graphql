@@ -1,0 +1,10 @@
+mutation UpdateComment(
+	$data: CommentUpdateInput!
+	$where: CommentWhereUniqueInput!
+) {
+	updateComment(data: $data, where: $where) {
+		record {
+			...CommentCardComment
+		}
+	}
+}

@@ -85,6 +85,7 @@ export * from "./SuggestedFriendCard";
 export * from "./TopLanguages";
 export * from "./TypistLogo";
 export * from "./UnbanUserButton";
+export * from "./UpdateCommentForm";
 export * from "./UpdateExperienceForm";
 export * from "./UpdateRepositoryCard";
 export * from "./UrqlProvider";
