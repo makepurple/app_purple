@@ -842,7 +842,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Comment'] | null; // Comment
   }
   UpdateDesiredSkillsPayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['UpdateDesiredSkillsError'][] | null; // [UpdateDesiredSkillsError!]
     record?: NexusGenRootTypes['User'] | null; // User
   }
   UpdateExperiencePayload: { // root type
@@ -850,7 +850,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Experience'] | null; // Experience
   }
   UpdatePostDraftPayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['UpdatePostDraftError'][] | null; // [UpdatePostDraftError!]
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdatePostPayload: { // root type
@@ -999,6 +999,7 @@ export interface NexusGenInterfaces {
   RemoveDesiredSkillError: core.Discriminate<'SkillNotFoundError', 'required'>;
   RemoveSkillError: core.Discriminate<'SkillNotFoundError', 'required'>;
   UpdateCodeExampleError: core.Discriminate<'CodeExampleNotFoundError', 'required'> | core.Discriminate<'InvalidSkillError', 'required'>;
+  UpdateDesiredSkillsError: core.Discriminate<'InvalidSkillError', 'required'>;
   UpdatePostDraftError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
   UpdatePostError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
   UpdateSkillsError: core.Discriminate<'InvalidSkillError', 'required'>;
@@ -1789,7 +1790,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdateDesiredSkillsPayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['UpdateDesiredSkillsError'][] | null; // [UpdateDesiredSkillsError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -1801,7 +1802,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostDraftPayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['UpdatePostDraftError'][] | null; // [UpdatePostDraftError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -2082,6 +2083,10 @@ export interface NexusGenFieldTypes {
     path: string[]; // [String!]!
   }
   UpdateCodeExampleError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
+  UpdateDesiredSkillsError: { // field return type
     message: string; // String!
     path: string[]; // [String!]!
   }
@@ -2886,7 +2891,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   UpdateDesiredSkillsPayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'UpdateDesiredSkillsError'
     query: 'Query'
     record: 'User'
     viewer: 'User'
@@ -2898,7 +2903,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   UpdatePostDraftPayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'UpdatePostDraftError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
@@ -3179,6 +3184,10 @@ export interface NexusGenFieldTypeNames {
     path: 'String'
   }
   UpdateCodeExampleError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
+  UpdateDesiredSkillsError: { // field return type name
     message: 'String'
     path: 'String'
   }
@@ -3833,6 +3842,7 @@ export interface NexusGenAbstractTypeMembers {
   RemoveDesiredSkillError: "SkillNotFoundError"
   RemoveSkillError: "SkillNotFoundError"
   UpdateCodeExampleError: "CodeExampleNotFoundError" | "InvalidSkillError"
+  UpdateDesiredSkillsError: "InvalidSkillError"
   UpdatePostDraftError: "InvalidSkillError" | "PostNotFoundError"
   UpdatePostError: "InvalidSkillError" | "PostNotFoundError"
   UpdateSkillsError: "InvalidSkillError"
@@ -3887,7 +3897,7 @@ export interface NexusGenTypeInterfaces {
   GitHubRepositoryConnection: "Connection"
   GitHubRepositoryEdge: "ConnectionEdge"
   GitHubUser: "GitHubRepositoryOwner"
-  InvalidSkillError: "AddDesiredSkillError" | "AddSkillError" | "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdateCodeExampleError" | "UpdatePostDraftError" | "UpdatePostError" | "UpdateSkillsError"
+  InvalidSkillError: "AddDesiredSkillError" | "AddSkillError" | "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdateCodeExampleError" | "UpdateDesiredSkillsError" | "UpdatePostDraftError" | "UpdatePostError" | "UpdateSkillsError"
   InviteToChatPayload: "MutationPayload"
   LeaveChatPayload: "MutationPayload"
   NotificationChatMessageReceived: "Node" | "Notification"
@@ -3965,6 +3975,7 @@ export interface NexusGenTypeInterfaces {
   RemoveDesiredSkillError: "MutationError"
   RemoveSkillError: "MutationError"
   UpdateCodeExampleError: "MutationError"
+  UpdateDesiredSkillsError: "MutationError"
   UpdatePostDraftError: "MutationError"
   UpdatePostError: "MutationError"
   UpdateSkillsError: "MutationError"

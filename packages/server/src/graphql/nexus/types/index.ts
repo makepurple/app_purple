@@ -120,6 +120,7 @@ export * from "./UnvotePostPayload";
 export * from "./UpdateCodeExampleError";
 export * from "./UpdateCodeExamplePayload";
 export * from "./UpdateCommentPayload";
+export * from "./UpdateDesiredSkillsError";
 export * from "./UpdateDesiredSkillsPayload";
 export * from "./UpdateExperiencePayload";
 export * from "./UpdatePostDraftError";
