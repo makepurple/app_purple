@@ -254,7 +254,7 @@ export type CodeExampleOrderByInput = {
   readonly updatedAt?: InputMaybe<SortOrder>;
 };
 
-export type CodeExampleTitleTakenError = MutationError & {
+export type CodeExampleTitleTakenError = CreateCodeExampleError & MutationError & {
   readonly __typename: 'CodeExampleTitleTakenError';
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -448,9 +448,14 @@ export type CreateChatPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type CreateCodeExampleError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type CreateCodeExamplePayload = MutationPayload & {
   readonly __typename: 'CreateCodeExamplePayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<CreateCodeExampleError>>;
   readonly query: Query;
   readonly record?: Maybe<CodeExample>;
   readonly viewer?: Maybe<User>;
@@ -2940,7 +2945,7 @@ export type CreateCodeExampleMutationVariables = Exact<{
 }>;
 
 
-export type CreateCodeExampleMutation = { readonly __typename: 'Mutation', readonly createCodeExample: { readonly __typename: 'CreateCodeExamplePayload', readonly errors?: ReadonlyArray<{ readonly __typename: 'CodeExampleTitleTakenError', readonly message: string } | { readonly __typename: 'InvalidSkillError', readonly message: string }> | null, readonly record?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string, readonly role: UserRole }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type CreateCodeExampleMutation = { readonly __typename: 'Mutation', readonly createCodeExample: { readonly __typename: 'CreateCodeExamplePayload', readonly errors?: ReadonlyArray<{ readonly __typename: 'CodeExampleTitleTakenError', readonly message: string }> | null, readonly record?: { readonly __typename: 'CodeExample', readonly id: string, readonly authorName: string, readonly description?: string | null, readonly language: CodeLanguage, readonly languageColor: string, readonly title: string, readonly upvotes: number, readonly urlSlug: string, readonly viewerUpvote?: boolean | null, readonly author: { readonly __typename: 'User', readonly id: string, readonly image?: string | null, readonly name: string, readonly role: UserRole }, readonly primarySkill: { readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly name: string, readonly owner: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string } | { readonly __typename: 'GitHubUser', readonly id: string, readonly avatarUrl: string, readonly login: string } } }, readonly skills: { readonly __typename: 'SkillConnection', readonly edges: ReadonlyArray<{ readonly __typename: 'SkillEdge', readonly cursor: string, readonly node: { readonly __typename: 'Skill', readonly id: string } }>, readonly nodes: ReadonlyArray<{ readonly __typename: 'Skill', readonly id: string, readonly name: string, readonly owner: string }> } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type CreateExperienceFragmentFragment = { readonly __typename: 'Experience', readonly id: string, readonly endDate?: Date | null, readonly highlights: ReadonlyArray<string>, readonly location?: string | null, readonly organizationName: string, readonly positionName: string, readonly startDate: Date, readonly type?: ExperienceType | null, readonly organization: { readonly __typename: 'Organization', readonly id: string, readonly name: string, readonly github: { readonly __typename: 'GitHubOrganization', readonly id: string, readonly avatarUrl: string, readonly login: string, readonly url: string, readonly description?: string | null, readonly name?: string | null } }, readonly user: { readonly __typename: 'User', readonly id: string, readonly name: string } };
 

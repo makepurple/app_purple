@@ -504,7 +504,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Chat'] | null; // Chat
   }
   CreateCodeExamplePayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['CreateCodeExampleError'][] | null; // [CreateCodeExampleError!]
     record?: NexusGenRootTypes['CodeExample'] | null; // CodeExample
   }
   CreateExperiencePayload: { // root type
@@ -973,6 +973,7 @@ export interface NexusGenObjects {
 export interface NexusGenInterfaces {
   Connection: core.Discriminate<'ChatConnection', 'required'> | core.Discriminate<'ChatMessageConnection', 'required'> | core.Discriminate<'CodeExampleConnection', 'required'> | core.Discriminate<'CommentConnection', 'required'> | core.Discriminate<'ExperienceConnection', 'required'> | core.Discriminate<'FollowConnection', 'required'> | core.Discriminate<'GitHubRepositoryConnection', 'required'> | core.Discriminate<'NotificationConnection', 'required'> | core.Discriminate<'PostConnection', 'required'> | core.Discriminate<'RepositoryConnection', 'required'> | core.Discriminate<'SkillConnection', 'required'> | core.Discriminate<'UserActivityConnection', 'required'> | core.Discriminate<'UserConnection', 'required'>;
   ConnectionEdge: core.Discriminate<'ChatEdge', 'required'> | core.Discriminate<'ChatMessageEdge', 'required'> | core.Discriminate<'CodeExampleEdge', 'required'> | core.Discriminate<'CommentEdge', 'required'> | core.Discriminate<'ExperienceEdge', 'required'> | core.Discriminate<'FollowEdge', 'required'> | core.Discriminate<'GitHubRepositoryEdge', 'required'> | core.Discriminate<'NotificationEdge', 'required'> | core.Discriminate<'PostEdge', 'required'> | core.Discriminate<'RepositoryEdge', 'required'> | core.Discriminate<'SkillEdge', 'required'> | core.Discriminate<'UserActivityEdge', 'required'> | core.Discriminate<'UserEdge', 'required'>;
+  CreateCodeExampleError: core.Discriminate<'CodeExampleTitleTakenError', 'required'>;
   Followable: core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'>;
   GitHubRepositoryOwner: core.Discriminate<'GitHubOrganization', 'required'> | core.Discriminate<'GitHubUser', 'required'>;
   MutationError: core.Discriminate<'CodeExampleTitleTakenError', 'required'> | core.Discriminate<'InvalidSkillError', 'required'>;
@@ -1147,7 +1148,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   CreateCodeExamplePayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['CreateCodeExampleError'][] | null; // [CreateCodeExampleError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['CodeExample'] | null; // CodeExample
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -1982,6 +1983,10 @@ export interface NexusGenFieldTypes {
   ConnectionEdge: { // field return type
     cursor: string; // String!
   }
+  CreateCodeExampleError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
   Followable: { // field return type
     viewerFollowing: boolean; // Boolean!
   }
@@ -2184,7 +2189,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   CreateCodeExamplePayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'CreateCodeExampleError'
     query: 'Query'
     record: 'CodeExample'
     viewer: 'User'
@@ -3019,6 +3024,10 @@ export interface NexusGenFieldTypeNames {
   ConnectionEdge: { // field return type name
     cursor: 'String'
   }
+  CreateCodeExampleError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
   Followable: { // field return type name
     viewerFollowing: 'Boolean'
   }
@@ -3676,6 +3685,7 @@ export interface NexusGenArgTypes {
 export interface NexusGenAbstractTypeMembers {
   Connection: "ChatConnection" | "ChatMessageConnection" | "CodeExampleConnection" | "CommentConnection" | "ExperienceConnection" | "FollowConnection" | "GitHubRepositoryConnection" | "NotificationConnection" | "PostConnection" | "RepositoryConnection" | "SkillConnection" | "UserActivityConnection" | "UserConnection"
   ConnectionEdge: "ChatEdge" | "ChatMessageEdge" | "CodeExampleEdge" | "CommentEdge" | "ExperienceEdge" | "FollowEdge" | "GitHubRepositoryEdge" | "NotificationEdge" | "PostEdge" | "RepositoryEdge" | "SkillEdge" | "UserActivityEdge" | "UserEdge"
+  CreateCodeExampleError: "CodeExampleTitleTakenError"
   Followable: "Skill" | "User"
   GitHubRepositoryOwner: "GitHubOrganization" | "GitHubUser"
   MutationError: "CodeExampleTitleTakenError" | "InvalidSkillError"
@@ -3701,7 +3711,7 @@ export interface NexusGenTypeInterfaces {
   CodeExample: "Node"
   CodeExampleConnection: "Connection"
   CodeExampleEdge: "ConnectionEdge"
-  CodeExampleTitleTakenError: "MutationError"
+  CodeExampleTitleTakenError: "CreateCodeExampleError" | "MutationError"
   Comment: "Node"
   CommentCodeExamplePayload: "MutationPayload"
   CommentConnection: "Connection"
@@ -3798,6 +3808,7 @@ export interface NexusGenTypeInterfaces {
   UserConnection: "Connection"
   UserEdge: "ConnectionEdge"
   ViewPostPayload: "MutationPayload"
+  CreateCodeExampleError: "MutationError"
   Notification: "Node"
   UserActivity: "Node"
 }

@@ -23,6 +23,7 @@ export * from "./CommentPostPayload";
 export * from "./Connection";
 export * from "./ConnectionEdge";
 export * from "./CreateChatPayload";
+export * from "./CreateCodeExampleError";
 export * from "./CreateCodeExamplePayload";
 export * from "./CreateExperiencePayload";
 export * from "./CreatePostPayload";

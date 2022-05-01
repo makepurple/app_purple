@@ -175,7 +175,7 @@ input CodeExampleOrderByInput {
   updatedAt: SortOrder
 }
 
-type CodeExampleTitleTakenError implements MutationError {
+type CodeExampleTitleTakenError implements CreateCodeExampleError & MutationError {
   message: String!
   path: [String!]!
 }
@@ -335,8 +335,13 @@ type CreateChatPayload implements MutationPayload {
   viewer: User
 }
 
+interface CreateCodeExampleError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type CreateCodeExamplePayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [CreateCodeExampleError!]
   query: Query!
   record: CodeExample
   viewer: User
