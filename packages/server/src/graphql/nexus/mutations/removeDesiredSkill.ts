@@ -1,3 +1,4 @@
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
@@ -16,7 +17,18 @@ export const removeDesiredSkill = mutationField("removeDesiredSkill", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!skill) throw new Error("This skill could not be found");
+		if (!skill) {
+			return {
+				errors: [
+					{
+						__typename: "SkillNotFoundError",
+						message: oneLine`
+							This skill does not exist
+						`
+					}
+				]
+			};
+		}
 
 		const record = await prisma.desiredSkillsOnUsers
 			.delete({

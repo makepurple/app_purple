@@ -1134,6 +1134,11 @@ type RejectFriendshipPayload implements MutationPayload {
   viewer: User
 }
 
+interface RemoveDesiredSkillError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type RemoveDesiredSkillPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
@@ -1148,8 +1153,13 @@ type RemovePostThumbnailPayload implements MutationPayload {
   viewer: User
 }
 
+interface RemoveSkillError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type RemoveSkillPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [RemoveSkillError!]
   query: Query!
   record: Skill
   viewer: User
@@ -1258,6 +1268,11 @@ input SkillListRelationFilter {
 input SkillNameOwnerCompoundUniqueInput {
   name: String!
   owner: String!
+}
+
+type SkillNotFoundError implements MutationError & RemoveDesiredSkillError & RemoveSkillError {
+  message: String!
+  path: [String!]!
 }
 
 input SkillOrderByInput {

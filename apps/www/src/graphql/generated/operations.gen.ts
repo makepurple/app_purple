@@ -1870,6 +1870,11 @@ export type RejectFriendshipPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type RemoveDesiredSkillError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type RemoveDesiredSkillPayload = MutationPayload & {
   readonly __typename: 'RemoveDesiredSkillPayload';
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
@@ -1886,9 +1891,14 @@ export type RemovePostThumbnailPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type RemoveSkillError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type RemoveSkillPayload = MutationPayload & {
   readonly __typename: 'RemoveSkillPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<RemoveSkillError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
@@ -2052,6 +2062,12 @@ export type SkillListRelationFilter = {
 export type SkillNameOwnerCompoundUniqueInput = {
   readonly name: Scalars['String'];
   readonly owner: Scalars['String'];
+};
+
+export type SkillNotFoundError = MutationError & RemoveDesiredSkillError & RemoveSkillError & {
+  readonly __typename: 'SkillNotFoundError';
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
 };
 
 export type SkillOrderByInput = {
