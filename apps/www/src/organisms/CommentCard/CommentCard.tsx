@@ -233,6 +233,11 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 
 	const [showReplyForm, setShowReplyForm] = useState<boolean>(false);
 
+	const wasEdited = useMemo(
+		() => !dayjs(comment.createdAt).isSame(comment.updatedAt),
+		[comment.createdAt, comment.updatedAt]
+	);
+
 	return (
 		<Root ref={composedRef} className={className} style={style}>
 			<CommenterInfo $collapsed={collapsed}>
@@ -268,7 +273,10 @@ export const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>((props, 
 						<DeletedUserName>[Deleted]</DeletedUserName>
 					)}
 					<Delimiter />
-					<CreatedAt>{dayjs(comment.createdAt).fromNow()}</CreatedAt>
+					<CreatedAt>
+						{wasEdited && "Edited: "}
+						{dayjs(comment.createdAt).fromNow()}
+					</CreatedAt>
 				</CommenterInfoContent>
 			</CommenterInfo>
 			<Body style={!collapsed ? {} : { display: "none" }}>
