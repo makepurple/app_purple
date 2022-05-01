@@ -188,7 +188,7 @@ export const Page: NextPage<PageProps> = () => {
 
 		createErrors.forEach((error) => {
 			switch (error.__typename) {
-				case "CodeExampleTitleTakenError":
+				case "SimilarTitleError":
 					setError("title", {
 						message: error.message
 					});

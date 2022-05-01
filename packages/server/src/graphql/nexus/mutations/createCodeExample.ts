@@ -1,6 +1,7 @@
 import { PromiseUtils, StringUtils } from "@makepurple/utils";
 import { CodeExampleCreateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
@@ -40,8 +41,11 @@ export const createCodeExample = mutationField("createCodeExample", {
 			return {
 				errors: [
 					{
-						__typename: "CodeExampleTitleTakenError",
-						message: `Title \`${args.data.title}\` is already in use`
+						__typename: "SimilarTitleError",
+						message: oneLine`
+							Title \`${args.data.title}\` is too similar to another
+							snippet of yours
+						`
 					}
 				]
 			};

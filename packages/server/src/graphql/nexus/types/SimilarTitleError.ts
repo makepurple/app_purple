@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
 
-export const InvalidSkillError = objectType({
-	name: "InvalidSkillError",
+export const SimilarTitleError = objectType({
+	name: "SimilarTitleError",
 	definition: (t) => {
 		t.implements("CreateCodeExampleError");
 		t.implements("PublishPostError");

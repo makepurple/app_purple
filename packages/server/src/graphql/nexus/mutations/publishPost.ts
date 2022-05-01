@@ -1,6 +1,7 @@
 import { PromiseUtils, StringUtils } from "@makepurple/utils";
 import { PostPublishInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { Logger, PrismaUtils } from "../../../utils";
@@ -59,7 +60,17 @@ export const publishPost = mutationField("publishPost", {
 		});
 
 		if (withSimilarTitle) {
-			throw new Error("Post title is in use");
+			return {
+				errors: [
+					{
+						__typename: "SimilarTitleError",
+						message: oneLine`
+							Title \`${args.data.title}\` is too similar to another
+							post of yours
+						`
+					}
+				]
+			};
 		}
 
 		const skillIds = (args.data.skills ?? [])
@@ -105,7 +116,18 @@ export const publishPost = mutationField("publishPost", {
 			async (skill) => await verifySkill(skill.name, skill.owner)
 		);
 
-		if (!verified) throw new Error("All skills must be from GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidSkillError",
+						message: oneLine`
+							All skills must be from GitHub
+						`
+					}
+				]
+			};
+		}
 
 		const record = await prisma.$transaction(async (transaction) => {
 			await transaction.post.update({

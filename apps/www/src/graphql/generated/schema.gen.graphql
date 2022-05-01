@@ -175,11 +175,6 @@ input CodeExampleOrderByInput {
   updatedAt: SortOrder
 }
 
-type CodeExampleTitleTakenError implements CreateCodeExampleError & MutationError {
-  message: String!
-  path: [String!]!
-}
-
 input CodeExampleUpdateInput {
   content: String
   description: String
@@ -727,7 +722,7 @@ input GitHubUserTotalCommitsWhereInput {
   createdAt: DateTimeNullableFilter
 }
 
-type InvalidSkillError implements CreateCodeExampleError & MutationError {
+type InvalidSkillError implements CreateCodeExampleError & MutationError & PublishPostError {
   message: String!
   path: [String!]!
 }
@@ -1061,8 +1056,13 @@ input PostWhereUniqueInput {
   id: String
 }
 
+interface PublishPostError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type PublishPostPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [PublishPostError!]
   query: Query!
   record: Post
   viewer: User
@@ -1194,6 +1194,11 @@ type SendChatMessagePayload implements MutationPayload {
   query: Query!
   record: ChatMessage
   viewer: User
+}
+
+type SimilarTitleError implements CreateCodeExampleError & MutationError & PublishPostError {
+  message: String!
+  path: [String!]!
 }
 
 type Skill implements Followable & Node & WithGitHubRepository {
