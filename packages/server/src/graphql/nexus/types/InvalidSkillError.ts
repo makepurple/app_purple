@@ -5,5 +5,6 @@ export const InvalidSkillError = objectType({
 	definition: (t) => {
 		t.implements("CreateCodeExampleError");
 		t.implements("PublishPostError");
+		t.implements("UpdatePostError");
 	}
 });

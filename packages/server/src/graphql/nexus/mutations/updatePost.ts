@@ -1,6 +1,7 @@
 import { PromiseUtils } from "@makepurple/utils";
 import { PostUpdateInput } from "@makepurple/validators";
 import { UserActivityType } from "@prisma/client";
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { Logger, PrismaUtils } from "../../../utils";
@@ -19,7 +20,18 @@ export const updatePost = mutationField("updatePost", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		if (!post) throw new Error("This post does not exist.");
+		if (!post) {
+			return {
+				errors: [
+					{
+						__typename: "PostNotFoundError",
+						message: oneLine`
+							This post does not exist
+						`
+					}
+				]
+			};
+		}
 
 		const dataInput = PostUpdateInput.validator({
 			content: args.data.content ?? undefined,
@@ -71,7 +83,18 @@ export const updatePost = mutationField("updatePost", {
 			async (skill) => await verifySkill(skill.name, skill.owner)
 		);
 
-		if (!verified) throw new Error("All skills must be from GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidSkillError",
+						message: oneLine`
+							All skills must be from GitHub
+						`
+					}
+				]
+			};
+		}
 
 		const activity = await prisma.userActivity.findFirst({
 			where: {

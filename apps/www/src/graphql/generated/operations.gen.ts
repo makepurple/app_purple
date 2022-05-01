@@ -930,7 +930,7 @@ export type GitHubUserTotalCommitsWhereInput = {
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
 };
 
-export type InvalidSkillError = CreateCodeExampleError & MutationError & PublishPostError & {
+export type InvalidSkillError = CreateCodeExampleError & MutationError & PublishPostError & UpdatePostError & {
   readonly __typename: 'InvalidSkillError';
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -1584,7 +1584,7 @@ export type PostImage = Node & {
   readonly url: Scalars['String'];
 };
 
-export type PostNotFoundError = MutationError & PublishPostError & {
+export type PostNotFoundError = MutationError & PublishPostError & UpdatePostError & {
   readonly __typename: 'PostNotFoundError';
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -2241,9 +2241,14 @@ export type UpdatePostDraftPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
+export type UpdatePostError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
 export type UpdatePostPayload = MutationPayload & {
   readonly __typename: 'UpdatePostPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+  readonly errors?: Maybe<ReadonlyArray<UpdatePostError>>;
   readonly query: Query;
   readonly record?: Maybe<Post>;
   readonly viewer?: Maybe<User>;

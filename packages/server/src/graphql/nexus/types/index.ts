@@ -116,6 +116,7 @@ export * from "./UpdateCommentPayload";
 export * from "./UpdateDesiredSkillsPayload";
 export * from "./UpdateExperiencePayload";
 export * from "./UpdatePostDraftPayload";
+export * from "./UpdatePostError";
 export * from "./UpdatePostPayload";
 export * from "./UpdateRepositoryPayload";
 export * from "./UpdateSkillsPayload";

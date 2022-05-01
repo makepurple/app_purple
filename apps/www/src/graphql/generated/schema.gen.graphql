@@ -722,7 +722,7 @@ input GitHubUserTotalCommitsWhereInput {
   createdAt: DateTimeNullableFilter
 }
 
-type InvalidSkillError implements CreateCodeExampleError & MutationError & PublishPostError {
+type InvalidSkillError implements CreateCodeExampleError & MutationError & PublishPostError & UpdatePostError {
   message: String!
   path: [String!]!
 }
@@ -1023,7 +1023,7 @@ type PostImage implements Node {
   url: String!
 }
 
-type PostNotFoundError implements MutationError & PublishPostError {
+type PostNotFoundError implements MutationError & PublishPostError & UpdatePostError {
   message: String!
   path: [String!]!
 }
@@ -1448,8 +1448,13 @@ type UpdatePostDraftPayload implements MutationPayload {
   viewer: User
 }
 
+interface UpdatePostError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
 type UpdatePostPayload implements MutationPayload {
-  errors: [MutationError!]
+  errors: [UpdatePostError!]
   query: Query!
   record: Post
   viewer: User

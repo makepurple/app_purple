@@ -848,7 +848,7 @@ export interface NexusGenObjects {
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdatePostPayload: { // root type
-    errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors?: NexusGenRootTypes['UpdatePostError'][] | null; // [UpdatePostError!]
     record?: NexusGenRootTypes['Post'] | null; // Post
   }
   UpdateRepositoryPayload: { // root type
@@ -988,6 +988,7 @@ export interface NexusGenInterfaces {
   Node: core.Discriminate<'BanReason', 'required'> | core.Discriminate<'Chat', 'required'> | core.Discriminate<'ChatMessage', 'required'> | core.Discriminate<'CodeExample', 'required'> | core.Discriminate<'Comment', 'required'> | core.Discriminate<'Experience', 'required'> | core.Discriminate<'Follow', 'required'> | core.Discriminate<'Friendship', 'required'> | core.Discriminate<'NotificationChatMessageReceived', 'required'> | core.Discriminate<'NotificationCodeExampleCommented', 'required'> | core.Discriminate<'NotificationFriendshipAccepted', 'required'> | core.Discriminate<'NotificationPostCommented', 'required'> | core.Discriminate<'Organization', 'required'> | core.Discriminate<'Post', 'required'> | core.Discriminate<'PostImage', 'required'> | core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'> | core.Discriminate<'User', 'required'> | core.Discriminate<'UserActivityCommentCodeExample', 'required'> | core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityCreateCodeExample', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvoteCodeExample', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   Notification: core.Discriminate<'NotificationChatMessageReceived', 'required'> | core.Discriminate<'NotificationCodeExampleCommented', 'required'> | core.Discriminate<'NotificationFriendshipAccepted', 'required'> | core.Discriminate<'NotificationPostCommented', 'required'>;
   PublishPostError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'> | core.Discriminate<'SimilarTitleError', 'required'>;
+  UpdatePostError: core.Discriminate<'InvalidSkillError', 'required'> | core.Discriminate<'PostNotFoundError', 'required'>;
   UserActivity: core.Discriminate<'UserActivityCommentCodeExample', 'required'> | core.Discriminate<'UserActivityCommentPost', 'required'> | core.Discriminate<'UserActivityCreateCodeExample', 'required'> | core.Discriminate<'UserActivityFollowSkill', 'required'> | core.Discriminate<'UserActivityFollowUser', 'required'> | core.Discriminate<'UserActivityFriendAcceptUser', 'required'> | core.Discriminate<'UserActivityJoined', 'required'> | core.Discriminate<'UserActivityPublishPost', 'required'> | core.Discriminate<'UserActivityUpvoteCodeExample', 'required'> | core.Discriminate<'UserActivityUpvotePost', 'required'>;
   WithGitHubRepository: core.Discriminate<'Repository', 'required'> | core.Discriminate<'Skill', 'required'>;
 }
@@ -1785,7 +1786,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   UpdatePostPayload: { // field return type
-    errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
+    errors: NexusGenRootTypes['UpdatePostError'][] | null; // [UpdatePostError!]
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['Post'] | null; // Post
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -2040,6 +2041,10 @@ export interface NexusGenFieldTypes {
     userId: string; // String!
   }
   PublishPostError: { // field return type
+    message: string; // String!
+    path: string[]; // [String!]!
+  }
+  UpdatePostError: { // field return type
     message: string; // String!
     path: string[]; // [String!]!
   }
@@ -2842,7 +2847,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   UpdatePostPayload: { // field return type name
-    errors: 'MutationError'
+    errors: 'UpdatePostError'
     query: 'Query'
     record: 'Post'
     viewer: 'User'
@@ -3097,6 +3102,10 @@ export interface NexusGenFieldTypeNames {
     userId: 'String'
   }
   PublishPostError: { // field return type name
+    message: 'String'
+    path: 'String'
+  }
+  UpdatePostError: { // field return type name
     message: 'String'
     path: 'String'
   }
@@ -3734,6 +3743,7 @@ export interface NexusGenAbstractTypeMembers {
   Node: "BanReason" | "Chat" | "ChatMessage" | "CodeExample" | "Comment" | "Experience" | "Follow" | "Friendship" | "NotificationChatMessageReceived" | "NotificationCodeExampleCommented" | "NotificationFriendshipAccepted" | "NotificationPostCommented" | "Organization" | "Post" | "PostImage" | "Repository" | "Skill" | "User" | "UserActivityCommentCodeExample" | "UserActivityCommentPost" | "UserActivityCreateCodeExample" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvoteCodeExample" | "UserActivityUpvotePost"
   Notification: "NotificationChatMessageReceived" | "NotificationCodeExampleCommented" | "NotificationFriendshipAccepted" | "NotificationPostCommented"
   PublishPostError: "InvalidSkillError" | "PostNotFoundError" | "SimilarTitleError"
+  UpdatePostError: "InvalidSkillError" | "PostNotFoundError"
   UserActivity: "UserActivityCommentCodeExample" | "UserActivityCommentPost" | "UserActivityCreateCodeExample" | "UserActivityFollowSkill" | "UserActivityFollowUser" | "UserActivityFriendAcceptUser" | "UserActivityJoined" | "UserActivityPublishPost" | "UserActivityUpvoteCodeExample" | "UserActivityUpvotePost"
   WithGitHubRepository: "Repository" | "Skill"
 }
@@ -3784,7 +3794,7 @@ export interface NexusGenTypeInterfaces {
   GitHubRepositoryConnection: "Connection"
   GitHubRepositoryEdge: "ConnectionEdge"
   GitHubUser: "GitHubRepositoryOwner"
-  InvalidSkillError: "CreateCodeExampleError" | "MutationError" | "PublishPostError"
+  InvalidSkillError: "CreateCodeExampleError" | "MutationError" | "PublishPostError" | "UpdatePostError"
   InviteToChatPayload: "MutationPayload"
   LeaveChatPayload: "MutationPayload"
   NotificationChatMessageReceived: "Node" | "Notification"
@@ -3802,7 +3812,7 @@ export interface NexusGenTypeInterfaces {
   PostDraftLimitError: "CreatePostError" | "MutationError"
   PostEdge: "ConnectionEdge"
   PostImage: "Node"
-  PostNotFoundError: "MutationError" | "PublishPostError"
+  PostNotFoundError: "MutationError" | "PublishPostError" | "UpdatePostError"
   PublishPostPayload: "MutationPayload"
   RejectFriendshipPayload: "MutationPayload"
   RemoveDesiredSkillMutationPayload: "MutationPayload"
@@ -3856,6 +3866,7 @@ export interface NexusGenTypeInterfaces {
   CreatePostError: "MutationError"
   Notification: "Node"
   PublishPostError: "MutationError"
+  UpdatePostError: "MutationError"
   UserActivity: "Node"
 }
 
