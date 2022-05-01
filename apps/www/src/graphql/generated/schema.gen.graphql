@@ -803,9 +803,9 @@ type Mutation {
   openNotifications: OpenNotificationsPayload!
   publishPost(data: PostPublishInput!, where: PostWhereUniqueInput!): PublishPostPayload!
   rejectFriendship(where: UserWhereUniqueInput!): RejectFriendshipPayload!
-  removeDesiredSkill(where: SkillWhereUniqueInput!): RemoveDesiredSkillMutationPayload!
+  removeDesiredSkill(where: SkillWhereUniqueInput!): RemoveDesiredSkillPayload!
   removePostThumbnail(where: PostWhereUniqueInput!): RemovePostThumbnailPayload!
-  removeSkill(where: SkillWhereUniqueInput!): RemoveSkillMutationPayload!
+  removeSkill(where: SkillWhereUniqueInput!): RemoveSkillPayload!
   requestFriendship(where: UserWhereUniqueInput!): RequestFriendshipPayload!
   sendChatMessage(data: ChatMessageCreateInput!, where: ChatWhereUniqueInput!): SendChatMessagePayload!
   unbanUser(where: UserWhereUniqueInput!): UnbanUserPayload!
@@ -1134,7 +1134,7 @@ type RejectFriendshipPayload implements MutationPayload {
   viewer: User
 }
 
-type RemoveDesiredSkillMutationPayload implements MutationPayload {
+type RemoveDesiredSkillPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
   record: Skill
@@ -1148,7 +1148,7 @@ type RemovePostThumbnailPayload implements MutationPayload {
   viewer: User
 }
 
-type RemoveSkillMutationPayload implements MutationPayload {
+type RemoveSkillPayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
   record: Skill

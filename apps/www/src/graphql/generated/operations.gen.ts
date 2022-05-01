@@ -1006,9 +1006,9 @@ export type Mutation = {
   readonly openNotifications: OpenNotificationsPayload;
   readonly publishPost: PublishPostPayload;
   readonly rejectFriendship: RejectFriendshipPayload;
-  readonly removeDesiredSkill: RemoveDesiredSkillMutationPayload;
+  readonly removeDesiredSkill: RemoveDesiredSkillPayload;
   readonly removePostThumbnail: RemovePostThumbnailPayload;
-  readonly removeSkill: RemoveSkillMutationPayload;
+  readonly removeSkill: RemoveSkillPayload;
   readonly requestFriendship: RequestFriendshipPayload;
   readonly sendChatMessage: SendChatMessagePayload;
   readonly unbanUser: UnbanUserPayload;
@@ -1870,8 +1870,8 @@ export type RejectFriendshipPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
-export type RemoveDesiredSkillMutationPayload = MutationPayload & {
-  readonly __typename: 'RemoveDesiredSkillMutationPayload';
+export type RemoveDesiredSkillPayload = MutationPayload & {
+  readonly __typename: 'RemoveDesiredSkillPayload';
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
@@ -1886,8 +1886,8 @@ export type RemovePostThumbnailPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
-export type RemoveSkillMutationPayload = MutationPayload & {
-  readonly __typename: 'RemoveSkillMutationPayload';
+export type RemoveSkillPayload = MutationPayload & {
+  readonly __typename: 'RemoveSkillPayload';
   readonly errors?: Maybe<ReadonlyArray<MutationError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
@@ -3138,7 +3138,7 @@ export type RemoveDesiredSkillMutationVariables = Exact<{
 }>;
 
 
-export type RemoveDesiredSkillMutation = { readonly __typename: 'Mutation', readonly removeDesiredSkill: { readonly __typename: 'RemoveDesiredSkillMutationPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type RemoveDesiredSkillMutation = { readonly __typename: 'Mutation', readonly removeDesiredSkill: { readonly __typename: 'RemoveDesiredSkillPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type RemovePostThumbnailMutationVariables = Exact<{
   where: PostWhereUniqueInput;
@@ -3152,7 +3152,7 @@ export type RemoveSkillMutationVariables = Exact<{
 }>;
 
 
-export type RemoveSkillMutation = { readonly __typename: 'Mutation', readonly removeSkill: { readonly __typename: 'RemoveSkillMutationPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type RemoveSkillMutation = { readonly __typename: 'Mutation', readonly removeSkill: { readonly __typename: 'RemoveSkillPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type SendChatMessageMutationVariables = Exact<{
   data: ChatMessageCreateInput;

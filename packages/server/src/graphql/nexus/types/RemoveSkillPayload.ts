@@ -1,7 +1,7 @@
 import { objectType } from "nexus";
 
-export const RemoveSkillMutationPayload = objectType({
-	name: "RemoveSkillMutationPayload",
+export const RemoveSkillPayload = objectType({
+	name: "RemoveSkillPayload",
 	definition: (t) => {
 		t.implements("MutationPayload");
 		t.field("record", { type: "Skill" });

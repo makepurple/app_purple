@@ -2,7 +2,7 @@ import { arg, mutationField, nonNull } from "nexus";
 import { PrismaUtils } from "../../../utils";
 
 export const removeDesiredSkill = mutationField("removeDesiredSkill", {
-	type: nonNull("RemoveDesiredSkillMutationPayload"),
+	type: nonNull("RemoveDesiredSkillPayload"),
 	args: {
 		where: nonNull(arg({ type: "SkillWhereUniqueInput" }))
 	},
