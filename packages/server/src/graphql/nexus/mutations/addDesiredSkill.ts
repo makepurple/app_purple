@@ -1,9 +1,10 @@
+import { oneLine } from "common-tags";
 import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
 
 export const addDesiredSkill = mutationField("addDesiredSkill", {
-	type: nonNull("AddDesiredSkillMutationPayload"),
+	type: nonNull("AddDesiredSkillPayload"),
 	args: {
 		where: nonNull(arg({ type: "SkillWhereUniqueInput" }))
 	},
@@ -67,7 +68,18 @@ export const addDesiredSkill = mutationField("addDesiredSkill", {
 			.then((result) => !!result.repository)
 			.catch(() => false);
 
-		if (!verified) throw new Error("This skill does not exist on GitHub");
+		if (!verified) {
+			return {
+				errors: [
+					{
+						__typename: "InvalidSkillError",
+						message: oneLine`
+							All skills must be from GitHub
+						`
+					}
+				]
+			};
+		}
 
 		const record = await prisma.$transaction(async (transaction) => {
 			const newSkill = await transaction.skill.upsert({

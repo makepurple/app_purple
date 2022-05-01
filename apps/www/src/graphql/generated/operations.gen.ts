@@ -33,17 +33,27 @@ export type AcceptFriendshipPayload = MutationPayload & {
   readonly viewer?: Maybe<User>;
 };
 
-export type AddDesiredSkillMutationPayload = MutationPayload & {
-  readonly __typename: 'AddDesiredSkillMutationPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+export type AddDesiredSkillError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
+export type AddDesiredSkillPayload = MutationPayload & {
+  readonly __typename: 'AddDesiredSkillPayload';
+  readonly errors?: Maybe<ReadonlyArray<AddDesiredSkillError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
 };
 
-export type AddSkillMutationPayload = MutationPayload & {
-  readonly __typename: 'AddSkillMutationPayload';
-  readonly errors?: Maybe<ReadonlyArray<MutationError>>;
+export type AddSkillError = {
+  readonly message: Scalars['String'];
+  readonly path: ReadonlyArray<Scalars['String']>;
+};
+
+export type AddSkillPayload = MutationPayload & {
+  readonly __typename: 'AddSkillPayload';
+  readonly errors?: Maybe<ReadonlyArray<AddSkillError>>;
   readonly query: Query;
   readonly record?: Maybe<Skill>;
   readonly viewer?: Maybe<User>;
@@ -936,7 +946,7 @@ export type GitHubUserTotalCommitsWhereInput = {
   readonly createdAt?: InputMaybe<DateTimeNullableFilter>;
 };
 
-export type InvalidSkillError = CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdatePostError & {
+export type InvalidSkillError = AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdatePostError & {
   readonly __typename: 'InvalidSkillError';
   readonly message: Scalars['String'];
   readonly path: ReadonlyArray<Scalars['String']>;
@@ -966,8 +976,8 @@ export type LeaveChatPayload = MutationPayload & {
 export type Mutation = {
   readonly __typename: 'Mutation';
   readonly acceptFriendship: AcceptFriendshipPayload;
-  readonly addDesiredSkill: AddDesiredSkillMutationPayload;
-  readonly addSkill: AddSkillMutationPayload;
+  readonly addDesiredSkill: AddDesiredSkillPayload;
+  readonly addSkill: AddSkillPayload;
   readonly banUser: BanUserPayload;
   readonly commentCodeExample: CommentCodeExamplePayload;
   readonly commentPost: CommentPostPayload;
@@ -2940,14 +2950,14 @@ export type AddDesiredSkillMutationVariables = Exact<{
 }>;
 
 
-export type AddDesiredSkillMutation = { readonly __typename: 'Mutation', readonly addDesiredSkill: { readonly __typename: 'AddDesiredSkillMutationPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type AddDesiredSkillMutation = { readonly __typename: 'Mutation', readonly addDesiredSkill: { readonly __typename: 'AddDesiredSkillPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type AddSkillMutationVariables = Exact<{
   where: SkillWhereUniqueInput;
 }>;
 
 
-export type AddSkillMutation = { readonly __typename: 'Mutation', readonly addSkill: { readonly __typename: 'AddSkillMutationPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
+export type AddSkillMutation = { readonly __typename: 'Mutation', readonly addSkill: { readonly __typename: 'AddSkillPayload', readonly record?: { readonly __typename: 'Skill', readonly id: string, readonly viewerDesiredSkill: boolean, readonly viewerSkill: boolean, readonly github: { readonly __typename: 'GitHubRepository', readonly id: string, readonly skill?: { readonly __typename: 'Skill', readonly id: string } | null } } | null, readonly viewer?: { readonly __typename: 'User', readonly id: string, readonly name: string } | null } };
 
 export type BanUserMutationVariables = Exact<{
   name: Scalars['String'];

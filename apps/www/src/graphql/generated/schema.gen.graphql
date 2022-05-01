@@ -5,15 +5,25 @@ type AcceptFriendshipPayload implements MutationPayload {
   viewer: User
 }
 
-type AddDesiredSkillMutationPayload implements MutationPayload {
-  errors: [MutationError!]
+interface AddDesiredSkillError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
+type AddDesiredSkillPayload implements MutationPayload {
+  errors: [AddDesiredSkillError!]
   query: Query!
   record: Skill
   viewer: User
 }
 
-type AddSkillMutationPayload implements MutationPayload {
-  errors: [MutationError!]
+interface AddSkillError implements MutationError {
+  message: String!
+  path: [String!]!
+}
+
+type AddSkillPayload implements MutationPayload {
+  errors: [AddSkillError!]
   query: Query!
   record: Skill
   viewer: User
@@ -727,7 +737,7 @@ input GitHubUserTotalCommitsWhereInput {
   createdAt: DateTimeNullableFilter
 }
 
-type InvalidSkillError implements CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdatePostError {
+type InvalidSkillError implements AddDesiredSkillError & AddSkillError & CreateCodeExampleError & MutationError & PublishPostError & UpdateCodeExampleError & UpdatePostError {
   message: String!
   path: [String!]!
 }
@@ -758,8 +768,8 @@ type LeaveChatPayload implements MutationPayload {
 """Root mutation type"""
 type Mutation {
   acceptFriendship(where: UserWhereUniqueInput!): AcceptFriendshipPayload!
-  addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillMutationPayload!
-  addSkill(where: SkillWhereUniqueInput!): AddSkillMutationPayload!
+  addDesiredSkill(where: SkillWhereUniqueInput!): AddDesiredSkillPayload!
+  addSkill(where: SkillWhereUniqueInput!): AddSkillPayload!
   banUser(data: BanUserInput!, where: UserWhereUniqueInput!): BanUserPayload!
   commentCodeExample(data: CommentCodeExampleInput!): CommentCodeExamplePayload!
   commentPost(data: CommentPostInput!): CommentPostPayload!
