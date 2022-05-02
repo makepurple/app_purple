@@ -15,7 +15,9 @@ export const ZIndicies = [
 	"app-bar",
 	"dialog-backdrop",
 	"dialog",
-	"menu"
+	"menu",
+	"cookie-consent-backdrop",
+	"cookie-consent"
 ] as const;
 
 export type ZIndexType = typeof ZIndicies[number];

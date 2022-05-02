@@ -1,24 +1,31 @@
 import { FocusTrap } from "@headlessui/react";
-import { Anchor, Button, Paper } from "@makepurple/components";
+import { Anchor, Backdrop, Button, Paper } from "@makepurple/components";
+import { StyleUtils } from "@makepurple/utils";
 import React, { CSSProperties, FC, Fragment, useEffect, useState } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 
 const LABEL_ID = "gdpr-cooke-consent-label";
 const DESCRIPTION_ID = "gdpr-cookie-consent-description";
 
-const Root = tw(Paper)`
-	fixed
-	inset-x-0
-	bottom-0
-	flex
-	flex-row
-	flex-wrap
-	items-center
-	gap-4
-	p-4
-	rounded-none
-	shadow-2xl
-	z-50
+const Root = styled(Paper)`
+	${tw`
+		fixed
+		inset-x-0
+		bottom-0
+		flex
+		flex-row
+		flex-wrap
+		items-center
+		gap-4
+		p-4
+		rounded-none
+		shadow-2xl
+	`}
+	z-index: ${StyleUtils.getZIndex("cookie-consent")};
+`;
+
+const StyledBackdrop = styled(Backdrop)`
+	z-index: ${StyleUtils.getZIndex("cookie-consent-backdrop")};
 `;
 
 const Info = tw.div`
@@ -76,6 +83,7 @@ export const LazyGdprCookieConsent: FC<LazyGdprCookieConsentProps> = ({
 			aria-labelledby={LABEL_ID}
 			aria-describedby={DESCRIPTION_ID}
 		>
+			<StyledBackdrop open />
 			<Info>
 				<Title id={LABEL_ID}>Cookie consent</Title>
 				<Description id={DESCRIPTION_ID}>
