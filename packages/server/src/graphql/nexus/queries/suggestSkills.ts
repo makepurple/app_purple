@@ -8,9 +8,6 @@ export const suggestSkills = queryField("suggestSkills", {
 		first: intArg(),
 		where: nonNull(arg({ type: "SuggestSkillsWhereInput" }))
 	},
-	authorize: (parent, args, { user }) => {
-		return !!user;
-	},
 	resolve: async (parent, args, { octokit: graphql }) => {
 		const searchQuery = [
 			args.where.owner ? `user:"${args.where.owner}"` : "",
