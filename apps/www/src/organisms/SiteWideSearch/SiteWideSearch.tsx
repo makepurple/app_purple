@@ -2,6 +2,7 @@ import { ComboBox, Popover } from "@makepurple/components";
 import { useComboBoxState, useLockBodyScroll, useOnKeyDown } from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
 import ms from "ms";
+import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, {
@@ -54,6 +55,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 		const { className, disabled, offset, onBlur, onFocus: _onFocus, style } = props;
 
 		const router = useRouter();
+		const { status } = useSession();
 
 		const offsetModifier = useMemo(() => Popover.Modifiers.Offset({ offset }), [offset]);
 
@@ -84,6 +86,8 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			debounce: ms("0.3s"),
 			onInputValueChange: useCallback(
 				async ({ inputValue }) => {
+					if (status !== "authenticated") return;
+
 					ownerPopper.forceUpdate?.();
 
 					if (!inputValue) return;
@@ -99,7 +103,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					setOwners(nodes.slice());
 				},
 				// eslint-disable-next-line react-hooks/exhaustive-deps
-				[ownerPopper.forceUpdate, urqlClient]
+				[ownerPopper.forceUpdate, status, urqlClient]
 			),
 			onSelectedItemChange: async ({ selectedItem }) => {
 				if (!selectedItem) return;
@@ -130,6 +134,8 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			debounce: ms("0.3s"),
 			onInputValueChange: useCallback(
 				async ({ inputValue }) => {
+					if (status !== "authenticated") return;
+
 					skillPopper.forceUpdate?.();
 
 					const skillName = inputValue?.toLowerCase();
@@ -152,7 +158,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 					setSkills(nodes.slice());
 				},
 				// eslint-disable-next-line react-hooks/exhaustive-deps
-				[matchedOwner, skillPopper.forceUpdate, urqlClient]
+				[matchedOwner, skillPopper.forceUpdate, status, urqlClient]
 			),
 			onSelectedItemChange: async ({ selectedItem }) => {
 				if (!selectedItem) return;
@@ -220,8 +226,14 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 								onChange: () => {
 									skillBox.closeMenu();
 								},
-								onFocus: (e) => {
+								onFocus: async (e) => {
 									onFocus?.(e);
+
+									if (status !== "authenticated") {
+										await router.push("/signup");
+
+										return;
+									}
 
 									skillBox.closeMenu();
 
@@ -229,6 +241,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 								},
 								onKeyDown: onEnterOwner,
 								placeholder: "Organizations or users...",
+								readOnly: status !== "authenticated",
 								spellCheck: false,
 								type: "search"
 							})}
@@ -243,8 +256,14 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 								onChange: () => {
 									ownerBox.closeMenu();
 								},
-								onFocus: (e) => {
+								onFocus: async (e) => {
 									onFocus?.(e);
+
+									if (status !== "authenticated") {
+										await router.push("/signup");
+
+										return;
+									}
 
 									ownerBox.closeMenu();
 
@@ -252,6 +271,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 								},
 								onKeyDown: onEnterSkill,
 								placeholder: "Repositories or skills...",
+								readOnly: status !== "authenticated",
 								spellCheck: false,
 								type: "search"
 							})}
