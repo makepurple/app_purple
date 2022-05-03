@@ -27,6 +27,10 @@ fragment CreateExperienceFragment on Experience {
 
 mutation CreateExperience($data: ExperienceCreateInput!) {
 	createExperience(data: $data) {
+		errors {
+			__typename
+			message
+		}
 		viewer {
 			id
 			name

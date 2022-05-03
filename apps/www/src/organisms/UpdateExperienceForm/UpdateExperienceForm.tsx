@@ -19,7 +19,7 @@ import {
 import { dayjs, LangUtils } from "@makepurple/utils";
 import { ExperienceUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
-import React, { CSSProperties, FC, SyntheticEvent, useMemo } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useEffect, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import {
@@ -83,13 +83,16 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 		[experience.endDate]
 	);
 
-	const [{ fetching }, updateExperience] = useUpdateExperienceMutation();
+	const [{ data: updateData, fetching }, updateExperience] = useUpdateExperienceMutation();
+
+	const updateErrors = updateData?.updateExperience.errors;
 
 	const {
 		control,
 		formState: { errors },
 		handleSubmit,
 		register,
+		setError,
 		setValue,
 		watch
 	} = useForm<Type<typeof ExperienceUpdateInput>>({
@@ -123,6 +126,18 @@ export const UpdateExperienceForm: FC<UpdateExperienceFormProps> = ({
 	});
 
 	const currentEndDate = watch("endDate");
+
+	useEffect(() => {
+		updateErrors?.forEach((error) => {
+			switch (error.__typename) {
+				case "InvalidOrganizationError":
+					setError("organizationName", { message: error.message });
+
+					break;
+				default:
+			}
+		});
+	}, [setError, updateErrors]);
 
 	return (
 		<Form

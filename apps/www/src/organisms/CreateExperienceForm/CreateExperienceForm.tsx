@@ -19,7 +19,7 @@ import {
 import { dayjs, LangUtils } from "@makepurple/utils";
 import { ExperienceCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
-import React, { CSSProperties, FC, SyntheticEvent, useMemo } from "react";
+import React, { CSSProperties, FC, SyntheticEvent, useEffect, useMemo } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { ExperienceType, useCreateExperienceMutation } from "../../graphql";
@@ -73,13 +73,16 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 }) => {
 	const today = useMemo(() => dayjs(), []);
 
-	const [{ fetching }, createExperience] = useCreateExperienceMutation();
+	const [{ data: createData, fetching }, createExperience] = useCreateExperienceMutation();
+
+	const createErrors = createData?.createExperience.errors;
 
 	const {
 		control,
 		formState: { errors },
 		handleSubmit,
 		register,
+		setError,
 		setValue,
 		watch
 	} = useForm<Type<typeof ExperienceCreateInput>>({
@@ -111,6 +114,18 @@ export const CreateExperienceForm: FC<CreateExperienceFormProps> = ({
 	});
 
 	const currentEndDate = watch("endDate");
+
+	useEffect(() => {
+		createErrors?.forEach((error) => {
+			switch (error.__typename) {
+				case "InvalidOrganizationError":
+					setError("organizationName", { message: error.message });
+
+					break;
+				default:
+			}
+		});
+	}, [createErrors, setError]);
 
 	return (
 		<Form

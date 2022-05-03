@@ -3,6 +3,10 @@ mutation UpdateExperience(
 	$where: ExperienceWhereUniqueInput!
 ) {
 	updateExperience(data: $data, where: $where) {
+		errors {
+			__typename
+			message
+		}
 		record {
 			...ExperienceCardExperience
 			...CreateExperienceFragment
