@@ -1,5 +1,9 @@
 mutation UpdatePost($where: PostWhereUniqueInput!, $data: PostUpdateInput!) {
 	updatePost(where: $where, data: $data) {
+		errors {
+			__typename
+			message
+		}
 		record {
 			id
 			content

@@ -3,6 +3,10 @@ mutation UpdateCodeExample(
 	$where: CodeExampleWhereUniqueInput!
 ) {
 	updateCodeExample(data: $data, where: $where) {
+		errors {
+			__typename
+			message
+		}
 		record {
 			...CodeExampleCardCodeExample
 		}

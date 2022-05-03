@@ -23,7 +23,7 @@ import { useSession } from "next-auth/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { useGetPostQuery, useUpdatePostMutation } from "../../../../graphql";
@@ -123,7 +123,9 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const [{ fetching: saving }, updatePost] = useUpdatePostMutation();
+	const [{ data: updateData, fetching: saving }, updatePost] = useUpdatePostMutation();
+
+	const updateErrors = updateData?.updatePost.errors;
 
 	const updating: boolean = false;
 
@@ -143,6 +145,7 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors },
 		handleSubmit,
 		register,
+		setError,
 		setValue,
 		watch
 	} = useForm<Type<typeof PostUpdateInput>>({
@@ -164,12 +167,18 @@ export const Page: NextPage<PageProps> = () => {
 
 	const thumbnailUrl = watch("thumbnailUrl");
 
-	/**
-	 * TODO
-	 * @description Handle case where no post is found.
-	 * @author David Lee
-	 * @date December 28, 2021
-	 */
+	useEffect(() => {
+		updateErrors?.forEach((error) => {
+			switch (error.__typename) {
+				case "InvalidSkillError":
+					setError("skills", { message: error.message });
+
+					break;
+				default:
+			}
+		});
+	}, [setError, updateErrors]);
+
 	if (!post) return null;
 
 	return (

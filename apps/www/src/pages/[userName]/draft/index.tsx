@@ -122,8 +122,11 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	});
 
-	const [{ fetching: saving }, updatePostDraft] = useUpdatePostDraftMutation();
-	const [{ fetching: publishing }, publishPost] = usePublishPostMutation();
+	const [{ data: updateData, fetching: saving }, updatePostDraft] = useUpdatePostDraftMutation();
+	const [{ data: publishData, fetching: publishing }, publishPost] = usePublishPostMutation();
+
+	const updateErrors = updateData?.updatePostDraft.errors;
+	const publishErrors = publishData?.publishPost.errors;
 
 	const post = data?.post;
 
@@ -150,6 +153,7 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors },
 		handleSubmit,
 		register,
+		setError,
 		setValue,
 		watch
 	} = useForm<Type<typeof PostDraftUpdateInput>>({
@@ -178,6 +182,34 @@ export const Page: NextPage<PageProps> = () => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		router?.prefetch("/[username]/[postTitle]");
 	}, [router]);
+
+	useEffect(() => {
+		updateErrors?.forEach((error) => {
+			switch (error.__typename) {
+				case "InvalidSkillError":
+					setError("skills", { message: error.message });
+
+					break;
+				default:
+			}
+		});
+	}, [setError, updateErrors]);
+
+	useEffect(() => {
+		publishErrors?.forEach((error) => {
+			switch (error.__typename) {
+				case "InvalidSkillError":
+					setError("skills", { message: error.message });
+
+					break;
+				case "SimilarTitleError":
+					setError("title", { message: error.message });
+
+					break;
+				default:
+			}
+		});
+	}, [publishErrors, setError]);
 
 	/**
 	 * TODO

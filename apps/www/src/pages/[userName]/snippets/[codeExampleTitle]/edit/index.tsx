@@ -133,9 +133,12 @@ export const Page: NextPage<PageProps> = () => {
 			urlSlug
 		}
 	});
-	const [{ fetching }, updateCodeExample] = useUpdateCodeExampleMutation();
 
 	const codeExample = data?.codeExample;
+
+	const [{ data: updateData, fetching }, updateCodeExample] = useUpdateCodeExampleMutation();
+
+	const updateErrors = updateData?.updateCodeExample.errors;
 
 	const {
 		control,
@@ -143,6 +146,7 @@ export const Page: NextPage<PageProps> = () => {
 		handleSubmit,
 		register,
 		reset,
+		setError,
 		setValue,
 		watch
 	} = useForm<Type<typeof CodeExampleUpdateInput>>({
@@ -227,6 +231,18 @@ export const Page: NextPage<PageProps> = () => {
 
 	const [repository, setRepository] =
 		useState<RepositorySearchResultGitHubRepositoryFragment | null>(defaultPrimarySkill);
+
+	useEffect(() => {
+		updateErrors?.forEach((error) => {
+			switch (error.__typename) {
+				case "InvalidSkillError":
+					setError("skills", { message: error.message });
+
+					break;
+				default:
+			}
+		});
+	}, [setError, updateErrors]);
 
 	if (!codeExample) return null;
 

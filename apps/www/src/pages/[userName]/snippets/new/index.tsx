@@ -188,10 +188,12 @@ export const Page: NextPage<PageProps> = () => {
 
 		createErrors.forEach((error) => {
 			switch (error.__typename) {
+				case "InvalidSkillError":
+					setError("skills", { message: error.message });
+
+					break;
 				case "SimilarTitleError":
-					setError("title", {
-						message: error.message
-					});
+					setError("title", { message: error.message });
 
 					break;
 				default:

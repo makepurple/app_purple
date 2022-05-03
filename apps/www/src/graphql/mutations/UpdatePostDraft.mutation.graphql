@@ -1,5 +1,9 @@
 mutation UpdatePostDraft($where: PostWhereUniqueInput!, $data: PostDraftUpdateInput!) {
 	updatePostDraft(where: $where, data: $data) {
+		errors {
+			__typename
+			message
+		}
 		record {
 			id
 			content
