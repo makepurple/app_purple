@@ -75,7 +75,7 @@ const SocialLinks = tw.div`
 const About = tw.div`
 	flex
 	flex-col
-	gap-4
+	gap-6
 	text-left
 	text-lg
 	text-gray-600
