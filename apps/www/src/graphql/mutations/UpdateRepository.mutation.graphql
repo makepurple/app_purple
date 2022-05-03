@@ -3,6 +3,10 @@ mutation UpdateRepository(
 	$where: RepositoryWhereUniqueInput!
 ) {
 	updateRepository(data: $data, where: $where) {
+		errors {
+			__typename
+			message
+		}
 		record {
 			id
 			skills {

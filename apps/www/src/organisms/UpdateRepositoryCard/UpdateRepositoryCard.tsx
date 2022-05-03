@@ -3,6 +3,7 @@ import {
 	Form,
 	FormButton,
 	FormGroup,
+	FormHelperText,
 	FormLabel,
 	GitHubAvatarImage,
 	HiddenInput,
@@ -13,7 +14,7 @@ import {
 	toast
 } from "@makepurple/components";
 import { dayjs } from "@makepurple/utils";
-import React, { CSSProperties, forwardRef } from "react";
+import React, { CSSProperties, forwardRef, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import tw, { styled } from "twin.macro";
 import { RepositoryCardRepositoryFragment, useUpdateRepositoryMutation } from "../../graphql";
@@ -130,9 +131,17 @@ export const UpdateRepositoryCard = forwardRef<HTMLFormElement, UpdateRepository
 		const primaryLanguage = repository.github.primaryLanguage;
 		const license = repository.github.licenseInfo;
 
-		const [{ fetching: updating }, updateRepository] = useUpdateRepositoryMutation();
+		const [{ data: updateData, fetching }, updateRepository] = useUpdateRepositoryMutation();
 
-		const { control, handleSubmit, register } = useForm<{
+		const updateErrors = updateData?.updateRepository.errors;
+
+		const {
+			control,
+			formState: { errors },
+			handleSubmit,
+			register,
+			setError
+		} = useForm<{
 			skills: readonly SuggestedSkill[];
 		}>({
 			defaultValues: {
@@ -146,12 +155,24 @@ export const UpdateRepositoryCard = forwardRef<HTMLFormElement, UpdateRepository
 		const owner = repository.github.owner;
 		const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
+		useEffect(() => {
+			updateErrors?.forEach((error) => {
+				switch (error.__typename) {
+					case "InvalidSkillError":
+						setError("skills", { message: error.message });
+
+						break;
+					default:
+				}
+			});
+		}, [setError, updateErrors]);
+
 		return (
 			<Root
 				as={Form}
 				ref={ref}
 				className={className}
-				disabled={updating}
+				disabled={fetching}
 				onSubmit={handleSubmit(async (formData) => {
 					const didSucceed = await updateRepository({
 						data: {
@@ -236,6 +257,7 @@ export const UpdateRepositoryCard = forwardRef<HTMLFormElement, UpdateRepository
 									aria-label="new skill"
 								/>
 							</Tags>
+							<FormHelperText error={(errors.skills as any)?.message} />
 						</FormGroup>
 						<Info
 							onClick={(e) => {
@@ -309,7 +331,7 @@ export const UpdateRepositoryCard = forwardRef<HTMLFormElement, UpdateRepository
 						}}
 					>
 						<CloseButton
-							disabled={updating}
+							disabled={fetching}
 							onClick={() => {
 								onClose?.();
 							}}
@@ -319,8 +341,8 @@ export const UpdateRepositoryCard = forwardRef<HTMLFormElement, UpdateRepository
 						>
 							Close
 						</CloseButton>
-						<SaveButton disabled={updating} size="small" type="submit">
-							{updating ? <Spinner /> : "Save"}
+						<SaveButton disabled={fetching} size="small" type="submit">
+							{fetching ? <Spinner /> : "Save"}
 						</SaveButton>
 					</Actions>
 				</>
