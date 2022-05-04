@@ -45,6 +45,8 @@ Template.parameters = {
 		switch (operationName) {
 			case "GetChat":
 				return { data: GetChat_mock };
+			case "GetChatHistoricalMessages":
+				return { data: GetChat_mock };
 			case "GetChats":
 				return { data: GetChats_mock };
 			case "GetNotificationCounts":
@@ -89,6 +91,13 @@ NoChats.parameters = {
 
 		switch (operationName) {
 			case "GetChat":
+				return {
+					data: {
+						...GetChat_mock,
+						chat: null
+					}
+				};
+			case "GetChatHistoricalMessages":
 				return {
 					data: {
 						...GetChat_mock,
