@@ -48,6 +48,16 @@ const Root = styled(Paper)`
 	}
 `;
 
+const Thumbnail = tw.a`
+	relative
+	flex-shrink-0
+	h-44
+	w-full
+	sm:w-44
+	overflow-hidden
+	rounded-md
+`;
+
 const Info = tw.div`
 	flex-grow
 	flex
@@ -134,16 +144,6 @@ const UpvoteCount = tw.span`
 	text-sm
 	leading-6
 	sm:leading-5
-`;
-
-const Thumbnail = tw.a`
-	relative
-	flex-shrink-0
-	h-44
-	w-full
-	sm:w-44
-	overflow-hidden
-	rounded-md
 `;
 
 export interface PostCardProps {
