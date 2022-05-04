@@ -117,46 +117,49 @@ export const Page: NextPage<PageProps> = () => {
 					index: shouldIndex
 				}}
 			/>
-			<Content>
-				{!codeExamples.length ? (
-					!fetching && (
-						<NonIdealState
-							title="There's nothing here"
-							subTitle="We couldn't find any snippets"
-						>
-							<NoSnippetsContent>
-								<StyledAvatar border={4}>
-									<IconContainer>
-										<StyledLogo href={null} />
-									</IconContainer>
-								</StyledAvatar>
-								{isMyPage && (
-									<NextLink
-										href="/[userName]/snippets/new"
-										as={`/${userName}/snippets/new`}
-										passHref
-									>
-										<CreateNewButton as="a">Create a snippet</CreateNewButton>
-									</NextLink>
-								)}
-							</NoSnippetsContent>
-						</NonIdealState>
-					)
+			{!codeExamples.length ? (
+				!fetching ? (
+					<NonIdealState
+						title="There's nothing here"
+						subTitle="We couldn't find any snippets"
+					>
+						<NoSnippetsContent>
+							<StyledAvatar border={4}>
+								<IconContainer>
+									<StyledLogo href={null} />
+								</IconContainer>
+							</StyledAvatar>
+							{isMyPage && (
+								<NextLink
+									href="/[userName]/snippets/new"
+									as={`/${userName}/snippets/new`}
+									passHref
+								>
+									<CreateNewButton as="a">Create a snippet</CreateNewButton>
+								</NextLink>
+							)}
+						</NoSnippetsContent>
+					</NonIdealState>
 				) : (
-					<>
-						{isMyPage && <CodeExampleCreateCard userName={userName} />}
-						{codeExamples.map((codeExample, i) => (
-							<CodeExampleMiniCard
-								key={codeExample.id}
-								ref={getRef(i)}
-								codeExample={codeExample}
-							/>
-						))}
-					</>
-				)}
-				{fetching &&
-					Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
-			</Content>
+					<Content>
+						{fetching &&
+							Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
+					</Content>
+				)
+			) : (
+				<Content>
+					{isMyPage && <CodeExampleCreateCard userName={userName} />}
+					{codeExamples.map((codeExample, i) => (
+						<CodeExampleMiniCard
+							key={codeExample.id}
+							ref={getRef(i)}
+							codeExample={codeExample}
+						/>
+					))}
+					{fetching &&
+						Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
+				</Content>
+			)}
 		</UserPageLayout>
 	);
 };
