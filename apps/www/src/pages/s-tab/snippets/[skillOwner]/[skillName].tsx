@@ -123,7 +123,7 @@ export const Page: NextPage<PageProps> = () => {
 				}}
 			/>
 			{!codeExamples.length ? (
-				!fetching && (
+				!fetching ? (
 					<NonIdealState
 						title="There's nothing here"
 						subTitle="We couldn't find any snippets"
@@ -145,6 +145,11 @@ export const Page: NextPage<PageProps> = () => {
 							)}
 						</NoSnippetsContent>
 					</NonIdealState>
+				) : (
+					<Content>
+						{fetching &&
+							Array.from({ length: 3 }, (_, i) => <LoadingCodeExampleCard key={i} />)}
+					</Content>
 				)
 			) : (
 				<Content>

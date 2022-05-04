@@ -1,4 +1,4 @@
-import { Skeleton } from "@makepurple/components";
+import { Paper, Skeleton } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
 
 export interface LoadingUserFollowCardProps {
@@ -8,7 +8,7 @@ export interface LoadingUserFollowCardProps {
 
 export const LoadingUserFollowCard: FC<LoadingUserFollowCardProps> = ({ className, style }) => {
 	return (
-		<div className={className} style={style} tw="flex items-start py-4">
+		<Paper className={className} style={style} tw="flex items-start p-4">
 			<Skeleton tw="flex-shrink-0 h-16 w-16 rounded-full mr-4" />
 			<div tw="flex-grow flex flex-col">
 				<Skeleton tw="h-4.5 w-3/5" />
@@ -24,9 +24,6 @@ export const LoadingUserFollowCard: FC<LoadingUserFollowCardProps> = ({ classNam
 					))}
 				</div>
 			</div>
-			<div tw="flex-shrink-0">
-				<Skeleton tw="h-10 w-16 ml-4" />
-			</div>
-		</div>
+		</Paper>
 	);
 };
