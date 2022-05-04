@@ -25,7 +25,7 @@ const EditButton = tw(Button)`
 const DeleteButton = tw(Button)`
 	flex-shrink-0
 	w-20
-		opacity-100
+	opacity-100
 	transition-opacity
 	ease-in-out
 	duration-150
