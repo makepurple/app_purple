@@ -15,6 +15,7 @@ import {
 	TextArea,
 	toast
 } from "@makepurple/components";
+import { useBeforeUnload } from "@makepurple/hooks";
 import { CodeExampleCreateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { NextPage } from "next";
@@ -120,7 +121,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const {
 		control,
-		formState: { errors, isSubmitted, isValid },
+		formState: { errors, isDirty, isSubmitted, isValid },
 		handleSubmit,
 		register,
 		setError,
@@ -142,6 +143,8 @@ export const Page: NextPage<PageProps> = () => {
 		},
 		resolver: computedTypesResolver(CodeExampleCreateInput)
 	});
+
+	useBeforeUnload(isDirty, "You have unsaved changes, are you sure you want to leave?");
 
 	const primarySkill = watch("primarySkill.name_owner");
 	const language = watch("language");

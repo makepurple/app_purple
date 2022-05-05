@@ -16,6 +16,7 @@ import {
 	TextArea,
 	toast
 } from "@makepurple/components";
+import { useBeforeUnload } from "@makepurple/hooks";
 import { PostDraftUpdateInput } from "@makepurple/validators";
 import type { Type } from "computed-types";
 import { NextPage } from "next";
@@ -150,7 +151,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const {
 		control,
-		formState: { errors },
+		formState: { errors, isDirty },
 		handleSubmit,
 		register,
 		setError,
@@ -173,6 +174,8 @@ export const Page: NextPage<PageProps> = () => {
 		},
 		resolver: computedTypesResolver(PostDraftUpdateInput)
 	});
+
+	useBeforeUnload(isDirty, "You have unsaved changes, are you sure you want to leave?");
 
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
