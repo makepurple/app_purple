@@ -1,4 +1,12 @@
-import { createElement, Fragment, ReactChild, useCallback, useEffect, useState } from "react";
+import {
+	createElement,
+	Fragment,
+	ReactChild,
+	ReactElement,
+	useCallback,
+	useEffect,
+	useState
+} from "react";
 
 /**
  * @description Ensure that a component is rendered only on the client. This is helpful for
@@ -11,8 +19,11 @@ export const useNoSsr = () => {
 	useEffect(() => setDidMount(typeof window !== "undefined"), []);
 
 	const noSsr = useCallback(
-		<T extends ReactChild>(element: T) => {
-			return didMount ? element : createElement(Fragment, {}, "");
+		<T extends ReactChild>(
+			element: T,
+			fallback: ReactElement = createElement(Fragment, {}, "")
+		) => {
+			return didMount ? element : fallback;
 		},
 		[didMount]
 	);

@@ -3,6 +3,8 @@ import enLocale from "dayjs/locale/en";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 
+export type { ConfigType, Dayjs } from "dayjs";
+
 _dayjs.extend(relativeTime);
 _dayjs.extend(updateLocale);
 _dayjs.locale("en-short", {
