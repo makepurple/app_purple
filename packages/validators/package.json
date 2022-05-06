@@ -11,6 +11,6 @@
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
-		"typescript": "^4.6.3"
+		"typescript": "^4.6.4"
 	}
 }
