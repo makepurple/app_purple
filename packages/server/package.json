@@ -56,8 +56,8 @@
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^2.6.2",
-		"@graphql-codegen/typescript": "^2.4.8",
-		"@graphql-codegen/typescript-operations": "^2.3.5",
+		"@graphql-codegen/typescript": "^2.4.10",
+		"@graphql-codegen/typescript-operations": "^2.3.7",
 		"@makepurple/tsconfig": "workspace:*",
 		"cross-env": "^7.0.3",
 		"dotenv-cli": "^5.1.0",
