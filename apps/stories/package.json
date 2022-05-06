@@ -12,7 +12,7 @@
 		"upload": "chromatic --build-script build --exit-zero-on-changes * --exit-once-uploaded *"
 	},
 	"dependencies": {
-		"@faker-js/faker": "6.2.0",
+		"@faker-js/faker": "6.3.1",
 		"@headlessui/react": "^1.5.0",
 		"@makepurple/components": "workspace:*",
 		"@makepurple/hooks": "workspace:*",
@@ -60,7 +60,7 @@
 		"@types/react-test-renderer": "^17.0.1",
 		"@urql/storybook-addon": "^1.0.8",
 		"addon-screen-reader": "^1.8.6",
-		"autoprefixer": "^10.4.5",
+		"autoprefixer": "^10.4.7",
 		"babel-jest": "^27.5.1",
 		"babel-loader": "^8.2.5",
 		"babel-plugin-dynamic-import-node": "^2.3.3",
