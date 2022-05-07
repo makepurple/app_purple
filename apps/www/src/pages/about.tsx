@@ -3,8 +3,8 @@ import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import React from "react";
-import { Seo } from "src/organisms";
 import tw from "twin.macro";
+import { Seo } from "../organisms";
 import { GitHubIcon, LinkedinIcon, TwitterIcon } from "../svgs";
 
 const Root = tw(MainContainer)`
