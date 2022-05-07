@@ -1,7 +1,9 @@
 import { Anchor, Avatar, Brand, GitHubAvatarImage, MainContainer } from "@makepurple/components";
+import { oneLine } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import React from "react";
+import { Seo } from "src/organisms";
 import tw from "twin.macro";
 import { GitHubIcon, LinkedinIcon, TwitterIcon } from "../svgs";
 
@@ -85,6 +87,14 @@ const About = tw.div`
 export const Page: NextPage = () => {
 	return (
 		<Root>
+			<Seo
+				title="About"
+				description={oneLine`
+					MakePurple is a discoverability platform for both skills and developers
+					for learning new things from other developers.
+				`}
+				robots={{ follow: true, index: true }}
+			/>
 			<Header>
 				About <StyledBrand />
 			</Header>
