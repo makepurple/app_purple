@@ -27,12 +27,14 @@ export const uploadPostImage = mutationField("uploadPostImage", {
 		return true;
 	},
 	resolve: async (parent, args, { cloudinary, prisma, user }) => {
+		if (!user) throw new Error();
+
 		// eslint-disable-next-line @typescript-eslint/await-thenable
 		const image = await args.data.image;
 
 		const uploadResponse = await cloudinary.uploadImageFile(image, {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			folder: user!.id
+			folder: user.id
 		});
 
 		const record = await prisma.postImage.create({
