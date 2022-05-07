@@ -25,7 +25,8 @@ export class CloudinaryClient {
 		const now = Date.now().toString();
 		const hash = createHash("md5").update(now);
 		const fileName = hash.digest("hex").toString();
-		const publicId = options?.folder ? [options.folder, fileName].join("/") : fileName;
+		const filePath = options?.folder ? [options.folder, fileName].join("/") : fileName;
+		const publicId = this.prefixEnvironment(filePath);
 
 		let byteLength = 0;
 
@@ -65,5 +66,13 @@ export class CloudinaryClient {
 			.destroy(publicId)
 			.then(() => true)
 			.catch(() => false);
+	}
+
+	private prefixEnvironment(filePath: string): string {
+		if (process.env.CLOUDINARY_ENV) {
+			return `${process.env.CLOUDINARY_ENV}/${filePath}`;
+		}
+
+		return filePath;
 	}
 }
