@@ -20,7 +20,7 @@ const authHandler: NextApiHandler = (req, res) =>
 					}
 				});
 
-				if (!dbUser) return false;
+				if (!dbUser) return true;
 
 				return !dbUser.banReason;
 			},
