@@ -157,12 +157,12 @@ export const Page: NextPage = () => {
 						on their personal sites, projects and blogs.
 					</p>
 					<p>
-						Since then, MakePurple has evolved for developers to present their skills as
-						a personal-website and with the discovery of GitHub repositories. Developers
-						can be found through their GitHub logins, GitHub organizations in which they
-						are members, or GitHub repositories defined as skills on MakePurple. Through
-						improving developer discoverability, MakePurple hopes to improve the ease of
-						sharing knowledge and learning new things.
+						Since then, MakePurple has evolved for developers to present their skills
+						with the discovery of GitHub repositories. Developers can be found through
+						their GitHub logins, GitHub organizations in which they are members, or
+						GitHub repositories defined as skills on MakePurple. Through improving
+						developer discoverability, MakePurple hopes to improve the ease of sharing
+						knowledge and learning new things.
 					</p>
 					<p>
 						If you haven&apos;t already,{" "}
