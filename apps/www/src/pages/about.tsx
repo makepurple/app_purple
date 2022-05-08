@@ -115,7 +115,7 @@ export const Page: NextPage = () => {
 					<NextLink href="/[userName]" as="/leedavidcs" passHref>
 						<AtName>@leedavidcs</AtName>
 					</NextLink>
-					<UserTitle tw="mt-4">Owner</UserTitle>
+					<UserTitle tw="mt-4">Software Engineer</UserTitle>
 					<SocialLinks tw="mt-4">
 						<a
 							href="https://github.com/leedavidcs"
