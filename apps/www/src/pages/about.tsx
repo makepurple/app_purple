@@ -151,23 +151,25 @@ export const Page: NextPage = () => {
 						Hi, I&apos;m David! Welcome to my project, <Brand tw="text-lg" />!
 					</p>
 					<p>
-						MakePurple originally started out as a personal website and sandbox to
-						showcase myself as a developer and to try out new things. Over the course of
-						its development, I found discovery of new skills to be invaluable to
-						technical development, and discovery of people with varying strengths to
-						create learning opportunities and potential partnerships.
+						MakePurple originally started as a personal website and sandbox to tinker
+						with new things. While building, I found I improved most through discovering
+						developers who knew things I didn&apos;t, who were open to sharing knowledge
+						on their personal sites, projects and blogs.
 					</p>
 					<p>
-						Since then, MakePurple has evolved to become a discoverability platform for
-						both skills and developers, such that we can learn and discover new things
-						from one another to become possibly better rounded (and purple)!
+						Since then, MakePurple has evolved for developers to present their skills as
+						a personal-website and with the discovery of GitHub repositories. Developers
+						can be found through their GitHub logins, GitHub organizations in which they
+						are members, or GitHub repositories defined as skills on MakePurple. Through
+						improving developer discoverability, MakePurple hopes to improve the ease of
+						sharing knowledge and learning new things.
 					</p>
 					<p>
 						If you haven&apos;t already,{" "}
 						<NextLink href="/signup" passHref>
 							<Anchor>join MakePurple</Anchor>
-						</NextLink>{" "}
-						and come teach me a thing or two! 😉
+						</NextLink>
+						, build-up your developer profile, and come teach us what you know! 😉
 					</p>
 				</About>
 			</Content>
