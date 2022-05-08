@@ -1,0 +1,58 @@
+# GraphCDN configuration. Learn more at https://docs.graphcdn.io/docs/cli
+schema: ./apps/www/src/graphql/generated/schema.gen.graphql
+scopes:
+  AUTHENTICATED: cookie:__Secure-next-auth.session-token
+rootTypeNames:
+  query: Query
+  mutation: Mutation
+rules:
+  - types:
+      - GitHub
+      - GitHubUser
+      - GitHubLicense
+      - GitHubLanguage
+      - GitHubRepository
+      - GitHubOrganization
+      - GitHubUserContributionCalendar
+      - GitHubUserContributionCalendarDay
+      - GitHubUserContributionCalendarWeek
+    maxAge: 3600
+    swr: 3600
+    description: Prevent frequent hits to GitHub api
+  - types:
+      - Post
+    maxAge: 7200
+    swr: 7200
+    description: Posts should not change too often
+  - types:
+      - CodeExample
+    maxAge: 7200
+    swr: 7200
+    description: CodeExamples should not change too often
+  - types:
+      - UserTrophies
+    maxAge: 900
+    swr: 900
+    description: Trophies can update less frequently
+  - types:
+      User:
+        - activities
+    maxAge: 900
+    swr: 900
+    description: Reduce expensive query of User activities
+  - types:
+      Query:
+        - activityFeed
+    maxAge: 900
+    swr: 900
+    scope: AUTHENTICATED
+    description: Only user's update activity feed every 15 minutes at most
+  - types:
+      Query:
+        - suggestFriends
+    maxAge: 900
+    swr: 900
+    scope: AUTHENTICATED
+    description: Only update user's suggested friends every 15 minutes at most
+name: makepurple
+originUrl: https://www.makepurple.com/api/graphql
