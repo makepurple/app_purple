@@ -126,28 +126,28 @@ const authHandler: NextApiHandler = (req, res) =>
 		],
 		session: {
 			strategy: "jwt"
-		},
-		...(process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-			? {
-					cookies: {
-						sessionToken: {
-							name: "__Secure-next-auth.session-token",
-							options: {
-								// The default would be the exact domain. We also want to allow passing
-								// credentials with requests to the `graphcdn` subdomain, so we make
-								// this cookie readable for all subdomains.
-								// Note that this is only relevant for the production deployment. When
-								// developing on localhost, no domain needs to be set.
-								domain: `.${process.env.NEXTAUTH_URL}`,
-								httpOnly: true,
-								path: "/",
-								sameSite: "lax",
-								secure: true
-							}
-						}
-					}
-			  }
-			: {})
+		}
+		// ...(process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+		// 	? {
+		// 			cookies: {
+		// 				sessionToken: {
+		// 					name: "__Secure-next-auth.session-token",
+		// 					options: {
+		// 						// The default would be the exact domain. We also want to allow passing
+		// 						// credentials with requests to the `graphcdn` subdomain, so we make
+		// 						// this cookie readable for all subdomains.
+		// 						// Note that this is only relevant for the production deployment. When
+		// 						// developing on localhost, no domain needs to be set.
+		// 						domain: `.${process.env.NEXTAUTH_URL}`,
+		// 						httpOnly: true,
+		// 						path: "/",
+		// 						sameSite: "lax",
+		// 						secure: true
+		// 					}
+		// 				}
+		// 			}
+		// 	  }
+		// 	: {})
 	});
 
 export default authHandler;
