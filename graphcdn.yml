@@ -16,8 +16,8 @@ rules:
       - GitHubUserContributionCalendar
       - GitHubUserContributionCalendarDay
       - GitHubUserContributionCalendarWeek
-    maxAge: 3600
-    swr: 3600
+    maxAge: 86400
+    swr: 86400
     description: Prevent frequent hits to GitHub api
   - types:
       - Post
@@ -54,5 +54,22 @@ rules:
     swr: 900
     scope: AUTHENTICATED
     description: Only update user's suggested friends every 15 minutes at most
+  - types:
+      - User
+    maxAge: 1800
+    swr: 1800
+    description: Cache users for overview pages
+  - types:
+      - Repository
+    maxAge: 7200
+    swr: 7200
+    description: Repositories should not change too often
+  - types:
+      Query:
+        - postDraft
+    maxAge: 0
+    swr: 0
+    scope: AUTHENTICATED
+    description: Never cache postDraft
 name: makepurple
 originUrl: https://www.makepurple.com/api/graphql
