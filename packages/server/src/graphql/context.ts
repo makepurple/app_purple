@@ -5,6 +5,7 @@ import type { CloudinaryClient } from "../services/cloudinary";
 import type { GraphCDNClient } from "../services/graphcdn";
 import type { OctokitClient } from "../services/octokit";
 import type { PusherClient } from "../services/pusher";
+import { UnsplashClient } from "../services/unsplash";
 
 export interface ServerContextUser {
 	id: string;
@@ -23,5 +24,6 @@ export interface ServerContext {
 	pusher: PusherClient;
 	req: NextApiRequest;
 	res: NextApiResponse;
+	unsplash: UnsplashClient;
 	user: Maybe<ServerContextUser>;
 }

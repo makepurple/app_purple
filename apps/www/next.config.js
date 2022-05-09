@@ -15,7 +15,10 @@ const config = {
 	},
 	reactStrictMode: true,
 	images: {
-		domains: ["res.cloudinary.com"]
+		deviceSizes: [320, 420, 768, 1024, 1200],
+		iconSizes: [],
+		domains: ["res.cloudinary.com", "images.unsplash.com"],
+		loader: "default"
 	},
 	env: {
 		API_URL:                   process.env.API_URL,

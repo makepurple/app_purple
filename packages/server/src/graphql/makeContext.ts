@@ -7,6 +7,7 @@ import { CloudinaryClient } from "../services/cloudinary";
 import { GraphCDNClient } from "../services/graphcdn";
 import * as octokit from "../services/octokit";
 import * as pusher from "../services/pusher";
+import { UnsplashClient } from "../services/unsplash";
 import type { ServerContext } from "./context";
 
 export const makeContext = async (params: {
@@ -28,6 +29,7 @@ export const makeContext = async (params: {
 		pusher: pusher.client,
 		req,
 		res,
+		unsplash: new UnsplashClient(),
 		user: jwt && {
 			id: jwt.sub,
 			name: jwt.name,
