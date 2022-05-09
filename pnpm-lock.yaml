@@ -256,7 +256,7 @@ importers:
       '@types/topojson-client': ^3.1.1
       '@urql/core': ^2.4.4
       '@urql/devtools': ^2.0.3
-      '@urql/exchange-graphcache': ^4.3.6
+      '@urql/exchange-graphcache': ^4.4.0
       '@urql/exchange-multipart-fetch': ^0.1.14
       '@urql/exchange-refocus': ^0.2.5
       '@urql/exchange-request-policy': ^0.1.5
@@ -291,7 +291,7 @@ importers:
       next-compose-plugins: ^2.2.1
       next-transpile-modules: ^9.0.0
       next-usequerystate: ^1.7.2
-      path-to-regexp: ^6.2.0
+      path-to-regexp: ^6.2.1
       polished: ^4.2.2
       prisma: ^3.13.0
       pusher-js: ^7.0.6
@@ -332,7 +332,7 @@ importers:
       '@types/three': 0.140.0
       '@types/topojson-client': 3.1.1
       '@urql/core': 2.4.4_graphql@16.3.0
-      '@urql/exchange-graphcache': 4.3.6_graphql@16.3.0
+      '@urql/exchange-graphcache': 4.4.0_graphql@16.3.0
       '@urql/exchange-multipart-fetch': 0.1.14_graphql@16.3.0
       '@urql/exchange-refocus': 0.2.5_graphql@16.3.0
       '@urql/exchange-request-policy': 0.1.5_graphql@16.3.0
@@ -358,7 +358,7 @@ importers:
       next: 12.1.6_a2e1e28ac7d7744bd11a0f193315a179
       next-auth: 4.3.4_react-dom@17.0.2+react@17.0.2
       next-usequerystate: 1.7.2_c9e78c1ef548b95661158f8b65ef5848
-      path-to-regexp: 6.2.0
+      path-to-regexp: 6.2.1
       polished: 4.2.2
       pusher-js: 7.0.6
       react: 17.0.2
@@ -773,13 +773,13 @@ importers:
       '@emotion/is-prop-valid': ^1.1.2
       '@makepurple/tsconfig': workspace:*
       '@makepurple/typings': workspace:*
-      dayjs: ^1.11.1
+      dayjs: ^1.11.2
       react-hook-form: ^7.30.0
       typescript: ^4.6.4
     dependencies:
       '@emotion/is-prop-valid': 1.1.2
       '@makepurple/typings': link:../typings
-      dayjs: 1.11.1
+      dayjs: 1.11.2
       react-hook-form: 7.30.0
     devDependencies:
       '@makepurple/tsconfig': link:../tsconfig
@@ -8625,8 +8625,8 @@ packages:
       wonka: 4.0.15
     dev: true
 
-  /@urql/exchange-graphcache/4.3.6_graphql@16.3.0:
-    resolution: {integrity: sha512-RDEi1954lcnwBK2dwQGaxOInuebZrRliz2v7aAuQasj49N9bWYrlSkBfELG14EzOL7NI23IUaeLeaDN7MouDJg==}
+  /@urql/exchange-graphcache/4.4.0_graphql@16.3.0:
+    resolution: {integrity: sha512-vr89m7E09XLIGhksBcyrUK19+wttSzz2Ieg8Bkt5UkJ7h7YazO6marWUxwFA6n+3/R5Z5uWt5Wie8f3i+oScxg==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
@@ -9953,7 +9953,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.5_281a4fa50a045c9112baf635f3bc27a7
+      styled-components: 5.3.5
 
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
@@ -12071,8 +12071,8 @@ packages:
     resolution: {integrity: sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==}
     dev: true
 
-  /dayjs/1.11.1:
-    resolution: {integrity: sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==}
+  /dayjs/1.11.2:
+    resolution: {integrity: sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==}
     dev: false
 
   /debounce/1.2.1:
@@ -18785,8 +18785,8 @@ packages:
   /path-to-regexp/0.1.7:
     resolution: {integrity: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=}
 
-  /path-to-regexp/6.2.0:
-    resolution: {integrity: sha512-f66KywYG6+43afgE/8j/GoiNyygk/bnoCbps++3ErRKsIYkGGupyv07R2Ok5m9i67Iqc+T2g1eAUGUPzWhYTyg==}
+  /path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
     dev: false
 
   /path-type/3.0.0:
