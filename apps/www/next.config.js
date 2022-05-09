@@ -46,6 +46,9 @@ const config = {
 		CLOUDINARY_API_SECRET:     process.env.CLOUDINARY_API_SECRET,
 		CLOUDINARY_API_VARIABLE:   process.env.CLOUDINARY_API_VARIABLE,
 		CLOUDINARY_ENV:            process.env.CLOUDINARY_ENV,
+
+		UNSPLASH_API_KEY:          process.env.UNSPLASH_API_KEY,
+		UNSPLASH_SECRET_KEY:       process.env.UNSPLASH_SECRET_KEY,
 	},
 	rewrites: async () => ({
 		beforeFiles: [
