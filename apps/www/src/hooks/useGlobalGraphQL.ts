@@ -1,4 +1,4 @@
-import { useWindowFocus } from "@makepurple/hooks";
+import { useInterval, useWindowFocus } from "@makepurple/hooks";
 import ms from "ms";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -17,19 +17,13 @@ const usePollNotificationCounts = () => {
 		requestPolicy: "cache-first"
 	});
 
-	useEffect(() => {
+	useInterval(() => {
 		if (status !== "authenticated") return;
 		if (fetching) return;
 		if (!focused) return;
 
-		const timerId = setTimeout(() => {
-			reexecuteQuery({ requestPolicy: "network-only" });
-		}, ms("30s"));
-
-		return () => {
-			clearTimeout(timerId);
-		};
-	}, [fetching, focused, reexecuteQuery, status]);
+		reexecuteQuery({ requestPolicy: "network-only" });
+	}, ms("30s"));
 };
 
 const useRefreshUserGitHubData = () => {

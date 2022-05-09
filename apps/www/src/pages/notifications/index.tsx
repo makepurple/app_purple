@@ -50,7 +50,9 @@ export const getServerSideProps = pageProps;
 export const Page: NextPage<PageProps> = () => {
 	useSession({ required: true });
 
-	const [{ data: countData }] = useGetNotificationCountsQuery({ requestPolicy: "cache-first" });
+	const [{ data: countData }] = useGetNotificationCountsQuery({
+		requestPolicy: "cache-first"
+	});
 
 	const [{ data, fetching }, { getRef }] = useRelayCursor({
 		query: GetNotificationsDocument,
