@@ -1,6 +1,6 @@
 import { Button, NonIdealState, NoteIcon, Paper } from "@makepurple/components";
 import { useRelayCursor } from "@makepurple/hooks";
-import { dayjs } from "@makepurple/utils";
+import { dayjs, ManipulateType } from "@makepurple/utils";
 import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import NextLink from "next/link";
@@ -72,9 +72,12 @@ export const Page: NextPage<PageProps> = () => {
 		switch (sort) {
 			case "top": {
 				const span = criteria ?? "week";
+				const spans = ["week", "month", "year"] as const;
 
-				const gte = ["week", "month", "year"].some((range) => range === span)
-					? dayjs().subtract(1, span).toDate()
+				const gte = spans.some((range) => range === span)
+					? dayjs()
+							.subtract(1, span as ManipulateType)
+							.toDate()
 					: span === "all"
 					? undefined
 					: dayjs().subtract(1, "week").toDate();

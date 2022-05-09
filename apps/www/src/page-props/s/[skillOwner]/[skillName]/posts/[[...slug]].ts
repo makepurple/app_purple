@@ -1,4 +1,4 @@
-import { dayjs } from "@makepurple/utils";
+import { dayjs, ManipulateType } from "@makepurple/utils";
 import { InferGetServerSidePropsType } from "next";
 import { getSession } from "next-auth/react";
 import { ssrExchange } from "urql";
@@ -37,7 +37,9 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 				const span = criteria ?? "week";
 
 				const gte = ["week", "month", "year"].some((range) => range === span)
-					? dayjs().subtract(1, span).toDate()
+					? dayjs()
+							.subtract(1, span as ManipulateType)
+							.toDate()
 					: span === "all"
 					? undefined
 					: dayjs().subtract(1, "week").toDate();

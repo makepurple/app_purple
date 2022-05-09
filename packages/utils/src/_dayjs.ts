@@ -3,7 +3,7 @@ import enLocale from "dayjs/locale/en";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 
-export type { ConfigType, Dayjs } from "dayjs";
+export type { ConfigType, Dayjs, ManipulateType } from "dayjs";
 
 _dayjs.extend(relativeTime);
 _dayjs.extend(updateLocale);
