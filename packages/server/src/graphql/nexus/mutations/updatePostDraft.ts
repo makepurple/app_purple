@@ -22,7 +22,9 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 
 		return true;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma }) => {
+	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, user }) => {
+		if (!user) throw new Error();
+
 		const post = await prisma.post.findUnique({
 			where: PrismaUtils.nonNull(args.where)
 		});
@@ -147,6 +149,17 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 				},
 				where: PrismaUtils.nonNull(args.where)
 			});
+		});
+
+		await graphcdn.purge`
+			mutation($draftId: ID!, $userId: ID!) {
+				purgePost(id: $draftId)
+				purgeQuery_postDraft
+				purgeUser(id: $userId)
+			}
+		`({
+			draftId: record.id,
+			userId: user.id
 		});
 
 		return { record };

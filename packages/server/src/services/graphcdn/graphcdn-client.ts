@@ -1,7 +1,7 @@
 import { stripIndents } from "common-tags";
 
 export class GraphCDNClient {
-	public static purge(strings: TemplateStringsArray, ...exprs: any[]) {
+	public purge(strings: TemplateStringsArray, ...exprs: any[]) {
 		return async (variables?: Record<string, any>): Promise<boolean> => {
 			const apiUrl = process.env.API_URL;
 			const graphcdnToken = process.env.GRAPHCDN_API_TOKEN;

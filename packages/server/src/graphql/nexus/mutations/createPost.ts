@@ -7,11 +7,12 @@ export const createPost = mutationField("createPost", {
 		Creates a new draft if the user doesn't have a draft pending to be published already
 	`,
 	authorize: (parent, args, { user }) => !!user,
-	resolve: async (parent, args, { prisma, user }) => {
+	resolve: async (parent, args, { graphcdn, prisma, user }) => {
 		if (!user) throw Error("Unexpected Error");
 
 		const draft = await prisma.post.findFirst({
 			where: {
+				author: { id: { equals: user.id } },
 				OR: [{ publishedAt: null }, { urlSlug: "draft" }]
 			}
 		});
@@ -38,6 +39,13 @@ export const createPost = mutationField("createPost", {
 				}
 			}
 		});
+
+		await graphcdn.purge`
+			mutation($userId: ID!) {
+				purgeQuery_postDraft
+				purgeUser(id: $userId)
+			}
+		`({ userId: user.id });
 
 		return { record };
 	}
