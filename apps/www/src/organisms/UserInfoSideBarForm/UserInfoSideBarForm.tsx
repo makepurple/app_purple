@@ -1,5 +1,5 @@
 import { Form, FormButton, HiddenInput, Spinner, Tags, toast } from "@makepurple/components";
-import React, { CSSProperties, FC, SyntheticEvent, useEffect } from "react";
+import React, { CSSProperties, FC, SyntheticEvent } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
 import { useGetUserInfoSideBarQuery, useUpdateUserInfoMutation } from "../../graphql";
@@ -44,7 +44,7 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 	const user = data?.user;
 
-	const { control, handleSubmit, register, reset } = useForm<{
+	const { control, handleSubmit, register } = useForm<{
 		skills: readonly { name: string; owner: string }[];
 		desiredSkills: readonly { name: string; owner: string }[];
 	}>({
@@ -56,16 +56,6 @@ export const UserInfoSideBarForm: FC<UserInfoSideBarFormProps> = ({
 
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 	const desiredSkills = useFieldArray({ control, keyName: "_id", name: "desiredSkills" });
-
-	useEffect(() => {
-		if (process.env.NODE_ENV === "test") return;
-		if (!user) return;
-
-		reset({
-			skills: user.skills.nodes,
-			desiredSkills: user.desiredSkills.nodes
-		});
-	}, [reset, user]);
 
 	return (
 		<Form
