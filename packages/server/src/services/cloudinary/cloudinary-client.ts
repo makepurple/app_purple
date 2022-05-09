@@ -70,7 +70,7 @@ export class CloudinaryClient {
 
 	private prefixEnvironment(filePath: string): string {
 		if (process.env.CLOUDINARY_ENV) {
-			return `${process.env.CLOUDINARY_ENV}/${filePath}`;
+			return `${process.env.CLOUDINARY_ENV ?? "development"}/${filePath}`;
 		}
 
 		return filePath;
