@@ -22,7 +22,6 @@ import { PersonIcon, RepoIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 const SEO_MIN_FOLLOWERS = 100;
-const SEO_MIN_MEMBERS = 3;
 const SEO_MIN_REPOSITORIES = 6;
 
 const Repositories = tw.div`
@@ -82,7 +81,7 @@ export const Page: NextPage<PageProps> = () => {
 		if (repositories.length < SEO_MIN_REPOSITORIES) return false;
 
 		return repositoryOwner.__typename === "GitHubOrganization"
-			? repositoryOwner.memberCount >= SEO_MIN_MEMBERS
+			? true
 			: repositoryOwner.followerCount >= SEO_MIN_FOLLOWERS;
 	}, [repositories, seoData?.github.repositoryOwner]);
 

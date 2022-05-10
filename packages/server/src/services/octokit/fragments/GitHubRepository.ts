@@ -1,7 +1,7 @@
 import { gql } from "../gql";
 import { GitHubLanguage } from "./GitHubLanguage";
 import { GitHubLicense } from "./GitHubLicense";
-import { GitHubOrganization } from "./GitHubOrganizaztion";
+import { GitHubOrganization } from "./GitHubOrganization";
 import { GitHubRepositoryOwner } from "./GitHubRepositoryOwner";
 import { GitHubUser } from "./GitHubUser";
 

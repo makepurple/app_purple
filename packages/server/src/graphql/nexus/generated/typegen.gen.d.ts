@@ -1343,7 +1343,6 @@ export interface NexusGenFieldTypes {
     experiencers: NexusGenRootTypes['UserConnection']; // UserConnection!
     id: string; // String!
     login: string; // String!
-    memberCount: number; // Int!
     name: string | null; // String
     organization: NexusGenRootTypes['Organization']; // Organization!
     repositories: NexusGenRootTypes['GitHubRepositoryConnection']; // GitHubRepositoryConnection!
@@ -2472,7 +2471,6 @@ export interface NexusGenFieldTypeNames {
     experiencers: 'UserConnection'
     id: 'String'
     login: 'String'
-    memberCount: 'Int'
     name: 'String'
     organization: 'Organization'
     repositories: 'GitHubRepositoryConnection'
