@@ -138,7 +138,11 @@ const authHandler: NextApiHandler = (req, res) =>
 								// this cookie readable for all subdomains.
 								// Note that this is only relevant for the production deployment. When
 								// developing on localhost, no domain needs to be set.
-								domain: `.${process.env.NEXTAUTH_URL}`,
+								// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+								domain: `${process.env.NEXTAUTH_URL!.replace(
+									/^https?:\/\/(www\.)?/,
+									"."
+								)}`,
 								httpOnly: true,
 								path: "/",
 								sameSite: "lax",
