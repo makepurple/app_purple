@@ -84,5 +84,11 @@ query GetHomePageSkills {
 		stitches: repository(where: { name: "stitches", owner: "modulz" }) {
 			...HomePageSkillGitHubRepository
 		}
+		solana: repository(where: { name: "solana", owner: "solana-labs" }) {
+			...HomePageSkillGitHubRepository
+		}
+		web3: repository(where: { name: "web3.js", owner: "ChainSafe" }) {
+			...HomePageSkillGitHubRepository
+		}
 	}
 }
