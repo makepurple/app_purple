@@ -19,6 +19,9 @@ export const makeContext = async (params: {
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const jwt = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! });
 
+	console.log("cookies", req.cookies);
+	console.log("jwt", jwt);
+
 	return {
 		cloudinary: new CloudinaryClient(),
 		graphcdn: new GraphCDNClient(),

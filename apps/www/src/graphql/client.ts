@@ -21,12 +21,24 @@ export const URQL_STATE_PROP_NAME = "__URQL_STATE__";
  * deploy preview or similar
  */
 const getApiUrl = (isStatic?: boolean): string => {
-	// In the browser we just use a relative URL and everything works perfectly
-	if (process.browser) return "/api/graphql";
+	/**
+	 * !HACK
+	 * @description Normally, in the browser, a relative URL would work perfectly; however, with
+	 * next-auth in production, and hitting GraphCDN via a subdomain, we need to use the same
+	 * API_URL if available.
+	 * @author David Lee
+	 * @date May 9, 2022
+	 */
+	if (process.browser) {
+		return process.env.API_URL
+			? `https://${process.env.API_URL.replace(/^https?:\/\//, "")}/api/graphql`
+			: "/api/graphql";
+	}
 
 	/**
 	 * @description
 	 * Infer the deploy URL if we're in production
+	 * API_URL is for hitting GraphCDN if provided
 	 * VERCEL_URL = Vercel, DEPLOY_URL = Netlify
 	 *
 	 * If this is run for a static page (isStatic = true), use the hosted api, because the local
@@ -34,11 +46,11 @@ const getApiUrl = (isStatic?: boolean): string => {
 	 * @author David Lee
 	 * @date April 17, 2022
 	 */
-	const PROVIDER_URL = isStatic
+	const providerUrl = isStatic
 		? process.env.API_URL_STATIC_BUILD
 		: process.env.API_URL || process.env.VERCEL_URL || process.env.DEPLOY_URL;
 
-	if (PROVIDER_URL) {
+	if (providerUrl) {
 		/**
 		 * !HACK
 		 * @description
@@ -46,7 +58,7 @@ const getApiUrl = (isStatic?: boolean): string => {
 		 * always at the beginning as the above environment variables are not
 		 * guaranteed to include it
 		 */
-		return `https://${PROVIDER_URL.replace(/^https?:\/\//, "")}/api/graphql`;
+		return `https://${providerUrl.replace(/^https?:\/\//, "")}/api/graphql`;
 	}
 
 	// Finally, fallback to hard-coded URL in case nothing else works
