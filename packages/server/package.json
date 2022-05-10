@@ -16,8 +16,8 @@
 	},
 	"dependencies": {
 		"@devoxa/prisma-relay-cursor-connection": "^2.1.0",
-		"@graphql-tools/batch-execute": "^8.4.6",
-		"@graphql-tools/utils": "^8.6.9",
+		"@graphql-tools/batch-execute": "^8.4.7",
+		"@graphql-tools/utils": "^8.6.10",
 		"@makepurple/typings": "workspace:*",
 		"@makepurple/utils": "workspace:*",
 		"@makepurple/validators": "workspace:*",
@@ -57,8 +57,8 @@
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^2.6.2",
-		"@graphql-codegen/typescript": "^2.4.10",
-		"@graphql-codegen/typescript-operations": "^2.3.7",
+		"@graphql-codegen/typescript": "^2.4.11",
+		"@graphql-codegen/typescript-operations": "^2.4.0",
 		"@makepurple/tsconfig": "workspace:*",
 		"cross-env": "^7.0.3",
 		"dotenv-cli": "^5.1.0",
