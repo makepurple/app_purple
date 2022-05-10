@@ -23,6 +23,6 @@
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
-		"graphql": "16.3.0"
+		"graphql": "16.5.0"
 	}
 }

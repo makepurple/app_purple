@@ -69,7 +69,7 @@
 		"chromatic": "^6.5.4",
 		"csstype": "^3.0.11",
 		"customize-cra": "^1.0.0",
-		"graphql": "16.3.0",
+		"graphql": "16.5.0",
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^27.5.1",
 		"jest-fetch-mock": "^3.0.3",
