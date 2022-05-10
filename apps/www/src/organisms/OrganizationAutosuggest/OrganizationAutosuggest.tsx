@@ -80,7 +80,11 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 			async ({ inputValue }) => {
 				const login = inputValue?.toLowerCase();
 
-				if (!login) return;
+				if (!login) {
+					setOrganizations([]);
+
+					return;
+				}
 
 				const nodes = await urqlClient
 					.query<SuggestOrganizationsQuery, SuggestOrganizationsQueryVariables>(
@@ -91,8 +95,6 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 					.then((result) => {
 						return result.data?.suggestOrganizations.nodes ?? [];
 					});
-
-				if (!nodes.length) return;
 
 				setOrganizations(nodes.slice());
 			},
