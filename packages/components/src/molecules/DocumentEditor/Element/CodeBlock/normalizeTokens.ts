@@ -1,5 +1,4 @@
 import type { Token } from "prismjs";
-import Prism from "prismjs";
 
 /**
  * !HACK
