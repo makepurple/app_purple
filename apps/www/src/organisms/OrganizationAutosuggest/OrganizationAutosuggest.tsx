@@ -85,10 +85,7 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 				const nodes = await urqlClient
 					.query<SuggestOrganizationsQuery, SuggestOrganizationsQueryVariables>(
 						SuggestOrganizationsDocument,
-						{
-							first: 3,
-							where: { name: login }
-						}
+						{ first: 5, where: { name: login } }
 					)
 					.toPromise()
 					.then((result) => {
