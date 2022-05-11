@@ -79,38 +79,38 @@ export const Page: NextPage<PageProps> = () => {
 	return (
 		<Root size="small">
 			<Seo title="Notifications" />
-			<Content>
-				<Title>
-					{unopenedCount
-						? `You have ${unopenedCount.toLocaleString()} new notifications`
-						: "Notifications"}
-				</Title>
-				<Notifications tw="mt-6">
-					{!notifications.length
-						? !fetching && (
-								<NonIdealState
-									title="There's nothing here"
-									subTitle="You don't have any notifications yet"
-									tw="shadow-none"
-								>
-									<SearchIcon height={96} width={96} />
-								</NonIdealState>
-						  )
-						: notifications.map((notification, i) => (
-								<Fragment key={notification.id}>
-									{!!i && <Divider />}
-									<NotificationCard ref={getRef(i)} notification={notification} />
-								</Fragment>
-						  ))}
-					{fetching &&
-						Array.from({ length: 3 }, (_, i) => (
-							<Fragment key={i}>
-								{(!!i || !!notifications.length) && <Divider />}
-								<LoadingNotificationCard />
+			{!notifications.length && !fetching ? (
+				<NonIdealState
+					title="There's nothing here"
+					subTitle="You don't have any notifications yet"
+					tw="shadow-none"
+				>
+					<SearchIcon height={96} width={96} />
+				</NonIdealState>
+			) : (
+				<Content>
+					<Title>
+						{unopenedCount
+							? `You have ${unopenedCount.toLocaleString()} new notifications`
+							: "Notifications"}
+					</Title>
+					<Notifications tw="mt-6">
+						{notifications.map((notification, i) => (
+							<Fragment key={notification.id}>
+								{!!i && <Divider />}
+								<NotificationCard ref={getRef(i)} notification={notification} />
 							</Fragment>
 						))}
-				</Notifications>
-			</Content>
+						{fetching &&
+							Array.from({ length: 3 }, (_, i) => (
+								<Fragment key={i}>
+									{(!!i || !!notifications.length) && <Divider />}
+									<LoadingNotificationCard />
+								</Fragment>
+							))}
+					</Notifications>
+				</Content>
+			)}
 		</Root>
 	);
 };
