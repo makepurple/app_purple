@@ -10,11 +10,17 @@ export class UnsplashClient {
 	});
 
 	public async getRandom(params: RandomParams = {}): Promise<Random[]> {
-		const { count = 1, orientation = "landscape", ...restParams } = params;
+		const {
+			count = 1,
+			orientation = "landscape",
+			query = "programming",
+			...restParams
+		} = params;
 
 		const response = await this.api.photos.getRandom({
 			count: MathUtils.clamp(count, [1, 20]),
 			orientation,
+			query,
 			...restParams
 		});
 

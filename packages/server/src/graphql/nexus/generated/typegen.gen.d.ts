@@ -1,4 +1,5 @@
 import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
+import type * as Unsplash from "unsplash-js/dist/methods/photos/types";
 import type { octokit } from "../../../services";
 
 import type { ServerContext as ctx } from "./../../context"
@@ -829,6 +830,20 @@ export interface NexusGenObjects {
   UnfollowUserPayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
     record?: NexusGenRootTypes['User'] | null; // User
+  }
+  UnsplashImage: Unsplash.Random;
+  UnsplashImageUrls: { // root type
+    full: string; // String!
+    id: string; // String!
+    raw: string; // String!
+    regular: string; // String!
+    small: string; // String!
+    thumb: string; // String!
+  }
+  UnsplashUser: { // root type
+    id: string; // String!
+    name: string; // String!
+    username: string; // String!
   }
   UnvoteCodeExamplePayload: { // root type
     errors?: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -1782,6 +1797,28 @@ export interface NexusGenFieldTypes {
     query: NexusGenRootTypes['Query']; // Query!
     record: NexusGenRootTypes['User'] | null; // User
     viewer: NexusGenRootTypes['User'] | null; // User
+  }
+  UnsplashImage: { // field return type
+    height: number; // Int!
+    id: string; // String!
+    unsplashUrl: string; // String!
+    urls: NexusGenRootTypes['UnsplashImageUrls']; // UnsplashImageUrls!
+    user: NexusGenRootTypes['UnsplashUser']; // UnsplashUser!
+    userUrl: string; // String!
+    width: number; // Int!
+  }
+  UnsplashImageUrls: { // field return type
+    full: string; // String!
+    id: string; // String!
+    raw: string; // String!
+    regular: string; // String!
+    small: string; // String!
+    thumb: string; // String!
+  }
+  UnsplashUser: { // field return type
+    id: string; // String!
+    name: string; // String!
+    username: string; // String!
   }
   UnvoteCodeExamplePayload: { // field return type
     errors: NexusGenRootTypes['MutationError'][] | null; // [MutationError!]
@@ -2910,6 +2947,28 @@ export interface NexusGenFieldTypeNames {
     query: 'Query'
     record: 'User'
     viewer: 'User'
+  }
+  UnsplashImage: { // field return type name
+    height: 'Int'
+    id: 'String'
+    unsplashUrl: 'String'
+    urls: 'UnsplashImageUrls'
+    user: 'UnsplashUser'
+    userUrl: 'String'
+    width: 'Int'
+  }
+  UnsplashImageUrls: { // field return type name
+    full: 'String'
+    id: 'String'
+    raw: 'String'
+    regular: 'String'
+    small: 'String'
+    thumb: 'String'
+  }
+  UnsplashUser: { // field return type name
+    id: 'String'
+    name: 'String'
+    username: 'String'
   }
   UnvoteCodeExamplePayload: { // field return type name
     errors: 'MutationError'

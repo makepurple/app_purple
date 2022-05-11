@@ -33,6 +33,7 @@ const _schema = makeSchema({
 		headers: [
 			stripIndents`
 				import type { FileUpload } from "@apollographql/graphql-upload-8-fork";
+				import type * as Unsplash from "unsplash-js/dist/methods/photos/types";
 				import type { octokit } from "../../../services";
 			`
 		],

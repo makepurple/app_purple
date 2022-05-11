@@ -1446,6 +1446,39 @@ type UnfollowUserPayload implements MutationPayload {
   viewer: User
 }
 
+type UnsplashImage {
+  height: Int!
+  id: String!
+
+  """
+  This is the backlink to Unsplash to satisfy their attribution requirements [here](https://help.unsplash.com/en/articles/2511315-guideline-attribution)
+  """
+  unsplashUrl: String!
+  urls: UnsplashImageUrls!
+  user: UnsplashUser!
+
+  """
+  This is the backlink to the photographer's Unsplash page to satisfy their attribution requirements [here](https://help.unsplash.com/en/articles/2511315-guideline-attribution)
+  """
+  userUrl: String!
+  width: Int!
+}
+
+type UnsplashImageUrls {
+  full: String!
+  id: String!
+  raw: String!
+  regular: String!
+  small: String!
+  thumb: String!
+}
+
+type UnsplashUser {
+  id: String!
+  name: String!
+  username: String!
+}
+
 type UnvoteCodeExamplePayload implements MutationPayload {
   errors: [MutationError!]
   query: Query!
