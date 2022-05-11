@@ -21,13 +21,13 @@ const Root = styled(HUIMenu)`
 `;
 
 Root.displayName = "Menu";
-Root.defaultProps = {
+(Root as any).defaultProps = {
 	forwardedAs: "div"
 };
 
 export type MenuProps = InferComponentProps<typeof Menu>;
 
-export const Menu = ObjectUtils.setStatic(Root, {
+export const Menu = ObjectUtils.setStatic(Root as any, {
 	Button: MenuButton,
 	Item: MenuItem,
 	Items: MenuItems

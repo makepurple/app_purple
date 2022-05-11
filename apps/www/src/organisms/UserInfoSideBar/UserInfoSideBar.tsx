@@ -315,7 +315,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 						{isMyUser && mode !== "editing" && (
 							<Actions tw="mt-4">
 								<NewPostButton>
-									{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+									{({ draft }) => (draft ? <>Edit Draft</> : <>New Post</>)}
 								</NewPostButton>
 								<Button
 									onClick={() => {

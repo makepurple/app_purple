@@ -471,7 +471,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 			</SocialLinks>
 			<Actions tw="mt-4">
 				<NewPostButton skillName={skillName} skillOwner={skillOwner}>
-					{({ draft }) => (draft ? "Edit Draft" : "New Post")}
+					{({ draft }) => (draft ? <>Edit Draft</> : <>New Post</>)}
 				</NewPostButton>
 				<Button
 					disabled={loading}

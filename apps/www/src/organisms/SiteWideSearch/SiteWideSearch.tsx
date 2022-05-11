@@ -1,5 +1,10 @@
 import { ComboBox, Popover } from "@makepurple/components";
-import { useComboBoxState, useLockBodyScroll, useOnKeyDown } from "@makepurple/hooks";
+import {
+	useComboBoxState,
+	UseComboboxStateChange,
+	useLockBodyScroll,
+	useOnKeyDown
+} from "@makepurple/hooks";
 import composeRefs from "@seznam/compose-react-refs";
 import ms from "ms";
 import { useSession } from "next-auth/react";
@@ -85,7 +90,9 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			itemToString: (item) => item?.name ?? item?.login ?? "",
 			debounce: ms("0.3s"),
 			onInputValueChange: useCallback(
-				async ({ inputValue }) => {
+				async ({
+					inputValue
+				}: UseComboboxStateChange<SuggestSkillOwnersGitHubRepositoryOwnerFragment>) => {
 					if (status !== "authenticated") return;
 
 					ownerPopper.forceUpdate?.();
@@ -133,7 +140,9 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 			itemToString: (item) => item?.name ?? "",
 			debounce: ms("0.3s"),
 			onInputValueChange: useCallback(
-				async ({ inputValue }) => {
+				async ({
+					inputValue
+				}: UseComboboxStateChange<RepositorySearchResultGitHubRepositoryFragment>) => {
 					if (status !== "authenticated") return;
 
 					skillPopper.forceUpdate?.();

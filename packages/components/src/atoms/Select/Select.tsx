@@ -21,13 +21,13 @@ const _Select = styled(Listbox)`
 `;
 
 _Select.displayName = "Select";
-_Select.defaultProps = {
+(_Select as any).defaultProps = {
 	forwardedAs: "div"
 };
 
-export type SelectProps = InferComponentProps<typeof Listbox>;
+export type SelectProps = InferComponentProps<typeof Listbox> & InferComponentProps<"div">;
 
-export const Select = ObjectUtils.setStatic(_Select, {
+export const Select = ObjectUtils.setStatic(_Select as typeof Listbox, {
 	Button: SelectButton,
 	Option: SelectOption,
 	Options: SelectOptions

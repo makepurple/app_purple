@@ -10,7 +10,7 @@ export type TabListProps = InferComponentProps<typeof Tab["List"]> & {
 };
 
 export const TabList = styled(Tab.List).attrs<TabListProps>(({ children, id }) => ({
-	children: <LayoutGroup id={id}>{children}</LayoutGroup>
+	children: <LayoutGroup id={id}>{children as any}</LayoutGroup>
 }))<TabListProps>`
 	${tw`
 		grid

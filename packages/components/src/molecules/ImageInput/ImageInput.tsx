@@ -82,7 +82,9 @@ export const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>((props, 
 			render={({ field }: any) => {
 				return (
 					<Dropzone
-						accept={["image/gif", "image/jpeg", "image/jpg", "image/png", "image/webp"]}
+						accept={{
+							"image/*": [".gif", ".jpeg", ".jpg", ".png", ".webp"]
+						}}
 						multiple={false}
 						onDrop={(acceptedFiles) => {
 							const acceptedFile = acceptedFiles[0] ?? null;

@@ -24,7 +24,7 @@ class CustomDocument extends NextDocument {
 						{initialProps.styles}
 						{sheet.getStyleElement()}
 					</>
-				)
+				) as any
 			};
 		} finally {
 			sheet.seal();

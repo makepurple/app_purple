@@ -1,5 +1,5 @@
 import { Avatar, ComboBox, GitHubAvatarImage } from "@makepurple/components";
-import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
+import { useComboBoxState, UseComboboxStateChange, useOnKeyDown } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, useCallback, useMemo, useState } from "react";
 import tw from "twin.macro";
@@ -77,7 +77,9 @@ export const OrganizationAutosuggest: FC<OrganizationAutosuggestProps> = ({
 		items: organizations,
 		itemToString: (item) => item?.name ?? item?.login ?? "",
 		onInputValueChange: useCallback(
-			async ({ inputValue }) => {
+			async ({
+				inputValue
+			}: UseComboboxStateChange<OrganizationSearchResultGitHubOrganizationFragment>) => {
 				const login = inputValue?.toLowerCase();
 
 				if (!login) {

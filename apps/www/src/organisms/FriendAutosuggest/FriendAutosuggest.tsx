@@ -1,5 +1,5 @@
 import { ComboBox, Tags } from "@makepurple/components";
-import { useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
+import { useComboBoxState, UseComboboxStateChange, useOnKeyDown } from "@makepurple/hooks";
 import ms from "ms";
 import React, { CSSProperties, FC, useCallback, useState } from "react";
 import tw from "twin.macro";
@@ -61,7 +61,7 @@ export const FriendAutosuggest: FC<FriendAutosuggestProps> = ({
 		items: friendItems,
 		itemToString: (item) => item?.name ?? "",
 		onInputValueChange: useCallback(
-			async ({ inputValue }) => {
+			async ({ inputValue }: UseComboboxStateChange<UserSearchResultGitHubUserFragment>) => {
 				const suggestions = await getFriendAutosuggestItems(inputValue);
 
 				setFriendItems(suggestions);

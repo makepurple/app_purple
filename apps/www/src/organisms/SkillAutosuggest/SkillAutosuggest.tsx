@@ -1,5 +1,10 @@
 import { ComboBox, Tags } from "@makepurple/components";
-import { UseComboBoxState, useComboBoxState, useOnKeyDown } from "@makepurple/hooks";
+import {
+	UseComboBoxState,
+	useComboBoxState,
+	UseComboboxStateChange,
+	useOnKeyDown
+} from "@makepurple/hooks";
 import ms from "ms";
 import React, {
 	CSSProperties,
@@ -75,7 +80,9 @@ export const SkillAutosuggest = forwardRef<
 		items: skillItems,
 		itemToString: (item) => item?.name ?? "",
 		onInputValueChange: useCallback(
-			async ({ inputValue }) => {
+			async ({
+				inputValue
+			}: UseComboboxStateChange<RepositorySearchResultGitHubRepositoryFragment>) => {
 				const suggestions = await getSkillAutosuggestItems(inputValue);
 
 				setSkillItems(suggestions.slice());

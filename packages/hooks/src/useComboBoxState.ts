@@ -8,6 +8,8 @@ import {
 } from "downshift";
 import { useCallback, useMemo, useState } from "react";
 
+export type { UseComboboxStateChange } from "downshift";
+
 export type UseComboBoxProps<T> = UseComboboxProps<T> & {
 	debounce?: number;
 };
