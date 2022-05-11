@@ -41,6 +41,7 @@ export * from "./PostPublishInput";
 export * from "./PostUpdateInput";
 export * from "./PostWhereInput";
 export * from "./PostWhereUniqueInput";
+export * from "./RandomUnsplashImageWhereInput";
 export * from "./RepositoryCreateInput";
 export * from "./RepositoryNameOwnerCompoundUniqueInput";
 export * from "./RepositoryUpdateInput";

@@ -1130,6 +1130,7 @@ type Query {
 
   """Relay-style connection on Post types."""
   posts(after: String, before: String, first: Int, last: Int, orderBy: [PostOrderByInput!], where: PostWhereInput): PostConnection!
+  randomUnsplashImages(limit: Int, where: RandomUnsplashImageWhereInput): [UnsplashImage!]!
   repositories(after: String, before: String, first: Int, last: Int, where: RepositoryWhereInput): RepositoryConnection!
   skill(where: SkillWhereUniqueInput!): Skill
 
@@ -1143,6 +1144,10 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: [UserOrderByInput!], where: UserWhereInput): UserConnection!
   viewer: User
+}
+
+input RandomUnsplashImageWhereInput {
+  query: String
 }
 
 type RejectFriendshipPayload implements MutationPayload {

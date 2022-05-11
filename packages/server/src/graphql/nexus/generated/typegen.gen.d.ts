@@ -280,6 +280,9 @@ export interface NexusGenInputs {
     authorName_urlSlug?: NexusGenInputs['PostAuthorNameUrlSlugCompoundUniqueInput'] | null; // PostAuthorNameUrlSlugCompoundUniqueInput
     id?: string | null; // String
   }
+  RandomUnsplashImageWhereInput: { // input type
+    query?: string | null; // String
+  }
   RepositoryCreateInput: { // input type
     name: string; // String!
   }
@@ -1647,6 +1650,7 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Post'] | null; // Post
     postDraft: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
+    randomUnsplashImages: NexusGenRootTypes['UnsplashImage'][]; // [UnsplashImage!]!
     repositories: NexusGenRootTypes['RepositoryConnection']; // RepositoryConnection!
     skill: NexusGenRootTypes['Skill'] | null; // Skill
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
@@ -2797,6 +2801,7 @@ export interface NexusGenFieldTypeNames {
     post: 'Post'
     postDraft: 'Post'
     posts: 'PostConnection'
+    randomUnsplashImages: 'UnsplashImage'
     repositories: 'RepositoryConnection'
     skill: 'Skill'
     skills: 'SkillConnection'
@@ -3708,6 +3713,10 @@ export interface NexusGenArgTypes {
       last?: number | null; // Int
       orderBy?: NexusGenInputs['PostOrderByInput'][] | null; // [PostOrderByInput!]
       where?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
+    }
+    randomUnsplashImages: { // args
+      limit?: number | null; // Int
+      where?: NexusGenInputs['RandomUnsplashImageWhereInput'] | null; // RandomUnsplashImageWhereInput
     }
     repositories: { // args
       after?: string | null; // String
