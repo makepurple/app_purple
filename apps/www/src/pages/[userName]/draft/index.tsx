@@ -21,7 +21,6 @@ import { PostDraftUpdateInput } from "@makepurple/validators";
 import type { Type } from "computed-types";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import NextImage from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -34,8 +33,6 @@ import {
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
-	PostImageInput,
-	RemovePostThumbnailButton,
 	Seo,
 	SkillAutosuggest
 } from "../../../organisms";
@@ -58,28 +55,6 @@ const Content = tw(Paper)`
 	flex-col
 	p-4
 	sm:p-6
-`;
-
-const AddCoverImageButton = tw(PostImageInput)`
-	w-52
-	mb-10
-`;
-
-const ThumbnailPreviewContainer = tw.div`
-	flex
-	flex-wrap
-	items-center
-	gap-4
-	mb-10
-`;
-
-const ThumbnailPreview = tw(Paper)`
-	relative
-	rounded-xl
-	h-36
-	w-full
-	sm:width[20rem]
-	overflow-hidden
 `;
 
 const FormActions = tw.div`
@@ -154,9 +129,7 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors, isDirty },
 		handleSubmit,
 		register,
-		setError,
-		setValue,
-		watch
+		setError
 	} = useForm<Type<typeof PostDraftUpdateInput>>({
 		defaultValues: {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
@@ -178,13 +151,6 @@ export const Page: NextPage<PageProps> = () => {
 	useBeforeUnload(isDirty, "You have unsaved changes, are you sure you want to leave?");
 
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
-
-	const thumbnailUrl = watch("thumbnailUrl");
-
-	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		router?.prefetch("/[username]/[postTitle]");
-	}, [router]);
 
 	useEffect(() => {
 		updateErrors?.forEach((error) => {
@@ -214,43 +180,12 @@ export const Page: NextPage<PageProps> = () => {
 		});
 	}, [publishErrors, setError]);
 
-	/**
-	 * TODO
-	 * @description Handle case where no post is found.
-	 * @author David Lee
-	 * @date October 31, 2021
-	 */
 	if (!post) return null;
 
 	return (
 		<Root>
 			<Seo title="Post Draft" />
 			<Content>
-				{!thumbnailUrl ? (
-					<AddCoverImageButton
-						disabled={publishing || saving}
-						onUpload={(newThumbnailUrl) => {
-							setValue("thumbnailUrl", newThumbnailUrl);
-						}}
-						postId={post.id}
-					>
-						Add a cover image
-					</AddCoverImageButton>
-				) : (
-					<ThumbnailPreviewContainer>
-						<ThumbnailPreview>
-							<NextImage
-								alt="thumbnail preview"
-								src={thumbnailUrl}
-								layout="fill"
-								objectFit="cover"
-							/>
-						</ThumbnailPreview>
-						<RemovePostThumbnailButton disabled={publishing || saving} postId={post.id}>
-							Remove image
-						</RemovePostThumbnailButton>
-					</ThumbnailPreviewContainer>
-				)}
 				<Form
 					disabled={publishing || saving}
 					onSubmit={handleSubmit(async (formData) => {

@@ -21,7 +21,6 @@ import { PostUpdateInput } from "@makepurple/validators";
 import { Type } from "computed-types";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import NextImage from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef } from "react";
@@ -31,8 +30,6 @@ import { useGetPostQuery, useUpdatePostMutation } from "../../../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
-	PostImageInput,
-	RemovePostThumbnailButton,
 	Seo,
 	SkillAutosuggest
 } from "../../../../organisms";
@@ -55,28 +52,6 @@ const Content = tw(Paper)`
 	flex-col
 	p-4
 	sm:p-6
-`;
-
-const AddCoverImageButton = tw(PostImageInput)`
-	w-52
-	mb-10
-`;
-
-const ThumbnailPreviewContainer = tw.div`
-	flex
-	flex-wrap
-	items-center
-	gap-4
-	mb-10
-`;
-
-const ThumbnailPreview = tw(Paper)`
-	relative
-	rounded-xl
-	h-36
-	w-full
-	sm:width[20rem]
-	overflow-hidden
 `;
 
 const StyledDocumentEditor = tw(DocumentEditor)`
@@ -128,8 +103,6 @@ export const Page: NextPage<PageProps> = () => {
 
 	const updateErrors = updateData?.updatePost.errors;
 
-	const updating: boolean = false;
-
 	const post = data?.post;
 
 	const defaultSkills = useMemo(() => {
@@ -146,9 +119,7 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors, isDirty },
 		handleSubmit,
 		register,
-		setError,
-		setValue,
-		watch
+		setError
 	} = useForm<Type<typeof PostUpdateInput>>({
 		defaultValues: {
 			thumbnailUrl: post?.thumbnailUrl ?? "",
@@ -168,8 +139,6 @@ export const Page: NextPage<PageProps> = () => {
 
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
-	const thumbnailUrl = watch("thumbnailUrl");
-
 	useEffect(() => {
 		updateErrors?.forEach((error) => {
 			switch (error.__typename) {
@@ -188,37 +157,6 @@ export const Page: NextPage<PageProps> = () => {
 		<Root>
 			<Seo title={`Editing: ${post.title}`} />
 			<Content>
-				{!thumbnailUrl ? (
-					<AddCoverImageButton
-						disabled={updating}
-						onUpload={(newThumbnailUrl) => {
-							setValue("thumbnailUrl", newThumbnailUrl);
-						}}
-						postId={post.id}
-					>
-						Add a cover image
-					</AddCoverImageButton>
-				) : (
-					<ThumbnailPreviewContainer>
-						<ThumbnailPreview>
-							<NextImage
-								alt="thumbnail preview"
-								src={thumbnailUrl}
-								layout="fill"
-								objectFit="cover"
-							/>
-						</ThumbnailPreview>
-						<RemovePostThumbnailButton
-							disabled={updating}
-							onCompleted={() => {
-								setValue("thumbnailUrl", "");
-							}}
-							postId={post.id}
-						>
-							Remove image
-						</RemovePostThumbnailButton>
-					</ThumbnailPreviewContainer>
-				)}
 				<Form
 					disabled={saving}
 					onSubmit={handleSubmit(async (formData) => {
