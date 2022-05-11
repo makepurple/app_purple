@@ -1688,6 +1688,7 @@ export type Query = {
   readonly postDraft?: Maybe<Post>;
   /** Relay-style connection on Post types. */
   readonly posts: PostConnection;
+  readonly randomUnsplashImages: ReadonlyArray<UnsplashImage>;
   readonly repositories: RepositoryConnection;
   readonly skill?: Maybe<Skill>;
   /** Relay-style connection on Skill types. */
@@ -1799,6 +1800,13 @@ export type QueryPostsArgs = {
 
 
 /** Root query type */
+export type QueryRandomUnsplashImagesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RandomUnsplashImageWhereInput>;
+};
+
+
+/** Root query type */
 export type QueryRepositoriesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -1875,6 +1883,10 @@ export type QueryUsersArgs = {
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<ReadonlyArray<UserOrderByInput>>;
   where?: InputMaybe<UserWhereInput>;
+};
+
+export type RandomUnsplashImageWhereInput = {
+  readonly query?: InputMaybe<Scalars['String']>;
 };
 
 export type RejectFriendshipPayload = MutationPayload & {
@@ -2230,6 +2242,36 @@ export type UnfollowUserPayload = MutationPayload & {
   readonly query: Query;
   readonly record?: Maybe<User>;
   readonly viewer?: Maybe<User>;
+};
+
+export type UnsplashImage = {
+  readonly __typename: 'UnsplashImage';
+  readonly height: Scalars['Int'];
+  readonly id: Scalars['String'];
+  /** This is the backlink to Unsplash to satisfy their attribution requirements [here](https://help.unsplash.com/en/articles/2511315-guideline-attribution) */
+  readonly unsplashUrl: Scalars['String'];
+  readonly urls: UnsplashImageUrls;
+  readonly user: UnsplashUser;
+  /** This is the backlink to the photographer's Unsplash page to satisfy their attribution requirements [here](https://help.unsplash.com/en/articles/2511315-guideline-attribution) */
+  readonly userUrl: Scalars['String'];
+  readonly width: Scalars['Int'];
+};
+
+export type UnsplashImageUrls = {
+  readonly __typename: 'UnsplashImageUrls';
+  readonly full: Scalars['String'];
+  readonly id: Scalars['String'];
+  readonly raw: Scalars['String'];
+  readonly regular: Scalars['String'];
+  readonly small: Scalars['String'];
+  readonly thumb: Scalars['String'];
+};
+
+export type UnsplashUser = {
+  readonly __typename: 'UnsplashUser';
+  readonly id: Scalars['String'];
+  readonly name: Scalars['String'];
+  readonly username: Scalars['String'];
 };
 
 export type UnvoteCodeExamplePayload = MutationPayload & {
