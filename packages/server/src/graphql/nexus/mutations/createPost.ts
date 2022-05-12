@@ -36,7 +36,13 @@ export const createPost = mutationField("createPost", {
 					connect: {
 						id: user.id
 					}
-				}
+				},
+				content: [
+					{
+						type: "paragraph",
+						children: [{ text: "" }]
+					}
+				]
 			}
 		});
 
