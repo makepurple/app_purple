@@ -28,7 +28,7 @@ export const CodeToolbarButton: FC<Record<string, never>> = () => {
 };
 
 export const Code = tw.code`
-	p-1
+	p-0.5
 	border
 	border-solid
 	border-gray-200
@@ -43,7 +43,7 @@ export const wrapLeafCode: WrapLeafWithType = (props) => {
 	if (!leaf.code) return { children, leaf };
 
 	return {
-		children: <Code>{children}</Code>,
+		children: <Code spellCheck={false}>{children}</Code>,
 		leaf
 	};
 };
