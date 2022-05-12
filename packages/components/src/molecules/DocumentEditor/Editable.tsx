@@ -72,6 +72,13 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 
 		const readOnly = _readOnly ?? context.readOnly;
 
+		const onTabKey = useOnKeyDown({ key: "TAB" }, (e) => {
+			if (e.shiftKey) return;
+
+			e.preventDefault();
+
+			editor.insertText("\t");
+		});
 		const onRightKey = useOnKeyDown({ key: "RIGHT" }, () => undefined);
 		const onEnterKey = useOnKeyDown({ key: "ENTER" }, (e) => {
 			const isCode = Object.values(CodeBlockType).some((codeType) =>
@@ -167,6 +174,7 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 					 * @date January 1, 2021
 					 */
 					onKeyDown={(e) => {
+						if (onTabKey(e)) return 1;
 						if (onRightKey(e)) return 1;
 
 						onEnterKey(e);
