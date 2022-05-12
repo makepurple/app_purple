@@ -43,7 +43,7 @@
 		"graphql-scalars": "^1.17.0",
 		"graphql-upload": "^13.0.0",
 		"ioredis": "^5.0.4",
-		"isbot": "^3.4.6",
+		"isbot": "^3.4.7",
 		"micro": "^9.3.4",
 		"next": "^12.1.6",
 		"next-auth": "^4.3.4",

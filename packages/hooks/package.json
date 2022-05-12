@@ -8,7 +8,7 @@
 	"dependencies": {
 		"@makepurple/typings": "workspace:*",
 		"@makepurple/utils": "workspace:*",
-		"@react-hookz/web": "^13.3.0",
+		"@react-hookz/web": "^14.0.0",
 		"@types/react": "^18.0.9",
 		"@types/react-dom": "^18.0.3",
 		"downshift": "^6.1.7",
