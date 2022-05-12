@@ -246,6 +246,11 @@ export const Page: NextPage<PageProps> = () => {
 									onChange={(newContent) => onChange(newContent)}
 								>
 									<DocumentEditor.Info ref={infoRef} />
+									<DocumentEditor.Editable
+										name={name}
+										placeholder="Tell the class things you've learned..."
+										aria-label="content"
+									/>
 									<DocumentEditor.Toolbar>
 										<DocumentEditor.Toolbar.CodeBlock />
 										<DocumentEditor.Toolbar.Heading />
@@ -259,11 +264,6 @@ export const Page: NextPage<PageProps> = () => {
 										<DocumentEditor.Toolbar.Link />
 										<DocumentEditorPostImageButton postId={post.id} />
 									</DocumentEditor.Toolbar>
-									<DocumentEditor.Editable
-										name={name}
-										placeholder="Tell the class things you've learned..."
-										aria-label="content"
-									/>
 								</StyledDocumentEditor>
 							)}
 						/>
