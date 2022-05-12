@@ -5,14 +5,14 @@ import copyToClipboard from "copy-to-clipboard";
 import React, { FC, Fragment, useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
-import { Descendant, Text as SlateText, Transforms } from "slate";
+import { Descendant, Editor, Text as SlateText, Transforms } from "slate";
 import { ReactEditor, RenderElementProps, useReadOnly, useSlateStatic } from "slate-react";
 import tw from "twin.macro";
 import { ListItem, toast } from "../../../../atoms";
 import { CodeSquareIcon, CopyIcon, XIcon } from "../../../../svgs";
 import { CodeBlockTheme } from "../../../CodeBlock";
 import { useInsertBlock } from "../../hooks/useInsertBlock";
-import { useIsBlockActive } from "../../hooks/useIsBlockActive";
+import { isBlockActive } from "../../hooks/useIsBlockActive";
 import { useToggleBlock } from "../../hooks/useToggleBlock";
 import { ToolbarButton } from "../../Shared";
 
@@ -96,7 +96,42 @@ const LanguageItems = tw.div`
 	z-10
 `;
 
+const isCodeBlockActive = (editor: Editor) => {
+	const isActive =
+		isBlockActive(editor, CodeBlockType.Go) ||
+		isBlockActive(editor, CodeBlockType.GraphQL) ||
+		isBlockActive(editor, CodeBlockType.HTML) ||
+		isBlockActive(editor, CodeBlockType.JavaScript) ||
+		isBlockActive(editor, CodeBlockType.Python) ||
+		isBlockActive(editor, CodeBlockType.SCSS) ||
+		isBlockActive(editor, CodeBlockType.SQL) ||
+		isBlockActive(editor, CodeBlockType.TypeScript) ||
+		isBlockActive(editor, CodeBlockType.YAML);
+
+	return isActive;
+};
+
+export const withCodeBlock = (editor: Editor): Editor => {
+	const { insertData, insertText } = editor;
+
+	editor.insertData = (data) => {
+		const text = data.getData("text/plain");
+
+		if (!text || !isCodeBlockActive(editor)) {
+			insertData(data);
+
+			return;
+		}
+
+		insertText(text);
+	};
+
+	return editor;
+};
+
 export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
+	const editor = useSlateStatic();
+
 	const insertBlock = useInsertBlock();
 	const toggleBlock = useToggleBlock();
 
@@ -106,25 +141,12 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 		placement: "bottom-start"
 	});
 
-	const isActive = useIsBlockActive();
-
-	const isCodeBlockActive =
-		isActive(CodeBlockType.Go) ||
-		isActive(CodeBlockType.GraphQL) ||
-		isActive(CodeBlockType.HTML) ||
-		isActive(CodeBlockType.JavaScript) ||
-		isActive(CodeBlockType.Python) ||
-		isActive(CodeBlockType.SCSS) ||
-		isActive(CodeBlockType.SQL) ||
-		isActive(CodeBlockType.TypeScript) ||
-		isActive(CodeBlockType.YAML);
-
 	return (
 		<Menu as={Fragment}>
 			<Menu.Button
 				as={ToolbarButton}
 				ref={referenceRef}
-				active={isCodeBlockActive}
+				active={isCodeBlockActive(editor)}
 				title="code block"
 				aria-label="code block"
 			>
@@ -155,7 +177,7 @@ export const CodeBlockToolbarButton: FC<Record<string, never>> = () => {
 
 											toggleBlock(slateType);
 										}}
-										selected={isActive(slateType)}
+										selected={isBlockActive(editor, slateType)}
 									>
 										{name}
 									</ListItem>
