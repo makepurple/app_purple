@@ -20,6 +20,9 @@ import {
 import { PageProps, pageProps } from "../../page-props/[userName]";
 import { CodeIcon, HexagonIcon, NoteIcon, RepoIcon } from "../../svgs";
 
+const MAX_CODE_EXAMPLES = 2;
+const MAX_EXPERIENCES = 3;
+const MAX_REPOSITORIES = 2;
 const SEO_MIN_EXPERIENCES = 1;
 const SEO_MIN_CODE_EXAMPLES = 2;
 const SEO_MIN_REPOSITORIES = 2;
@@ -115,12 +118,22 @@ export const Page: NextPage<PageProps> = () => {
 		[skills]
 	);
 
+	const codeExamples = useMemo(
+		() => user?.codeExamples.nodes.slice(0, MAX_CODE_EXAMPLES) ?? [],
+		[user?.codeExamples.nodes]
+	);
+	const experiences = useMemo(
+		() => user?.experiences.nodes.slice(0, MAX_EXPERIENCES) ?? [],
+		[user?.experiences.nodes]
+	);
+	const repositories = useMemo(
+		() => user?.repositories.nodes.slice(0, MAX_REPOSITORIES) ?? [],
+		[user?.repositories.nodes]
+	);
+
 	if (!user) return null;
 
 	const post = user.posts.nodes[0] ?? null;
-	const codeExamples = user.codeExamples.nodes ?? [];
-	const experiences = user.experiences.nodes ?? [];
-	const repositories = user.repositories.nodes ?? [];
 
 	const shouldIndex =
 		!!post &&
