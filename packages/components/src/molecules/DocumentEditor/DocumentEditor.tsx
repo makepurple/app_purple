@@ -13,7 +13,7 @@ import { DocumentEditorInfo } from "./DocumentEditorInfo";
 import { DocumentEditorEditable } from "./Editable";
 import { CustomElement, withImages, withLinks } from "./Element";
 import { CustomText } from "./Leaf";
-import { withKeyCommands } from "./plugins";
+import { withKeyCommands, withTabCharacters } from "./plugins";
 import { DocumentEditorToolbar } from "./Toolbar";
 
 const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean }>`
@@ -90,7 +90,8 @@ const _DocumentEditor = forwardRef<HTMLDivElement, DocumentEditorProps>((props, 
 			withHistory,
 			withLinks,
 			withImages,
-			withKeyCommands
+			withKeyCommands,
+			withTabCharacters
 		);
 
 		return composed(createEditor());

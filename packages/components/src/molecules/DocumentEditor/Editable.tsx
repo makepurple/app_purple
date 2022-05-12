@@ -77,7 +77,7 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 
 			e.preventDefault();
 
-			editor.insertText("\t");
+			editor.insertText("    ");
 		});
 		const onRightKey = useOnKeyDown({ key: "RIGHT" }, () => undefined);
 		const onEnterKey = useOnKeyDown({ key: "ENTER" }, (e) => {
