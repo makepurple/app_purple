@@ -9,7 +9,8 @@ import { ToolbarButton } from "../Shared";
 
 const Root = tw.ul`
 	list-disc
-	list-inside
+	list-outside
+	ml-8
 `;
 
 export type BulletedListSlateType = "bulleted-list";

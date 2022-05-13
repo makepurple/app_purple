@@ -9,7 +9,8 @@ import { ToolbarButton } from "../Shared";
 
 const Root = tw.ol`
 	list-decimal
-	list-inside
+	list-outside
+	ml-8
 `;
 
 export type NumberedListSlateType = "numbered-list";
