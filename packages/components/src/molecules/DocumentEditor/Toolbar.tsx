@@ -29,6 +29,7 @@ const Root = tw(Toolbar)`
 	p-1
 	shadow-none
 	border-0
+	border-t
 	border-b
 	border-solid
 	border-gray-200
