@@ -205,7 +205,7 @@ export const CodeBlock: FC<RenderElementProps> = (props) => {
 	const deleteSelf = useCallback(() => {
 		const path = ReactEditor.findPath(editor, element);
 
-		Transforms.removeNodes(editor, { at: path });
+		Transforms.setNodes(editor, { type: "paragraph", children: [{ text: "" }] }, { at: path });
 	}, [editor, element]);
 
 	return (

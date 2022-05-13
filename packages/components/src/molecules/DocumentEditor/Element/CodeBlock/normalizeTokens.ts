@@ -3,7 +3,7 @@ import type { Token } from "prismjs";
 /**
  * !HACK
  * @description This module was mostly forked from prism-react-renderer for the sake of feature
- * and render pairity.
+ * and render pairity. It is absolutely shit. Good luck deciphering this.
  * @author David Lee
  * @date April 3, 2022
  */
@@ -15,20 +15,6 @@ export type NormalizedToken = {
 };
 
 const newlineRe = /\r\n|\r|\n/;
-
-// Empty lines need to contain a single empty token, denoted with { empty: true }
-const normalizeEmptyLines = (line: NormalizedToken[]) => {
-	if (line.length === 0) {
-		line.push({
-			types: ["plain"],
-			content: "\n",
-			empty: true
-		});
-	} else if (line.length === 1 && line[0].content === "") {
-		line[0].content = "\n";
-		line[0].empty = true;
-	}
-};
 
 const appendTypes = (types: string[], add: string[] | string): string[] => {
 	const typesSize = types.length;
@@ -96,9 +82,11 @@ export const normalizeTokens = (tokens: (Token | string)[]): NormalizedToken[][]
 
 			// Create a new line for each string on a new line
 			for (let j = 1; j < newlineCount; j++) {
-				normalizeEmptyLines(currentLine);
 				acc.push((currentLine = []));
-				currentLine.push({ types, content: splitByNewlines[i] });
+				currentLine.push({
+					types,
+					content: splitByNewlines[j]
+				});
 			}
 		}
 
@@ -110,6 +98,5 @@ export const normalizeTokens = (tokens: (Token | string)[]): NormalizedToken[][]
 		tokenArrSizeStack.pop();
 	}
 
-	normalizeEmptyLines(currentLine);
 	return acc;
 };

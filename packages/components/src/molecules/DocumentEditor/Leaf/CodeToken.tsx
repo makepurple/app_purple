@@ -25,23 +25,16 @@ const themeToDict = () => {
 };
 
 const getStyleForToken = (token: NormalizedToken) => {
-	const { types, empty } = token;
+	const { types } = token;
 	const themeDict = themeToDict();
 
 	if (types.length === 1) {
-		if (types[0] === "plain") {
-			return empty ? { display: "inline-block" } : undefined;
-		}
-
-		if (!empty) {
-			return themeDict[types[0]];
-		}
+		return types[0] === "plain" ? undefined : themeDict[types[0]];
 	}
 
-	const baseStyle = empty ? { display: "inline-block" } : {};
 	const typeStyles = types.map((type) => themeDict[type]);
 
-	return Object.assign(baseStyle, ...typeStyles);
+	return Object.assign({}, ...typeStyles);
 };
 
 export const wrapLeafCodeToken = (props: RenderLeafProps) => {

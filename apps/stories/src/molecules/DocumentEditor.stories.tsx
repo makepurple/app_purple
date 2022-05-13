@@ -184,11 +184,7 @@ const Template: Story<DocumentEditorProps> = (args) => {
 		},
 		{
 			type: "paragraph",
-			children: [
-				{
-					text: ""
-				}
-			]
+			children: [{ text: "" }]
 		},
 		{
 			type: "block-quote",
@@ -200,11 +196,7 @@ const Template: Story<DocumentEditorProps> = (args) => {
 		},
 		{
 			type: "paragraph",
-			children: [
-				{
-					text: ""
-				}
-			]
+			children: [{ text: "" }]
 		},
 		{
 			type: "paragraph",
@@ -227,39 +219,23 @@ const Template: Story<DocumentEditorProps> = (args) => {
 		{
 			type: "paragraph",
 			children: [
-				{
-					text: ""
-				},
+				{ text: "" },
 				{
 					type: "link",
 					url: "https://google.com",
-					children: [
-						{
-							text: "google"
-						}
-					]
+					children: [{ text: "google" }]
 				},
-				{
-					text: ""
-				}
+				{ text: "" }
 			]
 		},
 		{
 			type: "paragraph",
-			children: [
-				{
-					text: ""
-				}
-			]
+			children: [{ text: "" }]
 		},
 		{
 			type: "image",
 			url: "https://github.githubassets.com/images/mona-loading-dark.gif",
-			children: [
-				{
-					text: ""
-				}
-			]
+			children: [{ text: "" }]
 		}
 	]);
 
@@ -363,6 +339,159 @@ export const JustLink: Story<DocumentEditorProps> = (args) => {
 	);
 };
 JustLink.args = {
+	disabled: false,
+	error: false,
+	readOnly: false
+};
+
+export const WithTypeScript: Story<DocumentEditorProps> = (args) => {
+	const [value, setValue] = useState<any>([
+		{
+			type: "language-tsx",
+			children: [
+				{
+					text: "const GET_POSTS = gql`\n    query GetPosts {\n        posts {\n            id\n            title\n        }\n    }\n`;\n\nuseQuery({\n    query: GET_POSTS\n});"
+				}
+			]
+		}
+	]);
+
+	return (
+		<>
+			<DocumentEditor
+				disabled={args.disabled}
+				error={args.error}
+				readOnly={args.readOnly}
+				value={value}
+				onChange={(newValue) => setValue(newValue)}
+			>
+				<DocumentEditor.Toolbar>
+					<DocumentEditor.Toolbar.CodeBlock />
+					<DocumentEditor.Toolbar.Heading />
+					<DocumentEditor.Toolbar.Bold />
+					<DocumentEditor.Toolbar.Italic />
+					<DocumentEditor.Toolbar.Underline />
+					<DocumentEditor.Toolbar.BulletedList />
+					<DocumentEditor.Toolbar.NumbedList />
+					<DocumentEditor.Toolbar.BlockQuote />
+					<DocumentEditor.Toolbar.Code />
+					<DocumentEditor.Toolbar.Link />
+					<DocumentEditor.Toolbar.Image />
+				</DocumentEditor.Toolbar>
+				<DocumentEditor.Editable
+					name="storybook textarea"
+					aria-label="Storybook-textarea"
+				/>
+			</DocumentEditor>
+			<pre style={{ fontSize: 12, whiteSpace: "pre-wrap" }}>
+				{JSON.stringify(value, null, 2)}
+			</pre>
+		</>
+	);
+};
+WithTypeScript.args = {
+	disabled: false,
+	error: false,
+	readOnly: false
+};
+
+export const WithGraphQL: Story<DocumentEditorProps> = (args) => {
+	const [value, setValue] = useState<any>([
+		{
+			type: "language-graphql",
+			children: [
+				{
+					text: "input PostWhereUniqueInput {\n    id: ID\n}\n\ninput PostCreateInput {}"
+				}
+			]
+		}
+	]);
+
+	return (
+		<>
+			<DocumentEditor
+				disabled={args.disabled}
+				error={args.error}
+				readOnly={args.readOnly}
+				value={value}
+				onChange={(newValue) => setValue(newValue)}
+			>
+				<DocumentEditor.Toolbar>
+					<DocumentEditor.Toolbar.CodeBlock />
+					<DocumentEditor.Toolbar.Heading />
+					<DocumentEditor.Toolbar.Bold />
+					<DocumentEditor.Toolbar.Italic />
+					<DocumentEditor.Toolbar.Underline />
+					<DocumentEditor.Toolbar.BulletedList />
+					<DocumentEditor.Toolbar.NumbedList />
+					<DocumentEditor.Toolbar.BlockQuote />
+					<DocumentEditor.Toolbar.Code />
+					<DocumentEditor.Toolbar.Link />
+					<DocumentEditor.Toolbar.Image />
+				</DocumentEditor.Toolbar>
+				<DocumentEditor.Editable
+					name="storybook textarea"
+					aria-label="Storybook-textarea"
+				/>
+			</DocumentEditor>
+			<pre style={{ fontSize: 12, whiteSpace: "pre-wrap" }}>
+				{JSON.stringify(value, null, 2)}
+			</pre>
+		</>
+	);
+};
+WithGraphQL.args = {
+	disabled: false,
+	error: false,
+	readOnly: false
+};
+
+export const WithMultiLineCodeBlock: Story<DocumentEditorProps> = (args) => {
+	const [value, setValue] = useState<any>([
+		{
+			type: "language-tsx",
+			children: [
+				{
+					text: "const GET_POSTS = gql`\n\n\ntest\n\nasdf asdf\n`;"
+				}
+			]
+		}
+	]);
+
+	return (
+		<>
+			<DocumentEditor
+				disabled={args.disabled}
+				error={args.error}
+				readOnly={args.readOnly}
+				value={value}
+				onChange={(newValue) => setValue(newValue)}
+			>
+				<DocumentEditor.Toolbar>
+					<DocumentEditor.Toolbar.CodeBlock />
+					<DocumentEditor.Toolbar.Heading />
+					<DocumentEditor.Toolbar.Bold />
+					<DocumentEditor.Toolbar.Italic />
+					<DocumentEditor.Toolbar.Underline />
+					<DocumentEditor.Toolbar.BulletedList />
+					<DocumentEditor.Toolbar.NumbedList />
+					<DocumentEditor.Toolbar.BlockQuote />
+					<DocumentEditor.Toolbar.Code />
+					<DocumentEditor.Toolbar.Link />
+					<DocumentEditor.Toolbar.Image />
+				</DocumentEditor.Toolbar>
+				<DocumentEditor.Editable
+					name="storybook textarea"
+					aria-label="Storybook-textarea"
+				/>
+			</DocumentEditor>
+			<pre style={{ fontSize: 12, whiteSpace: "pre-wrap" }}>
+				{JSON.stringify(value, null, 2)}
+			</pre>
+		</>
+	);
+};
+WithMultiLineCodeBlock.args = {
 	disabled: false,
 	error: false,
 	readOnly: false

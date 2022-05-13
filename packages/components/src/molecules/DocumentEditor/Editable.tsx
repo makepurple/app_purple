@@ -147,6 +147,8 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 								const length = codeToken.content?.length ?? 1;
 								const end = start + length;
 
+								if (start === end) return;
+
 								const leaf = {
 									codeToken,
 									anchor: { path, offset: start },
@@ -157,6 +159,19 @@ const _DocumentEditorEditable = forwardRef<HTMLDivElement, DocumentEditorEditabl
 
 								ranges.push(leaf);
 							});
+
+							const newlineLeaf = {
+								codeToken: {
+									content: "\n",
+									types: codeLine[0].types
+								},
+								anchor: { path, offset: start },
+								focus: { path, offset: start + 1 }
+							};
+
+							ranges.push(newlineLeaf);
+
+							start = start + 1;
 						});
 
 						return ranges;
