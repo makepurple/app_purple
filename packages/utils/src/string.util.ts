@@ -40,6 +40,7 @@ export class StringUtils {
 		const urlSlug: string = name
 			.split(/\s+/g)
 			.map((word) => word.replace(/[^a-z0-9]/gim, ""))
+			.map((word) => word.toLocaleLowerCase())
 			.join("-")
 			.replace(/(-)+/g, "-")
 			.replace(/(^-)|(-$)/g, "")
