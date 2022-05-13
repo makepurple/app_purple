@@ -143,7 +143,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const {
 		control,
-		formState: { errors, isDirty, isSubmitted, isValid },
+		formState: { errors, isDirty, isSubmitting, isSubmitted, isValid },
 		handleSubmit,
 		register,
 		reset,
@@ -171,7 +171,12 @@ export const Page: NextPage<PageProps> = () => {
 		resolver: computedTypesResolver(CodeExampleUpdateInput)
 	});
 
-	useBeforeUnload(isDirty, "You have unsaved changes, are you sure you want to leave?");
+	const submitting = isSubmitting || isSubmitted;
+
+	useBeforeUnload(
+		isDirty && !submitting,
+		"You have unsaved changes, are you sure you want to leave?"
+	);
 
 	useEffect(() => {
 		reset({

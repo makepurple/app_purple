@@ -121,7 +121,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const {
 		control,
-		formState: { errors, isDirty, isSubmitted, isValid },
+		formState: { errors, isDirty, isSubmitting, isSubmitted, isValid },
 		handleSubmit,
 		register,
 		setError,
@@ -144,7 +144,12 @@ export const Page: NextPage<PageProps> = () => {
 		resolver: computedTypesResolver(CodeExampleCreateInput)
 	});
 
-	useBeforeUnload(isDirty, "You have unsaved changes, are you sure you want to leave?");
+	const submitting = isSubmitting || isSubmitted;
+
+	useBeforeUnload(
+		isDirty && !submitting,
+		"You have unsaved changes, are you sure you want to leave?"
+	);
 
 	const primarySkill = watch("primarySkill.name_owner");
 	const language = watch("language");

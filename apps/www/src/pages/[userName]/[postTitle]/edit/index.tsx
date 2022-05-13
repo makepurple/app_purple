@@ -116,7 +116,7 @@ export const Page: NextPage<PageProps> = () => {
 
 	const {
 		control,
-		formState: { errors, isDirty },
+		formState: { errors, isDirty, isSubmitting, isSubmitted },
 		handleSubmit,
 		register,
 		setError
@@ -135,7 +135,12 @@ export const Page: NextPage<PageProps> = () => {
 		resolver: computedTypesResolver(PostUpdateInput)
 	});
 
-	useBeforeUnload(isDirty, "You have unsaved changes, are you sure you want to leave?");
+	const submitting = isSubmitting || isSubmitted;
+
+	useBeforeUnload(
+		isDirty && !submitting,
+		"You have unsaved changes, are you sure you want to leave?"
+	);
 
 	const skills = useFieldArray({ control, keyName: "_id", name: "skills" });
 
