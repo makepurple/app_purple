@@ -15,6 +15,19 @@ export const viewPost = mutationField("viewPost", {
 
 		if (!post) throw new Error("This post could not be found");
 
+		if (user) {
+			const record = await prisma.postViewer
+				.findFirst({
+					where: {
+						post: { id: { equals: post.id } },
+						user: { id: user.id }
+					}
+				})
+				.post();
+
+			if (record) return { record };
+		}
+
 		const record = await prisma.postViewer
 			.upsert({
 				where: {
