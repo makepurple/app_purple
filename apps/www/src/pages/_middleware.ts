@@ -12,10 +12,11 @@ const middleware: NextMiddleware = async (req: NextRequest) => {
 
 	const jwt = await getToken({ req });
 
-	const response =
-		jwt && pathname === "/"
-			? NextResponse.rewrite(NextUtils.getUrl(req, "/feed"))
-			: NextResponse.next();
+	const feedUrl = NextUtils.getUrl(req, "/feed");
+
+	console.log(jwt, pathname, feedUrl);
+
+	const response = jwt && pathname === "/" ? NextResponse.rewrite(feedUrl) : NextResponse.next();
 
 	const ContentSecurityPolicy = `
 		default-src 'self';
