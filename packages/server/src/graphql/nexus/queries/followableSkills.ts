@@ -1,4 +1,4 @@
-import { Skill } from "@prisma/client";
+import { Prisma, Skill } from "@prisma/client";
 import { oneLine } from "common-tags";
 import { arg, intArg, list, nonNull, queryField, stringArg } from "nexus";
 import { PrismaUtils } from "../../../utils";
@@ -17,31 +17,26 @@ export const followableSkills = queryField("followableSkills", {
 		where: arg({ type: "SkillWhereInput" })
 	},
 	resolve: async (parent, args, { prisma, user }) => {
+		const where: Prisma.SkillWhereInput = {
+			...PrismaUtils.nonNull(args.where),
+			...(user ? { users: { none: { id: { equals: user.id } } } } : {}),
+			/**
+			 * @description Only get skills for which there is at least 1 user,
+			 * desiring user or post.
+			 * @author David Lee
+			 * @date January 15, 2022
+			 */
+			OR: [{ users: { some: {} } }, { desiringUsers: { some: {} } }, { posts: { some: {} } }]
+		};
+
 		const connection = await PrismaUtils.findManyCursorConnection<Skill, { id: string }>(
 			(paginationArgs) =>
 				prisma.skill.findMany({
 					...paginationArgs,
 					orderBy: PrismaUtils.nonNull(args.orderBy),
-					where: {
-						...PrismaUtils.nonNull(args.where),
-						...(user ? { users: { none: { id: { equals: user.id } } } } : {}),
-						/**
-						 * @description Only get skills for which there is at least 1 user,
-						 * desiring user or post.
-						 * @author David Lee
-						 * @date January 15, 2022
-						 */
-						AND: {
-							OR: [
-								{ users: { some: {} } },
-								{ desiringUsers: { some: {} } },
-								{ posts: { some: {} } }
-							],
-							...PrismaUtils.nonNull(args.where)?.AND
-						}
-					}
+					where
 				}),
-			() => prisma.skill.count({ where: PrismaUtils.nonNull(args.where) }),
+			() => prisma.skill.count({ where }),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 			{ ...PrismaUtils.handleRelayCursor() }
 		);
