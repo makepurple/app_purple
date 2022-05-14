@@ -50,7 +50,7 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 	style
 }) => {
 	const [{ data }] = useGetFollowableSkillsQuery({
-		requestPolicy: "cache-first"
+		requestPolicy: "cache-and-network"
 	});
 
 	const skills = useMemo(() => data?.followableSkills.nodes.slice(0, MAX_SKILLS) ?? [], [data]);

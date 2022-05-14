@@ -3,6 +3,7 @@ fragment ActivityFeedFollowableSkillCardSkill on Skill {
 	github {
 		id
 		owner {
+			__typename
 			id
 			avatarUrl
 		}
