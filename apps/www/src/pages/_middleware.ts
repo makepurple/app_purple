@@ -2,16 +2,17 @@ import { isEuMember } from "is-eu-member";
 import ms from "ms";
 import type { NextMiddleware, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { NextUtils } from "../utils";
 
 const GDPR_COOKIE_MAX_AGE_SECONDS = ms("1y") / 1_000;
 
 const middleware: NextMiddleware = (req: NextRequest) => {
 	const { pathname } = req.nextUrl;
 
+	if (pathname === "/") return NextResponse.rewrite("https://www.makepurple.com/feed");
+
 	const response =
 		pathname === "/"
-			? NextResponse.rewrite(NextUtils.getUrl(req, "/feed"))
+			? NextResponse.rewrite("https://www.makepurple.com/feed")
 			: NextResponse.next();
 
 	const ContentSecurityPolicy = `
