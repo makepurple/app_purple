@@ -1,18 +1,20 @@
 import { isEuMember } from "is-eu-member";
 import ms from "ms";
+import { getToken } from "next-auth/jwt";
 import type { NextMiddleware, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { NextUtils } from "../utils";
 
 const GDPR_COOKIE_MAX_AGE_SECONDS = ms("1y") / 1_000;
 
-const middleware: NextMiddleware = (req: NextRequest) => {
+const middleware: NextMiddleware = async (req: NextRequest) => {
 	const { pathname } = req.nextUrl;
 
-	if (pathname === "/") return NextResponse.rewrite("https://www.makepurple.com/feed");
+	const jwt = await getToken({ req });
 
 	const response =
-		pathname === "/"
-			? NextResponse.rewrite("https://www.makepurple.com/feed")
+		jwt && pathname === "/"
+			? NextResponse.redirect(NextUtils.getUrl(req, "/feed"))
 			: NextResponse.next();
 
 	const ContentSecurityPolicy = `
