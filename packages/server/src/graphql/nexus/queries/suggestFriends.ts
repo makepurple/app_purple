@@ -41,12 +41,12 @@ export const suggestFriends = queryField("suggestFriends", {
 
 		if (!user) {
 			const where: Prisma.UserWhereInput = {
-				desiredSkills: {
-					some: PrismaUtils.nonNull(args.where.desiredSkills)
-				},
-				skills: {
-					some: PrismaUtils.nonNull(args.where.skills)
-				}
+				...(args.where.desiredSkills
+					? { desiredSkills: { some: PrismaUtils.nonNull(args.where.desiredSkills) } }
+					: {}),
+				...(args.where.skills
+					? { skills: { some: PrismaUtils.nonNull(args.where.skills) } }
+					: {})
 			};
 
 			const connection = PrismaUtils.findManyCursorConnection<User, { id: string }>(
@@ -110,12 +110,12 @@ export const suggestFriends = queryField("suggestFriends", {
 					]
 				}
 			},
-			desiredSkills: {
-				some: PrismaUtils.nonNull(args.where.desiredSkills)
-			},
-			skills: {
-				some: PrismaUtils.nonNull(args.where.skills)
-			},
+			...(args.where.desiredSkills
+				? { desiredSkills: { some: PrismaUtils.nonNull(args.where.desiredSkills) } }
+				: {}),
+			...(args.where.skills
+				? { skills: { some: PrismaUtils.nonNull(args.where.skills) } }
+				: {}),
 			...(suggestBySkill
 				? {
 						AND: [
