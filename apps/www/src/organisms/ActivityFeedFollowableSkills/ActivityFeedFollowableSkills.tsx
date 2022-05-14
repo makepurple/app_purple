@@ -50,15 +50,10 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 	style
 }) => {
 	const [{ data }] = useGetFollowableSkillsQuery({
-		requestPolicy: "cache-and-network"
+		requestPolicy: "cache-first"
 	});
 
-	const skills = useMemo(
-		() => data?.followableSkills.nodes.slice(0, MAX_SKILLS) ?? [],
-		[data?.followableSkills.nodes]
-	);
-
-	console.log(data, skills);
+	const skills = useMemo(() => data?.followableSkills.nodes.slice(0, MAX_SKILLS) ?? [], [data]);
 
 	return (
 		<Root className={className} style={style}>
