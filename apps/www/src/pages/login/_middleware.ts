@@ -3,7 +3,7 @@ import { NextMiddleware, NextResponse } from "next/server";
 import { NextUtils } from "../../utils";
 
 const middleware: NextMiddleware = async (req) => {
-	const jwt = await getToken({ req: req as any });
+	const jwt = await getToken({ req });
 
 	if (!jwt) return NextResponse.next();
 

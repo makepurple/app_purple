@@ -1,14 +1,20 @@
 import { isEuMember } from "is-eu-member";
 import ms from "ms";
+import { getToken } from "next-auth/jwt";
 import type { NextMiddleware, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { NextUtils } from "../utils";
 
 const GDPR_COOKIE_MAX_AGE_SECONDS = ms("1y") / 1_000;
 
-const middleware: NextMiddleware = (req: NextRequest) => {
+const middleware: NextMiddleware = async (req: NextRequest) => {
 	const { pathname } = req.nextUrl;
 
-	const response = NextResponse.next();
+	const jwt = await getToken({ req });
+
+	const response = jwt
+		? NextResponse.redirect(NextUtils.getUrl(req, "/feed"))
+		: NextResponse.next();
 
 	const ContentSecurityPolicy = `
 		default-src 'self';
