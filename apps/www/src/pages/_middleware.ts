@@ -14,7 +14,7 @@ const middleware: NextMiddleware = async (req: NextRequest) => {
 
 	const response =
 		jwt && pathname === "/"
-			? NextResponse.redirect(NextUtils.getUrl(req, "/feed"))
+			? NextResponse.rewrite(NextUtils.getUrl(req, "/feed"))
 			: NextResponse.next();
 
 	const ContentSecurityPolicy = `
