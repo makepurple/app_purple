@@ -58,7 +58,7 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 		[data?.followableSkills.nodes]
 	);
 
-	console.log(skills);
+	console.log(data, skills);
 
 	return (
 		<Root className={className} style={style}>
