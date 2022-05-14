@@ -24,7 +24,7 @@ export const followableSkills = queryField("followableSkills", {
 					orderBy: PrismaUtils.nonNull(args.orderBy),
 					where: {
 						...PrismaUtils.nonNull(args.where),
-						...(user ? { some: { id: { equals: user.id } } } : {}),
+						...(user ? { users: { none: { id: { equals: user.id } } } } : {}),
 						/**
 						 * @description Only get skills for which there is at least 1 user,
 						 * desiring user or post.
