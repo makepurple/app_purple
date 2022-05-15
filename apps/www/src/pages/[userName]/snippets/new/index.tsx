@@ -422,7 +422,7 @@ export const Page: NextPage<PageProps> = () => {
 					<FormActions>
 						<FormButton type="submit" variant="primary">
 							<span>Save</span>
-							<Spinner tw="ml-2" />
+							{fetching && <Spinner tw="ml-2" />}
 						</FormButton>
 					</FormActions>
 				</Form>
