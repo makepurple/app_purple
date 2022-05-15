@@ -1,5 +1,5 @@
 import { GetFollowableSkillsQuery } from "../../generated";
-import { Skill_fragment_mock } from "../fragments";
+import { PageInfo_fragment_mock, Skill_fragment_mock } from "../fragments";
 
 const DATA_SIZE = 20;
 
@@ -12,6 +12,7 @@ export const GetFollowableSkills_mock: GetFollowableSkillsQuery = {
 	__typename: "Query",
 	followableSkills: {
 		__typename: "SkillConnection",
+		pageInfo: PageInfo_fragment_mock,
 		edges: skills.map((skill, i) => ({
 			__typename: "SkillEdge",
 			cursor: `${i}`,

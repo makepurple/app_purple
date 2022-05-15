@@ -8,6 +8,9 @@ query GetFollowableSkills {
 		]
 	) {
 		__typename
+		pageInfo {
+			...PageInfoFragment
+		}
 		edges {
 			cursor
 			node {
