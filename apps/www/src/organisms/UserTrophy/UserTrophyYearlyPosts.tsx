@@ -19,37 +19,37 @@ export const UserTrophyYearlyPosts: FC<UserTrophyYearlyPostsProps> = ({
 				{
 					achievement: "God Poster",
 					rank: TrophyRank.SSS,
-					score: 36
+					score: 30
 				},
 				{
 					achievement: "Deep Poster",
 					rank: TrophyRank.SS,
-					score: 28
+					score: 22
 				},
 				{
 					achievement: "Super Poster",
 					rank: TrophyRank.S,
-					score: 21
+					score: 16
 				},
 				{
 					achievement: "Ultra Poster",
 					rank: TrophyRank.AAA,
-					score: 15
+					score: 11
 				},
 				{
 					achievement: "Super Poster",
 					rank: TrophyRank.AA,
-					score: 10
+					score: 7
 				},
 				{
 					achievement: "High Poster",
 					rank: TrophyRank.A,
-					score: 6
+					score: 4
 				},
 				{
 					achievement: "Middle Poster",
 					rank: TrophyRank.B,
-					score: 3
+					score: 2
 				},
 				{
 					achievement: "First Post",

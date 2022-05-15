@@ -15,37 +15,37 @@ export const UserTrophySkills: FC<UserTrophySkillsProps> = ({ className, style, 
 				{
 					achievement: "Master of all",
 					rank: TrophyRank.SSS,
-					score: 36
+					score: 30
 				},
 				{
 					achievement: "Jack of all Trades",
 					rank: TrophyRank.SS,
-					score: 28
+					score: 22
 				},
 				{
 					achievement: "Mega Skilled",
 					rank: TrophyRank.S,
-					score: 21
+					score: 16
 				},
 				{
 					achievement: "Ultra Skilled",
 					rank: TrophyRank.AAA,
-					score: 15
+					score: 11
 				},
 				{
 					achievement: "Super Skilled",
 					rank: TrophyRank.AA,
-					score: 10
+					score: 7
 				},
 				{
 					achievement: "Highly Skilled",
 					rank: TrophyRank.A,
-					score: 6
+					score: 4
 				},
 				{
 					achievement: "Many Skills",
 					rank: TrophyRank.B,
-					score: 3
+					score: 2
 				},
 				{
 					achievement: "First Skill",
