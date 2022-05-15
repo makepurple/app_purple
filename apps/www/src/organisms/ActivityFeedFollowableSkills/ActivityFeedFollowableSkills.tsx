@@ -53,7 +53,10 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 		requestPolicy: "cache-first"
 	});
 
-	const skills = useMemo(() => data?.followableSkills.nodes.slice(0, MAX_SKILLS) ?? [], [data]);
+	const skills = useMemo(
+		() => data?.followableSkills.nodes.slice(0, MAX_SKILLS) ?? [],
+		[data?.followableSkills.nodes]
+	);
 
 	return (
 		<Root className={className} style={style}>
