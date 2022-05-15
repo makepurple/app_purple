@@ -1,9 +1,9 @@
 import { computedTypesResolver } from "@hookform/resolvers/computed-types";
 import {
 	Avatar,
-	Button,
 	CodeBlockInput,
 	Form,
+	FormButton,
 	FormGroup,
 	FormHelperText,
 	FormLabel,
@@ -11,6 +11,7 @@ import {
 	HiddenInput,
 	Input,
 	Paper,
+	Spinner,
 	Tags,
 	TextArea,
 	toast
@@ -92,7 +93,7 @@ const RepositoryDescription = tw.p`
 	text-gray-500
 `;
 
-const RepositoryRemove = tw(Button)`
+const RepositoryRemove = tw(FormButton)`
 	flex-shrink-0
 	h-8
 	w-8
@@ -419,9 +420,10 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={errors.content?.message} />
 					</FormGroup>
 					<FormActions>
-						<Button type="submit" variant="primary">
-							Save
-						</Button>
+						<FormButton type="submit" variant="primary">
+							<span>Save</span>
+							<Spinner tw="ml-2" />
+						</FormButton>
 					</FormActions>
 				</Form>
 			</Content>
