@@ -75,6 +75,7 @@ export const Skill_fragment_mock: Omit<Skill, "github"> & {
 		edges: [],
 		nodes: []
 	},
+	usersCount: 0,
 	viewerDesiredSkill: false,
 	viewerFollowing: true,
 	viewerSkill: false

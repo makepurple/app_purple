@@ -1740,6 +1740,7 @@ export interface NexusGenFieldTypes {
     owner: string; // String!
     posts: NexusGenRootTypes['PostConnection']; // PostConnection!
     users: NexusGenRootTypes['UserConnection']; // UserConnection!
+    usersCount: number; // Int!
     viewerDesiredSkill: boolean; // Boolean!
     viewerFollowing: boolean; // Boolean!
     viewerSkill: boolean; // Boolean!
@@ -2891,6 +2892,7 @@ export interface NexusGenFieldTypeNames {
     owner: 'String'
     posts: 'PostConnection'
     users: 'UserConnection'
+    usersCount: 'Int'
     viewerDesiredSkill: 'Boolean'
     viewerFollowing: 'Boolean'
     viewerSkill: 'Boolean'

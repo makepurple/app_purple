@@ -85,7 +85,7 @@ export const ActivityFeedFollowableSkillCard: FC<ActivityFeedFollowableSkillCard
 	style
 }) => {
 	const owner = skill.github.owner;
-	const userCount = skill.users.totalCount;
+	const userCount = skill.usersCount;
 
 	const router = useRouter();
 

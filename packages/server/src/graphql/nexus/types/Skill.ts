@@ -258,6 +258,17 @@ export const Skill = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("usersCount", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.skill
+					.findUnique({
+						where: { id: parent.id },
+						rejectOnNotFound: true,
+						select: { _count: { select: { users: true } } }
+					})
+					.then((result) => result._count.users);
+			}
+		});
 		t.nonNull.boolean("viewerDesiredSkill", {
 			resolve: async (parent, args, { prisma, user }) => {
 				if (!user) return false;

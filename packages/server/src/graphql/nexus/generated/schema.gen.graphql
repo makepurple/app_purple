@@ -1275,6 +1275,7 @@ type Skill implements Followable & Node & WithGitHubRepository {
   owner: String!
   posts(after: String, before: String, first: Int, last: Int, where: PostWhereInput): PostConnection!
   users(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
+  usersCount: Int!
   viewerDesiredSkill: Boolean!
   viewerFollowing: Boolean!
   viewerSkill: Boolean!

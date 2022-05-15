@@ -10,8 +10,6 @@ fragment ActivityFeedFollowableSkillCardSkill on Skill {
 	}
 	name
 	owner
-	users {
-		totalCount
-	}
+	usersCount
 	viewerFollowing
 }
