@@ -12,14 +12,12 @@ export const createCache = (): Exchange => {
 			GitHubUserContributionCalendar: () => null,
 			GitHubUserContributionCalendarDay: () => null,
 			GitHubUserContributionCalendarWeek: () => null,
-			SkillConnection: () => null,
 			SuggestOrganizations: () => null,
 			SuggestRepositories: () => null,
 			SuggestSkillOwners: () => null,
 			SuggestSkills: () => null,
 			TopLanguages: () => null,
-			TopLanguage: () => null,
-			UserConnection: () => null
+			TopLanguage: () => null
 		},
 		resolvers: {
 			Comment: {
@@ -32,6 +30,7 @@ export const createCache = (): Exchange => {
 				activityFeed: relayPagination(),
 				comments: relayPagination(),
 				experiences: relayPagination(),
+				followableSkills: relayPagination(),
 				repositories: relayPagination(),
 				posts: relayPagination(),
 				skills: relayPagination(),
