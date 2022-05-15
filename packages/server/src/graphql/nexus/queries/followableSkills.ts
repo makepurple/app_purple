@@ -19,7 +19,7 @@ export const followableSkills = queryField("followableSkills", {
 	resolve: async (parent, args, { prisma, user }) => {
 		const where: Prisma.SkillWhereInput = {
 			...PrismaUtils.nonNull(args.where),
-			...(user ? { users: { none: { id: { equals: user.id } } } } : {}),
+			...(user ? { followedBy: { none: { follower: { id: { equals: user.id } } } } } : {}),
 			OR: [{ users: { some: {} } }, { desiringUsers: { some: {} } }, { posts: { some: {} } }]
 		};
 
