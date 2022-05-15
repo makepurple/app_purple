@@ -7,7 +7,15 @@ query GetFollowableSkills {
 			{ name: Desc }
 		]
 	) {
+		__typename
+		edges {
+			cursor
+			node {
+				id
+			}
+		}
 		nodes {
+			__typename
 			...ActivityFeedFollowableSkillCardSkill
 		}
 	}

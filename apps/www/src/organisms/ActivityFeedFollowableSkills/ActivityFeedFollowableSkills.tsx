@@ -50,10 +50,8 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 	style
 }) => {
 	const [result] = useGetFollowableSkillsQuery({
-		requestPolicy: "cache-first"
+		requestPolicy: "network-only"
 	});
-
-	console.log(result);
 
 	const { data } = result;
 
