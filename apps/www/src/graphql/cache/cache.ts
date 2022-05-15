@@ -12,12 +12,14 @@ export const createCache = (): Exchange => {
 			GitHubUserContributionCalendar: () => null,
 			GitHubUserContributionCalendarDay: () => null,
 			GitHubUserContributionCalendarWeek: () => null,
+			SkillConnection: () => null,
 			SuggestOrganizations: () => null,
 			SuggestRepositories: () => null,
 			SuggestSkillOwners: () => null,
 			SuggestSkills: () => null,
 			TopLanguages: () => null,
-			TopLanguage: () => null
+			TopLanguage: () => null,
+			UserConnection: () => null
 		},
 		resolvers: {
 			Comment: {
