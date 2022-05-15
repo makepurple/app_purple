@@ -12,6 +12,11 @@ export const GetFollowableSkills_mock: GetFollowableSkillsQuery = {
 	__typename: "Query",
 	followableSkills: {
 		__typename: "SkillConnection",
+		edges: skills.map((skill, i) => ({
+			__typename: "SkillEdge",
+			cursor: `${i}`,
+			node: skill
+		})),
 		nodes: skills as any
 	}
 };
