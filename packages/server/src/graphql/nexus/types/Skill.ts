@@ -26,11 +26,7 @@ export const Skill = objectType({
 						take === 0
 							? await Promise.resolve([])
 							: await prisma.skill
-									.findUnique({
-										where: {
-											id: parent.id
-										}
-									})
+									.findUnique({ where: { id: parent.id } })
 									.codeExamples({
 										cursor,
 										skip,
