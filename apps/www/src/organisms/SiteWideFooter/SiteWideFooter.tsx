@@ -169,7 +169,7 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 							<GitHubIcon />
 							<span>GitHub</span>
 						</ExternalLink>
-						<ExternalLink href="https://discord.gg/pnxNka88" target="_blank">
+						<ExternalLink href="https://discord.gg/NUVCnHY88h" target="_blank">
 							<DiscordIcon />
 							<span>Discord</span>
 						</ExternalLink>
