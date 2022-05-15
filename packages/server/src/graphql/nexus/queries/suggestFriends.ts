@@ -33,11 +33,11 @@ export const suggestFriends = queryField("suggestFriends", {
 		where: nonNull(arg({ type: "SuggestFriendsWhereInput" }))
 	},
 	resolve: async (parent, args, { prisma, user }) => {
-		const orderBy = PrismaUtils.getRandomOrderBy<any>({
-			direction: Prisma.SortOrder.desc,
-			options: ["posts._count", "codeExamples._count", "skills._count"],
-			seed: args.where.seed
-		});
+		// const orderBy = PrismaUtils.getRandomOrderBy<any>({
+		// 	direction: Prisma.SortOrder.desc,
+		// 	options: ["posts._count", "codeExamples._count", "skills._count"],
+		// 	seed: args.where.seed
+		// });
 
 		if (!user) {
 			const where: Prisma.UserWhereInput = {
@@ -55,8 +55,8 @@ export const suggestFriends = queryField("suggestFriends", {
 						cursor,
 						skip,
 						take,
-						where,
-						orderBy
+						where
+						// orderBy
 					}),
 				() => prisma.user.count({ where }),
 				{ ...PrismaUtils.handleRelayConnectionArgs(args) },
@@ -132,8 +132,8 @@ export const suggestFriends = queryField("suggestFriends", {
 					cursor,
 					skip,
 					take,
-					where,
-					orderBy
+					where
+					// orderBy
 				}),
 			() => prisma.user.count({ where }),
 			{ ...PrismaUtils.handleRelayConnectionArgs(args) },
