@@ -71,6 +71,8 @@ export const Page: NextPage<PageProps> = () => {
 
 	const activities = data?.activityFeed.nodes ?? [];
 
+	console.log(data, activities);
+
 	return (
 		<Root>
 			<Seo
