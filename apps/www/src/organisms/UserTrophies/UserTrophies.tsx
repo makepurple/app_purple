@@ -55,21 +55,13 @@ export const UserTrophies: FC<UserTrophiesProps> = ({ className, style, userName
 					<UserTrophy type="followers" value={trophies.totalFollowers} />
 				</TrophyContainer>
 			</NextLink>
-			<NextLink href="/[userName]/activity" as={`/${userName}/activity`} passHref>
-				<TrophyContainer>
-					<UserTrophy type="upvotes" value={trophies.totalUpvotes} />
-				</TrophyContainer>
-			</NextLink>
+			<UserTrophy type="upvotes" value={trophies.totalUpvotes} />
 			<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
 				<TrophyContainer>
 					<UserTrophy type="post-views" value={trophies.totalPostViews} />
 				</TrophyContainer>
 			</NextLink>
-			<NextLink href="/[userName]/experiences" as={`/${userName}/experiences`} passHref>
-				<TrophyContainer>
-					<UserTrophy type="skills" value={trophies.totalSkills} />
-				</TrophyContainer>
-			</NextLink>
+			<UserTrophy type="skills" value={trophies.totalSkills} />
 		</Root>
 	);
 };
