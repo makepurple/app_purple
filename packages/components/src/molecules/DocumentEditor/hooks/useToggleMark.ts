@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { Editor } from "slate";
-import { useSlateStatic } from "slate-react";
+import { useSlate } from "slate-react";
 import { isMarkActive, MarkType } from "./useIsMarkActive";
 
 export const toggleMark = (editor: Editor, mark: MarkType, force?: boolean) => {
@@ -16,7 +16,7 @@ export const toggleMark = (editor: Editor, mark: MarkType, force?: boolean) => {
 };
 
 export const useToggleMark = () => {
-	const editor = useSlateStatic();
+	const editor = useSlate();
 
 	return useCallback(
 		(mark: MarkType, force?: boolean): void => toggleMark(editor, mark, force),
