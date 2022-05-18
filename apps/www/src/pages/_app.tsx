@@ -76,7 +76,7 @@ export const CustomApp: NextComponentType<AppContext, AppInitialProps, AppProps>
 			<GoogleAnalytics measurementId={process.env.GOOGLE_ANALYTICS_ID} />
 			<ErrorBoundary fallback={() => <ErrorPage />}>
 				{({ error, fallback }) => (
-					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL}>
+					<SessionProvider session={pageProps.session} refetchInterval={REFETCH_INTERVAL} refetchOnWindowFocus>
 						<UrqlProvider pageProps={pageProps}>
 							<NextProgressBar />
 							<Toaster position="bottom-left" />
