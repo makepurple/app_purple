@@ -25,6 +25,7 @@ const Details = tw.div`
 	flex
 	flex-col
 	items-start
+	min-w-0
 `;
 
 const Name = tw.h3`
@@ -34,6 +35,7 @@ const Name = tw.h3`
 `;
 
 const Description = tw.p`
+	self-stretch
 	text-base
 	line-clamp-2
 `;
