@@ -34,8 +34,12 @@ const Name = tw.h3`
 	font-semibold
 `;
 
-const Description = tw.p`
+const DescriptionContainer = tw.a`
 	self-stretch
+	focus:ring-0
+`;
+
+const Description = tw.p`
 	text-base
 	line-clamp-2
 `;
@@ -126,9 +130,9 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 						as={`/s/${skill.owner}/${skill.name}`}
 						passHref
 					>
-						<a tabIndex={-1} tw="focus:ring-0">
+						<DescriptionContainer tabIndex={-1}>
 							<Description tw="mt-1">{skill.github.description}</Description>
-						</a>
+						</DescriptionContainer>
 					</NextLink>
 				)}
 				<Info
