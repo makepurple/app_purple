@@ -114,7 +114,10 @@ export const activityFeed = queryField("activityFeed", {
 								}
 							]
 						}
-					]
+					],
+					user: {
+						id: { not: { equals: user.id } }
+					}
 			  }
 			: {
 					// Get only "high-value" activitiese for un-authed users
