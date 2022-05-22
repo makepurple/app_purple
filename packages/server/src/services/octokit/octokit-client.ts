@@ -6,6 +6,7 @@ import { Octokit } from "@octokit/core";
 import { throttling } from "@octokit/plugin-throttling";
 import type { RequestOptions } from "@octokit/types";
 import { oneLine } from "common-tags";
+import type { DocumentNode } from "graphql";
 import { parse, print } from "graphql";
 
 export declare type DeepGitHubType<T> = T extends { __typename?: infer U }
@@ -48,10 +49,20 @@ export class OctokitClient {
 	});
 
 	public async graphql(accessToken?: Maybe<string>) {
+		const authToken = await this.getAuthToken(accessToken);
+
+		return this.getProxyOperation(authToken);
+	}
+
+	private async getAuthToken(accessToken?: Maybe<string>): Promise<string> {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const _accessToken = accessToken ?? process.env.GITHUB_ACCESS_TOKEN!;
 		const { token } = await createTokenAuth(_accessToken)();
 
+		return token;
+	}
+
+	private getGraphQLExecutor(authToken: string): Executor<any, any> {
 		const executor: Executor<any, any> = async (
 			request: ExecutionRequest<any, any>
 		): Promise<ExecutionResult<any>> => {
@@ -60,15 +71,50 @@ export class OctokitClient {
 
 			const data = await this.instance.graphql<Record<string, any>>(query, {
 				...variables,
-				headers: {
-					Authorization: `token ${token}`
-				}
+				headers: { Authorization: `token ${authToken}` }
 			});
 
 			return { data };
 		};
 
-		const batchExecutor = createBatchingExecutor(executor);
+		return createBatchingExecutor(executor);
+	}
+
+	private getGraphQLOperation<
+		TResult extends Record<string, any> = any,
+		TVariables extends Record<string, unknown> = any
+	>(query: DocumentNode, executor: Executor<any, any>) {
+		return async (variables?: TVariables): Promise<DeepGitHubType<TResult>> => {
+			const { data } = (await executor<TResult>({
+				document: query,
+				variables
+			})) as ExecutionResult<TResult>;
+
+			return OctokitClient.castTypenames(data as TResult);
+		};
+	}
+
+	private getCastGraphQLOperation<
+		TResult extends Record<string, any> = any,
+		TVariables extends Record<string, unknown> = any
+	>(operation: (variables?: TResult | undefined) => Promise<DeepGitHubType<TVariables>>) {
+		/**
+		 * !HACK
+		 * @description Optionally type-cast the result after defining the query, so that
+		 * we get VSCode syntax highlighting for GraphQL
+		 * @author David Lee
+		 * @date October 23, 2021
+		 */
+		return <
+			TCastResult extends Record<string, any> = any,
+			TCastVariables extends Record<string, unknown> = any
+		>(
+			variables?: TCastVariables
+		): Promise<DeepGitHubType<TCastResult>> => operation(variables as any) as any;
+	}
+
+	private getProxyOperation(authToken: string) {
+		const executor = this.getGraphQLExecutor(authToken);
 
 		return <
 			TResult extends Record<string, any> = any,
@@ -77,28 +123,31 @@ export class OctokitClient {
 			strings: TemplateStringsArray,
 			...exprs: any[]
 		) => {
-			const query = parse(oneLine(strings, ...exprs));
+			const query: DocumentNode = parse(oneLine(strings, ...exprs));
+			const operation = this.getGraphQLOperation<TResult, TVariables>(query, executor);
 
-			const op = async (variables?: TVariables): Promise<DeepGitHubType<TResult>> => {
-				const { data } = (await batchExecutor<TResult>({
-					document: query,
-					variables
-				})) as ExecutionResult<TResult>;
+			return ObjectUtils.setStatic(operation, {
+				cast: this.getCastGraphQLOperation(operation),
+				from: (accessToken?: Maybe<string>) => {
+					const altOperation = async (
+						variables?: TVariables | undefined
+					): Promise<DeepGitHubType<TResult>> => {
+						// Get from authToken, fallback to original authToken if missing
+						const _authToken = accessToken
+							? await this.getAuthToken(accessToken)
+							: authToken;
+						const altExecutor = this.getGraphQLExecutor(_authToken);
 
-				return OctokitClient.castTypenames(data as TResult);
-			};
+						return this.getGraphQLOperation<TResult, TVariables>(
+							query,
+							altExecutor
+						)(variables);
+					};
 
-			return ObjectUtils.setStatic(op, {
-				/**
-				 * !HACK
-				 * @description Optionally type-cast the result after defining the query, so that
-				 * we get VSCode syntax highlighting for GraphQL
-				 * @author David Lee
-				 * @date October 23, 2021
-				 */
-				cast: <TCastResult = any, TCastVariables extends Record<string, unknown> = any>(
-					variables?: TCastVariables
-				): Promise<DeepGitHubType<TCastResult>> => op(variables as any) as any
+					return ObjectUtils.setStatic(altOperation, {
+						cast: this.getCastGraphQLOperation(altOperation)
+					});
+				}
 			});
 		};
 	}
