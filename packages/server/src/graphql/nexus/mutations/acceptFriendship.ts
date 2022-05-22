@@ -3,6 +3,11 @@ import { arg, mutationField, nonNull } from "nexus";
 import { octokit } from "../../../services";
 import { PrismaUtils } from "../../../utils";
 
+interface FollowOnGitHubParams {
+	from?: string;
+	to: string;
+}
+
 export const acceptFriendship = mutationField("acceptFriendship", {
 	type: nonNull("AcceptFriendshipPayload"),
 	args: {
@@ -49,7 +54,25 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 
 		if (existing) return { record: existing };
 
-		const friendOnGitHub = async (login: string): Promise<void> => {
+		const followOnGitHub = async (params: FollowOnGitHubParams): Promise<void> => {
+			const { from: fromLogin, to: toLogin } = params;
+
+			const accessToken = fromLogin
+				? await prisma.user
+						.findUnique({
+							where: { name: fromLogin },
+							select: {
+								accounts: {
+									where: { provider: { equals: "github" } },
+									select: { access_token: true }
+								}
+							}
+						})
+						.then((result) => result?.accounts[0]?.access_token ?? null)
+				: undefined;
+
+			if (accessToken === null) return;
+
 			const githubId = await graphql`
 				query GetGitHubUserToFollow($login: String!) {
 					user(login: $login) {
@@ -60,7 +83,7 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 				.cast<
 					octokit.GetGitHubUserToFollowQuery,
 					octokit.GetGitHubUserToFollowQueryVariables
-				>({ login })
+				>({ login: toLogin })
 				.then((res) => res.user?.id ?? null)
 				.catch(() => null);
 
@@ -76,6 +99,7 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 					}
 				}
 			`
+				.from(accessToken)
 				.cast<octokit.FollowGitHubUserMutation, octokit.FollowGitHubUserMutationVariables>({
 					githubId
 				})
@@ -143,7 +167,11 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 				update: {}
 			});
 
-			await friendOnGitHub(pendingFriendship.friender.name);
+			await followOnGitHub({ to: pendingFriendship.friender.name }).catch(() => null);
+			await followOnGitHub({
+				from: pendingFriendship.friender.name,
+				to: user.name
+			}).catch(() => null);
 
 			return transaction.friendship
 				.create({
