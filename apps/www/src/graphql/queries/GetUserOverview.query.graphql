@@ -5,7 +5,12 @@ query GetUserOverview($name: String!) {
 		}
 	) {
 		id
-		codeExamples(first: 2) {
+		codeExamples(
+			first: 2
+			orderBy: {
+				createdAt: Desc
+			}
+		) {
 			totalCount
 			edges {
 				cursor
