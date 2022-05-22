@@ -961,6 +961,7 @@ export const User = objectType({
 			},
 			resolve: async (parent, args, { prisma }) => {
 				const where: Prisma.PostWhereInput = {
+					author: { id: { equals: parent.id } },
 					AND: [
 						{ urlSlug: { not: { equals: "draft" } } },
 						{
@@ -1009,15 +1010,7 @@ export const User = objectType({
 										createdAt: Prisma.SortOrder.desc
 									}
 							  }),
-					() =>
-						prisma.user
-							.findUnique({
-								where: { id: parent.id },
-								include: {
-									_count: { select: { posts: true } }
-								}
-							})
-							.then((result) => result?._count.posts ?? 0),
+					() => prisma.post.count({ where }),
 					{ ...PrismaUtils.handleRelayConnectionArgs(args) },
 					{ ...PrismaUtils.handleRelayCursor() }
 				);
