@@ -9,7 +9,13 @@ query GetUserCodeExamples(
 		}
 	) {
 		id
-		codeExamples(after: $after, first: $first) {
+		codeExamples(
+			after: $after
+			first: $first
+			orderBy: {
+				createdAt: Desc
+			}
+		) {
 			pageInfo {
 				...PageInfoFragment
 			}
