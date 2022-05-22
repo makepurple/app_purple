@@ -8,6 +8,16 @@ mutation UpdateCodeExample(
 			message
 		}
 		record {
+			id
+			content
+			primarySkill {
+				github {
+					...RepositorySearchResultGitHubRepository
+				}
+				id
+				name
+				owner
+			}
 			...CodeExampleCardCodeExample
 		}
 	}
