@@ -146,7 +146,6 @@ export const Page: NextPage<PageProps> = () => {
 		formState: { errors, isDirty, isSubmitting, isSubmitted, isValid },
 		handleSubmit,
 		register,
-		reset,
 		setError,
 		setValue,
 		watch
@@ -177,26 +176,6 @@ export const Page: NextPage<PageProps> = () => {
 		isDirty && !submitting,
 		"You have unsaved changes, are you sure you want to leave?"
 	);
-
-	useEffect(() => {
-		reset({
-			content: codeExample?.content ?? "",
-			description: codeExample?.description ?? "",
-			language: codeExample?.language ?? "TypeScript",
-			primarySkill: {
-				name_owner: {
-					name: "",
-					owner: ""
-				}
-			},
-			skills: (codeExample?.skills.nodes ?? []).map((skill) => ({
-				name_owner: {
-					name: skill.name,
-					owner: skill.owner
-				}
-			}))
-		});
-	}, [codeExample, reset]);
 
 	const primarySkill = watch("primarySkill.name_owner");
 	const language = watch("language");
