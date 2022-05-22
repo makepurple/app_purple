@@ -185,7 +185,7 @@ export const Page: NextPage<PageProps> = () => {
 				<Section>
 					<SectionTitle tw="mb-2">
 						<NextLink href="/[userName]/snippets" as={`/${userName}/snippets`} passHref>
-							<SectionTitleText>Snippets</SectionTitleText>
+							<SectionTitleText>Latest Snippets</SectionTitleText>
 						</NextLink>
 						{user.codeExamples.totalCount > 2 && (
 							<NextLink
