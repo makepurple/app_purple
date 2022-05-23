@@ -21,32 +21,32 @@ rules:
     description: Prevent frequent hits to GitHub api
   - types:
       - Post
-    maxAge: 7200
-    swr: 7200
+    maxAge: 21600
+    swr: 86400
     description: Posts should not change too often
   - types:
       - CodeExample
-    maxAge: 7200
-    swr: 7200
+    maxAge: 21600
+    swr: 86400
     description: CodeExamples should not change too often
   - types:
       - UserTrophies
-    maxAge: 900
-    swr: 900
+    maxAge: 21600
+    swr: 86400
     description: Trophies can update less frequently
   - types:
       User:
         - activities
-    maxAge: 900
-    swr: 900
+    maxAge: 21600
+    swr: 86400
     description: Reduce expensive query of User activities
   - types:
       Query:
         - activityFeed
-    maxAge: 900
-    swr: 900
+    maxAge: 3600
+    swr: 21600
     scope: AUTHENTICATED
-    description: Only user's update activity feed every 15 minutes at most
+    description: Only user's update activity feed every 1 hour at most
   - types:
       Query:
         - suggestFriends
@@ -56,13 +56,17 @@ rules:
     description: Only update user's suggested friends every 15 minutes at most
   - types:
       - User
-    maxAge: 1800
-    swr: 1800
+    maxAge: 21600
+    swr: 86400
     description: Cache users for overview pages
   - types:
-      - Repository
-    maxAge: 7200
-    swr: 7200
+      User:
+        - repositories
+      Query:
+        - repositories
+      Repository: true
+    maxAge: 21600
+    swr: 86400
     description: Repositories should not change too often
   - types:
       Query:
