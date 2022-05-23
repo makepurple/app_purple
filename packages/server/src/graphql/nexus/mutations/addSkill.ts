@@ -11,7 +11,7 @@ export const addSkill = mutationField("addSkill", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
+	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		if (!args.where.id && !args.where.name_owner) throw new Error("Invalid input");
@@ -43,6 +43,8 @@ export const addSkill = mutationField("addSkill", {
 				.skill();
 
 			if (!record) throw new Error();
+
+			await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 			return { record };
 		}
@@ -106,6 +108,8 @@ export const addSkill = mutationField("addSkill", {
 		});
 
 		if (!record) throw new Error();
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

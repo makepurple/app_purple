@@ -14,7 +14,7 @@ export const createCodeExample = mutationField("createCodeExample", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
+	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const dataInput = CodeExampleCreateInput.validator({
@@ -176,6 +176,8 @@ export const createCodeExample = mutationField("createCodeExample", {
 				}
 			});
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

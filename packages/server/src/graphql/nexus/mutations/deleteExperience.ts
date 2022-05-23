@@ -25,10 +25,12 @@ export const deleteExperience = mutationField("deleteExperience", {
 
 		return false;
 	},
-	resolve: async (parent, args, { prisma }) => {
+	resolve: async (parent, args, { prisma, res }) => {
 		const record = await prisma.experience.delete({
 			where: PrismaUtils.nonNull(args.where)
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

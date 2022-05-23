@@ -57,7 +57,7 @@ export const pageProps = NextUtils.castStaticProps(async (ctx) => {
 
 	return addUrqlState(ssr, {
 		props: {},
-		revalidate: ms("6h") / 1_000
+		revalidate: ms("24h") / 1_000
 	});
 });
 

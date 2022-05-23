@@ -10,7 +10,7 @@ export const removeDesiredSkill = mutationField("removeDesiredSkill", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { prisma, user }) => {
+	resolve: async (parent, args, { prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const skill = await prisma.skill.findUnique({
@@ -42,6 +42,8 @@ export const removeDesiredSkill = mutationField("removeDesiredSkill", {
 			.skill();
 
 		if (!record) throw new Error();
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

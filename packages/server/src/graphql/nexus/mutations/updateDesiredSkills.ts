@@ -11,7 +11,7 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
+	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const skillIds = args.data.skills
@@ -111,6 +111,8 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 				}
 			});
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

@@ -11,7 +11,7 @@ export const createExperience = mutationField("createExperience", {
 	authorize: (root, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (root, args, { octokit: graphql, prisma, user }) => {
+	resolve: async (root, args, { octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const dataInput = ExperienceCreateInput.validator({
@@ -71,6 +71,8 @@ export const createExperience = mutationField("createExperience", {
 				user: { connect: { id: user.id } }
 			}
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

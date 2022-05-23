@@ -21,10 +21,12 @@ export const deleteRepository = mutationField("deleteRepository", {
 
 		return false;
 	},
-	resolve: async (parent, args, { prisma }) => {
+	resolve: async (parent, args, { prisma, res }) => {
 		const record = await prisma.repository.delete({
 			where: PrismaUtils.nonNull(args.where)
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

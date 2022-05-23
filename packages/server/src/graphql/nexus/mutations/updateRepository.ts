@@ -21,7 +21,7 @@ export const updateRepository = mutationField("updateRepository", {
 
 		return true;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
+	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const repository = await prisma.repository.findUnique({
@@ -138,6 +138,8 @@ export const updateRepository = mutationField("updateRepository", {
 				where: PrismaUtils.nonNull(args.where)
 			});
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

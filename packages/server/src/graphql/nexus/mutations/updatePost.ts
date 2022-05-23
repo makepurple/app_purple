@@ -15,7 +15,7 @@ export const updatePost = mutationField("updatePost", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, user }) => {
+	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const post = await prisma.post.findUnique({
@@ -181,6 +181,8 @@ export const updatePost = mutationField("updatePost", {
 			postId: record.id,
 			userId: user.id
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}

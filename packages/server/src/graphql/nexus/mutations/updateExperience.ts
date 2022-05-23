@@ -23,7 +23,7 @@ export const updateExperience = mutationField("updateExperience", {
 
 		return true;
 	},
-	resolve: async (root, args, { octokit: graphql, prisma }) => {
+	resolve: async (root, args, { octokit: graphql, prisma, res }) => {
 		const dataInput = ExperienceUpdateInput.validator({
 			endDate: args.data.endDate ?? undefined,
 			highlights: args.data.highlights ?? undefined,
@@ -85,6 +85,8 @@ export const updateExperience = mutationField("updateExperience", {
 			},
 			where: PrismaUtils.nonNull(args.where)
 		});
+
+		await res.unstable_revalidate("/leedavidcs").catch(() => null);
 
 		return { record };
 	}
