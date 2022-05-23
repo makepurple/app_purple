@@ -10,6 +10,7 @@ import {
 	ChatIcon,
 	GearIcon,
 	GitHubIcon,
+	HomeIcon,
 	PeopleIcon,
 	SignOutIcon,
 	TelescopeIcon
@@ -261,6 +262,17 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 											tw="mr-3"
 										/>
 										<ListItemText>{user.name}</ListItemText>
+									</ListItem>
+								</NextLink>
+								<NextLink href="/feed" passHref>
+									<ListItem
+										as="a"
+										onClick={() => {
+											onClose?.();
+										}}
+									>
+										<HomeIcon height={24} width={24} tw="mr-3" />
+										<span>Feed</span>
 									</ListItem>
 								</NextLink>
 								<ListItem
