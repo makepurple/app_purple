@@ -162,7 +162,7 @@ export const updatePostDraft = mutationField("updatePostDraft", {
 			userId: user.id
 		});
 
-		await res.unstable_revalidate("/leedavidcs").catch(() => null);
+		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

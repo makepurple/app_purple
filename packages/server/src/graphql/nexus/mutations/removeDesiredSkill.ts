@@ -43,7 +43,7 @@ export const removeDesiredSkill = mutationField("removeDesiredSkill", {
 
 		if (!record) throw new Error();
 
-		await res.unstable_revalidate("/leedavidcs").catch(() => null);
+		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

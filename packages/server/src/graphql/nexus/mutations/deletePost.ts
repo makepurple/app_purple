@@ -25,7 +25,9 @@ export const deletePost = mutationField("deletePost", {
 
 		return false;
 	},
-	resolve: async (parent, args, { cloudinary, res, prisma }) => {
+	resolve: async (parent, args, { cloudinary, prisma, res, user }) => {
+		if (!user) throw new Error();
+
 		const images = await prisma.post
 			.findUnique({
 				where: PrismaUtils.nonNull(args.where)
@@ -55,7 +57,8 @@ export const deletePost = mutationField("deletePost", {
 			return deleted;
 		});
 
-		await res.unstable_revalidate("/leedavidcs").catch(() => null);
+		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.unstable_revalidate(`/${user.name}/${record.urlSlug}`).catch(() => null);
 
 		return { record };
 	}

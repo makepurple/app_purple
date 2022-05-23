@@ -38,7 +38,7 @@ import {
 	Seo,
 	UserPageLayout
 } from "../../../organisms";
-import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]";
+import { pageProps, PageProps, paths } from "../../../page-props/[userName]/[postTitle]";
 import { CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../svgs";
 import { PermissionUtils } from "../../../utils";
 
@@ -183,7 +183,8 @@ const CommentsContainer = tw.div`
 	sm:px-6
 `;
 
-export const getServerSideProps = pageProps;
+export const getStaticProps = pageProps;
+export const getStaticPaths = paths;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
