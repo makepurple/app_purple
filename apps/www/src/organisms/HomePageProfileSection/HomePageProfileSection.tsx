@@ -194,6 +194,7 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 						readTime: 8,
 						skills: {
 							__typename: "SkillConnection",
+							totalCount: post1Skills.length,
 							edges: post1Skills.map((skill) => ({
 								__typename: "SkillEdge",
 								cursor: skill.id,
@@ -201,7 +202,6 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 							})),
 							nodes: post1Skills
 						},
-						skillsCount: post1Skills.length,
 						thumbnailUrl: "/static/pngs/demo-post-thumbnail.png",
 						title: "How MakePurple Works",
 						upvotes: 12,
@@ -227,6 +227,7 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 						readTime: 23,
 						skills: {
 							__typename: "SkillConnection",
+							totalCount: post2Skills.length,
 							edges: post2Skills.map((skill) => ({
 								__typename: "SkillEdge",
 								cursor: skill.id,
@@ -234,7 +235,6 @@ export const HomePageProfileSection: FC<HomePageProfileSectionProps> = ({ classN
 							})),
 							nodes: post2Skills
 						},
-						skillsCount: post2Skills.length,
 						thumbnailUrl: "/static/pngs/demo-post-2-thumbnail.png",
 						title: "Consumer-First GraphQL API Design",
 						upvotes: 27,
