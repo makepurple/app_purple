@@ -5,6 +5,7 @@ query GetPostDraft {
 		content
 		description
 		skills(first: 8) {
+			totalCount
 			edges {
 				cursor
 				node {
@@ -17,7 +18,6 @@ query GetPostDraft {
 				owner
 			}
 		}
-		skillsCount
 		title
 		thumbnailUrl
 	}
