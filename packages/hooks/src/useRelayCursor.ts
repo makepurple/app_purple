@@ -1,10 +1,11 @@
 import { ObjectUtils } from "@makepurple/utils";
-import { IUseIntersectionObserverOptions } from "@react-hookz/web";
-import { RefCallback, useCallback, useEffect, useMemo, useState } from "react";
+import type { IUseIntersectionObserverOptions } from "@react-hookz/web";
+import { useIntersectionObserver } from "@react-hookz/web";
+import type { RefCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldPath } from "react-hook-form";
 import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
 import { useClient, useQuery } from "urql";
-import { useIntersectionObserver } from "./useIntersectionObserver";
 
 export type PageInfo = {
 	endCursor?: Maybe<string>;
