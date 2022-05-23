@@ -10,7 +10,6 @@ fragment PostCardPost on Post {
 	publishedAt
 	readTime
 	skills(first: 8) {
-		totalCount
 		edges {
 			cursor
 			node {
@@ -23,6 +22,7 @@ fragment PostCardPost on Post {
 			owner
 		}
 	}
+	skillsCount
 	thumbnailUrl
 	title
 	upvotes

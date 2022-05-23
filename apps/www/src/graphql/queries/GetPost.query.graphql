@@ -14,7 +14,6 @@ query GetPost($where: PostWhereUniqueInput!) {
 		publishedAt
 		readTime
 		skills(first: 8) {
-			totalCount
 			edges {
 				cursor
 				node {
@@ -27,6 +26,7 @@ query GetPost($where: PostWhereUniqueInput!) {
 				owner
 			}
 		}
+		skillsCount
 		title
 		upvotes
 		urlSlug
