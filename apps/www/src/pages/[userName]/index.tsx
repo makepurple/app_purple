@@ -17,7 +17,7 @@ import {
 	UserPageLayout,
 	UserTrophies
 } from "../../organisms";
-import { PageProps, pageProps } from "../../page-props/[userName]";
+import { PageProps, pageProps, paths } from "../../page-props/[userName]";
 import { CodeIcon, HexagonIcon, NoteIcon, RepoIcon } from "../../svgs";
 
 const MAX_CODE_EXAMPLES = 2;
@@ -85,7 +85,8 @@ const Repositories = tw(Paper)`
 	items-stretch
 `;
 
-export const getServerSideProps = pageProps;
+export const getStaticProps = pageProps;
+export const getStaticPaths = paths;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();

@@ -1,5 +1,5 @@
 import ms from "ms";
-import { InferGetServerSidePropsType } from "next";
+import { GetStaticPaths, InferGetStaticPropsType } from "next";
 import { ssrExchange } from "urql";
 import {
 	addUrqlState,
@@ -61,4 +61,11 @@ export const pageProps = NextUtils.castStaticProps(async (ctx) => {
 	});
 });
 
-export type PageProps = InferGetServerSidePropsType<typeof pageProps>;
+export const paths: GetStaticPaths = () => {
+	return {
+		paths: [{ params: { userName: "leedavidcs" } }],
+		fallback: "blocking"
+	};
+};
+
+export type PageProps = InferGetStaticPropsType<typeof pageProps>;
