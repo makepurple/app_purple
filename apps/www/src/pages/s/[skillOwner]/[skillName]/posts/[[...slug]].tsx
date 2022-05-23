@@ -180,7 +180,7 @@ export const Page: NextPage<PageProps> = () => {
 						</OrderByOption>
 					</NextLink>
 				</OrderBys>
-				{sort !== "top" && (
+				{sort === "top" && (
 					<OrderByCriteria>
 						<NextLink
 							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
