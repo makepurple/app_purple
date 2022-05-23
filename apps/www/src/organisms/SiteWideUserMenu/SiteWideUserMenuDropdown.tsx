@@ -8,7 +8,7 @@ import { stripUnit } from "polished";
 import React, { FC, Ref, useState } from "react";
 import tw, { styled, theme } from "twin.macro";
 import { useGetNotificationCountsQuery } from "../../graphql";
-import { BookIcon, ChatIcon, GearIcon, PeopleIcon, SignOutIcon } from "../../svgs";
+import { BookIcon, ChatIcon, GearIcon, HomeIcon, PeopleIcon, SignOutIcon } from "../../svgs";
 import { NewPostButton } from "../NewPostButton";
 import { UserAvatar } from "../UserAvatar";
 
@@ -133,6 +133,14 @@ export const SiteWideUserMenuDropdown: FC<SiteWideUserMenuDropdownProps> = (prop
 						)}
 					</Menu.Item>
 					<Divider tw="m-0.5" />
+					<Menu.Item>
+						{(itemProps) => (
+							<ListItem as={MobileLink} href="/feed" {...itemProps}>
+								<HomeIcon height={24} width={24} tw="mr-2" />
+								<span>Feed</span>
+							</ListItem>
+						)}
+					</Menu.Item>
 					<Menu.Item>
 						{(itemProps) => (
 							<ListItem as={NewPostItem} bounce={false} {...itemProps}>
