@@ -3,6 +3,7 @@ import {
 	UseComboBoxState,
 	useComboBoxState,
 	UseComboboxStateChange,
+	useFocus,
 	useOnKeyDown
 } from "@makepurple/hooks";
 import ms from "ms";
@@ -46,6 +47,8 @@ export const SkillAutosuggest = forwardRef<
 	SkillAutosuggestProps
 >((props, ref) => {
 	const { className, defaultValue = "", onSelect, style, "aria-label": ariaLabel } = props;
+
+	const [focused, { ref: focusRef }] = useFocus();
 
 	const [skillItems, setSkillItems] = useState<RepositorySearchResultGitHubRepositoryFragment[]>(
 		[]
@@ -132,6 +135,7 @@ export const SkillAutosuggest = forwardRef<
 				<ComboBox.Input
 					as={Tags.Editable}
 					{...combobox.getInputProps({
+						ref: focusRef,
 						onFocus: () => {
 							!!skillItems.length && combobox.openMenu();
 						},
@@ -142,7 +146,7 @@ export const SkillAutosuggest = forwardRef<
 					tw="w-52"
 				/>
 			</ComboBox>
-			<SkillsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen}>
+			<SkillsSuggest {...combobox.getMenuProps()} isOpen={focused && combobox.isOpen}>
 				{combobox.loading
 					? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
 					: skillItems.map((item, i) => (
