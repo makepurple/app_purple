@@ -36,6 +36,18 @@ const getApiUrl = (isStatic?: boolean): string => {
 	}
 
 	/**
+	 * !HACK
+	 * @description Normally, using the same api url for static pages will error; however, in
+	 * development mode, static pages will behave like SSR'ed pages, which allows us to directly
+	 * use the development api for these static pages
+	 * @author David Lee
+	 * @date May 23, 2022
+	 */
+	if (isStatic && process.env.NODE_ENV === "development") {
+		return "http://localhost:3001/api/graphql";
+	}
+
+	/**
 	 * @description
 	 * Infer the deploy URL if we're in production
 	 * API_URL is for hitting GraphCDN if provided
@@ -62,7 +74,7 @@ const getApiUrl = (isStatic?: boolean): string => {
 	}
 
 	// Finally, fallback to hard-coded URL in case nothing else works
-	return `http://localhost:3001/api/graphql`;
+	return "http://localhost:3001/api/graphql";
 };
 
 let ssr: SSRExchange;
