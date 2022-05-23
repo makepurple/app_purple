@@ -176,8 +176,8 @@ export interface UserInfoSideBarProps {
 }
 
 export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, userName }) => {
-	const [{ data }] = useGetUserInfoSideBarQuery({
-		requestPolicy: "cache-first",
+	const [{ data, fetching: fetchingData }] = useGetUserInfoSideBarQuery({
+		requestPolicy: "cache-and-network",
 		variables: {
 			name: userName
 		}
@@ -207,6 +207,8 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 
 	const displayName: string = user.github.name ?? user.name;
 	const hasTopLanguages = !!user.github.topLanguages.nodes.length;
+
+	const loadingData = fetchingData || status === "loading";
 
 	const loadingFollow = following || unfollowing;
 	const loadingFriend = friendRequesting || unfriending;
@@ -318,6 +320,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 									{({ draft }) => (draft ? <>Edit Draft</> : <>New Post</>)}
 								</NewPostButton>
 								<Button
+									disabled={loadingData}
 									onClick={() => {
 										setMode("editing");
 									}}
@@ -357,7 +360,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 								text="Yes, remove connection"
 							>
 								<Button
-									disabled={loadingFriend}
+									disabled={loadingData || loadingFriend}
 									onClick={(e) => {
 										e.stopPropagation();
 									}}
@@ -378,7 +381,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</AlertDialog>
 						) : (
 							<Button
-								disabled={loadingFriend || !user.viewerCanFriend}
+								disabled={loadingData || loadingFriend || !user.viewerCanFriend}
 								onClick={async () => {
 									if (status !== "authenticated") {
 										await router.push("/signup");
@@ -407,7 +410,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</Button>
 						)}
 						<Button
-							disabled={loadingFollow}
+							disabled={loadingData || loadingFollow}
 							onClick={async () => {
 								if (status !== "authenticated") {
 									await router.push("/signup");

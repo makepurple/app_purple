@@ -93,7 +93,7 @@ export const Page: NextPage<PageProps> = () => {
 	const userName = router?.query.userName as string;
 
 	const [{ data }] = useGetUserOverviewQuery({
-		requestPolicy: "cache-first",
+		requestPolicy: "cache-and-network",
 		variables: {
 			name: userName
 		}
