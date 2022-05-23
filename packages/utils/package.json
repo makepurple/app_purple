@@ -9,7 +9,7 @@
 		"@emotion/is-prop-valid": "^1.1.2",
 		"@makepurple/typings": "workspace:*",
 		"dayjs": "^1.11.2",
-		"react-hook-form": "^7.31.1"
+		"react-hook-form": "^7.31.2"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",

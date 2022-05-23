@@ -8,17 +8,17 @@
 	"dependencies": {
 		"@makepurple/typings": "workspace:*",
 		"@makepurple/utils": "workspace:*",
-		"@react-hookz/web": "^14.0.0",
+		"@react-hookz/web": "^14.2.2",
 		"@types/react": "^18.0.9",
-		"@types/react-dom": "^18.0.3",
+		"@types/react-dom": "^18.0.4",
 		"downshift": "^6.1.7",
 		"framer-motion": "6.3.3",
 		"js-cookie": "^3.0.1",
 		"keycode-js": "^3.1.0",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
-		"react-hook-form": "^7.31.1",
-		"react-use": "^17.3.2",
+		"react-hook-form": "^7.31.2",
+		"react-use": "^17.4.0",
 		"urql": "^2.2.0"
 	},
 	"devDependencies": {
