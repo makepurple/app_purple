@@ -1595,6 +1595,7 @@ export interface NexusGenFieldTypes {
     publishedAt: NexusGenScalars['DateTime'] | null; // DateTime
     readTime: number; // Int!
     skills: NexusGenRootTypes['SkillConnection']; // SkillConnection!
+    skillsCount: number; // Int!
     thumbnailUrl: string | null; // String
     title: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -2747,6 +2748,7 @@ export interface NexusGenFieldTypeNames {
     publishedAt: 'DateTime'
     readTime: 'Int'
     skills: 'SkillConnection'
+    skillsCount: 'Int'
     thumbnailUrl: 'String'
     title: 'String'
     updatedAt: 'DateTime'

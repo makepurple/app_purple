@@ -994,6 +994,7 @@ type Post implements Node {
   """
   readTime: Int!
   skills(after: String, before: String, first: Int, last: Int, where: SkillWhereInput): SkillConnection!
+  skillsCount: Int!
   thumbnailUrl: String
   title: String!
   updatedAt: DateTime!

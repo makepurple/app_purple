@@ -349,6 +349,7 @@ export const Post_fragment_mock: Post = {
 		})),
 		nodes: skills
 	},
+	skillsCount: 8,
 	thumbnailUrl: "/static/pngs/test-thumbnail.png",
 	title: "Not a Real Blog Post Title",
 	updatedAt: dayjs(1318781876406).toDate(),

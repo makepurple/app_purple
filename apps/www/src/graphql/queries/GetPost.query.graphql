@@ -13,10 +13,7 @@ query GetPost($where: PostWhereUniqueInput!) {
 		description
 		publishedAt
 		readTime
-		skills(first: 50) {
-			pageInfo {
-				...PageInfoFragment
-			}
+		skills(first: 8) {
 			edges {
 				cursor
 				node {
@@ -29,6 +26,7 @@ query GetPost($where: PostWhereUniqueInput!) {
 				owner
 			}
 		}
+		skillsCount
 		title
 		upvotes
 		urlSlug

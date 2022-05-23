@@ -187,6 +187,23 @@ export const Post = objectType({
 				return connection;
 			}
 		});
+		t.nonNull.int("skillsCount", {
+			resolve: async (parent, args, { prisma }) => {
+				return await prisma.post
+					.findUnique({
+						where: { id: parent.id },
+						select: {
+							_count: {
+								select: {
+									skills: true
+								}
+							}
+						},
+						rejectOnNotFound: true
+					})
+					.then((result) => result._count.skills);
+			}
+		});
 		t.string("thumbnailUrl");
 		t.nonNull.string("title");
 		t.nonNull.dateTime("updatedAt");

@@ -4,6 +4,20 @@ query GetPostDraft {
 		id
 		content
 		description
+		skills(first: 8) {
+			edges {
+				cursor
+				node {
+					id
+				}
+			}
+			nodes {
+				id
+				name
+				owner
+			}
+		}
+		skillsCount
 		title
 		thumbnailUrl
 	}
