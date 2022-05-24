@@ -15,7 +15,6 @@ import React, {
 	useMemo,
 	useState
 } from "react";
-import { InfoIcon } from "src/svgs";
 import tw from "twin.macro";
 import { useClient } from "urql";
 import {
@@ -24,6 +23,7 @@ import {
 	SuggestSkillsQuery,
 	SuggestSkillsQueryVariables
 } from "../../graphql";
+import { InfoIcon } from "../../svgs";
 import { LoadingSearchResult } from "../LoadingSearchResult";
 import { RepositorySearchResult } from "../RepositorySearchResult";
 
