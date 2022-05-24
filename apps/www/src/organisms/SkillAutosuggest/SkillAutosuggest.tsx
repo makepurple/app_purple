@@ -1,8 +1,9 @@
-import { ComboBox, Tags } from "@makepurple/components";
+import { ComboBox, Paper, Tags } from "@makepurple/components";
 import {
 	UseComboBoxState,
 	useComboBoxState,
 	UseComboboxStateChange,
+	useFocus,
 	useOnKeyDown
 } from "@makepurple/hooks";
 import ms from "ms";
@@ -14,6 +15,7 @@ import React, {
 	useMemo,
 	useState
 } from "react";
+import { InfoIcon } from "src/svgs";
 import tw from "twin.macro";
 import { useClient } from "urql";
 import {
@@ -24,6 +26,22 @@ import {
 } from "../../graphql";
 import { LoadingSearchResult } from "../LoadingSearchResult";
 import { RepositorySearchResult } from "../RepositorySearchResult";
+
+const InfoTooltip = tw(Paper)`
+	absolute
+	bottom-0
+	inset-x-0
+	transform
+	translate-y-full
+	flex
+	flex-row
+	items-start
+	p-2
+	gap-2
+	max-height[16rem]
+	overflow-y-auto
+	z-50
+`;
 
 const SkillsSuggest = tw(ComboBox.Options)`
 	bottom-0
@@ -53,6 +71,8 @@ export const SkillAutosuggest = forwardRef<
 	);
 
 	const urqlClient = useClient();
+
+	const [focused, { ref: inputRef }] = useFocus();
 
 	const getSkillAutosuggestItems = useCallback(
 		async (input: Maybe<string>) => {
@@ -138,6 +158,7 @@ export const SkillAutosuggest = forwardRef<
 				<ComboBox.Input
 					as={Tags.Editable}
 					{...combobox.getInputProps({
+						ref: inputRef,
 						onFocus: () => {
 							!!skillItems.length && combobox.openMenu();
 						},
@@ -148,6 +169,15 @@ export const SkillAutosuggest = forwardRef<
 					tw="w-52"
 				/>
 			</ComboBox>
+			{focused && !isInputValid && (
+				<InfoTooltip>
+					<InfoIcon height={24} width={24} tw="flex-shrink-0" />
+					<p>
+						Search by GitHub owner/repository. For example: github.com/vercel/next.js ➤
+						vercel/next.js
+					</p>
+				</InfoTooltip>
+			)}
 			<SkillsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen && isInputValid}>
 				{combobox.loading
 					? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
