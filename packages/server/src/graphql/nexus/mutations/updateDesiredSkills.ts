@@ -11,7 +11,7 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
+	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const skillIds = args.data.skills
@@ -110,6 +110,14 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 					}
 				}
 			});
+		});
+
+		await graphcdn.purge`
+			mutation($userId: ID!) {
+				purgeUser(id: $userId)
+			}
+		`({
+			userId: user.id
 		});
 
 		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
