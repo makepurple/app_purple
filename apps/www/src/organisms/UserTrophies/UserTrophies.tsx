@@ -42,22 +42,27 @@ export const UserTrophies: FC<UserTrophiesProps> = ({ className, style, userName
 
 	return (
 		<Root className={className} style={style}>
-			<TrophyContainer href={user.githubUrl} target="_blank" rel="noreferrer noopener">
+			<TrophyContainer
+				href={user.githubUrl}
+				target="_blank"
+				rel="noreferrer noopener"
+				aria-label="github"
+			>
 				<UserTrophy type="yearly-commits" value={trophies.totalYearlyCommits} />
 			</TrophyContainer>
 			<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-				<TrophyContainer>
+				<TrophyContainer aria-label="posts">
 					<UserTrophy type="yearly-posts" value={trophies.totalYearlyPosts} />
 				</TrophyContainer>
 			</NextLink>
 			<NextLink href="/[userName]/followers" as={`/${userName}/followers`} passHref>
-				<TrophyContainer>
+				<TrophyContainer aria-label="followers">
 					<UserTrophy type="followers" value={trophies.totalFollowers} />
 				</TrophyContainer>
 			</NextLink>
 			<UserTrophy type="upvotes" value={trophies.totalUpvotes} />
 			<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
-				<TrophyContainer>
+				<TrophyContainer aria-label="posts">
 					<UserTrophy type="post-views" value={trophies.totalPostViews} />
 				</TrophyContainer>
 			</NextLink>

@@ -132,8 +132,14 @@ export const UserOverviewExperienceCard: FC<UserOverviewExperienceCardProps> = (
 						e.stopPropagation();
 					}}
 					tw="mr-3"
+					aria-label={organization.login}
 				>
-					<GitHubAvatarImage src={organization.avatarUrl} height={36} width={36} />
+					<GitHubAvatarImage
+						alt={organization.login}
+						src={organization.avatarUrl}
+						height={36}
+						width={36}
+					/>
 				</StyledAvatar>
 			</NextLink>
 			<NextLink href="/s/[skillOwner]" as={`/s/${organization.login}`} passHref>
