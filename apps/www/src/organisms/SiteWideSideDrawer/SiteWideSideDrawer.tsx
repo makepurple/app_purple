@@ -145,7 +145,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 					<AuthContainer>
 						<AuthInfo>
 							<AuthBrand /> is a community where developers can discover, share and
-							learn new things.
+							learn new things from each other. Join in!
 						</AuthInfo>
 						<NextLink href="/signup" passHref>
 							<Button
