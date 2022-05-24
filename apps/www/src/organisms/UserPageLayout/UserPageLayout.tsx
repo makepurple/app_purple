@@ -9,7 +9,8 @@ const Root = tw(MainContainer)`
 	flex-col
 	items-stretch
 	min-w-0
-	my-12
+	my-6
+	md:my-12
 	lg:flex-row-reverse
 	lg:items-start
 `;
