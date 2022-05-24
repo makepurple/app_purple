@@ -3,7 +3,6 @@ import {
 	UseComboBoxState,
 	useComboBoxState,
 	UseComboboxStateChange,
-	useFocus,
 	useOnKeyDown
 } from "@makepurple/hooks";
 import ms from "ms";
@@ -12,6 +11,7 @@ import React, {
 	forwardRef,
 	useCallback,
 	useImperativeHandle,
+	useMemo,
 	useState
 } from "react";
 import tw from "twin.macro";
@@ -47,8 +47,6 @@ export const SkillAutosuggest = forwardRef<
 	SkillAutosuggestProps
 >((props, ref) => {
 	const { className, defaultValue = "", onSelect, style, "aria-label": ariaLabel } = props;
-
-	const [focused, { ref: inputRef }] = useFocus();
 
 	const [skillItems, setSkillItems] = useState<RepositorySearchResultGitHubRepositoryFragment[]>(
 		[]
@@ -129,13 +127,17 @@ export const SkillAutosuggest = forwardRef<
 		combobox.selectItem(newSelectedItem);
 	});
 
+	const isInputValid = useMemo(
+		() => /^[a-z0-9.]+\/[a-z0-9.]+$/i.test(combobox.inputValue),
+		[combobox.inputValue]
+	);
+
 	return (
 		<>
 			<ComboBox {...combobox.getComboboxProps({ className, style })} tw="flex-grow">
 				<ComboBox.Input
 					as={Tags.Editable}
 					{...combobox.getInputProps({
-						ref: inputRef,
 						onFocus: () => {
 							!!skillItems.length && combobox.openMenu();
 						},
@@ -146,10 +148,7 @@ export const SkillAutosuggest = forwardRef<
 					tw="w-52"
 				/>
 			</ComboBox>
-			<SkillsSuggest
-				{...combobox.getMenuProps()}
-				isOpen={combobox.isOpen && (focused || skillItems.length)}
-			>
+			<SkillsSuggest {...combobox.getMenuProps()} isOpen={combobox.isOpen && isInputValid}>
 				{combobox.loading
 					? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
 					: skillItems.map((item, i) => (
