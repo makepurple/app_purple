@@ -9,7 +9,7 @@ import {
 	PageContainer,
 	withForwardRef
 } from "@makepurple/components";
-import { didClickIn, useOnClickOutside, useOnKeyDown } from "@makepurple/hooks";
+import { didClickIn, useOnClickOutside, useOnKeyDown, useWindowFocus } from "@makepurple/hooks";
 import { FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { m, useViewportScroll } from "framer-motion";
@@ -158,6 +158,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const user = session?.user;
 
 	const { scrollY, scrollYProgress } = useViewportScroll();
+	const focused = useWindowFocus();
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -171,6 +172,10 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 	const notificationCount = notificationsData?.viewer?.newNotificationsCount ?? 0;
 
 	useEffect(() => {
+		setIsThreshold(
+			scrollY.get() > SCROLL_THRESHOLD || scrollYProgress.get() > SCROLL_PROGRESS_THRESHOLD
+		);
+
 		const unsubscribeScrollY = scrollY.onChange((y) => {
 			setIsThreshold(
 				y > SCROLL_THRESHOLD || scrollYProgress.get() > SCROLL_PROGRESS_THRESHOLD
@@ -180,7 +185,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 		return () => {
 			unsubscribeScrollY();
 		};
-	}, [scrollY, scrollYProgress]);
+	}, [focused, scrollY, scrollYProgress]);
 
 	const animate = drawerOpen ? "open" : isThreshold ? "scrolled" : "default";
 
