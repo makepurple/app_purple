@@ -86,7 +86,7 @@ export const createCache = (): Exchange => {
 
 					cache
 						.inspectFields({ __typename: "User", id: viewerId })
-						.filter((field) => field.fieldName === "skills")
+						.filter((field) => field.fieldName === "desiredSkills")
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },
@@ -626,7 +626,7 @@ export const createCache = (): Exchange => {
 
 					cache
 						.inspectFields({ __typename: "User", id: viewerId })
-						.filter((field) => field.fieldName === "skills")
+						.filter((field) => field.fieldName === "desiredSkills")
 						.forEach((field) => {
 							cache.invalidate(
 								{ __typename: "User", id: viewerId },
