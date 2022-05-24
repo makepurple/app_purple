@@ -50,10 +50,10 @@ rules:
   - types:
       Query:
         - suggestFriends
-    maxAge: 900
-    swr: 900
+    maxAge: 3600
+    swr: 21600
     scope: AUTHENTICATED
-    description: Only update user's suggested friends every 15 minutes at most
+    description: Only update user's suggested friends every 1 hour at most
   - types:
       - User
     maxAge: 21600
@@ -75,5 +75,25 @@ rules:
     swr: 0
     scope: AUTHENTICATED
     description: Never cache postDraft
+  - types:
+      Query:
+        - followableSkills
+    maxAge: 21600
+    swr: 86400
+    scope: AUTHENTICATED
+    description: Cache skills on feed page, per-user, since these hit GitHub
+  - types:
+      User:
+        - notifications
+        - newMessagesCount
+        - messagesLastOpenedAt
+        - newNotificationsCount
+        - friendRequestsReceived
+        - notificationsLastOpenedAt
+        - friendRequestsReceivedCount
+    maxAge: 0
+    swr: 0
+    scope: AUTHENTICATED
+    description: Don't cache notification-related queries
 name: makepurple
 originUrl: https://www.makepurple.com/api/graphql
