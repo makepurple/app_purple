@@ -21,7 +21,7 @@ export const deleteCodeExample = mutationField("deleteCodeExample", {
 
 		return false;
 	},
-	resolve: async (parent, args, { prisma, res, user }) => {
+	resolve: async (parent, args, { graphcdn, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const record = await prisma.$transaction(async (transaction) => {
@@ -38,7 +38,18 @@ export const deleteCodeExample = mutationField("deleteCodeExample", {
 			return deleted;
 		});
 
+		await graphcdn.purge`
+			mutation($codeExampleId: ID!, $userId: ID!) {
+				purgeCodeExample(id: $codeExampleId)
+				purgeUser(id: $userId)
+			}
+		`({
+			codeExampleId: record.id,
+			userId: user.id
+		});
+
 		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.unstable_revalidate(`/${user.name}/snippets/${record.urlSlug}`).catch(() => null);
 
 		return { record };
 	}

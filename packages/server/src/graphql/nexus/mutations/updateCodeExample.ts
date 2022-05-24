@@ -15,7 +15,7 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
+	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const codeExample = await prisma.codeExample.findUnique({
@@ -186,7 +186,18 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			});
 		});
 
+		await graphcdn.purge`
+			mutation($codeExampleId: ID!, $userId: ID!) {
+				purgeCodeExample(id: $codeExampleId)
+				purgeUser(id: $userId)
+			}
+		`({
+			codeExampleId: record.id,
+			userId: user.id
+		});
+
 		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.unstable_revalidate(`/${user.name}/snippets/${record.urlSlug}`).catch(() => null);
 
 		return { record };
 	}

@@ -25,7 +25,7 @@ export const deletePost = mutationField("deletePost", {
 
 		return false;
 	},
-	resolve: async (parent, args, { cloudinary, prisma, res, user }) => {
+	resolve: async (parent, args, { cloudinary, graphcdn, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const images = await prisma.post
@@ -55,6 +55,16 @@ export const deletePost = mutationField("deletePost", {
 			});
 
 			return deleted;
+		});
+
+		await graphcdn.purge`
+			mutation($postId: ID!, $userId: ID!) {
+				purgePost(id: $postId)
+				purgeUser(id: $userId)
+			}
+		`({
+			postId: record.id,
+			userId: user.id
 		});
 
 		await res.unstable_revalidate(`/${user.name}`).catch(() => null);

@@ -41,7 +41,8 @@ import {
 } from "../../../../organisms";
 import {
 	pageProps,
-	PageProps
+	PageProps,
+	paths
 } from "../../../../page-props/[userName]/snippets/[codeExampleTitle]";
 import { BookIcon, CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../../svgs";
 import { PermissionUtils } from "../../../../utils";
@@ -200,7 +201,8 @@ const CommentsContainer = tw.div`
 	sm:px-6
 `;
 
-export const getServerSideProps = pageProps;
+export const getStaticProps = pageProps;
+export const getStaticPaths = paths;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
@@ -218,7 +220,7 @@ export const Page: NextPage<PageProps> = () => {
 	const isMyPage = viewer?.name === userName;
 
 	const [{ data: postData }] = useGetCodeExampleQuery({
-		requestPolicy: "cache-first",
+		requestPolicy: "cache-and-network",
 		variables: {
 			authorName: userName,
 			urlSlug
@@ -310,18 +312,10 @@ export const Page: NextPage<PageProps> = () => {
 		`;
 	}, [codeExample?.description, codeExample?.title, skills, userName]);
 
-	/**
-	 * TODO
-	 * @description Return 404 error page eventually
-	 * @author David Lee
-	 * @date February 27, 2022
-	 */
 	if (!codeExample) return null;
 
 	const primarySkill = codeExample.primarySkill;
-
 	const mutating = removing || upvoting || unvoting;
-
 	const shouldIndex = codeExample.content.length >= SEO_MIN_CODE_LENGTH;
 
 	return (

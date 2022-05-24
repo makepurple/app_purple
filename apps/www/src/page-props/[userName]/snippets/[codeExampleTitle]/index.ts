@@ -1,5 +1,5 @@
-import { InferGetServerSidePropsType } from "next";
-import { getSession } from "next-auth/react";
+import ms from "ms";
+import { GetStaticPaths, InferGetStaticPropsType } from "next";
 import { ssrExchange } from "urql";
 import {
 	addUrqlState,
@@ -7,25 +7,20 @@ import {
 	GetCodeExampleDocument,
 	GetCodeExampleQuery,
 	GetCodeExampleQueryVariables,
-	GetPostDraftDocument,
-	GetPostDraftQuery,
-	GetPostDraftQueryVariables,
 	GetUserInfoSideBarDocument,
 	GetUserInfoSideBarQuery,
 	GetUserInfoSideBarQueryVariables
 } from "../../../../graphql";
 import { NextUtils } from "../../../../utils";
 
-export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { query, req } = ctx;
+export const pageProps = NextUtils.castStaticProps(async (ctx) => {
+	const { params } = ctx;
 
 	const ssr = ssrExchange({ isClient: false });
-	const urqlClient = createUrqlClient({ req, ssr });
+	const urqlClient = createUrqlClient({ isStatic: true, ssr });
 
-	const authorName = query.userName as string;
-	const urlSlug = query.codeExampleTitle as string;
-
-	const session = await getSession(ctx);
+	const authorName = params?.userName as string;
+	const urlSlug = params?.codeExampleTitle as string;
 
 	const [codeExample] = await NextUtils.concurrent([
 		urqlClient
@@ -38,20 +33,24 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
 				GetUserInfoSideBarDocument,
-				{ name: query.userName as string }
+				{ name: authorName }
 			)
-			.toPromise(),
-		!!session &&
-			urqlClient
-				.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-				.toPromise()
+			.toPromise()
 	]);
 
 	if (!codeExample) return { notFound: true };
 
 	return addUrqlState(ssr, {
-		props: { session }
+		props: {},
+		revalidate: ms("24h") / 1_000
 	});
 });
 
-export type PageProps = InferGetServerSidePropsType<typeof pageProps>;
+export const paths: GetStaticPaths = () => {
+	return {
+		paths: [],
+		fallback: "blocking"
+	};
+};
+
+export type PageProps = InferGetStaticPropsType<typeof pageProps>;

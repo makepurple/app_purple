@@ -14,7 +14,7 @@ export const createCodeExample = mutationField("createCodeExample", {
 	authorize: (parent, args, { user }) => {
 		return !!user;
 	},
-	resolve: async (parent, args, { octokit: graphql, prisma, res, user }) => {
+	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const dataInput = CodeExampleCreateInput.validator({
@@ -175,6 +175,14 @@ export const createCodeExample = mutationField("createCodeExample", {
 					urlSlug
 				}
 			});
+		});
+
+		await graphcdn.purge`
+			mutation($userId: ID!) {
+				purgeUser(id: $userId)
+			}
+		`({
+			userId: user.id
 		});
 
 		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
