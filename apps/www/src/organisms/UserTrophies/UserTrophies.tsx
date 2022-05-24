@@ -55,7 +55,11 @@ export const UserTrophies: FC<UserTrophiesProps> = ({ className, style, userName
 					<UserTrophy type="yearly-posts" value={trophies.totalYearlyPosts} />
 				</TrophyContainer>
 			</NextLink>
-			<NextLink href="/[userName]/followers" as={`/${userName}/followers`} passHref>
+			<NextLink
+				href="/[userName]/connections/followers"
+				as={`/${userName}/connections/followers`}
+				passHref
+			>
 				<TrophyContainer aria-label="followers">
 					<UserTrophy type="followers" value={trophies.totalFollowers} />
 				</TrophyContainer>
