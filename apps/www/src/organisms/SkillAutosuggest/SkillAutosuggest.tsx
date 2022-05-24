@@ -48,8 +48,7 @@ export const SkillAutosuggest = forwardRef<
 >((props, ref) => {
 	const { className, defaultValue = "", onSelect, style, "aria-label": ariaLabel } = props;
 
-	const [inputFocused, { ref: inputRef }] = useFocus();
-	const [menuFocused, { ref: menuRef }] = useFocus();
+	const [focused, { ref: inputRef }] = useFocus();
 
 	const [skillItems, setSkillItems] = useState<RepositorySearchResultGitHubRepositoryFragment[]>(
 		[]
@@ -130,8 +129,6 @@ export const SkillAutosuggest = forwardRef<
 		combobox.selectItem(newSelectedItem);
 	});
 
-	const focused = inputFocused || menuFocused;
-
 	return (
 		<>
 			<ComboBox {...combobox.getComboboxProps({ className, style })} tw="flex-grow">
@@ -150,10 +147,8 @@ export const SkillAutosuggest = forwardRef<
 				/>
 			</ComboBox>
 			<SkillsSuggest
-				{...combobox.getMenuProps({
-					ref: menuRef
-				})}
-				isOpen={focused && combobox.isOpen}
+				{...combobox.getMenuProps()}
+				isOpen={combobox.isOpen && (focused || skillItems.length)}
 			>
 				{combobox.loading
 					? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
