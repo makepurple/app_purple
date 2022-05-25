@@ -11,7 +11,7 @@ import {
 	Tags,
 	toast
 } from "@makepurple/components";
-import { useRelayCursor } from "@makepurple/hooks";
+import { useMountEffect, useRelayCursor } from "@makepurple/hooks";
 import { ArrayUtils, dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine, oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
@@ -19,7 +19,7 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import tw from "twin.macro";
 import {
 	CodeExampleWhereUniqueInput,
@@ -219,12 +219,16 @@ export const Page: NextPage<PageProps> = () => {
 
 	const isMyPage = viewer?.name === userName;
 
-	const [{ data: postData }] = useGetCodeExampleQuery({
+	const [{ data: postData }, refetch] = useGetCodeExampleQuery({
 		requestPolicy: "cache-and-network",
 		variables: {
 			authorName: userName,
 			urlSlug
 		}
+	});
+
+	useMountEffect(() => {
+		refetch({ requestPolicy: "network-only" });
 	});
 
 	/**

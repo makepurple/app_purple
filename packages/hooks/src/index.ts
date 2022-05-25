@@ -12,6 +12,7 @@ export * from "./useInterval";
 export * from "./useIsClamped";
 export * from "./useIsomorphicLayoutEffect";
 export * from "./useLockBodyScroll";
+export * from "./useMountEffect";
 export * from "./useNoSsr";
 export * from "./useOnClickOutside";
 export * from "./useOnKeyDown";

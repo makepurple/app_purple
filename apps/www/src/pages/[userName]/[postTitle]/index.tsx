@@ -11,7 +11,7 @@ import {
 	Tags,
 	toast
 } from "@makepurple/components";
-import { useRelayCursor } from "@makepurple/hooks";
+import { useMountEffect, useRelayCursor } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { DocumentEditorValue } from "@makepurple/validators";
 import { oneLine, oneLineCommaListsAnd } from "common-tags";
@@ -199,7 +199,7 @@ export const Page: NextPage<PageProps> = () => {
 	const userName = router?.query.userName as string;
 	const postTitle = router?.query.postTitle as string;
 
-	const [{ data: postData }] = useGetPostQuery({
+	const [{ data: postData }, refetch] = useGetPostQuery({
 		requestPolicy: "cache-first",
 		variables: {
 			where: {
@@ -209,6 +209,10 @@ export const Page: NextPage<PageProps> = () => {
 				}
 			}
 		}
+	});
+
+	useMountEffect(() => {
+		refetch({ requestPolicy: "network-only" });
 	});
 
 	const [, viewPost] = useViewPostMutation();

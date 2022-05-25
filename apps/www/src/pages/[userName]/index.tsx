@@ -1,4 +1,5 @@
 import { Anchor, Button, Divider, NonIdealState, Paper } from "@makepurple/components";
+import { useMountEffect } from "@makepurple/hooks";
 import { FormatUtils } from "@makepurple/utils";
 import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
@@ -93,11 +94,15 @@ export const Page: NextPage<PageProps> = () => {
 
 	const userName = router?.query.userName as string;
 
-	const [{ data }] = useGetUserOverviewQuery({
-		requestPolicy: "cache-and-network",
+	const [{ data }, refetch] = useGetUserOverviewQuery({
+		requestPolicy: "cache-first",
 		variables: {
 			name: userName
 		}
+	});
+
+	useMountEffect(() => {
+		refetch({ requestPolicy: "network-only" });
 	});
 
 	const [{ data: skillsData }] = useGetUserInfoSideBarQuery({

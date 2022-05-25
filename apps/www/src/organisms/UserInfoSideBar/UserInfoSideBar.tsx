@@ -13,13 +13,14 @@ import {
 	toast,
 	TwitterIcon
 } from "@makepurple/components";
+import { useMountEffect } from "@makepurple/hooks";
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { CSSProperties, FC, useEffect, useMemo, useState } from "react";
+import React, { CSSProperties, FC, useMemo, useState } from "react";
 import tw from "twin.macro";
 import {
 	useDeleteFriendshipMutation,
@@ -183,9 +184,9 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 		}
 	});
 
-	useEffect(() => {
+	useMountEffect(() => {
 		refetch({ requestPolicy: "network-only" });
-	}, [refetch]);
+	});
 
 	const [{ fetching: following }, followUser] = useFollowUserMutation();
 	const [{ fetching: unfollowing }, unfollowUser] = useUnfollowUserMutation();
