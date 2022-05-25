@@ -1,4 +1,5 @@
 import { Paper } from "@makepurple/components";
+import { useMountEffect } from "@makepurple/hooks";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
@@ -27,11 +28,15 @@ export interface UserTrophiesProps {
 }
 
 export const UserTrophies: FC<UserTrophiesProps> = ({ className, style, userName }) => {
-	const [{ data }] = useGetUserTrophiesQuery({
+	const [{ data }, refetch] = useGetUserTrophiesQuery({
 		requestPolicy: "cache-first",
 		variables: {
 			name: userName
 		}
+	});
+
+	useMountEffect(() => {
+		refetch({ requestPolicy: "network-only" });
 	});
 
 	const user = data?.user;
