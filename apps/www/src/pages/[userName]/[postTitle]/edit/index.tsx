@@ -12,6 +12,7 @@ import {
 	Input,
 	MainContainer,
 	Paper,
+	Spinner,
 	Tags,
 	TextArea,
 	toast
@@ -275,7 +276,10 @@ export const Page: NextPage<PageProps> = () => {
 						<FormHelperText error={(errors.content as any)?.message} />
 					</FormGroup>
 					<FormActions>
-						<FormButton type="submit">Save</FormButton>
+						<FormButton type="submit">
+							<span>Save</span>
+							{saving && <Spinner tw="ml-2" />}
+						</FormButton>
 						<NextLink
 							href="/[userName]/[postTitle]"
 							as={`/${userName}/${postTitle}`}
