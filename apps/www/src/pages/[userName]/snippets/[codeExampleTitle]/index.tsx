@@ -111,6 +111,8 @@ const Title = tw.h1`
 `;
 
 const Skills = tw(Tags)`
+	self-center
+	justify-center
 	max-width[24rem]
 `;
 
