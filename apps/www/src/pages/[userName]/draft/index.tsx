@@ -53,6 +53,7 @@ const Content = tw(Paper)`
 	lg:flex-grow
 	flex
 	flex-col
+	min-w-0
 	p-4
 	sm:p-6
 `;
