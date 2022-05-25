@@ -19,7 +19,7 @@ import { useSession } from "next-auth/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Language } from "prism-react-renderer";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import tw from "twin.macro";
 import {
 	CodeExampleWhereUniqueInput,
