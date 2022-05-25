@@ -20,7 +20,7 @@ export const Button = styled.button<{
 		border-solid
 		border-transparent
 		rounded-md
-		bg-indigo-500
+		bg-brand
 		text-white
 		font-semibold
 		cursor-pointer
@@ -62,7 +62,7 @@ export const Button = styled.button<{
 					${hasInput && tw`text-black`}
 				`;
 			case "primary":
-				return tw`bg-indigo-500`;
+				return tw`bg-brand`;
 			case "secondary":
 				return tw`
 					bg-white/80
@@ -71,7 +71,7 @@ export const Button = styled.button<{
 					not-disabled:hover:bg-indigo-50
 				`;
 			case "success":
-				return tw`bg-blue-500`;
+				return tw`bg-blue-600`;
 			default:
 				return null;
 		}

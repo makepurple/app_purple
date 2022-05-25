@@ -19,10 +19,10 @@ export const ComboBoxOption = tw.div`
 	ease-in-out
 	cursor-pointer
 	[&[aria-selected="true"]]:text-white
-	[&[aria-selected="true"]]:bg-indigo-500
-	[&[aria-selected="true"]]:hover:bg-indigo-500/80
+	[&[aria-selected="true"]]:bg-brand
+	[&[aria-selected="true"]]:hover:bg-brand/80
 	[&[data-selected="true"]]:text-white
-	[&[data-selected="true"]]:bg-indigo-500
+	[&[data-selected="true"]]:bg-brand
 `;
 
 export type ComboBoxOptionProps = InferComponentProps<typeof ComboBoxOption>;

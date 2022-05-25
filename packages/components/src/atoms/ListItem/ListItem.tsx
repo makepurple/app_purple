@@ -26,14 +26,14 @@ export const ListItem = styled.li<{
 		cursor-pointer
 		disabled:cursor-not-allowed
 		hover:text-white
-		hover:bg-indigo-500/80
+		hover:bg-brand/80
 	`}
 
 	${({ active }) =>
 		active &&
 		tw`
 			text-white
-			bg-indigo-500/80
+			bg-brand/80
 		`}
 
 	${({ disabled }) =>
@@ -46,6 +46,6 @@ export const ListItem = styled.li<{
 		selected &&
 		tw`
 			text-white
-			bg-indigo-500
+			bg-brand
 		`}
 `;

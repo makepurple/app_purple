@@ -33,7 +33,7 @@ const SelectorButton = tw.button`
 	w-8
 	rounded-r-lg
 	cursor-pointer
-	bg-indigo-500
+	bg-brand
 	text-white
 	hover:bg-indigo-600
 `;

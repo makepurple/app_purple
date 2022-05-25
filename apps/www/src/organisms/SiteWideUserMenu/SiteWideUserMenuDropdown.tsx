@@ -54,7 +54,7 @@ const AlertCount = styled.div<{ $variant?: "alert" | "success" }>`
 				return tw`bg-pink-600`;
 			case "success":
 			default:
-				return tw`bg-blue-500`;
+				return tw`bg-blue-600`;
 		}
 	}}
 `;

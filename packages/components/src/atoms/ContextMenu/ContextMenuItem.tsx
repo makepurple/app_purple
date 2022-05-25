@@ -25,8 +25,8 @@ export const ContextMenuItem = styled.button<{ selected?: boolean }>`
 		selected &&
 		tw`
 		text-white
-		bg-indigo-500
-		hover:bg-indigo-500
+		bg-brand
+		hover:bg-brand/80
 	`}
 `;
 

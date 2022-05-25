@@ -57,7 +57,7 @@ const Root = tw.div`
 	overflow-x-hidden
 	pt-24
 	pb-28
-	bg-indigo-500/10
+	bg-brand/10
 	border-t
 	border-b
 	border-solid

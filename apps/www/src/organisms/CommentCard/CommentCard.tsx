@@ -106,7 +106,7 @@ const CollapseBar = tw.div`
 	w-6
 	cursor-pointer
 	[& > *]:first:bg-gray-500
-	hover:[& > *]:first:bg-indigo-500
+	hover:[& > *]:first:bg-brand
 `;
 
 const Threadline = tw.i`

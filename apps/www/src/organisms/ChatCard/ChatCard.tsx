@@ -92,7 +92,7 @@ const UnreadMessagesCount = tw.div`
 	px-2
 	py-1.5
 	rounded-full
-	bg-blue-500
+	bg-blue-600
 	text-sm
 	leading-none
 	font-medium

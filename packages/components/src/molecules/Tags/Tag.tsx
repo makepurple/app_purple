@@ -34,7 +34,7 @@ export const Root = styled.a<{
 	background-color: ${({ type }): any => {
 		switch (type) {
 			case "positive":
-				return theme`colors.blue.500`;
+				return theme`colors.blue.600`;
 			case "negative":
 				return theme`colors.pink.600`;
 			case "neutral":

@@ -23,7 +23,7 @@ export const ToolbarButton = styled.button<{ active?: boolean }>`
 		active &&
 		tw`
 			text-white
-			bg-indigo-500
+			bg-brand
 		`}
 `;
 

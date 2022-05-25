@@ -17,7 +17,7 @@ const Info = tw.div`
 	items-center
 	h-8
 	rounded-t-md
-	bg-indigo-500
+	bg-brand
 	text-white
 	font-semibold
 `;

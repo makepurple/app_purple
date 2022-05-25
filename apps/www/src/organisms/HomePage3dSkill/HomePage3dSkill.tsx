@@ -33,7 +33,7 @@ const Face = tw.div`
 	flex
 	items-center
 	justify-center
-	bg-blue-500/40
+	bg-blue-600/40
 	border
 	border-solid
 	border-gray-300

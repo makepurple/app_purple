@@ -10,7 +10,7 @@ export const TabSelection = styled(m.div)`
 		hidden
 		absolute
 		inset-0
-		bg-indigo-500
+		bg-brand
 	`}
 `;
 
@@ -51,7 +51,7 @@ export const TabButton = styled.button.attrs<{ selected?: boolean }>(({ children
 		duration-75
 		ease-linear
 		hover:text-white
-		hover:bg-indigo-500
+		hover:bg-brand
 		hover:bg-opacity-80
 	`}
 

@@ -32,7 +32,7 @@ const Info = tw.div`
 	h-8
 	pl-2
 	rounded-t-md
-	bg-indigo-500
+	bg-brand
 	text-white
 	font-semibold
 	z-index[1]
