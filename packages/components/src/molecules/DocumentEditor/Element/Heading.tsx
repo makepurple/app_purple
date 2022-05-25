@@ -16,31 +16,37 @@ import { ToolbarButton } from "../Shared";
 const HeadingOne = tw.span`
 	text-3xl
 	font-bold
+	my-3
 `;
 
 const HeadingTwo = tw.span`
 	text-2xl
 	font-semibold
+	my-3
 `;
 
 const HeadingThree = tw.span`
 	text-xl
 	font-semibold
+	my-3
 `;
 
 const HeadingFour = tw.span`
 	text-base
 	font-semibold
+	my-3
 `;
 
 const HeadingFive = tw.span`
 	text-sm
 	font-semibold
+	my-3
 `;
 
 const HeadingSix = tw.span`
 	text-xs
 	font-semibold
+	my-3
 `;
 
 export type HeadingSlateType = HeadingType;
