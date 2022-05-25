@@ -137,41 +137,17 @@ export const Heading: FC<RenderElementProps> = (props) => {
 
 	switch (element.type) {
 		case "heading-one":
-			return (
-				<HeadingOne as="h1" {...attributes}>
-					{children}
-				</HeadingOne>
-			);
+			return <HeadingOne {...attributes}>{children}</HeadingOne>;
 		case "heading-two":
-			return (
-				<HeadingTwo as="h2" {...attributes}>
-					{children}
-				</HeadingTwo>
-			);
+			return <HeadingTwo {...attributes}>{children}</HeadingTwo>;
 		case "heading-three":
-			return (
-				<HeadingThree as="h3" {...attributes}>
-					{children}
-				</HeadingThree>
-			);
+			return <HeadingThree {...attributes}>{children}</HeadingThree>;
 		case "heading-four":
-			return (
-				<HeadingFour as="h4" {...attributes}>
-					{children}
-				</HeadingFour>
-			);
+			return <HeadingFour {...attributes}>{children}</HeadingFour>;
 		case "heading-five":
-			return (
-				<HeadingFive as="h5" {...attributes}>
-					{children}
-				</HeadingFive>
-			);
+			return <HeadingFive {...attributes}>{children}</HeadingFive>;
 		case "heading-six":
-			return (
-				<HeadingSix as="h6" {...attributes}>
-					{children}
-				</HeadingSix>
-			);
+			return <HeadingSix {...attributes}>{children}</HeadingSix>;
 		default:
 			return null;
 	}
