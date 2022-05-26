@@ -1,19 +1,11 @@
 import { useCallback } from "react";
-import { BaseEditor, Editor, Text as SlateText } from "slate";
+import { BaseEditor, Editor } from "slate";
 import { useSlate } from "slate-react";
 
 export type MarkType = keyof NonNullable<BaseEditor["marks"]>;
 
 export const isMarkActive = (editor: Editor, mark: MarkType): boolean => {
-	const [match] = Array.from(
-		Editor.nodes(editor, {
-			match: (node) => {
-				return !Editor.isEditor(node) && SlateText.isText(node) && !!node[mark];
-			}
-		})
-	);
-
-	return !!match;
+	return !!Editor.marks(editor)?.[mark];
 };
 
 export const useIsMarkActive = () => {
