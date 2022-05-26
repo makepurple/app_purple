@@ -13,37 +13,37 @@ import { useIsBlockActive } from "../hooks/useIsBlockActive";
 import { useToggleBlock } from "../hooks/useToggleBlock";
 import { ToolbarButton } from "../Shared";
 
-const HeadingOne = tw.span`
+const HeadingOne = tw.div`
 	text-3xl
 	font-bold
 	my-3
 `;
 
-const HeadingTwo = tw.span`
+const HeadingTwo = tw.div`
 	text-2xl
 	font-semibold
 	my-3
 `;
 
-const HeadingThree = tw.span`
+const HeadingThree = tw.div`
 	text-xl
 	font-semibold
 	my-3
 `;
 
-const HeadingFour = tw.span`
+const HeadingFour = tw.div`
 	text-base
 	font-semibold
 	my-3
 `;
 
-const HeadingFive = tw.span`
+const HeadingFive = tw.div`
 	text-sm
 	font-semibold
 	my-3
 `;
 
-const HeadingSix = tw.span`
+const HeadingSix = tw.div`
 	text-xs
 	font-semibold
 	my-3
