@@ -2,6 +2,7 @@ import { UrlUtils } from "@makepurple/utils";
 import React, { FC, useCallback } from "react";
 import { Descendant, Editor, Element, Path, Range, Transforms } from "slate";
 import { RenderElementProps, useSlateStatic } from "slate-react";
+import tw from "twin.macro";
 import { Anchor } from "../../../atoms";
 import { LinkIcon } from "../../../svgs";
 import { isBlockActive, useIsBlockActive } from "../hooks/useIsBlockActive";
@@ -128,14 +129,18 @@ export const LinkToolbarButton: FC<Record<string, never>> = () => {
 	);
 };
 
+const LinkAnchor = tw(Anchor)`
+	whitespace-normal
+`;
+
 export const Link: FC<RenderElementProps> = (props) => {
 	const { attributes, children, element } = props;
 
 	if (element.type !== "link") return null;
 
 	return (
-		<Anchor {...attributes} href={element.url} rel="noreferrer noopener" target="_blank">
+		<LinkAnchor {...attributes} href={element.url} rel="noreferrer noopener" target="_blank">
 			{children}
-		</Anchor>
+		</LinkAnchor>
 	);
 };
