@@ -6,7 +6,7 @@ module.exports = {
 		extend: {
 			colors: {
 				...colors,
-				brand: "#5C5BED",
+				brand: "#7C3AED",
 				current: "currentColor"
 			},
 			fontFamily: {
