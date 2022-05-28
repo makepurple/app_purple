@@ -21,6 +21,8 @@ import {
 import { ToolbarButton } from "./Shared";
 
 const Root = tw(Toolbar)`
+	sticky
+	bottom-0
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(3rem, 1fr))]
 	grid-auto-rows[minmax(3rem, 1fr)]
@@ -33,6 +35,7 @@ const Root = tw(Toolbar)`
 	border-b
 	border-solid
 	border-gray-200
+	bg-white
 `;
 
 export type DocumentEditorToolbarProps = ToolbarProps & {
