@@ -19,7 +19,7 @@ const Root = tw.li`
 	px-6
 	py-2
 	cursor-pointer
-	hover:bg-indigo-50
+	hover:bg-violet-50
 `;
 
 const Index = tw.span`

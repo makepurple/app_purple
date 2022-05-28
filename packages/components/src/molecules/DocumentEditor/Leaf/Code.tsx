@@ -34,7 +34,7 @@ export const Code = tw.code`
 	border-gray-200
 	font-mono
 	text-gray-800
-	bg-indigo-100
+	bg-violet-100
 `;
 
 export const wrapLeafCode: WrapLeafWithType = (props) => {

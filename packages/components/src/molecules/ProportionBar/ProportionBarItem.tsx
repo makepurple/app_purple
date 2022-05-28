@@ -19,7 +19,7 @@ const LegendIcon = tw.span`
 
 const Proportion = tw.span`
 	ml-2
-	text-indigo-300
+	text-violet-300
 	text-sm
 `;
 

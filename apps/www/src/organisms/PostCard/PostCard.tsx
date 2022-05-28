@@ -36,7 +36,7 @@ const Root = styled(Paper)`
 		gap-4
 		p-3
 		cursor-pointer
-		hover:bg-indigo-50
+		hover:bg-violet-50
 		sm:flex-row
 		sm:p-4
 	`}

@@ -42,8 +42,8 @@ const Root = styled.div<{ editable?: boolean | "add-only" | "remove-only"; type?
 			border-gray-400
 			rounded-sm
 			shadow-inner
-			bg-indigo-50
-			ring-indigo-500
+			bg-violet-50
+			ring-violet-500
 			ring-opacity-80
 			transition
 			duration-300

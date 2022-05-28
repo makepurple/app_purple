@@ -13,7 +13,7 @@ export const ComboBoxOption = tw.div`
 	font-semibold
 	text-black
 	bg-transparent
-	hover:bg-indigo-50/80
+	hover:bg-violet-50/80
 	transition
 	duration-150
 	ease-in-out

@@ -11,7 +11,7 @@ const Root = tw(Paper)`
 	cursor-pointer
 	gap-3
 	p-3
-	hover:bg-indigo-50
+	hover:bg-violet-50
 `;
 
 const Text = tw.span`

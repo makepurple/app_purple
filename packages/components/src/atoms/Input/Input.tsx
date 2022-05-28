@@ -14,7 +14,7 @@ const Root = styled.input<{ error?: boolean }>`
 		border-solid
 		rounded-sm
 		shadow-inner
-		bg-indigo-50
+		bg-violet-50
 		text-base
 		leading-none
 		font-sans

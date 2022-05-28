@@ -13,7 +13,7 @@ const Root = tw.div`
 	items-start
 	p-2
 	cursor-pointer
-	hover:bg-indigo-50
+	hover:bg-violet-50
 `;
 
 const Name = tw(Anchor)`

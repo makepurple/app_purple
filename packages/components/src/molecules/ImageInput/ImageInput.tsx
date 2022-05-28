@@ -13,7 +13,7 @@ const Root = tw.div`
 	border-solid
 	border-gray-200
 	rounded-lg
-	bg-indigo-50
+	bg-violet-50
 	cursor-pointer
 	transition
 	duration-300

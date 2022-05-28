@@ -13,13 +13,13 @@ export const NotificationCardBase = styled.div<{ unread: boolean }>`
 		border-solid
 		border-transparent
 		cursor-pointer
-		active:bg-indigo-50
+		active:bg-violet-50
 	`}
 
 	${({ unread }) =>
 		unread &&
 		tw`
-			border-indigo-500
-			bg-indigo-50
+			border-violet-500
+			bg-violet-50
 		`}
 `;

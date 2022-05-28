@@ -12,7 +12,7 @@ const Root = tw(Paper)`
 	items-start
 	p-4
 	cursor-pointer
-	hover:bg-indigo-50
+	hover:bg-violet-50
 `;
 
 const StyledAvatar = tw(Avatar)`

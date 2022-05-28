@@ -97,7 +97,7 @@ const BanInfo = tw.div`
 	border-gray-300
 	rounded-md
 	text-red-700
-	bg-indigo-50
+	bg-violet-50
 `;
 
 const BannedBy = tw.span`
@@ -118,7 +118,7 @@ const SocialLinks = tw.div`
 	items-center
 	flex-wrap
 	gap-4
-	text-indigo-800
+	text-violet-800
 `;
 
 const SocialLink = tw.a`

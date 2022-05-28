@@ -20,7 +20,7 @@ const Root = styled.textarea<{ error?: boolean }>`
 		shadow-inner
 		text-base
 		leading-snug
-		bg-indigo-50
+		bg-violet-50
 		transition
 		duration-300
 		ease-in-out

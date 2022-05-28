@@ -37,7 +37,7 @@ const SocialLinks = tw.div`
 	inline-flex
 	items-center
 	gap-4
-	text-indigo-800
+	text-violet-800
 `;
 
 const SocialLink = tw.a`

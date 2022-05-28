@@ -35,7 +35,7 @@ const SelectorButton = tw.button`
 	cursor-pointer
 	bg-brand
 	text-white
-	hover:bg-indigo-600
+	hover:bg-violet-600
 `;
 
 const Languages = styled(Paper)`

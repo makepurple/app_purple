@@ -133,7 +133,7 @@ const DeletedComment = tw.div`
 	border-gray-200
 	text-gray-500
 	font-mono
-	bg-indigo-50
+	bg-violet-50
 `;
 
 const Actions = tw.div`

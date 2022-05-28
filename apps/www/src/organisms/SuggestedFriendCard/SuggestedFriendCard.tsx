@@ -16,7 +16,7 @@ const Root = styled(Paper)<{ $withPost: boolean }>`
 		items-stretch
 	`}
 
-	${({ $withPost }) => !$withPost && tw`hover:bg-indigo-50`}
+	${({ $withPost }) => !$withPost && tw`hover:bg-violet-50`}
 `;
 
 const ThumbnailContainer = tw.div`
@@ -51,7 +51,7 @@ const PostInfo = tw.a`
 	flex-col
 	items-stretch
 	p-3
-	hover:bg-indigo-50
+	hover:bg-violet-50
 `;
 
 const PostTitle = tw.div`
@@ -71,12 +71,12 @@ const UserInfo = tw.div`
 	flex-col
 	items-stretch
 	p-3
-	hover:bg-indigo-50
+	hover:bg-violet-50
 `;
 
 const UserName = tw.a`
 	leading-none
-	text-indigo-600
+	text-violet-600
 	truncate
 `;
 

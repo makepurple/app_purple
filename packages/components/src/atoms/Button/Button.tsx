@@ -52,7 +52,7 @@ export const Button = styled.button<{
 			case "input":
 				return css`
 					${tw`
-						bg-indigo-50
+						bg-violet-50
 						border
 						border-solid
 						border-gray-400
@@ -68,7 +68,7 @@ export const Button = styled.button<{
 					bg-white/80
 					text-black
 					border-gray-300
-					not-disabled:hover:bg-indigo-50
+					not-disabled:hover:bg-violet-50
 				`;
 			case "success":
 				return tw`bg-blue-600`;

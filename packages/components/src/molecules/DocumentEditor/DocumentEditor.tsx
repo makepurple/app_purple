@@ -19,7 +19,7 @@ import { DocumentEditorToolbar } from "./Toolbar";
 const Root = styled(Paper)<{ $disabled?: boolean; error?: boolean }>`
 	${tw`
 		outline-none
-		ring-indigo-500
+		ring-violet-500
 		ring-opacity-80
 		transition
 		duration-300

@@ -24,18 +24,18 @@ const Root = styled.div<{ $selected: boolean; $unread: boolean }>`
 		bg-white
 		cursor-pointer
 		[& *]:cursor-pointer!
-		hover:bg-indigo-50
-		active:bg-indigo-100
+		hover:bg-violet-50
+		active:bg-violet-100
 	`}
 
-	${({ $selected }) => $selected && tw`bg-indigo-100!`}
+	${({ $selected }) => $selected && tw`bg-violet-100!`}
 
 	${({ $unread }) =>
 		$unread &&
 		tw`
 			border-l-4
 			border-solid
-			border-indigo-500
+			border-violet-500
 		`}
 `;
 

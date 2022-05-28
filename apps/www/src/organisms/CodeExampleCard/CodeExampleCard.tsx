@@ -38,7 +38,7 @@ const Root = styled(Paper)`
 		gap-4
 		p-4
 		cursor-pointer
-		hover:bg-indigo-50
+		hover:bg-violet-50
 	`}
 
 	&:hover ${DeleteButton} {

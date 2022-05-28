@@ -34,7 +34,7 @@ require("prismjs/components/prism-yaml");
 const EditableContainer = styled.div<{ $readOnly?: boolean }>`
 	${tw`
 		p-5
-		bg-indigo-50
+		bg-violet-50
 		transition
 		duration-300
 		ease-in-out
