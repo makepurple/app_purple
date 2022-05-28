@@ -76,7 +76,7 @@ export const CodeExample_fragment_mock: CodeExample = {
 				__typename: "SkillEdge",
 				cursor: Skill_fragment_mock.id,
 				node: Skill_fragment_mock
-			}
+			} as any
 		],
 		nodes: [Skill_fragment_mock],
 		totalCount: 1

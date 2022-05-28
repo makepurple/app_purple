@@ -329,12 +329,15 @@ input CommentWhereUniqueInput {
 }
 
 interface Connection {
+  edges: [ConnectionEdge!]!
+  nodes: [Node!]!
   pageInfo: PageInfo!
   totalCount: Int!
 }
 
 interface ConnectionEdge {
   cursor: String!
+  node: Node!
 }
 
 input CreateChatInput {
@@ -640,11 +643,11 @@ type GitHubLicense {
   url: URL
 }
 
-type GitHubOrganization implements GitHubRepositoryOwner {
+type GitHubOrganization implements GitHubRepositoryOwner & Node {
   avatarUrl: URL!
   description: String
   experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
-  id: String!
+  id: ID!
   login: String!
   name: String
   organization: Organization!
@@ -654,10 +657,10 @@ type GitHubOrganization implements GitHubRepositoryOwner {
   websiteUrl: String
 }
 
-type GitHubRepository {
+type GitHubRepository implements Node {
   description: String
   forkCount: Int!
-  id: String!
+  id: ID!
   issueCount: Int!
   licenseInfo: GitHubLicense
   name: String!
@@ -683,10 +686,10 @@ type GitHubRepositoryEdge implements ConnectionEdge {
   node: GitHubRepository!
 }
 
-interface GitHubRepositoryOwner {
+interface GitHubRepositoryOwner implements Node {
   avatarUrl: URL!
   experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
-  id: String!
+  id: ID!
   login: String!
   repositories(after: String, before: String, first: Int, last: Int): GitHubRepositoryConnection!
   url: URL!
@@ -702,14 +705,14 @@ input GitHubRepositoryWhereUniqueInput {
 }
 
 """Data for a user from that user's connected GitHub account."""
-type GitHubUser implements GitHubRepositoryOwner {
+type GitHubUser implements GitHubRepositoryOwner & Node {
   avatarUrl: URL!
   bio: String
   company: String
   contributionCalendar: GitHubUserContributionCalendar!
   experiencers(after: String, before: String, first: Int, last: Int, where: UserWhereInput): UserConnection!
   followerCount: Int!
-  id: String!
+  id: ID!
   login: String!
   name: String
   repositories(after: String, before: String, first: Int, last: Int): GitHubRepositoryConnection!

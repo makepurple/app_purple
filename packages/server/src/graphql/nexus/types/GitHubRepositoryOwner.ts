@@ -9,6 +9,7 @@ const MAX_REPOSITORIES = 20;
 export const GitHubRepositoryOwner = interfaceType({
 	name: "GitHubRepositoryOwner",
 	definition: (t) => {
+		t.implements("Node");
 		t.nonNull.url("avatarUrl");
 		t.nonNull.field("experiencers", {
 			type: "UserConnection",
@@ -37,7 +38,6 @@ export const GitHubRepositoryOwner = interfaceType({
 				);
 			}
 		});
-		t.nonNull.string("id");
 		t.nonNull.string("login");
 		t.nonNull.field("repositories", {
 			type: "GitHubRepositoryConnection",

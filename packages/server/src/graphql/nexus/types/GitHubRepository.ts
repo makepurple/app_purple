@@ -4,7 +4,7 @@ export const GitHubRepository = objectType({
 	name: "GitHubRepository",
 	sourceType: "octokit.DeepGitHubType<octokit.GitHubRepositoryFragment>",
 	definition: (t) => {
-		t.nonNull.string("id");
+		t.implements("Node");
 		t.string("description");
 		t.nonNull.int("forkCount");
 		t.nonNull.int("issueCount", {

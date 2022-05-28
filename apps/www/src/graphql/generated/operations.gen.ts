@@ -437,12 +437,15 @@ export type CommentWhereUniqueInput = {
 };
 
 export type Connection = {
+  readonly edges: ReadonlyArray<ConnectionEdge>;
+  readonly nodes: ReadonlyArray<Node>;
   readonly pageInfo: PageInfo;
   readonly totalCount: Scalars['Int'];
 };
 
 export type ConnectionEdge = {
   readonly cursor: Scalars['String'];
+  readonly node: Node;
 };
 
 export type CreateChatInput = {
@@ -778,12 +781,12 @@ export type GitHubLicense = {
   readonly url?: Maybe<Scalars['URL']>;
 };
 
-export type GitHubOrganization = GitHubRepositoryOwner & {
+export type GitHubOrganization = GitHubRepositoryOwner & Node & {
   readonly __typename: 'GitHubOrganization';
   readonly avatarUrl: Scalars['URL'];
   readonly description?: Maybe<Scalars['String']>;
   readonly experiencers: UserConnection;
-  readonly id: Scalars['String'];
+  readonly id: Scalars['ID'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;
   readonly organization: Organization;
@@ -810,11 +813,11 @@ export type GitHubOrganizationRepositoriesArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
-export type GitHubRepository = {
+export type GitHubRepository = Node & {
   readonly __typename: 'GitHubRepository';
   readonly description?: Maybe<Scalars['String']>;
   readonly forkCount: Scalars['Int'];
-  readonly id: Scalars['String'];
+  readonly id: Scalars['ID'];
   readonly issueCount: Scalars['Int'];
   readonly licenseInfo?: Maybe<GitHubLicense>;
   readonly name: Scalars['String'];
@@ -845,7 +848,7 @@ export type GitHubRepositoryEdge = ConnectionEdge & {
 export type GitHubRepositoryOwner = {
   readonly avatarUrl: Scalars['URL'];
   readonly experiencers: UserConnection;
-  readonly id: Scalars['String'];
+  readonly id: Scalars['ID'];
   readonly login: Scalars['String'];
   readonly repositories: GitHubRepositoryConnection;
   readonly url: Scalars['URL'];
@@ -878,7 +881,7 @@ export type GitHubRepositoryWhereUniqueInput = {
 };
 
 /** Data for a user from that user's connected GitHub account. */
-export type GitHubUser = GitHubRepositoryOwner & {
+export type GitHubUser = GitHubRepositoryOwner & Node & {
   readonly __typename: 'GitHubUser';
   readonly avatarUrl: Scalars['URL'];
   readonly bio?: Maybe<Scalars['String']>;
@@ -886,7 +889,7 @@ export type GitHubUser = GitHubRepositoryOwner & {
   readonly contributionCalendar: GitHubUserContributionCalendar;
   readonly experiencers: UserConnection;
   readonly followerCount: Scalars['Int'];
-  readonly id: Scalars['String'];
+  readonly id: Scalars['ID'];
   readonly login: Scalars['String'];
   readonly name?: Maybe<Scalars['String']>;
   readonly repositories: GitHubRepositoryConnection;
