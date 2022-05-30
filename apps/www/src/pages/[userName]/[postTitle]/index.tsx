@@ -329,9 +329,16 @@ export const Page: NextPage<PageProps> = () => {
 					<Title>{post.title}</Title>
 					<Skills type="positive">
 						{skills.map((skill) => (
-							<Tags.Tag key={skill.id} id={skill.id}>
-								{skill.name}
-							</Tags.Tag>
+							<NextLink
+								key={skill.id}
+								href="/s/[skillOwner]/[skillName]"
+								as={`/s/${skill.owner}/${skill.name}`}
+								passHref
+							>
+								<Tags.Tag id={skill.id} title={`${skill.owner}/${skill.name}`}>
+									{skill.name}
+								</Tags.Tag>
+							</NextLink>
 						))}
 					</Skills>
 					{post.description && <Description>{post.description}</Description>}
