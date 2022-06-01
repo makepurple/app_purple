@@ -528,7 +528,7 @@ model CodeExample {
   author         User                   @relation(fields: [authorName], references: [name], onDelete: Cascade)
   authorName     String                 @db.VarChar(128)
   comments       Comment[]
-  content        String                 @db.VarChar(4096)
+  content        String                 @db.VarChar(8192)
   createdAt      DateTime               @default(now()) @db.DateTime(6)
   description    String?                @db.VarChar(512)
   language       CodeLanguage
