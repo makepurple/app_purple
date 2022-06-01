@@ -361,7 +361,6 @@ export const Page: NextPage<PageProps> = () => {
 						<Tags editable type="positive" tw="relative">
 							<></>
 							<SkillAutosuggest
-								defaultValue={`${codeExample.primarySkill.owner}/${codeExample.primarySkill.name}`}
 								onSelect={(newSkill) => {
 									const name = newSkill.name;
 									const owner = newSkill.owner.login;
