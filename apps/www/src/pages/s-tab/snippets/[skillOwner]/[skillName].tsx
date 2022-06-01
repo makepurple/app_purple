@@ -28,7 +28,7 @@ const SEO_MIN_SKILL_SIZE = 5;
 const Content = tw.div`
 	grid
 	grid-template-columns[repeat(auto-fill, minmax(20rem, 1fr))]
-	auto-rows-fr
+	auto-rows-auto
 	gap-3
 `;
 

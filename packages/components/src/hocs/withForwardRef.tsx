@@ -5,20 +5,21 @@ import React, { ComponentType, forwardRef } from "react";
  * @description This component is used to forward refs of class components.
  * This is useful for components that cannot be function components, for
  * example, if they need `componentDidCatch` which cannot be implemented in
- * hooks at the time of this comment.
+ * hooks at the time of this comment. This is also useful to inject refs for
+ * components wrapped with next/dynamic
  * @author David Lee
  * @date October 24, 2021
  */
 export const withForwardRef = <T extends unknown, P extends unknown>(
 	Component: ComponentType<P>
 ) => {
-	const classComponent = (props, ref) => {
+	const wrappedComponent = (props, ref) => {
 		return <Component {...props} innerRef={ref} />;
 	};
 
-	classComponent.displayName = `WithForwardedRef(${
-		classComponent.displayName || classComponent.name
+	wrappedComponent.displayName = `WithForwardedRef(${
+		wrappedComponent.displayName || wrappedComponent.name
 	})`;
 
-	return forwardRef<T, P>(classComponent);
+	return forwardRef<T, P>(wrappedComponent);
 };
