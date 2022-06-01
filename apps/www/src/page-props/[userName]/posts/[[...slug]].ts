@@ -81,7 +81,7 @@ export const pageProps = NextUtils.castStaticProps(async (ctx) => {
 
 export const paths: GetStaticPaths = () => {
 	return {
-		paths: [],
+		paths: [{ params: { userName: "leedavidcs", slug: [] } }],
 		fallback: "blocking"
 	};
 };
