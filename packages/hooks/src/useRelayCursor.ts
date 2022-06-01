@@ -14,7 +14,6 @@ export type PageInfo = {
 
 export type UseQueryHook<TData, TVariables> = (
 	options?: Omit<UseQueryArgs<TVariables>, "query">
-	// eslint-disable-next-line @typescript-eslint/ban-types
 ) => UseQueryResponse<TData, TVariables>;
 
 export type UseRelayCursorGetRef = (i: number) => Maybe<RefCallback<HTMLElement>>;
@@ -32,13 +31,18 @@ export type UseRelayCursorArgs<
 	offset?: number;
 } & IUseIntersectionObserverOptions;
 
+export type UseRelayCursorResult<TData, TVariables> = [
+	state: UseQueryState<TData, TVariables>,
+	actions: UseRelayCursorActions
+];
+
 export const useRelayCursor = <
 	TData extends object,
 	TVariables extends { after?: Maybe<string> },
 	TFieldName extends FieldPath<TData> = FieldPath<TData>
 >(
 	args: UseRelayCursorArgs<TData, TVariables, TFieldName>
-): [state: UseQueryState<TData, TVariables>, actions: UseRelayCursorActions] => {
+): UseRelayCursorResult<TData, TVariables> => {
 	const { field: fieldName, offset = 0, root, rootMargin, threshold, ...options } = args;
 
 	const [result, reexecute] = useQuery({ ...options });
@@ -100,5 +104,5 @@ export const useRelayCursor = <
 	const state = useMemo(() => ({ ...result, fetching }), [fetching, result]);
 	const actions = useMemo(() => ({ getRef, reexecute }), [getRef, reexecute]);
 
-	return [state, actions] as [UseQueryState<TData, TVariables>, UseRelayCursorActions];
+	return [state, actions] as UseRelayCursorResult<TData, TVariables>;
 };
