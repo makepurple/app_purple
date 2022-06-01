@@ -3,7 +3,7 @@ import { CodeExampleTitle, CodeLanguage } from "../string";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 export const CodeExampleCreateInput = Schema({
-	content: string.trim().error("Required").min(12).max(3_000),
+	content: string.trim().error("Required").min(12).max(4_096),
 	description: string.trim().max(512).strictOptional(),
 	language: CodeLanguage,
 	primarySkill: SkillWhereUniqueInput.strictOptional(),

@@ -3,7 +3,7 @@ import { CodeLanguage } from "../string";
 import { SkillWhereUniqueInput } from "./SkillWhereUniqueInput";
 
 export const CodeExampleUpdateInput = Schema({
-	content: string.trim().min(12).max(3_000).strictOptional(),
+	content: string.trim().min(12).max(4_096).strictOptional(),
 	description: string.trim().max(512, "Max 512 character limit").strictOptional(),
 	language: CodeLanguage.strictOptional(),
 	primarySkill: SkillWhereUniqueInput.strictOptional(),
