@@ -1,13 +1,10 @@
 import { dayjs, ManipulateType } from "@makepurple/utils";
-import { InferGetServerSidePropsType } from "next";
-import { getSession } from "next-auth/react";
+import ms from "ms";
+import { GetStaticPaths, InferGetStaticPropsType } from "next";
 import { ssrExchange } from "urql";
 import {
 	addUrqlState,
 	createUrqlClient,
-	GetPostDraftDocument,
-	GetPostDraftQuery,
-	GetPostDraftQueryVariables,
 	GetPostsDocument,
 	GetPostsQuery,
 	GetPostsQueryVariables,
@@ -22,16 +19,14 @@ import { NextUtils } from "../../../utils";
 
 const BATCH_SIZE = 20;
 
-export const pageProps = NextUtils.castSSRProps(async (ctx) => {
-	const { query, req } = ctx;
+export const pageProps = NextUtils.castStaticProps(async (ctx) => {
+	const { params } = ctx;
 
 	const ssr = ssrExchange({ isClient: false });
-	const urqlClient = createUrqlClient({ req, ssr });
+	const urqlClient = createUrqlClient({ isStatic: true, ssr });
 
-	const session = await getSession(ctx);
-
-	const userName = query.userName as string;
-	const slug = (query.slug ?? []) as (string | undefined)[];
+	const userName = params?.userName as string;
+	const slug = (params?.slug ?? []) as (string | undefined)[];
 
 	const [sort, criteria] = slug;
 
@@ -59,7 +54,7 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 		urqlClient
 			.query<GetUserInfoSideBarQuery, GetUserInfoSideBarQueryVariables>(
 				GetUserInfoSideBarDocument,
-				{ name: query.userName as string }
+				{ name: params?.userName as string }
 			)
 			.toPromise()
 			.then((result) => result.data?.user),
@@ -73,18 +68,22 @@ export const pageProps = NextUtils.castSSRProps(async (ctx) => {
 					author: { name: { equals: userName } }
 				}
 			})
-			.toPromise(),
-		!!session &&
-			urqlClient
-				.query<GetPostDraftQuery, GetPostDraftQueryVariables>(GetPostDraftDocument)
-				.toPromise()
+			.toPromise()
 	]);
 
 	if (!user) return { notFound: true };
 
 	return addUrqlState(ssr, {
-		props: { session }
+		props: {},
+		revalidate: ms("24h") / 1_000
 	});
 });
 
-export type PageProps = InferGetServerSidePropsType<typeof pageProps>;
+export const paths: GetStaticPaths = () => {
+	return {
+		paths: [],
+		fallback: "blocking"
+	};
+};
+
+export type PageProps = InferGetStaticPropsType<typeof pageProps>;

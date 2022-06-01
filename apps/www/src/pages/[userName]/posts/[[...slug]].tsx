@@ -1,5 +1,5 @@
 import { Button, NonIdealState, NoteIcon, Paper } from "@makepurple/components";
-import { useRelayCursor } from "@makepurple/hooks";
+import { useMountEffect, useRelayCursor } from "@makepurple/hooks";
 import { dayjs, ManipulateType } from "@makepurple/utils";
 import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
@@ -9,7 +9,7 @@ import React, { useMemo } from "react";
 import tw, { styled } from "twin.macro";
 import { GetPostsDocument, PostOrderByInput, PostWhereInput, SortOrder } from "../../../graphql";
 import { LoadingPostCard, PostCard, Seo, UserPageLayout } from "../../../organisms";
-import { PageProps, pageProps } from "../../../page-props/[userName]/posts/[[...slug]]";
+import { PageProps, pageProps, paths } from "../../../page-props/[userName]/posts/[[...slug]]";
 
 const BATCH_SIZE = 20;
 const MIN_SEO_READ_TIME = 10;
@@ -58,7 +58,8 @@ const OrderByCriteria = styled.div`
 	`}
 `;
 
-export const getServerSideProps = pageProps;
+export const getStaticProps = pageProps;
+export const getStaticPaths = paths;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
@@ -89,7 +90,7 @@ export const Page: NextPage<PageProps> = () => {
 		}
 	}, [criteria, sort]);
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor({
+	const [{ data, fetching }, { getRef, reexecute }] = useRelayCursor({
 		query: GetPostsDocument,
 		field: "posts",
 		requestPolicy: "cache-first",
@@ -102,6 +103,10 @@ export const Page: NextPage<PageProps> = () => {
 				author: { name: { equals: userName } }
 			}
 		}
+	});
+
+	useMountEffect(() => {
+		reexecute({ requestPolicy: "network-only" });
 	});
 
 	const posts = useMemo(() => data?.posts.nodes ?? [], [data?.posts.nodes]);

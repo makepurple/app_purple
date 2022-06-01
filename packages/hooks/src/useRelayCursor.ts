@@ -4,7 +4,7 @@ import { useIntersectionObserver } from "@react-hookz/web";
 import type { RefCallback } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { FieldPath } from "react-hook-form";
-import type { UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
+import type { OperationContext, UseQueryArgs, UseQueryResponse, UseQueryState } from "urql";
 import { useClient, useQuery } from "urql";
 
 export type PageInfo = {
@@ -15,11 +15,12 @@ export type PageInfo = {
 export type UseQueryHook<TData, TVariables> = (
 	options?: Omit<UseQueryArgs<TVariables>, "query">
 	// eslint-disable-next-line @typescript-eslint/ban-types
-) => UseQueryResponse<TData, object>;
+) => UseQueryResponse<TData, TVariables>;
 
 export type UseRelayCursorGetRef = (i: number) => Maybe<RefCallback<HTMLElement>>;
 export type UseRelayCursorActions = {
 	getRef: UseRelayCursorGetRef;
+	reexecute: (opts?: Partial<OperationContext> | undefined) => void;
 };
 
 export type UseRelayCursorArgs<
@@ -37,10 +38,10 @@ export const useRelayCursor = <
 	TFieldName extends FieldPath<TData> = FieldPath<TData>
 >(
 	args: UseRelayCursorArgs<TData, TVariables, TFieldName>
-): [state: UseQueryState<TData, any>, actions: UseRelayCursorActions] => {
+): [state: UseQueryState<TData, TVariables>, actions: UseRelayCursorActions] => {
 	const { field: fieldName, offset = 0, root, rootMargin, threshold, ...options } = args;
 
-	const [result] = useQuery({ ...options });
+	const [result, reexecute] = useQuery({ ...options });
 
 	const { data, fetching: fetchingInitial } = result;
 
@@ -97,7 +98,7 @@ export const useRelayCursor = <
 	);
 
 	const state = useMemo(() => ({ ...result, fetching }), [fetching, result]);
-	const actions = useMemo(() => ({ getRef }), [getRef]);
+	const actions = useMemo(() => ({ getRef, reexecute }), [getRef, reexecute]);
 
-	return [state, actions] as [UseQueryState<TData, any>, UseRelayCursorActions];
+	return [state, actions] as [UseQueryState<TData, TVariables>, UseRelayCursorActions];
 };

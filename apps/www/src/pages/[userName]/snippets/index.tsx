@@ -1,5 +1,5 @@
 import { Avatar, Button, Logo, NonIdealState } from "@makepurple/components";
-import { useRelayCursor } from "@makepurple/hooks";
+import { useMountEffect, useRelayCursor } from "@makepurple/hooks";
 import { ArrayUtils } from "@makepurple/utils";
 import { oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
@@ -16,7 +16,7 @@ import {
 	Seo,
 	UserPageLayout
 } from "../../../organisms";
-import { pageProps, PageProps } from "../../../page-props/[userName]/snippets";
+import { pageProps, PageProps, paths } from "../../../page-props/[userName]/snippets";
 
 const BATCH_SIZE = 20;
 const SEO_MIN_SIZE = 5;
@@ -62,7 +62,8 @@ const CreateNewButton = tw(Button)`
 	w-48
 `;
 
-export const getServerSideProps = pageProps;
+export const getStaticProps = pageProps;
+export const getStaticPaths = paths;
 
 export const Page: NextPage<PageProps> = () => {
 	const router = useRouter();
@@ -71,7 +72,7 @@ export const Page: NextPage<PageProps> = () => {
 	const userName = router?.query.userName as string;
 	const isMyPage = session?.user.name === userName;
 
-	const [{ data, fetching }, { getRef }] = useRelayCursor({
+	const [{ data, fetching }, { getRef, reexecute }] = useRelayCursor({
 		query: GetUserCodeExamplesDocument,
 		field: "user.codeExamples",
 		offset: 0,
@@ -81,6 +82,10 @@ export const Page: NextPage<PageProps> = () => {
 			first: BATCH_SIZE,
 			name: userName
 		}
+	});
+
+	useMountEffect(() => {
+		reexecute({ requestPolicy: "network-only" });
 	});
 
 	const codeExamples = useMemo(
