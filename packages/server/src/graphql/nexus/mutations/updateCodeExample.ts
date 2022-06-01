@@ -197,6 +197,7 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 		});
 
 		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.unstable_revalidate(`/${user.name}/snippets`).catch(() => null);
 		await res.unstable_revalidate(`/${user.name}/snippets/${record.urlSlug}`).catch(() => null);
 
 		return { record };

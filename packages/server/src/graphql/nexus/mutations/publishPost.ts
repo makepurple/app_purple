@@ -23,7 +23,7 @@ export const publishPost = mutationField("publishPost", {
 
 		return true;
 	},
-	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, user }) => {
+	resolve: async (parent, args, { graphcdn, octokit: graphql, prisma, res, user }) => {
 		if (!user) throw new Error();
 
 		const post = await prisma.post.findUnique({
@@ -208,6 +208,10 @@ export const publishPost = mutationField("publishPost", {
 			draftId: record.id,
 			userId: user.id
 		});
+
+		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.unstable_revalidate(`/${user.name}/posts`).catch(() => null);
+		await res.unstable_revalidate(`/${user.name}/${record.urlSlug}`).catch(() => null);
 
 		return { record };
 	}
