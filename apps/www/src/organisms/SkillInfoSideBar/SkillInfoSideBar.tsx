@@ -525,7 +525,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 					variant="secondary"
 				>
 					{viewerFollowing ? "Unfollow" : "Follow"}
-					{loading && <Spinner tw="ml-2" />}
+					{(following || unfollowing) && <Spinner tw="ml-2" />}
 				</Button>
 			</Actions>
 			<ConnectionsContainer tw="mt-4">
