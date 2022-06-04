@@ -1,6 +1,7 @@
 import { DocumentEditor, DocumentEditorProps } from "@makepurple/components";
+import { DocumentEditorValue } from "@makepurple/validators";
 import type { Meta, Story } from "@storybook/react";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 export default {
 	title: "molecules/DocumentEditor",
@@ -112,6 +113,15 @@ const Template: Story<DocumentEditorProps> = (args) => {
 			type: "paragraph",
 			children: [
 				{
+					underline: true,
+					text: ""
+				}
+			]
+		},
+		{
+			type: "paragraph",
+			children: [
+				{
 					text: ""
 				}
 			]
@@ -160,7 +170,7 @@ const Template: Story<DocumentEditorProps> = (args) => {
 					type: "list-item",
 					children: [
 						{
-							text: "List Item 1"
+							text: "The SPA had no knowledge of the Next.js app, and react-router navigated internally"
 						}
 					]
 				},
@@ -168,7 +178,19 @@ const Template: Story<DocumentEditorProps> = (args) => {
 					type: "list-item",
 					children: [
 						{
-							text: "List Item 2"
+							text: "We were using "
+						},
+						{
+							url: "https://www.npmjs.com/package/@auth0/auth0-spa-js",
+							type: "link",
+							children: [
+								{
+									text: "@auth0/auth0-spa-js"
+								}
+							]
+						},
+						{
+							text: " on the SPA and couldn't to log users out"
 						}
 					]
 				},
@@ -184,7 +206,11 @@ const Template: Story<DocumentEditorProps> = (args) => {
 		},
 		{
 			type: "paragraph",
-			children: [{ text: "" }]
+			children: [
+				{
+					text: ""
+				}
+			]
 		},
 		{
 			type: "block-quote",
@@ -196,7 +222,11 @@ const Template: Story<DocumentEditorProps> = (args) => {
 		},
 		{
 			type: "paragraph",
-			children: [{ text: "" }]
+			children: [
+				{
+					text: ""
+				}
+			]
 		},
 		{
 			type: "paragraph",
@@ -219,25 +249,43 @@ const Template: Story<DocumentEditorProps> = (args) => {
 		{
 			type: "paragraph",
 			children: [
-				{ text: "" },
+				{
+					text: ""
+				},
 				{
 					type: "link",
 					url: "https://google.com",
-					children: [{ text: "google" }]
+					children: [
+						{
+							text: "google"
+						}
+					]
 				},
-				{ text: "" }
+				{
+					text: ""
+				}
 			]
 		},
 		{
 			type: "paragraph",
-			children: [{ text: "" }]
+			children: [
+				{
+					text: ""
+				}
+			]
 		},
 		{
 			type: "image",
 			url: "https://github.githubassets.com/images/mona-loading-dark.gif",
-			children: [{ text: "" }]
+			children: [
+				{
+					text: ""
+				}
+			]
 		}
 	]);
+
+	const message = useMemo(() => DocumentEditorValue.destruct()(value)[0]?.message, [value]);
 
 	return (
 		<>
@@ -266,6 +314,7 @@ const Template: Story<DocumentEditorProps> = (args) => {
 					aria-label="Storybook-textarea"
 				/>
 			</DocumentEditor>
+			<div>Error: {message}</div>
 			<pre style={{ fontSize: 12, whiteSpace: "pre-wrap" }}>
 				{JSON.stringify(value, null, 2)}
 			</pre>

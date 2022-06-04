@@ -18,6 +18,7 @@
 		"@makepurple/hooks": "workspace:*",
 		"@makepurple/server": "workspace:*",
 		"@makepurple/utils": "workspace:*",
+		"@makepurple/validators": "workspace:*",
 		"@makepurple/www": "workspace:*",
 		"@storybook/addon-actions": "^6.5.4",
 		"@storybook/react": "^6.5.4",

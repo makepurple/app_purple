@@ -38,9 +38,15 @@ const BlockQuoteElement = Schema({
 	children: array.of(CustomText)
 });
 
+const LinkElement = Schema({
+	type: string.equals("link"),
+	children: array.of(CustomText).min(1).max(1),
+	url: string
+});
+
 const ListItemElement = Schema({
 	type: string.equals("list-item"),
-	children: array.of(CustomText)
+	children: array.of(Schema.either(CustomText, LinkElement))
 });
 
 const BulletedListElement = Schema({
@@ -61,12 +67,6 @@ const HeadingElement = Schema({
 const ImageElement = Schema({
 	type: string.equals("image"),
 	children: array.of(CustomText),
-	url: string
-});
-
-const LinkElement = Schema({
-	type: string.equals("link"),
-	children: array.of(CustomText).min(1).max(1),
 	url: string
 });
 

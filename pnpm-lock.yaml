@@ -52,6 +52,7 @@ importers:
       '@makepurple/server': workspace:*
       '@makepurple/tsconfig': workspace:*
       '@makepurple/utils': workspace:*
+      '@makepurple/validators': workspace:*
       '@makepurple/www': workspace:*
       '@storybook/addon-a11y': ^6.5.4
       '@storybook/addon-actions': ^6.5.4
@@ -120,6 +121,7 @@ importers:
       '@makepurple/hooks': link:../../packages/hooks
       '@makepurple/server': link:../../packages/server
       '@makepurple/utils': link:../../packages/utils
+      '@makepurple/validators': link:../../packages/validators
       '@makepurple/www': link:../www
       '@storybook/addon-actions': 6.5.4_react-dom@18.1.0+react@18.1.0
       '@storybook/react': 6.5.4_d43de838c8b2e9b71bbb64cd78ecfade
@@ -1604,7 +1606,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.10.4
+      '@babel/helper-plugin-utils': 7.17.12
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.17.12_@babel+core@7.12.9
 
@@ -7025,7 +7027,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.18.2
-      '@babel/plugin-transform-template-literals': 7.17.12_@babel+core@7.18.2
+      '@babel/plugin-transform-template-literals': 7.18.2_@babel+core@7.18.2
       '@babel/preset-react': 7.17.12_@babel+core@7.18.2
       '@storybook/addons': 6.5.4_react-dom@18.1.0+react@18.1.0
       '@storybook/core-client': 6.5.4_46a72f0c228d6b71f69c0fbd5704fd39
@@ -7075,7 +7077,7 @@ packages:
     dependencies:
       '@babel/generator': 7.18.2
       '@babel/parser': 7.18.4
-      '@babel/preset-env': 7.18.0_@babel+core@7.18.2
+      '@babel/preset-env': 7.18.2_@babel+core@7.18.2
       '@babel/types': 7.18.4
       '@mdx-js/mdx': 1.6.22
       '@mdx-js/react': 1.6.22_react@18.1.0
@@ -16781,7 +16783,7 @@ packages:
       p-locate: 5.0.0
 
   /lodash.debounce/4.0.8:
-    resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
   /lodash.defaults/4.2.0:
     resolution: {integrity: sha1-0JF4cW/+pN3p5ft7N/bwgCJ0WAw=}
