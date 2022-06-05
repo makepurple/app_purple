@@ -18,9 +18,15 @@ const BlockQuoteElement = Schema({
 	children: array.of(CustomText)
 });
 
+const LinkElement = Schema({
+	type: string.equals("link"),
+	children: array.of(CustomText).min(1).max(1),
+	url: string
+});
+
 const ListItemElement = Schema({
 	type: string.equals("list-item"),
-	children: array.of(CustomText)
+	children: array.of(Schema.either(CustomText, LinkElement))
 });
 
 const BulletedListElement = Schema({
@@ -31,12 +37,6 @@ const BulletedListElement = Schema({
 const CodeBlockElement = Schema({
 	type: Schema.enum(CodeBlockType),
 	children: array.of(CustomText)
-});
-
-const LinkElement = Schema({
-	type: string.equals("link"),
-	children: array.of(CustomText).min(1).max(1),
-	url: string
 });
 
 const NumberedListElement = Schema({
