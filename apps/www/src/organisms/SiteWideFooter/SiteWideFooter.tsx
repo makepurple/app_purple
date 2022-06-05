@@ -44,11 +44,11 @@ const BrandContainer = tw.div`
 	gap-1
 `;
 
-const PoweredByGraphCdn = tw.a`
+const PoweredByStellate = tw.a`
 	relative
-	width[130px]
+	width[113px]
 	height[50px]
-	md:width[156px]
+	md:width[136px]
 	md:height[60px]
 `;
 
@@ -127,19 +127,19 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 							<Logo />
 							<Brand />
 						</BrandContainer>
-						<PoweredByGraphCdn
-							href="https://graphcdn.io/?ref=powered-by"
+						<PoweredByStellate
+							href="https://stellate.co/?ref=powered-by"
 							rel="noopener"
 							target="_blank"
 						>
 							<NextImage
-								src="https://graphcdn.io/badge.svg"
-								alt="Powered by GraphCDN, the GraphQL CDN"
+								src="https://stellate.co/badge.svg"
+								alt="Powered by Stellate, the GraphQL Edge Cache"
 								loader={({ src }) => src}
 								layout="fill"
 								unoptimized
 							/>
-						</PoweredByGraphCdn>
+						</PoweredByStellate>
 					</LeftContainer>
 					<LinksContainer>
 						<NextLink href="/blog" passHref>
