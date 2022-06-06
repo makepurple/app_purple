@@ -55,7 +55,6 @@ const PostInfo = tw.a`
 `;
 
 const PostTitle = tw.div`
-	leading-none
 	text-black
 `;
 
@@ -75,7 +74,6 @@ const UserInfo = tw.div`
 `;
 
 const UserName = tw.a`
-	leading-none
 	text-violet-600
 	truncate
 `;
@@ -167,9 +165,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 								<PostInfo>
 									<PostTitle>{post.title}</PostTitle>
 									{post.description && (
-										<PostDescription tw="mt-1">
-											{post.description}
-										</PostDescription>
+										<PostDescription>{post.description}</PostDescription>
 									)}
 								</PostInfo>
 							</NextLink>
@@ -187,7 +183,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 						</NextLink>
 						{user.description && (
 							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
-								<UserDescription tw="mt-1">{user.description}</UserDescription>
+								<UserDescription>{user.description}</UserDescription>
 							</NextLink>
 						)}
 						{(!!skills.length || !!desiredSkills.length) && (
