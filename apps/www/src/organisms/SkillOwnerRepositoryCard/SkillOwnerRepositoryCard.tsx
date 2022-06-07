@@ -22,14 +22,19 @@ const Root = tw(Paper)`
 `;
 
 const Title = tw.div`
+	self-stretch
 	flex
 	flex-row
 	items-center
 `;
 
+const TitleIcon = tw(RepoIcon)`
+	flex-shrink-0
+`;
+
 const Name = tw(Anchor)`
-	leading-none
 	font-semibold
+	truncate
 `;
 
 const DescriptionContainer = tw.div`
@@ -109,7 +114,7 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 		return (
 			<Root ref={ref} className={className} style={style}>
 				<Title>
-					<RepoIcon height={16} width={16} tw="mr-2" />
+					<TitleIcon height={16} width={16} tw="mr-2" />
 					<NextLink
 						href="/s/[skillOwner]/[skillName]"
 						as={`/s/${skillOwner}/${repository.name}`}
@@ -118,11 +123,11 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 						<Name>{repository.name}</Name>
 					</NextLink>
 				</Title>
-				{!!repository.description && (
-					<DescriptionContainer tw="mt-3">
+				<DescriptionContainer tw="mt-2">
+					{!!repository.description && (
 						<Description>{repository.description}</Description>
-					</DescriptionContainer>
-				)}
+					)}
+				</DescriptionContainer>
 				<Info
 					onClick={(e) => {
 						e.stopPropagation();
