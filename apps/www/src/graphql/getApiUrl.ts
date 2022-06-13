@@ -24,26 +24,15 @@ export const getApiUrl = (options?: GetApiUrlOptions): string => {
 	const { bypassCdn = false, isStatic = false } = options ?? {};
 
 	/**
-	 * @description
-	 * Infer the deploy URL if we're in production
-	 * API_URL is for hitting GraphCDN if provided
-	 * VERCEL_URL = Vercel, DEPLOY_URL = Netlify
-	 *
-	 * If this is run for a static page (isStatic = true), use the hosted api, because the local
-	 * api won't be available during build-time
-	 * @author David Lee
-	 * @date April 17, 2022
-	 */
-	const providerUrl = isStatic
-		? process.env.API_URL_STATIC_BUILD
-		: process.env.API_URL || process.env.VERCEL_URL || process.env.DEPLOY_URL;
-
-	/**
 	 * !HACK
-	 * @description If we want to bypass GraphCDN,
+	 * @description If we want to bypass GraphCDN, we need to hit the same-domain api directly
+	 * @author David Lee
+	 * @date June 13, 2022
 	 */
 	if (bypassCdn) {
-		return providerUrl ? formatApiUrl(providerUrl) : "http://localhost:3001/api/graphql";
+		const bypassUrl = process.env.VERCEL_URL || process.env.DEPLOY_URL;
+
+		return bypassUrl ? formatApiUrl(bypassUrl) : "http://localhost:3001/api/graphql";
 	}
 
 	/**
@@ -69,6 +58,21 @@ export const getApiUrl = (options?: GetApiUrlOptions): string => {
 	if (isStatic && process.env.NODE_ENV === "development") {
 		return "http://localhost:3001/api/graphql";
 	}
+
+	/**
+	 * @description
+	 * Infer the deploy URL if we're in production
+	 * API_URL is for hitting GraphCDN if provided
+	 * VERCEL_URL = Vercel, DEPLOY_URL = Netlify
+	 *
+	 * If this is run for a static page (isStatic = true), use the hosted api, because the local
+	 * api won't be available during build-time
+	 * @author David Lee
+	 * @date April 17, 2022
+	 */
+	const providerUrl = isStatic
+		? process.env.API_URL_STATIC_BUILD
+		: process.env.API_URL || process.env.VERCEL_URL || process.env.DEPLOY_URL;
 
 	return providerUrl ? formatApiUrl(providerUrl) : "http://localhost:3001/api/graphql";
 };
