@@ -1,4 +1,6 @@
 import { FieldInfo } from "@urql/exchange-graphcache";
+import { OperationContext } from "urql";
+import { getApiUrl } from "../graphql";
 
 export class UrqlUtils {
 	public static getFieldKey(field: FieldInfo): string {
@@ -9,5 +11,20 @@ export class UrqlUtils {
 						.join(",")})`
 				: ""
 		}`;
+	}
+
+	public static bypassCdn(): Partial<OperationContext> {
+		const isStatic = true;
+
+		return {
+			fetch: (_, init) => fetch(getApiUrl(isStatic), init),
+			fetchOptions: {
+				credentials: "include",
+				headers: {
+					cookie: document.cookie,
+					"graphcdn-bypass": "1"
+				}
+			}
+		};
 	}
 }

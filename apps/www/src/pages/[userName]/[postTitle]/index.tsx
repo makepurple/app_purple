@@ -40,7 +40,7 @@ import {
 } from "../../../organisms";
 import { pageProps, PageProps, paths } from "../../../page-props/[userName]/[postTitle]";
 import { CommentIcon, ShareIcon, ThumbsUpIcon } from "../../../svgs";
-import { PermissionUtils } from "../../../utils";
+import { PermissionUtils, UrqlUtils } from "../../../utils";
 
 const MIN_SEO_READ_TIME = 3;
 const SEO_SKILL_COUNT = 5;
@@ -268,11 +268,11 @@ export const Page: NextPage<PageProps> = () => {
 	}, [post?.content]);
 
 	useEffect(() => {
-		if (status !== "authenticated") return;
+		if (status === "loading") return;
 		if (!post?.id) return;
 
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		viewPost({ where: { id: post.id } }).catch(() => null);
+		viewPost({ where: { id: post.id } }, { ...UrqlUtils.bypassCdn() }).catch(() => null);
 	}, [post?.id, status, viewPost]);
 
 	const metaDescription = useMemo(() => {

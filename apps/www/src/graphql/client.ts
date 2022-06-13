@@ -21,7 +21,7 @@ export const URQL_STATE_PROP_NAME = "__URQL_STATE__";
  * Consistently determine the API URL for the current client even when in a
  * deploy preview or similar
  */
-const getApiUrl = (isStatic?: boolean): string => {
+export const getApiUrl = (isStatic?: boolean): string => {
 	/**
 	 * !HACK
 	 * @description Normally, in the browser, a relative URL would work perfectly; however, with
