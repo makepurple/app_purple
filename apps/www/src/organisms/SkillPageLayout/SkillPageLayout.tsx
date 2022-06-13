@@ -6,8 +6,10 @@ import { SkillPageTabs } from "../SkillPageTabs";
 
 const Root = tw(MainContainer)`
 	flex
-	flex-col
+	flex-col-reverse
 	items-stretch
+	gap-6
+	min-w-0
 	my-6
 	md:my-12
 	lg:flex-row-reverse
@@ -17,10 +19,7 @@ const Root = tw(MainContainer)`
 const SideBar = tw(SkillInfoSideBar)`
 	flex-shrink-0
 	w-full
-	mb-6
 	lg:w-96
-	lg:ml-4
-	xl:ml-6
 `;
 
 const Content = tw.div`
