@@ -51,7 +51,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client =>
 			},
 			maskTypename: false,
 			requestPolicy: "cache-first",
-			url: getApiUrl(isStatic)
+			url: getApiUrl({ isStatic })
 		});
 
 		// Serialize the urqlClient to null on the client-side.

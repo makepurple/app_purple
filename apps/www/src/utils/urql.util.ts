@@ -14,10 +14,8 @@ export class UrqlUtils {
 	}
 
 	public static bypassCdn(): Partial<OperationContext> {
-		const isStatic = true;
-
 		return {
-			fetch: (_, init) => fetch(getApiUrl(isStatic), init),
+			fetch: (_, init) => fetch(getApiUrl({ bypassCdn: true }), init),
 			fetchOptions: {
 				credentials: "include",
 				headers: {
