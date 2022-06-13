@@ -1,6 +1,6 @@
-import { FieldInfo } from "@urql/exchange-graphcache";
-import { OperationContext } from "urql";
-import { getApiUrl } from "../graphql";
+import type { FieldInfo } from "@urql/exchange-graphcache";
+import type { OperationContext } from "urql";
+import { getApiUrl } from "../graphql/getApiUrl";
 
 export class UrqlUtils {
 	public static getFieldKey(field: FieldInfo): string {
