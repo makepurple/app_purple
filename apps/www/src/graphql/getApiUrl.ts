@@ -30,7 +30,8 @@ export const getApiUrl = (options?: GetApiUrlOptions): string => {
 	 * @date June 13, 2022
 	 */
 	if (bypassCdn) {
-		const bypassUrl = process.env.VERCEL_URL || process.env.DEPLOY_URL;
+		const bypassUrl =
+			process.env.API_URL_BYPASS_CDN || process.env.VERCEL_URL || process.env.DEPLOY_URL;
 
 		return bypassUrl ? formatApiUrl(bypassUrl) : "http://localhost:3001/api/graphql";
 	}

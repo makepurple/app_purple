@@ -22,6 +22,7 @@ const config = {
 	},
 	env: {
 		API_URL:                   process.env.API_URL,
+		API_URL_BYPASS_CDN:        process.env.API_URL_BYPASS_CDN,
 		API_URL_STATIC_BUILD:      process.env.API_URL_STATIC_BUILD,
 		NEXTAUTH_SECRET:           process.env.NEXTAUTH_SECRET,
 		NEXTAUTH_URL:              process.env.NEXTAUTH_URL,
