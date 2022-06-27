@@ -10,13 +10,14 @@ const Root = tw.div`
 	flex
 	flex-col
 	items-center
-	justify-center
+	justify-start
 	w-full
 	min-h-screen
-	py-24
 	border-b
 	border-solid
 	border-gray-300/80
+	2xl:min-height[120vh]
+	2xl:clip-path[url(#home-hero-clip-path)]
 `;
 
 const GradientBackground = styled.div`
@@ -50,9 +51,13 @@ const RadialBackground = tw.div`
 `;
 
 const Contents = tw.div`
+	w-full
+	h-screen
 	flex
 	flex-col
 	items-center
+	justify-center
+	py-24
 	z-[1]
 `;
 
@@ -85,9 +90,19 @@ const PoweredBy = tw.span`
 	whitespace-nowrap
 `;
 
-const SignUpButton = tw(Button)`
-	max-width[12rem]
+const Buttons = tw.div`
+	grid
+	grid-template-columns[repeat(auto-fill, minmax(8rem, 1fr))]
+	gap-4
+	max-width[20rem]
 	w-full
+	px-4
+	md:max-width[24rem]
+`;
+
+const Mask = tw.svg`
+	fixed
+	pointer-events-none
 `;
 
 export interface HomePageHeroProps {
@@ -97,27 +112,54 @@ export interface HomePageHeroProps {
 
 export const HomePageHero: FC<HomePageHeroProps> = ({ className, style }) => {
 	return (
-		<Root className={className} style={style}>
-			<GradientBackground />
-			<GridBackground />
-			<RadialBackground />
-			<Contents>
-				<TagLine>
-					<Line>Discover</Line>
-					<Line>Developers</Line>
-					<Line>
-						for <TypistLogo sentences={["next.js", "urql", "prisma"]} />
-					</Line>
-				</TagLine>
-				<Info as="h2" tw="mt-5 md:mt-10">
-					Developer profiles <PoweredBy>powered-by</PoweredBy> GitHub discoverability
-				</Info>
-				<NextLink href="/signup" passHref>
-					<SignUpButton as="a" size="large" type="button" tw="mt-5 md:mt-10">
-						<span>Get Started</span>
-					</SignUpButton>
-				</NextLink>
-			</Contents>
-		</Root>
+		<>
+			<Root className={className} style={style}>
+				<GradientBackground />
+				<GridBackground />
+				<RadialBackground />
+				<Contents>
+					<TagLine>
+						<Line>Discover</Line>
+						<Line>Developers</Line>
+						<Line>
+							for <TypistLogo sentences={["next.js", "urql", "prisma"]} />
+						</Line>
+					</TagLine>
+					<Info as="h2" tw="mt-5 md:mt-10">
+						Developer profiles <PoweredBy>powered-by</PoweredBy> GitHub discoverability
+					</Info>
+					<Buttons tw="mt-5 md:mt-10">
+						<NextLink href="/signup" passHref>
+							<Button as="a" size="large" type="button" variant="primary">
+								<span>Get Started</span>
+							</Button>
+						</NextLink>
+						<NextLink href="/explore" passHref>
+							<Button as="a" size="large" type="button" variant="alert">
+								<span>Explore</span>
+							</Button>
+						</NextLink>
+					</Buttons>
+				</Contents>
+			</Root>
+			<Mask
+				width="1512"
+				height="1016"
+				viewBox="0 0 1512 1016"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				style={{ position: "fixed" }}
+			>
+				<defs>
+					<clipPath
+						id="home-hero-clip-path"
+						clipPathUnits="objectBoundingBox"
+						transform="scale(0.00066137566 0.00098425196)"
+					>
+						<path d="M457.9 845.429C704.763 967.647 1260.98 1000.5 1527 1016L1527 0.00012207L-3.32488e-05 -1.14243e-05L2.71885e-05 705C62.2891 692.364 199.5 717.5 457.9 845.429Z" />
+					</clipPath>
+				</defs>
+			</Mask>
+		</>
 	);
 };
