@@ -45,6 +45,20 @@ export class ArrayUtils {
 		return newArray;
 	}
 
+	public static partitionByFraction<T>(
+		array: readonly T[],
+		fraction: number
+	): readonly (readonly T[])[] {
+		if (fraction > 1) return [array];
+
+		const partitionSize = Math.ceil(array.length * fraction);
+		const partitionCount = Math.ceil(array.length / partitionSize);
+
+		return Array.from({ length: partitionCount }, (_, i) =>
+			array.slice(i * partitionSize, (i + 1) * partitionSize)
+		);
+	}
+
 	public static shuffle<T>(array: readonly T[]): readonly T[] {
 		return array.slice().sort(() => Math.random() - 0.5);
 	}

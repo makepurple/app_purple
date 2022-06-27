@@ -1,8 +1,11 @@
-import { PageContainer } from "@makepurple/components";
+import { InfiniteAutoplayCarousel, PageContainer } from "@makepurple/components";
+import { ArrayUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
-import React, { CSSProperties, FC } from "react";
+import ms from "ms";
+import React, { CSSProperties, FC, useMemo } from "react";
 import tw, { styled, theme } from "twin.macro";
-import { HomePageSkillsCarousel } from "../HomePageSkillsCarousel";
+import { HomePageSkillGitHubRepositoryFragment, useGetHomePageSkillsQuery } from "../../graphql";
+import { HomePageSkill } from "../HomePageSkill";
 
 const Root = tw.div`
 	flex
@@ -61,9 +64,16 @@ const OpenSource = tw.span`
 	whitespace-nowrap
 `;
 
-const Skills = tw(HomePageSkillsCarousel)`
+const Skills = tw.div`
+	flex
+	flex-col
+	gap-16
 	w-full
 	max-width[2560px]
+`;
+
+const Skill = tw(HomePageSkill)`
+	mx-8
 `;
 
 export interface HomePageSkillsSectionProps {
@@ -72,6 +82,25 @@ export interface HomePageSkillsSectionProps {
 }
 
 export const HomePageSkillsSection: FC<HomePageSkillsSectionProps> = ({ className, style }) => {
+	const [{ data }] = useGetHomePageSkillsQuery({
+		requestPolicy: "cache-first"
+	});
+
+	const github = data?.github;
+
+	const repositories = useMemo(() => {
+		const items = Object.values(github ?? {}).filter(
+			(item) => item !== "GitHub"
+		) as readonly HomePageSkillGitHubRepositoryFragment[];
+
+		return ArrayUtils.dropFalsey(items);
+	}, [github]);
+
+	const [first, second, third] = useMemo(
+		() => ArrayUtils.partitionByFraction(repositories, 1 / 3),
+		[repositories]
+	);
+
 	return (
 		<Root className={className} style={style}>
 			<Heading>
@@ -84,7 +113,18 @@ export const HomePageSkillsSection: FC<HomePageSkillsSectionProps> = ({ classNam
 					</div>
 				</Info>
 			</Heading>
-			<Skills tw="mt-12" />
+			<Skills tw="mt-12">
+				<InfiniteAutoplayCarousel speed={ms("110s")}>
+					{first.map((repository) => (
+						<Skill key={repository.id} repository={repository} />
+					))}
+				</InfiniteAutoplayCarousel>
+				<InfiniteAutoplayCarousel speed={ms("85s")}>
+					{second.map((repository) => (
+						<Skill key={repository.id} repository={repository} />
+					))}
+				</InfiniteAutoplayCarousel>
+			</Skills>
 		</Root>
 	);
 };

@@ -30,7 +30,6 @@ export * from "./HomePageHero";
 export * from "./HomePageJoinCommunitySection";
 export * from "./HomePageProfileSection";
 export * from "./HomePageSkill";
-export * from "./HomePageSkillsCarousel";
 export * from "./HomePageSkillsSection";
 export * from "./LoadingChatCard";
 export * from "./LoadingChatRoomMessage";
