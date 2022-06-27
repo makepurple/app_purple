@@ -22,6 +22,7 @@ const HeadingContainer = tw.div`
 	flex
 	flex-row
 	items-end
+	justify-center
 	w-full
 `;
 
@@ -75,13 +76,20 @@ const OpenSource = tw.span`
 const Skills = tw.div`
 	flex
 	flex-col
-	gap-16
+	gap-8
 	w-full
 	max-width[2560px]
+	xl:gap-16
 `;
 
 const Skill = tw(HomePageSkill)`
-	mx-8
+	mx-4
+	xl:mx-8
+`;
+
+const TopCarousel = tw(InfiniteAutoplayCarousel)`
+	hidden
+	xl:block
 `;
 
 export interface HomePageSkillsSectionProps {
@@ -122,19 +130,19 @@ export const HomePageSkillsSection: FC<HomePageSkillsSectionProps> = ({ classNam
 						</div>
 					</Info>
 				</Heading>
-				<InfiniteAutoplayCarousel speed={ms("60s")}>
+				<TopCarousel direction="right" speed={ms("60s")}>
 					{third.map((repository) => (
 						<Skill key={repository.id} repository={repository} />
 					))}
-				</InfiniteAutoplayCarousel>
+				</TopCarousel>
 			</HeadingContainer>
-			<Skills tw="mt-16">
-				<InfiniteAutoplayCarousel speed={ms("110s")}>
+			<Skills tw="mt-8 xl:mt-16">
+				<InfiniteAutoplayCarousel direction="left" speed={ms("110s")}>
 					{first.map((repository) => (
 						<Skill key={repository.id} repository={repository} />
 					))}
 				</InfiniteAutoplayCarousel>
-				<InfiniteAutoplayCarousel speed={ms("85s")}>
+				<InfiniteAutoplayCarousel direction="right" speed={ms("85s")}>
 					{second.map((repository) => (
 						<Skill key={repository.id} repository={repository} />
 					))}

@@ -75,19 +75,12 @@ const SlideTrack = styled.div<SlideTrackProps>`
 		flex
 		items-center
 		h-full
+		width[max-content]
+		hover:animation-play-state[paused]
+		motion-reduce:animation-play-state[paused]
+		[& > *]:flex-shrink-0
 	`}
-	width: max-content;
 	animation: ${(props) => scroll(props)} ${({ $speed }) => $speed}ms linear infinite;
-
-	&:hover {
-		animation-play-state: paused;
-	}
-
-	& > * {
-		${tw`
-			flex-shrink-0
-		`}
-	}
 `;
 
 export interface InfiniteAutoplayCarouselProps {
