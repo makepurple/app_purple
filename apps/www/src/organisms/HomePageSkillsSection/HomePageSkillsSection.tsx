@@ -130,19 +130,19 @@ export const HomePageSkillsSection: FC<HomePageSkillsSectionProps> = ({ classNam
 						</div>
 					</Info>
 				</Heading>
-				<TopCarousel direction="right" speed={ms("60s")}>
+				<TopCarousel direction="right" speed={ms("85s")}>
 					{third.map((repository) => (
 						<Skill key={repository.id} repository={repository} />
 					))}
 				</TopCarousel>
 			</HeadingContainer>
 			<Skills tw="mt-8 xl:mt-16">
-				<InfiniteAutoplayCarousel direction="left" speed={ms("110s")}>
+				<InfiniteAutoplayCarousel direction="left" speed={ms("125s")}>
 					{first.map((repository) => (
 						<Skill key={repository.id} repository={repository} />
 					))}
 				</InfiniteAutoplayCarousel>
-				<InfiniteAutoplayCarousel direction="right" speed={ms("85s")}>
+				<InfiniteAutoplayCarousel direction="right" speed={ms("95s")}>
 					{second.map((repository) => (
 						<Skill key={repository.id} repository={repository} />
 					))}
