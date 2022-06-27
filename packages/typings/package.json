@@ -6,14 +6,14 @@
 	"types": "src/index.d.ts",
 	"dependencies": {
 		"@makepurple/tsconfig": "workspace:*",
-		"@types/react": "^18.0.9",
+		"@types/react": "^18.0.14",
 		"@types/styled-components": "^5.1.25",
-		"next-auth": "^4.3.4",
-		"react": "^18.1.0",
-		"react-dom": "^18.1.0",
+		"next-auth": "^4.6.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"twin.macro": "^2.8.2"
 	},
 	"devDependencies": {
-		"typescript": "^4.7.2"
+		"typescript": "^4.7.4"
 	}
 }
