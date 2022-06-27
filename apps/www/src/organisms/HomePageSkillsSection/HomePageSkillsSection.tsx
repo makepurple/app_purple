@@ -18,7 +18,15 @@ const Root = tw.div`
 	xl:pt-12
 `;
 
+const HeadingContainer = tw.div`
+	flex
+	flex-row
+	items-end
+	w-full
+`;
+
 const Heading = tw.div`
+	flex-shrink-0
 	flex
 	flex-col
 	items-center
@@ -103,17 +111,24 @@ export const HomePageSkillsSection: FC<HomePageSkillsSectionProps> = ({ classNam
 
 	return (
 		<Root className={className} style={style}>
-			<Heading>
-				<Title as="h2">Search by Repository</Title>
-				<Info as="h3" tw="mt-2">
-					<div>Skills are defined as GitHub Repositories.</div>
-					<div>
-						Find experts by searching within millions of{" "}
-						<OpenSource>open-sourced</OpenSource> skills.
-					</div>
-				</Info>
-			</Heading>
-			<Skills tw="mt-12">
+			<HeadingContainer>
+				<Heading>
+					<Title as="h2">Search by Repository</Title>
+					<Info as="h3" tw="mt-2">
+						<div>Skills are defined as GitHub Repositories.</div>
+						<div>
+							Find experts by searching within millions of{" "}
+							<OpenSource>open-sourced</OpenSource> skills.
+						</div>
+					</Info>
+				</Heading>
+				<InfiniteAutoplayCarousel speed={ms("60s")}>
+					{third.map((repository) => (
+						<Skill key={repository.id} repository={repository} />
+					))}
+				</InfiniteAutoplayCarousel>
+			</HeadingContainer>
+			<Skills tw="mt-16">
 				<InfiniteAutoplayCarousel speed={ms("110s")}>
 					{first.map((repository) => (
 						<Skill key={repository.id} repository={repository} />

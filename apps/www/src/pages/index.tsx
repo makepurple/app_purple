@@ -18,6 +18,7 @@ const Root = tw.div`
 	items-center
 	w-full
 	text-center
+	bg-white
 `;
 
 export const getStaticProps = pageProps;
