@@ -12,6 +12,16 @@ const Root = tw.div`
 	max-w-full
 	pt-24
 	pb-28
+	xl:pt-12
+`;
+
+const Heading = tw.div`
+	flex
+	flex-col
+	items-center
+	xl:self-start
+	xl:ml-36
+	xl:items-start
 `;
 
 const Title = styled(PageContainer)`
@@ -40,8 +50,11 @@ const Info = tw(PageContainer)`
 	items-center
 	max-width[32rem]
 	text-lg
-	md:text-xl
 	font-medium
+	text-center
+	xl:text-left
+	xl:items-start
+	md:text-xl
 `;
 
 const OpenSource = tw.span`
@@ -61,14 +74,16 @@ export interface HomePageSkillsSectionProps {
 export const HomePageSkillsSection: FC<HomePageSkillsSectionProps> = ({ className, style }) => {
 	return (
 		<Root className={className} style={style}>
-			<Title as="h2">Search by Repository</Title>
-			<Info as="h3" tw="mt-2">
-				<div>Skills are defined as GitHub Repositories.</div>
-				<div>
-					Find experts by searching within millions of{" "}
-					<OpenSource>open-sourced</OpenSource> skills.
-				</div>
-			</Info>
+			<Heading>
+				<Title as="h2">Search by Repository</Title>
+				<Info as="h3" tw="mt-2">
+					<div>Skills are defined as GitHub Repositories.</div>
+					<div>
+						Find experts by searching within millions of{" "}
+						<OpenSource>open-sourced</OpenSource> skills.
+					</div>
+				</Info>
+			</Heading>
 			<Skills tw="mt-12" />
 		</Root>
 	);

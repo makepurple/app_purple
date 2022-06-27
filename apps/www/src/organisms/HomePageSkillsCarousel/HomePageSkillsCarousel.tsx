@@ -9,11 +9,11 @@ import { HomePageSkill } from "../HomePageSkill";
 const Root = tw.div`
 	flex
 	flex-col
-	gap-6
+	gap-16
 `;
 
 const Skill = tw(HomePageSkill)`
-	mx-3
+	mx-8
 `;
 
 export interface HomePageSkillsCarouselProps {
@@ -48,12 +48,12 @@ export const HomePageSkillsCarousel = memo<HomePageSkillsCarouselProps>(({ class
 
 	return (
 		<Root className={className} style={style}>
-			<InfiniteAutoplayCarousel speed={ms("80s")}>
+			<InfiniteAutoplayCarousel speed={ms("120s")}>
 				{first.map((repository) => (
 					<Skill key={repository.id} repository={repository} />
 				))}
 			</InfiniteAutoplayCarousel>
-			<InfiniteAutoplayCarousel speed={ms("55s")}>
+			<InfiniteAutoplayCarousel speed={ms("90s")}>
 				{second.map((repository) => (
 					<Skill key={repository.id} repository={repository} />
 				))}

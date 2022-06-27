@@ -30,8 +30,11 @@ const scroll = ({ $direction }: SlideTrackProps) => {
 const Root = styled.div`
 	${tw`
 		relative
-		overflow-hidden
+		overflow-y-visible
+		overflow-x-hidden
 	`}
+	overflow-x: clip;
+
 	&::before,
 	&::after {
 		${tw`
