@@ -148,7 +148,6 @@ export const HomePageHero: FC<HomePageHeroProps> = ({ className, style }) => {
 				viewBox="0 0 1512 1016"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
-				style={{ position: "fixed" }}
 			>
 				<defs>
 					<clipPath
