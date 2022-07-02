@@ -31,6 +31,8 @@ export * from "./Input";
 export * from "./LazyMotion";
 export * from "./ListItem";
 export * from "./Logo";
+export * from "./LogoLeftWing";
+export * from "./LogoRightWing";
 export * from "./MainContainer";
 export * from "./MaybeAnchor";
 export * from "./MaybeWrap";
