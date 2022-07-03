@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import { HomePageFeature1 } from "./HomePageFeature1";
 import { HomePageFeature2 } from "./HomePageFeature2";
 import { HomePageFeature3 } from "./HomePageFeature3";
+import { HomePageFeature4 } from "./HomePageFeature4";
 
 const Root = tw.div`
 	flex
@@ -21,6 +22,7 @@ export const HomePageFeatures: FC<HomePageFeaturesProps> = ({ className, style }
 			<HomePageFeature1 />
 			<HomePageFeature2 />
 			<HomePageFeature3 />
+			<HomePageFeature4 />
 		</Root>
 	);
 };

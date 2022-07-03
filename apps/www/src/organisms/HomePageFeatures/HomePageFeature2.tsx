@@ -8,6 +8,7 @@ const Root = tw.div`
 
 const Section = tw.div`
 	flex
+	flex-col
 	items-center
 	justify-center
 	gap-8
