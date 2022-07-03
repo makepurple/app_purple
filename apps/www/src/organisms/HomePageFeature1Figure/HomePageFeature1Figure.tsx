@@ -100,6 +100,7 @@ export const HomePageFeature1Figure: FC<HomePageFeature1FigureProps> = ({ classN
 		<Root className={className} style={style}>
 			<Avatar border={6}>
 				<GitHubAvatarImage
+					alt="leedavidcs"
 					src="https://avatars.githubusercontent.com/u/15151154"
 					height={156}
 					width={156}
