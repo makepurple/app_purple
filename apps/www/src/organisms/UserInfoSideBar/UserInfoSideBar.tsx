@@ -283,10 +283,10 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 									url: `https://makepurple.com/${userName}`,
 									title: `Check out ${userName} on MakePurple!`,
 									text: oneLine`
-								Check out ${isMyUser ? "my" : `${userName}'s`} page on
-								MakePurple, featuring posts, experiences, repositories,
-								code-examples and more!
-							`
+										Check out ${isMyUser ? "my" : `${userName}'s`} page on
+										MakePurple, featuring posts, experiences, repositories,
+										code-examples and more!
+									`
 								}}
 								size="small"
 								tags={["makepurple"]}
