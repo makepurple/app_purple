@@ -1,8 +1,7 @@
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import { HomePageFeature1 } from "./HomePageFeature1";
-import { HomePageFeature4 } from "./HomePageFeature4";
-import { HomePageFeaturesWaves } from "./HomePageFeaturesWaves";
+import { HomePageFeature3 } from "./HomePageFeature3";
 
 const Root = tw.div`
 	flex
@@ -15,14 +14,6 @@ const SectionContainer = tw.div`
 `;
 
 const Section2 = tw.div`
-	relative
-	flex
-	items-center
-	justify-center
-	py-72
-`;
-
-const Section3 = tw.div`
 	relative
 	flex
 	items-center
@@ -43,14 +34,8 @@ export const HomePageFeatures: FC<HomePageFeaturesProps> = ({ className, style }
 				<Section2>
 					<div />
 				</Section2>
-				<HomePageFeaturesWaves />
 			</SectionContainer>
-			<SectionContainer>
-				<Section3>
-					<div />
-				</Section3>
-			</SectionContainer>
-			<HomePageFeature4 />
+			<HomePageFeature3 />
 		</Root>
 	);
 };

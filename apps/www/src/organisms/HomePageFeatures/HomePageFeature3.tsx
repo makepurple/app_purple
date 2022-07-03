@@ -20,7 +20,7 @@ const Section4TopWaves = tw(HomePageFeaturesWaves)`
 	bottom-[auto]
 `;
 
-const Section4BottomWaves = tw.svg`
+const Section3BottomWaves = tw.svg`
 	absolute
 	left-1/2
 	bottom-0
@@ -37,19 +37,19 @@ const Mask = tw.svg`
 	pointer-events-none
 `;
 
-export interface HomePageFeature4Props {
+export interface HomePageFeature3Props {
 	className?: string;
 	style?: CSSProperties;
 }
 
-export const HomePageFeature4: FC<HomePageFeature4Props> = ({ className, style }) => {
+export const HomePageFeature3: FC<HomePageFeature3Props> = ({ className, style }) => {
 	return (
 		<Root className={className} style={style}>
 			<Section4TopWaves />
 			<Section>
 				<div />
 			</Section>
-			<Section4BottomWaves
+			<Section3BottomWaves
 				width="1511"
 				height="375"
 				viewBox="0 0 1511 375"
@@ -61,7 +61,7 @@ export const HomePageFeature4: FC<HomePageFeature4Props> = ({ className, style }
 					stroke="#B2B2FF"
 					strokeWidth="1.5"
 				/>
-			</Section4BottomWaves>
+			</Section3BottomWaves>
 			<Mask
 				width="1524"
 				height="1162"

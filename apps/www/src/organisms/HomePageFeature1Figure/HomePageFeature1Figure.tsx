@@ -146,7 +146,7 @@ export const HomePageFeature1Figure: FC<HomePageFeature1FigureProps> = ({ classN
 						Connect
 					</Button>
 					<Button type="button" variant="secondary">
-						Connect
+						Follow
 					</Button>
 				</Actions>
 				<ConnectionsContainer tw="mt-4">
