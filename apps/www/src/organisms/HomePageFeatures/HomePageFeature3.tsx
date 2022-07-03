@@ -1,3 +1,4 @@
+import { LogoLeftWing } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
 import { HomePageFeaturesWaves } from "./HomePageFeaturesWaves";
@@ -10,17 +11,26 @@ const Section = tw.div`
 	flex
 	items-center
 	justify-center
+	gap-8
+	py-24
+	px-4
 	bg-indigo-50
-	py-72
+	2xl:flex-row
+	2xl:items-end
+	2xl:gap-16
+	2xl:py-64
 	2xl:clip-path[url(#home-section4-clip-path)]
 `;
 
 const Section4TopWaves = tw(HomePageFeaturesWaves)`
+	hidden
 	top-[12px]
 	bottom-[auto]
+	2xl:block
 `;
 
 const Section3BottomWaves = tw.svg`
+	hidden
 	absolute
 	left-1/2
 	bottom-0
@@ -30,11 +40,48 @@ const Section3BottomWaves = tw.svg`
 	rotate-[-3deg]
 	scale-x-[1.2]
 	scale-y-[0.75]
+	2xl:block
 `;
 
 const Mask = tw.svg`
 	fixed
 	pointer-events-none
+`;
+
+const LeftWing = tw(LogoLeftWing)`
+	flex-shrink-0
+	w-6
+	2xl:w-[auto]
+`;
+
+const InfoContainer = tw.div`
+	flex
+	flex-row
+	items-start
+	gap-3
+	max-width[600px]
+	2xl:gap-6
+`;
+
+const TextContainer = tw.div`
+	flex
+	flex-col
+	items-start
+	gap-5
+`;
+
+const Header = tw.h2`
+	font-bold
+	mt-5
+	text-4xl
+	2xl:mt-3
+	2xl:text-6xl
+`;
+
+const Detail = tw.p`
+	text-xl
+	font-medium
+	2xl:text-2xl
 `;
 
 export interface HomePageFeature3Props {
@@ -47,6 +94,16 @@ export const HomePageFeature3: FC<HomePageFeature3Props> = ({ className, style }
 		<Root className={className} style={style}>
 			<Section4TopWaves />
 			<Section>
+				<InfoContainer>
+					<LeftWing />
+					<TextContainer>
+						<Header>Your New Resume</Header>
+						<Detail>
+							Share your MakePurple profile with potential collaborators and employers
+							with your experiences, skills and other demonstrations of your knowledge
+						</Detail>
+					</TextContainer>
+				</InfoContainer>
 				<div />
 			</Section>
 			<Section3BottomWaves
