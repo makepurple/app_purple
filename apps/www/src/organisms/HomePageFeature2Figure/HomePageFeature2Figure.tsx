@@ -133,7 +133,7 @@ export const HomePageFeature2Figure: FC<HomePageFeature2FigureProps> = ({ classN
 						id: "0",
 						following: {
 							__typename: "Skill",
-							viewerFollowing: true,
+							viewerFollowing: false,
 							id: "0",
 							name: "prisma",
 							owner: "prisma",
