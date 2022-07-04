@@ -62,6 +62,7 @@ const Info = tw.div`
 	flex-grow
 	flex
 	flex-col
+	min-w-0
 `;
 
 const MainAnchor = tw.a`
@@ -77,7 +78,6 @@ const Title = tw.span`
 	leading-snug
 	text-black
 	line-clamp-2
-	sm:truncate
 `;
 
 const DescriptionContainer = tw.div`

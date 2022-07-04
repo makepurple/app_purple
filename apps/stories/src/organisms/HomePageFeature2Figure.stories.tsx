@@ -1,14 +1,14 @@
-import { HomePageFeature1Figure, HomePageFeature1FigureProps } from "@makepurple/www";
+import { HomePageFeature2Figure, HomePageFeature2FigureProps } from "@makepurple/www";
 import type { Meta, Story } from "@storybook/react";
 import React from "react";
 
 export default {
-	title: "organisms/HomePageFeature1Figure",
-	component: HomePageFeature1Figure
+	title: "organisms/HomePageFeature2Figure",
+	component: HomePageFeature2Figure
 } as Meta;
 
-const Template: Story<HomePageFeature1FigureProps> = (args) => {
-	return <HomePageFeature1Figure {...args} />;
+const Template: Story<HomePageFeature2FigureProps> = (args) => {
+	return <HomePageFeature2Figure {...args} />;
 };
 Template.args = {};
 Template.parameters = {};
