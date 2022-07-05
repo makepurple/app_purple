@@ -1,16 +1,14 @@
-import { Paper, Tags } from "@makepurple/components";
+import { Avatar, GitHubAvatarImage, Paper, Tags } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { TopLanguages } from "../TopLanguages";
 
-const desiredSkills = ["postgres", "kubernetes", "terraform", "blender", "inkscape"].map(
-	(skill, i) => ({
-		__typename: "Skill" as const,
-		id: `DesiredSkill_${i}`,
-		name: skill,
-		owner: "github"
-	})
-);
+const desiredSkills = ["kubernetes", "terraform", "blender"].map((skill, i) => ({
+	__typename: "Skill" as const,
+	id: `DesiredSkill_${i}`,
+	name: skill,
+	owner: "github"
+}));
 
 const skills = ["next.js", "prisma", "nexus", "urql", "typeScript", "storybook", "tailwindcss"].map(
 	(skill, i) => ({
@@ -23,17 +21,59 @@ const skills = ["next.js", "prisma", "nexus", "urql", "typeScript", "storybook",
 
 const Root = tw.div`
 	relative
-	pl-6
+	pl-2
 	pb-6
+	sm:pl-12
 `;
 
 const Content = tw.div`
 	absolute
 	bottom-0
 	left-0
+	right-2
 	flex
 	flex-col
 	gap-4
+	sm:right-6
+`;
+
+const MockSidebar = styled(Paper)`
+	${tw`
+		flex
+		flex-col
+		items-start
+		h-[700px]
+		p-6
+		sm:h-[640px]
+	`}
+
+	@media (min-width: 360px) {
+		${tw`
+			h-[740px]
+		`}
+	}
+`;
+
+const UserName = tw.div`
+	mt-3
+`;
+
+const DisplayName = tw.div`
+	text-2xl
+	leading-none
+	font-bold
+	text-black
+`;
+
+const SecondaryName = tw.div`
+	text-lg
+	leading-none
+	text-gray-500
+`;
+
+const Bio = tw.p`
+	text-gray-500
+	line-clamp-4
 `;
 
 const SubTitle = tw.div`
@@ -60,6 +100,21 @@ export interface HomePageFeature3FigureProps {
 export const HomePageFeature3Figure: FC<HomePageFeature3FigureProps> = ({ className, style }) => {
 	return (
 		<Root className={className} style={style}>
+			<MockSidebar>
+				<Avatar border={6}>
+					<GitHubAvatarImage
+						alt="leedavidcs"
+						src="https://avatars.githubusercontent.com/u/15151154"
+						height={156}
+						width={156}
+					/>
+				</Avatar>
+				<UserName tw="mt-3">
+					<DisplayName>David Lee</DisplayName>
+					<SecondaryName tw="mt-1">leedavidcs</SecondaryName>
+				</UserName>
+				<Bio tw="mt-3">I learn things and work on MakePurple</Bio>
+			</MockSidebar>
 			<Content>
 				<TopLanguagesContainer>
 					<SubTitle>Most Used Languages</SubTitle>

@@ -161,7 +161,6 @@ export const HomePageFeature1Figure: FC<HomePageFeature1FigureProps> = ({ classN
 								</span>
 							</FollowAnchor>
 							<Delimiter tw="mx-2" />
-
 							<FollowAnchor>
 								<FollowCount>{FormatUtils.toGitHubFixed(57)}</FollowCount> Following
 							</FollowAnchor>

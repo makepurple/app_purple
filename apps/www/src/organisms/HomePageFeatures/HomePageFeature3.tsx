@@ -1,10 +1,19 @@
 import { LogoLeftWing } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
+import { HomePageFeature3Figure } from "../HomePageFeature3Figure";
 import { HomePageFeaturesWaves } from "./HomePageFeaturesWaves";
 
 const Root = tw.div`
 	relative
+`;
+
+const Background = tw.div`
+	absolute
+	inset-0
+	bg-indigo-50
+	z-[-2]
+	2xl:clip-path[url(#home-section4-clip-path)]
 `;
 
 const Section = tw.div`
@@ -15,18 +24,18 @@ const Section = tw.div`
 	gap-8
 	py-24
 	px-4
-	bg-indigo-50
 	2xl:flex-row
-	2xl:items-end
+	2xl:items-center
 	2xl:gap-16
 	2xl:py-64
-	2xl:clip-path[url(#home-section4-clip-path)]
 `;
 
 const Section4TopWaves = tw(HomePageFeaturesWaves)`
 	hidden
-	top-[12px]
+	top-[64px]
 	bottom-[auto]
+	rotate-[5deg]
+	z-[-1]
 	2xl:block
 `;
 
@@ -36,11 +45,9 @@ const Section3BottomWaves = tw.svg`
 	left-1/2
 	bottom-0
 	-translate-x-1/2
-	translate-y-[20%]
 	w-full
 	rotate-[-3deg]
 	scale-x-[1.2]
-	scale-y-[0.75]
 	2xl:block
 `;
 
@@ -85,6 +92,10 @@ const Detail = tw.p`
 	2xl:text-2xl
 `;
 
+const Figure = tw(HomePageFeature3Figure)`
+	max-w-[540px]
+`;
+
 export interface HomePageFeature3Props {
 	className?: string;
 	style?: CSSProperties;
@@ -94,6 +105,7 @@ export const HomePageFeature3: FC<HomePageFeature3Props> = ({ className, style }
 	return (
 		<Root className={className} style={style}>
 			<Section4TopWaves />
+			<Background />
 			<Section>
 				<InfoContainer>
 					<LeftWing />
@@ -105,7 +117,7 @@ export const HomePageFeature3: FC<HomePageFeature3Props> = ({ className, style }
 						</Detail>
 					</TextContainer>
 				</InfoContainer>
-				<div />
+				<Figure />
 			</Section>
 			<Section3BottomWaves
 				width="1511"
