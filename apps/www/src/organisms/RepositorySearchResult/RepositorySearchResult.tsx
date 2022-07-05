@@ -18,7 +18,7 @@ const Content = tw.div`
 	flex
 	flex-col
 	gap-1
-	justify-start
+	items-start
 	overflow-hidden
 `;
 
