@@ -24,10 +24,14 @@ import { ForkIcon, IssueIcon, LicenseIcon, PullRequestIcon, StarIcon } from "../
 
 const Root = tw(Paper)`
 	flex
+	flex-col
 	items-start
+	gap-4
 	p-4
 	cursor-pointer
 	hover:bg-violet-50
+	sm:flex-row
+
 `;
 
 const StyledAvatar = tw(Avatar)`
@@ -133,7 +137,6 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 						onClick={(e) => {
 							e.stopPropagation();
 						}}
-						tw="mr-4"
 					>
 						<GitHubAvatarImage
 							alt={owner.login}
@@ -231,7 +234,7 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 				</Info>
 			</Details>
 			{status === "authenticated" && (
-				<Actions tw="ml-4">
+				<Actions>
 					<FollowButton
 						disabled={loading}
 						onClick={async (e) => {

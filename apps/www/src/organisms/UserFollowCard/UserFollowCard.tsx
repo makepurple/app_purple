@@ -16,10 +16,13 @@ const MAX_SKILLS_SHOWN = 5;
 
 const Root = tw(Paper)`
 	flex
+	flex-col
 	items-start
+	gap-4
 	p-4
 	cursor-pointer
 	hover:bg-violet-50
+	sm:flex-row
 `;
 
 const StyledAvatar = tw(UserAvatar)`
