@@ -14,11 +14,13 @@ const Root = tw.div`
 `;
 
 const NewPostActivity = tw(UserActivityCard)`
-	mr-12
+	mr-0
+	sm:mr-12
 `;
 
 const FollowSkillActivity = tw(UserActivityCard)`
-	ml-12
+	ml-0
+	sm:ml-12
 `;
 
 export interface HomePageFeature2FigureProps {
