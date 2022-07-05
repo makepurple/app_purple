@@ -32,7 +32,7 @@ const Section = tw.div`
 
 const Section4TopWaves = tw(HomePageFeaturesWaves)`
 	hidden
-	top-[64px]
+	top-[72px]
 	bottom-[auto]
 	rotate-[5deg]
 	z-[-1]
@@ -43,10 +43,9 @@ const Section3BottomWaves = tw.svg`
 	hidden
 	absolute
 	left-1/2
-	bottom-0
+	bottom-4
 	-translate-x-1/2
 	w-full
-	rotate-[-3deg]
 	scale-x-[1.2]
 	2xl:block
 `;
