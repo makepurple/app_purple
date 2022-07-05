@@ -13,6 +13,7 @@ const Root = tw.div`
 	items-center
 	w-screen
 	max-w-full
+	overflow-hidden
 	pt-24
 	pb-28
 	xl:pt-12
@@ -31,6 +32,7 @@ const Heading = tw.div`
 	flex
 	flex-col
 	items-center
+	max-w-full
 	xl:self-start
 	xl:ml-36
 	xl:items-start
