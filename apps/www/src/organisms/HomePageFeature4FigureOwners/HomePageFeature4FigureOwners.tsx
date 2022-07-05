@@ -1,6 +1,5 @@
-import { Button, Paper, Popover, Typist } from "@makepurple/components";
+import { Button, Paper, Typist } from "@makepurple/components";
 import React, { CSSProperties, FC, useMemo, useState } from "react";
-import { usePopper } from "react-popper";
 import tw, { styled } from "twin.macro";
 import { UserSearchResultGitHubUserFragment } from "../../graphql";
 import { SearchIcon } from "../../svgs";
@@ -8,6 +7,7 @@ import { LoadingSearchResult } from "../LoadingSearchResult";
 import { UserSearchResult } from "../UserSearchResult";
 
 const Root = tw.div`
+	relative
 	flex
 	flex-row
 	items-stretch
@@ -80,6 +80,10 @@ const SearchButton = tw(Button)`
 `;
 
 const Results = tw(Paper)`
+	absolute
+	inset-x-0
+	bottom-0
+	translate-y-full
 	max-h-96
 	overflow-y-auto
 `;
@@ -286,25 +290,6 @@ export const HomePageFeature4FigureOwners: FC<HomePageFeature4FigureOwnersProps>
 	const [usePlaceholder, setUsePlaceholder] = useState<boolean>(false);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	const offsetModifier = useMemo(() => Popover.Modifiers.Offset({}), []);
-
-	const [refElem, refRef] = useState<HTMLDivElement | null>(null);
-	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
-	const popper = usePopper(refElem, popperElem, {
-		modifiers: [
-			offsetModifier,
-			Popover.Modifiers.SameWidth,
-			{
-				name: "flip",
-				options: {
-					fallbackPlacements: ["bottom-start"]
-				}
-			}
-		],
-		placement: "bottom-start",
-		strategy: "fixed"
-	});
-
 	const texts: readonly string[] = useMemo(() => Object.keys(searches), []);
 	const results: readonly UserSearchResultGitHubUserFragment[] = useMemo(
 		() => searches[searchTerm] ?? [],
@@ -312,7 +297,7 @@ export const HomePageFeature4FigureOwners: FC<HomePageFeature4FigureOwnersProps>
 	);
 
 	return (
-		<Root ref={refRef} className={className} style={style}>
+		<Root className={className} style={style}>
 			<OwnerSearch $focused={focused}>
 				<Typist
 					onChange={({ mode, text }) => {
@@ -339,7 +324,7 @@ export const HomePageFeature4FigureOwners: FC<HomePageFeature4FigureOwnersProps>
 				<SearchIcon height={24} width={24} />
 			</SearchButton>
 			{!!searchTerm && focused && (
-				<Results ref={popperRef} {...popper.attributes.popper} style={popper.styles.popper}>
+				<Results>
 					{!results.length
 						? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
 						: results.map((owner) => (
