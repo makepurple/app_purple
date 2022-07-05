@@ -28,7 +28,7 @@ export * from "./HomePageAdditionalBenefitsSection";
 export * from "./HomePageFeature1Figure";
 export * from "./HomePageFeature2Figure";
 export * from "./HomePageFeature3Figure";
-export * from "./HomePageFeature4Figure";
+export * from "./HomePageFeature4FigureOwners";
 export * from "./HomePageFeatures";
 export * from "./HomePageGlobe";
 export * from "./HomePageHero";

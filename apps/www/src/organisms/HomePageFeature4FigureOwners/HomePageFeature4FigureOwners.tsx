@@ -273,12 +273,15 @@ const searches: Record<string, readonly UserSearchResultGitHubUserFragment[]> = 
 	]
 };
 
-export interface HomePageFeature4FigureProps {
+export interface HomePageFeature4FigureOwnersProps {
 	className?: string;
 	style?: CSSProperties;
 }
 
-export const HomePageFeature4Figure: FC<HomePageFeature4FigureProps> = ({ className, style }) => {
+export const HomePageFeature4FigureOwners: FC<HomePageFeature4FigureOwnersProps> = ({
+	className,
+	style
+}) => {
 	const [focused, setFocused] = useState<boolean>(false);
 	const [usePlaceholder, setUsePlaceholder] = useState<boolean>(false);
 	const [searchTerm, setSearchTerm] = useState<string>("");
