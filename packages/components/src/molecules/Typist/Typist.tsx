@@ -1,7 +1,7 @@
-import { useUpdateEffect, useWindowFocus } from "@makepurple/hooks";
+import { useIntersectionObserver, useUpdateEffect, useWindowFocus } from "@makepurple/hooks";
 import { ObjectUtils } from "@makepurple/utils";
 import ms from "ms";
-import React, { CSSProperties, FC, ReactNode, useEffect, useState } from "react";
+import React, { CSSProperties, FC, ReactNode, useEffect, useRef, useState } from "react";
 import { TypistCursor } from "./TypistCursor";
 
 export type TypistMode = "typing" | "deleting" | "paused" | "halted";
@@ -9,6 +9,7 @@ export type TypistMode = "typing" | "deleting" | "paused" | "halted";
 export interface TypistState {
 	completed: boolean;
 	mode: TypistMode;
+	text: string;
 }
 
 export interface TypistProps {
@@ -38,7 +39,12 @@ const _Typist: FC<TypistProps> = ({
 	deleteSpeed = typingSpeed,
 	repeatDelay = typingDelay
 }) => {
+	const rootRef = useRef<HTMLSpanElement>(null);
+
 	const focused = useWindowFocus();
+	const intersection = useIntersectionObserver(rootRef, {
+		threshold: [0]
+	});
 
 	const [mode, setMode] = useState<TypistMode>("typing");
 	const [index, setIndex] = useState<number>(0);
@@ -46,18 +52,19 @@ const _Typist: FC<TypistProps> = ({
 
 	const sentence: string = sentences[index] ?? "";
 	const isCompleted: boolean = sentence === displayedSentence;
+	const isIntersecting: boolean = !!intersection?.isIntersecting;
 
 	useEffect(() => {
-		if (!focused) {
-			setIndex(0);
-			setMode("halted");
-			setDisplayedSentence("");
+		if (focused && isIntersecting) {
+			setMode("typing");
 
 			return;
 		}
 
-		setMode("typing");
-	}, [focused]);
+		setIndex(0);
+		setMode("halted");
+		setDisplayedSentence("");
+	}, [focused, isIntersecting]);
 
 	useEffect(() => {
 		if (!sentence) return;
@@ -154,11 +161,11 @@ const _Typist: FC<TypistProps> = ({
 	const completed = isCompleted && index === sentences.length - 1 && mode === "paused";
 
 	useUpdateEffect(() => {
-		onChange?.({ completed, mode });
-	}, [completed, mode, onChange]);
+		onChange?.({ completed, mode, text: displayedSentence });
+	}, [completed, displayedSentence, mode, onChange]);
 
 	return (
-		<span className={className} style={style}>
+		<span ref={rootRef} className={className} style={style}>
 			<span>{displayedSentence}</span>
 			{children}
 		</span>
