@@ -64,7 +64,7 @@ const Placeholder = tw.span`
 	truncate
 `;
 
-export const SearchButton = tw(Button)`
+const SearchButton = tw(Button)`
 	flex-shrink-0
 	h-11
 	w-11
