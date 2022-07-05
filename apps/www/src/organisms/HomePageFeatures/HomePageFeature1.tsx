@@ -76,6 +76,7 @@ const Header = tw.h2`
 	font-bold
 	mt-5
 	text-4xl
+	text-left
 	2xl:mt-3
 	2xl:text-6xl
 `;
