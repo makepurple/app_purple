@@ -1,18 +1,18 @@
 import { LogoLeftWing, LogoRightWing } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
+import { HomePageFeature4Figure } from "../HomePageFeature4Figure";
 
 const Root = tw.div`
 	flex
 	flex-col
 	items-center
 	justify-center
-	py-24
+	gap-16
+	pt-24
+	pb-[384px]
 	px-4
-	2xl:flex-row
-	2xl:items-end
-	2xl:gap-16
-	2xl:py-32
+	2xl:pt-32
 `;
 
 const RightWing = tw(LogoRightWing)`
@@ -71,6 +71,11 @@ const Detail = tw.p`
 	2xl:text-2xl
 `;
 
+const Figure = tw(HomePageFeature4Figure)`
+	max-w-[480px]
+	lg:max-w-[unset]
+`;
+
 export interface HomePageFeature4Props {
 	className?: string;
 	style?: CSSProperties;
@@ -92,7 +97,7 @@ export const HomePageFeature4: FC<HomePageFeature4Props> = ({ className, style }
 					</Detail>
 				</TextContainer>
 			</InfoContainer>
-			<div />
+			<Figure />
 		</Root>
 	);
 };

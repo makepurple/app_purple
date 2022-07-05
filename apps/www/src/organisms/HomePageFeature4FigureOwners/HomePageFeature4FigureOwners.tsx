@@ -291,7 +291,16 @@ export const HomePageFeature4FigureOwners: FC<HomePageFeature4FigureOwnersProps>
 	const [refElem, refRef] = useState<HTMLDivElement | null>(null);
 	const [popperElem, popperRef] = useState<HTMLDivElement | null>(null);
 	const popper = usePopper(refElem, popperElem, {
-		modifiers: [offsetModifier, Popover.Modifiers.SameWidth],
+		modifiers: [
+			offsetModifier,
+			Popover.Modifiers.SameWidth,
+			{
+				name: "flip",
+				options: {
+					fallbackPlacements: ["bottom-start"]
+				}
+			}
+		],
 		placement: "bottom-start",
 		strategy: "fixed"
 	});
