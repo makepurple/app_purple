@@ -8,10 +8,11 @@ const Root = tw.div`
 	flex-col
 	items-center
 	justify-center
-	gap-16
+	gap-8
 	pt-24
 	pb-[384px]
 	px-4
+	2xl:gap-16
 	2xl:pt-32
 `;
 
