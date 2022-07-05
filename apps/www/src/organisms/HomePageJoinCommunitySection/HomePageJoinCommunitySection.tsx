@@ -15,22 +15,29 @@ const Root = styled(PageContainer)`
 		flex
 		items-center
 		justify-center
-		min-height[496px]
+		min-h-0
 		w-screen
 		max-w-full
 		overflow-hidden
-		py-24
+		px-0
+		py-0
+		lg:min-h-[496px]
+		lg:px-2
+		lg:py-24
 	`}
 	background: linear-gradient(to bottom, #fff 35%, #4f46e530 65%)
 `;
 
 const Globe = tw(HomePageGlobe)`
+	hidden
 	absolute
 	top-1/2
-	lg:top-3/4
 	-translate-y-1/2
 	-translate-x-1/2
 	left-1/2
+	z-0
+	lg:block
+	lg:top-3/4
 	lg:left-2/3
 	sm:h-[512px]
 	sm:w-[512px]
@@ -38,7 +45,6 @@ const Globe = tw(HomePageGlobe)`
 	md:w-[768px]
 	lg:h-[1024px]
 	lg:w-[1024px]
-	z-0
 `;
 
 const Content = styled(Paper)`
@@ -46,16 +52,17 @@ const Content = styled(Paper)`
 		flex
 		flex-col
 		items-center
-		max-w-4xl
+		max-w-[unset]
 		w-full
 		px-2
-		py-4
+		py-16
+		rounded-none
 		shadow-2xl
 		text-center
 		text-white
 		z-[1]
-		md:py-6
-		xl:py-12
+		lg:rounded-lg
+		lg:max-w-4xl
 	`}
 	background: ${oneLine`
 		linear-gradient(
