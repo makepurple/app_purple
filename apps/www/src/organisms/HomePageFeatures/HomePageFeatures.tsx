@@ -9,6 +9,10 @@ const Root = tw.div`
 	flex
 	flex-col
 	items-stretch
+	w-full
+	border-b
+	border-solid
+	border-gray-300/80
 `;
 
 export interface HomePageFeaturesProps {

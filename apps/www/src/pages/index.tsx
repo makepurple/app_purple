@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import React from "react";
 import tw from "twin.macro";
 import {
-	HomePageAdditionalBenefitsSection,
+	HomePageFeatures,
 	HomePageHero,
 	HomePageJoinCommunitySection,
 	HomePageProfileSection,
@@ -38,7 +38,7 @@ export const Page: NextPage<PageProps> = () => {
 			<HomePageHero />
 			<HomePageSkillsSection />
 			<HomePageProfileSection />
-			<HomePageAdditionalBenefitsSection />
+			<HomePageFeatures />
 			<HomePageJoinCommunitySection />
 		</Root>
 	);
