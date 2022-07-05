@@ -6,13 +6,14 @@ import { HomePageFeaturesWaves } from "./HomePageFeaturesWaves";
 
 const Root = tw.div`
 	relative
+	z-[1]
 `;
 
 const Background = tw.div`
+	z-[-2]
 	absolute
 	inset-0
 	bg-indigo-50
-	z-[-2]
 	2xl:clip-path[url(#home-section4-clip-path)]
 `;
 

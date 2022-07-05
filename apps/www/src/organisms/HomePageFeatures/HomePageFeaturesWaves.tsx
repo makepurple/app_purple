@@ -7,7 +7,7 @@ const Root = tw.div`
 	inset-x-0
 	bottom-[84px]
 	w-full
-	z-10
+	z-[1]
 	rotate-[-2deg]
 `;
 
