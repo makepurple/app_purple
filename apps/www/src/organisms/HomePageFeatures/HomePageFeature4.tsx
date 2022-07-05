@@ -12,7 +12,7 @@ const Root = tw.div`
 	2xl:flex-row
 	2xl:items-end
 	2xl:gap-16
-	2xl:py-40
+	2xl:py-32
 `;
 
 const RightWing = tw(LogoRightWing)`
