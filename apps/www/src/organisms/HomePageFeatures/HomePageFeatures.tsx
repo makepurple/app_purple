@@ -10,6 +10,7 @@ const Root = tw.div`
 	flex-col
 	items-stretch
 	w-full
+	overflow-x-hidden
 	border-b
 	border-solid
 	border-gray-300/80
