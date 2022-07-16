@@ -7,9 +7,8 @@ export const UserActivityUpvoteCodeExample = objectType({
 		t.nonNull.field("codeExample", {
 			type: "CodeExample",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.codeExample.findUnique({
-					where: { id: parent.codeExampleId },
-					rejectOnNotFound: true
+				return await prisma.codeExample.findUniqueOrThrow({
+					where: { id: parent.codeExampleId }
 				});
 			}
 		});

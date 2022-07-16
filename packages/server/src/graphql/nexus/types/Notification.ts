@@ -20,11 +20,10 @@ export const Notification = interfaceType({
 		t.nonNull.field("user", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						id: parent.userId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

@@ -12,11 +12,10 @@ export const ChatMessage = objectType({
 		t.nonNull.field("chat", {
 			type: "Chat",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.chat.findUnique({
+				return prisma.chat.findUniqueOrThrow({
 					where: {
 						id: parent.chatId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});
@@ -38,11 +37,10 @@ export const ChatMessage = objectType({
 		t.nonNull.field("sender", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						id: parent.senderId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

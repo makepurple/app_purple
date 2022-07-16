@@ -7,9 +7,8 @@ export const NotificationChatMessageReceived = objectType({
 		t.nonNull.field("chat", {
 			type: "Chat",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.chat.findUnique({
-					where: { id: parent.chatId },
-					rejectOnNotFound: true
+				return await prisma.chat.findUniqueOrThrow({
+					where: { id: parent.chatId }
 				});
 			}
 		});

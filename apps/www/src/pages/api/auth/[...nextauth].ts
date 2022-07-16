@@ -25,11 +25,10 @@ const authHandler: NextApiHandler = (req, res) =>
 				return !dbUser.banReason;
 			},
 			jwt: async ({ account, token }) => {
-				const dbUser = await prisma.user.findUnique({
+				const dbUser = await prisma.user.findUniqueOrThrow({
 					where: {
 						name: token.name
-					},
-					rejectOnNotFound: true
+					}
 				});
 
 				const accessToken = account?.access_token;

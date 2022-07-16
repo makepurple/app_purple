@@ -7,9 +7,8 @@ export const NotificationFriendshipAccepted = objectType({
 		t.nonNull.field("friendship", {
 			type: "Friendship",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.friendship.findUnique({
-					where: { id: parent.friendshipId },
-					rejectOnNotFound: true
+				return await prisma.friendship.findUniqueOrThrow({
+					where: { id: parent.friendshipId }
 				});
 			}
 		});

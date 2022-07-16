@@ -22,11 +22,10 @@ export const Post = objectType({
 		t.nonNull.field("author", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						name: parent.authorName
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});
@@ -190,7 +189,7 @@ export const Post = objectType({
 		t.nonNull.int("skillsCount", {
 			resolve: async (parent, args, { prisma }) => {
 				return await prisma.post
-					.findUnique({
+					.findUniqueOrThrow({
 						where: { id: parent.id },
 						select: {
 							_count: {
@@ -198,8 +197,7 @@ export const Post = objectType({
 									skills: true
 								}
 							}
-						},
-						rejectOnNotFound: true
+						}
 					})
 					.then((result) => result._count.skills);
 			}

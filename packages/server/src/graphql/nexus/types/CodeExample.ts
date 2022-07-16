@@ -10,11 +10,10 @@ export const CodeExample = objectType({
 		t.nonNull.field("author", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						name: parent.authorName
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});
@@ -95,11 +94,10 @@ export const CodeExample = objectType({
 		t.nonNull.field("primarySkill", {
 			type: "Skill",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.skill.findUnique({
+				return prisma.skill.findUniqueOrThrow({
 					where: {
 						id: parent.primarySkillId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

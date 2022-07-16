@@ -6,11 +6,10 @@ export const Friendship = objectType({
 		t.nonNull.field("friender", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						id: parent.frienderId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});
@@ -18,11 +17,10 @@ export const Friendship = objectType({
 		t.nonNull.field("friending", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						id: parent.friendingId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

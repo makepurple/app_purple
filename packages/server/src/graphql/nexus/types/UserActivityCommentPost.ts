@@ -7,9 +7,8 @@ export const UserActivityCommentPost = objectType({
 		t.nonNull.field("comment", {
 			type: "Comment",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.comment.findUnique({
-					where: { id: parent.commentId },
-					rejectOnNotFound: true
+				return await prisma.comment.findUniqueOrThrow({
+					where: { id: parent.commentId }
 				});
 			}
 		});

@@ -13,9 +13,8 @@ export const requestFriendship = mutationField("requestFriendship", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const toFriend = await prisma.user.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+		const toFriend = await prisma.user.findUniqueOrThrow({
+			where: PrismaUtils.nonNull(args.where)
 		});
 
 		if (toFriend.name === user.name) throw new Error("Cannot friend yourself!");

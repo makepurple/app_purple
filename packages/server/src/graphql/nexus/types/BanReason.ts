@@ -19,9 +19,8 @@ export const BanReason = objectType({
 		t.nonNull.field("user", {
 			type: "User",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.user.findUnique({
-					where: { id: parent.id },
-					rejectOnNotFound: true
+				return await prisma.user.findUniqueOrThrow({
+					where: { id: parent.id }
 				});
 			}
 		});

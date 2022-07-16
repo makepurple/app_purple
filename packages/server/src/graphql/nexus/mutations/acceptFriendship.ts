@@ -21,12 +21,11 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 	resolve: async (parent, args, { octokit: graphql, prisma, user }) => {
 		if (!user) throw new Error();
 
-		const friender = await prisma.user.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+		const friender = await prisma.user.findUniqueOrThrow({
+			where: PrismaUtils.nonNull(args.where)
 		});
 
-		const pendingFriendship = await prisma.friendship.findUnique({
+		const pendingFriendship = await prisma.friendship.findUniqueOrThrow({
 			where: {
 				frienderId_friendingId: {
 					// The requester of the friendship
@@ -37,8 +36,7 @@ export const acceptFriendship = mutationField("acceptFriendship", {
 			},
 			include: {
 				friender: true
-			},
-			rejectOnNotFound: true
+			}
 		});
 
 		const existing = await prisma.friendship

@@ -21,9 +21,8 @@ export const unbanUser = mutationField("unbanUser", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const toUnban = await prisma.user.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+		const toUnban = await prisma.user.findUniqueOrThrow({
+			where: PrismaUtils.nonNull(args.where)
 		});
 
 		const banReason = await prisma.banReason.delete({

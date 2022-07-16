@@ -26,11 +26,10 @@ export const Experience = objectType({
 		t.nonNull.field("organization", {
 			type: "Organization",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.organization.findUnique({
+				return prisma.organization.findUniqueOrThrow({
 					where: {
 						name: parent.organizationName
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});
@@ -41,11 +40,10 @@ export const Experience = objectType({
 		t.nonNull.field("user", {
 			type: "User",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						id: parent.userId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

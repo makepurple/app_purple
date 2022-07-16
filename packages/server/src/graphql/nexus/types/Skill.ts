@@ -257,9 +257,8 @@ export const Skill = objectType({
 		t.nonNull.int("usersCount", {
 			resolve: async (parent, args, { prisma }) => {
 				return await prisma.skill
-					.findUnique({
+					.findUniqueOrThrow({
 						where: { id: parent.id },
-						rejectOnNotFound: true,
 						select: { _count: { select: { users: true } } }
 					})
 					.then((result) => result._count.users);

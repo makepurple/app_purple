@@ -7,9 +7,8 @@ export const UserActivityFollowUser = objectType({
 		t.nonNull.field("follow", {
 			type: "Follow",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.follow.findUnique({
-					where: { id: parent.followId },
-					rejectOnNotFound: true
+				return await prisma.follow.findUniqueOrThrow({
+					where: { id: parent.followId }
 				});
 			}
 		});

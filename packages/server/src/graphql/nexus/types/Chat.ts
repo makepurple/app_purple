@@ -48,14 +48,13 @@ export const Chat = objectType({
 				if (!user) throw new Error();
 
 				return await prisma.chatsOnUsers
-					.findUnique({
+					.findUniqueOrThrow({
 						where: {
 							chatId_userId: {
 								chatId: parent.id,
 								userId: user.id
 							}
-						},
-						rejectOnNotFound: true
+						}
 					})
 					.then((result) => result.lastOpenedAt);
 			}
@@ -151,14 +150,13 @@ export const Chat = objectType({
 				if (!user) throw new Error();
 
 				const lastOpenedAt = await prisma.chatsOnUsers
-					.findUnique({
+					.findUniqueOrThrow({
 						where: {
 							chatId_userId: {
 								chatId: parent.id,
 								userId: user.id
 							}
-						},
-						rejectOnNotFound: true
+						}
 					})
 					.then((result) => result.lastOpenedAt);
 
@@ -192,14 +190,13 @@ export const Chat = objectType({
 				if (!user) throw new Error();
 
 				const lastOpenedAt = await prisma.chatsOnUsers
-					.findUnique({
+					.findUniqueOrThrow({
 						where: {
 							chatId_userId: {
 								chatId: parent.id,
 								userId: user.id
 							}
-						},
-						rejectOnNotFound: true
+						}
 					})
 					.then((result) => result.lastOpenedAt);
 

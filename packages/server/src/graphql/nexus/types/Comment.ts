@@ -15,11 +15,10 @@ export const Comment = objectType({
 			resolve: (parent, args, { prisma }) => {
 				if (!parent.authorId) return null;
 
-				return prisma.user.findUnique({
+				return prisma.user.findUniqueOrThrow({
 					where: {
 						id: parent.authorId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

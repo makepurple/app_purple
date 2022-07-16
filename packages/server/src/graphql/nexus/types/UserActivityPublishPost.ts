@@ -7,9 +7,8 @@ export const UserActivityPublishPost = objectType({
 		t.nonNull.field("post", {
 			type: "Post",
 			resolve: async (parent, args, { prisma }) => {
-				return await prisma.post.findUnique({
-					where: { id: parent.postId },
-					rejectOnNotFound: true
+				return await prisma.post.findUniqueOrThrow({
+					where: { id: parent.postId }
 				});
 			}
 		});

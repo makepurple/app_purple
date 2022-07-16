@@ -66,14 +66,13 @@ export const suggestFriends = queryField("suggestFriends", {
 			return connection;
 		}
 
-		const viewer = await prisma.user.findUnique({
+		const viewer = await prisma.user.findUniqueOrThrow({
 			where: { id: user.id },
 			select: {
 				_count: { select: { skills: true } },
 				desiredSkills: { select: { skillId: true } },
 				skills: { select: { skillId: true } }
-			},
-			rejectOnNotFound: true
+			}
 		});
 
 		const viewerDesiredSkillIds = viewer.desiredSkills.map((skill) => skill.skillId);

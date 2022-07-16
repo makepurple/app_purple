@@ -7,11 +7,10 @@ export const PostImage = objectType({
 		t.nonNull.field("post", {
 			type: "Post",
 			resolve: (parent, args, { prisma }) => {
-				return prisma.post.findUnique({
+				return prisma.post.findUniqueOrThrow({
 					where: {
 						id: parent.postId
-					},
-					rejectOnNotFound: true
+					}
 				});
 			}
 		});

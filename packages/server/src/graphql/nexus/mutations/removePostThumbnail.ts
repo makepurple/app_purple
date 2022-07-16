@@ -21,9 +21,8 @@ export const removePostThumbnail = mutationField("removePostThumbnail", {
 		return true;
 	},
 	resolve: async (parent, args, { cloudinary, prisma }) => {
-		let record: Post | null = await prisma.post.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+		let record: Post | null = await prisma.post.findUniqueOrThrow({
+			where: PrismaUtils.nonNull(args.where)
 		});
 
 		const thumbnailUrl = record?.thumbnailUrl;

@@ -12,9 +12,8 @@ export const leaveChat = mutationField("leaveChat", {
 	resolve: async (parent, args, { prisma, user }) => {
 		if (!user) throw new Error();
 
-		const chat = await prisma.chat.findUnique({
-			where: PrismaUtils.nonNull(args.where),
-			rejectOnNotFound: true
+		const chat = await prisma.chat.findUniqueOrThrow({
+			where: PrismaUtils.nonNull(args.where)
 		});
 
 		const record = await prisma.$transaction(async (transaction) => {
@@ -27,7 +26,7 @@ export const leaveChat = mutationField("leaveChat", {
 				}
 			});
 
-			const result = await prisma.chat.findUnique({
+			const result = await prisma.chat.findUniqueOrThrow({
 				where: { id: chat.id },
 				include: {
 					_count: {
@@ -35,8 +34,7 @@ export const leaveChat = mutationField("leaveChat", {
 							users: true
 						}
 					}
-				},
-				rejectOnNotFound: true
+				}
 			});
 
 			if (!result) return null;

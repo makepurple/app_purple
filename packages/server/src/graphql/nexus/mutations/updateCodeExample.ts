@@ -126,15 +126,13 @@ export const updateCodeExample = mutationField("updateCodeExample", {
 			const skillsToConnect = [...existingSkills, ...newSkills];
 
 			const primarySkill = args.data.primarySkill
-				? await transaction.skill.findUnique({
-						where: PrismaUtils.nonNull(args.data.primarySkill),
-						rejectOnNotFound: true
+				? await transaction.skill.findUniqueOrThrow({
+						where: PrismaUtils.nonNull(args.data.primarySkill)
 				  })
 				: skillsToConnect.length
-				? await transaction.skill.findFirst({
+				? await transaction.skill.findFirstOrThrow({
 						orderBy: { users: { _count: "desc" } },
-						where: { id: { in: skillsToConnect.map((skill) => skill.id) } },
-						rejectOnNotFound: true
+						where: { id: { in: skillsToConnect.map((skill) => skill.id) } }
 				  })
 				: undefined;
 
