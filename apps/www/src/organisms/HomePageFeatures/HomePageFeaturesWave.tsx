@@ -1,4 +1,9 @@
 import React, { CSSProperties, FC } from "react";
+import tw from "twin.macro";
+
+const Root = tw.svg`
+	w-full
+`;
 
 export interface HomePageFeaturesWaveProps {
 	className?: string;
@@ -7,7 +12,7 @@ export interface HomePageFeaturesWaveProps {
 
 export const HomePageFeaturesWave: FC<HomePageFeaturesWaveProps> = ({ className, style }) => {
 	return (
-		<svg
+		<Root
 			className={className}
 			width="1512"
 			height="194"
@@ -21,6 +26,6 @@ export const HomePageFeaturesWave: FC<HomePageFeaturesWaveProps> = ({ className,
 				stroke="#B2B2FF"
 				strokeWidth="1.5"
 			/>
-		</svg>
+		</Root>
 	);
 };

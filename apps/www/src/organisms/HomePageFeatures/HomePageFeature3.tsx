@@ -35,6 +35,7 @@ const Section4TopWaves = tw(HomePageFeaturesWaves)`
 	hidden
 	top-[72px]
 	bottom-[auto]
+	w-full
 	rotate-[5deg]
 	z-[-1]
 	2xl:block
