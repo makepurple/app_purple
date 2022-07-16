@@ -34,7 +34,7 @@ const skillIds = skills.map((skill) => skill.id!);
 export const users: readonly Prisma.UserCreateInput[] = names.map(([name, image], i) => {
 	const userSkillIds: readonly string[] = [
 		...new Set(
-			faker.random.arrayElements(
+			faker.helpers.arrayElements(
 				skillIds,
 				Math.floor(
 					faker.datatype.number({
@@ -52,7 +52,7 @@ export const users: readonly Prisma.UserCreateInput[] = names.map(([name, image]
 
 	const userDesiredSkillIds: readonly string[] = [
 		...new Set(
-			faker.random.arrayElements(
+			faker.helpers.arrayElements(
 				remainingSkillIds,
 				Math.floor(
 					faker.datatype.number({

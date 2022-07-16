@@ -14,7 +14,7 @@ const DATA_SIZE = 20;
 const COUNT_UNOPENED = 5;
 
 const notifications = Array.from({ length: DATA_SIZE }, (_, i) => {
-	const notification = faker.random.arrayElement([
+	const notification = faker.helpers.arrayElement([
 		NotificationChatMessageReceived_fragment_mock,
 		NotificationCodeExampleCommented_fragment_mock,
 		NotificationFriendshipAccepted_fragment_mock,

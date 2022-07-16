@@ -18,7 +18,7 @@ faker.seed(1);
 const DATA_SIZE = 20;
 
 const activities = Array.from({ length: DATA_SIZE }, (_, i) => {
-	const activity = faker.random.arrayElement([
+	const activity = faker.helpers.arrayElement([
 		UserActivityCommentCodeExample_fragment_mock,
 		UserActivityCommentPost_fragment_mock,
 		UserActivityCreateCodeExample_fragment_mock,

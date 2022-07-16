@@ -12,7 +12,7 @@
 		"upload": "chromatic --build-script build --exit-zero-on-changes * --exit-once-uploaded *"
 	},
 	"dependencies": {
-		"@faker-js/faker": "6.3.1",
+		"@faker-js/faker": "7.3.0",
 		"@headlessui/react": "^1.6.6",
 		"@makepurple/components": "workspace:*",
 		"@makepurple/hooks": "workspace:*",
