@@ -16,8 +16,8 @@
 	"dependencies": {
 		"@makepurple/server": "workspace:*",
 		"@makepurple/typings": "workspace:*",
-		"@types/react": "^18.0.14",
-		"@types/react-dom": "^18.0.5",
+		"@types/react": "^18.0.15",
+		"@types/react-dom": "^18.0.6",
 		"graphql-voyager": "^1.0.0-rc.31",
 		"next": "^12.1.6",
 		"react": "^18.2.0",
@@ -27,6 +27,6 @@
 		"@graphql-codegen/cli": "^2.6.2",
 		"@graphql-codegen/introspection": "^2.1.1",
 		"@makepurple/tsconfig": "workspace:*",
-		"dotenv-cli": "^5.1.0"
+		"dotenv-cli": "^6.0.0"
 	}
 }
