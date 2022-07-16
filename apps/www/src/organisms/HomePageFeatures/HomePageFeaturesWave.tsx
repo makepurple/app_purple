@@ -1,8 +1,16 @@
 import React, { CSSProperties, FC } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 
-const Root = tw.svg`
-	w-full
+const Root = styled.svg`
+	${tw`
+		w-full
+	`}
+
+	@media (min-width: 1980px) {
+		${tw`
+			hidden
+		`}
+	}
 `;
 
 export interface HomePageFeaturesWaveProps {

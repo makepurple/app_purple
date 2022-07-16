@@ -1,6 +1,6 @@
 import { LogoLeftWing } from "@makepurple/components";
 import React, { CSSProperties, FC } from "react";
-import tw from "twin.macro";
+import tw, { styled } from "twin.macro";
 import { HomePageFeature3Figure } from "../HomePageFeature3Figure";
 import { HomePageFeaturesWaves } from "./HomePageFeaturesWaves";
 
@@ -31,25 +31,41 @@ const Section = tw.div`
 	2xl:py-64
 `;
 
-const Section4TopWaves = tw(HomePageFeaturesWaves)`
-	hidden
-	top-[72px]
-	bottom-[auto]
-	w-full
-	rotate-[5deg]
-	z-[-1]
-	2xl:block
+const Section4TopWaves = styled(HomePageFeaturesWaves)`
+	${tw`
+		hidden
+		top-[72px]
+		bottom-[auto]
+		w-full
+		rotate-[5deg]
+		z-[-1]
+		2xl:block
+	`}
+
+	@media (min-width: 1980px) {
+		${tw`
+			hidden
+		`}
+	}
 `;
 
-const Section3BottomWaves = tw.svg`
-	hidden
-	absolute
-	left-1/2
-	bottom-4
-	-translate-x-1/2
-	w-full
-	scale-x-[1.2]
-	2xl:block
+const Section3BottomWaves = styled.svg`
+	${tw`
+		hidden
+		absolute
+		left-1/2
+		bottom-4
+		-translate-x-1/2
+		w-full
+		scale-x-[1.2]
+		2xl:block
+	`}
+
+	@media (min-width: 1980px) {
+		${tw`
+			hidden
+		`}
+	}
 `;
 
 const Mask = tw.svg`
