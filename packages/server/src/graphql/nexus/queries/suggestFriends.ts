@@ -42,10 +42,14 @@ export const suggestFriends = queryField("suggestFriends", {
 		if (!user) {
 			const where: Prisma.UserWhereInput = {
 				...(args.where.desiredSkills
-					? { desiredSkills: { some: PrismaUtils.nonNull(args.where.desiredSkills) } }
+					? {
+							desiredSkills: {
+								some: { skill: PrismaUtils.nonNull(args.where.desiredSkills) }
+							}
+					  }
 					: {}),
 				...(args.where.skills
-					? { skills: { some: PrismaUtils.nonNull(args.where.skills) } }
+					? { skills: { some: { skill: PrismaUtils.nonNull(args.where.skills) } } }
 					: {})
 			};
 
