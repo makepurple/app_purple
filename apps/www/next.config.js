@@ -59,6 +59,39 @@ const config = {
 			{
 				source: "/blog",
 				destination: "/leedavidcs/posts"
+			},
+			{
+				source: "/s/:path*",
+				has: [
+					{
+						type: "query",
+						key: "tab",
+						value: "explore"
+					}
+				],
+				destination: "/s-tab/explore/:path*"
+			},
+			{
+				source: "/s/:path*",
+				has: [
+					{
+						type: "query",
+						key: "tab",
+						value: "followers"
+					}
+				],
+				destination: "/s-tab/followers/:path*"
+			},
+			{
+				source: "/s/:path*",
+				has: [
+					{
+						type: "query",
+						key: "tab",
+						value: "snippets"
+					}
+				],
+				destination: "/s-tab/snippets/:path*"
 			}
 		]
 	}),
