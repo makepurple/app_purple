@@ -12,7 +12,7 @@ import {
 import { didClickIn, useOnClickOutside, useOnKeyDown, useWindowFocus } from "@makepurple/hooks";
 import { FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
-import { m, useViewportScroll } from "framer-motion";
+import { m, useScroll } from "framer-motion";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
@@ -157,7 +157,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 
 	const user = session?.user;
 
-	const { scrollY, scrollYProgress } = useViewportScroll();
+	const { scrollY, scrollYProgress } = useScroll();
 	const focused = useWindowFocus();
 
 	const [isThreshold, setIsThreshold] = useState<boolean>(false);

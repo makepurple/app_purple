@@ -1,6 +1,6 @@
 import type { Coordinates } from "@makepurple/typings";
 import { WindowUtils } from "@makepurple/utils";
-import { useViewportScroll } from "framer-motion";
+import { useScroll } from "framer-motion";
 import { RefObject, useCallback, useEffect, useState } from "react";
 
 export interface UseRelativeScrollPositionOptions {
@@ -13,7 +13,7 @@ export const useRelativeScrollPosition = <T extends HTMLElement>(
 	options: UseRelativeScrollPositionOptions = {}
 ) => {
 	const { onChange, origin } = options;
-	const { scrollX, scrollY } = useViewportScroll();
+	const { scrollX, scrollY } = useScroll();
 
 	const getRelativeX = useCallback(
 		(windowX: number): number => {
