@@ -1,7 +1,6 @@
 import type { SSRData } from "@urql/core/dist/types/exchanges/ssr";
 import type { GetServerSideProps, GetStaticProps } from "next";
 import type { NextURL } from "next/dist/server/web/next-url";
-// eslint-disable-next-line @next/next/no-server-import-in-page
 import type { NextRequest } from "next/server";
 
 const URQL_STATE_PROP_NAME = "__URQL_STATE__";

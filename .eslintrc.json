@@ -82,6 +82,7 @@
 		"no-use-before-define": "off",
 		"object-shorthand": "error",
 		"prettier/prettier": "error",
+		"react/display-name": "off",
 		"react/prop-types": "off",
 		"react/self-closing-comp": [
 			"error",
