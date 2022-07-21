@@ -83,7 +83,7 @@
 	},
 	"devDependencies": {
 		"@faker-js/faker": "7.3.0",
-		"@graphql-codegen/cli": "^2.9.0",
+		"@graphql-codegen/cli": "^2.9.1",
 		"@graphql-codegen/introspection": "^2.2.0",
 		"@graphql-codegen/schema-ast": "^2.5.0",
 		"@graphql-codegen/typed-document-node": "^2.3.2",

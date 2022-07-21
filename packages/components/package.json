@@ -13,7 +13,7 @@
 		"@makepurple/utils": "workspace:*",
 		"@makepurple/validators": "workspace:*",
 		"@popperjs/core": "^2.11.5",
-		"@radix-ui/react-alert-dialog": "^0.1.7",
+		"@radix-ui/react-alert-dialog": "^1.0.0",
 		"@seznam/compose-react-refs": "^1.0.6",
 		"@tailwindcss/aspect-ratio": "0.3.0",
 		"@tippyjs/react": "^4.2.6",
