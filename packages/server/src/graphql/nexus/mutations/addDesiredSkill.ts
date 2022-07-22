@@ -44,7 +44,7 @@ export const addDesiredSkill = mutationField("addDesiredSkill", {
 
 			if (!record) throw new Error();
 
-			await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+			await res.revalidate(`/${user.name}`).catch(() => null);
 
 			return { record };
 		}
@@ -109,7 +109,7 @@ export const addDesiredSkill = mutationField("addDesiredSkill", {
 
 		if (!record) throw new Error();
 
-		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

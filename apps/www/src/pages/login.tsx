@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import NextLink from "next/link";
 import React from "react";
 import tw from "twin.macro";
-import { Seo } from "../../organisms";
+import { Seo } from "../organisms";
 
 const Root = tw(MainContainer)`
 	flex

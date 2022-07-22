@@ -32,7 +32,7 @@ export const deleteExperience = mutationField("deleteExperience", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

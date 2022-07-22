@@ -72,7 +72,7 @@ export const createExperience = mutationField("createExperience", {
 			}
 		});
 
-		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

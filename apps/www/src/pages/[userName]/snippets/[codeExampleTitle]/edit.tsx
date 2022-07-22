@@ -32,18 +32,13 @@ import {
 	RepositorySearchResultGitHubRepositoryFragment,
 	useGetCodeExampleQuery,
 	useUpdateCodeExampleMutation
-} from "../../../../../graphql";
-import {
-	CodeLanguageSelect,
-	Seo,
-	SkillAutosuggest,
-	UserPageLayout
-} from "../../../../../organisms";
+} from "../../../../graphql";
+import { CodeLanguageSelect, Seo, SkillAutosuggest, UserPageLayout } from "../../../../organisms";
 import {
 	pageProps,
 	PageProps
-} from "../../../../../page-props/[userName]/snippets/[codeExampleTitle]/edit";
-import { BookIcon, XIcon } from "../../../../../svgs";
+} from "../../../../page-props/[userName]/snippets/[codeExampleTitle]/edit";
+import { BookIcon, XIcon } from "../../../../svgs";
 
 const Content = tw(Paper)`
 	flex

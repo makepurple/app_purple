@@ -4,16 +4,16 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { GetUserFriendRequestsDocument } from "../../../../graphql";
+import { GetUserFriendRequestsDocument } from "../../../graphql";
 import {
 	LoadingUserFriendCard,
 	Seo,
 	UserConnectionPageTabs,
 	UserFriendRequestCard,
 	UserPageLayout
-} from "../../../../organisms";
-import { PageProps, pageProps } from "../../../../page-props/[userName]/connections/requests";
-import { PersonIcon } from "../../../../svgs";
+} from "../../../organisms";
+import { PageProps, pageProps } from "../../../page-props/[userName]/connections/requests";
+import { PersonIcon } from "../../../svgs";
 
 const BATCH_SIZE = 20;
 

@@ -27,14 +27,14 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
-import { useGetPostQuery, useUpdatePostMutation } from "../../../../graphql";
+import { useGetPostQuery, useUpdatePostMutation } from "../../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
 	Seo,
 	SkillAutosuggest
-} from "../../../../organisms";
-import { pageProps, PageProps } from "../../../../page-props/[userName]/[postTitle]/edit";
+} from "../../../organisms";
+import { pageProps, PageProps } from "../../../page-props/[userName]/[postTitle]/edit";
 
 const Root = tw(MainContainer)`
 	flex

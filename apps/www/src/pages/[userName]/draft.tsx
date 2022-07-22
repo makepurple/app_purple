@@ -25,18 +25,14 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import tw from "twin.macro";
-import {
-	useGetPostQuery,
-	usePublishPostMutation,
-	useUpdatePostDraftMutation
-} from "../../../graphql";
+import { useGetPostQuery, usePublishPostMutation, useUpdatePostDraftMutation } from "../../graphql";
 import {
 	DocumentEditorPostImageButton,
 	PostGuidelines,
 	Seo,
 	SkillAutosuggest
-} from "../../../organisms";
-import { PageProps, pageProps } from "../../../page-props/[userName]/draft";
+} from "../../organisms";
+import { PageProps, pageProps } from "../../page-props/[userName]/draft";
 
 const Root = tw(MainContainer)`
 	flex

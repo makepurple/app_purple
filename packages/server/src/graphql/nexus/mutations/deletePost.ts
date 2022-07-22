@@ -67,9 +67,9 @@ export const deletePost = mutationField("deletePost", {
 			userId: user.id
 		});
 
-		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
-		await res.unstable_revalidate(`/${user.name}/posts`).catch(() => null);
-		await res.unstable_revalidate(`/${user.name}/${record.urlSlug}`).catch(() => null);
+		await res.revalidate(`/${user.name}`).catch(() => null);
+		await res.revalidate(`/${user.name}/posts`).catch(() => null);
+		await res.revalidate(`/${user.name}/${record.urlSlug}`).catch(() => null);
 
 		return { record };
 	}

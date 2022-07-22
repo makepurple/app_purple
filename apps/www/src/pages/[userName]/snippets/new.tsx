@@ -30,10 +30,10 @@ import {
 	CodeLanguage,
 	RepositorySearchResultGitHubRepositoryFragment,
 	useCreateCodeExampleMutation
-} from "../../../../graphql";
-import { CodeLanguageSelect, Seo, SkillAutosuggest, UserPageLayout } from "../../../../organisms";
-import { pageProps, PageProps } from "../../../../page-props/[userName]/snippets/new";
-import { BookIcon, XIcon } from "../../../../svgs";
+} from "../../../graphql";
+import { CodeLanguageSelect, Seo, SkillAutosuggest, UserPageLayout } from "../../../organisms";
+import { pageProps, PageProps } from "../../../page-props/[userName]/snippets/new";
+import { BookIcon, XIcon } from "../../../svgs";
 
 const Content = tw(Paper)`
 	flex

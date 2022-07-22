@@ -12,8 +12,8 @@ import { NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
 import React, { useMemo, useState } from "react";
 import tw from "twin.macro";
-import { useDeleteUserMutation } from "../../graphql";
-import { Seo } from "../../organisms";
+import { useDeleteUserMutation } from "../graphql";
+import { Seo } from "../organisms";
 
 const DEFAULT_SUBJECT = oneLine`
 	HELP: Account deletion failed!

@@ -105,8 +105,10 @@ const authHandler: NextApiHandler = (req, res) =>
 		},
 		providers: [
 			GitHubProvider({
-				clientId: process.env.GITHUB_CLIENT_ID,
-				clientSecret: process.env.GITHUB_CLIENT_SECRET,
+				/* eslint-disable @typescript-eslint/no-non-null-assertion */
+				clientId: process.env.GITHUB_CLIENT_ID!,
+				clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+				/* eslint-enable @typescript-eslint/no-non-null-assertion */
 				profile: (profile) => {
 					return {
 						id: profile.id,

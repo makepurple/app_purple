@@ -120,7 +120,7 @@ export const updateDesiredSkills = mutationField("updateDesiredSkills", {
 			userId: user.id
 		});
 
-		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

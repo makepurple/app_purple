@@ -28,7 +28,7 @@ export const deleteRepository = mutationField("deleteRepository", {
 			where: PrismaUtils.nonNull(args.where)
 		});
 
-		await res.unstable_revalidate(`/${user.name}`).catch(() => null);
+		await res.revalidate(`/${user.name}`).catch(() => null);
 
 		return { record };
 	}

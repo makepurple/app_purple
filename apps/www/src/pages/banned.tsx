@@ -2,7 +2,7 @@ import { Anchor, MainContainer, PageContainer } from "@makepurple/components";
 import { NextPage } from "next";
 import React from "react";
 import tw from "twin.macro";
-import { Seo } from "../../organisms";
+import { Seo } from "../organisms";
 
 const Root = tw(PageContainer)`
 	min-h-screen
