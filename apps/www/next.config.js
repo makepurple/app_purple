@@ -6,6 +6,16 @@ const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE 
 const withTranspileModules = transpileModules([]);
 
 const config = {
+	eslint: {
+		/**
+		 * !HACK
+		 * @description Unfortunately, Next.js indefinitely hangs for some reason on linting.
+		 * Disabling for now
+		 * @author David Lee
+		 * @date July 22, 2022
+		 */
+		ignoreDuringBuilds: true
+	},
 	experimental: {
 		externalDir: true
 	},
