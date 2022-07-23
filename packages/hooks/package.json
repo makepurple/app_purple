@@ -19,7 +19,7 @@
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.33.1",
 		"react-use": "^17.4.0",
-		"urql": "^2.2.2"
+		"urql": "^2.2.3"
 	},
 	"devDependencies": {
 		"@makepurple/tsconfig": "workspace:*",
