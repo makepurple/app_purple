@@ -7,7 +7,7 @@
 	"sideEffects": false,
 	"scripts": {
 		"dev": "start-storybook -p 6006",
-		"build": "build-storybook --quiet",
+		"build": "NODE_OPTIONS=\"--openssl-legacy-provider\" build-storybook --quiet",
 		"test": "jest",
 		"upload": "chromatic --build-script build --exit-zero-on-changes * --exit-once-uploaded *"
 	},
