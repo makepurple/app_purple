@@ -10,6 +10,8 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
+			"@makepurple/components": ["../../packages/components/src/index"],
+			"@makepurple/prisma": ["../../packages/prisma/src/index"],
 			"@makepurple/server": ["../../packages/server/src/index"],
 			"@makepurple/server/graphql/*": ["../../packages/server/src/graphql/*"],
 			"@makepurple/server/prisma": ["../../packages/server/prisma"],
