@@ -10,7 +10,7 @@ import {
 import { dayjs, FormatUtils } from "@makepurple/utils";
 import { oneLine } from "common-tags";
 import { useSession } from "next-auth/react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef, useMemo } from "react";
@@ -187,7 +187,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 			style={style}
 		>
 			{post.thumbnailUrl && (
-				<NextLink href={postUrl} passHref>
+				<NextLink legacyBehavior href={postUrl} passHref>
 					<Thumbnail onClick={(e) => e.stopPropagation()}>
 						<NextImage
 							alt="thumbnail"
@@ -199,7 +199,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 				</NextLink>
 			)}
 			<Info>
-				<NextLink href={postUrl} passHref>
+				<NextLink legacyBehavior href={postUrl} passHref>
 					<MainAnchor>
 						<Title title={post.title ?? ""}>{post.title}</Title>
 						{post.description && (
@@ -212,6 +212,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 				<Tags type="positive" tw="mt-3">
 					{skills.map((skill) => (
 						<NextLink
+							legacyBehavior
 							key={skill.id}
 							href="/s/[skillOwner]/[skillName]"
 							as={`/s/${skill.owner}/${skill.name}`}
@@ -230,7 +231,7 @@ export const PostCard = forwardRef<HTMLDivElement, PostCardProps>((props, ref) =
 					))}
 				</Tags>
 				<PostedDetails tw="mt-3">
-					<NextLink href={`/${post.author.name}`} passHref>
+					<NextLink legacyBehavior href={`/${post.author.name}`} passHref>
 						<AuthorName onClick={(e) => e.stopPropagation()} title={post.author.name}>
 							{post.author.name}
 						</AuthorName>

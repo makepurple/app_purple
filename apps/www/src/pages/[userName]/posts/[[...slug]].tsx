@@ -140,7 +140,12 @@ export const Page: NextPage<PageProps> = () => {
 			/>
 			<OrderBy>
 				<OrderBys>
-					<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+					<NextLink
+						legacyBehavior
+						href="/[userName]/posts"
+						as={`/${userName}/posts`}
+						passHref
+					>
 						<OrderByOption
 							as="a"
 							variant={!sort || sort === "latest" ? "primary" : "secondary"}
@@ -149,6 +154,7 @@ export const Page: NextPage<PageProps> = () => {
 						</OrderByOption>
 					</NextLink>
 					<NextLink
+						legacyBehavior
 						href="/[userName]/posts/[[...slug]]"
 						as={`/${userName}/posts/top`}
 						passHref
@@ -161,6 +167,7 @@ export const Page: NextPage<PageProps> = () => {
 				{sort === "top" && (
 					<OrderByCriteria>
 						<NextLink
+							legacyBehavior
 							href="/[userName]/posts/[[...slug]]"
 							as={`/${userName}/posts/top`}
 							passHref
@@ -173,6 +180,7 @@ export const Page: NextPage<PageProps> = () => {
 							</OrderByOption>
 						</NextLink>
 						<NextLink
+							legacyBehavior
 							href="/[userName]/posts/top/[[...slug]]"
 							as={`/${userName}/posts/top/month`}
 							passHref
@@ -185,6 +193,7 @@ export const Page: NextPage<PageProps> = () => {
 							</OrderByOption>
 						</NextLink>
 						<NextLink
+							legacyBehavior
 							href="/[userName]/posts/top/[[...slug]]"
 							as={`/${userName}/posts/top/year`}
 							passHref
@@ -197,6 +206,7 @@ export const Page: NextPage<PageProps> = () => {
 							</OrderByOption>
 						</NextLink>
 						<NextLink
+							legacyBehavior
 							href="/[userName]/posts/top/[[...slug]]"
 							as={`/${userName}/posts/top/all`}
 							passHref

@@ -54,6 +54,7 @@ export const HomePageSkill: FC<HomePageSkillProps> = ({ className, repository, s
 
 	return (
 		<NextLink
+			legacyBehavior
 			href="/s/[skillOwner]/[skillName]"
 			as={`/s/${owner.login}/${repository.name}`}
 			passHref

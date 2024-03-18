@@ -281,6 +281,7 @@ export const Page: NextPage<PageProps> = () => {
 							{saving && <Spinner tw="ml-2" />}
 						</FormButton>
 						<NextLink
+							legacyBehavior
 							href="/[userName]/[postTitle]"
 							as={`/${userName}/${postTitle}`}
 							passHref

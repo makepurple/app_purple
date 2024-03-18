@@ -176,6 +176,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 			style={style}
 		>
 			<NextLink
+				legacyBehavior
 				href="/s/[skillOwner]/[skillName]"
 				as={`/s/${primarySkill.owner}/${primarySkill.name}`}
 				passHref
@@ -203,6 +204,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 			</NextLink>
 			<Content>
 				<NextLink
+					legacyBehavior
 					href="/[userName]/snippets/[codeExampleTitle]"
 					as={`/${codeExample.authorName}/snippets/${codeExample.urlSlug}`}
 					passHref
@@ -210,6 +212,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 					<Title>{codeExample.title}</Title>
 				</NextLink>
 				<NextLink
+					legacyBehavior
 					href="/[userName]/snippets/[codeExampleTitle]"
 					as={`/${codeExample.authorName}/snippets/${codeExample.urlSlug}`}
 					passHref
@@ -230,6 +233,7 @@ export const CodeExampleCard = forwardRef<HTMLDivElement, CodeExampleCardProps>(
 					</Language>
 					{skills.map((skill) => (
 						<NextLink
+							legacyBehavior
 							key={`${skill.owner}/${skill.name}`}
 							href="/s/[skillOwner]/[skillName]"
 							as={`/s/${skill.owner}/${skill.name}`}

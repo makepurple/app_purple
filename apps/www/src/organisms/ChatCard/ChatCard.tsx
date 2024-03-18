@@ -191,6 +191,7 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 						(participant) =>
 							!!participant.image && (
 								<NextLink
+									legacyBehavior
 									key={participant.id}
 									href="/[userName]"
 									as={`/${participant.name}`}
@@ -208,7 +209,12 @@ export const ChatCard = forwardRef<HTMLDivElement, ChatCardProps>((props, ref) =
 							)
 					)}
 				</ParticipantAvatars>
-				<NextLink href="/messaging/[[...slug]]" as={`/messaging/${chat.id}`} passHref>
+				<NextLink
+					legacyBehavior
+					href="/messaging/[[...slug]]"
+					as={`/messaging/${chat.id}`}
+					passHref
+				>
 					<Title>
 						<ParticipantName>{firstParticipant.name}</ParticipantName>
 						{!!countOthers && <Others>+{countOthers.toLocaleString()} others</Others>}

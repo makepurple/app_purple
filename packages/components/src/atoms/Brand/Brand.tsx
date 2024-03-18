@@ -44,7 +44,7 @@ export const Brand = forwardRef<HTMLAnchorElement, BrandProps>((props, ref) => {
 	}
 
 	return (
-		<NextLink href={href} passHref>
+		<NextLink legacyBehavior href={href} passHref>
 			<Root {...StyleUtils.filterHTMLProps(restProps)} ref={ref}>
 				{config.brand}
 			</Root>

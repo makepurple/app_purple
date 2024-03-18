@@ -56,7 +56,7 @@ export const ActivityFeedInfo: FC<ActivityFeedInfoProps> = ({ className, style }
 				</Description>
 			)}
 			<DiscoverMore tw="mt-6">Want to discover more?</DiscoverMore>
-			<NextLink href="/explore" passHref>
+			<NextLink legacyBehavior href="/explore" passHref>
 				<Button as="a" tw="mt-3">
 					Explore
 				</Button>

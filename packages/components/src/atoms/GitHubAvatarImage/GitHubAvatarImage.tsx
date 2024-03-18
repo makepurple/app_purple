@@ -1,5 +1,5 @@
 import { UrlUtils } from "@makepurple/utils";
-import NextImage, { ImageProps } from "next/image";
+import NextImage, { ImageProps } from "next/legacy/image";
 import React, { FC } from "react";
 
 export type GitHubAvatarImageProps = ImageProps;

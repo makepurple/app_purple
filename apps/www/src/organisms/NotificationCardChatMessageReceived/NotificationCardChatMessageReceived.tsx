@@ -111,6 +111,7 @@ export const NotificationCardChatMessageReceived = forwardRef<
 					(participant) =>
 						!!participant.image && (
 							<NextLink
+								legacyBehavior
 								key={participant.id}
 								href="/[userName]"
 								as={`/${participant.name}`}
@@ -127,7 +128,12 @@ export const NotificationCardChatMessageReceived = forwardRef<
 						)
 				)}
 			</ParticipantAvatars>
-			<NextLink href="/messaging/[[...slug]]" as={`/messaging/${chat.id}`} passHref>
+			<NextLink
+				legacyBehavior
+				href="/messaging/[[...slug]]"
+				as={`/messaging/${chat.id}`}
+				passHref
+			>
 				<Details>
 					<Title>
 						New messages received from:{" "}

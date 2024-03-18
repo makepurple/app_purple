@@ -99,6 +99,7 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 		>
 			{owner.__typename === "GitHubOrganization" && owner.avatarUrl && (
 				<NextLink
+					legacyBehavior
 					href="/s/[skillOwner]/[skillName]"
 					as={`/s/${skill.owner}/${skill.name}`}
 					passHref
@@ -116,6 +117,7 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 			)}
 			<Details>
 				<NextLink
+					legacyBehavior
 					href="/s/[skillOwner]/[skillName]"
 					as={`/s/${skill.owner}/${skill.name}`}
 					passHref
@@ -126,6 +128,7 @@ export const SkillCard = forwardRef<HTMLDivElement, SkillCardProps>((props, ref)
 				</NextLink>
 				{skill.github.description && (
 					<NextLink
+						legacyBehavior
 						href="/s/[skillOwner]/[skillName]"
 						as={`/s/${skill.owner}/${skill.name}`}
 						passHref

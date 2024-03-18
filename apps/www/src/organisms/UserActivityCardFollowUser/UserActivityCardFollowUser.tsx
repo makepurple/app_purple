@@ -41,7 +41,7 @@ export const UserActivityCardFollowUser = forwardRef<
 		<Root ref={ref} className={className} style={style}>
 			<UserActivityCardHeader userActivity={userActivity}>
 				followed{" "}
-				<NextLink href="/[userName]" as={`/${followedUser.name}`} passHref>
+				<NextLink legacyBehavior href="/[userName]" as={`/${followedUser.name}`} passHref>
 					<Anchor>{followedUser.name}</Anchor>
 				</NextLink>
 			</UserActivityCardHeader>

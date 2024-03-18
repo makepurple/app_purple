@@ -236,6 +236,7 @@ export const RepositoryCard = forwardRef<HTMLDivElement, RepositoryCardProps>((p
 							>
 								{skills.map((skill) => (
 									<NextLink
+										legacyBehavior
 										key={skill.id}
 										href="/s/[skillOwner]/[skillName]"
 										as={`/s/${skill.owner}/${skill.name}`}

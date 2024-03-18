@@ -1,5 +1,5 @@
 import { Anchor, Brand, Footer, Logo, MainContainer, PageContainer } from "@makepurple/components";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import React, { CSSProperties, FC } from "react";
 import tw from "twin.macro";
@@ -142,13 +142,13 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 						</PoweredByStellate>
 					</LeftContainer>
 					<LinksContainer>
-						<NextLink href="/blog" passHref>
+						<NextLink legacyBehavior href="/blog" passHref>
 							<SiteLink>Blog</SiteLink>
 						</NextLink>
-						<NextLink href="/about" passHref>
+						<NextLink legacyBehavior href="/about" passHref>
 							<SiteLink>About</SiteLink>
 						</NextLink>
-						<NextLink href="/skills" passHref>
+						<NextLink legacyBehavior href="/skills" passHref>
 							<SiteLink>Skills</SiteLink>
 						</NextLink>
 						<SiteLink
@@ -175,10 +175,10 @@ export const SiteWideFooter: FC<SiteWideFooterProps> = ({ className, style }) =>
 						</ExternalLink>
 					</ExternalLinks>
 					<Legal>
-						<NextLink href="/legal/terms" passHref>
+						<NextLink legacyBehavior href="/legal/terms" passHref>
 							<SiteLink>Terms</SiteLink>
 						</NextLink>
-						<NextLink href="/legal/privacy" passHref>
+						<NextLink legacyBehavior href="/legal/privacy" passHref>
 							<SiteLink>Privacy</SiteLink>
 						</NextLink>
 						<Copyright>&copy; MakePurple {new Date().getFullYear()}</Copyright>

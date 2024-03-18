@@ -100,7 +100,7 @@ export const Page: NextPage = () => {
 			</Header>
 			<Content tw="mt-12">
 				<UserSection>
-					<NextLink href="/[userName]" as="/leedavidcs" passHref>
+					<NextLink legacyBehavior href="/[userName]" as="/leedavidcs" passHref>
 						<StyledAvatar border={8} title="leedavidcs" aria-label="leedavidcs">
 							<GitHubAvatarImage
 								src="https://avatars.githubusercontent.com/u/15151154"
@@ -112,7 +112,7 @@ export const Page: NextPage = () => {
 					<UserName tw="mt-1.5">
 						<span>David Lee</span>
 					</UserName>
-					<NextLink href="/[userName]" as="/leedavidcs" passHref>
+					<NextLink legacyBehavior href="/[userName]" as="/leedavidcs" passHref>
 						<AtName>@leedavidcs</AtName>
 					</NextLink>
 					<UserTitle tw="mt-4">Software Engineer</UserTitle>
@@ -166,7 +166,7 @@ export const Page: NextPage = () => {
 					</p>
 					<p>
 						If you haven&apos;t already,{" "}
-						<NextLink href="/signup" passHref>
+						<NextLink legacyBehavior href="/signup" passHref>
 							<Anchor>join MakePurple</Anchor>
 						</NextLink>
 						, build-up your developer profile, and come teach us what you know! 😉

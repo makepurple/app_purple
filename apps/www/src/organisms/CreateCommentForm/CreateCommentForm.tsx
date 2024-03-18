@@ -134,7 +134,7 @@ export const CreateCommentForm: FC<CreateCommentFormProps> = ({
 			<FormGroup>
 				<FormLabel>
 					Comment as{" "}
-					<NextLink href="/[userName]" as={`/${viewer.name}`} passHref>
+					<NextLink legacyBehavior href="/[userName]" as={`/${viewer.name}`} passHref>
 						<Anchor>{viewer.name}</Anchor>
 					</NextLink>
 				</FormLabel>

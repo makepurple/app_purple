@@ -55,7 +55,7 @@ export const PendingFriendsButton: FC<PendingFriendsButtonProps> = ({ className,
 	if (status !== "authenticated") return null;
 
 	return (
-		<NextLink href="/connections/requests" passHref>
+		<NextLink legacyBehavior href="/connections/requests" passHref>
 			<Root as="a" className={className} style={style} type="button">
 				<PeopleIcon height={24} width={24} />
 				{!!count && <PendingFriendsCount>{count}</PendingFriendsCount>}

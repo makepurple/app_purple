@@ -304,6 +304,7 @@ export const Page: NextPage<PageProps> = () => {
 						{!!repository && (
 							<CurrentRepository tw="mb-2">
 								<NextLink
+									legacyBehavior
 									href="/s/[skillOwner]/[skillName]"
 									as={`/s/${repository.owner.login}/${repository.name}`}
 									passHref

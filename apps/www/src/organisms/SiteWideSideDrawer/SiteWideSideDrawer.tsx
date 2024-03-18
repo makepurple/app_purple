@@ -147,7 +147,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 							<AuthBrand /> is a community where developers can discover, share and
 							learn new things from each other. Join in!
 						</AuthInfo>
-						<NextLink href="/signup" passHref>
+						<NextLink legacyBehavior href="/signup" passHref>
 							<Button
 								as="a"
 								onClick={() => {
@@ -158,7 +158,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 								Sign Up
 							</Button>
 						</NextLink>
-						<NextLink href="/login" passHref>
+						<NextLink legacyBehavior href="/login" passHref>
 							<StyledLoginButton
 								as="a"
 								onClick={() => {
@@ -174,7 +174,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 				)}
 				{status === "authenticated" && !!user && (
 					<>
-						<NextLink href="/explore" passHref>
+						<NextLink legacyBehavior href="/explore" passHref>
 							<Button
 								as="a"
 								onClick={() => {
@@ -195,7 +195,11 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 												subTitle={
 													<div tw="flex flex-col items-center">
 														<div>Discover developers and skills</div>
-														<NextLink href="/explore" passHref>
+														<NextLink
+															legacyBehavior
+															href="/explore"
+															passHref
+														>
 															<ExploreButton
 																as="a"
 																onClick={() => {
@@ -246,7 +250,12 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 						<Other tw="mt-3">
 							<SectionTitle>Other</SectionTitle>
 							<SectionContent tw="mt-1">
-								<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+								<NextLink
+									legacyBehavior
+									href="/[userName]"
+									as={`/${user.name}`}
+									passHref
+								>
 									<ListItem
 										as="a"
 										onClick={() => {
@@ -264,7 +273,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 										<ListItemText>{user.name}</ListItemText>
 									</ListItem>
 								</NextLink>
-								<NextLink href="/feed" passHref>
+								<NextLink legacyBehavior href="/feed" passHref>
 									<ListItem
 										as="a"
 										onClick={() => {
@@ -290,6 +299,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 									)}
 								</ListItem>
 								<NextLink
+									legacyBehavior
 									href="/[userName]/connections/requests"
 									as={`/${user.name}/connections/requests`}
 									passHref
@@ -304,7 +314,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 										<span>Invitations</span>
 									</ListItem>
 								</NextLink>
-								<NextLink href="/messaging" passHref>
+								<NextLink legacyBehavior href="/messaging" passHref>
 									<ListItem
 										as="a"
 										onClick={() => {
@@ -315,7 +325,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 										<span>Messages</span>
 									</ListItem>
 								</NextLink>
-								<NextLink href="/notifications" passHref>
+								<NextLink legacyBehavior href="/notifications" passHref>
 									<ListItem
 										as="a"
 										onClick={() => {
@@ -326,7 +336,7 @@ export const SiteWideSideDrawer: FC<SiteWideSideDrawerProps> = (props) => {
 										<span>Notifications</span>
 									</ListItem>
 								</NextLink>
-								<NextLink href="/account" passHref>
+								<NextLink legacyBehavior href="/account" passHref>
 									<ListItem
 										as="a"
 										onClick={() => {

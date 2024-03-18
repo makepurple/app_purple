@@ -32,7 +32,7 @@ export const UserActivityCardFriendAcceptUser = forwardRef<
 		<Root ref={ref} className={className} style={style}>
 			<UserActivityCardHeader userActivity={userActivity}>
 				connected with{" "}
-				<NextLink href="/[userName]" as={`/${friendedUser.name}`} passHref>
+				<NextLink legacyBehavior href="/[userName]" as={`/${friendedUser.name}`} passHref>
 					<Anchor>{friendedUser.name}</Anchor>
 				</NextLink>
 			</UserActivityCardHeader>

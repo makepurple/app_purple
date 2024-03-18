@@ -136,6 +136,7 @@ export const Page: NextPage<PageProps> = () => {
 							</StyledAvatar>
 							{!!session?.user && (
 								<NextLink
+									legacyBehavior
 									href="/[userName]/snippets/new"
 									as={`/${session.user.name}/snippets/new`}
 									passHref

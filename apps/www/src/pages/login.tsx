@@ -94,17 +94,17 @@ export const Page: NextPage = () => {
 			</LoginButton>
 			<NotRegistered tw="mt-12">
 				<span>Not registered yet?</span>{" "}
-				<NextLink href="/signup" passHref>
+				<NextLink legacyBehavior href="/signup" passHref>
 					<CreateAccount>Create your account</CreateAccount>
 				</NextLink>
 			</NotRegistered>
 			<Disclaimer tw="mt-32">
 				By signing up you agree to the{" "}
-				<NextLink href="/legal/terms" passHref>
+				<NextLink legacyBehavior href="/legal/terms" passHref>
 					<DisclaimerLink>Terms of Service</DisclaimerLink>
 				</NextLink>{" "}
 				and{" "}
-				<NextLink href="/legal/privacy" passHref>
+				<NextLink legacyBehavior href="/legal/privacy" passHref>
 					<DisclaimerLink>Privacy Policy</DisclaimerLink>
 				</NextLink>
 				.

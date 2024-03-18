@@ -55,7 +55,7 @@ export const NotificationBellButton: FC<NotificationBellButtonProps> = ({ classN
 	if (status !== "authenticated") return null;
 
 	return (
-		<NextLink href="/notifications" passHref>
+		<NextLink legacyBehavior href="/notifications" passHref>
 			<Root as="a" className={className} style={style} type="button">
 				<BellIcon height={24} width={24} />
 				{!!count && <NotificationCount>{count}</NotificationCount>}

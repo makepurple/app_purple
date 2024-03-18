@@ -55,7 +55,7 @@ export const NotificationCardFriendshipAccepted = forwardRef<
 			unread={!notification.opened}
 		>
 			{!!friender.image && (
-				<NextLink href="/[userName]" as={`/${friender.id}`} passHref>
+				<NextLink legacyBehavior href="/[userName]" as={`/${friender.id}`} passHref>
 					<StyledAvatar border={4} aria-label={friender.name} tw="mr-6">
 						<GitHubAvatarImage
 							alt={friender.name}
@@ -66,7 +66,7 @@ export const NotificationCardFriendshipAccepted = forwardRef<
 					</StyledAvatar>
 				</NextLink>
 			)}
-			<NextLink href="/[userName]" as={`/${friender.id}`} passHref>
+			<NextLink legacyBehavior href="/[userName]" as={`/${friender.id}`} passHref>
 				<Details>
 					<Title>
 						You are now connected to <b>{friender.name}</b>

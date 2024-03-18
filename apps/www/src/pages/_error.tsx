@@ -131,7 +131,7 @@ export const Page: NextPage<ErrorProps> = ({ statusCode, title: _title }) => {
 				</AvatarIconContainer>
 			</StyledAvatar>
 			{!!title && <Title tw="mt-6">{title}</Title>}
-			<NextLink href="/" passHref>
+			<NextLink legacyBehavior href="/" passHref>
 				<HomeButton as="a" size="large" tw="mt-16">
 					<span>Return to the home page</span>
 				</HomeButton>

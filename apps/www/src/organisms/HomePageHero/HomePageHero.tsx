@@ -129,12 +129,12 @@ export const HomePageHero: FC<HomePageHeroProps> = ({ className, style }) => {
 						Developer profiles <PoweredBy>powered-by</PoweredBy> GitHub discoverability
 					</Info>
 					<Buttons tw="mt-5 md:mt-10">
-						<NextLink href="/signup" passHref>
+						<NextLink legacyBehavior href="/signup" passHref>
 							<Button as="a" size="large" type="button" variant="primary">
 								<span>Get Started</span>
 							</Button>
 						</NextLink>
-						<NextLink href="/explore" passHref>
+						<NextLink legacyBehavior href="/explore" passHref>
 							<Button as="a" size="large" type="button" variant="alert">
 								<span>Explore</span>
 							</Button>

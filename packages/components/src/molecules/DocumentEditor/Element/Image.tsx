@@ -1,5 +1,5 @@
 import { UrlUtils } from "@makepurple/utils";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import React, {
 	CSSProperties,
 	FC,

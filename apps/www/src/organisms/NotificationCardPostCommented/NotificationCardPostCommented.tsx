@@ -78,6 +78,7 @@ export const NotificationCardPostCommented = forwardRef<
 			unread={!notification.opened}
 		>
 			<NextLink
+				legacyBehavior
 				href="/[userName]/[postTitle]"
 				as={`/${post.authorName}/${post.urlSlug}`}
 				passHref
@@ -89,6 +90,7 @@ export const NotificationCardPostCommented = forwardRef<
 				</StyledAvatar>
 			</NextLink>
 			<NextLink
+				legacyBehavior
 				href="/[userName]/[postTitle]"
 				as={`/${post.authorName}/${post.urlSlug}`}
 				passHref

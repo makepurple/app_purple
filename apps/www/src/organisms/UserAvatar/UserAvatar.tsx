@@ -47,7 +47,7 @@ export const UserAvatar = forwardRef<HTMLAnchorElement, UserAvatarProps>((props,
 	);
 
 	return asLink ? (
-		<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+		<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 			{component}
 		</NextLink>
 	) : (

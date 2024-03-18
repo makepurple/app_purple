@@ -62,7 +62,7 @@ export const UserActivityCardJoined = forwardRef<HTMLDivElement, UserActivityCar
 				</UserActivityCardHeader>
 				<Content tw="mt-2">
 					{!!user.image && (
-						<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+						<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 							<Avatar border={6} tw="flex-shrink-0 mr-4">
 								<GitHubAvatarImage src={user.image} height={128} width={128} />
 							</Avatar>
@@ -73,7 +73,12 @@ export const UserActivityCardJoined = forwardRef<HTMLDivElement, UserActivityCar
 							Welcome to <Brand tw="text-2xl sm:text-3xl" />,
 						</span>
 						<UserNameContainer tw="mt-1">
-							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+							<NextLink
+								legacyBehavior
+								href="/[userName]"
+								as={`/${user.name}`}
+								passHref
+							>
 								<UserName>{user.name}</UserName>
 							</NextLink>
 							!

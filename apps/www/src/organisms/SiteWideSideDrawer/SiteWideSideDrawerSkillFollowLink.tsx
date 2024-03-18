@@ -46,6 +46,7 @@ export const SiteWideSideDrawerSkillFollowLink: FC<SiteWideSideDrawerSkillFollow
 
 	return (
 		<NextLink
+			legacyBehavior
 			href="/s/[skillOwner]/[skillName]"
 			as={`/s/${skill.owner}/${skill.name}`}
 			passHref

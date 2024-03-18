@@ -112,6 +112,7 @@ export const ActivityFeedFollowableSkillCard: FC<ActivityFeedFollowableSkillCard
 		>
 			<Index tw="mr-3">{index + 1}.</Index>
 			<NextLink
+				legacyBehavior
 				href="/s/[skillOwner]/[skillName]"
 				as={`/s/${skill.owner}/${skill.name}`}
 				passHref
@@ -127,6 +128,7 @@ export const ActivityFeedFollowableSkillCard: FC<ActivityFeedFollowableSkillCard
 				</SkillIcon>
 			</NextLink>
 			<NextLink
+				legacyBehavior
 				href="/s/[skillOwner]/[skillName]"
 				as={`/s/${skill.owner}/${skill.name}`}
 				passHref

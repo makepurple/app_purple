@@ -42,6 +42,7 @@ export const UserActivityCardFollowSkill = forwardRef<
 			<UserActivityCardHeader userActivity={userActivity}>
 				followed{" "}
 				<NextLink
+					legacyBehavior
 					href="/[userName]"
 					as={`/s/${followedSkill.owner}/${followedSkill.name}`}
 					passHref

@@ -138,7 +138,12 @@ export const Page: NextPage<PageProps> = () => {
 					<Title>
 						<span tw="flex-grow">Messaging</span>
 						{!!chatId && (
-							<NextLink href="/messaging/[[...slug]]" as="/messaging" passHref>
+							<NextLink
+								legacyBehavior
+								href="/messaging/[[...slug]]"
+								as="/messaging"
+								passHref
+							>
 								<AddButton
 									as="a"
 									size="small"

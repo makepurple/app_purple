@@ -131,7 +131,7 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 			style={style}
 		>
 			{owner.avatarUrl && (
-				<NextLink href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
+				<NextLink legacyBehavior href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
 					<StyledAvatar
 						border={4}
 						onClick={(e) => {
@@ -150,6 +150,7 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 			)}
 			<Details>
 				<NextLink
+					legacyBehavior
 					href="/s/[skillOwner]/[skillName]"
 					as={`/s/${owner.login}/${skill.name}`}
 					passHref
@@ -160,6 +161,7 @@ export const SkillFollowCard = forwardRef<HTMLDivElement, SkillFollowCardProps>(
 				</NextLink>
 				{skill.github.description && (
 					<NextLink
+						legacyBehavior
 						href="/s/[skillOwner]/[skillName]"
 						as={`/s/${owner.login}/${skill.name}`}
 						passHref

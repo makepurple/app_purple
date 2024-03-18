@@ -227,7 +227,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 				)}
 			</TopContainer>
 			<Name>
-				<NextLink href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
+				<NextLink legacyBehavior href="/s/[skillOwner]" as={`/s/${owner.login}`} passHref>
 					<OwnerName>{owner.login}</OwnerName>
 				</NextLink>
 				<NameDelimiter tw="mx-1">/</NameDelimiter>
@@ -532,6 +532,7 @@ export const SkillInfoSideBar: FC<SkillInfoSideBarProps> = ({
 				<PeopleIcon height={24} width={24} tw="mr-2" />
 				<ConnectionsContents>
 					<NextLink
+						legacyBehavior
 						href="/s/[skillOwner]/[skillName]"
 						as={`/s/${owner.login}/${repository.name}?tab=followers`}
 						passHref

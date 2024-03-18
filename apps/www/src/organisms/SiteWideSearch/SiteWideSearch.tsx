@@ -313,6 +313,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
 						: owners.map((owner, i) => (
 								<NextLink
+									legacyBehavior
 									key={owner.id}
 									href="/s/[skillOwner]"
 									as={`/s/${owner.login}`}
@@ -345,6 +346,7 @@ export const SiteWideSearch = memo<SiteWideSearchProps>(
 						? Array.from({ length: 3 }, (_, i) => <LoadingSearchResult key={i} />)
 						: skills.map((skill, i) => (
 								<NextLink
+									legacyBehavior
 									key={skill.id}
 									href="/s/[skillOwner]/[skillName]"
 									as={`/s/${skill.owner.login}/${skill.name}`}

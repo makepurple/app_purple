@@ -280,18 +280,19 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 						</>
 					) : status !== "authenticated" || !user ? (
 						<>
-							<NextLink href="/login" passHref>
+							<NextLink legacyBehavior href="/login" passHref>
 								<StyledLoginButton as="a" variant="secondary">
 									Login
 								</StyledLoginButton>
 							</NextLink>
-							<NextLink href="/signup" passHref>
+							<NextLink legacyBehavior href="/signup" passHref>
 								<SignUpButton as="a">Sign Up</SignUpButton>
 							</NextLink>
 						</>
 					) : (
 						<>
 							<NextLink
+								legacyBehavior
 								href="/[userName]/connections/requests"
 								as={`/${user.name}/connections/requests`}
 								passHref
@@ -305,7 +306,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 									)}
 								</IconButton>
 							</NextLink>
-							<NextLink href="/messaging" passHref>
+							<NextLink legacyBehavior href="/messaging" passHref>
 								<IconButton as="a" variant="secondary">
 									<ChatIcon height={24} width={24} />
 									{!!messageCount && (
@@ -315,7 +316,7 @@ export const SiteWideAppBar: FC<SiteWideAppBarProps> = ({ className, style }) =>
 									)}
 								</IconButton>
 							</NextLink>
-							<NextLink href="/notifications" passHref>
+							<NextLink legacyBehavior href="/notifications" passHref>
 								<NotificationButton as="a" variant="secondary">
 									<BellIcon height={24} width={24} />
 									{!!notificationCount && (

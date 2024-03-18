@@ -1,6 +1,6 @@
 import { Avatar, Divider, GitHubAvatarImage, Paper, Tags } from "@makepurple/components";
 import { RenderComponentProps as MasonicRenderProps } from "masonic";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { CSSProperties, forwardRef } from "react";
@@ -121,6 +121,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 				>
 					{post?.thumbnailUrl && (
 						<NextLink
+							legacyBehavior
 							href="/[userName]/[postTitle]"
 							as={`/${user.name}/${post.urlSlug}`}
 							passHref
@@ -142,7 +143,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 						</NextLink>
 					)}
 					{user.image && (
-						<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+						<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 							<UserAvatar tabIndex={-1} border={3}>
 								<GitHubAvatarImage
 									alt={user.name}
@@ -158,6 +159,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 					{post && (
 						<>
 							<NextLink
+								legacyBehavior
 								href="/[userName]/[postTitle]"
 								as={`/${user.name}/${post.urlSlug}`}
 								passHref
@@ -178,11 +180,16 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 							await router.push("/[userName]", `/${user.name}`);
 						}}
 					>
-						<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+						<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 							<UserName>{user.name}</UserName>
 						</NextLink>
 						{user.description && (
-							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+							<NextLink
+								legacyBehavior
+								href="/[userName]"
+								as={`/${user.name}`}
+								passHref
+							>
 								<UserDescription>{user.description}</UserDescription>
 							</NextLink>
 						)}
@@ -192,6 +199,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 									<Tags type="positive">
 										{skills.map((skill) => (
 											<NextLink
+												legacyBehavior
 												key={skill.id}
 												href="/s/[skillOwner]/[skillName]"
 												as={`/s/${skill.owner}/${skill.name}`}
@@ -210,6 +218,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 										))}
 										{skillsExtra > 0 && (
 											<NextLink
+												legacyBehavior
 												href="/[userName]"
 												as={`/${user.name}`}
 												passHref
@@ -232,6 +241,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 									<Tags type="negative">
 										{desiredSkills.map((skill) => (
 											<NextLink
+												legacyBehavior
 												key={skill.id}
 												href="/s/[skillOwner]/[skillName]"
 												as={`/s/${skill.owner}/${skill.name}`}
@@ -250,6 +260,7 @@ export const SuggestedFriendCard = forwardRef<HTMLDivElement, SuggestedFriendCar
 										))}
 										{desiredSkillsExtra > 0 && (
 											<NextLink
+												legacyBehavior
 												href="/[userName]"
 												as={`/${user.name}`}
 												passHref

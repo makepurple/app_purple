@@ -14,7 +14,7 @@ export const NextLinkAs = forwardRef(
 		const { as: Type, forwardedAs, href, linkAs, ...asProps } = props;
 
 		return (
-			<NextLink href={href} as={linkAs} passHref>
+			<NextLink legacyBehavior href={href} as={linkAs} passHref>
 				<Type as={forwardedAs} {...asProps} ref={ref} />
 			</NextLink>
 		);

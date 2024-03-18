@@ -55,12 +55,13 @@ export const UserTrophies: FC<UserTrophiesProps> = ({ className, style, userName
 			>
 				<UserTrophy type="yearly-commits" value={trophies.totalYearlyCommits} />
 			</TrophyContainer>
-			<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+			<NextLink legacyBehavior href="/[userName]/posts" as={`/${userName}/posts`} passHref>
 				<TrophyContainer aria-label="posts">
 					<UserTrophy type="yearly-posts" value={trophies.totalYearlyPosts} />
 				</TrophyContainer>
 			</NextLink>
 			<NextLink
+				legacyBehavior
 				href="/[userName]/connections/followers"
 				as={`/${userName}/connections/followers`}
 				passHref
@@ -70,7 +71,7 @@ export const UserTrophies: FC<UserTrophiesProps> = ({ className, style, userName
 				</TrophyContainer>
 			</NextLink>
 			<UserTrophy type="upvotes" value={trophies.totalUpvotes} />
-			<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+			<NextLink legacyBehavior href="/[userName]/posts" as={`/${userName}/posts`} passHref>
 				<TrophyContainer aria-label="posts">
 					<UserTrophy type="post-views" value={trophies.totalPostViews} />
 				</TrophyContainer>

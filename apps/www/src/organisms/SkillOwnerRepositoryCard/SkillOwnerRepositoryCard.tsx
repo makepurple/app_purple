@@ -116,6 +116,7 @@ export const SkillOwnerRepositoryCard = forwardRef<HTMLDivElement, SkillOwnerRep
 				<Title>
 					<TitleIcon height={16} width={16} tw="mr-2" />
 					<NextLink
+						legacyBehavior
 						href="/s/[skillOwner]/[skillName]"
 						as={`/s/${skillOwner}/${repository.name}`}
 						passHref

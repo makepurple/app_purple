@@ -166,11 +166,21 @@ export const Page: NextPage<PageProps> = () => {
 				<UserGitHubContributions userName={userName} />
 				<Section>
 					<SectionTitle tw="mb-2">
-						<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+						<NextLink
+							legacyBehavior
+							href="/[userName]/posts"
+							as={`/${userName}/posts`}
+							passHref
+						>
 							<SectionTitleText>Latest Post</SectionTitleText>
 						</NextLink>
 						{user.posts.totalCount > 1 && (
-							<NextLink href="/[userName]/posts" as={`/${userName}/posts`} passHref>
+							<NextLink
+								legacyBehavior
+								href="/[userName]/posts"
+								as={`/${userName}/posts`}
+								passHref
+							>
 								<SectionSeeAllButton as="a" size="small">
 									See {FormatUtils.toGitHubFixed(user.posts.totalCount - 1)} more
 								</SectionSeeAllButton>
@@ -190,11 +200,17 @@ export const Page: NextPage<PageProps> = () => {
 				</Section>
 				<Section>
 					<SectionTitle tw="mb-2">
-						<NextLink href="/[userName]/snippets" as={`/${userName}/snippets`} passHref>
+						<NextLink
+							legacyBehavior
+							href="/[userName]/snippets"
+							as={`/${userName}/snippets`}
+							passHref
+						>
 							<SectionTitleText>Latest Snippets</SectionTitleText>
 						</NextLink>
 						{user.codeExamples.totalCount > 2 && (
 							<NextLink
+								legacyBehavior
 								href="/[userName]/snippets"
 								as={`/${userName}/snippets`}
 								passHref
@@ -229,6 +245,7 @@ export const Page: NextPage<PageProps> = () => {
 					<Section>
 						<SectionTitle tw="mb-2">
 							<NextLink
+								legacyBehavior
 								href="/[userName]/experiences"
 								as={`/${userName}/experiences`}
 								passHref
@@ -237,6 +254,7 @@ export const Page: NextPage<PageProps> = () => {
 							</NextLink>
 							{user.experiences.totalCount > 3 && (
 								<NextLink
+									legacyBehavior
 									href="/[userName]/experiences"
 									as={`/${userName}/experiences`}
 									passHref
@@ -270,6 +288,7 @@ export const Page: NextPage<PageProps> = () => {
 					<Section>
 						<SectionTitle tw="mb-2">
 							<NextLink
+								legacyBehavior
 								href="/[userName]/repositories"
 								as={`/${userName}/repositories`}
 								passHref
@@ -278,6 +297,7 @@ export const Page: NextPage<PageProps> = () => {
 							</NextLink>
 							{user.repositories.totalCount > 2 && (
 								<NextLink
+									legacyBehavior
 									href="/[userName]/repositories"
 									as={`/${userName}/repositories`}
 									passHref

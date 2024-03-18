@@ -60,7 +60,7 @@ export const Logo: FC<LogoProps> = ({
 			wrap={({ child }) => (
 				<>
 					{!!href && (
-						<NextLink href={href} passHref>
+						<NextLink legacyBehavior href={href} passHref>
 							{child}
 						</NextLink>
 					)}

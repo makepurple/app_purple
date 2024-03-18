@@ -72,6 +72,7 @@ export const NotificationCardCodeExampleCommented = forwardRef<
 			unread={!notification.opened}
 		>
 			<NextLink
+				legacyBehavior
 				href="/[userName]/snippets/[codeExampleTitle]"
 				as={`/${codeExample.authorName}/snippets/${codeExample.urlSlug}`}
 				passHref
@@ -85,6 +86,7 @@ export const NotificationCardCodeExampleCommented = forwardRef<
 				</StyledAvatar>
 			</NextLink>
 			<NextLink
+				legacyBehavior
 				href="/[userName]/snippets/[codeExampleTitle]"
 				as={`/${codeExample.authorName}/snippets/${codeExample.urlSlug}`}
 				passHref

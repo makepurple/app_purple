@@ -29,7 +29,7 @@ export const SiteWideSideDrawerUserFollowLink: FC<SiteWideSideDrawerUserFollowLi
 	user
 }) => {
 	return (
-		<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+		<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 			<ListItem
 				as={Root}
 				className={className}

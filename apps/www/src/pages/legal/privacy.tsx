@@ -74,7 +74,7 @@ export const Page: NextPage = () => {
 				<p>Last Updated: March 31, 2022</p>
 				<p>
 					This Privacy Policy applies to{" "}
-					<NextLink href="/" passHref>
+					<NextLink legacyBehavior href="/" passHref>
 						<Anchor>https://makepurple.com</Anchor>
 					</NextLink>{" "}
 					(&quot;MakePurple&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;), and
@@ -258,7 +258,7 @@ export const Page: NextPage = () => {
 				<p>
 					You may request the erasure of your Personal Data from the Owner. This can also
 					be done on your{" "}
-					<NextLink href="/account" passHref>
+					<NextLink legacyBehavior href="/account" passHref>
 						<Anchor>account page</Anchor>
 					</NextLink>{" "}
 					when logged-in.

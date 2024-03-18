@@ -10,7 +10,7 @@ export const NextLinkAnchor = forwardRef<HTMLAnchorElement, NextLinkAnchorProps>
 	const { href, hrefAs, ...restProps } = props;
 
 	return (
-		<NextLink href={href} as={hrefAs as string} passHref>
+		<NextLink legacyBehavior href={href} as={hrefAs as string} passHref>
 			<a {...StyleUtils.filterHTMLProps(restProps)} ref={ref} />
 		</NextLink>
 	);

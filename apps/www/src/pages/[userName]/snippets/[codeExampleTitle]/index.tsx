@@ -339,6 +339,7 @@ export const Page: NextPage<PageProps> = () => {
 					<TopContainer>
 						<TitleContainer>
 							<NextLink
+								legacyBehavior
 								href="/s/[skillOwner]/[skillName]"
 								as={`/s/${primarySkill.owner}/${primarySkill.name}`}
 								passHref
@@ -367,6 +368,7 @@ export const Page: NextPage<PageProps> = () => {
 						<Skills type="positive">
 							{skills.map((skill) => (
 								<NextLink
+									legacyBehavior
 									key={skill.id}
 									href="/s/[skillOwner]/[skillName]"
 									as={`/s/${skill.owner}/${skill.name}`}
@@ -467,6 +469,7 @@ export const Page: NextPage<PageProps> = () => {
 					{isMyPage && (
 						<OwnerActions>
 							<NextLink
+								legacyBehavior
 								href="/[userName]/snippets/[codeExampleTitle]/edit"
 								as={`/${userName}/snippets/${urlSlug}/edit`}
 								passHref

@@ -108,7 +108,7 @@ export const HomePageJoinCommunitySection: FC<HomePageJoinCommunitySectionProps>
 			<Content>
 				<LogoCurrentColor height={64} width={64} />
 				<Title tw="mt-4">Join the MakePurple Community</Title>
-				<NextLink href="/signup" passHref>
+				<NextLink legacyBehavior href="/signup" passHref>
 					<SignUpButton as="a" size="large" variant="secondary" tw="mt-8">
 						Get Started
 					</SignUpButton>

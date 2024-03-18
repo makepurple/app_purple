@@ -54,7 +54,12 @@ export const CodeExampleCreateCard: FC<CodeExampleCreateCardProps> = ({
 	userName
 }) => {
 	return (
-		<NextLink href="/[userName]/snippets/new" as={`/${userName}/snippets/new`} passHref>
+		<NextLink
+			legacyBehavior
+			href="/[userName]/snippets/new"
+			as={`/${userName}/snippets/new`}
+			passHref
+		>
 			<Root as="a" className={className} style={style}>
 				<Text>Create a new snippet</Text>
 				<StyledAvatar border={4}>

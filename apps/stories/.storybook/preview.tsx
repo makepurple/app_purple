@@ -12,12 +12,12 @@ import { RouterContext as WwwRouterContext } from "../../www/node_modules/next/d
 
 /**
  * !HACK
- * @description next/image doesn't work within Storybook, so we're overwriting it here
+ * @description next/legacy/image doesn't work within Storybook, so we're overwriting it here
  * @author David Lee
  * @date June 11, 2021
  */
-import * as WwwNextImage from "../../www/node_modules/next/image";
-import * as ComponentsNextImage from "../../../packages/components/node_modules/next/image";
+import * as WwwNextImage from "../../www/node_modules/next/legacy/image";
+import * as ComponentsNextImage from "../../../packages/components/node_modules/next/legacy/image";
 
 const overwriteNextImage = (nextImage: any) => {
 	const OriginalNextImage = nextImage.default;

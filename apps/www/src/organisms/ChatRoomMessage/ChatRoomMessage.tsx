@@ -102,7 +102,7 @@ export const ChatRoomMessage = memo(
 			<Root ref={ref} className={className} style={style}>
 				<MessageInfo $isViewer={isViewer}>
 					{sender.image && (
-						<NextLink href="/[userName]" as={`/${sender.name}`} passHref>
+						<NextLink legacyBehavior href="/[userName]" as={`/${sender.name}`} passHref>
 							<Avatar border={2} tw="flex-shrink-0">
 								<GitHubAvatarImage
 									alt={sender.name}

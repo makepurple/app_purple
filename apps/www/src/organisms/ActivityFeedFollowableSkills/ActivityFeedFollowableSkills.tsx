@@ -73,7 +73,7 @@ export const ActivityFeedFollowableSkills: FC<ActivityFeedFollowableSkillsProps>
 				))}
 			</Skills>
 			<ViewAllContainer tw="mt-3">
-				<NextLink href="/skills" passHref>
+				<NextLink legacyBehavior href="/skills" passHref>
 					<Button as="a">View All</Button>
 				</NextLink>
 			</ViewAllContainer>

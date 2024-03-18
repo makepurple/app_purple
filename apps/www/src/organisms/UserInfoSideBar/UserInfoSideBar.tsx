@@ -468,6 +468,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 					<ConnectionsContents>
 						<FollowContainer>
 							<NextLink
+								legacyBehavior
 								href="/[userName]/connections/followers"
 								as={`/${user.name}/connections/followers`}
 								passHref
@@ -483,6 +484,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</NextLink>
 							<Delimiter tw="mx-2" />
 							<NextLink
+								legacyBehavior
 								href="/[userName]/connections/following"
 								as={`/${user.name}/connections/following`}
 								passHref
@@ -496,6 +498,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							</NextLink>
 						</FollowContainer>
 						<NextLink
+							legacyBehavior
 							href="/[userName]/connections"
 							as={`/${user.name}/connections`}
 							passHref
@@ -530,6 +533,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							<Tags type="positive" tw="mt-4">
 								{user.skills.nodes.map((skill) => (
 									<NextLink
+										legacyBehavior
 										key={skill.id}
 										href="/s/[skillOwner]/[skillName]"
 										as={`/s/${skill.owner}/${skill.name}`}
@@ -552,6 +556,7 @@ export const UserInfoSideBar: FC<UserInfoSideBarProps> = ({ className, style, us
 							<Tags type="negative" tw="mt-4">
 								{user.desiredSkills.nodes.map((skill) => (
 									<NextLink
+										legacyBehavior
 										key={skill.id}
 										href="/s/[skillOwner]/[skillName]"
 										as={`/s/${skill.owner}/${skill.name}`}

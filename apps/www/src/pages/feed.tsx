@@ -94,7 +94,7 @@ export const Page: NextPage<PageProps> = () => {
 								subTitle={
 									<div tw="flex flex-col items-center">
 										<div>Discover developers and skills</div>
-										<NextLink href="/explore" passHref>
+										<NextLink legacyBehavior href="/explore" passHref>
 											<ExploreButton as="a" size="small" tw="mt-3">
 												Explore
 											</ExploreButton>

@@ -67,7 +67,7 @@ export const Page: NextPage = () => {
 				<p>
 					Please read carefully these Terms of Service (the &quot;Terms&quot;) and our
 					Privacy Policy (&quot;Privacy Policy&quot;) because they govern your use of{" "}
-					<NextLink href="/" passHref>
+					<NextLink legacyBehavior href="/" passHref>
 						<Anchor>https://makepurple.com</Anchor>
 					</NextLink>{" "}
 					(&quot;MakePurple&quot;, the &quot;Site&quot;, &quot;we&quot;, &quot;us&quot;,

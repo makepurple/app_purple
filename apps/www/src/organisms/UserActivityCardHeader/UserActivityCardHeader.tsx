@@ -47,7 +47,7 @@ export const UserActivityCardHeader: FC<UserActivityCardHeaderProps> = (props) =
 	return (
 		<Root className={className} style={style}>
 			{!!user.image && (
-				<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+				<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 					<Avatar border={2} tw="flex-shrink-0 mr-3">
 						<GitHubAvatarImage
 							alt={user.name}
@@ -60,7 +60,7 @@ export const UserActivityCardHeader: FC<UserActivityCardHeaderProps> = (props) =
 			)}
 			<Content>
 				<UserAction>
-					<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+					<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 						<Anchor tw="mr-1">{user.name}</Anchor>
 					</NextLink>
 					{children}

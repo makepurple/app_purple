@@ -1,7 +1,7 @@
 import { Avatar, AvatarProps } from "@makepurple/components";
 import { UrlUtils } from "@makepurple/utils";
 import type { Meta, Story } from "@storybook/react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import React from "react";
 
 export default {

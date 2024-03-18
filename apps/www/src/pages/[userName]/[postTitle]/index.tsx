@@ -17,7 +17,7 @@ import { DocumentEditorValue } from "@makepurple/validators";
 import { oneLine, oneLineCommaListsAnd } from "common-tags";
 import { NextPage } from "next";
 import { useSession } from "next-auth/react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
@@ -330,6 +330,7 @@ export const Page: NextPage<PageProps> = () => {
 					<Skills type="positive">
 						{skills.map((skill) => (
 							<NextLink
+								legacyBehavior
 								key={skill.id}
 								href="/s/[skillOwner]/[skillName]"
 								as={`/s/${skill.owner}/${skill.name}`}
@@ -419,6 +420,7 @@ export const Page: NextPage<PageProps> = () => {
 					{isMyPost && (
 						<OwnerActions>
 							<NextLink
+								legacyBehavior
 								href="/[userName]/[postTitle]/edit"
 								as={`/${userName}/${postTitle}/edit`}
 								passHref

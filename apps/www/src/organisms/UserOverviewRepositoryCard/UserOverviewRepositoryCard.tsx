@@ -98,6 +98,7 @@ export const UserOverviewRepositoryCard: FC<UserOverviewRepositoryCardProps> = (
 			<Tags type="positive" tw="mt-1">
 				{skills.map((skill) => (
 					<NextLink
+						legacyBehavior
 						key={skill.id}
 						href="/s/[skillOwner]/[skillName]"
 						as={`/s/${skill.owner}/${skill.name}`}
@@ -115,7 +116,12 @@ export const UserOverviewRepositoryCard: FC<UserOverviewRepositoryCardProps> = (
 					</NextLink>
 				))}
 				{!!otherSkills && (
-					<NextLink href="/[userName]" as={`/${repository.github.owner.login}`} passHref>
+					<NextLink
+						legacyBehavior
+						href="/[userName]"
+						as={`/${repository.github.owner.login}`}
+						passHref
+					>
 						<Tags.Tag
 							id={`${repository.name}:skill-count`}
 							onClick={(e) => {

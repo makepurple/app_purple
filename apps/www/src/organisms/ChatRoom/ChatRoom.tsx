@@ -397,6 +397,7 @@ export const ChatRoom: FC<ChatRoomProps> = ({ chatId, className, style }) => {
 										(participant) =>
 											!!participant.image && (
 												<NextLink
+													legacyBehavior
 													key={participant.id}
 													href="/[userName]"
 													as={`/${participant.name}`}

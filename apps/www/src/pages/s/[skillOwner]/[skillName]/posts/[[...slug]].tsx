@@ -157,6 +157,7 @@ export const Page: NextPage<PageProps> = () => {
 			<OrderBy>
 				<OrderBys>
 					<NextLink
+						legacyBehavior
 						href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
 						as={`/s/${skillOwner}/${skillName}`}
 						passHref
@@ -170,6 +171,7 @@ export const Page: NextPage<PageProps> = () => {
 						</OrderByOption>
 					</NextLink>
 					<NextLink
+						legacyBehavior
 						href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
 						as={`/s/${skillOwner}/${skillName}/top`}
 						passHref
@@ -183,6 +185,7 @@ export const Page: NextPage<PageProps> = () => {
 				{sort === "top" && (
 					<OrderByCriteria>
 						<NextLink
+							legacyBehavior
 							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
 							as={`/s/${skillOwner}/${skillName}/top`}
 							passHref
@@ -196,6 +199,7 @@ export const Page: NextPage<PageProps> = () => {
 							</OrderByOption>
 						</NextLink>
 						<NextLink
+							legacyBehavior
 							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
 							as={`/s/${skillOwner}/${skillName}/top/month`}
 							passHref
@@ -209,6 +213,7 @@ export const Page: NextPage<PageProps> = () => {
 							</OrderByOption>
 						</NextLink>
 						<NextLink
+							legacyBehavior
 							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
 							as={`/s/${skillOwner}/${skillName}/top/year`}
 							passHref
@@ -222,6 +227,7 @@ export const Page: NextPage<PageProps> = () => {
 							</OrderByOption>
 						</NextLink>
 						<NextLink
+							legacyBehavior
 							href="/s/[skillOwner]/[skillOwner]/[[...slug]]"
 							as={`/s/${skillOwner}/${skillName}/top/all`}
 							passHref

@@ -106,10 +106,10 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 				/>
 			)}
 			<Details>
-				<NextLink href="/[userName" as={`/${user.name}`} passHref>
+				<NextLink legacyBehavior href="/[userName" as={`/${user.name}`} passHref>
 					<UserName>{user.name}</UserName>
 				</NextLink>
-				<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+				<NextLink legacyBehavior href="/[userName]" as={`/${user.name}`} passHref>
 					<BioContainer tabIndex={-1}>
 						{user.description && <Bio tw="mt-1">{user.description}</Bio>}
 					</BioContainer>
@@ -118,6 +118,7 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 					<Tags type="positive" tw="mt-2">
 						{skills.map((skill) => (
 							<NextLink
+								legacyBehavior
 								key={skill.id}
 								href="/s/[skillOwner]/[skillName]"
 								as={`/s/${skill.owner}/${skill.name}`}
@@ -135,7 +136,12 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 							</NextLink>
 						))}
 						{skillsExtra > 0 && (
-							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+							<NextLink
+								legacyBehavior
+								href="/[userName]"
+								as={`/${user.name}`}
+								passHref
+							>
 								<Tags.Tag id="see-more" tw="px-1">
 									+{skillsExtra} other
 									{skillsExtra === 1 ? "" : "s"}
@@ -148,6 +154,7 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 					<Tags type="negative" tw="mt-2">
 						{desiredSkills.map((skill) => (
 							<NextLink
+								legacyBehavior
 								key={skill.id}
 								href="/s/[skillOwner]/[skillName]"
 								as={`/s/${skill.owner}/${skill.name}`}
@@ -165,7 +172,12 @@ export const UserFriendCard = forwardRef<HTMLDivElement, UserFriendCardProps>((p
 							</NextLink>
 						))}
 						{desiredSkillsExtra > 0 && (
-							<NextLink href="/[userName]" as={`/${user.name}`} passHref>
+							<NextLink
+								legacyBehavior
+								href="/[userName]"
+								as={`/${user.name}`}
+								passHref
+							>
 								<Tags.Tag id="see-more" tw="px-1">
 									+{desiredSkillsExtra} other
 									{desiredSkillsExtra === 1 ? "" : "s"}
