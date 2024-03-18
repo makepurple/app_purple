@@ -2,14 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["interactiveTransactions", "referentialIntegrity"]
+  previewFeatures = ["interactiveTransactions"]
 }
 
 generator erd {
@@ -45,7 +44,7 @@ model Account {
 }
 
 model Session {
-  expires      DateTime @db.DateTime(6)
+  expires      DateTime @db.Date
   id           String   @id @default(cuid())
   sessionToken String   @unique @db.VarChar(768)
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -55,7 +54,7 @@ model Session {
 }
 
 model VerificationToken {
-  expires    DateTime @db.DateTime(6)
+  expires    DateTime @db.Date
   identifier String   @db.VarChar(512)
   token      String   @unique @db.VarChar(256)
 
@@ -78,11 +77,11 @@ model User {
   codeExamples              CodeExample[]
   comments                  Comment[]
   // When this account was registered
-  createdAt                 DateTime               @default(now()) @db.DateTime(6)
+  createdAt                 DateTime               @default(now()) @db.Date
   description               String?                @db.VarChar(512)
   desiredSkills             DesiredSkillsOnUsers[]
   email                     String                 @unique @db.VarChar(256)
-  emailVerified             DateTime?              @db.DateTime(6)
+  emailVerified             DateTime?              @db.Date
   experiences               Experience[]
   followedBy                FollowUser[]           @relation("FollowingUser")
   followingSkill            FollowSkill[]
@@ -94,19 +93,19 @@ model User {
   // Avatar image, pulled from GitHub
   image                     String?                @db.VarChar(512)
   // When the user last opened their messages
-  messagesLastOpenedAt      DateTime               @default(now()) @db.DateTime(6)
+  messagesLastOpenedAt      DateTime               @default(now()) @db.Date
   // The GitHub name of the user
   name                      String                 @unique @db.VarChar(128)
   notifications             Notification[]         @relation()
   // When the user last opened their notifications
-  notificationsLastOpenedAt DateTime               @default(now()) @db.DateTime(6)
+  notificationsLastOpenedAt DateTime               @default(now()) @db.Date
   posts                     Post[]                 @relation("PostAuthor")
   repositories              Repository[]
   role                      UserRole               @default(Member)
   // Self written summary or description
   sessions                  Session[]
   skills                    SkillsOnUsers[]
-  updatedAt                 DateTime               @updatedAt @db.DateTime(6)
+  updatedAt                 DateTime               @updatedAt @db.Date
   upvotedCodeExamples       CodeExampleUpvoter[]
   upvotedComments           CommentUpvoter[]
   upvotedPosts              PostUpvoter[]
@@ -116,10 +115,10 @@ model User {
 model BanReason {
   bannedBy   User?    @relation(fields: [bannedById], references: [id], onDelete: SetNull, name: "BannedByUser")
   bannedById String?
-  createdAt  DateTime @default(now()) @db.DateTime(6)
+  createdAt  DateTime @default(now()) @db.Date
   id         String   @id @default(cuid())
   reason     String   @db.VarChar(256)
-  updatedAt  DateTime @updatedAt @db.DateTime(6)
+  updatedAt  DateTime @updatedAt @db.Date
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String   @unique
 
@@ -154,7 +153,7 @@ model UserActivity {
   postId        String?
   skills        Skill[]
   type          UserActivityType
-  updatedAt     DateTime         @updatedAt @db.DateTime(6)
+  updatedAt     DateTime         @updatedAt @db.Date
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
 
@@ -184,7 +183,7 @@ model Notification {
   post          Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId        String?
   type          NotificationType
-  updatedAt     DateTime         @updatedAt @db.DateTime(6)
+  updatedAt     DateTime         @updatedAt @db.Date
   user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String
 
@@ -204,8 +203,8 @@ model Friendship {
   friending     User           @relation("FriendingUser", fields: [friendingId], references: [id], onDelete: Cascade)
   friendingId   String
   notifications Notification[]
-  rejectedAt    DateTime?      @db.DateTime(6)
-  updatedAt     DateTime       @updatedAt @db.DateTime(6)
+  rejectedAt    DateTime?      @db.Date
+  updatedAt     DateTime       @updatedAt @db.Date
 
   @@unique([frienderId, friendingId])
   @@index([frienderId])
@@ -220,7 +219,7 @@ enum FollowType {
 model Follow {
   id             String         @id @default(cuid())
   activities     UserActivity[]
-  createdAt      DateTime       @default(now()) @db.DateTime(6)
+  createdAt      DateTime       @default(now()) @db.Date
   followingSkill FollowSkill?
   followingUser  FollowUser?
   type           FollowType
@@ -263,7 +262,7 @@ model Chat {
   messages      ChatMessage[]
   notifications Notification[]
   users         ChatsOnUsers[]
-  updatedAt     DateTime       @updatedAt @db.DateTime(6)
+  updatedAt     DateTime       @updatedAt @db.Date
 }
 
 model ChatMessage {
@@ -273,7 +272,7 @@ model ChatMessage {
   content   Json
   sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId  String
-  createdAt DateTime @default(now()) @db.DateTime(6)
+  createdAt DateTime @default(now()) @db.Date
 
   @@index([senderId])
 }
@@ -284,7 +283,7 @@ model ChatsOnUsers {
   chatId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
-  lastOpenedAt DateTime @default(now()) @db.DateTime(6)
+  lastOpenedAt DateTime @default(now()) @db.Date
 
   @@unique([chatId, userId])
   @@index([chatId])
@@ -297,16 +296,16 @@ model Post {
   authorName    String          @db.VarChar(128)
   comments      Comment[]
   content       Json?
-  createdAt     DateTime        @default(now()) @db.DateTime(6)
+  createdAt     DateTime        @default(now()) @db.Date
   description   String?         @db.VarChar(512)
   id            String          @id @default(cuid())
   images        PostImage[]
   notifications Notification[]
-  publishedAt   DateTime?       @db.DateTime(6)
+  publishedAt   DateTime?       @db.Date
   skills        SkillsOnPosts[]
   title         String          @default("Draft") @db.VarChar(128)
   thumbnailUrl  String?         @db.VarChar(512)
-  updatedAt     DateTime        @updatedAt @db.DateTime(6)
+  updatedAt     DateTime        @updatedAt @db.Date
   upvoters      PostUpvoter[]
   urlSlug       String          @default("draft") @db.VarChar(128)
   viewers       PostViewer[]
@@ -347,7 +346,7 @@ model PostImage {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
   url       String   @unique @db.VarChar(512)
-  createdAt DateTime @default(now()) @db.DateTime(6)
+  createdAt DateTime @default(now()) @db.Date
 
   @@index([postId])
 }
@@ -360,13 +359,13 @@ model Comment {
   codeExample   CodeExample?     @relation(fields: [codeExampleId], references: [id], onDelete: Cascade)
   codeExampleId String?
   content       Json?
-  createdAt     DateTime         @default(now()) @db.DateTime(6)
+  createdAt     DateTime         @default(now()) @db.Date
   parent        Comment?         @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId      String?
   post          Post?            @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId        String?
   replies       Comment[]        @relation("CommentReplies")
-  updatedAt     DateTime         @updatedAt @db.DateTime(6)
+  updatedAt     DateTime         @updatedAt @db.Date
   upvoters      CommentUpvoter[]
 
   @@index([authorId])
@@ -495,13 +494,13 @@ enum ExperienceType {
 model Experience {
   id               String          @id @default(cuid())
   // When this experience was ended. Null is assumed as present.
-  endDate          DateTime?       @db.DateTime(3)
+  endDate          DateTime?       @db.Date
   highlights       Json
   location         String?         @db.VarChar(256)
   organization     Organization    @relation(fields: [organizationName], references: [name], onDelete: Cascade)
   organizationName String          @db.VarChar(256)
   positionName     String          @db.VarChar(256)
-  startDate        DateTime        @db.DateTime(3)
+  startDate        DateTime        @db.Date
   type             ExperienceType?
   user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
@@ -529,7 +528,7 @@ model CodeExample {
   authorName     String                 @db.VarChar(128)
   comments       Comment[]
   content        String                 @db.VarChar(8192)
-  createdAt      DateTime               @default(now()) @db.DateTime(6)
+  createdAt      DateTime               @default(now()) @db.Date
   description    String?                @db.VarChar(512)
   language       CodeLanguage
   notifications  Notification[]
@@ -537,7 +536,7 @@ model CodeExample {
   primarySkillId String
   skills         SkillsOnCodeExamples[]
   title          String                 @db.VarChar(128)
-  updatedAt      DateTime               @updatedAt @db.DateTime(6)
+  updatedAt      DateTime               @updatedAt @db.Date
   upvoters       CodeExampleUpvoter[]
   urlSlug        String                 @db.VarChar(128)
 
