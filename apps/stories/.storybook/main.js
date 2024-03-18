@@ -11,7 +11,6 @@ module.exports = {
 		"@storybook/addon-essentials",
 		"@storybook/addon-links",
 		"addon-screen-reader",
-		"storybook-addon-next-router",
 		"storybook-tailwind-dark-mode",
 		{
 			name: "@storybook/addon-postcss",

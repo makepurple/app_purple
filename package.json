@@ -3,8 +3,8 @@
   "sideEffects": false,
   "scripts": {
     "lint": "eslint ./{apps,packages}/**/*.{ts,tsx}",
-    "services": "docker-compose up -d",
-    "services:stop": "docker-compose down",
+    "services": "docker compose up -d",
+    "services:stop": "docker compose down",
     "turbo": "turbo"
   },
   "devDependencies": {

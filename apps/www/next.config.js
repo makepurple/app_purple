@@ -94,10 +94,6 @@ const config = {
 			}
 		]
 	}),
-	webpack5: true,
-	webpack: (config, { dev, isServer }) => {
-		return config;
-	}
 };
 
 module.exports = withPlugins([

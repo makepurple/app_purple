@@ -1,42 +1,11 @@
 import { GlobalStyles, Toaster } from "@makepurple/components";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { addons } from "@storybook/addons";
 import { themes } from "@storybook/theming";
 import { urqlDecorator } from "@urql/storybook-addon";
 import { domMax, LazyMotion } from "framer-motion";
+import React from "react";
 import "tippy.js/dist/tippy.css";
 import "twin.macro";
-import { RouterContext as ComponentsRouterContext } from "../../../packages/components/node_modules/next/dist/shared/lib/router-context";
-import { RouterContext as WwwRouterContext } from "../../www/node_modules/next/dist/shared/lib/router-context";
-
-/**
- * !HACK
- * @description next/legacy/image doesn't work within Storybook, so we're overwriting it here
- * @author David Lee
- * @date June 11, 2021
- */
-import * as WwwNextImage from "../../www/node_modules/next/legacy/image";
-import * as ComponentsNextImage from "../../../packages/components/node_modules/next/legacy/image";
-
-const overwriteNextImage = (nextImage: any) => {
-	const OriginalNextImage = nextImage.default;
-
-	Object.defineProperty(nextImage, "default", {
-		configurable: true,
-		value: (props) => (
-			<OriginalNextImage
-				{...props}
-				unoptimized
-				blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAADAAQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAbEAADAAMBAQAAAAAAAAAAAAABAgMABAURUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAECEf/aAAwDAQACEQMRAD8Anz9voy1dCI2mectSE5ioFCqia+KCwJ8HzGMZPqJb1oPEf//Z"
-				loader={({ src }) => src}
-			/>
-		)
-	});
-};
-
-overwriteNextImage(WwwNextImage);
-overwriteNextImage(ComponentsNextImage);
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
@@ -62,25 +31,6 @@ export const parameters = {
 			color: /(background|color)$/i,
 			date: /Date$/,
 		},
-	},
-	nextRouter: {
-		Provider: ({ children, value }) => (
-			<ComponentsRouterContext.Provider value={value}>
-				<WwwRouterContext.Provider value={value}>
-					{children}
-				</WwwRouterContext.Provider>
-			</ComponentsRouterContext.Provider>
-		),
-		push(...args) {
-			action("nextRouter.push")(...args);
-			/**
-			 * !HACK
-			 * @description Assume webpage stories to be under the pages root story.
-			 * @author David Lee
-			 * @date January 10, 2022
-			 */
-			linkTo(`pages${args[0]}`)();
-		}
 	},
 	options: {
 		storySort: alphabeticSort
