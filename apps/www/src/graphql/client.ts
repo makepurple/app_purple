@@ -2,6 +2,7 @@ import { WindowUtils } from "@makepurple/utils";
 import type { SSRData, SSRExchange } from "@urql/core/dist/types/exchanges/ssr";
 import deepMerge from "deepmerge";
 import deepEqual from "fast-deep-equal";
+import fetchPonyfill from "fetch-ponyfill";
 import type { GetServerSidePropsContext } from "next";
 import type { Client } from "urql";
 import { createClient, dedupExchange, ssrExchange } from "urql";
@@ -27,6 +28,8 @@ export interface CreateUrqlClientParams {
 	ssr?: SSRExchange;
 }
 
+const newFetch = fetchPonyfill();
+
 export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client => {
 	const { isStatic, ssr: _ssr = ssrExchange({ isClient: !params.req }), req } = params;
 
@@ -43,6 +46,7 @@ export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client =>
 				persistedFetchExchange(),
 				multipartFetchExchange()
 			],
+			fetch: newFetch.fetch,
 			fetchOptions: {
 				credentials: "include",
 				headers: {

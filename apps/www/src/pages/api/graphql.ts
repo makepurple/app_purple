@@ -1,3 +1,4 @@
+import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { getApolloServer, makeContext, schema } from "@makepurple/server";
 import { processRequest } from "graphql-upload";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
@@ -39,11 +40,9 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
 		(req as any).filePayload = await processRequest(req, res);
 	}
 
-	const graphqlHandler = server.createHandler({
-		path: "/api/graphql"
-	});
-
-	await graphqlHandler(req, res);
+	return startServerAndCreateNextHandler(server, {
+		context: (_req, _res) => makeContext({ req: _req, res: _res })
+	})(req, res);
 };
 
 export default handler;

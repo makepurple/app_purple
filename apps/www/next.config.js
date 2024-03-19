@@ -5,6 +5,7 @@ const transpileModules = require("next-transpile-modules");
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.BUNDLE_ANALYZE === "true" });
 const withTranspileModules = transpileModules([]);
 
+/** @type {import("next").NextConfig} */
 const config = {
 	experimental: {
 		externalDir: true

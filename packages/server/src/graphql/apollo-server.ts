@@ -1,5 +1,5 @@
-import { ApolloServerPluginLandingPageDisabled } from "apollo-server-core";
-import { ApolloServer } from "apollo-server-micro";
+import { ApolloServer } from "@apollo/server";
+import { ApolloServerPluginLandingPageDisabled } from "@apollo/server/plugin/disabled";
 import type { GraphQLSchema } from "graphql";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -18,11 +18,9 @@ export interface GetApolloServerConfig {
 }
 
 export const getApolloServer = (config: GetApolloServerConfig): ApolloServer => {
-	const { schema, context = {} } = config;
+	const { schema } = config;
 
 	const server = new ApolloServer({
-		context,
-		debug: !isProd,
 		introspection: !isProd,
 		plugins: [ApolloServerPluginLandingPageDisabled()],
 		schema
