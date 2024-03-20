@@ -31,7 +31,7 @@ export interface CreateUrqlClientParams {
 const newFetch = fetchPonyfill();
 
 export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client => {
-	const { isStatic, ssr: _ssr = ssrExchange({ isClient: !params.req }), req } = params;
+	const { isStatic, ssr: _ssr = ssrExchange({ isClient: !params.req }) } = params;
 
 	if (WindowUtils.isSsr() || !urqlClient) {
 		urqlClient = createClient({
@@ -47,12 +47,17 @@ export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client =>
 				multipartFetchExchange()
 			],
 			fetch: newFetch.fetch,
-			fetchOptions: {
-				credentials: "include",
-				headers: {
-					cookie: req?.headers.cookie ?? (WindowUtils.isBrowser() ? document.cookie : "")
-				}
-			},
+			...(WindowUtils.isBrowser()
+				? {
+						fetchOptions: {
+							credentials: "include",
+							headers: {
+								"content-type": "application/json",
+								cookie: document.cookie
+							}
+						}
+				  }
+				: {}),
 			maskTypename: false,
 			requestPolicy: "cache-first",
 			url: getApiUrl({ isStatic })
