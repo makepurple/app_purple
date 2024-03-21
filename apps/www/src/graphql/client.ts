@@ -47,17 +47,6 @@ export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client =>
 				multipartFetchExchange()
 			],
 			fetch: newFetch.fetch,
-			...(WindowUtils.isBrowser()
-				? {
-						fetchOptions: {
-							credentials: "include",
-							headers: {
-								"content-type": "application/json",
-								cookie: document.cookie
-							}
-						}
-				  }
-				: {}),
 			maskTypename: false,
 			requestPolicy: "cache-first",
 			url: getApiUrl({ isStatic })
