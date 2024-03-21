@@ -11,7 +11,6 @@ import {
 	devtoolsExchange,
 	errorExchange,
 	multipartFetchExchange,
-	persistedFetchExchange,
 	refocusExchange,
 	requestPolicyExchange
 } from "./exchanges";
@@ -43,7 +42,6 @@ export const createUrqlClient = (params: CreateUrqlClientParams = {}): Client =>
 				createCache(),
 				errorExchange(),
 				_ssr,
-				persistedFetchExchange(),
 				multipartFetchExchange()
 			],
 			fetch: newFetch.fetch,
