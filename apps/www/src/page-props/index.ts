@@ -28,8 +28,7 @@ export const pageProps = NextUtils.castStaticProps(async () => {
 			.toPromise(),
 		urqlClient
 			.query<GetHomePageSkillsQuery, GetHomePageSkillsQueryVariables>(
-				GetHomePageSkillsDocument,
-				{}
+				GetHomePageSkillsDocument
 			)
 			.toPromise()
 	]);
