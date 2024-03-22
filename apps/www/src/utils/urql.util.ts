@@ -19,7 +19,7 @@ export class UrqlUtils {
 			fetchOptions: {
 				credentials: "include",
 				headers: {
-					cookie: document.cookie,
+					"content-type": "application/json",
 					"graphcdn-bypass": "1"
 				}
 			}
