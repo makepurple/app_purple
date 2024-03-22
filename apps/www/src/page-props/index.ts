@@ -19,7 +19,7 @@ export const pageProps = NextUtils.castStaticProps(async () => {
 	const ssr = ssrExchange({ isClient: false });
 	const urqlClient = createUrqlClient({ isStatic: true, ssr });
 
-	const [result1, result2] = await NextUtils.concurrent([
+	await NextUtils.concurrent([
 		urqlClient
 			.query<GetActivityFeedQuery, GetActivityFeedQueryVariables>(GetActivityFeedDocument, {
 				after: null,
@@ -33,8 +33,6 @@ export const pageProps = NextUtils.castStaticProps(async () => {
 			)
 			.toPromise()
 	]);
-
-	console.log(result1?.error, result2?.error);
 
 	return addUrqlState(ssr, {
 		props: {},
